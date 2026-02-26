@@ -2,7 +2,7 @@
 title: attr category
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   Attribute for adding a category to custom commands.
 usage: |
@@ -32,7 +32,7 @@ contributors: false
 | nothing | string |
 ## Examples
 
-Add a category to a custom command
+Add a category to a custom command.
 ```nu
 > # Double numbers
     @category math

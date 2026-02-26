@@ -2,11 +2,11 @@
 title: flatten
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
-  Flatten the table.
+  Flatten a table by extracting nested values.
 usage: |
-  Flatten the table.
+  Flatten a table by extracting nested values.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `flatten` for [filters](/commands/categories/filters.md)
 
-<div class='command-title'>Flatten the table.</div>
+<div class='command-title'>Flatten a table by extracting nested values.</div>
 
 ## Signature
 
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--all, -a`: flatten inner table one level out
+ -  `--all, -a`: Flatten inner table one level out.
 
 ## Parameters
 
@@ -37,7 +37,7 @@ contributors: false
 | record    | table     |
 ## Examples
 
-flatten a table
+flatten a table.
 ```nu
 > [[N, u, s, h, e, l, l]] | flatten
 ╭───┬───╮
@@ -52,25 +52,25 @@ flatten a table
 
 ```
 
-flatten a table, get the first item
+flatten a table, get the first item.
 ```nu
 > [[N, u, s, h, e, l, l]] | flatten | first
 
 ```
 
-flatten a column having a nested table
+flatten a column having a nested table.
 ```nu
 > [[origin, people]; [Ecuador, ([[name, meal]; ['Andres', 'arepa']])]] | flatten --all | get meal
 
 ```
 
-restrict the flattening by passing column names
+restrict the flattening by passing column names.
 ```nu
 > [[origin, crate, versions]; [World, ([[name]; ['nu-cli']]), ['0.21', '0.22']]] | flatten versions --all | last | get versions
 
 ```
 
-Flatten inner table
+Flatten inner table.
 ```nu
 > { a: b, d: [ 1 2 3 4 ], e: [ 4 3 ] } | flatten d --all
 ╭───┬───┬───┬───────────╮

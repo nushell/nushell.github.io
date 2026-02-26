@@ -2,11 +2,11 @@
 title: str capitalize
 categories: |
   strings
-version: 0.110.0
+version: 0.111.0
 strings: |
-  Capitalize first letter of text.
+  Capitalize the first letter of text.
 usage: |
-  Capitalize first letter of text.
+  Capitalize the first letter of text.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `str capitalize` for [strings](/commands/categories/strings.md)
 
-<div class='command-title'>Capitalize first letter of text.</div>
+<div class='command-title'>Capitalize the first letter of text.</div>
 
 ## Signature
 
@@ -35,19 +35,19 @@ contributors: false
 | record       | record       |
 ## Examples
 
-Capitalize contents
+Capitalize contents.
 ```nu
 > 'good day' | str capitalize
 Good day
 ```
 
-Capitalize contents
+Capitalize contents.
 ```nu
 > 'anton' | str capitalize
 Anton
 ```
 
-Capitalize a column in a table
+Capitalize a column in a table.
 ```nu
 > [[lang, gems]; [nu_test, 100]] | str capitalize lang
 ╭───┬─────────┬──────╮

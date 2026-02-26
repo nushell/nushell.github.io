@@ -2,11 +2,11 @@
 title: http patch
 categories: |
   network
-version: 0.110.0
+version: 0.111.0
 network: |
-  Patch a body to a URL.
+  Send a PATCH request to a URL with a request body.
 usage: |
-  Patch a body to a URL.
+  Send a PATCH request to a URL with a request body.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `http patch` for [network](/commands/categories/network.md)
 
-<div class='command-title'>Patch a body to a URL.</div>
+<div class='command-title'>Send a PATCH request to a URL with a request body.</div>
 
 ## Signature
 
@@ -22,18 +22,18 @@ contributors: false
 
 ## Flags
 
- -  `--user, -u {any}`: the username when authenticating
- -  `--password, -p {any}`: the password when authenticating
- -  `--content-type, -t {any}`: the MIME type of content to post
- -  `--max-time, -m {duration}`: max duration before timeout occurs
- -  `--headers, -H {any}`: custom headers you want to add
- -  `--raw, -r`: return values as a string instead of a table
- -  `--insecure, -k`: allow insecure server connections when using SSL
- -  `--full, -f`: returns the full response instead of only the body
- -  `--allow-errors, -e`: do not fail if the server returns an error code
- -  `--pool`: using a global pool as a client
+ -  `--user, -u {any}`: The username when authenticating.
+ -  `--password, -p {any}`: The password when authenticating.
+ -  `--content-type, -t {any}`: The MIME type of content to post.
+ -  `--max-time, -m {duration}`: Max duration before timeout occurs.
+ -  `--headers, -H {any}`: Custom headers you want to add.
+ -  `--raw, -r`: Return values as a string instead of a table.
+ -  `--insecure, -k`: Allow insecure server connections when using SSL.
+ -  `--full, -f`: Returns the full response instead of only the body.
+ -  `--allow-errors, -e`: Do not fail if the server returns an error code.
+ -  `--pool`: Using a global pool as a client.
  -  `--redirect-mode, -R {string}`: What to do when encountering redirects. Default: 'follow'. Valid options: 'follow' ('f'), 'manual' ('m'), 'error' ('e').
- -  `--unix-socket, -U {path}`: Connect to the specified Unix socket instead of using TCP
+ -  `--unix-socket, -U {path}`: Connect to the specified Unix socket instead of using TCP.
 
 ## Parameters
 
@@ -48,37 +48,37 @@ contributors: false
 | any   | any    |
 ## Examples
 
-Patch content to example.com
+Patch content to example.com.
 ```nu
 > http patch https://www.example.com 'body'
 
 ```
 
-Patch content to example.com, with username and password
+Patch content to example.com, with username and password.
 ```nu
 > http patch --user myuser --password mypass https://www.example.com 'body'
 
 ```
 
-Patch content to example.com, with custom header using a record
+Patch content to example.com, with custom header using a record.
 ```nu
 > http patch --headers {my-header-key: my-header-value} https://www.example.com
 
 ```
 
-Patch content to example.com, with custom header using a list
+Patch content to example.com, with custom header using a list.
 ```nu
 > http patch --headers [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
 
 ```
 
-Patch content to example.com, with JSON body
+Patch content to example.com, with JSON body.
 ```nu
 > http patch --content-type application/json https://www.example.com { field: value }
 
 ```
 
-Patch JSON content from a pipeline to example.com
+Patch JSON content from a pipeline to example.com.
 ```nu
 > open --raw foo.json | http patch https://www.example.com
 

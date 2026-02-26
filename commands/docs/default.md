@@ -2,7 +2,7 @@
 title: default
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Sets a default value if a row's column is missing or null.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--empty, -e`: also replace empty items like "", {}, and []
+ -  `--empty, -e`: Also replace empty items like "", {}, and [].
 
 ## Parameters
 

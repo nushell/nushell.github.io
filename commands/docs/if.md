@@ -2,7 +2,7 @@
 title: if
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   Conditionally run a block.
 usage: |
@@ -34,19 +34,19 @@ contributors: false
 | any   | any    |
 ## Examples
 
-Output a value if a condition matches, otherwise return nothing
+Output a value if a condition matches, otherwise return nothing.
 ```nu
 > if 2 < 3 { 'yes!' }
 yes!
 ```
 
-Output a value if a condition matches, else return another value
+Output a value if a condition matches, else return another value.
 ```nu
 > if 5 < 3 { 'yes!' } else { 'no!' }
 no!
 ```
 
-Chain multiple if's together
+Chain multiple if's together.
 ```nu
 > if 5 < 3 { 'yes!' } else if 4 < 5 { 'no!' } else { 'okay!' }
 no!

@@ -2,7 +2,7 @@
 title: config flatten
 categories: |
   debug
-version: 0.110.0
+version: 0.111.0
 debug: |
   Show the current configuration in a flattened form.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | nothing | record |
 ## Examples
 
-Show the current configuration in a flattened form
+Show the current configuration in a flattened form.
 ```nu
 > config flatten
 

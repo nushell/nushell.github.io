@@ -2,7 +2,7 @@
 title: hide
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   Hide definitions in the current scope.
 usage: |
@@ -33,13 +33,13 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Hide the alias just defined
+Hide the alias just defined.
 ```nu
 > alias lll = ls -l; hide lll
 
 ```
 
-Hide a custom command
+Hide a custom command.
 ```nu
 > def say-hi [] { echo 'Hi!' }; hide say-hi
 

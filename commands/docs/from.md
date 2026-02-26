@@ -2,7 +2,7 @@
 title: from
 categories: |
   formats
-version: 0.110.0
+version: 0.111.0
 formats: |
   Parse a string or binary data into structured data.
 usage: |
@@ -37,7 +37,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`from eml`](/commands/docs/from_eml.md)           | Parse text as .eml and create record.                                                                                      | plugin   |
 | [`from ics`](/commands/docs/from_ics.md)           | Parse text as .ics and create table.                                                                                       | plugin   |
 | [`from ini`](/commands/docs/from_ini.md)           | Parse text as .ini and create table.                                                                                       | plugin   |
-| [`from json`](/commands/docs/from_json.md)         | Convert from json to structured data.                                                                                      | built-in |
+| [`from json`](/commands/docs/from_json.md)         | Convert JSON text into structured data.                                                                                    | built-in |
 | [`from msgpack`](/commands/docs/from_msgpack.md)   | Convert MessagePack data into Nu values.                                                                                   | built-in |
 | [`from msgpackz`](/commands/docs/from_msgpackz.md) | Convert brotli-compressed MessagePack data into Nu values.                                                                 | built-in |
 | [`from nuon`](/commands/docs/from_nuon.md)         | Convert from nuon to structured data.                                                                                      | built-in |

@@ -2,7 +2,7 @@
 title: into binary
 categories: |
   conversions
-version: 0.110.0
+version: 0.111.0
 conversions: |
   Convert value to a binary primitive.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--compact, -c`: output without padding zeros
- -  `--endian, -e {string}`: byte encode endian. Does not affect string, date or binary. In containers, only individual elements are affected. Available options: native(default), little, big
+ -  `--compact, -c`: Output without padding zeros.
+ -  `--endian, -e {string}`: Byte encode endian. Does not affect string, date or binary. In containers, only individual elements are affected. Available options: native(default), little, big.
 
 ## Parameters
 
@@ -45,7 +45,7 @@ contributors: false
 | record   | record |
 ## Examples
 
-convert string to a nushell binary primitive
+convert string to a nushell binary primitive.
 ```nu
 > 'This is a string that is exactly 52 characters long.' | into binary
 Length: 52 (0x34) bytes | printable whitespace ascii_other non_ascii
@@ -56,7 +56,7 @@ Length: 52 (0x34) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-convert a number to a nushell binary primitive
+convert a number to a nushell binary primitive.
 ```nu
 > 1 | into binary
 Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
@@ -64,7 +64,7 @@ Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-convert a number to a nushell binary primitive (big endian)
+convert a number to a nushell binary primitive (big endian).
 ```nu
 > 258 | into binary --endian big
 Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
@@ -72,7 +72,7 @@ Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-convert a number to a nushell binary primitive (little endian)
+convert a number to a nushell binary primitive (little endian).
 ```nu
 > 258 | into binary --endian little
 Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
@@ -80,7 +80,7 @@ Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-convert a boolean to a nushell binary primitive
+convert a boolean to a nushell binary primitive.
 ```nu
 > true | into binary
 Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
@@ -88,19 +88,19 @@ Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-convert a filesize to a nushell binary primitive
+convert a filesize to a nushell binary primitive.
 ```nu
 > ls | where name == LICENSE | get size | into binary
 
 ```
 
-convert a filepath to a nushell binary primitive
+convert a filepath to a nushell binary primitive.
 ```nu
 > ls | where name == LICENSE | get name | path expand | into binary
 
 ```
 
-convert a float to a nushell binary primitive
+convert a float to a nushell binary primitive.
 ```nu
 > 1.234 | into binary
 Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
@@ -108,7 +108,7 @@ Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-convert an int to a nushell binary primitive with compact enabled
+convert an int to a nushell binary primitive with compact enabled.
 ```nu
 > 10 | into binary --compact
 Length: 1 (0x1) bytes | printable whitespace ascii_other non_ascii

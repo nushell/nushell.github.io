@@ -2,7 +2,7 @@
 title: random float
 categories: |
   random
-version: 0.110.0
+version: 0.111.0
 random: |
   Generate a random float within a range [min..max].
 usage: |
@@ -32,25 +32,25 @@ contributors: false
 | nothing | float  |
 ## Examples
 
-Generate a default float value between 0 and 1
+Generate a default float value between 0 and 1.
 ```nu
 > random float
 
 ```
 
-Generate a random float less than or equal to 500
+Generate a random float less than or equal to 500.
 ```nu
 > random float ..500
 
 ```
 
-Generate a random float greater than or equal to 100000
+Generate a random float greater than or equal to 100000.
 ```nu
 > random float 100000..
 
 ```
 
-Generate a random float between 1.0 and 1.1
+Generate a random float between 1.0 and 1.1.
 ```nu
 > random float 1.0..1.1
 

@@ -2,7 +2,7 @@
 title: metadata access
 categories: |
   debug
-version: 0.110.0
+version: 0.111.0
 debug: |
   Access the metadata for the input stream within a closure.
 usage: |
@@ -32,7 +32,7 @@ contributors: false
 | any   | any    |
 ## Examples
 
-Access metadata and data from a stream together
+Access metadata and data from a stream together.
 ```nu
 > {foo: bar} | to json --raw | metadata access {|meta| {in: $in, content: $meta.content_type}}
 ╭─────────┬──────────────────╮

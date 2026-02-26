@@ -2,7 +2,7 @@
 title: view files
 categories: |
   debug
-version: 0.110.0
+version: 0.111.0
 debug: |
   View the files registered in nushell's EngineState memory.
 usage: |
@@ -28,13 +28,13 @@ contributors: false
 | nothing | table&lt;filename: string, start: int, end: int, size: int&gt; |
 ## Examples
 
-View the files registered in Nushell's EngineState memory
+View the files registered in Nushell's EngineState memory.
 ```nu
 > view files
 
 ```
 
-View how Nushell was originally invoked
+View how Nushell was originally invoked.
 ```nu
 > view files | get 0
 

@@ -2,7 +2,7 @@
 title: path exists
 categories: |
   path
-version: 0.110.0
+version: 0.111.0
 path: |
   Check whether a path exists.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--no-symlink, -n`: Do not resolve symbolic links
+ -  `--no-symlink, -n`: Do not resolve symbolic links.
 
 
 ## Input/output types:
@@ -33,13 +33,13 @@ contributors: false
 | list&lt;string&gt; | list&lt;bool&gt; |
 ## Examples
 
-Check if a file exists
+Check if a file exists.
 ```nu
 > '/home/joe/todo.txt' | path exists
 false
 ```
 
-Check if files in list exist
+Check if files in list exist.
 ```nu
 > [ /home/joe/todo.txt, /home/doe/todo.txt ] | path exists
 ╭───┬───────╮

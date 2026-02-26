@@ -2,7 +2,7 @@
 title: tutor
 categories: |
   misc
-version: 0.110.0
+version: 0.111.0
 misc: |
   Run the tutorial. To begin, run: tutor.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--find, -f {string}`: Search tutorial for a phrase
+ -  `--find, -f {string}`: Search tutorial for a phrase.
 
 ## Parameters
 
@@ -36,13 +36,13 @@ contributors: false
 | nothing | string |
 ## Examples
 
-Begin the tutorial
+Begin the tutorial.
 ```nu
 > tutor begin
 
 ```
 
-Search a tutorial by phrase
+Search a tutorial by phrase.
 ```nu
 > tutor --find "$in"
 

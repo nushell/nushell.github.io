@@ -2,7 +2,7 @@
 title: scope engine-stats
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   Output stats on the engine in the current state.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | nothing | any    |
 ## Examples
 
-Show the stats on the current engine state
+Show the stats on the current engine state.
 ```nu
 > scope engine-stats
 

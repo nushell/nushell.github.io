@@ -2,7 +2,7 @@
 title: str trim
 categories: |
   strings
-version: 0.110.0
+version: 0.111.0
 strings: |
   Trim whitespace or specific character.
 usage: |
@@ -22,9 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--char, -c {string}`: character to trim (default: whitespace)
- -  `--left, -l`: trims characters only from the beginning of the string
- -  `--right, -r`: trims characters only from the end of the string
+ -  `--char, -c {string}`: Character to trim (default: whitespace).
+ -  `--left, -l`: Trims characters only from the beginning of the string.
+ -  `--right, -r`: Trims characters only from the end of the string.
 
 ## Parameters
 
@@ -41,31 +41,31 @@ contributors: false
 | record       | record       |
 ## Examples
 
-Trim whitespace
+Trim whitespace.
 ```nu
 > 'Nu shell ' | str trim
 Nu shell
 ```
 
-Trim a specific character (not the whitespace)
+Trim a specific character (not the whitespace).
 ```nu
 > '=== Nu shell ===' | str trim --char '='
  Nu shell
 ```
 
-Trim whitespace from the beginning of string
+Trim whitespace from the beginning of string.
 ```nu
 > ' Nu shell ' | str trim --left
 Nu shell
 ```
 
-Trim whitespace from the end of string
+Trim whitespace from the end of string.
 ```nu
 > ' Nu shell ' | str trim --right
  Nu shell
 ```
 
-Trim a specific character only from the end of the string
+Trim a specific character only from the end of the string.
 ```nu
 > '=== Nu shell ===' | str trim --right --char '='
 === Nu shell

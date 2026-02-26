@@ -2,7 +2,7 @@
 title: plugin use
 categories: |
   plugin
-version: 0.110.0
+version: 0.111.0
 plugin: |
   Load a plugin from the plugin registry file into scope.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--plugin-config {path}`: Use a plugin registry file other than the one set in `$nu.plugin-path`
+ -  `--plugin-config {path}`: Use a plugin registry file other than the one set in `$nu.plugin-path`.
 
 ## Parameters
 

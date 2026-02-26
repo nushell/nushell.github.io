@@ -2,7 +2,7 @@
 title: metadata set
 categories: |
   debug
-version: 0.110.0
+version: 0.111.0
 debug: |
   Set the metadata for items in the stream.
 usage: |
@@ -22,10 +22,11 @@ contributors: false
 
 ## Flags
 
- -  `--datasource-ls, -l`: Assign the DataSource::Ls metadata to the input
- -  `--datasource-filepath, -f {path}`: Assign the DataSource::FilePath metadata to the input
- -  `--content-type, -c {string}`: Assign content type metadata to the input
- -  `--merge, -m {record}`: Merge arbitrary metadata fields
+ -  `--datasource-ls, -l`: Assign the DataSource::Ls metadata to the input.
+ -  `--datasource-filepath, -f {path}`: Assign the DataSource::FilePath metadata to the input.
+ -  `--path-columns, -p {list<string>}`: Assign path columns metadata to the input.
+ -  `--content-type, -c {string}`: Assign content type metadata to the input.
+ -  `--merge, -m {record}`: Merge arbitrary metadata fields.
 
 ## Parameters
 
@@ -39,31 +40,37 @@ contributors: false
 | any   | any    |
 ## Examples
 
-Set the metadata of a table literal
+Set the metadata of a table literal.
 ```nu
 > [[name color]; [Cargo.lock '#ff0000'] [Cargo.toml '#00ff00'] [README.md '#0000ff']] | metadata set --datasource-ls
 
 ```
 
-Set the metadata of a file path
+Set the metadata of a file path.
 ```nu
 > 'crates' | metadata set --datasource-filepath $'(pwd)/crates'
 
 ```
 
-Set the content type metadata
+Set the path columns metadata.
+```nu
+> glob * | wrap path | metadata set --path-columns [path]
+
+```
+
+Set the content type metadata.
 ```nu
 > 'crates' | metadata set --content-type text/plain | metadata | get content_type
 text/plain
 ```
 
-Set custom metadata
+Set custom metadata.
 ```nu
 > "data" | metadata set --merge {custom_key: "value"} | metadata | get custom_key
 value
 ```
 
-Set metadata using a closure
+Set metadata using a closure.
 ```nu
 > "data" | metadata set --content-type "text/csv" | metadata set {|m| $m | update content_type {$in + "-processed"}} | metadata | get content_type
 text/csv-processed

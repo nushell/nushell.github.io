@@ -2,7 +2,7 @@
 title: move
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Moves columns relative to other columns or make them the first/last columns. Flags are mutually exclusive.
 usage: |
@@ -22,10 +22,10 @@ contributors: false
 
 ## Flags
 
- -  `--after {string}`: the column that will precede the columns moved
- -  `--before {string}`: the column that will be the next after the columns moved
- -  `--first`: makes the columns be the first ones
- -  `--last`: makes the columns be the last ones
+ -  `--after {string}`: The column that will precede the columns moved.
+ -  `--before {string}`: The column that will be the next after the columns moved.
+ -  `--first`: Makes the columns be the first ones.
+ -  `--last`: Makes the columns be the last ones.
 
 ## Parameters
 
@@ -40,7 +40,7 @@ contributors: false
 | table  | table  |
 ## Examples
 
-Move a column before the first column
+Move a column before the first column.
 ```nu
 > [[name value index]; [foo a 1] [bar b 2] [baz c 3]] | move index --before name
 ╭───┬──────┬───────╮
@@ -53,7 +53,7 @@ Move a column before the first column
 
 ```
 
-Move multiple columns after the last column and reorder them
+Move multiple columns after the last column and reorder them.
 ```nu
 > [[name value index]; [foo a 1] [bar b 2] [baz c 3]] | move value name --after index
 ╭───┬───────┬──────╮
@@ -66,7 +66,7 @@ Move multiple columns after the last column and reorder them
 
 ```
 
-Move columns of a record
+Move columns of a record.
 ```nu
 > { name: foo, value: a, index: 1 } | move name --before index
 ╭───────┬─────╮

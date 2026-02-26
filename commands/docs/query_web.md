@@ -2,7 +2,7 @@
 title: query web
 categories: |
   network
-version: 0.110.0
+version: 0.111.0
 network: |
   execute selector query on html/web
 usage: |
@@ -22,11 +22,11 @@ contributors: false
 
 ## Flags
 
- -  `--query, -q {string}`: selector query
- -  `--as-html, -m`: return the query output as html
- -  `--attribute, -a {any}`: downselect based on the given attribute
- -  `--as-table, -t {list<string>}`: find table based on column header list
- -  `--inspect, -i`: run in inspect mode to provide more information for determining column headers
+ -  `--query, -q {string}`: Selector query.
+ -  `--as-html, -m`: Return the query output as html.
+ -  `--attribute, -a {any}`: Downselect based on the given attribute.
+ -  `--as-table, -t {list<string>}`: Find table based on column header list.
+ -  `--inspect, -i`: Run in inspect mode to provide more information for determining column headers.
 
 ## Examples
 

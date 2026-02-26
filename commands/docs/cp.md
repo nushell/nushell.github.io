@@ -2,7 +2,7 @@
 title: cp
 categories: |
   filesystem
-version: 0.110.0
+version: 0.111.0
 filesystem: |
   Copy files using uutils/coreutils cp.
 usage: |
@@ -22,20 +22,20 @@ contributors: false
 
 ## Flags
 
- -  `--recursive, -r`: copy directories recursively
- -  `--verbose, -v`: explicitly state what is being done
- -  `--force, -f`: if an existing destination file cannot be opened, remove it and try
+ -  `--recursive, -r`: Copy directories recursively.
+ -  `--verbose, -v`: Explicitly state what is being done.
+ -  `--force, -f`: If an existing destination file cannot be opened, remove it and try
                     again (this option is ignored when the -n option is also used).
-                    currently not implemented for windows
- -  `--interactive, -i`: ask before overwriting files
- -  `--update, -u`: copy only when the SOURCE file is newer than the destination file or when the destination file is missing
- -  `--progress, -p`: display a progress bar
- -  `--no-clobber, -n`: do not overwrite an existing file
- -  `--preserve {list<string>}`: preserve only the specified attributes (empty list means no attributes preserved)
+                    Currently not implemented for windows.
+ -  `--interactive, -i`: Ask before overwriting files.
+ -  `--update, -u`: Copy only when the SOURCE file is newer than the destination file or when the destination file is missing.
+ -  `--progress, -p`: Display a progress bar.
+ -  `--no-clobber, -n`: Do not overwrite an existing file.
+ -  `--preserve {list<string>}`: Preserve only the specified attributes (empty list means no attributes preserved)
                     if not specified only mode is preserved
-                    possible values: mode, ownership (unix only), timestamps, context, link, links, xattr
- -  `--debug`: explain how a file is copied. Implies -v
- -  `--all, -a`: move hidden files if '*' is provided
+                    possible values: mode, ownership (unix only), timestamps, context, link, links, xattr.
+ -  `--debug`: Explain how a file is copied. Implies -v.
+ -  `--all, -a`: Copy hidden files if '*' is provided.
 
 ## Parameters
 
@@ -49,49 +49,49 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Copy myfile to dir_b
+Copy myfile to dir_b.
 ```nu
 > cp myfile dir_b
 
 ```
 
-Recursively copy dir_a to dir_b
+Recursively copy dir_a to dir_b.
 ```nu
 > cp -r dir_a dir_b
 
 ```
 
-Recursively copy dir_a to dir_b, and print the feedbacks
+Recursively copy dir_a to dir_b, and print the feedbacks.
 ```nu
 > cp -r -v dir_a dir_b
 
 ```
 
-Move many files into a directory
+Move many files into a directory.
 ```nu
 > cp *.txt dir_a
 
 ```
 
-Copy only if source file is newer than target file
+Copy only if source file is newer than target file.
 ```nu
 > cp -u myfile newfile
 
 ```
 
-Copy file preserving mode and timestamps attributes
+Copy file preserving mode and timestamps attributes.
 ```nu
 > cp --preserve [ mode timestamps ] myfile newfile
 
 ```
 
-Copy file erasing all attributes
+Copy file erasing all attributes.
 ```nu
 > cp --preserve [] myfile newfile
 
 ```
 
-Copy file to a directory three levels above its current location
+Copy file to a directory three levels above its current location.
 ```nu
 > cp myfile ....
 

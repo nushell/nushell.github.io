@@ -2,7 +2,7 @@
 title: roll down
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Roll table rows down.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--by, -b {int}`: Number of rows to roll
+ -  `--by, -b {int}`: Number of rows to roll.
 
 
 ## Input/output types:

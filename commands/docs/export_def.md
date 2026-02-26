@@ -2,7 +2,7 @@
 title: export def
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   Define a custom command and export it from a module.
 usage: |
@@ -22,14 +22,14 @@ contributors: false
 
 ## Flags
 
- -  `--env`: keep the environment defined inside the command
- -  `--wrapped`: treat unknown flags and arguments as strings (requires ...rest-like parameter in signature)
+ -  `--env`: Environment: defined inside the command.
+ -  `--wrapped`: Unknown flags and arguments: strings that require rest-like parameter in signature.
 
 ## Parameters
 
- -  `def_name`: Command name.
- -  `params`: Parameters.
- -  `block`: Body of the definition.
+ -  `def_name`: Command name to define.
+ -  `params`: Command parameters: comma-separated list inside [].
+ -  `block`: Command body: list of instructions inside {}.
 
 
 ## Input/output types:
@@ -39,7 +39,7 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Define a custom command in a module and call it
+Define a custom command in a module and call it.
 ```nu
 > module spam { export def foo [] { "foo" } }; use spam foo; foo
 foo

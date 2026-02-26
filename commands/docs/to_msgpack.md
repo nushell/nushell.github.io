@@ -2,7 +2,7 @@
 title: to msgpack
 categories: |
   formats
-version: 0.110.0
+version: 0.111.0
 formats: |
   Convert Nu values into MessagePack.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--serialize, -s`: serialize nushell types that cannot be deserialized
+ -  `--serialize, -s`: Serialize nushell types that cannot be deserialized.
 
 
 ## Input/output types:
@@ -32,7 +32,7 @@ contributors: false
 | any   | binary |
 ## Examples
 
-Convert a list of values to MessagePack
+Convert a list of values to MessagePack.
 ```nu
 > [foo, 42, false] | to msgpack
 Length: 7 (0x7) bytes | printable whitespace ascii_other non_ascii
@@ -40,7 +40,7 @@ Length: 7 (0x7) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-Convert a range to a MessagePack array
+Convert a range to a MessagePack array.
 ```nu
 > 1..10 | to msgpack
 Length: 11 (0xb) bytes | printable whitespace ascii_other non_ascii
@@ -48,7 +48,7 @@ Length: 11 (0xb) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-Convert a table to MessagePack
+Convert a table to MessagePack.
 ```nu
 > [
         [event_name time];

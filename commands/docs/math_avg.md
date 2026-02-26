@@ -2,7 +2,7 @@
 title: math avg
 categories: |
   math
-version: 0.110.0
+version: 0.111.0
 math: |
   Returns the average of a list of numbers.
 usage: |
@@ -36,19 +36,19 @@ contributors: false
 | record         | record   |
 ## Examples
 
-Compute the average of a list of numbers
+Compute the average of a list of numbers.
 ```nu
 > [-50 100.0 25] | math avg
 25.0
 ```
 
-Compute the average of a list of durations
+Compute the average of a list of durations.
 ```nu
 > [2sec 1min] | math avg
 31sec
 ```
 
-Compute the average of each column in a table
+Compute the average of each column in a table.
 ```nu
 > [[a b]; [1 2] [3 4]] | math avg
 ╭───┬───╮

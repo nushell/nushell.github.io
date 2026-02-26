@@ -2,7 +2,7 @@
 title: job
 categories: |
   experimental
-version: 0.110.0
+version: 0.111.0
 experimental: |
   Various commands for working with background jobs.
 usage: |
@@ -37,7 +37,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`job id`](/commands/docs/job_id.md)             | Get id of current job.                       | built-in |
 | [`job kill`](/commands/docs/job_kill.md)         | Kill a background job.                       | built-in |
 | [`job list`](/commands/docs/job_list.md)         | List background jobs.                        | built-in |
-| [`job recv`](/commands/docs/job_recv.md)         | Read a message from the mailbox.             | built-in |
+| [`job recv`](/commands/docs/job_recv.md)         | Read a message from a job's mailbox.         | built-in |
 | [`job send`](/commands/docs/job_send.md)         | Send a message to the mailbox of a job.      | built-in |
 | [`job spawn`](/commands/docs/job_spawn.md)       | Spawn a background job and retrieve its ID.  | built-in |
 | [`job tag`](/commands/docs/job_tag.md)           | Add a description tag to a background job.   | built-in |

@@ -2,11 +2,11 @@
 title: into duration
 categories: |
   conversions
-version: 0.110.0
+version: 0.111.0
 conversions: |
-  Convert value to duration.
+  Convert value to a duration.
 usage: |
-  Convert value to duration.
+  Convert value to a duration.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `into duration` for [conversions](/commands/categories/conversions.md)
 
-<div class='command-title'>Convert value to duration.</div>
+<div class='command-title'>Convert value to a duration.</div>
 
 ## Signature
 
@@ -42,19 +42,19 @@ contributors: false
 | table    | table    |
 ## Examples
 
-Convert duration string to duration value
+Convert duration string to duration value.
 ```nu
 > '7min' | into duration
 7min
 ```
 
-Convert compound duration string to duration value
+Convert compound duration string to duration value.
 ```nu
 > '1day 2hr 3min 4sec' | into duration
 1day 2hr 3min 4sec
 ```
 
-Convert table of duration strings to table of duration values
+Convert table of duration strings to table of duration values.
 ```nu
 > [[value]; ['1sec'] ['2min'] ['3hr'] ['4day'] ['5wk']] | into duration value
 ╭───┬───────╮
@@ -69,31 +69,31 @@ Convert table of duration strings to table of duration values
 
 ```
 
-Convert duration to duration
+Convert duration to duration.
 ```nu
 > 420sec | into duration
 7min
 ```
 
-Convert a number of ns to duration
+Convert a number of ns to duration.
 ```nu
 > 1_234_567 | into duration
 1ms 234µs 567ns
 ```
 
-Convert a number of an arbitrary unit to duration
+Convert a number of an arbitrary unit to duration.
 ```nu
 > 1_234 | into duration --unit ms
 1sec 234ms
 ```
 
-Convert a floating point number of an arbitrary unit to duration
+Convert a floating point number of an arbitrary unit to duration.
 ```nu
 > 1.234 | into duration --unit sec
 1sec 234ms
 ```
 
-Convert a record to a duration
+Convert a record to a duration.
 ```nu
 > {day: 10, hour: 2, minute: 6, second: 50, sign: '+'} | into duration
 1wk 3day 2hr 6min 50sec

@@ -2,7 +2,7 @@
 title: polars selector all
 categories: |
   expression
-version: 0.110.0
+version: 0.111.0
 expression: |
   Creates a selector that selects all columns.
 usage: |

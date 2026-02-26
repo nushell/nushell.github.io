@@ -2,7 +2,7 @@
 title: commandline edit
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   Modify the current command line input buffer.
 usage: |
@@ -22,10 +22,10 @@ contributors: false
 
 ## Flags
 
- -  `--append, -a`: appends the string to the end of the buffer
- -  `--insert, -i`: inserts the string into the buffer at the cursor position
- -  `--replace, -r`: replaces the current contents of the buffer (default)
- -  `--accept, -A`: immediately executes the result after edit
+ -  `--append, -a`: Appends the string to the end of the buffer.
+ -  `--insert, -i`: Inserts the string into the buffer at the cursor position.
+ -  `--replace, -r`: Replaces the current contents of the buffer (default).
+ -  `--accept, -A`: Immediately executes the result after edit.
 
 ## Parameters
 

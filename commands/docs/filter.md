@@ -2,7 +2,7 @@
 title: filter
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Filter values based on a predicate closure.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `closure`: Predicate closure.
+ -  `closure`: The closure to use as a filter predicate.
 
 
 ## Input/output types:
@@ -33,7 +33,7 @@ contributors: false
 | range     | list&lt;any&gt; |
 ## Examples
 
-Filter items of a list according to a condition
+Filter items of a list according to a condition.
 ```nu
 > [1 2] | filter {|x| $x > 1}
 ╭───┬───╮
@@ -42,7 +42,7 @@ Filter items of a list according to a condition
 
 ```
 
-Filter rows of a table according to a condition
+Filter rows of a table according to a condition.
 ```nu
 > [{a: 1} {a: 2}] | filter {|x| $x.a > 1}
 ╭───┬───╮
@@ -53,7 +53,7 @@ Filter rows of a table according to a condition
 
 ```
 
-Filter rows of a table according to a stored condition
+Filter rows of a table according to a stored condition.
 ```nu
 > let cond = {|x| $x.a > 1}; [{a: 1} {a: 2}] | filter $cond
 ╭───┬───╮
@@ -64,7 +64,7 @@ Filter rows of a table according to a stored condition
 
 ```
 
-Filter items of a range according to a condition
+Filter items of a range according to a condition.
 ```nu
 > 9..13 | filter {|el| $el mod 2 != 0}
 ╭───┬────╮
@@ -75,7 +75,7 @@ Filter items of a range according to a condition
 
 ```
 
-List all numbers above 3, using an existing closure condition
+List all numbers above 3, using an existing closure condition.
 ```nu
 > let a = {$in > 3}; [1, 2, 5, 6] | filter $a
 

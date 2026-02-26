@@ -2,7 +2,7 @@
 title: url split-query
 categories: |
   network
-version: 0.110.0
+version: 0.111.0
 network: |
   Converts query string into table applying percent-decoding.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | string | table&lt;key: string, value: string&gt; |
 ## Examples
 
-Outputs a table representing the contents of this query string
+Outputs a table representing the contents of this query string.
 ```nu
 > "mode=normal&userid=31415" | url split-query
 ╭───┬────────┬────────╮
@@ -40,7 +40,7 @@ Outputs a table representing the contents of this query string
 
 ```
 
-Outputs a table representing the contents of this query string, url-decoding the values
+Outputs a table representing the contents of this query string, url-decoding the values.
 ```nu
 > "a=AT%26T&b=AT+T" | url split-query
 ╭───┬─────┬───────╮
@@ -52,7 +52,7 @@ Outputs a table representing the contents of this query string, url-decoding the
 
 ```
 
-Outputs a table representing the contents of this query string
+Outputs a table representing the contents of this query string.
 ```nu
 > "a=one&a=two&b=three" | url split-query
 ╭───┬─────┬───────╮

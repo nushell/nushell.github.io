@@ -2,11 +2,11 @@
 title: input
 categories: |
   platform
-version: 0.110.0
+version: 0.111.0
 platform: |
-  Get input from the user.
+  Get input from the user via the terminal.
 usage: |
-  Get input from the user.
+  Get input from the user via the terminal.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `input` for [platform](/commands/categories/platform.md)
 
-<div class='command-title'>Get input from the user.</div>
+<div class='command-title'>Get input from the user via the terminal.</div>
 
 ## Signature
 
@@ -22,13 +22,13 @@ contributors: false
 
 ## Flags
 
- -  `--bytes-until-any, -u {string}`: read bytes (not text) until any of the given stop bytes is seen
- -  `--numchar, -n {int}`: number of characters to read; suppresses output
- -  `--default, -d {string}`: default value if no input is provided
- -  `--reedline`: use the reedline library, defaults to false
+ -  `--bytes-until-any, -u {string}`: Read bytes (not text) until any of the given stop bytes is seen.
+ -  `--numchar, -n {int}`: Number of characters to read; suppresses output.
+ -  `--default, -d {string}`: Default value if no input is provided.
+ -  `--reedline`: Use the reedline library, defaults to false.
  -  `--history-file {path}`: Path to a file to read and write command history. This is a text file and will be created if it doesn't exist. Will be used as the selection list. Implies `--reedline`.
  -  `--max-history {int}`: The maximum number of entries to keep in the history, defaults to $env.config.history.max_size. Implies `--reedline`.
- -  `--suppress-output, -s`: don't print keystroke values
+ -  `--suppress-output, -s`: Don't print keystroke values.
 
 ## Parameters
 
@@ -43,37 +43,37 @@ contributors: false
 | list&lt;string&gt; | any    |
 ## Examples
 
-Get input from the user, and assign to a variable
+Get input from the user, and assign to a variable.
 ```nu
 > let user_input = (input)
 
 ```
 
-Get two characters from the user, and assign to a variable
+Get two characters from the user, and assign to a variable.
 ```nu
 > let user_input = (input --numchar 2)
 
 ```
 
-Get input from the user with default value, and assign to a variable
+Get input from the user with default value, and assign to a variable.
 ```nu
 > let user_input = (input --default 10)
 
 ```
 
-Get multiple lines of input from the user (newlines can be entered using `Alt` + `Enter` or `Ctrl` + `Enter`), and assign to a variable
+Get multiple lines of input from the user (newlines can be entered using `Alt` + `Enter` or `Ctrl` + `Enter`), and assign to a variable.
 ```nu
 > let multiline_input = (input --reedline)
 
 ```
 
-Get input from the user with history, and assign to a variable
+Get input from the user with history, and assign to a variable.
 ```nu
 > let user_input = ([past,command,entries] | input --reedline)
 
 ```
 
-Get input from the user with history backed by a file, and assign to a variable
+Get input from the user with history backed by a file, and assign to a variable.
 ```nu
 > let user_input = (input --reedline --history-file ./history.txt)
 
@@ -82,7 +82,7 @@ Get input from the user with history backed by a file, and assign to a variable
 
 ## Subcommands:
 
-| name                                             | description                      | type     |
-| ------------------------------------------------ | -------------------------------- | -------- |
-| [`input list`](/commands/docs/input_list.md)     | Interactive list selection.      | built-in |
-| [`input listen`](/commands/docs/input_listen.md) | Listen for user interface event. | built-in |
+| name                                             | description                                     | type     |
+| ------------------------------------------------ | ----------------------------------------------- | -------- |
+| [`input list`](/commands/docs/input_list.md)     | Display an interactive list for user selection. | built-in |
+| [`input listen`](/commands/docs/input_listen.md) | Listen for user interface events.               | built-in |

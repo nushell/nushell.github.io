@@ -2,7 +2,7 @@
 title: random int
 categories: |
   random
-version: 0.110.0
+version: 0.111.0
 random: |
   Generate a random integer [min..max].
 usage: |
@@ -32,25 +32,25 @@ contributors: false
 | nothing | int    |
 ## Examples
 
-Generate a non-negative random integer
+Generate a non-negative random integer.
 ```nu
 > random int
 
 ```
 
-Generate a random integer between 0 (inclusive) and 500 (inclusive)
+Generate a random integer between 0 (inclusive) and 500 (inclusive).
 ```nu
 > random int ..500
 
 ```
 
-Generate a random integer greater than or equal to 100000
+Generate a random integer greater than or equal to 100000.
 ```nu
 > random int 100000..
 
 ```
 
-Generate a random integer between -10 (inclusive) and 10 (inclusive)
+Generate a random integer between -10 (inclusive) and 10 (inclusive).
 ```nu
 > random int (-10)..10
 

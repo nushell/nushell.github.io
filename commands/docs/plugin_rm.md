@@ -2,7 +2,7 @@
 title: plugin rm
 categories: |
   plugin
-version: 0.110.0
+version: 0.111.0
 plugin: |
   Remove a plugin from the plugin registry file.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--plugin-config {path}`: Use a plugin registry file other than the one set in `$nu.plugin-path`
- -  `--force, -f`: Don't cause an error if the plugin name wasn't found in the file
+ -  `--plugin-config {path}`: Use a plugin registry file other than the one set in `$nu.plugin-path`.
+ -  `--force, -f`: Don't cause an error if the plugin name wasn't found in the file.
 
 ## Parameters
 

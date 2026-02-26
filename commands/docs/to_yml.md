@@ -2,7 +2,7 @@
 title: to yml
 categories: |
   formats
-version: 0.110.0
+version: 0.111.0
 formats: |
   Convert table into .yaml/.yml text.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--serialize, -s`: serialize nushell types that cannot be deserialized
+ -  `--serialize, -s`: Serialize nushell types that cannot be deserialized.
 
 
 ## Input/output types:
@@ -32,7 +32,7 @@ contributors: false
 | any   | string |
 ## Examples
 
-Outputs a YAML string representing the contents of this table
+Outputs a YAML string representing the contents of this table.
 ```nu
 > [[foo bar]; ["1" "2"]] | to yml
 - foo: '1'

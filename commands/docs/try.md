@@ -2,7 +2,7 @@
 title: try
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   Try to run a block, if it fails optionally run a catch closure.
 usage: |
@@ -18,12 +18,13 @@ contributors: false
 
 ## Signature
 
-```> try {flags} (try_block) (catch_closure)```
+```> try {flags} (try_block) (catch) (finally)```
 
 ## Parameters
 
  -  `try_block`: Block to run.
- -  `catch_closure`: Closure to run if try block fails.
+ -  `catch`: Closure to run if try block fails.
+ -  `finally`: Closure to run anyway.
 
 
 ## Input/output types:
@@ -33,21 +34,27 @@ contributors: false
 | any   | any    |
 ## Examples
 
-Try to run a division by zero
+Try to run a division by zero.
 ```nu
 > try { 1 / 0 }
 
 ```
 
-Try to run a division by zero and return a string instead
+Try to run a division by zero and return a string instead.
 ```nu
 > try { 1 / 0 } catch { 'divided by zero' }
 divided by zero
 ```
 
-Try to run a division by zero and report the message
+Try to run a division by zero and report the message.
 ```nu
 > try { 1 / 0 } catch { |err| $err.msg }
+
+```
+
+Try to run a division by zero, report the message, and run finally
+```nu
+> try { 1 / 0 } catch { |err| print $err.msg } finally { 'clean' }
 
 ```
 

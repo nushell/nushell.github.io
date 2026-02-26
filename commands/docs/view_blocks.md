@@ -2,7 +2,7 @@
 title: view blocks
 categories: |
   debug
-version: 0.110.0
+version: 0.111.0
 debug: |
   View the blocks registered in nushell's EngineState memory.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | nothing | table&lt;block_id: int, content: string, start: int, end: int&gt; |
 ## Examples
 
-View the blocks registered in Nushell's EngineState memory
+View the blocks registered in Nushell's EngineState memory.
 ```nu
 > view blocks
 

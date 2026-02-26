@@ -2,7 +2,7 @@
 title: timeit
 categories: |
   debug
-version: 0.110.0
+version: 0.111.0
 debug: |
   Time how long it takes a closure to run.
 usage: |
@@ -39,31 +39,31 @@ contributors: false
 | nothing | record&lt;time: duration, output: any&gt; |
 ## Examples
 
-Time a closure containing one command
+Time a closure containing one command.
 ```nu
 > timeit { sleep 500ms }
 500ms 631µs 800ns
 ```
 
-Time a closure with an input value
+Time a closure with an input value.
 ```nu
 > 'A really long string' | timeit { split chars }
 
 ```
 
-Time a closure with an input stream
+Time a closure with an input stream.
 ```nu
 > open some_file.txt | collect | timeit { split chars }
 
 ```
 
-Time a closure containing a pipeline
+Time a closure containing a pipeline.
 ```nu
 > timeit { open some_file.txt | split chars }
 
 ```
 
-Time a closure and also return the output
+Time a closure and also return the output.
 ```nu
 > timeit --output { 'example text' }
 ╭────────┬──────────────╮

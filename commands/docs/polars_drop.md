@@ -2,7 +2,7 @@
 title: polars drop
 categories: |
   dataframe
-version: 0.110.0
+version: 0.111.0
 dataframe: |
   Creates a new dataframe by dropping the selected columns.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `...rest`: column names to be dropped
+ -  `...rest`: Column names to be dropped.
 
 
 ## Input/output types:

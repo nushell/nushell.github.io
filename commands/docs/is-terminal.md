@@ -2,7 +2,7 @@
 title: is-terminal
 categories: |
   platform
-version: 0.110.0
+version: 0.111.0
 platform: |
   Check if stdin, stdout, or stderr is a terminal.
 usage: |
@@ -22,9 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--stdin, -i`: Check if stdin is a terminal
- -  `--stdout, -o`: Check if stdout is a terminal
- -  `--stderr, -e`: Check if stderr is a terminal
+ -  `--stdin, -i`: Check if stdin is a terminal.
+ -  `--stdout, -o`: Check if stdout is a terminal.
+ -  `--stderr, -e`: Check if stderr is a terminal.
 
 
 ## Input/output types:

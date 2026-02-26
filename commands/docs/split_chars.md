@@ -2,7 +2,7 @@
 title: split chars
 categories: |
   strings
-version: 0.110.0
+version: 0.111.0
 strings: |
   Split a string into a list of characters.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--grapheme-clusters, -g`: split on grapheme clusters
- -  `--code-points, -c`: split on code points (default; splits combined characters)
+ -  `--grapheme-clusters, -g`: Split on grapheme clusters.
+ -  `--code-points, -c`: Split on code points (default; splits combined characters).
 
 
 ## Input/output types:
@@ -34,7 +34,7 @@ contributors: false
 | list&lt;string&gt; | list&lt;list&lt;string&gt;&gt; |
 ## Examples
 
-Split the string into a list of characters
+Split the string into a list of characters.
 ```nu
 > 'hello' | split chars
 ╭───┬───╮
@@ -47,7 +47,7 @@ Split the string into a list of characters
 
 ```
 
-Split on grapheme clusters
+Split on grapheme clusters.
 ```nu
 > '🇯🇵ほげ' | split chars --grapheme-clusters
 ╭───┬────╮
@@ -58,7 +58,7 @@ Split on grapheme clusters
 
 ```
 
-Split multiple strings into lists of characters
+Split multiple strings into lists of characters.
 ```nu
 > ['hello', 'world'] | split chars
 ╭───┬───────────╮

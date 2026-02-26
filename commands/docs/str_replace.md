@@ -2,11 +2,11 @@
 title: str replace
 categories: |
   strings
-version: 0.110.0
+version: 0.111.0
 strings: |
-  Find and replace text.
+  Find and replace text in the input string.
 usage: |
-  Find and replace text.
+  Find and replace text in the input string.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `str replace` for [strings](/commands/categories/strings.md)
 
-<div class='command-title'>Find and replace text.</div>
+<div class='command-title'>Find and replace text in the input string.</div>
 
 ## Signature
 
@@ -22,10 +22,10 @@ contributors: false
 
 ## Flags
 
- -  `--all, -a`: replace all occurrences of the pattern
- -  `--no-expand, -n`: do not expand capture groups (like $name) in the replacement string
- -  `--regex, -r`: match the pattern as a regular expression in the input, instead of a substring
- -  `--multiline, -m`: multi-line regex mode (implies --regex): ^ and $ match begin/end of line; equivalent to (?m)
+ -  `--all, -a`: Replace all occurrences of the pattern.
+ -  `--no-expand, -n`: Do not expand capture groups (like $name) in the replacement string.
+ -  `--regex, -r`: Match the pattern as a regular expression in the input, instead of a substring.
+ -  `--multiline, -m`: Multi-line regex mode (implies --regex): ^ and $ match begin/end of line; equivalent to (?m).
 
 ## Parameters
 
@@ -44,37 +44,37 @@ contributors: false
 | list&lt;string&gt; | list&lt;string&gt; |
 ## Examples
 
-Find and replace the first occurrence of a substring
+Find and replace the first occurrence of a substring.
 ```nu
 > 'c:\some\cool\path' | str replace 'c:\some\cool' '~'
 ~\path
 ```
 
-Find and replace all occurrences of a substring
+Find and replace all occurrences of a substring.
 ```nu
 > 'abc abc abc' | str replace --all 'b' 'z'
 azc azc azc
 ```
 
-Find and replace contents with capture group using regular expression
+Find and replace contents with capture group using regular expression.
 ```nu
 > 'my_library.rb' | str replace -r '(.+).rb' '$1.nu'
 my_library.nu
 ```
 
-Find and replace contents with capture group using regular expression, with escapes
+Find and replace contents with capture group using regular expression, with escapes.
 ```nu
 > 'hello=world' | str replace -r '\$?(?<varname>.*)=(?<value>.*)' '$$$varname = $value'
 $hello = world
 ```
 
-Find and replace all occurrences of found string using regular expression
+Find and replace all occurrences of found string using regular expression.
 ```nu
 > 'abc abc abc' | str replace --all --regex 'b' 'z'
 azc azc azc
 ```
 
-Find and replace all occurrences of found string in table using regular expression
+Find and replace all occurrences of found string in table using regular expression.
 ```nu
 > [[ColA ColB ColC]; [abc abc ads]] | str replace --all --regex 'b' 'z' ColA ColC
 ╭───┬──────┬──────┬──────╮
@@ -85,7 +85,7 @@ Find and replace all occurrences of found string in table using regular expressi
 
 ```
 
-Find and replace all occurrences of found string in record using regular expression
+Find and replace all occurrences of found string in record using regular expression.
 ```nu
 > { KeyA: abc, KeyB: abc, KeyC: ads } | str replace --all --regex 'b' 'z' KeyA KeyC
 ╭──────┬─────╮
@@ -95,31 +95,31 @@ Find and replace all occurrences of found string in record using regular express
 ╰──────┴─────╯
 ```
 
-Find and replace contents without using the replace parameter as a regular expression
+Find and replace contents without using the replace parameter as a regular expression.
 ```nu
 > 'dogs_$1_cats' | str replace -r '\$1' '$2' -n
 dogs_$2_cats
 ```
 
-Use captures to manipulate the input text using regular expression
+Use captures to manipulate the input text using regular expression.
 ```nu
 > "abc-def" | str replace -r "(.+)-(.+)" "${2}_${1}"
 def_abc
 ```
 
-Find and replace with fancy-regex using regular expression
+Find and replace with fancy-regex using regular expression.
 ```nu
 > 'a successful b' | str replace -r '\b([sS])uc(?:cs|s?)e(ed(?:ed|ing|s?)|ss(?:es|ful(?:ly)?|i(?:ons?|ve(?:ly)?)|ors?)?)\b' '${1}ucce$2'
 a successful b
 ```
 
-Find and replace with fancy-regex using regular expression
+Find and replace with fancy-regex using regular expression.
 ```nu
 > 'GHIKK-9+*' | str replace -r '[*[:xdigit:]+]' 'z'
 GHIKK-z+*
 ```
 
-Find and replace on individual lines using multiline regular expression
+Find and replace on individual lines using multiline regular expression.
 ```nu
 > "non-matching line\n123. one line\n124. another line\n" | str replace --all --multiline '^[0-9]+\. ' ''
 non-matching line
@@ -128,7 +128,7 @@ another line
 
 ```
 
-Find and replace backslash escape sequences using a closure
+Find and replace backslash escape sequences using a closure.
 ```nu
 > 'string: \"abc\" backslash: \\ newline:\nend' | str replace -a -r '\\(.)' {|char| if $char == "n" { "\n" } else { $char } }
 string: "abc" backslash: \ newline:

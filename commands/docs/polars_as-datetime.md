@@ -2,7 +2,7 @@
 title: polars as-datetime
 categories: |
   dataframe
-version: 0.110.0
+version: 0.111.0
 dataframe: |
   Converts string to datetime.
 usage: |
@@ -22,20 +22,20 @@ contributors: false
 
 ## Flags
 
- -  `--not-exact, -n`: the format string may be contained in the date (e.g. foo-2021-01-01-bar could match 2021-01-01)
- -  `--naive`: the input datetimes should be parsed as naive (i.e., not timezone-aware). Ignored if input is an expression.
+ -  `--not-exact, -n`: The format string may be contained in the date (e.g. foo-2021-01-01-bar could match 2021-01-01).
+ -  `--naive`: The input datetimes should be parsed as naive (i.e., not timezone-aware). Ignored if input is an expression.
  -  `--ambiguous, -a {oneof<string, nothing>}`: Determine how to deal with ambiguous datetimes:
                     `raise` (default): raise error
                     `earliest`: use the earliest datetime
                     `latest`: use the latest datetime
                     `null`: set to null
                     Used only when input is a lazyframe or expression and ignored otherwise
- -  `--time-unit {string}`: time unit for the output datetime. One of: ns, us, ms. Default is ns
- -  `--time-zone {string}`: time zone for the output datetime. E.g. 'UTC', 'America/New_York'
+ -  `--time-unit {string}`: Time unit for the output datetime. One of: ns, us, ms. Default is ns.
+ -  `--time-zone {string}`: Time zone for the output datetime. E.g. 'UTC', 'America/New_York'.
 
 ## Parameters
 
- -  `format`: formatting date time string
+ -  `format`: Formatting date time string.
 
 
 ## Input/output types:
@@ -88,10 +88,10 @@ Converts string to datetime using the `--not-exact` flag even with excessive sym
 ╭───┬──────────────╮
 │ # │   datetime   │
 ├───┼──────────────┤
-│ 0 │ 2 months ago │
-│ 1 │ 2 months ago │
-│ 2 │ 2 months ago │
-│ 3 │ 2 months ago │
+│ 0 │ 3 months ago │
+│ 1 │ 3 months ago │
+│ 2 │ 3 months ago │
+│ 3 │ 3 months ago │
 ╰───┴──────────────╯
 
 ```

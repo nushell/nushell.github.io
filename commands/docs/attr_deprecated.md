@@ -2,7 +2,7 @@
 title: attr deprecated
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   Attribute for marking a command or flag as deprecated.
 usage: |
@@ -22,9 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--flag {string}`: Mark a flag as deprecated rather than the command
- -  `--since, -s {string}`: Denote a version when this item was deprecated
- -  `--remove, -r {string}`: Denote a version when this item will be removed
+ -  `--flag {string}`: Mark a flag as deprecated rather than the command.
+ -  `--since, -s {string}`: Denote a version when this item was deprecated.
+ -  `--remove, -r {string}`: Denote a version when this item will be removed.
  -  `--report {string}`: How to warn about this item. One of: first (default), every
 
 ## Parameters
@@ -39,14 +39,14 @@ contributors: false
 | nothing | record |
 ## Examples
 
-Add a deprecation warning to a custom command
+Add a deprecation warning to a custom command.
 ```nu
 > @deprecated
     def outdated [] {}
 
 ```
 
-Add a deprecation warning with a custom message
+Add a deprecation warning with a custom message.
 ```nu
 > @deprecated "Use my-new-command instead."
     @category deprecated

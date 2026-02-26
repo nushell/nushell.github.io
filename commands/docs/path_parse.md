@@ -2,7 +2,7 @@
 title: path parse
 categories: |
   path
-version: 0.110.0
+version: 0.111.0
 path: |
   Convert a path into structured data.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--extension, -e {string}`: Manually supply the extension (without the dot)
+ -  `--extension, -e {string}`: Manually supply the extension (without the dot).
 
 
 ## Input/output types:
@@ -33,7 +33,7 @@ contributors: false
 | list&lt;string&gt; | table  |
 ## Examples
 
-Parse a path
+Parse a path.
 ```nu
 > '/home/viking/spam.txt' | path parse
 ╭───────────┬──────────────╮
@@ -43,13 +43,13 @@ Parse a path
 ╰───────────┴──────────────╯
 ```
 
-Replace a complex extension
+Replace a complex extension.
 ```nu
 > '/home/viking/spam.tar.gz' | path parse --extension tar.gz | upsert extension { 'txt' }
 
 ```
 
-Ignore the extension
+Ignore the extension.
 ```nu
 > '/etc/conf.d' | path parse --extension ''
 ╭───────────┬────────╮
@@ -59,7 +59,7 @@ Ignore the extension
 ╰───────────┴────────╯
 ```
 
-Parse all paths in a list
+Parse all paths in a list.
 ```nu
 > [ /home/viking.d /home/spam.txt ] | path parse
 ╭───┬────────┬────────┬───────────╮

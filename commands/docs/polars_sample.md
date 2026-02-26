@@ -2,7 +2,7 @@
 title: polars sample
 categories: |
   dataframe
-version: 0.110.0
+version: 0.111.0
 dataframe: |
   Create sample dataframe.
 usage: |
@@ -22,11 +22,11 @@ contributors: false
 
 ## Flags
 
- -  `--n-rows, -n {int}`: number of rows to be taken from dataframe
- -  `--fraction, -f {number}`: fraction of dataframe to be taken
- -  `--seed, -s {number}`: seed for the selection
- -  `--replace, -e`: sample with replace
- -  `--shuffle, -u`: shuffle sample
+ -  `--n-rows, -n {int}`: Number of rows to be taken from dataframe.
+ -  `--fraction, -f {number}`: Fraction of dataframe to be taken.
+ -  `--seed, -s {number}`: Seed for the selection.
+ -  `--replace, -e`: Sample with replace.
+ -  `--shuffle, -u`: Shuffle sample.
 
 
 ## Input/output types:

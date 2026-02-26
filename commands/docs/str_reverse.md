@@ -2,7 +2,7 @@
 title: str reverse
 categories: |
   strings
-version: 0.110.0
+version: 0.111.0
 strings: |
   Reverse every string in the pipeline.
 usage: |
@@ -35,13 +35,13 @@ contributors: false
 | record       | record       |
 ## Examples
 
-Reverse a single string
+Reverse a single string.
 ```nu
 > 'Nushell' | str reverse
 llehsuN
 ```
 
-Reverse multiple strings in a list
+Reverse multiple strings in a list.
 ```nu
 > ['Nushell' 'is' 'cool'] | str reverse
 ╭───┬─────────╮

@@ -2,7 +2,7 @@
 title: ansi link
 categories: |
   platform
-version: 0.110.0
+version: 0.111.0
 platform: |
   Add a link (using OSC 8 escape sequence) to the given string.
 usage: |
@@ -23,7 +23,7 @@ contributors: false
 ## Flags
 
  -  `--text, -t {string}`: Link text. Uses uri as text if absent. In case of
-                tables, records and lists applies this text to all elements
+                tables, records and lists applies this text to all elements.
 
 ## Parameters
 

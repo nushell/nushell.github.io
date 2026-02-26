@@ -2,7 +2,7 @@
 title: polars cumulative
 categories: |
   dataframe
-version: 0.110.0
+version: 0.111.0
 dataframe: |
   Cumulative calculation for a column or series.
 usage: |
@@ -22,11 +22,11 @@ contributors: false
 
 ## Flags
 
- -  `--reverse, -r`: Reverse cumulative calculation
+ -  `--reverse, -r`: Reverse cumulative calculation.
 
 ## Parameters
 
- -  `type`: rolling operation. Values of min, max, and sum are accepted.
+ -  `type`: Rolling operation. Values of min, max, and sum are accepted.
 
 
 ## Input/output types:

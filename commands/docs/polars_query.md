@@ -2,7 +2,7 @@
 title: polars query
 categories: |
   dataframe
-version: 0.110.0
+version: 0.111.0
 dataframe: |
   Query dataframe using SQL. Note: The dataframe is always named 'df' in your query's from clause.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `sql`: sql query
+ -  `sql`: Sql query.
 
 
 ## Input/output types:

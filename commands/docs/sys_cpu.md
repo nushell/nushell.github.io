@@ -2,7 +2,7 @@
 title: sys cpu
 categories: |
   system
-version: 0.110.0
+version: 0.111.0
 system: |
   View information about the system CPUs.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--long, -l`: Get all available columns (slower, needs to sample CPU over time)
+ -  `--long, -l`: Get all available columns (slower, needs to sample CPU over time).
 
 
 ## Input/output types:

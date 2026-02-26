@@ -2,7 +2,7 @@
 title: transpose
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Transposes the table contents so rows become columns and columns become rows.
 usage: |
@@ -22,11 +22,11 @@ contributors: false
 
 ## Flags
 
- -  `--header-row, -r`: use the first input column as the table header-row (or keynames when combined with --as-record)
- -  `--ignore-titles, -i`: don't transpose the column names into values
- -  `--as-record, -d`: transfer to record if the result is a table and contains only one row
- -  `--keep-last, -l`: on repetition of record fields due to `header-row`, keep the last value obtained
- -  `--keep-all, -a`: on repetition of record fields due to `header-row`, keep all the values obtained
+ -  `--header-row, -r`: Use the first input column as the table header-row (or keynames when combined with --as-record).
+ -  `--ignore-titles, -i`: Don't transpose the column names into values.
+ -  `--as-record, -d`: Transfer to record if the result is a table and contains only one row.
+ -  `--keep-last, -l`: On repetition of record fields due to `header-row`, keep the last value obtained.
+ -  `--keep-all, -a`: On repetition of record fields due to `header-row`, keep all the values obtained.
 
 ## Parameters
 
@@ -41,7 +41,7 @@ contributors: false
 | record | table  |
 ## Examples
 
-Transposes the table contents with default column names
+Transposes the table contents with default column names.
 ```nu
 > [[c1 c2]; [1 2]] | transpose
 ╭───┬─────────┬─────────╮
@@ -53,7 +53,7 @@ Transposes the table contents with default column names
 
 ```
 
-Transposes the table contents with specified column names
+Transposes the table contents with specified column names.
 ```nu
 > [[c1 c2]; [1 2]] | transpose key val
 ╭───┬─────┬─────╮
@@ -65,7 +65,7 @@ Transposes the table contents with specified column names
 
 ```
 
-Transposes the table without column names and specify a new column name
+Transposes the table without column names and specify a new column name.
 ```nu
 > [[c1 c2]; [1 2]] | transpose --ignore-titles val
 ╭───┬─────╮
@@ -77,7 +77,7 @@ Transposes the table without column names and specify a new column name
 
 ```
 
-Transfer back to record with -d flag
+Transfer back to record with -d flag.
 ```nu
 > {c1: 1, c2: 2} | transpose | transpose --ignore-titles -r -d
 ╭────┬───╮

@@ -2,7 +2,7 @@
 title: to plist
 categories: |
   formats
-version: 0.110.0
+version: 0.111.0
 formats: |
   Convert Nu values into plist
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--binary, -b`: Output plist in binary format
+ -  `--binary, -b`: Output plist in binary format.
 
 ## Examples
 

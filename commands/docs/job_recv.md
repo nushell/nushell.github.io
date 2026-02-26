@@ -2,11 +2,11 @@
 title: job recv
 categories: |
   experimental
-version: 0.110.0
+version: 0.111.0
 experimental: |
-  Read a message from the mailbox.
+  Read a message from a job's mailbox.
 usage: |
-  Read a message from the mailbox.
+  Read a message from a job's mailbox.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `job recv` for [experimental](/commands/categories/experimental.md)
 
-<div class='command-title'>Read a message from the mailbox.</div>
+<div class='command-title'>Read a message from a job&#x27;s mailbox.</div>
 
 ## Signature
 
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--tag {int}`: A tag for the message
+ -  `--tag {int}`: A tag for the message.
  -  `--timeout {duration}`: The maximum time duration to wait for.
 
 
@@ -33,7 +33,7 @@ contributors: false
 | nothing | any    |
 ## Examples
 
-Block the current thread while no message arrives
+Block the current thread while no message arrives.
 ```nu
 > job recv
 
@@ -45,13 +45,13 @@ Receive a message, wait for at most 10 seconds.
 
 ```
 
-Get a message or fail if no message is available immediately
+Get a message or fail if no message is available immediately.
 ```nu
 > job recv --timeout 0sec
 
 ```
 
-Receive a message from a newly-spawned job
+Receive a message from a newly-spawned job.
 ```nu
 > job spawn { sleep 1sec; 'hi' | job send 0 }; job recv
 

@@ -2,7 +2,7 @@
 title: polars datepart
 categories: |
   expression
-version: 0.110.0
+version: 0.111.0
 expression: |
   Creates an expression for capturing the specified datepart in a column.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `Datepart name`: Part of the date to capture.  Possible values are year, quarter, month, week, weekday, day, hour, minute, second, millisecond, microsecond, nanosecond
+ -  `Datepart name`: Part of the date to capture.  Possible values are year, quarter, month, week, weekday, day, hour, minute, second, millisecond, microsecond, nanosecond.
 
 
 ## Input/output types:

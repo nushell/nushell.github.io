@@ -2,7 +2,7 @@
 title: path expand
 categories: |
   path
-version: 0.110.0
+version: 0.111.0
 path: |
   Try to expand a path to its absolute form.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--strict, -s`: Throw an error if the path could not be expanded
- -  `--no-symlink, -n`: Do not resolve symbolic links
+ -  `--strict, -s`: Throw an error if the path could not be expanded.
+ -  `--no-symlink, -n`: Do not resolve symbolic links.
 
 
 ## Input/output types:
@@ -34,19 +34,19 @@ contributors: false
 | list&lt;string&gt; | list&lt;string&gt; |
 ## Examples
 
-Expand an absolute path
+Expand an absolute path.
 ```nu
 > '/home/joe/foo/../bar' | path expand
 /home/joe/bar
 ```
 
-Expand a relative path
+Expand a relative path.
 ```nu
 > 'foo/../bar' | path expand
 
 ```
 
-Expand a list of paths
+Expand a list of paths.
 ```nu
 > [ /foo/../bar, /foo/../baz ] | path expand
 ╭───┬──────╮

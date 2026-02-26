@@ -2,7 +2,7 @@
 title: random uuid
 categories: |
   random
-version: 0.110.0
+version: 0.111.0
 random: |
   Generate a random uuid string of the specified version.
 usage: |
@@ -35,19 +35,19 @@ contributors: false
 | nothing | string |
 ## Examples
 
-Generate a random uuid v4 string (default)
+Generate a random uuid v4 string (default).
 ```nu
 > random uuid
 
 ```
 
-Generate a uuid v1 string (timestamp-based)
+Generate a uuid v1 string (timestamp-based).
 ```nu
 > random uuid -v 1 -m 00:11:22:33:44:55
 
 ```
 
-Generate a uuid v3 string (namespace with MD5)
+Generate a uuid v3 string (namespace with MD5).
 ```nu
 > random uuid -v 3 -n dns -s example.com
 
@@ -59,13 +59,13 @@ Generate a uuid v4 string (random).
 
 ```
 
-Generate a uuid v5 string (namespace with SHA1)
+Generate a uuid v5 string (namespace with SHA1).
 ```nu
 > random uuid -v 5 -n dns -s example.com
 
 ```
 
-Generate a uuid v7 string (timestamp + random)
+Generate a uuid v7 string (timestamp + random).
 ```nu
 > random uuid -v 7
 

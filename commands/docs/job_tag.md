@@ -2,7 +2,7 @@
 title: job tag
 categories: |
   experimental
-version: 0.110.0
+version: 0.111.0
 experimental: |
   Add a description tag to a background job.
 usage: |
@@ -33,13 +33,13 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Tag a newly spawned job
+Tag a newly spawned job.
 ```nu
 > let id = job spawn { sleep 10sec }; job tag $id abc
 
 ```
 
-Remove the tag of a job
+Remove the tag of a job.
 ```nu
 > let id = job spawn { sleep 10sec }; job tag $id abc; job tag $id null
 

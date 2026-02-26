@@ -2,7 +2,7 @@
 title: reduce
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Aggregate a list (starting from the left) to a single value using an accumulator closure.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--fold, -f {any}`: reduce with initial value
+ -  `--fold, -f {any}`: Reduce with initial value.
 
 ## Parameters
 
@@ -38,7 +38,7 @@ contributors: false
 | range     | any    |
 ## Examples
 
-Sum values of a list (same as 'math sum')
+Sum values of a list (same as 'math sum').
 ```nu
 > [ 1 2 3 4 ] | reduce {|it, acc| $it + $acc }
 10
@@ -50,25 +50,25 @@ Sum values of a list (same as 'math sum')
 -8
 ```
 
-Sum values of a list, plus their indexes
+Sum values of a list, plus their indexes.
 ```nu
 > [ 8 7 6 ] | enumerate | reduce --fold 0 {|it, acc| $acc + $it.item + $it.index }
 24
 ```
 
-Sum values with a starting value (fold)
+Sum values with a starting value (fold).
 ```nu
 > [ 1 2 3 4 ] | reduce --fold 10 {|it, acc| $acc + $it }
 20
 ```
 
-Iteratively perform string replace (from left to right): 'foobar' -> 'bazbar' -> 'quuxbar'
+Iteratively perform string replace (from left to right): 'foobar' -> 'bazbar' -> 'quuxbar'.
 ```nu
 > [[foo baz] [baz quux]] | reduce --fold "foobar" {|it, acc| $acc | str replace $it.0 $it.1}
 quuxbar
 ```
 
-Replace selected characters in a string with 'X'
+Replace selected characters in a string with 'X'.
 ```nu
 > [ i o t ] | reduce --fold "Arthur, King of the Britons" {|it, acc| $acc | str replace --all $it "X" }
 ArXhur, KXng Xf Xhe BrXXXns

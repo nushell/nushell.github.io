@@ -2,7 +2,7 @@
 title: split cell-path
 categories: |
   conversions
-version: 0.110.0
+version: 0.111.0
 conversions: |
   Split a cell-path into its components.
 usage: |
@@ -29,7 +29,7 @@ contributors: false
 | cell-path | list&lt;record&lt;value: any, optional: bool, insensitive: bool&gt;&gt; |
 ## Examples
 
-Split a cell-path into its components
+Split a cell-path into its components.
 ```nu
 > $.5?.c | split cell-path
 ╭───┬───────┬──────────┬─────────────╮
@@ -41,7 +41,7 @@ Split a cell-path into its components
 
 ```
 
-Split a complex cell-path
+Split a complex cell-path.
 ```nu
 > $.a!.b?.1."2"."c.d" | split cell-path
 ╭───┬───────┬──────────┬─────────────╮

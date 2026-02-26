@@ -2,7 +2,7 @@
 title: polars str-replace
 categories: |
   dataframe
-version: 0.110.0
+version: 0.111.0
 dataframe: |
   Replace the leftmost (sub)string by a regex pattern.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--pattern, -p {string}`: Regex pattern to be matched
- -  `--replace, -r {string}`: replacing string
+ -  `--pattern, -p {string}`: Regex pattern to be matched.
+ -  `--replace, -r {string}`: Replacing string.
 
 
 ## Input/output types:

@@ -2,7 +2,7 @@
 title: open
 categories: |
   filesystem
-version: 0.110.0
+version: 0.111.0
 filesystem: |
   Load a file into a cell, converting to table if possible (avoid by appending '--raw').
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--raw, -r`: open file as raw binary
+ -  `--raw, -r`: Open file as raw binary.
 
 ## Parameters
 
@@ -38,37 +38,37 @@ contributors: false
 | any     | any    |
 ## Examples
 
-Open a file, with structure (based on file extension or SQLite database header)
+Open a file, with structure (based on file extension or SQLite database header).
 ```nu
 > open myfile.json
 
 ```
 
-Open a file, as raw bytes
+Open a file, as raw bytes.
 ```nu
 > open myfile.json --raw
 
 ```
 
-Open a file, using the input to get filename
+Open a file, using the input to get filename.
 ```nu
 > 'myfile.txt' | open
 
 ```
 
-Open a file, and decode it by the specified encoding
+Open a file, and decode it by the specified encoding.
 ```nu
 > open myfile.txt --raw | decode utf-8
 
 ```
 
-Create a custom `from` parser to open newline-delimited JSON files with `open`
+Create a custom `from` parser to open newline-delimited JSON files with `open`.
 ```nu
 > def "from ndjson" [] { from json -o }; open myfile.ndjson
 
 ```
 
-Show the extensions for which the `open` command will automatically parse
+Show the extensions for which the `open` command will automatically parse.
 ```nu
 > scope commands
     | where name starts-with "from "

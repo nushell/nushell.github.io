@@ -2,7 +2,7 @@
 title: from eml
 categories: |
   formats
-version: 0.110.0
+version: 0.111.0
 formats: |
   Parse text as .eml and create record.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--preview-body, -b {int}`: How many bytes of the body to preview
+ -  `--preview-body, -b {int}`: How many bytes of the body to preview.
 
 
 ## Input/output types:

@@ -2,7 +2,7 @@
 title: polars replace-time-zone
 categories: |
   dataframe
-version: 0.110.0
+version: 0.111.0
 dataframe: |
   Replace the timezone information in a datetime column.
 usage: |
@@ -65,10 +65,10 @@ Apply timezone with ambiguous datetime
 ╭───┬──────────────╮
 │ # │   datetime   │
 ├───┼──────────────┤
-│ 0 │ 2 months ago │
+│ 0 │ 3 months ago │
 │ 1 │              │
-│ 2 │ 2 months ago │
-│ 3 │ 2 months ago │
+│ 2 │ 3 months ago │
+│ 3 │ 3 months ago │
 ╰───┴──────────────╯
 
 ```
@@ -79,13 +79,13 @@ Apply timezone with nonexistent datetime
                     | polars into-df
                     | polars as-datetime "%Y-%m-%d %H:%M:%S" --naive
                     | polars select (polars col datetime | polars replace-time-zone "America/New_York" --nonexistent null)
-╭───┬───────────────╮
-│ # │   datetime    │
-├───┼───────────────┤
-│ 0 │ 10 months ago │
-│ 1 │               │
-│ 2 │ 10 months ago │
-│ 3 │ 10 months ago │
-╰───┴───────────────╯
+╭───┬────────────╮
+│ # │  datetime  │
+├───┼────────────┤
+│ 0 │ a year ago │
+│ 1 │            │
+│ 2 │ a year ago │
+│ 3 │ a year ago │
+╰───┴────────────╯
 
 ```

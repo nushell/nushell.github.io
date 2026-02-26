@@ -2,7 +2,7 @@
 title: explore regex
 categories: |
   viewers
-version: 0.110.0
+version: 0.111.0
 viewers: |
   Launch a TUI to create and explore regular expressions interactively.
 usage: |
@@ -43,3 +43,4 @@ Explore a regular expression interactively with sample text
 
 ## Notes
 Press `Ctrl-Q` to quit and provide constructed regular expression as the output.
+Supports AltGr key combinations for international keyboard layouts.

@@ -2,7 +2,7 @@
 title: attr
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   Various attributes for custom commands.
 usage: |

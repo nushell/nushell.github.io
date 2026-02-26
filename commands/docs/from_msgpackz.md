@@ -2,7 +2,7 @@
 title: from msgpackz
 categories: |
   formats
-version: 0.110.0
+version: 0.111.0
 formats: |
   Convert brotli-compressed MessagePack data into Nu values.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--objects`: Read multiple objects from input
+ -  `--objects`: Read multiple objects from input.
 
 
 ## Input/output types:

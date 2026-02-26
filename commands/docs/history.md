@@ -2,7 +2,7 @@
 title: history
 categories: |
   history
-version: 0.110.0
+version: 0.111.0
 history: |
   Get the command history.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--clear, -c`: Clears out the history entries
- -  `--long, -l`: Show long listing of entries for sqlite history
+ -  `--clear, -c`: Clears out the history entries.
+ -  `--long, -l`: Show long format with timestamps and additional details.
 
 
 ## Input/output types:
@@ -42,6 +42,12 @@ Get current history length
 Show last 5 commands you have ran
 ```nu
 > history | last 5
+
+```
+
+Show last 5 commands with full details
+```nu
+> history --long | last 5
 
 ```
 

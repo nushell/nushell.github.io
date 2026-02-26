@@ -2,7 +2,7 @@
 title: str stats
 categories: |
   strings
-version: 0.110.0
+version: 0.111.0
 strings: |
   Gather word count statistics on the text.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | string | record |
 ## Examples
 
-Count the number of words in a string
+Count the number of words in a string.
 ```nu
 > "There are seven words in this sentence" | str stats
 ╭───────────────┬────╮
@@ -41,7 +41,7 @@ Count the number of words in a string
 ╰───────────────┴────╯
 ```
 
-Counts unicode characters
+Counts unicode characters.
 ```nu
 > '今天天气真好' | str stats
 ╭───────────────┬────╮
@@ -54,7 +54,7 @@ Counts unicode characters
 ╰───────────────┴────╯
 ```
 
-Counts Unicode characters correctly in a string
+Counts Unicode characters correctly in a string.
 ```nu
 > "Amélie Amelie" | str stats
 ╭───────────────┬────╮

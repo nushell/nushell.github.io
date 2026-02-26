@@ -2,7 +2,7 @@
 title: polars unique
 categories: |
   dataframe or lazyframe
-version: 0.110.0
+version: 0.111.0
 dataframe_or_lazyframe: |
   Returns unique values from a dataframe.
 usage: |
@@ -22,9 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--subset, -s {any}`: Subset of column(s) to use to maintain rows (lazy df)
- -  `--last, -l`: Keeps last unique value. Default keeps first value (lazy df)
- -  `--maintain-order, -k`: Keep the same order as the original DataFrame (lazy df)
+ -  `--subset, -s {any}`: Subset of column(s) to use to maintain rows (lazy df).
+ -  `--last, -l`: Keeps last unique value. Default keeps first value (lazy df).
+ -  `--maintain-order, -k`: Keep the same order as the original DataFrame (lazy df).
 
 
 ## Input/output types:

@@ -2,7 +2,7 @@
 title: detect type
 categories: |
   strings
-version: 0.110.0
+version: 0.111.0
 strings: |
   Infer Nushell datatype from a string.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--prefer-filesize, -f`: For ints display them as human-readable file sizes
- -  `--prefer-dmy`: Prefer day-month-year format for ambiguous dates
+ -  `--prefer-filesize, -f`: For ints display them as human-readable file sizes.
+ -  `--prefer-dmy`: Prefer day-month-year format for ambiguous dates.
 
 
 ## Input/output types:

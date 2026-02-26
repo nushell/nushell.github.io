@@ -2,7 +2,7 @@
 title: export extern
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   Define an extern and export it from a module.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Parameters
 
- -  `def_name`: Definition name.
- -  `params`: Parameters.
+ -  `def_name`: The name of the external command signature to define and export.
+ -  `params`: The parameters for the external command signature.
 
 
 ## Input/output types:
@@ -33,7 +33,7 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Export the signature for an external command
+Export the signature for an external command.
 ```nu
 > export extern echo [text: string]
 

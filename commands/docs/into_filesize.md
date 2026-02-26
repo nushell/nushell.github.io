@@ -2,11 +2,11 @@
 title: into filesize
 categories: |
   conversions
-version: 0.110.0
+version: 0.111.0
 conversions: |
-  Convert value to filesize.
+  Convert value to a filesize.
 usage: |
-  Convert value to filesize.
+  Convert value to a filesize.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `into filesize` for [conversions](/commands/categories/conversions.md)
 
-<div class='command-title'>Convert value to filesize.</div>
+<div class='command-title'>Convert value to a filesize.</div>
 
 ## Signature
 
@@ -42,7 +42,7 @@ contributors: false
 | list&lt;any&gt;      | list&lt;filesize&gt; |
 ## Examples
 
-Convert string to filesize in table
+Convert string to filesize in table.
 ```nu
 > [[device size]; ["/dev/sda1" "200"] ["/dev/loop0" "50"]] | into filesize size
 ╭───┬────────────┬───────╮
@@ -54,31 +54,31 @@ Convert string to filesize in table
 
 ```
 
-Convert string to filesize
+Convert string to filesize.
 ```nu
 > '2' | into filesize
 2 B
 ```
 
-Convert float to filesize
+Convert float to filesize.
 ```nu
 > 8.3 | into filesize
 8 B
 ```
 
-Convert int to filesize
+Convert int to filesize.
 ```nu
 > 5 | into filesize
 5 B
 ```
 
-Convert file size to filesize
+Convert file size to filesize.
 ```nu
 > 4KB | into filesize
 4.0 kB
 ```
 
-Convert string with unit to filesize
+Convert string with unit to filesize.
 ```nu
 > '-1KB' | into filesize
 -1.0 kB

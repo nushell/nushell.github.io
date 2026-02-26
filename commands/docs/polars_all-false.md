@@ -2,7 +2,7 @@
 title: polars all-false
 categories: |
   dataframe
-version: 0.110.0
+version: 0.111.0
 dataframe: |
   Returns true if all values are false.
 usage: |

@@ -2,7 +2,7 @@
 title: bytes
 categories: |
   bytes
-version: 0.110.0
+version: 0.111.0
 bytes: |
   Various commands for working with byte data.
 usage: |
@@ -33,15 +33,15 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 | name                                                       | description                                                                                | type     |
 | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------ | -------- |
-| [`bytes add`](/commands/docs/bytes_add.md)                 | Add specified bytes to the input.                                                          | built-in |
-| [`bytes at`](/commands/docs/bytes_at.md)                   | Get bytes defined by a range.                                                              | built-in |
-| [`bytes build`](/commands/docs/bytes_build.md)             | Create bytes from the arguments.                                                           | built-in |
+| [`bytes add`](/commands/docs/bytes_add.md)                 | Add specified bytes to the binary input.                                                   | built-in |
+| [`bytes at`](/commands/docs/bytes_at.md)                   | Get bytes from the input defined by a range.                                               | built-in |
+| [`bytes build`](/commands/docs/bytes_build.md)             | Create a binary value from the provided arguments.                                         | built-in |
 | [`bytes collect`](/commands/docs/bytes_collect.md)         | Concatenate multiple binary into a single binary, with an optional separator between each. | built-in |
-| [`bytes ends-with`](/commands/docs/bytes_ends-with.md)     | Check if bytes ends with a pattern.                                                        | built-in |
+| [`bytes ends-with`](/commands/docs/bytes_ends-with.md)     | Check if binary data ends with a pattern.                                                  | built-in |
 | [`bytes index-of`](/commands/docs/bytes_index-of.md)       | Returns start index of first occurrence of pattern in bytes, or -1 if no match.            | built-in |
 | [`bytes length`](/commands/docs/bytes_length.md)           | Output the length of any bytes in the pipeline.                                            | built-in |
-| [`bytes remove`](/commands/docs/bytes_remove.md)           | Remove bytes.                                                                              | built-in |
-| [`bytes replace`](/commands/docs/bytes_replace.md)         | Find and replace binary.                                                                   | built-in |
+| [`bytes remove`](/commands/docs/bytes_remove.md)           | Remove specified bytes from the input.                                                     | built-in |
+| [`bytes replace`](/commands/docs/bytes_replace.md)         | Find and replace bytes in binary data.                                                     | built-in |
 | [`bytes reverse`](/commands/docs/bytes_reverse.md)         | Reverse the bytes in the pipeline.                                                         | built-in |
 | [`bytes split`](/commands/docs/bytes_split.md)             | Split input into multiple items using a separator.                                         | built-in |
-| [`bytes starts-with`](/commands/docs/bytes_starts-with.md) | Check if bytes starts with a pattern.                                                      | built-in |
+| [`bytes starts-with`](/commands/docs/bytes_starts-with.md) | Check if binary data starts with a pattern.                                                | built-in |

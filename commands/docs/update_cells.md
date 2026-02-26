@@ -2,7 +2,7 @@
 title: update cells
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Update the table cells.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--columns, -c {list<any>}`: list of columns to update
+ -  `--columns, -c {list<any>}`: List of columns to update.
 
 ## Parameters
 

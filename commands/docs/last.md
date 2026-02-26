@@ -2,7 +2,7 @@
 title: last
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Return only the last several rows of the input. Counterpart of `first`. Opposite of `drop`.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--strict, -s`: Throw an error if input is empty
+ -  `--strict, -s`: Throw an error if input is empty.
 
 ## Parameters
 
@@ -38,7 +38,7 @@ contributors: false
 | range     | any    |
 ## Examples
 
-Return the last 2 items of a list/table
+Return the last 2 items of a list/table.
 ```nu
 > [1,2,3] | last 2
 ╭───┬───╮
@@ -48,13 +48,13 @@ Return the last 2 items of a list/table
 
 ```
 
-Return the last item of a list/table
+Return the last item of a list/table.
 ```nu
 > [1,2,3] | last
 3
 ```
 
-Return the last 2 bytes of a binary value
+Return the last 2 bytes of a binary value.
 ```nu
 > 0x[01 23 45] | last 2
 Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
@@ -62,7 +62,7 @@ Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-Return the last item of a range
+Return the last item of a range.
 ```nu
 > 1..3 | last
 3

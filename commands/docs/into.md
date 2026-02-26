@@ -2,7 +2,7 @@
 title: into
 categories: |
   conversions
-version: 0.110.0
+version: 0.111.0
 conversions: |
   Commands to convert data from one type to another.
 usage: |
@@ -34,15 +34,15 @@ You must use one of the following subcommands. Using this command as-is will onl
 | name                                                 | description                                | type     |
 | ---------------------------------------------------- | ------------------------------------------ | -------- |
 | [`into binary`](/commands/docs/into_binary.md)       | Convert value to a binary primitive.       | built-in |
-| [`into bool`](/commands/docs/into_bool.md)           | Convert value to boolean.                  | built-in |
+| [`into bool`](/commands/docs/into_bool.md)           | Convert value to a boolean.                | built-in |
 | [`into cell-path`](/commands/docs/into_cell-path.md) | Convert value to a cell-path.              | built-in |
 | [`into datetime`](/commands/docs/into_datetime.md)   | Convert text or timestamp into a datetime. | built-in |
-| [`into duration`](/commands/docs/into_duration.md)   | Convert value to duration.                 | built-in |
-| [`into filesize`](/commands/docs/into_filesize.md)   | Convert value to filesize.                 | built-in |
+| [`into duration`](/commands/docs/into_duration.md)   | Convert value to a duration.               | built-in |
+| [`into filesize`](/commands/docs/into_filesize.md)   | Convert value to a filesize.               | built-in |
 | [`into float`](/commands/docs/into_float.md)         | Convert data into floating point number.   | built-in |
-| [`into glob`](/commands/docs/into_glob.md)           | Convert value to glob.                     | built-in |
-| [`into int`](/commands/docs/into_int.md)             | Convert value to integer.                  | built-in |
-| [`into record`](/commands/docs/into_record.md)       | Convert value to record.                   | built-in |
+| [`into glob`](/commands/docs/into_glob.md)           | Convert value to a glob pattern.           | built-in |
+| [`into int`](/commands/docs/into_int.md)             | Convert value to an integer.               | built-in |
+| [`into record`](/commands/docs/into_record.md)       | Convert value to a record.                 | built-in |
 | [`into sqlite`](/commands/docs/into_sqlite.md)       | Convert table into a SQLite database.      | built-in |
-| [`into string`](/commands/docs/into_string.md)       | Convert value to string.                   | built-in |
+| [`into string`](/commands/docs/into_string.md)       | Convert value to a string.                 | built-in |
 | [`into value`](/commands/docs/into_value.md)         | Convert custom values into base values.    | built-in |

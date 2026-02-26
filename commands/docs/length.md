@@ -2,7 +2,7 @@
 title: length
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Count the number of items in an input list, rows in a table, or bytes in binary data.
 usage: |
@@ -23,11 +23,12 @@ contributors: false
 
 ## Input/output types:
 
-| input     | output |
-| --------- | ------ |
-| list&lt;any&gt; | int    |
-| binary    | int    |
-| nothing   | int    |
+| input              | output |
+| ------------------ | ------ |
+| list&lt;any&gt;          | int    |
+| binary             | int    |
+| nothing            | int    |
+| SQLiteQueryBuilder | int    |
 ## Examples
 
 Count the number of items in a list

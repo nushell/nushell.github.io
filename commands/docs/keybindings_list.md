@@ -2,7 +2,7 @@
 title: keybindings list
 categories: |
   platform
-version: 0.110.0
+version: 0.111.0
 platform: |
   List available options that can be used to create keybindings.
 usage: |
@@ -22,11 +22,11 @@ contributors: false
 
 ## Flags
 
- -  `--modifiers, -m`: list of modifiers
- -  `--keycodes, -k`: list of keycodes
- -  `--modes, -o`: list of edit modes
- -  `--events, -e`: list of reedline event
- -  `--edits, -d`: list of edit commands
+ -  `--modifiers, -m`: List of modifiers.
+ -  `--keycodes, -k`: List of keycodes.
+ -  `--modes, -o`: List of edit modes.
+ -  `--events, -e`: List of reedline event.
+ -  `--edits, -d`: List of edit commands.
 
 
 ## Input/output types:

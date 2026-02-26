@@ -30,7 +30,7 @@ def plugin-paths [ nu_path?: path ] {
 # get all command names from a clean scope
 def command-names [] {
     let plugins = (plugin-paths)
-    nu --no-config-file --plugins ($plugins | to nuon) --commands $'scope commands | select name | to json'
+    nu --no-config-file --plugins ...$plugins --commands $'scope commands | select name | to json'
         | from json
 }
 
@@ -62,7 +62,7 @@ def make_docs [
 ] {
     let $nu_path = ($nu_path | default $nu.current-exe)
     let plugins = (plugin-paths $nu_path)
-    run-external $nu_path "--no-config-file" $"--plugins ($plugins | to nuon)" "make_docs.nu"
+    run-external $nu_path "--no-config-file" "--plugins" ...$plugins "make_docs.nu"
 }
 
 # generate the YAML frontmatter of a command

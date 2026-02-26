@@ -2,7 +2,7 @@
 title: polars pivot
 categories: |
   dataframe
-version: 0.110.0
+version: 0.111.0
 dataframe: |
   Pivot a DataFrame from long to wide format.
 usage: |
@@ -22,13 +22,13 @@ contributors: false
 
 ## Flags
 
- -  `--on, -o {list<string>}`: column names for pivoting
- -  `--index, -i {list<string>}`: column names for indexes
- -  `--values, -v {list<string>}`: column names used as value columns
- -  `--aggregate, -a {any}`: Aggregation to apply when pivoting. The following are supported: first, sum, min, max, mean, median, count, last, or a custom expression
- -  `--separator, -p {string}`: Delimiter in generated column names in case of multiple `values` columns (default '_')
- -  `--sort, -s`: Sort columns
- -  `--streamable, -t`: Whether or not to use the polars streaming engine. Only valid for lazy dataframes
+ -  `--on, -o {list<string>}`: Column names for pivoting.
+ -  `--index, -i {list<string>}`: Column names for indexes.
+ -  `--values, -v {list<string>}`: Column names used as value columns.
+ -  `--aggregate, -a {any}`: Aggregation to apply when pivoting. The following are supported: first, sum, min, max, mean, median, count, last, or a custom expression.
+ -  `--separator, -p {string}`: Delimiter in generated column names in case of multiple `values` columns (default '_').
+ -  `--sort, -s`: Sort columns.
+ -  `--streamable, -t`: Whether or not to use the polars streaming engine. Only valid for lazy dataframes.
  -  `--stable`: Perform a stable pivot.
 
 
@@ -43,12 +43,12 @@ contributors: false
 Perform a pivot in order to show individuals test score by subject
 ```nu
 > [[name subject date test_1 test_2]; [Cady maths 2025-04-01 98 100] [Cady physics 2025-04-01 99 100] [Karen maths 2025-04-02 61 60] [Karen physics 2025-04-02 58 60]] | polars into-df |  polars pivot --on [subject] --index [name date] --values [test_1]
-╭───┬───────┬──────────────┬───────┬─────────╮
-│ # │ name  │     date     │ maths │ physics │
-├───┼───────┼──────────────┼───────┼─────────┤
-│ 0 │ Cady  │ 9 months ago │    98 │      99 │
-│ 1 │ Karen │ 9 months ago │    61 │      58 │
-╰───┴───────┴──────────────┴───────┴─────────╯
+╭───┬───────┬───────────────┬───────┬─────────╮
+│ # │ name  │     date      │ maths │ physics │
+├───┼───────┼───────────────┼───────┼─────────┤
+│ 0 │ Cady  │ 11 months ago │    98 │      99 │
+│ 1 │ Karen │ 11 months ago │    61 │      58 │
+╰───┴───────┴───────────────┴───────┴─────────╯
 
 ```
 

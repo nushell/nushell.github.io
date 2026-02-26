@@ -2,7 +2,7 @@
 title: math sin
 categories: |
   math
-version: 0.110.0
+version: 0.111.0
 math: |
   Returns the sine of the number.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--degrees, -d`: Use degrees instead of radians
+ -  `--degrees, -d`: Use degrees instead of radians.
 
 
 ## Input/output types:

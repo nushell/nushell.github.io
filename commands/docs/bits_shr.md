@@ -2,7 +2,7 @@
 title: bits shr
 categories: |
   bits
-version: 0.110.0
+version: 0.111.0
 bits: |
   Bitwise shift right for ints or binary values.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--signed, -s`: always treat input number as a signed number
- -  `--number-bytes, -n {int}`: the word size in number of bytes. Must be `1`, `2`, `4`, or `8` (defaults to the smallest of those that fits the input number)
+ -  `--signed, -s`: Always treat input number as a signed number.
+ -  `--number-bytes, -n {int}`: The word size in number of bytes. Must be `1`, `2`, `4`, or `8` (defaults to the smallest of those that fits the input number).
 
 ## Parameters
 

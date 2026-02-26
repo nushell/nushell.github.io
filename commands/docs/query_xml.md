@@ -2,7 +2,7 @@
 title: query xml
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Execute XPath 1.0 query on XML input
 usage: |
@@ -22,14 +22,14 @@ contributors: false
 
 ## Flags
 
- -  `--namespaces, -n {record}`: map of prefixes to namespace URIs
+ -  `--namespaces, -n {record}`: Map of prefixes to namespace URIs.
  -  `--output-string-value`: Include `string_value` in the nodeset output. On by default.
  -  `--output-type`: Include `type` in the nodeset output. Off by default.
  -  `--output-names`: Include `local_name`, `prefixed_name`, and `namespace` in the nodeset output. Off by default.
 
 ## Parameters
 
- -  `query`: xpath query
+ -  `query`: Xpath query.
 
 
 ## Input/output types:

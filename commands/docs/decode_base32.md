@@ -2,11 +2,11 @@
 title: decode base32
 categories: |
   formats
-version: 0.110.0
+version: 0.111.0
 formats: |
-  Decode a Base32 value.
+  Decode a Base32-encoded value.
 usage: |
-  Decode a Base32 value.
+  Decode a Base32-encoded value.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `decode base32` for [formats](/commands/categories/formats.md)
 
-<div class='command-title'>Decode a Base32 value.</div>
+<div class='command-title'>Decode a Base32-encoded value.</div>
 
 ## Signature
 

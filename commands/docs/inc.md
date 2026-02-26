@@ -2,7 +2,7 @@
 title: inc
 categories: |
   default
-version: 0.110.0
+version: 0.111.0
 default: |
   Increment a value or version. Optionally use the column of a table.
 usage: |
@@ -22,10 +22,10 @@ contributors: false
 
 ## Flags
 
- -  `--major, -M`: increment the major version (eg 1.2.1 -> 2.0.0)
- -  `--minor, -m`: increment the minor version (eg 1.2.1 -> 1.3.0)
- -  `--patch, -p`: increment the patch version (eg 1.2.1 -> 1.2.2)
+ -  `--major, -M`: Increment the major version (eg 1.2.1 -> 2.0.0).
+ -  `--minor, -m`: Increment the minor version (eg 1.2.1 -> 1.3.0).
+ -  `--patch, -p`: Increment the patch version (eg 1.2.1 -> 1.2.2).
 
 ## Parameters
 
- -  `cell_path`: cell path to update
+ -  `cell_path`: Cell path to update.

@@ -2,7 +2,7 @@
 title: date now
 categories: |
   date
-version: 0.110.0
+version: 0.111.0
 date: |
   Get the current date.
 usage: |
@@ -52,7 +52,7 @@ Get the time duration since a more specific time.
 
 ```
 
-Get current time and format it in the debug format (RFC 2822 with timezone)
+Get current time and format it in the debug format (RFC 2822 with timezone).
 ```nu
 > date now | debug
 

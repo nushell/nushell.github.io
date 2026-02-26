@@ -2,7 +2,7 @@
 title: polars select
 categories: |
   lazyframe
-version: 0.110.0
+version: 0.111.0
 lazyframe: |
   Selects columns from lazyframe.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `...rest`: Expression(s) that define the column selection
+ -  `...rest`: Expression(s) that define the column selection.
 
 
 ## Input/output types:

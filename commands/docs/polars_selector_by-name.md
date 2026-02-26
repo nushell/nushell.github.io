@@ -2,7 +2,7 @@
 title: polars selector by-name
 categories: |
   expression
-version: 0.110.0
+version: 0.111.0
 expression: |
   Creates a selector that selects columns by name.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `...rest`: Names of columns to select
+ -  `...rest`: Names of columns to select.
 
 
 ## Input/output types:

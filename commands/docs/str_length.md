@@ -2,7 +2,7 @@
 title: str length
 categories: |
   strings
-version: 0.110.0
+version: 0.111.0
 strings: |
   Output the length of any strings in the pipeline.
 usage: |
@@ -22,9 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--grapheme-clusters, -g`: count length in grapheme clusters (all visible chars have length 1)
- -  `--utf-8-bytes, -b`: count length in UTF-8 bytes (default; all non-ASCII chars have length 2+)
- -  `--chars, -c`: count length in chars
+ -  `--grapheme-clusters, -g`: Count length in grapheme clusters (all visible chars have length 1).
+ -  `--utf-8-bytes, -b`: Count length in UTF-8 bytes (default; all non-ASCII chars have length 2+).
+ -  `--chars, -c`: Count length in chars.
 
 ## Parameters
 
@@ -41,19 +41,19 @@ contributors: false
 | record       | record    |
 ## Examples
 
-Return the lengths of a string in bytes
+Return the lengths of a string in bytes.
 ```nu
 > 'hello' | str length
 5
 ```
 
-Count length of a string in grapheme clusters
+Count length of a string in grapheme clusters.
 ```nu
 > '🇯🇵ほげ ふが ぴよ' | str length  --grapheme-clusters
 9
 ```
 
-Return the lengths of multiple strings in bytes
+Return the lengths of multiple strings in bytes.
 ```nu
 > ['hi' 'there'] | str length
 ╭───┬───╮
@@ -63,7 +63,7 @@ Return the lengths of multiple strings in bytes
 
 ```
 
-Return the lengths of a string in chars
+Return the lengths of a string in chars.
 ```nu
 > 'hällo' | str length --chars
 5

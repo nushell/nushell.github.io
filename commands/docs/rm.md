@@ -2,7 +2,7 @@
 title: rm
 categories: |
   filesystem
-version: 0.110.0
+version: 0.111.0
 filesystem: |
   Remove files and directories.
 usage: |
@@ -22,13 +22,14 @@ contributors: false
 
 ## Flags
 
- -  `--trash, -t`: move to the platform's trash instead of permanently deleting. not used on android and ios
- -  `--permanent, -p`: delete permanently, ignoring the 'always_trash' config option. always enabled on android and ios
- -  `--recursive, -r`: delete subdirectories recursively
- -  `--force, -f`: suppress error when no file
- -  `--verbose, -v`: print names of deleted files
- -  `--interactive, -i`: ask user to confirm action
- -  `--interactive-once, -I`: ask user to confirm action only once
+ -  `--trash, -t`: Move to the platform's trash instead of permanently deleting. not used on android and ios.
+ -  `--permanent, -p`: Delete permanently, ignoring the 'always_trash' config option. always enabled on android and ios.
+ -  `--recursive, -r`: Delete subdirectories recursively.
+ -  `--force, -f`: Suppress error when no file.
+ -  `--verbose, -v`: Print names of deleted files.
+ -  `--interactive, -i`: Ask user to confirm action.
+ -  `--interactive-once, -I`: Ask user to confirm action only once.
+ -  `--all, -a`: Remove hidden files if '*' is provided.
 
 ## Parameters
 
@@ -42,31 +43,31 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Delete, or move a file to the trash (based on the 'always_trash' config option)
+Delete, or move a file to the trash (based on the 'always_trash' config option).
 ```nu
 > rm file.txt
 
 ```
 
-Move a file to the trash
+Move a file to the trash.
 ```nu
 > rm --trash file.txt
 
 ```
 
-Delete a file permanently, even if the 'always_trash' config option is true
+Delete a file permanently, even if the 'always_trash' config option is true.
 ```nu
 > rm --permanent file.txt
 
 ```
 
-Delete a file, ignoring 'file not found' errors
+Delete a file, ignoring 'file not found' errors.
 ```nu
 > rm --force file.txt
 
 ```
 
-Delete all 0KB files in the current directory
+Delete all 0KB files in the current directory.
 ```nu
 > ls | where size == 0KB and type == file | each { rm $in.name } | null
 

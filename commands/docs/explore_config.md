@@ -2,7 +2,7 @@
 title: explore config
 categories: |
   viewers
-version: 0.110.0
+version: 0.111.0
 viewers: |
   Launch a TUI to view and edit the nushell configuration interactively.
 usage: |
@@ -22,9 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--use-example-data, -e`: Show the nushell configuration TUI using example data
- -  `--tree, -t`: Do not show the TUI, just show a tree structure of the data
- -  `--output, -o {string}`: Optional output file to save changes to (default: output.json)
+ -  `--use-example-data, -e`: Show the nushell configuration TUI using example data.
+ -  `--tree, -t`: Do not show the TUI, just show a tree structure of the data.
+ -  `--output, -o {string}`: Optional output file to save changes to (default: output.json).
 
 
 ## Input/output types:

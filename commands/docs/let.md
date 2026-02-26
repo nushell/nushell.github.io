@@ -2,7 +2,7 @@
 title: let
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   Create a variable and give it a value.
 usage: |
@@ -22,39 +22,51 @@ contributors: false
 
 ## Parameters
 
- -  `var_name`: Variable name.
+ -  `var_name`: The variable name to create.
  -  `initial_value`: Equals sign followed by value.
 
 
 ## Input/output types:
 
-| input | output  |
-| ----- | ------- |
-| any   | nothing |
+| input | output |
+| ----- | ------ |
+| any   | any    |
 ## Examples
 
-Set a variable to a value
+Set a variable to a value (no output).
 ```nu
 > let x = 10
 
 ```
 
-Set a variable to the result of an expression
+Set a variable to the result of an expression (no output).
 ```nu
 > let x = 10 + 100
 
 ```
 
-Set a variable based on the condition
+Set a variable based on the condition (no output).
 ```nu
 > let x = if false { -1 } else { 1 }
 
 ```
 
-Set a variable to the output of a pipeline
+Set a variable to the output of a pipeline.
 ```nu
 > ls | let files
 
+```
+
+Use let in the middle of a pipeline to assign and pass the value.
+```nu
+> 10 | let x | $x + 5
+15
+```
+
+Use let in the middle of a pipeline, then consume value with $in.
+```nu
+> 10 | let x | $in + 5
+15
 ```
 
 ## Notes

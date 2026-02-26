@@ -2,7 +2,7 @@
 title: schema
 categories: |
   database
-version: 0.110.0
+version: 0.111.0
 database: |
   Show the schema of a SQLite database.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | any   | any    |
 ## Examples
 
-Show the schema of a SQLite database
+Show the schema of a SQLite database.
 ```nu
 > open foo.db | schema
 

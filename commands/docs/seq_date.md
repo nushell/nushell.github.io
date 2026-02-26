@@ -2,7 +2,7 @@
 title: seq date
 categories: |
   generators
-version: 0.110.0
+version: 0.111.0
 generators: |
   Print sequences of dates.
 usage: |
@@ -22,14 +22,14 @@ contributors: false
 
 ## Flags
 
- -  `--output-format, -o {string}`: prints dates in this format (defaults to %Y-%m-%d)
- -  `--input-format, -i {string}`: give argument dates in this format (defaults to %Y-%m-%d)
- -  `--begin-date, -b {string}`: beginning date range
- -  `--end-date, -e {string}`: ending date
- -  `--increment, -n {oneof<duration, int>}`: increment dates by this duration (defaults to days if integer)
- -  `--days, -d {int}`: number of days to print (ignored if periods is used)
- -  `--periods, -p {int}`: number of periods to print
- -  `--reverse, -r`: print dates in reverse
+ -  `--output-format, -o {string}`: Prints dates in this format (defaults to %Y-%m-%d).
+ -  `--input-format, -i {string}`: Give argument dates in this format (defaults to %Y-%m-%d).
+ -  `--begin-date, -b {string}`: Beginning date range.
+ -  `--end-date, -e {string}`: Ending date.
+ -  `--increment, -n {oneof<duration, int>}`: Increment dates by this duration (defaults to days if integer).
+ -  `--days, -d {int}`: Number of days to print (ignored if periods is used).
+ -  `--periods, -p {int}`: Number of periods to print.
+ -  `--reverse, -r`: Print dates in reverse.
 
 
 ## Input/output types:

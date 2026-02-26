@@ -2,7 +2,7 @@
 title: save
 categories: |
   filesystem
-version: 0.110.0
+version: 0.111.0
 filesystem: |
   Save a file.
 usage: |
@@ -22,11 +22,11 @@ contributors: false
 
 ## Flags
 
- -  `--stderr, -e {path}`: the filename used to save stderr, only works with `-r` flag
- -  `--raw, -r`: save file as raw binary
- -  `--append, -a`: append input to the end of the file
- -  `--force, -f`: overwrite the destination
- -  `--progress, -p`: enable progress bar
+ -  `--stderr, -e {path}`: The filename used to save stderr, only works with `-r` flag.
+ -  `--raw, -r`: Save file as raw binary.
+ -  `--append, -a`: Append input to the end of the file.
+ -  `--force, -f`: Overwrite the destination.
+ -  `--progress, -p`: Enable progress bar.
 
 ## Parameters
 
@@ -40,37 +40,37 @@ contributors: false
 | any   | nothing |
 ## Examples
 
-Save a string to foo.txt in the current directory
+Save a string to foo.txt in the current directory.
 ```nu
 > 'save me' | save foo.txt
 
 ```
 
-Append a string to the end of foo.txt
+Append a string to the end of foo.txt.
 ```nu
 > 'append me' | save --append foo.txt
 
 ```
 
-Save a record to foo.json in the current directory
+Save a record to foo.json in the current directory.
 ```nu
 > { a: 1, b: 2 } | save foo.json
 
 ```
 
-Save a running program's stderr to foo.txt
+Save a running program's stderr to foo.txt.
 ```nu
 > do -i {} | save foo.txt --stderr foo.txt
 
 ```
 
-Save a running program's stderr to separate file
+Save a running program's stderr to separate file.
 ```nu
 > do -i {} | save foo.txt --stderr bar.txt
 
 ```
 
-Show the extensions for which the `save` command will automatically serialize
+Show the extensions for which the `save` command will automatically serialize.
 ```nu
 > scope commands
     | where name starts-with "to "

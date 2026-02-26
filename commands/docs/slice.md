@@ -2,7 +2,7 @@
 title: slice
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Return only the selected rows.
 usage: |
@@ -32,7 +32,7 @@ contributors: false
 | list&lt;any&gt; | list&lt;any&gt; |
 ## Examples
 
-Get the last 2 items
+Get the last 2 items.
 ```nu
 > [0,1,2,3,4,5] | slice 4..5
 ╭───┬───╮
@@ -42,7 +42,7 @@ Get the last 2 items
 
 ```
 
-Get the last 2 items
+Get the last 2 items.
 ```nu
 > [0,1,2,3,4,5] | slice (-2)..
 ╭───┬───╮
@@ -52,7 +52,7 @@ Get the last 2 items
 
 ```
 
-Get the next to last 2 items
+Get the next to last 2 items.
 ```nu
 > [0,1,2,3,4,5] | slice (-3)..-2
 ╭───┬───╮

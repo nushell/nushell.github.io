@@ -2,7 +2,7 @@
 title: polars arg-sort
 categories: |
   dataframe
-version: 0.110.0
+version: 0.111.0
 dataframe: |
   Returns indexes for a sorted series.
 usage: |
@@ -22,10 +22,10 @@ contributors: false
 
 ## Flags
 
- -  `--reverse, -r`: reverse order
- -  `--nulls-last, -n`: nulls ordered last
+ -  `--reverse, -r`: Reverse order.
+ -  `--nulls-last, -n`: Nulls ordered last.
  -  `--limit, -l {int}`: Limit a sort output, this is for optimization purposes and might be ignored.
- -  `--maintain-order, -m`: maintain order on sorted items
+ -  `--maintain-order, -m`: Maintain order on sorted items.
 
 
 ## Input/output types:

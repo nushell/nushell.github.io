@@ -2,7 +2,7 @@
 title: format filesize
 categories: |
   strings
-version: 0.110.0
+version: 0.111.0
 strings: |
   Converts a column of filesizes to some specified format.
 usage: |
@@ -35,20 +35,23 @@ contributors: false
 | record   | record |
 ## Examples
 
-Convert the size column to KB
+Convert the size column to KB.
 ```nu
 > ls | format filesize kB size
 
 ```
 
-Convert the apparent column to B
+Convert the apparent column to B.
 ```nu
 > du | format filesize B apparent
 
 ```
 
-Convert the size data to MB
+Convert the size data to MB.
 ```nu
 > 4GB | format filesize MB
 4000 MB
 ```
+
+## Notes
+Decimal precision is controlled by `$env.config.float_precision`.
