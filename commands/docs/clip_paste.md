@@ -5,12 +5,12 @@ categories: |
 version: 0.111.0
 system: |
   Output the current clipboard content.
- By default, it tries to parse clipboard content as JSON and outputs the corresponding Nushell value.
- This behavior can be inverted using `$env.config.clip.default_raw = true`.
+  By default, it tries to parse clipboard content as JSON and outputs the corresponding Nushell value.
+  This behavior can be inverted using `$env.config.clip.default_raw = true`.
 usage: |
   Output the current clipboard content.
- By default, it tries to parse clipboard content as JSON and outputs the corresponding Nushell value.
- This behavior can be inverted using `$env.config.clip.default_raw = true`.
+  By default, it tries to parse clipboard content as JSON and outputs the corresponding Nushell value.
+  This behavior can be inverted using `$env.config.clip.default_raw = true`.
 editLink: false
 contributors: false
 ---
@@ -18,7 +18,7 @@ contributors: false
 
 # `clip paste` for [system](/commands/categories/system.md)
 
-<div class='command-title'>Output the current clipboard content.<br> By default, it tries to parse clipboard content as JSON and outputs the corresponding Nushell value.<br> This behavior can be inverted using `$env.config.clip.default_raw = true`.</div>
+<div class='command-title'>Output the current clipboard content.<br>  By default, it tries to parse clipboard content as JSON and outputs the corresponding Nushell value.<br>  This behavior can be inverted using `$env.config.clip.default_raw = true`.</div>
 
 ## Signature
 

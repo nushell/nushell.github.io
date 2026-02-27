@@ -29,9 +29,9 @@ contributors: false
 
 ## Subcommands:
 
-| name                                         | description                                                                                                                                                                                                             | type     |
-| -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| [`clip copy`](/commands/docs/clip_copy.md)   | Copy the input into the clipboard.                                                                                                                                                                                      | built-in |
+| name                                         | description                                                                                                                                                                                                               | type     |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| [`clip copy`](/commands/docs/clip_copy.md)   | Copy the input into the clipboard.                                                                                                                                                                                        | built-in |
 | [`clip paste`](/commands/docs/clip_paste.md) | Output the current clipboard content.
- By default, it tries to parse clipboard content as JSON and outputs the corresponding Nushell value.
- This behavior can be inverted using `$env.config.clip.default_raw = true`. | built-in |
+  By default, it tries to parse clipboard content as JSON and outputs the corresponding Nushell value.
+  This behavior can be inverted using `$env.config.clip.default_raw = true`. | built-in |
