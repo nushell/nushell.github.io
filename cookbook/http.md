@@ -47,17 +47,15 @@ perhaps with different query parameters and you want to view all the responses a
 An example JSON file, `urls.json`, with the following contents:
 
 ```json
-{
-  "urls": [
-    "https://jsonplaceholder.typicode.com/posts/1",
-    "https://jsonplaceholder.typicode.com/posts/2",
-    "https://jsonplaceholder.typicode.com/posts/3"
-  ]
-}
+[
+  "https://jsonplaceholder.typicode.com/posts/1",
+  "https://jsonplaceholder.typicode.com/posts/2",
+  "https://jsonplaceholder.typicode.com/posts/3"
+]
 ```
 
 ```nu
-open urls.json | get urls | each { |u| http get $u }
+open urls.json | each { |u| http get $u }
 # => ━━━┯━━━━━━━━┯━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # =>  # │ userId │ id │ title                                                   │ body
 # => ───┼────────┼────┼─────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────────
@@ -83,7 +81,7 @@ open urls.json | get urls | each { |u| http get $u }
 If you specify the `--raw` flag, you'll see 3 separate json objects, one in each row.
 
 ```nu
-open urls.json | get urls | each { |u| http get $u -r }
+open urls.json | each { |u| http get $u -r }
 # => ━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # =>  # │ <value>
 # => ───┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -116,7 +114,7 @@ open urls.json | get urls | each { |u| http get $u -r }
 To combine these responses together into a valid JSON array, you can turn the table into json.
 
 ```nu
-open urls.json | get urls | each { |u| http get $u } | to json
+open urls.json | each { |u| http get $u } | to json
 ```
 
 Output
@@ -150,16 +148,14 @@ Making a `post` request to an endpoint with a JSON payload. To make long request
 
 ```json
 {
-  "my_payload": {
-    "title": "foo",
-    "body": "bar",
-    "userId": 1
-  }
+  "title": "foo",
+  "body": "bar",
+  "userId": 1
 }
 ```
 
 ```nu
-open payload.json | get my_payload | to json | http post https://jsonplaceholder.typicode.com/posts $in
+open payload.json | to json | http post https://jsonplaceholder.typicode.com/posts $in
 # => ━━━━━
 # =>  id
 # => ─────
@@ -172,7 +168,7 @@ open payload.json | get my_payload | to json | http post https://jsonplaceholder
 We can put this all together into a pipeline where we read data, manipulate it, and then send it back to the API. Lets `fetch` a post, `increment` the id, and `post` it back to the endpoint. In this particular example, the test endpoint gives back an arbitrary response which we can't actually mutate.
 
 ```nu
-open urls.json | get urls | first | http get $in | upsert id {|item| $item.id | inc} | to json | http post https://jsonplaceholder.typicode.com/posts $in
+open urls.json | first | http get $in | upsert id {|item| $item.id | inc} | to json | http post https://jsonplaceholder.typicode.com/posts $in
 # => ━━━━━
 # =>  id
 # => ─────
