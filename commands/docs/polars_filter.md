@@ -53,7 +53,7 @@ Filter dataframe for rows where dt is within the last 2 days of the maximum dt v
 │ # │      dt       │ val │
 ├───┼───────────────┼─────┤
 │ 0 │ 11 months ago │   3 │
-│ 1 │ 10 months ago │   4 │
+│ 1 │ 11 months ago │   4 │
 ╰───┴───────────────┴─────╯
 
 ```

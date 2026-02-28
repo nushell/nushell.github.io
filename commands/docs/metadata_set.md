@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--datasource-ls, -l`: Assign the DataSource::Ls metadata to the input.
+ -  `--datasource-ls, -l`: (DEPRECATED) Assign the DataSource::Ls metadata to the input.
  -  `--datasource-filepath, -f {path}`: Assign the DataSource::FilePath metadata to the input.
  -  `--path-columns, -p {list<string>}`: Assign path columns metadata to the input.
  -  `--content-type, -c {string}`: Assign content type metadata to the input.
@@ -40,21 +40,15 @@ contributors: false
 | any   | any    |
 ## Examples
 
-Set the metadata of a table literal.
+Set the metadata of a table literal so the `name` column is treated as a path.
 ```nu
-> [[name color]; [Cargo.lock '#ff0000'] [Cargo.toml '#00ff00'] [README.md '#0000ff']] | metadata set --datasource-ls
+> [[name color]; [Cargo.lock '#ff0000'] [Cargo.toml '#00ff00'] [README.md '#0000ff']] | metadata set --path-columns [name]
 
 ```
 
 Set the metadata of a file path.
 ```nu
 > 'crates' | metadata set --datasource-filepath $'(pwd)/crates'
-
-```
-
-Set the path columns metadata.
-```nu
-> glob * | wrap path | metadata set --path-columns [path]
 
 ```
 
