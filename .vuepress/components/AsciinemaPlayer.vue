@@ -1,7 +1,5 @@
 <template>
-  <ClientOnly>
-    <div ref="playerElement"></div>
-  </ClientOnly>
+  <div ref="playerElement"></div>
 </template>
 
 <!-- for opts see https://docs.asciinema.org/manual/player/options/ -->
