@@ -1,12 +1,14 @@
 <template>
-  <div ref="playerElement"></div>
+  <ClientOnly>
+    <div ref="playerElement"></div>
+  </ClientOnly>
 </template>
 
 <!-- for opts see https://docs.asciinema.org/manual/player/options/ -->
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { create } from 'asciinema-player';
+import { ClientOnly } from 'vuepress/client';
 
 const props = defineProps({
   castUrl: {
@@ -21,7 +23,8 @@ const props = defineProps({
 
 const playerElement = ref(null);
 
-onMounted(() => {
+onMounted(async () => {
+  const { create } = await import('asciinema-player');
   create(props.castUrl, playerElement.value, { theme: 'tango', ...props.opts });
 });
 </script>
