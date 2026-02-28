@@ -20,6 +20,7 @@
     "@vuepress/plugin-shiki": "2.0.0-rc.118",
     "@vuepress/plugin-sitemap": "2.0.0-rc.118",
     "@vuepress/theme-default": "2.0.0-rc.118",
+    "asciinema-player": "^3.15.1",
     "lefthook": "1.8.2",
     "patch-package": "^8.0.1",
     "prettier": "^3.3.3",

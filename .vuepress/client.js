@@ -5,6 +5,7 @@
  */
 
 import { defineClientConfig } from 'vuepress/client';
+import AsciinemaPlayer from './components/AsciinemaPlayer.vue';
 import BlogPosts from './components/BlogPosts.vue';
 import JumpToc from './components/JumpToc.vue';
 import PrBy from './components/PrBy.vue';
@@ -12,6 +13,7 @@ import ReleaseToc from './components/ReleaseToc.vue';
 
 export default defineClientConfig({
   enhance({ app }) {
+    app.component('AsciinemaPlayer', AsciinemaPlayer);
     app.component('BlogPosts', BlogPosts);
     app.component('JumpToc', JumpToc);
     app.component('PrBy', PrBy);
