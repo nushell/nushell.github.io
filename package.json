@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "update": "nu make_docs.nu",
-    "dev": "vuepress dev",
+    "dev": "cross-env NODE_OPTIONS=--max-old-space-size=8192 vuepress dev",
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=8192 vuepress build",
     "postinstall": "patch-package",
     "prepare": "git config --unset core.hooksPath && rm -rf .husky || true; npx lefthook install",
