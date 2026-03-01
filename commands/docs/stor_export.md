@@ -2,7 +2,7 @@
 title: stor export
 categories: |
   database
-version: 0.110.0
+version: 0.111.0
 database: |
   Export the in-memory sqlite database to a sqlite database file.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--file-name, -f {string}`: file name to export the sqlite in-memory database to
+ -  `--file-name, -f {string}`: File name to export the sqlite in-memory database to.
 
 
 ## Input/output types:

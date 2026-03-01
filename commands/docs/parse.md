@@ -2,7 +2,7 @@
 title: parse
 categories: |
   strings
-version: 0.110.0
+version: 0.111.0
 strings: |
   Parse columns from string data using a simple pattern or a supplied regular expression.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--regex, -r`: use full regex syntax for patterns
- -  `--backtrack, -b {int}`: set the max backtrack limit for regex
+ -  `--regex, -r`: Use full regex syntax for patterns.
+ -  `--backtrack, -b {int}`: Set the max backtrack limit for regex.
 
 ## Parameters
 
@@ -38,7 +38,7 @@ contributors: false
 | list&lt;any&gt; | table  |
 ## Examples
 
-Parse a string into two named columns
+Parse a string into two named columns.
 ```nu
 > "hi there" | parse "{foo} {bar}"
 ╭───┬─────┬───────╮
@@ -49,7 +49,7 @@ Parse a string into two named columns
 
 ```
 
-Parse a string, ignoring a column with _
+Parse a string, ignoring a column with _.
 ```nu
 > "hello world" | parse "{foo} {_}"
 ╭───┬───────╮
@@ -60,7 +60,7 @@ Parse a string, ignoring a column with _
 
 ```
 
-This is how the first example is interpreted in the source code
+This is how the first example is interpreted in the source code.
 ```nu
 > "hi there" | parse --regex '(?s)\A(?P<foo>.*?) (?P<bar>.*?)\z'
 ╭───┬─────┬───────╮
@@ -71,7 +71,7 @@ This is how the first example is interpreted in the source code
 
 ```
 
-Parse a string using fancy-regex named capture group pattern
+Parse a string using fancy-regex named capture group pattern.
 ```nu
 > "foo bar." | parse --regex '\s*(?<name>\w+)(?=\.)'
 ╭───┬──────╮
@@ -82,7 +82,7 @@ Parse a string using fancy-regex named capture group pattern
 
 ```
 
-Parse a string using fancy-regex capture group pattern
+Parse a string using fancy-regex capture group pattern.
 ```nu
 > "foo! bar." | parse --regex '(\w+)(?=\.)|(\w+)(?=!)'
 ╭───┬──────────┬──────────╮
@@ -94,7 +94,7 @@ Parse a string using fancy-regex capture group pattern
 
 ```
 
-Parse a string using fancy-regex look behind pattern
+Parse a string using fancy-regex look behind pattern.
 ```nu
 > " @another(foo bar)   " | parse --regex '\s*(?<=[() ])(@\w+)(\([^)]*\))?\s*'
 ╭───┬──────────┬───────────╮
@@ -105,7 +105,7 @@ Parse a string using fancy-regex look behind pattern
 
 ```
 
-Parse a string using fancy-regex look ahead atomic group pattern
+Parse a string using fancy-regex look ahead atomic group pattern.
 ```nu
 > "abcd" | parse --regex '^a(bc(?=d)|b)cd$'
 ╭───┬──────────╮
@@ -116,7 +116,7 @@ Parse a string using fancy-regex look ahead atomic group pattern
 
 ```
 
-Parse a string with a manually set fancy-regex backtrack limit
+Parse a string with a manually set fancy-regex backtrack limit.
 ```nu
 > "hi there" | parse --backtrack 1500000 "{foo} {bar}"
 ╭───┬─────┬───────╮

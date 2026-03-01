@@ -2,7 +2,7 @@
 title: to nuon
 categories: |
   formats
-version: 0.110.0
+version: 0.111.0
 formats: |
   Converts table data into Nuon (Nushell Object Notation) text.
 usage: |
@@ -22,11 +22,11 @@ contributors: false
 
 ## Flags
 
- -  `--raw, -r`: remove all of the whitespace (overwrites -i and -t)
- -  `--indent, -i {number}`: specify indentation width
- -  `--tabs, -t {number}`: specify indentation tab quantity
- -  `--serialize, -s`: serialize nushell types that cannot be deserialized
- -  `--raw-strings`: use raw string syntax (r#'...'#) for strings with quotes or backslashes
+ -  `--raw, -r`: Remove all of the whitespace (overwrites -i and -t).
+ -  `--indent, -i {number}`: Specify indentation width.
+ -  `--tabs, -t {number}`: Specify indentation tab quantity.
+ -  `--serialize, -s`: Serialize nushell types that cannot be deserialized.
+ -  `--raw-strings`: Use raw string syntax (r#'...'#) for strings with quotes or backslashes.
 
 
 ## Input/output types:
@@ -36,13 +36,13 @@ contributors: false
 | any   | string |
 ## Examples
 
-Outputs a NUON string representing the contents of this list, compact by default
+Outputs a NUON string representing the contents of this list, compact by default.
 ```nu
 > [1 2 3] | to nuon
 [1, 2, 3]
 ```
 
-Outputs a NUON array of ints, with pretty indentation
+Outputs a NUON array of ints, with pretty indentation.
 ```nu
 > [1 2 3] | to nuon --indent 2
 [
@@ -52,13 +52,13 @@ Outputs a NUON array of ints, with pretty indentation
 ]
 ```
 
-Overwrite any set option with --raw
+Overwrite any set option with --raw.
 ```nu
 > [1 2 3] | to nuon --indent 2 --raw
 [1,2,3]
 ```
 
-A more complex record with multiple data types
+A more complex record with multiple data types.
 ```nu
 > {date: 2000-01-01, data: [1 [2 3] 4.56]} | to nuon --indent 2
 {
@@ -74,13 +74,13 @@ A more complex record with multiple data types
 }
 ```
 
-A more complex record with --raw
+A more complex record with --raw.
 ```nu
 > {date: 2000-01-01, data: [1 [2 3] 4.56]} | to nuon --raw
 {date:2000-01-01T00:00:00+00:00,data:[1,[2,3],4.56]}
 ```
 
-Use raw string syntax for strings with quotes or backslashes
+Use raw string syntax for strings with quotes or backslashes.
 ```nu
 > 'hello "world"' | to nuon --raw-strings
 r#'hello "world"'#

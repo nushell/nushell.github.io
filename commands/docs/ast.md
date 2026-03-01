@@ -2,7 +2,7 @@
 title: ast
 categories: |
   debug
-version: 0.110.0
+version: 0.111.0
 debug: |
   Print the abstract syntax tree (ast) for a pipeline.
 usage: |
@@ -22,9 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--json, -j`: Serialize to json
- -  `--minify, -m`: Minify the nuon or json output
- -  `--flatten, -f`: An easier to read version of the ast
+ -  `--json, -j`: Serialize to json.
+ -  `--minify, -m`: Minify the nuon or json output.
+ -  `--flatten, -f`: An easier to read version of the ast.
 
 ## Parameters
 
@@ -40,37 +40,37 @@ contributors: false
 | nothing | string |
 ## Examples
 
-Print the ast of a string
+Print the ast of a string.
 ```nu
 > ast 'hello'
 
 ```
 
-Print the ast of a pipeline
+Print the ast of a pipeline.
 ```nu
 > ast 'ls | where name =~ README'
 
 ```
 
-Print the ast of a pipeline with an error
+Print the ast of a pipeline with an error.
 ```nu
 > ast 'for x in 1..10 { echo $x '
 
 ```
 
-Print the ast of a pipeline with an error, as json, in a nushell table
+Print the ast of a pipeline with an error, as json, in a nushell table.
 ```nu
 > ast 'for x in 1..10 { echo $x ' --json | get block | from json
 
 ```
 
-Print the ast of a pipeline with an error, as json, minified
+Print the ast of a pipeline with an error, as json, minified.
 ```nu
 > ast 'for x in 1..10 { echo $x ' --json --minify
 
 ```
 
-Print the ast of a string flattened
+Print the ast of a string flattened.
 ```nu
 > ast "'hello'" --flatten
 ╭───┬─────────┬──────────────┬───────────────╮
@@ -84,13 +84,13 @@ Print the ast of a string flattened
 
 ```
 
-Print the ast of a string flattened, as json, minified
+Print the ast of a string flattened, as json, minified.
 ```nu
 > ast "'hello'" --flatten --json --minify
 [{"content":"'hello'","shape":"shape_string","span":{"start":0,"end":7}}]
 ```
 
-Print the ast of a pipeline flattened
+Print the ast of a pipeline flattened.
 ```nu
 > ast 'ls | sort-by type name -i' --flatten
 ╭───┬─────────┬────────────────────┬────────────────╮

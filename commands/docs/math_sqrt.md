@@ -2,7 +2,7 @@
 title: math sqrt
 categories: |
   math
-version: 0.110.0
+version: 0.111.0
 math: |
   Returns the square root of the input number.
 usage: |
@@ -30,7 +30,7 @@ contributors: false
 | range        | list&lt;number&gt; |
 ## Examples
 
-Compute the square root of each number in a list
+Compute the square root of each number in a list.
 ```nu
 > [9 16] | math sqrt
 ╭───┬──────╮

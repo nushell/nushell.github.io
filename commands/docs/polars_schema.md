@@ -2,7 +2,7 @@
 title: polars schema
 categories: |
   dataframe
-version: 0.110.0
+version: 0.111.0
 dataframe: |
   Show schema for a dataframe.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--datatype-list, -l`: creates a lazy dataframe
+ -  `--datatype-list, -l`: Creates a lazy dataframe.
 
 
 ## Input/output types:

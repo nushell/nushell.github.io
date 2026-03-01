@@ -2,7 +2,7 @@
 title: bits or
 categories: |
   bits
-version: 0.110.0
+version: 0.111.0
 bits: |
   Performs bitwise or for ints or binary values.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--endian, -e {string}`: byte encode endian, available options: native(default), little, big
+ -  `--endian, -e {string}`: Byte encode endian, available options: native(default), little, big.
 
 ## Parameters
 

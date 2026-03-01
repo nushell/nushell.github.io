@@ -2,7 +2,7 @@
 title: str join
 categories: |
   strings
-version: 0.110.0
+version: 0.111.0
 strings: |
   Concatenate multiple strings into a single string, with an optional separator between each.
 usage: |
@@ -33,13 +33,13 @@ contributors: false
 | string    | string |
 ## Examples
 
-Create a string from input
+Create a string from input.
 ```nu
 > ['nu', 'shell'] | str join
 nushell
 ```
 
-Create a string from input with a separator
+Create a string from input with a separator.
 ```nu
 > ['nu', 'shell'] | str join '-'
 nu-shell

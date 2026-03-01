@@ -2,7 +2,7 @@
 title: shuffle
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Shuffle rows randomly.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | list&lt;any&gt; | list&lt;any&gt; |
 ## Examples
 
-Shuffle rows randomly (execute it several times and see the difference)
+Shuffle rows randomly (execute it several times and see the difference).
 ```nu
 > [[version patch]; ['1.0.0' false] ['3.0.1' true] ['2.0.0' false]] | shuffle
 

@@ -2,7 +2,7 @@
 title: char
 categories: |
   strings
-version: 0.110.0
+version: 0.111.0
 strings: |
   Output special characters (e.g., 'newline').
 usage: |
@@ -22,9 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--list, -l`: List all supported character names
- -  `--unicode, -u`: Unicode string i.e. 1f378
- -  `--integer, -i`: Create a codepoint from an integer
+ -  `--list, -l`: List all supported character names.
+ -  `--unicode, -u`: Unicode string i.e. 1f378.
+ -  `--integer, -i`: Create a codepoint from an integer.
 
 ## Parameters
 

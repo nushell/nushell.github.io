@@ -2,7 +2,7 @@
 title: tee
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Copy a stream to another command in parallel.
 usage: |
@@ -36,25 +36,25 @@ contributors: false
 | any   | any    |
 ## Examples
 
-Save a webpage to a file while also printing it
+Save a webpage to a file while also printing it.
 ```nu
 > http get http://example.org/ | tee { save example.html }
 
 ```
 
-Save error messages from an external command to a file without redirecting them
+Save error messages from an external command to a file without redirecting them.
 ```nu
 > nu -c 'print -e error; print ok' | tee --stderr { save error.log } | complete
 
 ```
 
-Print numbers and their sum
+Print numbers and their sum.
 ```nu
 > 1..100 | tee { each { print } } | math sum | wrap sum
 
 ```
 
-Do something with a value on another thread, while also passing through the value
+Do something with a value on another thread, while also passing through the value.
 ```nu
 > 10000 | tee { 1..$in | print } | $in * 5
 50000

@@ -2,7 +2,7 @@
 title: term size
 categories: |
   platform
-version: 0.110.0
+version: 0.111.0
 platform: |
   Returns a record containing the number of columns (width) and rows (height) of the terminal.
 usage: |
@@ -28,19 +28,19 @@ contributors: false
 | nothing | record&lt;columns: int, rows: int&gt; |
 ## Examples
 
-Return the columns (width) and rows (height) of the terminal
+Return the columns (width) and rows (height) of the terminal.
 ```nu
 > term size
 
 ```
 
-Return the columns (width) of the terminal
+Return the columns (width) of the terminal.
 ```nu
 > (term size).columns
 
 ```
 
-Return the rows (height) of the terminal
+Return the rows (height) of the terminal.
 ```nu
 > (term size).rows
 

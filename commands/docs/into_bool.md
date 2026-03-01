@@ -2,11 +2,11 @@
 title: into bool
 categories: |
   conversions
-version: 0.110.0
+version: 0.111.0
 conversions: |
-  Convert value to boolean.
+  Convert value to a boolean.
 usage: |
-  Convert value to boolean.
+  Convert value to a boolean.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `into bool` for [conversions](/commands/categories/conversions.md)
 
-<div class='command-title'>Convert value to boolean.</div>
+<div class='command-title'>Convert value to a boolean.</div>
 
 ## Signature
 
@@ -43,7 +43,7 @@ contributors: false
 | record    | record |
 ## Examples
 
-Convert value to boolean in table
+Convert value to boolean in table.
 ```nu
 > [[value]; ['false'] ['1'] [0] [1.0] [true]] | into bool value
 ╭───┬───────╮
@@ -58,43 +58,43 @@ Convert value to boolean in table
 
 ```
 
-Convert bool to boolean
+Convert bool to boolean.
 ```nu
 > true | into bool
 true
 ```
 
-convert int to boolean
+convert int to boolean.
 ```nu
 > 1 | into bool
 true
 ```
 
-convert float to boolean
+convert float to boolean.
 ```nu
 > 0.3 | into bool
 true
 ```
 
-convert float string to boolean
+convert float string to boolean.
 ```nu
 > '0.0' | into bool
 false
 ```
 
-convert string to boolean
+convert string to boolean.
 ```nu
 > 'true' | into bool
 true
 ```
 
-interpret a null as false
+interpret a null as false.
 ```nu
 > null | into bool --relaxed
 false
 ```
 
-interpret any non-false, non-zero string as true
+interpret any non-false, non-zero string as true.
 ```nu
 > 'something' | into bool --relaxed
 true

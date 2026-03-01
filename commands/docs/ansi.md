@@ -2,7 +2,7 @@
 title: ansi
 categories: |
   platform
-version: 0.110.0
+version: 0.111.0
 platform: |
   Output ANSI codes to change color and style of text.
 usage: |
@@ -24,7 +24,7 @@ contributors: false
 
  -  `--escape, -e`: escape sequence without the escape character(s) ('\x1b[' is not required)
  -  `--osc, -o`: operating system command (osc) escape sequence without the escape character(s) ('\x1b]' is not required)
- -  `--list, -l`: list available ansi code names
+ -  `--list, -l`: List available ansi code names.
 
 ## Parameters
 
@@ -88,6 +88,60 @@ Use structured escape codes
         attr: b
     }
     $"(ansi --escape $bold_blue_on_red)Hello, Nu World!(ansi reset)"
+Hello, Nu World!
+```
+
+Use structured escape codes with attribute name
+```nu
+> let strike_blue_on_red = {
+        fg: '#0000ff'
+        bg: '#ff0000'
+        attr: strike
+    }
+    $"(ansi --escape $strike_blue_on_red)Hello, Nu World!(ansi reset)"
+Hello, Nu World!
+```
+
+Use structured escape codes with multiple attribute names
+```nu
+> let bold_italic_blue_on_red = {
+        fg: '#0000ff'
+        bg: '#ff0000'
+        attr: 'bold italic'
+    }
+    $"(ansi --escape $bold_italic_blue_on_red)Hello, Nu World!(ansi reset)"
+Hello, Nu World!
+```
+
+Use structured escape codes with concatenated attribute codes
+```nu
+> let bold_italic_strike_blue_on_red = {
+        fg: '#0000ff'
+        bg: '#ff0000'
+        attr: bis
+    }
+    $"(ansi --escape $bold_italic_strike_blue_on_red)Hello, Nu World!(ansi reset)"
+Hello, Nu World!
+```
+
+Use structured escape codes with attribute list (comma-separated)
+```nu
+> let bold_underline_blue = {
+        fg: '#0000ff'
+        attr: [b,underline]
+    }
+    $"(ansi --escape $bold_underline_blue)Hello, Nu World!(ansi reset)"
+Hello, Nu World!
+```
+
+Use structured escape codes with multiple attributes in list
+```nu
+> let styled_text = {
+        fg: '#0000ff'
+        bg: '#ff0000'
+        attr: [bold, italic, strike]
+    }
+    $"(ansi --escape $styled_text)Hello, Nu World!(ansi reset)"
 Hello, Nu World!
 ```
 

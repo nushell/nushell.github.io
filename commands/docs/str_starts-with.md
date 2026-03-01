@@ -2,7 +2,7 @@
 title: str starts-with
 categories: |
   strings
-version: 0.110.0
+version: 0.111.0
 strings: |
   Check if an input starts with a string.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--ignore-case, -i`: search is case insensitive
+ -  `--ignore-case, -i`: Search is case insensitive.
 
 ## Parameters
 
@@ -40,25 +40,25 @@ contributors: false
 | record       | record     |
 ## Examples
 
-Checks if input string starts with 'my'
+Checks if input string starts with 'my'.
 ```nu
 > 'my_library.rb' | str starts-with 'my'
 true
 ```
 
-Checks if input string starts with 'Car'
+Checks if input string starts with 'Car'.
 ```nu
 > 'Cargo.toml' | str starts-with 'Car'
 true
 ```
 
-Checks if input string starts with '.toml'
+Checks if input string starts with '.toml'.
 ```nu
 > 'Cargo.toml' | str starts-with '.toml'
 false
 ```
 
-Checks if input string starts with 'cargo', case-insensitive
+Checks if input string starts with 'cargo', case-insensitive.
 ```nu
 > 'Cargo.toml' | str starts-with --ignore-case 'cargo'
 true

@@ -2,11 +2,11 @@
 title: bytes add
 categories: |
   bytes
-version: 0.110.0
+version: 0.111.0
 bytes: |
-  Add specified bytes to the input.
+  Add specified bytes to the binary input.
 usage: |
-  Add specified bytes to the input.
+  Add specified bytes to the binary input.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `bytes add` for [bytes](/commands/categories/bytes.md)
 
-<div class='command-title'>Add specified bytes to the input.</div>
+<div class='command-title'>Add specified bytes to the binary input.</div>
 
 ## Signature
 
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--index, -i {int}`: index to insert binary data
- -  `--end, -e`: add to the end of binary
+ -  `--index, -i {int}`: Index to insert binary data.
+ -  `--end, -e`: Add to the end of binary.
 
 ## Parameters
 
@@ -41,7 +41,7 @@ contributors: false
 | record       | record       |
 ## Examples
 
-Add bytes `0x[AA]` to `0x[1F FF AA AA]`
+Add bytes `0x[AA]` to `0x[1F FF AA AA]`.
 ```nu
 > 0x[1F FF AA AA] | bytes add 0x[AA]
 Length: 5 (0x5) bytes | printable whitespace ascii_other non_ascii
@@ -49,7 +49,7 @@ Length: 5 (0x5) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-Add bytes `0x[AA BB]` to `0x[1F FF AA AA]` at index 1
+Add bytes `0x[AA BB]` to `0x[1F FF AA AA]` at index 1.
 ```nu
 > 0x[1F FF AA AA] | bytes add 0x[AA BB] --index 1
 Length: 6 (0x6) bytes | printable whitespace ascii_other non_ascii
@@ -57,7 +57,7 @@ Length: 6 (0x6) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-Add bytes `0x[11]` to `0x[FF AA AA]` at the end
+Add bytes `0x[11]` to `0x[FF AA AA]` at the end.
 ```nu
 > 0x[FF AA AA] | bytes add 0x[11] --end
 Length: 4 (0x4) bytes | printable whitespace ascii_other non_ascii
@@ -65,7 +65,7 @@ Length: 4 (0x4) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-Add bytes `0x[11 22 33]` to `0x[FF AA AA]` at the end, at index 1(the index is start from end)
+Add bytes `0x[11 22 33]` to `0x[FF AA AA]` at the end, at index 1(the index is start from end).
 ```nu
 > 0x[FF AA BB] | bytes add 0x[11 22 33] --end --index 1
 Length: 6 (0x6) bytes | printable whitespace ascii_other non_ascii

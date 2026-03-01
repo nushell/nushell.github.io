@@ -2,7 +2,7 @@
 title: str ends-with
 categories: |
   strings
-version: 0.110.0
+version: 0.111.0
 strings: |
   Check if an input ends with a string.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--ignore-case, -i`: search is case insensitive
+ -  `--ignore-case, -i`: Search is case insensitive.
 
 ## Parameters
 
@@ -40,13 +40,13 @@ contributors: false
 | record       | record     |
 ## Examples
 
-Checks if string ends with '.rb'
+Checks if string ends with '.rb'.
 ```nu
 > 'my_library.rb' | str ends-with '.rb'
 true
 ```
 
-Checks if strings end with '.txt'
+Checks if strings end with '.txt'.
 ```nu
 > ['my_library.rb', 'README.txt'] | str ends-with '.txt'
 ╭───┬───────╮
@@ -56,7 +56,7 @@ Checks if strings end with '.txt'
 
 ```
 
-Checks if string ends with '.RB', case-insensitive
+Checks if string ends with '.RB', case-insensitive.
 ```nu
 > 'my_library.rb' | str ends-with --ignore-case '.RB'
 true

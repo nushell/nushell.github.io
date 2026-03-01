@@ -2,7 +2,7 @@
 title: from ssv
 categories: |
   formats
-version: 0.110.0
+version: 0.111.0
 formats: |
   Parse text as space-separated values and create a table. The default minimum number of spaces counted as a separator is 2.
 usage: |
@@ -22,9 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--noheaders, -n`: don't treat the first row as column names
- -  `--aligned-columns, -a`: assume columns are aligned
- -  `--minimum-spaces, -m {int}`: the minimum spaces to separate columns
+ -  `--noheaders, -n`: Don't treat the first row as column names.
+ -  `--aligned-columns, -a`: Assume columns are aligned.
+ -  `--minimum-spaces, -m {int}`: The minimum spaces to separate columns.
 
 
 ## Input/output types:
@@ -34,7 +34,7 @@ contributors: false
 | string | table  |
 ## Examples
 
-Converts ssv formatted string to table
+Converts ssv formatted string to table.
 ```nu
 > 'FOO   BAR
 1   2' | from ssv
@@ -46,7 +46,7 @@ Converts ssv formatted string to table
 
 ```
 
-Converts ssv formatted string to table but not treating the first row as column names
+Converts ssv formatted string to table but not treating the first row as column names.
 ```nu
 > 'FOO   BAR
 1   2' | from ssv --noheaders

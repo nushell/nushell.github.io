@@ -2,7 +2,7 @@
 title: merge
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Merge the input with a record or table, overwriting values in matching columns.
 usage: |
@@ -33,7 +33,7 @@ contributors: false
 | table  | table  |
 ## Examples
 
-Add an 'id' column to the input table
+Add an 'id' column to the input table.
 ```nu
 > [a b c] | wrap name | merge ( [47 512 618] | wrap id )
 ╭───┬──────┬─────╮
@@ -46,7 +46,7 @@ Add an 'id' column to the input table
 
 ```
 
-Merge two records
+Merge two records.
 ```nu
 > {a: 1, b: 2} | merge {c: 3}
 ╭───┬───╮
@@ -56,7 +56,7 @@ Merge two records
 ╰───┴───╯
 ```
 
-Merge two tables, overwriting overlapping columns
+Merge two tables, overwriting overlapping columns.
 ```nu
 > [{columnA: A0 columnB: B0}] | merge [{columnA: 'A0*'}]
 ╭───┬─────────┬─────────╮

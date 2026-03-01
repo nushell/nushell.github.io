@@ -2,7 +2,7 @@
 title: window
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Creates a sliding window of `window_size` that slide by n rows/elements across input.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--stride, -s {int}`: the number of rows to slide over between windows
- -  `--remainder, -r`: yield last chunks even if they have fewer elements than size
+ -  `--stride, -s {int}`: The number of rows to slide over between windows.
+ -  `--remainder, -r`: Yield last chunks even if they have fewer elements than size.
 
 ## Parameters
 
@@ -37,7 +37,7 @@ contributors: false
 | list&lt;any&gt; | list&lt;list&lt;any&gt;&gt; |
 ## Examples
 
-A sliding window of two elements
+A sliding window of two elements.
 ```nu
 > [1 2 3 4] | window 2
 ╭───┬───────────╮
@@ -57,7 +57,7 @@ A sliding window of two elements
 
 ```
 
-A sliding window of two elements, with a stride of 3
+A sliding window of two elements, with a stride of 3.
 ```nu
 > [1, 2, 3, 4, 5, 6, 7, 8] | window 2 --stride 3
 ╭───┬───────────╮
@@ -77,7 +77,7 @@ A sliding window of two elements, with a stride of 3
 
 ```
 
-A sliding window of equal stride that includes remainder. Equivalent to chunking
+A sliding window of equal stride that includes remainder. Equivalent to chunking.
 ```nu
 > [1, 2, 3, 4, 5] | window 3 --stride 3 --remainder
 ╭───┬───────────╮

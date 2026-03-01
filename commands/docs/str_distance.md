@@ -2,7 +2,7 @@
 title: str distance
 categories: |
   strings
-version: 0.110.0
+version: 0.111.0
 strings: |
   Compare two strings and return the edit distance/Levenshtein distance.
 usage: |
@@ -35,13 +35,13 @@ contributors: false
 | record | record |
 ## Examples
 
-get the edit distance between two strings
+Get the edit distance between two strings.
 ```nu
 > 'nushell' | str distance 'nutshell'
 1
 ```
 
-Compute edit distance between strings in table and another string, using cell paths
+Compute edit distance between strings in table and another string, using cell paths.
 ```nu
 > [{a: 'nutshell' b: 'numetal'}] | str distance 'nushell' 'a' 'b'
 ╭───┬───┬───╮
@@ -52,7 +52,7 @@ Compute edit distance between strings in table and another string, using cell pa
 
 ```
 
-Compute edit distance between strings in record and another string, using cell paths
+Compute edit distance between strings in record and another string, using cell paths.
 ```nu
 > {a: 'nutshell' b: 'numetal'} | str distance 'nushell' a b
 ╭───┬───╮

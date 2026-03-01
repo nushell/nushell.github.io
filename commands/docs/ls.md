@@ -2,7 +2,7 @@
 title: ls
 categories: |
   filesystem
-version: 0.110.0
+version: 0.111.0
 filesystem: |
   List the filenames, sizes, and modification times of items in a directory.
 usage: |
@@ -22,13 +22,13 @@ contributors: false
 
 ## Flags
 
- -  `--all, -a`: Show hidden files
- -  `--long, -l`: Get all available columns for each entry (slower; columns are platform-dependent)
- -  `--short-names, -s`: Only print the file names, and not the path
- -  `--full-paths, -f`: display paths as absolute paths
- -  `--du, -d`: Display the apparent directory size ("disk usage") in place of the directory metadata size
- -  `--directory, -D`: List the specified directory itself instead of its contents
- -  `--mime-type, -m`: Show mime-type in type column instead of 'file' (based on filenames only; files' contents are not examined)
+ -  `--all, -a`: Show hidden files.
+ -  `--long, -l`: Get all available columns for each entry (slower; columns are platform-dependent).
+ -  `--short-names, -s`: Only print the file names, and not the path.
+ -  `--full-paths, -f`: Display paths as absolute paths.
+ -  `--du, -d`: Display the apparent directory size ("disk usage") in place of the directory metadata size.
+ -  `--directory, -D`: List the specified directory itself instead of its contents.
+ -  `--mime-type, -m`: Show mime-type in type column instead of 'file' (based on filenames only; files' contents are not examined).
  -  `--threads, -t`: Use multiple threads to list contents. Output will be non-deterministic.
 
 ## Parameters
@@ -43,61 +43,61 @@ contributors: false
 | nothing | table  |
 ## Examples
 
-List visible files in the current directory
+List visible files in the current directory.
 ```nu
 > ls
 
 ```
 
-List visible files in a subdirectory
+List visible files in a subdirectory.
 ```nu
 > ls subdir
 
 ```
 
-List visible files with full path in the parent directory
+List visible files with full path in the parent directory.
 ```nu
 > ls -f ..
 
 ```
 
-List Rust files
+List Rust files.
 ```nu
 > ls *.rs
 
 ```
 
-List files and directories whose name do not contain 'bar'
+List files and directories whose name do not contain 'bar'.
 ```nu
 > ls | where name !~ bar
 
 ```
 
-List the full path of all dirs in your home directory
+List the full path of all dirs in your home directory.
 ```nu
 > ls -a ~ | where type == dir
 
 ```
 
-List only the names (not paths) of all dirs in your home directory which have not been modified in 7 days
+List only the names (not paths) of all dirs in your home directory which have not been modified in 7 days.
 ```nu
 > ls -as ~ | where type == dir and modified < ((date now) - 7day)
 
 ```
 
-Recursively list all files and subdirectories under the current directory using a glob pattern
+Recursively list all files and subdirectories under the current directory using a glob pattern.
 ```nu
 > ls -a **/*
 
 ```
 
-Recursively list *.rs and *.toml files using the glob command
+Recursively list *.rs and *.toml files using the glob command.
 ```nu
 > ls ...(glob **/*.{rs,toml})
 
 ```
 
-List given paths and show directories themselves
+List given paths and show directories themselves.
 ```nu
 > ['/path/to/directory' '/path/to/file'] | each {|| ls -D $in } | flatten
 

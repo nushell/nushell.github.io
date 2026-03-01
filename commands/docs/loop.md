@@ -2,7 +2,7 @@
 title: loop
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   Run a block in a loop.
 usage: |
@@ -32,7 +32,7 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Loop while a condition is true
+Loop while a condition is true.
 ```nu
 > mut x = 0; loop { if $x > 10 { break }; $x = $x + 1 }; $x
 11

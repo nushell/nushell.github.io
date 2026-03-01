@@ -2,7 +2,7 @@
 title: polars join
 categories: |
   lazyframe
-version: 0.110.0
+version: 0.111.0
 lazyframe: |
   Joins a lazy frame with other lazy frame.
 usage: |
@@ -22,18 +22,19 @@ contributors: false
 
 ## Flags
 
- -  `--inner, -i`: inner joining between lazyframes (default)
- -  `--left, -l`: left join between lazyframes
- -  `--full, -f`: full join between lazyframes
- -  `--cross, -c`: cross join between lazyframes
+ -  `--inner, -i`: Inner joining between lazyframes (default).
+ -  `--left, -l`: Left join between lazyframes.
+ -  `--full, -f`: Full join between lazyframes.
+ -  `--cross, -c`: Cross join between lazyframes.
  -  `--coalesce-columns`: Sets the join coalesce strategy to colesce columns. Most useful when used with --full, which will not otherwise coalesce.
- -  `--suffix, -s {string}`: Suffix to use on columns with same name
+ -  `--nulls-equal`: Join on null values. By default null values will never produce matches.
+ -  `--suffix, -s {string}`: Suffix to use on columns with same name.
 
 ## Parameters
 
- -  `other`: LazyFrame to join with
- -  `left_on`: Left column(s) to join on
- -  `right_on`: Right column(s) to join on
+ -  `other`: LazyFrame to join with.
+ -  `left_on`: Left column(s) to join on.
+ -  `right_on`: Right column(s) to join on.
 
 
 ## Input/output types:
@@ -106,5 +107,39 @@ Join one eager dataframe with another using a cross join
 │ 4 │ Bob   │ shoe           │
 │ 5 │ Bob   │ boat           │
 ╰───┴───────┴────────────────╯
+
+```
+
+Join on column expressions
+```nu
+>
+                let df1 = [[a b]; ["2025-01-01 01:00:00+0000" 1] ["2025-01-02 05:36:42+0000" 2]] | polars into-df --schema {a: "datetime<ms,UTC>", b: i8}
+
+                let df2 = [[a c]; ["2025-01-01 00:00:00+0000" a] ["2025-01-02 00:00:00+0000" b]] | polars into-df --schema {a: "datetime<ms,UTC>", c: str}
+
+                $df1 | polars join $df2 [(polars col a | polars truncate 1d)] [a]
+╭───┬────────────┬───┬────────────┬───╮
+│ # │     a      │ b │    a_x     │ c │
+├───┼────────────┼───┼────────────┼───┤
+│ 0 │ a year ago │ 1 │ a year ago │ a │
+│ 1 │ a year ago │ 2 │ a year ago │ b │
+╰───┴────────────┴───┴────────────┴───╯
+
+```
+
+Join on nulls
+```nu
+> [[col1 col2]; [2 a] [3 b] [null c]] | polars into-df
+                | polars join (
+                    [[col1 col3]; [2 x] [3 y] [null z]] | polars into-df
+                ) [col1] [col1] --nulls-equal
+                | polars collect
+╭───┬──────┬──────┬──────╮
+│ # │ col1 │ col2 │ col3 │
+├───┼──────┼──────┼──────┤
+│ 0 │    2 │ a    │ x    │
+│ 1 │    3 │ b    │ y    │
+│ 2 │      │ c    │ z    │
+╰───┴──────┴──────┴──────╯
 
 ```

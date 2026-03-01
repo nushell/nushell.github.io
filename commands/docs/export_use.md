@@ -2,7 +2,7 @@
 title: export use
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   Use definitions from a module and export them from this module.
 usage: |
@@ -33,7 +33,7 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Re-export a command from another module
+Re-export a command from another module.
 ```nu
 > module spam { export def foo [] { "foo" } }
     module eggs { export use spam foo }

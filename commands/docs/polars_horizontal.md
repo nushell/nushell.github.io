@@ -2,7 +2,7 @@
 title: polars horizontal
 categories: |
   expression
-version: 0.110.0
+version: 0.111.0
 expression: |
   Horizontal calculation across multiple columns.
 usage: |
@@ -22,12 +22,12 @@ contributors: false
 
 ## Flags
 
- -  `--nulls, -n`: If set, null value in the input will lead to null output
+ -  `--nulls, -n`: If set, null value in the input will lead to null output.
 
 ## Parameters
 
- -  `type`: horizontal operation. Values of all, any, min, max, sum, and mean are accepted.
- -  `...rest`: Expression(s) that define the lazy group-by
+ -  `type`: Horizontal operation. Values of all, any, min, max, sum, and mean are accepted.
+ -  `...rest`: Expression(s) that define the lazy group-by.
 
 
 ## Input/output types:

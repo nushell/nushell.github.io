@@ -2,7 +2,7 @@
 title: sleep
 categories: |
   platform
-version: 0.110.0
+version: 0.111.0
 platform: |
   Delay for a specified amount of time.
 usage: |
@@ -23,7 +23,7 @@ contributors: false
 ## Parameters
 
  -  `duration`: Time to sleep.
- -  `...rest`: Additional time.
+ -  `...rest`: Additional time duration to sleep.
 
 
 ## Input/output types:
@@ -33,19 +33,19 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Sleep for 1sec
+Sleep for 1 second.
 ```nu
 > sleep 1sec
 
 ```
 
-Use multiple arguments to write a duration with multiple units, which is unsupported by duration literals
+Use multiple arguments to write a duration with multiple units, which is unsupported by duration literals.
 ```nu
 > sleep 1min 30sec
 
 ```
 
-Send output after 1sec
+Send output after 1 second.
 ```nu
 > sleep 1sec; echo done
 

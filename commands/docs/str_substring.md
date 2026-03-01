@@ -2,7 +2,7 @@
 title: str substring
 categories: |
   strings
-version: 0.110.0
+version: 0.111.0
 strings: |
   Get part of a string. Note that the first character of a string is index 0.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--grapheme-clusters, -g`: count indexes and split using grapheme clusters (all visible chars have length 1)
- -  `--utf-8-bytes, -b`: count indexes and split using UTF-8 bytes (default; non-ASCII chars have length 2+)
+ -  `--grapheme-clusters, -g`: Count indexes and split using grapheme clusters (all visible chars have length 1).
+ -  `--utf-8-bytes, -b`: Count indexes and split using UTF-8 bytes (default; non-ASCII chars have length 2+).
 
 ## Parameters
 
@@ -41,19 +41,19 @@ contributors: false
 | record       | record       |
 ## Examples
 
-Get a substring "nushell" from the text "good nushell" using a range
+Get a substring "nushell" from the text "good nushell" using a range.
 ```nu
 >  'good nushell' | str substring 5..11
 nushell
 ```
 
-Count indexes and split using grapheme clusters
+Count indexes and split using grapheme clusters.
 ```nu
 >  '🇯🇵ほげ ふが ぴよ' | str substring --grapheme-clusters 4..5
 ふが
 ```
 
-sub string by negative index
+sub string by negative index.
 ```nu
 >  'good nushell' | str substring 5..-2
 nushel

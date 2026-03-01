@@ -2,7 +2,7 @@
 title: attr search-terms
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   Attribute for adding search terms to custom commands.
 usage: |
@@ -32,7 +32,7 @@ contributors: false
 | nothing | list&lt;string&gt; |
 ## Examples
 
-Add search terms to a custom command
+Add search terms to a custom command.
 ```nu
 > # Double numbers
     @search-terms multiply times

@@ -2,7 +2,7 @@
 title: ignore
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   Ignore the output of the previous command in the pipeline.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | any   | nothing |
 ## Examples
 
-Ignore the output of an echo command
+Ignore the output of an echo command.
 ```nu
 > echo done | ignore
 

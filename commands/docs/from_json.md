@@ -2,11 +2,11 @@
 title: from json
 categories: |
   formats
-version: 0.110.0
+version: 0.111.0
 formats: |
-  Convert from json to structured data.
+  Convert JSON text into structured data.
 usage: |
-  Convert from json to structured data.
+  Convert JSON text into structured data.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `from json` for [formats](/commands/categories/formats.md)
 
-<div class='command-title'>Convert from json to structured data.</div>
+<div class='command-title'>Convert JSON text into structured data.</div>
 
 ## Signature
 
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--objects, -o`: treat each line as a separate value
- -  `--strict, -s`: follow the json specification exactly
+ -  `--objects, -o`: Treat each line as a separate value.
+ -  `--strict, -s`: Follow the json specification exactly.
 
 
 ## Input/output types:
@@ -33,7 +33,7 @@ contributors: false
 | string | any    |
 ## Examples
 
-Converts json formatted string to table
+Converts json formatted string to table.
 ```nu
 > '{ "a": 1 }' | from json
 ╭───┬───╮
@@ -41,7 +41,7 @@ Converts json formatted string to table
 ╰───┴───╯
 ```
 
-Converts json formatted string to table
+Converts json formatted string to table.
 ```nu
 > '{ "a": 1, "b": [1, 2] }' | from json
 ╭───┬───────────╮
@@ -53,7 +53,7 @@ Converts json formatted string to table
 ╰───┴───────────╯
 ```
 
-Parse json strictly which will error on comments and trailing commas
+Parse json strictly which will error on comments and trailing commas.
 ```nu
 > '{ "a": 1, "b": 2 }' | from json -s
 ╭───┬───╮
@@ -62,7 +62,7 @@ Parse json strictly which will error on comments and trailing commas
 ╰───┴───╯
 ```
 
-Parse a stream of line-delimited JSON values
+Parse a stream of line-delimited JSON values.
 ```nu
 > '{ "a": 1 }
 { "b": 2 }' | from json --objects

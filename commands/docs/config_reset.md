@@ -2,7 +2,7 @@
 title: config reset
 categories: |
   env
-version: 0.110.0
+version: 0.111.0
 env: |
   Reset nushell environment configurations to default, and saves old config files in the config location as oldconfig.nu and oldenv.nu.
 usage: |
@@ -22,9 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--nu, -n`: reset only nu config, config.nu
- -  `--env, -e`: reset only env config, env.nu
- -  `--without-backup, -w`: do not make a backup
+ -  `--nu, -n`: Reset only nu config, config.nu.
+ -  `--env, -e`: Reset only env config, env.nu.
+ -  `--without-backup, -w`: Do not make a backup.
 
 
 ## Input/output types:
@@ -34,7 +34,7 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-reset nushell configuration files
+Reset nushell configuration files.
 ```nu
 > config reset
 

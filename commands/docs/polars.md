@@ -2,7 +2,7 @@
 title: polars
 categories: |
   dataframe
-version: 0.110.0
+version: 0.111.0
 dataframe: |
   Operate with data in a dataframe format.
 usage: |
@@ -80,6 +80,7 @@ to the `polars agg` command with some column expressions for aggregation which t
 | [`polars drop-duplicates`](/commands/docs/polars_drop-duplicates.md)       | Drops duplicate values in dataframe.                                                                                                                               | plugin |
 | [`polars drop-nulls`](/commands/docs/polars_drop-nulls.md)                 | Drops null values in dataframe.                                                                                                                                    | plugin |
 | [`polars dummies`](/commands/docs/polars_dummies.md)                       | Creates a new dataframe with dummy variables.                                                                                                                      | plugin |
+| [`polars entropy`](/commands/docs/polars_entropy.md)                       | Compute the entropy as `-sum(pk * log(pk))` where `pk` are discrete probabilities.                                                                                 | plugin |
 | [`polars explode`](/commands/docs/polars_explode.md)                       | Explodes a dataframe or creates a explode expression.                                                                                                              | plugin |
 | [`polars expr-not`](/commands/docs/polars_expr-not.md)                     | Creates a not expression.                                                                                                                                          | plugin |
 | [`polars fill-nan`](/commands/docs/polars_fill-nan.md)                     | Replaces NaN values with the given expression.                                                                                                                     | plugin |

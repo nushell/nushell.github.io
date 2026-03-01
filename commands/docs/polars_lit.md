@@ -2,7 +2,7 @@
 title: polars lit
 categories: |
   expression
-version: 0.110.0
+version: 0.111.0
 expression: |
   Creates a literal expression.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `literal`: literal to construct the expression
+ -  `literal`: Literal to construct the expression.
 
 
 ## Input/output types:

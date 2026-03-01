@@ -2,7 +2,7 @@
 title: prepend
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Prepend any number of rows to a table.
 usage: |
@@ -32,7 +32,7 @@ contributors: false
 | any   | list&lt;any&gt; |
 ## Examples
 
-prepend a list to an item
+Prepend a list to an item.
 ```nu
 > 0 | prepend [1 2 3]
 ╭───┬───╮
@@ -44,7 +44,7 @@ prepend a list to an item
 
 ```
 
-Prepend a list of strings to a string
+Prepend a list of strings to a string.
 ```nu
 > "a" | prepend ["b"]
 ╭───┬───╮
@@ -54,7 +54,7 @@ Prepend a list of strings to a string
 
 ```
 
-Prepend one int item
+Prepend one int item.
 ```nu
 > [1 2 3 4] | prepend 0
 ╭───┬───╮
@@ -67,7 +67,7 @@ Prepend one int item
 
 ```
 
-Prepend two int items
+Prepend two int items.
 ```nu
 > [2 3 4] | prepend [0 1]
 ╭───┬───╮
@@ -80,7 +80,7 @@ Prepend two int items
 
 ```
 
-Prepend ints and strings
+Prepend ints and strings.
 ```nu
 > [2 nu 4 shell] | prepend [0 1 rocks]
 ╭───┬───────╮
@@ -95,7 +95,7 @@ Prepend ints and strings
 
 ```
 
-Prepend a range
+Prepend a range.
 ```nu
 > [3 4] | prepend 0..2
 ╭───┬───╮

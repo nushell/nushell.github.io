@@ -2,11 +2,11 @@
 title: bytes replace
 categories: |
   bytes
-version: 0.110.0
+version: 0.111.0
 bytes: |
-  Find and replace binary.
+  Find and replace bytes in binary data.
 usage: |
-  Find and replace binary.
+  Find and replace bytes in binary data.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `bytes replace` for [bytes](/commands/categories/bytes.md)
 
-<div class='command-title'>Find and replace binary.</div>
+<div class='command-title'>Find and replace bytes in binary data.</div>
 
 ## Signature
 
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--all, -a`: replace all occurrences of find binary
+ -  `--all, -a`: Replace all occurrences of find binary.
 
 ## Parameters
 
@@ -40,7 +40,7 @@ contributors: false
 | record | record |
 ## Examples
 
-Find and replace contents
+Find and replace contents.
 ```nu
 > 0x[10 AA FF AA FF] | bytes replace 0x[10 AA] 0x[FF]
 Length: 4 (0x4) bytes | printable whitespace ascii_other non_ascii
@@ -48,7 +48,7 @@ Length: 4 (0x4) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-Find and replace all occurrences of find binary
+Find and replace all occurrences of find binary.
 ```nu
 > 0x[10 AA 10 BB 10] | bytes replace --all 0x[10] 0x[A0]
 Length: 5 (0x5) bytes | printable whitespace ascii_other non_ascii
@@ -56,7 +56,7 @@ Length: 5 (0x5) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-Find and replace all occurrences of find binary in table
+Find and replace all occurrences of find binary in table.
 ```nu
 > [[ColA ColB ColC]; [0x[11 12 13] 0x[14 15 16] 0x[17 18 19]]] | bytes replace --all 0x[11] 0x[13] ColA ColC
 ╭───┬──────────────┬──────────────┬──────────────╮

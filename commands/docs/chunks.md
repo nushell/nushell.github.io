@@ -2,7 +2,7 @@
 title: chunks
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Divide a list, table or binary input into chunks of `chunk_size`.
 usage: |

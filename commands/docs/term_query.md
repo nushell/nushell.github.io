@@ -2,7 +2,7 @@
 title: term query
 categories: |
   platform
-version: 0.110.0
+version: 0.111.0
 platform: |
   Query the terminal for information.
 usage: |
@@ -50,7 +50,7 @@ Get terminal background color.
 
 ```
 
-Get terminal background color. (some terminals prefer `char bel` rather than `ansi st` as string terminator)
+Get terminal background color. (some terminals prefer `char bel` rather than `ansi st` as string terminator).
 ```nu
 > term query $'(ansi osc)10;?(char bel)' --prefix $'(ansi osc)10;' --terminator (char bel)
 

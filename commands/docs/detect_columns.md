@@ -2,7 +2,7 @@
 title: detect columns
 categories: |
   strings
-version: 0.110.0
+version: 0.111.0
 strings: |
   Attempt to automatically split text into multiple columns.
 usage: |
@@ -22,11 +22,11 @@ contributors: false
 
 ## Flags
 
- -  `--skip, -s {int}`: number of rows to skip before detecting
- -  `--no-headers, -n`: don't detect headers
- -  `--ignore-box-chars, -i`: ignore lines consisting entirely of box drawing characters and clean box characters from tokens
- -  `--combine-columns, -c {range}`: columns to be combined; listed as a range
- -  `--guess`: detect columns by guessing width, it may be useful if default one doesn't work
+ -  `--skip, -s {int}`: Number of rows to skip before detecting.
+ -  `--no-headers, -n`: Don't detect headers.
+ -  `--ignore-box-chars, -i`: Ignore lines consisting entirely of box drawing characters and clean box characters from tokens.
+ -  `--combine-columns, -c {range}`: Columns to be combined; listed as a range.
+ -  `--guess`: Detect columns by guessing width, it may be useful if default one doesn't work.
 
 
 ## Input/output types:

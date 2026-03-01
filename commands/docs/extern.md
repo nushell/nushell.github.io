@@ -2,7 +2,7 @@
 title: extern
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   Define a signature for an external command.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Parameters
 
- -  `def_name`: Definition name.
- -  `params`: Parameters.
+ -  `def_name`: The name of the external command signature to define.
+ -  `params`: The parameters for the external command signature.
 
 
 ## Input/output types:
@@ -33,7 +33,7 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Write a signature for an external command
+Write a signature for an external command.
 ```nu
 > extern echo [text: string]
 

@@ -2,7 +2,7 @@
 title: stor create
 categories: |
   database
-version: 0.110.0
+version: 0.111.0
 database: |
   Create a table in the in-memory sqlite database.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--table-name, -t {string}`: name of the table you want to create
- -  `--columns, -c {record}`: a record of column names and datatypes
+ -  `--table-name, -t {string}`: Name of the table you want to create.
+ -  `--columns, -c {record}`: A record of column names and datatypes.
 
 
 ## Input/output types:

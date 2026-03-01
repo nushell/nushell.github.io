@@ -2,7 +2,7 @@
 title: url encode
 categories: |
   strings
-version: 0.110.0
+version: 0.111.0
 strings: |
   Converts a string to a percent encoded web safe string.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--all, -a`: encode all non-alphanumeric chars including `/`, `.`, `:`
+ -  `--all, -a`: Encode all non-alphanumeric chars including `/`, `.`, `:`.
 
 ## Parameters
 
@@ -39,13 +39,13 @@ contributors: false
 | record       | record       |
 ## Examples
 
-Encode a url with escape characters
+Encode a URL with escape characters.
 ```nu
 > 'https://example.com/foo bar' | url encode
 https://example.com/foo%20bar
 ```
 
-Encode multiple urls with escape characters in list
+Encode multiple URLs with escape characters in list.
 ```nu
 > ['https://example.com/foo bar' 'https://example.com/a>b' '中文字/eng/12 34'] | url encode
 ╭───┬─────────────────────────────────────────╮
@@ -56,7 +56,7 @@ Encode multiple urls with escape characters in list
 
 ```
 
-Encode all non alphanumeric chars with all flag
+Encode all non alphanumeric chars with all flag.
 ```nu
 > 'https://example.com/foo bar' | url encode --all
 https%3A%2F%2Fexample%2Ecom%2Ffoo%20bar

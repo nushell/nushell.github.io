@@ -2,7 +2,7 @@
 title: par-each
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Run a closure on each row of the input list in parallel, creating a new list with the results.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--threads, -t {int}`: the number of threads to use
- -  `--keep-order, -k`: keep sequence of output same as the order of input
+ -  `--threads, -t {int}`: The number of threads to use.
+ -  `--keep-order, -k`: Keep sequence of output same as the order of input.
 
 ## Parameters
 
@@ -45,7 +45,7 @@ Multiplies each number. Note that the list will become arbitrarily disordered.
 
 ```
 
-Multiplies each number, keeping an original order
+Multiplies each number, keeping an original order.
 ```nu
 > [1 2 3] | par-each --keep-order {|e| $e * 2 }
 ╭───┬───╮
@@ -56,7 +56,7 @@ Multiplies each number, keeping an original order
 
 ```
 
-Enumerate and sort-by can be used to reconstruct the original order
+Enumerate and sort-by can be used to reconstruct the original order.
 ```nu
 > 1..3 | enumerate | par-each {|p| update item ($p.item * 2)} | sort-by item | get item
 ╭───┬───╮
@@ -67,7 +67,7 @@ Enumerate and sort-by can be used to reconstruct the original order
 
 ```
 
-Output can still be sorted afterward
+Output can still be sorted afterward.
 ```nu
 > [foo bar baz] | par-each {|e| $e + '!' } | sort
 ╭───┬──────╮
@@ -78,7 +78,7 @@ Output can still be sorted afterward
 
 ```
 
-Iterate over each element, producing a list showing indexes of any 2s
+Iterate over each element, producing a list showing indexes of any 2s.
 ```nu
 > [1 2 3] | enumerate | par-each { |e| if $e.item == 2 { $"found 2 at ($e.index)!"} }
 ╭───┬───────────────╮

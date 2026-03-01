@@ -2,7 +2,7 @@
 title: table
 categories: |
   viewers
-version: 0.110.0
+version: 0.111.0
 viewers: |
   Render the table.
 usage: |
@@ -22,18 +22,18 @@ contributors: false
 
 ## Flags
 
- -  `--theme, -t {string}`: set a table mode/theme
- -  `--index, -i {any}`: enable (true) or disable (false) the #/index column or set the starting index
- -  `--width, -w {int}`: number of terminal columns wide (not output columns)
- -  `--expand, -e`: expand the table structure in a light mode
- -  `--expand-deep, -d {int}`: an expand limit of recursion which will take place, must be used with --expand
- -  `--flatten`: Flatten simple arrays
- -  `--flatten-separator {string}`: sets a separator when 'flatten' used
- -  `--collapse, -c`: expand the table structure in collapse mode.
-Be aware collapse mode currently doesn't support width control
- -  `--abbreviated, -a {int}`: abbreviate the data in the table by truncating the middle part and only showing amount provided on top and bottom
- -  `--list, -l`: list available table modes/themes
- -  `--icons, -o`: adds icons to ls tables
+ -  `--theme, -t {string}`: Set a table mode/theme.
+ -  `--index, -i {any}`: Enable (true) or disable (false) the #/index column or set the starting index.
+ -  `--width, -w {int}`: Number of terminal columns wide (not output columns).
+ -  `--expand, -e`: Expand the table structure in a light mode.
+ -  `--expand-deep, -d {int}`: An expand limit of recursion which will take place, must be used with --expand.
+ -  `--flatten`: Flatten simple arrays.
+ -  `--flatten-separator {string}`: Sets a separator when 'flatten' is used.
+ -  `--collapse, -c`: Expand the table structure in collapse mode.
+Be aware collapse mode currently doesn't support width control.
+ -  `--abbreviated, -a {int}`: Abbreviate the data in the table by truncating the middle part and only showing amount provided on top and bottom.
+ -  `--list, -l`: List available table modes/themes.
+ -  `--icons, -o`: Add icons to file paths in tables.
 
 
 ## Input/output types:

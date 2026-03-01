@@ -2,7 +2,7 @@
 title: polars as-date
 categories: |
   dataframe
-version: 0.110.0
+version: 0.111.0
 dataframe: |
   Converts string to date.
 usage: |
@@ -22,11 +22,11 @@ contributors: false
 
 ## Flags
 
- -  `--not-exact, -n`: the format string may be contained in the date (e.g. foo-2021-01-01-bar could match 2021-01-01)
+ -  `--not-exact, -n`: The format string may be contained in the date (e.g. foo-2021-01-01-bar could match 2021-01-01).
 
 ## Parameters
 
- -  `format`: formatting date string
+ -  `format`: Formatting date string.
 
 
 ## Input/output types:

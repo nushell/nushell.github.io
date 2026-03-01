@@ -2,11 +2,11 @@
 title: input listen
 categories: |
   platform
-version: 0.110.0
+version: 0.111.0
 platform: |
-  Listen for user interface event.
+  Listen for user interface events.
 usage: |
-  Listen for user interface event.
+  Listen for user interface events.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `input listen` for [platform](/commands/categories/platform.md)
 
-<div class='command-title'>Listen for user interface event.</div>
+<div class='command-title'>Listen for user interface events.</div>
 
 ## Signature
 
@@ -22,8 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--types, -t {list<string>}`: Listen for event of specified types only (can be one of: focus, key, mouse, paste, resize)
- -  `--raw, -r`: Add raw_code field with numeric value of keycode and raw_flags with bit mask flags
+ -  `--types, -t {list<string>}`: Listen for event of specified types only (can be one of: focus, key, mouse, paste, resize).
+ -  `--raw, -r`: Add raw_code field with numeric value of keycode and raw_flags with bit mask flags.
+ -  `--timeout, -o {duration}`: How long to wait for input before returning.
 
 
 ## Input/output types:
@@ -33,7 +34,7 @@ contributors: false
 | nothing | record&lt;keycode: string, modifiers: list&lt;string&gt;&gt; |
 ## Examples
 
-Listen for a keyboard shortcut and find out how nu receives it
+Listen for a keyboard shortcut and find out how nu receives it.
 ```nu
 > input listen --types [key]
 

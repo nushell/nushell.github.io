@@ -2,7 +2,7 @@
 title: polars with-column
 categories: |
   dataframe or lazyframe
-version: 0.110.0
+version: 0.111.0
 dataframe_or_lazyframe: |
   Adds a series to the dataframe.
 usage: |
@@ -26,7 +26,7 @@ contributors: false
 
 ## Parameters
 
- -  `...rest`: series to be added or expressions used to define the new columns
+ -  `...rest`: Series to be added or expressions used to define the new columns.
 
 
 ## Input/output types:

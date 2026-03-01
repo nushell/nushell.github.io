@@ -2,7 +2,7 @@
 title: reject
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Remove the given columns or rows from the table. Opposite of `select`.
 usage: |
@@ -22,9 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--optional, -o`: make all cell path members optional
- -  `--ignore-case`: make all cell path members case insensitive
- -  `--ignore-errors, -i`: ignore missing data (make all cell path members optional) (deprecated)
+ -  `--optional, -o`: Make all cell path members optional.
+ -  `--ignore-case`: Make all cell path members case insensitive.
+ -  `--ignore-errors, -i`: Ignore missing data (make all cell path members optional) (deprecated).
 
 ## Parameters
 
@@ -40,13 +40,13 @@ contributors: false
 | list&lt;any&gt; | list&lt;any&gt; |
 ## Examples
 
-Reject a column in the `ls` table
+Reject a column in the `ls` table.
 ```nu
 > ls | reject modified
 
 ```
 
-Reject a column in a table
+Reject a column in a table.
 ```nu
 > [[a, b]; [1, 2]] | reject a
 ╭───┬───╮
@@ -57,7 +57,7 @@ Reject a column in a table
 
 ```
 
-Reject a row in a table
+Reject a row in a table.
 ```nu
 > [[a, b]; [1, 2] [3, 4]] | reject 1
 ╭───┬───┬───╮
@@ -68,7 +68,7 @@ Reject a row in a table
 
 ```
 
-Reject the specified field in a record
+Reject the specified field in a record.
 ```nu
 > {a: 1, b: 2} | reject a
 ╭───┬───╮
@@ -76,7 +76,7 @@ Reject the specified field in a record
 ╰───┴───╯
 ```
 
-Reject a nested field in a record
+Reject a nested field in a record.
 ```nu
 > {a: {b: 3, c: 5}} | reject a.b
 ╭───┬───────────╮
@@ -86,13 +86,13 @@ Reject a nested field in a record
 ╰───┴───────────╯
 ```
 
-Reject multiple rows
+Reject multiple rows.
 ```nu
 > [[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb] [file.json json 3kb]] | reject 0 2
 
 ```
 
-Reject multiple columns
+Reject multiple columns.
 ```nu
 > [[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb]] | reject type size
 ╭───┬────────────╮
@@ -104,7 +104,7 @@ Reject multiple columns
 
 ```
 
-Reject multiple columns by spreading a list
+Reject multiple columns by spreading a list.
 ```nu
 > let cols = [type size]; [[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb]] | reject ...$cols
 ╭───┬────────────╮
@@ -116,7 +116,7 @@ Reject multiple columns by spreading a list
 
 ```
 
-Reject item in list
+Reject item in list.
 ```nu
 > [1 2 3] | reject 1
 ╭───┬───╮
@@ -127,4 +127,4 @@ Reject item in list
 ```
 
 ## Notes
-To remove a quantity of rows or columns, use `skip`, `drop`, or `drop column`.
+To remove a quantity of rows or columns, use `skip`, `drop`, or `drop column`. To keep/retain only specific columns, use `select`.

@@ -2,7 +2,7 @@
 title: debug
 categories: |
   debug
-version: 0.110.0
+version: 0.111.0
 debug: |
   Debug print the value(s) piped in.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--raw, -r`: Prints the raw value representation
- -  `--raw-value, -v`: Prints the raw value representation but not the nushell value part
+ -  `--raw, -r`: Prints the raw value representation.
+ -  `--raw-value, -v`: Prints the raw value representation but not the nushell value part.
 
 
 ## Input/output types:
@@ -34,13 +34,13 @@ contributors: false
 | any       | string       |
 ## Examples
 
-Debug print a string
+Debug print a string.
 ```nu
 > 'hello' | debug
 hello
 ```
 
-Debug print a list
+Debug print a list.
 ```nu
 > ['hello'] | debug
 ╭───┬───────╮
@@ -49,7 +49,7 @@ Debug print a list
 
 ```
 
-Debug print a table
+Debug print a table.
 ```nu
 > [[version patch]; ['0.1.0' false] ['0.1.1' true] ['0.2.0' false]] | debug
 ╭───┬────────────────────────────────╮
@@ -60,7 +60,7 @@ Debug print a table
 
 ```
 
-Debug print an ansi escape encoded string and get the raw value
+Debug print an ansi escape encoded string and get the raw value.
 ```nu
 > $'(ansi red)nushell(ansi reset)' | debug -v
 "\u{1b}[31mnushell\u{1b}[0m"

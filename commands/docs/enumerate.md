@@ -2,7 +2,7 @@
 title: enumerate
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Enumerate the elements in a stream.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | any   | table  |
 ## Examples
 
-Add an index to each element of a list
+Add an index to each element of a list.
 ```nu
 > [a, b, c] | enumerate
 ╭───┬──────╮

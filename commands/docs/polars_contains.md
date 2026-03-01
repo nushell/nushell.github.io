@@ -2,7 +2,7 @@
 title: polars contains
 categories: |
   dataframe
-version: 0.110.0
+version: 0.111.0
 dataframe: |
   Checks if a pattern is contained in a string.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `pattern`: Regex pattern to be searched
+ -  `pattern`: Regex pattern to be searched.
 
 
 ## Input/output types:

@@ -2,11 +2,11 @@
 title: into record
 categories: |
   conversions
-version: 0.110.0
+version: 0.111.0
 conversions: |
-  Convert value to record.
+  Convert value to a record.
 usage: |
-  Convert value to record.
+  Convert value to a record.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `into record` for [conversions](/commands/categories/conversions.md)
 
-<div class='command-title'>Convert value to record.</div>
+<div class='command-title'>Convert value to a record.</div>
 
 ## Signature
 
@@ -31,7 +31,7 @@ contributors: false
 | record    | record |
 ## Examples
 
-Convert from one row table to record
+Convert from one row table to record.
 ```nu
 > [[value]; [false]] | into record
 ╭───────┬───────╮
@@ -39,7 +39,7 @@ Convert from one row table to record
 ╰───────┴───────╯
 ```
 
-Convert from list of records to record
+Convert from list of records to record.
 ```nu
 > [{foo: bar} {baz: quux}] | into record
 ╭─────┬──────╮
@@ -48,7 +48,7 @@ Convert from list of records to record
 ╰─────┴──────╯
 ```
 
-Convert from list of pairs into record
+Convert from list of pairs into record.
 ```nu
 > [[foo bar] [baz quux]] | into record
 ╭─────┬──────╮
@@ -57,7 +57,7 @@ Convert from list of pairs into record
 ╰─────┴──────╯
 ```
 
-convert duration to record (weeks max)
+convert duration to record (weeks max).
 ```nu
 > (-500day - 4hr - 5sec) | into record
 ╭────────┬────╮
@@ -69,7 +69,7 @@ convert duration to record (weeks max)
 ╰────────┴────╯
 ```
 
-convert record to record
+convert record to record.
 ```nu
 > {a: 1, b: 2} | into record
 ╭───┬───╮
@@ -78,7 +78,7 @@ convert record to record
 ╰───┴───╯
 ```
 
-convert date to record
+convert date to record.
 ```nu
 > 2020-04-12T22:10:57+02:00 | into record
 ╭─────────────┬────────╮
@@ -95,7 +95,7 @@ convert date to record
 ╰─────────────┴────────╯
 ```
 
-convert date components to table columns
+convert date components to table columns.
 ```nu
 > 2020-04-12T22:10:57+02:00 | into record | transpose | transpose -r
 

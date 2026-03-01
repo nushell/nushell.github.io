@@ -2,7 +2,7 @@
 title: each
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Run a closure on each row of the input list, creating a new list with the results.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--keep-empty, -k`: keep empty result cells
- -  `--flatten, -f`: combine outputs into a single stream instead of collecting them to separate values
+ -  `--keep-empty, -k`: Keep empty result cells.
+ -  `--flatten, -f`: Combine outputs into a single stream instead of collecting them to separate values.
 
 ## Parameters
 
@@ -39,7 +39,7 @@ contributors: false
 | any       | any       |
 ## Examples
 
-Multiplies elements in the list
+Multiplies elements in the list.
 ```nu
 > [1 2 3] | each {|e| 2 * $e }
 ╭───┬───╮
@@ -50,7 +50,7 @@ Multiplies elements in the list
 
 ```
 
-Produce a list of values in the record, converted to string
+Produce a list of values in the record, converted to string.
 ```nu
 > {major:2, minor:1, patch:4} | values | each {|| into string }
 ╭───┬───╮
@@ -71,7 +71,7 @@ Produce a list of values in the record, converted to string
 
 ```
 
-Iterate over each element, producing a list showing indexes of any 2s
+Iterate over each element, producing a list showing indexes of any 2s.
 ```nu
 > [1 2 3] | enumerate | each {|e| if $e.item == 2 { $"found 2 at ($e.index)!"} }
 ╭───┬───────────────╮
@@ -80,7 +80,7 @@ Iterate over each element, producing a list showing indexes of any 2s
 
 ```
 
-Iterate over each element, keeping null results
+Iterate over each element, keeping null results.
 ```nu
 > [1 2 3] | each --keep-empty {|e| if $e == 2 { "found 2!"} }
 ╭───┬──────────╮
@@ -91,13 +91,13 @@ Iterate over each element, keeping null results
 
 ```
 
-Update value if not null, otherwise do nothing
+Update value if not null, otherwise do nothing.
 ```nu
 > $env.name? | each { $"hello ($in)" } | default "bye"
 
 ```
 
-Scan through multiple files without pause
+Scan through multiple files without pause.
 ```nu
 > ls *.txt | each --flatten {|f| open $f.name | lines } | find -i 'note: ' | str join "\n"
 

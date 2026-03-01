@@ -2,7 +2,7 @@
 title: debug info
 categories: |
   debug
-version: 0.110.0
+version: 0.111.0
 debug: |
   View process memory info.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | nothing | record |
 ## Examples
 
-View process information
+View process information.
 ```nu
 > debug info
 

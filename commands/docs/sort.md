@@ -2,11 +2,11 @@
 title: sort
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
-  Sort in increasing order.
+  Sort the input in increasing order.
 usage: |
-  Sort in increasing order.
+  Sort the input in increasing order.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `sort` for [filters](/commands/categories/filters.md)
 
-<div class='command-title'>Sort in increasing order.</div>
+<div class='command-title'>Sort the input in increasing order.</div>
 
 ## Signature
 
@@ -22,10 +22,10 @@ contributors: false
 
 ## Flags
 
- -  `--reverse, -r`: Sort in reverse order
- -  `--ignore-case, -i`: Sort string-based data case-insensitively
- -  `--values, -v`: If input is a single record, sort the record by values; ignored if input is not a single record
- -  `--natural, -n`: Sort alphanumeric string-based values naturally (1, 9, 10, 99, 100, ...)
+ -  `--reverse, -r`: Sort in reverse order.
+ -  `--ignore-case, -i`: Sort string-based data case-insensitively.
+ -  `--values, -v`: If input is a single record, sort the record by values; ignored if input is not a single record.
+ -  `--natural, -n`: Sort alphanumeric string-based values naturally (1, 9, 10, 99, 100, ...).
 
 
 ## Input/output types:
@@ -36,7 +36,7 @@ contributors: false
 | record    | record    |
 ## Examples
 
-Sort the list by increasing value
+Sort the list by increasing value.
 ```nu
 > [2 0 1] | sort
 ╭───┬───╮
@@ -47,7 +47,7 @@ Sort the list by increasing value
 
 ```
 
-Sort the list by decreasing value
+Sort the list by decreasing value.
 ```nu
 > [2 0 1] | sort --reverse
 ╭───┬───╮
@@ -58,7 +58,7 @@ Sort the list by decreasing value
 
 ```
 
-Sort a list of strings
+Sort a list of strings.
 ```nu
 > [betty amy sarah] | sort
 ╭───┬───────╮
@@ -69,7 +69,7 @@ Sort a list of strings
 
 ```
 
-Sort a list of strings in reverse
+Sort a list of strings in reverse.
 ```nu
 > [betty amy sarah] | sort --reverse
 ╭───┬───────╮
@@ -80,7 +80,7 @@ Sort a list of strings in reverse
 
 ```
 
-Sort strings (case-insensitive)
+Sort strings (case-insensitive).
 ```nu
 > [airplane Truck Car] | sort -i
 ╭───┬──────────╮
@@ -91,7 +91,7 @@ Sort strings (case-insensitive)
 
 ```
 
-Sort strings (reversed case-insensitive)
+Sort strings (reversed case-insensitive).
 ```nu
 > [airplane Truck Car] | sort -i -r
 ╭───┬──────────╮
@@ -102,7 +102,7 @@ Sort strings (reversed case-insensitive)
 
 ```
 
-Sort alphanumeric strings in natural order
+Sort alphanumeric strings in natural order.
 ```nu
 > [foo1 foo10 foo9] | sort -n
 ╭───┬───────╮
@@ -113,7 +113,7 @@ Sort alphanumeric strings in natural order
 
 ```
 
-Sort record by key (case-insensitive)
+Sort record by key (case-insensitive).
 ```nu
 > {b: 3, a: 4} | sort
 ╭───┬───╮
@@ -122,7 +122,7 @@ Sort record by key (case-insensitive)
 ╰───┴───╯
 ```
 
-Sort record by value
+Sort record by value.
 ```nu
 > {b: 4, a: 3, c:1} | sort -v
 ╭───┬───╮

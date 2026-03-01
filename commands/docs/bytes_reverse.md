@@ -2,7 +2,7 @@
 title: bytes reverse
 categories: |
   bytes
-version: 0.110.0
+version: 0.111.0
 bytes: |
   Reverse the bytes in the pipeline.
 usage: |
@@ -34,7 +34,7 @@ contributors: false
 | record | record |
 ## Examples
 
-Reverse bytes `0x[1F FF AA AA]`
+Reverse bytes `0x[1F FF AA AA]`.
 ```nu
 > 0x[1F FF AA AA] | bytes reverse
 Length: 4 (0x4) bytes | printable whitespace ascii_other non_ascii
@@ -42,7 +42,7 @@ Length: 4 (0x4) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-Reverse bytes `0x[FF AA AA]`
+Reverse bytes `0x[FF AA AA]`.
 ```nu
 > 0x[FF AA AA] | bytes reverse
 Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii

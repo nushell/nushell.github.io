@@ -2,7 +2,7 @@
 title: load-env
 categories: |
   filesystem
-version: 0.110.0
+version: 0.111.0
 filesystem: |
   Loads an environment update from a record.
 usage: |
@@ -34,13 +34,13 @@ contributors: false
 | any     | nothing |
 ## Examples
 
-Load variables from an input stream
+Load variables from an input stream.
 ```nu
 > {NAME: ABE, AGE: UNKNOWN} | load-env; $env.NAME
 ABE
 ```
 
-Load variables from an argument
+Load variables from an argument.
 ```nu
 > load-env {NAME: ABE, AGE: UNKNOWN}; $env.NAME
 ABE

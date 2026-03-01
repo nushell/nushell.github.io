@@ -2,7 +2,7 @@
 title: url
 categories: |
   network
-version: 0.110.0
+version: 0.111.0
 network: |
   Various commands for working with URLs.
 usage: |
@@ -36,6 +36,6 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`url build-query`](/commands/docs/url_build-query.md) | Converts record or table into query string applying percent-encoding. | built-in |
 | [`url decode`](/commands/docs/url_decode.md)           | Converts a percent-encoded web safe string to a string.               | built-in |
 | [`url encode`](/commands/docs/url_encode.md)           | Converts a string to a percent encoded web safe string.               | built-in |
-| [`url join`](/commands/docs/url_join.md)               | Converts a record to url.                                             | built-in |
-| [`url parse`](/commands/docs/url_parse.md)             | Parses a url.                                                         | built-in |
+| [`url join`](/commands/docs/url_join.md)               | Convert a record to a URL string.                                     | built-in |
+| [`url parse`](/commands/docs/url_parse.md)             | Parse a URL string into structured data.                              | built-in |
 | [`url split-query`](/commands/docs/url_split-query.md) | Converts query string into table applying percent-decoding.           | built-in |

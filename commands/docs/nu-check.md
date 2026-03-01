@@ -2,11 +2,11 @@
 title: nu-check
 categories: |
   strings
-version: 0.110.0
+version: 0.111.0
 strings: |
-  Validate and parse input content.
+  Validate and parse Nushell input content.
 usage: |
-  Validate and parse input content.
+  Validate and parse Nushell input content.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `nu-check` for [strings](/commands/categories/strings.md)
 
-<div class='command-title'>Validate and parse input content.</div>
+<div class='command-title'>Validate and parse Nushell input content.</div>
 
 ## Signature
 
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--as-module, -m`: Parse content as module
- -  `--debug, -d`: Show error messages
+ -  `--as-module, -m`: Parse content as module.
+ -  `--debug, -d`: Show error messages.
 
 ## Parameters
 

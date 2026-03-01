@@ -2,7 +2,7 @@
 title: scope modules
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   Output info on the modules in the current scope.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | nothing | any    |
 ## Examples
 
-Show the modules in the current scope
+Show the modules in the current scope.
 ```nu
 > scope modules
 

@@ -2,7 +2,7 @@
 title: http pool
 categories: |
   network
-version: 0.110.0
+version: 0.111.0
 network: |
   Configure and reset builtin http connection pool.
 usage: |
@@ -22,10 +22,10 @@ contributors: false
 
 ## Flags
 
- -  `--insecure, -k`: allow insecure server connections when using SSL
- -  `--allow-errors, -e`: do not fail if the server returns an error code
+ -  `--insecure, -k`: Allow insecure server connections when using SSL.
+ -  `--allow-errors, -e`: Do not fail if the server returns an error code.
  -  `--redirect-mode, -R {string}`: What to do when encountering redirects. Default: 'follow'. Valid options: 'follow' ('f'), 'manual' ('m'), 'error' ('e').
- -  `--unix-socket, -U {path}`: Connect to the specified Unix socket instead of using TCP
+ -  `--unix-socket, -U {path}`: Connect to the specified Unix socket instead of using TCP.
 
 
 ## Input/output types:
@@ -34,4 +34,4 @@ contributors: false
 | ------- | ------ |
 | nothing | any    |
 ## Notes
-All connections inside http connection poll will be closed.
+All connections inside http connection pool will be closed.

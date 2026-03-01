@@ -2,11 +2,11 @@
 title: into int
 categories: |
   conversions
-version: 0.110.0
+version: 0.111.0
 conversions: |
-  Convert value to integer.
+  Convert value to an integer.
 usage: |
-  Convert value to integer.
+  Convert value to an integer.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `into int` for [conversions](/commands/categories/conversions.md)
 
-<div class='command-title'>Convert value to integer.</div>
+<div class='command-title'>Convert value to an integer.</div>
 
 ## Signature
 
@@ -22,9 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--radix, -r {number}`: radix of integer
- -  `--endian, -e {string}`: byte encode endian, available options: native(default), little, big
- -  `--signed, -s`: always treat input number as a signed number
+ -  `--radix, -r {number}`: Radix of integer.
+ -  `--endian, -e {string}`: Byte encode endian, available options: native(default), little, big.
+ -  `--signed, -s`: Always treat input number as a signed number.
 
 ## Parameters
 
@@ -53,37 +53,37 @@ contributors: false
 | list&lt;any&gt;      | list&lt;int&gt; |
 ## Examples
 
-Convert string to int in table
+Convert string to int in table.
 ```nu
 > [[num]; ['-5'] [4] [1.5]] | into int num
 
 ```
 
-Convert string to int
+Convert string to int.
 ```nu
 > '2' | into int
 2
 ```
 
-Convert float to int
+Convert float to int.
 ```nu
 > 5.9 | into int
 5
 ```
 
-Convert decimal string to int
+Convert decimal string to int.
 ```nu
 > '5.9' | into int
 5
 ```
 
-Convert file size to int
+Convert file size to int.
 ```nu
 > 4KB | into int
 4000
 ```
 
-Convert bool to int
+Convert bool to int.
 ```nu
 > [false, true] | into int
 ╭───┬───╮
@@ -93,49 +93,49 @@ Convert bool to int
 
 ```
 
-Convert date to int (Unix nanosecond timestamp)
+Convert date to int (Unix nanosecond timestamp).
 ```nu
 > 1983-04-13T12:09:14.123456789-05:00 | into int
 419101754123456789
 ```
 
-Convert to int from binary data (radix: 2)
+Convert to int from binary data (radix: 2).
 ```nu
 > '1101' | into int --radix 2
 13
 ```
 
-Convert to int from hex
+Convert to int from hex.
 ```nu
 > 'FF' |  into int --radix 16
 255
 ```
 
-Convert octal string to int
+Convert octal string to int.
 ```nu
 > '0o10132' | into int
 4186
 ```
 
-Convert 0 padded string to int
+Convert 0 padded string to int.
 ```nu
 > '0010132' | into int
 10132
 ```
 
-Convert 0 padded string to int with radix 8
+Convert 0 padded string to int with radix 8.
 ```nu
 > '0010132' | into int --radix 8
 4186
 ```
 
-Convert binary value to int
+Convert binary value to int.
 ```nu
 > 0x[10] | into int
 16
 ```
 
-Convert binary value to signed int
+Convert binary value to signed int.
 ```nu
 > 0x[a0] | into int --signed
 -96

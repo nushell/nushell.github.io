@@ -2,7 +2,7 @@
 title: polars save
 categories: |
   lazyframe
-version: 0.110.0
+version: 0.111.0
 lazyframe: |
   Saves a dataframe to disk. For lazy dataframes a sink operation will be used if the file type supports it (parquet, ipc/arrow, csv, and ndjson).
 usage: |
@@ -22,14 +22,14 @@ contributors: false
 
 ## Flags
 
- -  `--type, -t {string}`: File type: csv, json, parquet, arrow/ipc. If omitted, derive from file extension
- -  `--avro-compression {string}`: Compression for avro supports deflate or snappy
- -  `--csv-delimiter {string}`: file delimiter character
+ -  `--type, -t {string}`: File type: csv, json, parquet, arrow/ipc. If omitted, derive from file extension.
+ -  `--avro-compression {string}`: Compression for avro supports deflate or snappy.
+ -  `--csv-delimiter {string}`: File delimiter character.
  -  `--csv-no-header`: Indicates to exclude a header row for CSV files.
 
 ## Parameters
 
- -  `path`: Path or cloud url to write to
+ -  `path`: Path or cloud url to write to.
 
 
 ## Input/output types:

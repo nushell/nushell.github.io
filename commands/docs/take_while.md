@@ -2,7 +2,7 @@
 title: take while
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Take elements of the input while a predicate is true.
 usage: |
@@ -33,7 +33,7 @@ contributors: false
 | list&lt;any&gt; | list&lt;any&gt; |
 ## Examples
 
-Take while the element is negative
+Take while the element is negative.
 ```nu
 > [-1 -2 9 1] | take while {|x| $x < 0 }
 ╭───┬────╮
@@ -43,7 +43,7 @@ Take while the element is negative
 
 ```
 
-Take while the element is negative using stored condition
+Take while the element is negative using stored condition.
 ```nu
 > let cond = {|x| $x < 0 }; [-1 -2 9 1] | take while $cond
 ╭───┬────╮
@@ -53,7 +53,7 @@ Take while the element is negative using stored condition
 
 ```
 
-Take while the field value is negative
+Take while the field value is negative.
 ```nu
 > [{a: -1} {a: -2} {a: 9} {a: 1}] | take while {|x| $x.a < 0 }
 ╭───┬────╮

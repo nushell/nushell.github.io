@@ -2,7 +2,7 @@
 title: job id
 categories: |
   experimental
-version: 0.110.0
+version: 0.111.0
 experimental: |
   Get id of current job.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | nothing | int    |
 ## Examples
 
-Get id of current job
+Get id of current job.
 ```nu
 > job id
 

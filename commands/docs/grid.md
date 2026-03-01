@@ -2,7 +2,7 @@
 title: grid
 categories: |
   viewers
-version: 0.110.0
+version: 0.111.0
 viewers: |
   Renders the output to a textual terminal grid.
 usage: |
@@ -22,10 +22,10 @@ contributors: false
 
 ## Flags
 
- -  `--width, -w {int}`: number of terminal columns wide (not output columns)
- -  `--color, -c`: draw output with color
- -  `--icons, -i`: draw output with icons (assumes nerd font is used)
- -  `--separator, -s {string}`: character to separate grid with
+ -  `--width, -w {int}`: Number of terminal columns wide (not output columns).
+ -  `--color, -c`: Draw output with color.
+ -  `--icons, -i`: Draw output with icons (assumes nerd font is used).
+ -  `--separator, -s {string}`: Character to separate grid with.
 
 
 ## Input/output types:

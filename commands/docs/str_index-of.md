@@ -2,7 +2,7 @@
 title: str index-of
 categories: |
   strings
-version: 0.110.0
+version: 0.111.0
 strings: |
   Returns start index of first occurrence of string in input, or -1 if no match.
 usage: |
@@ -22,10 +22,10 @@ contributors: false
 
 ## Flags
 
- -  `--grapheme-clusters, -g`: count indexes using grapheme clusters (all visible chars have length 1)
- -  `--utf-8-bytes, -b`: count indexes using UTF-8 bytes (default; non-ASCII chars have length 2+)
- -  `--range, -r {range}`: optional start and/or end index
- -  `--end, -e`: search from the end of the input
+ -  `--grapheme-clusters, -g`: Count indexes using grapheme clusters (all visible chars have length 1).
+ -  `--utf-8-bytes, -b`: Count indexes using UTF-8 bytes (default; non-ASCII chars have length 2+).
+ -  `--range, -r {range}`: Optional start and/or end index.
+ -  `--end, -e`: Search from the end of the input.
 
 ## Parameters
 
@@ -43,37 +43,37 @@ contributors: false
 | record       | record    |
 ## Examples
 
-Returns index of string in input
+Returns index of string in input.
 ```nu
 >  'my_library.rb' | str index-of '.rb'
 10
 ```
 
-Count length using grapheme clusters
+Count length using grapheme clusters.
 ```nu
 > '🇯🇵ほげ ふが ぴよ' | str index-of --grapheme-clusters 'ふが'
 4
 ```
 
-Returns index of string in input within a`rhs open range`
+Returns index of string in input within a`rhs open range`.
 ```nu
 >  '.rb.rb' | str index-of '.rb' --range 1..
 3
 ```
 
-Returns index of string in input within a lhs open range
+Returns index of string in input within a lhs open range.
 ```nu
 >  '123456' | str index-of '6' --range ..4
 -1
 ```
 
-Returns index of string in input within a range
+Returns index of string in input within a range.
 ```nu
 >  '123456' | str index-of '3' --range 1..4
 2
 ```
 
-Returns index of string in input
+Returns index of string in input.
 ```nu
 >  '/this/is/some/path/file.txt' | str index-of '/' -e
 18

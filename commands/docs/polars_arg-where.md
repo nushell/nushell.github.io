@@ -2,7 +2,7 @@
 title: polars arg-where
 categories: |
   expression
-version: 0.110.0
+version: 0.111.0
 expression: |
   Creates an expression that returns the arguments where expression is true.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `column name`: Expression to evaluate
+ -  `column name`: Expression to evaluate.
 
 
 ## Input/output types:

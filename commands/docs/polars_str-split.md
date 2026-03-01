@@ -2,7 +2,7 @@
 title: polars str-split
 categories: |
   dataframe
-version: 0.110.0
+version: 0.111.0
 dataframe: |
   Split the string by a substring. The resulting dtype is list<str>.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `expr`: Separator expression
+ -  `expr`: Separator expression.
 
 
 ## Input/output types:

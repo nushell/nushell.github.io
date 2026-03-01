@@ -2,7 +2,7 @@
 title: to xml
 categories: |
   formats
-version: 0.110.0
+version: 0.111.0
 formats: |
   Convert special record structure into .xml text.
 usage: |
@@ -22,9 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--indent, -i {int}`: Formats the XML text with the provided indentation setting
- -  `--partial-escape, -p`: Only escape mandatory characters in text and attributes
- -  `--self-closed, -s`: Output empty tags as self closing
+ -  `--indent, -i {int}`: Formats the XML text with the provided indentation setting.
+ -  `--partial-escape, -p`: Only escape mandatory characters in text and attributes.
+ -  `--self-closed, -s`: Output empty tags as self closing.
 
 
 ## Input/output types:
@@ -34,19 +34,19 @@ contributors: false
 | record | string |
 ## Examples
 
-Outputs an XML string representing the contents of this table
+Outputs an XML string representing the contents of this table.
 ```nu
 > {tag: note attributes: {} content : [{tag: remember attributes: {} content : [{tag: null attributes: null content : Event}]}]} | to xml
 <note><remember>Event</remember></note>
 ```
 
-When formatting xml null and empty record fields can be omitted and strings can be written without a wrapping record
+When formatting xml null and empty record fields can be omitted and strings can be written without a wrapping record.
 ```nu
 > {tag: note content : [{tag: remember content : [Event]}]} | to xml
 <note><remember>Event</remember></note>
 ```
 
-Optionally, formats the text with a custom indentation setting
+Optionally, formats the text with a custom indentation setting.
 ```nu
 > {tag: note content : [{tag: remember content : [Event]}]} | to xml --indent 3
 <note>
@@ -54,13 +54,13 @@ Optionally, formats the text with a custom indentation setting
 </note>
 ```
 
-Produce less escaping sequences in resulting xml
+Produce less escaping sequences in resulting xml.
 ```nu
 > {tag: note attributes: {a: "'qwe'\\"} content: ["\"'"]} | to xml --partial-escape
 <note a="'qwe'\">"'</note>
 ```
 
-Save space using self-closed tags
+Save space using self-closed tags.
 ```nu
 > {tag: root content: [[tag]; [a] [b] [c]]} | to xml --self-closed
 <root><a/><b/><c/></root>

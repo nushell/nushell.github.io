@@ -2,7 +2,7 @@
 title: http delete
 categories: |
   network
-version: 0.110.0
+version: 0.111.0
 network: |
   Delete the specified resource.
 usage: |
@@ -22,19 +22,19 @@ contributors: false
 
 ## Flags
 
- -  `--user, -u {any}`: the username when authenticating
- -  `--password, -p {any}`: the password when authenticating
- -  `--data, -d {any}`: the content to post
- -  `--content-type, -t {any}`: the MIME type of content to post
- -  `--max-time, -m {duration}`: max duration before timeout occurs
- -  `--headers, -H {any}`: custom headers you want to add
- -  `--raw, -r`: fetch contents as text rather than a table
- -  `--insecure, -k`: allow insecure server connections when using SSL
- -  `--full, -f`: returns the full response instead of only the body
- -  `--allow-errors, -e`: do not fail if the server returns an error code
- -  `--pool`: using a global pool as a client
+ -  `--user, -u {any}`: The username when authenticating.
+ -  `--password, -p {any}`: The password when authenticating.
+ -  `--data, -d {any}`: The content to post.
+ -  `--content-type, -t {any}`: The MIME type of content to post.
+ -  `--max-time, -m {duration}`: Max duration before timeout occurs.
+ -  `--headers, -H {any}`: Custom headers you want to add.
+ -  `--raw, -r`: Fetch contents as text rather than a table.
+ -  `--insecure, -k`: Allow insecure server connections when using SSL.
+ -  `--full, -f`: Returns the full response instead of only the body.
+ -  `--allow-errors, -e`: Do not fail if the server returns an error code.
+ -  `--pool`: Using a global pool as a client.
  -  `--redirect-mode, -R {string}`: What to do when encountering redirects. Default: 'follow'. Valid options: 'follow' ('f'), 'manual' ('m'), 'error' ('e').
- -  `--unix-socket, -U {path}`: Connect to the specified Unix socket instead of using TCP
+ -  `--unix-socket, -U {path}`: Connect to the specified Unix socket instead of using TCP.
 
 ## Parameters
 
@@ -48,43 +48,43 @@ contributors: false
 | any   | any    |
 ## Examples
 
-http delete from example.com
+HTTP delete from example.com.
 ```nu
 > http delete https://www.example.com
 
 ```
 
-http delete from example.com, with username and password
+HTTP delete from example.com, with username and password.
 ```nu
 > http delete --user myuser --password mypass https://www.example.com
 
 ```
 
-http delete from example.com, with custom header using a record
+HTTP delete from example.com, with custom header using a record.
 ```nu
 > http delete --headers {my-header-key: my-header-value} https://www.example.com
 
 ```
 
-http delete from example.com, with custom header using a list
+HTTP delete from example.com, with custom header using a list.
 ```nu
 > http delete --headers [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
 
 ```
 
-http delete from example.com, with body
+HTTP delete from example.com, with body.
 ```nu
 > http delete --data 'body' https://www.example.com
 
 ```
 
-http delete from example.com, with JSON body
+HTTP delete from example.com, with JSON body.
 ```nu
 > http delete --content-type application/json --data { field: value } https://www.example.com
 
 ```
 
-Perform an HTTP delete with JSON content from a pipeline to example.com
+Perform an HTTP delete with JSON content from a pipeline to example.com.
 ```nu
 > open foo.json | http delete https://www.example.com
 

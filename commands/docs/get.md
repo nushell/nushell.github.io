@@ -2,7 +2,7 @@
 title: get
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Extract data using a cell path.
 usage: |
@@ -22,10 +22,10 @@ contributors: false
 
 ## Flags
 
- -  `--optional, -o`: make all cell path members optional (returns `null` for missing values)
- -  `--ignore-case`: make all cell path members case insensitive
- -  `--ignore-errors, -i`: ignore missing data (make all cell path members optional) (deprecated)
- -  `--sensitive, -s`: get path in a case sensitive manner (deprecated)
+ -  `--optional, -o`: Make all cell path members optional (returns `null` for missing values).
+ -  `--ignore-case`: Make all cell path members case insensitive.
+ -  `--ignore-errors, -i`: Ignore missing data (make all cell path members optional) (deprecated).
+ -  `--sensitive, -s`: Get path in a case sensitive manner (deprecated).
 
 ## Parameters
 
@@ -43,13 +43,13 @@ contributors: false
 | nothing   | nothing |
 ## Examples
 
-Get an item from a list
+Get an item from a list.
 ```nu
 > [0 1 2] | get 1
 1
 ```
 
-Get a column from a table
+Get a column from a table.
 ```nu
 > [{A: A0}] | get A
 ╭───┬────╮
@@ -58,7 +58,7 @@ Get a column from a table
 
 ```
 
-Get a column from a table where some rows don't have that column, using optional cell-path syntax
+Get a column from a table where some rows don't have that column, using optional cell-path syntax.
 ```nu
 > [{A: A0, B: B0}, {B: B1}, {A: A2, B: B2}] | get A?
 ╭───┬────╮
@@ -69,7 +69,7 @@ Get a column from a table where some rows don't have that column, using optional
 
 ```
 
-Get a column from a table where some rows don't have that column, using the optional flag
+Get a column from a table where some rows don't have that column, using the optional flag.
 ```nu
 > [{A: A0, B: B0}, {B: B1}, {A: A2, B: B2}] | get -o A
 ╭───┬────╮
@@ -80,37 +80,37 @@ Get a column from a table where some rows don't have that column, using the opti
 
 ```
 
-Get a cell from a table
+Get a cell from a table.
 ```nu
 > [{A: A0}] | get 0.A
 A0
 ```
 
-Extract the name of the 3rd record in a list (same as `ls | $in.name.2`)
+Extract the name of the 3rd record in a list (same as `ls | $in.name.2`).
 ```nu
 > ls | get name.2
 
 ```
 
-Extract the name of the 3rd record in a list
+Extract the name of the 3rd record in a list.
 ```nu
 > ls | get 2.name
 
 ```
 
-Getting environment variables in a case insensitive way, using case insensitive cell-path syntax
+Getting environment variables in a case insensitive way, using case insensitive cell-path syntax.
 ```nu
 > $env | get home! path!
 
 ```
 
-Getting environment variables in a case insensitive way, using the '--ignore-case' flag
+Getting environment variables in a case insensitive way, using the '--ignore-case' flag.
 ```nu
 > $env | get --ignore-case home path
 
 ```
 
-Getting Path in a case sensitive way, won't work for 'PATH'
+Getting Path in a case sensitive way, won't work for 'PATH'.
 ```nu
 > $env | get Path
 

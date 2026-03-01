@@ -2,11 +2,11 @@
 title: bytes starts-with
 categories: |
   bytes
-version: 0.110.0
+version: 0.111.0
 bytes: |
-  Check if bytes starts with a pattern.
+  Check if binary data starts with a pattern.
 usage: |
-  Check if bytes starts with a pattern.
+  Check if binary data starts with a pattern.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `bytes starts-with` for [bytes](/commands/categories/bytes.md)
 
-<div class='command-title'>Check if bytes starts with a pattern.</div>
+<div class='command-title'>Check if binary data starts with a pattern.</div>
 
 ## Signature
 
@@ -35,19 +35,19 @@ contributors: false
 | record | record |
 ## Examples
 
-Checks if binary starts with `0x[1F FF AA]`
+Checks if binary starts with `0x[1F FF AA]`.
 ```nu
 > 0x[1F FF AA AA] | bytes starts-with 0x[1F FF AA]
 true
 ```
 
-Checks if binary starts with `0x[1F]`
+Checks if binary starts with `0x[1F]`.
 ```nu
 > 0x[1F FF AA AA] | bytes starts-with 0x[1F]
 true
 ```
 
-Checks if binary starts with `0x[1F]`
+Checks if binary starts with `0x[1F]`.
 ```nu
 > 0x[1F FF AA AA] | bytes starts-with 0x[11]
 false

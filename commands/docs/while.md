@@ -2,7 +2,7 @@
 title: while
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   Conditionally run a block in a loop.
 usage: |
@@ -33,7 +33,7 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Loop while a condition is true
+Loop while a condition is true.
 ```nu
 > mut x = 0; while $x < 10 { $x = $x + 1 }
 

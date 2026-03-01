@@ -2,7 +2,7 @@
 title: bytes split
 categories: |
   bytes
-version: 0.110.0
+version: 0.111.0
 bytes: |
   Split input into multiple items using a separator.
 usage: |
@@ -32,7 +32,7 @@ contributors: false
 | binary | list&lt;binary&gt; |
 ## Examples
 
-Split a binary value using a binary separator
+Split a binary value using a binary separator.
 ```nu
 > 0x[66 6F 6F 20 62 61 72 20 62 61 7A 20] | bytes split 0x[20]
 ╭───┬─────────────────╮
@@ -44,7 +44,7 @@ Split a binary value using a binary separator
 
 ```
 
-Split a binary value using a string separator
+Split a binary value using a string separator.
 ```nu
 > 0x[61 2D 2D 62 2D 2D 63] | bytes split "--"
 ╭───┬──────╮

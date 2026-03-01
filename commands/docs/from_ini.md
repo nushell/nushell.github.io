@@ -2,7 +2,7 @@
 title: from ini
 categories: |
   formats
-version: 0.110.0
+version: 0.111.0
 formats: |
   Parse text as .ini and create table.
 usage: |
@@ -19,6 +19,13 @@ contributors: false
 ## Signature
 
 ```> from ini {flags} ```
+
+## Flags
+
+ -  `--no-quote, -q`: Disable quote handling for values.
+ -  `--no-escape, -e`: Disable escape sequence handling for values.
+ -  `--indented-multiline-value, -m`: Allow values to continue on indented lines.
+ -  `--preserve-key-leading-whitespace, -w`: Preserve leading whitespace in keys.
 
 
 ## Input/output types:
@@ -39,4 +46,50 @@ b=2' | from ini
 │     │ │ b │ 2 │ │
 │     │ ╰───┴───╯ │
 ╰─────┴───────────╯
+```
+
+Disable escaping to keep backslashes literal
+```nu
+> '[start]
+file=C:\Windows\System32\xcopy.exe' | from ini --no-escape
+╭───────┬──────────────────────────────────────────╮
+│       │ ╭──────┬───────────────────────────────╮ │
+│ start │ │ file │ C:\Windows\System32\xcopy.exe │ │
+│       │ ╰──────┴───────────────────────────────╯ │
+╰───────┴──────────────────────────────────────────╯
+```
+
+Disable quote handling to keep quote characters
+```nu
+> '[foo]
+bar="quoted"' | from ini --no-quote
+╭─────┬────────────────────╮
+│     │ ╭─────┬──────────╮ │
+│ foo │ │ bar │ "quoted" │ │
+│     │ ╰─────┴──────────╯ │
+╰─────┴────────────────────╯
+```
+
+Allow values to continue on indented lines
+```nu
+> '[foo]
+bar=line one
+  line two' | from ini --indented-multiline-value
+╭─────┬────────────────────╮
+│     │ ╭─────┬──────────╮ │
+│ foo │ │ bar │ line one │ │
+│     │ │     │ line two │ │
+│     │ ╰─────┴──────────╯ │
+╰─────┴────────────────────╯
+```
+
+Preserve leading whitespace in keys
+```nu
+> '[foo]
+  key=value' | from ini --preserve-key-leading-whitespace
+╭─────┬───────────────────╮
+│     │ ╭───────┬───────╮ │
+│ foo │ │   key │ value │ │
+│     │ ╰───────┴───────╯ │
+╰─────┴───────────────────╯
 ```

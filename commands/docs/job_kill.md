@@ -2,7 +2,7 @@
 title: job kill
 categories: |
   experimental
-version: 0.110.0
+version: 0.111.0
 experimental: |
   Kill a background job.
 usage: |
@@ -32,7 +32,7 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Kill a newly spawned job
+Kill a newly spawned job.
 ```nu
 > let id = job spawn { sleep 10sec }; job kill $id
 

@@ -2,7 +2,7 @@
 title: polars replace
 categories: |
   expression
-version: 0.110.0
+version: 0.111.0
 expression: |
   Create an expression that replaces old values with new values
 usage: |
@@ -28,8 +28,8 @@ contributors: false
 
 ## Parameters
 
- -  `old`: Values to be replaced
- -  `new`: Values to replace by
+ -  `old`: Values to be replaced.
+ -  `new`: Values to replace by.
 
 
 ## Input/output types:

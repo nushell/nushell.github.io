@@ -2,7 +2,7 @@
 title: stor delete
 categories: |
   database
-version: 0.110.0
+version: 0.111.0
 database: |
   Delete a table or specified rows in the in-memory sqlite database.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--table-name, -t {string}`: name of the table you want to delete or delete from
- -  `--where-clause, -w {string}`: a sql string to use as a where clause without the WHERE keyword
+ -  `--table-name, -t {string}`: Name of the table you want to delete or delete from.
+ -  `--where-clause, -w {string}`: A sql string to use as a where clause without the WHERE keyword.
 
 
 ## Input/output types:

@@ -2,7 +2,7 @@
 title: from ods
 categories: |
   formats
-version: 0.110.0
+version: 0.111.0
 formats: |
   Parse OpenDocument Spreadsheet(.ods) data and create table.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--sheets, -s {list<string>}`: Only convert specified sheets
+ -  `--sheets, -s {list<string>}`: Only convert specified sheets.
 
 
 ## Input/output types:
@@ -32,13 +32,13 @@ contributors: false
 | string | table  |
 ## Examples
 
-Convert binary .ods data to a table
+Convert binary .ods data to a table.
 ```nu
 > open --raw test.ods | from ods
 
 ```
 
-Convert binary .ods data to a table, specifying the tables
+Convert binary .ods data to a table, specifying the tables.
 ```nu
 > open --raw test.ods | from ods --sheets [Spreadsheet1]
 

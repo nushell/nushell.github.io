@@ -2,11 +2,11 @@
 title: to text
 categories: |
   formats
-version: 0.110.0
+version: 0.111.0
 formats: |
-  Converts data into simple text.
+  Convert data into plain text format.
 usage: |
-  Converts data into simple text.
+  Convert data into plain text format.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `to text` for [formats](/commands/categories/formats.md)
 
-<div class='command-title'>Converts data into simple text.</div>
+<div class='command-title'>Convert data into plain text format.</div>
 
 ## Signature
 
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--no-newline, -n`: Do not append a newline to the end of the text
- -  `--serialize, -s`: serialize nushell types that cannot be deserialized
+ -  `--no-newline, -n`: Do not append a newline to the end of the text.
+ -  `--serialize, -s`: Serialize nushell types that cannot be deserialized.
 
 
 ## Input/output types:
@@ -33,26 +33,26 @@ contributors: false
 | any   | string |
 ## Examples
 
-Outputs data as simple text with a trailing newline
+Outputs data as simple text with a trailing newline.
 ```nu
 > [1] | to text
 1
 
 ```
 
-Outputs data as simple text without a trailing newline
+Outputs data as simple text without a trailing newline.
 ```nu
 > [1] | to text --no-newline
 1
 ```
 
-Outputs external data as simple text
+Outputs external data as simple text.
 ```nu
 > git help -a | lines | find -r '^ ' | to text
 
 ```
 
-Outputs records as simple text
+Outputs records as simple text.
 ```nu
 > ls | to text
 

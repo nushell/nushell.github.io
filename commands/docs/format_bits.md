@@ -2,7 +2,7 @@
 title: format bits
 categories: |
   conversions
-version: 0.110.0
+version: 0.111.0
 conversions: |
   Convert value to a string of binary data represented by 0 and 1.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--endian, -e {string}`: Byte encode endian. Only applies to int, filesize, duration and bool, as well as tables and records of those. Available options: native, little, big(default)
+ -  `--endian, -e {string}`: Byte encode endian. Only applies to int, filesize, duration and bool, as well as tables and records of those. Available options: native, little, big(default).
 
 ## Parameters
 

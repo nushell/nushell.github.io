@@ -2,7 +2,7 @@
 title: start
 categories: |
   filesystem
-version: 0.110.0
+version: 0.111.0
 filesystem: |
   Open a folder, file, or website in the default application or viewer.
 usage: |
@@ -32,37 +32,37 @@ contributors: false
 | nothing | any    |
 ## Examples
 
-Open a text file with the default text editor
+Open a text file with the default text editor.
 ```nu
 > start file.txt
 
 ```
 
-Open an image with the default image viewer
+Open an image with the default image viewer.
 ```nu
 > start file.jpg
 
 ```
 
-Open the current directory with the default file manager
+Open the current directory with the default file manager.
 ```nu
 > start .
 
 ```
 
-Open a PDF with the default PDF viewer
+Open a PDF with the default PDF viewer.
 ```nu
 > start file.pdf
 
 ```
 
-Open a website with the default browser
+Open a website with the default browser.
 ```nu
 > start https://www.nushell.sh
 
 ```
 
-Open an application-registered protocol URL
+Open an application-registered protocol URL.
 ```nu
 > start obsidian://open?vault=Test
 

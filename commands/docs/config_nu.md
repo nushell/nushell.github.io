@@ -2,7 +2,7 @@
 title: config nu
 categories: |
   env
-version: 0.110.0
+version: 0.111.0
 env: |
   Edit nu configurations.
 usage: |
@@ -33,19 +33,19 @@ contributors: false
 | nothing | any    |
 ## Examples
 
-open user's config.nu in the default editor
+Open user's config.nu in the default editor.
 ```nu
 > config nu
 
 ```
 
-pretty-print a commented `config.nu` that explains common settings
+Pretty-print a commented `config.nu` that explains common settings.
 ```nu
 > config nu --doc | nu-highlight
 
 ```
 
-pretty-print the internal `config.nu` file which is loaded before user's config
+Pretty-print the internal `config.nu` file which is loaded before user's config.
 ```nu
 > config nu --default | nu-highlight
 

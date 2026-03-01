@@ -2,7 +2,7 @@
 title: join
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Join two tables.
 usage: |
@@ -22,10 +22,12 @@ contributors: false
 
 ## Flags
 
- -  `--inner, -i`: Inner join (default)
- -  `--left, -l`: Left-outer join
- -  `--right, -r`: Right-outer join
- -  `--outer, -o`: Outer join
+ -  `--prefix, -p {string}`: Prefix columns from the right table with this string (excluding the shared join key).
+ -  `--suffix, -s {string}`: Suffix columns from the right table with this string (excluding the shared join key).
+ -  `--inner, -i`: Inner join (default).
+ -  `--left, -l`: Left-outer join.
+ -  `--right, -r`: Right-outer join.
+ -  `--outer, -o`: Outer join.
 
 ## Parameters
 
@@ -49,5 +51,27 @@ Join two tables
 ├───┼───┼───┼───┤
 │ 0 │ 1 │ 2 │ 3 │
 ╰───┴───┴───┴───╯
+
+```
+
+Join multiple tables with distinct suffixes for the right table's columns
+```nu
+> [{id: 1 x: 10}] | join --suffix _a [{id: 1 x: 20}] id | join --suffix _b [{id: 1 x: 30}] id
+╭───┬────┬────┬─────┬─────╮
+│ # │ id │ x  │ x_a │ x_b │
+├───┼────┼────┼─────┼─────┤
+│ 0 │  1 │ 10 │  20 │  30 │
+╰───┴────┴────┴─────┴─────╯
+
+```
+
+Join multiple tables with a prefix for the right table's columns
+```nu
+> [{id: 1 x: 10}] | join --prefix r_ [{id: 1 x: 20}] id
+╭───┬────┬────┬─────╮
+│ # │ id │ x  │ r_x │
+├───┼────┼────┼─────┤
+│ 0 │  1 │ 10 │  20 │
+╰───┴────┴────┴─────╯
 
 ```

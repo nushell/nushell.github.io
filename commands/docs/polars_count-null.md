@@ -2,7 +2,7 @@
 title: polars count-null
 categories: |
   dataframe
-version: 0.110.0
+version: 0.111.0
 dataframe: |
   Counts null values.
 usage: |

@@ -2,7 +2,7 @@
 title: polars convert-time-zone
 categories: |
   dataframe
-version: 0.110.0
+version: 0.111.0
 dataframe: |
   Convert datetime to target timezone.
 usage: |
@@ -38,12 +38,12 @@ Convert timezone for timezone-aware datetime
 > ["2025-04-10 09:30:00 -0400" "2025-04-10 10:30:00 -0400"] | polars into-df
                     | polars as-datetime "%Y-%m-%d %H:%M:%S %z"
                     | polars select (polars col datetime | polars convert-time-zone "Europe/Lisbon")
-╭───┬──────────────╮
-│ # │   datetime   │
-├───┼──────────────┤
-│ 0 │ 9 months ago │
-│ 1 │ 9 months ago │
-╰───┴──────────────╯
+╭───┬───────────────╮
+│ # │   datetime    │
+├───┼───────────────┤
+│ 0 │ 10 months ago │
+│ 1 │ 10 months ago │
+╰───┴───────────────╯
 
 ```
 
@@ -52,11 +52,11 @@ Timezone conversions for timezone-naive datetime will assume the original timezo
 > ["2025-04-10 09:30:00" "2025-04-10 10:30:00"] | polars into-df
                     | polars as-datetime "%Y-%m-%d %H:%M:%S" --naive
                     | polars select (polars col datetime | polars convert-time-zone "America/New_York")
-╭───┬──────────────╮
-│ # │   datetime   │
-├───┼──────────────┤
-│ 0 │ 9 months ago │
-│ 1 │ 9 months ago │
-╰───┴──────────────╯
+╭───┬───────────────╮
+│ # │   datetime    │
+├───┼───────────────┤
+│ 0 │ 10 months ago │
+│ 1 │ 10 months ago │
+╰───┴───────────────╯
 
 ```

@@ -2,7 +2,7 @@
 title: lines
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Converts input to lines.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--skip-empty, -s`: skip empty lines
+ -  `--skip-empty, -s`: Skip empty lines.
 
 
 ## Input/output types:

@@ -2,7 +2,7 @@
 title: ps
 categories: |
   system
-version: 0.110.0
+version: 0.111.0
 system: |
   View information about system processes.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--long, -l`: list all available columns for each entry
+ -  `--long, -l`: List all available columns for each entry.
 
 
 ## Input/output types:

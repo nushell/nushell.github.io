@@ -2,7 +2,7 @@
 title: overlay list
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   List all overlays with their active status.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | nothing | table&lt;name: string, active: bool&gt; |
 ## Examples
 
-List all overlays with their active status
+List all overlays with their active status.
 ```nu
 > module spam { export def foo [] { "foo" } }
     overlay use spam
@@ -41,7 +41,7 @@ List all overlays with their active status
 
 ```
 
-Get overlay status after hiding
+Get overlay status after hiding.
 ```nu
 > module spam { export def foo [] { "foo" } }
     overlay use spam

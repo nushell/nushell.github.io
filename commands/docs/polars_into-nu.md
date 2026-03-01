@@ -2,7 +2,7 @@
 title: polars into-nu
 categories: |
   dataframe
-version: 0.110.0
+version: 0.111.0
 dataframe: |
   Converts a dataframe or an expression into nushell value for access and exploration.
 usage: |
@@ -22,9 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--rows, -n {number}`: number of rows to be shown
- -  `--tail, -t`: shows tail rows
- -  `--index, -i`: add an index column
+ -  `--rows, -n {number}`: Number of rows to be shown.
+ -  `--tail, -t`: Shows tail rows.
+ -  `--index, -i`: Add an index column.
 
 
 ## Input/output types:

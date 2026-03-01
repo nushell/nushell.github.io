@@ -2,7 +2,7 @@
 title: error make
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   Create an error.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--unspanned, -u`: remove the labels from the error
+ -  `--unspanned, -u`: Remove the labels from the error.
 
 ## Parameters
 
@@ -31,32 +31,30 @@ contributors: false
 
 ## Input/output types:
 
-| input   | output |
-| ------- | ------ |
-| nothing | error  |
-| string  | error  |
-| record  | error  |
+| input | output |
+| ----- | ------ |
+| any   | error  |
 ## Examples
 
-Create a simple, default error
+Create a simple, default error.
 ```nu
 > error make
 
 ```
 
-Create a simple error from a string
+Create a simple error from a string.
 ```nu
 > error make 'my error message'
 
 ```
 
-Create a simple error from an `error_struct` record
+Create a simple error from an `error_struct` record.
 ```nu
 > error make {msg: 'my error message'}
 
 ```
 
-A complex error utilizing spans and inners
+A complex error utilizing spans and inners.
 ```nu
 > def foo [x: int, y: int] {
         let z = $x + $y
@@ -75,13 +73,13 @@ A complex error utilizing spans and inners
 
 ```
 
-Chain errors using a pipeline
+Chain errors using a pipeline.
 ```nu
 > try {error make "foo"} catch {error make "bar"}
 
 ```
 
-Chain errors using arguments (note the extra command in `catch`)
+Chain errors using arguments (note the extra command in `catch`).
 ```nu
 > try {
         error make "foo"

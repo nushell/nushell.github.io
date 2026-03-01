@@ -2,7 +2,7 @@
 title: nu-highlight
 categories: |
   strings
-version: 0.110.0
+version: 0.111.0
 strings: |
   Syntax highlight the input string.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--reject-garbage, -r`: Return an error if invalid syntax (garbage) was encountered
+ -  `--reject-garbage, -r`: Return an error if invalid syntax (garbage) was encountered.
 
 
 ## Input/output types:

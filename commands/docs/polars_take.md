@@ -2,7 +2,7 @@
 title: polars take
 categories: |
   dataframe
-version: 0.110.0
+version: 0.111.0
 dataframe: |
   Creates new dataframe using the given indices.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `indices`: list of indices used to take data
+ -  `indices`: List of indices used to take data.
 
 
 ## Input/output types:

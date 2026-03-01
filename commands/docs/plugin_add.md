@@ -2,7 +2,7 @@
 title: plugin add
 categories: |
   plugin
-version: 0.110.0
+version: 0.111.0
 plugin: |
   Add a plugin to the plugin registry file.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--plugin-config {path}`: Use a plugin registry file other than the one set in `$nu.plugin-path`
- -  `--shell, -s {path}`: Use an additional shell program (cmd, sh, python, etc.) to run the plugin
+ -  `--plugin-config {path}`: Use a plugin registry file other than the one set in `$nu.plugin-path`.
+ -  `--shell, -s {path}`: Use an additional shell program (cmd, sh, python, etc.) to run the plugin.
 
 ## Parameters
 

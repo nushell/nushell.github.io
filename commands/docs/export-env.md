@@ -2,7 +2,7 @@
 title: export-env
 categories: |
   env
-version: 0.110.0
+version: 0.111.0
 env: |
   Run a block and preserve its environment in a current scope.
 usage: |
@@ -32,13 +32,13 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Set an environment variable
+Set an environment variable.
 ```nu
 > export-env { $env.SPAM = 'eggs' }
 
 ```
 
-Set an environment variable and examine its value
+Set an environment variable and examine its value.
 ```nu
 > export-env { $env.SPAM = 'eggs' }; $env.SPAM
 eggs

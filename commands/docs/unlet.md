@@ -2,7 +2,7 @@
 title: unlet
 categories: |
   experimental
-version: 0.110.0
+version: 0.111.0
 experimental: |
   Delete variables from nushell memory, making them unrecoverable.
 usage: |
@@ -32,25 +32,25 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Delete a variable from memory
+Delete a variable from memory.
 ```nu
 > let x = 42; unlet $x
 
 ```
 
-Delete multiple variables from memory
+Delete multiple variables from memory.
 ```nu
 > let x = 1; let y = 2; unlet $x $y
 
 ```
 
-Attempting to delete a built-in variable fails
+Attempting to delete a built-in variable fails.
 ```nu
 > unlet $nu
 
 ```
 
-Attempting to delete a non-variable fails
+Attempting to delete a non-variable fails.
 ```nu
 > unlet 42
 

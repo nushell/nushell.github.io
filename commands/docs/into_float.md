@@ -2,7 +2,7 @@
 title: into float
 categories: |
   conversions
-version: 0.110.0
+version: 0.111.0
 conversions: |
   Convert data into floating point number.
 usage: |
@@ -38,7 +38,7 @@ contributors: false
 | list&lt;any&gt; | list&lt;float&gt; |
 ## Examples
 
-Convert string to float in table
+Convert string to float in table.
 ```nu
 > [[num]; ['5.01']] | into float num
 ╭───┬──────╮
@@ -49,13 +49,13 @@ Convert string to float in table
 
 ```
 
-Convert string to floating point number
+Convert string to floating point number.
 ```nu
 > '1.345' | into float
 1.345
 ```
 
-Coerce list of ints and floats to float
+Coerce list of ints and floats to float.
 ```nu
 > [4 -5.9] | into float
 ╭───┬───────╮
@@ -65,7 +65,7 @@ Coerce list of ints and floats to float
 
 ```
 
-Convert boolean to float
+Convert boolean to float.
 ```nu
 > true | into float
 1.0

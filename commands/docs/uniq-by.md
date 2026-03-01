@@ -2,7 +2,7 @@
 title: uniq-by
 categories: |
   filters
-version: 0.110.0
+version: 0.111.0
 filters: |
   Return the distinct values in the input by the given column(s).
 usage: |
@@ -22,10 +22,11 @@ contributors: false
 
 ## Flags
 
- -  `--count, -c`: Return a table containing the distinct input values together with their counts
- -  `--repeated, -d`: Return the input values that occur more than once
- -  `--ignore-case, -i`: Ignore differences in case when comparing input values
- -  `--unique, -u`: Return the input values that occur once only
+ -  `--count, -c`: Return a table containing the distinct input values together with their counts.
+ -  `--keep-last, -l`: Return the last occurrence of each unique value instead of the first.
+ -  `--repeated, -d`: Return the input values that occur more than once.
+ -  `--ignore-case, -i`: Ignore differences in case when comparing input values.
+ -  `--unique, -u`: Return the input values that occur once only.
 
 ## Parameters
 
@@ -40,13 +41,26 @@ contributors: false
 | list&lt;any&gt; | list&lt;any&gt; |
 ## Examples
 
-Get rows from table filtered by column uniqueness
+Get rows from table filtered by column uniqueness.
 ```nu
 > [[fruit count]; [apple 9] [apple 2] [pear 3] [orange 7]] | uniq-by fruit
 ╭───┬────────┬───────╮
 │ # │ fruit  │ count │
 ├───┼────────┼───────┤
 │ 0 │ apple  │     9 │
+│ 1 │ pear   │     3 │
+│ 2 │ orange │     7 │
+╰───┴────────┴───────╯
+
+```
+
+Get rows from table filtered by column uniqueness, keeping the last occurrence of each duplicate.
+```nu
+> [[fruit count]; [apple 9] [apple 2] [pear 3] [orange 7]] | uniq-by fruit --keep-last
+╭───┬────────┬───────╮
+│ # │ fruit  │ count │
+├───┼────────┼───────┤
+│ 0 │ apple  │     2 │
 │ 1 │ pear   │     3 │
 │ 2 │ orange │     7 │
 ╰───┴────────┴───────╯

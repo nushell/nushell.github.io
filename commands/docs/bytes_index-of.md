@@ -2,7 +2,7 @@
 title: bytes index-of
 categories: |
   bytes
-version: 0.110.0
+version: 0.111.0
 bytes: |
   Returns start index of first occurrence of pattern in bytes, or -1 if no match.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--all, -a`: returns all matched index
- -  `--end, -e`: search from the end of the binary
+ -  `--all, -a`: Returns all matched index.
+ -  `--end, -e`: Search from the end of the binary.
 
 ## Parameters
 
@@ -40,19 +40,19 @@ contributors: false
 | record | record |
 ## Examples
 
-Returns index of pattern in bytes
+Returns index of pattern in bytes.
 ```nu
 >  0x[33 44 55 10 01 13 44 55] | bytes index-of 0x[44 55]
 1
 ```
 
-Returns index of pattern, search from end
+Returns index of pattern, search from end.
 ```nu
 >  0x[33 44 55 10 01 13 44 55] | bytes index-of --end 0x[44 55]
 6
 ```
 
-Returns all matched index
+Returns all matched index.
 ```nu
 >  0x[33 44 55 10 01 33 44 33 44] | bytes index-of --all 0x[33 44]
 ╭───┬───╮
@@ -63,7 +63,7 @@ Returns all matched index
 
 ```
 
-Returns all matched index, searching from end
+Returns all matched index, searching from end.
 ```nu
 >  0x[33 44 55 10 01 33 44 33 44] | bytes index-of --all --end 0x[33 44]
 ╭───┬───╮
@@ -74,7 +74,7 @@ Returns all matched index, searching from end
 
 ```
 
-Returns index of pattern for specific column
+Returns index of pattern for specific column.
 ```nu
 >  [[ColA ColB ColC]; [0x[11 12 13] 0x[14 15 16] 0x[17 18 19]]] | bytes index-of 0x[11] ColA ColC
 ╭───┬──────┬──────────────┬──────╮

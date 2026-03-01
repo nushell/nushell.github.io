@@ -2,7 +2,7 @@
 title: mktemp
 categories: |
   filesystem
-version: 0.110.0
+version: 0.111.0
 filesystem: |
   Create temporary files or directories using uutils/coreutils mktemp.
 usage: |
@@ -23,8 +23,8 @@ contributors: false
 ## Flags
 
  -  `--suffix {string}`: Append suffix to template; must not contain a slash.
- -  `--tmpdir-path, -p {path}`: Interpret TEMPLATE relative to tmpdir-path. If tmpdir-path is not set use $TMPDIR
- -  `--tmpdir, -t`: Interpret TEMPLATE relative to the system temporary directory.
+ -  `--tmpdir-path, -p {path}`: Interpret TEMPLATE relative to tmpdir-path. If tmpdir-path is not set use $TMPDIR.
+ -  `--tmpdir, -t`: Interpret TEMPLATE relative to the system temporary directory. It is implied if template is not provided.
  -  `--directory, -d`: Create a directory instead of a file.
  -  `--dry`: Don't create a file and just return the path that would have been created.
 
@@ -40,10 +40,10 @@ contributors: false
 | nothing | string |
 ## Examples
 
-Make a temporary file with the given suffix in the current working directory.
+Make a temporary file with the given suffix in the system temp directory.
 ```nu
 > mktemp --suffix .txt
-<WORKING_DIR>/tmp.lekjbhelyx.txt
+/tmp/tmp.lekjbhelyx.txt
 ```
 
 Make a temporary file named testfile.XXX with the 'X's as random characters in the current working directory.

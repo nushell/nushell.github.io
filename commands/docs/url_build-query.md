@@ -2,7 +2,7 @@
 title: url build-query
 categories: |
   network
-version: 0.110.0
+version: 0.111.0
 network: |
   Converts record or table into query string applying percent-encoding.
 usage: |
@@ -29,25 +29,25 @@ contributors: false
 | table&lt;key: any, value: any&gt; | string |
 ## Examples
 
-Outputs a query string representing the contents of this record
+Outputs a query string representing the contents of this record.
 ```nu
 > { mode:normal userid:31415 } | url build-query
 mode=normal&userid=31415
 ```
 
-Outputs a query string representing the contents of this record, with a value that needs to be url-encoded
+Outputs a query string representing the contents of this record, with a value that needs to be URL-encoded.
 ```nu
 > {a:"AT&T", b: "AT T"} | url build-query
 a=AT%26T&b=AT+T
 ```
 
-Outputs a query string representing the contents of this record, "exploding" the list into multiple parameters
+Outputs a query string representing the contents of this record, "exploding" the list into multiple parameters.
 ```nu
 > {a: ["one", "two"], b: "three"} | url build-query
 a=one&a=two&b=three
 ```
 
-Outputs a query string representing the contents of this table containing key-value pairs
+Outputs a query string representing the contents of this table containing key-value pairs.
 ```nu
 > [[key, value]; [a, one], [a, two], [b, three], [a, four]] | url build-query
 a=one&a=two&b=three&a=four

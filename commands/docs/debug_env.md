@@ -2,7 +2,7 @@
 title: debug env
 categories: |
   debug
-version: 0.110.0
+version: 0.111.0
 debug: |
   Show environment variables as external commands would get it.
 usage: |
@@ -28,13 +28,13 @@ contributors: false
 | nothing | record |
 ## Examples
 
-Get PATH variable that externals see
+Get PATH variable that externals see.
 ```nu
 > debug env | get PATH!
 
 ```
 
-Create a .env file
+Create a .env file.
 ```nu
 > debug env | transpose key value | each {$"($in.key)=($in.value | to json)"} | save .env
 

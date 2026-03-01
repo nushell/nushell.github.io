@@ -2,7 +2,7 @@
 title: polars selector by-dtype
 categories: |
   expression
-version: 0.110.0
+version: 0.111.0
 expression: |
   Creates a selector that selects columns by data type.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `...rest`: Data types to select (e.g., i64, f64, str, bool)
+ -  `...rest`: Data types to select (e.g., i64, f64, str, bool).
 
 
 ## Input/output types:

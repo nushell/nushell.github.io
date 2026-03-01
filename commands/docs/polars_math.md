@@ -2,7 +2,7 @@
 title: polars math
 categories: |
   dataframe
-version: 0.110.0
+version: 0.111.0
 dataframe: |
   Collection of math functions to be applied on one or more column expressions
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Parameters
 
- -  `type`: Function name. See extra description for full list of accepted values
- -  `...rest`: Extra arguments required by some functions
+ -  `type`: Function name. See extra description for full list of accepted values.
+ -  `...rest`: Extra arguments required by some functions.
 
 
 ## Input/output types:

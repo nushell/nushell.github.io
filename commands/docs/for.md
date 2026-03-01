@@ -2,7 +2,7 @@
 title: for
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   Loop over a range.
 usage: |
@@ -34,19 +34,19 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Print the square of each integer
+Print the square of each integer.
 ```nu
 > for x in [1 2 3] { print ($x * $x) }
 
 ```
 
-Work with elements of a range
+Work with elements of a range.
 ```nu
 > for $x in 1..3 { print $x }
 
 ```
 
-Number each item and print a message
+Number each item and print a message.
 ```nu
 > for $it in (['bob' 'fred'] | enumerate) { print $"($it.index) is ($it.item)" }
 

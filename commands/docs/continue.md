@@ -2,7 +2,7 @@
 title: continue
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   Continue a loop from the next iteration.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Continue a loop from the next iteration
+Continue a loop from the next iteration.
 ```nu
 > for i in 1..10 { if $i == 5 { continue }; print $i }
 

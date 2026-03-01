@@ -2,7 +2,7 @@
 title: scope variables
 categories: |
   core
-version: 0.110.0
+version: 0.111.0
 core: |
   Output info on the variables in the current scope.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | nothing | any    |
 ## Examples
 
-Show the variables in the current scope
+Show the variables in the current scope.
 ```nu
 > scope variables
 

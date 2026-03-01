@@ -2,7 +2,7 @@
 title: polars unpivot
 categories: |
   dataframe
-version: 0.110.0
+version: 0.111.0
 dataframe: |
   Unpivot a DataFrame from wide to long format.
 usage: |
@@ -22,10 +22,10 @@ contributors: false
 
 ## Flags
 
- -  `--index, -i {list<any>}`: column names for unpivoting
- -  `--on, -o {list<any>}`: column names used as value columns
- -  `--variable-name, -r {string}`: optional name for variable column
- -  `--value-name, -l {string}`: optional name for value column
+ -  `--index, -i {list<any>}`: Column names for unpivoting.
+ -  `--on, -o {list<any>}`: Column names used as value columns.
+ -  `--variable-name, -r {string}`: Optional name for variable column.
+ -  `--value-name, -l {string}`: Optional name for value column.
 
 
 ## Input/output types:
