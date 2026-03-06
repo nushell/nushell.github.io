@@ -65,3 +65,19 @@ This means:
 | `Get-Location` or `$PWD`                                          | `pwd` or `$env.PWD`                           | Show current directory                                            |
 | `Read-Host`                                                       | `let var = input`                             | Read user input                                                   |
 | `Read-Host -AsSecureString`                                       | `let secret = input -s`                       | Read secret input                                                 |
+
+## Clearing the commandline buffer by pressing ESC
+
+Legacy versions of PowerShell feature the ability to clear the commandline buffer by pressing the ESC key.
+
+While Nu does not replicate this by default, a keybind can be added to your `config.nu` to enable similar functionality:
+
+```nu
+$env.config.keybindings ++= [{
+    name: 'esc_clear'
+    modifier: 'None'
+    keycode: 'Esc'
+    mode: ['Emacs', 'Vi_Normal']
+    event: {edit: 'Clear'}
+}]
+```

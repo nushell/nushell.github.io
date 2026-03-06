@@ -73,3 +73,19 @@ Executing `./ver` or `ver.bat` *will* execute the local bat file though.
 
 Note that Nushell has its own [`start` command](/commands/docs/start.md) which takes precedence.
 You can call the CMD.EXE's internal `START` command with the external command syntax `^start`.
+
+## Clearing the commandline buffer by pressing ESC
+
+CMD.EXE features the ability to clear the commandline buffer by pressing the ESC key.
+
+While Nu does not replicate this by default, a keybind can be added to your `config.nu` to enable similar functionality:
+
+```nu
+$env.config.keybindings ++= [{
+    name: 'esc_clear'
+    modifier: 'None'
+    keycode: 'Esc'
+    mode: ['Emacs', 'Vi_Normal']
+    event: {edit: 'Clear'}
+}]
+```
