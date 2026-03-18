@@ -188,11 +188,11 @@ When defining a hook as a string, the `$before` and `$after` variables are set t
 ```nu
 $env.config = ($env.config | upsert hooks {
     env_change: {
-        PWD: {
+        PWD: [{
             code: 'print $"changing directory from ($before) to ($after)"'
-        }
+        }]
     }
-}
+})
 ```
 
 ## Examples
