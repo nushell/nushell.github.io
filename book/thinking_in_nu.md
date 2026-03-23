@@ -170,7 +170,7 @@ In all of the above:
 - The first value is evaluated as the integer 40 but is not returned
 - The second value is evaluated as the integer 50 but is not returned
 - The third value is evaluated as the integer 60, and since it is the last
-  value, it is is returned and displayed (rendered).
+  value, it is returned and displayed (rendered).
 
 ::: warning Thinking in Nushell
 When debugging unexpected results, be on the lookout for:
