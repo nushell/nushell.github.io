@@ -10,6 +10,7 @@ import BlogPosts from './components/BlogPosts.vue';
 import JumpToc from './components/JumpToc.vue';
 import PrBy from './components/PrBy.vue';
 import ReleaseToc from './components/ReleaseToc.vue';
+import URLDocSearch from './components/URLDocSearch.vue';
 
 export default defineClientConfig({
   enhance({ app }) {
@@ -18,5 +19,8 @@ export default defineClientConfig({
     app.component('JumpToc', JumpToc);
     app.component('PrBy', PrBy);
     app.component('ReleaseToc', ReleaseToc);
+
+    // Override the builtin searchbox
+    app.component('SearchBox', URLDocSearch);
   },
 });
