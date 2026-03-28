@@ -3,13 +3,13 @@
 </template>
 
 <script setup lang="ts">
-import { DocSearch } from '@vuepress/plugin-docsearch/client';
+import { DocSearch, DocSearchOptions } from '@vuepress/plugin-docsearch/client';
 import { useDebounceFn, useEventListener } from '@vueuse/core';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, Ref, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
 const SEARCH_KEY = 'search';
-const docsearchOptions = ref({});
+const docsearchOptions: Ref<DocSearchOptions> = ref({});
 const router = useRouter();
 const route = useRoute();
 
@@ -18,20 +18,20 @@ onMounted(() => {
   const query = new URL(window.location.href).searchParams.get(SEARCH_KEY);
   if (query) {
     docsearchOptions.value.initialQuery = query;
-    document.querySelector('.DocSearch-Button').click();
+    (document.querySelector('.DocSearch-Button') as HTMLButtonElement).click();
   }
 });
 
 // There's some debounce builtin to docsearch, this mimics that and should
 // help prevent browser history from getting filled with partial queries.
 const inputHandler = useDebounceFn(handleSearchInput, 500);
-useEventListener('input', inputHandler);
+useEventListener('input', (event) => inputHandler(event as InputEvent));
 
 // Update the URL bar when the search input changes.
-function handleSearchInput(event) {
-  const searchQuery = event.target.value;
-
-  if (event.target.id !== 'docsearch-input' || !searchQuery) {
+function handleSearchInput(event: InputEvent) {
+  const target = event.target as HTMLInputElement | undefined;
+  const searchQuery = target?.value;
+  if (target?.id !== 'docsearch-input' || !searchQuery) {
     return;
   }
 
