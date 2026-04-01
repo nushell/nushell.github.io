@@ -25,7 +25,7 @@ The full list of `filesize` units is:
 | `PB`: petabytes          | `PiB`: pebibytes        |
 | `EB`: exabytes           | `EiB`: exbibytes        |
 
-::: tip
+::: warning
 File size units are case-insensitive. E.g., `1KiB`, `1kib`, and `1Kib` are all equivalent.
 :::
 
