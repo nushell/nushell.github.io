@@ -26,7 +26,7 @@ The full list of `filesize` units is:
 | `EB`: exabytes           | `EiB`: exbibytes        |
 
 ::: warning
-File size units are case-insensitive. E.g., `1KiB`, `1kib`, and `1Kib` are all equivalent.
+File size units are case-insensitive. E.g., `1KiB`, `1kib`, and `1Kib` are all equivalent. Do not confuse it with bit!
 :::
 
 ## Common commands that can work with `filesizes`
