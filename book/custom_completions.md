@@ -4,7 +4,7 @@ Custom completions allow you to mix together two features of Nushell: custom com
 
 A completion is defined in two steps:
 
-- Define a completion command (a.k.a. completer) that returns the possible values to suggest
+- Define a completion command (a.k.a. completer) that returns the possible values to suggest (either strings or records)
 - Attach the completer to the type annotation (shape) of another command's argument using `<shape>@<completer>`
 
 Here's a simple example:
@@ -36,11 +36,19 @@ When the completion menu is displayed, the prompt changes to include the `|` cha
 To fall back to Nushell's built-in file completions, return `null` rather than a list of suggestions.
 :::
 
+The completer can also return records rather than strings to further customize its suggestions (the list of suggestions can include both strings and records mixed together). The record must contain a `value` field containing the suggestion value. It can also contain the following optional fields:
+
+- `description`: A short description to be displayed alongside the suggestion
+- `span`: For choosing which part of the buffer to replace (elaborated on [below](#context-aware-custom-completions))
+- `style`: For overriding the style used for the suggestion value (elaborated on [below](#customizing-suggestions-visually))
+- `display_override`: For overriding the displayed suggestion text in the completion menu, as well as more complicated styling (elaborated on [below](#customizing-suggestions-visually))
+
 ## Options for Custom Completions
 
 If you want to choose how your completions are filtered and sorted, you can also return a record rather than a list. The list of completion suggestions should be under the `completions` key of this record. Optionally, it can also have, under the `options` key, a record containing the following optional settings:
 
 - `sort` - Set this to `false` to stop Nushell from sorting your completions. By default, this is `true`, and completions are sorted according to `$env.config.completions.sort`.
+- `filter` - Set this to `false` to stop Nushell from filtering your completions. This is `true` by default. Note that when filtering is disabled, sorting also becomes disabled.
 - `case_sensitive` - Set to `true` for the custom completions to be matched case sensitively, `false` otherwise. Used for overriding `$env.config.completions.case_sensitive`.
 - `completion_algorithm` - Set this to `prefix`, `substring`, or `fuzzy` to choose how your completions are matched against the typed text. Used for overriding `$env.config.completions.algorithm`.
 
@@ -144,6 +152,45 @@ def completer [context:string, position:int] {}
 
 :::
 
+Completers can also choose which part of the buffer should be replaced by each suggestion using the `span` field. Here's a not-particularly-realistic example command with a completer:
+
+```nu
+def comp [context: string] {
+    let foo_pos = $context | str index-of "foo"
+    [
+        {
+            value: "bar",
+            span: (if $foo_pos != -1 {
+                { start: $foo_pos, end: ($context | str length) }
+            } else {
+                null
+            })
+        },
+        {
+            value: "other-command",
+            span: { start: 0, end: ($context | str length) }
+        }
+    ]
+}
+def my-command [...arg: string@comp] {}
+```
+
+Now, try typing in a few arguments that include "foo" and hit <kbd>tab</kbd>.
+
+```
+>_ my-command blech foo garply <TAB>
+bar                 other-command
+```
+
+- If you select `bar`, your buffer will look like `my-command blech bar`. That's because we replaced everything from where `foo` began (`start: $foo_pos`) to the cursor (`$context | str length`).
+- If you select `other-command`, your buffer will look like `other-command`. That's because we replaced everything, from the start (`0`) to the cursor (`$context | str length`).
+
+::: tip Note
+
+The `start` and `end` are relative to the beginning of the command, not the beginning of the buffer. Hence, this completer will work even if the command is part of a pipeline, e.g., `ls | my-command foo <TAB>`.
+
+:::
+
 ## Custom Completion and [`extern`](/commands/docs/extern.md)
 
 A powerful combination is adding custom completions to [known `extern` commands](externs.md). These work the same way as adding a custom completion to a custom command: by creating the custom completion and then attaching it with a `@` to the type of one of the positional or flag arguments of the `extern`.
@@ -160,20 +207,33 @@ export extern "git push" [
 
 Custom completions will serve the same role in this example as in the previous examples. The examples above call into two different custom completions, based on the position the user is currently in.
 
-## Custom Descriptions and Styles
+## Customizing Suggestions Visually
 
-As an alternative to returning a list of strings, a completion function can also return a list of records with a `value` field as well as optional `description` and `style` fields. The style can be one of the following:
+To change how suggestions look, suggestions can include a `style` field and/or a `display_override` field.
+
+The `style` field is used to set the style for the suggestion value (not the description). It overrides the suggestion style for the menu (which can be set globally when adding the menu in `$env.config.menus`). The style can be one of the following:
 
 - A string with the foreground color, either a hex code or a color name such as `yellow`. For a list of valid color names, see `ansi --list`.
 - A record with the fields `fg` (foreground color), `bg` (background color), and `attr` (attributes such as underline and bold). This record is in the same format that `ansi --escape` accepts. See the [`ansi`](/commands/docs/ansi) command reference for a list of possible values for the `attr` field.
 - The same record, but converted to a JSON string.
 
+The `display_override` field can be used to set the text that's displayed as the suggestion value in the completion menu. It can contain ANSI escapes, meaning that it can also be used for styling the suggestion value. You can, however, set both `style` and `display_override`.
+
 ```nu
 def my_commits [] {
     [
-        { value: "5c2464", description: "Add .gitignore", style: red },
-        # "attr: ub" => underlined and bolded
-        { value: "f3a377", description: "Initial commit", style: { fg: green, bg: "#66078c", attr: ub } }
+        {
+            value: "5c2464",
+            display_override: "HEAD",
+            description: "Add .gitignore",
+            style: red
+        },
+        {
+            value: "f3a377",
+            display_override: $"origin/(ansi blue)main", # Include styling in display_override
+            description: "Initial commit",
+            style: { fg: white, bg: "#66078c", attr: ub } # "attr: ub" => underlined and bolded
+        },
     ]
 }
 ```
@@ -191,8 +251,8 @@ def my-command [commit: string@my_commits] {
 
 ```ansi
 >_ [36mmy-command[0m <TAB>
-[1;31m5c2464[0m  [33mAdd .gitignore[0m
-[1;4;48;2;102;7;140;32mf3a377  [0m[33mInitial commit[0m
+[31mHEAD[0m         [33mAdd .gitignore[0m
+[1;4;48;2;102;7;140;32m[37morigin/[34mmain  [0m[33mInitial commit[0m
 ```
 
 ... only the value (i.e., "5c2464" or "f3a377") will be used in the command arguments!
