@@ -2,7 +2,7 @@
 title: str
 categories: |
   strings
-version: 0.111.0
+version: 0.112.0
 strings: |
   Various commands for working with string data.
 usage: |
@@ -39,6 +39,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`str distance`](/commands/docs/str_distance.md)                         | Compare two strings and return the edit distance/Levenshtein distance.                      | built-in |
 | [`str downcase`](/commands/docs/str_downcase.md)                         | Convert text to lowercase.                                                                  | built-in |
 | [`str ends-with`](/commands/docs/str_ends-with.md)                       | Check if an input ends with a string.                                                       | built-in |
+| [`str escape-regex`](/commands/docs/str_escape-regex.md)                 | Escapes special characters in the input string with '\\'.                                   | built-in |
 | [`str expand`](/commands/docs/str_expand.md)                             | Generates all possible combinations defined in brace expansion syntax.                      | built-in |
 | [`str index-of`](/commands/docs/str_index-of.md)                         | Returns start index of first occurrence of string in input, or -1 if no match.              | built-in |
 | [`str join`](/commands/docs/str_join.md)                                 | Concatenate multiple strings into a single string, with an optional separator between each. | built-in |

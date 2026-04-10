@@ -2,7 +2,7 @@
 title: decode base32hex
 categories: |
   formats
-version: 0.111.0
+version: 0.112.0
 formats: |
   Encode a base32hex value.
 usage: |
@@ -35,7 +35,7 @@ contributors: false
 Decode arbitrary binary data
 ```nu
 > "ATNAQ===" | decode base32hex
-Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
+Length: 3 (0x3) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   57 6e ad                                             Wn×
 
 ```
@@ -49,7 +49,7 @@ Decode an encoded string
 Parse a string without padding
 ```nu
 > "ATNAQ" | decode base32hex --nopad
-Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
+Length: 3 (0x3) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   57 6e ad                                             Wn×
 
 ```

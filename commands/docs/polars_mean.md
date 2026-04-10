@@ -2,7 +2,7 @@
 title: polars mean
 categories: |
   dataframe
-version: 0.111.0
+version: 0.112.0
 dataframe: |
   Creates a mean expression for an aggregation or aggregates columns to their mean value.
 usage: |

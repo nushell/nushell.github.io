@@ -2,7 +2,7 @@
 title: to msgpack
 categories: |
   formats
-version: 0.111.0
+version: 0.112.0
 formats: |
   Convert Nu values into MessagePack.
 usage: |
@@ -35,7 +35,7 @@ contributors: false
 Convert a list of values to MessagePack.
 ```nu
 > [foo, 42, false] | to msgpack
-Length: 7 (0x7) bytes | printable whitespace ascii_other non_ascii
+Length: 7 (0x7) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   93 a3 66 6f  6f 2a c2                                ××foo*×
 
 ```
@@ -43,7 +43,7 @@ Length: 7 (0x7) bytes | printable whitespace ascii_other non_ascii
 Convert a range to a MessagePack array.
 ```nu
 > 1..10 | to msgpack
-Length: 11 (0xb) bytes | printable whitespace ascii_other non_ascii
+Length: 11 (0xb) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   9a 01 02 03  04 05 06 07  08 09 0a                   ×••••••••__
 
 ```
@@ -55,7 +55,7 @@ Convert a table to MessagePack.
         ['Apollo 11 Landing' 1969-07-24T16:50:35]
         ['Nushell first commit' 2019-05-10T09:59:12-07:00]
     ] | to msgpack
-Length: 95 (0x5f) bytes | printable whitespace ascii_other non_ascii
+Length: 95 (0x5f) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   92 82 aa 65  76 65 6e 74  5f 6e 61 6d  65 b1 41 70   ×××event_name×Ap
 00000010:   6f 6c 6c 6f  20 31 31 20  4c 61 6e 64  69 6e 67 a4   ollo 11 Landing×
 00000020:   74 69 6d 65  c7 0c ff 00  00 00 00 ff  ff ff ff ff   time×_×0000×××××

@@ -2,7 +2,7 @@
 title: bytes replace
 categories: |
   bytes
-version: 0.111.0
+version: 0.112.0
 bytes: |
   Find and replace bytes in binary data.
 usage: |
@@ -43,7 +43,7 @@ contributors: false
 Find and replace contents.
 ```nu
 > 0x[10 AA FF AA FF] | bytes replace 0x[10 AA] 0x[FF]
-Length: 4 (0x4) bytes | printable whitespace ascii_other non_ascii
+Length: 4 (0x4) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   ff ff aa ff                                          ××××
 
 ```
@@ -51,7 +51,7 @@ Length: 4 (0x4) bytes | printable whitespace ascii_other non_ascii
 Find and replace all occurrences of find binary.
 ```nu
 > 0x[10 AA 10 BB 10] | bytes replace --all 0x[10] 0x[A0]
-Length: 5 (0x5) bytes | printable whitespace ascii_other non_ascii
+Length: 5 (0x5) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   a0 aa a0 bb  a0                                      ×××××
 
 ```

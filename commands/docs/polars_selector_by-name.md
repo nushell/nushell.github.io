@@ -2,7 +2,7 @@
 title: polars selector by-name
 categories: |
   expression
-version: 0.111.0
+version: 0.112.0
 expression: |
   Creates a selector that selects columns by name.
 usage: |
@@ -19,6 +19,10 @@ contributors: false
 ## Signature
 
 ```> polars selector by-name {flags} ...rest```
+
+## Flags
+
+ -  `--strict`: If set, the selector will error if any specified column names do not exist.
 
 ## Parameters
 

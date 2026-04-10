@@ -2,7 +2,7 @@
 title: group-by
 categories: |
   filters
-version: 0.111.0
+version: 0.112.0
 filters: |
   Splits a list or table into groups, and returns a record containing those groups.
 usage: |
@@ -23,6 +23,7 @@ contributors: false
 ## Flags
 
  -  `--to-table`: Return a table with "groups" and "items" columns.
+ -  `--prune`: Remove a column after grouping, if applicable.
 
 ## Parameters
 
@@ -191,7 +192,7 @@ Group items by column and delete the original.
         [jt, rs, "2019"],
         [storm, rs, "2021"]
     ]
-    | group-by lang | update cells { reject lang }
+    | group-by lang --prune
 ╭────┬───────────────────────╮
 │    │ ╭───┬────────┬──────╮ │
 │ rb │ │ # │  name  │ year │ │

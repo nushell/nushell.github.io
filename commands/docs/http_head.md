@@ -2,7 +2,7 @@
 title: http head
 categories: |
   network
-version: 0.111.0
+version: 0.112.0
 network: |
   Get the headers from a URL.
 usage: |
@@ -26,7 +26,9 @@ contributors: false
  -  `--password, -p {any}`: The password when authenticating.
  -  `--max-time, -m {duration}`: Max duration before timeout occurs.
  -  `--headers, -H {any}`: Custom headers you want to add.
+ -  `--full, -f`: Returns the full response instead of only the headers.
  -  `--insecure, -k`: Allow insecure server connections when using SSL.
+ -  `--allow-errors, -e`: Do not fail if the server returns an error code.
  -  `--pool`: Using a global pool as a client.
  -  `--redirect-mode, -R {string}`: What to do when encountering redirects. Default: 'follow'. Valid options: 'follow' ('f'), 'manual' ('m'), 'error' ('e').
  -  `--unix-socket, -U {path}`: Connect to the specified Unix socket instead of using TCP.

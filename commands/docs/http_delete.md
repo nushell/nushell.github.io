@@ -2,7 +2,7 @@
 title: http delete
 categories: |
   network
-version: 0.111.0
+version: 0.112.0
 network: |
   Delete the specified resource.
 usage: |

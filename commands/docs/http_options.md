@@ -2,7 +2,7 @@
 title: http options
 categories: |
   network
-version: 0.111.0
+version: 0.112.0
 network: |
   Requests permitted communication options for a given URL.
 usage: |
@@ -26,6 +26,7 @@ contributors: false
  -  `--password, -p {any}`: The password when authenticating.
  -  `--max-time, -m {duration}`: Max duration before timeout occurs.
  -  `--headers, -H {any}`: Custom headers you want to add.
+ -  `--full, -f`: Returns the full response instead of only the headers.
  -  `--insecure, -k`: Allow insecure server connections when using SSL.
  -  `--allow-errors, -e`: Do not fail if the server returns an error code.
  -  `--pool`: Using a global pool as a client.
@@ -46,6 +47,12 @@ contributors: false
 Get options from example.com.
 ```nu
 > http options https://www.example.com
+
+```
+
+Get the full OPTIONS response record (status, headers, etc.).
+```nu
+> http options --full https://www.example.com
 
 ```
 

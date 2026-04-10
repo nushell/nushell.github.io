@@ -2,7 +2,7 @@
 title: bits shl
 categories: |
   bits
-version: 0.111.0
+version: 0.112.0
 bits: |
   Bitwise shift left for ints or binary values.
 usage: |
@@ -72,7 +72,7 @@ Shift left a list of numbers
 Shift left a binary value
 ```nu
 > 0x[4f f4] | bits shl 4
-Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
+Length: 2 (0x2) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   ff 40                                                ×@
 
 ```

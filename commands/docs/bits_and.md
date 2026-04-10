@@ -2,7 +2,7 @@
 title: bits and
 categories: |
   bits
-version: 0.111.0
+version: 0.112.0
 bits: |
   Performs bitwise and for ints or binary values.
 usage: |
@@ -48,7 +48,7 @@ Apply bitwise and to two numbers
 Apply bitwise and to two binary values
 ```nu
 > 0x[ab cd] | bits and 0x[99 99]
-Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
+Length: 2 (0x2) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   89 89                                                ××
 
 ```
@@ -77,7 +77,7 @@ Apply bitwise and to a list of binary data
 Apply bitwise and to binary data of varying lengths with specified endianness
 ```nu
 > 0x[c0 ff ee] | bits and 0x[ff] --endian big
-Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
+Length: 3 (0x3) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   00 00 ee                                             00×
 
 ```
@@ -85,7 +85,7 @@ Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
 Apply bitwise and to input binary data smaller than the operand
 ```nu
 > 0x[ff] | bits and 0x[12 34 56] --endian little
-Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
+Length: 3 (0x3) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   12 00 00                                             •00
 
 ```

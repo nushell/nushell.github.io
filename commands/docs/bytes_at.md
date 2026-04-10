@@ -2,7 +2,7 @@
 title: bytes at
 categories: |
   bytes
-version: 0.111.0
+version: 0.112.0
 bytes: |
   Get bytes from the input defined by a range.
 usage: |
@@ -47,7 +47,7 @@ Extract bytes starting from a specific index.
 Slice out `0x[10 01 13]` from `0x[33 44 55 10 01 13]`.
 ```nu
 > 0x[33 44 55 10 01 13] | bytes at 3..5
-Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
+Length: 3 (0x3) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   10 01 13                                             •••
 
 ```
@@ -55,7 +55,7 @@ Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
 Extract bytes from the start up to a specific index.
 ```nu
 > 0x[33 44 55 10 01 13 10] | bytes at ..4
-Length: 5 (0x5) bytes | printable whitespace ascii_other non_ascii
+Length: 5 (0x5) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   33 44 55 10  01                                      3DU••
 
 ```
@@ -63,7 +63,7 @@ Length: 5 (0x5) bytes | printable whitespace ascii_other non_ascii
 Extract byte `0x[10]` using an exclusive end index.
 ```nu
 > 0x[33 44 55 10 01 13 10] | bytes at 3..<4
-Length: 1 (0x1) bytes | printable whitespace ascii_other non_ascii
+Length: 1 (0x1) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   10                                                   •
 
 ```
@@ -71,7 +71,7 @@ Length: 1 (0x1) bytes | printable whitespace ascii_other non_ascii
 Extract bytes up to a negative index (inclusive).
 ```nu
 > 0x[33 44 55 10 01 13 10] | bytes at ..-4
-Length: 4 (0x4) bytes | printable whitespace ascii_other non_ascii
+Length: 4 (0x4) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   33 44 55 10                                          3DU•
 
 ```
@@ -90,7 +90,7 @@ Slice bytes across multiple table columns.
 Extract the last three bytes using a negative start index.
 ```nu
 > 0x[33 44 55 10 01 13 10] | bytes at (-3)..
-Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
+Length: 3 (0x3) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   01 13 10                                             •••
 
 ```

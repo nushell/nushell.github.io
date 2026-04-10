@@ -2,7 +2,7 @@
 title: decode base32
 categories: |
   formats
-version: 0.111.0
+version: 0.112.0
 formats: |
   Decode a Base32-encoded value.
 usage: |
@@ -35,7 +35,7 @@ contributors: false
 Decode arbitrary binary data
 ```nu
 > "AEBAGBAF" | decode base32
-Length: 5 (0x5) bytes | printable whitespace ascii_other non_ascii
+Length: 5 (0x5) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   01 02 03 04  05                                      •••••
 
 ```
@@ -49,7 +49,7 @@ Decode an encoded string
 Parse a string without padding
 ```nu
 > "NBUQ" | decode base32 --nopad
-Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
+Length: 2 (0x2) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   68 69                                                hi
 
 ```

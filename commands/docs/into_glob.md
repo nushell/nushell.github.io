@@ -2,7 +2,7 @@
 title: into glob
 categories: |
   conversions
-version: 0.111.0
+version: 0.112.0
 conversions: |
   Convert value to a glob pattern.
 usage: |

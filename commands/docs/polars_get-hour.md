@@ -2,7 +2,7 @@
 title: polars get-hour
 categories: |
   dataframe
-version: 0.111.0
+version: 0.112.0
 dataframe: |
   Gets hour from datetime.
 usage: |

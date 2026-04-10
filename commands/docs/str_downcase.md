@@ -2,7 +2,7 @@
 title: str downcase
 categories: |
   strings
-version: 0.111.0
+version: 0.112.0
 strings: |
   Convert text to lowercase.
 usage: |

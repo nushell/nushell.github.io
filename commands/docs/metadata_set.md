@@ -2,7 +2,7 @@
 title: metadata set
 categories: |
   debug
-version: 0.111.0
+version: 0.112.0
 debug: |
   Set the metadata for items in the stream.
 usage: |
@@ -24,9 +24,8 @@ contributors: false
 
  -  `--datasource-ls, -l`: (DEPRECATED) Assign the DataSource::Ls metadata to the input.
  -  `--datasource-filepath, -f {path}`: Assign the DataSource::FilePath metadata to the input.
- -  `--path-columns, -p {list<string>}`: Assign path columns metadata to the input.
- -  `--content-type, -c {string}`: Assign content type metadata to the input.
- -  `--merge, -m {record}`: Merge arbitrary metadata fields.
+ -  `--path-columns, -p {list<string>}`: A list of columns in the input for which path metadata will be assigned.
+ -  `--content-type, -c {oneof<string, nothing>}`: Assign content type metadata to the input.
 
 ## Parameters
 
@@ -58,10 +57,10 @@ Set the content type metadata.
 text/plain
 ```
 
-Set custom metadata.
+Merge custom metadata.
 ```nu
-> "data" | metadata set --merge {custom_key: "value"} | metadata | get custom_key
-value
+> "data" | metadata set {|| merge {custom_key: "value"}} | metadata | get custom_key
+
 ```
 
 Set metadata using a closure.

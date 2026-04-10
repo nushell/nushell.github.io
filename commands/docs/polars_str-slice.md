@@ -2,7 +2,7 @@
 title: polars str-slice
 categories: |
   dataframe
-version: 0.111.0
+version: 0.112.0
 dataframe: |
   Slices the string from the start position until the selected length.
 usage: |

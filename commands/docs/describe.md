@@ -2,7 +2,7 @@
 title: describe
 categories: |
   core
-version: 0.111.0
+version: 0.112.0
 core: |
   Describe the type and structure of the value(s) piped in.
 usage: |
@@ -41,11 +41,11 @@ string
 
 Describe the type of a record in a detailed way.
 ```nu
-> {shell:'true', uwu:true, features: {bugs:false, multiplatform:true, speed: 10}, fib: [1 1 2 3 5 8], on_save: {|x| $'Saving ($x)'}, first_commit: 2019-05-10, my_duration: (4min + 20sec)} | describe -d
+> {shell:'true', uwu:true, features: {bugs:false, multiplatform:true, speed: 10}, fib: [1 1 2 3 5 8], first_commit: 2019-05-10, my_duration: (4min + 20sec)} | describe -d
 ╭───────────────┬────────────────────────────────────────────────────────────────────────────────────────────╮
 │ type          │ record                                                                                     │
 │ detailed_type │ record<shell: string, uwu: bool, features: record<bugs: bool, multiplatform: bool, speed:  │
-│               │ int>, fib: list<int>, on_save: closure, first_commit: datetime, my_duration: duration>     │
+│               │ int>, fib: list<int>, first_commit: datetime, my_duration: duration>                       │
 │               │ ╭──────────────┬─────────────────────────────────────────────────────────────────────────╮ │
 │ columns       │ │              │ ╭───────────────┬────────────────────────╮                              │ │
 │               │ │ shell        │ │ type          │ string                 │                              │ │
@@ -101,17 +101,6 @@ Describe the type of a record in a detailed way.
 │               │ │              │ │                 │ │ 5 │ int  │ int           │ i64       │     8 │  │ │ │
 │               │ │              │ │                 │ ╰───┴──────┴───────────────┴───────────┴───────╯  │ │ │
 │               │ │              │ ╰─────────────────┴───────────────────────────────────────────────────╯ │ │
-│               │ │              │ ╭───────────────┬─────────────────────────────────────────────────────╮ │ │
-│               │ │ on_save      │ │ type          │ closure                                             │ │ │
-│               │ │              │ │ detailed_type │ closure                                             │ │ │
-│               │ │              │ │ rust_type     │ &alloc::boxed::Box<nu_protocol::engine::closure::Cl │ │ │
-│               │ │              │ │               │ osure>                                              │ │ │
-│               │ │              │ │ value         │ closure_1                                           │ │ │
-│               │ │              │ │               │ ╭──────────┬─────────╮                              │ │ │
-│               │ │              │ │ signature     │ │ name     │         │                              │ │ │
-│               │ │              │ │               │ │ category │ default │                              │ │ │
-│               │ │              │ │               │ ╰──────────┴─────────╯                              │ │ │
-│               │ │              │ ╰───────────────┴─────────────────────────────────────────────────────╯ │ │
 │               │ │              │ ╭───────────────┬─────────────────────────────────────────────────────╮ │ │
 │               │ │ first_commit │ │ type          │ datetime                                            │ │ │
 │               │ │              │ │ detailed_type │ datetime                                            │ │ │

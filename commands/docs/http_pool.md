@@ -2,7 +2,7 @@
 title: http pool
 categories: |
   network
-version: 0.111.0
+version: 0.112.0
 network: |
   Configure and reset builtin http connection pool.
 usage: |

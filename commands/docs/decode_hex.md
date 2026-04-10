@@ -2,7 +2,7 @@
 title: decode hex
 categories: |
   formats
-version: 0.111.0
+version: 0.112.0
 formats: |
   Decode a hex-encoded value.
 usage: |
@@ -31,7 +31,7 @@ contributors: false
 Decode arbitrary binary data
 ```nu
 > "09FD" | decode hex
-Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
+Length: 2 (0x2) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   09 fd                                                _×
 
 ```
@@ -39,7 +39,7 @@ Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
 Lowercase Hex is also accepted
 ```nu
 > "09fd" | decode hex
-Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
+Length: 2 (0x2) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   09 fd                                                _×
 
 ```

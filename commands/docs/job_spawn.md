@@ -2,7 +2,7 @@
 title: job spawn
 categories: |
   experimental
-version: 0.111.0
+version: 0.112.0
 experimental: |
   Spawn a background job and retrieve its ID.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--tag, -t {string}`: An optional description tag for this job.
+ -  `--description, -d {string}`: An optional description for this job.
 
 ## Parameters
 

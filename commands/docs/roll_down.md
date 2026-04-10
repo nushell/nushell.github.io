@@ -2,7 +2,7 @@
 title: roll down
 categories: |
   filters
-version: 0.111.0
+version: 0.112.0
 filters: |
   Roll table rows down.
 usage: |

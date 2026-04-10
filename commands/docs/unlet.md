@@ -2,7 +2,7 @@
 title: unlet
 categories: |
   experimental
-version: 0.111.0
+version: 0.112.0
 experimental: |
   Delete variables from nushell memory, making them unrecoverable.
 usage: |

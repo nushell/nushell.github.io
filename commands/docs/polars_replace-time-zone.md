@@ -2,7 +2,7 @@
 title: polars replace-time-zone
 categories: |
   dataframe
-version: 0.111.0
+version: 0.112.0
 dataframe: |
   Replace the timezone information in a datetime column.
 usage: |
@@ -65,10 +65,10 @@ Apply timezone with ambiguous datetime
 ╭───┬──────────────╮
 │ # │   datetime   │
 ├───┼──────────────┤
-│ 0 │ 3 months ago │
+│ 0 │ 5 months ago │
 │ 1 │              │
-│ 2 │ 3 months ago │
-│ 3 │ 3 months ago │
+│ 2 │ 5 months ago │
+│ 3 │ 5 months ago │
 ╰───┴──────────────╯
 
 ```

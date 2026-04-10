@@ -2,7 +2,7 @@
 title: skip
 categories: |
   filters
-version: 0.111.0
+version: 0.112.0
 filters: |
   Skip the first several rows of the input. Counterpart of `drop`. Opposite of `first`.
 usage: |
@@ -59,7 +59,7 @@ Skip two rows of a table.
 Skip 2 bytes of a binary value.
 ```nu
 > 0x[01 23 45 67] | skip 2
-Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
+Length: 2 (0x2) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   45 67                                                Eg
 
 ```

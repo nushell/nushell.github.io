@@ -2,7 +2,7 @@
 title: math arccosh
 categories: |
   math
-version: 0.111.0
+version: 0.112.0
 math: |
   Returns the inverse of the hyperbolic cosine function.
 usage: |

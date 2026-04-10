@@ -2,7 +2,7 @@
 title: polars filter
 categories: |
   lazyframe
-version: 0.111.0
+version: 0.112.0
 lazyframe: |
   Filter dataframe based in expression.
 usage: |
@@ -49,12 +49,12 @@ Filter dataframe using an expression
 Filter dataframe for rows where dt is within the last 2 days of the maximum dt value
 ```nu
 > [[dt val]; [2025-04-01 1] [2025-04-02 2] [2025-04-03 3] [2025-04-04 4]] | polars into-df | polars filter ((polars col dt) > ((polars col dt | polars max | $in - 2day)))
-╭───┬───────────────┬─────╮
-│ # │      dt       │ val │
-├───┼───────────────┼─────┤
-│ 0 │ 11 months ago │   3 │
-│ 1 │ 11 months ago │   4 │
-╰───┴───────────────┴─────╯
+╭───┬────────────┬─────╮
+│ # │     dt     │ val │
+├───┼────────────┼─────┤
+│ 0 │ a year ago │   3 │
+│ 1 │ a year ago │   4 │
+╰───┴────────────┴─────╯
 
 ```
 

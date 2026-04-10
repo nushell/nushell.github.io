@@ -2,7 +2,7 @@
 title: bits not
 categories: |
   bits
-version: 0.111.0
+version: 0.112.0
 bits: |
   Performs logical negation on each bit.
 usage: |
@@ -72,7 +72,7 @@ Apply logical negation to a list of numbers, treat input as signed number
 Apply logical negation to binary data
 ```nu
 > 0x[ff 00 7f] | bits not
-Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
+Length: 3 (0x3) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   00 ff 80                                             0××
 
 ```

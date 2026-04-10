@@ -2,7 +2,7 @@
 title: fill
 categories: |
   conversions
-version: 0.111.0
+version: 0.112.0
 conversions: |
   Fill and align text in columns.
 usage: |

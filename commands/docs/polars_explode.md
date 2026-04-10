@@ -2,7 +2,7 @@
 title: polars explode
 categories: |
   lazyframe
-version: 0.111.0
+version: 0.112.0
 lazyframe: |
   Explodes a dataframe or creates a explode expression.
 usage: |
@@ -20,9 +20,14 @@ contributors: false
 
 ```> polars explode {flags} ...rest```
 
+## Flags
+
+ -  `--empty-as-null`: Explode an empty list into a `null`
+ -  `--keep-nulls`: Explode a `null` into a `null`
+
 ## Parameters
 
- -  `...rest`: Columns to explode, only applicable for dataframes.
+ -  `...rest`: A polars selector or columns to explode, only applicable for dataframes
 
 
 ## Input/output types:

@@ -2,7 +2,7 @@
 title: polars store-ls
 categories: |
   dataframe
-version: 0.111.0
+version: 0.112.0
 dataframe: |
   Lists stored polars objects.
 usage: |

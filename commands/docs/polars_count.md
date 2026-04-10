@@ -2,7 +2,7 @@
 title: polars count
 categories: |
   dataframe
-version: 0.111.0
+version: 0.112.0
 dataframe: |
   Returns the number of non-null values in the column.
 usage: |

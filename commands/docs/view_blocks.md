@@ -2,7 +2,7 @@
 title: view blocks
 categories: |
   debug
-version: 0.111.0
+version: 0.112.0
 debug: |
   View the blocks registered in nushell's EngineState memory.
 usage: |

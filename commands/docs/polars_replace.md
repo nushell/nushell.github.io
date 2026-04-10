@@ -2,7 +2,7 @@
 title: polars replace
 categories: |
   expression
-version: 0.111.0
+version: 0.112.0
 expression: |
   Create an expression that replaces old values with new values
 usage: |
