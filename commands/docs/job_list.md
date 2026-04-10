@@ -2,7 +2,7 @@
 title: job list
 categories: |
   experimental
-version: 0.109.0
+version: 0.111.0
 experimental: |
   List background jobs.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | nothing | table  |
 ## Examples
 
-List all background jobs
+List all background jobs.
 ```nu
 > job list
 

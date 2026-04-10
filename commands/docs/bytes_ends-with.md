@@ -2,11 +2,11 @@
 title: bytes ends-with
 categories: |
   bytes
-version: 0.109.0
+version: 0.111.0
 bytes: |
-  Check if bytes ends with a pattern.
+  Check if binary data ends with a pattern.
 usage: |
-  Check if bytes ends with a pattern.
+  Check if binary data ends with a pattern.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `bytes ends-with` for [bytes](/commands/categories/bytes.md)
 
-<div class='command-title'>Check if bytes ends with a pattern.</div>
+<div class='command-title'>Check if binary data ends with a pattern.</div>
 
 ## Signature
 
@@ -35,19 +35,19 @@ contributors: false
 | record | record |
 ## Examples
 
-Checks if binary ends with `0x[AA]`
+Checks if binary ends with `0x[AA]`.
 ```nu
 > 0x[1F FF AA AA] | bytes ends-with 0x[AA]
 true
 ```
 
-Checks if binary ends with `0x[FF AA AA]`
+Checks if binary ends with `0x[FF AA AA]`.
 ```nu
 > 0x[1F FF AA AA] | bytes ends-with 0x[FF AA AA]
 true
 ```
 
-Checks if binary ends with `0x[11]`
+Checks if binary ends with `0x[11]`.
 ```nu
 > 0x[1F FF AA AA] | bytes ends-with 0x[11]
 false

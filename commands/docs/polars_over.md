@@ -2,7 +2,7 @@
 title: polars over
 categories: |
   lazyframe
-version: 0.109.0
+version: 0.111.0
 lazyframe: |
   Compute expressions over a window group defined by partition expressions.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `...rest`: Expression(s) that define the partition window
+ -  `...rest`: Expression(s) that define the partition window.
 
 
 ## Input/output types:

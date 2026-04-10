@@ -2,7 +2,7 @@
 title: polars explode
 categories: |
   lazyframe
-version: 0.109.0
+version: 0.111.0
 lazyframe: |
   Explodes a dataframe or creates a explode expression.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `...rest`: columns to explode, only applicable for dataframes
+ -  `...rest`: Columns to explode, only applicable for dataframes.
 
 
 ## Input/output types:

@@ -2,7 +2,7 @@
 title: sort-by
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
   Sort by the given cell path or closure.
 usage: |
@@ -22,10 +22,10 @@ contributors: false
 
 ## Flags
 
- -  `--reverse, -r`: Sort in reverse order
- -  `--ignore-case, -i`: Sort string-based data case-insensitively
- -  `--natural, -n`: Sort alphanumeric string-based data naturally (1, 9, 10, 99, 100, ...)
- -  `--custom, -c`: Use closures to specify a custom sort order, rather than to compute a comparison key
+ -  `--reverse, -r`: Sort in reverse order.
+ -  `--ignore-case, -i`: Sort string-based data case-insensitively.
+ -  `--natural, -n`: Sort alphanumeric string-based data naturally (1, 9, 10, 99, 100, ...).
+ -  `--custom, -c`: Use closures to specify a custom sort order, rather than to compute a comparison key.
 
 ## Parameters
 
@@ -41,19 +41,19 @@ contributors: false
 | table     | table     |
 ## Examples
 
-Sort files by modified date
+Sort files by modified date.
 ```nu
 > ls | sort-by modified
 
 ```
 
-Sort files by name (case-insensitive)
+Sort files by name (case-insensitive).
 ```nu
 > ls | sort-by name --ignore-case
 
 ```
 
-Sort a table by a column (reversed order)
+Sort a table by a column (reversed order).
 ```nu
 > [[fruit count]; [apple 9] [pear 3] [orange 7]] | sort-by fruit --reverse
 ╭───┬────────┬───────╮
@@ -66,7 +66,7 @@ Sort a table by a column (reversed order)
 
 ```
 
-Sort by a nested value
+Sort by a nested value.
 ```nu
 > [[name info]; [Cairo {founded: 969}] [Kyoto {founded: 794}]] | sort-by info.founded
 ╭───┬───────┬───────────────────╮
@@ -82,7 +82,7 @@ Sort by a nested value
 
 ```
 
-Sort by the last value in a list
+Sort by the last value in a list.
 ```nu
 > [[2 50] [10 1]] | sort-by { last }
 ╭───┬────────────╮
@@ -98,7 +98,7 @@ Sort by the last value in a list
 
 ```
 
-Sort in a custom order
+Sort in a custom order.
 ```nu
 > [7 3 2 8 4] | sort-by -c {|a, b| $a < $b}
 ╭───┬───╮

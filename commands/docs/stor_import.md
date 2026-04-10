@@ -2,7 +2,7 @@
 title: stor import
 categories: |
   database
-version: 0.109.0
+version: 0.111.0
 database: |
   Import a sqlite database file into the in-memory sqlite database.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--file-name, -f {string}`: file name to import the sqlite in-memory database from
+ -  `--file-name, -f {string}`: File name to import the sqlite in-memory database from.
 
 
 ## Input/output types:

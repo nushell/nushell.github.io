@@ -2,7 +2,7 @@
 title: split list
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
   Split a list into multiple lists using a separator.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--regex, -r`: separator is a regular expression, matching values that can be coerced into a string
- -  `--split {string}`: Whether to split lists before, after, or on (default) the separator
+ -  `--regex, -r`: Separator is a regular expression, matching values that can be coerced into a string.
+ -  `--split {string}`: Whether to split lists before, after, or on (default) the separator.
 
 ## Parameters
 
@@ -37,7 +37,7 @@ contributors: false
 | list&lt;any&gt; | list&lt;list&lt;any&gt;&gt; |
 ## Examples
 
-Split a list of chars into two lists
+Split a list of chars into two lists.
 ```nu
 > [a, b, c, d, e, f, g] | split list d
 ╭───┬───────────╮
@@ -55,7 +55,7 @@ Split a list of chars into two lists
 
 ```
 
-Split a list of lists into two lists of lists
+Split a list of lists into two lists of lists.
 ```nu
 > [[1,2], [2,3], [3,4]] | split list [2,3]
 ╭───┬───────────────────╮
@@ -75,7 +75,7 @@ Split a list of lists into two lists of lists
 
 ```
 
-Split a list of chars into two lists
+Split a list of chars into two lists.
 ```nu
 > [a, b, c, d, a, e, f, g] | split list a
 ╭───┬────────────────╮
@@ -94,7 +94,7 @@ Split a list of chars into two lists
 
 ```
 
-Split a list of chars into lists based on multiple characters
+Split a list of chars into lists based on multiple characters.
 ```nu
 > [a, b, c, d, a, e, f, g] | split list --regex '(b|e)'
 ╭───┬───────────╮
@@ -114,7 +114,7 @@ Split a list of chars into lists based on multiple characters
 
 ```
 
-Split a list of numbers on multiples of 3
+Split a list of numbers on multiples of 3.
 ```nu
 > [1 2 3 4 5 6 7 8 9 10] | split list {|e| $e mod 3 == 0 }
 ╭───┬────────────╮
@@ -137,7 +137,7 @@ Split a list of numbers on multiples of 3
 
 ```
 
-Split a list of numbers into lists ending with 0
+Split a list of numbers into lists ending with 0.
 ```nu
 > [1 2 0 3 4 5 0 6 0 0 7] | split list --split after 0
 ╭───┬───────────╮

@@ -2,7 +2,7 @@
 title: version
 categories: |
   core
-version: 0.109.0
+version: 0.111.0
 core: |
   Display Nu version, and its build configuration.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | nothing | record |
 ## Examples
 
-Display Nu version
+Display Nu version.
 ```nu
 > version
 

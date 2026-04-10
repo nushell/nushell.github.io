@@ -2,11 +2,11 @@
 title: input list
 categories: |
   platform
-version: 0.109.0
+version: 0.111.0
 platform: |
-  Interactive list selection.
+  Display an interactive list for user selection.
 usage: |
-  Interactive list selection.
+  Display an interactive list for user selection.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `input list` for [platform](/commands/categories/platform.md)
 
-<div class='command-title'>Interactive list selection.</div>
+<div class='command-title'>Display an interactive list for user selection.</div>
 
 ## Signature
 
@@ -22,10 +22,15 @@ contributors: false
 
 ## Flags
 
- -  `--multi, -m`: Use multiple results, you can press a to toggle all options on/off
+ -  `--multi, -m`: Use multiple results, you can press a to toggle all, Ctrl+R to refine.
  -  `--fuzzy, -f`: Use a fuzzy select.
  -  `--index, -i`: Returns list indexes.
- -  `--display, -d {cell-path}`: Field to use as display value
+ -  `--no-footer, -n`: Hide the footer showing item count and selection count.
+ -  `--no-separator`: Hide the separator line between the search box and results.
+ -  `--case-sensitive, -s {oneof<bool, string>}`: Case sensitivity for fuzzy matching: true, false, or 'smart' (case-insensitive unless query has uppercase)
+ -  `--display, -d {oneof<cell-path, closure(any)>}`: Field or closure to generate display value for search (returns original value when selected)
+ -  `--no-table, -t`: Disable table rendering for table input (show as single lines).
+ -  `--per-column, -c`: Match filter text against each column independently (table mode only).
 
 ## Parameters
 
@@ -40,41 +45,150 @@ contributors: false
 | range     | int    |
 ## Examples
 
-Return a single value from a list
+Return a single value from a list.
 ```nu
 > [1 2 3 4 5] | input list 'Rate it'
 
 ```
 
-Return multiple values from a list
+Return multiple values from a list.
 ```nu
 > [Banana Kiwi Pear Peach Strawberry] | input list --multi 'Add fruits to the basket'
 
 ```
 
-Return a single record from a table with fuzzy search
+Return a single record from a table with fuzzy search.
 ```nu
 > ls | input list --fuzzy 'Select the target'
 
 ```
 
-Choose an item from a range
+Choose an item from a range.
 ```nu
 > 1..10 | input list
 
 ```
 
-Return the index of a selected item
+Return the index of a selected item.
 ```nu
 > [Banana Kiwi Pear Peach Strawberry] | input list --index
 
 ```
 
-Choose an item from a table using a column as display value
+Choose an item from a table using a column as display value.
 ```nu
 > [[name price]; [Banana 12] [Kiwi 4] [Pear 7]] | input list -d name
 
 ```
 
+Choose an item using a closure to generate display text
+```nu
+> [[name price]; [Banana 12] [Kiwi 4] [Pear 7]] | input list -d {|it| $"($it.name): $($it.price)"}
+
+```
+
+Fuzzy search with case-sensitive matching
+```nu
+> [abc ABC aBc] | input list --fuzzy --case-sensitive true
+
+```
+
+Fuzzy search without the footer showing item count
+```nu
+> ls | input list --fuzzy --no-footer
+
+```
+
+Fuzzy search without the separator line
+```nu
+> ls | input list --fuzzy --no-separator
+
+```
+
+Fuzzy search with custom match highlighting color
+```nu
+> $env.config.color_config.search_result = "red"; ls | input list --fuzzy
+
+```
+
+Display a table with column rendering
+```nu
+> [[name size]; [file1.txt "1.2 KB"] [file2.txt "3.4 KB"]] | input list
+
+```
+
+Display a table as single lines (no table rendering)
+```nu
+> ls | input list --no-table
+
+```
+
+Fuzzy search with multiple selection (use Tab to toggle)
+```nu
+> ls | input list --fuzzy --multi
+
+```
+
 ## Notes
-Abort with esc or q.
+Presents an interactive list in the terminal for selecting items.
+
+Four modes are available:
+- Single (default): Select one item with arrow keys, confirm with Enter
+- Multi (--multi): Select multiple items with Space, toggle all with 'a'
+- Fuzzy (--fuzzy): Type to filter, matches are highlighted
+- Fuzzy Multi (--fuzzy --multi): Type to filter AND select multiple items with Tab, toggle all with Alt+A
+
+Multi mode features:
+- The footer always shows the selection count (e.g., "[1-5 of 10, 3 selected]")
+- Use Ctrl+R to "refine" the list: narrow down to only selected items, keeping them
+  selected so you can deselect the ones you don't want. Can be used multiple times.
+
+Table rendering:
+When piping a table (list of records), items are displayed with aligned columns.
+Use Left/Right arrows (or h/l) to scroll horizontally when columns exceed terminal width.
+In fuzzy mode, use Shift+Left/Right for horizontal scrolling.
+Ellipsis (…) shows when more columns are available in each direction.
+In fuzzy mode, the ellipsis is highlighted when matches exist in hidden columns.
+Use --no-table to disable table rendering and show records as single lines.
+Use --per-column to match filter text against each column independently (best match wins).
+This prevents false positives from matches spanning column boundaries.
+Use --display to specify a column or closure for display/search text (disables table mode).
+The --display flag accepts either a cell path (e.g., -d name) or a closure (e.g., -d {|it| $it.name}).
+The closure receives each item and should return the string to display and search on.
+The original value is always returned when selected, regardless of what --display shows.
+
+Keyboard shortcuts:
+- Up/Down, j/k: Navigate items
+- Left/Right, h/l: Scroll columns horizontally (table mode, single/multi)
+- Shift+Left/Right: Scroll columns horizontally (fuzzy mode)
+- Home/End: Jump to first/last item
+- PageUp/PageDown: Navigate by page
+- Space: Toggle selection (multi mode)
+- Tab: Toggle selection and move down (fuzzy multi mode)
+- Shift+Tab: Toggle selection and move up (fuzzy multi mode)
+- a: Toggle all items (multi mode), Alt+A in fuzzy multi mode
+- Ctrl+R: Refine list to only selected items (multi modes)
+- Alt+C: Cycle case sensitivity (smart -> CASE -> nocase) in fuzzy modes
+- Alt+P: Toggle per-column matching in fuzzy table mode
+- Enter: Confirm selection
+- Esc: Cancel (all modes)
+- q: Cancel (single/multi modes only)
+- Ctrl+C: Cancel (all modes)
+
+Fuzzy mode supports readline-style editing:
+- Ctrl+A/E: Beginning/end of line
+- Ctrl+B/F, Left/Right: Move cursor
+- Alt+B/F: Move by word
+- Ctrl+U/K: Kill to beginning/end of line
+- Ctrl+W, Alt+Backspace: Delete previous word
+- Ctrl+D, Delete: Delete character at cursor
+
+Styling (inherited from $env.config.color_config):
+- search_result: Match highlighting in fuzzy mode
+- hints: Footer text
+- separator: Separator line and table column separators
+- row_index: Prompt marker and selection marker
+- header: Table column headers
+- Table column characters inherit from $env.config.table.mode
+
+Use --no-footer and --no-separator to hide the footer and separator line.

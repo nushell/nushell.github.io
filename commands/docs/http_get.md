@@ -2,7 +2,7 @@
 title: http get
 categories: |
   network
-version: 0.109.0
+version: 0.111.0
 network: |
   Fetch the contents from a URL.
 usage: |
@@ -22,16 +22,17 @@ contributors: false
 
 ## Flags
 
- -  `--user, -u {any}`: the username when authenticating
- -  `--password, -p {any}`: the password when authenticating
- -  `--max-time, -m {duration}`: max duration before timeout occurs
- -  `--headers, -H {any}`: custom headers you want to add
- -  `--raw, -r`: fetch contents as text rather than a table
- -  `--insecure, -k`: allow insecure server connections when using SSL
- -  `--full, -f`: returns the full response instead of only the body
- -  `--allow-errors, -e`: do not fail if the server returns an error code
+ -  `--user, -u {any}`: The username when authenticating.
+ -  `--password, -p {any}`: The password when authenticating.
+ -  `--max-time, -m {duration}`: Max duration before timeout occurs.
+ -  `--headers, -H {any}`: Custom headers you want to add.
+ -  `--raw, -r`: Fetch contents as text rather than a table.
+ -  `--insecure, -k`: Allow insecure server connections when using SSL.
+ -  `--full, -f`: Returns the full response instead of only the body.
+ -  `--allow-errors, -e`: Do not fail if the server returns an error code.
+ -  `--pool`: Using a global pool as a client.
  -  `--redirect-mode, -R {string}`: What to do when encountering redirects. Default: 'follow'. Valid options: 'follow' ('f'), 'manual' ('m'), 'error' ('e').
- -  `--unix-socket, -U {path}`: Connect to the specified Unix socket instead of using TCP
+ -  `--unix-socket, -U {path}`: Connect to the specified Unix socket instead of using TCP.
 
 ## Parameters
 
@@ -45,43 +46,43 @@ contributors: false
 | nothing | any    |
 ## Examples
 
-Get content from example.com
+Get content from example.com.
 ```nu
 > http get https://www.example.com
 
 ```
 
-Get content from example.com, with username and password
+Get content from example.com, with username and password.
 ```nu
 > http get --user myuser --password mypass https://www.example.com
 
 ```
 
-Get content from example.com, with custom header using a record
+Get content from example.com, with custom header using a record.
 ```nu
 > http get --headers {my-header-key: my-header-value} https://www.example.com
 
 ```
 
-Get content from example.com, with custom headers using a list
+Get content from example.com, with custom headers using a list.
 ```nu
 > http get --headers [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
 
 ```
 
-Get the response status code
+Get the response status code.
 ```nu
 > http get https://www.example.com | metadata | get http_response.status
 
 ```
 
-Check response status while streaming
+Check response status while streaming.
 ```nu
 > http get --allow-errors https://example.com/file | metadata access {|m| if $m.http_response.status != 200 { error make {msg: "failed"} } else { } } | lines
 
 ```
 
-Get from Docker daemon via Unix socket
+Get from Docker daemon via Unix socket.
 ```nu
 > http get --unix-socket /var/run/docker.sock http://localhost/containers/json
 

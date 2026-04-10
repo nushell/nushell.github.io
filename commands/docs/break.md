@@ -2,7 +2,7 @@
 title: break
 categories: |
   core
-version: 0.109.0
+version: 0.111.0
 core: |
   Break a loop.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Break out of a loop
+Break out of a loop.
 ```nu
 > loop { break }
 

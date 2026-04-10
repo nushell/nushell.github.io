@@ -2,7 +2,7 @@
 title: split row
 categories: |
   strings
-version: 0.109.0
+version: 0.111.0
 strings: |
   Split a string into multiple rows using a separator.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--number, -n {int}`: Split into maximum number of items
- -  `--regex, -r`: use regex syntax for separator
+ -  `--number, -n {int}`: Split into maximum number of items.
+ -  `--regex, -r`: Use regex syntax for separator.
 
 ## Parameters
 
@@ -38,7 +38,7 @@ contributors: false
 | list&lt;string&gt; | list&lt;string&gt; |
 ## Examples
 
-Split a string into rows of char
+Split a string into rows of char.
 ```nu
 > 'abc' | split row ''
 ╭───┬───╮
@@ -51,7 +51,7 @@ Split a string into rows of char
 
 ```
 
-Split a string into rows by the specified separator
+Split a string into rows by the specified separator.
 ```nu
 > 'a--b--c' | split row '--'
 ╭───┬───╮
@@ -62,7 +62,7 @@ Split a string into rows by the specified separator
 
 ```
 
-Split a string by '-'
+Split a string by '-'.
 ```nu
 > '-a-b-c-' | split row '-'
 ╭───┬───╮
@@ -75,7 +75,7 @@ Split a string by '-'
 
 ```
 
-Split a string by regex
+Split a string by regex.
 ```nu
 > 'a   b       c' | split row -r '\s+'
 ╭───┬───╮

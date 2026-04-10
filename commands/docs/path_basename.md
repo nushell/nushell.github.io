@@ -2,7 +2,7 @@
 title: path basename
 categories: |
   path
-version: 0.109.0
+version: 0.111.0
 path: |
   Get the final component of a path.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--replace, -r {string}`: Return original path with basename replaced by this string
+ -  `--replace, -r {string}`: Return original path with basename replaced by this string.
 
 
 ## Input/output types:
@@ -33,13 +33,13 @@ contributors: false
 | list&lt;string&gt; | list&lt;string&gt; |
 ## Examples
 
-Get basename of a path
+Get basename of a path.
 ```nu
 > '/home/joe/test.txt' | path basename
 test.txt
 ```
 
-Get basename of a list of paths
+Get basename of a list of paths.
 ```nu
 > [ /home/joe, /home/doe ] | path basename
 ╭───┬─────╮
@@ -49,7 +49,7 @@ Get basename of a list of paths
 
 ```
 
-Replace basename of a path
+Replace basename of a path.
 ```nu
 > '/home/joe/test.txt' | path basename --replace 'spam.png'
 /home/joe/spam.png

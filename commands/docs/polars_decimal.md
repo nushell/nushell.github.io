@@ -2,7 +2,7 @@
 title: polars decimal
 categories: |
   dataframe
-version: 0.109.0
+version: 0.111.0
 dataframe: |
   Converts a string column into a decimal column
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `infer_length`: Number of decimal points to infer
+ -  `infer_length`: Number of decimal points to infer.
 
 
 ## Input/output types:

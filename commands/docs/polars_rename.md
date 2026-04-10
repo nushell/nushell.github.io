@@ -2,7 +2,7 @@
 title: polars rename
 categories: |
   dataframe or lazyframe
-version: 0.109.0
+version: 0.111.0
 dataframe_or_lazyframe: |
   Rename a dataframe column.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Parameters
 
- -  `columns`: Column(s) to be renamed. A string or list of strings
- -  `new names`: New names for the selected column(s). A string or list of strings
+ -  `columns`: Column(s) to be renamed. A string or list of strings.
+ -  `new names`: New names for the selected column(s). A string or list of strings.
 
 
 ## Input/output types:

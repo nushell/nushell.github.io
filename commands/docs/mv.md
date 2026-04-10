@@ -2,7 +2,7 @@
 title: mv
 categories: |
   filesystem
-version: 0.109.0
+version: 0.111.0
 filesystem: |
   Move files or directories using uutils/coreutils mv.
 usage: |
@@ -22,12 +22,13 @@ contributors: false
 
 ## Flags
 
- -  `--force, -f`: do not prompt before overwriting
- -  `--verbose, -v`: explain what is being done.
- -  `--progress, -p`: display a progress bar
- -  `--interactive, -i`: prompt before overwriting
- -  `--update, -u`: move and overwrite only when the SOURCE file is newer than the destination file or when the destination file is missing
- -  `--no-clobber, -n`: do not overwrite an existing file
+ -  `--force, -f`: Do not prompt before overwriting.
+ -  `--verbose, -v`: Explain what is being done.
+ -  `--progress, -p`: Display a progress bar.
+ -  `--interactive, -i`: Prompt before overwriting.
+ -  `--update, -u`: Move and overwrite only when the SOURCE file is newer than the destination file or when the destination file is missing.
+ -  `--no-clobber, -n`: Do not overwrite an existing file.
+ -  `--all, -a`: Move hidden files if '*' is provided.
 
 ## Parameters
 
@@ -41,31 +42,31 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Rename a file
+Rename a file.
 ```nu
 > mv before.txt after.txt
 
 ```
 
-Move a file into a directory
+Move a file into a directory.
 ```nu
 > mv test.txt my/subdirectory
 
 ```
 
-Move only if source file is newer than target file
+Move only if source file is newer than target file.
 ```nu
 > mv -u new/test.txt old/
 
 ```
 
-Move many files into a directory
+Move many files into a directory.
 ```nu
 > mv *.txt my/subdirectory
 
 ```
 
-Move a file into the "my" directory two levels up in the directory tree
+Move a file into the "my" directory two levels up in the directory tree.
 ```nu
 > mv test.txt .../my/
 

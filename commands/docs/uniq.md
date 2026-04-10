@@ -2,7 +2,7 @@
 title: uniq
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
   Return the distinct values in the input.
 usage: |
@@ -22,10 +22,10 @@ contributors: false
 
 ## Flags
 
- -  `--count, -c`: Return a table containing the distinct input values together with their counts
- -  `--repeated, -d`: Return the input values that occur more than once
- -  `--ignore-case, -i`: Compare input values case-insensitively
- -  `--unique, -u`: Return the input values that occur once only
+ -  `--count, -c`: Return a table containing the distinct input values together with their counts.
+ -  `--repeated, -d`: Return the input values that occur more than once.
+ -  `--ignore-case, -i`: Compare input values case-insensitively.
+ -  `--unique, -u`: Return the input values that occur once only.
 
 
 ## Input/output types:
@@ -35,7 +35,7 @@ contributors: false
 | list&lt;any&gt; | list&lt;any&gt; |
 ## Examples
 
-Return the distinct values of a list/table (remove duplicates so that each value occurs once only)
+Return the distinct values of a list/table (remove duplicates so that each value occurs once only).
 ```nu
 > [2 3 3 4] | uniq
 ╭───┬───╮
@@ -46,7 +46,7 @@ Return the distinct values of a list/table (remove duplicates so that each value
 
 ```
 
-Return the input values that occur more than once
+Return the input values that occur more than once.
 ```nu
 > [1 2 2] | uniq -d
 ╭───┬───╮
@@ -55,7 +55,7 @@ Return the input values that occur more than once
 
 ```
 
-Return the input values that occur once only
+Return the input values that occur once only.
 ```nu
 > [1 2 2] | uniq --unique
 ╭───┬───╮
@@ -64,7 +64,7 @@ Return the input values that occur once only
 
 ```
 
-Ignore differences in case when comparing input values
+Ignore differences in case when comparing input values.
 ```nu
 > ['hello' 'goodbye' 'Hello'] | uniq --ignore-case
 ╭───┬─────────╮
@@ -74,7 +74,7 @@ Ignore differences in case when comparing input values
 
 ```
 
-Return a table containing the distinct input values together with their counts
+Return a table containing the distinct input values together with their counts.
 ```nu
 > [1 2 2] | uniq --count
 ╭───┬───────┬───────╮

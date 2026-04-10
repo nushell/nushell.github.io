@@ -2,7 +2,7 @@
 title: into cell-path
 categories: |
   conversions
-version: 0.109.0
+version: 0.111.0
 conversions: |
   Convert value to a cell-path.
 usage: |
@@ -31,31 +31,31 @@ contributors: false
 | list&lt;record&lt;value: any, optional: bool, insensitive: bool&gt;&gt; | cell-path |
 ## Examples
 
-Convert integer into cell path
+Convert integer into cell path.
 ```nu
 > 5 | into cell-path
 $.5
 ```
 
-Convert cell path into cell path
+Convert cell path into cell path.
 ```nu
 > 5 | into cell-path | into cell-path
 $.5
 ```
 
-Convert string into cell path
+Convert string into cell path.
 ```nu
 > 'some.path' | split row '.' | into cell-path
 $.some.path
 ```
 
-Convert list into cell path
+Convert list into cell path.
 ```nu
 > [5 c 7 h] | into cell-path
 $.5.c.7.h
 ```
 
-Convert table into cell path
+Convert table into cell path.
 ```nu
 > [[value, optional, insensitive]; [5 true false] [c false false] [d false true]] | into cell-path
 $.5?.c.d!

@@ -2,7 +2,7 @@
 title: math stddev
 categories: |
   math
-version: 0.109.0
+version: 0.111.0
 math: |
   Returns the standard deviation of a list of numbers, or of each column in a table.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--sample, -s`: calculate sample standard deviation (i.e. using N-1 as the denominator)
+ -  `--sample, -s`: Calculate sample standard deviation (i.e. using N-1 as the denominator).
 
 
 ## Input/output types:
@@ -35,19 +35,19 @@ contributors: false
 | record       | record |
 ## Examples
 
-Compute the standard deviation of a list of numbers
+Compute the standard deviation of a list of numbers.
 ```nu
 > [1 2 3 4 5] | math stddev
 1.4142135623730951
 ```
 
-Compute the sample standard deviation of a list of numbers
+Compute the sample standard deviation of a list of numbers.
 ```nu
 > [1 2 3 4 5] | math stddev --sample
 1.5811388300841898
 ```
 
-Compute the standard deviation of each column in a table
+Compute the standard deviation of each column in a table.
 ```nu
 > [[a b]; [1 2] [3 4]] | math stddev
 ╭───┬───╮

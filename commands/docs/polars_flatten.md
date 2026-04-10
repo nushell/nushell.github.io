@@ -2,7 +2,7 @@
 title: polars flatten
 categories: |
   lazyframe
-version: 0.109.0
+version: 0.111.0
 lazyframe: |
   An alias for polars explode.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `...rest`: columns to flatten, only applicable for dataframes
+ -  `...rest`: Columns to flatten, only applicable for dataframes.
 
 
 ## Input/output types:

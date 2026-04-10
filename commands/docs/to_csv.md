@@ -2,7 +2,7 @@
 title: to csv
 categories: |
   formats
-version: 0.109.0
+version: 0.111.0
 formats: |
   Convert table into .csv text .
 usage: |
@@ -22,9 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--separator, -s {string}`: a character to separate columns, defaults to ','
- -  `--noheaders, -n`: do not output the columns names as the first row
- -  `--columns {list<string>}`: the names (in order) of the columns to use
+ -  `--separator, -s {string}`: A character to separate columns, defaults to ','.
+ -  `--noheaders, -n`: Do not output the columns names as the first row.
+ -  `--columns {list<string>}`: The names (in order) of the columns to use.
 
 
 ## Input/output types:
@@ -35,7 +35,7 @@ contributors: false
 | table  | string |
 ## Examples
 
-Outputs a CSV string representing the contents of this table
+Outputs a CSV string representing the contents of this table.
 ```nu
 > [[foo bar]; [1 2]] | to csv
 foo,bar
@@ -43,7 +43,7 @@ foo,bar
 
 ```
 
-Outputs a CSV string representing the contents of this table
+Outputs a CSV string representing the contents of this table.
 ```nu
 > [[foo bar]; [1 2]] | to csv --separator ';'
 foo;bar
@@ -51,7 +51,7 @@ foo;bar
 
 ```
 
-Outputs a CSV string representing the contents of this record
+Outputs a CSV string representing the contents of this record.
 ```nu
 > {a: 1 b: 2} | to csv
 a,b
@@ -59,7 +59,7 @@ a,b
 
 ```
 
-Outputs a CSV stream with column names pre-determined
+Outputs a CSV stream with column names pre-determined.
 ```nu
 > [[foo bar baz]; [1 2 3]] | to csv --columns [baz foo]
 baz,foo

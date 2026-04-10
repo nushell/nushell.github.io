@@ -2,7 +2,7 @@
 title: into value
 categories: |
   conversions
-version: 0.109.0
+version: 0.111.0
 conversions: |
   Convert custom values into base values.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--columns, -c {list<any>}`: list of columns to update
- -  `--prefer-filesizes, -f`: For ints display them as human-readable file sizes
+ -  `--columns, -c {list<any>}`: List of columns to update.
+ -  `--prefer-filesizes, -f`: For ints display them as human-readable file sizes.
 
 
 ## Input/output types:

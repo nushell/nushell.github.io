@@ -2,7 +2,7 @@
 title: explain
 categories: |
   debug
-version: 0.109.0
+version: 0.111.0
 debug: |
   Explain closure contents.
 usage: |
@@ -33,7 +33,7 @@ contributors: false
 | nothing | any    |
 ## Examples
 
-Explain a command within a closure
+Explain a command within a closure.
 ```nu
 > explain {|| ls | sort-by name type --ignore-case | get name } | table --expand
 

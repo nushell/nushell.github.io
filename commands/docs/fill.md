@@ -2,11 +2,11 @@
 title: fill
 categories: |
   conversions
-version: 0.109.0
+version: 0.111.0
 conversions: |
-  Fill and Align.
+  Fill and align text in columns.
 usage: |
-  Fill and Align.
+  Fill and align text in columns.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `fill` for [conversions](/commands/categories/conversions.md)
 
-<div class='command-title'>Fill and Align.</div>
+<div class='command-title'>Fill and align text in columns.</div>
 
 ## Signature
 
@@ -22,9 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--width, -w {int}`: The width of the output. Defaults to 1
- -  `--alignment, -a {string}`: The alignment of the output. Defaults to Left (Left(l), Right(r), Center(c/m), MiddleRight(cr/mr))
- -  `--character, -c {string}`: The character to fill with. Defaults to ' ' (space)
+ -  `--width, -w {int}`: The width of the output. Defaults to 1.
+ -  `--alignment, -a {string}`: The alignment of the output. Defaults to Left (Left(l), Right(r), Center(c/m), MiddleRight(cr/mr)).
+ -  `--character, -c {string}`: The character to fill with. Defaults to ' ' (space).
 
 
 ## Input/output types:
@@ -42,37 +42,37 @@ contributors: false
 | list&lt;any&gt;      | list&lt;string&gt; |
 ## Examples
 
-Fill a string on the left side to a width of 15 with the character '─'
+Fill a string on the left side to a width of 15 with the character '─'.
 ```nu
 > 'nushell' | fill --alignment l --character '─' --width 15
 nushell────────
 ```
 
-Fill a string on the right side to a width of 15 with the character '─'
+Fill a string on the right side to a width of 15 with the character '─'.
 ```nu
 > 'nushell' | fill --alignment r --character '─' --width 15
 ────────nushell
 ```
 
-Fill an empty string with 10 '─' characters
+Fill an empty string with 10 '─' characters.
 ```nu
 > '' | fill --character '─' --width 10
 ──────────
 ```
 
-Fill a number on the left side to a width of 5 with the character '0'
+Fill a number on the left side to a width of 5 with the character '0'.
 ```nu
 > 1 | fill --alignment right --character '0' --width 5
 00001
 ```
 
-Fill a number on both sides to a width of 5 with the character '0'
+Fill a number on both sides to a width of 5 with the character '0'.
 ```nu
 > 1.1 | fill --alignment center --character '0' --width 5
 01.10
 ```
 
-Fill a filesize on both sides to a width of 10 with the character '0'
+Fill a filesize on both sides to a width of 10 with the character '0'.
 ```nu
 > 1kib | fill --alignment middle --character '0' --width 10
 0001024000

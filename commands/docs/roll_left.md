@@ -2,7 +2,7 @@
 title: roll left
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
   Roll record or table columns left.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--by, -b {int}`: Number of columns to roll
- -  `--cells-only, -c`: rotates columns leaving headers fixed
+ -  `--by, -b {int}`: Number of columns to roll.
+ -  `--cells-only, -c`: Rotates columns leaving headers fixed.
 
 
 ## Input/output types:

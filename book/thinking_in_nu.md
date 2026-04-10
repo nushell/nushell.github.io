@@ -170,7 +170,7 @@ In all of the above:
 - The first value is evaluated as the integer 40 but is not returned
 - The second value is evaluated as the integer 50 but is not returned
 - The third value is evaluated as the integer 60, and since it is the last
-  value, it is is returned and displayed (rendered).
+  value, it is returned and displayed (rendered).
 
 ::: warning Thinking in Nushell
 When debugging unexpected results, be on the lookout for:
@@ -225,7 +225,7 @@ However, this also means that Nushell cannot currently support an `eval` constru
 
 ### Features Built on Static Parsing
 
-On the other hand, the **_static_** results of Parsing are key to many features of Nushell its REPL, such as:
+On the other hand, the **_static_** results of Parsing are key to many features of Nushell and its REPL, such as:
 
 - Accurate and expressive error messages
 - Semantic analysis for earlier and robust detection of error conditions
@@ -270,8 +270,8 @@ The following examples use the [`source` command](/commands/docs/source.md), but
 Consider this scenario:
 
 ```nu
-"print Hello" | save output.nu
-source output.nu
+("print Hello" | save output.nu;
+source output.nu)
 # => Error: nu::parser::sourced_file_not_found
 # =>
 # =>   × File not found

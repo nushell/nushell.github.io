@@ -2,7 +2,7 @@
 title: polars str-replace-all
 categories: |
   dataframe
-version: 0.109.0
+version: 0.111.0
 dataframe: |
   Replace all (sub)strings by a regex pattern.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--pattern, -p {string}`: Regex pattern to be matched
- -  `--replace, -r {string}`: replacing string
+ -  `--pattern, -p {string}`: Regex pattern to be matched.
+ -  `--replace, -r {string}`: Replacing string.
 
 
 ## Input/output types:

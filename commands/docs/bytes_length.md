@@ -2,7 +2,7 @@
 title: bytes length
 categories: |
   bytes
-version: 0.109.0
+version: 0.111.0
 bytes: |
   Output the length of any bytes in the pipeline.
 usage: |
@@ -35,13 +35,13 @@ contributors: false
 | record       | record    |
 ## Examples
 
-Return the length of a binary
+Return the length of a binary.
 ```nu
 > 0x[1F FF AA AB] | bytes length
 4
 ```
 
-Return the lengths of multiple binaries
+Return the lengths of multiple binaries.
 ```nu
 > [0x[1F FF AA AB] 0x[1F]] | bytes length
 ╭───┬───╮

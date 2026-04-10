@@ -2,7 +2,7 @@
 title: compact
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
   Creates a table with non-empty rows.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--empty, -e`: also compact empty items like "", {}, and []
+ -  `--empty, -e`: Also compact empty items like "", {}, and [].
 
 ## Parameters
 

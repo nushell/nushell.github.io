@@ -2,7 +2,7 @@
 title: polars first
 categories: |
   dataframe
-version: 0.109.0
+version: 0.111.0
 dataframe: |
   Show only the first number of rows or create a first expression
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `rows`: starting from the front, the number of rows to return
+ -  `rows`: Starting from the front, the number of rows to return.
 
 
 ## Input/output types:

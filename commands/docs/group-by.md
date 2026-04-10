@@ -2,7 +2,7 @@
 title: group-by
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
   Splits a list or table into groups, and returns a record containing those groups.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--to-table`: Return a table with "groups" and "items" columns
+ -  `--to-table`: Return a table with "groups" and "items" columns.
 
 ## Parameters
 
@@ -36,19 +36,19 @@ contributors: false
 | list&lt;any&gt; | any    |
 ## Examples
 
-Group items by the "type" column's values
+Group items by the "type" column's values.
 ```nu
 > ls | group-by type
 
 ```
 
-Group items by the "foo" column's values, ignoring records without a "foo" column
+Group items by the "foo" column's values, ignoring records without a "foo" column.
 ```nu
 > open cool.json | group-by foo?
 
 ```
 
-Group using a block which is evaluated against each input value
+Group using a block which is evaluated against each input value.
 ```nu
 > [foo.txt bar.csv baz.txt] | group-by { path parse | get extension }
 ╭─────┬─────────────────╮
@@ -62,7 +62,7 @@ Group using a block which is evaluated against each input value
 ╰─────┴─────────────────╯
 ```
 
-You can also group by raw values by leaving out the argument
+You can also group by raw values by leaving out the argument.
 ```nu
 > ['1' '3' '1' '3' '2' '1' '1'] | group-by
 ╭───┬───────────╮
@@ -82,7 +82,7 @@ You can also group by raw values by leaving out the argument
 ╰───┴───────────╯
 ```
 
-You can also output a table instead of a record
+You can also output a table instead of a record.
 ```nu
 > ['1' '3' '1' '3' '2' '1' '1'] | group-by --to-table
 ╭───┬───────┬───────────╮
@@ -105,7 +105,7 @@ You can also output a table instead of a record
 
 ```
 
-Group bools, whether they are strings or actual bools
+Group bools, whether they are strings or actual bools.
 ```nu
 > [true "true" false "false"] | group-by
 ╭───────┬───────────────╮
@@ -120,7 +120,7 @@ Group bools, whether they are strings or actual bools
 ╰───────┴───────────────╯
 ```
 
-Group items by multiple columns' values
+Group items by multiple columns' values.
 ```nu
 > [
         [name, lang, year];
@@ -152,7 +152,7 @@ Group items by multiple columns' values
 ╰────┴─────────────────────────────────────────╯
 ```
 
-Group items by multiple columns' values
+Group items by multiple columns' values.
 ```nu
 > [
         [name, lang, year];
@@ -183,7 +183,7 @@ Group items by multiple columns' values
 
 ```
 
-Group items by column and delete the original
+Group items by column and delete the original.
 ```nu
 > [
         [name, lang, year];

@@ -2,7 +2,7 @@
 title: job unfreeze
 categories: |
   experimental
-version: 0.109.0
+version: 0.111.0
 experimental: |
   Unfreeze a frozen process job in foreground.
 usage: |
@@ -32,13 +32,13 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Unfreeze the latest frozen job
+Unfreeze the latest frozen job.
 ```nu
 > job unfreeze
 
 ```
 
-Unfreeze a specific frozen job by its PID
+Unfreeze a specific frozen job by its PID.
 ```nu
 > job unfreeze 4
 

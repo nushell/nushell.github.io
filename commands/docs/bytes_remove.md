@@ -2,11 +2,11 @@
 title: bytes remove
 categories: |
   bytes
-version: 0.109.0
+version: 0.111.0
 bytes: |
-  Remove bytes.
+  Remove specified bytes from the input.
 usage: |
-  Remove bytes.
+  Remove specified bytes from the input.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `bytes remove` for [bytes](/commands/categories/bytes.md)
 
-<div class='command-title'>Remove bytes.</div>
+<div class='command-title'>Remove specified bytes from the input.</div>
 
 ## Signature
 
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--end, -e`: remove from end of binary
- -  `--all, -a`: remove occurrences of finding binary
+ -  `--end, -e`: Remove from end of binary.
+ -  `--all, -a`: Remove occurrences of finding binary.
 
 ## Parameters
 
@@ -40,7 +40,7 @@ contributors: false
 | record | record |
 ## Examples
 
-Remove contents
+Remove contents.
 ```nu
 > 0x[10 AA FF AA FF] | bytes remove 0x[10 AA]
 Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
@@ -48,7 +48,7 @@ Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-Remove all occurrences of find binary in record field
+Remove all occurrences of find binary in record field.
 ```nu
 > { data: 0x[10 AA 10 BB 10] } | bytes remove --all 0x[10] data
 ╭──────┬────────────╮
@@ -56,7 +56,7 @@ Remove all occurrences of find binary in record field
 ╰──────┴────────────╯
 ```
 
-Remove occurrences of find binary from end
+Remove occurrences of find binary from end.
 ```nu
 > 0x[10 AA 10 BB CC AA 10] | bytes remove --end 0x[10]
 Length: 6 (0x6) bytes | printable whitespace ascii_other non_ascii
@@ -64,7 +64,7 @@ Length: 6 (0x6) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-Remove find binary from end not found
+Remove find binary from end not found.
 ```nu
 > 0x[10 AA 10 BB CC AA 10] | bytes remove --end 0x[11]
 Length: 7 (0x7) bytes | printable whitespace ascii_other non_ascii
@@ -72,7 +72,7 @@ Length: 7 (0x7) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-Remove all occurrences of find binary in table
+Remove all occurrences of find binary in table.
 ```nu
 > [[ColA ColB ColC]; [0x[11 12 13] 0x[14 15 16] 0x[17 18 19]]] | bytes remove 0x[11] ColA ColC
 ╭───┬──────────┬──────────────┬──────────────╮

@@ -2,7 +2,7 @@
 title: mut
 categories: |
   core
-version: 0.109.0
+version: 0.111.0
 core: |
   Create a mutable variable and give it a value.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `var_name`: Variable name.
+ -  `var_name`: The mutable variable name to create.
  -  `initial_value`: Equals sign followed by value.
 
 
@@ -33,25 +33,25 @@ contributors: false
 | any   | nothing |
 ## Examples
 
-Set a mutable variable to a value, then update it
+Set a mutable variable to a value, then update it.
 ```nu
 > mut x = 10; $x = 12
 
 ```
 
-Upsert a value inside a mutable data structure
+Upsert a value inside a mutable data structure.
 ```nu
 > mut a = {b:{c:1}}; $a.b.c = 2
 
 ```
 
-Set a mutable variable to the result of an expression
+Set a mutable variable to the result of an expression.
 ```nu
 > mut x = 10 + 100
 
 ```
 
-Set a mutable variable based on the condition
+Set a mutable variable based on the condition.
 ```nu
 > mut x = if false { -1 } else { 1 }
 

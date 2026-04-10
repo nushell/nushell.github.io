@@ -2,7 +2,7 @@
 title: source-env
 categories: |
   core
-version: 0.109.0
+version: 0.111.0
 core: |
   Source the environment from a source file into the current environment.
 usage: |
@@ -32,7 +32,7 @@ contributors: false
 | any   | any    |
 ## Examples
 
-Sources the environment from foo.nu in the current context
+Sources the environment from foo.nu in the current context.
 ```nu
 > source-env foo.nu
 

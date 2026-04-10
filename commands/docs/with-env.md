@@ -2,7 +2,7 @@
 title: with-env
 categories: |
   env
-version: 0.109.0
+version: 0.111.0
 env: |
   Runs a block with an environment variable set.
 usage: |
@@ -33,7 +33,7 @@ contributors: false
 | any   | any    |
 ## Examples
 
-Set by key-value record
+Set by key-value record.
 ```nu
 > with-env {X: "Y", W: "Z"} { [$env.X $env.W] }
 ╭───┬───╮

@@ -2,7 +2,7 @@
 title: do
 categories: |
   core
-version: 0.109.0
+version: 0.111.0
 core: |
   Run a closure, providing it with the pipeline input.
 usage: |
@@ -22,9 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--ignore-errors, -i`: ignore errors as the closure runs
- -  `--capture-errors, -c`: catch errors as the closure runs, and return them
- -  `--env`: keep the environment defined inside the command
+ -  `--ignore-errors, -i`: Ignore errors as the closure runs.
+ -  `--capture-errors, -c`: Catch errors as the closure runs, and return them.
+ -  `--env`: Keep the environment defined inside the command.
 
 ## Parameters
 
@@ -39,55 +39,55 @@ contributors: false
 | any   | any    |
 ## Examples
 
-Run the closure
+Run the closure.
 ```nu
 > do { echo hello }
 hello
 ```
 
-Run a stored first-class closure
+Run a stored first-class closure.
 ```nu
 > let text = "I am enclosed"; let hello = {|| echo $text}; do $hello
 I am enclosed
 ```
 
-Run the closure and ignore both shell and external program errors
+Run the closure and ignore both shell and external program errors.
 ```nu
 > do --ignore-errors { thisisnotarealcommand }
 
 ```
 
-Abort the pipeline if a program returns a non-zero exit code
+Abort the pipeline if a program returns a non-zero exit code.
 ```nu
 > do --capture-errors { nu --commands 'exit 1' } | myscarycommand
 
 ```
 
-Run the closure with a positional, type-checked parameter
+Run the closure with a positional, type-checked parameter.
 ```nu
 > do {|x:int| 100 + $x } 77
 177
 ```
 
-Run the closure with pipeline input
+Run the closure with pipeline input.
 ```nu
 > 77 | do { 100 + $in }
 177
 ```
 
-Run the closure with a default parameter value
+Run the closure with a default parameter value.
 ```nu
 > 77 | do {|x=100| $x + $in }
 177
 ```
 
-Run the closure with two positional parameters
+Run the closure with two positional parameters.
 ```nu
 > do {|x,y| $x + $y } 77 100
 177
 ```
 
-Run the closure and keep changes to the environment
+Run the closure and keep changes to the environment.
 ```nu
 > do --env { $env.foo = 'bar' }; $env.foo
 bar

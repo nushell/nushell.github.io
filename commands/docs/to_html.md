@@ -2,7 +2,7 @@
 title: to html
 categories: |
   formats
-version: 0.109.0
+version: 0.111.0
 formats: |
   Convert table into simple HTML.
 usage: |
@@ -22,13 +22,13 @@ contributors: false
 
 ## Flags
 
- -  `--html-color, -c`: change ansi colors to html colors
- -  `--no-color, -n`: remove all ansi colors in output
- -  `--dark, -d`: indicate your background color is a darker color
- -  `--partial, -p`: only output the html for the content itself
- -  `--theme, -t {string}`: the name of the theme to use (github, blulocolight, ...); case-insensitive
- -  `--list, -l`: produce a color table of all available themes
- -  `--raw, -r`: do not escape html tags
+ -  `--html-color, -c`: Change ansi colors to html colors.
+ -  `--no-color, -n`: Remove all ansi colors in output.
+ -  `--dark, -d`: Indicate your background color is a darker color.
+ -  `--partial, -p`: Only output the html for the content itself.
+ -  `--theme, -t {string}`: The name of the theme to use (github, blulocolight, ...); case-insensitive.
+ -  `--list, -l`: Produce a color table of all available themes.
+ -  `--raw, -r`: Do not escape html tags.
 
 
 ## Input/output types:

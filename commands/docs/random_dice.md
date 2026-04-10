@@ -2,7 +2,7 @@
 title: random dice
 categories: |
   random
-version: 0.109.0
+version: 0.111.0
 random: |
   Generate a random dice roll.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--dice, -d {int}`: The amount of dice being rolled
- -  `--sides, -s {int}`: The amount of sides a die has
+ -  `--dice, -d {int}`: The amount of dice being rolled.
+ -  `--sides, -s {int}`: The amount of sides a die has.
 
 
 ## Input/output types:
@@ -33,13 +33,13 @@ contributors: false
 | nothing | list&lt;int&gt; |
 ## Examples
 
-Roll 1 dice with 6 sides each
+Roll 1 dice with 6 sides each.
 ```nu
 > random dice
 
 ```
 
-Roll 10 dice with 12 sides each
+Roll 10 dice with 12 sides each.
 ```nu
 > random dice --dice 10 --sides 12
 

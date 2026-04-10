@@ -2,7 +2,7 @@
 title: polars as
 categories: |
   expression
-version: 0.109.0
+version: 0.111.0
 expression: |
   Creates an alias expression.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `Alias name`: Alias name for the expression
+ -  `Alias name`: Alias name for the expression.
 
 
 ## Input/output types:
@@ -30,6 +30,7 @@ contributors: false
 | input             | output            |
 | ----------------- | ----------------- |
 | polars_expression | polars_expression |
+| polars_selector   | polars_expression |
 ## Examples
 
 Creates and alias expression

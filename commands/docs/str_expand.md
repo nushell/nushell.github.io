@@ -2,7 +2,7 @@
 title: str expand
 categories: |
   strings
-version: 0.109.0
+version: 0.111.0
 strings: |
   Generates all possible combinations defined in brace expansion syntax.
 usage: |
@@ -44,7 +44,7 @@ Define a range inside braces to produce a list of string.
 
 ```
 
-Ignore the next character after the backslash ('\')
+Ignore the next character after the backslash ('\').
 ```nu
 > 'A{B\,,C}' | str expand
 ╭───┬─────╮
@@ -140,7 +140,7 @@ Empty item can be in the middle of the collection.
 
 ```
 
-Also, it is possible to use one inside another. Here is a real-world example, that creates files:
+Also, it is possible to use one inside another. Here is a real-world example, that creates files.
 ```nu
 > "A{B{1,3},C{2,5}}D" | str expand
 ╭───┬──────╮

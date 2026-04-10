@@ -2,7 +2,7 @@
 title: hide-env
 categories: |
   core
-version: 0.109.0
+version: 0.111.0
 core: |
   Hide environment variables in the current scope.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--ignore-errors, -i`: do not throw an error if an environment variable was not found
+ -  `--ignore-errors, -i`: Do not throw an error if an environment variable was not found.
 
 ## Parameters
 
@@ -36,7 +36,7 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Hide an environment variable
+Hide an environment variable.
 ```nu
 > $env.HZ_ENV_ABC = 1; hide-env HZ_ENV_ABC; 'HZ_ENV_ABC' in $env
 false

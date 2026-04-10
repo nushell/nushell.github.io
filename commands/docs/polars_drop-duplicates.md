@@ -2,7 +2,7 @@
 title: polars drop-duplicates
 categories: |
   dataframe
-version: 0.109.0
+version: 0.111.0
 dataframe: |
   Drops duplicate values in dataframe.
 usage: |
@@ -22,12 +22,12 @@ contributors: false
 
 ## Flags
 
- -  `--maintain, -m`: maintain order
- -  `--last, -l`: keeps last duplicate value (by default keeps first)
+ -  `--maintain, -m`: Maintain order.
+ -  `--last, -l`: Keeps last duplicate value (by default keeps first).
 
 ## Parameters
 
- -  `subset`: subset of columns to drop duplicates
+ -  `subset`: Subset of columns to drop duplicates.
 
 
 ## Input/output types:

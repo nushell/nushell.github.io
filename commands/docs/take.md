@@ -2,7 +2,7 @@
 title: take
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
   Take only the first n elements of a list, or the first n bytes of a binary value.
 usage: |
@@ -35,7 +35,7 @@ contributors: false
 | range     | list&lt;number&gt; |
 ## Examples
 
-Return the first item of a list/table
+Return the first item of a list/table.
 ```nu
 > [1 2 3] | take 1
 ╭───┬───╮
@@ -44,7 +44,7 @@ Return the first item of a list/table
 
 ```
 
-Return the first 2 items of a list/table
+Return the first 2 items of a list/table.
 ```nu
 > [1 2 3] | take 2
 ╭───┬───╮
@@ -54,7 +54,7 @@ Return the first 2 items of a list/table
 
 ```
 
-Return the first two rows of a table
+Return the first two rows of a table.
 ```nu
 > [[editions]; [2015] [2018] [2021]] | take 2
 ╭───┬──────────╮
@@ -66,7 +66,7 @@ Return the first two rows of a table
 
 ```
 
-Return the first 2 bytes of a binary value
+Return the first 2 bytes of a binary value.
 ```nu
 > 0x[01 23 45] | take 2
 Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
@@ -74,7 +74,7 @@ Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-Return the first 3 elements of a range
+Return the first 3 elements of a range.
 ```nu
 > 1..10 | take 3
 ╭───┬───╮

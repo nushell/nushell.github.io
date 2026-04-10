@@ -2,7 +2,7 @@
 title: path split
 categories: |
   path
-version: 0.109.0
+version: 0.111.0
 path: |
   Split a path into a list based on the system's path separator.
 usage: |
@@ -29,7 +29,7 @@ contributors: false
 | list&lt;string&gt; | list&lt;list&lt;string&gt;&gt; |
 ## Examples
 
-Split a path into parts
+Split a path into parts.
 ```nu
 > '/home/viking/spam.txt' | path split
 ╭───┬──────────╮
@@ -41,7 +41,7 @@ Split a path into parts
 
 ```
 
-Split paths in list into parts
+Split paths in list into parts.
 ```nu
 > [ /home/viking/spam.txt /home/viking/eggs.txt ] | path split
 ╭───┬──────────────────╮

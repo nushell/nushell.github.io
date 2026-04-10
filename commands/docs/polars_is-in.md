@@ -2,7 +2,7 @@
 title: polars is-in
 categories: |
   expression
-version: 0.109.0
+version: 0.111.0
 expression: |
   Creates an is-in expression or checks to see if the elements are contained in the right series
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `list`: List to check if values are in
+ -  `list`: List to check if values are in.
 
 
 ## Input/output types:
@@ -30,12 +30,41 @@ contributors: false
 | input             | output            |
 | ----------------- | ----------------- |
 | polars_expression | polars_expression |
+| polars_selector   | polars_expression |
 ## Examples
 
-Creates a is-in expression
+Creates a is-in expression using a list
 ```nu
 > let df = ([[a b]; [one 1] [two 2] [three 3]] | polars into-df);
             $df | polars with-column (polars col a | polars is-in [one two] | polars as a_in)
+╭───┬───────┬───┬───────╮
+│ # │   a   │ b │ a_in  │
+├───┼───────┼───┼───────┤
+│ 0 │ one   │ 1 │ true  │
+│ 1 │ two   │ 2 │ true  │
+│ 2 │ three │ 3 │ false │
+╰───┴───────┴───┴───────╯
+
+```
+
+Creates a is-in expression using a polars series
+```nu
+> let df = ([[a b]; [one 1] [two 2] [three 3]] | polars into-df);
+            $df | polars with-column (polars col a | polars is-in ([one two] | polars into-df) | polars as a_in)
+╭───┬───────┬───┬───────╮
+│ # │   a   │ b │ a_in  │
+├───┼───────┼───┼───────┤
+│ 0 │ one   │ 1 │ true  │
+│ 1 │ two   │ 2 │ true  │
+│ 2 │ three │ 3 │ false │
+╰───┴───────┴───┴───────╯
+
+```
+
+Creates a is-in expression using a polars expr
+```nu
+> let df = ([[a b]; [one 1] [two 2] [three 3]] | polars into-df);
+            $df | polars with-column (polars col a | polars is-in (polars lit [one two] | polars implode) | polars as a_in)
 ╭───┬───────┬───┬───────╮
 │ # │   a   │ b │ a_in  │
 ├───┼───────┼───┼───────┤

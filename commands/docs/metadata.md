@@ -2,7 +2,7 @@
 title: metadata
 categories: |
   debug
-version: 0.109.0
+version: 0.111.0
 debug: |
   Get the metadata for items in the stream.
 usage: |
@@ -32,13 +32,13 @@ contributors: false
 | any   | record |
 ## Examples
 
-Get the metadata of a variable
+Get the metadata of a variable.
 ```nu
 > let a = 42; metadata $a
 
 ```
 
-Get the metadata of the input
+Get the metadata of the input.
 ```nu
 > ls | metadata
 

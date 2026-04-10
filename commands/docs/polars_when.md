@@ -2,7 +2,7 @@
 title: polars when
 categories: |
   expression
-version: 0.109.0
+version: 0.111.0
 expression: |
   Creates and modifies a when expression.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Parameters
 
- -  `when expression`: when expression used for matching
- -  `then expression`: expression that will be applied when predicate is true
+ -  `when expression`: When expression used for matching.
+ -  `then expression`: Expression that will be applied when predicate is true.
 
 
 ## Input/output types:

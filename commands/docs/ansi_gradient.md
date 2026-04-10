@@ -2,7 +2,7 @@
 title: ansi gradient
 categories: |
   platform
-version: 0.109.0
+version: 0.111.0
 platform: |
   Add a color gradient (using ANSI color codes) to the given string.
 usage: |
@@ -22,10 +22,10 @@ contributors: false
 
 ## Flags
 
- -  `--fgstart, -a {string}`: foreground gradient start color in hex (0x123456)
- -  `--fgend, -b {string}`: foreground gradient end color in hex
- -  `--bgstart, -c {string}`: background gradient start color in hex
- -  `--bgend, -d {string}`: background gradient end color in hex
+ -  `--fgstart, -a {string}`: Foreground gradient start color in hex (0x123456).
+ -  `--fgend, -b {string}`: Foreground gradient end color in hex.
+ -  `--bgstart, -c {string}`: Background gradient start color in hex.
+ -  `--bgend, -d {string}`: Background gradient end color in hex.
 
 ## Parameters
 

@@ -2,7 +2,7 @@
 title: select
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
   Select only these columns or rows from the input. Opposite of `reject`.
 usage: |
@@ -22,9 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--optional, -o`: make all cell path members optional (returns `null` for missing values)
- -  `--ignore-case`: make all cell path members case insensitive
- -  `--ignore-errors, -i`: ignore missing data (make all cell path members optional) (deprecated)
+ -  `--optional, -o`: Make all cell path members optional (returns `null` for missing values).
+ -  `--ignore-case`: Make all cell path members case insensitive.
+ -  `--ignore-errors, -i`: Ignore missing data (make all cell path members optional) (deprecated).
 
 ## Parameters
 
@@ -33,14 +33,15 @@ contributors: false
 
 ## Input/output types:
 
-| input     | output |
-| --------- | ------ |
-| record    | record |
-| table     | table  |
-| list&lt;any&gt; | any    |
+| input              | output             |
+| ------------------ | ------------------ |
+| record             | record             |
+| table              | table              |
+| list&lt;any&gt;          | any                |
+| SQLiteQueryBuilder | SQLiteQueryBuilder |
 ## Examples
 
-Select a column in a table
+Select a column in a table.
 ```nu
 > [{a: a b: b}] | select a
 ╭───┬───╮
@@ -51,7 +52,7 @@ Select a column in a table
 
 ```
 
-Select a column even if some rows are missing that column
+Select a column even if some rows are missing that column.
 ```nu
 > [{a: a0 b: b0} {b: b1}] | select -o a
 ╭───┬────╮
@@ -63,7 +64,7 @@ Select a column even if some rows are missing that column
 
 ```
 
-Select a field in a record
+Select a field in a record.
 ```nu
 > {a: a b: b} | select a
 ╭───┬───╮
@@ -71,19 +72,19 @@ Select a field in a record
 ╰───┴───╯
 ```
 
-Select just the `name` column
+Select just the `name` column.
 ```nu
 > ls | select name
 
 ```
 
-Select the first four rows (this is the same as `first 4`)
+Select the first four rows (this is the same as `first 4`).
 ```nu
 > ls | select 0 1 2 3
 
 ```
 
-Select multiple columns
+Select multiple columns.
 ```nu
 > [[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb]] | select name type
 ╭───┬────────────┬──────╮
@@ -95,7 +96,7 @@ Select multiple columns
 
 ```
 
-Select multiple columns by spreading a list
+Select multiple columns by spreading a list.
 ```nu
 > let cols = [name type]; [[name type size]; [Cargo.toml toml 1kb] [Cargo.lock toml 2kb]] | select ...$cols
 ╭───┬────────────┬──────╮

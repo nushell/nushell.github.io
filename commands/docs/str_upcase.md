@@ -2,11 +2,11 @@
 title: str upcase
 categories: |
   strings
-version: 0.109.0
+version: 0.111.0
 strings: |
-  Make text uppercase.
+  Convert text to uppercase.
 usage: |
-  Make text uppercase.
+  Convert text to uppercase.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `str upcase` for [strings](/commands/categories/strings.md)
 
-<div class='command-title'>Make text uppercase.</div>
+<div class='command-title'>Convert text to uppercase.</div>
 
 ## Signature
 
@@ -35,7 +35,7 @@ contributors: false
 | record       | record       |
 ## Examples
 
-Upcase contents
+Upcase contents.
 ```nu
 > 'nu' | str upcase
 NU

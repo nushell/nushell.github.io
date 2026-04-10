@@ -2,7 +2,7 @@
 title: from csv
 categories: |
   formats
-version: 0.109.0
+version: 0.111.0
 formats: |
   Parse text as .csv and create table.
 usage: |
@@ -22,13 +22,13 @@ contributors: false
 
 ## Flags
 
- -  `--separator, -s {string}`: a character to separate columns (either single char or 4 byte unicode sequence), defaults to ','
- -  `--comment, -c {string}`: a comment character to ignore lines starting with it
- -  `--quote, -q {string}`: a quote character to ignore separators in strings, defaults to '"'
- -  `--escape, -e {string}`: an escape character for strings containing the quote character
- -  `--noheaders, -n`: don't treat the first row as column names
- -  `--flexible`: allow the number of fields in records to be variable
- -  `--no-infer`: no field type inferencing
+ -  `--separator, -s {string}`: A character to separate columns (either single char or 4 byte unicode sequence), defaults to ','.
+ -  `--comment, -c {string}`: A comment character to ignore lines starting with it.
+ -  `--quote, -q {string}`: A quote character to ignore separators in strings, defaults to '"'.
+ -  `--escape, -e {string}`: An escape character for strings containing the quote character.
+ -  `--noheaders, -n`: Don't treat the first row as column names.
+ -  `--flexible`: Allow the number of fields in records to be variable.
+ -  `--no-infer`: No field type inferencing.
  -  `--trim, -t {string}`: drop leading and trailing whitespaces around headers names and/or field values
 
 
@@ -39,7 +39,7 @@ contributors: false
 | string | table  |
 ## Examples
 
-Convert comma-separated data to a table
+Convert comma-separated data to a table.
 ```nu
 > "ColA,ColB
 1,2" | from csv
@@ -51,7 +51,7 @@ Convert comma-separated data to a table
 
 ```
 
-Convert comma-separated data to a table, allowing variable number of columns per row
+Convert comma-separated data to a table, allowing variable number of columns per row.
 ```nu
 > "ColA,ColB
 1,2
@@ -67,37 +67,37 @@ Convert comma-separated data to a table, allowing variable number of columns per
 
 ```
 
-Convert comma-separated data to a table, ignoring headers
+Convert comma-separated data to a table, ignoring headers.
 ```nu
 > open data.txt | from csv --noheaders
 
 ```
 
-Convert semicolon-separated data to a table
+Convert semicolon-separated data to a table.
 ```nu
 > open data.txt | from csv --separator ';'
 
 ```
 
-Convert comma-separated data to a table, ignoring lines starting with '#'
+Convert comma-separated data to a table, ignoring lines starting with '#'.
 ```nu
 > open data.txt | from csv --comment '#'
 
 ```
 
-Convert comma-separated data to a table, dropping all possible whitespaces around header names and field values
+Convert comma-separated data to a table, dropping all possible whitespaces around header names and field values.
 ```nu
 > open data.txt | from csv --trim all
 
 ```
 
-Convert comma-separated data to a table, dropping all possible whitespaces around header names
+Convert comma-separated data to a table, dropping all possible whitespaces around header names.
 ```nu
 > open data.txt | from csv --trim headers
 
 ```
 
-Convert comma-separated data to a table, dropping all possible whitespaces around field values
+Convert comma-separated data to a table, dropping all possible whitespaces around field values.
 ```nu
 > open data.txt | from csv --trim fields
 

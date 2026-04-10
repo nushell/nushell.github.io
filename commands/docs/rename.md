@@ -2,7 +2,7 @@
 title: rename
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
   Creates a new table with columns renamed.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--column, -c {record}`: column name to be changed
- -  `--block, -b {closure(any)}`: A closure to apply changes on each column
+ -  `--column, -c {record}`: Column name to be changed.
+ -  `--block, -b {closure(any)}`: A closure to apply changes on each column.
 
 ## Parameters
 
@@ -38,7 +38,7 @@ contributors: false
 | table  | table  |
 ## Examples
 
-Rename a column
+Rename a column.
 ```nu
 > [[a, b]; [1, 2]] | rename my_column
 ╭───┬───────────┬───╮
@@ -49,7 +49,7 @@ Rename a column
 
 ```
 
-Rename many columns
+Rename many columns.
 ```nu
 > [[a, b, c]; [1, 2, 3]] | rename eggs ham bacon
 ╭───┬──────┬─────┬───────╮
@@ -60,7 +60,7 @@ Rename many columns
 
 ```
 
-Rename a specific column
+Rename a specific column.
 ```nu
 > [[a, b, c]; [1, 2, 3]] | rename --column { a: ham }
 ╭───┬─────┬───┬───╮
@@ -71,7 +71,7 @@ Rename a specific column
 
 ```
 
-Rename the fields of a record
+Rename the fields of a record.
 ```nu
 > {a: 1 b: 2} | rename x y
 ╭───┬───╮
@@ -80,7 +80,7 @@ Rename the fields of a record
 ╰───┴───╯
 ```
 
-Rename fields based on a given closure
+Rename fields based on a given closure.
 ```nu
 > {abc: 1, bbc: 2} | rename --block {str replace --all 'b' 'z'}
 ╭─────┬───╮

@@ -2,7 +2,7 @@
 title: to json
 categories: |
   formats
-version: 0.109.0
+version: 0.111.0
 formats: |
   Converts table data into JSON text.
 usage: |
@@ -22,10 +22,10 @@ contributors: false
 
 ## Flags
 
- -  `--raw, -r`: remove all of the whitespace and trailing line ending
- -  `--indent, -i {number}`: specify indentation width
- -  `--tabs, -t {number}`: specify indentation tab quantity
- -  `--serialize, -s`: serialize nushell types that cannot be deserialized
+ -  `--raw, -r`: Remove all of the whitespace and trailing line ending.
+ -  `--indent, -i {number}`: Specify indentation width.
+ -  `--tabs, -t {number}`: Specify indentation tab quantity.
+ -  `--serialize, -s`: Serialize nushell types that cannot be deserialized.
 
 
 ## Input/output types:
@@ -35,7 +35,7 @@ contributors: false
 | any   | string |
 ## Examples
 
-Outputs a JSON string, with default indentation, representing the contents of this table
+Outputs a JSON string, with default indentation, representing the contents of this table.
 ```nu
 > [a b c] | to json
 [
@@ -45,7 +45,7 @@ Outputs a JSON string, with default indentation, representing the contents of th
 ]
 ```
 
-Outputs a JSON string, with 4-space indentation, representing the contents of this table
+Outputs a JSON string, with 4-space indentation, representing the contents of this table.
 ```nu
 > [Joe Bob Sam] | to json --indent 4
 [
@@ -55,7 +55,7 @@ Outputs a JSON string, with 4-space indentation, representing the contents of th
 ]
 ```
 
-Outputs an unformatted JSON string representing the contents of this table
+Outputs an unformatted JSON string representing the contents of this table.
 ```nu
 > [1 2 3] | to json -r
 [1,2,3]

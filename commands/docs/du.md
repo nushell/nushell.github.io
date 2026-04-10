@@ -2,7 +2,7 @@
 title: du
 categories: |
   filesystem
-version: 0.109.0
+version: 0.111.0
 filesystem: |
   Find disk usage sizes of specified items.
 usage: |
@@ -22,11 +22,12 @@ contributors: false
 
 ## Flags
 
- -  `--deref, -r`: Dereference symlinks to their targets for size
- -  `--long, -l`: Get underlying directories and files for each entry
- -  `--exclude, -x {glob}`: Exclude these file names
- -  `--max-depth, -d {int}`: Directory recursion limit
- -  `--min-size, -m {int}`: Exclude files below this size
+ -  `--deref, -r`: Dereference symlinks to their targets for size.
+ -  `--long, -l`: Get underlying directories and files for each entry.
+ -  `--exclude, -x {glob}`: Exclude these file names.
+ -  `--max-depth, -d {int}`: Directory recursion limit.
+ -  `--min-size, -m {int}`: Exclude files below this size.
+ -  `--all, -a`: Include hidden files if '*' is provided.
 
 ## Parameters
 
@@ -40,7 +41,7 @@ contributors: false
 | nothing | table  |
 ## Examples
 
-Disk usage of the current directory
+Disk usage of the current directory.
 ```nu
 > du
 

@@ -2,7 +2,7 @@
 title: gstat
 categories: |
   prompt
-version: 0.109.0
+version: 0.111.0
 prompt: |
   Get the git status of a repo
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--no-tag`: Disable git tag resolving
+ -  `--no-tag`: Disable git tag resolving.
 
 ## Parameters
 
- -  `path`: path to repo
+ -  `path`: Path to repo.

@@ -2,7 +2,7 @@
 title: commandline set-cursor
 categories: |
   core
-version: 0.109.0
+version: 0.111.0
 core: |
   Set the current cursor position.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--end, -e`: set the current cursor position to the end of the buffer
+ -  `--end, -e`: Set the current cursor position to the end of the buffer.
 
 ## Parameters
 

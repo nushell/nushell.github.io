@@ -2,7 +2,7 @@
 title: plugin list
 categories: |
   plugin
-version: 0.109.0
+version: 0.111.0
 plugin: |
   List loaded and installed plugins.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--plugin-config {path}`: Use a plugin registry file other than the one set in `$nu.plugin-path`
+ -  `--plugin-config {path}`: Use a plugin registry file other than the one set in `$nu.plugin-path`.
  -  `--engine, -e`: Show info for plugins that are loaded into the engine only.
  -  `--registry, -r`: Show info for plugins from the registry file only.
 
@@ -40,7 +40,7 @@ List installed plugins.
 ╭────┬───────┬─────────────────────┬──────────┬────────┬───────────────────────────────┬───────┬─────────────╮
 │  # │ name  │       version       │  status  │  pid   │           filename            │ shell │  commands   │
 ├────┼───────┼─────────────────────┼──────────┼────────┼───────────────────────────────┼───────┼─────────────┤
-│  0 │ inc   │ 0.109.0  │ running  │ 106480 │ /opt/nu/plugins/nu_plugin_inc │       │ ╭───┬─────╮ │
+│  0 │ inc   │ 0.111.0  │ running  │ 106480 │ /opt/nu/plugins/nu_plugin_inc │       │ ╭───┬─────╮ │
 │    │       │                     │          │        │                               │       │ │ 0 │ inc │ │
 │    │       │                     │          │        │                               │       │ ╰───┴─────╯ │
 ╰────┴───────┴─────────────────────┴──────────┴────────┴───────────────────────────────┴───────┴─────────────╯

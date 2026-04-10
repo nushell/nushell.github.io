@@ -2,7 +2,7 @@
 title: polars sort-by
 categories: |
   lazyframe
-version: 0.109.0
+version: 0.111.0
 lazyframe: |
   Sorts a lazy dataframe based on expression(s).
 usage: |
@@ -22,13 +22,13 @@ contributors: false
 
 ## Flags
 
- -  `--reverse, -r {list<bool>}`: Reverse sorting. Default is false
- -  `--nulls-last, -n`: nulls are shown last in the dataframe
- -  `--maintain-order, -m`: Maintains order during sort
+ -  `--reverse, -r {list<bool>}`: Reverse sorting. Default is false.
+ -  `--nulls-last, -n`: Nulls are shown last in the dataframe.
+ -  `--maintain-order, -m`: Maintains order during sort.
 
 ## Parameters
 
- -  `...rest`: sort expression for the dataframe
+ -  `...rest`: Sort expression for the dataframe.
 
 
 ## Input/output types:

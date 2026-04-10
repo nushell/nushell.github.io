@@ -2,7 +2,7 @@
 title: watch
 categories: |
   filesystem
-version: 0.109.0
+version: 0.111.0
 filesystem: |
   Watch for file changes and execute Nu code when they happen.
 usage: |
@@ -22,12 +22,12 @@ contributors: false
 
 ## Flags
 
- -  `--debounce-ms, -d {int}`: Debounce changes for this many milliseconds (default: 100). Adjust if you find that single writes are reported as multiple events (deprecated)
- -  `--debounce {duration}`: Debounce changes for this duration (default: 100ms). Adjust if you find that single writes are reported as multiple events
+ -  `--debounce-ms, -d {int}`: Debounce changes for this many milliseconds (default: 100). Adjust if you find that single writes are reported as multiple events (deprecated).
+ -  `--debounce {duration}`: Debounce changes for this duration (default: 100ms). Adjust if you find that single writes are reported as multiple events.
  -  `--glob, -g {string}`: Only report changes for files that match this glob pattern (default: all files)
- -  `--recursive, -r {bool}`: Watch all directories under `<path>` recursively. Will be ignored if `<path>` is a file (default: true)
- -  `--quiet, -q`: Hide the initial status message (default: false)
- -  `--verbose, -v`: Operate in verbose mode (default: false)
+ -  `--recursive, -r {bool}`: Watch all directories under `<path>` recursively. Will be ignored if `<path>` is a file (default: true).
+ -  `--quiet, -q`: Hide the initial status message (default: false).
+ -  `--verbose, -v`: Operate in verbose mode (default: false).
 
 ## Parameters
 
@@ -43,13 +43,13 @@ contributors: false
 | nothing | table&lt;operation: string, path: string, new_path: string&gt; |
 ## Examples
 
-Run `cargo test` whenever a Rust file changes
+Run `cargo test` whenever a Rust file changes.
 ```nu
 > watch . --glob=**/*.rs {|| cargo test }
 
 ```
 
-Watch all changes in the current directory
+Watch all changes in the current directory.
 ```nu
 > watch . { |op, path, new_path| $"($op) ($path) ($new_path)"}
 
@@ -66,13 +66,13 @@ Watch all changes in the current directory
 
 ```
 
-Print file changes with a debounce time of 5 minutes
+Print file changes with a debounce time of 5 minutes.
 ```nu
 > watch /foo/bar --debounce 5min { |op, path| $"Registered ($op) on ($path)" | print }
 
 ```
 
-Note: if you are looking to run a command every N units of time, this can be accomplished with a loop and sleep
+Note: if you are looking to run a command every N units of time, this can be accomplished with a loop and sleep.
 ```nu
 > loop { command; sleep duration }
 

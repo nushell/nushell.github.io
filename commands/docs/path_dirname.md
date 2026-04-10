@@ -2,7 +2,7 @@
 title: path dirname
 categories: |
   path
-version: 0.109.0
+version: 0.111.0
 path: |
   Get the parent directory of a path.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--replace, -r {string}`: Return original path with dirname replaced by this string
- -  `--num-levels, -n {int}`: Number of directories to walk up
+ -  `--replace, -r {string}`: Return original path with dirname replaced by this string.
+ -  `--num-levels, -n {int}`: Number of directories to walk up.
 
 
 ## Input/output types:
@@ -34,13 +34,13 @@ contributors: false
 | list&lt;string&gt; | list&lt;string&gt; |
 ## Examples
 
-Get dirname of a path
+Get dirname of a path.
 ```nu
 > '/home/joe/code/test.txt' | path dirname
 /home/joe/code
 ```
 
-Get dirname of a list of paths
+Get dirname of a list of paths.
 ```nu
 > [ /home/joe/test.txt, /home/doe/test.txt ] | path dirname
 ╭───┬───────────╮
@@ -50,13 +50,13 @@ Get dirname of a list of paths
 
 ```
 
-Walk up two levels
+Walk up two levels.
 ```nu
 > '/home/joe/code/test.txt' | path dirname --num-levels 2
 /home/joe
 ```
 
-Replace the part that would be returned with a custom path
+Replace the part that would be returned with a custom path.
 ```nu
 > '/home/joe/code/test.txt' | path dirname --num-levels 2 --replace /home/viking
 /home/viking/code/test.txt

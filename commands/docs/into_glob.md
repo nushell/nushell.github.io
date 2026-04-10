@@ -2,11 +2,11 @@
 title: into glob
 categories: |
   conversions
-version: 0.109.0
+version: 0.111.0
 conversions: |
-  Convert value to glob.
+  Convert value to a glob pattern.
 usage: |
-  Convert value to glob.
+  Convert value to a glob pattern.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `into glob` for [conversions](/commands/categories/conversions.md)
 
-<div class='command-title'>Convert value to glob.</div>
+<div class='command-title'>Convert value to a glob pattern.</div>
 
 ## Signature
 
@@ -36,19 +36,19 @@ contributors: false
 | record       | record     |
 ## Examples
 
-convert string to glob
+Convert string to glob.
 ```nu
 > '1234' | into glob
 1234
 ```
 
-convert glob to glob
+Convert glob to glob.
 ```nu
 > '1234' | into glob | into glob
 1234
 ```
 
-convert filepath to glob
+Convert filepath to glob.
 ```nu
 > ls Cargo.toml | get name | into glob
 

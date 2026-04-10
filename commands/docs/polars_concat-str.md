@@ -2,7 +2,7 @@
 title: polars concat-str
 categories: |
   expression
-version: 0.109.0
+version: 0.111.0
 expression: |
   Creates a concat string expression.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Parameters
 
- -  `separator`: Separator used during the concatenation
- -  `concat expressions`: Expression(s) that define the string concatenation
+ -  `separator`: Separator used during the concatenation.
+ -  `concat expressions`: Expression(s) that define the string concatenation.
 
 
 ## Input/output types:

@@ -2,7 +2,7 @@
 title: from nuon
 categories: |
   formats
-version: 0.109.0
+version: 0.111.0
 formats: |
   Convert from nuon to structured data.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | string | any    |
 ## Examples
 
-Converts nuon formatted string to table
+Converts nuon formatted string to table.
 ```nu
 > '{ a:1 }' | from nuon
 ╭───┬───╮
@@ -36,7 +36,7 @@ Converts nuon formatted string to table
 ╰───┴───╯
 ```
 
-Converts nuon formatted string to table
+Converts nuon formatted string to table.
 ```nu
 > '{ a:1, b: [1, 2] }' | from nuon
 ╭───┬───────────╮
@@ -48,7 +48,7 @@ Converts nuon formatted string to table
 ╰───┴───────────╯
 ```
 
-Converts raw nuon formatted string to table
+Converts raw nuon formatted string to table.
 ```nu
 > '{a:1,b:[1,2]}' | from nuon
 ╭───┬───────────╮

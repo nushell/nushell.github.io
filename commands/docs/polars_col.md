@@ -2,7 +2,7 @@
 title: polars col
 categories: |
   expression
-version: 0.109.0
+version: 0.111.0
 expression: |
   Creates a named column expression.
 usage: |
@@ -22,12 +22,12 @@ contributors: false
 
 ## Flags
 
- -  `--type, -t`: Treat column names as type names
+ -  `--type, -t`: Treat column names as type names.
 
 ## Parameters
 
  -  `column name`: Name of column to be used. '*' can be used for all columns. Accepts regular expression input; regular expressions should start with ^ and end with $.
- -  `...rest`: Additional columns to be used. Cannot be '*'
+ -  `...rest`: Additional columns to be used. Cannot be '*'.
 
 
 ## Input/output types:

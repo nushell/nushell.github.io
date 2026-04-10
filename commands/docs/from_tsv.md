@@ -2,7 +2,7 @@
 title: from tsv
 categories: |
   formats
-version: 0.109.0
+version: 0.111.0
 formats: |
   Parse text as .tsv and create table.
 usage: |
@@ -22,13 +22,13 @@ contributors: false
 
 ## Flags
 
- -  `--comment, -c {string}`: a comment character to ignore lines starting with it
- -  `--quote, -q {string}`: a quote character to ignore separators in strings, defaults to '"'
- -  `--escape, -e {string}`: an escape character for strings containing the quote character
- -  `--noheaders, -n`: don't treat the first row as column names
- -  `--flexible`: allow the number of fields in records to be variable
- -  `--no-infer`: no field type inferencing
- -  `--trim, -t {string}`: drop leading and trailing whitespaces around headers names and/or field values
+ -  `--comment, -c {string}`: A comment character to ignore lines starting with it.
+ -  `--quote, -q {string}`: A quote character to ignore separators in strings, defaults to '"'.
+ -  `--escape, -e {string}`: An escape character for strings containing the quote character.
+ -  `--noheaders, -n`: Don't treat the first row as column names.
+ -  `--flexible`: Allow the number of fields in records to be variable.
+ -  `--no-infer`: No field type inferencing.
+ -  `--trim, -t {string}`: Drop leading and trailing whitespaces around headers names and/or field values.
 
 
 ## Input/output types:
@@ -38,7 +38,7 @@ contributors: false
 | string | table  |
 ## Examples
 
-Convert tab-separated data to a table
+Convert tab-separated data to a table.
 ```nu
 > "ColA	ColB
 1	2" | from tsv
@@ -50,7 +50,7 @@ Convert tab-separated data to a table
 
 ```
 
-Convert comma-separated data to a table, allowing variable number of columns per row and ignoring headers
+Convert comma-separated data to a table, allowing variable number of columns per row and ignoring headers.
 ```nu
 > "value 1
 value 2	description 2" | from tsv --flexible --noheaders
@@ -63,31 +63,31 @@ value 2	description 2" | from tsv --flexible --noheaders
 
 ```
 
-Create a tsv file with header columns and open it
+Create a tsv file with header columns and open it.
 ```nu
 > $'c1(char tab)c2(char tab)c3(char nl)1(char tab)2(char tab)3' | save tsv-data | open tsv-data | from tsv
 
 ```
 
-Create a tsv file without header columns and open it
+Create a tsv file without header columns and open it.
 ```nu
 > $'a1(char tab)b1(char tab)c1(char nl)a2(char tab)b2(char tab)c2' | save tsv-data | open tsv-data | from tsv --noheaders
 
 ```
 
-Create a tsv file without header columns and open it, removing all unnecessary whitespaces
+Create a tsv file without header columns and open it, removing all unnecessary whitespaces.
 ```nu
 > $'a1(char tab)b1(char tab)c1(char nl)a2(char tab)b2(char tab)c2' | save tsv-data | open tsv-data | from tsv --trim all
 
 ```
 
-Create a tsv file without header columns and open it, removing all unnecessary whitespaces in the header names
+Create a tsv file without header columns and open it, removing all unnecessary whitespaces in the header names.
 ```nu
 > $'a1(char tab)b1(char tab)c1(char nl)a2(char tab)b2(char tab)c2' | save tsv-data | open tsv-data | from tsv --trim headers
 
 ```
 
-Create a tsv file without header columns and open it, removing all unnecessary whitespaces in the field values
+Create a tsv file without header columns and open it, removing all unnecessary whitespaces in the field values.
 ```nu
 > $'a1(char tab)b1(char tab)c1(char nl)a2(char tab)b2(char tab)c2' | save tsv-data | open tsv-data | from tsv --trim fields
 

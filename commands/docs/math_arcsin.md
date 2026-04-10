@@ -2,7 +2,7 @@
 title: math arcsin
 categories: |
   math
-version: 0.109.0
+version: 0.111.0
 math: |
   Returns the arcsine of the number.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--degrees, -d`: Return degrees instead of radians
+ -  `--degrees, -d`: Return degrees instead of radians.
 
 
 ## Input/output types:

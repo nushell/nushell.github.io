@@ -2,7 +2,7 @@
 title: http options
 categories: |
   network
-version: 0.109.0
+version: 0.111.0
 network: |
   Requests permitted communication options for a given URL.
 usage: |
@@ -22,13 +22,14 @@ contributors: false
 
 ## Flags
 
- -  `--user, -u {any}`: the username when authenticating
- -  `--password, -p {any}`: the password when authenticating
- -  `--max-time, -m {duration}`: max duration before timeout occurs
- -  `--headers, -H {any}`: custom headers you want to add
- -  `--insecure, -k`: allow insecure server connections when using SSL
- -  `--allow-errors, -e`: do not fail if the server returns an error code
- -  `--unix-socket, -U {path}`: Connect to the specified Unix socket instead of using TCP
+ -  `--user, -u {any}`: The username when authenticating.
+ -  `--password, -p {any}`: The password when authenticating.
+ -  `--max-time, -m {duration}`: Max duration before timeout occurs.
+ -  `--headers, -H {any}`: Custom headers you want to add.
+ -  `--insecure, -k`: Allow insecure server connections when using SSL.
+ -  `--allow-errors, -e`: Do not fail if the server returns an error code.
+ -  `--pool`: Using a global pool as a client.
+ -  `--unix-socket, -U {path}`: Connect to the specified Unix socket instead of using TCP.
 
 ## Parameters
 
@@ -42,31 +43,31 @@ contributors: false
 | nothing | any    |
 ## Examples
 
-Get options from example.com
+Get options from example.com.
 ```nu
 > http options https://www.example.com
 
 ```
 
-Get options from example.com, with username and password
+Get options from example.com, with username and password.
 ```nu
 > http options --user myuser --password mypass https://www.example.com
 
 ```
 
-Get options from example.com, with custom header using a record
+Get options from example.com, with custom header using a record.
 ```nu
 > http options --headers {my-header-key: my-header-value} https://www.example.com
 
 ```
 
-Get options from example.com, with custom headers using a list
+Get options from example.com, with custom headers using a list.
 ```nu
 > http options --headers [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
 
 ```
 
-Simulate a browser cross-origin preflight request from www.example.com to media.example.com
+Simulate a browser cross-origin preflight request from www.example.com to media.example.com.
 ```nu
 > http options https://media.example.com/api/ --headers [Origin https://www.example.com Access-Control-Request-Headers "Content-Type, X-Custom-Header" Access-Control-Request-Method GET]
 

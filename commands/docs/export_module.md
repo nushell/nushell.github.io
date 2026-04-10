@@ -2,7 +2,7 @@
 title: export module
 categories: |
   core
-version: 0.109.0
+version: 0.111.0
 core: |
   Export a custom module from a module.
 usage: |
@@ -33,7 +33,7 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Define a custom command in a submodule of a module and call it
+Define a custom command in a submodule of a module and call it.
 ```nu
 > module spam {
         export module eggs {

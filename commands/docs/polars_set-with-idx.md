@@ -2,7 +2,7 @@
 title: polars set-with-idx
 categories: |
   dataframe
-version: 0.109.0
+version: 0.111.0
 dataframe: |
   Sets value in the given index.
 usage: |
@@ -22,11 +22,11 @@ contributors: false
 
 ## Flags
 
- -  `--indices, -i {any}`: list of indices indicating where to set the value
+ -  `--indices, -i {any}`: List of indices indicating where to set the value.
 
 ## Parameters
 
- -  `value`: value to be inserted in series
+ -  `value`: Value to be inserted in series.
 
 
 ## Input/output types:

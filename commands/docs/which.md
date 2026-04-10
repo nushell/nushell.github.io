@@ -2,7 +2,7 @@
 title: which
 categories: |
   system
-version: 0.109.0
+version: 0.111.0
 system: |
   Finds a program file, alias or custom command. If `application` is not provided, all deduplicated commands will be returned.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--all, -a`: list all executables
+ -  `--all, -a`: List all executables.
 
 ## Parameters
 

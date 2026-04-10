@@ -2,7 +2,7 @@
 title: debug profile
 categories: |
   debug
-version: 0.109.0
+version: 0.111.0
 debug: |
   Profile pipeline elements in a closure.
 usage: |
@@ -22,12 +22,12 @@ contributors: false
 
 ## Flags
 
- -  `--spans, -s`: Collect spans of profiled elements
- -  `--expand-source, -e`: Collect full source fragments of profiled elements
- -  `--values, -v`: Collect pipeline element output values
- -  `--lines, -l`: Collect line numbers
- -  `--duration-values, -d`: Report instruction duration as duration values rather than milliseconds
- -  `--max-depth, -m {int}`: How many blocks/closures deep to step into (default 2)
+ -  `--spans, -s`: Collect spans of profiled elements.
+ -  `--expand-source, -e`: Collect full source fragments of profiled elements.
+ -  `--values, -v`: Collect pipeline element output values.
+ -  `--lines, -l`: Collect line numbers.
+ -  `--duration-values, -d`: Report instruction duration as duration values rather than milliseconds.
+ -  `--max-depth, -m {int}`: How many blocks/closures deep to step into (default 2).
 
 ## Parameters
 
@@ -41,13 +41,13 @@ contributors: false
 | any   | table  |
 ## Examples
 
-Profile config evaluation
+Profile config evaluation.
 ```nu
 > debug profile { source $nu.config-path }
 
 ```
 
-Profile config evaluation with more granularity
+Profile config evaluation with more granularity.
 ```nu
 > debug profile { source $nu.config-path } --max-depth 4
 

@@ -2,7 +2,7 @@
 title: overlay new
 categories: |
   core
-version: 0.109.0
+version: 0.111.0
 core: |
   Create an empty overlay.
 usage: |
@@ -36,7 +36,7 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Create an empty overlay
+Create an empty overlay.
 ```nu
 > overlay new spam
 

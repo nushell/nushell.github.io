@@ -2,7 +2,7 @@
 title: def
 categories: |
   core
-version: 0.109.0
+version: 0.111.0
 core: |
   Define a custom command.
 usage: |
@@ -22,14 +22,14 @@ contributors: false
 
 ## Flags
 
- -  `--env`: keep the environment defined inside the command
- -  `--wrapped`: treat unknown flags and arguments as strings (requires ...rest-like parameter in signature)
+ -  `--env`: Keep the environment defined inside the command.
+ -  `--wrapped`: Treat unknown flags and arguments as strings (requires ...rest-like parameter in signature).
 
 ## Parameters
 
- -  `def_name`: Command name.
- -  `params`: Parameters.
- -  `block`: Body of the definition.
+ -  `def_name`: The command name to define.
+ -  `params`: The command parameters, a comma-separated list inside [].
+ -  `block`: The body of the command, a list of instructions inside {}.
 
 
 ## Input/output types:
@@ -39,37 +39,37 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Define a command and run it
+Define a command and run it.
 ```nu
 > def say-hi [] { echo 'hi' }; say-hi
 hi
 ```
 
-Define a command and run it with parameter(s)
+Define a command and run it with parameter(s).
 ```nu
 > def say-sth [sth: string] { echo $sth }; say-sth hi
 hi
 ```
 
-Set environment variable by call a custom command
+Set environment variable by call a custom command.
 ```nu
 > def --env foo [] { $env.BAR = "BAZ" }; foo; $env.BAR
 BAZ
 ```
 
-cd affects the environment, so '--env' is required to change directory from within a command
+cd affects the environment, so '--env' is required to change directory from within a command.
 ```nu
 > def --env gohome [] { cd ~ }; gohome; $env.PWD == ('~' | path expand)
 true
 ```
 
-Define a custom wrapper for an external command
+Define a custom wrapper for an external command.
 ```nu
 > def --wrapped my-echo [...rest] { ^echo ...$rest }; my-echo -e 'spam\tspam'
 spamspam
 ```
 
-Define a custom command with a type signature. Passing a non-int value will result in an error
+Define a custom command with a type signature. Passing a non-int value will result in an error.
 ```nu
 > def only_int []: int -> int { $in }; 42 | only_int
 42

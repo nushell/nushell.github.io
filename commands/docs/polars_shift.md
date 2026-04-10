@@ -2,7 +2,7 @@
 title: polars shift
 categories: |
   dataframe or lazyframe
-version: 0.109.0
+version: 0.111.0
 dataframe_or_lazyframe: |
   Shifts the values by a given period.
 usage: |
@@ -22,11 +22,11 @@ contributors: false
 
 ## Flags
 
- -  `--fill, -f {any}`: Expression used to fill the null values (lazy df)
+ -  `--fill, -f {any}`: Expression used to fill the null values (lazy df).
 
 ## Parameters
 
- -  `period`: shift period
+ -  `period`: Shift period.
 
 
 ## Input/output types:

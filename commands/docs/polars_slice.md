@@ -2,7 +2,7 @@
 title: polars slice
 categories: |
   dataframe
-version: 0.109.0
+version: 0.111.0
 dataframe: |
   Creates new dataframe from a slice of rows.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Parameters
 
- -  `offset`: start of slice
- -  `size`: size of slice
+ -  `offset`: Start of slice.
+ -  `size`: Size of slice.
 
 
 ## Input/output types:

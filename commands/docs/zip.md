@@ -2,7 +2,7 @@
 title: zip
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
   Combine a stream with the input.
 usage: |
@@ -33,7 +33,7 @@ contributors: false
 | range     | list&lt;list&lt;any&gt;&gt; |
 ## Examples
 
-Zip two lists
+Zip two lists.
 ```nu
 > [1 2] | zip [3 4]
 ╭───┬───────────╮
@@ -49,7 +49,7 @@ Zip two lists
 
 ```
 
-Zip two ranges
+Zip two ranges.
 ```nu
 > 1..3 | zip 4..6
 ╭───┬───────────╮
@@ -69,7 +69,7 @@ Zip two ranges
 
 ```
 
-Zip two streams
+Zip two streams.
 ```nu
 > seq 1 3 | zip { seq 4 600000000 }
 ╭───┬───────────╮
@@ -89,7 +89,7 @@ Zip two streams
 
 ```
 
-Rename .ogg files to match an existing list of filenames
+Rename .ogg files to match an existing list of filenames.
 ```nu
 > glob *.ogg | zip ['bang.ogg', 'fanfare.ogg', 'laser.ogg'] | each {|| mv $in.0 $in.1 }
 

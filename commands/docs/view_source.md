@@ -2,7 +2,7 @@
 title: view source
 categories: |
   debug
-version: 0.109.0
+version: 0.111.0
 debug: |
   View a block, module, or a definition.
 usage: |
@@ -32,38 +32,50 @@ contributors: false
 | nothing | string |
 ## Examples
 
-View the source of a code block
+View the source of a code block.
 ```nu
 > let abc = {|| echo 'hi' }; view source $abc
 {|| echo 'hi' }
 ```
 
-View the source of a custom command
+View the source of a custom command.
 ```nu
 > def hi [] { echo 'Hi!' }; view source hi
 def hi [] { echo 'Hi!' }
 ```
 
-View the source of a custom command, which participates in the caller environment
+View the source of a custom command, which participates in the caller environment.
 ```nu
 > def --env foo [] { $env.BAR = 'BAZ' }; view source foo
-def foo [] { $env.BAR = 'BAZ' }
+def --env foo [] { $env.BAR = 'BAZ' }
 ```
 
-View the source of a custom command with flags and arguments
+View the source of a custom command with flags.
+```nu
+> def --wrapped --env foo [...rest: string] { print $rest }; view source foo
+def --env --wrapped foo [ ...rest: string] { print $rest }
+```
+
+View the source of a custom command with flags and arguments.
 ```nu
 > def test [a?:any --b:int ...rest:string] { echo 'test' }; view source test
 def test [ a?: any --b: int ...rest: string] { echo 'test' }
 ```
 
-View the source of a module
+View the source of a module.
 ```nu
 > module mod-foo { export-env { $env.FOO_ENV = 'BAZ' } }; view source mod-foo
  export-env { $env.FOO_ENV = 'BAZ' }
 ```
 
-View the source of an alias
+View the source of an alias.
 ```nu
 > alias hello = echo hi; view source hello
 echo hi
+```
+
+View the file where a definition lives via metadata.
+```nu
+> view source some_command | metadata
+
 ```

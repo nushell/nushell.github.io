@@ -935,6 +935,170 @@ The comments following the parameters become their description. Only a single-li
 A Nushell comment that continues on the same line for argument documentation purposes requires a space before the ` #` pound sign.
 :::
 
+## Adding Attributes to Custom Commands via `attr`
+
+As of version 0.103.0, Nushell allows authors of custom commands to enrich their work
+with attributes with subcommands of the `attr` builtin, prefixed by the `@` symbol
+before the definition of the command. For those coming from Python, Java, or JavaScript, this
+will appear similar to decorators or annotations, but serve a slightly different purpose.
+
+Let's improve the documentation for the `vip-greet` custom command. The `example`
+attribute adds to the output of `help {command}` or `{command} -h`:
+
+```nu
+# Greet guests along with a VIP
+#
+# Use for birthdays, graduation parties,
+# retirements, and any other event which
+# celebrates an event # for a particular
+# person.
+@example "Greet a VIP" {vip-greet "Bob"} --result "And a special welcome to our VIP today, Bob!"
+@example "Greet multiple people" {vip-greet "Bob" ["Alice" "Charlie"]} --result "Hello, Alice!
+Hello, Charlie!
+And a special welcome to our VIP today, Bob!"
+def vip-greet [
+  vip: string        # The special guest
+   ...names: string  # The other guests
+] {
+  for $name in $names {
+    print $"Hello, ($name)!"
+  }
+
+  print $"And a special welcome to our VIP today, ($vip)!"
+}
+```
+
+Now, run `help vip-greet` to see the examples added.
+
+```text
+Greet guests along with a VIP
+
+Use for birthdays, graduation parties,
+retirements, and any other event which
+celebrates an event # for a particular
+person.
+
+Usage:
+  > vip-greet <vip> ...(names)
+
+Flags:
+  -h, --help: Display the help message for this command
+
+Parameters:
+  vip <string>: The special guest
+  ...names <string>: The other guests
+
+Input/output types:
+  ╭───┬───────┬────────╮
+  │ # │ input │ output │
+  ├───┼───────┼────────┤
+  │ 0 │ any   │ any    │
+  ╰───┴───────┴────────╯
+
+Examples:
+  Greet a VIP
+  > vip-greet "Bob"
+  And a special welcome to our VIP today, Bob!
+
+  Greet multiple people
+  > vip-greet "Bob" ["Alice" "Charlie"]
+  Hello, Alice!
+  Hello, Charlie!
+  And a special welcome to our VIP today, Bob!
+```
+
+When maintaining a script, module, plugin, or library written in nu, some custom
+commands may end up being replaced by newer versions or removed completely, but
+remain available temporarily to give users time to transition away from the older
+functionality.
+
+The `deprecated` attribute raises a warning to the users upon running
+the custom command.
+
+```nu
+@deprecated
+def greet [
+  name: string
+  --all-caps
+] {
+    let greeting = $"Hello, ($name)!"
+    if $all_caps {
+      $greeting | str upcase
+    } else {
+      $greeting
+    }
+}
+```
+
+Run `greet {name}` to see the warning.
+
+```bash
+> greet "bob"
+Warning: nu::parser::deprecated
+
+  ⚠ Command deprecated.
+   ╭─[entry #13:1:1]
+ 1 │ greet "bob"
+   · ─────┬─────
+   ·      ╰── greet is deprecated and will be removed in a future release.
+   ╰────
+
+Hello, bob!
+```
+
+If there is a replacement command or additional context that would
+assist the user when updating their workflows, add text after `@deprecated`.
+
+The `category` attribute assigns the specified label when using `scope commands`
+or `help` commands.
+
+```nu
+@deprecated "Use vip-greet as a replacement."
+@category "deprecated"
+def greet [
+  name: string
+  --all-caps
+] {
+    let greeting = $"Hello, ($name)!"
+    if $all_caps {
+      $greeting | str upcase
+    } else {
+      $greeting
+    }
+}
+```
+
+```bash
+> greet bob
+Warning: nu::parser::deprecated
+
+  ⚠ Command deprecated.
+   ╭─[entry #15:1:1]
+ 1 │ greet bob
+   · ────┬────
+   ·     ╰── greet is deprecated and will be removed in a future release.
+   ╰────
+  help: Use vip-greet as a replacement.
+
+Hello, bob!
+
+> help commands | where category == deprecated
+╭───────┬──────────┬───────────────┬─────────────────┬────────────────┬───────────────────────────────────────────────────────────────────────────────────────┬───────────────────┬─────────────────┬─────────────╮
+│     # │   name   │   category    │  command_type   │  description   │                                        params                                         │   input_output    │  search_terms   │  is_const   │
+├───────┼──────────┼───────────────┼─────────────────┼────────────────┼───────────────────────────────────────────────────────────────────────────────────────┼───────────────────┼─────────────────┼─────────────┤
+│     0 │ greet    │ deprecated    │ custom          │                │ ╭───┬────────────┬────────┬──────────┬───────────────────────────────────────────╮    │ [list 0 items]    │                 │ false       │
+│       │          │               │                 │                │ │ # │    name    │  type  │ required │                description                │    │                   │                 │             │
+│       │          │               │                 │                │ ├───┼────────────┼────────┼──────────┼───────────────────────────────────────────┤    │                   │                 │             │
+│       │          │               │                 │                │ │ 0 │ name       │ string │ true     │                                           │    │                   │                 │             │
+│       │          │               │                 │                │ │ 1 │ --all-caps │ switch │ false    │                                           │    │                   │                 │             │
+│       │          │               │                 │                │ │ 2 │ --help(-h) │ switch │ false    │ Display the help message for this command │    │                   │                 │             │
+│       │          │               │                 │                │ ╰───┴────────────┴────────┴──────────┴───────────────────────────────────────────╯    │                   │                 │             │
+╰───────┴──────────┴───────────────┴─────────────────┴────────────────┴───────────────────────────────────────────────────────────────────────────────────────┴───────────────────┴─────────────────┴─────────────╯
+```
+
+To see other attributes available for use within nushell, check the [command reference](/commands/docs/attr.html)
+or run `help attr` from the nushell REPL.
+
 ## Changing the Environment in a Custom Command
 
 Normally, environment variable definitions and changes are [_scoped_ within a block](./environment.html#scoping). This means that changes to those variables are lost when they go out of scope at the end of the block, including the block of a custom command.

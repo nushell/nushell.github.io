@@ -2,7 +2,7 @@
 title: reverse
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
   Reverses the input list or table.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | list&lt;any&gt; | list&lt;any&gt; |
 ## Examples
 
-Reverse a list
+Reverse a list.
 ```nu
 > [0,1,2,3] | reverse
 ╭───┬───╮
@@ -40,7 +40,7 @@ Reverse a list
 
 ```
 
-Reverse a table
+Reverse a table.
 ```nu
 > [{a: 1} {a: 2}] | reverse
 ╭───┬───╮

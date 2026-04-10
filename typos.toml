@@ -6,6 +6,10 @@ extend-ignore-identifiers-re = [
     "(?i)foobar", # false positive in book/sorting.md
 ]
 
+extend-ignore-re = [
+    "\\x1b\\[[0-9;]*m.*", # ignore ansi color instructions
+]
+
 [default.extend-words]
 "ime" = "ime" # false positive in cookbook/polars_v_pandas_v_nushell.md
 ba = "ba"

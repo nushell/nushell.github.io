@@ -2,7 +2,7 @@
 title: exit
 categories: |
   shells
-version: 0.109.0
+version: 0.111.0
 shells: |
   Exit Nu.
 usage: |
@@ -19,6 +19,10 @@ contributors: false
 ## Signature
 
 ```> exit {flags} (exit_code)```
+
+## Flags
+
+ -  `--abort`: Exit by abort.
 
 ## Parameters
 

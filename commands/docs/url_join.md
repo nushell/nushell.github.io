@@ -2,11 +2,11 @@
 title: url join
 categories: |
   network
-version: 0.109.0
+version: 0.111.0
 network: |
-  Converts a record to url.
+  Convert a record to a URL string.
 usage: |
-  Converts a record to url.
+  Convert a record to a URL string.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `url join` for [network](/commands/categories/network.md)
 
-<div class='command-title'>Converts a record to url.</div>
+<div class='command-title'>Convert a record to a URL string.</div>
 
 ## Signature
 
@@ -28,7 +28,7 @@ contributors: false
 | record | string |
 ## Examples
 
-Outputs a url representing the contents of this record, `params` and `query` fields must be equivalent
+Outputs a URL representing the contents of this record, `params` and `query` fields must be equivalent.
 ```nu
 > {
         "scheme": "http",
@@ -48,7 +48,7 @@ Outputs a url representing the contents of this record, `params` and `query` fie
 http://www.pixiv.net/member_illust.php?mode=medium&illust_id=99260204
 ```
 
-Outputs a url representing the contents of this record, "exploding" the list in `params` into multiple parameters
+Outputs a URL representing the contents of this record, "exploding" the list in `params` into multiple parameters.
 ```nu
 > {
         "scheme": "http",
@@ -62,7 +62,7 @@ Outputs a url representing the contents of this record, "exploding" the list in 
 http://user:pwd@www.pixiv.net:1234?a=one&a=two&b=three
 ```
 
-Outputs a url representing the contents of this record
+Outputs a URL representing the contents of this record.
 ```nu
 > {
         "scheme": "http",
@@ -76,7 +76,7 @@ Outputs a url representing the contents of this record
 http://user:pwd@www.pixiv.net:1234?test=a
 ```
 
-Outputs a url representing the contents of this record
+Outputs a URL representing the contents of this record.
 ```nu
 > {
         "scheme": "http",

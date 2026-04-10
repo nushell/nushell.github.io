@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "update": "nu make_docs.nu",
-    "dev": "vuepress dev",
-    "build": "vuepress build",
+    "dev": "cross-env NODE_OPTIONS=--max-old-space-size=8192 vuepress dev",
+    "build": "cross-env NODE_OPTIONS=--max-old-space-size=8192 vuepress build",
     "postinstall": "patch-package",
     "prepare": "git config --unset core.hooksPath && rm -rf .husky || true; npx lefthook install",
     "pretty": "prettier --write ."
@@ -20,6 +20,8 @@
     "@vuepress/plugin-shiki": "2.0.0-rc.118",
     "@vuepress/plugin-sitemap": "2.0.0-rc.118",
     "@vuepress/theme-default": "2.0.0-rc.118",
+    "asciinema-player": "^3.15.1",
+    "cross-env": "^10.1.0",
     "lefthook": "1.8.2",
     "patch-package": "^8.0.1",
     "prettier": "^3.3.3",
@@ -29,5 +31,8 @@
   "engines": {
     "npm": ">=9.0.0",
     "node": ">=18.12.0"
+  },
+  "volta": {
+    "node": "22.22.0"
   }
 }

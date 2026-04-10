@@ -2,7 +2,7 @@
 title: update
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
   Update an existing column to have a new value.
 usage: |
@@ -35,7 +35,7 @@ contributors: false
 | list&lt;any&gt; | list&lt;any&gt; |
 ## Examples
 
-Update a column value
+Update a column value.
 ```nu
 > {'name': 'nu', 'stars': 5} | update name 'Nushell'
 ╭───────┬─────────╮
@@ -44,7 +44,7 @@ Update a column value
 ╰───────┴─────────╯
 ```
 
-Use a closure to alter each value in the 'authors' column to a single string
+Use a closure to alter each value in the 'authors' column to a single string.
 ```nu
 > [[project, authors]; ['nu', ['Andrés', 'JT', 'Yehuda']]] | update authors {|row| $row.authors | str join ',' }
 ╭───┬─────────┬──────────────────╮
@@ -55,7 +55,7 @@ Use a closure to alter each value in the 'authors' column to a single string
 
 ```
 
-Implicitly use the `$in` value in a closure to update 'authors'
+Implicitly use the `$in` value in a closure to update 'authors'.
 ```nu
 > [[project, authors]; ['nu', ['Andrés', 'JT', 'Yehuda']]] | update authors { str join ',' }
 ╭───┬─────────┬──────────────────╮
@@ -66,7 +66,7 @@ Implicitly use the `$in` value in a closure to update 'authors'
 
 ```
 
-Update a value at an index in a list
+Update a value at an index in a list.
 ```nu
 > [1 2 3] | update 1 4
 ╭───┬───╮
@@ -77,7 +77,7 @@ Update a value at an index in a list
 
 ```
 
-Use a closure to compute a new value at an index
+Use a closure to compute a new value at an index.
 ```nu
 > [1 2 3] | update 1 {|i| $i + 2 }
 ╭───┬───╮

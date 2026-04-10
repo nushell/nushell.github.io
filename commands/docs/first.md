@@ -2,7 +2,7 @@
 title: first
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
   Return only the first several rows of the input. Counterpart of `last`. Opposite of `skip`.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--strict, -s`: Throw an error if input is empty
+ -  `--strict, -s`: Throw an error if input is empty.
 
 ## Parameters
 
@@ -38,13 +38,13 @@ contributors: false
 | range     | any    |
 ## Examples
 
-Return the first item of a list/table
+Return the first item of a list/table.
 ```nu
 > [1 2 3] | first
 1
 ```
 
-Return the first 2 items of a list/table
+Return the first 2 items of a list/table.
 ```nu
 > [1 2 3] | first 2
 ╭───┬───╮
@@ -54,7 +54,7 @@ Return the first 2 items of a list/table
 
 ```
 
-Return the first 2 bytes of a binary value
+Return the first 2 bytes of a binary value.
 ```nu
 > 0x[01 23 45] | first 2
 Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
@@ -62,7 +62,7 @@ Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-Return the first item of a range
+Return the first item of a range.
 ```nu
 > 1..3 | first
 1

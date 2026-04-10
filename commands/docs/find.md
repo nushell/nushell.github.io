@@ -2,11 +2,11 @@
 title: find
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
-  Searches terms in the input.
+  Search for terms in the input data.
 usage: |
-  Searches terms in the input.
+  Search for terms in the input data.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `find` for [filters](/commands/categories/filters.md)
 
-<div class='command-title'>Searches terms in the input.</div>
+<div class='command-title'>Search for terms in the input data.</div>
 
 ## Signature
 
@@ -22,14 +22,14 @@ contributors: false
 
 ## Flags
 
- -  `--regex, -r {string}`: regex to match with
- -  `--ignore-case, -i`: case-insensitive; when in regex mode, this is equivalent to (?i)
- -  `--multiline, -m`: don't split multi-line strings into lists of lines. you should use this option when using the (?m) or (?s) flags in regex mode
- -  `--dotall, -s`: dotall regex mode: allow a dot . to match newlines \n; equivalent to (?s)
- -  `--columns, -c {list<string>}`: column names to be searched
- -  `--no-highlight, -n`: no-highlight mode: find without marking with ansi code
- -  `--invert, -v`: invert the match
- -  `--rfind, -R`: search from the end of the string and only return the first match
+ -  `--regex, -r {string}`: Regex to match with.
+ -  `--ignore-case, -i`: Case-insensitive; when in regex mode, this is equivalent to (?i).
+ -  `--multiline, -m`: Don't split multi-line strings into lists of lines. you should use this option when using the (?m) or (?s) flags in regex mode.
+ -  `--dotall, -s`: Dotall regex mode: allow a dot . to match newlines \n; equivalent to (?s).
+ -  `--columns, -c {list<string>}`: Column names to be searched.
+ -  `--no-highlight, -n`: No-highlight mode: find without marking with ansi code.
+ -  `--invert, -v`: Invert the match.
+ -  `--rfind, -R`: Search from the end of the string and only return the first match.
 
 ## Parameters
 
@@ -44,7 +44,7 @@ contributors: false
 | string    | any       |
 ## Examples
 
-Search for multiple terms in a command output
+Search for multiple terms in a command output.
 ```nu
 > ls | find toml md sh
 
@@ -56,7 +56,7 @@ Search and highlight text for a term in a string.
 Cargo.toml
 ```
 
-Search a number or a file size in a list of numbers
+Search a number or a file size in a list of numbers.
 ```nu
 > [1 5 3kb 4 35 3Mb] | find 5 3kb
 ╭───┬────────╮
@@ -66,7 +66,7 @@ Search a number or a file size in a list of numbers
 
 ```
 
-Search a char in a list of string
+Search a char in a list of string.
 ```nu
 > [moe larry curly] | find l
 ╭───┬───────╮
@@ -76,7 +76,7 @@ Search a char in a list of string
 
 ```
 
-Search using regex
+Search using regex.
 ```nu
 > [abc odb arc abf] | find --regex "b."
 ╭───┬─────╮
@@ -86,7 +86,7 @@ Search using regex
 
 ```
 
-Case insensitive search
+Case insensitive search.
 ```nu
 > [aBc bde Arc abf] | find "ab" -i
 ╭───┬─────╮
@@ -96,7 +96,7 @@ Case insensitive search
 
 ```
 
-Find value in records using regex
+Find value in records using regex.
 ```nu
 > [[version name]; ['0.1.0' nushell] ['0.1.1' fish] ['0.2.0' zsh]] | find --regex "nu"
 ╭───┬─────────┬─────────╮
@@ -107,7 +107,7 @@ Find value in records using regex
 
 ```
 
-Find inverted values in records using regex
+Find inverted values in records using regex.
 ```nu
 > [[version name]; ['0.1.0' nushell] ['0.1.1' fish] ['0.2.0' zsh]] | find --regex "nu" --invert
 ╭───┬─────────┬──────╮
@@ -119,7 +119,7 @@ Find inverted values in records using regex
 
 ```
 
-Find value in list using regex
+Find value in list using regex.
 ```nu
 > [["Larry", "Moe"], ["Victor", "Marina"]] | find --regex "rr"
 ╭───┬───────────────╮
@@ -131,7 +131,7 @@ Find value in list using regex
 
 ```
 
-Find inverted values in records using regex
+Find inverted values in records using regex.
 ```nu
 > [["Larry", "Moe"], ["Victor", "Marina"]] | find --regex "rr" --invert
 ╭───┬────────────────╮
@@ -143,7 +143,7 @@ Find inverted values in records using regex
 
 ```
 
-Remove ANSI sequences from result
+Remove ANSI sequences from result.
 ```nu
 > [[foo bar]; [abc 123] [def 456]] | find --no-highlight 123
 ╭───┬─────┬─────╮
@@ -154,7 +154,7 @@ Remove ANSI sequences from result
 
 ```
 
-Find and highlight text in specific columns
+Find and highlight text in specific columns.
 ```nu
 > [[col1 col2 col3]; [moe larry curly] [larry curly moe]] | find moe --columns [col1]
 ╭───┬──────┬───────┬───────╮
@@ -165,7 +165,7 @@ Find and highlight text in specific columns
 
 ```
 
-Find in a multi-line string
+Find in a multi-line string.
 ```nu
 > 'Violets are red
 And roses are blue
@@ -178,7 +178,7 @@ Alter their hue' | find ue
 
 ```
 
-Find in a multi-line string without splitting the input into a list of lines
+Find in a multi-line string without splitting the input into a list of lines.
 ```nu
 > 'Violets are red
 And roses are blue
@@ -190,7 +190,7 @@ When metamaterials
 Alter their hue
 ```
 
-Find and highlight the last occurrence in a string
+Find and highlight the last occurrence in a string.
 ```nu
 > 'hello world hello' | find --rfind hello
 hello world hello

@@ -2,7 +2,7 @@
 title: values
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
   Given a record or table, produce a list of its columns' values.
 usage: |
@@ -29,7 +29,7 @@ contributors: false
 | table  | list&lt;any&gt; |
 ## Examples
 
-Get the values from the record (produce a list)
+Get the values from the record (produce a list).
 ```nu
 > { mode:normal userid:31415 } | values
 ╭───┬────────╮
@@ -39,7 +39,7 @@ Get the values from the record (produce a list)
 
 ```
 
-Values are ordered by the column order of the record
+Values are ordered by the column order of the record.
 ```nu
 > { f:250 g:191 c:128 d:1024 e:2000 a:16 b:32 } | values
 ╭───┬──────╮
@@ -54,7 +54,7 @@ Values are ordered by the column order of the record
 
 ```
 
-Get the values from the table (produce a list of lists)
+Get the values from the table (produce a list of lists).
 ```nu
 > [[name meaning]; [ls list] [mv move] [cd 'change directory']] | values
 ╭───┬──────────────────────────╮

@@ -2,11 +2,11 @@
 title: bytes build
 categories: |
   bytes
-version: 0.109.0
+version: 0.111.0
 bytes: |
-  Create bytes from the arguments.
+  Create a binary value from the provided arguments.
 usage: |
-  Create bytes from the arguments.
+  Create a binary value from the provided arguments.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `bytes build` for [bytes](/commands/categories/bytes.md)
 
-<div class='command-title'>Create bytes from the arguments.</div>
+<div class='command-title'>Create a binary value from the provided arguments.</div>
 
 ## Signature
 
@@ -32,7 +32,7 @@ contributors: false
 | nothing | binary |
 ## Examples
 
-Builds binary data from 0x[01 02], 0x[03], 0x[04]
+Builds binary data from 0x[01 02], 0x[03], 0x[04].
 ```nu
 > bytes build 0x[01 02] 0x[03] 0x[04]
 Length: 4 (0x4) bytes | printable whitespace ascii_other non_ascii
@@ -40,7 +40,7 @@ Length: 4 (0x4) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-Builds binary data from byte numbers
+Builds binary data from byte numbers.
 ```nu
 > bytes build 255 254 253 252
 Length: 4 (0x4) bytes | printable whitespace ascii_other non_ascii

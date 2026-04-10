@@ -2,7 +2,7 @@
 title: drop column
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
   Remove N columns at the right-hand end of the input table. To remove columns by name, use `reject`.
 usage: |
@@ -19,6 +19,10 @@ contributors: false
 ## Signature
 
 ```> drop column {flags} (columns)```
+
+## Flags
+
+ -  `--left, -l`: Drop columns from the left.
 
 ## Parameters
 
@@ -51,4 +55,24 @@ Remove the last column of a record
 ╭─────┬────────╮
 │ lib │ nu-lib │
 ╰─────┴────────╯
+```
+
+Remove the first column of a table
+```nu
+> [[lib, extension]; [nu-lib, rs] [nu-core, rb]] | drop column --left
+╭───┬───────────╮
+│ # │ extension │
+├───┼───────────┤
+│ 0 │ rs        │
+│ 1 │ rb        │
+╰───┴───────────╯
+
+```
+
+Remove the first column of a record
+```nu
+> {lib: nu-lib, extension: rs} | drop column --left
+╭───────────┬────╮
+│ extension │ rs │
+╰───────────┴────╯
 ```

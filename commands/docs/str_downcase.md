@@ -2,11 +2,11 @@
 title: str downcase
 categories: |
   strings
-version: 0.109.0
+version: 0.111.0
 strings: |
-  Make text lowercase.
+  Convert text to lowercase.
 usage: |
-  Make text lowercase.
+  Convert text to lowercase.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `str downcase` for [strings](/commands/categories/strings.md)
 
-<div class='command-title'>Make text lowercase.</div>
+<div class='command-title'>Convert text to lowercase.</div>
 
 ## Signature
 
@@ -35,19 +35,19 @@ contributors: false
 | record       | record       |
 ## Examples
 
-Downcase contents
+Downcase contents.
 ```nu
 > 'NU' | str downcase
 nu
 ```
 
-Downcase contents
+Downcase contents.
 ```nu
 > 'TESTa' | str downcase
 testa
 ```
 
-Downcase contents
+Downcase contents.
 ```nu
 > [[ColA ColB]; [Test ABC]] | str downcase ColA
 ╭───┬──────┬──────╮
@@ -58,7 +58,7 @@ Downcase contents
 
 ```
 
-Downcase contents
+Downcase contents.
 ```nu
 > [[ColA ColB]; [Test ABC]] | str downcase ColA ColB
 ╭───┬──────┬──────╮

@@ -2,7 +2,7 @@
 title: url decode
 categories: |
   strings
-version: 0.109.0
+version: 0.111.0
 strings: |
   Converts a percent-encoded web safe string to a string.
 usage: |
@@ -35,13 +35,13 @@ contributors: false
 | record       | record       |
 ## Examples
 
-Decode a url with escape characters
+Decode a URL with escape characters.
 ```nu
 > 'https://example.com/foo%20bar' | url decode
 https://example.com/foo bar
 ```
 
-Decode multiple urls with escape characters in list
+Decode multiple URLs with escape characters in list.
 ```nu
 > ['https://example.com/foo%20bar' 'https://example.com/a%3Eb' '%E4%B8%AD%E6%96%87%E5%AD%97/eng/12%2034'] | url decode
 ╭───┬─────────────────────────────╮

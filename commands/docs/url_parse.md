@@ -2,11 +2,11 @@
 title: url parse
 categories: |
   network
-version: 0.109.0
+version: 0.111.0
 network: |
-  Parses a url.
+  Parse a URL string into structured data.
 usage: |
-  Parses a url.
+  Parse a URL string into structured data.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `url parse` for [network](/commands/categories/network.md)
 
-<div class='command-title'>Parses a url.</div>
+<div class='command-title'>Parse a URL string into structured data.</div>
 
 ## Signature
 
@@ -34,7 +34,7 @@ contributors: false
 | record | record |
 ## Examples
 
-Parses a url
+Parses a URL.
 ```nu
 > 'http://user123:pass567@www.example.com:8081/foo/bar?param1=section&p2=&f[name]=vldc&f[no]=42#hello' | url parse
 ╭──────────┬──────────────────────────────────────────╮

@@ -2,7 +2,7 @@
 title: http
 categories: |
   network
-version: 0.109.0
+version: 0.111.0
 network: |
   Various commands for working with http methods.
 usage: |
@@ -22,22 +22,21 @@ contributors: false
 
 ## Flags
 
- -  `--content-type, -t {any}`: the MIME type of content to post
- -  `--user, -u {any}`: the username when authenticating
- -  `--password, -p {any}`: the password when authenticating
- -  `--max-time, -m {duration}`: max duration before timeout occurs
- -  `--headers, -H {any}`: custom headers you want to add
- -  `--raw, -r`: fetch contents as text rather than a table
- -  `--insecure, -k`: allow insecure server connections when using SSL
+ -  `--content-type, -t {any}`: The MIME type of content to post.
+ -  `--user, -u {any}`: The username when authenticating.
+ -  `--password, -p {any}`: The password when authenticating.
+ -  `--max-time, -m {duration}`: Max duration before timeout occurs.
+ -  `--headers, -H {any}`: Custom headers you want to add.
+ -  `--raw, -r`: Fetch contents as text rather than a table.
+ -  `--insecure, -k`: Allow insecure server connections when using SSL.
  -  `--full, -f`: Returns the record, containing metainformation about the exchange in addition to the response.
                 Returning record fields:
                 - urls: list of url redirects this command had to make to get to the destination
                 - headers.request: list of headers passed when doing the request
                 - headers.response: list of received headers
                 - body: the http body of the response
-                - status: the http status of the response
-
- -  `--allow-errors, -e`: do not fail if the server returns an error code
+                - status: the http status of the response.
+ -  `--allow-errors, -e`: Do not fail if the server returns an error code.
  -  `--redirect-mode, -R {string}`: What to do when encountering redirects. Default: 'follow'. Valid options: 'follow' ('f'), 'manual' ('m'), 'error' ('e').
 
 ## Parameters
@@ -53,19 +52,19 @@ contributors: false
 | nothing | any    |
 ## Examples
 
-Get content from example.com with default verb
+Get content from example.com with default verb.
 ```nu
 > http https://www.example.com
 
 ```
 
-Post content to example.com with default verb
+Post content to example.com with default verb.
 ```nu
 > http https://www.example.com 'body'
 
 ```
 
-Get content from example.com with explicit verb
+Get content from example.com with explicit verb.
 ```nu
 > http get https://www.example.com
 
@@ -82,6 +81,7 @@ Without a subcommand but with a URL provided, it performs a GET request by defau
 | [`http get`](/commands/docs/http_get.md)         | Fetch the contents from a URL.                            | built-in |
 | [`http head`](/commands/docs/http_head.md)       | Get the headers from a URL.                               | built-in |
 | [`http options`](/commands/docs/http_options.md) | Requests permitted communication options for a given URL. | built-in |
-| [`http patch`](/commands/docs/http_patch.md)     | Patch a body to a URL.                                    | built-in |
-| [`http post`](/commands/docs/http_post.md)       | Post a body to a URL.                                     | built-in |
-| [`http put`](/commands/docs/http_put.md)         | Put a body to a URL.                                      | built-in |
+| [`http patch`](/commands/docs/http_patch.md)     | Send a PATCH request to a URL with a request body.        | built-in |
+| [`http pool`](/commands/docs/http_pool.md)       | Configure and reset builtin http connection pool.         | built-in |
+| [`http post`](/commands/docs/http_post.md)       | Send a POST request to a URL with a request body.         | built-in |
+| [`http put`](/commands/docs/http_put.md)         | Send a PUT request to a URL with a request body.          | built-in |

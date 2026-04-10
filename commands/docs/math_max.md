@@ -2,7 +2,7 @@
 title: math max
 categories: |
   math
-version: 0.109.0
+version: 0.111.0
 math: |
   Returns the maximum of a list of values, or of columns in a table.
 usage: |
@@ -34,13 +34,13 @@ contributors: false
 | record         | record   |
 ## Examples
 
-Find the maximum of a list of numbers
+Find the maximum of a list of numbers.
 ```nu
 > [-50 100 25] | math max
 100
 ```
 
-Find the maxima of the columns of a table
+Find the maxima of the columns of a table.
 ```nu
 > [{a: 1 b: 3} {a: 2 b: -1}] | math max
 ╭───┬───╮
@@ -49,8 +49,8 @@ Find the maxima of the columns of a table
 ╰───┴───╯
 ```
 
-Find the maximum of a list of dates
+Find the maximum of a list of dates.
 ```nu
 > [2022-02-02 2022-12-30 2012-12-12] | math max
-Fri, 30 Dec 2022 00:00:00 +0000 (2 years ago)
+Fri, 30 Dec 2022 00:00:00 +0000 (3 years ago)
 ```

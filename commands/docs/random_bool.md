@@ -2,7 +2,7 @@
 title: random bool
 categories: |
   random
-version: 0.109.0
+version: 0.111.0
 random: |
   Generate a random boolean value.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--bias, -b {number}`: Adjusts the probability of a "true" outcome
+ -  `--bias, -b {number}`: Adjusts the probability of a "true" outcome.
 
 
 ## Input/output types:
@@ -32,13 +32,13 @@ contributors: false
 | nothing | bool   |
 ## Examples
 
-Generate a random boolean value
+Generate a random boolean value.
 ```nu
 > random bool
 
 ```
 
-Generate a random boolean value with a 75% chance of "true"
+Generate a random boolean value with a 75% chance of "true".
 ```nu
 > random bool --bias 0.75
 

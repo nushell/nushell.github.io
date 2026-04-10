@@ -2,7 +2,7 @@
 title: split words
 categories: |
   strings
-version: 0.109.0
+version: 0.111.0
 strings: |
   Split a string's words into separate rows.
 usage: |
@@ -22,9 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--min-word-length, -l {int}`: The minimum word length
- -  `--grapheme-clusters, -g`: measure word length in grapheme clusters (requires -l)
- -  `--utf-8-bytes, -b`: measure word length in UTF-8 bytes (default; requires -l; non-ASCII chars are length 2+)
+ -  `--min-word-length, -l {int}`: The minimum word length.
+ -  `--grapheme-clusters, -g`: Measure word length in grapheme clusters (requires -l).
+ -  `--utf-8-bytes, -b`: Measure word length in UTF-8 bytes (default; requires -l; non-ASCII chars are length 2+).
 
 
 ## Input/output types:
@@ -35,7 +35,7 @@ contributors: false
 | list&lt;string&gt; | list&lt;list&lt;string&gt;&gt; |
 ## Examples
 
-Split the string's words into separate rows
+Split the string's words into separate rows.
 ```nu
 > 'hello world' | split words
 ╭───┬───────╮
@@ -45,7 +45,7 @@ Split the string's words into separate rows
 
 ```
 
-Split the string's words, of at least 3 characters, into separate rows
+Split the string's words, of at least 3 characters, into separate rows.
 ```nu
 > 'hello to the world' | split words --min-word-length 3
 ╭───┬───────╮
@@ -56,7 +56,7 @@ Split the string's words, of at least 3 characters, into separate rows
 
 ```
 
-A real-world example of splitting words
+A real-world example of splitting words.
 ```nu
 > http get https://www.gutenberg.org/files/11/11-0.txt | str downcase | split words --min-word-length 2 | uniq --count | sort-by count --reverse | first 10
 

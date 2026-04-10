@@ -2,7 +2,7 @@
 title: to toml
 categories: |
   formats
-version: 0.109.0
+version: 0.111.0
 formats: |
   Convert record into .toml text.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--serialize, -s`: serialize nushell types that cannot be deserialized
+ -  `--serialize, -s`: Serialize nushell types that cannot be deserialized.
 
 
 ## Input/output types:
@@ -32,7 +32,7 @@ contributors: false
 | record | string |
 ## Examples
 
-Outputs an TOML string representing the contents of this record
+Outputs an TOML string representing the contents of this record.
 ```nu
 > {foo: 1 bar: 'qwe'} | to toml
 foo = 1

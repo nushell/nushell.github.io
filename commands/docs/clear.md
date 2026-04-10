@@ -2,11 +2,11 @@
 title: clear
 categories: |
   platform
-version: 0.109.0
+version: 0.111.0
 platform: |
-  Clear the terminal.
+  Clear the terminal screen.
 usage: |
-  Clear the terminal.
+  Clear the terminal screen.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `clear` for [platform](/commands/categories/platform.md)
 
-<div class='command-title'>Clear the terminal.</div>
+<div class='command-title'>Clear the terminal screen.</div>
 
 ## Signature
 
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--keep-scrollback, -k`: Do not clear the scrollback history
+ -  `--keep-scrollback, -k`: Do not clear the scrollback history.
 
 
 ## Input/output types:
@@ -32,13 +32,13 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Clear the terminal
+Clear the terminal.
 ```nu
 > clear
 
 ```
 
-Clear the terminal but not its scrollback history
+Clear the terminal but not its scrollback history.
 ```nu
 > clear --keep-scrollback
 

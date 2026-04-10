@@ -2,7 +2,7 @@
 title: math abs
 categories: |
   math
-version: 0.109.0
+version: 0.111.0
 math: |
   Returns the absolute value of a number.
 usage: |
@@ -32,7 +32,7 @@ contributors: false
 | range          | list&lt;number&gt;   |
 ## Examples
 
-Compute absolute value of each number in a list of numbers
+Compute absolute value of each number in a list of numbers.
 ```nu
 > [-50 -100.0 25] | math abs
 ╭───┬────────╮

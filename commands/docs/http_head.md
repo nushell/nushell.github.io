@@ -2,7 +2,7 @@
 title: http head
 categories: |
   network
-version: 0.109.0
+version: 0.111.0
 network: |
   Get the headers from a URL.
 usage: |
@@ -22,13 +22,14 @@ contributors: false
 
 ## Flags
 
- -  `--user, -u {any}`: the username when authenticating
- -  `--password, -p {any}`: the password when authenticating
- -  `--max-time, -m {duration}`: max duration before timeout occurs
- -  `--headers, -H {any}`: custom headers you want to add
- -  `--insecure, -k`: allow insecure server connections when using SSL
+ -  `--user, -u {any}`: The username when authenticating.
+ -  `--password, -p {any}`: The password when authenticating.
+ -  `--max-time, -m {duration}`: Max duration before timeout occurs.
+ -  `--headers, -H {any}`: Custom headers you want to add.
+ -  `--insecure, -k`: Allow insecure server connections when using SSL.
+ -  `--pool`: Using a global pool as a client.
  -  `--redirect-mode, -R {string}`: What to do when encountering redirects. Default: 'follow'. Valid options: 'follow' ('f'), 'manual' ('m'), 'error' ('e').
- -  `--unix-socket, -U {path}`: Connect to the specified Unix socket instead of using TCP
+ -  `--unix-socket, -U {path}`: Connect to the specified Unix socket instead of using TCP.
 
 ## Parameters
 
@@ -42,25 +43,25 @@ contributors: false
 | nothing | any    |
 ## Examples
 
-Get headers from example.com
+Get headers from example.com.
 ```nu
 > http head https://www.example.com
 
 ```
 
-Get headers from example.com, with username and password
+Get headers from example.com, with username and password.
 ```nu
 > http head --user myuser --password mypass https://www.example.com
 
 ```
 
-Get headers from example.com, with custom header using a record
+Get headers from example.com, with custom header using a record.
 ```nu
 > http head --headers {my-header-key: my-header-value} https://www.example.com
 
 ```
 
-Get headers from example.com, with custom header using a list
+Get headers from example.com, with custom header using a list.
 ```nu
 > http head --headers [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
 

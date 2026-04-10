@@ -2,7 +2,7 @@
 title: format number
 categories: |
   conversions
-version: 0.109.0
+version: 0.111.0
 conversions: |
   Format a number.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--no-prefix, -n`: don't include the binary, hex or octal prefixes
+ -  `--no-prefix, -n`: Don't include the binary, hex or octal prefixes.
 
 
 ## Input/output types:

@@ -2,7 +2,7 @@
 title: scope commands
 categories: |
   core
-version: 0.109.0
+version: 0.111.0
 core: |
   Output info on the commands in the current scope.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | nothing | list&lt;any&gt; |
 ## Examples
 
-Show the commands in the current scope
+Show the commands in the current scope.
 ```nu
 > scope commands
 

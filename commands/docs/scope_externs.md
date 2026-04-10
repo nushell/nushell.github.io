@@ -2,7 +2,7 @@
 title: scope externs
 categories: |
   core
-version: 0.109.0
+version: 0.111.0
 core: |
   Output info on the known externals in the current scope.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | nothing | any    |
 ## Examples
 
-Show the known externals in the current scope
+Show the known externals in the current scope.
 ```nu
 > scope externs
 

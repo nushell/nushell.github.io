@@ -2,7 +2,7 @@
 title: math min
 categories: |
   math
-version: 0.109.0
+version: 0.111.0
 math: |
   Finds the minimum within a list of values or tables.
 usage: |
@@ -34,13 +34,13 @@ contributors: false
 | record         | record   |
 ## Examples
 
-Compute the minimum of a list of numbers
+Compute the minimum of a list of numbers.
 ```nu
 > [-50 100 25] | math min
 -50
 ```
 
-Compute the minima of the columns of a table
+Compute the minima of the columns of a table.
 ```nu
 > [{a: 1 b: 3} {a: 2 b: -1}] | math min
 ╭───┬────╮
@@ -49,7 +49,7 @@ Compute the minima of the columns of a table
 ╰───┴────╯
 ```
 
-Find the minimum of a list of arbitrary values (Warning: Weird)
+Find the minimum of a list of arbitrary values (Warning: Weird).
 ```nu
 > [-50 'hello' true] | math min
 true

@@ -2,7 +2,7 @@
 title: print
 categories: |
   strings
-version: 0.109.0
+version: 0.111.0
 strings: |
   Print the given values to stdout.
 usage: |
@@ -22,13 +22,13 @@ contributors: false
 
 ## Flags
 
- -  `--no-newline, -n`: print without inserting a newline for the line ending
- -  `--stderr, -e`: print to stderr instead of stdout
- -  `--raw, -r`: print without formatting (including binary data)
+ -  `--no-newline, -n`: Print without inserting a newline for the line ending.
+ -  `--stderr, -e`: Print to stderr instead of stdout.
+ -  `--raw, -r`: Print without formatting (including binary data).
 
 ## Parameters
 
- -  `...rest`: the values to print
+ -  `...rest`: The values to print.
 
 
 ## Input/output types:

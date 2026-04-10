@@ -2,7 +2,7 @@
 title: polars concat
 categories: |
   dataframe
-version: 0.109.0
+version: 0.111.0
 dataframe: |
   Concatenate two or more dataframes.
 usage: |
@@ -22,16 +22,16 @@ contributors: false
 
 ## Flags
 
- -  `--no-parallel`: Disable parallel execution
- -  `--rechunk`: Rechunk the resulting dataframe
- -  `--to-supertypes`: Cast to supertypes
- -  `--diagonal`: Concatenate dataframes diagonally
+ -  `--no-parallel`: Disable parallel execution.
+ -  `--rechunk`: Rechunk the resulting dataframe.
+ -  `--to-supertypes`: Cast to supertypes.
+ -  `--diagonal`: Concatenate dataframes diagonally.
  -  `--no-maintain-order`: Do not maintain order. The default behavior is to maintain order.
- -  `--from-partitioned-ds`: Concatenate dataframes from a partitioned dataset
+ -  `--from-partitioned-ds`: Concatenate dataframes from a partitioned dataset.
 
 ## Parameters
 
- -  `...rest`: The dataframes to concatenate
+ -  `...rest`: The dataframes to concatenate.
 
 
 ## Input/output types:

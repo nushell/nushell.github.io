@@ -40,10 +40,10 @@ The span "start" and "end" here refer to where the underline will be in the line
 
 ## Custom Metadata
 
-You can attach arbitrary metadata to pipeline data using the [`metadata set`](/commands/docs/metadata_set.md) command with the `--merge` flag:
+You can attach arbitrary metadata to pipeline data using the [`metadata set`](/commands/docs/metadata_set.md) command with the optional closure parameter:
 
 ```nu
-"data" | metadata set --merge {custom_key: "custom_value"}
+"data" | metadata set { merge {custom_key: "custom_value"} }
 ```
 
 ## HTTP Response Metadata

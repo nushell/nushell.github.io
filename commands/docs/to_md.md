@@ -2,7 +2,7 @@
 title: to md
 categories: |
   formats
-version: 0.109.0
+version: 0.111.0
 formats: |
   Convert table into simple Markdown.
 usage: |
@@ -22,12 +22,13 @@ contributors: false
 
 ## Flags
 
- -  `--pretty, -p`: Formats the Markdown table to vertically align items
- -  `--per-element, -e`: Treat each row as markdown syntax element
- -  `--center, -c {list<cell-path>}`: Formats the Markdown table to center given columns
- -  `--escape-md, -m`: Escapes Markdown special characters
- -  `--escape-html, -t`: Escapes HTML special characters
- -  `--escape-all, -a`: Escapes both Markdown and HTML special characters
+ -  `--pretty, -p`: Formats the Markdown table to vertically align items.
+ -  `--per-element, -e`: Treat each row as markdown syntax element.
+ -  `--center, -c {list<cell-path>}`: Formats the Markdown table to center given columns.
+ -  `--escape-md, -m`: Escapes Markdown special characters.
+ -  `--escape-html, -t`: Escapes HTML special characters.
+ -  `--escape-all, -a`: Escapes both Markdown and HTML special characters.
+ -  `--list, -l {string}`: Format lists as 'ordered' (1. 2. 3.), 'unordered' (* * *), or 'none'. Default: unordered.
 
 
 ## Input/output types:
@@ -37,7 +38,7 @@ contributors: false
 | any   | string |
 ## Examples
 
-Outputs an MD string representing the contents of this table
+Outputs an MD string representing the contents of this table.
 ```nu
 > [[foo bar]; [1 2]] | to md
 | foo | bar |
@@ -45,7 +46,7 @@ Outputs an MD string representing the contents of this table
 | 1 | 2 |
 ```
 
-Optionally, output a formatted markdown string
+Optionally, output a formatted markdown string.
 ```nu
 > [[foo bar]; [1 2]] | to md --pretty
 | foo | bar |
@@ -53,7 +54,7 @@ Optionally, output a formatted markdown string
 | 1   | 2   |
 ```
 
-Treat each row as a markdown element
+Treat each row as a markdown element.
 ```nu
 > [{"H1": "Welcome to Nushell" } [[foo bar]; [1 2]]] | to md --per-element --pretty
 # Welcome to Nushell
@@ -62,15 +63,15 @@ Treat each row as a markdown element
 | 1   | 2   |
 ```
 
-Render a list
+Render a list (unordered by default).
 ```nu
-> [0 1 2] | to md --pretty
-0
-1
-2
+> [0 1 2] | to md
+* 0
+* 1
+* 2
 ```
 
-Separate list into markdown tables
+Separate list into markdown tables.
 ```nu
 > [ {foo: 1, bar: 2} {foo: 3, bar: 4} {foo: 5}] | to md --per-element
 | foo | bar |
@@ -83,7 +84,7 @@ Separate list into markdown tables
 | 5 |
 ```
 
-Center a column of a markdown table
+Center a column of a markdown table.
 ```nu
 > [ {foo: 1, bar: 2} {foo: 3, bar: 4}] | to md --pretty --center [bar]
 | foo | bar |
@@ -92,7 +93,7 @@ Center a column of a markdown table
 | 3   |  4  |
 ```
 
-Escape markdown special characters
+Escape markdown special characters.
 ```nu
 > [ {foo: "_1_", bar: "\# 2"} {foo: "[3]", bar: "4|5"}] | to md --escape-md
 | foo | bar |
@@ -101,10 +102,26 @@ Escape markdown special characters
 | \[3\] | 4\|5 |
 ```
 
-Escape html special characters
+Escape html special characters.
 ```nu
 > [ {a: p, b: "<p>Welcome to nushell</p>"}] | to md --escape-html
 | a | b |
 | --- | --- |
 | p | &lt;p&gt;Welcome to nushell&lt;&#x2f;p&gt; |
+```
+
+Render a list as an ordered markdown list.
+```nu
+> [one two three] | to md --list ordered
+1. one
+2. two
+3. three
+```
+
+Render a list without markers.
+```nu
+> [one two three] | to md --list none
+one
+two
+three
 ```

@@ -2,7 +2,7 @@
 title: const
 categories: |
   core
-version: 0.109.0
+version: 0.111.0
 core: |
   Create a parse-time constant.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `const_name`: Constant name.
+ -  `const_name`: The constant name to create.
  -  `initial_value`: Equals sign followed by constant value.
 
 
@@ -39,7 +39,7 @@ Create a new parse-time constant.
 
 ```
 
-Create a composite constant value
+Create a composite constant value.
 ```nu
 > const x = { a: 10, b: 20 }
 

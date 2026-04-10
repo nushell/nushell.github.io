@@ -2,7 +2,7 @@
 title: take until
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
   Take elements of the input until a predicate is true.
 usage: |
@@ -32,7 +32,7 @@ contributors: false
 | list&lt;any&gt; | list&lt;any&gt; |
 ## Examples
 
-Take until the element is positive
+Take until the element is positive.
 ```nu
 > [-1 -2 9 1] | take until {|x| $x > 0 }
 ╭───┬────╮
@@ -42,7 +42,7 @@ Take until the element is positive
 
 ```
 
-Take until the element is positive using stored condition
+Take until the element is positive using stored condition.
 ```nu
 > let cond = {|x| $x > 0 }; [-1 -2 9 1] | take until $cond
 ╭───┬────╮
@@ -52,7 +52,7 @@ Take until the element is positive using stored condition
 
 ```
 
-Take until the field value is positive
+Take until the field value is positive.
 ```nu
 > [{a: -1} {a: -2} {a: 9} {a: 1}] | take until {|x| $x.a > 0 }
 ╭───┬────╮

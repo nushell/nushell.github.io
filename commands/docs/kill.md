@@ -2,11 +2,11 @@
 title: kill
 categories: |
   platform
-version: 0.109.0
+version: 0.111.0
 platform: |
-  Kill a process using the process id.
+  Kill a process using its process ID.
 usage: |
-  Kill a process using the process id.
+  Kill a process using its process ID.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `kill` for [platform](/commands/categories/platform.md)
 
-<div class='command-title'>Kill a process using the process id.</div>
+<div class='command-title'>Kill a process using its process ID.</div>
 
 ## Signature
 
@@ -22,9 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--force, -f`: forcefully kill the process
- -  `--quiet, -q`: won't print anything to the console
- -  `--signal, -s {int}`: signal decimal number to be sent instead of the default 15 (unsupported on Windows)
+ -  `--force, -f`: Forcefully kill the process.
+ -  `--quiet, -q`: Won't print anything to the console.
+ -  `--signal, -s {int}`: Signal decimal number to be sent instead of the default 15 (unsupported on Windows).
 
 ## Parameters
 
@@ -38,19 +38,19 @@ contributors: false
 | nothing | any    |
 ## Examples
 
-Kill the pid using the most memory
+Kill the pid using the most memory.
 ```nu
 > ps | sort-by mem | last | kill $in.pid
 
 ```
 
-Force kill a given pid
+Force kill a given pid.
 ```nu
 > kill --force 12345
 
 ```
 
-Send INT signal
+Send INT signal.
 ```nu
 > kill -s 2 12345
 

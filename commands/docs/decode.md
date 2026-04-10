@@ -2,7 +2,7 @@
 title: decode
 categories: |
   strings
-version: 0.109.0
+version: 0.111.0
 strings: |
   Decode bytes into a string.
 usage: |
@@ -53,9 +53,9 @@ documentation link at https://docs.rs/encoding_rs/latest/encoding_rs/#statics
 
 ## Subcommands:
 
-| name                                                     | description               | type     |
-| -------------------------------------------------------- | ------------------------- | -------- |
-| [`decode base32`](/commands/docs/decode_base32.md)       | Decode a Base32 value.    | built-in |
-| [`decode base32hex`](/commands/docs/decode_base32hex.md) | Encode a base32hex value. | built-in |
-| [`decode base64`](/commands/docs/decode_base64.md)       | Decode a Base64 value.    | built-in |
-| [`decode hex`](/commands/docs/decode_hex.md)             | Hex decode a value.       | built-in |
+| name                                                     | description                    | type     |
+| -------------------------------------------------------- | ------------------------------ | -------- |
+| [`decode base32`](/commands/docs/decode_base32.md)       | Decode a Base32-encoded value. | built-in |
+| [`decode base32hex`](/commands/docs/decode_base32hex.md) | Encode a base32hex value.      | built-in |
+| [`decode base64`](/commands/docs/decode_base64.md)       | Decode a Base64-encoded value. | built-in |
+| [`decode hex`](/commands/docs/decode_hex.md)             | Decode a hex-encoded value.    | built-in |

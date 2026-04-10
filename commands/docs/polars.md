@@ -2,7 +2,7 @@
 title: polars
 categories: |
   dataframe
-version: 0.109.0
+version: 0.111.0
 dataframe: |
   Operate with data in a dataframe format.
 usage: |
@@ -80,6 +80,7 @@ to the `polars agg` command with some column expressions for aggregation which t
 | [`polars drop-duplicates`](/commands/docs/polars_drop-duplicates.md)       | Drops duplicate values in dataframe.                                                                                                                               | plugin |
 | [`polars drop-nulls`](/commands/docs/polars_drop-nulls.md)                 | Drops null values in dataframe.                                                                                                                                    | plugin |
 | [`polars dummies`](/commands/docs/polars_dummies.md)                       | Creates a new dataframe with dummy variables.                                                                                                                      | plugin |
+| [`polars entropy`](/commands/docs/polars_entropy.md)                       | Compute the entropy as `-sum(pk * log(pk))` where `pk` are discrete probabilities.                                                                                 | plugin |
 | [`polars explode`](/commands/docs/polars_explode.md)                       | Explodes a dataframe or creates a explode expression.                                                                                                              | plugin |
 | [`polars expr-not`](/commands/docs/polars_expr-not.md)                     | Creates a not expression.                                                                                                                                          | plugin |
 | [`polars fill-nan`](/commands/docs/polars_fill-nan.md)                     | Replaces NaN values with the given expression.                                                                                                                     | plugin |
@@ -145,6 +146,12 @@ to the `polars agg` command with some column expressions for aggregation which t
 | [`polars save`](/commands/docs/polars_save.md)                             | Saves a dataframe to disk. For lazy dataframes a sink operation will be used if the file type supports it (parquet, ipc/arrow, csv, and ndjson).                   | plugin |
 | [`polars schema`](/commands/docs/polars_schema.md)                         | Show schema for a dataframe.                                                                                                                                       | plugin |
 | [`polars select`](/commands/docs/polars_select.md)                         | Selects columns from lazyframe.                                                                                                                                    | plugin |
+| [`polars selector`](/commands/docs/polars_selector.md)                     | Create column selectors for use in polars commands.                                                                                                                | plugin |
+| [`polars selector all`](/commands/docs/polars_selector_all.md)             | Creates a selector that selects all columns.                                                                                                                       | plugin |
+| [`polars selector by-dtype`](/commands/docs/polars_selector_by-dtype.md)   | Creates a selector that selects columns by data type.                                                                                                              | plugin |
+| [`polars selector by-name`](/commands/docs/polars_selector_by-name.md)     | Creates a selector that selects columns by name.                                                                                                                   | plugin |
+| [`polars selector first`](/commands/docs/polars_selector_first.md)         | Creates a selector that selects the first column(s) by index.                                                                                                      | plugin |
+| [`polars selector last`](/commands/docs/polars_selector_last.md)           | Creates a selector that selects the last column(s) by index.                                                                                                       | plugin |
 | [`polars set`](/commands/docs/polars_set.md)                               | Sets value where given mask is true.                                                                                                                               | plugin |
 | [`polars set-with-idx`](/commands/docs/polars_set-with-idx.md)             | Sets value in the given index.                                                                                                                                     | plugin |
 | [`polars shape`](/commands/docs/polars_shape.md)                           | Shows column and row size for a dataframe.                                                                                                                         | plugin |

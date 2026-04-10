@@ -2,7 +2,7 @@
 title: glob
 categories: |
   filesystem
-version: 0.109.0
+version: 0.111.0
 filesystem: |
   Creates a list of files and/or folders based on the glob pattern provided.
 usage: |
@@ -22,11 +22,11 @@ contributors: false
 
 ## Flags
 
- -  `--depth, -d {int}`: directory depth to search
- -  `--no-dir, -D`: Whether to filter out directories from the returned paths
- -  `--no-file, -F`: Whether to filter out files from the returned paths
- -  `--no-symlink, -S`: Whether to filter out symlinks from the returned paths
- -  `--follow-symlinks, -l`: Whether to follow symbolic links to their targets
+ -  `--depth, -d {int}`: Directory depth to search.
+ -  `--no-dir, -D`: Whether to filter out directories from the returned paths.
+ -  `--no-file, -F`: Whether to filter out files from the returned paths.
+ -  `--no-symlink, -S`: Whether to filter out symlinks from the returned paths.
+ -  `--follow-symlinks, -l`: Whether to follow symbolic links to their targets.
  -  `--exclude, -e {list<string>}`: Patterns to exclude from the search: `glob` will not walk the inside of directories matching the excluded patterns.
 
 ## Parameters
@@ -41,73 +41,73 @@ contributors: false
 | nothing | list&lt;string&gt; |
 ## Examples
 
-Search for *.rs files
+Search for *.rs files.
 ```nu
 > glob *.rs
 
 ```
 
-Search for *.rs and *.toml files recursively up to 2 folders deep
+Search for *.rs and *.toml files recursively up to 2 folders deep.
 ```nu
 > glob **/*.{rs,toml} --depth 2
 
 ```
 
-Search for files and folders that begin with uppercase C or lowercase c
+Search for files and folders that begin with uppercase C or lowercase c.
 ```nu
 > glob "[Cc]*"
 
 ```
 
-Search for files and folders like abc or xyz substituting a character for ?
+Search for files and folders like abc or xyz substituting a character for ?.
 ```nu
 > glob "{a?c,x?z}"
 
 ```
 
-A case-insensitive search for files and folders that begin with c
+A case-insensitive search for files and folders that begin with c.
 ```nu
 > glob "(?i)c*"
 
 ```
 
-Search for files or folders that do not begin with c, C, b, M, or s
+Search for files or folders that do not begin with c, C, b, M, or s.
 ```nu
 > glob "[!cCbMs]*"
 
 ```
 
-Search for files or folders with 3 a's in a row in the name
+Search for files or folders with 3 a's in a row in the name.
 ```nu
 > glob <a*:3>
 
 ```
 
-Search for files or folders with only a, b, c, or d in the file name between 1 and 10 times
+Search for files or folders with only a, b, c, or d in the file name between 1 and 10 times.
 ```nu
 > glob <[a-d]:1,10>
 
 ```
 
-Search for folders that begin with an uppercase ASCII letter, ignoring files and symlinks
+Search for folders that begin with an uppercase ASCII letter, ignoring files and symlinks.
 ```nu
 > glob "[A-Z]*" --no-file --no-symlink
 
 ```
 
-Search for files named tsconfig.json that are not in node_modules directories
+Search for files named tsconfig.json that are not in node_modules directories.
 ```nu
 > glob **/tsconfig.json --exclude [**/node_modules/**]
 
 ```
 
-Search for all files that are not in the target nor .git directories
+Search for all files that are not in the target nor .git directories.
 ```nu
 > glob **/* --exclude [**/target/** **/.git/** */]
 
 ```
 
-Search for files following symbolic links to their targets
+Search for files following symbolic links to their targets.
 ```nu
 > glob "**/*.txt" --follow-symlinks
 

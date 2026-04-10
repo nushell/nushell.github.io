@@ -69,13 +69,13 @@ The path to the module can be:
   Note that the module name (its directory) can end in a `/` (or `\` on Windows), but as with most commands that take a paths (e.g., `cd`), this is completely optional.
   :::
 
-  ::: important Important! Importing modules from `$env.NU_LIB_DIRS`
-  When importing a module via a relative path, Nushell first searches from the current directory. If a matching module is not found at that location, Nushell then searches each directory in the `$env.NU_LIB_DIRS` list.
+  ::: important Important! Importing modules from `$NU_LIB_DIRS` or `$env.NU_LIB_DIRS`
+  When importing a module via a relative path, Nushell first searches from the current directory. If a matching module is not found at that location, Nushell then searches each directory in the constant `$NU_LIB_DIRS` list, and then `$env.NU_LIB_DIRS` (deprecated).
 
   This allows you to install modules to a location that is easily accessible via a relative path regardless of the current directory.
   :::
 
-- An absolute or relative path to a Nushell module file. As above, Nushell will search the `$env.NU_LIB_DIRS` for a matching relative path.
+- An absolute or relative path to a Nushell module file. As above, Nushell will search the constant `$NU_LIB_DIRS` and then `$env.NU_LIB_DIRS` for a matching relative path.
 
   ::: details Example
 

@@ -2,7 +2,7 @@
 title: format duration
 categories: |
   strings
-version: 0.109.0
+version: 0.111.0
 strings: |
   Outputs duration with a specified unit of time.
 usage: |
@@ -35,13 +35,13 @@ contributors: false
 | table          | table        |
 ## Examples
 
-Convert µs duration to the requested second duration as a string
+Convert µs duration to the requested second duration as a string.
 ```nu
 > 1000000µs | format duration sec
 1 sec
 ```
 
-Convert durations to µs duration as strings
+Convert durations to µs duration as strings.
 ```nu
 > [1sec 2sec] | format duration µs
 ╭───┬────────────╮
@@ -51,7 +51,7 @@ Convert durations to µs duration as strings
 
 ```
 
-Convert duration to µs as a string if unit asked for was us
+Convert duration to µs as a string if unit asked for was us.
 ```nu
 > 1sec | format duration us
 1000000 µs

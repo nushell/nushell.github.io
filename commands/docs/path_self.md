@@ -2,7 +2,7 @@
 title: path self
 categories: |
   path
-version: 0.109.0
+version: 0.111.0
 path: |
   Get the absolute path of the script or module containing this command at parse time.
 usage: |
@@ -32,19 +32,19 @@ contributors: false
 | nothing | string |
 ## Examples
 
-Get the path of the current file
+Get the path of the current file.
 ```nu
 > const current_file = path self
 
 ```
 
-Get the path of the directory containing the current file
+Get the path of the directory containing the current file.
 ```nu
 > const current_file = path self .
 
 ```
 
-Get the absolute form of a path relative to the current file
+Get the absolute form of a path relative to the current file.
 ```nu
 > const current_file = path self ../foo
 

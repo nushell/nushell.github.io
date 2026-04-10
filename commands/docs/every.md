@@ -2,7 +2,7 @@
 title: every
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
   Show (or skip) every n-th row, starting from the first one.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--skip, -s`: skip the rows that would be returned, instead of selecting them
+ -  `--skip, -s`: Skip the rows that would be returned, instead of selecting them.
 
 ## Parameters
 

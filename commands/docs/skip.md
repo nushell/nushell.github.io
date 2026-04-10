@@ -2,7 +2,7 @@
 title: skip
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
   Skip the first several rows of the input. Counterpart of `drop`. Opposite of `first`.
 usage: |
@@ -34,7 +34,7 @@ contributors: false
 | list&lt;any&gt; | list&lt;any&gt; |
 ## Examples
 
-Skip the first value of a list
+Skip the first value of a list.
 ```nu
 > [2 4 6 8] | skip 1
 ╭───┬───╮
@@ -45,7 +45,7 @@ Skip the first value of a list
 
 ```
 
-Skip two rows of a table
+Skip two rows of a table.
 ```nu
 > [[editions]; [2015] [2018] [2021]] | skip 2
 ╭───┬──────────╮
@@ -56,7 +56,7 @@ Skip two rows of a table
 
 ```
 
-Skip 2 bytes of a binary value
+Skip 2 bytes of a binary value.
 ```nu
 > 0x[01 23 45 67] | skip 2
 Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii

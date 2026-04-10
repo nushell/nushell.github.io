@@ -2,7 +2,7 @@
 title: polars get-weekday
 categories: |
   dataframe
-version: 0.109.0
+version: 0.111.0
 dataframe: |
   Gets weekday from date.
 usage: |

@@ -2,7 +2,7 @@
 title: where
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
   Filter values of an input list based on a condition.
 usage: |
@@ -34,7 +34,7 @@ contributors: false
 | range     | any       |
 ## Examples
 
-Filter rows of a table according to a condition
+Filter rows of a table according to a condition.
 ```nu
 > [{a: 1} {a: 2}] | where a > 1
 ╭───┬───╮
@@ -45,31 +45,31 @@ Filter rows of a table according to a condition
 
 ```
 
-List only the files in the current directory
+List only the files in the current directory.
 ```nu
 > ls | where type == file
 
 ```
 
-List all files in the current directory with sizes greater than 2kb
+List all files in the current directory with sizes greater than 2kb.
 ```nu
 > ls | where size > 2kb
 
 ```
 
-List all files with names that contain "Car"
+List all files with names that contain "Car".
 ```nu
 > ls | where name =~ "Car"
 
 ```
 
-List all files that were modified in the last two weeks
+List all files that were modified in the last two weeks.
 ```nu
 > ls | where modified >= (date now) - 2wk
 
 ```
 
-Filter items of a list with a row condition
+Filter items of a list with a row condition.
 ```nu
 > [1 2 3 4 5] | where $it > 2
 ╭───┬───╮
@@ -80,7 +80,7 @@ Filter items of a list with a row condition
 
 ```
 
-Filter items of a list with a closure
+Filter items of a list with a closure.
 ```nu
 > [1 2 3 4 5] | where {|x| $x > 2 }
 ╭───┬───╮
@@ -91,25 +91,25 @@ Filter items of a list with a closure
 
 ```
 
-Find files whose filenames don't begin with the correct sequential number
+Find files whose filenames don't begin with the correct sequential number.
 ```nu
 > ls | where type == file | sort-by name --natural | enumerate | where {|e| $e.item.name !~ $'^($e.index + 1)' } | get item
 
 ```
 
-Find case-insensitively files called "readme", with a subexpression inside the row condition
+Find case-insensitively files called "readme", with a subexpression inside the row condition.
 ```nu
 > ls | where ($it.name | str downcase) =~ readme
 
 ```
 
-Find case-insensitively files called "readme", with regex only
+Find case-insensitively files called "readme", with regex only.
 ```nu
 > ls | where name =~ '(?i)readme'
 
 ```
 
-Filter rows of a table according to a stored condition
+Filter rows of a table according to a stored condition.
 ```nu
 > let cond = {|x| $x.a > 1}; [{a: 1} {a: 2}] | where $cond
 ╭───┬───╮
@@ -120,7 +120,7 @@ Filter rows of a table according to a stored condition
 
 ```
 
-List all numbers above 3, using an existing closure condition
+List all numbers above 3, using an existing closure condition.
 ```nu
 > let a = {$in > 3}; [1, 2, 5, 6] | where $a
 ╭───┬───╮

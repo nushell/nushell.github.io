@@ -2,7 +2,7 @@
 title: str contains
 categories: |
   strings
-version: 0.109.0
+version: 0.111.0
 strings: |
   Checks if string input contains a substring.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--ignore-case, -i`: search is case insensitive
+ -  `--ignore-case, -i`: Search is case insensitive.
 
 ## Parameters
 
@@ -40,19 +40,19 @@ contributors: false
 | list&lt;string&gt; | list&lt;bool&gt; |
 ## Examples
 
-Check if input contains string
+Check if input contains string.
 ```nu
 > 'my_library.rb' | str contains '.rb'
 true
 ```
 
-Check if input contains string case insensitive
+Check if input contains string case insensitive.
 ```nu
 > 'my_library.rb' | str contains --ignore-case '.RB'
 true
 ```
 
-Check if input contains string in a record
+Check if input contains string in a record.
 ```nu
 > { ColA: test, ColB: 100 } | str contains 'e' ColA
 ╭──────┬──────╮
@@ -61,7 +61,7 @@ Check if input contains string in a record
 ╰──────┴──────╯
 ```
 
-Check if input contains string in a table
+Check if input contains string in a table.
 ```nu
 >  [[ColA ColB]; [test 100]] | str contains --ignore-case 'E' ColA
 ╭───┬──────┬──────╮
@@ -72,7 +72,7 @@ Check if input contains string in a table
 
 ```
 
-Check if input contains string in a table
+Check if input contains string in a table.
 ```nu
 >  [[ColA ColB]; [test hello]] | str contains 'e' ColA ColB
 ╭───┬──────┬──────╮
@@ -83,13 +83,13 @@ Check if input contains string in a table
 
 ```
 
-Check if input string contains 'banana'
+Check if input string contains 'banana'.
 ```nu
 > 'hello' | str contains 'banana'
 false
 ```
 
-Check if list contains string
+Check if list contains string.
 ```nu
 > [one two three] | str contains o
 ╭───┬───────╮

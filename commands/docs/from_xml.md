@@ -2,7 +2,7 @@
 title: from xml
 categories: |
   formats
-version: 0.109.0
+version: 0.111.0
 formats: |
   Parse text as .xml and create record.
 usage: |
@@ -22,9 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--keep-comments`: add comment nodes to result
- -  `--allow-dtd`: allow parsing documents with DTDs (may result in exponential entity expansion)
- -  `--keep-pi`: add processing instruction nodes to result
+ -  `--keep-comments`: Add comment nodes to result.
+ -  `--allow-dtd`: Allow parsing documents with DTDs (may result in exponential entity expansion).
+ -  `--keep-pi`: Add processing instruction nodes to result.
 
 
 ## Input/output types:
@@ -34,7 +34,7 @@ contributors: false
 | string | record |
 ## Examples
 
-Converts xml formatted string to record
+Converts xml formatted string to record.
 ```nu
 > '<?xml version="1.0" encoding="UTF-8"?>
 <note>

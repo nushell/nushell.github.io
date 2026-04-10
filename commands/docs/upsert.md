@@ -2,7 +2,7 @@
 title: upsert
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
   Update an existing column to have a new value, or insert a new column.
 usage: |
@@ -35,7 +35,7 @@ contributors: false
 | list&lt;any&gt; | list&lt;any&gt; |
 ## Examples
 
-Update a record's value
+Update a record's value.
 ```nu
 > {'name': 'nu', 'stars': 5} | upsert name 'Nushell'
 ╭───────┬─────────╮
@@ -44,7 +44,7 @@ Update a record's value
 ╰───────┴─────────╯
 ```
 
-Insert a new entry into a record
+Insert a new entry into a record.
 ```nu
 > {'name': 'nu', 'stars': 5} | upsert language 'Rust'
 ╭──────────┬──────╮
@@ -54,7 +54,7 @@ Insert a new entry into a record
 ╰──────────┴──────╯
 ```
 
-Update each row of a table
+Update each row of a table.
 ```nu
 > [[name lang]; [Nushell ''] [Reedline '']] | upsert lang 'Rust'
 ╭───┬──────────┬──────╮
@@ -66,7 +66,7 @@ Update each row of a table
 
 ```
 
-Insert a new column with values computed based off the other columns
+Insert a new column with values computed based off the other columns.
 ```nu
 > [[foo]; [7] [8] [9]] | upsert bar {|row| $row.foo * 2 }
 ╭───┬─────┬─────╮
@@ -79,7 +79,7 @@ Insert a new column with values computed based off the other columns
 
 ```
 
-Update null values in a column to a default value
+Update null values in a column to a default value.
 ```nu
 > [[foo]; [2] [null] [4]] | upsert foo { default 0 }
 ╭───┬─────╮
@@ -92,7 +92,7 @@ Update null values in a column to a default value
 
 ```
 
-Upsert into a list, updating an existing value at an index
+Upsert into a list, updating an existing value at an index.
 ```nu
 > [1 2 3] | upsert 0 2
 ╭───┬───╮
@@ -103,7 +103,7 @@ Upsert into a list, updating an existing value at an index
 
 ```
 
-Upsert into a list, inserting a new value at the end
+Upsert into a list, inserting a new value at the end.
 ```nu
 > [1 2 3] | upsert 3 4
 ╭───┬───╮
@@ -115,7 +115,7 @@ Upsert into a list, inserting a new value at the end
 
 ```
 
-Upsert into a nested path, creating new values as needed
+Upsert into a nested path, creating new values as needed.
 ```nu
 > [{} {a: [{}]}] | upsert a.0.b "value"
 ╭───┬───────────────╮

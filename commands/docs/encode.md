@@ -2,7 +2,7 @@
 title: encode
 categories: |
   strings
-version: 0.109.0
+version: 0.111.0
 strings: |
   Encode a string into bytes.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--ignore-errors, -i`: when a character isn't in the given encoding, replace with a HTML entity (like `&#127880;`)
+ -  `--ignore-errors, -i`: When a character isn't in the given encoding, replace with a HTML entity (like `&#127880;`).
 
 ## Parameters
 

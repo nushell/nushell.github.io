@@ -89,15 +89,7 @@ Carapace will return this error when a non-supported flag is provided. For examp
 | -1ERR | unknown shorthand flag: "1" in -1 |
 | -1\_  |                                   |
 
-The solution to this involves manually checking the value to filter it out:
-
-```nu
-let carapace_completer = {|spans: list<string>|
-    carapace $spans.0 nushell ...$spans
-    | from json
-    | if ($in | default [] | any {|| $in.display | str starts-with "ERR"}) { null } else { $in }
-}
-```
+The solution to this is to set `$env.CARAPACE_LENIENT = 1`, see [the carapace documentation](https://carapace-sh.github.io/carapace-bin/setup/environment.html#carapace_lenient).
 
 ## Putting it all together
 
@@ -107,9 +99,7 @@ This is an example of how an external completer definition might look like:
 let fish_completer = ...
 
 let carapace_completer = {|spans: list<string>|
-    carapace $spans.0 nushell ...$spans
-    | from json
-    | if ($in | default [] | any {|| $in.display | str starts-with "ERR"}) { null } else { $in }
+    CARAPACE_LENIENT=1 carapace $spans.0 nushell ...$spans | from json
 }
 
 # This completer will use carapace by default

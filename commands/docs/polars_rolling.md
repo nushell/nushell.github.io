@@ -2,7 +2,7 @@
 title: polars rolling
 categories: |
   dataframe
-version: 0.109.0
+version: 0.111.0
 dataframe: |
   Rolling calculation for a series.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Parameters
 
- -  `type`: rolling operation
- -  `window`: Window size for rolling
+ -  `type`: Rolling operation.
+ -  `window`: Window size for rolling.
 
 
 ## Input/output types:

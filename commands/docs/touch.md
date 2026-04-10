@@ -2,7 +2,7 @@
 title: touch
 categories: |
   filesystem
-version: 0.109.0
+version: 0.111.0
 filesystem: |
   Creates one or more files.
 usage: |
@@ -22,13 +22,13 @@ contributors: false
 
 ## Flags
 
- -  `--reference, -r {path}`: Use the access and modification times of the reference file/directory instead of the current time
- -  `--timestamp, -t {datetime}`: Use the given timestamp instead of the current time
- -  `--date, -d {string}`: Use the given time instead of the current time. This can be a full timestamp or it can be relative to either the current time or reference file time (if given). For more information, see https://www.gnu.org/software/coreutils/manual/html_node/touch-invocation.html
- -  `--modified, -m`: Change only the modification time (if used with -a, access time is changed too)
- -  `--access, -a`: Change only the access time (if used with -m, modification time is changed too)
- -  `--no-create, -c`: Don't create the file if it doesn't exist
- -  `--no-deref, -s`: Affect each symbolic link instead of any referenced file (only for systems that can change the timestamps of a symlink). Ignored if touching stdout
+ -  `--reference, -r {path}`: Use the access and modification times of the reference file/directory instead of the current time.
+ -  `--timestamp, -t {datetime}`: Use the given timestamp instead of the current time.
+ -  `--date, -d {string}`: Use the given time instead of the current time. This can be a full timestamp or it can be relative to either the current time or reference file time (if given). For more information, see https://www.gnu.org/software/coreutils/manual/html_node/touch-invocation.html.
+ -  `--modified, -m`: Change only the modification time (if used with -a, access time is changed too).
+ -  `--access, -a`: Change only the access time (if used with -m, modification time is changed too).
+ -  `--no-create, -c`: Don't create the file if it doesn't exist.
+ -  `--no-deref, -s`: Affect each symbolic link instead of any referenced file (only for systems that can change the timestamps of a symlink). Ignored if touching stdout.
 
 ## Parameters
 
@@ -42,55 +42,55 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Creates "fixture.json"
+Creates "fixture.json".
 ```nu
 > touch fixture.json
 
 ```
 
-Creates files a, b and c
+Creates files a, b and c.
 ```nu
 > touch a b c
 
 ```
 
-Changes the last modified time of "fixture.json" to today's date
+Changes the last modified time of "fixture.json" to today's date.
 ```nu
 > touch -m fixture.json
 
 ```
 
-Changes the last modified and accessed time of all files with the .json extension to today's date
+Changes the last modified and accessed time of all files with the .json extension to today's date.
 ```nu
 > touch *.json
 
 ```
 
-Changes the last accessed and modified times of files a, b and c to the current time but yesterday
+Changes the last accessed and modified times of files a, b and c to the current time but yesterday.
 ```nu
 > touch -d "yesterday" a b c
 
 ```
 
-Changes the last modified time of files d and e to "fixture.json"'s last modified time
+Changes the last modified time of files d and e to "fixture.json"'s last modified time.
 ```nu
 > touch -m -r fixture.json d e
 
 ```
 
-Changes the last accessed time of "fixture.json" to a datetime
+Changes the last accessed time of "fixture.json" to a datetime.
 ```nu
 > touch -a -t 2019-08-24T12:30:30 fixture.json
 
 ```
 
-Change the last accessed and modified times of stdout
+Change the last accessed and modified times of stdout.
 ```nu
 > touch -
 
 ```
 
-Changes the last accessed and modified times of file a to 1 month before "fixture.json"'s last modified time
+Changes the last accessed and modified times of file a to 1 month before "fixture.json"'s last modified time.
 ```nu
 > touch -r fixture.json -d "-1 month" a
 

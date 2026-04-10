@@ -2,7 +2,7 @@
 title: job spawn
 categories: |
   experimental
-version: 0.109.0
+version: 0.111.0
 experimental: |
   Spawn a background job and retrieve its ID.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--tag, -t {string}`: An optional description tag for this job
+ -  `--tag, -t {string}`: An optional description tag for this job.
 
 ## Parameters
 
@@ -36,7 +36,7 @@ contributors: false
 | nothing | int    |
 ## Examples
 
-Spawn a background job to do some time consuming work
+Spawn a background job to do some time consuming work.
 ```nu
 > job spawn { sleep 5sec; rm evidence.pdf }
 

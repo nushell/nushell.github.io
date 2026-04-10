@@ -2,7 +2,7 @@
 title: polars drop-nulls
 categories: |
   dataframe
-version: 0.109.0
+version: 0.111.0
 dataframe: |
   Drops null values in dataframe.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `subset`: subset of columns to drop nulls
+ -  `subset`: Subset of columns to drop nulls.
 
 
 ## Input/output types:

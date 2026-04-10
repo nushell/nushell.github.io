@@ -2,7 +2,7 @@
 title: polars profile
 categories: |
   dataframe
-version: 0.109.0
+version: 0.111.0
 dataframe: |
   Profile a lazy dataframe.
 usage: |

@@ -2,7 +2,7 @@
 title: explore
 categories: |
   viewers
-version: 0.109.0
+version: 0.111.0
 viewers: |
   Explore acts as a table pager, just like `less` does for text.
 usage: |
@@ -22,10 +22,10 @@ contributors: false
 
 ## Flags
 
- -  `--head {bool}`: Show or hide column headers (default true)
- -  `--index, -i`: Show row indexes when viewing a list
- -  `--tail, -t`: Start with the viewport scrolled to the bottom
- -  `--peek, -p`: When quitting, output the value of the cell the cursor was on
+ -  `--head {bool}`: Show or hide column headers (default true).
+ -  `--index, -i`: Show row indexes when viewing a list.
+ -  `--tail, -t`: Start with the viewport scrolled to the bottom.
+ -  `--peek, -p`: When quitting, output the value of the cell the cursor was on.
 
 
 ## Input/output types:
@@ -64,6 +64,7 @@ Press `:` then `h` to get a help menu.
 
 ## Subcommands:
 
-| name                                               | description                                                           | type     |
-| -------------------------------------------------- | --------------------------------------------------------------------- | -------- |
-| [`explore regex`](/commands/docs/explore_regex.md) | Launch a TUI to create and explore regular expressions interactively. | built-in |
+| name                                                 | description                                                            | type     |
+| ---------------------------------------------------- | ---------------------------------------------------------------------- | -------- |
+| [`explore config`](/commands/docs/explore_config.md) | Launch a TUI to view and edit the nushell configuration interactively. | built-in |
+| [`explore regex`](/commands/docs/explore_regex.md)   | Launch a TUI to create and explore regular expressions interactively.  | built-in |

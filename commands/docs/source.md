@@ -2,7 +2,7 @@
 title: source
 categories: |
   core
-version: 0.109.0
+version: 0.111.0
 core: |
   Runs a script file in the current context.
 usage: |
@@ -32,13 +32,13 @@ contributors: false
 | any   | any    |
 ## Examples
 
-Runs foo.nu in the current context
+Runs foo.nu in the current context.
 ```nu
 > source foo.nu
 
 ```
 
-Runs foo.nu in current context and call the command defined, suppose foo.nu has content: `def say-hi [] { echo 'Hi!' }`
+Runs foo.nu in current context and call the command defined, suppose foo.nu has content: `def say-hi [] { echo 'Hi!' }`.
 ```nu
 > source ./foo.nu; say-hi
 

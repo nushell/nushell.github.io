@@ -2,7 +2,7 @@
 title: math floor
 categories: |
   math
-version: 0.109.0
+version: 0.111.0
 math: |
   Returns the floor of a number (largest integer less than or equal to that number).
 usage: |
@@ -30,7 +30,7 @@ contributors: false
 | range        | list&lt;number&gt; |
 ## Examples
 
-Apply the floor function to a list of numbers
+Apply the floor function to a list of numbers.
 ```nu
 > [1.5 2.3 -3.1] | math floor
 ╭───┬────╮

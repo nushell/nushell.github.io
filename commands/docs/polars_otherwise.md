@@ -2,7 +2,7 @@
 title: polars otherwise
 categories: |
   expression
-version: 0.109.0
+version: 0.111.0
 expression: |
   Completes a when expression.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `otherwise expression`: expression to apply when no when predicate matches
+ -  `otherwise expression`: Expression to apply when no when predicate matches.
 
 
 ## Input/output types:

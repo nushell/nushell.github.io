@@ -2,7 +2,7 @@
 title: overlay hide
 categories: |
   core
-version: 0.109.0
+version: 0.111.0
 core: |
   Hide an active overlay.
 usage: |
@@ -23,7 +23,7 @@ contributors: false
 ## Flags
 
  -  `--keep-custom, -k`: Keep all newly added commands and aliases in the next activated overlay.
- -  `--keep-env, -e {list<string>}`: List of environment variables to keep in the next activated overlay
+ -  `--keep-env, -e {list<string>}`: List of environment variables to keep in the next activated overlay.
 
 ## Parameters
 
@@ -37,7 +37,7 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Keep a custom command after hiding the overlay
+Keep a custom command after hiding the overlay.
 ```nu
 > module spam { export def foo [] { "foo" } }
     overlay use spam
@@ -48,7 +48,7 @@ Keep a custom command after hiding the overlay
 
 ```
 
-Hide an overlay created from a file
+Hide an overlay created from a file.
 ```nu
 > 'export alias f = "foo"' | save spam.nu
     overlay use spam.nu
@@ -56,7 +56,7 @@ Hide an overlay created from a file
 
 ```
 
-Hide the last activated overlay
+Hide the last activated overlay.
 ```nu
 > module spam { export-env { $env.FOO = "foo" } }
     overlay use spam
@@ -64,7 +64,7 @@ Hide the last activated overlay
 
 ```
 
-Keep the current working directory when removing an overlay
+Keep the current working directory when removing an overlay.
 ```nu
 > overlay new spam
     cd some-dir

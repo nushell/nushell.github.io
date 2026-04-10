@@ -2,7 +2,7 @@
 title: inspect
 categories: |
   debug
-version: 0.109.0
+version: 0.111.0
 debug: |
   Inspect pipeline results while running a pipeline.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | any   | any    |
 ## Examples
 
-Inspect pipeline results
+Inspect pipeline results.
 ```nu
 > ls | inspect | get name | inspect
 

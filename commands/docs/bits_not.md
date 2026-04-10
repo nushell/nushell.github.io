@@ -2,7 +2,7 @@
 title: bits not
 categories: |
   bits
-version: 0.109.0
+version: 0.111.0
 bits: |
   Performs logical negation on each bit.
 usage: |
@@ -22,8 +22,8 @@ contributors: false
 
 ## Flags
 
- -  `--signed, -s`: always treat input number as a signed number
- -  `--number-bytes, -n {int}`: the size of unsigned number in bytes, it can be 1, 2, 4, 8, auto
+ -  `--signed, -s`: Always treat input number as a signed number.
+ -  `--number-bytes, -n {int}`: The size of unsigned number in bytes, it can be 1, 2, 4, 8, auto.
 
 
 ## Input/output types:

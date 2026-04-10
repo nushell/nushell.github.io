@@ -2,7 +2,7 @@
 title: polars set
 categories: |
   dataframe
-version: 0.109.0
+version: 0.111.0
 dataframe: |
   Sets value where given mask is true.
 usage: |
@@ -22,11 +22,11 @@ contributors: false
 
 ## Flags
 
- -  `--mask, -m {any}`: mask indicating insertions
+ -  `--mask, -m {any}`: Mask indicating insertions.
 
 ## Parameters
 
- -  `value`: value to be inserted in series
+ -  `value`: Value to be inserted in series.
 
 
 ## Input/output types:

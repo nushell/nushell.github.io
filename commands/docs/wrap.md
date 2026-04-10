@@ -2,7 +2,7 @@
 title: wrap
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
   Wrap the value into a column.
 usage: |
@@ -34,7 +34,7 @@ contributors: false
 | any       | record |
 ## Examples
 
-Wrap a list into a table with a given column name
+Wrap a list into a table with a given column name.
 ```nu
 > [ Pachisi Mahjong Catan Carcassonne ] | wrap game
 ╭───┬─────────────╮
@@ -48,7 +48,7 @@ Wrap a list into a table with a given column name
 
 ```
 
-Wrap a range into a table with a given column name
+Wrap a range into a table with a given column name.
 ```nu
 > 4..6 | wrap num
 ╭───┬─────╮

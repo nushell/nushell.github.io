@@ -2,7 +2,7 @@
 title: math median
 categories: |
   math
-version: 0.109.0
+version: 0.111.0
 math: |
   Computes the median of a list of numbers.
 usage: |
@@ -33,13 +33,13 @@ contributors: false
 | record         | record   |
 ## Examples
 
-Compute the median of a list of numbers
+Compute the median of a list of numbers.
 ```nu
 > [3 8 9 12 12 15] | math median
 10.5
 ```
 
-Compute the medians of the columns of a table
+Compute the medians of the columns of a table.
 ```nu
 > [{a: 1 b: 3} {a: 2 b: -1} {a: -3 b: 5}] | math median
 ╭───┬───╮
@@ -48,7 +48,7 @@ Compute the medians of the columns of a table
 ╰───┴───╯
 ```
 
-Find the median of a list of file sizes
+Find the median of a list of file sizes.
 ```nu
 > [5KB 10MB 200B] | math median
 5.0 kB

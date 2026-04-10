@@ -2,7 +2,7 @@
 title: split column
 categories: |
   strings
-version: 0.109.0
+version: 0.111.0
 strings: |
   Split a string into multiple columns using a separator.
 usage: |
@@ -22,9 +22,9 @@ contributors: false
 
 ## Flags
 
- -  `--collapse-empty, -c`: remove empty columns
- -  `--number, -n {int}`: Split into maximum number of items
- -  `--regex, -r`: separator is a regular expression
+ -  `--collapse-empty, -c`: Remove empty columns.
+ -  `--number, -n {int}`: Split into maximum number of items.
+ -  `--regex, -r`: Separator is a regular expression.
 
 ## Parameters
 
@@ -40,7 +40,7 @@ contributors: false
 | list&lt;string&gt; | table  |
 ## Examples
 
-Split a string into columns by the specified separator
+Split a string into columns by the specified separator.
 ```nu
 > 'a--b--c' | split column '--'
 ╭───┬─────────┬─────────┬─────────╮
@@ -51,7 +51,7 @@ Split a string into columns by the specified separator
 
 ```
 
-Split a string into columns of char and remove the empty columns
+Split a string into columns of char and remove the empty columns.
 ```nu
 > 'abc' | split column --collapse-empty ''
 ╭───┬─────────┬─────────┬─────────╮
@@ -62,7 +62,7 @@ Split a string into columns of char and remove the empty columns
 
 ```
 
-Split a list of strings into a table
+Split a list of strings into a table.
 ```nu
 > ['a-b' 'c-d'] | split column -
 ╭───┬─────────┬─────────╮
@@ -74,7 +74,7 @@ Split a list of strings into a table
 
 ```
 
-Split a list of strings into a table, ignoring padding
+Split a list of strings into a table, ignoring padding.
 ```nu
 > ['a -  b' 'c  -    d'] | split column --regex '\s*-\s*'
 ╭───┬─────────┬─────────╮
@@ -86,7 +86,7 @@ Split a list of strings into a table, ignoring padding
 
 ```
 
-Split into columns, last column may contain the delimiter
+Split into columns, last column may contain the delimiter.
 ```nu
 > ['author: Salina Yoon' r#'title: Where's Ellie?: A Hide-and-Seek Book'#] | split column --number 2 ': ' key value
 ╭───┬────────┬──────────────────────────────────────╮

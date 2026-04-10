@@ -2,7 +2,7 @@
 title: attr example
 categories: |
   core
-version: 0.109.0
+version: 0.111.0
 core: |
   Attribute for adding examples to custom commands.
 usage: |
@@ -37,7 +37,7 @@ contributors: false
 | nothing | record&lt;description: string, example: string&gt; |
 ## Examples
 
-Add examples to custom command
+Add examples to custom command.
 ```nu
 > # Double numbers
     @example "double an int" { 2 | double } --result 4

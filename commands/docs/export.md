@@ -2,7 +2,7 @@
 title: export
 categories: |
   core
-version: 0.109.0
+version: 0.111.0
 core: |
   Export definitions or environment variables from a module.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Export a definition from a module
+Export a definition from a module.
 ```nu
 > module utils { export def my-command [] { "hello" } }; use utils my-command; my-command
 hello

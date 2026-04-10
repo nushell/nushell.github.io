@@ -2,7 +2,7 @@
 title: skip while
 categories: |
   filters
-version: 0.109.0
+version: 0.111.0
 filters: |
   Skip elements of the input while a predicate is true.
 usage: |
@@ -33,7 +33,7 @@ contributors: false
 | list&lt;any&gt; | list&lt;any&gt; |
 ## Examples
 
-Skip while the element is negative
+Skip while the element is negative.
 ```nu
 > [-2 0 2 -1] | skip while {|x| $x < 0 }
 ╭───┬────╮
@@ -44,7 +44,7 @@ Skip while the element is negative
 
 ```
 
-Skip while the element is negative using stored condition
+Skip while the element is negative using stored condition.
 ```nu
 > let cond = {|x| $x < 0 }; [-2 0 2 -1] | skip while $cond
 ╭───┬────╮
@@ -55,7 +55,7 @@ Skip while the element is negative using stored condition
 
 ```
 
-Skip while the field value is negative
+Skip while the field value is negative.
 ```nu
 > [{a: -2} {a: 0} {a: 2} {a: -1}] | skip while {|x| $x.a < 0 }
 ╭───┬────╮

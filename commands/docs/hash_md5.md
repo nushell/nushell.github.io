@@ -2,7 +2,7 @@
 title: hash md5
 categories: |
   hash
-version: 0.109.0
+version: 0.111.0
 hash: |
   Hash a value using the md5 hash algorithm.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--binary, -b`: Output binary instead of hexadecimal representation
+ -  `--binary, -b`: Output binary instead of hexadecimal representation.
 
 ## Parameters
 

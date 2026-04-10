@@ -2,7 +2,7 @@
 title: from toml
 categories: |
   formats
-version: 0.109.0
+version: 0.111.0
 formats: |
   Parse text as .toml and create record.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | string | record |
 ## Examples
 
-Converts toml formatted string to record
+Converts toml formatted string to record.
 ```nu
 > 'a = 1' | from toml
 ╭───┬───╮
@@ -36,7 +36,7 @@ Converts toml formatted string to record
 ╰───┴───╯
 ```
 
-Converts toml formatted string to record
+Converts toml formatted string to record.
 ```nu
 > 'a = 1
 b = [1, 2]' | from toml

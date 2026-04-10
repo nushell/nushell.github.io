@@ -2,11 +2,11 @@
 title: bytes at
 categories: |
   bytes
-version: 0.109.0
+version: 0.111.0
 bytes: |
-  Get bytes defined by a range.
+  Get bytes from the input defined by a range.
 usage: |
-  Get bytes defined by a range.
+  Get bytes from the input defined by a range.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `bytes at` for [bytes](/commands/categories/bytes.md)
 
-<div class='command-title'>Get bytes defined by a range.</div>
+<div class='command-title'>Get bytes from the input defined by a range.</div>
 
 ## Signature
 
@@ -36,7 +36,7 @@ contributors: false
 | record       | record       |
 ## Examples
 
-Extract bytes starting from a specific index
+Extract bytes starting from a specific index.
 ```nu
 > { data: 0x[33 44 55 10 01 13 10] } | bytes at 3.. data
 ╭──────┬─────────────────╮
@@ -44,7 +44,7 @@ Extract bytes starting from a specific index
 ╰──────┴─────────────────╯
 ```
 
-Slice out `0x[10 01 13]` from `0x[33 44 55 10 01 13]`
+Slice out `0x[10 01 13]` from `0x[33 44 55 10 01 13]`.
 ```nu
 > 0x[33 44 55 10 01 13] | bytes at 3..5
 Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
@@ -52,7 +52,7 @@ Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-Extract bytes from the start up to a specific index
+Extract bytes from the start up to a specific index.
 ```nu
 > 0x[33 44 55 10 01 13 10] | bytes at ..4
 Length: 5 (0x5) bytes | printable whitespace ascii_other non_ascii
@@ -60,7 +60,7 @@ Length: 5 (0x5) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-Extract byte `0x[10]` using an exclusive end index
+Extract byte `0x[10]` using an exclusive end index.
 ```nu
 > 0x[33 44 55 10 01 13 10] | bytes at 3..<4
 Length: 1 (0x1) bytes | printable whitespace ascii_other non_ascii
@@ -68,7 +68,7 @@ Length: 1 (0x1) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-Extract bytes up to a negative index (inclusive)
+Extract bytes up to a negative index (inclusive).
 ```nu
 > 0x[33 44 55 10 01 13 10] | bytes at ..-4
 Length: 4 (0x4) bytes | printable whitespace ascii_other non_ascii
@@ -76,7 +76,7 @@ Length: 4 (0x4) bytes | printable whitespace ascii_other non_ascii
 
 ```
 
-Slice bytes across multiple table columns
+Slice bytes across multiple table columns.
 ```nu
 > [[ColA ColB ColC]; [0x[11 12 13] 0x[14 15 16] 0x[17 18 19]]] | bytes at 1.. ColB ColC
 ╭───┬──────────────┬──────────┬──────────╮
@@ -87,7 +87,7 @@ Slice bytes across multiple table columns
 
 ```
 
-Extract the last three bytes using a negative start index
+Extract the last three bytes using a negative start index.
 ```nu
 > 0x[33 44 55 10 01 13 10] | bytes at (-3)..
 Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii

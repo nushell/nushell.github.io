@@ -2,7 +2,7 @@
 title: polars append
 categories: |
   dataframe
-version: 0.109.0
+version: 0.111.0
 dataframe: |
   Appends a new dataframe.
 usage: |
@@ -22,11 +22,11 @@ contributors: false
 
 ## Flags
 
- -  `--col, -c`: append as new columns instead of rows
+ -  `--col, -c`: Append as new columns instead of rows.
 
 ## Parameters
 
- -  `other`: other dataframe to append
+ -  `other`: Other dataframe to append.
 
 
 ## Input/output types:

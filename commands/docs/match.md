@@ -2,7 +2,7 @@
 title: match
 categories: |
   core
-version: 0.109.0
+version: 0.111.0
 core: |
   Conditionally run a block on a matched value.
 usage: |
@@ -33,49 +33,49 @@ contributors: false
 | any   | any    |
 ## Examples
 
-Match on a value
+Match on a value.
 ```nu
 > match 3 { 1 => 'one', 2 => 'two', 3 => 'three' }
 three
 ```
 
-Match against alternative values
+Match against alternative values.
 ```nu
 > match 'three' { 1 | 'one' => '-', 2 | 'two' => '--', 3 | 'three' => '---' }
 ---
 ```
 
-Match on a value in range
+Match on a value in range.
 ```nu
 > match 3 { 1..10 => 'yes!' }
 yes!
 ```
 
-Match on a field in a record
+Match on a field in a record.
 ```nu
 > match {a: 100} { {a: $my_value} => { $my_value } }
 100
 ```
 
-Match with a catch-all
+Match with a catch-all.
 ```nu
 > match 3 { 1 => { 'yes!' }, _ => { 'no!' } }
 no!
 ```
 
-Match against a list
+Match against a list.
 ```nu
 > match [1, 2, 3] { [$a, $b, $c] => { $a + $b + $c }, _ => 0 }
 6
 ```
 
-Match against pipeline input
+Match against pipeline input.
 ```nu
 > {a: {b: 3}} | match $in {{a: { $b }} => ($b + 10) }
 13
 ```
 
-Match with a guard
+Match with a guard.
 ```nu
 > match [1 2 3] {
         [$x, ..$y] if $x == 1 => { 'good list' },

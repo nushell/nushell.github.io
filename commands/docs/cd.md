@@ -2,11 +2,11 @@
 title: cd
 categories: |
   filesystem
-version: 0.109.0
+version: 0.111.0
 filesystem: |
-  Change directory.
+  Change the current working directory.
 usage: |
-  Change directory.
+  Change the current working directory.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `cd` for [filesystem](/commands/categories/filesystem.md)
 
-<div class='command-title'>Change directory.</div>
+<div class='command-title'>Change the current working directory.</div>
 
 ## Signature
 
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--physical, -P`: use the physical directory structure; resolve symbolic links before processing instances of ..
+ -  `--physical, -P`: Use the physical directory structure; resolve symbolic links before processing instances of ..
 
 ## Parameters
 
@@ -36,19 +36,19 @@ contributors: false
 | nothing | nothing |
 ## Examples
 
-Change to your home directory
+Change to your home directory.
 ```nu
 > cd ~
 
 ```
 
-Change to the previous working directory (same as "cd $env.OLDPWD")
+Change to the previous working directory (same as "cd $env.OLDPWD").
 ```nu
 > cd -
 
 ```
 
-Changing directory with a custom command requires 'def --env'
+Changing directory with a custom command requires 'def --env'.
 ```nu
 > def --env gohome [] { cd ~ }
 
