@@ -2,7 +2,7 @@
 title: from yml
 categories: |
   formats
-version: 0.111.0
+version: 0.112.0
 formats: |
   Parse text as .yaml/.yml and create table.
 usage: |
@@ -30,7 +30,7 @@ contributors: false
 
 Converts yaml formatted string to table.
 ```nu
-> 'a: 1' | from yaml
+> 'a: 1' | from yml
 ╭───┬───╮
 │ a │ 1 │
 ╰───┴───╯
@@ -38,7 +38,7 @@ Converts yaml formatted string to table.
 
 Converts yaml formatted string to table.
 ```nu
-> '[ a: 1, b: [1, 2] ]' | from yaml
+> '[ a: 1, b: [1, 2] ]' | from yml
 ╭───┬────┬───────────╮
 │ # │ a  │     b     │
 ├───┼────┼───────────┤

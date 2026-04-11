@@ -2,7 +2,7 @@
 title: bits rol
 categories: |
   bits
-version: 0.111.0
+version: 0.112.0
 bits: |
   Bitwise rotate left for ints or binary values.
 usage: |
@@ -60,7 +60,7 @@ Rotate left a list of numbers with 2 bits
 rotate left binary data
 ```nu
 > 0x[c0 ff ee] | bits rol 10
-Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
+Length: 3 (0x3) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   ff bb 03                                             ××•
 
 ```

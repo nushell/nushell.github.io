@@ -2,7 +2,7 @@
 title: insert
 categories: |
   filters
-version: 0.111.0
+version: 0.112.0
 filters: |
   Insert a new column, using an expression or closure to create each row's values.
 usage: |
@@ -96,20 +96,16 @@ Insert a new value at the end of a list
 Insert into a nested path, creating new values as needed
 ```nu
 > [{} {a: [{}]}] | insert a.0.b "value"
-╭───┬───────────────╮
-│ # │       a       │
-├───┼───────────────┤
-│ 0 │ ╭───┬───────╮ │
-│   │ │ # │   b   │ │
-│   │ ├───┼───────┤ │
-│   │ │ 0 │ value │ │
-│   │ ╰───┴───────╯ │
-│ 1 │ ╭───┬───────╮ │
-│   │ │ # │   b   │ │
-│   │ ├───┼───────┤ │
-│   │ │ 0 │ value │ │
-│   │ ╰───┴───────╯ │
-╰───┴───────────────╯
+╭───┬───────────────────────────╮
+│ # │             a             │
+├───┼───────────────────────────┤
+│ 0 │ ╭───┬───────╮             │
+│   │ │ b │ value │             │
+│   │ ╰───┴───────╯             │
+│ 1 │ ╭───┬───────────────────╮ │
+│   │ │ 0 │ {record 0 fields} │ │
+│   │ ╰───┴───────────────────╯ │
+╰───┴───────────────────────────╯
 
 ```
 

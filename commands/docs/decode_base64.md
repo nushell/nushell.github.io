@@ -2,7 +2,7 @@
 title: decode base64
 categories: |
   formats
-version: 0.111.0
+version: 0.112.0
 formats: |
   Decode a Base64-encoded value.
 usage: |
@@ -42,7 +42,7 @@ Decode a Base64 string
 Decode arbitrary data
 ```nu
 > "/w==" | decode base64
-Length: 1 (0x1) bytes | printable whitespace ascii_other non_ascii
+Length: 1 (0x1) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   ff                                                   ×
 
 ```
@@ -50,7 +50,7 @@ Length: 1 (0x1) bytes | printable whitespace ascii_other non_ascii
 Decode a URL-safe Base64 string
 ```nu
 > "_w==" | decode base64 --url
-Length: 1 (0x1) bytes | printable whitespace ascii_other non_ascii
+Length: 1 (0x1) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   ff                                                   ×
 
 ```

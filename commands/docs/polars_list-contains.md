@@ -2,7 +2,7 @@
 title: polars list-contains
 categories: |
   dataframe
-version: 0.111.0
+version: 0.112.0
 dataframe: |
   Checks if an element is contained in a list.
 usage: |

@@ -2,7 +2,7 @@
 title: last
 categories: |
   filters
-version: 0.111.0
+version: 0.112.0
 filters: |
   Return only the last several rows of the input. Counterpart of `first`. Opposite of `drop`.
 usage: |
@@ -57,7 +57,7 @@ Return the last item of a list/table.
 Return the last 2 bytes of a binary value.
 ```nu
 > 0x[01 23 45] | last 2
-Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
+Length: 2 (0x2) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   23 45                                                #E
 
 ```

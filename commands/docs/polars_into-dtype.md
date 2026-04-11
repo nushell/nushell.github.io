@@ -2,7 +2,7 @@
 title: polars into-dtype
 categories: |
   dataframe
-version: 0.111.0
+version: 0.112.0
 dataframe: |
   Convert a string to a specific datatype.
 usage: |

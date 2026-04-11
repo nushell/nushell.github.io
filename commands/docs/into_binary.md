@@ -2,7 +2,7 @@
 title: into binary
 categories: |
   conversions
-version: 0.111.0
+version: 0.112.0
 conversions: |
   Convert value to a binary primitive.
 usage: |
@@ -48,7 +48,7 @@ contributors: false
 convert string to a nushell binary primitive.
 ```nu
 > 'This is a string that is exactly 52 characters long.' | into binary
-Length: 52 (0x34) bytes | printable whitespace ascii_other non_ascii
+Length: 52 (0x34) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   54 68 69 73  20 69 73 20  61 20 73 74  72 69 6e 67   This is a string
 00000010:   20 74 68 61  74 20 69 73  20 65 78 61  63 74 6c 79    that is exactly
 00000020:   20 35 32 20  63 68 61 72  61 63 74 65  72 73 20 6c    52 characters l
@@ -59,7 +59,7 @@ Length: 52 (0x34) bytes | printable whitespace ascii_other non_ascii
 convert a number to a nushell binary primitive.
 ```nu
 > 1 | into binary
-Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
+Length: 8 (0x8) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   01 00 00 00  00 00 00 00                             •0000000
 
 ```
@@ -67,7 +67,7 @@ Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
 convert a number to a nushell binary primitive (big endian).
 ```nu
 > 258 | into binary --endian big
-Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
+Length: 8 (0x8) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   00 00 00 00  00 00 01 02                             000000••
 
 ```
@@ -75,7 +75,7 @@ Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
 convert a number to a nushell binary primitive (little endian).
 ```nu
 > 258 | into binary --endian little
-Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
+Length: 8 (0x8) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   02 01 00 00  00 00 00 00                             ••000000
 
 ```
@@ -83,7 +83,7 @@ Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
 convert a boolean to a nushell binary primitive.
 ```nu
 > true | into binary
-Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
+Length: 8 (0x8) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   01 00 00 00  00 00 00 00                             •0000000
 
 ```
@@ -103,7 +103,7 @@ convert a filepath to a nushell binary primitive.
 convert a float to a nushell binary primitive.
 ```nu
 > 1.234 | into binary
-Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
+Length: 8 (0x8) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   58 39 b4 c8  76 be f3 3f                             X9××v××?
 
 ```
@@ -111,7 +111,7 @@ Length: 8 (0x8) bytes | printable whitespace ascii_other non_ascii
 convert an int to a nushell binary primitive with compact enabled.
 ```nu
 > 10 | into binary --compact
-Length: 1 (0x1) bytes | printable whitespace ascii_other non_ascii
+Length: 1 (0x1) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   0a                                                   _
 
 ```

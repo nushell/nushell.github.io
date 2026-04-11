@@ -2,7 +2,7 @@
 title: polars pivot
 categories: |
   dataframe
-version: 0.111.0
+version: 0.112.0
 dataframe: |
   Pivot a DataFrame from long to wide format.
 usage: |
@@ -22,13 +22,14 @@ contributors: false
 
 ## Flags
 
- -  `--on, -o {list<string>}`: Column names for pivoting.
- -  `--index, -i {list<string>}`: Column names for indexes.
- -  `--values, -v {list<string>}`: Column names used as value columns.
+ -  `--on, -o {any}`: Column names for pivoting.
+ -  `--on-cols, -c {any}`: column names used as value columns
+ -  `--index, -i {any}`: Selector or column names for indexes.
+ -  `--values {any}`: Selector or column names used as value columns.
  -  `--aggregate, -a {any}`: Aggregation to apply when pivoting. The following are supported: first, sum, min, max, mean, median, count, last, or a custom expression.
  -  `--separator, -p {string}`: Delimiter in generated column names in case of multiple `values` columns (default '_').
- -  `--sort, -s`: Sort columns.
- -  `--streamable, -t`: Whether or not to use the polars streaming engine. Only valid for lazy dataframes.
+ -  `--maintain-order`: Maintain Order.
+ -  `--streamable, -t`: Whether or not to use the polars streaming engine. Only valid for lazy dataframes
  -  `--stable`: Perform a stable pivot.
 
 
@@ -40,26 +41,65 @@ contributors: false
 | polars_lazyframe | polars_lazyframe |
 ## Examples
 
-Perform a pivot in order to show individuals test score by subject
+Given a set of test scores, reshape so we have one row per student, with different subjects as columns, and their `test_1` scores as values
 ```nu
-> [[name subject date test_1 test_2]; [Cady maths 2025-04-01 98 100] [Cady physics 2025-04-01 99 100] [Karen maths 2025-04-02 61 60] [Karen physics 2025-04-02 58 60]] | polars into-df |  polars pivot --on [subject] --index [name date] --values [test_1]
-╭───┬───────┬───────────────┬───────┬─────────╮
-│ # │ name  │     date      │ maths │ physics │
-├───┼───────┼───────────────┼───────┼─────────┤
-│ 0 │ Cady  │ 11 months ago │    98 │      99 │
-│ 1 │ Karen │ 11 months ago │    61 │      58 │
-╰───┴───────┴───────────────┴───────┴─────────╯
+> {
+        "name": ["Cady", "Cady", "Karen", "Karen"],
+        "subject": ["maths", "physics", "maths", "physics"],
+        "test_1": [98, 99, 61, 58],
+        "test_2": [100, 100, 60, 60],
+    } |
+    polars into-df --as-columns |
+    polars pivot --on subject --on-cols [maths physics] --index name --values test_1 |
+    polars sort-by name maths physics |
+    polars collect
+╭───┬───────┬───────┬─────────╮
+│ # │ name  │ maths │ physics │
+├───┼───────┼───────┼─────────┤
+│ 0 │ Cady  │    98 │      99 │
+│ 1 │ Karen │    61 │      58 │
+╰───┴───────┴───────┴─────────╯
 
 ```
 
-Perform a pivot with multiple `values` columns with a separator
+Given a set of test scores, reshape so we have one row per student, utilize a selector for the values come to include all test scores
 ```nu
-> [[name subject date test_1 test_2 grade_1 grade_2]; [Cady maths 2025-04-01 98 100 A A] [Cady physics 2025-04-01 99 100 A A] [Karen maths 2025-04-02 61 60 D D] [Karen physics 2025-04-02 58 60 D D]] | polars into-df |  polars pivot --on [subject] --index [name] --values [test_1 grade_1] --separator /
-╭───┬───────┬──────────────┬────────────────┬───────────────┬─────────────────╮
-│ # │ name  │ test_1/maths │ test_1/physics │ grade_1/maths │ grade_1/physics │
-├───┼───────┼──────────────┼────────────────┼───────────────┼─────────────────┤
-│ 0 │ Cady  │           98 │             99 │ A             │ A               │
-│ 1 │ Karen │           61 │             58 │ D             │ D               │
-╰───┴───────┴──────────────┴────────────────┴───────────────┴─────────────────╯
+> {
+        "name": ["Cady", "Cady", "Karen", "Karen"],
+        "subject": ["maths", "physics", "maths", "physics"],
+        "test_1": [98, 99, 61, 58],
+        "test_2": [100, 100, 60, 60],
+    } |
+    polars into-df --as-columns |
+    polars pivot --on subject --on-cols [maths physics] --index name --values (polars selector starts-with test) |
+    polars sort-by name test_1_maths test_1_physics test_2_maths test_2_physics |
+    polars collect
+╭───┬───────┬──────────────┬────────────────┬──────────────┬────────────────╮
+│ # │ name  │ test_1_maths │ test_1_physics │ test_2_maths │ test_2_physics │
+├───┼───────┼──────────────┼────────────────┼──────────────┼────────────────┤
+│ 0 │ Cady  │           98 │             99 │          100 │            100 │
+│ 1 │ Karen │           61 │             58 │           60 │             60 │
+╰───┴───────┴──────────────┴────────────────┴──────────────┴────────────────╯
+
+```
+
+Given a DataFrame with duplicate entries for the pivot columns, use the `aggregate` flag to specify how to aggregate values for those duplicates. In this example, we sum the `foo` and `bar` values for rows with the same `ix` and `col` values.
+```nu
+> {
+        "ix": [1, 1, 2, 2, 1, 2],
+        "col": ["a", "a", "a", "a", "b", "b"],
+        "foo": [0, 1, 2, 2, 7, 1],
+        "bar": [0, 2, 0, 0, 9, 4],
+    } |
+    polars into-df --as-columns |
+    polars pivot --on col --on-cols [a b] --index ix --aggregate sum |
+    polars sort-by ix foo_a foo_b bar_a bar_b |
+    polars collect
+╭───┬────┬───────┬───────┬───────┬───────╮
+│ # │ ix │ foo_a │ foo_b │ bar_a │ bar_b │
+├───┼────┼───────┼───────┼───────┼───────┤
+│ 0 │  1 │     1 │     7 │     2 │     9 │
+│ 1 │  2 │     4 │     1 │     0 │     4 │
+╰───┴────┴───────┴───────┴───────┴───────╯
 
 ```

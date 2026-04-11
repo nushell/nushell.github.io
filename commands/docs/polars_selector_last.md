@@ -2,7 +2,7 @@
 title: polars selector last
 categories: |
   expression
-version: 0.111.0
+version: 0.112.0
 expression: |
   Creates a selector that selects the last column(s) by index.
 usage: |

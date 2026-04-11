@@ -2,7 +2,7 @@
 title: bytes remove
 categories: |
   bytes
-version: 0.111.0
+version: 0.112.0
 bytes: |
   Remove specified bytes from the input.
 usage: |
@@ -43,7 +43,7 @@ contributors: false
 Remove contents.
 ```nu
 > 0x[10 AA FF AA FF] | bytes remove 0x[10 AA]
-Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
+Length: 3 (0x3) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   ff aa ff                                             ×××
 
 ```
@@ -59,7 +59,7 @@ Remove all occurrences of find binary in record field.
 Remove occurrences of find binary from end.
 ```nu
 > 0x[10 AA 10 BB CC AA 10] | bytes remove --end 0x[10]
-Length: 6 (0x6) bytes | printable whitespace ascii_other non_ascii
+Length: 6 (0x6) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   10 aa 10 bb  cc aa                                   •×•×××
 
 ```
@@ -67,7 +67,7 @@ Length: 6 (0x6) bytes | printable whitespace ascii_other non_ascii
 Remove find binary from end not found.
 ```nu
 > 0x[10 AA 10 BB CC AA 10] | bytes remove --end 0x[11]
-Length: 7 (0x7) bytes | printable whitespace ascii_other non_ascii
+Length: 7 (0x7) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   10 aa 10 bb  cc aa 10                                •×•×××•
 
 ```

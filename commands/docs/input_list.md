@@ -2,7 +2,7 @@
 title: input list
 categories: |
   platform
-version: 0.111.0
+version: 0.112.0
 platform: |
   Display an interactive list for user selection.
 usage: |
@@ -158,7 +158,7 @@ The closure receives each item and should return the string to display and searc
 The original value is always returned when selected, regardless of what --display shows.
 
 Keyboard shortcuts:
-- Up/Down, j/k: Navigate items
+- Up/Down, j/k, Ctrl+n/p: Navigate items
 - Left/Right, h/l: Scroll columns horizontally (table mode, single/multi)
 - Shift+Left/Right: Scroll columns horizontally (fuzzy mode)
 - Home/End: Jump to first/last item

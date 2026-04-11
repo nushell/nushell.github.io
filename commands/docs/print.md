@@ -2,7 +2,7 @@
 title: print
 categories: |
   strings
-version: 0.111.0
+version: 0.112.0
 strings: |
   Print the given values to stdout.
 usage: |
@@ -62,3 +62,4 @@ Unlike `echo`, this command does not return any value (`print | describe` will r
 Since this command has no output, there is no point in piping it with other commands.
 
 `print` may be used inside blocks of code (e.g.: hooks) to display text during execution without interfering with the pipeline.
+In protocol modes (`--lsp`, `--mcp`), `print` always writes to stderr to keep stdout reserved for protocol messages.

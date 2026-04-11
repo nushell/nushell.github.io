@@ -2,7 +2,7 @@
 title: date from-human
 categories: |
   date
-version: 0.111.0
+version: 0.112.0
 date: |
   Convert a human readable datetime string to a datetime.
 usage: |

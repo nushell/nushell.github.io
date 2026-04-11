@@ -2,7 +2,7 @@
 title: into value
 categories: |
   conversions
-version: 0.111.0
+version: 0.112.0
 conversions: |
   Convert custom values into base values.
 usage: |
@@ -19,11 +19,6 @@ contributors: false
 ## Signature
 
 ```> into value {flags} ```
-
-## Flags
-
- -  `--columns, -c {list<any>}`: List of columns to update.
- -  `--prefer-filesizes, -f`: For ints display them as human-readable file sizes.
 
 
 ## Input/output types:

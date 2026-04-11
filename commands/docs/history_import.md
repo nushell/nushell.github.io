@@ -2,7 +2,7 @@
 title: history import
 categories: |
   history
-version: 0.111.0
+version: 0.112.0
 history: |
   Import command line history.
 usage: |

@@ -2,7 +2,7 @@
 title: bits or
 categories: |
   bits
-version: 0.111.0
+version: 0.112.0
 bits: |
   Performs bitwise or for ints or binary values.
 usage: |
@@ -59,7 +59,7 @@ Apply bitwise or to a list of numbers
 Apply bitwise or to binary data
 ```nu
 > 0x[88 cc] | bits or 0x[42 32]
-Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
+Length: 2 (0x2) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   ca fe                                                ××
 
 ```
@@ -67,7 +67,7 @@ Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
 Apply bitwise or to binary data of varying lengths with specified endianness
 ```nu
 > 0x[c0 ff ee] | bits or 0x[ff] --endian big
-Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
+Length: 3 (0x3) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   c0 ff ff                                             ×××
 
 ```
@@ -75,7 +75,7 @@ Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
 Apply bitwise or to input binary data smaller than the operor
 ```nu
 > 0x[ff] | bits or 0x[12 34 56] --endian little
-Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
+Length: 3 (0x3) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   ff 34 56                                             ×4V
 
 ```

@@ -2,7 +2,7 @@
 title: find
 categories: |
   filters
-version: 0.111.0
+version: 0.112.0
 filters: |
   Search for terms in the input data.
 usage: |

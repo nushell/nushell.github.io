@@ -2,7 +2,7 @@
 title: url parse
 categories: |
   network
-version: 0.111.0
+version: 0.112.0
 network: |
   Parse a URL string into structured data.
 usage: |
@@ -19,6 +19,10 @@ contributors: false
 ## Signature
 
 ```> url parse {flags} ...rest```
+
+## Flags
+
+ -  `--base, -b {string}`: Base URL used to resolve relative URLs.
 
 ## Parameters
 
@@ -55,4 +59,20 @@ Parses a URL.
 │          │ │ 3 │ f[no]   │ 42      │                │
 │          │ ╰───┴─────────┴─────────╯                │
 ╰──────────┴──────────────────────────────────────────╯
+```
+
+Resolves a relative URL against a base URL.
+```nu
+> "../images/logo.png" | url parse --base "https://example.com/products/item1"
+╭──────────┬──────────────────╮
+│ scheme   │ https            │
+│ username │                  │
+│ password │                  │
+│ host     │ example.com      │
+│ port     │                  │
+│ path     │ /images/logo.png │
+│ query    │                  │
+│ fragment │                  │
+│ params   │ [list 0 items]   │
+╰──────────┴──────────────────╯
 ```

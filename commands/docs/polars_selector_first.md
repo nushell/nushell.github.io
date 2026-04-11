@@ -2,7 +2,7 @@
 title: polars selector first
 categories: |
   expression
-version: 0.111.0
+version: 0.112.0
 expression: |
   Creates a selector that selects the first column(s) by index.
 usage: |

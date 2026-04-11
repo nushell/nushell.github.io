@@ -2,7 +2,7 @@
 title: explore config
 categories: |
   viewers
-version: 0.111.0
+version: 0.112.0
 viewers: |
   Launch a TUI to view and edit the nushell configuration interactively.
 usage: |

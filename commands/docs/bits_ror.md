@@ -2,7 +2,7 @@
 title: bits ror
 categories: |
   bits
-version: 0.111.0
+version: 0.112.0
 bits: |
   Bitwise rotate right for ints or binary values.
 usage: |
@@ -60,7 +60,7 @@ rotate right a list of numbers of two bytes
 rotate right binary data
 ```nu
 > 0x[ff bb 03] | bits ror 10
-Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
+Length: 3 (0x3) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   c0 ff ee                                             ×××
 
 ```

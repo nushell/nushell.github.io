@@ -2,7 +2,7 @@
 title: ast
 categories: |
   debug
-version: 0.111.0
+version: 0.112.0
 debug: |
   Print the abstract syntax tree (ast) for a pipeline.
 usage: |
@@ -96,7 +96,7 @@ Print the ast of a pipeline flattened.
 ╭───┬─────────┬────────────────────┬────────────────╮
 │ # │ content │       shape        │      span      │
 ├───┼─────────┼────────────────────┼────────────────┤
-│ 0 │ ls      │ shape_external     │ ╭───────┬───╮  │
+│ 0 │ ls      │ shape_internalcall │ ╭───────┬───╮  │
 │   │         │                    │ │ start │ 0 │  │
 │   │         │                    │ │ end   │ 2 │  │
 │   │         │                    │ ╰───────┴───╯  │

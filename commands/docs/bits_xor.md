@@ -2,7 +2,7 @@
 title: bits xor
 categories: |
   bits
-version: 0.111.0
+version: 0.112.0
 bits: |
   Performs bitwise xor for ints or binary values.
 usage: |
@@ -59,7 +59,7 @@ Apply bitwise xor to a list of numbers
 Apply bitwise xor to binary data
 ```nu
 > 0x[ca fe] | bits xor 0x[ba be]
-Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
+Length: 2 (0x2) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   70 40                                                p@
 
 ```
@@ -67,7 +67,7 @@ Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
 Apply bitwise xor to binary data of varying lengths with specified endianness
 ```nu
 > 0x[ca fe] | bits xor 0x[aa] --endian big
-Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
+Length: 2 (0x2) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   ca 54                                                ×T
 
 ```
@@ -75,7 +75,7 @@ Length: 2 (0x2) bytes | printable whitespace ascii_other non_ascii
 Apply bitwise xor to input binary data smaller than the operand
 ```nu
 > 0x[ff] | bits xor 0x[12 34 56] --endian little
-Length: 3 (0x3) bytes | printable whitespace ascii_other non_ascii
+Length: 3 (0x3) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   ed 34 56                                             ×4V
 
 ```

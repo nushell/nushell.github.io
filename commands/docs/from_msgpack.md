@@ -2,7 +2,7 @@
 title: from msgpack
 categories: |
   formats
-version: 0.111.0
+version: 0.112.0
 formats: |
   Convert MessagePack data into Nu values.
 usage: |

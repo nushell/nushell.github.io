@@ -2,7 +2,7 @@
 title: debug info
 categories: |
   debug
-version: 0.111.0
+version: 0.112.0
 debug: |
   View process memory info.
 usage: |

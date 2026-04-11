@@ -2,7 +2,7 @@
 title: str replace
 categories: |
   strings
-version: 0.111.0
+version: 0.112.0
 strings: |
   Find and replace text in the input string.
 usage: |

@@ -2,7 +2,7 @@
 title: config use-colors
 categories: |
   env
-version: 0.111.0
+version: 0.112.0
 env: |
   Get the configuration for color output.
 usage: |

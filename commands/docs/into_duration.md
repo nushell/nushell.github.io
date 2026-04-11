@@ -2,7 +2,7 @@
 title: into duration
 categories: |
   conversions
-version: 0.111.0
+version: 0.112.0
 conversions: |
   Convert value to a duration.
 usage: |
@@ -73,6 +73,18 @@ Convert duration to duration.
 ```nu
 > 420sec | into duration
 7min
+```
+
+Convert `hh:mm:ss`-style string to duration
+```nu
+> '3:34:00' | into duration
+3hr 34min
+```
+
+Convert `hh:mm:ss.f`-style string to duration
+```nu
+> '2:45:31.2' | into duration
+2hr 45min 31sec 200ms
 ```
 
 Convert a number of ns to duration.

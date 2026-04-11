@@ -2,7 +2,7 @@
 title: query web
 categories: |
   network
-version: 0.111.0
+version: 0.112.0
 network: |
   execute selector query on html/web
 usage: |
@@ -27,6 +27,7 @@ contributors: false
  -  `--attribute, -a {any}`: Downselect based on the given attribute.
  -  `--as-table, -t {list<string>}`: Find table based on column header list.
  -  `--inspect, -i`: Run in inspect mode to provide more information for determining column headers.
+ -  `--document, -d`: Parse the input as a full HTML document instead of a fragment
 
 ## Examples
 
@@ -46,6 +47,12 @@ Retrieve a html table from Wikipedia and parse it into a nushell table using tab
 Pass multiple css selectors to extract several elements within single query, group the query results together and rotate them to create a table
 ```nu
 > http get https://www.nushell.sh | query web --query 'h2, h2 + p' | each {str join} | chunks 2 | each {rotate --ccw tagline description} | flatten
+
+```
+
+Parse the response as a full document so that the `<body>` element is preserved
+```nu
+> http get http://example.com | query web --document --query body
 
 ```
 

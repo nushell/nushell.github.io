@@ -2,7 +2,7 @@
 title: to nuon
 categories: |
   formats
-version: 0.111.0
+version: 0.112.0
 formats: |
   Converts table data into Nuon (Nushell Object Notation) text.
 usage: |
@@ -26,7 +26,8 @@ contributors: false
  -  `--indent, -i {number}`: Specify indentation width.
  -  `--tabs, -t {number}`: Specify indentation tab quantity.
  -  `--serialize, -s`: Serialize nushell types that cannot be deserialized.
- -  `--raw-strings`: Use raw string syntax (r#'...'#) for strings with quotes or backslashes.
+ -  `--raw-strings, -R`: Use raw string syntax (r#'...'#) for strings with quotes or backslashes.
+ -  `--list-of-records, -l`: Serialize table values as list-of-records instead of table syntax.
 
 
 ## Input/output types:
@@ -84,4 +85,19 @@ Use raw string syntax for strings with quotes or backslashes.
 ```nu
 > 'hello "world"' | to nuon --raw-strings
 r#'hello "world"'#
+```
+
+Serialize table values as a list of records instead of table syntax.
+```nu
+> [[a, b]; [1, 2], [3, 4]] | to nuon --list-of-records
+[{a: 1, b: 2}, {a: 3, b: 4}]
+```
+
+Serialize table values as list of records with pretty indentation.
+```nu
+> [[a, b]; [1, 2], [3, 4]] | to nuon --list-of-records --indent 2
+[
+  {a: 1, b: 2},
+  {a: 3, b: 4}
+]
 ```
