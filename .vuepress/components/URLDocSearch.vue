@@ -1,5 +1,5 @@
 <template>
-  <DocSearch :options="docsearchOptions" />
+  <DocSearch />
 </template>
 
 <script setup lang="ts">
@@ -18,7 +18,6 @@ const SEARCH_INPUT_ID = 'docsearch-input';
 const router = useRouter();
 const route = useRoute();
 
-const docsearchOptions = ref<DocSearchOptions>({});
 const inputElement = ref<HTMLInputElement>();
 const isNavigating = ref(false);
 
