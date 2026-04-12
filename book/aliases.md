@@ -41,9 +41,9 @@ alias ll = ls -l
 # some other config and script loading
 ```
 
-## Piping in Aliases
+## Piping / Multiple commands in Aliases
 
-Note that `alias uuidgen = uuidgen | tr A-F a-f` (to make uuidgen on mac behave like linux) won't work.
+Note aliases currently do not support including multiple commands. So for example `alias uuidgen = uuidgen | tr A-F a-f` (to make uuidgen on mac behave like linux) won't work.
 The solution is to define a command without parameters that calls the system program `uuidgen` via `^`.
 
 ```nu
@@ -59,6 +59,30 @@ def lsg [] { ls | sort-by type name -i | grid -c | str trim }
 ```
 
 displaying all listed files and folders in a grid.
+
+Similarly trying to chain multiple commands also will not work. In this example the aim is have `make_calls` print both "call1" and "call2".
+
+```nu
+alias make_calls = print call1; print call2
+
+#output:
+#call2
+```
+
+It output "call2" right away because the ";" ended the alias command instead of being included in it. If we try testing the alias we only get "call1" output as seen below:
+
+```nu
+make_calls
+
+#output:
+#call1
+```
+
+To implement the desired functionality a custom command would again be needed.
+
+```nu
+def make_calls [] { print call1; print call2 }
+```
 
 ## Replacing Existing Commands Using Aliases
 
