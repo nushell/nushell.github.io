@@ -58,10 +58,9 @@ do --env {
 keychain --eval --quiet <your ssh keys, eg. id_ed25519>
     | lines
     | where not ($it | is-empty)
-    | parse "{k}={v}; export {k2};"
-    | select k v
-    | transpose --header-row
-    | into record
+    | parse "{k}={v};{_}"
+    | transpose --header-row -d
+    | str trim -c "\""
     | load-env
 ```
 
