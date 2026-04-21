@@ -618,6 +618,8 @@ The following stages and their steps _may_ occur during startup, based on the fl
   - ✅ Sources user's `config.nu` file if it exists if it exists in the config directory
   - ❌ Does not read `personal login.nu` file
   - ✅ Enters the REPL
+  - ✅ Sources the files in `vendor-autoload-dirs`
+  - ✅ Sources the files in `user-autoload-dirs`
 
 - `nu -c "ls"`:
 
@@ -630,7 +632,8 @@ The following stages and their steps _may_ occur during startup, based on the fl
   - ❌ Does not read the user's `login.nu` file
   - ✅ Runs the `ls` command and exits
   - ❌ Does not enter the REPL
-
+  - ❌ Does not source the files in `vendor-autoload-dirs`
+  - ❌ Does not source the files in `user-autoload-dirs`
 - `nu -l -c "ls"`:
 
   - ✅ Makes the Standard Library available
@@ -642,6 +645,8 @@ The following stages and their steps _may_ occur during startup, based on the fl
   - ✅ Sources the user's `login.nu` file if it exists in the config directory
   - ✅ Runs the `ls` command and exits
   - ❌ Does not enter the REPL
+  - ❌ Does not source the files in `vendor-autoload-dirs`
+  - ❌ Does not source the files in `user-autoload-dirs`
 
 - `nu -l -c "ls" --config foo_config.nu`
 
@@ -658,6 +663,8 @@ The following stages and their steps _may_ occur during startup, based on the fl
   - ❌ Does not read the user's `login.nu` file
   - ✅ Runs the `ls` command and exits
   - ❌ Does not enter the REPL
+  - ❌ Does not source the files in `vendor-autoload-dirs`
+  - ❌ Does not source the files in `user-autoload-dirs`
 
 - `nu test.nu`:
 
@@ -670,6 +677,8 @@ The following stages and their steps _may_ occur during startup, based on the fl
   - ❌ Does not read the user's `login.nu` file
   - ✅ Runs `test.nu` file as a script
   - ❌ Does not enter the REPL
+  - ❌ Does not source the files in `vendor-autoload-dirs`
+  - ❌ Does not source the files in `user-autoload-dirs`
 
 - `nu --config foo_config.nu test.nu`
 
@@ -682,6 +691,8 @@ The following stages and their steps _may_ occur during startup, based on the fl
   - ❌ Does not read the user's `login.nu` file
   - ✅ Runs `test.nu` file as a script
   - ❌ Does not enter the REPL
+  - ❌ Does not source the files in `vendor-autoload-dirs`
+  - ❌ Does not source the files in `user-autoload-dirs`
 
 - `nu -n --no-std-lib` (fastest REPL startup):
 
@@ -692,6 +703,8 @@ The following stages and their steps _may_ occur during startup, based on the fl
   - ❌ Does not read the internal `default_config.nu` file
   - ❌ Does not read the user's `config.nu` file
   - ❌ Does not read the user's `login.nu` file
+  - ❌ Does not source the files in `vendor-autoload-dirs`
+  - ❌ Does not source the files in `user-autoload-dirs`
   - ✅ Enters the REPL
 
 - `nu -n --no-std-lib -c "ls"` (fastest command-string invocation):
@@ -705,3 +718,6 @@ The following stages and their steps _may_ occur during startup, based on the fl
   - ❌ Does not read the user's `login.nu` file
   - ✅ Runs the `ls` command and exits
   - ❌ Does not enter the REPL
+  - ❌ Does not source the files in `vendor-autoload-dirs`
+  - ❌ Does not source the files in `user-autoload-dirs`
+
