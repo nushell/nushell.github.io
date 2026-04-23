@@ -297,6 +297,18 @@ $teams_scores | drop column
 # => ╰───┴───────────────────────┴───────╯
 ```
 
+### Overview of table operations
+
+| part of table | keep | discard | add |
+|-|-|-|-|
+| specific rows | get | drop nth | - |
+| range of rows | slice | drop nth | - |
+| first n rows | first/take, take while, take until | skip, skip while, skip until | prepend |
+| last n rows | last | drop | append |
+| every nth row | every | every --skip | - |
+| specific columns | select | reject | insert plus move |
+| last n columns | - | drop column | insert |
+
 ## Files and Filesystem
 
 open a text file with the default text editor:
