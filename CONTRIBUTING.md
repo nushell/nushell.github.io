@@ -70,6 +70,8 @@ ls | where type == file | sort-by -r size | first 5
 
 The preferred form for consistency is `` ```nu ``.
 
+If the snippet is a reusable block that readers might want to source directly and track over time, save it as a sibling `.nu` file and include it inside the fence with `<!-- @include: ./example.nu -->` (see `cookbook/direnv.md` for an example).
+
 ## Translation Guide
 
 Follow the steps above for each group of translations.
