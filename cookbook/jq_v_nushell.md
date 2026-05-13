@@ -32,7 +32,7 @@ In `nu`, we need to be explicit because Nushell has a wider range of input choic
 The output for `jq` is a JSON string whereas in `nu` it's a Nushell value. To get the output of any pipeline as JSON, simply apply a [`to json`](/commands/docs/to_json.html) at the end:
 
 ```nu
-'[{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]'
+'{"title": "jq vs Nushell", "publication_date": "2023-11-20"}'
 | from json
 | to json
 ```
@@ -310,17 +310,7 @@ In `nu` we do:
 ```nu
 '{"name": "Alice", "age": 30}'
 | from json
-| items { |key, value| ["Name" $value] | str join ": " }
-| str join ", "
-# => Name: Alice, Name: 30
-```
-
-This approach is a bit involved but if we [install the full version](https://github.com/nushell/nushell/releases) which includes the _extra commands_ we can benefit from the [`format`](/commands/docs/format.html):
-
-```nu
-'{"name": "Alice", "age": 30}'
-| from json
-| format "Name: {name}, Age: {age}"
+| format pattern "Name: {name}, Age: {age}"
 ```
 
 ### Composing records
