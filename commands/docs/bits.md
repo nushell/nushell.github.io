@@ -2,7 +2,7 @@
 title: bits
 categories: |
   bits
-version: 0.112.0
+version: 0.113.0
 bits: |
   Various commands for working with bits.
 usage: |

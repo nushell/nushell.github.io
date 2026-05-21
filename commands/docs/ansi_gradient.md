@@ -2,7 +2,7 @@
 title: ansi gradient
 categories: |
   platform
-version: 0.112.0
+version: 0.113.0
 platform: |
   Add a color gradient (using ANSI color codes) to the given string.
 usage: |
@@ -24,8 +24,11 @@ contributors: false
 
  -  `--fgstart, -a {string}`: Foreground gradient start color in hex (0x123456).
  -  `--fgend, -b {string}`: Foreground gradient end color in hex.
+ -  `--fgnamed, -F {string}`: Named foreground gradient.
  -  `--bgstart, -c {string}`: Background gradient start color in hex.
  -  `--bgend, -d {string}`: Background gradient end color in hex.
+ -  `--bgnamed, -B {string}`: Named background gradient.
+ -  `--list, -l`: List available named gradients and show an example.
 
 ## Parameters
 
@@ -40,28 +43,41 @@ contributors: false
 | list&lt;string&gt; | list&lt;string&gt; |
 | table        | table        |
 | record       | record       |
+| nothing      | string       |
 ## Examples
 
 draw text in a gradient with foreground start and end colors
 ```nu
 > 'Hello, Nushell! This is a gradient.' | ansi gradient --fgstart '0x40c9ff' --fgend '0xe81cff'
-
+Hello, Nushell! This is a gradient.
 ```
 
 draw text in a gradient with foreground start and end colors and background start and end colors
 ```nu
 > 'Hello, Nushell! This is a gradient.' | ansi gradient --fgstart '0x40c9ff' --fgend '0xe81cff' --bgstart '0xe81cff' --bgend '0x40c9ff'
-
+Hello, Nushell! This is a gradient.
 ```
 
 draw text in a gradient by specifying foreground start color - end color is assumed to be black
 ```nu
 > 'Hello, Nushell! This is a gradient.' | ansi gradient --fgstart '0x40c9ff'
-
+Hello, Nushell! This is a gradient.
 ```
 
 draw text in a gradient by specifying foreground end color - start color is assumed to be black
 ```nu
 > 'Hello, Nushell! This is a gradient.' | ansi gradient --fgend '0xe81cff'
+Hello, Nushell! This is a gradient.
+```
 
+draw text in a gradient using a named rainbow foreground gradient
+```nu
+> 'Hello, Nushell! This is a gradient.' | ansi gradient --fgnamed rainbow
+Hello, Nushell! This is a gradient.
+```
+
+draw text in a gradient using a named forest background gradient
+```nu
+> 'Hello, Nushell! This is a gradient.' | ansi gradient --bgnamed forest
+Hello, Nushell! This is a gradient.
 ```

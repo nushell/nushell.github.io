@@ -2,7 +2,7 @@
 title: bytes split
 categories: |
   bytes
-version: 0.112.0
+version: 0.113.0
 bytes: |
   Split input into multiple items using a separator.
 usage: |

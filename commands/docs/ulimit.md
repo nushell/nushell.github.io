@@ -2,7 +2,7 @@
 title: ulimit
 categories: |
   platform
-version: 0.112.0
+version: 0.113.0
 platform: |
   Set or get resource usage limits.
 usage: |

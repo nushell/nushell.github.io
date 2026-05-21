@@ -2,7 +2,7 @@
 title: polars len
 categories: |
   dataframe
-version: 0.112.0
+version: 0.113.0
 dataframe: |
   Return the number of rows in the context. This is similar to COUNT(*) in SQL.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | any   | polars_expression |
 ## Examples
 
-Count the number of rows in the the dataframe.
+Count the number of rows in the dataframe.
 ```nu
 > [[a b]; [1 2] [3 4]] | polars into-df | polars select (polars len) | polars collect
 ╭───┬─────╮

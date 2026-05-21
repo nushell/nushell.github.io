@@ -2,7 +2,7 @@
 title: grid
 categories: |
   viewers
-version: 0.112.0
+version: 0.113.0
 viewers: |
   Renders the output to a textual terminal grid.
 usage: |
@@ -18,7 +18,7 @@ contributors: false
 
 ## Signature
 
-```> grid {flags} ```
+```> grid {flags} (column)```
 
 ## Flags
 
@@ -26,6 +26,10 @@ contributors: false
  -  `--color, -c`: Draw output with color.
  -  `--icons, -i`: Draw output with icons (assumes nerd font is used).
  -  `--separator, -s {string}`: Character to separate grid with.
+
+## Parameters
+
+ -  `column`: Format this column in a grid.
 
 
 ## Input/output types:
@@ -45,12 +49,12 @@ Render a simple list to a grid
 
 The above example is the same as:
 ```nu
-> [1 2 3 a b c] | wrap name | grid
+> [1 2 3 a b c] | wrap name | grid name
 1 │ 2 │ 3 │ a │ b │ c
 
 ```
 
-Render a record to a grid
+Render a record to a grid (deprecated)
 ```nu
 > {name: 'foo', b: 1, c: 2} | grid
 foo
@@ -59,28 +63,25 @@ foo
 
 Render a list of records to a grid
 ```nu
-> [{name: 'A', v: 1} {name: 'B', v: 2} {name: 'C', v: 3}] | grid
+> [{name: 'A', v: 1} {name: 'B', v: 2} {name: 'C', v: 3}] | grid name
 A │ B │ C
 
 ```
 
 Render a table with 'name' column in it to a grid
 ```nu
-> [[name patch]; [0.1.0 false] [0.1.1 true] [0.2.0 false]] | grid
+> [[name patch]; [0.1.0 false] [0.1.1 true] [0.2.0 false]] | grid name
 0.1.0 │ 0.1.1 │ 0.2.0
 
 ```
 
 Render a table with 'name' column in it to a grid with icons and colors
 ```nu
-> [[name patch]; [Cargo.toml false] [README.md true] [SECURITY.md false]] | grid --icons --color
+> ls | grid --icons --color name
 
 ```
 
 ## Notes
-grid was built to give a concise gridded layout for ls. however,
-it determines what to put in the grid by looking for a column named
-'name'. this works great for tables and records but for lists we
-need to do something different. such as with '[one two three] | grid'
-it creates a fake column called 'name' for these values so that it
-prints out the list properly.
+The `grid` command creates a concise gridded layout for the input. It
+prints every item of the list in a grid layout. However, for table,
+you need to provide the name of the column you want to put in the grid.

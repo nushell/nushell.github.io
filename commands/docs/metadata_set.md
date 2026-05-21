@@ -2,7 +2,7 @@
 title: metadata set
 categories: |
   debug
-version: 0.112.0
+version: 0.113.0
 debug: |
   Set the metadata for items in the stream.
 usage: |
@@ -22,7 +22,6 @@ contributors: false
 
 ## Flags
 
- -  `--datasource-ls, -l`: (DEPRECATED) Assign the DataSource::Ls metadata to the input.
  -  `--datasource-filepath, -f {path}`: Assign the DataSource::FilePath metadata to the input.
  -  `--path-columns, -p {list<string>}`: A list of columns in the input for which path metadata will be assigned.
  -  `--content-type, -c {oneof<string, nothing>}`: Assign content type metadata to the input.

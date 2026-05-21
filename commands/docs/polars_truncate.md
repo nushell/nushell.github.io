@@ -2,7 +2,7 @@
 title: polars truncate
 categories: |
   expression
-version: 0.112.0
+version: 0.113.0
 expression: |
   Divide the date/datetime range into buckets.
 usage: |
@@ -36,14 +36,14 @@ contributors: false
 Truncate a series of dates by period length
 ```nu
 > seq date -b 2025-01-01 --periods 4 --increment 6wk -o "%Y-%m-%d %H:%M:%S" | polars into-df | polars as-datetime "%F %H:%M:%S" --naive | polars select datetime (polars col datetime | polars truncate 5d37m | polars as truncated)
-╭───┬───────────────┬───────────────╮
-│ # │   datetime    │   truncated   │
-├───┼───────────────┼───────────────┤
-│ 0 │ a year ago    │ a year ago    │
-│ 1 │ a year ago    │ a year ago    │
-│ 2 │ a year ago    │ a year ago    │
-│ 3 │ 11 months ago │ 11 months ago │
-╰───┴───────────────┴───────────────╯
+╭───┬────────────┬────────────╮
+│ # │  datetime  │ truncated  │
+├───┼────────────┼────────────┤
+│ 0 │ a year ago │ a year ago │
+│ 1 │ a year ago │ a year ago │
+│ 2 │ a year ago │ a year ago │
+│ 3 │ a year ago │ a year ago │
+╰───┴────────────┴────────────╯
 
 ```
 

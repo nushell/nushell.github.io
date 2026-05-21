@@ -2,7 +2,7 @@
 title: polars pivot
 categories: |
   dataframe
-version: 0.112.0
+version: 0.113.0
 dataframe: |
   Pivot a DataFrame from long to wide format.
 usage: |
@@ -51,6 +51,27 @@ Given a set of test scores, reshape so we have one row per student, with differe
     } |
     polars into-df --as-columns |
     polars pivot --on subject --on-cols [maths physics] --index name --values test_1 |
+    polars sort-by name maths physics |
+    polars collect
+╭───┬───────┬───────┬─────────╮
+│ # │ name  │ maths │ physics │
+├───┼───────┼───────┼─────────┤
+│ 0 │ Cady  │    98 │      99 │
+│ 1 │ Karen │    61 │      58 │
+╰───┴───────┴───────┴─────────╯
+
+```
+
+Given a set of test scores, reshape so we have one row per student, with different subjects as columns, and their `test_1` scores as values, without specifying --on-cols
+```nu
+> {
+        "name": ["Cady", "Cady", "Karen", "Karen"],
+        "subject": ["maths", "physics", "maths", "physics"],
+        "test_1": [98, 99, 61, 58],
+        "test_2": [100, 100, 60, 60],
+    } |
+    polars into-df --as-columns |
+    polars pivot --on subject --index name --values test_1 |
     polars sort-by name maths physics |
     polars collect
 ╭───┬───────┬───────┬─────────╮

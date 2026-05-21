@@ -2,7 +2,7 @@
 title: cp
 categories: |
   filesystem
-version: 0.112.0
+version: 0.113.0
 filesystem: |
   Copy files using uutils/coreutils cp.
 usage: |
@@ -23,6 +23,7 @@ contributors: false
 ## Flags
 
  -  `--recursive, -r`: Copy directories recursively.
+ -  `--no-dereference, -P`: Copy symbolic links as symbolic links instead of their targets.
  -  `--verbose, -v`: Explicitly state what is being done.
  -  `--force, -f`: If an existing destination file cannot be opened, remove it and try
                     again (this option is ignored when the -n option is also used).
@@ -88,6 +89,12 @@ Copy file preserving mode and timestamps attributes.
 Copy file erasing all attributes.
 ```nu
 > cp --preserve [] myfile newfile
+
+```
+
+Copy a symbolic link without copying the target.
+```nu
+> cp --no-dereference link-to-file newlink
 
 ```
 
