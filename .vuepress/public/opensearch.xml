@@ -1,0 +1,12 @@
+<OpenSearchDescription
+  xmlns="http://a9.com/-/spec/opensearch/1.1/"
+  xmlns:moz="http://www.mozilla.org/2006/browser/search/"
+>
+  <ShortName>Nushell Docs</ShortName>
+  <Description>Search Nushell documentation</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Image width="16" height="16" type="image/png">https://www.nushell.sh/icon.png</Image>
+  <Url type="text/html" template="https://www.nushell.sh/?search={searchTerms}" />
+  <Url type="application/opensearchdescription+xml" rel="self" template="https://www.nushell.sh/opensearch.xml" />
+  <!-- TODO: it might be possible to provide suggestions via some Algolia API? -->
+</OpenSearchDescription>

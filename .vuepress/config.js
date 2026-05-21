@@ -110,6 +110,15 @@ export default defineUserConfig({
       { name: 'apple-mobile-web-app-status-bar-style', content: 'black' },
     ],
     ['link', { rel: 'icon', href: '/icon.png' }],
+    [
+      'link',
+      {
+        rel: 'search',
+        type: 'application/opensearchdescription+xml',
+        title: 'Nushell Docs', // NOTE: must match ShortName
+        href: '/opensearch.xml',
+      },
+    ],
   ],
   markdown: {
     importCode: {
