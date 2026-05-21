@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { DocSearch, DocSearchOptions } from '@vuepress/plugin-docsearch/client';
+import { DocSearch } from '@vuepress/plugin-docsearch/client';
 import {
   useDebounceFn,
   useElementVisibility,
@@ -22,10 +22,13 @@ const inputElement = ref<HTMLInputElement>();
 const isNavigating = ref(false);
 
 // Handle initial search query, if one is set
-onMounted(async () => {
+onMounted(() => {
   const query = new URL(window.location.href).searchParams.get(SEARCH_KEY);
   if (query) {
-    (document.querySelector('.DocSearch-Button') as HTMLButtonElement).click();
+    const button =
+      document.querySelector<HTMLButtonElement>('.DocSearch-Button');
+    if (!button) return;
+    button.click();
     // Set value in the input element once it appears
     performInitialQuery(query);
   }
