@@ -6,7 +6,6 @@ import { shikiPlugin } from '@vuepress/plugin-shiki';
 import { defaultTheme } from '@vuepress/theme-default';
 import { sitemapPlugin } from '@vuepress/plugin-sitemap';
 import { docsearchPlugin } from '@vuepress/plugin-docsearch';
-import { markdownIncludePlugin } from '@vuepress/plugin-markdown-include';
 
 import {
   navbarDe,
@@ -221,7 +220,6 @@ export default defineUserConfig({
   plugins: [
     // Note: gitPlugin, backToTopPlugin, mediumZoomPlugin, and copyCodePlugin
     // are already included in defaultTheme, so we don't need to add them here
-    markdownIncludePlugin({}),
     shikiPlugin({
       themes: {
         light: 'dark-plus',
