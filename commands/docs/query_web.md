@@ -39,8 +39,7 @@ Retrieve all `<header>` elements from phoronix.com website
 
 Retrieve a html table from Wikipedia and parse it into a nushell table using table headers as guides
 ```nu
-> http get https://en.wikipedia.org/wiki/List_of_cities_in_India_by_population |
-        query web --as-table [City 'Population(2011)[3]' 'Population(2001)[3][a]' 'State or unionterritory' 'Reference']
+> http get https://en.wikipedia.org/wiki/List_of_terminal_emulators | query web --as-table ['Name', 'Type', 'Connectivity', 'User Interface', 'Operating System']
 
 ```
 
