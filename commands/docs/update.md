@@ -2,7 +2,7 @@
 title: update
 categories: |
   filters
-version: 0.112.0
+version: 0.113.0
 filters: |
   Update an existing column to have a new value.
 usage: |

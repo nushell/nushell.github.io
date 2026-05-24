@@ -2,7 +2,7 @@
 title: to nuon
 categories: |
   formats
-version: 0.112.0
+version: 0.113.0
 formats: |
   Converts table data into Nuon (Nushell Object Notation) text.
 usage: |
@@ -28,6 +28,7 @@ contributors: false
  -  `--serialize, -s`: Serialize nushell types that cannot be deserialized.
  -  `--raw-strings, -R`: Use raw string syntax (r#'...'#) for strings with quotes or backslashes.
  -  `--list-of-records, -l`: Serialize table values as list-of-records instead of table syntax.
+ -  `--no-commas, -c`: Do not use commas between items in tables and lists.
 
 
 ## Input/output types:
@@ -100,4 +101,16 @@ Serialize table values as list of records with pretty indentation.
   {a: 1, b: 2},
   {a: 3, b: 4}
 ]
+```
+
+Output a list without commas between items.
+```nu
+> [1 2 3] | to nuon --no-commas
+[1 2 3]
+```
+
+Output a record without commas between fields.
+```nu
+> {a: 1, b: 2} | to nuon --no-commas
+{a: 1 b: 2}
 ```

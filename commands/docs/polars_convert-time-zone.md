@@ -2,7 +2,7 @@
 title: polars convert-time-zone
 categories: |
   dataframe
-version: 0.112.0
+version: 0.113.0
 dataframe: |
   Convert datetime to target timezone.
 usage: |

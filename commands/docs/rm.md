@@ -2,7 +2,7 @@
 title: rm
 categories: |
   filesystem
-version: 0.112.0
+version: 0.113.0
 filesystem: |
   Remove files and directories.
 usage: |
@@ -26,7 +26,7 @@ contributors: false
  -  `--permanent, -p`: Delete permanently, ignoring the 'always_trash' config option. always enabled on android and ios.
  -  `--recursive, -r`: Delete subdirectories recursively.
  -  `--force, -f`: Suppress error when no file.
- -  `--verbose, -v`: Print names of deleted files.
+ -  `--verbose, -v`: Return a table for each processed path.
  -  `--interactive, -i`: Ask user to confirm action.
  -  `--interactive-once, -I`: Ask user to confirm action only once.
  -  `--all, -a`: Remove hidden files if '*' is provided.
@@ -38,9 +38,10 @@ contributors: false
 
 ## Input/output types:
 
-| input   | output  |
-| ------- | ------- |
-| nothing | nothing |
+| input   | output                                                            |
+| ------- | ----------------------------------------------------------------- |
+| nothing | nothing                                                           |
+| nothing | table&lt;path: string, deleted: bool, error: oneof&lt;nothing, string&gt;&gt; |
 ## Examples
 
 Delete, or move a file to the trash (based on the 'always_trash' config option).

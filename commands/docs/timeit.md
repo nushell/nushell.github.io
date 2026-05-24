@@ -2,7 +2,7 @@
 title: timeit
 categories: |
   debug
-version: 0.112.0
+version: 0.113.0
 debug: |
   Time how long it takes a closure to run.
 usage: |

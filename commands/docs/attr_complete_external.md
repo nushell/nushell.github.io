@@ -2,7 +2,7 @@
 title: attr complete external
 categories: |
   core
-version: 0.112.0
+version: 0.113.0
 core: |
   Attribute for enabling use of the external completer for internal commands.
 usage: |

@@ -2,11 +2,11 @@
 title: from md
 categories: |
   formats
-version: 0.112.0
+version: 0.113.0
 formats: |
-  Convert markdown text into structured data.
+  Convert markdown text into human-friendly structured rows. Use --verbose for the full AST.
 usage: |
-  Convert markdown text into structured data.
+  Convert markdown text into human-friendly structured rows. Use --verbose for the full AST.
 editLink: false
 contributors: false
 ---
@@ -14,11 +14,15 @@ contributors: false
 
 # `from md` for [formats](/commands/categories/formats.md)
 
-<div class='command-title'>Convert markdown text into structured data.</div>
+<div class='command-title'>Convert markdown text into human-friendly structured rows. Use --verbose for the full AST.</div>
 
 ## Signature
 
 ```> from md {flags} ```
+
+## Flags
+
+ -  `--verbose, -v`: Return the full AST with type, position, attrs, and children fields.
 
 
 ## Input/output types:
@@ -28,31 +32,29 @@ contributors: false
 | string | table  |
 ## Examples
 
-Parse markdown and return key node fields.
+Reduced mode promotes child rows; heading text is represented as a text element.
 ```nu
-> '# Title' | from md | select type position attrs
-╭───┬──────┬────────────────────────────┬───────────────╮
-│ # │ type │          position          │     attrs     │
-├───┼──────┼────────────────────────────┼───────────────┤
-│ 0 │ h1   │ ╭───────┬────────────────╮ │ ╭───────┬───╮ │
-│   │      │ │       │ ╭────────┬───╮ │ │ │ depth │ 1 │ │
-│   │      │ │ start │ │ line   │ 1 │ │ │ │ level │ 1 │ │
-│   │      │ │       │ │ column │ 1 │ │ │ ╰───────┴───╯ │
-│   │      │ │       │ ╰────────┴───╯ │ │               │
-│   │      │ │       │ ╭────────┬───╮ │ │               │
-│   │      │ │ end   │ │ line   │ 1 │ │ │               │
-│   │      │ │       │ │ column │ 8 │ │ │               │
-│   │      │ │       │ ╰────────┴───╯ │ │               │
-│   │      │ ╰───────┴────────────────╯ │               │
-╰───┴──────┴────────────────────────────┴───────────────╯
-
+> '# Title' | from md | get 0.element
+text
 ```
 
-Parse markdown frontmatter as a dedicated node.
+Get the text content of the first element.
+```nu
+> '# Title' | from md | get 0.content
+Title
+```
+
+Parse markdown frontmatter as a dedicated yaml element.
 ```nu
 > '---
 title: Demo
 ---
-# A' | from md | get 0.type
+# A' | from md | get 0.element
 yaml
+```
+
+Use --verbose to get the full AST; the first node type is h1.
+```nu
+> '# Title' | from md --verbose | get 0.type
+h1
 ```

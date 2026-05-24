@@ -2,7 +2,7 @@
 title: str replace
 categories: |
   strings
-version: 0.112.0
+version: 0.113.0
 strings: |
   Find and replace text in the input string.
 usage: |
@@ -138,7 +138,7 @@ end
 ## Notes
 The pattern to find can be a substring (default) or a regular expression (with `--regex`).
 
-The replacement can be a a string, possibly containing references to numbered (`$1` etc) or
-named capture groups (`$name`), or it can be closure that is invoked for each match.
+The replacement can be a string, possibly containing references to numbered (`$1` etc) or
+named capture groups (`$name`), or it can be a closure that is invoked for each match.
 In the latter case, the closure is invoked with the entire match as its input and any capture
 groups as its argument. It must return a string that will be used as a replacement for the match.

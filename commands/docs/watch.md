@@ -2,7 +2,7 @@
 title: watch
 categories: |
   filesystem
-version: 0.112.0
+version: 0.113.0
 filesystem: |
   Watch for file changes and execute Nu code when they happen.
 usage: |
@@ -31,30 +31,30 @@ contributors: false
 ## Parameters
 
  -  `path`: The path to watch. Can be a file or directory.
- -  `closure`: Some Nu code to run whenever a file changes. The closure will be passed `operation`, `path`, and `new_path` (for renames only) arguments in that order.
+ -  `closure`: Some Nu code to run whenever a file changes. The closure will be passed `operation`, `path`, and `new_path` (for renames only) arguments in that order (deprecated).
 
 
 ## Input/output types:
 
-| input   | output                                                   |
-| ------- | -------------------------------------------------------- |
-| nothing | nothing                                                  |
-| nothing | table&lt;operation: string, path: string, new_path: string&gt; |
+| input   | output                                                                                   |
+| ------- | ---------------------------------------------------------------------------------------- |
+| nothing | nothing                                                                                  |
+| nothing | table&lt;operation: string, path: oneof&lt;string, nothing&gt;, new_path: oneof&lt;string, nothing&gt;&gt; |
 ## Examples
 
 Run `cargo test` whenever a Rust file changes.
 ```nu
-> watch . --glob=**/*.rs {|| cargo test }
+> for _ in (watch . --glob=**/*.rs) { cargo test }
 
 ```
 
 Watch all changes in the current directory.
 ```nu
-> watch . { |op, path, new_path| $"($op) ($path) ($new_path)"}
+> watch . | each { print }
 
 ```
 
-`watch` (when run without a closure) can also emit a stream of events it detects.
+Filter, limit and modify `watch`'s output by using it as part of a pipeline.
 ```nu
 > watch /foo/bar
     | where operation == Create
@@ -67,13 +67,19 @@ Watch all changes in the current directory.
 
 Print file changes with a debounce time of 5 minutes.
 ```nu
-> watch /foo/bar --debounce 5min { |op, path| $"Registered ($op) on ($path)" | print }
+> watch /foo/bar --debounce 5min | each {|e| $"Registered ($e.operation) on ($e.path)" | print }
 
 ```
 
 Note: if you are looking to run a command every N units of time, this can be accomplished with a loop and sleep.
 ```nu
 > loop { command; sleep duration }
+
+```
+
+Run `cargo test` whenever a Rust file changes (with the deprecated closure argument).
+```nu
+> watch . --glob=**/*.rs {|| cargo test }
 
 ```
 

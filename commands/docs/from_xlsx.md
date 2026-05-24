@@ -2,7 +2,7 @@
 title: from xlsx
 categories: |
   formats
-version: 0.112.0
+version: 0.113.0
 formats: |
   Parse binary Excel(.xlsx) data and create table.
 usage: |
@@ -23,6 +23,7 @@ contributors: false
 ## Flags
 
  -  `--sheets, -s {list<string>}`: Only convert specified sheets.
+ -  `--header-row, -r {oneof<int, nothing>}`: Specify row (0-indexed) to designate the header (default first non-empty row) or null for no header
 
 
 ## Input/output types:
@@ -41,5 +42,11 @@ Convert binary .xlsx data to a table.
 Convert binary .xlsx data to a table, specifying the tables.
 ```nu
 > open --raw test.xlsx | from xlsx --sheets [Spreadsheet1]
+
+```
+
+Convert binary .xlsx data to a table, specifying the tables and specifying no header row.
+```nu
+> open --raw test.xlsx | from xlsx --sheets [Spreadsheet1] --header-row null
 
 ```
