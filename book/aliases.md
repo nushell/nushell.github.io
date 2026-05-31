@@ -125,3 +125,12 @@ def ls [
     ) | sort-by type name -i
 }
 ```
+
+To call the underlying built-in command you can use a percent sigil `%`, e.g. 
+```nu
+def ls [] {
+    "something else"
+}
+
+%ls # <- calls the original ls
+```

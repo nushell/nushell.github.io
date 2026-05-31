@@ -40,6 +40,13 @@ let arguments = ["arg1", "-a", "arg2"]
 
 The caret `^` before the string interpolation symbol `$` allows that external command to be executed.
 
+The percent sigin `%` can be used to call the built-in command (without arguments).
+
+```nu
+let cmd = "ls"
+%$cmd
+```
+
 ## String Quoting
 
 ### Double quotes
