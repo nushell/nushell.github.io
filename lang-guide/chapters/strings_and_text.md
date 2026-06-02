@@ -44,7 +44,10 @@ The percent sigin `%` can be used to call the built-in command (without argument
 
 ```nu
 let cmd = "ls"
+# call internal `ls` command
 %$cmd
+# call external `ls` command
+^$cmd
 ```
 
 ## String Quoting
