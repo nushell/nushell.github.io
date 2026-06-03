@@ -199,23 +199,25 @@ Installed plugins are displayed using [`plugin list`](/commands/docs/plugin_list
 ```nu
 plugin list
 # =>
-╭───┬─────────┬────────────┬─────────┬───────────────────────┬───────┬───────────────────────────────╮
-│ # │  name   │ is_running │   pid   │       filename        │ shell │           commands            │
-├───┼─────────┼────────────┼─────────┼───────────────────────┼───────┼───────────────────────────────┤
-│ 0 │ gstat   │ true       │ 1389890 │ .../nu_plugin_gstat   │       │ ╭───┬───────╮                 │
-│   │         │            │         │                       │       │ │ 0 │ gstat │                 │
-│   │         │            │         │                       │       │ ╰───┴───────╯                 │
-│ 1 │ inc     │ false      │         │ .../nu_plugin_inc     │       │ ╭───┬─────╮                   │
-│   │         │            │         │                       │       │ │ 0 │ inc │                   │
-│   │         │            │         │                       │       │ ╰───┴─────╯                   │
-│ 2 │ example │ false      │         │ .../nu_plugin_example │       │ ╭───┬───────────────────────╮ │
-│   │         │            │         │                       │       │ │ 0 │ nu-example-1          │ │
-│   │         │            │         │                       │       │ │ 1 │ nu-example-2          │ │
-│   │         │            │         │                       │       │ │ 2 │ nu-example-3          │ │
-│   │         │            │         │                       │       │ │ 3 │ nu-example-config     │ │
-│   │         │            │         │                       │       │ │ 4 │ nu-example-disable-gc │ │
-│   │         │            │         │                       │       │ ╰───┴───────────────────────╯ │
-╰───┴─────────┴────────────┴─────────┴───────────────────────┴───────┴───────────────────────────────╯
+╭───┬───────┬─────────┬─────────┬───────┬───────────────────────┬───────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ # │ name  │ version │ status  │  pid  │       filename        │ shell │           commands                                                                                                   │
+├───┼───────┼─────────┼─────────┼───────┼───────────────────────┼───────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 0 │ gstat │ 0.113.0 │ loaded  │       │ .../nu_plugin_gstat   │       │ ╭───┬───────┬──────────────────────────────╮                                                                         │
+│   │       │         │         │       │                       │       │ │ # │ name  │         description          │                                                                         │
+│   │       │         │         │       │                       │       │ ├───┼───────┼──────────────────────────────┤                                                                         │
+│   │       │         │         │       │                       │       │ │ 0 │ gstat │ Get the git status of a repo │                                                                         │
+│   │       │         │         │       │                       │       │ ╰───┴───────┴──────────────────────────────╯                                                                         │
+│ 1 │ query │ 0.113.0 │ running │ 27312 │ .../nu_plugin_query   │       │ ╭───┬────────────────────┬─────────────────────────────────────────────────────────────────────────────────────────╮ │
+│   │       │         │         │       │                       │       │ │ # │        name        │                                       description                                       │ │
+│   │       │         │         │       │                       │       │ ├───┼────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────┤ │
+│   │       │         │         │       │                       │       │ │ 0 │ query              │ Show all the query commands                                                             │ │
+│   │       │         │         │       │                       │       │ │ 1 │ query json         │ execute json query on json file (open --raw <file> | query json 'query string')         │ │
+│   │       │         │         │       │                       │       │ │ 2 │ query web          │ execute selector query on html/web                                                      │ │
+│   │       │         │         │       │                       │       │ │ 3 │ query webpage-info │ uses the webpage crate to extract info from html: title, description, language, links,  │ │
+│   │       │         │         │       │                       │       │ │   │                    │ RSS feeds, Opengraph, Schema.org, and more                                              │ │
+│   │       │         │         │       │                       │       │ │ 4 │ query xml          │ Execute XPath 1.0 query on XML input                                                    │ │
+│   │       │         │         │       │                       │       │ ╰───┴────────────────────┴─────────────────────────────────────────────────────────────────────────────────────────╯ │
+╰───┴───────┴─────────┴─────────┴───────┴───────────────────────┴───────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 All of the commands from installed plugins are available in the current scope:
@@ -228,31 +230,31 @@ scope commands | where type == "plugin"
 
 Plugins stay running while they are in use, and are automatically stopped by default after a period of time of inactivity. This behavior is managed by the [plugin garbage collector](#plugin-garbage-collector). To manually stop a plugin, call `plugin stop` with its name:
 
-For example, run the `gstat` command from the corresponding plugin, then check its `is_running` status:
+For example, run the `query` command from the corresponding plugin, then check its `status` status:
 
 ```nu
-gstat
-# => gstat output
-plugin list | where name == gstat | select name is_running
+http get http://example.com | query web --document --query body
+# => query output
+plugin list | where name == query | select name status
 # =>
-╭───┬───────┬────────────╮
-│ # │ name  │ is_running │
-├───┼───────┼────────────┤
-│ 0 │ gstat │ true       │
-╰───┴───────┴────────────╯
+╭───┬───────┬─────────╮
+│ # │ name  │ status  │
+├───┼───────┼─────────┤
+│ 0 │ query │ running │
+╰───┴───────┴─────────╯
 ```
 
 Now stop the plugin manually, and we can see that it is no longer running:
 
 ```nu
-plugin stop gstat
-plugin list | where name == gstat | select name is_running
+plugin stop query
+plugin list | where name == query | select name status
 # =>
-╭───┬───────┬────────────╮
-│ # │ name  │ is_running │
-├───┼───────┼────────────┤
-│ 0 │ gstat │ false      │
-╰───┴───────┴────────────╯
+╭───┬───────┬────────╮
+│ # │ name  │ status │
+├───┼───────┼────────┤
+│ 0 │ query │ loaded │
+╰───┴───────┴────────╯
 ```
 
 ### Plugin Garbage Collector
