@@ -9,7 +9,7 @@ Nushell currently has experimental support for thread-based background jobs.
 
 ## Spawning Jobs
 
-Jobs can be can be spawned using [`job spawn`](/commands/docs/job_spawn.md), which receives a closure and starts its execution in a background thread, returning
+Jobs can be spawned using [`job spawn`](/commands/docs/job_spawn.md), which receives a closure and starts its execution in a background thread, returning
 an unique integer id for the spawned job:
 
 ```nu

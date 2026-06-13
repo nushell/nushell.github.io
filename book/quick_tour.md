@@ -136,7 +136,7 @@ The [`describe` command](/commands/docs/describe.md) can be used to display the 
 
 ## Command Arguments in a Pipeline
 
-Sometimes, a command takes an _argument_ instead of pipeline _input_. For this scenario, Nushell provides the [`$in` variable](./pipelines.md#pipeline-input-and-the-special-in-variable) that let's you use the previous command's output in variable-form. For example:
+Sometimes, a command takes an _argument_ instead of pipeline _input_. For this scenario, Nushell provides the [`$in` variable](./pipelines.md#pipeline-input-and-the-special-in-variable) that lets you use the previous command's output in variable-form. For example:
 
 ```nu:line-numbers
 ls

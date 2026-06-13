@@ -47,7 +47,7 @@ Error:
 
 There are many assert commands, which behave exactly as the base one with the proper operator. The additional value for them is the ability for better error messages.
 
-For example this is not so helpful without additional message:
+For example this is not so helpful without an additional message:
 
 ```nu
 let a = "foo"

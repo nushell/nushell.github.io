@@ -63,7 +63,7 @@ displaying all listed files and folders in a grid.
 ## Replacing Existing Commands Using Aliases
 
 ::: warning Caution!
-When replacing commands it is best to "back up" the command first and avoid recursion error.
+When replacing commands it is best to "back up" the command first and avoid a recursion error.
 :::
 
 How to back up a command like `ls`:

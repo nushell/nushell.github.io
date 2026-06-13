@@ -32,7 +32,7 @@ Single-quoted strings don't do anything to the text they're given, making them i
 
 ## Double-quoted Strings
 
-For more complex strings, Nushell also offers double-quoted strings. These strings use the `"` character to surround text. They also support the ability escape characters inside the text using the `\` character.
+For more complex strings, Nushell also offers double-quoted strings. These strings use the `"` character to surround text. They also support the ability to escape characters inside the text using the `\` character.
 
 For example, we could write the text hello followed by a new line and then world, using escape characters and a double-quoted string:
 

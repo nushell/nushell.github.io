@@ -575,7 +575,7 @@ $env.config.table.mode: rounded # ascii_rounded, basic, basic_compact, compact, 
 $env.config.use_ansi_coloring: true
 ```
 
-if you want to go full-tilt on theming, you'll want to theme all the items I mentioned at the very beginning, including LS_COLORS, and the prompt. Good luck!
+If you want to go full-tilt on theming, you'll want to theme all the items I mentioned at the very beginning, including LS_COLORS, and the prompt. Good luck!
 
 ### Working on Light Background Terminal
 
