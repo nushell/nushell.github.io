@@ -821,3 +821,23 @@ $env.config.keybindings ++= [
     }
 ]
 ```
+
+## Abbreviations
+
+Reedline abbreviations are a convenient way to expand a command into a
+different command that is often longer and/or more complex. This is similiar to
+an `alias` with two main exceptions: (1) the expanded command is what gets
+stored to history, (2) the expanded command can be edited before being used. 
+
+Abbreviations are expanded on `space` or `enter` and you can add them to your config
+like this
+
+```nushell
+$env.config.abbreviations = {
+    ll: ls -l
+    gs: git status
+    ptop: ps | sort-by cpu -r | first 15
+}
+```
+
+You can see the currently active abbreviations with `abbr list`
