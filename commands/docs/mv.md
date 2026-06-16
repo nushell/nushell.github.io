@@ -2,7 +2,7 @@
 title: mv
 categories: |
   filesystem
-version: 0.112.0
+version: 0.113.0
 filesystem: |
   Move files or directories using uutils/coreutils mv.
 usage: |
@@ -37,9 +37,10 @@ contributors: false
 
 ## Input/output types:
 
-| input   | output  |
-| ------- | ------- |
-| nothing | nothing |
+| input   | output                                                      |
+| ------- | ----------------------------------------------------------- |
+| nothing | table&lt;source: string, destination: string, message: string&gt; |
+| nothing | nothing                                                     |
 ## Examples
 
 Rename a file.
@@ -69,5 +70,16 @@ Move many files into a directory.
 Move a file into the "my" directory two levels up in the directory tree.
 ```nu
 > mv test.txt .../my/
+
+```
+
+Move a file and show what is being done.
+```nu
+> mv -v before.txt after.txt
+╭───┬────────────┬─────────────┬──────────╮
+│ # │   source   │ destination │ message  │
+├───┼────────────┼─────────────┼──────────┤
+│ 0 │ before.txt │ after.txt   │ renamed  │
+╰───┴────────────┴─────────────┴──────────╯
 
 ```

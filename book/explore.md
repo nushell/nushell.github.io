@@ -25,9 +25,9 @@ So the main point of [`explore`](/commands/docs/explore.md) is `:table` (Which y
 
 You can interact with it via `<Left>`, `<Right>`, `<Up>`, `<Down>` _arrow keys_. It also supports the `Vim` keybindings `<h>`, `<j>`, `<k>`, and `<l>`, `<Ctrl-f>` and `<Ctrl-b>`, and it supports the `Emacs` keybindings `<Ctrl-v>`, `<Alt-v>`, `<Ctrl-p>`, and `<Ctrl-n>`.
 
-You can inspect a underlying values by entering into cursor mode. You can press either `<i>` or `<Enter>` to do so.
+You can inspect underlying values by entering into cursor mode. You can press either `<i>` or `<Enter>` to do so.
 Then using _arrow keys_ you can choose a necessary cell.
-And you'll be able to see it's underlying structure.
+And you'll be able to see its underlying structure.
 
 You can obtain more information about the various aspects of it by `:help`.
 

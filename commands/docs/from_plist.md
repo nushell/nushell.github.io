@@ -2,7 +2,7 @@
 title: from plist
 categories: |
   formats
-version: 0.112.0
+version: 0.113.0
 formats: |
   Convert plist to Nushell values
 usage: |

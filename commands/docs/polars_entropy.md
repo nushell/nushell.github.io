@@ -2,7 +2,7 @@
 title: polars entropy
 categories: |
   dataframe
-version: 0.112.0
+version: 0.113.0
 dataframe: |
   Compute the entropy as `-sum(pk * log(pk))` where `pk` are discrete probabilities.
 usage: |

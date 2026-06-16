@@ -2,7 +2,7 @@
 title: mktemp
 categories: |
   filesystem
-version: 0.112.0
+version: 0.113.0
 filesystem: |
   Create temporary files or directories using uutils/coreutils mktemp.
 usage: |

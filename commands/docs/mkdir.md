@@ -2,7 +2,7 @@
 title: mkdir
 categories: |
   filesystem
-version: 0.112.0
+version: 0.113.0
 filesystem: |
   Create directories, with intermediary directories if required using uutils/coreutils mkdir.
 usage: |
@@ -31,9 +31,10 @@ contributors: false
 
 ## Input/output types:
 
-| input   | output  |
-| ------- | ------- |
-| nothing | nothing |
+| input   | output                                                            |
+| ------- | ----------------------------------------------------------------- |
+| nothing | nothing                                                           |
+| nothing | table&lt;path: string, created: bool, error: oneof&lt;nothing, string&gt;&gt; |
 ## Examples
 
 Make a directory named foo.
@@ -45,5 +46,11 @@ Make a directory named foo.
 Make multiple directories and show the paths created.
 ```nu
 > mkdir -v foo/bar foo2
+╭───┬─────────┬─────────┬───────╮
+│ # │  path   │ created │ error │
+├───┼─────────┼─────────┼───────┤
+│ 0 │ foo/bar │ true    │       │
+│ 1 │ foo2    │ true    │       │
+╰───┴─────────┴─────────┴───────╯
 
 ```

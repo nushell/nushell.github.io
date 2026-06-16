@@ -63,7 +63,7 @@ displaying all listed files and folders in a grid.
 ## Replacing Existing Commands Using Aliases
 
 ::: warning Caution!
-When replacing commands it is best to "back up" the command first and avoid recursion error.
+When replacing commands it is best to "back up" the command first and avoid a recursion error.
 :::
 
 How to back up a command like `ls`:
@@ -124,4 +124,13 @@ def ls [
         ...$pattern
     ) | sort-by type name -i
 }
+```
+
+To call the underlying built-in command you can use a percent sigil `%`, e.g. 
+```nu
+def ls [] {
+    "something else"
+}
+
+%ls # <- calls the original ls
 ```

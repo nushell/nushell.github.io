@@ -2,7 +2,7 @@
 title: bytes add
 categories: |
   bytes
-version: 0.112.0
+version: 0.113.0
 bytes: |
   Add specified bytes to the binary input.
 usage: |

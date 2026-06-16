@@ -2,7 +2,7 @@
 title: explore
 categories: |
   viewers
-version: 0.112.0
+version: 0.113.0
 viewers: |
   Explore acts as a table pager, just like `less` does for text.
 usage: |

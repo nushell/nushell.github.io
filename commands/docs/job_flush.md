@@ -2,7 +2,7 @@
 title: job flush
 categories: |
   experimental
-version: 0.112.0
+version: 0.113.0
 experimental: |
   Clear this job's mailbox.
 usage: |

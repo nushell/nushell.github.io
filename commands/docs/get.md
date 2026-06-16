@@ -2,7 +2,7 @@
 title: get
 categories: |
   filters
-version: 0.112.0
+version: 0.113.0
 filters: |
   Extract data using a cell path.
 usage: |
