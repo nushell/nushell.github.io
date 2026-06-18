@@ -43,6 +43,7 @@ If you want to choose how your completions are filtered and sorted, you can also
 - `sort` - Set this to `false` to stop Nushell from sorting your completions. By default, this is `true`, and completions are sorted according to `$env.config.completions.sort`.
 - `case_sensitive` - Set to `true` for the custom completions to be matched case sensitively, `false` otherwise. Used for overriding `$env.config.completions.case_sensitive`.
 - `completion_algorithm` - Set this to `prefix`, `substring`, or `fuzzy` to choose how your completions are matched against the typed text. Used for overriding `$env.config.completions.algorithm`.
+- `match_description` - Set this to `true` to also match the typed text against each suggestion's description, in addition to its value. The inserted completion is still the suggestion's value. By default, this is `false`.
 
 Here's an example demonstrating how to set these options:
 
@@ -68,6 +69,27 @@ cat                 rat                 bat
 ```
 
 Because we made matching case-insensitive, Nushell will find the substring "a" in all of the completion suggestions. Additionally, because we set `sort: false`, the completions will be left in their original order. This is useful if your completions are already sorted in a particular order unrelated to their text (e.g. by date).
+
+### Matching against descriptions
+
+Custom completers can opt into matching the typed text against suggestion descriptions in addition to values, by setting `match_description: true` in the returned `options` record. The inserted completion is still the suggestion's value. This is useful when the value is an opaque identifier but the description is what the user is likely to type, such as completing an email address by the person's name:
+
+```nu
+def "nu-complete users" [] {
+    {
+        options: {
+            match_description: true,
+            completion_algorithm: "substring",
+        },
+        completions: [
+            { value: "lk446763@example.com", description: "Lennart Kiil" },
+            { value: "ab123456@example.com", description: "Alice Bob" },
+        ]
+    }
+}
+```
+
+Now, typing `Lennart` and pressing the <kbd>Tab</kbd> key matches the description "Lennart Kiil" and inserts its value `lk446763@example.com`, even though the typed text doesn't appear in the value itself.
 
 ## Modules and Custom Completions
 
