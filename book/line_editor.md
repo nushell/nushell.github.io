@@ -825,7 +825,7 @@ $env.config.keybindings ++= [
 ## Abbreviations
 
 Reedline abbreviations are a convenient way to expand a command into a
-different command that is often longer and/or more complex. This is similiar to
+different command that is often longer and/or more complex. This is similar to
 an `alias` with two main exceptions: (1) the expanded command is what gets
 stored to history, (2) the expanded command can be edited before being used. 
 
