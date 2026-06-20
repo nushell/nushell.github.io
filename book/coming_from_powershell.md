@@ -6,11 +6,10 @@ PowerShell pipelines pass rich **.NET objects**, which allow property access lik
 Nushell pipelines, by contrast, pass **structured data** such as tables, lists, and values.  
 This means:
 
-- No `.PropertyName` access  
-- Use `get column`, `select`, `$it.column`, or table operations instead  
+- No `.PropertyName` access
+- Use `get column`, `select`, `$it.column`, or table operations instead
 - Commands always receive predictable structured input, not strings or .NET types
-:::
-
+  :::
 
 ## Command Equivalents:
 
@@ -20,7 +19,7 @@ This means:
 | `Get-ChildItem <dir>`                                           | `ls <dir>`                                   | List files in given directory             |
 | `Get-ChildItem pattern*`                                        | `ls pattern*`                                | Pattern-match files                       |
 | `Get-ChildItem -Force -File -Hidden`                            | `ls --long --all` or `ls -la`                | Detailed listing including hidden files   |
-| `Get-ChildItem -Directory`                                      | `ls \| where type == dir`                    | List directories only                     |
+| `Get-ChildItem \| Where-Object { $_.PSIsContainer }`            | `ls \| where type == dir`                    | List directories only                     |
 | `Get-ChildItem -Recurse -Filter *.rs`                           | `ls **/*.rs`                                 | Recursive search for files                |
 | `Get-ChildItem -Recurse Makefile \| Select-Object -Expand Name` | `ls **/Makefile \| get name \| vim ...$in`   | Pass matched paths to command             |
 | `Set-Location <dir>`                                            | `cd <dir>`                                   | Change directory                          |
@@ -29,7 +28,7 @@ This means:
 | `New-Item -ItemType Directory <path>`                           | `mkdir <path>`                               | Create a directory                        |
 | `New-Item test.txt`                                             | `touch test.txt`                             | Create a file                             |
 | `command \| Out-File <path>`                                    | `out> <path>` or `o> <path>`                 | Save output to file (raw)                 |
-| use dedicated cmdlet such as `ConvertTo-Json`                   | `\| save <path>`                             | Save output to file (structured)          |
+| `command \| Set-Content <path>`                                 | `\| save <path>`                             | Save output to file (structured)          |
 | `command \| Out-File -Append <path>`                            | `out>> <path>` or `o>> <path>`               | Append output to file                     |
 |                                                                 | `\| save --append <path>`                    | Append structured output                  |
 | `command \| Out-Null`                                           | `\| ignore`                                  | Discard output                            |
@@ -51,14 +50,14 @@ This means:
 | `Get-Command`                                                   | `help commands`                              | List all commands                         |
 | `Get-Command "*<string>*"`                                      | `help --find <string>`                       | Search commands                           |
 | `command1; if ($?) { command2 }`                                | `command1; command2`                         | Run second command only if first succeeds |
-| `"/tmp/$((Get-Random))"`                                        | `$"/tmp/(random int)"`                       | String interpolation                      |
+| `/tmp/$((Get-Random))`                                          | `$"/tmp/(random int)"`                       | String interpolation                      |
 | `$env:Path`                                                     | `$env.PATH` or `$env.Path`                   | Show PATH                                 |
 | `$LASTEXITCODE`                                                 | `$env.LAST_EXIT_CODE`                        | Exit code of last external command        |
 | `$env:PATH += ":/usr/bin"`                                      | `$env.PATH = ($env.PATH \| append /usr/bin)` | Update PATH (temporary)                   |
 | `Get-ChildItem Env:`                                            | `$env`                                       | List environment variables                |
 | `$env:FOO`                                                      | `$env.FOO`                                   | Access environment variable               |
 | `Remove-Item Env:FOO`                                           | `hide-env FOO`                               | Unset environment variable                |
-| `function s { git status -sb }`                                 | `alias s = git status -sb`                   | Temporary alias                           |
+| `Set-Alias s "git status -sb"`                                  | `alias s = git status -sb`                   | Temporary alias                           |
 | `Get-Command FOO`                                               | `which FOO`                                  | Inspect command / alias / binary          |
 | `powershell -Command "<commands>"`                              | `nu -c <commands>`                           | Run inline pipeline                       |
 | `.\script.ps1`                                                  | `nu <script file>`                           | Run script file                           |
