@@ -147,14 +147,14 @@ These keybinding events apply only to Vi-insert mode:
 
 These keybinding events apply only to Vi-normal mode:
 
-| Key                                         | Event               |
-| ------------------------------------------- | ------------------- |
-| <kbd>Ctrl</kbd>+<kbd>C</kbd>                | Cancel current line |
-| <kbd>Ctrl</kbd>+<kbd>L</kbd>                | Clear screen        |
-| <kbd>↑</kbd> (Up Arrow)                     | Move up             |
-| <kbd>↓</kbd> (Down Arrow)                   | Move down           |
-| <kbd>←</kbd> (Left Arrow)                   | Move left           |
-| <kbd>→</kbd> (Right Arrow)                  | Move right          |
+| Key                                        | Event               |
+| ------------------------------------------ | ------------------- |
+| <kbd>Ctrl</kbd>+<kbd>C</kbd>               | Cancel current line |
+| <kbd>Ctrl</kbd>+<kbd>L</kbd>               | Clear screen        |
+| <kbd>↑</kbd> (Up Arrow)                    | Move up             |
+| <kbd>↓</kbd> (Down Arrow)                  | Move down           |
+| <kbd>←</kbd> (Left Arrow)                  | Move left           |
+| <kbd>→</kbd> (Right Arrow)                 | Move right          |
 | <kbd>Ctrl</kbd>+<kbd>→</kbd> (Right Arrow) | Move right one word |
 | <kbd>Ctrl</kbd>+<kbd>←</kbd> (Left Arrow)  | Move left one word  |
 
@@ -825,9 +825,9 @@ $env.config.keybindings ++= [
 ## Abbreviations
 
 Reedline abbreviations are a convenient way to expand a command into a
-different command that is often longer and/or more complex. This is similiar to
+different command that is often longer and/or more complex. This is similar to
 an `alias` with two main exceptions: (1) the expanded command is what gets
-stored to history, (2) the expanded command can be edited before being used. 
+stored to history, (2) the expanded command can be edited before being used.
 
 Abbreviations are expanded on `space` or `enter` and you can add them to your config
 like this
