@@ -2,7 +2,7 @@
 title: flatten
 categories: |
   filters
-version: 0.113.0
+version: 0.114.0
 filters: |
   Flatten a table by extracting nested values.
 usage: |

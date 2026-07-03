@@ -2,7 +2,7 @@
 title: to
 categories: |
   formats
-version: 0.113.0
+version: 0.114.0
 formats: |
   Translate structured data to various formats.
 usage: |
@@ -36,6 +36,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`to csv`](/commands/docs/to_csv.md)           | Convert table into .csv text .                                | built-in |
 | [`to html`](/commands/docs/to_html.md)         | Convert table into simple HTML.                               | built-in |
 | [`to json`](/commands/docs/to_json.md)         | Converts table data into JSON text.                           | built-in |
+| [`to kdl`](/commands/docs/to_kdl.md)           | Converts table data into KDL text.                            | built-in |
 | [`to md`](/commands/docs/to_md.md)             | Convert table into simple Markdown.                           | built-in |
 | [`to msgpack`](/commands/docs/to_msgpack.md)   | Convert Nu values into MessagePack.                           | built-in |
 | [`to msgpackz`](/commands/docs/to_msgpackz.md) | Convert Nu values into brotli-compressed MessagePack.         | built-in |

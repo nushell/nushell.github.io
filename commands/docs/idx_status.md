@@ -2,7 +2,7 @@
 title: idx status
 categories: |
   filesystem
-version: 0.113.0
+version: 0.114.0
 filesystem: |
   Show status information for the global in-memory idx runtime.
 usage: |
@@ -28,7 +28,7 @@ contributors: false
 | nothing | record |
 ## Examples
 
-Show the current idx runtime status
+Show the current idx runtime status.
 ```nu
 > idx status
 

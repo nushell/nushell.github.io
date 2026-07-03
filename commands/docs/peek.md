@@ -2,7 +2,7 @@
 title: peek
 categories: |
   default
-version: 0.113.0
+version: 0.114.0
 default: |
   Peek the first <n> elements of a stream and store them in the metadata.
 usage: |
@@ -62,10 +62,10 @@ Lists can also be peeked.
 Peeking non-list values won't return any values.
 ```nu
 > 'hello' | peek 1 | metadata | $in.peek
-╭────────┬───────╮
-│ type   │ value │
-│ stream │ false │
-╰────────┴───────╯
+╭────────┬────────╮
+│ type   │ string │
+│ stream │ false  │
+╰────────┴────────╯
 ```
 
 Peeking non-list streams (text streams, binary streams, external byte streams) won't return any values.

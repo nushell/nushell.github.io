@@ -2,7 +2,7 @@
 title: idx search
 categories: |
   filesystem
-version: 0.113.0
+version: 0.114.0
 filesystem: |
   Search indexed file contents.
 usage: |
@@ -25,6 +25,7 @@ contributors: false
  -  `--regex, -r`: Use regular-expression matching mode.
  -  `--fuzzy, -f`: Use fuzzy line-matching mode.
  -  `--limit, -l {int}`: Maximum number of matches to collect.
+ -  `--context, -c {oneof<range, int>}`: The number of context lines to include before and after each match can be specified as an integer or a range. An integer sets both the before and after context to that number, while a range uses a negative value for lines before and a positive value for lines after (e.g., -3..5).
 
 ## Parameters
 
@@ -38,21 +39,45 @@ contributors: false
 | nothing | list&lt;record&gt; |
 ## Examples
 
-Search indexed file contents for a plain text pattern
+Search indexed file contents for a plain text pattern.
 ```nu
 > idx search hello
 
 ```
 
-Search using a regular expression
+Search using a regular expression.
 ```nu
 > idx search --regex 'fn \w+'
 
 ```
 
-Search with multiple patterns simultaneously
+Search with multiple patterns simultaneously.
 ```nu
 > idx search TODO FIXME HACK
+
+```
+
+Include 2 lines of context before and 5 lines after each match.
+```nu
+> idx search error -2..5
+
+```
+
+Brackets and question marks are treated as literal text, not glob patterns.
+```nu
+> idx search 'arr[0]'
+
+```
+
+Glob patterns with a path separator filter which files to search.
+```nu
+> idx search pattern tests/*
+
+```
+
+Brace expansion globs also filter which files to search.
+```nu
+> idx search pattern *.{rs,js}
 
 ```
 

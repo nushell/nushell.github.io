@@ -2,7 +2,7 @@
 title: polars cumulative
 categories: |
   dataframe
-version: 0.113.0
+version: 0.114.0
 dataframe: |
   Cumulative calculation for a column or series.
 usage: |
@@ -36,6 +36,7 @@ contributors: false
 | polars_dataframe  | polars_dataframe  |
 | polars_lazyframe  | polars_lazyframe  |
 | polars_expression | polars_expression |
+| polars_selector   | polars_expression |
 ## Examples
 
 Cumulative sum for a column

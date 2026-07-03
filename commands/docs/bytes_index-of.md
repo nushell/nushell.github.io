@@ -2,7 +2,7 @@
 title: bytes index-of
 categories: |
   bytes
-version: 0.113.0
+version: 0.114.0
 bytes: |
   Returns start index of first occurrence of pattern in bytes, or -1 if no match.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Flags
 
- -  `--all, -a`: Returns all matched index.
+ -  `--all, -a`: Returns all matched indices.
  -  `--end, -e`: Search from the end of the binary.
 
 ## Parameters

@@ -2,7 +2,7 @@
 title: url encode
 categories: |
   strings
-version: 0.113.0
+version: 0.114.0
 strings: |
   Converts a string to a percent encoded web safe string.
 usage: |
@@ -31,12 +31,13 @@ contributors: false
 
 ## Input/output types:
 
-| input        | output       |
-| ------------ | ------------ |
-| string       | string       |
-| list&lt;string&gt; | list&lt;string&gt; |
-| table        | table        |
-| record       | record       |
+| input                       | output       |
+| --------------------------- | ------------ |
+| string                      | string       |
+| binary                      | string       |
+| list&lt;oneof&lt;string, binary&gt;&gt; | list&lt;string&gt; |
+| table                       | table        |
+| record                      | record       |
 ## Examples
 
 Encode a URL with escape characters.
@@ -60,4 +61,10 @@ Encode all non alphanumeric chars with all flag.
 ```nu
 > 'https://example.com/foo bar' | url encode --all
 https%3A%2F%2Fexample%2Ecom%2Ffoo%20bar
+```
+
+Encode a iso-8859-1 encoded string.
+```nu
+> '£ rates' | encode iso-8859-1 | url encode
+%A3%20rates
 ```

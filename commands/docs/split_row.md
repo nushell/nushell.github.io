@@ -2,7 +2,7 @@
 title: split row
 categories: |
   strings
-version: 0.113.0
+version: 0.114.0
 strings: |
   Split a string into multiple rows using a separator.
 usage: |
@@ -23,6 +23,7 @@ contributors: false
 ## Flags
 
  -  `--number, -n {int}`: Split into maximum number of items.
+ -  `--right`: When `--number` is used, collect the remainder in the leftmost item.
  -  `--regex, -r`: Use regex syntax for separator.
 
 ## Parameters
@@ -83,5 +84,25 @@ Split a string by regex.
 │ 1 │ b │
 │ 2 │ c │
 ╰───┴───╯
+
+```
+
+Split a string a limited number of times.
+```nu
+> 'a-b-c' | split row --number 2 '-'
+╭───┬─────╮
+│ 0 │ a   │
+│ 1 │ b-c │
+╰───┴─────╯
+
+```
+
+Split a string a limited number of times, starting from the right.
+```nu
+> 'a-b-c' | split row --number 2 --right '-'
+╭───┬─────╮
+│ 0 │ a-b │
+│ 1 │ c   │
+╰───┴─────╯
 
 ```

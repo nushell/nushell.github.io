@@ -2,7 +2,7 @@
 title: polars selector datetime
 categories: |
   expression
-version: 0.113.0
+version: 0.114.0
 expression: |
   Select all datetime columns. Optionally filter by time unit (ns, us, ms) and/or timezone.
 usage: |

@@ -2,7 +2,7 @@
 title: polars selector empty
 categories: |
   expression
-version: 0.113.0
+version: 0.114.0
 expression: |
   Create an empty selector that matches no columns. Useful as a base for selector composition.
 usage: |

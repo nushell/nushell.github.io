@@ -2,7 +2,7 @@
 title: grid
 categories: |
   viewers
-version: 0.113.0
+version: 0.114.0
 viewers: |
   Renders the output to a textual terminal grid.
 usage: |
@@ -37,7 +37,6 @@ contributors: false
 | input     | output |
 | --------- | ------ |
 | list&lt;any&gt; | string |
-| record    | string |
 ## Examples
 
 Render a simple list to a grid
@@ -51,13 +50,6 @@ The above example is the same as:
 ```nu
 > [1 2 3 a b c] | wrap name | grid name
 1 │ 2 │ 3 │ a │ b │ c
-
-```
-
-Render a record to a grid (deprecated)
-```nu
-> {name: 'foo', b: 1, c: 2} | grid
-foo
 
 ```
 
@@ -83,5 +75,6 @@ Render a table with 'name' column in it to a grid with icons and colors
 
 ## Notes
 The `grid` command creates a concise gridded layout for the input. It
-prints every item of the list in a grid layout. However, for table,
-you need to provide the name of the column you want to put in the grid.
+prints every item of the list in a grid layout. For tables or list
+containing records, it will look for a 'name' column by default; if
+the 'name' column is missing, the entire record is rendered instead.

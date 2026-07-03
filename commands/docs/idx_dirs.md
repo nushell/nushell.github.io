@@ -2,11 +2,11 @@
 title: idx dirs
 categories: |
   filesystem
-version: 0.113.0
+version: 0.114.0
 filesystem: |
-  List indexed directories from idx state.
+  List indexed directories, or fuzzy-match directories by query.
 usage: |
-  List indexed directories from idx state.
+  List indexed directories, or fuzzy-match directories by query.
 editLink: false
 contributors: false
 ---
@@ -14,11 +14,15 @@ contributors: false
 
 # `idx dirs` for [filesystem](/commands/categories/filesystem.md)
 
-<div class='command-title'>List indexed directories from idx state.</div>
+<div class='command-title'>List indexed directories, or fuzzy-match directories by query.</div>
 
 ## Signature
 
-```> idx dirs {flags} ```
+```> idx dirs {flags} (query)```
+
+## Parameters
+
+ -  `query`: Optional fuzzy query to filter indexed directories.
 
 
 ## Input/output types:
@@ -31,5 +35,11 @@ contributors: false
 List all indexed directories
 ```nu
 > idx dirs
+
+```
+
+Fuzzy-match indexed directories by query
+```nu
+> idx dirs src
 
 ```

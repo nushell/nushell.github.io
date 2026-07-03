@@ -2,7 +2,7 @@
 title: polars str-replace-all
 categories: |
   dataframe
-version: 0.113.0
+version: 0.114.0
 dataframe: |
   Replace all (sub)strings by a regex pattern.
 usage: |
@@ -33,6 +33,7 @@ contributors: false
 | polars_dataframe  | polars_dataframe  |
 | polars_lazyframe  | polars_lazyframe  |
 | polars_expression | polars_expression |
+| polars_selector   | polars_expression |
 ## Examples
 
 Replaces string in a column

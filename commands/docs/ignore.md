@@ -2,11 +2,11 @@
 title: ignore
 categories: |
   core
-version: 0.113.0
+version: 0.114.0
 core: |
-  Ignore the output of the previous command in the pipeline.
+  Ignore selected output streams from the previous command in the pipeline.
 usage: |
-  Ignore the output of the previous command in the pipeline.
+  Ignore selected output streams from the previous command in the pipeline.
 editLink: false
 contributors: false
 ---
@@ -14,22 +14,46 @@ contributors: false
 
 # `ignore` for [core](/commands/categories/core.md)
 
-<div class='command-title'>Ignore the output of the previous command in the pipeline.</div>
+<div class='command-title'>Ignore selected output streams from the previous command in the pipeline.</div>
 
 ## Signature
 
 ```> ignore {flags} ```
 
+## Flags
+
+ -  `--stderr, -e`: Consume all stderr output and allow stdout output through.
+ -  `--stdout, -o`: Consume all stdout output and allow stderr output through.
+ -  `--show-errors, -x`: Allow errors through and set $env.LAST_EXIT_CODE (internal failures use 1).
+
 
 ## Input/output types:
 
-| input | output  |
-| ----- | ------- |
-| any   | nothing |
+| input | output |
+| ----- | ------ |
+| any   | any    |
 ## Examples
 
-Ignore the output of an echo command.
+Ignore all stdout output (default behavior).
 ```nu
 > echo done | ignore
 
+```
+
+Consume stderr and allow stdout through.
+```nu
+> echo done | ignore --stderr
+done
+```
+
+Consume stdout while keeping stderr visible.
+```nu
+> $'done' | ignore --stdout
+
+```
+
+Show internal errors and read the resulting exit code.
+```nu
+> try { error make {msg: 'boom'} | ignore --show-errors } catch { $env.LAST_EXIT_CODE }
+1
 ```

@@ -2,7 +2,7 @@
 title: polars entropy
 categories: |
   dataframe
-version: 0.113.0
+version: 0.114.0
 dataframe: |
   Compute the entropy as `-sum(pk * log(pk))` where `pk` are discrete probabilities.
 usage: |
@@ -31,6 +31,7 @@ contributors: false
 | input             | output            |
 | ----------------- | ----------------- |
 | polars_expression | polars_expression |
+| polars_selector   | polars_expression |
 ## Examples
 
 Compute the entropy of a column expression

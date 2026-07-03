@@ -2,7 +2,7 @@
 title: into
 categories: |
   conversions
-version: 0.113.0
+version: 0.114.0
 conversions: |
   Commands to convert data from one type to another.
 usage: |
@@ -31,18 +31,20 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 ## Subcommands:
 
-| name                                                 | description                                | type     |
-| ---------------------------------------------------- | ------------------------------------------ | -------- |
-| [`into binary`](/commands/docs/into_binary.md)       | Convert value to a binary primitive.       | built-in |
-| [`into bool`](/commands/docs/into_bool.md)           | Convert value to a boolean.                | built-in |
-| [`into cell-path`](/commands/docs/into_cell-path.md) | Convert value to a cell-path.              | built-in |
-| [`into datetime`](/commands/docs/into_datetime.md)   | Convert text or timestamp into a datetime. | built-in |
-| [`into duration`](/commands/docs/into_duration.md)   | Convert value to a duration.               | built-in |
-| [`into filesize`](/commands/docs/into_filesize.md)   | Convert value to a filesize.               | built-in |
-| [`into float`](/commands/docs/into_float.md)         | Convert data into floating point number.   | built-in |
-| [`into glob`](/commands/docs/into_glob.md)           | Convert value to a glob pattern.           | built-in |
-| [`into int`](/commands/docs/into_int.md)             | Convert value to an integer.               | built-in |
-| [`into record`](/commands/docs/into_record.md)       | Convert value to a record.                 | built-in |
-| [`into sqlite`](/commands/docs/into_sqlite.md)       | Convert table into a SQLite database.      | built-in |
-| [`into string`](/commands/docs/into_string.md)       | Convert value to a string.                 | built-in |
-| [`into value`](/commands/docs/into_value.md)         | Convert custom values into base values.    | built-in |
+| name                                                       | description                                | type     |
+| ---------------------------------------------------------- | ------------------------------------------ | -------- |
+| [`into binary`](/commands/docs/into_binary.md)             | Convert value to a binary primitive.       | built-in |
+| [`into bool`](/commands/docs/into_bool.md)                 | Convert value to a boolean.                | built-in |
+| [`into cell-path`](/commands/docs/into_cell-path.md)       | Convert value to a cell-path.              | built-in |
+| [`into datetime`](/commands/docs/into_datetime.md)         | Convert text or timestamp into a datetime. | built-in |
+| [`into duration`](/commands/docs/into_duration.md)         | Convert value to a duration.               | built-in |
+| [`into filesize`](/commands/docs/into_filesize.md)         | Convert value to a filesize.               | built-in |
+| [`into float`](/commands/docs/into_float.md)               | Convert data into floating point number.   | built-in |
+| [`into glob`](/commands/docs/into_glob.md)                 | Convert value to a glob pattern.           | built-in |
+| [`into int`](/commands/docs/into_int.md)                   | Convert value to an integer.               | built-in |
+| [`into record`](/commands/docs/into_record.md)             | Convert value to a record.                 | built-in |
+| [`into semver`](/commands/docs/into_semver.md)             | Convert a value to a semantic version.     | built-in |
+| [`into semver-range`](/commands/docs/into_semver-range.md) | Convert a string to a semver range.        | built-in |
+| [`into sqlite`](/commands/docs/into_sqlite.md)             | Convert table into a SQLite database.      | built-in |
+| [`into string`](/commands/docs/into_string.md)             | Convert value to a string.                 | built-in |
+| [`into value`](/commands/docs/into_value.md)               | Convert custom values into base values.    | built-in |

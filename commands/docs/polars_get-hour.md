@@ -2,7 +2,7 @@
 title: polars get-hour
 categories: |
   dataframe
-version: 0.113.0
+version: 0.114.0
 dataframe: |
   Gets hour from datetime.
 usage: |
@@ -28,6 +28,7 @@ contributors: false
 | polars_dataframe  | polars_dataframe  |
 | polars_lazyframe  | polars_lazyframe  |
 | polars_expression | polars_expression |
+| polars_selector   | polars_expression |
 ## Examples
 
 Returns hour from a date

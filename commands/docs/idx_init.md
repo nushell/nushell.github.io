@@ -2,7 +2,7 @@
 title: idx init
 categories: |
   filesystem
-version: 0.113.0
+version: 0.114.0
 filesystem: |
   Initialize the in-memory idx index for a path.
 usage: |
@@ -23,6 +23,9 @@ contributors: false
 ## Flags
 
  -  `--wait, -w`: Block until the initial scan completes before returning.
+ -  `--no-watch`: Disable filesystem watching after the initial scan (watching is enabled by default).
+ -  `--no-content-indexing`: Disable file content indexing (content indexing is enabled by default).
+ -  `--follow-symlinks, -f`: Whether to follow symlinks when indexing.
 
 ## Parameters
 
@@ -36,17 +39,23 @@ contributors: false
 | nothing | record |
 ## Examples
 
-Initialize idx for the current directory
+Initialize idx for the current directory.
 ```nu
 > idx init .
 
 ```
 
-Initialize idx and wait for the initial scan to complete
+Initialize idx and wait for the initial scan to complete.
 ```nu
 > idx init . --wait
 
 ```
 
+Initialize idx without filesystem watching.
+```nu
+> idx init . --no-watch
+
+```
+
 ## Notes
-By default idx init returns immediately and indexing continues in the background. Use `idx status` to check when scanning completes. Pass `--wait` to block until the initial scan finishes.
+By default idx init returns immediately and indexing continues in the background. Use `idx status` to check when scanning completes. Pass `--wait` to block until the initial scan finishes. Filesystem watching is enabled by default; pass `--no-watch` to disable it.

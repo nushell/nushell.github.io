@@ -2,7 +2,7 @@
 title: polars selector exclude
 categories: |
   expression
-version: 0.113.0
+version: 0.114.0
 expression: |
   Select all columns except those with the given name(s). This is the inverse of `polars selector by-name`.
 usage: |

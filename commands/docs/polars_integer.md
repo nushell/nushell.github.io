@@ -2,7 +2,7 @@
 title: polars integer
 categories: |
   dataframe
-version: 0.113.0
+version: 0.114.0
 dataframe: |
   Converts a string column into a integer column
 usage: |
@@ -35,6 +35,7 @@ contributors: false
 | input             | output            |
 | ----------------- | ----------------- |
 | polars_expression | polars_expression |
+| polars_selector   | polars_expression |
 ## Examples
 
 Modifies strings to integer

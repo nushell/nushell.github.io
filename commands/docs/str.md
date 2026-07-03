@@ -2,7 +2,7 @@
 title: str
 categories: |
   strings
-version: 0.113.0
+version: 0.114.0
 strings: |
   Various commands for working with string data.
 usage: |
@@ -45,6 +45,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`str join`](/commands/docs/str_join.md)                                 | Concatenate multiple strings into a single string, with an optional separator between each. | built-in |
 | [`str kebab-case`](/commands/docs/str_kebab-case.md)                     | Convert a string to kebab-case.                                                             | built-in |
 | [`str length`](/commands/docs/str_length.md)                             | Output the length of any strings in the pipeline.                                           | built-in |
+| [`str lowercase`](/commands/docs/str_lowercase.md)                       | Convert text to lowercase.                                                                  | built-in |
 | [`str pascal-case`](/commands/docs/str_pascal-case.md)                   | Convert a string to PascalCase.                                                             | built-in |
 | [`str replace`](/commands/docs/str_replace.md)                           | Find and replace text in the input string.                                                  | built-in |
 | [`str reverse`](/commands/docs/str_reverse.md)                           | Reverse every string in the pipeline.                                                       | built-in |
@@ -56,3 +57,4 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`str title-case`](/commands/docs/str_title-case.md)                     | Convert a string to Title Case.                                                             | built-in |
 | [`str trim`](/commands/docs/str_trim.md)                                 | Trim whitespace or specific character.                                                      | built-in |
 | [`str upcase`](/commands/docs/str_upcase.md)                             | Convert text to uppercase.                                                                  | built-in |
+| [`str uppercase`](/commands/docs/str_uppercase.md)                       | Convert text to uppercase.                                                                  | built-in |

@@ -2,7 +2,7 @@
 title: idx
 categories: |
   filesystem
-version: 0.113.0
+version: 0.114.0
 filesystem: |
   Manage in-memory file index state.
 usage: |
@@ -33,10 +33,10 @@ Use one of the subcommands: init, status, find, search, export, import, drop, di
 
 | name                                         | description                                                             | type     |
 | -------------------------------------------- | ----------------------------------------------------------------------- | -------- |
-| [`idx dirs`](/commands/docs/idx_dirs.md)     | List indexed directories from idx state.                                | built-in |
+| [`idx dirs`](/commands/docs/idx_dirs.md)     | List indexed directories, or fuzzy-match directories by query.          | built-in |
 | [`idx drop`](/commands/docs/idx_drop.md)     | Drop the current idx runtime from memory.                               | built-in |
 | [`idx export`](/commands/docs/idx_export.md) | Persist idx state to disk.                                              | built-in |
-| [`idx files`](/commands/docs/idx_files.md)   | List indexed files, or lookup a specific indexed path.                  | built-in |
+| [`idx files`](/commands/docs/idx_files.md)   | List indexed files, or fuzzy-match files by query.                      | built-in |
 | [`idx find`](/commands/docs/idx_find.md)     | Search idx with fuzzy matching across files and directories by default. | built-in |
 | [`idx import`](/commands/docs/idx_import.md) | Import idx state from disk.                                             | built-in |
 | [`idx init`](/commands/docs/idx_init.md)     | Initialize the in-memory idx index for a path.                          | built-in |

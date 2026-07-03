@@ -2,7 +2,7 @@
 title: sys mem
 categories: |
   system
-version: 0.113.0
+version: 0.114.0
 system: |
   View information about the system memory.
 usage: |

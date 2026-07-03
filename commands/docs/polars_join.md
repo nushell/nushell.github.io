@@ -2,7 +2,7 @@
 title: polars join
 categories: |
   lazyframe
-version: 0.113.0
+version: 0.114.0
 lazyframe: |
   Joins a lazy frame with other lazy frame.
 usage: |
@@ -118,12 +118,12 @@ Join on column expressions
                 let df2 = [[a c]; ["2025-01-01 00:00:00+0000" a] ["2025-01-02 00:00:00+0000" b]] | polars into-df --schema {a: "datetime<ms,UTC>", c: str}
 
                 $df1 | polars join $df2 [(polars col a | polars truncate 1d)] [a]
-╭───┬────────────┬───┬────────────┬───╮
-│ # │     a      │ b │    a_x     │ c │
-├───┼────────────┼───┼────────────┼───┤
-│ 0 │ a year ago │ 1 │ a year ago │ a │
-│ 1 │ a year ago │ 2 │ a year ago │ b │
-╰───┴────────────┴───┴────────────┴───╯
+╭───┬─────────────┬───┬─────────────┬───╮
+│ # │      a      │ b │     a_x     │ c │
+├───┼─────────────┼───┼─────────────┼───┤
+│ 0 │ 2 years ago │ 1 │ 2 years ago │ a │
+│ 1 │ 2 years ago │ 2 │ 2 years ago │ b │
+╰───┴─────────────┴───┴─────────────┴───╯
 
 ```
 

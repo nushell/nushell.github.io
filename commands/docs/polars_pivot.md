@@ -2,7 +2,7 @@
 title: polars pivot
 categories: |
   dataframe
-version: 0.113.0
+version: 0.114.0
 dataframe: |
   Pivot a DataFrame from long to wide format.
 usage: |
@@ -31,6 +31,7 @@ contributors: false
  -  `--maintain-order`: Maintain Order.
  -  `--streamable, -t`: Whether or not to use the polars streaming engine. Only valid for lazy dataframes
  -  `--stable`: Perform a stable pivot.
+ -  `--always-combine-names`: Always combine the values and on-column names.
 
 
 ## Input/output types:

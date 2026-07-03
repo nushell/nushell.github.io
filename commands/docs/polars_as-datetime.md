@@ -2,7 +2,7 @@
 title: polars as-datetime
 categories: |
   dataframe
-version: 0.113.0
+version: 0.114.0
 dataframe: |
   Converts string to datetime.
 usage: |
@@ -45,6 +45,7 @@ contributors: false
 | polars_dataframe  | polars_dataframe  |
 | polars_lazyframe  | polars_lazyframe  |
 | polars_expression | polars_expression |
+| polars_selector   | polars_expression |
 ## Examples
 
 Converts string to datetime
@@ -88,10 +89,10 @@ Converts string to datetime using the `--not-exact` flag even with excessive sym
 ╭───┬──────────────╮
 │ # │   datetime   │
 ├───┼──────────────┤
-│ 0 │ 6 months ago │
-│ 1 │ 6 months ago │
-│ 2 │ 6 months ago │
-│ 3 │ 6 months ago │
+│ 0 │ 8 months ago │
+│ 1 │ 8 months ago │
+│ 2 │ 8 months ago │
+│ 3 │ 8 months ago │
 ╰───┴──────────────╯
 
 ```

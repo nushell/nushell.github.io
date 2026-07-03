@@ -2,7 +2,7 @@
 title: to nuon
 categories: |
   formats
-version: 0.113.0
+version: 0.114.0
 formats: |
   Converts table data into Nuon (Nushell Object Notation) text.
 usage: |
@@ -22,13 +22,14 @@ contributors: false
 
 ## Flags
 
- -  `--raw, -r`: Remove all of the whitespace (overwrites -i and -t).
+ -  `--raw, -r`: Remove all of the whitespace (overwrites -i, -t, and -p).
  -  `--indent, -i {number}`: Specify indentation width.
  -  `--tabs, -t {number}`: Specify indentation tab quantity.
  -  `--serialize, -s`: Serialize nushell types that cannot be deserialized.
  -  `--raw-strings, -R`: Use raw string syntax (r#'...'#) for strings with quotes or backslashes.
  -  `--list-of-records, -l`: Serialize table values as list-of-records instead of table syntax.
  -  `--no-commas, -c`: Do not use commas between items in tables and lists.
+ -  `--pretty, -p`: Format output with indentation and aligned table columns.
 
 
 ## Input/output types:
@@ -113,4 +114,14 @@ Output a record without commas between fields.
 ```nu
 > {a: 1, b: 2} | to nuon --no-commas
 {a: 1 b: 2}
+```
+
+Format output with pretty indentation and aligned table columns.
+```nu
+> [[name, age]; [Alice, 30], [Bob, 25]] | to nuon --pretty
+[
+  [name,  age];
+  [Alice, 30],
+  [Bob,   25]
+]
 ```

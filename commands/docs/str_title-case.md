@@ -2,7 +2,7 @@
 title: str title-case
 categories: |
   strings
-version: 0.113.0
+version: 0.114.0
 strings: |
   Convert a string to Title Case.
 usage: |

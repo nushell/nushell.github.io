@@ -2,7 +2,7 @@
 title: polars when
 categories: |
   expression
-version: 0.113.0
+version: 0.114.0
 expression: |
   Creates and modifies a when expression.
 usage: |
@@ -32,7 +32,7 @@ contributors: false
 | ----------------- | ----------------- |
 | nothing           | polars_expression |
 | polars_expression | polars_expression |
-| any               | polars_expression |
+| polars_selector   | polars_expression |
 ## Examples
 
 Create a when conditions

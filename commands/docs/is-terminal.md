@@ -2,7 +2,7 @@
 title: is-terminal
 categories: |
   platform
-version: 0.113.0
+version: 0.114.0
 platform: |
   Check if stdin, stdout, or stderr is a terminal.
 usage: |
@@ -33,6 +33,24 @@ contributors: false
 | ------- | ------ |
 | nothing | bool   |
 ## Examples
+
+Check if stdout is a terminal (default when no flag is specified).
+```nu
+> is-terminal
+
+```
+
+Return false when output is piped to another command.
+```nu
+> is-terminal | to text
+false
+```
+
+Return false when output is collected into a variable.
+```nu
+> let x = (is-terminal); $x
+false
+```
 
 Return "terminal attached" if standard input is attached to a terminal, and "no terminal" if not.
 ```nu

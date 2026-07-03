@@ -2,7 +2,7 @@
 title: polars replace
 categories: |
   expression
-version: 0.113.0
+version: 0.114.0
 expression: |
   Create an expression that replaces old values with new values
 usage: |
@@ -37,6 +37,7 @@ contributors: false
 | input             | output            |
 | ----------------- | ----------------- |
 | polars_expression | polars_expression |
+| polars_selector   | polars_expression |
 ## Examples
 
 Replace column with different values of same type
@@ -128,7 +129,7 @@ Replace column with different values using a record
 ```nu
 > [[a]; [1] [1] [2] [2]]
                 | polars into-df
-                | polars select (polars col a | polars replace {1: a, 2: b} --strict --return-dtype str)
+                | polars select (polars col a | polars replace {1: a, 2: b} --default c --strict --return-dtype str)
                 | polars collect
 ╭───┬───╮
 │ # │ a │

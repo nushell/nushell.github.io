@@ -2,7 +2,7 @@
 title: polars rolling
 categories: |
   dataframe
-version: 0.113.0
+version: 0.114.0
 dataframe: |
   Rolling calculation for a series.
 usage: |

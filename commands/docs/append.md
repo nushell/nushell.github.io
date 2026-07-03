@@ -2,7 +2,7 @@
 title: append
 categories: |
   filters
-version: 0.113.0
+version: 0.114.0
 filters: |
   Append any number of rows to a table.
 usage: |
@@ -18,11 +18,12 @@ contributors: false
 
 ## Signature
 
-```> append {flags} (row)```
+```> append {flags} (row) ...rest```
 
 ## Parameters
 
  -  `row`: The row, list, or table to append.
+ -  `...rest`: Additional values to append.
 
 
 ## Input/output types:
@@ -67,19 +68,6 @@ Append a list of string to a string.
 
 ```
 
-Append three int items.
-```nu
-> [0 1] | append [2 3 4]
-╭───┬───╮
-│ 0 │ 0 │
-│ 1 │ 1 │
-│ 2 │ 2 │
-│ 3 │ 3 │
-│ 4 │ 4 │
-╰───┴───╯
-
-```
-
 Append ints and strings.
 ```nu
 > [0 1] | append [2 nu 4 shell]
@@ -97,6 +85,19 @@ Append ints and strings.
 Append a range of ints to a list.
 ```nu
 > [0 1] | append 2..4
+╭───┬───╮
+│ 0 │ 0 │
+│ 1 │ 1 │
+│ 2 │ 2 │
+│ 3 │ 3 │
+│ 4 │ 4 │
+╰───┴───╯
+
+```
+
+Append multiple lists and values.
+```nu
+> [0] | append [1 2] [3] [] 4
 ╭───┬───╮
 │ 0 │ 0 │
 │ 1 │ 1 │
