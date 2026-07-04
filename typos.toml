@@ -4,10 +4,12 @@ extend-exclude = ["pt-BR", "de", "ja", "es", "blog/202[0-4]*", "commands/", "fr"
 [default]
 extend-ignore-identifiers-re = [
     "(?i)foobar", # false positive in book/sorting.md
+    '\b[0-9a-fA-F]{7}\b', # ignore 7-char git hashes
 ]
 
 extend-ignore-re = [
-    "\\x1b\\[[0-9;]*m.*", # ignore ansi color instructions
+    '\^\[\[[0-9;]*[A-Za-z]',
+    '\x1b\[[0-9;]*[A-Za-z]', # ignore ansi color instructions
 ]
 
 [default.extend-words]
