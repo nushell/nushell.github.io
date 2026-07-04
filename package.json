@@ -14,20 +14,20 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@vuepress/bundler-vite": "2.0.0-rc.26",
-    "@vuepress/plugin-docsearch": "2.0.0-rc.118",
-    "@vuepress/plugin-feed": "2.0.0-rc.118",
-    "@vuepress/plugin-shiki": "2.0.0-rc.118",
-    "@vuepress/plugin-sitemap": "2.0.0-rc.118",
-    "@vuepress/theme-default": "2.0.0-rc.118",
-    "@vueuse/core": "^14.0.0",
+    "@vuepress/bundler-vite": "2.0.0-rc.30",
+    "@vuepress/plugin-docsearch": "2.0.0-rc.131",
+    "@vuepress/plugin-feed": "2.0.0-rc.131",
+    "@vuepress/plugin-shiki": "2.0.0-rc.131",
+    "@vuepress/plugin-sitemap": "2.0.0-rc.131",
+    "@vuepress/theme-default": "2.0.0-rc.131",
+    "@vueuse/core": "^14.3.0",
     "asciinema-player": "^3.15.1",
     "cross-env": "^10.1.0",
     "lefthook": "1.8.2",
     "patch-package": "^8.0.1",
     "prettier": "^3.3.3",
     "sass-embedded": "^1.81.0",
-    "vuepress": "^2.0.0-rc.26"
+    "vuepress": "^2.0.0-rc.30"
   },
   "engines": {
     "npm": ">=9.0.0",
