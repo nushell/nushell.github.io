@@ -2,7 +2,7 @@
 title: polars unique
 categories: |
   dataframe or lazyframe
-version: 0.113.0
+version: 0.114.0
 dataframe_or_lazyframe: |
   Returns unique values from a dataframe.
 usage: |
@@ -34,6 +34,7 @@ contributors: false
 | polars_dataframe  | polars_dataframe  |
 | polars_lazyframe  | polars_lazyframe  |
 | polars_expression | polars_expression |
+| polars_selector   | polars_expression |
 ## Examples
 
 Returns unique values from a series

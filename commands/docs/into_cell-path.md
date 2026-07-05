@@ -2,7 +2,7 @@
 title: into cell-path
 categories: |
   conversions
-version: 0.113.0
+version: 0.114.0
 conversions: |
   Convert value to a cell-path.
 usage: |
@@ -23,12 +23,12 @@ contributors: false
 
 ## Input/output types:
 
-| input                                                       | output    |
-| ----------------------------------------------------------- | --------- |
-| cell-path                                                   | cell-path |
-| int                                                         | cell-path |
-| list&lt;any&gt;                                                   | cell-path |
-| list&lt;record&lt;value: any, optional: bool, insensitive: bool&gt;&gt; | cell-path |
+| input                                                | output    |
+| ---------------------------------------------------- | --------- |
+| cell-path                                            | cell-path |
+| int                                                  | cell-path |
+| list&lt;any&gt;                                            | cell-path |
+| table&lt;value: any, optional: bool, insensitive: bool&gt; | cell-path |
 ## Examples
 
 Convert integer into cell path.

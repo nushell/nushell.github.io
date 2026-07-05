@@ -2,7 +2,7 @@
 title: polars selector digit
 categories: |
   expression
-version: 0.113.0
+version: 0.114.0
 expression: |
   Select columns whose names consist entirely of digit characters. By default uses Unicode decimal digits; use `--ascii-only` to restrict to ASCII 0-9.
 usage: |

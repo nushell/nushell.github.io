@@ -2,7 +2,7 @@
 title: stor delete
 categories: |
   database
-version: 0.113.0
+version: 0.114.0
 database: |
   Delete a table or specified rows in the in-memory sqlite database.
 usage: |

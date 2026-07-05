@@ -2,7 +2,7 @@
 title: polars is-in
 categories: |
   expression
-version: 0.113.0
+version: 0.114.0
 expression: |
   Creates an is-in expression or checks to see if the elements are contained in the right series
 usage: |
@@ -19,6 +19,10 @@ contributors: false
 ## Signature
 
 ```> polars is-in {flags} (list)```
+
+## Flags
+
+ -  `--maintain-order, -o`: Maintains the order of the original values in the list
 
 ## Parameters
 

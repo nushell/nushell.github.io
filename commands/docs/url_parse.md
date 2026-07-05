@@ -2,7 +2,7 @@
 title: url parse
 categories: |
   network
-version: 0.113.0
+version: 0.114.0
 network: |
   Parse a URL string into structured data.
 usage: |

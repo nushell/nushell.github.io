@@ -2,7 +2,7 @@
 title: url decode
 categories: |
   strings
-version: 0.113.0
+version: 0.114.0
 strings: |
   Converts a percent-encoded web safe string to a string.
 usage: |
@@ -20,6 +20,10 @@ contributors: false
 
 ```> url decode {flags} ...rest```
 
+## Flags
+
+ -  `--binary, -b`: Return a binary value, to allow decoding non UTF-8 text.
+
 ## Parameters
 
  -  `...rest`: For a data structure input, url decode strings at the given cell paths.
@@ -30,7 +34,9 @@ contributors: false
 | input        | output       |
 | ------------ | ------------ |
 | string       | string       |
+| string       | binary       |
 | list&lt;string&gt; | list&lt;string&gt; |
+| list&lt;string&gt; | list&lt;binary&gt; |
 | table        | table        |
 | record       | record       |
 ## Examples
@@ -50,4 +56,10 @@ Decode multiple URLs with escape characters in list.
 │ 2 │ 中文字/eng/12 34            │
 ╰───┴─────────────────────────────╯
 
+```
+
+Decode a percent-encoded iso-8859-1 string.
+```nu
+> '%A3%20rates' | url decode --binary | decode iso-8859-1
+£ rates
 ```

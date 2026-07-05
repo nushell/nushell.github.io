@@ -2,7 +2,7 @@
 title: polars last
 categories: |
   dataframe
-version: 0.113.0
+version: 0.114.0
 dataframe: |
   Creates new dataframe with tail rows or creates a last expression.
 usage: |
@@ -30,6 +30,7 @@ contributors: false
 | input             | output            |
 | ----------------- | ----------------- |
 | polars_expression | polars_expression |
+| polars_selector   | polars_expression |
 | polars_dataframe  | polars_dataframe  |
 | polars_lazyframe  | polars_lazyframe  |
 ## Examples

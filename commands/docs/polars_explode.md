@@ -2,7 +2,7 @@
 title: polars explode
 categories: |
   lazyframe
-version: 0.113.0
+version: 0.114.0
 lazyframe: |
   Explodes a dataframe or creates a explode expression.
 usage: |
@@ -35,6 +35,7 @@ contributors: false
 | input             | output            |
 | ----------------- | ----------------- |
 | polars_expression | polars_expression |
+| polars_selector   | polars_expression |
 | polars_dataframe  | polars_dataframe  |
 | polars_lazyframe  | polars_lazyframe  |
 ## Examples

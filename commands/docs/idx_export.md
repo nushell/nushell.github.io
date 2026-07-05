@@ -2,7 +2,7 @@
 title: idx export
 categories: |
   filesystem
-version: 0.113.0
+version: 0.114.0
 filesystem: |
   Persist idx state to disk.
 usage: |
@@ -32,7 +32,7 @@ contributors: false
 | nothing | record |
 ## Examples
 
-Save the current idx index to disk
+Save the current idx index to disk.
 ```nu
 > idx export ~/my-index.db
 

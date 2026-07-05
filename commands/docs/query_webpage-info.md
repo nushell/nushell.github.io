@@ -2,7 +2,7 @@
 title: query webpage-info
 categories: |
   network
-version: 0.113.0
+version: 0.114.0
 network: |
   uses the webpage crate to extract info from html: title, description, language, links, RSS feeds, Opengraph, Schema.org, and more
 usage: |

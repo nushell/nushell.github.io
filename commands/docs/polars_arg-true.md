@@ -2,7 +2,7 @@
 title: polars arg-true
 categories: |
   dataframe
-version: 0.113.0
+version: 0.114.0
 dataframe: |
   Returns indexes where values are true.
 usage: |

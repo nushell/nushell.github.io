@@ -2,7 +2,7 @@
 title: polars fill-nan
 categories: |
   lazyframe
-version: 0.113.0
+version: 0.114.0
 lazyframe: |
   Replaces NaN values with the given expression.
 usage: |
@@ -27,10 +27,12 @@ contributors: false
 
 ## Input/output types:
 
-| input            | output           |
-| ---------------- | ---------------- |
-| polars_dataframe | polars_dataframe |
-| polars_lazyframe | polars_lazyframe |
+| input             | output            |
+| ----------------- | ----------------- |
+| polars_dataframe  | polars_dataframe  |
+| polars_lazyframe  | polars_lazyframe  |
+| polars_expression | polars_expression |
+| polars_selector   | polars_expression |
 ## Examples
 
 Fills the NaN values with 0

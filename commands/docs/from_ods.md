@@ -2,7 +2,7 @@
 title: from ods
 categories: |
   formats
-version: 0.113.0
+version: 0.114.0
 formats: |
   Parse OpenDocument Spreadsheet(.ods) data and create table.
 usage: |
@@ -23,13 +23,16 @@ contributors: false
 ## Flags
 
  -  `--sheets, -s {list<string>}`: Only convert specified sheets.
+ -  `--noheaders, -n`: Don't treat the first row as column names.
+ -  `--first-row, -f {int}`: The row to start reading the sheets from. By default, reading starts from the firsts non empty row.
+ -  `--prefer-integers, -i`: Convert whole-number floats (for example, 40.0) to integers, leaving non-whole floats unchanged.
 
 
 ## Input/output types:
 
 | input  | output |
 | ------ | ------ |
-| string | table  |
+| binary | record |
 ## Examples
 
 Convert binary .ods data to a table.
@@ -41,5 +44,11 @@ Convert binary .ods data to a table.
 Convert binary .ods data to a table, specifying the tables.
 ```nu
 > open --raw test.ods | from ods --sheets [Spreadsheet1]
+
+```
+
+Convert binary .ods data to a table, specifying the tables and specifying no header row.
+```nu
+> open --raw test.ods | from ods --sheets [Spreadsheet1] --noheaders
 
 ```

@@ -2,11 +2,11 @@
 title: idx files
 categories: |
   filesystem
-version: 0.113.0
+version: 0.114.0
 filesystem: |
-  List indexed files, or lookup a specific indexed path.
+  List indexed files, or fuzzy-match files by query.
 usage: |
-  List indexed files, or lookup a specific indexed path.
+  List indexed files, or fuzzy-match files by query.
 editLink: false
 contributors: false
 ---
@@ -14,15 +14,15 @@ contributors: false
 
 # `idx files` for [filesystem](/commands/categories/filesystem.md)
 
-<div class='command-title'>List indexed files, or lookup a specific indexed path.</div>
+<div class='command-title'>List indexed files, or fuzzy-match files by query.</div>
 
 ## Signature
 
-```> idx files {flags} (path)```
+```> idx files {flags} (query)```
 
 ## Parameters
 
- -  `path`: Optional path to lookup in index.
+ -  `query`: Optional fuzzy query to filter indexed files.
 
 
 ## Input/output types:
@@ -32,14 +32,14 @@ contributors: false
 | nothing | list&lt;record&gt; |
 ## Examples
 
-List all indexed files
+List all indexed files.
 ```nu
 > idx files
 
 ```
 
-Lookup a specific file path in the index
+Fuzzy-match indexed files by query.
 ```nu
-> idx files src/main.rs
+> idx files main
 
 ```

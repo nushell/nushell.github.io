@@ -2,7 +2,7 @@
 title: idx find
 categories: |
   filesystem
-version: 0.113.0
+version: 0.114.0
 filesystem: |
   Search idx with fuzzy matching across files and directories by default.
 usage: |
@@ -25,7 +25,7 @@ contributors: false
  -  `--verbose, -v`: Include verbose scoring details.
  -  `--dirs, -d`: Search directories only.
  -  `--files, -f`: Search files only.
- -  `--limit, -l {int}`: Maximum number of rows to return.
+ -  `--limit, -l {int}`: Maximum number of rows to return (default 100).
 
 ## Parameters
 
@@ -39,19 +39,19 @@ contributors: false
 | nothing | list&lt;record&gt; |
 ## Examples
 
-Fuzzy search for files and directories matching 'main'
+Fuzzy search for files and directories matching 'main'.
 ```nu
 > idx find main
 
 ```
 
-Search only files with verbose scoring output
+Search only files with verbose scoring output.
 ```nu
 > idx find config --files --verbose
 
 ```
 
-Search only directories, limited to top 10 results
+Search only directories, limited to top 10 results.
 ```nu
 > idx find src --dirs --limit 10
 

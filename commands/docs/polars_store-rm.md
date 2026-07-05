@@ -2,7 +2,7 @@
 title: polars store-rm
 categories: |
   dataframe
-version: 0.113.0
+version: 0.114.0
 dataframe: |
   Removes a stored Dataframe or other object from the plugin cache.
 usage: |

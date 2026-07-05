@@ -2,7 +2,7 @@
 title: polars str-join
 categories: |
   dataframe
-version: 0.113.0
+version: 0.114.0
 dataframe: |
   Concatenates strings within a column or dataframes
 usage: |
@@ -35,6 +35,7 @@ contributors: false
 | input             | output            |
 | ----------------- | ----------------- |
 | polars_expression | polars_expression |
+| polars_selector   | polars_expression |
 | polars_dataframe  | polars_dataframe  |
 | polars_lazyframe  | polars_lazyframe  |
 ## Examples

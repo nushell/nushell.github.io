@@ -2,7 +2,7 @@
 title: polars selector struct
 categories: |
   expression
-version: 0.113.0
+version: 0.114.0
 expression: |
   Select all struct columns.
 usage: |

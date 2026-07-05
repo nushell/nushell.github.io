@@ -2,7 +2,7 @@
 title: attr search-terms
 categories: |
   core
-version: 0.113.0
+version: 0.114.0
 core: |
   Attribute for adding search terms to custom commands.
 usage: |

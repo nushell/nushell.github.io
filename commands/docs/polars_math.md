@@ -2,11 +2,11 @@
 title: polars math
 categories: |
   dataframe
-version: 0.113.0
+version: 0.114.0
 dataframe: |
-  Collection of math functions to be applied on one or more column expressions
+  Collection of math functions to be applied on column expressions.
 usage: |
-  Collection of math functions to be applied on one or more column expressions
+  Collection of math functions to be applied on column expressions.
 editLink: false
 contributors: false
 ---
@@ -14,92 +14,20 @@ contributors: false
 
 # `polars math` for [dataframe](/commands/categories/dataframe.md)
 
-<div class='command-title'>Collection of math functions to be applied on one or more column expressions</div>
+<div class='command-title'>Collection of math functions to be applied on column expressions.</div>
 
 ## Signature
 
-```> polars math {flags} (type) ...rest```
-
-## Parameters
-
- -  `type`: Function name. See extra description for full list of accepted values.
- -  `...rest`: Extra arguments required by some functions.
+```> polars math {flags} ```
 
 
 ## Input/output types:
 
-| input             | output            |
-| ----------------- | ----------------- |
-| polars_expression | polars_expression |
-| polars_selector   | polars_expression |
-## Examples
-
-Apply function to column expression
-```nu
-> [[a]; [0] [-1] [2] [-3] [4]]
-                    | polars into-df
-                    | polars select [
-                        (polars col a | polars math abs | polars as a_abs)
-                        (polars col a | polars math sign | polars as a_sign)
-                        (polars col a | polars math exp | polars as a_exp)]
-                    | polars collect
-╭───┬───────┬────────┬───────╮
-│ # │ a_abs │ a_sign │ a_exp │
-├───┼───────┼────────┼───────┤
-│ 0 │     0 │      0 │  1.00 │
-│ 1 │     1 │     -1 │  0.37 │
-│ 2 │     2 │      1 │  7.39 │
-│ 3 │     3 │     -1 │  0.05 │
-│ 4 │     4 │      1 │ 54.60 │
-╰───┴───────┴────────┴───────╯
-
-```
-
-Specify arguments for select functions. See description for more information.
-```nu
-> [[a]; [0] [1] [2] [4] [8] [16]]
-                    | polars into-df
-                    | polars select [
-                        (polars col a | polars math log 2 | polars as a_base2)]
-                    | polars collect
-╭───┬─────────╮
-│ # │ a_base2 │
-├───┼─────────┤
-│ 0 │    -inf │
-│ 1 │    0.00 │
-│ 2 │    1.00 │
-│ 3 │    2.00 │
-│ 4 │    3.00 │
-│ 5 │    4.00 │
-╰───┴─────────╯
-
-```
-
-Specify arguments for select functions. See description for more information.
-```nu
-> [[a b]; [0 0] [1 1] [2 2] [3 3] [4 4] [5 5]]
-                    | polars into-df
-                    | polars select [
-                        (polars col a | polars math dot (polars col b) | polars as ab)]
-                    | polars collect
-╭───┬───────╮
-│ # │  ab   │
-├───┼───────┤
-│ 0 │ 55.00 │
-╰───┴───────╯
-
-```
-
+| input   | output |
+| ------- | ------ |
+| nothing | string |
 ## Notes
-This is an incomplete implementation of the available functions listed here: https://docs.pola.rs/api/python/stable/reference/expressions/computation.html.
 
-        The following functions are currently available:
-        - abs
-        - cos
-        - dot <expression>
-        - exp
-        - log <base; default e>
-        - log1p
-        - sign
-        - sin
-        - sqrt
+You must use one of the subcommands below. Using this command as-is will only produce this help message.
+
+See https://docs.pola.rs/api/python/stable/reference/expressions/computation.html for more information.

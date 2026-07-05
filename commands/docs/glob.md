@@ -2,7 +2,7 @@
 title: glob
 categories: |
   filesystem
-version: 0.113.0
+version: 0.114.0
 filesystem: |
   Creates a list of files and/or folders based on the glob pattern provided.
 usage: |
@@ -114,4 +114,4 @@ Search for files following symbolic links to their targets.
 ```
 
 ## Notes
-For more glob pattern help, please refer to https://docs.rs/crate/wax/latest
+For more glob pattern help, please refer to https://docs.rs/crate/wax/latest.

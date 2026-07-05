@@ -2,7 +2,7 @@
 title: alias
 categories: |
   core
-version: 0.113.0
+version: 0.114.0
 core: |
   Alias a command (with optional flags) to a new name.
 usage: |

@@ -2,7 +2,7 @@
 title: polars selector alpha
 categories: |
   expression
-version: 0.113.0
+version: 0.114.0
 expression: |
   Select all columns with alphabetic names (eg: only letters). Matching column names cannot contain *any* non-alphabetic characters. Note that the definition of "alphabetic" consists of all valid Unicode alphabetic characters by default; this can be changed by setting `--ascii-only`.
 usage: |

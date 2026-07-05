@@ -2,7 +2,7 @@
 title: bits shl
 categories: |
   bits
-version: 0.113.0
+version: 0.114.0
 bits: |
   Bitwise shift left for ints or binary values.
 usage: |
@@ -23,7 +23,7 @@ contributors: false
 ## Flags
 
  -  `--signed, -s`: Always treat input number as a signed number.
- -  `--number-bytes, -n {int}`: The word size in number of bytes. Must be `1`, `2`, `4`, or `8` (defaults to the smallest of those that fits the input number).
+ -  `--number-bytes, -n {int}`: The word size in number of bytes. Must be `1`, `2`, `4`, or `8` (defaults to `8`).
 
 ## Parameters
 
@@ -43,7 +43,7 @@ contributors: false
 Shift left a number by 7 bits
 ```nu
 > 2 | bits shl 7
-0
+256
 ```
 
 Shift left a number with 2 byte by 7 bits
@@ -54,7 +54,7 @@ Shift left a number with 2 byte by 7 bits
 
 Shift left a signed number by 1 bit
 ```nu
-> 0x7F | bits shl 1 --signed
+> 0x7F | bits shl 1 --signed --number-bytes 1
 -2
 ```
 

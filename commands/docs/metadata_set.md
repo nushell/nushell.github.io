@@ -2,7 +2,7 @@
 title: metadata set
 categories: |
   debug
-version: 0.113.0
+version: 0.114.0
 debug: |
   Set the metadata for items in the stream.
 usage: |
@@ -25,6 +25,7 @@ contributors: false
  -  `--datasource-filepath, -f {path}`: Assign the DataSource::FilePath metadata to the input.
  -  `--path-columns, -p {list<string>}`: A list of columns in the input for which path metadata will be assigned.
  -  `--content-type, -c {oneof<string, nothing>}`: Assign content type metadata to the input.
+ -  `--table-width-priority-columns, -w {list<string>}`: A list of columns to prioritize during table width allocation.
 
 ## Parameters
 
@@ -66,4 +67,10 @@ Set metadata using a closure.
 ```nu
 > "data" | metadata set --content-type "text/csv" | metadata set {|m| $m | update content_type {$in + "-processed"}} | metadata | get content_type
 text/csv-processed
+```
+
+Set table width-priority columns metadata.
+```nu
+> "data" | metadata set --table-width-priority-columns [command virtual] | metadata | get table_width_priority_columns | str join ","
+command,virtual
 ```

@@ -2,7 +2,7 @@
 title: split cell-path
 categories: |
   conversions
-version: 0.113.0
+version: 0.114.0
 conversions: |
   Split a cell-path into its components.
 usage: |
@@ -23,10 +23,9 @@ contributors: false
 
 ## Input/output types:
 
-| input     | output                                                      |
-| --------- | ----------------------------------------------------------- |
-| cell-path | list&lt;any&gt;                                                   |
-| cell-path | list&lt;record&lt;value: any, optional: bool, insensitive: bool&gt;&gt; |
+| input     | output                                               |
+| --------- | ---------------------------------------------------- |
+| cell-path | table&lt;value: any, optional: bool, insensitive: bool&gt; |
 ## Examples
 
 Split a cell-path into its components.

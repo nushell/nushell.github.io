@@ -2,7 +2,7 @@
 title: hash sha256
 categories: |
   hash
-version: 0.113.0
+version: 0.114.0
 hash: |
   Hash a value using the sha256 hash algorithm.
 usage: |
@@ -51,6 +51,12 @@ Return the sha256 hash of a string, as binary
 Length: 32 (0x20) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   71 c4 80 df  93 d6 ae 2f  1e fa d1 44  7c 66 c9 52   q××××××/•××D|f×R
 00000010:   5e 31 62 18  cf 51 fc 8d  9e d8 32 f2  da f1 8b 73   ^1b•×Q××××2××××s
+
+```
+
+Return the sha256 hash of binary data
+```nu
+> 0x[deadbeef] | hash sha256
 
 ```
 

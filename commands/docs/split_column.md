@@ -2,7 +2,7 @@
 title: split column
 categories: |
   strings
-version: 0.113.0
+version: 0.114.0
 strings: |
   Split a string into multiple columns using a separator.
 usage: |
@@ -23,7 +23,8 @@ contributors: false
 ## Flags
 
  -  `--collapse-empty, -c`: Remove empty columns.
- -  `--number, -n {int}`: Split into maximum number of items.
+ -  `--number, -n {int}`: Split into maximum number of columns.
+ -  `--right`: When `--number` is used, collect the remainder in the leftmost column.
  -  `--regex, -r`: Separator is a regular expression.
 
 ## Parameters
@@ -95,5 +96,18 @@ Split into columns, last column may contain the delimiter.
 │ 0 │ author │ Salina Yoon                          │
 │ 1 │ title  │ Where's Ellie?: A Hide-and-Seek Book │
 ╰───┴────────┴──────────────────────────────────────╯
+
+```
+
+Split into columns, first column may contain the delimiter.
+```nu
+> ['some-package-1.2.3' 'pkg2-1.0' 'do-smart-things-0.9.1'] | split column --number 2 --right '-' name version
+╭───┬─────────────────┬─────────╮
+│ # │      name       │ version │
+├───┼─────────────────┼─────────┤
+│ 0 │ some-package    │ 1.2.3   │
+│ 1 │ pkg2            │ 1.0     │
+│ 2 │ do-smart-things │ 0.9.1   │
+╰───┴─────────────────┴─────────╯
 
 ```

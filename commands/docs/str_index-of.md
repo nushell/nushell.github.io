@@ -2,7 +2,7 @@
 title: str index-of
 categories: |
   strings
-version: 0.113.0
+version: 0.114.0
 strings: |
   Returns start index of first occurrence of string in input, or -1 if no match.
 usage: |
@@ -53,6 +53,12 @@ Count length using grapheme clusters.
 ```nu
 > '🇯🇵ほげ ふが ぴよ' | str index-of --grapheme-clusters 'ふが'
 4
+```
+
+A match that falls inside a grapheme cluster is reported as not found.
+```nu
+> '🇯🇵' | str index-of --grapheme-clusters '🇵'
+-1
 ```
 
 Returns index of string in input within a`rhs open range`.

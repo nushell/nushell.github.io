@@ -2,7 +2,7 @@
 title: polars filter
 categories: |
   lazyframe
-version: 0.113.0
+version: 0.114.0
 lazyframe: |
   Filter dataframe based in expression.
 usage: |
@@ -32,6 +32,7 @@ contributors: false
 | polars_dataframe  | polars_dataframe  |
 | polars_lazyframe  | polars_lazyframe  |
 | polars_expression | polars_expression |
+| polars_selector   | polars_expression |
 ## Examples
 
 Filter dataframe using an expression

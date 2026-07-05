@@ -2,7 +2,7 @@
 title: polars arg-min
 categories: |
   dataframe
-version: 0.113.0
+version: 0.114.0
 dataframe: |
   Return index for min value in series.
 usage: |

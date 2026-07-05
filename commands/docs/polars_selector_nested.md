@@ -2,7 +2,7 @@
 title: polars selector nested
 categories: |
   expression
-version: 0.113.0
+version: 0.114.0
 expression: |
   Select all nested columns (list, array, or struct).
 usage: |

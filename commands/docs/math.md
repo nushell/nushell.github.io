@@ -2,7 +2,7 @@
 title: math
 categories: |
   math
-version: 0.113.0
+version: 0.114.0
 math: |
   Use mathematical functions as aggregate functions on a list of numbers or tables.
 usage: |
@@ -41,6 +41,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`math arctan`](/commands/docs/math_arctan.md)     | Returns the arctangent of the number.                                                 | built-in |
 | [`math arctanh`](/commands/docs/math_arctanh.md)   | Returns the inverse of the hyperbolic tangent function.                               | built-in |
 | [`math avg`](/commands/docs/math_avg.md)           | Returns the average of a list of numbers.                                             | built-in |
+| [`math cbrt`](/commands/docs/math_cbrt.md)         | Returns the real-valued cube root of the input number.                                | built-in |
 | [`math ceil`](/commands/docs/math_ceil.md)         | Returns the ceil of a number (smallest integer greater than or equal to that number). | built-in |
 | [`math cos`](/commands/docs/math_cos.md)           | Returns the cosine of the number.                                                     | built-in |
 | [`math cosh`](/commands/docs/math_cosh.md)         | Returns the hyperbolic cosine of the number.                                          | built-in |

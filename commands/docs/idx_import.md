@@ -2,7 +2,7 @@
 title: idx import
 categories: |
   filesystem
-version: 0.113.0
+version: 0.114.0
 filesystem: |
   Import idx state from disk.
 usage: |
@@ -20,6 +20,10 @@ contributors: false
 
 ```> idx import {flags} (filepath)```
 
+## Flags
+
+ -  `--no-watch`: Disable filesystem watching after import (watching is enabled by default).
+
 ## Parameters
 
  -  `filepath`: Path to a stored idx snapshot.
@@ -32,11 +36,11 @@ contributors: false
 | nothing | record |
 ## Examples
 
-Restore an idx index from a snapshot on disk
+Restore an idx index from a snapshot on disk.
 ```nu
 > idx import ~/my-index.db
 
 ```
 
 ## Notes
-Reads a SQLite snapshot created by `idx export` and hydrates the runtime from stored rows. Watch mode is not restored from the snapshot.
+Reads a SQLite snapshot created by `idx export` and auto-initializes idx runtime for immediate queries.

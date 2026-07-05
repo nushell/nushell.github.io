@@ -2,7 +2,7 @@
 title: polars implode
 categories: |
   dataframe
-version: 0.113.0
+version: 0.114.0
 dataframe: |
   Aggregates values into a list.
 usage: |
@@ -20,12 +20,17 @@ contributors: false
 
 ```> polars implode {flags} ```
 
+## Flags
+
+ -  `--maintain-order, -o`: Maintains the order of the original values in the list
+
 
 ## Input/output types:
 
 | input             | output            |
 | ----------------- | ----------------- |
 | polars_expression | polars_expression |
+| polars_selector   | polars_expression |
 ## Examples
 
 Create two lists for columns a and b with all the rows as values.
