@@ -251,7 +251,7 @@ let cond = {|x| $x < 0 }; [-1 -2 9 1] | take while $cond
 # => ╰───┴────╯
 ```
 
-## Tablaux
+## Tableaux
 
 trier un tableau :
 
