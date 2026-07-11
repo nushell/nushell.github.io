@@ -12,7 +12,7 @@
 
 1. `path` is technically a "syntax shape" rather than a full "type".
    It is used for annotating strings that should be treated as a path to a filename or directory.
-   `~` and `.` characters in the string will automatically be expanded treated as a `path`.
+   `~` and `...` characters in the string will automatically be expanded treated as a `path`.
 
    Example:
 
@@ -27,9 +27,6 @@
 
    # Results
    cd ~/testing
-   show_difference . .
-   # => The path is expanded: /home/username/testing
-   # => The string is not: .
    show_difference ~ ~
    # => The path is expanded: /home/username
    # => The string is not: ~
