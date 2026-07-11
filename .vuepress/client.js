@@ -10,6 +10,7 @@ import BlogPosts from './components/BlogPosts.vue';
 import ExperimentalOption from './components/ExperimentalOption.vue';
 import JumpToc from './components/JumpToc.vue';
 import PrBy from './components/PrBy.vue';
+import PrOther from './components/PrOther.vue';
 import ReleaseToc from './components/ReleaseToc.vue';
 import URLDocSearch from './components/URLDocSearch.vue';
 
@@ -20,6 +21,7 @@ export default defineClientConfig({
     app.component('ExperimentalOption', ExperimentalOption);
     app.component('JumpToc', JumpToc);
     app.component('PrBy', PrBy);
+    app.component('PrOther', PrOther);
     app.component('ReleaseToc', ReleaseToc);
 
     // Override the builtin searchbox
