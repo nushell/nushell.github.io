@@ -99,12 +99,23 @@ use std
 cat unknown.txt o+e> (std null-device)
 ```
 
-Note that file redirections are scoped to an expression and apply to all external commands in the expression. In the example below, `out.txt` will contain `hello\nworld`:
+Semicolons follow defined pipeline behavior. In the following example, the first expression prints to stdout, and the second becomes the result of the parentheses-subexpression and gets piped into `out.txt`.
 ```nu
 let text = "hello\nworld"
 ($text | head -n 1; $text | tail -n 1) o> out.txt
+# => hello
+open out.txt
+# => world
 ```
-Pipes and additional file redirections inside the expression will override any file redirections applied from the outside.
+
+To combine the output, scope them into a block and execute it with `do`:
+```nu
+let text = "hello\nworld"
+do { $text | head -n 1; $text | tail -n 1 } o> out.txt
+open out.txt
+# => hello
+# => world
+```
 
 ## Pipe Redirections
 
