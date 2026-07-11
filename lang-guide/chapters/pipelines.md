@@ -88,74 +88,74 @@ Pipeline and redirection behavior can be hard to follow when they are used with 
 
 ### Examples for subexpression
 
-- (^cmd1 | ^cmd2; ^cmd3 | ^cmd4)
+- `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4)`
 
-| Command | Stdout     | Stderr   |
-| ------- | ---------- | -------- |
-| cmd1    | Piped      | Terminal |
-| cmd2    | _Terminal_ | Terminal |
-| cmd3    | Piped      | Terminal |
-| cmd4    | Terminal   | Terminal |
+| Command   | Stdout     | Stderr   |
+| --------- | ---------- | -------- |
+| `cmd1`    | Piped      | Terminal |
+| `cmd2`    | _Terminal_ | Terminal |
+| `cmd3`    | Piped      | Terminal |
+| `cmd4`    | Terminal   | Terminal |
 
-- (^cmd1 | ^cmd2; ^cmd3 | ^cmd4) | ^cmd5
+- `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4) | ^cmd5`
 
 It runs `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4)` first, then pipes _stdout_ to `^cmd5`, where both stdout and stderr are directed to the Terminal.
 
-| Command | Stdout     | Stderr   |
-| ------- | ---------- | -------- |
-| cmd1    | Piped      | Terminal |
-| cmd2    | _Terminal_ | Terminal |
-| cmd3    | Piped      | Terminal |
-| cmd4    | Piped      | Terminal |
+| Command   | Stdout     | Stderr   |
+| --------- | ---------- | -------- |
+| `cmd1`    | Piped      | Terminal |
+| `cmd2`    | _Terminal_ | Terminal |
+| `cmd3`    | Piped      | Terminal |
+| `cmd4`    | Piped      | Terminal |
 
-- (^cmd1 | ^cmd2; ^cmd3 | ^cmd4) e>| ^cmd5
+- `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4) e>| ^cmd5`
 
 It runs `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4)` first, then pipes _stderr_ to `^cmd5`, where both stdout and stderr are directed to the Terminal.
 
-| Command | Stdout   | Stderr   |
-| ------- | -------- | -------- |
-| cmd1    | Piped    | Terminal |
-| cmd2    | Terminal | Terminal |
-| cmd3    | Piped    | Terminal |
-| cmd4    | Terminal | Piped    |
+| Command   | Stdout   | Stderr   |
+| --------- | -------- | -------- |
+| `cmd1`    | Piped    | Terminal |
+| `cmd2`    | Terminal | Terminal |
+| `cmd3`    | Piped    | Terminal |
+| `cmd4`    | Terminal | Piped    |
 
-- (^cmd1 | ^cmd2; ^cmd3 | ^cmd4) o+e>| ^cmd5
+- `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4) o+e>| ^cmd5`
 
 It runs `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4)` first, then pipes _stdout and stderr_ to `^cmd5`, where both stdout and stderr are directed to the Terminal.
 
-| Command | Stdout   | Stderr   |
-| ------- | -------- | -------- |
-| cmd1    | Piped    | Terminal |
-| cmd2    | Terminal | Terminal |
-| cmd3    | Piped    | Terminal |
-| cmd4    | Piped    | Piped    |
+| Command   | Stdout   | Stderr   |
+| --------- | -------- | -------- |
+| `cmd1`    | Piped    | Terminal |
+| `cmd2`    | Terminal | Terminal |
+| `cmd3`    | Piped    | Terminal |
+| `cmd4`    | Piped    | Piped    |
 
-- (^cmd1 | ^cmd2; ^cmd3 | ^cmd4) o> test.out
+- `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4) o> test.out`
 
-| Command | Stdout | Stderr   |
-| ------- | ------ | -------- |
-| cmd1    | Piped  | Terminal |
-| cmd2    | File   | Terminal |
-| cmd3    | Piped  | Terminal |
-| cmd4    | File   | Terminal |
+| Command   | Stdout | Stderr   |
+| --------- | ------ | -------- |
+| `cmd1`    | Piped  | Terminal |
+| `cmd2`    | File   | Terminal |
+| `cmd3`    | Piped  | Terminal |
+| `cmd4`    | File   | Terminal |
 
-- (^cmd1 | ^cmd2; ^cmd3 | ^cmd4) e> test.out
+- `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4) e> test.out`
 
-| Command | Stdout   | Stderr |
-| ------- | -------- | ------ |
-| cmd1    | Piped    | File   |
-| cmd2    | Terminal | File   |
-| cmd3    | Piped    | File   |
-| cmd4    | Terminal | File   |
+| Command   | Stdout   | Stderr |
+| --------- | -------- | ------ |
+| `cmd1`    | Piped    | File   |
+| `cmd2`    | Terminal | File   |
+| `cmd3`    | Piped    | File   |
+| `cmd4`    | Terminal | File   |
 
-- (^cmd1 | ^cmd2; ^cmd3 | ^cmd4) o+e> test.out
+- `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4) o+e> test.out`
 
-| Command | Stdout | Stderr |
-| ------- | ------ | ------ |
-| cmd1    | Piped  | File   |
-| cmd2    | File   | File   |
-| cmd3    | Piped  | File   |
-| cmd4    | File   | File   |
+| Command   | Stdout | Stderr |
+| --------- | ------ | ------ |
+| `cmd1`    | Piped  | File   |
+| `cmd2`    | File   | File   |
+| `cmd3`    | Piped  | File   |
+| `cmd4`    | File   | File   |
 
 ### Examples for custom command
 
@@ -172,71 +172,71 @@ The custom command stdio behavior is the same as the previous section.
 
 In the examples below the body of `custom-cmd` is `(^cmd1 | ^cmd2; ^cmd3 | ^cmd4)`.
 
-- custom-cmd
+- `custom-cmd`
 
-| Command | Stdout     | Stderr   |
-| ------- | ---------- | -------- |
-| cmd1    | Piped      | Terminal |
-| cmd2    | _Terminal_ | Terminal |
-| cmd3    | Piped      | Terminal |
-| cmd4    | Terminal   | Terminal |
+| Command   | Stdout     | Stderr   |
+| --------- | ---------- | -------- |
+| `cmd1`    | Piped      | Terminal |
+| `cmd2`    | _Terminal_ | Terminal |
+| `cmd3`    | Piped      | Terminal |
+| `cmd4`    | Terminal   | Terminal |
 
-- custom-cmd | ^cmd5
+- `custom-cmd | ^cmd5`
 
 It runs `custom-cmd` first, then pipes _stdout_ to `^cmd5`, where both stdout and stderr are directed to the Terminal.
 
-| Command | Stdout     | Stderr   |
-| ------- | ---------- | -------- |
-| cmd1    | Piped      | Terminal |
-| cmd2    | _Terminal_ | Terminal |
-| cmd3    | Piped      | Terminal |
-| cmd4    | Piped      | Terminal |
+| Command   | Stdout     | Stderr   |
+| --------- | ---------- | -------- |
+| `cmd1`    | Piped      | Terminal |
+| `cmd2`    | _Terminal_ | Terminal |
+| `cmd3`    | Piped      | Terminal |
+| `cmd4`    | Piped      | Terminal |
 
-- custom-cmd e>| ^cmd5
+- `custom-cmd e>| ^cmd5`
 
 It runs `custom-cmd` first, then pipes _stderr_ to `^cmd5`, where both stdout and stderr are directed to the Terminal.
 
-| Command | Stdout   | Stderr   |
-| ------- | -------- | -------- |
-| cmd1    | Piped    | Terminal |
-| cmd2    | Terminal | Terminal |
-| cmd3    | Piped    | Terminal |
-| cmd4    | Terminal | Piped    |
+| Command   | Stdout   | Stderr   |
+| --------- | -------- | -------- |
+| `cmd1`    | Piped    | Terminal |
+| `cmd2`    | Terminal | Terminal |
+| `cmd3`    | Piped    | Terminal |
+| `cmd4`    | Terminal | Piped    |
 
-- custom-cmd o+e>| ^cmd5
+- `custom-cmd o+e>| ^cmd5`
 
 It runs `custom-cmd` first, then pipes _stdout and stderr_ to `^cmd5`, where both stdout and stderr are directed to the Terminal.
 
-| Command | Stdout   | Stderr   |
-| ------- | -------- | -------- |
-| cmd1    | Piped    | Terminal |
-| cmd2    | Terminal | Terminal |
-| cmd3    | Piped    | Terminal |
-| cmd4    | Piped    | Piped    |
+| Command   | Stdout   | Stderr   |
+| --------- | -------- | -------- |
+| `cmd1`    | Piped    | Terminal |
+| `cmd2`    | Terminal | Terminal |
+| `cmd3`    | Piped    | Terminal |
+| `cmd4`    | Piped    | Piped    |
 
-- custom-cmd o> test.out
+- `custom-cmd o> test.out`
 
-| Command | Stdout | Stderr   |
-| ------- | ------ | -------- |
-| cmd1    | Piped  | Terminal |
-| cmd2    | File   | Terminal |
-| cmd3    | Piped  | Terminal |
-| cmd4    | File   | Terminal |
+| Command   | Stdout | Stderr   |
+| --------- | ------ | -------- |
+| `cmd1`    | Piped  | Terminal |
+| `cmd2`    | File   | Terminal |
+| `cmd3`    | Piped  | Terminal |
+| `cmd4`    | File   | Terminal |
 
-- custom-cmd e> test.out
+- `custom-cmd e> test.out`
 
-| Command | Stdout   | Stderr |
-| ------- | -------- | ------ |
-| cmd1    | Piped    | File   |
-| cmd2    | Terminal | File   |
-| cmd3    | Piped    | File   |
-| cmd4    | Terminal | File   |
+| Command   | Stdout   | Stderr |
+| --------- | -------- | ------ |
+| `cmd1`    | Piped    | File   |
+| `cmd2`    | Terminal | File   |
+| `cmd3`    | Piped    | File   |
+| `cmd4`    | Terminal | File   |
 
-- custom-cmd o+e> test.out
+- `custom-cmd o+e> test.out`
 
-| Command | Stdout | Stderr |
-| ------- | ------ | ------ |
-| cmd1    | Piped  | File   |
-| cmd2    | File   | File   |
-| cmd3    | Piped  | File   |
-| cmd4    | File   | File   |
+| Command   | Stdout | Stderr |
+| --------- | ------ | ------ |
+| `cmd1`    | Piped  | File   |
+| `cmd2`    | File   | File   |
+| `cmd3`    | Piped  | File   |
+| `cmd4`    | File   | File   |
