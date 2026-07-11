@@ -99,10 +99,9 @@ use std
 cat unknown.txt o+e> (std null-device)
 ```
 
-Semicolons follow defined pipeline behavior. In the following example, the first expression prints to stdout, and the second becomes the result of the parentheses-subexpression and gets piped into `out.txt`.
+Semicolons follow defined pipeline behavior. In the following example, the first external command prints to stdout, and the second external command stdout becomes the output of the parentheses-subexpression and gets piped into `out.txt`.
 ```nu
-let text = "hello\nworld"
-($text | head -n 1; $text | tail -n 1) o> out.txt
+(nu -c 'print hello'; nu -c 'print world') o> test.txt
 # => hello
 open out.txt
 # => world
@@ -114,6 +113,13 @@ let text = "hello\nworld"
 do { $text | head -n 1; $text | tail -n 1 } o> out.txt
 open out.txt
 # => hello
+# => world
+```
+
+This external command behavior is in contrast to native Nushell expressions where the first command's stdout gets discarded:
+```nu
+('hello'; 'world') o> test.txt
+open test.txt
 # => world
 ```
 
