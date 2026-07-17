@@ -281,6 +281,7 @@ export default defineUserConfig({
       },
       getter: {
         publishDate: (page) => new Date(page.date),
+        lastUpdateDate: (page) => new Date(page.date),
       },
       sorter: (a, b) => {
         const pathDateA = new Date(
