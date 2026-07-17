@@ -279,6 +279,9 @@ export default defineUserConfig({
           frontmatter.feed === true || filePathRelative?.indexOf('blog/') >= 0
         );
       },
+      getter: {
+        publishDate: (page) => new Date(page.date),
+      },
       sorter: (a, b) => {
         const pathDateA = new Date(
           a.path.replace('/blog/', '').substring(0, 10),
