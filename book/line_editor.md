@@ -629,7 +629,7 @@ $env.config.menus ++= [{
 By modifying these parameters you can customize the layout of your menu to your
 liking.
 
-### Ide Completion Meu
+### Ide Completion Menu
 The ide_completion_menu works much like the completion_menu but has an ide look and feel about it.
 
 ```nu
