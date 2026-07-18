@@ -583,7 +583,7 @@ $env.config.menus ++= [{
         col_width: 20            # Optional value. If missing all the screen width is used to calculate column width
         col_padding: 2           # Padding between columns
         selection_rows: 4        # Number of rows allowed to display found options
-        description_rows: 10     # Number of rows allowed to display command description
+        description_rows: 20     # Number of rows allowed to display command description
     }
     style: {
         text: green                   # Text style
@@ -608,24 +608,65 @@ modifying these values from the config object:
 ```nu
 $env.config.menus ++= [{
     name: completion_menu
-    only_buffer_difference: false # Search is done on the text written after activating the menu
-    marker: "| "                  # Indicator that appears with the menu is active
+    only_buffer_difference: false   # Search is done on the text written after activating the menu
+    marker: "| "                    # Indicator that appears with the menu is active
     type: {
-        layout: columnar          # Type of menu
-        columns: 4                # Number of columns where the options are displayed
-        col_width: 20             # Optional value. If missing all the screen width is used to calculate column width
-        col_padding: 2            # Padding between columns
+        layout: columnar            # Type of menu
+        columns: 4                  # Number of columns where the options are displayed
+        col_width: 20               # Optional value. If missing all the screen width is used to calculate column width
+        col_padding: 2              # Padding between columns
+        tab_traversal: "vertical"   # Direction in which pressing <Tab> will cycle through options, "horizontal" or "vertical"
     }
     style: {
         text: green                   # Text style
         selected_text: green_reverse  # Text style for selected option
         description_text: yellow      # Text style for description
-    }
+        match_text: { attr: u }       # Matched style
+        selected_match_text: { attr: ur }    } # Selected matched style
 }]
 ```
 
 By modifying these parameters you can customize the layout of your menu to your
 liking.
+
+### Ide Completion Meu
+The ide_completion_menu works much like the completion_menu but has an ide look and feel about it.
+
+```nu
+{
+  name: ide_completion_menu
+  only_buffer_difference: false
+  marker: "| "
+  type: {
+    layout: ide
+    min_completion_width: 0,
+    max_completion_width: 50,
+    max_completion_height: 10, # will be limited by the available lines in the terminal
+    padding: 0,
+    border: true,
+    cursor_offset: 0,
+    description_mode: "prefer_right"
+    min_description_width: 15
+    max_description_width: 50
+    max_description_height: 10
+    description_offset: 1
+    # If true, the cursor pos will be corrected, so the suggestions match up with the typed text
+    #
+    # C:\> str
+    #      str join
+    #      str trim
+    #      str split
+    correct_cursor_pos: false
+  }
+  style: {
+    text: green
+    selected_text: { attr: r }
+    description_text: yellow
+    match_text: { attr: u }
+    selected_match_text: { attr: ur }
+  }
+}
+```
 
 ### History Menu
 
