@@ -18,6 +18,32 @@ External command (typically `/usr/bin/ls`):
 On Windows, `ls` is a PowerShell _alias_ by default, so `^ls` will not find a matching system _command_.
 :::
 
+## Passing Arguments
+
+External arguments are separated by Nushell syntax, not by spaces inside a quoted string. Quote a string to keep its spaces inside one argument:
+
+```nu
+git commit -m "Update external command documentation"
+```
+
+Nushell does not automatically convert a list into external arguments, and passing a list directly produces an error. Use the spread operator (`...`) to pass each list item as its own argument:
+
+```nu
+let paths = ["file one.txt" "file two.txt"]
+git add ...$paths
+```
+
+Here, `git` receives two path arguments, and the space in each path remains part of that argument. See [the spread operator in command calls](operators.md#in-command-calls) for more examples and the complete spreading rules.
+
+The caret can also run an executable whose name or path is stored in a variable:
+
+```nu
+let program = "git"
+^$program status
+```
+
+See [Strings as external commands](working_with_strings.md#strings-as-external-commands) for the supported string forms. An [`extern` declaration](externs.md) can add type checking and completions for a known external command; calling it follows the same argument rules described here.
+
 ## Additional Windows Notes
 
 When running an external command on Windows,
