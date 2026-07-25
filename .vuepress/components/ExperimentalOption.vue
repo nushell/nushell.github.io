@@ -3,7 +3,7 @@
     <p class="hint-container-title">Experimental option</p>
     <p>
       This feature is behind an experimental option. Run Nushell with
-      <code>--experimental-option={{ option }}</code> or set before running
+      <code>--experimental-options={{ option }}</code> or set before running
       Nushell the environment variable to
       <code>NU_EXPERIMENTAL_OPTIONS={{ option }}</code
       >.
