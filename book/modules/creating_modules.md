@@ -425,9 +425,22 @@ To bring `my-utils` exported environment into scope for the `go.nu` module, ther
 
 Note that the first method keeps `my-utils` environment inside the `go.nu` module's scope. The second, on the other hand, re-exports `my-utils` environment into the user scope.
 
-### Module files and commands cannot be named after parent module
+### Exports cannot be named after their module
 
-A `.nu` file cannot have the same name as its module directory (e.g., `spam/spam.nu`) as this would create an ambiguous condition with the name being defined twice. This is similar to the situation described above where a command cannot have the same name as its parent.
+A module cannot export a command, alias, or known external defined inside it that has the same name as the module itself. For commands and known externals, name the definition `main` instead, as covered in [`main` Exports](#main-exports) above. The same restriction applies to a submodule declared by name, so `export module spam` inside a module named `spam` is rejected:
+
+```nu
+module spam { export module spam { } }
+# => Error: nu::parser::named_as_module
+# => ...
+# => help: Module spam can't export module named
+# => the same as the module. Either change the module
+# => name, or export `mod` module.
+```
+
+::: note
+A `.nu` file _may_ have the same name as its module directory (e.g., `spam/spam.nu`), and Nushell will import it. Still, prefer a different name: if the parent module and the same-named submodule both export a `main`, the two definitions resolve to the same command name and the parent's `main` silently wins.
+:::
 
 ## Windows Path Syntax
 
