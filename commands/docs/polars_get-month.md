@@ -2,7 +2,7 @@
 title: polars get-month
 categories: |
   dataframe
-version: 0.114.2-nightly.33
+version: 0.115.0
 dataframe: |
   Gets month from date.
 usage: |

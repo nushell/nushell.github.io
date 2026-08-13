@@ -2,7 +2,7 @@
 title: attr deprecated
 categories: |
   core
-version: 0.114.2-nightly.33
+version: 0.115.0
 core: |
   Attribute for marking a command or flag as deprecated.
 usage: |

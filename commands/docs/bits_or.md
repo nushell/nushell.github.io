@@ -2,7 +2,7 @@
 title: bits or
 categories: |
   bits
-version: 0.114.2-nightly.33
+version: 0.115.0
 bits: |
   Performs bitwise or for ints or binary values.
 usage: |

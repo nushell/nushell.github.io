@@ -2,7 +2,7 @@
 title: polars all-true
 categories: |
   dataframe
-version: 0.114.2-nightly.33
+version: 0.115.0
 dataframe: |
   Returns true if all values are true.
 usage: |

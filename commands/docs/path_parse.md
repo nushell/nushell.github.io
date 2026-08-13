@@ -2,7 +2,7 @@
 title: path parse
 categories: |
   path
-version: 0.114.2-nightly.33
+version: 0.115.0
 path: |
   Convert a path into structured data.
 usage: |

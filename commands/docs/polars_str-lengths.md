@@ -2,7 +2,7 @@
 title: polars str-lengths
 categories: |
   dataframe
-version: 0.114.2-nightly.33
+version: 0.115.0
 dataframe: |
   Get lengths of all strings.
 usage: |

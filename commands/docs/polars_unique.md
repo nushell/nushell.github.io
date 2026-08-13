@@ -2,7 +2,7 @@
 title: polars unique
 categories: |
   dataframe or lazyframe
-version: 0.114.2-nightly.33
+version: 0.115.0
 dataframe_or_lazyframe: |
   Returns unique values from a dataframe.
 usage: |

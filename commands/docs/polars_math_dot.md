@@ -2,7 +2,7 @@
 title: polars math dot
 categories: |
   dataframe
-version: 0.114.2-nightly.33
+version: 0.115.0
 dataframe: |
   Compute the dot product of two column expressions.
 usage: |

@@ -2,7 +2,7 @@
 title: bits shr
 categories: |
   bits
-version: 0.114.2-nightly.33
+version: 0.115.0
 bits: |
   Bitwise shift right for ints or binary values.
 usage: |

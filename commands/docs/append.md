@@ -2,7 +2,7 @@
 title: append
 categories: |
   filters
-version: 0.114.2-nightly.33
+version: 0.115.0
 filters: |
   Append any number of rows to a table.
 usage: |

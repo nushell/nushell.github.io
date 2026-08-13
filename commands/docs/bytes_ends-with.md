@@ -2,7 +2,7 @@
 title: bytes ends-with
 categories: |
   bytes
-version: 0.114.2-nightly.33
+version: 0.115.0
 bytes: |
   Check if binary data ends with a pattern.
 usage: |

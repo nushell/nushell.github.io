@@ -2,7 +2,7 @@
 title: job id
 categories: |
   experimental
-version: 0.114.2-nightly.33
+version: 0.115.0
 experimental: |
   Get id of current job.
 usage: |

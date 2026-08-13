@@ -2,7 +2,7 @@
 title: reverse
 categories: |
   filters
-version: 0.114.2-nightly.33
+version: 0.115.0
 filters: |
   Reverses the input list or table.
 usage: |

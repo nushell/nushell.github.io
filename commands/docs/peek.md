@@ -2,7 +2,7 @@
 title: peek
 categories: |
   default
-version: 0.114.2-nightly.33
+version: 0.115.0
 default: |
   Peek the first <n> elements of a stream and store them in the metadata.
 usage: |

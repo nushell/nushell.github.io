@@ -2,7 +2,7 @@
 title: bits rol
 categories: |
   bits
-version: 0.114.2-nightly.33
+version: 0.115.0
 bits: |
   Bitwise rotate left for ints or binary values.
 usage: |

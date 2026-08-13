@@ -2,7 +2,7 @@
 title: let-env
 categories: |
   removed
-version: 0.114.2-nightly.33
+version: 0.115.0
 removed: |
   `let-env FOO = ...` has been removed, use `$env.FOO = ...` instead.
 usage: |

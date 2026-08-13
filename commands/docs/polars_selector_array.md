@@ -2,7 +2,7 @@
 title: polars selector array
 categories: |
   expression
-version: 0.114.2-nightly.33
+version: 0.115.0
 expression: |
   Select all array columns. Optionally filter by fixed width.
 usage: |

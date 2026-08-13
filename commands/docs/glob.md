@@ -2,7 +2,7 @@
 title: glob
 categories: |
   filesystem
-version: 0.114.2-nightly.33
+version: 0.115.0
 filesystem: |
   Creates a list of files and/or folders based on the glob pattern provided.
 usage: |

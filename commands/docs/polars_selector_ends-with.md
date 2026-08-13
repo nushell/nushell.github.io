@@ -2,7 +2,7 @@
 title: polars selector ends-with
 categories: |
   expression
-version: 0.114.2-nightly.33
+version: 0.115.0
 expression: |
   Select columns that end with the given substring(s).
 usage: |

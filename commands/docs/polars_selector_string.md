@@ -2,7 +2,7 @@
 title: polars selector string
 categories: |
   expression
-version: 0.114.2-nightly.33
+version: 0.115.0
 expression: |
   Select all string columns. Use `--include-categorical` to also select categorical columns.
 usage: |

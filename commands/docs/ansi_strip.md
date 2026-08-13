@@ -2,7 +2,7 @@
 title: ansi strip
 categories: |
   platform
-version: 0.114.2-nightly.33
+version: 0.115.0
 platform: |
   Strip ANSI escape sequences from a string.
 usage: |

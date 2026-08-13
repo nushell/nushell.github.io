@@ -2,7 +2,7 @@
 title: run
 categories: |
   core
-version: 0.114.2-nightly.33
+version: 0.115.0
 core: |
   Runs a script file in an isolated scope as part of a pipeline.
 usage: |

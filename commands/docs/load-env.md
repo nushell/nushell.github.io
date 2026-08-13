@@ -2,7 +2,7 @@
 title: load-env
 categories: |
   filesystem
-version: 0.114.2-nightly.33
+version: 0.115.0
 filesystem: |
   Loads an environment update from a record.
 usage: |

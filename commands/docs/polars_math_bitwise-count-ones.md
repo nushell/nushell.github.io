@@ -2,7 +2,7 @@
 title: polars math bitwise-count-ones
 categories: |
   dataframe
-version: 0.114.2-nightly.33
+version: 0.115.0
 dataframe: |
   Compute the number of set bits for each element in an integer column expression.
 usage: |

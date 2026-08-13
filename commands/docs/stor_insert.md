@@ -2,7 +2,7 @@
 title: stor insert
 categories: |
   database
-version: 0.114.2-nightly.33
+version: 0.115.0
 database: |
   Insert information into a specified table in the in-memory sqlite database.
 usage: |

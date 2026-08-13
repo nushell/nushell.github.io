@@ -2,7 +2,7 @@
 title: scope engine-stats
 categories: |
   core
-version: 0.114.2-nightly.33
+version: 0.115.0
 core: |
   Output stats on the engine in the current state, including interactive last-result size info.
 usage: |

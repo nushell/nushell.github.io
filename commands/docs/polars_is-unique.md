@@ -2,7 +2,7 @@
 title: polars is-unique
 categories: |
   dataframe
-version: 0.114.2-nightly.33
+version: 0.115.0
 dataframe: |
   Creates mask indicating unique values.
 usage: |

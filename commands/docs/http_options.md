@@ -2,7 +2,7 @@
 title: http options
 categories: |
   network
-version: 0.114.2-nightly.33
+version: 0.115.0
 network: |
   Requests permitted communication options for a given URL.
 usage: |

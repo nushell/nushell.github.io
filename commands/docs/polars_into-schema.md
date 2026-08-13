@@ -2,7 +2,7 @@
 title: polars into-schema
 categories: |
   dataframe
-version: 0.114.2-nightly.33
+version: 0.115.0
 dataframe: |
   Convert a value to a polars schema object
 usage: |

@@ -2,7 +2,7 @@
 title: matrix zeros
 categories: |
   filters
-version: 0.114.2-nightly.33
+version: 0.115.0
 filters: |
   Create a matrix filled with zeros.
 usage: |

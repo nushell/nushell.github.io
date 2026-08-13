@@ -2,7 +2,7 @@
 title: union
 categories: |
   filters
-version: 0.114.2-nightly.33
+version: 0.115.0
 filters: |
   Returns a list of unique elements from both the input and the provided list.
 usage: |

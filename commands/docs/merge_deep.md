@@ -2,7 +2,7 @@
 title: merge deep
 categories: |
   filters
-version: 0.114.2-nightly.33
+version: 0.115.0
 filters: |
   Merge the input with a record or table, recursively merging values in matching columns.
 usage: |

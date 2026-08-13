@@ -2,7 +2,7 @@
 title: enumerate
 categories: |
   filters
-version: 0.114.2-nightly.33
+version: 0.115.0
 filters: |
   Enumerate the elements in a stream.
 usage: |

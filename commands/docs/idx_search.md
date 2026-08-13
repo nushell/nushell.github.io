@@ -2,7 +2,7 @@
 title: idx search
 categories: |
   filesystem
-version: 0.114.2-nightly.33
+version: 0.115.0
 filesystem: |
   Search indexed file contents.
 usage: |

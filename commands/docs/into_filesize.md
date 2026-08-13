@@ -2,7 +2,7 @@
 title: into filesize
 categories: |
   conversions
-version: 0.114.2-nightly.33
+version: 0.115.0
 conversions: |
   Convert value to a filesize.
 usage: |

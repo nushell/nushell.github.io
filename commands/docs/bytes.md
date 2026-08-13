@@ -2,7 +2,7 @@
 title: bytes
 categories: |
   bytes
-version: 0.114.2-nightly.33
+version: 0.115.0
 bytes: |
   Various commands for working with byte data.
 usage: |

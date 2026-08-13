@@ -2,7 +2,7 @@
 title: split cell-path
 categories: |
   conversions
-version: 0.114.2-nightly.33
+version: 0.115.0
 conversions: |
   Split a cell-path into its components.
 usage: |

@@ -2,7 +2,7 @@
 title: scope variables
 categories: |
   core
-version: 0.114.2-nightly.33
+version: 0.115.0
 core: |
   Output info on the variables in the current scope.
 usage: |

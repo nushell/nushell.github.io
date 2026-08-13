@@ -2,7 +2,7 @@
 title: filter
 categories: |
   filters
-version: 0.114.2-nightly.33
+version: 0.115.0
 filters: |
   Filter values based on a predicate closure.
 usage: |

@@ -2,7 +2,7 @@
 title: stor export
 categories: |
   database
-version: 0.114.2-nightly.33
+version: 0.115.0
 database: |
   Export the in-memory sqlite database to a sqlite database file.
 usage: |

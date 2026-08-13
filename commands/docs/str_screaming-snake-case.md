@@ -2,7 +2,7 @@
 title: str screaming-snake-case
 categories: |
   strings
-version: 0.114.2-nightly.33
+version: 0.115.0
 strings: |
   Convert a string to SCREAMING_SNAKE_CASE.
 usage: |

@@ -2,7 +2,7 @@
 title: where
 categories: |
   filters
-version: 0.114.2-nightly.33
+version: 0.115.0
 filters: |
   Filter values of an input list based on a condition.
 usage: |

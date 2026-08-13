@@ -2,7 +2,7 @@
 title: idx
 categories: |
   filesystem
-version: 0.114.2-nightly.33
+version: 0.115.0
 filesystem: |
   Manage in-memory file index state.
 usage: |

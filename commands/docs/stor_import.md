@@ -2,7 +2,7 @@
 title: stor import
 categories: |
   database
-version: 0.114.2-nightly.33
+version: 0.115.0
 database: |
   Import a sqlite database file into the in-memory sqlite database.
 usage: |

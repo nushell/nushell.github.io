@@ -2,7 +2,7 @@
 title: explain
 categories: |
   debug
-version: 0.114.2-nightly.33
+version: 0.115.0
 debug: |
   Explain closure contents.
 usage: |

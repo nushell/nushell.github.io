@@ -2,7 +2,7 @@
 title: math arccos
 categories: |
   math
-version: 0.114.2-nightly.33
+version: 0.115.0
 math: |
   Returns the arccosine of the number.
 usage: |

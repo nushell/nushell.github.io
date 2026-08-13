@@ -2,7 +2,7 @@
 title: date format
 categories: |
   removed
-version: 0.114.2-nightly.33
+version: 0.115.0
 removed: |
   Removed command: use `format date` instead.
 usage: |

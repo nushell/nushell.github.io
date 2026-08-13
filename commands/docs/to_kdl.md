@@ -2,7 +2,7 @@
 title: to kdl
 categories: |
   formats
-version: 0.114.2-nightly.33
+version: 0.115.0
 formats: |
   Converts structured data into KDL text.
 usage: |

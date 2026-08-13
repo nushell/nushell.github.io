@@ -2,7 +2,7 @@
 title: from msgpackz
 categories: |
   formats
-version: 0.114.2-nightly.33
+version: 0.115.0
 formats: |
   Convert brotli-compressed MessagePack data into Nu values.
 usage: |

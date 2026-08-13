@@ -2,7 +2,7 @@
 title: into semver
 categories: |
   conversions
-version: 0.114.2-nightly.33
+version: 0.115.0
 conversions: |
   Convert a value (string, record, or semver) to a semantic version.
 usage: |

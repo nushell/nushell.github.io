@@ -2,7 +2,7 @@
 title: str pascal-case
 categories: |
   strings
-version: 0.114.2-nightly.33
+version: 0.115.0
 strings: |
   Convert a string to PascalCase.
 usage: |

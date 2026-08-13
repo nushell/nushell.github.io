@@ -2,7 +2,7 @@
 title: matrix
 categories: |
   filters
-version: 0.114.2-nightly.33
+version: 0.115.0
 filters: |
   Various commands for working with matrices.
 usage: |

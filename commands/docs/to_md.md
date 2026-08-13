@@ -2,7 +2,7 @@
 title: to md
 categories: |
   formats
-version: 0.114.2-nightly.33
+version: 0.115.0
 formats: |
   Convert table into simple Markdown.
 usage: |

@@ -2,7 +2,7 @@
 title: plugin stop
 categories: |
   plugin
-version: 0.114.2-nightly.33
+version: 0.115.0
 plugin: |
   Stop an installed plugin if it was running.
 usage: |

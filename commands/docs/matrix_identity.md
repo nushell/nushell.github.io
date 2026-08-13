@@ -2,7 +2,7 @@
 title: matrix identity
 categories: |
   filters
-version: 0.114.2-nightly.33
+version: 0.115.0
 filters: |
   Create an identity matrix of the given size.
 usage: |

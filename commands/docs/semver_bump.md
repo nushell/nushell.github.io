@@ -2,7 +2,7 @@
 title: semver bump
 categories: |
   filters
-version: 0.114.2-nightly.33
+version: 0.115.0
 filters: |
   Bump a semantic version to the next level.
 usage: |

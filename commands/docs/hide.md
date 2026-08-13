@@ -2,7 +2,7 @@
 title: hide
 categories: |
   core
-version: 0.114.2-nightly.33
+version: 0.115.0
 core: |
   Hide definitions in the current scope.
 usage: |

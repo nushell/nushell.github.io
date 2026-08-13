@@ -2,7 +2,7 @@
 title: path dirname
 categories: |
   path
-version: 0.114.2-nightly.33
+version: 0.115.0
 path: |
   Get the parent directory of a path.
 usage: |

@@ -2,7 +2,7 @@
 title: inc
 categories: |
   default
-version: 0.114.2-nightly.33
+version: 0.115.0
 default: |
   Increment a value or version. Optionally use the column of a table.
 usage: |

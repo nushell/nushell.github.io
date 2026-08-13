@@ -2,7 +2,7 @@
 title: into float
 categories: |
   conversions
-version: 0.114.2-nightly.33
+version: 0.115.0
 conversions: |
   Convert data into floating point number.
 usage: |

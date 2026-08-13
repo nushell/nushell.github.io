@@ -2,7 +2,7 @@
 title: format date
 categories: |
   strings
-version: 0.114.2-nightly.33
+version: 0.115.0
 strings: |
   Format a given date using a format string.
 usage: |

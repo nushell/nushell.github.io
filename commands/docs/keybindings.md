@@ -2,7 +2,7 @@
 title: keybindings
 categories: |
   platform
-version: 0.114.2-nightly.33
+version: 0.115.0
 platform: |
   Keybindings related commands.
 usage: |

@@ -2,7 +2,7 @@
 title: to toml
 categories: |
   formats
-version: 0.114.2-nightly.33
+version: 0.115.0
 formats: |
   Convert record into .toml text.
 usage: |

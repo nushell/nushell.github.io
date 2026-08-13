@@ -2,7 +2,7 @@
 title: query db
 categories: |
   database
-version: 0.114.2-nightly.33
+version: 0.115.0
 database: |
   Query a SQLite database with SQL statements.
 usage: |

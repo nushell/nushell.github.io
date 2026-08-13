@@ -2,7 +2,7 @@
 title: query json
 categories: |
   filters
-version: 0.114.2-nightly.33
+version: 0.115.0
 filters: |
   execute json query on json file (open --raw <file> | query json 'query string')
 usage: |

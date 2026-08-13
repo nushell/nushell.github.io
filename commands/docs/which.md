@@ -2,7 +2,7 @@
 title: which
 categories: |
   system
-version: 0.114.2-nightly.33
+version: 0.115.0
 system: |
   Finds a program file, alias or custom command. If `application` is not provided, all deduplicated commands will be returned.
 usage: |

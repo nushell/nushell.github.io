@@ -2,7 +2,7 @@
 title: idx files
 categories: |
   filesystem
-version: 0.114.2-nightly.33
+version: 0.115.0
 filesystem: |
   List indexed files, or fuzzy-match files by query.
 usage: |

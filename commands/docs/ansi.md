@@ -2,7 +2,7 @@
 title: ansi
 categories: |
   platform
-version: 0.114.2-nightly.33
+version: 0.115.0
 platform: |
   Output ANSI codes to change color and style of text.
 usage: |

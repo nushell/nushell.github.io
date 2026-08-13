@@ -2,7 +2,7 @@
 title: export use
 categories: |
   core
-version: 0.114.2-nightly.33
+version: 0.115.0
 core: |
   Use definitions from a module and export them from this module.
 usage: |

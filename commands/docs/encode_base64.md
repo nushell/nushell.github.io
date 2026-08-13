@@ -2,7 +2,7 @@
 title: encode base64
 categories: |
   formats
-version: 0.114.2-nightly.33
+version: 0.115.0
 formats: |
   Encode a string or binary value using Base64.
 usage: |

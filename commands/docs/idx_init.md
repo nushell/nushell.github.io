@@ -2,7 +2,7 @@
 title: idx init
 categories: |
   filesystem
-version: 0.114.2-nightly.33
+version: 0.115.0
 filesystem: |
   Initialize the in-memory idx index for a path.
 usage: |

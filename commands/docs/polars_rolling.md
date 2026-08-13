@@ -2,7 +2,7 @@
 title: polars rolling
 categories: |
   dataframe
-version: 0.114.2-nightly.33
+version: 0.115.0
 dataframe: |
   Rolling calculation for a series or expression, or a rolling group-by for a lazyframe.
 usage: |

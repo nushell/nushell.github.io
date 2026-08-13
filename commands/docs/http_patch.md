@@ -2,7 +2,7 @@
 title: http patch
 categories: |
   network
-version: 0.114.2-nightly.33
+version: 0.115.0
 network: |
   Send a PATCH request to a URL with a request body.
 usage: |

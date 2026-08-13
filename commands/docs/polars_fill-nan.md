@@ -2,7 +2,7 @@
 title: polars fill-nan
 categories: |
   lazyframe
-version: 0.114.2-nightly.33
+version: 0.115.0
 lazyframe: |
   Replaces NaN values with the given expression.
 usage: |

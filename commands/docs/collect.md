@@ -2,7 +2,7 @@
 title: collect
 categories: |
   core
-version: 0.114.2-nightly.33
+version: 0.115.0
 core: |
   Collect a stream into a value.
 usage: |

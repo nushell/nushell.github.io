@@ -2,7 +2,7 @@
 title: roll left
 categories: |
   filters
-version: 0.114.2-nightly.33
+version: 0.115.0
 filters: |
   Roll record or table columns left.
 usage: |

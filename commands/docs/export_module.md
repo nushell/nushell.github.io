@@ -2,7 +2,7 @@
 title: export module
 categories: |
   core
-version: 0.114.2-nightly.33
+version: 0.115.0
 core: |
   Export a custom module from a module.
 usage: |
