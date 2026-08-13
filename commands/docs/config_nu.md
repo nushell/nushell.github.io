@@ -2,7 +2,7 @@
 title: config nu
 categories: |
   env
-version: 0.114.0
+version: 0.114.2-nightly.33
 env: |
   Edit nu configurations.
 usage: |

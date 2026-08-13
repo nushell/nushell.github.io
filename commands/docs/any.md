@@ -2,7 +2,7 @@
 title: any
 categories: |
   filters
-version: 0.114.0
+version: 0.114.2-nightly.33
 filters: |
   Tests if any element of the input fulfills a predicate expression.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `predicate`: A closure that must evaluate to a boolean.
+ -  `predicate`: Row condition or closure that evaluates to a boolean.
 
 
 ## Input/output types:
@@ -40,7 +40,7 @@ true
 
 Check if any row's status is the string 'DOWN'.
 ```nu
-> [[status]; [UP] [DOWN] [UP]] | any {|el| $el.status == DOWN }
+> [[status]; [UP] [DOWN] [UP]] | any status == DOWN
 true
 ```
 
@@ -52,7 +52,7 @@ false
 
 Check if any value is equal to twice its own index.
 ```nu
-> [9 8 7 6] | enumerate | any {|i| $i.item == $i.index * 2 }
+> [9 8 7 6] | enumerate | any item == index * 2
 true
 ```
 

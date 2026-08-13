@@ -2,7 +2,7 @@
 title: polars map-batches
 categories: |
   dataframe
-version: 0.114.0
+version: 0.114.2-nightly.33
 dataframe: |
   Map a custom Nushell closure over one or more dataframe columns.
 usage: |

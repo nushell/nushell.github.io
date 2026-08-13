@@ -2,7 +2,7 @@
 title: idx drop
 categories: |
   filesystem
-version: 0.114.0
+version: 0.114.2-nightly.33
 filesystem: |
   Drop the current idx runtime from memory.
 usage: |
@@ -27,4 +27,4 @@ contributors: false
 | ------- | ------ |
 | nothing | record |
 ## Notes
-Use this when you want to free the in-memory index completely before reinitializing or restoring a different snapshot.
+Use this when you want to free the in-memory index completely before reinitializing it.

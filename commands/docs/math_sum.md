@@ -2,7 +2,7 @@
 title: math sum
 categories: |
   math
-version: 0.114.0
+version: 0.114.2-nightly.33
 math: |
   Returns the sum of a list of numbers or of each column in a table.
 usage: |
@@ -18,7 +18,11 @@ contributors: false
 
 ## Signature
 
-```> math sum {flags} ```
+```> math sum {flags} ...rest```
+
+## Parameters
+
+ -  `...rest`: The cell-paths/columns to operate on.
 
 
 ## Input/output types:
@@ -52,4 +56,26 @@ Compute the sum of each column in a table.
 │ a │ 4 │
 │ b │ 6 │
 ╰───┴───╯
+```
+
+Sum the values of list-valued columns in a record.
+```nu
+> {alice: [1 2 3], bob: [4 5 6]} | math sum
+╭───────┬────╮
+│ alice │ 6  │
+│ bob   │ 15 │
+╰───────┴────╯
+```
+
+Sum a single column using a cell path.
+```nu
+> {alice: [1 2 3], bob: [4 5 6]} | math sum alice
+╭───────┬───────────╮
+│ alice │ 6         │
+│       │ ╭───┬───╮ │
+│ bob   │ │ 0 │ 4 │ │
+│       │ │ 1 │ 5 │ │
+│       │ │ 2 │ 6 │ │
+│       │ ╰───┴───╯ │
+╰───────┴───────────╯
 ```

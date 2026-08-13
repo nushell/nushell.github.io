@@ -2,11 +2,11 @@
 title: take
 categories: |
   filters
-version: 0.114.0
+version: 0.114.2-nightly.33
 filters: |
-  Take only the first n elements of a list, or the first n bytes of a binary value.
+  Take only the first n elements of a list, or the first n bytes of a binary value. For binary input, n can also be specified as a filesize.
 usage: |
-  Take only the first n elements of a list, or the first n bytes of a binary value.
+  Take only the first n elements of a list, or the first n bytes of a binary value. For binary input, n can also be specified as a filesize.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `take` for [filters](/commands/categories/filters.md)
 
-<div class='command-title'>Take only the first n elements of a list, or the first n bytes of a binary value.</div>
+<div class='command-title'>Take only the first n elements of a list, or the first n bytes of a binary value. For binary input, n can also be specified as a filesize.</div>
 
 ## Signature
 
@@ -82,6 +82,14 @@ Return the first 3 elements of a range.
 │ 1 │ 2 │
 │ 2 │ 3 │
 ╰───┴───╯
+
+```
+
+Return the first 3 bytes of a binary value, using a filesize argument.
+```nu
+> 0x[01 23 45] | take 3b
+Length: 3 (0x3) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   01 23 45                                             •#E
 
 ```
 

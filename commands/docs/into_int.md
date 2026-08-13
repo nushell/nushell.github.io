@@ -2,7 +2,7 @@
 title: into int
 categories: |
   conversions
-version: 0.114.0
+version: 0.114.2-nightly.33
 conversions: |
   Convert value to an integer.
 usage: |

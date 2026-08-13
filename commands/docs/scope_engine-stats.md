@@ -2,11 +2,11 @@
 title: scope engine-stats
 categories: |
   core
-version: 0.114.0
+version: 0.114.2-nightly.33
 core: |
-  Output stats on the engine in the current state.
+  Output stats on the engine in the current state, including interactive last-result size info.
 usage: |
-  Output stats on the engine in the current state.
+  Output stats on the engine in the current state, including interactive last-result size info.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `scope engine-stats` for [core](/commands/categories/core.md)
 
-<div class='command-title'>Output stats on the engine in the current state.</div>
+<div class='command-title'>Output stats on the engine in the current state, including interactive last-result size info.</div>
 
 ## Signature
 
@@ -28,7 +28,7 @@ contributors: false
 | nothing | any    |
 ## Examples
 
-Show the stats on the current engine state.
+Show the stats on the current engine state (includes last_result size limit and memory use).
 ```nu
 > scope engine-stats
 

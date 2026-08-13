@@ -2,7 +2,7 @@
 title: math avg
 categories: |
   math
-version: 0.114.0
+version: 0.114.2-nightly.33
 math: |
   Returns the average of a list of numbers.
 usage: |
@@ -18,7 +18,11 @@ contributors: false
 
 ## Signature
 
-```> math avg {flags} ```
+```> math avg {flags} ...rest```
+
+## Parameters
+
+ -  `...rest`: The cell-paths/columns to operate on.
 
 
 ## Input/output types:
@@ -55,4 +59,26 @@ Compute the average of each column in a table.
 │ a │ 2 │
 │ b │ 3 │
 ╰───┴───╯
+```
+
+Compute the average of list-valued columns in a record.
+```nu
+> {alice: [1 2 3], bob: [4 5 6]} | math avg
+╭───────┬───╮
+│ alice │ 2 │
+│ bob   │ 5 │
+╰───────┴───╯
+```
+
+Compute the average of a single column using a cell path.
+```nu
+> {alice: [1 2 3], bob: [4 5 6]} | math avg alice
+╭───────┬───────────╮
+│ alice │ 2         │
+│       │ ╭───┬───╮ │
+│ bob   │ │ 0 │ 4 │ │
+│       │ │ 1 │ 5 │ │
+│       │ │ 2 │ 6 │ │
+│       │ ╰───┴───╯ │
+╰───────┴───────────╯
 ```

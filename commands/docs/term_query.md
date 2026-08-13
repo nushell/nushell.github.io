@@ -2,7 +2,7 @@
 title: term query
 categories: |
   platform
-version: 0.114.0
+version: 0.114.2-nightly.33
 platform: |
   Query the terminal for information.
 usage: |

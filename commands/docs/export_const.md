@@ -2,7 +2,7 @@
 title: export const
 categories: |
   core
-version: 0.114.0
+version: 0.114.2-nightly.33
 core: |
   Use parse-time constant from a module and export them from this module.
 usage: |

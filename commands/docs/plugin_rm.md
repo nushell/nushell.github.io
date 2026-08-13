@@ -2,7 +2,7 @@
 title: plugin rm
 categories: |
   plugin
-version: 0.114.0
+version: 0.114.2-nightly.33
 plugin: |
   Remove a plugin from the plugin registry file.
 usage: |

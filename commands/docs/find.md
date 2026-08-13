@@ -2,7 +2,7 @@
 title: find
 categories: |
   filters
-version: 0.114.0
+version: 0.114.2-nightly.33
 filters: |
   Search for terms in the input data.
 usage: |

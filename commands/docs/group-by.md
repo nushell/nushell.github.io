@@ -2,7 +2,7 @@
 title: group-by
 categories: |
   filters
-version: 0.114.0
+version: 0.114.2-nightly.33
 filters: |
   Splits a list or table into groups, and returns a record containing those groups.
 usage: |
@@ -214,3 +214,4 @@ the group-by command makes some assumptions:
     - datetime is formatted based on your configuration setting. use `format date` to change the format.
     - filesize is formatted based on your configuration setting. use `format filesize` to change the format.
     - some nushell values are not supported, such as closures.
+    - null group keys are never mapped to the empty string. The default record output omits null groups (records cannot use null as a key); use --to-table to include them as null values. Optional cell paths (e.g. `foo?`) still ignore rows where access yields null.

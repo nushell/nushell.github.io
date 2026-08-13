@@ -2,7 +2,7 @@
 title: polars select
 categories: |
   lazyframe
-version: 0.114.0
+version: 0.114.2-nightly.33
 lazyframe: |
   Selects columns from lazyframe.
 usage: |

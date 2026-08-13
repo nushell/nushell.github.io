@@ -2,7 +2,7 @@
 title: detect type
 categories: |
   strings
-version: 0.114.0
+version: 0.114.2-nightly.33
 strings: |
   Infer Nushell datatype from a string.
 usage: |
@@ -109,7 +109,7 @@ Thu, 2 Jan 2025 00:00:00 +0800 (2 years ago)
 Prefer DMY for ambiguous dates
 ```nu
 > '01/02/2025' | detect type --prefer-dmy
-Sat, 1 Feb 2025 00:00:00 +0800 (a year ago)
+Sat, 1 Feb 2025 00:00:00 +0800 (2 years ago)
 ```
 
 Unknown stays a string

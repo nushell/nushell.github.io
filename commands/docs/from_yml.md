@@ -2,7 +2,7 @@
 title: from yml
 categories: |
   formats
-version: 0.114.0
+version: 0.114.2-nightly.33
 formats: |
   Parse text as .yaml/.yml and create table.
 usage: |
@@ -20,6 +20,13 @@ contributors: false
 
 ```> from yml {flags} ```
 
+## Flags
+
+ -  `--spec {string}`: YAML spec version ('1.1' or '1.2' (default)).
+ -  `--multiple {string}`: Handle multiple documents ('auto', 'list', 'single').
+ -  `--ignore-tags`: Ignore any tags
+ -  `--key-resolution {string}`: Handle plain scalar keys ('strict' (default), 'verbatim').
+
 
 ## Input/output types:
 
@@ -28,7 +35,7 @@ contributors: false
 | string | any    |
 ## Examples
 
-Converts yaml formatted string to table.
+Converts YAML formatted string to table.
 ```nu
 > 'a: 1' | from yml
 ╭───┬───╮
@@ -36,7 +43,7 @@ Converts yaml formatted string to table.
 ╰───┴───╯
 ```
 
-Converts yaml formatted string to table.
+Converts YAML formatted string to table.
 ```nu
 > '[ a: 1, b: [1, 2] ]' | from yml
 ╭───┬────┬───────────╮
@@ -49,4 +56,10 @@ Converts yaml formatted string to table.
 │   │    │ ╰───┴───╯ │
 ╰───┴────┴───────────╯
 
+```
+
+Convert nushell values from YAML.
+```nu
+> '!cell-path $.1.abc?.def!' | from yml
+$.1.abc?.def!
 ```

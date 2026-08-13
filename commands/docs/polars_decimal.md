@@ -2,7 +2,7 @@
 title: polars decimal
 categories: |
   dataframe
-version: 0.114.0
+version: 0.114.2-nightly.33
 dataframe: |
   Converts a string column into a decimal column
 usage: |

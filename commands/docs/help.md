@@ -2,7 +2,7 @@
 title: help
 categories: |
   core
-version: 0.114.0
+version: 0.114.2-nightly.33
 core: |
   Display help information about different parts of Nushell.
 usage: |

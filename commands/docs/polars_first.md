@@ -2,7 +2,7 @@
 title: polars first
 categories: |
   dataframe
-version: 0.114.0
+version: 0.114.2-nightly.33
 dataframe: |
   Show only the first number of rows or create a first expression
 usage: |
@@ -33,6 +33,7 @@ contributors: false
 | polars_selector   | polars_expression |
 | polars_dataframe  | polars_dataframe  |
 | polars_lazyframe  | polars_lazyframe  |
+| polars_group_by   | polars_lazyframe  |
 ## Examples
 
 Return the first row of a dataframe

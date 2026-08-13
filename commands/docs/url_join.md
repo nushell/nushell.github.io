@@ -2,7 +2,7 @@
 title: url join
 categories: |
   network
-version: 0.114.0
+version: 0.114.2-nightly.33
 network: |
   Convert a record to a URL string.
 usage: |

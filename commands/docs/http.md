@@ -2,7 +2,7 @@
 title: http
 categories: |
   network
-version: 0.114.0
+version: 0.114.2-nightly.33
 network: |
   Various commands for working with http methods.
 usage: |

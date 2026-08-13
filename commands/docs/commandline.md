@@ -2,7 +2,7 @@
 title: commandline
 categories: |
   core
-version: 0.114.0
+version: 0.114.2-nightly.33
 core: |
   View the current command line input buffer.
 usage: |
@@ -29,9 +29,10 @@ contributors: false
 
 ## Subcommands:
 
-| name                                                                 | description                                      | type     |
-| -------------------------------------------------------------------- | ------------------------------------------------ | -------- |
-| [`commandline complete`](/commands/docs/commandline_complete.md)     | Complete a string using the default completions. | built-in |
-| [`commandline edit`](/commands/docs/commandline_edit.md)             | Modify the current command line input buffer.    | built-in |
-| [`commandline get-cursor`](/commands/docs/commandline_get-cursor.md) | Get the current cursor position.                 | built-in |
-| [`commandline set-cursor`](/commands/docs/commandline_set-cursor.md) | Set the current cursor position.                 | built-in |
+| name                                                                 | description                                                                                   | type     |
+| -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | -------- |
+| [`commandline complete`](/commands/docs/commandline_complete.md)     | Complete a string using the default completions.                                              | built-in |
+| [`commandline edit`](/commands/docs/commandline_edit.md)             | Modify the current command line input buffer.                                                 | built-in |
+| [`commandline get-cursor`](/commands/docs/commandline_get-cursor.md) | Get the current cursor position.                                                              | built-in |
+| [`commandline set-cursor`](/commands/docs/commandline_set-cursor.md) | Set the current cursor position.                                                              | built-in |
+| [`commandline set-prompt`](/commands/docs/commandline_set-prompt.md) | Replace the current prompt and repaint it in place, without disturbing the line being edited. | built-in |

@@ -2,7 +2,7 @@
 title: polars join-where
 categories: |
   lazyframe
-version: 0.114.0
+version: 0.114.2-nightly.33
 lazyframe: |
   Joins a lazy frame with other lazy frame based on conditions.
 usage: |

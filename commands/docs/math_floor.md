@@ -2,7 +2,7 @@
 title: math floor
 categories: |
   math
-version: 0.114.0
+version: 0.114.2-nightly.33
 math: |
   Returns the floor of a number (largest integer less than or equal to that number).
 usage: |
@@ -18,16 +18,25 @@ contributors: false
 
 ## Signature
 
-```> math floor {flags} ```
+```> math floor {flags} ...rest```
+
+## Parameters
+
+ -  `...rest`: The cell-paths/columns to operate on.
 
 
 ## Input/output types:
 
-| input        | output       |
-| ------------ | ------------ |
-| number       | int          |
-| list&lt;number&gt; | list&lt;int&gt;    |
-| range        | list&lt;number&gt; |
+| input          | output         |
+| -------------- | -------------- |
+| number         | int            |
+| duration       | duration       |
+| filesize       | filesize       |
+| list&lt;number&gt;   | list&lt;int&gt;      |
+| list&lt;duration&gt; | list&lt;duration&gt; |
+| list&lt;filesize&gt; | list&lt;filesize&gt; |
+| range          | list&lt;number&gt;   |
+| record         | record         |
 ## Examples
 
 Apply the floor function to a list of numbers.
@@ -40,3 +49,44 @@ Apply the floor function to a list of numbers.
 ╰───┴────╯
 
 ```
+
+Apply the floor function to list-valued columns in a record.
+```nu
+> {alice: [1.2 2.7 3.5], bob: [4.1 5.9]} | math floor
+╭───────┬───────────╮
+│       │ ╭───┬───╮ │
+│ alice │ │ 0 │ 1 │ │
+│       │ │ 1 │ 2 │ │
+│       │ │ 2 │ 3 │ │
+│       │ ╰───┴───╯ │
+│       │ ╭───┬───╮ │
+│ bob   │ │ 0 │ 4 │ │
+│       │ │ 1 │ 5 │ │
+│       │ ╰───┴───╯ │
+╰───────┴───────────╯
+```
+
+Apply the floor function to a single column using a cell path.
+```nu
+> {alice: [1.2 2.7 3.5], bob: [4.1 5.9]} | math floor alice
+╭───────┬──────────────╮
+│       │ ╭───┬───╮    │
+│ alice │ │ 0 │ 1 │    │
+│       │ │ 1 │ 2 │    │
+│       │ │ 2 │ 3 │    │
+│       │ ╰───┴───╯    │
+│       │ ╭───┬──────╮ │
+│ bob   │ │ 0 │ 4.10 │ │
+│       │ │ 1 │ 5.90 │ │
+│       │ ╰───┴──────╯ │
+╰───────┴──────────────╯
+```
+
+Filesize values are already whole bytes, so flooring is a no-op.
+```nu
+> 2.1KB | math floor
+2.1 kB
+```
+
+## Notes
+Filesize and duration values are stored as integers in base units (bytes and nanoseconds). With no display unit to round against, `math floor` is the identity function for those types.

@@ -2,11 +2,11 @@
 title: chunks
 categories: |
   filters
-version: 0.114.0
+version: 0.114.2-nightly.33
 filters: |
-  Divide a list, table or binary input into chunks of `chunk_size`.
+  Divide a list, table or binary input into chunks of `chunk_size`. For binary input, `chunk_size` can also be specified as a filesize.
 usage: |
-  Divide a list, table or binary input into chunks of `chunk_size`.
+  Divide a list, table or binary input into chunks of `chunk_size`. For binary input, `chunk_size` can also be specified as a filesize.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `chunks` for [filters](/commands/categories/filters.md)
 
-<div class='command-title'>Divide a list, table or binary input into chunks of `chunk_size`.</div>
+<div class='command-title'>Divide a list, table or binary input into chunks of `chunk_size`. For binary input, `chunk_size` can also be specified as a filesize.</div>
 
 ## Signature
 
@@ -79,6 +79,12 @@ Chunk the bytes of a binary into triplets
 │ 1 │ [68, 85, 102] │
 │ 2 │ [119, 136]    │
 ╰───┴───────────────╯
+
+```
+
+Open a binary file and make 8 kibibyte chunks
+```nu
+> open --raw foo.bin | chunks 8kib
 
 ```
 

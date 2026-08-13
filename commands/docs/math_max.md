@@ -2,7 +2,7 @@
 title: math max
 categories: |
   math
-version: 0.114.0
+version: 0.114.2-nightly.33
 math: |
   Returns the maximum of a list of values, or of columns in a table.
 usage: |
@@ -18,7 +18,11 @@ contributors: false
 
 ## Signature
 
-```> math max {flags} ```
+```> math max {flags} ...rest```
+
+## Parameters
+
+ -  `...rest`: The cell-paths/columns to operate on.
 
 
 ## Input/output types:
@@ -53,4 +57,26 @@ Find the maximum of a list of dates.
 ```nu
 > [2022-02-02 2022-12-30 2012-12-12] | math max
 Fri, 30 Dec 2022 00:00:00 +0000 (3 years ago)
+```
+
+Find the maximum of list-valued columns in a record.
+```nu
+> {alice: [1 5 3], bob: [4 5 6]} | math max
+╭───────┬───╮
+│ alice │ 5 │
+│ bob   │ 6 │
+╰───────┴───╯
+```
+
+Find the maximum of a single column using a cell path.
+```nu
+> {alice: [1 5 3], bob: [4 5 6]} | math max alice
+╭───────┬───────────╮
+│ alice │ 5         │
+│       │ ╭───┬───╮ │
+│ bob   │ │ 0 │ 4 │ │
+│       │ │ 1 │ 5 │ │
+│       │ │ 2 │ 6 │ │
+│       │ ╰───┴───╯ │
+╰───────┴───────────╯
 ```

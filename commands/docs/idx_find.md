@@ -2,7 +2,7 @@
 title: idx find
 categories: |
   filesystem
-version: 0.114.0
+version: 0.114.2-nightly.33
 filesystem: |
   Search idx with fuzzy matching across files and directories by default.
 usage: |

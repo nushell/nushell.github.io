@@ -2,11 +2,11 @@
 title: is-terminal
 categories: |
   platform
-version: 0.114.0
+version: 0.114.2-nightly.33
 platform: |
-  Check if stdin, stdout, or stderr is a terminal.
+  Check if the process stdin, stdout, or stderr is attached to a terminal device.
 usage: |
-  Check if stdin, stdout, or stderr is a terminal.
+  Check if the process stdin, stdout, or stderr is attached to a terminal device.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `is-terminal` for [platform](/commands/categories/platform.md)
 
-<div class='command-title'>Check if stdin, stdout, or stderr is a terminal.</div>
+<div class='command-title'>Check if the process stdin, stdout, or stderr is attached to a terminal device.</div>
 
 ## Signature
 
@@ -40,20 +40,22 @@ Check if stdout is a terminal (default when no flag is specified).
 
 ```
 
-Return false when output is piped to another command.
-```nu
-> is-terminal | to text
-false
-```
-
-Return false when output is collected into a variable.
-```nu
-> let x = (is-terminal); $x
-false
-```
-
 Return "terminal attached" if standard input is attached to a terminal, and "no terminal" if not.
 ```nu
 > if (is-terminal --stdin) { "terminal attached" } else { "no terminal" }
 terminal attached
 ```
+
+Choose formatting based on process stdout being a TTY (works inside `if`).
+```nu
+> if (is-terminal --stdout) { "human" } else { "piped" }
+
+```
+
+## Notes
+This is an operating-system level check (like bash `test -t`), not a Nushell
+pipeline check. It reports if the process file descriptor is a TTY, which is
+what scripts need for `./script.nu | cat` vs running on a terminal.
+
+To detect if a custom command's return value is piped or collected inside
+Nushell (pretty output vs structured data), use `is-redirected` instead.

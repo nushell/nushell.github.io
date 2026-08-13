@@ -2,7 +2,7 @@
 title: decode base64
 categories: |
   formats
-version: 0.114.0
+version: 0.114.2-nightly.33
 formats: |
   Decode a Base64-encoded value.
 usage: |

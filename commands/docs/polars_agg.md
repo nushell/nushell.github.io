@@ -2,7 +2,7 @@
 title: polars agg
 categories: |
   lazyframe
-version: 0.114.0
+version: 0.114.2-nightly.33
 lazyframe: |
   Performs a series of aggregations from a group-by.
 usage: |
@@ -31,6 +31,7 @@ contributors: false
 | ---------------- | ---------------- |
 | polars_dataframe | polars_dataframe |
 | polars_lazyframe | polars_lazyframe |
+| polars_group_by  | polars_lazyframe |
 ## Examples
 
 Group by and perform an aggregation

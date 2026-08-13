@@ -2,7 +2,7 @@
 title: all
 categories: |
   filters
-version: 0.114.0
+version: 0.114.2-nightly.33
 filters: |
   Test if every element of the input fulfills a predicate expression.
 usage: |
@@ -22,7 +22,7 @@ contributors: false
 
 ## Parameters
 
- -  `predicate`: A closure that must evaluate to a boolean.
+ -  `predicate`: Row condition or closure that evaluates to a boolean.
 
 
 ## Input/output types:
@@ -46,7 +46,7 @@ true
 
 Check that each item is a string.
 ```nu
-> [foo bar 2 baz] | all {|| ($in | describe) == 'string' }
+> [foo bar 2 baz] | all ($it | describe) == 'string'
 false
 ```
 

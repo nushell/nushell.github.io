@@ -2,7 +2,7 @@
 title: source-env
 categories: |
   core
-version: 0.114.0
+version: 0.114.2-nightly.33
 core: |
   Source the environment from a source file into the current environment.
 usage: |

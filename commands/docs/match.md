@@ -2,7 +2,7 @@
 title: match
 categories: |
   core
-version: 0.114.0
+version: 0.114.2-nightly.33
 core: |
   Conditionally run a block on a matched value.
 usage: |
@@ -48,6 +48,12 @@ Match against alternative values.
 Match on a value in range.
 ```nu
 > match 3 { 1..10 => 'yes!' }
+yes!
+```
+
+Match on a constant expression.
+```nu
+> match 42 { (40 + 2) => 'yes!' }
 yes!
 ```
 

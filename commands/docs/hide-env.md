@@ -2,7 +2,7 @@
 title: hide-env
 categories: |
   core
-version: 0.114.0
+version: 0.114.2-nightly.33
 core: |
   Hide environment variables in the current scope.
 usage: |

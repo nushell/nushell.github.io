@@ -2,7 +2,7 @@
 title: format date
 categories: |
   strings
-version: 0.114.0
+version: 0.114.2-nightly.33
 strings: |
   Format a given date using a format string.
 usage: |
@@ -31,12 +31,14 @@ contributors: false
 
 ## Input/output types:
 
-| input    | output |
-| -------- | ------ |
-| datetime | string |
-| string   | string |
-| nothing  | table  |
-| any      | table  |
+| input          | output       |
+| -------------- | ------------ |
+| datetime       | string       |
+| string         | string       |
+| nothing        | table        |
+| any            | table        |
+| list&lt;datetime&gt; | list&lt;string&gt; |
+| list&lt;string&gt;   | list&lt;string&gt; |
 ## Examples
 
 Format a given date-time using the default format (RFC 2822).
@@ -73,4 +75,24 @@ Format a given date using a given format string.
 ```nu
 > "2021-10-22 20:00:12 +01:00" | format date "%Y-%m-%d"
 2021-10-22
+```
+
+Format a list of date strings using a given format string.
+```nu
+> ["2021-10-22 20:00:12 +01:00", "2021-10-23 20:00:12 +01:00"] | format date "%Y-%m-%d"
+╭───┬────────────╮
+│ 0 │ 2021-10-22 │
+│ 1 │ 2021-10-23 │
+╰───┴────────────╯
+
+```
+
+Format a list of datetimes using a given format string.
+```nu
+> [2021-10-22T20:00:12+01:00, 2021-10-23T20:00:12+01:00] | format date "%Y-%m-%d"
+╭───┬────────────╮
+│ 0 │ 2021-10-22 │
+│ 1 │ 2021-10-23 │
+╰───┴────────────╯
+
 ```

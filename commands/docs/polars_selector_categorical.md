@@ -2,7 +2,7 @@
 title: polars selector categorical
 categories: |
   expression
-version: 0.114.0
+version: 0.114.2-nightly.33
 expression: |
   Select all categorical columns.
 usage: |

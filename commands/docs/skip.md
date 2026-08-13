@@ -2,11 +2,11 @@
 title: skip
 categories: |
   filters
-version: 0.114.0
+version: 0.114.2-nightly.33
 filters: |
-  Skip the first several rows of the input. Counterpart of `drop`. Opposite of `first`.
+  Skip the first several rows of the input. Counterpart of `drop`. Opposite of `first`. For binary input, n can also be specified as a filesize.
 usage: |
-  Skip the first several rows of the input. Counterpart of `drop`. Opposite of `first`.
+  Skip the first several rows of the input. Counterpart of `drop`. Opposite of `first`. For binary input, n can also be specified as a filesize.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `skip` for [filters](/commands/categories/filters.md)
 
-<div class='command-title'>Skip the first several rows of the input. Counterpart of `drop`. Opposite of `first`.</div>
+<div class='command-title'>Skip the first several rows of the input. Counterpart of `drop`. Opposite of `first`. For binary input, n can also be specified as a filesize.</div>
 
 ## Signature
 
@@ -59,6 +59,14 @@ Skip two rows of a table.
 Skip 2 bytes of a binary value.
 ```nu
 > 0x[01 23 45 67] | skip 2
+Length: 2 (0x2) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   45 67                                                Eg
+
+```
+
+Skip 2 bytes of a binary value, using a filesize argument.
+```nu
+> 0x[01 23 45 67] | skip 2b
 Length: 2 (0x2) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   45 67                                                Eg
 

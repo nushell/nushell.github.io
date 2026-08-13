@@ -2,11 +2,11 @@
 title: first
 categories: |
   filters
-version: 0.114.0
+version: 0.114.2-nightly.33
 filters: |
-  Return only the first several rows of the input. Counterpart of `last`. Opposite of `skip`.
+  Return only the first several rows of the input. Counterpart of `last`. Opposite of `skip`. For binary input, rows can also be specified as a filesize.
 usage: |
-  Return only the first several rows of the input. Counterpart of `last`. Opposite of `skip`.
+  Return only the first several rows of the input. Counterpart of `last`. Opposite of `skip`. For binary input, rows can also be specified as a filesize.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `first` for [filters](/commands/categories/filters.md)
 
-<div class='command-title'>Return only the first several rows of the input. Counterpart of `last`. Opposite of `skip`.</div>
+<div class='command-title'>Return only the first several rows of the input. Counterpart of `last`. Opposite of `skip`. For binary input, rows can also be specified as a filesize.</div>
 
 ## Signature
 
@@ -66,4 +66,12 @@ Return the first item of a range.
 ```nu
 > 1..3 | first
 1
+```
+
+Return the first 2 bytes of a binary value, using a filesize argument.
+```nu
+> 0x[01 23 45] | first 2b
+Length: 2 (0x2) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   01 23                                                •#
+
 ```

@@ -2,7 +2,7 @@
 title: polars
 categories: |
   dataframe
-version: 0.114.0
+version: 0.114.2-nightly.33
 dataframe: |
   Operate with data in a dataframe format.
 usage: |
@@ -160,7 +160,7 @@ to the `polars agg` command with some column expressions for aggregation which t
 | [`polars replace`](/commands/docs/polars_replace.md)                                         | Create an expression that replaces old values with new values                                                                                                                                                                                                                                         | plugin |
 | [`polars replace-time-zone`](/commands/docs/polars_replace-time-zone.md)                     | Replace the timezone information in a datetime column.                                                                                                                                                                                                                                                | plugin |
 | [`polars reverse`](/commands/docs/polars_reverse.md)                                         | Reverses the LazyFrame                                                                                                                                                                                                                                                                                | plugin |
-| [`polars rolling`](/commands/docs/polars_rolling.md)                                         | Rolling calculation for a series.                                                                                                                                                                                                                                                                     | plugin |
+| [`polars rolling`](/commands/docs/polars_rolling.md)                                         | Rolling calculation for a series or expression, or a rolling group-by for a lazyframe.                                                                                                                                                                                                                | plugin |
 | [`polars sample`](/commands/docs/polars_sample.md)                                           | Create sample dataframe.                                                                                                                                                                                                                                                                              | plugin |
 | [`polars save`](/commands/docs/polars_save.md)                                               | Saves a dataframe to disk. For lazy dataframes a sink operation will be used if the file type supports it (parquet, ipc/arrow, csv, and ndjson).                                                                                                                                                      | plugin |
 | [`polars schema`](/commands/docs/polars_schema.md)                                           | Show schema for a dataframe.                                                                                                                                                                                                                                                                          | plugin |

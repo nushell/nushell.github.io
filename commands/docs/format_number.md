@@ -2,7 +2,7 @@
 title: format number
 categories: |
   conversions
-version: 0.114.0
+version: 0.114.2-nightly.33
 conversions: |
   Format a number.
 usage: |

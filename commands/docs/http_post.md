@@ -2,7 +2,7 @@
 title: http post
 categories: |
   network
-version: 0.114.0
+version: 0.114.2-nightly.33
 network: |
   Send a POST request to a URL with a request body.
 usage: |

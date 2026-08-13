@@ -2,7 +2,7 @@
 title: semver
 categories: |
   filters
-version: 0.114.0
+version: 0.114.2-nightly.33
 filters: |
   Various commands for working with semantic versions.
 usage: |

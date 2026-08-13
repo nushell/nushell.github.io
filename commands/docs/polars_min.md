@@ -2,7 +2,7 @@
 title: polars min
 categories: |
   dataframe
-version: 0.114.0
+version: 0.114.2-nightly.33
 dataframe: |
   Creates a min expression or aggregates columns to their min value.
 usage: |

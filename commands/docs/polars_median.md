@@ -2,7 +2,7 @@
 title: polars median
 categories: |
   lazyframe
-version: 0.114.0
+version: 0.114.2-nightly.33
 lazyframe: |
   Median value from columns in a dataframe or creates expression for an aggregation
 usage: |

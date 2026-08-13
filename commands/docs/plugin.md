@@ -2,7 +2,7 @@
 title: plugin
 categories: |
   plugin
-version: 0.114.0
+version: 0.114.2-nightly.33
 plugin: |
   Commands for managing plugins.
 usage: |

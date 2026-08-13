@@ -2,7 +2,7 @@
 title: date to-timezone
 categories: |
   date
-version: 0.114.0
+version: 0.114.2-nightly.33
 date: |
   Convert a date to a given time zone.
 usage: |
@@ -27,10 +27,12 @@ contributors: false
 
 ## Input/output types:
 
-| input    | output   |
-| -------- | -------- |
-| datetime | datetime |
-| string   | datetime |
+| input          | output         |
+| -------------- | -------------- |
+| datetime       | datetime       |
+| string         | datetime       |
+| list&lt;datetime&gt; | list&lt;datetime&gt; |
+| list&lt;string&gt;   | list&lt;datetime&gt; |
 ## Examples
 
 Get the current date in UTC+05:00.
@@ -61,6 +63,26 @@ Get a date in a different time zone, from a datetime.
 ```nu
 > "2020-10-10 10:00:00 +02:00" | into datetime | date to-timezone "+0500"
 Sat, 10 Oct 2020 13:00:00 +0500 (5 years ago)
+```
+
+Convert a list of datetimes to a given time zone.
+```nu
+> [2021-10-22T10:00:00+02:00, 2021-10-23T10:00:00+02:00] | date to-timezone "+0500"
+╭───┬─────────────╮
+│ 0 │ 4 years ago │
+│ 1 │ 4 years ago │
+╰───┴─────────────╯
+
+```
+
+Convert a list of date strings to a given time zone.
+```nu
+> ["2020-10-10 10:00:00 +02:00", "2020-10-10 12:00:00 +02:00"] | date to-timezone "+0500"
+╭───┬─────────────╮
+│ 0 │ 5 years ago │
+│ 1 │ 5 years ago │
+╰───┴─────────────╯
+
 ```
 
 ## Notes

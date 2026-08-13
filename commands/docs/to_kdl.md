@@ -2,11 +2,11 @@
 title: to kdl
 categories: |
   formats
-version: 0.114.0
+version: 0.114.2-nightly.33
 formats: |
-  Converts table data into KDL text.
+  Converts structured data into KDL text.
 usage: |
-  Converts table data into KDL text.
+  Converts structured data into KDL text.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `to kdl` for [formats](/commands/categories/formats.md)
 
-<div class='command-title'>Converts table data into KDL text.</div>
+<div class='command-title'>Converts structured data into KDL text.</div>
 
 ## Signature
 
@@ -22,7 +22,10 @@ contributors: false
 
 ## Flags
 
- -  `--serialize, -s`: Serialize nushell types that cannot be deserialized.
+ -  `--spec {int}`: KDL language version (1 or 2 (default)).
+ -  `--format {string}`: Data model: 'jik' (default) for JSON-in-KDL, or 'nodes' for KDL AST rows.
+ -  `--serialize, -s`: Serialize nushell types that cannot be deserialized (shorthand for --non-roundtrip lossy).
+ -  `--non-roundtrip {string}`: How to handle values that are non-roundtrippable ('error' (default), 'null', or 'lossy').
 
 
 ## Input/output types:
@@ -32,45 +35,143 @@ contributors: false
 | any   | string |
 ## Examples
 
-Convert yaml file to kdl file
+Convert a record to JSON-in-KDL (default KDL v2 keywords).
 ```nu
-> {this: that list: [1 2 3 {bool: true} {this: should be: a-block}]} | to yaml | from yaml | to kdl
-this that
-list 1 2 3 bool=#true {
-    this should
-    be a-block
-}
+> {a: 1, b: true} | to kdl
+- a=1 b=#true
 
 ```
 
-Convert nu record to kdl
+Emit KDL v2 explicitly with --spec 2.
 ```nu
-> {one: [{one: two, 1: 2} {three: 3} [1 2 3] 4 5 6 {bool: true}] } | to kdl
-one three=3 1 2 3 4 5 6 bool=#true {
-    one two
-    "1" 2
-}
+> {a: 1, b: true} | to kdl --spec 2
+- a=1 b=#true
 
 ```
 
-Convert nu list to kdl string
+Emit KDL v1 keywords with --spec 1 (bare true/false/null).
+```nu
+> {a: 1, b: true} | to kdl --spec 1
+- a=1 b=true
+
+```
+
+Convert a list to JSON-in-KDL.
 ```nu
 > [1 2 3] | to kdl
-root 1 2 3
+- 1 2 3
 
 ```
 
-Convert nu closure to kdl string
+Emit null/bool keywords as KDL v2.
 ```nu
-> {2: {|| 1 + 1} } | to kdl --serialize
-"2" "{|| 1 + 1}"
+> [null false true] | to kdl --spec 2
+- #null #false #true
 
 ```
 
-Round-trip KDL through canonical node rows.
+Emit null/bool keywords as KDL v1.
+```nu
+> [null false true] | to kdl --spec 1
+- null false true
+
+```
+
+Round-trip KDL through node rows (default v2).
 ```nu
 > 'node one; node two' | from kdl | to kdl
 node one
 node two
+
+```
+
+Round-trip a KDL v1 document; metadata keeps --spec 1 on to kdl.
+```nu
+> "item 1 enabled=true" | from kdl --spec 1 | to kdl
+item 1 enabled=true
+
+```
+
+Round-trip a KDL v2 document with --spec 2 on both sides.
+```nu
+> "item 1 enabled=#true" | from kdl --spec 2 | to kdl --spec 2
+item 1 enabled=#true
+
+```
+
+Override metadata: parse as v1 but emit as v2.
+```nu
+> "item 1 enabled=true" | from kdl --spec 1 | to kdl --spec 2
+item 1 enabled=#true
+
+```
+
+Serialize a closure as a string.
+```nu
+> {|| 1 + 1} | to kdl --serialize
+- "{|| 1 + 1}"
+
+```
+
+Emit Nushell filesize and duration with type annotations.
+```nu
+> {size: 1kib, wait: 5sec} | to kdl
+- size=(filesize)1024 wait=(duration)5000000000
+
+```
+
+Emit a datetime as a (timestamp) annotation (RFC 3339 string).
+```nu
+> {when: 2020-01-02T03:04:05+00:00} | to kdl
+- when=(timestamp)"2020-01-02T03:04:05+00:00"
+
+```
+
+Emit a cell-path with a (cell-path) annotation.
+```nu
+> $.1.abc | to kdl
+- (cell-path)$.1.abc
+
+```
+
+Emit a range with a (range) annotation.
+```nu
+> 1..3 | to kdl
+- (range)"1..3"
+
+```
+
+Emit a glob with a (glob) annotation.
+```nu
+> "*.rs" | into glob | to kdl
+- (glob)*.rs
+
+```
+
+Emit binary data as base64 with a (binary) annotation.
+```nu
+> 0x[01 02 03] | to kdl
+- (binary)AQID
+
+```
+
+Round-trip annotated Nushell types through KDL.
+```nu
+> {size: 1kib, wait: 5sec} | to kdl | from kdl --format jik
+╭──────┬────────╮
+│ size │ 1.0 kB │
+│ wait │ 5sec   │
+╰──────┴────────╯
+```
+
+Round-trip a list of records (table-shaped data) as JSON-in-KDL.
+```nu
+> [{a: 1}, {a: 2}] | to kdl | from kdl --format jik
+╭───┬───╮
+│ # │ a │
+├───┼───┤
+│ 0 │ 1 │
+│ 1 │ 2 │
+╰───┴───╯
 
 ```

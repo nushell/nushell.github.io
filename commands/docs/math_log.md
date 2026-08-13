@@ -2,7 +2,7 @@
 title: math log
 categories: |
   math
-version: 0.114.0
+version: 0.114.2-nightly.33
 math: |
   Returns the logarithm for an arbitrary base.
 usage: |
@@ -18,11 +18,12 @@ contributors: false
 
 ## Signature
 
-```> math log {flags} (base)```
+```> math log {flags} (base) ...rest```
 
 ## Parameters
 
  -  `base`: Base for which the logarithm should be computed.
+ -  `...rest`: The cell-paths/columns to operate on.
 
 
 ## Input/output types:
@@ -32,6 +33,7 @@ contributors: false
 | number       | float        |
 | list&lt;number&gt; | list&lt;float&gt;  |
 | range        | list&lt;number&gt; |
+| record       | record       |
 ## Examples
 
 Get the logarithm of 100 to the base 10.
@@ -49,4 +51,36 @@ Get the log2 of a list of values.
 │ 2 │ 2.00 │
 ╰───┴──────╯
 
+```
+
+Compute the log base 10 of list-valued columns in a record.
+```nu
+> {alice: [1 10 100], bob: [1000 10000]} | math log 10
+╭───────┬──────────────╮
+│       │ ╭───┬──────╮ │
+│ alice │ │ 0 │ 0.00 │ │
+│       │ │ 1 │ 1.00 │ │
+│       │ │ 2 │ 2.00 │ │
+│       │ ╰───┴──────╯ │
+│       │ ╭───┬──────╮ │
+│ bob   │ │ 0 │ 3.00 │ │
+│       │ │ 1 │ 4.00 │ │
+│       │ ╰───┴──────╯ │
+╰───────┴──────────────╯
+```
+
+Compute the log base 10 of a single column using a cell path.
+```nu
+> {alice: [1 10 100], bob: [1000 10000]} | math log 10 alice
+╭───────┬───────────────╮
+│       │ ╭───┬──────╮  │
+│ alice │ │ 0 │ 0.00 │  │
+│       │ │ 1 │ 1.00 │  │
+│       │ │ 2 │ 2.00 │  │
+│       │ ╰───┴──────╯  │
+│       │ ╭───┬───────╮ │
+│ bob   │ │ 0 │  1000 │ │
+│       │ │ 1 │ 10000 │ │
+│       │ ╰───┴───────╯ │
+╰───────┴───────────────╯
 ```

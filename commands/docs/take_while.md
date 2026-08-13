@@ -2,7 +2,7 @@
 title: take while
 categories: |
   filters
-version: 0.114.0
+version: 0.114.2-nightly.33
 filters: |
   Take elements of the input while a predicate is true.
 usage: |
@@ -19,6 +19,10 @@ contributors: false
 ## Signature
 
 ```> take while {flags} (predicate)```
+
+## Flags
+
+ -  `--include, -i {int}`: Include extra items after the stream would otherwise have stopped. `0` is a no-op.
 
 ## Parameters
 
@@ -62,5 +66,18 @@ Take while the field value is negative.
 │ 0 │ -1 │
 │ 1 │ -2 │
 ╰───┴────╯
+
+```
+
+Take until the first item without a lowercase name including that item.
+```nu
+> [[name value]; [b, 2], [c, 3], [A, 1], [D, 4]] | take while -i 1 {|x| $x.name like '[a-z]' }
+╭───┬──────┬───────╮
+│ # │ name │ value │
+├───┼──────┼───────┤
+│ 0 │ b    │     2 │
+│ 1 │ c    │     3 │
+│ 2 │ A    │     1 │
+╰───┴──────┴───────╯
 
 ```

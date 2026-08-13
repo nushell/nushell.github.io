@@ -2,7 +2,7 @@
 title: from md
 categories: |
   formats
-version: 0.114.0
+version: 0.114.2-nightly.33
 formats: |
   Convert markdown text into human-friendly structured rows. Use --verbose for the full AST.
 usage: |

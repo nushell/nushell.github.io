@@ -2,7 +2,7 @@
 title: date
 categories: |
   date
-version: 0.114.0
+version: 0.114.2-nightly.33
 date: |
   Date-related commands.
 usage: |

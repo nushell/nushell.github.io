@@ -2,7 +2,7 @@
 title: tutor
 categories: |
   misc
-version: 0.114.0
+version: 0.114.2-nightly.33
 misc: |
   Run the tutorial. To begin, run: tutor.
 usage: |

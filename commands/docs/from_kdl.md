@@ -2,7 +2,7 @@
 title: from kdl
 categories: |
   formats
-version: 0.114.0
+version: 0.114.2-nightly.33
 formats: |
   Convert KDL text into structured data.
 usage: |
@@ -20,6 +20,12 @@ contributors: false
 
 ```> from kdl {flags} ```
 
+## Flags
+
+ -  `--spec {int}`: KDL language version (1 or 2 (default)).
+ -  `--format {string}`: Data model: 'nodes' (default) for KDL AST rows, or 'jik' for JSON-in-KDL values.
+ -  `--ignore-types`: Ignore type annotations (return base KDL types only).
+
 
 ## Input/output types:
 
@@ -28,7 +34,7 @@ contributors: false
 | string | any    |
 ## Examples
 
-Converts KDL formatted string to canonical node rows.
+Convert KDL to node rows (default format, KDL v2).
 ```nu
 > "node attr=1 attr2=#true {bloc}" | from kdl
 ╭───┬──────┬────────────────┬──────────────────┬─────────────────────────────────────────────────────────────╮
@@ -45,7 +51,7 @@ Converts KDL formatted string to canonical node rows.
 
 ```
 
-Converts KDL formatted string to canonical node rows.
+Parse a package-style KDL document into node rows.
 ```nu
 > 'package { name nu; version 0.1; description "new type of shell" }' | from kdl
 ╭───┬─────────┬────────────────┬───────────────────┬─────────────────────────────────────────────────────────╮
@@ -117,6 +123,81 @@ Converts KDL formatted string to canonical node rows.
 
 ```
 
+Parse JSON-in-KDL (v2 keywords use #true / #null).
+```nu
+> '- a=1 b=#true' | from kdl --format jik
+╭───┬──────╮
+│ a │ 1    │
+│ b │ true │
+╰───┴──────╯
+```
+
+Parse KDL v2 keyword arguments with --spec 2 (default).
+```nu
+> "node #true #false #null" | from kdl --spec 2
+╭───┬──────┬───────────────┬───────────────────┬────────────────╮
+│ # │ name │     args      │       props       │    children    │
+├───┼──────┼───────────────┼───────────────────┼────────────────┤
+│ 0 │ node │ ╭───┬───────╮ │ {record 0 fields} │ [list 0 items] │
+│   │      │ │ 0 │ true  │ │                   │                │
+│   │      │ │ 1 │ false │ │                   │                │
+│   │      │ │ 2 │       │ │                   │                │
+│   │      │ ╰───┴───────╯ │                   │                │
+╰───┴──────┴───────────────┴───────────────────┴────────────────╯
+
+```
+
+Parse KDL v1 keyword arguments with --spec 1 (bare true/false/null).
+```nu
+> "node true false null" | from kdl --spec 1
+╭───┬──────┬───────────────┬───────────────────┬────────────────╮
+│ # │ name │     args      │       props       │    children    │
+├───┼──────┼───────────────┼───────────────────┼────────────────┤
+│ 0 │ node │ ╭───┬───────╮ │ {record 0 fields} │ [list 0 items] │
+│   │      │ │ 0 │ true  │ │                   │                │
+│   │      │ │ 1 │ false │ │                   │                │
+│   │      │ │ 2 │       │ │                   │                │
+│   │      │ ╰───┴───────╯ │                   │                │
+╰───┴──────┴───────────────┴───────────────────┴────────────────╯
+
+```
+
+Parse a KDL v1 property boolean with --spec 1.
+```nu
+> "item 1 enabled=true" | from kdl --spec 1
+╭───┬──────┬───────────┬────────────────────┬────────────────╮
+│ # │ name │   args    │       props        │    children    │
+├───┼──────┼───────────┼────────────────────┼────────────────┤
+│ 0 │ item │ ╭───┬───╮ │ ╭─────────┬──────╮ │ [list 0 items] │
+│   │      │ │ 0 │ 1 │ │ │ enabled │ true │ │                │
+│   │      │ ╰───┴───╯ │ ╰─────────┴──────╯ │                │
+╰───┴──────┴───────────┴────────────────────┴────────────────╯
+
+```
+
+Parse a KDL v2 property boolean with --spec 2.
+```nu
+> "item 1 enabled=#true" | from kdl --spec 2
+╭───┬──────┬───────────┬────────────────────┬────────────────╮
+│ # │ name │   args    │       props        │    children    │
+├───┼──────┼───────────┼────────────────────┼────────────────┤
+│ 0 │ item │ ╭───┬───╮ │ ╭─────────┬──────╮ │ [list 0 items] │
+│   │      │ │ 0 │ 1 │ │ │ enabled │ true │ │                │
+│   │      │ ╰───┴───╯ │ ╰─────────┴──────╯ │                │
+╰───┴──────┴───────────┴────────────────────┴────────────────╯
+
+```
+
+Parse JSON-in-KDL written in KDL v1 keyword style.
+```nu
+> '- a=1 b=true c=null' | from kdl --format jik --spec 1
+╭───┬──────╮
+│ a │ 1    │
+│ b │ true │
+│ c │      │
+╰───┴──────╯
+```
+
 Duplicate sibling node names are preserved in-order.
 ```nu
 > "node one; node two" | from kdl
@@ -131,4 +212,84 @@ Duplicate sibling node names are preserved in-order.
 │   │      │ ╰───┴─────╯ │                   │                │
 ╰───┴──────┴─────────────┴───────────────────┴────────────────╯
 
+```
+
+Promote Nushell type annotations on node arguments (filesize, duration).
+```nu
+> "node (filesize)1024 (duration)5000000000" | from kdl
+╭───┬──────┬────────────────┬───────────────────┬────────────────╮
+│ # │ name │      args      │       props       │    children    │
+├───┼──────┼────────────────┼───────────────────┼────────────────┤
+│ 0 │ node │ ╭───┬────────╮ │ {record 0 fields} │ [list 0 items] │
+│   │      │ │ 0 │ 1.0 kB │ │                   │                │
+│   │      │ │ 1 │   5sec │ │                   │                │
+│   │      │ ╰───┴────────╯ │                   │                │
+╰───┴──────┴────────────────┴───────────────────┴────────────────╯
+
+```
+
+Parse JSON-in-KDL with filesize, duration, and datetime (timestamp) annotations.
+```nu
+> '- size=(filesize)1024 wait=(duration)5000000000 when=(timestamp)"2020-01-02T03:04:05+00:00"' | from kdl --format jik
+╭──────┬─────────────╮
+│ size │ 1.0 kB      │
+│ wait │ 5sec        │
+│ when │ 6 years ago │
+╰──────┴─────────────╯
+```
+
+Accept (datetime) as an alias for (timestamp) when parsing.
+```nu
+> '- when=(datetime)"2020-01-02T03:04:05+00:00"' | from kdl --format jik
+╭──────┬─────────────╮
+│ when │ 6 years ago │
+╰──────┴─────────────╯
+```
+
+Parse cell-path, range, glob, and binary type annotations.
+```nu
+> '- path=(cell-path)$.1.abc span=(range)"1..3" pat=(glob)*.rs blob=(binary)AQID' | from kdl --format jik
+╭──────┬───────────╮
+│ path │ $.1.abc   │
+│ span │ 1..3      │
+│ pat  │ *.rs      │
+│ blob │ [1, 2, 3] │
+╰──────┴───────────╯
+```
+
+Ignore type annotations and keep base KDL types with --ignore-types.
+```nu
+> '- size=(filesize)1024' | from kdl --format jik --ignore-types
+╭──────┬──────╮
+│ size │ 1024 │
+╰──────┴──────╯
+```
+
+JiK: multiple '-' children are a list, not an object with duplicate keys.
+```nu
+> '- { - a=1; - a=2 }' | from kdl --format jik
+╭───┬───╮
+│ # │ a │
+├───┼───┤
+│ 0 │ 1 │
+│ 1 │ 2 │
+╰───┴───╯
+
+```
+
+JiK: a sole '-' child is still a one-element list unless annotated (object).
+```nu
+> '- { - 1 }' | from kdl --format jik
+╭───┬───╮
+│ 0 │ 1 │
+╰───┴───╯
+
+```
+
+JiK: object with key '-' must use the (object) annotation.
+```nu
+> '(object)- { - 1 }' | from kdl --format jik
+╭───┬───╮
+│ - │ 1 │
+╰───┴───╯
 ```

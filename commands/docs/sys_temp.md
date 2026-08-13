@@ -2,7 +2,7 @@
 title: sys temp
 categories: |
   system
-version: 0.114.0
+version: 0.114.2-nightly.33
 system: |
   View the temperatures of system components.
 usage: |

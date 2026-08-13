@@ -2,7 +2,7 @@
 title: polars sort-by
 categories: |
   lazyframe
-version: 0.114.0
+version: 0.114.2-nightly.33
 lazyframe: |
   Sorts a lazy dataframe based on expression(s).
 usage: |

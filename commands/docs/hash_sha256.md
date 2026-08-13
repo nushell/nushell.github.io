@@ -2,7 +2,7 @@
 title: hash sha256
 categories: |
   hash
-version: 0.114.0
+version: 0.114.2-nightly.33
 hash: |
   Hash a value using the sha256 hash algorithm.
 usage: |
@@ -31,12 +31,14 @@ contributors: false
 
 ## Input/output types:
 
-| input  | output                |
-| ------ | --------------------- |
-| string | oneof&lt;string, binary&gt; |
-| binary | oneof&lt;string, binary&gt; |
-| table  | table                 |
-| record | record                |
+| input        | output                      |
+| ------------ | --------------------------- |
+| string       | oneof&lt;string, binary&gt;       |
+| binary       | oneof&lt;string, binary&gt;       |
+| list&lt;string&gt; | list&lt;oneof&lt;string, binary&gt;&gt; |
+| list&lt;binary&gt; | list&lt;oneof&lt;string, binary&gt;&gt; |
+| table        | table                       |
+| record       | record                      |
 ## Examples
 
 Return the sha256 hash of a string, hex-encoded
@@ -63,5 +65,16 @@ Return the sha256 hash of binary data
 Return the sha256 hash of a file's contents
 ```nu
 > open ./nu_0_24_1_windows.zip | hash sha256
+
+```
+
+Return the sha256 hash of a list of strings
+```nu
+> [abc def ghi] | hash sha256
+╭───┬──────────────────────────────────────────────────────────────────╮
+│ 0 │ ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad │
+│ 1 │ cb8379ac2098aa165029e3938a51da0bcecfc008fd6795f401178647f96c5b34 │
+│ 2 │ 50ae61e841fac4e8f9e40baf2ad36ec868922ea48368c18f9535e47db56dd7fb │
+╰───┴──────────────────────────────────────────────────────────────────╯
 
 ```

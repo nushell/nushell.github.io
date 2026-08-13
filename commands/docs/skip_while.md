@@ -2,7 +2,7 @@
 title: skip while
 categories: |
   filters
-version: 0.114.0
+version: 0.114.2-nightly.33
 filters: |
   Skip elements of the input while a predicate is true.
 usage: |

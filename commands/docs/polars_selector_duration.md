@@ -2,7 +2,7 @@
 title: polars selector duration
 categories: |
   expression
-version: 0.114.0
+version: 0.114.2-nightly.33
 expression: |
   Select all duration columns. Optionally filter by time unit (ns, us, ms).
 usage: |

@@ -2,7 +2,7 @@
 title: sort
 categories: |
   filters
-version: 0.114.0
+version: 0.114.2-nightly.33
 filters: |
   Sort the input in increasing order.
 usage: |

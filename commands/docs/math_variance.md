@@ -2,7 +2,7 @@
 title: math variance
 categories: |
   math
-version: 0.114.0
+version: 0.114.2-nightly.33
 math: |
   Returns the variance of a list of numbers or of each column in a table.
 usage: |
@@ -18,21 +18,27 @@ contributors: false
 
 ## Signature
 
-```> math variance {flags} ```
+```> math variance {flags} ...rest```
 
 ## Flags
 
  -  `--sample, -s`: Calculate sample variance (i.e. using N-1 as the denominator).
 
+## Parameters
+
+ -  `...rest`: The cell-paths/columns to operate on.
+
 
 ## Input/output types:
 
-| input        | output |
-| ------------ | ------ |
-| list&lt;number&gt; | number |
-| range        | number |
-| table        | record |
-| record       | record |
+| input          | output |
+| -------------- | ------ |
+| list&lt;number&gt;   | number |
+| list&lt;duration&gt; | number |
+| list&lt;filesize&gt; | number |
+| range          | number |
+| table          | record |
+| record         | record |
 ## Examples
 
 Get the variance of a list of numbers.
@@ -55,3 +61,33 @@ Compute the variance of each column in a table.
 │ b │ 1 │
 ╰───┴───╯
 ```
+
+Compute the variance of list-valued columns in a record.
+```nu
+> {alice: [1 3], bob: [4 6]} | math variance
+╭───────┬───╮
+│ alice │ 1 │
+│ bob   │ 1 │
+╰───────┴───╯
+```
+
+Compute the variance of a single column using a cell path.
+```nu
+> {alice: [1 3], bob: [4 6]} | math variance alice
+╭───────┬───────────╮
+│ alice │ 1         │
+│       │ ╭───┬───╮ │
+│ bob   │ │ 0 │ 4 │ │
+│       │ │ 1 │ 6 │ │
+│       │ ╰───┴───╯ │
+╰───────┴───────────╯
+```
+
+Variance of filesizes is a number of base units squared (bytes²).
+```nu
+> [1KB 3KB] | math variance
+1000000.0
+```
+
+## Notes
+For filesize and duration inputs, variance is computed in base units (bytes and nanoseconds) and returned as a plain number. There is no squared unit type in Nushell, so the result is the variance of the underlying byte or nanosecond values (B² or ns²), not of the display unit used when the values were written.

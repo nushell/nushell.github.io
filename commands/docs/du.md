@@ -2,7 +2,7 @@
 title: du
 categories: |
   filesystem
-version: 0.114.0
+version: 0.114.2-nightly.33
 filesystem: |
   Find disk usage sizes of specified items.
 usage: |

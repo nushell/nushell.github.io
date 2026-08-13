@@ -2,7 +2,7 @@
 title: polars selector contains
 categories: |
   expression
-version: 0.114.0
+version: 0.114.2-nightly.33
 expression: |
   Select columns whose names contain the given literal substring(s).
 usage: |

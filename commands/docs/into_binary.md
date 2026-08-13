@@ -2,7 +2,7 @@
 title: into binary
 categories: |
   conversions
-version: 0.114.0
+version: 0.114.2-nightly.33
 conversions: |
   Convert value to a binary primitive.
 usage: |
@@ -40,6 +40,7 @@ contributors: false
 | string   | binary |
 | bool     | binary |
 | filesize | binary |
+| duration | binary |
 | datetime | binary |
 | table    | table  |
 | record   | record |
@@ -113,5 +114,13 @@ convert an int to a nushell binary primitive with compact enabled.
 > 10 | into binary --compact
 Length: 1 (0x1) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   0a                                                   _
+
+```
+
+convert a duration to a nushell binary primitive.
+```nu
+> 1sec | into binary
+Length: 8 (0x8) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   00 ca 9a 3b  00 00 00 00                             0××;0000
 
 ```

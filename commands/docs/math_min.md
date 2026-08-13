@@ -2,7 +2,7 @@
 title: math min
 categories: |
   math
-version: 0.114.0
+version: 0.114.2-nightly.33
 math: |
   Finds the minimum within a list of values or tables.
 usage: |
@@ -18,7 +18,11 @@ contributors: false
 
 ## Signature
 
-```> math min {flags} ```
+```> math min {flags} ...rest```
+
+## Parameters
+
+ -  `...rest`: The cell-paths/columns to operate on.
 
 
 ## Input/output types:
@@ -53,4 +57,25 @@ Find the minimum of a list of arbitrary values (Warning: Weird).
 ```nu
 > [-50 'hello' true] | math min
 true
+```
+
+Compute the minimum of list-valued columns in a record.
+```nu
+> {alice: [5 3 9], bob: [2 7]} | math min
+╭───────┬───╮
+│ alice │ 3 │
+│ bob   │ 2 │
+╰───────┴───╯
+```
+
+Compute the minimum of a single column using a cell path.
+```nu
+> {alice: [5 3 9], bob: [2 7]} | math min alice
+╭───────┬───────────╮
+│ alice │ 3         │
+│       │ ╭───┬───╮ │
+│ bob   │ │ 0 │ 2 │ │
+│       │ │ 1 │ 7 │ │
+│       │ ╰───┴───╯ │
+╰───────┴───────────╯
 ```

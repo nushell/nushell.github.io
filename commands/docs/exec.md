@@ -2,7 +2,7 @@
 title: exec
 categories: |
   system
-version: 0.114.0
+version: 0.114.2-nightly.33
 system: |
   Execute a command, replacing or exiting the current process, depending on platform.
 usage: |

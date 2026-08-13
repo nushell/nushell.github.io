@@ -2,7 +2,7 @@
 title: polars len
 categories: |
   dataframe
-version: 0.114.0
+version: 0.114.2-nightly.33
 dataframe: |
   Return the number of rows in the context. This is similar to COUNT(*) in SQL.
 usage: |

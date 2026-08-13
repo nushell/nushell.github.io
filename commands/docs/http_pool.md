@@ -2,7 +2,7 @@
 title: http pool
 categories: |
   network
-version: 0.114.0
+version: 0.114.2-nightly.33
 network: |
   Configure and reset builtin http connection pool.
 usage: |

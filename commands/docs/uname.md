@@ -2,7 +2,7 @@
 title: uname
 categories: |
   system
-version: 0.114.0
+version: 0.114.2-nightly.33
 system: |
   Print certain system information using uutils/coreutils uname.
 usage: |
@@ -23,9 +23,9 @@ contributors: false
 
 ## Input/output types:
 
-| input   | output |
-| ------- | ------ |
-| nothing | table  |
+| input   | output                                                                                                                                   |
+| ------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| nothing | record&lt;kernel-name: string, nodename: string, kernel-release: string, kernel-version: string, machine: string, operating-system: string&gt; |
 ## Examples
 
 Print all information

@@ -2,7 +2,7 @@
 title: http get
 categories: |
   network
-version: 0.114.0
+version: 0.114.2-nightly.33
 network: |
   Fetch the contents from a URL.
 usage: |

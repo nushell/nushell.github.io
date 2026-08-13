@@ -2,7 +2,7 @@
 title: polars std
 categories: |
   dataframe
-version: 0.114.0
+version: 0.114.2-nightly.33
 dataframe: |
   Creates a std expression for an aggregation of std value from columns in a dataframe.
 usage: |
