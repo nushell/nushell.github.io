@@ -2,7 +2,7 @@
 title: scope variables
 categories: |
   core
-version: 0.114.0
+version: 0.115.0
 core: |
   Output info on the variables in the current scope.
 usage: |
@@ -33,3 +33,21 @@ Show the variables in the current scope.
 > scope variables
 
 ```
+
+## Notes
+Lists variables that are available at runtime in the current stack and active overlays (locals and globals). Nested scopes such as `do`, `if`/`for` bodies, and custom commands include their locals while that scope is active; outer locals remain visible when the outer frame is still on the stack.
+
+Closures only capture free variables that are referenced in the closure body. An outer local that is never mentioned is not captured, so after the defining scope ends it will not appear in `scope variables` when that closure runs. Mentioning the variable (for example `$a`) causes it to be captured and listed.
+
+For example, this shows `$a` inside the `do` block, but not when the returned closure runs later:
+
+    do {
+      let a = 123
+      scope variables | where name == '$a' | print
+      {|| scope variables | where name == '$a' }
+    } | let factory
+    do $factory
+
+Adding a reference to `$a` in the closure body captures it so it appears:
+
+    {|| $a; scope variables | where name == '$a' }

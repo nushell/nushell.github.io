@@ -2,7 +2,7 @@
 title: into datetime
 categories: |
   conversions
-version: 0.114.0
+version: 0.115.0
 conversions: |
   Convert text or timestamp into a datetime.
 usage: |
@@ -34,17 +34,18 @@ contributors: false
 
 ## Input/output types:
 
-| input        | output         |
-| ------------ | -------------- |
-| datetime     | datetime       |
-| int          | datetime       |
-| string       | datetime       |
-| list&lt;string&gt; | list&lt;datetime&gt; |
-| table        | table          |
-| nothing      | table          |
-| record       | record         |
-| record       | datetime       |
-| any          | table          |
+| input          | output         |
+| -------------- | -------------- |
+| datetime       | datetime       |
+| int            | datetime       |
+| string         | datetime       |
+| list&lt;string&gt;   | list&lt;datetime&gt; |
+| list&lt;datetime&gt; | list&lt;datetime&gt; |
+| table          | table          |
+| nothing        | table          |
+| record         | record         |
+| record         | datetime       |
+| any            | table          |
 ## Examples
 
 Convert timestamp string to datetime with timezone offset.
@@ -102,6 +103,16 @@ Convert list of timestamps to datetimes.
 │ 0 │ 3 years ago │
 │ 1 │ 3 years ago │
 │ 2 │ 3 years ago │
+╰───┴─────────────╯
+
+```
+
+Passing a list of datetimes through is a no-op.
+```nu
+> [2023-03-30T10:10:07-05:00, 2023-05-05T13:43:49-05:00] | into datetime
+╭───┬─────────────╮
+│ 0 │ 3 years ago │
+│ 1 │ 3 years ago │
 ╰───┴─────────────╯
 
 ```

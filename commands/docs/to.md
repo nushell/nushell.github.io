@@ -2,7 +2,7 @@
 title: to
 categories: |
   formats
-version: 0.114.0
+version: 0.115.0
 formats: |
   Translate structured data to various formats.
 usage: |
@@ -36,7 +36,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`to csv`](/commands/docs/to_csv.md)           | Convert table into .csv text .                                | built-in |
 | [`to html`](/commands/docs/to_html.md)         | Convert table into simple HTML.                               | built-in |
 | [`to json`](/commands/docs/to_json.md)         | Converts table data into JSON text.                           | built-in |
-| [`to kdl`](/commands/docs/to_kdl.md)           | Converts table data into KDL text.                            | built-in |
+| [`to kdl`](/commands/docs/to_kdl.md)           | Converts structured data into KDL text.                       | built-in |
 | [`to md`](/commands/docs/to_md.md)             | Convert table into simple Markdown.                           | built-in |
 | [`to msgpack`](/commands/docs/to_msgpack.md)   | Convert Nu values into MessagePack.                           | built-in |
 | [`to msgpackz`](/commands/docs/to_msgpackz.md) | Convert Nu values into brotli-compressed MessagePack.         | built-in |
@@ -45,6 +45,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`to text`](/commands/docs/to_text.md)         | Convert data into plain text format.                          | built-in |
 | [`to toml`](/commands/docs/to_toml.md)         | Convert record into .toml text.                               | built-in |
 | [`to tsv`](/commands/docs/to_tsv.md)           | Convert table into .tsv text.                                 | built-in |
+| [`to txt`](/commands/docs/to_txt.md)           | Convert data into plain text format.                          | built-in |
 | [`to xml`](/commands/docs/to_xml.md)           | Convert special record structure into .xml text.              | built-in |
 | [`to yaml`](/commands/docs/to_yaml.md)         | Convert table into .yaml/.yml text.                           | built-in |
 | [`to yml`](/commands/docs/to_yml.md)           | Convert table into .yaml/.yml text.                           | built-in |

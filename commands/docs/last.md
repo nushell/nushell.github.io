@@ -2,11 +2,11 @@
 title: last
 categories: |
   filters
-version: 0.114.0
+version: 0.115.0
 filters: |
-  Return only the last several rows of the input. Counterpart of `first`. Opposite of `drop`.
+  Return only the last several rows of the input. Counterpart of `first`. Opposite of `drop`. For binary input, rows can also be specified as a filesize.
 usage: |
-  Return only the last several rows of the input. Counterpart of `first`. Opposite of `drop`.
+  Return only the last several rows of the input. Counterpart of `first`. Opposite of `drop`. For binary input, rows can also be specified as a filesize.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `last` for [filters](/commands/categories/filters.md)
 
-<div class='command-title'>Return only the last several rows of the input. Counterpart of `first`. Opposite of `drop`.</div>
+<div class='command-title'>Return only the last several rows of the input. Counterpart of `first`. Opposite of `drop`. For binary input, rows can also be specified as a filesize.</div>
 
 ## Signature
 
@@ -66,4 +66,12 @@ Return the last item of a range.
 ```nu
 > 1..3 | last
 3
+```
+
+Return the last 2 bytes of a binary value, using a filesize argument.
+```nu
+> 0x[01 23 45] | last 2b
+Length: 2 (0x2) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   23 45                                                #E
+
 ```

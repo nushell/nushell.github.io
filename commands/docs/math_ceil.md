@@ -2,7 +2,7 @@
 title: math ceil
 categories: |
   math
-version: 0.114.0
+version: 0.115.0
 math: |
   Returns the ceil of a number (smallest integer greater than or equal to that number).
 usage: |
@@ -18,16 +18,25 @@ contributors: false
 
 ## Signature
 
-```> math ceil {flags} ```
+```> math ceil {flags} ...rest```
+
+## Parameters
+
+ -  `...rest`: The cell-paths/columns to operate on.
 
 
 ## Input/output types:
 
-| input        | output       |
-| ------------ | ------------ |
-| number       | int          |
-| list&lt;number&gt; | list&lt;int&gt;    |
-| range        | list&lt;number&gt; |
+| input          | output         |
+| -------------- | -------------- |
+| number         | int            |
+| duration       | duration       |
+| filesize       | filesize       |
+| list&lt;number&gt;   | list&lt;int&gt;      |
+| list&lt;duration&gt; | list&lt;duration&gt; |
+| list&lt;filesize&gt; | list&lt;filesize&gt; |
+| range          | list&lt;number&gt;   |
+| record         | record         |
 ## Examples
 
 Apply the ceil function to a list of numbers.
@@ -40,3 +49,44 @@ Apply the ceil function to a list of numbers.
 ╰───┴────╯
 
 ```
+
+Apply ceiling to list-valued columns in a record.
+```nu
+> {alice: [1.2 2.7 3.5], bob: [4.1 5.9]} | math ceil
+╭───────┬───────────╮
+│       │ ╭───┬───╮ │
+│ alice │ │ 0 │ 2 │ │
+│       │ │ 1 │ 3 │ │
+│       │ │ 2 │ 4 │ │
+│       │ ╰───┴───╯ │
+│       │ ╭───┬───╮ │
+│ bob   │ │ 0 │ 5 │ │
+│       │ │ 1 │ 6 │ │
+│       │ ╰───┴───╯ │
+╰───────┴───────────╯
+```
+
+Apply ceiling to a single column using a cell path.
+```nu
+> {alice: [1.2 2.7 3.5], bob: [4.1 5.9]} | math ceil alice
+╭───────┬──────────────╮
+│       │ ╭───┬───╮    │
+│ alice │ │ 0 │ 2 │    │
+│       │ │ 1 │ 3 │    │
+│       │ │ 2 │ 4 │    │
+│       │ ╰───┴───╯    │
+│       │ ╭───┬──────╮ │
+│ bob   │ │ 0 │ 4.10 │ │
+│       │ │ 1 │ 5.90 │ │
+│       │ ╰───┴──────╯ │
+╰───────┴──────────────╯
+```
+
+Filesize values are already whole bytes, so ceiling is a no-op.
+```nu
+> 2.1KB | math ceil
+2.1 kB
+```
+
+## Notes
+Filesize and duration values are stored as integers in base units (bytes and nanoseconds). With no display unit to round against, `math ceil` is the identity function for those types.

@@ -2,7 +2,7 @@
 title: polars pivot
 categories: |
   dataframe
-version: 0.114.0
+version: 0.115.0
 dataframe: |
   Pivot a DataFrame from long to wide format.
 usage: |

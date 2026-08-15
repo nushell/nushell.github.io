@@ -2,7 +2,7 @@
 title: polars math sign
 categories: |
   dataframe
-version: 0.114.0
+version: 0.115.0
 dataframe: |
   Compute the element-wise sign of a column expression, returning -1, 0, or 1.
 usage: |

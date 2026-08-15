@@ -2,7 +2,7 @@
 title: semver bump
 categories: |
   filters
-version: 0.114.0
+version: 0.115.0
 filters: |
   Bump a semantic version to the next level.
 usage: |
@@ -24,6 +24,7 @@ contributors: false
 
  -  `--ignore-errors, -i`: If the input is not a valid semver version, return the original input unchanged
  -  `--preserve-build-metadata, -p`: Preserve the existing build metadata from the input version
+ -  `--loose, -l`: Allow common non-strict prefixes such as v1.2.3, v.1.2.3, v:1.2.3, v-1.2.3, or v_1.2.3 when parsing string input; the prefix is preserved on the result
  -  `--build-metadata, -b {string}`: Additionally set the build metadata. Takes precedence over --preserve-build-metadata
 
 ## Parameters
@@ -79,4 +80,16 @@ Bump with preserved build metadata
 ```nu
 > '1.2.3+build.5' | into semver | semver bump patch --preserve-build-metadata
 1.2.4+build.5
+```
+
+Bump a loosely-prefixed version string
+```nu
+> 'v1.2.3' | semver bump patch --loose | to text
+v1.2.4
+```
+
+Bump after converting with --loose (prefix is preserved)
+```nu
+> 'v1.2.3' | into semver --loose | semver bump major | to text
+v2.0.0
 ```

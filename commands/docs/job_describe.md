@@ -2,7 +2,7 @@
 title: job describe
 categories: |
   experimental
-version: 0.114.0
+version: 0.115.0
 experimental: |
   Add a description to a background job.
 usage: |

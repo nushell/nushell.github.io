@@ -2,11 +2,11 @@
 title: polars rolling
 categories: |
   dataframe
-version: 0.114.0
+version: 0.115.0
 dataframe: |
-  Rolling calculation for a series.
+  Rolling calculation for a series or expression, or a rolling group-by for a lazyframe.
 usage: |
-  Rolling calculation for a series.
+  Rolling calculation for a series or expression, or a rolling group-by for a lazyframe.
 editLink: false
 contributors: false
 ---
@@ -14,24 +14,33 @@ contributors: false
 
 # `polars rolling` for [dataframe](/commands/categories/dataframe.md)
 
-<div class='command-title'>Rolling calculation for a series.</div>
+<div class='command-title'>Rolling calculation for a series or expression, or a rolling group-by for a lazyframe.</div>
 
 ## Signature
 
 ```> polars rolling {flags} (type) (window)```
 
+## Flags
+
+ -  `--index-column, -i {string}`: Time or index column to roll over. Required for lazyframe input.
+ -  `--period, -p {oneof<duration, string, int>}`: Rolling window width (e.g. 7day, "7d", 1wk, "1mo", "2i", ). Required for lazyframe input.
+ -  `--offset, -o {oneof<duration, string, int>}`: Offset of the rolling window relative to the index column (default: 1ns).
+ -  `--closed, -c {string}`: Which boundary of the window is closed: left, right, both, none (default: left).
+ -  `--group-by, -g {list<any>}`: Additional expressions to group by within each rolling window.
+
 ## Parameters
 
- -  `type`: Rolling operation.
- -  `window`: Window size for rolling.
+ -  `type`: Rolling operation (min, max, sum, mean). Required for dataframe and expression inputs.
+ -  `window`: Window size for rolling. Required for dataframe and expression inputs.
 
 
 ## Input/output types:
 
-| input            | output           |
-| ---------------- | ---------------- |
-| polars_dataframe | polars_dataframe |
-| polars_lazyframe | polars_lazyframe |
+| input             | output            |
+| ----------------- | ----------------- |
+| polars_dataframe  | polars_dataframe  |
+| polars_expression | polars_expression |
+| polars_lazyframe  | polars_group_by   |
 ## Examples
 
 Rolling sum for a series
@@ -59,5 +68,45 @@ Rolling max for a series
 │ 2 │             4 │
 │ 3 │             5 │
 ╰───┴───────────────╯
+
+```
+
+Rolling sum for an expression in a lazyframe
+```nu
+> [[a]; [1] [2] [3] [4] [5]]
+    | polars into-df
+    | polars select (polars col a | polars rolling sum 2 | polars as roll_a)
+    | polars collect
+    | polars drop-nulls
+    | polars collect
+╭───┬────────╮
+│ # │ roll_a │
+├───┼────────┤
+│ 0 │      3 │
+│ 1 │      5 │
+│ 2 │      7 │
+│ 3 │      9 │
+╰───┴────────╯
+
+```
+
+Rolling sum over a 2-row integer window on a lazyframe
+```nu
+> [[idx val]; [1 10] [2 20] [3 30] [4 40] [5 50]]
+    | polars into-lazy
+    | polars rolling --index-column idx --period 2i
+    | polars agg [(polars col val | polars sum | polars as val_sum)]
+    | polars collect
+    | polars sort-by idx
+    | polars collect
+╭───┬─────┬─────────╮
+│ # │ idx │ val_sum │
+├───┼─────┼─────────┤
+│ 0 │   1 │      50 │
+│ 1 │   2 │      70 │
+│ 2 │   3 │      90 │
+│ 3 │   4 │      50 │
+│ 4 │   5 │       0 │
+╰───┴─────┴─────────╯
 
 ```

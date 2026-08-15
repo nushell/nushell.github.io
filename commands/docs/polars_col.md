@@ -2,7 +2,7 @@
 title: polars col
 categories: |
   expression
-version: 0.114.0
+version: 0.115.0
 expression: |
   Creates a named column expression.
 usage: |

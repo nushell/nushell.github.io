@@ -2,7 +2,7 @@
 title: date from-human
 categories: |
   date
-version: 0.114.0
+version: 0.115.0
 date: |
   Convert a human readable datetime string to a datetime.
 usage: |
@@ -27,10 +27,12 @@ contributors: false
 
 ## Input/output types:
 
-| input   | output   |
-| ------- | -------- |
-| string  | datetime |
-| nothing | table    |
+| input          | output         |
+| -------------- | -------------- |
+| string         | datetime       |
+| nothing        | table          |
+| list&lt;datetime&gt; | list&lt;datetime&gt; |
+| list&lt;string&gt;   | list&lt;datetime&gt; |
 ## Examples
 
 Parsing human readable datetime.
@@ -54,5 +56,11 @@ Parsing human readable datetime.
 Show human-readable datetime parsing examples.
 ```nu
 > date from-human --list
+
+```
+
+Convert a list of human-readable datetime strings to datetimes.
+```nu
+> ["Today at 18:30", "Tomorrow at 09:00"] | date from-human
 
 ```

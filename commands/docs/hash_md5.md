@@ -2,7 +2,7 @@
 title: hash md5
 categories: |
   hash
-version: 0.114.0
+version: 0.115.0
 hash: |
   Hash a value using the md5 hash algorithm.
 usage: |
@@ -31,12 +31,14 @@ contributors: false
 
 ## Input/output types:
 
-| input  | output                |
-| ------ | --------------------- |
-| string | oneof&lt;string, binary&gt; |
-| binary | oneof&lt;string, binary&gt; |
-| table  | table                 |
-| record | record                |
+| input        | output                      |
+| ------------ | --------------------------- |
+| string       | oneof&lt;string, binary&gt;       |
+| binary       | oneof&lt;string, binary&gt;       |
+| list&lt;string&gt; | list&lt;oneof&lt;string, binary&gt;&gt; |
+| list&lt;binary&gt; | list&lt;oneof&lt;string, binary&gt;&gt; |
+| table        | table                       |
+| record       | record                      |
 ## Examples
 
 Return the md5 hash of a string, hex-encoded
@@ -62,5 +64,16 @@ Return the md5 hash of binary data
 Return the md5 hash of a file's contents
 ```nu
 > open ./nu_0_24_1_windows.zip | hash md5
+
+```
+
+Return the md5 hash of a list of strings
+```nu
+> [abc def ghi] | hash md5
+╭───┬──────────────────────────────────╮
+│ 0 │ 900150983cd24fb0d6963f7d28e17f72 │
+│ 1 │ 4ed9407630eb1000c0f6b63842defa7d │
+│ 2 │ 826bbc5d0522f5f20a1da4b60fa8c871 │
+╰───┴──────────────────────────────────╯
 
 ```

@@ -2,7 +2,7 @@
 title: scope
 categories: |
   core
-version: 0.114.0
+version: 0.115.0
 core: |
   Commands for getting info about what is in scope.
 usage: |
@@ -29,11 +29,11 @@ contributors: false
 
 ## Subcommands:
 
-| name                                                         | description                                              | type     |
-| ------------------------------------------------------------ | -------------------------------------------------------- | -------- |
-| [`scope aliases`](/commands/docs/scope_aliases.md)           | Output info on the aliases in the current scope.         | built-in |
-| [`scope commands`](/commands/docs/scope_commands.md)         | Output info on the commands in the current scope.        | built-in |
-| [`scope engine-stats`](/commands/docs/scope_engine-stats.md) | Output stats on the engine in the current state.         | built-in |
-| [`scope externs`](/commands/docs/scope_externs.md)           | Output info on the known externals in the current scope. | built-in |
-| [`scope modules`](/commands/docs/scope_modules.md)           | Output info on the modules in the current scope.         | built-in |
-| [`scope variables`](/commands/docs/scope_variables.md)       | Output info on the variables in the current scope.       | built-in |
+| name                                                         | description                                                                                   | type     |
+| ------------------------------------------------------------ | --------------------------------------------------------------------------------------------- | -------- |
+| [`scope aliases`](/commands/docs/scope_aliases.md)           | Output info on the aliases in the current scope.                                              | built-in |
+| [`scope commands`](/commands/docs/scope_commands.md)         | Output info on the commands in the current scope.                                             | built-in |
+| [`scope engine-stats`](/commands/docs/scope_engine-stats.md) | Output stats on the engine in the current state, including interactive last-result size info. | built-in |
+| [`scope externs`](/commands/docs/scope_externs.md)           | Output info on the known externals in the current scope.                                      | built-in |
+| [`scope modules`](/commands/docs/scope_modules.md)           | Output info on the modules in the current scope.                                              | built-in |
+| [`scope variables`](/commands/docs/scope_variables.md)       | Output info on the variables in the current scope.                                            | built-in |

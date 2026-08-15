@@ -2,7 +2,7 @@
 title: math abs
 categories: |
   math
-version: 0.114.0
+version: 0.115.0
 math: |
   Returns the absolute value of a number.
 usage: |
@@ -18,7 +18,11 @@ contributors: false
 
 ## Signature
 
-```> math abs {flags} ```
+```> math abs {flags} ...rest```
+
+## Parameters
+
+ -  `...rest`: The cell-paths/columns to operate on.
 
 
 ## Input/output types:
@@ -27,9 +31,12 @@ contributors: false
 | -------------- | -------------- |
 | number         | number         |
 | duration       | duration       |
+| filesize       | filesize       |
 | list&lt;number&gt;   | list&lt;number&gt;   |
 | list&lt;duration&gt; | list&lt;duration&gt; |
+| list&lt;filesize&gt; | list&lt;filesize&gt; |
 | range          | list&lt;number&gt;   |
+| record         | record         |
 ## Examples
 
 Compute absolute value of each number in a list of numbers.
@@ -41,4 +48,36 @@ Compute absolute value of each number in a list of numbers.
 │ 2 │     25 │
 ╰───┴────────╯
 
+```
+
+Compute the absolute value of list-valued columns in a record.
+```nu
+> {alice: [-1 -2 -3], bob: [-4 -5]} | math abs
+╭───────┬───────────╮
+│       │ ╭───┬───╮ │
+│ alice │ │ 0 │ 1 │ │
+│       │ │ 1 │ 2 │ │
+│       │ │ 2 │ 3 │ │
+│       │ ╰───┴───╯ │
+│       │ ╭───┬───╮ │
+│ bob   │ │ 0 │ 4 │ │
+│       │ │ 1 │ 5 │ │
+│       │ ╰───┴───╯ │
+╰───────┴───────────╯
+```
+
+Compute the absolute value of a single column using a cell path.
+```nu
+> {alice: [-1 -2 -3], bob: [-4 -5]} | math abs alice
+╭───────┬────────────╮
+│       │ ╭───┬───╮  │
+│ alice │ │ 0 │ 1 │  │
+│       │ │ 1 │ 2 │  │
+│       │ │ 2 │ 3 │  │
+│       │ ╰───┴───╯  │
+│       │ ╭───┬────╮ │
+│ bob   │ │ 0 │ -4 │ │
+│       │ │ 1 │ -5 │ │
+│       │ ╰───┴────╯ │
+╰───────┴────────────╯
 ```

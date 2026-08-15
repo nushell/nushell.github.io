@@ -2,7 +2,7 @@
 title: str camel-case
 categories: |
   strings
-version: 0.114.0
+version: 0.115.0
 strings: |
   Convert a string to camelCase.
 usage: |

@@ -2,7 +2,7 @@
 title: polars math bitwise-trailing-ones
 categories: |
   dataframe
-version: 0.114.0
+version: 0.115.0
 dataframe: |
   Compute the number of trailing set bits for each element in an integer column expression.
 usage: |

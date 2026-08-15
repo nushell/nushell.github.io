@@ -2,7 +2,7 @@
 title: math mode
 categories: |
   math
-version: 0.114.0
+version: 0.115.0
 math: |
   Returns the most frequent element(s) from a list of numbers or tables.
 usage: |
@@ -18,7 +18,11 @@ contributors: false
 
 ## Signature
 
-```> math mode {flags} ```
+```> math mode {flags} ...rest```
+
+## Parameters
+
+ -  `...rest`: The cell-paths/columns to operate on.
 
 
 ## Input/output types:
@@ -29,6 +33,7 @@ contributors: false
 | list&lt;duration&gt; | list&lt;duration&gt; |
 | list&lt;filesize&gt; | list&lt;filesize&gt; |
 | table          | record         |
+| record         | record         |
 ## Examples
 
 Compute the mode(s) of a list of numbers.
@@ -54,4 +59,32 @@ Compute the mode(s) of the columns of a table.
 │   │ │ 2 │  5 │ │
 │   │ ╰───┴────╯ │
 ╰───┴────────────╯
+```
+
+Compute the mode(s) of list-valued columns in a record.
+```nu
+> {alice: [1 1 2 3], bob: [5 5 6]} | math mode
+╭───────┬───────────╮
+│       │ ╭───┬───╮ │
+│ alice │ │ 0 │ 1 │ │
+│       │ ╰───┴───╯ │
+│       │ ╭───┬───╮ │
+│ bob   │ │ 0 │ 5 │ │
+│       │ ╰───┴───╯ │
+╰───────┴───────────╯
+```
+
+Compute the mode(s) of a single column using a cell path.
+```nu
+> {alice: [1 1 2 3], bob: [5 5 6]} | math mode alice
+╭───────┬───────────╮
+│       │ ╭───┬───╮ │
+│ alice │ │ 0 │ 1 │ │
+│       │ ╰───┴───╯ │
+│       │ ╭───┬───╮ │
+│ bob   │ │ 0 │ 5 │ │
+│       │ │ 1 │ 5 │ │
+│       │ │ 2 │ 6 │ │
+│       │ ╰───┴───╯ │
+╰───────┴───────────╯
 ```

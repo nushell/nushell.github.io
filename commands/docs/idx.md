@@ -2,7 +2,7 @@
 title: idx
 categories: |
   filesystem
-version: 0.114.0
+version: 0.115.0
 filesystem: |
   Manage in-memory file index state.
 usage: |
@@ -27,7 +27,7 @@ contributors: false
 | ------- | ------ |
 | nothing | string |
 ## Notes
-Use one of the subcommands: init, status, find, search, export, import, drop, dirs, files. Watch mode keeps the index warm as files change; disable it when you only need a snapshot of the current tree.
+Use one of the subcommands: init, status, find, search, watch, drop, dirs, files. By default `idx init` enables filesystem watching so the index updates as files change; pass `--no-watch` for a static index. Use `idx watch` to stream change events from that live index into a pipeline.
 
 ## Subcommands:
 
@@ -35,10 +35,9 @@ Use one of the subcommands: init, status, find, search, export, import, drop, di
 | -------------------------------------------- | ----------------------------------------------------------------------- | -------- |
 | [`idx dirs`](/commands/docs/idx_dirs.md)     | List indexed directories, or fuzzy-match directories by query.          | built-in |
 | [`idx drop`](/commands/docs/idx_drop.md)     | Drop the current idx runtime from memory.                               | built-in |
-| [`idx export`](/commands/docs/idx_export.md) | Persist idx state to disk.                                              | built-in |
 | [`idx files`](/commands/docs/idx_files.md)   | List indexed files, or fuzzy-match files by query.                      | built-in |
 | [`idx find`](/commands/docs/idx_find.md)     | Search idx with fuzzy matching across files and directories by default. | built-in |
-| [`idx import`](/commands/docs/idx_import.md) | Import idx state from disk.                                             | built-in |
 | [`idx init`](/commands/docs/idx_init.md)     | Initialize the in-memory idx index for a path.                          | built-in |
 | [`idx search`](/commands/docs/idx_search.md) | Search indexed file contents.                                           | built-in |
 | [`idx status`](/commands/docs/idx_status.md) | Show status information for the global in-memory idx runtime.           | built-in |
+| [`idx watch`](/commands/docs/idx_watch.md)   | Stream filesystem change events from the live idx index.                | built-in |

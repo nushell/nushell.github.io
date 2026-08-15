@@ -2,7 +2,7 @@
 title: bytes starts-with
 categories: |
   bytes
-version: 0.114.0
+version: 0.115.0
 bytes: |
   Check if binary data starts with a pattern.
 usage: |

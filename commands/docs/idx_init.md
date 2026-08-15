@@ -2,7 +2,7 @@
 title: idx init
 categories: |
   filesystem
-version: 0.114.0
+version: 0.115.0
 filesystem: |
   Initialize the in-memory idx index for a path.
 usage: |
@@ -58,4 +58,4 @@ Initialize idx without filesystem watching.
 ```
 
 ## Notes
-By default idx init returns immediately and indexing continues in the background. Use `idx status` to check when scanning completes. Pass `--wait` to block until the initial scan finishes. Filesystem watching is enabled by default; pass `--no-watch` to disable it.
+By default idx init returns immediately and indexing continues in the background. Use `idx status` to check when scanning completes. Pass `--wait` to block until the initial scan finishes. Filesystem watching is enabled by default so the index stays warm and `idx watch` can stream events; pass `--no-watch` to disable both.

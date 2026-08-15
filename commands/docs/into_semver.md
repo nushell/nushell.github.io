@@ -2,11 +2,11 @@
 title: into semver
 categories: |
   conversions
-version: 0.114.0
+version: 0.115.0
 conversions: |
-  Convert a value to a semantic version.
+  Convert a value (string, record, or semver) to a semantic version.
 usage: |
-  Convert a value to a semantic version.
+  Convert a value (string, record, or semver) to a semantic version.
 editLink: false
 contributors: false
 ---
@@ -14,20 +14,34 @@ contributors: false
 
 # `into semver` for [conversions](/commands/categories/conversions.md)
 
-<div class='command-title'>Convert a value to a semantic version.</div>
+<div class='command-title'>Convert a value (string, record, or semver) to a semantic version.</div>
 
 ## Signature
 
-```> into semver {flags} ```
+```> into semver {flags} ...rest```
+
+## Flags
+
+ -  `--loose, -l`: Allow common non-strict prefixes such as v1.2.3, v.1.2.3, v:1.2.3, v-1.2.3, or v_1.2.3
+
+## Parameters
+
+ -  `...rest`: For a data structure input, convert data at the given cell paths.
 
 
 ## Input/output types:
 
-| input  | output |
-| ------ | ------ |
-| string | semver |
-| semver | semver |
-| record | semver |
+| input        | output       |
+| ------------ | ------------ |
+| string       | semver       |
+| semver       | semver       |
+| record       | semver       |
+| record       | record       |
+| table        | table        |
+| list&lt;string&gt; | list&lt;semver&gt; |
+| list&lt;semver&gt; | list&lt;semver&gt; |
+| table        | list&lt;semver&gt; |
+| any          | semver       |
 ## Examples
 
 Convert a string to a semver value
@@ -47,3 +61,18 @@ Convert a record to a semver value
 > {major: 1, minor: 2, patch: 3} | into semver
 
 ```
+
+Parse a version with a common leading v prefix
+```nu
+> 'v1.2.3' | into semver --loose
+
+```
+
+Parse versions like v.1.2.3, v:1.2.3, v-1.2.3, or v_1.2.3
+```nu
+> ['v.1.2.3' 'v:2.0.0' 'v-3.0.0' 'v_4.0.0'] | into semver --loose
+
+```
+
+## Notes
+From a record: major/minor/patch are required; pre, build, and prefix are optional. prefix is display-only metadata (e.g. "v"); re-parsing from text with --loose only accepts recognized loose prefixes (v/V with optional . : - _).

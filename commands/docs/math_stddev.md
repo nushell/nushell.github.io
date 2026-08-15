@@ -2,7 +2,7 @@
 title: math stddev
 categories: |
   math
-version: 0.114.0
+version: 0.115.0
 math: |
   Returns the standard deviation of a list of numbers, or of each column in a table.
 usage: |
@@ -18,21 +18,27 @@ contributors: false
 
 ## Signature
 
-```> math stddev {flags} ```
+```> math stddev {flags} ...rest```
 
 ## Flags
 
  -  `--sample, -s`: Calculate sample standard deviation (i.e. using N-1 as the denominator).
 
+## Parameters
+
+ -  `...rest`: The cell-paths/columns to operate on.
+
 
 ## Input/output types:
 
-| input        | output |
-| ------------ | ------ |
-| list&lt;number&gt; | number |
-| range        | number |
-| table        | record |
-| record       | record |
+| input          | output   |
+| -------------- | -------- |
+| list&lt;number&gt;   | number   |
+| list&lt;duration&gt; | duration |
+| list&lt;filesize&gt; | filesize |
+| range          | number   |
+| table          | record   |
+| record         | record   |
 ## Examples
 
 Compute the standard deviation of a list of numbers.
@@ -50,8 +56,29 @@ Compute the sample standard deviation of a list of numbers.
 Compute the standard deviation of each column in a table.
 ```nu
 > [[a b]; [1 2] [3 4]] | math stddev
-╭───┬───╮
-│ a │ 1 │
-│ b │ 1 │
-╰───┴───╯
+╭───┬──────╮
+│ a │ 1.00 │
+│ b │ 1.00 │
+╰───┴──────╯
+```
+
+Compute the standard deviation of list-valued columns in a record.
+```nu
+> {alice: [1 3], bob: [4 6]} | math stddev
+╭───────┬──────╮
+│ alice │ 1.00 │
+│ bob   │ 1.00 │
+╰───────┴──────╯
+```
+
+Compute the standard deviation of a single column using a cell path.
+```nu
+> {alice: [1 3], bob: [4 6]} | math stddev alice
+╭───────┬───────────╮
+│ alice │ 1.00      │
+│       │ ╭───┬───╮ │
+│ bob   │ │ 0 │ 4 │ │
+│       │ │ 1 │ 6 │ │
+│       │ ╰───┴───╯ │
+╰───────┴───────────╯
 ```

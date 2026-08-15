@@ -2,7 +2,7 @@
 title: math round
 categories: |
   math
-version: 0.114.0
+version: 0.115.0
 math: |
   Returns the input number rounded to the specified precision.
 usage: |
@@ -18,20 +18,29 @@ contributors: false
 
 ## Signature
 
-```> math round {flags} ```
+```> math round {flags} ...rest```
 
 ## Flags
 
  -  `--precision, -p {number}`: Digits of precision.
 
+## Parameters
+
+ -  `...rest`: The cell-paths/columns to operate on.
+
 
 ## Input/output types:
 
-| input        | output       |
-| ------------ | ------------ |
-| number       | number       |
-| list&lt;number&gt; | list&lt;number&gt; |
-| range        | list&lt;number&gt; |
+| input          | output         |
+| -------------- | -------------- |
+| number         | number         |
+| duration       | duration       |
+| filesize       | filesize       |
+| list&lt;number&gt;   | list&lt;number&gt;   |
+| list&lt;duration&gt; | list&lt;duration&gt; |
+| list&lt;filesize&gt; | list&lt;filesize&gt; |
+| range          | list&lt;number&gt;   |
+| record         | record         |
 ## Examples
 
 Apply the round function to a list of numbers.
@@ -66,3 +75,44 @@ Apply negative precision to a list of numbers.
 ╰───┴──────╯
 
 ```
+
+Apply the round function to list-valued columns in a record.
+```nu
+> {alice: [1.2 2.7 3.5], bob: [4.1 5.9]} | math round
+╭───────┬───────────╮
+│       │ ╭───┬───╮ │
+│ alice │ │ 0 │ 1 │ │
+│       │ │ 1 │ 3 │ │
+│       │ │ 2 │ 4 │ │
+│       │ ╰───┴───╯ │
+│       │ ╭───┬───╮ │
+│ bob   │ │ 0 │ 4 │ │
+│       │ │ 1 │ 6 │ │
+│       │ ╰───┴───╯ │
+╰───────┴───────────╯
+```
+
+Apply the round function to a single column using a cell path.
+```nu
+> {alice: [1.2 2.7 3.5], bob: [4.1 5.9]} | math round alice
+╭───────┬──────────────╮
+│       │ ╭───┬───╮    │
+│ alice │ │ 0 │ 1 │    │
+│       │ │ 1 │ 3 │    │
+│       │ │ 2 │ 4 │    │
+│       │ ╰───┴───╯    │
+│       │ ╭───┬──────╮ │
+│ bob   │ │ 0 │ 4.10 │ │
+│       │ │ 1 │ 5.90 │ │
+│       │ ╰───┴──────╯ │
+╰───────┴──────────────╯
+```
+
+Filesize values are already whole bytes, so rounding is a no-op.
+```nu
+> 2.1KB | math round
+2.1 kB
+```
+
+## Notes
+Filesize and duration values are stored as integers in base units (bytes and nanoseconds). With no display unit to round against, `math round` is the identity function for those types. `--precision` is not supported for filesize or duration.

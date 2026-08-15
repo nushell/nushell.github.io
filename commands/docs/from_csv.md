@@ -2,7 +2,7 @@
 title: from csv
 categories: |
   formats
-version: 0.114.0
+version: 0.115.0
 formats: |
   Parse text as .csv and create table.
 usage: |

@@ -2,7 +2,7 @@
 title: path type
 categories: |
   path
-version: 0.114.0
+version: 0.115.0
 path: |
   Get the type of the object a path refers to (e.g., file, dir, symlink).
 usage: |
@@ -33,6 +33,12 @@ Show type of a filepath.
 ```nu
 > '.' | path type
 dir
+```
+
+Empty string is not a path.
+```nu
+> '' | path type | is-empty
+true
 ```
 
 Show type of filepaths in a list.

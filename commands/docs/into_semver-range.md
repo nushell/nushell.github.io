@@ -2,7 +2,7 @@
 title: into semver-range
 categories: |
   conversions
-version: 0.114.0
+version: 0.115.0
 conversions: |
   Convert a string to a semver range.
 usage: |
@@ -19,6 +19,10 @@ contributors: false
 ## Signature
 
 ```> into semver-range {flags} ```
+
+## Flags
+
+ -  `--loose, -l`: Allow common non-strict version prefixes such as v1.2.3, v.1.2.3, v:1.2.3, v-1.2.3, or v_1.2.3 inside the range
 
 
 ## Input/output types:
@@ -38,5 +42,11 @@ Convert a string to a semver range
 Convert a complex range
 ```nu
 > '^1.2.3' | into semver-range
+
+```
+
+Parse a range with a leading v on the version
+```nu
+> '>=v1.0.0' | into semver-range --loose
 
 ```

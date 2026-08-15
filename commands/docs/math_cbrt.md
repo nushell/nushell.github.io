@@ -2,7 +2,7 @@
 title: math cbrt
 categories: |
   math
-version: 0.114.0
+version: 0.115.0
 math: |
   Returns the real-valued cube root of the input number.
 usage: |
@@ -18,7 +18,11 @@ contributors: false
 
 ## Signature
 
-```> math cbrt {flags} ```
+```> math cbrt {flags} ...rest```
+
+## Parameters
+
+ -  `...rest`: The cell-paths/columns to operate on.
 
 
 ## Input/output types:
@@ -28,6 +32,7 @@ contributors: false
 | number       | float        |
 | list&lt;number&gt; | list&lt;float&gt;  |
 | range        | list&lt;number&gt; |
+| record       | record       |
 ## Examples
 
 Compute the cube root of each number in a list.
@@ -38,4 +43,36 @@ Compute the cube root of each number in a list.
 │ 1 │ -3.00 │
 ╰───┴───────╯
 
+```
+
+Compute the cube root of list-valued columns in a record.
+```nu
+> {alice: [8 27 64], bob: [125 216]} | math cbrt
+╭───────┬──────────────╮
+│       │ ╭───┬──────╮ │
+│ alice │ │ 0 │ 2.00 │ │
+│       │ │ 1 │ 3.00 │ │
+│       │ │ 2 │ 4.00 │ │
+│       │ ╰───┴──────╯ │
+│       │ ╭───┬──────╮ │
+│ bob   │ │ 0 │ 5.00 │ │
+│       │ │ 1 │ 6.00 │ │
+│       │ ╰───┴──────╯ │
+╰───────┴──────────────╯
+```
+
+Compute the cube root of a single column using a cell path.
+```nu
+> {alice: [8 27 64], bob: [125 216]} | math cbrt alice
+╭───────┬──────────────╮
+│       │ ╭───┬──────╮ │
+│ alice │ │ 0 │ 2.00 │ │
+│       │ │ 1 │ 3.00 │ │
+│       │ │ 2 │ 4.00 │ │
+│       │ ╰───┴──────╯ │
+│       │ ╭───┬─────╮  │
+│ bob   │ │ 0 │ 125 │  │
+│       │ │ 1 │ 216 │  │
+│       │ ╰───┴─────╯  │
+╰───────┴──────────────╯
 ```

@@ -2,7 +2,7 @@
 title: polars selector by-dtype
 categories: |
   expression
-version: 0.114.0
+version: 0.115.0
 expression: |
   Creates a selector that selects columns by data type.
 usage: |

@@ -2,7 +2,7 @@
 title: return
 categories: |
   core
-version: 0.114.0
+version: 0.115.0
 core: |
   Return early from a custom command.
 usage: |

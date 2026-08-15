@@ -2,7 +2,7 @@
 title: math sqrt
 categories: |
   math
-version: 0.114.0
+version: 0.115.0
 math: |
   Returns the square root of the input number.
 usage: |
@@ -18,7 +18,11 @@ contributors: false
 
 ## Signature
 
-```> math sqrt {flags} ```
+```> math sqrt {flags} ...rest```
+
+## Parameters
+
+ -  `...rest`: The cell-paths/columns to operate on.
 
 
 ## Input/output types:
@@ -28,6 +32,7 @@ contributors: false
 | number       | float        |
 | list&lt;number&gt; | list&lt;float&gt;  |
 | range        | list&lt;number&gt; |
+| record       | record       |
 ## Examples
 
 Compute the square root of each number in a list.
@@ -38,4 +43,38 @@ Compute the square root of each number in a list.
 │ 1 │ 4.00 │
 ╰───┴──────╯
 
+```
+
+Apply square root to list-valued columns in a record.
+```nu
+> {alice: [1 4 9], bob: [16 25 36]} | math sqrt
+╭───────┬──────────────╮
+│       │ ╭───┬──────╮ │
+│ alice │ │ 0 │ 1.00 │ │
+│       │ │ 1 │ 2.00 │ │
+│       │ │ 2 │ 3.00 │ │
+│       │ ╰───┴──────╯ │
+│       │ ╭───┬──────╮ │
+│ bob   │ │ 0 │ 4.00 │ │
+│       │ │ 1 │ 5.00 │ │
+│       │ │ 2 │ 6.00 │ │
+│       │ ╰───┴──────╯ │
+╰───────┴──────────────╯
+```
+
+Apply square root to a single column using a cell path.
+```nu
+> {alice: [1 4 9], bob: [16 25 36]} | math sqrt alice
+╭───────┬──────────────╮
+│       │ ╭───┬──────╮ │
+│ alice │ │ 0 │ 1.00 │ │
+│       │ │ 1 │ 2.00 │ │
+│       │ │ 2 │ 3.00 │ │
+│       │ ╰───┴──────╯ │
+│       │ ╭───┬────╮   │
+│ bob   │ │ 0 │ 16 │   │
+│       │ │ 1 │ 25 │   │
+│       │ │ 2 │ 36 │   │
+│       │ ╰───┴────╯   │
+╰───────┴──────────────╯
 ```

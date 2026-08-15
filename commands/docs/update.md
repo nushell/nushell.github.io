@@ -2,7 +2,7 @@
 title: update
 categories: |
   filters
-version: 0.114.0
+version: 0.115.0
 filters: |
   Update an existing column to have a new value.
 usage: |
@@ -33,6 +33,7 @@ contributors: false
 | record    | record    |
 | table     | table     |
 | list&lt;any&gt; | list&lt;any&gt; |
+| matrix    | matrix    |
 ## Examples
 
 Update a column value.
@@ -86,6 +87,12 @@ Use a closure to compute a new value at an index.
 │ 2 │ 3 │
 ╰───┴───╯
 
+```
+
+Update a row in a matrix
+```nu
+> [[1 2] [3 4]] | into matrix | update 0 [5 6] | matrix into-nu | to nuon
+[[5.0, 6.0], [3.0, 4.0]]
 ```
 
 ## Notes

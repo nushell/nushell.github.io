@@ -2,7 +2,7 @@
 title: math median
 categories: |
   math
-version: 0.114.0
+version: 0.115.0
 math: |
   Computes the median of a list of numbers.
 usage: |
@@ -18,7 +18,11 @@ contributors: false
 
 ## Signature
 
-```> math median {flags} ```
+```> math median {flags} ...rest```
+
+## Parameters
+
+ -  `...rest`: The cell-paths/columns to operate on.
 
 
 ## Input/output types:
@@ -52,4 +56,26 @@ Find the median of a list of file sizes.
 ```nu
 > [5KB 10MB 200B] | math median
 5.0 kB
+```
+
+Compute the median of list-valued columns in a record.
+```nu
+> {alice: [3 1 2], bob: [4 5 6]} | math median
+╭───────┬───╮
+│ alice │ 2 │
+│ bob   │ 5 │
+╰───────┴───╯
+```
+
+Compute the median of a single column using a cell path.
+```nu
+> {alice: [3 1 2], bob: [4 5 6]} | math median alice
+╭───────┬───────────╮
+│ alice │ 2         │
+│       │ ╭───┬───╮ │
+│ bob   │ │ 0 │ 4 │ │
+│       │ │ 1 │ 5 │ │
+│       │ │ 2 │ 6 │ │
+│       │ ╰───┴───╯ │
+╰───────┴───────────╯
 ```

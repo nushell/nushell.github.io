@@ -2,7 +2,7 @@
 title: move
 categories: |
   filters
-version: 0.114.0
+version: 0.115.0
 filters: |
   Moves columns relative to other columns or make them the first/last columns. Flags are mutually exclusive.
 usage: |

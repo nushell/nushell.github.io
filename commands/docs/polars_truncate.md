@@ -2,7 +2,7 @@
 title: polars truncate
 categories: |
   expression
-version: 0.114.0
+version: 0.115.0
 expression: |
   Divide the date/datetime range into buckets.
 usage: |
@@ -40,7 +40,7 @@ Truncate a series of dates by period length
 │ # │  datetime   │  truncated  │
 ├───┼─────────────┼─────────────┤
 │ 0 │ 2 years ago │ 2 years ago │
-│ 1 │ a year ago  │ a year ago  │
+│ 1 │ 2 years ago │ 2 years ago │
 │ 2 │ a year ago  │ a year ago  │
 │ 3 │ a year ago  │ a year ago  │
 ╰───┴─────────────┴─────────────╯

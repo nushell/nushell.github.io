@@ -2,7 +2,7 @@
 title: error
 categories: |
   core
-version: 0.114.0
+version: 0.115.0
 core: |
   Various commands for working with errors.
 usage: |

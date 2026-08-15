@@ -2,7 +2,7 @@
 title: idx search
 categories: |
   filesystem
-version: 0.114.0
+version: 0.115.0
 filesystem: |
   Search indexed file contents.
 usage: |
@@ -59,7 +59,7 @@ Search with multiple patterns simultaneously.
 
 Include 2 lines of context before and 5 lines after each match.
 ```nu
-> idx search error -2..5
+> idx search --context -2..5 error
 
 ```
 

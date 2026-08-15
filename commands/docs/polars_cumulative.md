@@ -2,7 +2,7 @@
 title: polars cumulative
 categories: |
   dataframe
-version: 0.114.0
+version: 0.115.0
 dataframe: |
   Cumulative calculation for a column or series.
 usage: |

@@ -2,7 +2,7 @@
 title: job send
 categories: |
   experimental
-version: 0.114.0
+version: 0.115.0
 experimental: |
   Send a message to the mailbox of a job.
 usage: |

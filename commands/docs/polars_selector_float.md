@@ -2,7 +2,7 @@
 title: polars selector float
 categories: |
   expression
-version: 0.114.0
+version: 0.115.0
 expression: |
   Select all float columns.
 usage: |

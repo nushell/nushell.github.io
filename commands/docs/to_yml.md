@@ -2,7 +2,7 @@
 title: to yml
 categories: |
   formats
-version: 0.114.0
+version: 0.115.0
 formats: |
   Convert table into .yaml/.yml text.
 usage: |
@@ -23,6 +23,13 @@ contributors: false
 ## Flags
 
  -  `--serialize, -s`: Serialize nushell types that cannot be deserialized.
+ -  `--non-roundtrip {string}`: How to handle values that are non-roundtrippable.
+ -  `--spec {string}`: YAML spec version ('1.1' or '1.2' (default)).
+ -  `--add-directives, -d`: Add YAML document directives.
+ -  `--multiple, -m`: Given a list, serialize a multi document stream.
+ -  `--indent, -i {int}`: Configure the indent.
+ -  `--compact-list-indent`: Emit lists with a more compact indentation style.
+ -  `--quote, -q {string}`: String quote style ('auto' (default), 'single' or 'double')
 
 
 ## Input/output types:
@@ -35,7 +42,14 @@ contributors: false
 Outputs a YAML string representing the contents of this table.
 ```nu
 > [[foo bar]; ["1" "2"]] | to yml
-- foo: '1'
-  bar: '2'
+- foo: "1"
+  bar: "2"
+
+```
+
+Convert a nushell specific type into YAML.
+```nu
+> $.1.abc | to yml
+!cell-path $.1.abc
 
 ```

@@ -2,7 +2,7 @@
 title: debug env
 categories: |
   debug
-version: 0.114.0
+version: 0.115.0
 debug: |
   Show environment variables as external commands would get it.
 usage: |

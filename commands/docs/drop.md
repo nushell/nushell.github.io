@@ -2,11 +2,11 @@
 title: drop
 categories: |
   filters
-version: 0.114.0
+version: 0.115.0
 filters: |
-  Remove items/rows from the end of the input list/table. Counterpart of `skip`. Opposite of `last`.
+  Remove items/rows from the end of the input list/table, or remove bytes from the end of binary data. Counterpart of `skip`. Opposite of `last`. For binary input, `rows` can also be specified as a filesize.
 usage: |
-  Remove items/rows from the end of the input list/table. Counterpart of `skip`. Opposite of `last`.
+  Remove items/rows from the end of the input list/table, or remove bytes from the end of binary data. Counterpart of `skip`. Opposite of `last`. For binary input, `rows` can also be specified as a filesize.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `drop` for [filters](/commands/categories/filters.md)
 
-<div class='command-title'>Remove items&#x2f;rows from the end of the input list&#x2f;table. Counterpart of `skip`. Opposite of `last`.</div>
+<div class='command-title'>Remove items&#x2f;rows from the end of the input list&#x2f;table, or remove bytes from the end of binary data. Counterpart of `skip`. Opposite of `last`. For binary input, `rows` can also be specified as a filesize.</div>
 
 ## Signature
 
@@ -31,6 +31,7 @@ contributors: false
 | --------- | --------- |
 | table     | table     |
 | list&lt;any&gt; | list&lt;any&gt; |
+| binary    | binary    |
 ## Examples
 
 Remove the last item of a list
@@ -74,6 +75,14 @@ Remove the last row in a table
 ├───┼───┼───┤
 │ 0 │ 1 │ 2 │
 ╰───┴───┴───╯
+
+```
+
+Remove the last 2 bytes of a binary value, using a filesize argument
+```nu
+> 0x[01 23 45] | drop 2b
+Length: 1 (0x1) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   01                                                   •
 
 ```
 
