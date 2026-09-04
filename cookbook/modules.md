@@ -125,4 +125,4 @@ This kind of overlaying environments can be used to scope more elaborate virtual
 
 Tools like conda or Python virtualenv manage and isolate sets of environment variables.
 The [official virtualenv integration](https://github.com/pypa/virtualenv/blob/main/src/virtualenv/activation/nushell/activate.nu) makes use of these concepts.
-And our nu_scripts repository has a an [unofficial Conda module](https://github.com/nushell/nu_scripts/tree/main/modules/virtual_environments).
+And our nu_scripts repository has an [unofficial Conda module](https://github.com/nushell/nu_scripts/tree/main/modules/virtual_environments).

@@ -66,7 +66,7 @@ keychain --eval --quiet <your ssh keys, eg. id_ed25519>
 
 ## Non-nushell workarounds
 
-However, the commonly recommended approach involves running an ssh-agent so it establishes an user-wide socket for processes to connect to.
+However, the commonly recommended approach involves running an ssh-agent so it establishes a user-wide socket for processes to connect to.
 
 Here are two common ways to achieve this.
 

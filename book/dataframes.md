@@ -61,7 +61,7 @@ polars store-ls | select key type columns rows estimated_size
 ```
 
 ::: tip
-As of nushell 0.97, `polars open` will open as a lazy dataframe instead of a eager dataframe.
+As of nushell 0.97, `polars open` will open as a lazy dataframe instead of an eager dataframe.
 To open as an eager dataframe, use the `--eager` flag.
 :::
 
@@ -1119,7 +1119,7 @@ This list may be outdated. To get the up-to-date command list, see [Dataframe](/
 | polars drop-duplicates | dataframe             | Drops duplicate values in dataframe.                                                             |                         |
 | polars drop-nulls      | dataframe             | Drops null values in dataframe.                                                                  |                         |
 | polars dummies         | dataframe             | Creates a new dataframe with dummy variables.                                                    |                         |
-| polars explode         | expression, dataframe | Explodes a dataframe or creates a explode expression.                                            |                         |
+| polars explode         | expression, dataframe | Explodes a dataframe or creates an explode expression.                                            |                         |
 | polars expr-not        | expression            | Creates a not expression.                                                                        |                         |
 | polars fetch           | dataframe             | Collects the lazyframe to the selected rows.                                                     |                         |
 | polars fill-nan        | dataframe             | Replaces NaN values with the given expression.                                                   |                         |
