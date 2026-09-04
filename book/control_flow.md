@@ -162,7 +162,7 @@ While it may be tempting to use loops if you're familiar with them in other lang
 
 The biggest downside of loops is that they are statements, unlike [`each`](/commands/docs/each.html) which is an expression. Expressions, like [`each`](/commands/docs/each.html) always result in some output value, however statements do not.
 
-This means that they don't work well with immutable variables and using immutable variables is considered a more [Nushell-style](/book/thinking_in_nu.html#variables-are-immutable). Without a mutable variable declared beforehand in the example in the previous section, it would be impossible to use [`for`](/commands/docs/each.html) to get the list of numbers with incremented numbers, or any value at all.
+This means that they don't work well with immutable variables and using immutable variables is considered a more [Nushell-style](/book/thinking_in_nu.html#variables-are-immutable-by-default). Without a mutable variable declared beforehand in the example in the previous section, it would be impossible to use [`for`](/commands/docs/each.html) to get the list of numbers with incremented numbers, or any value at all.
 
 Statements also don't work in Nushell pipelines which require some output. In fact Nushell will give an error if you try:
 
