@@ -97,7 +97,7 @@ $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 | (Emacs Mode) <kbd>Ctrl</kbd>+<kbd>X</kbd><kbd>Ctrl</kbd>+<kbd>E</kbd> | <kbd>Ctrl/Cmd</kbd>+<kbd>O</kbd> | Edit the command-line in the editor defined by `$env.EDITOR`   |
 | (Vi Command Mode) <kbd>V</kbd>       | <kbd>Ctrl/Cmd</kbd>+<kbd>O</kbd>                              | Edit the command-line in the editor defined by `$env.EDITOR`       |
 
-Most common Emacs-mode and Vi-mode keybindings are also available. See the [Reedline Chapter](line_editor.html#editing-mode).
+Most common Emacs-mode and Vi-mode keybindings are also available. See the [Reedline Chapter](line_editor.html#setting-the-editing-mode).
 
 ::: tip
 In Bash, history substitution occurs immediately after pressing <kbd>Enter</kbd> 

@@ -7,7 +7,7 @@
 | **_Literal Syntax:_** | See [Working with strings](/book/working_with_strings.md)    |
 | **_Casts:_**          | [`into string`](/commands/docs/into_string.md)               |
 | **_See also:_**       | [Handling Strings](/book/loading_data.md#handling-strings)   |
-|                       | [Types of Data - String](/book/types_of_data.md#textstrings) |
+|                       | [Types of Data - String](/book/types_of_data.md#text-strings) |
 
 ## Language Notes:
 
