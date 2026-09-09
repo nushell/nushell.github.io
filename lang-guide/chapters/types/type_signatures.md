@@ -78,4 +78,4 @@ binding will be `bool` and its value will be `true` if the flag is present
 and `false` if not present.
 
 You cannot use the `bool` type as a flag annotation as that is the same
-as the the existence or not of the occurrence of the flag.
+as the existence or not of the occurrence of the flag.

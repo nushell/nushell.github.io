@@ -863,7 +863,7 @@ As expected, the command returns a new dataframe that can be used to do more
 queries.
 
 Continuing with our exploration of `Series`, the next thing that we can do is
-to only get the unique unique values from a series, like this
+to only get the unique values from a series, like this
 
 ```nu
 $df_1 | polars get first | polars unique
@@ -1143,7 +1143,7 @@ This list may be outdated. To get the up-to-date command list, see [Dataframe](/
 | polars implode         | expression            | Aggregates a group to a Series.                                                                  |                         |
 | polars into-df         | any                   | Converts a list, table or record into a dataframe.                                               |                         |
 | polars into-lazy       | any                   | Converts a dataframe into a lazy dataframe.                                                      |                         |
-| polars into-nu         | expression, dataframe | Converts a dataframe or an expression into into nushell value for access and exploration.        |                         |
+| polars into-nu         | expression, dataframe | Converts a dataframe or an expression into nushell value for access and exploration.        |                         |
 | polars is-duplicated   | dataframe             | Creates mask indicating duplicated values.                                                       |                         |
 | polars is-in           | expression, dataframe | Creates an is-in expression or checks to see if the elements are contained in the right series   | in                      |
 | polars is-not-null     | expression, dataframe | Creates mask where value is not null.                                                            |                         |
