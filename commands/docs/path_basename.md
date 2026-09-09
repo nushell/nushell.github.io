@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Get the final component of a path.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> path basename {flags} ```

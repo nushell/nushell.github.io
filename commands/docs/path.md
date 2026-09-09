@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Explore and manipulate paths.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> path {flags} ```

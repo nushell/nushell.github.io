@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Generates all possible combinations defined in brace expansion syntax.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str expand {flags} ```

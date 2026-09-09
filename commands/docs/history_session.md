@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Get the command history session.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> history session {flags} ```

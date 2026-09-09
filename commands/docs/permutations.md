@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Generates all permutations of the input list.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> permutations {flags} ```

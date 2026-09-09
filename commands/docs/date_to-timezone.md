@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert a date to a given time zone.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> date to-timezone {flags} (time zone)```

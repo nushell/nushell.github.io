@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Use mathematical functions as aggregate functions on a list of numbers or tables.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> math {flags} ```

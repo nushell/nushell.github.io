@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Filter values of an input list based on a condition.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> where {flags} (condition)```

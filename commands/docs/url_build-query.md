@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Converts record or table into query string applying percent-encoding.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> url build-query {flags} ```

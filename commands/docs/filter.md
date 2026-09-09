@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Filter values based on a predicate closure.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> filter {flags} (closure)```

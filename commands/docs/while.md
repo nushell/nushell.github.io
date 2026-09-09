@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Conditionally run a block in a loop.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> while {flags} (cond) (block)```

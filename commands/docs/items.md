@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Given a record, iterate on each pair of column name and associated value.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> items {flags} (closure)```

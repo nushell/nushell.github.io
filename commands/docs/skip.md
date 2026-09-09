@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Skip the first several rows of the input. Counterpart of `drop`. Opposite of `first`. For binary input, n can also be specified as a filesize.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> skip {flags} (n)```

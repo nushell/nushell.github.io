@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert value to a glob pattern.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> into glob {flags} ...rest```

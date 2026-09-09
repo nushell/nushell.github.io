@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Inspect pipeline results while running a pipeline.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> inspect {flags} ```

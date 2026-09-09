@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Count the number of items in an input list, rows in a table, or bytes in binary data.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> length {flags} ```

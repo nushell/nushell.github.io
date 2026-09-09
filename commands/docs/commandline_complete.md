@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Complete a string using the default completions.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> commandline complete {flags} ```

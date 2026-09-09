@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Fetch the contents from a URL.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> http get {flags} (URL)```

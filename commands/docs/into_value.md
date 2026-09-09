@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert custom values into base values.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> into value {flags} ```

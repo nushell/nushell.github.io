@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Loop over a range.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> for {flags} (var_name) (range) (block)```

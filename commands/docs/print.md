@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Print the given values to stdout.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> print {flags} ...rest```

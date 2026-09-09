@@ -16,6 +16,17 @@ contributors: false
 
 <div class='command-title'>Horizontal calculation across multiple columns.</div>
 
+::: warning This command requires a plugin
+The `polars horizontal` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
+
 ## Signature
 
 ```> polars horizontal {flags} (type) ...rest```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Reverses the input list or table.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> reverse {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Run a block in a loop.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> loop {flags} (block)```

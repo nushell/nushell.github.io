@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Decode a Base64-encoded value.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> decode base64 {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns the natural logarithm. Base: (math e).</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> math ln {flags} ```

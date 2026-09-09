@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Get the parent directory of a path.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> path dirname {flags} ```

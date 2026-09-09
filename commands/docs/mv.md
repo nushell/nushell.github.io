@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Move files or directories using uutils&#x2f;coreutils mv.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> mv {flags} ...rest```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Check if the process stdin, stdout, or stderr is attached to a terminal device.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> is-terminal {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Sort the input in increasing order.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> sort {flags} ```

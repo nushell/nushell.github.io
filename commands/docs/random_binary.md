@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Generate random bytes.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> random binary {flags} (length)```

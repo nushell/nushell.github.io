@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Find disk usage sizes of specified items.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> du {flags} ...rest```

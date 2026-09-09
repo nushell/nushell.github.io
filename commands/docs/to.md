@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Translate structured data to various formats.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> to {flags} ```

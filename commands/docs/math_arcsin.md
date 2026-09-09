@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns the arcsine of the number.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> math arcsin {flags} ```

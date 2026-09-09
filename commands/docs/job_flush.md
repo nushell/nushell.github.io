@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Clear this job&#x27;s mailbox.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> job flush {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Read multiple streams in parallel and combine them into one stream.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> interleave {flags} ...rest```

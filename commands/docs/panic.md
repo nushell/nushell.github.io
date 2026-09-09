@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Causes nushell to panic.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> panic {flags} (msg)```

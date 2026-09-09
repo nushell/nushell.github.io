@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns the arccosine of the number.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> math arccos {flags} ```

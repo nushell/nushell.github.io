@@ -35,7 +35,7 @@ def plugin-args [plugins: list] {
 def command-names [] {
     let plugins = (plugin-paths)
     let plugin_args = (plugin-args $plugins)
-    nu --no-config-file ...$plugin_args --commands $'scope commands | select name | to json'
+    run-external $nu.current-exe '--no-config-file' ...$plugin_args '--commands' 'scope commands | select name | to json'
         | from json
 }
 
@@ -68,7 +68,7 @@ def make_docs [
     let $nu_path = ($nu_path | default $nu.current-exe)
     let plugins = (plugin-paths $nu_path)
     let plugin_args = (plugin-args $plugins)
-    run-external $nu_path "--no-config-file" ...$plugin_args "make_docs.nu"
+    run-external $nu_path "--no-config-file" ...$plugin_args ($env.FILE_PWD | path join 'make_docs.nu') "generate"
 }
 
 # generate the YAML frontmatter of a command
@@ -172,6 +172,12 @@ def command-doc [command] {
             }
         } | str join " ")
     }
+
+    let command_type = $"## Command Type
+
+`($command.type)`
+
+"
 
     let signatures = $"## Signature
 
@@ -303,7 +309,16 @@ $"($example.description)
         ['', '## Subcommands:', '', $commands, ''] | str join (char newline)
     } else { '' }
 
-    let plugin_commands = (plugin list | flatten)
+    let plugin_commands = (
+        plugin list
+        | update commands { each {|command|
+            match $command {
+                {name: $name} => $name
+                _ => $command
+            }
+        } }
+        | flatten
+    )
     let plugin_warning = if ($command.name in $plugin_commands.commands) {
         let plugin = ($plugin_commands | where commands == $command.name | first)
         [ $"::: warning This command requires a plugin"
@@ -319,7 +334,7 @@ $"($example.description)
     }
 
     let doc = (
-        ($top + $plugin_warning + $signatures + $flags + $parameters + $in_out + $examples + $extra_description + $sub_commands)
+        ($top + $plugin_warning + $command_type + $signatures + $flags + $parameters + $in_out + $examples + $extra_description + $sub_commands)
         | lines
         | each {|line| ($line | str trim -r) }
         | str join (char newline)
@@ -444,7 +459,12 @@ contributors: false
 }
 
 
+# Start generation in a clean process with the bundled plugins loaded.
 def main [] {
+    make_docs
+}
+
+def "main generate" [] {
     # Old commands are currently not deleted because some of them
     # are platform-specific (currently `exec`, `registry query`), and a single run of this script will not regenerate
     # all of them.

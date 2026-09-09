@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Join a structured path or a list of path parts.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> path join {flags} ...rest```

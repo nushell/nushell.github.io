@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Decode bytes into a string.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> decode {flags} (encoding)```

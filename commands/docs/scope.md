@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Commands for getting info about what is in scope.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> scope {flags} ```

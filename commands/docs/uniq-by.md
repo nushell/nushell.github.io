@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Return the distinct values in the input by the given column(s).</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> uniq-by {flags} ...rest```

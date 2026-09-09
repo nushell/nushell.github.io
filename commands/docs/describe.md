@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Describe the type and structure of the value(s) piped in.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> describe {flags} ```

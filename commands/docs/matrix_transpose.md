@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Transpose a matrix (swap rows and columns). For n-dimensional arrays, reverses all axes.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> matrix transpose {flags} ```

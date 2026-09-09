@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Generate random chars uniformly distributed over ASCII letters and numbers: a-z, A-Z and 0-9.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> random chars {flags} ```

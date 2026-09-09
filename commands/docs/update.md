@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Update an existing column to have a new value.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> update {flags} (field) (replacement value)```

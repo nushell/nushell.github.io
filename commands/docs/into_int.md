@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert value to an integer.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> into int {flags} ...rest```

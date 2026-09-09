@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert a string to a semver range.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> into semver-range {flags} ```

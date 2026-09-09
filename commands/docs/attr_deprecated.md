@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Attribute for marking a command or flag as deprecated.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> attr deprecated {flags} (message)```

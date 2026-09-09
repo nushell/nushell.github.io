@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert table into simple Markdown.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> to md {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Export definitions or environment variables from a module.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> export {flags} ```

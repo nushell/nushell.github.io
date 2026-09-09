@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Configure and reset builtin http connection pool.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> http pool {flags} ```

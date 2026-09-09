@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert Nu values into MessagePack.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> to msgpack {flags} ```

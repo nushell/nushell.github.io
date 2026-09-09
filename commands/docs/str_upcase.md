@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert text to uppercase.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str upcase {flags} ...rest```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Rotates a table or record clockwise (default) or counter-clockwise (use --ccw flag).</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> rotate {flags} ...rest```

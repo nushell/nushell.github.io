@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Profile pipeline elements in a closure.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> debug profile {flags} (closure)```

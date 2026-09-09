@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Add specified bytes to the binary input.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> bytes add {flags} (data) ...rest```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Initialize the in-memory idx index for a path.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> idx init {flags} (path)```

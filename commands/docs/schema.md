@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Show the schema of a SQLite database.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> schema {flags} ```

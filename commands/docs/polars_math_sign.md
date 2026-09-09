@@ -16,6 +16,17 @@ contributors: false
 
 <div class='command-title'>Compute the element-wise sign of a column expression, returning -1, 0, or 1.</div>
 
+::: warning This command requires a plugin
+The `polars math sign` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
+
 ## Signature
 
 ```> polars math sign {flags} ```

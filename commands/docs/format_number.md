@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Format a number.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> format number {flags} ```

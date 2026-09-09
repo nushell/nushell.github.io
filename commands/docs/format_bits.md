@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert value to a string of binary data represented by 0 and 1.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> format bits {flags} ...rest```

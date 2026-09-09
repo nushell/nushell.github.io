@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Syntax highlight the input string.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> nu-highlight {flags} ```

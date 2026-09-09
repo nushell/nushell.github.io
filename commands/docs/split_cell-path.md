@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Split a cell-path into its components.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> split cell-path {flags} ```

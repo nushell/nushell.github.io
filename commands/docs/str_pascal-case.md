@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert a string to PascalCase.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str pascal-case {flags} ...rest```

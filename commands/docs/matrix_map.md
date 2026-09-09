@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Apply a closure to each element of a matrix and return a new matrix.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> matrix map {flags} (closure)```

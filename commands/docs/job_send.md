@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Send a message to the mailbox of a job.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> job send {flags} (id)```

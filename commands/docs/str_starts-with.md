@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Check if an input starts with a string.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str starts-with {flags} (string) ...rest```

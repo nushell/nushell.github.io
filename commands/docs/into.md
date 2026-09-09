@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Commands to convert data from one type to another.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> into {flags} ```

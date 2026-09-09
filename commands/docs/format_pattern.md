@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Format columns into a string using a simple pattern.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> format pattern {flags} (pattern)```

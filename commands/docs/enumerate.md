@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Enumerate the elements in a stream.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> enumerate {flags} ```

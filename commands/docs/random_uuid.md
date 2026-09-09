@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Generate a random uuid string of the specified version.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> random uuid {flags} ```

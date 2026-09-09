@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Print a banner for Nushell with information about the project</div>
 
+## Command Type
+
+`custom`
+
 ## Signature
 
 ```> banner {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Output info on the variables in the current scope.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> scope variables {flags} ```

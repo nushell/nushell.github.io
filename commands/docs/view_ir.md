@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>View the compiled IR code for a block of code.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> view ir {flags} (target)```

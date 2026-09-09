@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Capitalize the first letter of text.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str capitalize {flags} ...rest```

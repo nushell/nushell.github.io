@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Kill a background job.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> job kill {flags} (id)```

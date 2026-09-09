@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Compare two strings and return the edit distance&#x2f;Levenshtein distance.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str distance {flags} (compare-string) ...rest```

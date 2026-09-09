@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Open a folder, file, or website in the default application or viewer.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> start {flags} (path)```

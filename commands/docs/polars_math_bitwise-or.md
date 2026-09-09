@@ -16,6 +16,17 @@ contributors: false
 
 <div class='command-title'>Perform an aggregation of bitwise ORs over a column expression.</div>
 
+::: warning This command requires a plugin
+The `polars math bitwise-or` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
+
 ## Signature
 
 ```> polars math bitwise-or {flags} ```

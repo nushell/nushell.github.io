@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Return the current working directory</div>
 
+## Command Type
+
+`custom`
+
 ## Signature
 
 ```> pwd {flags} ```

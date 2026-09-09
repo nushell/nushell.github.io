@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Watch for file changes and execute Nu code when they happen.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> watch {flags} (path) (closure)```

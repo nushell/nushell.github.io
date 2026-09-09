@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Stream filesystem change events from the live idx index.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> idx watch {flags} (pattern)```

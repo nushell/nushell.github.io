@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>List the filenames, sizes, and modification times of items in a directory.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> ls {flags} ...rest```

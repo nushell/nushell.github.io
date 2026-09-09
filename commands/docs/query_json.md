@@ -16,6 +16,17 @@ contributors: false
 
 <div class='command-title'>execute json query on json file (open --raw &lt;file&gt; | query json &#x27;query string&#x27;)</div>
 
+::: warning This command requires a plugin
+The `query json` command resides in the `query` plugin.
+To use this command, you must install and register `nu_plugin_query`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
+
 ## Signature
 
 ```> query json {flags} (query)```

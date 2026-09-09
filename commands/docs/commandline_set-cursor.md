@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Set the current cursor position.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> commandline set-cursor {flags} (pos)```

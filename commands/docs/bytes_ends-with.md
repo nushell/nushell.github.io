@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Check if binary data ends with a pattern.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> bytes ends-with {flags} (pattern) ...rest```

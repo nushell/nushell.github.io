@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Conditionally run a block.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> if {flags} (cond) (then_block) (else_expression)```

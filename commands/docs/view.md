@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Various commands for viewing debug information.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> view {flags} ```

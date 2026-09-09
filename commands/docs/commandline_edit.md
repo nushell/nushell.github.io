@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Modify the current command line input buffer.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> commandline edit {flags} (str)```

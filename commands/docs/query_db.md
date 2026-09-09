@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Query a SQLite database with SQL statements.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> query db {flags} (SQL)```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Generate a list of values by successively invoking a closure.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> generate {flags} (closure) (initial)```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Combine a stream with the input.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> zip {flags} (other)```

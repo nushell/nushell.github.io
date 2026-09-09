@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Sets a default value if a row&#x27;s column is missing or null.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> default {flags} (default value) ...rest```

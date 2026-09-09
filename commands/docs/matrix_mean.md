@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Compute the mean of all elements in a matrix.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> matrix mean {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Stop an installed plugin if it was running.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> plugin stop {flags} (name)```

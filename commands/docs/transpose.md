@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Transposes the table contents so rows become columns and columns become rows.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> transpose {flags} ...rest```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Parse a URL string into structured data.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> url parse {flags} ...rest```

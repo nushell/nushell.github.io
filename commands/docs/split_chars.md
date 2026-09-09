@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Split a string into a list of characters.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> split chars {flags} ```

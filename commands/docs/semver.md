@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Various commands for working with semantic versions.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> semver {flags} ```

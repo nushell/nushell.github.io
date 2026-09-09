@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Search indexed file contents.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> idx search {flags} ...rest```

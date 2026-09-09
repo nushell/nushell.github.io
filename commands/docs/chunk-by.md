@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Divides a sequence into sub-sequences based on a closure.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> chunk-by {flags} (closure)```

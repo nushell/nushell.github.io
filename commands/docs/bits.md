@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Various commands for working with bits.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> bits {flags} ```

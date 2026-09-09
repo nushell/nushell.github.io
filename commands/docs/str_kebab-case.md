@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert a string to kebab-case.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str kebab-case {flags} ...rest```

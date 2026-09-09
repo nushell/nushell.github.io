@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Use definitions from a module as an overlay.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> overlay use {flags} (name) (as)```

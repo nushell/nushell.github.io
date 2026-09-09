@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Merge the input with a record or table, recursively merging values in matching columns.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> merge deep {flags} (value)```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert special record structure into .xml text.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> to xml {flags} ```

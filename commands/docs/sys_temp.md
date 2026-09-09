@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>View the temperatures of system components.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> sys temp {flags} ```

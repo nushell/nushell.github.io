@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Parse text as .toml and create record.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> from toml {flags} ```

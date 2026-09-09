@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert value to a duration.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> into duration {flags} ...rest```

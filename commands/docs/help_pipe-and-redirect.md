@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Show help on nushell pipes and redirects.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> help pipe-and-redirect {flags} ```

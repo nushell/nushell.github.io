@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Get the metadata for items in the stream.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> metadata {flags} (expression)```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Performs logical negation on each bit.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> bits not {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Create directories, with intermediary directories if required using uutils&#x2f;coreutils mkdir.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> mkdir {flags} ...rest```

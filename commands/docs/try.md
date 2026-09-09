@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Try to run a block, if it fails optionally run a catch closure.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> try {flags} (try_block) (catch) (finally)```

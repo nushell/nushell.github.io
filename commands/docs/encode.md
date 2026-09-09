@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Encode a string into bytes.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> encode {flags} (encoding)```

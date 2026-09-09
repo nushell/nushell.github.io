@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Various commands for working with errors.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> error {flags} ```

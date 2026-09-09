@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Infer Nushell datatype from a string.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> detect type {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Access the metadata for the input stream within a closure.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> metadata access {flags} (closure)```

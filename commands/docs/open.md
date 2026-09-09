@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Load a file into a cell, converting to table if possible (avoid by appending &#x27;--raw&#x27;).</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> open {flags} ...rest```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Commands for manipulating overlays.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> overlay {flags} ```

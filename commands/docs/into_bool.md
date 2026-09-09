@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert value to a boolean.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> into bool {flags} ...rest```

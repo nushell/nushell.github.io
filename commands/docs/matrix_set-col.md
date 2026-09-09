@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Replace a column in a 2D matrix.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> matrix set-col {flags} (index) (replacement)```

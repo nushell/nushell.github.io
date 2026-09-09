@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns the most frequent element(s) from a list of numbers or tables.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> math mode {flags} ...rest```

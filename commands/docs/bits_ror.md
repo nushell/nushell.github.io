@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Bitwise rotate right for ints or binary values.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> bits ror {flags} (bits)```

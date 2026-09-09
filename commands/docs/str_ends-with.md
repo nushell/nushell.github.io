@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Check if an input ends with a string.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str ends-with {flags} (string) ...rest```

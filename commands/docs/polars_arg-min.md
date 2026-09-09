@@ -16,6 +16,17 @@ contributors: false
 
 <div class='command-title'>Return index for min value in series.</div>
 
+::: warning This command requires a plugin
+The `polars arg-min` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
+
 ## Signature
 
 ```> polars arg-min {flags} ```

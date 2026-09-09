@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Express a path as relative to another path.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> path relative-to {flags} (path)```

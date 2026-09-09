@@ -16,6 +16,17 @@ contributors: false
 
 <div class='command-title'>execute selector query on html&#x2f;web</div>
 
+::: warning This command requires a plugin
+The `query web` command resides in the `query` plugin.
+To use this command, you must install and register `nu_plugin_query`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
+
 ## Signature
 
 ```> query web {flags} ```

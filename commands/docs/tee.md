@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Copy a stream to another command in parallel.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> tee {flags} (closure)```

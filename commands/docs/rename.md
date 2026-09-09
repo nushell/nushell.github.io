@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Creates a new table with columns renamed.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> rename {flags} ...rest```

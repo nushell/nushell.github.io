@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Define a signature for an external command.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> extern {flags} (def_name) (params)```

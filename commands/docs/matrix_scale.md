@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Multiply all elements of a matrix by a scalar.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> matrix scale {flags} (scalar)```

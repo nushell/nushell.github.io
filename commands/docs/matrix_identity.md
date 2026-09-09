@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Create an identity matrix of the given size.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> matrix identity {flags} (size)```

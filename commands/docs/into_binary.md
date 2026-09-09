@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert value to a binary primitive.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> into binary {flags} ...rest```

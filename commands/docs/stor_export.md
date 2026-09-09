@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Export the in-memory sqlite database to a sqlite database file.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> stor export {flags} ```

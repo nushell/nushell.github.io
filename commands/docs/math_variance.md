@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns the variance of a list of numbers or of each column in a table.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> math variance {flags} ...rest```

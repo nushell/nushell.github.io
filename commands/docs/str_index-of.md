@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns start index of first occurrence of string in input, or -1 if no match.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str index-of {flags} (string) ...rest```

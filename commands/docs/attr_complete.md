@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Attribute for using another command as a completion source for all arguments.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> attr complete {flags} (completer)```

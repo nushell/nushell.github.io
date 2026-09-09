@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Print certain system information using uutils&#x2f;coreutils uname.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> uname {flags} ```

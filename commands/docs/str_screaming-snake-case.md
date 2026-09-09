@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert a string to SCREAMING_SNAKE_CASE.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str screaming-snake-case {flags} ...rest```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Roll table rows up.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> roll up {flags} ```

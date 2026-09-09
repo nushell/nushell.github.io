@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert text to lowercase.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str downcase {flags} ...rest```

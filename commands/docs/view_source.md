@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>View a block, module, or a definition.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> view source {flags} (item)```

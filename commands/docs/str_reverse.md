@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Reverse every string in the pipeline.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str reverse {flags} ...rest```

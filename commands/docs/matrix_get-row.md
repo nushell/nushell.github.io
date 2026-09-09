@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Extract a row from a matrix.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> matrix get-row {flags} (index)```

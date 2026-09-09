@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Join two tables.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> join {flags} (right-table) (left-on) (right-on)```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Hide definitions in the current scope.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> hide {flags} (module) (members)```

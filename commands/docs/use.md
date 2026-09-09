@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Use definitions from a module, making them available in your shell.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> use {flags} (module) ...rest```

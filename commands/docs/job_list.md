@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>List background jobs.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> job list {flags} ```

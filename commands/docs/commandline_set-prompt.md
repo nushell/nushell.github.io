@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Replace the current prompt and repaint it in place, without disturbing the line being edited.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> commandline set-prompt {flags} (prompt)```

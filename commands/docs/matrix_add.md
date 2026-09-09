@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Add a matrix or scalar to a matrix.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> matrix add {flags} (other)```

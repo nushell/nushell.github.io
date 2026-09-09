@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Define a custom module.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> module {flags} (module) (block)```

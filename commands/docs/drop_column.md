@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Remove N columns at the right-hand end of the input table. To remove columns by name, use `reject`.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> drop column {flags} (columns)```

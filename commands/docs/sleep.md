@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Delay for a specified amount of time.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> sleep {flags} (duration) ...rest```

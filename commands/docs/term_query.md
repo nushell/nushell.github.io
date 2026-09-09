@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Query the terminal for information.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> term query {flags} (query)```

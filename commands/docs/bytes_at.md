@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Get bytes from the input defined by a range.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> bytes at {flags} (range) ...rest```

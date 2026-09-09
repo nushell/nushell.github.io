@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Update information in a specified table in the in-memory sqlite database.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> stor update {flags} ```

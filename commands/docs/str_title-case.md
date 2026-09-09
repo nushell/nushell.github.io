@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert a string to Title Case.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str title-case {flags} ...rest```

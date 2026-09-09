@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>List default keybindings.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> keybindings default {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert from nuon to structured data.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> from nuon {flags} ```

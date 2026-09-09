@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Insert a new column, using an expression or closure to create each row&#x27;s values.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> insert {flags} (field) (new value)```

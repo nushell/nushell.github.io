@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Various commands for working with the in-memory sqlite database.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> stor {flags} ```

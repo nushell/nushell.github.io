@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Change the current working directory.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> cd {flags} (path)```

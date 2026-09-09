@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Explain closure contents.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> explain {flags} (closure)```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>View the contents of a span.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> view span {flags} (start) (end)```

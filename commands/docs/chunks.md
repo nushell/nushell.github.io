@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Divide a list, table or binary input into chunks of `chunk_size`. For binary input, `chunk_size` can also be specified as a filesize.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> chunks {flags} (chunk_size)```

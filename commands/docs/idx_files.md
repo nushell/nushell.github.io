@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>List indexed files, or fuzzy-match files by query.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> idx files {flags} (query)```

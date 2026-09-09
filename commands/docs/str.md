@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Various commands for working with string data.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str {flags} ```

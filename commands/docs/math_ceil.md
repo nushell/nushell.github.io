@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns the ceil of a number (smallest integer greater than or equal to that number).</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> math ceil {flags} ...rest```

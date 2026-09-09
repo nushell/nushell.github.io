@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Display Nu version, and its build configuration.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> version {flags} ```

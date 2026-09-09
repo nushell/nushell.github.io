@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Generates all combinations of size k from the input list.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> combinations {flags} (k)```

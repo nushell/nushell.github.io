@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Continue a loop from the next iteration.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> continue {flags} ```

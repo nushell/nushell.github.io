@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Loads an environment update from a record.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> load-env {flags} (update)```

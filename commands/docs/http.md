@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Various commands for working with http methods.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> http {flags} (URL) (data)```

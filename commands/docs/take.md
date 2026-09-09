@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Take only the first n elements of a list, or the first n bytes of a binary value. For binary input, n can also be specified as a filesize.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> take {flags} (n)```

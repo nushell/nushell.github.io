@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns the absolute value of a number.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> math abs {flags} ...rest```

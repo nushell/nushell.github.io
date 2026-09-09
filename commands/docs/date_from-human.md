@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert a human readable datetime string to a datetime.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> date from-human {flags} ```

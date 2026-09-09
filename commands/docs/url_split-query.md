@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Converts query string into table applying percent-decoding.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> url split-query {flags} ```

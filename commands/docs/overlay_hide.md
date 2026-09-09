@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Hide an active overlay.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> overlay hide {flags} (name)```

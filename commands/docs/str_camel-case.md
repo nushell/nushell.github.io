@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert a string to camelCase.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str camel-case {flags} ...rest```

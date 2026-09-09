@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Get input from the user.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> keybindings listen {flags} ```

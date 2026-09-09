@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Save a file.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> save {flags} (filename)```

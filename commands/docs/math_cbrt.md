@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns the real-valued cube root of the input number.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> math cbrt {flags} ...rest```

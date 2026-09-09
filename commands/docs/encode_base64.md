@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Encode a string or binary value using Base64.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> encode base64 {flags} ```

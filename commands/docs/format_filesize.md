@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Converts a column of filesizes to some specified format.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> format filesize {flags} (format value) ...rest```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Define an extern and export it from a module.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> export extern {flags} (def_name) (params)```

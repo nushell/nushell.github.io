@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Search idx with fuzzy matching across files and directories by default.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> idx find {flags} (query)```

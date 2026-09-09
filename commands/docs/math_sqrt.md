@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns the square root of the input number.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> math sqrt {flags} ...rest```

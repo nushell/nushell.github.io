@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns the maximum of a list of values, or of columns in a table.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> math max {flags} ...rest```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>View information about the system network interfaces.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> sys net {flags} ```

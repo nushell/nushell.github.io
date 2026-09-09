@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Create a table in the in-memory sqlite database.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> stor create {flags} ```

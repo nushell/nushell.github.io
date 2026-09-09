@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Find and replace bytes in binary data.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> bytes replace {flags} (find) (replace) ...rest```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Replace a row in a matrix.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> matrix set-row {flags} (index) (replacement)```

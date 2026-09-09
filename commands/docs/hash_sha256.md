@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Hash a value using the sha256 hash algorithm.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> hash sha256 {flags} ...rest```

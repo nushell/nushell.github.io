@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Clear the terminal screen.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> clear {flags} ```

@@ -16,6 +16,17 @@ contributors: false
 
 <div class='command-title'>Select columns by their index position. Supports negative indices (e.g., -1 for the last column).</div>
 
+::: warning This command requires a plugin
+The `polars selector by-index` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
+
 ## Signature
 
 ```> polars selector by-index {flags} ...rest```

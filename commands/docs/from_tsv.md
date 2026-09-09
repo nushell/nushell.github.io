@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Parse text as .tsv and create table.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> from tsv {flags} ```

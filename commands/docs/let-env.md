@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>`let-env FOO = ...` has been removed, use `$env.FOO = ...` instead.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> let-env {flags} (var_name) (initial_value)```

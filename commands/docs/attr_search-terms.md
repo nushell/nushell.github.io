@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Attribute for adding search terms to custom commands.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> attr search-terms {flags} ...rest```

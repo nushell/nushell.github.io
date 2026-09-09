@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Get part of a string. Note that the first character of a string is index 0.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str substring {flags} (range) ...rest```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Unfreeze a frozen process job in foreground.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> job unfreeze {flags} (id)```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Get the current username using uutils&#x2f;coreutils whoami.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> whoami {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Performs bitwise or for ints or binary values.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> bits or {flags} (target)```

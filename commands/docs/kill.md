@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Kill a process using its process ID.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> kill {flags} ...rest```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Runs external command.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> run-external {flags} ...rest```

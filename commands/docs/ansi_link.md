@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Add a link (using OSC 8 escape sequence) to the given string.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> ansi link {flags} ...rest```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>List indexed directories, or fuzzy-match directories by query.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> idx dirs {flags} (query)```

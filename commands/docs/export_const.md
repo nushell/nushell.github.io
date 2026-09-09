@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Use parse-time constant from a module and export them from this module.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> export const {flags} (const_name) (initial_value)```

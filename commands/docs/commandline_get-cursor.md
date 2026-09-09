@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Get the current cursor position.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> commandline get-cursor {flags} ```

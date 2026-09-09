@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Sort by the given cell path or closure.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> sort-by {flags} ...rest```

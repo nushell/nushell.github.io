@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Hash a value using the md5 hash algorithm.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> hash md5 {flags} ...rest```

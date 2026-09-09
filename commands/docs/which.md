@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Finds a program file, alias or custom command. If `application` is not provided, all deduplicated commands will be returned.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> which {flags} ...rest```

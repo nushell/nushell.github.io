@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Edit nushell configuration files.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> config {flags} ```

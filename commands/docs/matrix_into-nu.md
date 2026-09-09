@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert a matrix to a nushell table (list of lists by default).</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> matrix into-nu {flags} ```

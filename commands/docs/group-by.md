@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Splits a list or table into groups, and returns a record containing those groups.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> group-by {flags} ...rest```

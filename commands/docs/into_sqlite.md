@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert table into a SQLite database.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> into sqlite {flags} (file-name)```

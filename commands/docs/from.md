@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Parse a string or binary data into structured data.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> from {flags} ```

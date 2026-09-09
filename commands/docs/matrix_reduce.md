@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Reduce all elements of a matrix to a single value.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> matrix reduce {flags} (closure)```

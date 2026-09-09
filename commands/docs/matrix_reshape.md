@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Change the dimensions of a matrix.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> matrix reshape {flags} (dimensions) ...rest```

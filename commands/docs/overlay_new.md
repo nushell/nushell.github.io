@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Create an empty overlay.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> overlay new {flags} (name)```

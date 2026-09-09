@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Remove specified bytes from the input.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> bytes remove {flags} (pattern) ...rest```

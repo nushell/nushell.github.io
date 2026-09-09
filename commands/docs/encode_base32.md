@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Encode a string or binary value using Base32.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> encode base32 {flags} ```

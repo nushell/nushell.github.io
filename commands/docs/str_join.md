@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Concatenate multiple strings into a single string, with an optional separator between each.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str join {flags} (separator)```

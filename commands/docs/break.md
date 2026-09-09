@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Break a loop.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> break {flags} ```

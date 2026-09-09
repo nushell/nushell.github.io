@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Show the current configuration in a flattened form.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> config flatten {flags} ```

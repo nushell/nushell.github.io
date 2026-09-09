@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Bitwise shift left for ints or binary values.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> bits shl {flags} (bits)```

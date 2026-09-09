@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Delete variables from nushell memory, making them unrecoverable.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> unlet {flags} ...rest```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Escapes special characters in the input string with &#x27;\&#x27;.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str escape-regex {flags} ...rest```

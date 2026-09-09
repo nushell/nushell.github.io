@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Converts a percent-encoded web safe string to a string.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> url decode {flags} ...rest```

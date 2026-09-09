@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Shuffle rows randomly.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> shuffle {flags} ```

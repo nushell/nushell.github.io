@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Ignore selected output streams from the previous command in the pipeline.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> ignore {flags} ```

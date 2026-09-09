@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Converts table data into JSON text.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> to json {flags} ```

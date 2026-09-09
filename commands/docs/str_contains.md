@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Checks if string input contains a substring.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str contains {flags} (string) ...rest```

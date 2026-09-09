@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Output ANSI codes to change color and style of text.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> ansi {flags} (code)```

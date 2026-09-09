@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Split a list into multiple lists using a separator.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> split list {flags} (separator)```

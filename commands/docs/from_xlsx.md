@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Parse binary Excel(.xlsx) data and create table.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> from xlsx {flags} ```

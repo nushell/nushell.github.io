@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Get the current date.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> date now {flags} ```

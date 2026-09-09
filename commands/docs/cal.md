@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Display a calendar.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> cal {flags} ```

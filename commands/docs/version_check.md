@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Checks to see if you have the latest version of nushell.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> version check {flags} ```

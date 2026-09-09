@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Format a given date using a format string.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> format date {flags} (format string)```

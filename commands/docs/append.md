@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Append any number of rows to a table.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> append {flags} (row) ...rest```

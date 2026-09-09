@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Print a &#x27;humanized&#x27; format for the date, relative to now.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> date humanize {flags} ```

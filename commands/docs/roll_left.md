@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Roll record or table columns left.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> roll left {flags} ```

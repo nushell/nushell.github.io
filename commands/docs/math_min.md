@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Finds the minimum within a list of values or tables.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> math min {flags} ...rest```

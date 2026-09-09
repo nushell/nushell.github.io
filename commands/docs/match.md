@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Conditionally run a block on a matched value.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> match {flags} (value) (match_block)```

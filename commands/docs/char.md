@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Output special characters (e.g., &#x27;newline&#x27;).</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> char {flags} (character) ...rest```

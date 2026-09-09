@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Various attributes for custom commands.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> attr {flags} ```

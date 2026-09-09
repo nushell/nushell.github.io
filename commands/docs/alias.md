@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Alias a command (with optional flags) to a new name.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> alias {flags} (name) (initial_value)```

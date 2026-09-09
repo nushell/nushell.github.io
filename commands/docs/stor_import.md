@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Import a sqlite database file into the in-memory sqlite database.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> stor import {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Flatten a table by extracting nested values.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> flatten {flags} ...rest```

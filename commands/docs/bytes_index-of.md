@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns start index of first occurrence of pattern in bytes, or -1 if no match.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> bytes index-of {flags} (pattern) ...rest```

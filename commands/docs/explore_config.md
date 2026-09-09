@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Launch a TUI to view and edit the nushell configuration interactively.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> explore config {flags} ```

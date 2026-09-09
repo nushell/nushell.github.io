@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Capture the outputs and exit code from an external piped in command in a nushell table.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> complete {flags} ```

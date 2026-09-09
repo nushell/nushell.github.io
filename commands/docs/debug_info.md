@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>View process memory info.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> debug info {flags} ```

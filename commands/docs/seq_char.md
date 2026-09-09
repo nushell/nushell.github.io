@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Print a sequence of ASCII characters.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> seq char {flags} (start) (end)```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Check if nushell is running with administrator or root privileges.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> is-admin {flags} ```

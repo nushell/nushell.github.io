@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Reverse the bytes in the pipeline.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> bytes reverse {flags} ...rest```

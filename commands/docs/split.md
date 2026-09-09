@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Split contents across desired subcommand (like row, column) via the separator.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> split {flags} ```

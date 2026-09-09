@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Extract a column from a 2D matrix.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> matrix get-col {flags} (index)```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Print sequences of dates.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> seq date {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Outputs duration with a specified unit of time.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> format duration {flags} (format value) ...rest```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert record into .toml text.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> to toml {flags} ```

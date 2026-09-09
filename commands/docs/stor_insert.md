@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Insert information into a specified table in the in-memory sqlite database.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> stor insert {flags} ```

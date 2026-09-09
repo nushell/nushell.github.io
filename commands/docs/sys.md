@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>View information about the system.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> sys {flags} ```

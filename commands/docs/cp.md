@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Copy files using uutils&#x2f;coreutils cp.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> cp {flags} ...rest```

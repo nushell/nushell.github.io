@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>View information about system processes.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> ps {flags} ```

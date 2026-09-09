@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert table into .csv text .</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> to csv {flags} ```

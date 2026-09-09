@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Search for terms in the input data.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> find {flags} ...rest```

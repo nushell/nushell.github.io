@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Remove items&#x2f;rows from the end of the input list&#x2f;table, or remove bytes from the end of binary data. Counterpart of `skip`. Opposite of `last`. For binary input, `rows` can also be specified as a filesize.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> drop {flags} (rows)```

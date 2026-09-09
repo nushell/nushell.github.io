@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Aggregate a list (starting from the left) to a single value using an accumulator closure.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> reduce {flags} (closure)```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Run a closure, providing it with the pipeline input.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> do {flags} (closure) ...rest```

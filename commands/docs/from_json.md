@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert JSON text into structured data.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> from json {flags} ```

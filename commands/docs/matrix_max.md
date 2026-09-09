@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Find the maximum value in a matrix, or max along an axis.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> matrix max {flags} ```

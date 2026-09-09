@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>List supported time zones.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> date list-timezone {flags} ```

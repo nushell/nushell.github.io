@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Creates a table with non-empty rows.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> compact {flags} ...rest```

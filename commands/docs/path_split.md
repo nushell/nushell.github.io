@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Split a path into a list based on the system&#x27;s path separator.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> path split {flags} ```

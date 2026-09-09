@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Apply hash function.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> hash {flags} ```

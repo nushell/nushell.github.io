@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Output the length of any bytes in the pipeline.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> bytes length {flags} ...rest```

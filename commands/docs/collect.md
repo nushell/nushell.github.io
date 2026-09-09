@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Collect a stream into a value.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> collect {flags} (closure)```

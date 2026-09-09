@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Output stats on the engine in the current state, including interactive last-result size info.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> scope engine-stats {flags} ```

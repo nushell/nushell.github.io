@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Check whether a path exists.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> path exists {flags} ```

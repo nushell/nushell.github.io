@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Send a PUT request to a URL with a request body.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> http put {flags} (URL) (data)```

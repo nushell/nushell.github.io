@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Get the command history.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> history {flags} ```

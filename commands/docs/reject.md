@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Remove the given columns or rows from the table. Opposite of `select`.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> reject {flags} ...rest```

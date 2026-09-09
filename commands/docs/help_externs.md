@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Show help on nushell externs.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> help externs {flags} ...rest```

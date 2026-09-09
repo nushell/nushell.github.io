@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns a list of unique elements in the input that are not present in the other list.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> difference {flags} (other)```

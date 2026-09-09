@@ -16,6 +16,17 @@ contributors: false
 
 <div class='command-title'>Compute the number of trailing unset bits for each element in an integer column expression.</div>
 
+::: warning This command requires a plugin
+The `polars math bitwise-trailing-zeros` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
+
 ## Signature
 
 ```> polars math bitwise-trailing-zeros {flags} ```

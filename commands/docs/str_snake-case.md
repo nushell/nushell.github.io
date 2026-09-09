@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert a string to snake_case.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str snake-case {flags} ...rest```

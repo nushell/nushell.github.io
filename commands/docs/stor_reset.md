@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Reset the in-memory database by dropping all tables.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> stor reset {flags} ```

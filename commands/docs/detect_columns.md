@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Attempt to automatically split text into multiple columns.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> detect columns {flags} ```

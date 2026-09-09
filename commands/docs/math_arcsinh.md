@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns the inverse of the hyperbolic sine function.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> math arcsinh {flags} ```

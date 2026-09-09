@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Split a string into multiple columns using a separator.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> split column {flags} (separator) ...rest```

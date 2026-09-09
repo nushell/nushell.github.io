@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Split input into multiple items using a separator.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> bytes split {flags} (separator)```

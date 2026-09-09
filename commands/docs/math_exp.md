@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns e raised to the power of x.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> math exp {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns the floor of a number (largest integer less than or equal to that number).</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> math floor {flags} ...rest```

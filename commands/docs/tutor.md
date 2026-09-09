@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Run the tutorial. To begin, run: tutor.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> tutor {flags} (search)```

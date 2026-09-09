@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Update an existing column to have a new value, or insert a new column.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> upsert {flags} (field) (replacement value)```

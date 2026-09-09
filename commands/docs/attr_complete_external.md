@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Attribute for enabling use of the external completer for internal commands.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> attr complete external {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Return early from a custom command.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> return {flags} (return_value)```

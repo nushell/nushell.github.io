@@ -16,6 +16,17 @@ contributors: false
 
 <div class='command-title'>Slices the string from the start position until the selected length.</div>
 
+::: warning This command requires a plugin
+The `polars str-slice` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
+
 ## Signature
 
 ```> polars str-slice {flags} (start)```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Strip ANSI escape sequences from a string.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> ansi strip {flags} ...rest```

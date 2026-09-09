@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Get or set default file creation permissions.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> umask {flags} (permissions)```

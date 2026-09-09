@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Peek the first &lt;n&gt; elements of a stream and store them in the metadata.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> peek {flags} (n)```

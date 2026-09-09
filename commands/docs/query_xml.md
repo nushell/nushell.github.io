@@ -16,6 +16,17 @@ contributors: false
 
 <div class='command-title'>Execute XPath 1.0 query on XML input</div>
 
+::: warning This command requires a plugin
+The `query xml` command resides in the `query` plugin.
+To use this command, you must install and register `nu_plugin_query`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
+
 ## Signature
 
 ```> query xml {flags} (query)```

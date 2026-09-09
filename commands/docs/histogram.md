@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Creates a new table with a histogram based on the column name passed in.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> histogram {flags} (column-name) (frequency-column-name)```

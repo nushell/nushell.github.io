@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Concatenate multiple binary into a single binary, with an optional separator between each.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> bytes collect {flags} (separator)```

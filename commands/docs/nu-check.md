@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Validate and parse Nushell input content.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> nu-check {flags} (path)```

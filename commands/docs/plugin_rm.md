@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Remove a plugin from the plugin registry file.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> plugin rm {flags} (name)```

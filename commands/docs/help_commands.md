@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Show help on nushell commands.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> help commands {flags} ...rest```

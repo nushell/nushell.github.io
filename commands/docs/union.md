@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns a list of unique elements from both the input and the provided list.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> union {flags} (other)```

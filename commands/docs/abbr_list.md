@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>List all defined abbreviations.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> abbr list {flags} ```

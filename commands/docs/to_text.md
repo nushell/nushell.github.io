@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert data into plain text format.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> to text {flags} ```

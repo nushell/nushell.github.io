@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Generate a random boolean value.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> random bool {flags} ```

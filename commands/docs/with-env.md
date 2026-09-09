@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Runs a block with an environment variable set.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> with-env {flags} (variable) (block)```

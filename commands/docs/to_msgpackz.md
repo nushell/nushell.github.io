@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert Nu values into brotli-compressed MessagePack.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> to msgpackz {flags} ```

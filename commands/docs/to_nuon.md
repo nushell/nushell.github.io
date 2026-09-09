@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Converts table data into Nuon (Nushell Object Notation) text.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> to nuon {flags} ```

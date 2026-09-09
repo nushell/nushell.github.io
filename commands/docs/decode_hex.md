@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Decode a hex-encoded value.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> decode hex {flags} ```

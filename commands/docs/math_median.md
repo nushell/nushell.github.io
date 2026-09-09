@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Computes the median of a list of numbers.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> math median {flags} ...rest```

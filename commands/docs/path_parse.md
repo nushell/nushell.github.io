@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert a path into structured data.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> path parse {flags} ```

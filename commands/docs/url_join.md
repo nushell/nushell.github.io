@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert a record to a URL string.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> url join {flags} ```

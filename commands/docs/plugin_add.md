@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Add a plugin to the plugin registry file.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> plugin add {flags} (filename)```

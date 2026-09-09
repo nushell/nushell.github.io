@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert table into .yaml&#x2f;.yml text.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> to yml {flags} ```

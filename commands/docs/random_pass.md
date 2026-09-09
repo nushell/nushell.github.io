@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Generate a cryptologically secure password.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> random pass {flags} ```

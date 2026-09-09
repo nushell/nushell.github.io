@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns the average of a list of numbers.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> math avg {flags} ...rest```

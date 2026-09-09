@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Moves columns relative to other columns or make them the first&#x2f;last columns. Flags are mutually exclusive.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> move {flags} ...rest```

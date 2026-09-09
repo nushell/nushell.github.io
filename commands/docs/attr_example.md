@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Attribute for adding examples to custom commands.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> attr example {flags} (description) (example)```

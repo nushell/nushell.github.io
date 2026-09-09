@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Delete a table or specified rows in the in-memory sqlite database.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> stor delete {flags} ```

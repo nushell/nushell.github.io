@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Show (or skip) every n-th row, starting from the first one.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> every {flags} (stride)```

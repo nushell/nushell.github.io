@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert value to a filesize.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> into filesize {flags} ...rest```

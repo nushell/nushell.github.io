@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Listen for user interface events.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> input listen {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert a nushell table or list of lists into a matrix.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> into matrix {flags} ```

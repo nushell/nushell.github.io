@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Alias a command (with optional flags) to a new name and export it from a module.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> export alias {flags} (name) (initial_value)```

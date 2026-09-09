@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns the logarithm for an arbitrary base.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> math log {flags} (base) ...rest```

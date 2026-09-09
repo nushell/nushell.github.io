@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Return only the selected rows.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> slice {flags} (rows)```

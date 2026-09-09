@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Parse text as .xml and create record.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> from xml {flags} ```

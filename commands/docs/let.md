@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Create a variable and give it a value.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> let {flags} (var_name) (initial_value)```

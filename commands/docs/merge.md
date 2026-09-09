@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Merge the input with a record or table, overwriting values in matching columns.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> merge {flags} (value)```

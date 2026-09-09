@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns a record containing the number of columns (width) and rows (height) of the terminal.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> term size {flags} ```

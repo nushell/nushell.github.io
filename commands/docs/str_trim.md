@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Trim whitespace or specific character.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str trim {flags} ...rest```

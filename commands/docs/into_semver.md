@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert a value (string, record, or semver) to a semantic version.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> into semver {flags} ...rest```

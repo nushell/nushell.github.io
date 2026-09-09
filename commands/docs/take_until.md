@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Take elements of the input until a predicate is true.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> take until {flags} (predicate)```

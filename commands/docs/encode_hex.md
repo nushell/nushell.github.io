@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Hex encode a binary value or a string.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> encode hex {flags} ```

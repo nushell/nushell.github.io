@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Define a custom command.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> def {flags} (def_name) (params) (block)```

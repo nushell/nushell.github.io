@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Show all experimental options.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> debug experimental-options {flags} ```

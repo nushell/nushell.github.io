@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Decode a Base32-encoded value.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> decode base32 {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Parse text as .yaml&#x2f;.yml and create table.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> from yaml {flags} ```

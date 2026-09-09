@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Add a color gradient (using ANSI color codes) to the given string.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> ansi gradient {flags} ...rest```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Create a parse-time constant.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> const {flags} (const_name) (initial_value)```

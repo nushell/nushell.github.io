@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Generate a random integer [min..max].</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> random int {flags} (range)```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Use definitions from a module and export them from this module.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> export use {flags} (module) ...rest```

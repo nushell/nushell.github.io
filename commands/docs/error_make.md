@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Create an error.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> error make {flags} (error_struct)```

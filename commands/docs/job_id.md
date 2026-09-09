@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Get id of current job.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> job id {flags} ```

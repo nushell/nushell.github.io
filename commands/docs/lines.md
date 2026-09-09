@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Converts input to lines.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> lines {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Various commands for formatting data.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> format {flags} ```

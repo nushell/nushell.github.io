@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Check if the current custom command&#x27;s return value is redirected away from display.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> is-redirected {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>List loaded and installed plugins.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> plugin list {flags} ```

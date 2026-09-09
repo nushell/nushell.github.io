@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Run a built-in command by name. Used internally by `%($cmd)` dynamic dispatch.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> run-internal {flags} (name) ...rest```

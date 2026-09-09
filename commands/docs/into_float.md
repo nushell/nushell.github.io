@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert data into floating point number.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> into float {flags} ...rest```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns its arguments, ignoring the piped-in value.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> echo {flags} ...rest```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Parse columns from string data using a simple pattern or a supplied regular expression.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> parse {flags} (pattern)```

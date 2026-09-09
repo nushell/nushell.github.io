@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Extract data using a cell path.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> get {flags} (cell_path) ...rest```

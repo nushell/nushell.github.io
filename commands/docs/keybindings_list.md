@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>List available options that can be used to create keybindings.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> keybindings list {flags} ```

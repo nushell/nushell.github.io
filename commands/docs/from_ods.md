@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Parse OpenDocument Spreadsheet(.ods) data and create table.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> from ods {flags} ```

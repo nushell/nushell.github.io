@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Set or get resource usage limits.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> ulimit {flags} (limit)```

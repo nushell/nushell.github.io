@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Find and replace text in the input string.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str replace {flags} (find) (replace) ...rest```

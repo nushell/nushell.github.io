@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Define a custom command and export it from a module.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> export def {flags} (def_name) (params) (block)```

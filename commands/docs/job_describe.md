@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Add a description to a background job.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> job describe {flags} (id) (description)```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Source the environment from a source file into the current environment.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> source-env {flags} (filename)```

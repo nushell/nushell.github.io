@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Return only the last several rows of the input. Counterpart of `first`. Opposite of `drop`. For binary input, rows can also be specified as a filesize.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> last {flags} (rows)```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Parse url-encoded string as a record.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> from url {flags} ```

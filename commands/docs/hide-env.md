@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Hide environment variables in the current scope.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> hide-env {flags} ...rest```

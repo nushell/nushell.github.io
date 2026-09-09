@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Requests permitted communication options for a given URL.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> http options {flags} (URL)```

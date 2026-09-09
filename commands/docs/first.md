@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Return only the first several rows of the input. Counterpart of `last`. Opposite of `skip`. For binary input, rows can also be specified as a filesize.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> first {flags} (rows)```

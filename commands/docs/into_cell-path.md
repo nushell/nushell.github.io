@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert value to a cell-path.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> into cell-path {flags} ```

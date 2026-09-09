@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Update the table cells.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> update cells {flags} (closure)```

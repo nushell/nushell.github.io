@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Remove files and directories.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> rm {flags} ...rest```

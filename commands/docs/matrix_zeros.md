@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Create a matrix filled with zeros.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> matrix zeros {flags} (dimensions) ...rest```

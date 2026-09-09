@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert text or timestamp into a datetime.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> into datetime {flags} ...rest```

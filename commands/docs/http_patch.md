@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Send a PATCH request to a URL with a request body.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> http patch {flags} (URL) (data)```

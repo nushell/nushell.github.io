@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Renders the output to a textual terminal grid.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> grid {flags} (column)```

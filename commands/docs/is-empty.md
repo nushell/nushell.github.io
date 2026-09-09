@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Check for empty values.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> is-empty {flags} ...rest```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Roll table columns right.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> roll right {flags} ```

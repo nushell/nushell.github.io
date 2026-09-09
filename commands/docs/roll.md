@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Rolling commands for tables.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> roll {flags} ```

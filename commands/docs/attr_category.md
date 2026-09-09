@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Attribute for adding a category to custom commands.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> attr category {flags} (category)```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Create temporary files or directories using uutils&#x2f;coreutils mktemp.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> mktemp {flags} (template)```

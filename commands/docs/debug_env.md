@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Show environment variables as external commands would get it.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> debug env {flags} ```

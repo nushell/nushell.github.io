@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Render the table.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> table {flags} ```

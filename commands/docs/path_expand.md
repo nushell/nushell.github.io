@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Try to expand a path to its absolute form.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> path expand {flags} ```

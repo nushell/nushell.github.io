@@ -16,6 +16,17 @@ contributors: false
 
 <div class='command-title'>Removes a stored Dataframe or other object from the plugin cache.</div>
 
+::: warning This command requires a plugin
+The `polars store-rm` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
+
 ## Signature
 
 ```> polars store-rm {flags} ...rest```

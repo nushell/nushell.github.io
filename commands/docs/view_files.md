@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>View the files registered in nushell&#x27;s EngineState memory.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> view files {flags} ```

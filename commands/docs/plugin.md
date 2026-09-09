@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Commands for managing plugins.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> plugin {flags} ```

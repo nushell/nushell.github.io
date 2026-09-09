@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Spawn a background job and retrieve its ID.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> job spawn {flags} (closure)```

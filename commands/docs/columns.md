@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Given a record or table, produce a list of its columns&#x27; names.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> columns {flags} ```

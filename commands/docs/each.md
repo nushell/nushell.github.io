@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Run a closure on each row of the input list, creating a new list with the results.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> each {flags} (closure)```

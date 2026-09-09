@@ -16,6 +16,17 @@ contributors: false
 
 <div class='command-title'>Returns indexes where values are true.</div>
 
+::: warning This command requires a plugin
+The `polars arg-true` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
+
 ## Signature
 
 ```> polars arg-true {flags} ```

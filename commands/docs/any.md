@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Tests if any element of the input fulfills a predicate expression.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> any {flags} (predicate)```

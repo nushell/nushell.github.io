@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Read a message from a job&#x27;s mailbox.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> job recv {flags} ```

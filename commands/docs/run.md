@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Runs a script file in an isolated scope as part of a pipeline.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> run {flags} (filename) ...rest```

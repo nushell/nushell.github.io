@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Various commands for detecting things.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> detect {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Various commands for working with matrices.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> matrix {flags} ```

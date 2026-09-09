@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns the input number rounded to the specified precision.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> math round {flags} ...rest```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Get the type of the object a path refers to (e.g., file, dir, symlink).</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> path type {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Create a binary value from the provided arguments.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> bytes build {flags} ...rest```

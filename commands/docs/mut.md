@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Create a mutable variable and give it a value.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> mut {flags} (var_name) (initial_value)```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Generate a random float within a range [min..max].</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> random float {flags} (range)```

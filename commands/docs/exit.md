@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Exit Nu.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> exit {flags} (exit_code)```

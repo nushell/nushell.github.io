@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Debug print the value(s) piped in.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> debug {flags} ```

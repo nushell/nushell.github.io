@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Select only these columns or rows from the input. Opposite of `reject`.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> select {flags} ...rest```

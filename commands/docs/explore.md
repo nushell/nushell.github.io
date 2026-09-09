@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Explore acts as a table pager, just like `less` does for text.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> explore {flags} ```

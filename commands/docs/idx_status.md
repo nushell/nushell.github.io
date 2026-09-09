@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Show status information for the global in-memory idx runtime.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> idx status {flags} ```

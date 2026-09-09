@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Display an interactive list for user selection.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> input list {flags} (prompt)```

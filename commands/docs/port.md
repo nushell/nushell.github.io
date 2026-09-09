@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Get a free TCP port from system.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> port {flags} (start) (end)```

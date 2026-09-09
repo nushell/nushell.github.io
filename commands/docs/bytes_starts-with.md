@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Check if binary data starts with a pattern.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> bytes starts-with {flags} (pattern) ...rest```

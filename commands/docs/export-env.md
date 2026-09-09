@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Run a block and preserve its environment in a current scope.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> export-env {flags} (block)```

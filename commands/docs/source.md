@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Runs a script file in the current context.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> source {flags} (filename)```

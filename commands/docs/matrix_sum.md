@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Sum all elements of a matrix, or sum along an axis.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> matrix sum {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Get input from the user via the terminal.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> input {flags} (prompt)```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Subtract a matrix or scalar from a matrix.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> matrix subtract {flags} (other)```

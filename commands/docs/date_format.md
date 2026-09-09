@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Removed command: use `format date` instead.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> date format {flags} (format string)```

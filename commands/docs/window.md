@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Creates a sliding window of `window_size` that slide by n rows&#x2f;elements across input.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> window {flags} (window_size)```

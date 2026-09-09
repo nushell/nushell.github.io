@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Convert markdown text into human-friendly structured rows. Use --verbose for the full AST.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> from md {flags} ```

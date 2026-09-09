@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Fill and align text in columns.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> fill {flags} ```

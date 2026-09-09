@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Import command line history.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> history import {flags} ```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Delete the specified resource.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> http delete {flags} (URL)```

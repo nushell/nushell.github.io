@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Reset nushell environment configurations to default, and saves old config files in the config location as oldconfig.nu and oldenv.nu.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> config reset {flags} ```

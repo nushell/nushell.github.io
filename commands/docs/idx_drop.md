@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Drop the current idx runtime from memory.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> idx drop {flags} ```

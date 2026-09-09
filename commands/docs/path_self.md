@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Get the absolute path of the script or module containing this command at parse time.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> path self {flags} (path)```

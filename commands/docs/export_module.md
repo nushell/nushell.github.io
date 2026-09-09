@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Export a custom module from a module.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> export module {flags} (module) (block)```

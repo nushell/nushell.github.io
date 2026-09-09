@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Launch a TUI to create and explore regular expressions interactively.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> explore regex {flags} ```

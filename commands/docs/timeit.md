@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Time how long it takes a closure to run.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> timeit {flags} (command)```

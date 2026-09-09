@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Split a string&#x27;s words into separate rows.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> split words {flags} ```

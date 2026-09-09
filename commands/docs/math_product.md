@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Returns the product of a list of numbers or the products of each column of a table.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> math product {flags} ...rest```

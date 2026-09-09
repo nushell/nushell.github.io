@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Gather word count statistics on the text.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str stats {flags} ```

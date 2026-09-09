@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>View information about the system CPUs.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> sys cpu {flags} ```

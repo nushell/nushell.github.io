@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Use the first row of the table as column names.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> headers {flags} ```

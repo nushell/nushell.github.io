@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Output the length of any strings in the pipeline.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> str length {flags} ...rest```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Creates a list of files and&#x2f;or folders based on the glob pattern provided.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> glob {flags} (glob)```

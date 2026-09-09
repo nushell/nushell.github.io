@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Load a plugin from the plugin registry file into scope.</div>
 
+## Command Type
+
+`keyword`
+
 ## Signature
 
 ```> plugin use {flags} (name)```

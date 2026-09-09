@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Wrap the value into a column.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> wrap {flags} (name)```

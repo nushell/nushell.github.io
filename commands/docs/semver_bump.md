@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Bump a semantic version to the next level.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> semver bump {flags} (level)```

@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Get the configuration for color output.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> config use-colors {flags} ```

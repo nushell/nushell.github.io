@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>Multiply two matrices using dot product.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> matrix multiply {flags} (other) ...rest```

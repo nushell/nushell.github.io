@@ -16,6 +16,10 @@ contributors: false
 
 <div class='command-title'>List all overlays with their active status.</div>
 
+## Command Type
+
+`built-in`
+
 ## Signature
 
 ```> overlay list {flags} ```
