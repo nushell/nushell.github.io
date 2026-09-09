@@ -2,7 +2,7 @@
 title: job send
 categories: |
   experimental
-version: 0.115.0
+version: 0.115.1
 experimental: |
   Send a message to the mailbox of a job.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `job send` for [experimental](/commands/categories/experimental.md)
 
 <div class='command-title'>Send a message to the mailbox of a job.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: overlay list
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   List all overlays with their active status.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `overlay list` for [core](/commands/categories/core.md)
 
 <div class='command-title'>List all overlays with their active status.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: keybindings list
 categories: |
   platform
-version: 0.115.0
+version: 0.115.1
 platform: |
   List available options that can be used to create keybindings.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `keybindings list` for [platform](/commands/categories/platform.md)
 
 <div class='command-title'>List available options that can be used to create keybindings.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

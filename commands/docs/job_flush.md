@@ -2,7 +2,7 @@
 title: job flush
 categories: |
   experimental
-version: 0.115.0
+version: 0.115.1
 experimental: |
   Clear this job's mailbox.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `job flush` for [experimental](/commands/categories/experimental.md)
 
 <div class='command-title'>Clear this job&#x27;s mailbox.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

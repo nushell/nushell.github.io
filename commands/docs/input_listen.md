@@ -2,7 +2,7 @@
 title: input listen
 categories: |
   platform
-version: 0.115.0
+version: 0.115.1
 platform: |
   Listen for user interface events.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `input listen` for [platform](/commands/categories/platform.md)
 
 <div class='command-title'>Listen for user interface events.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: random bool
 categories: |
   random
-version: 0.115.0
+version: 0.115.1
 random: |
   Generate a random boolean value.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `random bool` for [random](/commands/categories/random.md)
 
 <div class='command-title'>Generate a random boolean value.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

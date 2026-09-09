@@ -2,7 +2,7 @@
 title: which
 categories: |
   system
-version: 0.115.0
+version: 0.115.1
 system: |
   Finds a program file, alias or custom command. If `application` is not provided, all deduplicated commands will be returned.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `which` for [system](/commands/categories/system.md)
 
 <div class='command-title'>Finds a program file, alias or custom command. If `application` is not provided, all deduplicated commands will be returned.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

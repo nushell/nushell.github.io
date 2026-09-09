@@ -2,7 +2,7 @@
 title: inspect
 categories: |
   debug
-version: 0.115.0
+version: 0.115.1
 debug: |
   Inspect pipeline results while running a pipeline.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `inspect` for [debug](/commands/categories/debug.md)
 
 <div class='command-title'>Inspect pipeline results while running a pipeline.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

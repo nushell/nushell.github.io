@@ -2,7 +2,7 @@
 title: plugin stop
 categories: |
   plugin
-version: 0.115.0
+version: 0.115.1
 plugin: |
   Stop an installed plugin if it was running.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `plugin stop` for [plugin](/commands/categories/plugin.md)
 
 <div class='command-title'>Stop an installed plugin if it was running.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: str trim
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Trim whitespace or specific character.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `str trim` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Trim whitespace or specific character.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

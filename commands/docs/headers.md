@@ -2,7 +2,7 @@
 title: headers
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Use the first row of the table as column names.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `headers` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Use the first row of the table as column names.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

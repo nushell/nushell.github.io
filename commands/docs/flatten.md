@@ -2,7 +2,7 @@
 title: flatten
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Flatten a table by extracting nested values.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `flatten` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Flatten a table by extracting nested values.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

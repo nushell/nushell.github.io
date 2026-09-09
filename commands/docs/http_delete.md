@@ -2,7 +2,7 @@
 title: http delete
 categories: |
   network
-version: 0.115.0
+version: 0.115.1
 network: |
   Delete the specified resource.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `http delete` for [network](/commands/categories/network.md)
 
 <div class='command-title'>Delete the specified resource.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

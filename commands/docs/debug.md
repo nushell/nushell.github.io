@@ -2,7 +2,7 @@
 title: debug
 categories: |
   debug
-version: 0.115.0
+version: 0.115.1
 debug: |
   Debug print the value(s) piped in.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `debug` for [debug](/commands/categories/debug.md)
 
 <div class='command-title'>Debug print the value(s) piped in.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

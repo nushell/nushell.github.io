@@ -2,7 +2,7 @@
 title: str kebab-case
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Convert a string to kebab-case.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `str kebab-case` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Convert a string to kebab-case.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

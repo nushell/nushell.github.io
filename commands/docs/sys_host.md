@@ -2,7 +2,7 @@
 title: sys host
 categories: |
   system
-version: 0.115.0
+version: 0.115.1
 system: |
   View information about the system host.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `sys host` for [system](/commands/categories/system.md)
 
 <div class='command-title'>View information about the system host.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

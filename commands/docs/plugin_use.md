@@ -2,7 +2,7 @@
 title: plugin use
 categories: |
   plugin
-version: 0.115.0
+version: 0.115.1
 plugin: |
   Load a plugin from the plugin registry file into scope.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `plugin use` for [plugin](/commands/categories/plugin.md)
 
 <div class='command-title'>Load a plugin from the plugin registry file into scope.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

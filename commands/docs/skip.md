@@ -2,7 +2,7 @@
 title: skip
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Skip the first several rows of the input. Counterpart of `drop`. Opposite of `first`. For binary input, n can also be specified as a filesize.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `skip` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Skip the first several rows of the input. Counterpart of `drop`. Opposite of `first`. For binary input, n can also be specified as a filesize.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

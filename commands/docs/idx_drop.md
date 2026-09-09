@@ -2,7 +2,7 @@
 title: idx drop
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   Drop the current idx runtime from memory.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `idx drop` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>Drop the current idx runtime from memory.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

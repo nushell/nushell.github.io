@@ -2,7 +2,7 @@
 title: commandline
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   View the current command line input buffer.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `commandline` for [core](/commands/categories/core.md)
 
 <div class='command-title'>View the current command line input buffer.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

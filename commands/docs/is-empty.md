@@ -2,7 +2,7 @@
 title: is-empty
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Check for empty values.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `is-empty` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Check for empty values.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

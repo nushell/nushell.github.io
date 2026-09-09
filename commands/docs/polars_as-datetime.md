@@ -2,7 +2,7 @@
 title: polars as-datetime
 categories: |
   dataframe
-version: 0.115.0
+version: 0.115.1
 dataframe: |
   Converts string to datetime.
 usage: |
@@ -15,6 +15,17 @@ contributors: false
 # `polars as-datetime` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Converts string to datetime.</div>
+
+::: warning This command requires a plugin
+The `polars as-datetime` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
 
 ## Signature
 
@@ -86,14 +97,14 @@ Converts string to datetime using the `--not-exact` flag even with excessive sym
 Converts string to datetime using the `--not-exact` flag even with excessive symbols in an expression
 ```nu
 > ["2025-11-02 00:00:00", "2025-11-02 01:00:00", "2025-11-02 02:00:00", "2025-11-02 03:00:00"] | polars into-df | polars select (polars col 0 | polars as-datetime "%Y-%m-%d %H:%M:%S")
-╭───┬──────────────╮
-│ # │   datetime   │
-├───┼──────────────┤
-│ 0 │ 9 months ago │
-│ 1 │ 9 months ago │
-│ 2 │ 9 months ago │
-│ 3 │ 9 months ago │
-╰───┴──────────────╯
+╭───┬───────────────╮
+│ # │   datetime    │
+├───┼───────────────┤
+│ 0 │ 10 months ago │
+│ 1 │ 10 months ago │
+│ 2 │ 10 months ago │
+│ 3 │ 10 months ago │
+╰───┴───────────────╯
 
 ```
 

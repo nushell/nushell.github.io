@@ -2,7 +2,7 @@
 title: peek
 categories: |
   default
-version: 0.115.0
+version: 0.115.1
 default: |
   Peek the first <n> elements of a stream and store them in the metadata.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `peek` for [default](/commands/categories/default.md)
 
 <div class='command-title'>Peek the first &lt;n&gt; elements of a stream and store them in the metadata.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

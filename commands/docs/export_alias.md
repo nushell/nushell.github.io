@@ -2,7 +2,7 @@
 title: export alias
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Alias a command (with optional flags) to a new name and export it from a module.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `export alias` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Alias a command (with optional flags) to a new name and export it from a module.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

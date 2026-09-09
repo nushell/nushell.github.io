@@ -2,7 +2,7 @@
 title: attr category
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Attribute for adding a category to custom commands.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `attr category` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Attribute for adding a category to custom commands.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

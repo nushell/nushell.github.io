@@ -2,7 +2,7 @@
 title: math avg
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Returns the average of a list of numbers.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `math avg` for [math](/commands/categories/math.md)
 
 <div class='command-title'>Returns the average of a list of numbers.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

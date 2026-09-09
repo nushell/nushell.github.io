@@ -2,7 +2,7 @@
 title: path parse
 categories: |
   path
-version: 0.115.0
+version: 0.115.1
 path: |
   Convert a path into structured data.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `path parse` for [path](/commands/categories/path.md)
 
 <div class='command-title'>Convert a path into structured data.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

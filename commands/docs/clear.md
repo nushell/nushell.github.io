@@ -2,7 +2,7 @@
 title: clear
 categories: |
   platform
-version: 0.115.0
+version: 0.115.1
 platform: |
   Clear the terminal screen.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `clear` for [platform](/commands/categories/platform.md)
 
 <div class='command-title'>Clear the terminal screen.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

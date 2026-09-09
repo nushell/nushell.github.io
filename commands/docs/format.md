@@ -2,7 +2,7 @@
 title: format
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Various commands for formatting data.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `format` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Various commands for formatting data.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: export-env
 categories: |
   env
-version: 0.115.0
+version: 0.115.1
 env: |
   Run a block and preserve its environment in a current scope.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `export-env` for [env](/commands/categories/env.md)
 
 <div class='command-title'>Run a block and preserve its environment in a current scope.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

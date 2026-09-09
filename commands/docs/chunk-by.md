@@ -2,7 +2,7 @@
 title: chunk-by
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Divides a sequence into sub-sequences based on a closure.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `chunk-by` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Divides a sequence into sub-sequences based on a closure.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

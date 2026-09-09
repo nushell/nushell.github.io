@@ -2,7 +2,7 @@
 title: export extern
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Define an extern and export it from a module.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `export extern` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Define an extern and export it from a module.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

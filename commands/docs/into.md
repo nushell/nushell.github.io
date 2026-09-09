@@ -2,7 +2,7 @@
 title: into
 categories: |
   conversions
-version: 0.115.0
+version: 0.115.1
 conversions: |
   Commands to convert data from one type to another.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `into` for [conversions](/commands/categories/conversions.md)
 
 <div class='command-title'>Commands to convert data from one type to another.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: str expand
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Generates all possible combinations defined in brace expansion syntax.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `str expand` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Generates all possible combinations defined in brace expansion syntax.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

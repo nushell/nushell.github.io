@@ -2,7 +2,7 @@
 title: path type
 categories: |
   path
-version: 0.115.0
+version: 0.115.1
 path: |
   Get the type of the object a path refers to (e.g., file, dir, symlink).
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `path type` for [path](/commands/categories/path.md)
 
 <div class='command-title'>Get the type of the object a path refers to (e.g., file, dir, symlink).</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

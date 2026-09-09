@@ -2,7 +2,7 @@
 title: idx find
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   Search idx with fuzzy matching across files and directories by default.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `idx find` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>Search idx with fuzzy matching across files and directories by default.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

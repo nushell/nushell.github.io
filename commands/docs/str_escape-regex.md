@@ -2,7 +2,7 @@
 title: str escape-regex
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Escapes special characters in the input string with '\'.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `str escape-regex` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Escapes special characters in the input string with &#x27;\&#x27;.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

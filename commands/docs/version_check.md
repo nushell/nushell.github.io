@@ -2,7 +2,7 @@
 title: version check
 categories: |
   platform
-version: 0.115.0
+version: 0.115.1
 platform: |
   Checks to see if you have the latest version of nushell.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `version check` for [platform](/commands/categories/platform.md)
 
 <div class='command-title'>Checks to see if you have the latest version of nushell.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: polars fill-null
 categories: |
   lazyframe
-version: 0.115.0
+version: 0.115.1
 lazyframe: |
   Replaces NULL values with the given expression.
 usage: |
@@ -15,6 +15,17 @@ contributors: false
 # `polars fill-null` for [lazyframe](/commands/categories/lazyframe.md)
 
 <div class='command-title'>Replaces NULL values with the given expression.</div>
+
+::: warning This command requires a plugin
+The `polars fill-null` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
 
 ## Signature
 

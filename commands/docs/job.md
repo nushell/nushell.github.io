@@ -2,7 +2,7 @@
 title: job
 categories: |
   experimental
-version: 0.115.0
+version: 0.115.1
 experimental: |
   Various commands for working with background jobs.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `job` for [experimental](/commands/categories/experimental.md)
 
 <div class='command-title'>Various commands for working with background jobs.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: format filesize
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Converts a column of filesizes to some specified format.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `format filesize` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Converts a column of filesizes to some specified format.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

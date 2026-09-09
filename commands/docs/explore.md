@@ -2,7 +2,7 @@
 title: explore
 categories: |
   viewers
-version: 0.115.0
+version: 0.115.1
 viewers: |
   Explore acts as a table pager, just like `less` does for text.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `explore` for [viewers](/commands/categories/viewers.md)
 
 <div class='command-title'>Explore acts as a table pager, just like `less` does for text.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

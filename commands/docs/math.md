@@ -2,7 +2,7 @@
 title: math
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Use mathematical functions as aggregate functions on a list of numbers or tables.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `math` for [math](/commands/categories/math.md)
 
 <div class='command-title'>Use mathematical functions as aggregate functions on a list of numbers or tables.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

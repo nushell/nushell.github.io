@@ -2,7 +2,7 @@
 title: math arcsinh
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Returns the inverse of the hyperbolic sine function.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `math arcsinh` for [math](/commands/categories/math.md)
 
 <div class='command-title'>Returns the inverse of the hyperbolic sine function.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

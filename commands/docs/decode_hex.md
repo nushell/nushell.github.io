@@ -2,7 +2,7 @@
 title: decode hex
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Decode a hex-encoded value.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `decode hex` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Decode a hex-encoded value.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

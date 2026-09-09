@@ -2,7 +2,7 @@
 title: str
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Various commands for working with string data.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `str` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Various commands for working with string data.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: sys cpu
 categories: |
   system
-version: 0.115.0
+version: 0.115.1
 system: |
   View information about the system CPUs.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `sys cpu` for [system](/commands/categories/system.md)
 
 <div class='command-title'>View information about the system CPUs.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

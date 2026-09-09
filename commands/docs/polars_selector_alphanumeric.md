@@ -2,7 +2,7 @@
 title: polars selector alphanumeric
 categories: |
   expression
-version: 0.115.0
+version: 0.115.1
 expression: |
   Select all columns with alphanumeric names (eg: only letters). Matching column names cannot contain *any* non-alphanumeric characters. Note that the definition of "alphanumeric" consists of all valid Unicode alphanumeric characters by default; this can be changed by setting `ascii_only=true`.
 usage: |
@@ -15,6 +15,17 @@ contributors: false
 # `polars selector alphanumeric` for [expression](/commands/categories/expression.md)
 
 <div class='command-title'>Select all columns with alphanumeric names (eg: only letters). Matching column names cannot contain *any* non-alphanumeric characters. Note that the definition of &quot;alphanumeric&quot; consists of all valid Unicode alphanumeric characters by default; this can be changed by setting `ascii_only=true`.</div>
+
+::: warning This command requires a plugin
+The `polars selector alphanumeric` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
 
 ## Signature
 

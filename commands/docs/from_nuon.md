@@ -2,7 +2,7 @@
 title: from nuon
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Convert from nuon to structured data.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `from nuon` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Convert from nuon to structured data.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

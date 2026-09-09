@@ -2,7 +2,7 @@
 title: idx status
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   Show status information for the global in-memory idx runtime.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `idx status` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>Show status information for the global in-memory idx runtime.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

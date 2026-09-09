@@ -2,7 +2,7 @@
 title: idx files
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   List indexed files, or fuzzy-match files by query.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `idx files` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>List indexed files, or fuzzy-match files by query.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

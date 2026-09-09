@@ -2,7 +2,7 @@
 title: matrix sum
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Sum all elements of a matrix, or sum along an axis.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `matrix sum` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Sum all elements of a matrix, or sum along an axis.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

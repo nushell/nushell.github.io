@@ -2,7 +2,7 @@
 title: bits xor
 categories: |
   bits
-version: 0.115.0
+version: 0.115.1
 bits: |
   Performs bitwise xor for ints or binary values.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `bits xor` for [bits](/commands/categories/bits.md)
 
 <div class='command-title'>Performs bitwise xor for ints or binary values.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

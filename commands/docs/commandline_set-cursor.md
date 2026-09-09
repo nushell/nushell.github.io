@@ -2,7 +2,7 @@
 title: commandline set-cursor
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Set the current cursor position.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `commandline set-cursor` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Set the current cursor position.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

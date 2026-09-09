@@ -2,7 +2,7 @@
 title: polars sum
 categories: |
   dataframe
-version: 0.115.0
+version: 0.115.1
 dataframe: |
   Creates a sum expression for an aggregation or aggregates columns to their sum value.
 usage: |
@@ -15,6 +15,17 @@ contributors: false
 # `polars sum` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Creates a sum expression for an aggregation or aggregates columns to their sum value.</div>
+
+::: warning This command requires a plugin
+The `polars sum` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
 
 ## Signature
 

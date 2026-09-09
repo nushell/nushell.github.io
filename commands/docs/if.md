@@ -2,7 +2,7 @@
 title: if
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Conditionally run a block.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `if` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Conditionally run a block.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

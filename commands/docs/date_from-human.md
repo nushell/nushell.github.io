@@ -2,7 +2,7 @@
 title: date from-human
 categories: |
   date
-version: 0.115.0
+version: 0.115.1
 date: |
   Convert a human readable datetime string to a datetime.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `date from-human` for [date](/commands/categories/date.md)
 
 <div class='command-title'>Convert a human readable datetime string to a datetime.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

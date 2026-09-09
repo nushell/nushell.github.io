@@ -2,7 +2,7 @@
 title: bytes
 categories: |
   bytes
-version: 0.115.0
+version: 0.115.1
 bytes: |
   Various commands for working with byte data.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `bytes` for [bytes](/commands/categories/bytes.md)
 
 <div class='command-title'>Various commands for working with byte data.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

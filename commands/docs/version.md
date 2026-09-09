@@ -2,7 +2,7 @@
 title: version
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Display Nu version, and its build configuration.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `version` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Display Nu version, and its build configuration.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

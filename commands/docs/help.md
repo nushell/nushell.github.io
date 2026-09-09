@@ -2,7 +2,7 @@
 title: help
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Display help information about different parts of Nushell.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `help` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Display help information about different parts of Nushell.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

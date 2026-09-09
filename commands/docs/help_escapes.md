@@ -2,7 +2,7 @@
 title: help escapes
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Show help on nushell string escapes.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `help escapes` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Show help on nushell string escapes.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

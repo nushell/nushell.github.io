@@ -2,7 +2,7 @@
 title: polars truncate
 categories: |
   expression
-version: 0.115.0
+version: 0.115.1
 expression: |
   Divide the date/datetime range into buckets.
 usage: |
@@ -15,6 +15,17 @@ contributors: false
 # `polars truncate` for [expression](/commands/categories/expression.md)
 
 <div class='command-title'>Divide the date&#x2f;datetime range into buckets.</div>
+
+::: warning This command requires a plugin
+The `polars truncate` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: into value
 categories: |
   conversions
-version: 0.115.0
+version: 0.115.1
 conversions: |
   Convert custom values into base values.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `into value` for [conversions](/commands/categories/conversions.md)
 
 <div class='command-title'>Convert custom values into base values.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

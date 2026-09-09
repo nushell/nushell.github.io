@@ -2,7 +2,7 @@
 title: pwd
 categories: |
   default
-version: 0.115.0
+version: 0.115.1
 default: |
   Return the current working directory
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `pwd` for [default](/commands/categories/default.md)
 
 <div class='command-title'>Return the current working directory</div>
+
+## Command Type
+
+`custom`
 
 ## Signature
 

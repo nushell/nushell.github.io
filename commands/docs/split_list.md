@@ -2,7 +2,7 @@
 title: split list
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Split a list into multiple lists using a separator.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `split list` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Split a list into multiple lists using a separator.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

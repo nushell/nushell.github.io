@@ -2,7 +2,7 @@
 title: bytes collect
 categories: |
   bytes
-version: 0.115.0
+version: 0.115.1
 bytes: |
   Concatenate multiple binary into a single binary, with an optional separator between each.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `bytes collect` for [bytes](/commands/categories/bytes.md)
 
 <div class='command-title'>Concatenate multiple binary into a single binary, with an optional separator between each.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

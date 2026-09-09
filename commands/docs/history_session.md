@@ -2,7 +2,7 @@
 title: history session
 categories: |
   history
-version: 0.115.0
+version: 0.115.1
 history: |
   Get the command history session.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `history session` for [history](/commands/categories/history.md)
 
 <div class='command-title'>Get the command history session.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

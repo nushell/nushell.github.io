@@ -2,7 +2,7 @@
 title: str substring
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Get part of a string. Note that the first character of a string is index 0.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `str substring` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Get part of a string. Note that the first character of a string is index 0.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

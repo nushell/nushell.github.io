@@ -2,7 +2,7 @@
 title: math product
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Returns the product of a list of numbers or the products of each column of a table.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `math product` for [math](/commands/categories/math.md)
 
 <div class='command-title'>Returns the product of a list of numbers or the products of each column of a table.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

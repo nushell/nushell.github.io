@@ -2,7 +2,7 @@
 title: bytes split
 categories: |
   bytes
-version: 0.115.0
+version: 0.115.1
 bytes: |
   Split input into multiple items using a separator.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `bytes split` for [bytes](/commands/categories/bytes.md)
 
 <div class='command-title'>Split input into multiple items using a separator.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

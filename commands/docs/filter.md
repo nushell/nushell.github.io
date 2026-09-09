@@ -2,7 +2,7 @@
 title: filter
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Filter values based on a predicate closure.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `filter` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Filter values based on a predicate closure.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: run-internal
 categories: |
   default
-version: 0.115.0
+version: 0.115.1
 default: |
   Run a built-in command by name. Used internally by `%($cmd)` dynamic dispatch.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `run-internal` for [default](/commands/categories/default.md)
 
 <div class='command-title'>Run a built-in command by name. Used internally by `%($cmd)` dynamic dispatch.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

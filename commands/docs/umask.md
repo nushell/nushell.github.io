@@ -2,7 +2,7 @@
 title: umask
 categories: |
   platform
-version: 0.115.0
+version: 0.115.1
 platform: |
   Get or set default file creation permissions.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `umask` for [platform](/commands/categories/platform.md)
 
 <div class='command-title'>Get or set default file creation permissions.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

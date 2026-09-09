@@ -2,7 +2,7 @@
 title: random
 categories: |
   random
-version: 0.115.0
+version: 0.115.1
 random: |
   Generate a random value.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `random` for [random](/commands/categories/random.md)
 
 <div class='command-title'>Generate a random value.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

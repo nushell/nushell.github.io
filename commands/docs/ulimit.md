@@ -2,7 +2,7 @@
 title: ulimit
 categories: |
   platform
-version: 0.115.0
+version: 0.115.1
 platform: |
   Set or get resource usage limits.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `ulimit` for [platform](/commands/categories/platform.md)
 
 <div class='command-title'>Set or get resource usage limits.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

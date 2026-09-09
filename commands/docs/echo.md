@@ -2,7 +2,7 @@
 title: echo
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Returns its arguments, ignoring the piped-in value.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `echo` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Returns its arguments, ignoring the piped-in value.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

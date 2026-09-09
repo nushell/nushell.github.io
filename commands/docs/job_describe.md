@@ -2,7 +2,7 @@
 title: job describe
 categories: |
   experimental
-version: 0.115.0
+version: 0.115.1
 experimental: |
   Add a description to a background job.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `job describe` for [experimental](/commands/categories/experimental.md)
 
 <div class='command-title'>Add a description to a background job.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

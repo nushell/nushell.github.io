@@ -2,7 +2,7 @@
 title: last
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Return only the last several rows of the input. Counterpart of `first`. Opposite of `drop`. For binary input, rows can also be specified as a filesize.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `last` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Return only the last several rows of the input. Counterpart of `first`. Opposite of `drop`. For binary input, rows can also be specified as a filesize.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

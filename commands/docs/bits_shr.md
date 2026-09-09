@@ -2,7 +2,7 @@
 title: bits shr
 categories: |
   bits
-version: 0.115.0
+version: 0.115.1
 bits: |
   Bitwise shift right for ints or binary values.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `bits shr` for [bits](/commands/categories/bits.md)
 
 <div class='command-title'>Bitwise shift right for ints or binary values.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

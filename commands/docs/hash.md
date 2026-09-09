@@ -2,7 +2,7 @@
 title: hash
 categories: |
   hash
-version: 0.115.0
+version: 0.115.1
 hash: |
   Apply hash function.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `hash` for [hash](/commands/categories/hash.md)
 
 <div class='command-title'>Apply hash function.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

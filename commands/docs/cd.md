@@ -2,7 +2,7 @@
 title: cd
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   Change the current working directory.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `cd` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>Change the current working directory.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

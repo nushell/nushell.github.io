@@ -2,7 +2,7 @@
 title: format bits
 categories: |
   conversions
-version: 0.115.0
+version: 0.115.1
 conversions: |
   Convert value to a string of binary data represented by 0 and 1.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `format bits` for [conversions](/commands/categories/conversions.md)
 
 <div class='command-title'>Convert value to a string of binary data represented by 0 and 1.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

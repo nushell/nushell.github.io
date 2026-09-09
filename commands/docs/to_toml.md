@@ -2,7 +2,7 @@
 title: to toml
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Convert record into .toml text.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `to toml` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Convert record into .toml text.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

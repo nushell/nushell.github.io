@@ -2,7 +2,7 @@
 title: fill
 categories: |
   conversions
-version: 0.115.0
+version: 0.115.1
 conversions: |
   Fill and align text in columns.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `fill` for [conversions](/commands/categories/conversions.md)
 
 <div class='command-title'>Fill and align text in columns.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

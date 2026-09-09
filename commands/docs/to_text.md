@@ -2,7 +2,7 @@
 title: to text
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Convert data into plain text format.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `to text` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Convert data into plain text format.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

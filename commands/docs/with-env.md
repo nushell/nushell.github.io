@@ -2,7 +2,7 @@
 title: with-env
 categories: |
   env
-version: 0.115.0
+version: 0.115.1
 env: |
   Runs a block with an environment variable set.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `with-env` for [env](/commands/categories/env.md)
 
 <div class='command-title'>Runs a block with an environment variable set.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

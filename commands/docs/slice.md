@@ -2,7 +2,7 @@
 title: slice
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Return only the selected rows.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `slice` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Return only the selected rows.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: where
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Filter values of an input list based on a condition.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `where` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Filter values of an input list based on a condition.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: metadata access
 categories: |
   debug
-version: 0.115.0
+version: 0.115.1
 debug: |
   Access the metadata for the input stream within a closure.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `metadata access` for [debug](/commands/categories/debug.md)
 
 <div class='command-title'>Access the metadata for the input stream within a closure.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

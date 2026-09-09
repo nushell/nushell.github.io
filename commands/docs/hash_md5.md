@@ -2,7 +2,7 @@
 title: hash md5
 categories: |
   hash
-version: 0.115.0
+version: 0.115.1
 hash: |
   Hash a value using the md5 hash algorithm.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `hash md5` for [hash](/commands/categories/hash.md)
 
 <div class='command-title'>Hash a value using the md5 hash algorithm.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

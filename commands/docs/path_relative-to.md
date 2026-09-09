@@ -2,7 +2,7 @@
 title: path relative-to
 categories: |
   path
-version: 0.115.0
+version: 0.115.1
 path: |
   Express a path as relative to another path.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `path relative-to` for [path](/commands/categories/path.md)
 
 <div class='command-title'>Express a path as relative to another path.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

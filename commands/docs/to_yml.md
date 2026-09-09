@@ -2,7 +2,7 @@
 title: to yml
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Convert table into .yaml/.yml text.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `to yml` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Convert table into .yaml&#x2f;.yml text.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: enumerate
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Enumerate the elements in a stream.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `enumerate` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Enumerate the elements in a stream.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: error make
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Create an error.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `error make` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Create an error.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

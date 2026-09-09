@@ -2,7 +2,7 @@
 title: bytes build
 categories: |
   bytes
-version: 0.115.0
+version: 0.115.1
 bytes: |
   Create a binary value from the provided arguments.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `bytes build` for [bytes](/commands/categories/bytes.md)
 
 <div class='command-title'>Create a binary value from the provided arguments.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

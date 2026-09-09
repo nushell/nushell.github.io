@@ -2,7 +2,7 @@
 title: update
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Update an existing column to have a new value.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `update` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Update an existing column to have a new value.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

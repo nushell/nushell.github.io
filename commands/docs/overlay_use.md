@@ -2,7 +2,7 @@
 title: overlay use
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Use definitions from a module as an overlay.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `overlay use` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Use definitions from a module as an overlay.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

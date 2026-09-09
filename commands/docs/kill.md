@@ -2,7 +2,7 @@
 title: kill
 categories: |
   platform
-version: 0.115.0
+version: 0.115.1
 platform: |
   Kill a process using its process ID.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `kill` for [platform](/commands/categories/platform.md)
 
 <div class='command-title'>Kill a process using its process ID.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

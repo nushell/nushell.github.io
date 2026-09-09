@@ -2,7 +2,7 @@
 title: matrix reshape
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Change the dimensions of a matrix.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `matrix reshape` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Change the dimensions of a matrix.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

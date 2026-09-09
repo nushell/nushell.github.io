@@ -2,7 +2,7 @@
 title: from ods
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Parse OpenDocument Spreadsheet(.ods) data and create table.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `from ods` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Parse OpenDocument Spreadsheet(.ods) data and create table.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

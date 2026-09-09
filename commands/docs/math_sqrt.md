@@ -2,7 +2,7 @@
 title: math sqrt
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Returns the square root of the input number.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `math sqrt` for [math](/commands/categories/math.md)
 
 <div class='command-title'>Returns the square root of the input number.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

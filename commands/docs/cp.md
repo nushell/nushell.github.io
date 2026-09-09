@@ -2,7 +2,7 @@
 title: cp
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   Copy files using uutils/coreutils cp.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `cp` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>Copy files using uutils&#x2f;coreutils cp.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

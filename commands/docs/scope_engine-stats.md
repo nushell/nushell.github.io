@@ -2,7 +2,7 @@
 title: scope engine-stats
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Output stats on the engine in the current state, including interactive last-result size info.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `scope engine-stats` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Output stats on the engine in the current state, including interactive last-result size info.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

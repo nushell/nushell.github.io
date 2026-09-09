@@ -2,7 +2,7 @@
 title: drop nth
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Drop the selected rows.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `drop nth` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Drop the selected rows.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

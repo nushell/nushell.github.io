@@ -2,7 +2,7 @@
 title: move
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Moves columns relative to other columns or make them the first/last columns. Flags are mutually exclusive.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `move` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Moves columns relative to other columns or make them the first&#x2f;last columns. Flags are mutually exclusive.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

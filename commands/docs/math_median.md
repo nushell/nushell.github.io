@@ -2,7 +2,7 @@
 title: math median
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Computes the median of a list of numbers.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `math median` for [math](/commands/categories/math.md)
 
 <div class='command-title'>Computes the median of a list of numbers.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

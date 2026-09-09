@@ -2,7 +2,7 @@
 title: source-env
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Source the environment from a source file into the current environment.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `source-env` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Source the environment from a source file into the current environment.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

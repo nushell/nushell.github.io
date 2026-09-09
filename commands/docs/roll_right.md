@@ -2,7 +2,7 @@
 title: roll right
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Roll table columns right.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `roll right` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Roll table columns right.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: uname
 categories: |
   system
-version: 0.115.0
+version: 0.115.1
 system: |
   Print certain system information using uutils/coreutils uname.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `uname` for [system](/commands/categories/system.md)
 
 <div class='command-title'>Print certain system information using uutils&#x2f;coreutils uname.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

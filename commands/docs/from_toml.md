@@ -2,7 +2,7 @@
 title: from toml
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Parse text as .toml and create record.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `from toml` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Parse text as .toml and create record.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

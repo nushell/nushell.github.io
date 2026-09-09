@@ -2,7 +2,7 @@
 title: attr
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Various attributes for custom commands.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `attr` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Various attributes for custom commands.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

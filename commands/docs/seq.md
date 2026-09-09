@@ -2,7 +2,7 @@
 title: seq
 categories: |
   generators
-version: 0.115.0
+version: 0.115.1
 generators: |
   Output sequences of numbers.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `seq` for [generators](/commands/categories/generators.md)
 
 <div class='command-title'>Output sequences of numbers.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: chunks
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Divide a list, table or binary input into chunks of `chunk_size`. For binary input, `chunk_size` can also be specified as a filesize.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `chunks` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Divide a list, table or binary input into chunks of `chunk_size`. For binary input, `chunk_size` can also be specified as a filesize.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

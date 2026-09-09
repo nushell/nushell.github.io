@@ -2,7 +2,7 @@
 title: view
 categories: |
   debug
-version: 0.115.0
+version: 0.115.1
 debug: |
   Various commands for viewing debug information.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `view` for [debug](/commands/categories/debug.md)
 
 <div class='command-title'>Various commands for viewing debug information.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

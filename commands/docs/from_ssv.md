@@ -2,7 +2,7 @@
 title: from ssv
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Parse text as space-separated values and create a table. The default minimum number of spaces counted as a separator is 2.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `from ssv` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Parse text as space-separated values and create a table. The default minimum number of spaces counted as a separator is 2.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

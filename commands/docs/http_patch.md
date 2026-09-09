@@ -2,7 +2,7 @@
 title: http patch
 categories: |
   network
-version: 0.115.0
+version: 0.115.1
 network: |
   Send a PATCH request to a URL with a request body.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `http patch` for [network](/commands/categories/network.md)
 
 <div class='command-title'>Send a PATCH request to a URL with a request body.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

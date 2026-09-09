@@ -2,7 +2,7 @@
 title: random binary
 categories: |
   random
-version: 0.115.0
+version: 0.115.1
 random: |
   Generate random bytes.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `random binary` for [random](/commands/categories/random.md)
 
 <div class='command-title'>Generate random bytes.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

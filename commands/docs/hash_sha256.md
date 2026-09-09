@@ -2,7 +2,7 @@
 title: hash sha256
 categories: |
   hash
-version: 0.115.0
+version: 0.115.1
 hash: |
   Hash a value using the sha256 hash algorithm.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `hash sha256` for [hash](/commands/categories/hash.md)
 
 <div class='command-title'>Hash a value using the sha256 hash algorithm.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

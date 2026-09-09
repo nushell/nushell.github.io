@@ -2,7 +2,7 @@
 title: into semver
 categories: |
   conversions
-version: 0.115.0
+version: 0.115.1
 conversions: |
   Convert a value (string, record, or semver) to a semantic version.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `into semver` for [conversions](/commands/categories/conversions.md)
 
 <div class='command-title'>Convert a value (string, record, or semver) to a semantic version.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

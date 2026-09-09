@@ -2,7 +2,7 @@
 title: math arctan
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Returns the arctangent of the number.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `math arctan` for [math](/commands/categories/math.md)
 
 <div class='command-title'>Returns the arctangent of the number.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

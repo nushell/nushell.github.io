@@ -2,7 +2,7 @@
 title: url
 categories: |
   network
-version: 0.115.0
+version: 0.115.1
 network: |
   Various commands for working with URLs.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `url` for [network](/commands/categories/network.md)
 
 <div class='command-title'>Various commands for working with URLs.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

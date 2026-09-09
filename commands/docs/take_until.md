@@ -2,7 +2,7 @@
 title: take until
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Take elements of the input until a predicate is true.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `take until` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Take elements of the input until a predicate is true.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: is-redirected
 categories: |
   platform
-version: 0.115.0
+version: 0.115.1
 platform: |
   Check if the current custom command's return value is redirected away from display.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `is-redirected` for [platform](/commands/categories/platform.md)
 
 <div class='command-title'>Check if the current custom command&#x27;s return value is redirected away from display.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

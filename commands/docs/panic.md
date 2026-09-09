@@ -2,7 +2,7 @@
 title: panic
 categories: |
   debug
-version: 0.115.0
+version: 0.115.1
 debug: |
   Causes nushell to panic.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `panic` for [debug](/commands/categories/debug.md)
 
 <div class='command-title'>Causes nushell to panic.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

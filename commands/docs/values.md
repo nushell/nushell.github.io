@@ -2,7 +2,7 @@
 title: values
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Given a record or table, produce a list of its columns' values.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `values` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Given a record or table, produce a list of its columns&#x27; values.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

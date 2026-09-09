@@ -2,7 +2,7 @@
 title: scope aliases
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Output info on the aliases in the current scope.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `scope aliases` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Output info on the aliases in the current scope.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: keybindings listen
 categories: |
   platform
-version: 0.115.0
+version: 0.115.1
 platform: |
   Get input from the user.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `keybindings listen` for [platform](/commands/categories/platform.md)
 
 <div class='command-title'>Get input from the user.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: polars math bitwise-leading-ones
 categories: |
   dataframe
-version: 0.115.0
+version: 0.115.1
 dataframe: |
   Compute the number of leading set bits for each element in an integer column expression.
 usage: |
@@ -15,6 +15,17 @@ contributors: false
 # `polars math bitwise-leading-ones` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Compute the number of leading set bits for each element in an integer column expression.</div>
+
+::: warning This command requires a plugin
+The `polars math bitwise-leading-ones` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
 
 ## Signature
 

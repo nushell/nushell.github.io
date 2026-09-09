@@ -2,7 +2,7 @@
 title: url encode
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Converts a string to a percent encoded web safe string.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `url encode` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Converts a string to a percent encoded web safe string.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

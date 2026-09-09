@@ -2,7 +2,7 @@
 title: date list-timezone
 categories: |
   date
-version: 0.115.0
+version: 0.115.1
 date: |
   List supported time zones.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `date list-timezone` for [date](/commands/categories/date.md)
 
 <div class='command-title'>List supported time zones.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: http pool
 categories: |
   network
-version: 0.115.0
+version: 0.115.1
 network: |
   Configure and reset builtin http connection pool.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `http pool` for [network](/commands/categories/network.md)
 
 <div class='command-title'>Configure and reset builtin http connection pool.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

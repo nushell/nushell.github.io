@@ -2,7 +2,7 @@
 title: glob
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   Creates a list of files and/or folders based on the glob pattern provided.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `glob` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>Creates a list of files and&#x2f;or folders based on the glob pattern provided.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

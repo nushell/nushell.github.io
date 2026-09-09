@@ -2,7 +2,7 @@
 title: history import
 categories: |
   history
-version: 0.115.0
+version: 0.115.1
 history: |
   Import command line history.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `history import` for [history](/commands/categories/history.md)
 
 <div class='command-title'>Import command line history.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

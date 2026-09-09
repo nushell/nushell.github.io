@@ -2,7 +2,7 @@
 title: drop column
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Remove N columns at the right-hand end of the input table. To remove columns by name, use `reject`.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `drop column` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Remove N columns at the right-hand end of the input table. To remove columns by name, use `reject`.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: to
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Translate structured data to various formats.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `to` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Translate structured data to various formats.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

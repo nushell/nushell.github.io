@@ -2,7 +2,7 @@
 title: job id
 categories: |
   experimental
-version: 0.115.0
+version: 0.115.1
 experimental: |
   Get id of current job.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `job id` for [experimental](/commands/categories/experimental.md)
 
 <div class='command-title'>Get id of current job.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

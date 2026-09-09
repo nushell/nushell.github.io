@@ -2,7 +2,7 @@
 title: from
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Parse a string or binary data into structured data.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `from` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Parse a string or binary data into structured data.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

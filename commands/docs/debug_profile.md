@@ -2,7 +2,7 @@
 title: debug profile
 categories: |
   debug
-version: 0.115.0
+version: 0.115.1
 debug: |
   Profile pipeline elements in a closure.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `debug profile` for [debug](/commands/categories/debug.md)
 
 <div class='command-title'>Profile pipeline elements in a closure.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

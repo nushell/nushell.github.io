@@ -2,7 +2,7 @@
 title: uniq-by
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Return the distinct values in the input by the given column(s).
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `uniq-by` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Return the distinct values in the input by the given column(s).</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

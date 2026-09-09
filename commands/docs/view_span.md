@@ -2,7 +2,7 @@
 title: view span
 categories: |
   debug
-version: 0.115.0
+version: 0.115.1
 debug: |
   View the contents of a span.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `view span` for [debug](/commands/categories/debug.md)
 
 <div class='command-title'>View the contents of a span.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: describe
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Describe the type and structure of the value(s) piped in.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `describe` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Describe the type and structure of the value(s) piped in.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

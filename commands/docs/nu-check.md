@@ -2,7 +2,7 @@
 title: nu-check
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Validate and parse Nushell input content.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `nu-check` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Validate and parse Nushell input content.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: idx dirs
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   List indexed directories, or fuzzy-match directories by query.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `idx dirs` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>List indexed directories, or fuzzy-match directories by query.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

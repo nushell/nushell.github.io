@@ -2,7 +2,7 @@
 title: is-not-empty
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Check for non-empty values.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `is-not-empty` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Check for non-empty values.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

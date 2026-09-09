@@ -2,7 +2,7 @@
 title: sleep
 categories: |
   platform
-version: 0.115.0
+version: 0.115.1
 platform: |
   Delay for a specified amount of time.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `sleep` for [platform](/commands/categories/platform.md)
 
 <div class='command-title'>Delay for a specified amount of time.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: to msgpackz
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Convert Nu values into brotli-compressed MessagePack.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `to msgpackz` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Convert Nu values into brotli-compressed MessagePack.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

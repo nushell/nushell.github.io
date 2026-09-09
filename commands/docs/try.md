@@ -2,7 +2,7 @@
 title: try
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Try to run a block, if it fails optionally run a catch closure.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `try` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Try to run a block, if it fails optionally run a catch closure.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

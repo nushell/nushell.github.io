@@ -2,7 +2,7 @@
 title: term query
 categories: |
   platform
-version: 0.115.0
+version: 0.115.1
 platform: |
   Query the terminal for information.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `term query` for [platform](/commands/categories/platform.md)
 
 <div class='command-title'>Query the terminal for information.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: reverse
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Reverses the input list or table.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `reverse` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Reverses the input list or table.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

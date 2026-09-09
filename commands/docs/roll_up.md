@@ -2,7 +2,7 @@
 title: roll up
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Roll table rows up.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `roll up` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Roll table rows up.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

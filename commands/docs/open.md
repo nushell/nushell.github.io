@@ -2,7 +2,7 @@
 title: open
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   Load a file into a cell, converting to table if possible (avoid by appending '--raw').
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `open` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>Load a file into a cell, converting to table if possible (avoid by appending &#x27;--raw&#x27;).</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

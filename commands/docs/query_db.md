@@ -2,7 +2,7 @@
 title: query db
 categories: |
   database
-version: 0.115.0
+version: 0.115.1
 database: |
   Query a SQLite database with SQL statements.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `query db` for [database](/commands/categories/database.md)
 
 <div class='command-title'>Query a SQLite database with SQL statements.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

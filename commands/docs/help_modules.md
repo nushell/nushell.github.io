@@ -2,7 +2,7 @@
 title: help modules
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Show help on nushell modules.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `help modules` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Show help on nushell modules.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

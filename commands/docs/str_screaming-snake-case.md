@@ -2,7 +2,7 @@
 title: str screaming-snake-case
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Convert a string to SCREAMING_SNAKE_CASE.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `str screaming-snake-case` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Convert a string to SCREAMING_SNAKE_CASE.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

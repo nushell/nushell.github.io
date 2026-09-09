@@ -2,7 +2,7 @@
 title: path expand
 categories: |
   path
-version: 0.115.0
+version: 0.115.1
 path: |
   Try to expand a path to its absolute form.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `path expand` for [path](/commands/categories/path.md)
 
 <div class='command-title'>Try to expand a path to its absolute form.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: date format
 categories: |
   removed
-version: 0.115.0
+version: 0.115.1
 removed: |
   Removed command: use `format date` instead.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `date format` for [removed](/commands/categories/removed.md)
 
 <div class='command-title'>Removed command: use `format date` instead.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

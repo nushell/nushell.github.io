@@ -2,7 +2,7 @@
 title: attr search-terms
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Attribute for adding search terms to custom commands.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `attr search-terms` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Attribute for adding search terms to custom commands.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

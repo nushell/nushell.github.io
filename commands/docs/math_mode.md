@@ -2,7 +2,7 @@
 title: math mode
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Returns the most frequent element(s) from a list of numbers or tables.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `math mode` for [math](/commands/categories/math.md)
 
 <div class='command-title'>Returns the most frequent element(s) from a list of numbers or tables.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

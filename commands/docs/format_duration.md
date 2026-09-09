@@ -2,7 +2,7 @@
 title: format duration
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Outputs duration with a specified unit of time.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `format duration` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Outputs duration with a specified unit of time.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

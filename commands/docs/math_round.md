@@ -2,7 +2,7 @@
 title: math round
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Returns the input number rounded to the specified precision.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `math round` for [math](/commands/categories/math.md)
 
 <div class='command-title'>Returns the input number rounded to the specified precision.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

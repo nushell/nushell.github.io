@@ -2,7 +2,7 @@
 title: url build-query
 categories: |
   network
-version: 0.115.0
+version: 0.115.1
 network: |
   Converts record or table into query string applying percent-encoding.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `url build-query` for [network](/commands/categories/network.md)
 
 <div class='command-title'>Converts record or table into query string applying percent-encoding.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

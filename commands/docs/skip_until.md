@@ -2,7 +2,7 @@
 title: skip until
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Skip elements of the input until a predicate is true.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `skip until` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Skip elements of the input until a predicate is true.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: matrix get-col
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Extract a column from a 2D matrix.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `matrix get-col` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Extract a column from a 2D matrix.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

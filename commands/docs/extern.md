@@ -2,7 +2,7 @@
 title: extern
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Define a signature for an external command.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `extern` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Define a signature for an external command.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: math cbrt
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Returns the real-valued cube root of the input number.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `math cbrt` for [math](/commands/categories/math.md)
 
 <div class='command-title'>Returns the real-valued cube root of the input number.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

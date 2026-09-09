@@ -2,7 +2,7 @@
 title: cal
 categories: |
   generators
-version: 0.115.0
+version: 0.115.1
 generators: |
   Display a calendar.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `cal` for [generators](/commands/categories/generators.md)
 
 <div class='command-title'>Display a calendar.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

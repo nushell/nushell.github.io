@@ -2,7 +2,7 @@
 title: plugin
 categories: |
   plugin
-version: 0.115.0
+version: 0.115.1
 plugin: |
   Commands for managing plugins.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `plugin` for [plugin](/commands/categories/plugin.md)
 
 <div class='command-title'>Commands for managing plugins.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

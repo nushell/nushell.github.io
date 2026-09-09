@@ -2,7 +2,7 @@
 title: let
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Create a variable and give it a value.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `let` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Create a variable and give it a value.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

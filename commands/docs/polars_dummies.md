@@ -2,7 +2,7 @@
 title: polars dummies
 categories: |
   dataframe
-version: 0.115.0
+version: 0.115.1
 dataframe: |
   Creates a new dataframe with dummy variables.
 usage: |
@@ -15,6 +15,17 @@ contributors: false
 # `polars dummies` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Creates a new dataframe with dummy variables.</div>
+
+::: warning This command requires a plugin
+The `polars dummies` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
 
 ## Signature
 

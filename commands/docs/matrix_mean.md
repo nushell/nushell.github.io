@@ -2,7 +2,7 @@
 title: matrix mean
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Compute the mean of all elements in a matrix.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `matrix mean` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Compute the mean of all elements in a matrix.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

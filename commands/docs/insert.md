@@ -2,7 +2,7 @@
 title: insert
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Insert a new column, using an expression or closure to create each row's values.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `insert` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Insert a new column, using an expression or closure to create each row&#x27;s values.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

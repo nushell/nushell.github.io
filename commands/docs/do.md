@@ -2,7 +2,7 @@
 title: do
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Run a closure, providing it with the pipeline input.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `do` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Run a closure, providing it with the pipeline input.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

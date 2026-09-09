@@ -2,7 +2,7 @@
 title: math floor
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Returns the floor of a number (largest integer less than or equal to that number).
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `math floor` for [math](/commands/categories/math.md)
 
 <div class='command-title'>Returns the floor of a number (largest integer less than or equal to that number).</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

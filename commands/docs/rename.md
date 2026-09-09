@@ -2,7 +2,7 @@
 title: rename
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Creates a new table with columns renamed.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `rename` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Creates a new table with columns renamed.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

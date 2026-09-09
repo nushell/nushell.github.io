@@ -2,7 +2,7 @@
 title: encode hex
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Hex encode a binary value or a string.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `encode hex` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Hex encode a binary value or a string.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

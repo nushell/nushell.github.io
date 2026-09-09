@@ -2,7 +2,7 @@
 title: str lowercase
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Convert text to lowercase.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `str lowercase` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Convert text to lowercase.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

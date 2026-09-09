@@ -2,7 +2,7 @@
 title: random chars
 categories: |
   random
-version: 0.115.0
+version: 0.115.1
 random: |
   Generate random chars uniformly distributed over ASCII letters and numbers: a-z, A-Z and 0-9.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `random chars` for [random](/commands/categories/random.md)
 
 <div class='command-title'>Generate random chars uniformly distributed over ASCII letters and numbers: a-z, A-Z and 0-9.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

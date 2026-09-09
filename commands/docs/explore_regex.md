@@ -2,7 +2,7 @@
 title: explore regex
 categories: |
   viewers
-version: 0.115.0
+version: 0.115.1
 viewers: |
   Launch a TUI to create and explore regular expressions interactively.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `explore regex` for [viewers](/commands/categories/viewers.md)
 
 <div class='command-title'>Launch a TUI to create and explore regular expressions interactively.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

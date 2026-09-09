@@ -2,7 +2,7 @@
 title: math min
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Finds the minimum within a list of values or tables.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `math min` for [math](/commands/categories/math.md)
 
 <div class='command-title'>Finds the minimum within a list of values or tables.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

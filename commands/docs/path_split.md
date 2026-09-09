@@ -2,7 +2,7 @@
 title: path split
 categories: |
   path
-version: 0.115.0
+version: 0.115.1
 path: |
   Split a path into a list based on the system's path separator.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `path split` for [path](/commands/categories/path.md)
 
 <div class='command-title'>Split a path into a list based on the system&#x27;s path separator.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

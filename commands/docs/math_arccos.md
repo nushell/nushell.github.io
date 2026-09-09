@@ -2,7 +2,7 @@
 title: math arccos
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Returns the arccosine of the number.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `math arccos` for [math](/commands/categories/math.md)
 
 <div class='command-title'>Returns the arccosine of the number.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

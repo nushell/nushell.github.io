@@ -2,7 +2,7 @@
 title: term size
 categories: |
   platform
-version: 0.115.0
+version: 0.115.1
 platform: |
   Returns a record containing the number of columns (width) and rows (height) of the terminal.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `term size` for [platform](/commands/categories/platform.md)
 
 <div class='command-title'>Returns a record containing the number of columns (width) and rows (height) of the terminal.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

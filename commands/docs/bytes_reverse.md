@@ -2,7 +2,7 @@
 title: bytes reverse
 categories: |
   bytes
-version: 0.115.0
+version: 0.115.1
 bytes: |
   Reverse the bytes in the pipeline.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `bytes reverse` for [bytes](/commands/categories/bytes.md)
 
 <div class='command-title'>Reverse the bytes in the pipeline.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

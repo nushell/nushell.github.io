@@ -2,7 +2,7 @@
 title: job kill
 categories: |
   experimental
-version: 0.115.0
+version: 0.115.1
 experimental: |
   Kill a background job.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `job kill` for [experimental](/commands/categories/experimental.md)
 
 <div class='command-title'>Kill a background job.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

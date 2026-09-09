@@ -2,7 +2,7 @@
 title: matrix identity
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Create an identity matrix of the given size.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `matrix identity` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Create an identity matrix of the given size.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

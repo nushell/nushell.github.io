@@ -2,7 +2,7 @@
 title: debug experimental-options
 categories: |
   debug
-version: 0.115.0
+version: 0.115.1
 debug: |
   Show all experimental options.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `debug experimental-options` for [debug](/commands/categories/debug.md)
 
 <div class='command-title'>Show all experimental options.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

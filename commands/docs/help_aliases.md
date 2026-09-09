@@ -2,7 +2,7 @@
 title: help aliases
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Show help on nushell aliases.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `help aliases` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Show help on nushell aliases.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

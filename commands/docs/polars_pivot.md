@@ -2,7 +2,7 @@
 title: polars pivot
 categories: |
   dataframe
-version: 0.115.0
+version: 0.115.1
 dataframe: |
   Pivot a DataFrame from long to wide format.
 usage: |
@@ -15,6 +15,17 @@ contributors: false
 # `polars pivot` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Pivot a DataFrame from long to wide format.</div>
+
+::: warning This command requires a plugin
+The `polars pivot` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
 
 ## Signature
 

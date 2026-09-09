@@ -2,7 +2,7 @@
 title: help pipe-and-redirect
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Show help on nushell pipes and redirects.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `help pipe-and-redirect` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Show help on nushell pipes and redirects.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

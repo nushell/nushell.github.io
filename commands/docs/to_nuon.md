@@ -2,7 +2,7 @@
 title: to nuon
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Converts table data into Nuon (Nushell Object Notation) text.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `to nuon` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Converts table data into Nuon (Nushell Object Notation) text.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

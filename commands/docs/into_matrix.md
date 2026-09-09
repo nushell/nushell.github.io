@@ -2,7 +2,7 @@
 title: into matrix
 categories: |
   conversions
-version: 0.115.0
+version: 0.115.1
 conversions: |
   Convert a nushell table or list of lists into a matrix.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `into matrix` for [conversions](/commands/categories/conversions.md)
 
 <div class='command-title'>Convert a nushell table or list of lists into a matrix.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: ignore
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Ignore selected output streams from the previous command in the pipeline.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `ignore` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Ignore selected output streams from the previous command in the pipeline.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: config flatten
 categories: |
   debug
-version: 0.115.0
+version: 0.115.1
 debug: |
   Show the current configuration in a flattened form.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `config flatten` for [debug](/commands/categories/debug.md)
 
 <div class='command-title'>Show the current configuration in a flattened form.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

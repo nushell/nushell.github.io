@@ -2,7 +2,7 @@
 title: du
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   Find disk usage sizes of specified items.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `du` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>Find disk usage sizes of specified items.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

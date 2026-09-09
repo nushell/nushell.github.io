@@ -2,7 +2,7 @@
 title: date
 categories: |
   date
-version: 0.115.0
+version: 0.115.1
 date: |
   Date-related commands.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `date` for [date](/commands/categories/date.md)
 
 <div class='command-title'>Date-related commands.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

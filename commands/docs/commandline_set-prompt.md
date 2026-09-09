@@ -2,7 +2,7 @@
 title: commandline set-prompt
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Replace the current prompt and repaint it in place, without disturbing the line being edited.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `commandline set-prompt` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Replace the current prompt and repaint it in place, without disturbing the line being edited.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: polars selector alpha
 categories: |
   expression
-version: 0.115.0
+version: 0.115.1
 expression: |
   Select all columns with alphabetic names (eg: only letters). Matching column names cannot contain *any* non-alphabetic characters. Note that the definition of "alphabetic" consists of all valid Unicode alphabetic characters by default; this can be changed by setting `--ascii-only`.
 usage: |
@@ -15,6 +15,17 @@ contributors: false
 # `polars selector alpha` for [expression](/commands/categories/expression.md)
 
 <div class='command-title'>Select all columns with alphabetic names (eg: only letters). Matching column names cannot contain *any* non-alphabetic characters. Note that the definition of &quot;alphabetic&quot; consists of all valid Unicode alphabetic characters by default; this can be changed by setting `--ascii-only`.</div>
+
+::: warning This command requires a plugin
+The `polars selector alpha` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
 
 ## Signature
 

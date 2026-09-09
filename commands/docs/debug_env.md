@@ -2,7 +2,7 @@
 title: debug env
 categories: |
   debug
-version: 0.115.0
+version: 0.115.1
 debug: |
   Show environment variables as external commands would get it.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `debug env` for [debug](/commands/categories/debug.md)
 
 <div class='command-title'>Show environment variables as external commands would get it.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

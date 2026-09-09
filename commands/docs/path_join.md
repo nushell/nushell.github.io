@@ -2,7 +2,7 @@
 title: path join
 categories: |
   path
-version: 0.115.0
+version: 0.115.1
 path: |
   Join a structured path or a list of path parts.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `path join` for [path](/commands/categories/path.md)
 
 <div class='command-title'>Join a structured path or a list of path parts.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

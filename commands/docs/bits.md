@@ -2,7 +2,7 @@
 title: bits
 categories: |
   bits
-version: 0.115.0
+version: 0.115.1
 bits: |
   Various commands for working with bits.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `bits` for [bits](/commands/categories/bits.md)
 
 <div class='command-title'>Various commands for working with bits.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

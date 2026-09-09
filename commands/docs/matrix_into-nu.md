@@ -2,7 +2,7 @@
 title: matrix into-nu
 categories: |
   conversions
-version: 0.115.0
+version: 0.115.1
 conversions: |
   Convert a matrix to a nushell table (list of lists by default).
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `matrix into-nu` for [conversions](/commands/categories/conversions.md)
 
 <div class='command-title'>Convert a matrix to a nushell table (list of lists by default).</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

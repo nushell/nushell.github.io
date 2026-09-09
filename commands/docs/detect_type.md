@@ -2,7 +2,7 @@
 title: detect type
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Infer Nushell datatype from a string.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `detect type` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Infer Nushell datatype from a string.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

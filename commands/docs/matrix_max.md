@@ -2,7 +2,7 @@
 title: matrix max
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Find the maximum value in a matrix, or max along an axis.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `matrix max` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Find the maximum value in a matrix, or max along an axis.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

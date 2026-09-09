@@ -2,7 +2,7 @@
 title: str index-of
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Returns start index of first occurrence of string in input, or -1 if no match.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `str index-of` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Returns start index of first occurrence of string in input, or -1 if no match.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

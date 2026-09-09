@@ -2,7 +2,7 @@
 title: str join
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Concatenate multiple strings into a single string, with an optional separator between each.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `str join` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Concatenate multiple strings into a single string, with an optional separator between each.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

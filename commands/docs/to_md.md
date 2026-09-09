@@ -2,7 +2,7 @@
 title: to md
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Convert table into simple Markdown.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `to md` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Convert table into simple Markdown.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

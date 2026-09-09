@@ -2,7 +2,7 @@
 title: matrix transpose
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Transpose a matrix (swap rows and columns). For n-dimensional arrays, reverses all axes.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `matrix transpose` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Transpose a matrix (swap rows and columns). For n-dimensional arrays, reverses all axes.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

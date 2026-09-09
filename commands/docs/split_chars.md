@@ -2,7 +2,7 @@
 title: split chars
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Split a string into a list of characters.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `split chars` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Split a string into a list of characters.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

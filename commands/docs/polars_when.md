@@ -2,7 +2,7 @@
 title: polars when
 categories: |
   expression
-version: 0.115.0
+version: 0.115.1
 expression: |
   Creates and modifies a when expression.
 usage: |
@@ -15,6 +15,17 @@ contributors: false
 # `polars when` for [expression](/commands/categories/expression.md)
 
 <div class='command-title'>Creates and modifies a when expression.</div>
+
+::: warning This command requires a plugin
+The `polars when` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
 
 ## Signature
 

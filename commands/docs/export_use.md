@@ -2,7 +2,7 @@
 title: export use
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Use definitions from a module and export them from this module.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `export use` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Use definitions from a module and export them from this module.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

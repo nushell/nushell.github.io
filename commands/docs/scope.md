@@ -2,7 +2,7 @@
 title: scope
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Commands for getting info about what is in scope.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `scope` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Commands for getting info about what is in scope.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

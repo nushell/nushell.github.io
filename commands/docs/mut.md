@@ -2,7 +2,7 @@
 title: mut
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Create a mutable variable and give it a value.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `mut` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Create a mutable variable and give it a value.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

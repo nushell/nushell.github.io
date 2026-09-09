@@ -2,7 +2,7 @@
 title: tee
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Copy a stream to another command in parallel.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `tee` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Copy a stream to another command in parallel.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

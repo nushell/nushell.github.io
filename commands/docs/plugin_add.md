@@ -2,7 +2,7 @@
 title: plugin add
 categories: |
   plugin
-version: 0.115.0
+version: 0.115.1
 plugin: |
   Add a plugin to the plugin registry file.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `plugin add` for [plugin](/commands/categories/plugin.md)
 
 <div class='command-title'>Add a plugin to the plugin registry file.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

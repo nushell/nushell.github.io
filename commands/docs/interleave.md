@@ -2,7 +2,7 @@
 title: interleave
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Read multiple streams in parallel and combine them into one stream.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `interleave` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Read multiple streams in parallel and combine them into one stream.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

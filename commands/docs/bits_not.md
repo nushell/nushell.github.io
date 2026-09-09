@@ -2,7 +2,7 @@
 title: bits not
 categories: |
   bits
-version: 0.115.0
+version: 0.115.1
 bits: |
   Performs logical negation on each bit.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `bits not` for [bits](/commands/categories/bits.md)
 
 <div class='command-title'>Performs logical negation on each bit.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

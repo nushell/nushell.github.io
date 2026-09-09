@@ -2,7 +2,7 @@
 title: combinations
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Generates all combinations of size k from the input list.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `combinations` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Generates all combinations of size k from the input list.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

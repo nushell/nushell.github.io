@@ -2,7 +2,7 @@
 title: sort-by
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Sort by the given cell path or closure.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `sort-by` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Sort by the given cell path or closure.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

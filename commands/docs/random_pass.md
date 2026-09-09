@@ -2,7 +2,7 @@
 title: random pass
 categories: |
   random
-version: 0.115.0
+version: 0.115.1
 random: |
   Generate a cryptologically secure password.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `random pass` for [random](/commands/categories/random.md)
 
 <div class='command-title'>Generate a cryptologically secure password.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

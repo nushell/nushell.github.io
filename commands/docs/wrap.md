@@ -2,7 +2,7 @@
 title: wrap
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Wrap the value into a column.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `wrap` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Wrap the value into a column.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

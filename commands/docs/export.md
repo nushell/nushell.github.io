@@ -2,7 +2,7 @@
 title: export
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Export definitions or environment variables from a module.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `export` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Export definitions or environment variables from a module.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

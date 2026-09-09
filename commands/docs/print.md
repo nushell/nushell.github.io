@@ -2,7 +2,7 @@
 title: print
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Print the given values to stdout.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `print` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Print the given values to stdout.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

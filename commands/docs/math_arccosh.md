@@ -2,7 +2,7 @@
 title: math arccosh
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Returns the inverse of the hyperbolic cosine function.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `math arccosh` for [math](/commands/categories/math.md)
 
 <div class='command-title'>Returns the inverse of the hyperbolic cosine function.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

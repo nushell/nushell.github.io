@@ -2,7 +2,7 @@
 title: sys net
 categories: |
   system
-version: 0.115.0
+version: 0.115.1
 system: |
   View information about the system network interfaces.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `sys net` for [system](/commands/categories/system.md)
 
 <div class='command-title'>View information about the system network interfaces.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

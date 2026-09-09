@@ -2,7 +2,7 @@
 title: continue
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Continue a loop from the next iteration.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `continue` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Continue a loop from the next iteration.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

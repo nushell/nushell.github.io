@@ -2,7 +2,7 @@
 title: commandline complete
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Complete a string using the default completions.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `commandline complete` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Complete a string using the default completions.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

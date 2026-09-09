@@ -2,7 +2,7 @@
 title: parse
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Parse columns from string data using a simple pattern or a supplied regular expression.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `parse` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Parse columns from string data using a simple pattern or a supplied regular expression.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

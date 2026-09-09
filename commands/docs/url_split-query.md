@@ -2,7 +2,7 @@
 title: url split-query
 categories: |
   network
-version: 0.115.0
+version: 0.115.1
 network: |
   Converts query string into table applying percent-decoding.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `url split-query` for [network](/commands/categories/network.md)
 
 <div class='command-title'>Converts query string into table applying percent-decoding.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: start
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   Open a folder, file, or website in the default application or viewer.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `start` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>Open a folder, file, or website in the default application or viewer.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

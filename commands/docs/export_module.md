@@ -2,7 +2,7 @@
 title: export module
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Export a custom module from a module.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `export module` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Export a custom module from a module.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

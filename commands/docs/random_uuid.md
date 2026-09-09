@@ -2,7 +2,7 @@
 title: random uuid
 categories: |
   random
-version: 0.115.0
+version: 0.115.1
 random: |
   Generate a random uuid string of the specified version.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `random uuid` for [random](/commands/categories/random.md)
 
 <div class='command-title'>Generate a random uuid string of the specified version.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

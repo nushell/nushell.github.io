@@ -2,7 +2,7 @@
 title: matrix add
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Add a matrix or scalar to a matrix.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `matrix add` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Add a matrix or scalar to a matrix.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

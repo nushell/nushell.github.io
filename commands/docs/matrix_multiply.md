@@ -2,7 +2,7 @@
 title: matrix multiply
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Multiply two matrices using dot product.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `matrix multiply` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Multiply two matrices using dot product.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

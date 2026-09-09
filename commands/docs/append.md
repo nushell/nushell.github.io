@@ -2,7 +2,7 @@
 title: append
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Append any number of rows to a table.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `append` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Append any number of rows to a table.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

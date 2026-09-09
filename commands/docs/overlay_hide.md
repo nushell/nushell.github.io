@@ -2,7 +2,7 @@
 title: overlay hide
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Hide an active overlay.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `overlay hide` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Hide an active overlay.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

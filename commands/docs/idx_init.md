@@ -2,7 +2,7 @@
 title: idx init
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   Initialize the in-memory idx index for a path.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `idx init` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>Initialize the in-memory idx index for a path.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

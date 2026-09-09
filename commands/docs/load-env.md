@@ -2,7 +2,7 @@
 title: load-env
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   Loads an environment update from a record.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `load-env` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>Loads an environment update from a record.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

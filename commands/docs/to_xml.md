@@ -2,7 +2,7 @@
 title: to xml
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Convert special record structure into .xml text.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `to xml` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Convert special record structure into .xml text.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

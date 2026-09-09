@@ -2,7 +2,7 @@
 title: bytes index-of
 categories: |
   bytes
-version: 0.115.0
+version: 0.115.1
 bytes: |
   Returns start index of first occurrence of pattern in bytes, or -1 if no match.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `bytes index-of` for [bytes](/commands/categories/bytes.md)
 
 <div class='command-title'>Returns start index of first occurrence of pattern in bytes, or -1 if no match.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

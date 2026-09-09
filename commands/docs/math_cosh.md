@@ -2,7 +2,7 @@
 title: math cosh
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Returns the hyperbolic cosine of the number.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `math cosh` for [math](/commands/categories/math.md)
 
 <div class='command-title'>Returns the hyperbolic cosine of the number.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

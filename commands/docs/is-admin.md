@@ -2,7 +2,7 @@
 title: is-admin
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Check if nushell is running with administrator or root privileges.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `is-admin` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Check if nushell is running with administrator or root privileges.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

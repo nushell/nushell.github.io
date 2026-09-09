@@ -2,7 +2,7 @@
 title: stor update
 categories: |
   database
-version: 0.115.0
+version: 0.115.1
 database: |
   Update information in a specified table in the in-memory sqlite database.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `stor update` for [database](/commands/categories/database.md)
 
 <div class='command-title'>Update information in a specified table in the in-memory sqlite database.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

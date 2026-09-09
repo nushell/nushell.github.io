@@ -2,7 +2,7 @@
 title: polars store-get
 categories: |
   dataframe
-version: 0.115.0
+version: 0.115.1
 dataframe: |
   Gets a Dataframe or other object from the plugin cache.
 usage: |
@@ -15,6 +15,17 @@ contributors: false
 # `polars store-get` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Gets a Dataframe or other object from the plugin cache.</div>
+
+::: warning This command requires a plugin
+The `polars store-get` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
 
 ## Signature
 

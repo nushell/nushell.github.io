@@ -2,7 +2,7 @@
 title: from json
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Convert JSON text into structured data.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `from json` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Convert JSON text into structured data.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

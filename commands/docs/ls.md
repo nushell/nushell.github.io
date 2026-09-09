@@ -2,7 +2,7 @@
 title: ls
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   List the filenames, sizes, and modification times of items in a directory.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `ls` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>List the filenames, sizes, and modification times of items in a directory.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: matrix zeros
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Create a matrix filled with zeros.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `matrix zeros` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Create a matrix filled with zeros.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: collect
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Collect a stream into a value.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `collect` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Collect a stream into a value.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

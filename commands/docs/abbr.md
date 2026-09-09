@@ -2,7 +2,7 @@
 title: abbr
 categories: |
   platform
-version: 0.115.0
+version: 0.115.1
 platform: |
   Abbreviations related commands.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `abbr` for [platform](/commands/categories/platform.md)
 
 <div class='command-title'>Abbreviations related commands.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

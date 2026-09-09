@@ -2,7 +2,7 @@
 title: char
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Output special characters (e.g., 'newline').
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `char` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Output special characters (e.g., &#x27;newline&#x27;).</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

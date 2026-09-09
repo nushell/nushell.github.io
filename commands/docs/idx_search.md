@@ -2,7 +2,7 @@
 title: idx search
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   Search indexed file contents.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `idx search` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>Search indexed file contents.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

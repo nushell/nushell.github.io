@@ -2,7 +2,7 @@
 title: merge
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Merge the input with a record or table, overwriting values in matching columns.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `merge` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Merge the input with a record or table, overwriting values in matching columns.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

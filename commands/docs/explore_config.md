@@ -2,7 +2,7 @@
 title: explore config
 categories: |
   viewers
-version: 0.115.0
+version: 0.115.1
 viewers: |
   Launch a TUI to view and edit the nushell configuration interactively.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `explore config` for [viewers](/commands/categories/viewers.md)
 
 <div class='command-title'>Launch a TUI to view and edit the nushell configuration interactively.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

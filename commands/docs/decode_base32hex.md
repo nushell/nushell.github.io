@@ -2,7 +2,7 @@
 title: decode base32hex
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Encode a base32hex value.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `decode base32hex` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Encode a base32hex value.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

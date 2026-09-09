@@ -2,7 +2,7 @@
 title: permutations
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Generates all permutations of the input list.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `permutations` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Generates all permutations of the input list.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

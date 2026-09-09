@@ -2,7 +2,7 @@
 title: banner
 categories: |
   default
-version: 0.115.0
+version: 0.115.1
 default: |
   Print a banner for Nushell with information about the project
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `banner` for [default](/commands/categories/default.md)
 
 <div class='command-title'>Print a banner for Nushell with information about the project</div>
+
+## Command Type
+
+`custom`
 
 ## Signature
 

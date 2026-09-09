@@ -2,7 +2,7 @@
 title: math arctanh
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Returns the inverse of the hyperbolic tangent function.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `math arctanh` for [math](/commands/categories/math.md)
 
 <div class='command-title'>Returns the inverse of the hyperbolic tangent function.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

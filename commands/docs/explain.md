@@ -2,7 +2,7 @@
 title: explain
 categories: |
   debug
-version: 0.115.0
+version: 0.115.1
 debug: |
   Explain closure contents.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `explain` for [debug](/commands/categories/debug.md)
 
 <div class='command-title'>Explain closure contents.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

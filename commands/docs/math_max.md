@@ -2,7 +2,7 @@
 title: math max
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Returns the maximum of a list of values, or of columns in a table.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `math max` for [math](/commands/categories/math.md)
 
 <div class='command-title'>Returns the maximum of a list of values, or of columns in a table.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

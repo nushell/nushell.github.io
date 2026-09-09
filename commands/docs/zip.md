@@ -2,7 +2,7 @@
 title: zip
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Combine a stream with the input.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `zip` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Combine a stream with the input.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

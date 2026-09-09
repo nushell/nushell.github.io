@@ -2,7 +2,7 @@
 title: items
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Given a record, iterate on each pair of column name and associated value.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `items` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Given a record, iterate on each pair of column name and associated value.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

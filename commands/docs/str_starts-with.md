@@ -2,7 +2,7 @@
 title: str starts-with
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Check if an input starts with a string.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `str starts-with` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Check if an input starts with a string.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

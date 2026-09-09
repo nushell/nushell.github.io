@@ -2,7 +2,7 @@
 title: run
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Runs a script file in an isolated scope as part of a pipeline.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `run` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Runs a script file in an isolated scope as part of a pipeline.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

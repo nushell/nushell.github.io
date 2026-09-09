@@ -2,7 +2,7 @@
 title: roll left
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Roll record or table columns left.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `roll left` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Roll record or table columns left.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

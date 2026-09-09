@@ -2,7 +2,7 @@
 title: module
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Define a custom module.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `module` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Define a custom module.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

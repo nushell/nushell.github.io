@@ -2,7 +2,7 @@
 title: polars over
 categories: |
   lazyframe
-version: 0.115.0
+version: 0.115.1
 lazyframe: |
   Compute expressions over a window group defined by partition expressions.
 usage: |
@@ -15,6 +15,17 @@ contributors: false
 # `polars over` for [lazyframe](/commands/categories/lazyframe.md)
 
 <div class='command-title'>Compute expressions over a window group defined by partition expressions.</div>
+
+::: warning This command requires a plugin
+The `polars over` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
 
 ## Signature
 

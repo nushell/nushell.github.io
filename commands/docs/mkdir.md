@@ -2,7 +2,7 @@
 title: mkdir
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   Create directories, with intermediary directories if required using uutils/coreutils mkdir.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `mkdir` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>Create directories, with intermediary directories if required using uutils&#x2f;coreutils mkdir.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

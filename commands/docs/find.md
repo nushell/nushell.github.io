@@ -2,7 +2,7 @@
 title: find
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Search for terms in the input data.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `find` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Search for terms in the input data.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

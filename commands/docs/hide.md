@@ -2,7 +2,7 @@
 title: hide
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Hide definitions in the current scope.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `hide` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Hide definitions in the current scope.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

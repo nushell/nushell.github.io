@@ -2,7 +2,7 @@
 title: into bool
 categories: |
   conversions
-version: 0.115.0
+version: 0.115.1
 conversions: |
   Convert value to a boolean.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `into bool` for [conversions](/commands/categories/conversions.md)
 
 <div class='command-title'>Convert value to a boolean.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

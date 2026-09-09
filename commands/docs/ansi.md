@@ -2,7 +2,7 @@
 title: ansi
 categories: |
   platform
-version: 0.115.0
+version: 0.115.1
 platform: |
   Output ANSI codes to change color and style of text.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `ansi` for [platform](/commands/categories/platform.md)
 
 <div class='command-title'>Output ANSI codes to change color and style of text.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

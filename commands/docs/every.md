@@ -2,7 +2,7 @@
 title: every
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Show (or skip) every n-th row, starting from the first one.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `every` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Show (or skip) every n-th row, starting from the first one.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

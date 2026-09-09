@@ -2,7 +2,7 @@
 title: from tsv
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Parse text as .tsv and create table.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `from tsv` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Parse text as .tsv and create table.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

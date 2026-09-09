@@ -2,7 +2,7 @@
 title: http options
 categories: |
   network
-version: 0.115.0
+version: 0.115.1
 network: |
   Requests permitted communication options for a given URL.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `http options` for [network](/commands/categories/network.md)
 
 <div class='command-title'>Requests permitted communication options for a given URL.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

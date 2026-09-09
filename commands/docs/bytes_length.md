@@ -2,7 +2,7 @@
 title: bytes length
 categories: |
   bytes
-version: 0.115.0
+version: 0.115.1
 bytes: |
   Output the length of any bytes in the pipeline.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `bytes length` for [bytes](/commands/categories/bytes.md)
 
 <div class='command-title'>Output the length of any bytes in the pipeline.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

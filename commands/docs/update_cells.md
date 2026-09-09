@@ -2,7 +2,7 @@
 title: update cells
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Update the table cells.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `update cells` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Update the table cells.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

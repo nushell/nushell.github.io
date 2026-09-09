@@ -2,7 +2,7 @@
 title: exec
 categories: |
   system
-version: 0.115.0
+version: 0.115.1
 system: |
   Execute a command, replacing or exiting the current process, depending on platform.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `exec` for [system](/commands/categories/system.md)
 
 <div class='command-title'>Execute a command, replacing or exiting the current process, depending on platform.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

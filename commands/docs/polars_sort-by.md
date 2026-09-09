@@ -2,7 +2,7 @@
 title: polars sort-by
 categories: |
   lazyframe
-version: 0.115.0
+version: 0.115.1
 lazyframe: |
   Sorts a lazy dataframe based on expression(s).
 usage: |
@@ -15,6 +15,17 @@ contributors: false
 # `polars sort-by` for [lazyframe](/commands/categories/lazyframe.md)
 
 <div class='command-title'>Sorts a lazy dataframe based on expression(s).</div>
+
+::: warning This command requires a plugin
+The `polars sort-by` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: from kdl
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Convert KDL text into structured data.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `from kdl` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Convert KDL text into structured data.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

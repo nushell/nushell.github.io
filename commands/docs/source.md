@@ -2,7 +2,7 @@
 title: source
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Runs a script file in the current context.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `source` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Runs a script file in the current context.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

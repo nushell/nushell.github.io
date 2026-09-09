@@ -2,7 +2,7 @@
 title: polars selector array
 categories: |
   expression
-version: 0.115.0
+version: 0.115.1
 expression: |
   Select all array columns. Optionally filter by fixed width.
 usage: |
@@ -15,6 +15,17 @@ contributors: false
 # `polars selector array` for [expression](/commands/categories/expression.md)
 
 <div class='command-title'>Select all array columns. Optionally filter by fixed width.</div>
+
+::: warning This command requires a plugin
+The `polars selector array` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
 
 ## Signature
 

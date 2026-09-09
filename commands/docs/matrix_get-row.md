@@ -2,7 +2,7 @@
 title: matrix get-row
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Extract a row from a matrix.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `matrix get-row` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Extract a row from a matrix.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

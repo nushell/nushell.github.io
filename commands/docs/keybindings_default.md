@@ -2,7 +2,7 @@
 title: keybindings default
 categories: |
   platform
-version: 0.115.0
+version: 0.115.1
 platform: |
   List default keybindings.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `keybindings default` for [platform](/commands/categories/platform.md)
 
 <div class='command-title'>List default keybindings.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

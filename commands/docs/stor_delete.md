@@ -2,7 +2,7 @@
 title: stor delete
 categories: |
   database
-version: 0.115.0
+version: 0.115.1
 database: |
   Delete a table or specified rows in the in-memory sqlite database.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `stor delete` for [database](/commands/categories/database.md)
 
 <div class='command-title'>Delete a table or specified rows in the in-memory sqlite database.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

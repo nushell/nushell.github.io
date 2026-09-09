@@ -2,7 +2,7 @@
 title: metadata set
 categories: |
   debug
-version: 0.115.0
+version: 0.115.1
 debug: |
   Set the metadata for items in the stream.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `metadata set` for [debug](/commands/categories/debug.md)
 
 <div class='command-title'>Set the metadata for items in the stream.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

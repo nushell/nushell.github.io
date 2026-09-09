@@ -2,7 +2,7 @@
 title: http get
 categories: |
   network
-version: 0.115.0
+version: 0.115.1
 network: |
   Fetch the contents from a URL.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `http get` for [network](/commands/categories/network.md)
 
 <div class='command-title'>Fetch the contents from a URL.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

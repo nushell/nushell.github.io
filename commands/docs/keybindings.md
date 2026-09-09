@@ -2,7 +2,7 @@
 title: keybindings
 categories: |
   platform
-version: 0.115.0
+version: 0.115.1
 platform: |
   Keybindings related commands.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `keybindings` for [platform](/commands/categories/platform.md)
 
 <div class='command-title'>Keybindings related commands.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

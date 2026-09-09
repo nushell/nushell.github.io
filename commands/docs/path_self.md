@@ -2,7 +2,7 @@
 title: path self
 categories: |
   path
-version: 0.115.0
+version: 0.115.1
 path: |
   Get the absolute path of the script or module containing this command at parse time.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `path self` for [path](/commands/categories/path.md)
 
 <div class='command-title'>Get the absolute path of the script or module containing this command at parse time.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

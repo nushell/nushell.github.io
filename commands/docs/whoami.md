@@ -2,7 +2,7 @@
 title: whoami
 categories: |
   platform
-version: 0.115.0
+version: 0.115.1
 platform: |
   Get the current username using uutils/coreutils whoami.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `whoami` for [platform](/commands/categories/platform.md)
 
 <div class='command-title'>Get the current username using uutils&#x2f;coreutils whoami.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

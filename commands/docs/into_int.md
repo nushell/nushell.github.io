@@ -2,7 +2,7 @@
 title: into int
 categories: |
   conversions
-version: 0.115.0
+version: 0.115.1
 conversions: |
   Convert value to an integer.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `into int` for [conversions](/commands/categories/conversions.md)
 
 <div class='command-title'>Convert value to an integer.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

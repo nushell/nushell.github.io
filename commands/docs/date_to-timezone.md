@@ -2,7 +2,7 @@
 title: date to-timezone
 categories: |
   date
-version: 0.115.0
+version: 0.115.1
 date: |
   Convert a date to a given time zone.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `date to-timezone` for [date](/commands/categories/date.md)
 
 <div class='command-title'>Convert a date to a given time zone.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

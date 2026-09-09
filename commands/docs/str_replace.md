@@ -2,7 +2,7 @@
 title: str replace
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Find and replace text in the input string.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `str replace` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Find and replace text in the input string.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

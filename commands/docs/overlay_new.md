@@ -2,7 +2,7 @@
 title: overlay new
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Create an empty overlay.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `overlay new` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Create an empty overlay.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

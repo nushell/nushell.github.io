@@ -2,7 +2,7 @@
 title: split
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Split contents across desired subcommand (like row, column) via the separator.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `split` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Split contents across desired subcommand (like row, column) via the separator.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

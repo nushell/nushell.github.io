@@ -2,7 +2,7 @@
 title: overlay
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Commands for manipulating overlays.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `overlay` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Commands for manipulating overlays.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

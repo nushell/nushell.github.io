@@ -2,7 +2,7 @@
 title: into datetime
 categories: |
   conversions
-version: 0.115.0
+version: 0.115.1
 conversions: |
   Convert text or timestamp into a datetime.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `into datetime` for [conversions](/commands/categories/conversions.md)
 
 <div class='command-title'>Convert text or timestamp into a datetime.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

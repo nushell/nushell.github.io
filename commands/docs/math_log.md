@@ -2,7 +2,7 @@
 title: math log
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Returns the logarithm for an arbitrary base.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `math log` for [math](/commands/categories/math.md)
 
 <div class='command-title'>Returns the logarithm for an arbitrary base.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

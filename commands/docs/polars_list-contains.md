@@ -2,7 +2,7 @@
 title: polars list-contains
 categories: |
   dataframe
-version: 0.115.0
+version: 0.115.1
 dataframe: |
   Checks if an element is contained in a list.
 usage: |
@@ -15,6 +15,17 @@ contributors: false
 # `polars list-contains` for [dataframe](/commands/categories/dataframe.md)
 
 <div class='command-title'>Checks if an element is contained in a list.</div>
+
+::: warning This command requires a plugin
+The `polars list-contains` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
 
 ## Signature
 

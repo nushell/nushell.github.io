@@ -2,7 +2,7 @@
 title: match
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Conditionally run a block on a matched value.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `match` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Conditionally run a block on a matched value.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

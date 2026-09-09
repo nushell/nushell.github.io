@@ -2,7 +2,7 @@
 title: length
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Count the number of items in an input list, rows in a table, or bytes in binary data.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `length` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Count the number of items in an input list, rows in a table, or bytes in binary data.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

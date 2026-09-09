@@ -2,7 +2,7 @@
 title: random float
 categories: |
   random
-version: 0.115.0
+version: 0.115.1
 random: |
   Generate a random float within a range [min..max].
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `random float` for [random](/commands/categories/random.md)
 
 <div class='command-title'>Generate a random float within a range [min..max].</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

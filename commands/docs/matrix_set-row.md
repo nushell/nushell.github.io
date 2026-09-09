@@ -2,7 +2,7 @@
 title: matrix set-row
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Replace a row in a matrix.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `matrix set-row` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Replace a row in a matrix.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

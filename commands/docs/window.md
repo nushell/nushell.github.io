@@ -2,7 +2,7 @@
 title: window
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Creates a sliding window of `window_size` that slide by n rows/elements across input.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `window` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Creates a sliding window of `window_size` that slide by n rows&#x2f;elements across input.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

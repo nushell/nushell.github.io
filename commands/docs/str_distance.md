@@ -2,7 +2,7 @@
 title: str distance
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Compare two strings and return the edit distance/Levenshtein distance.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `str distance` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Compare two strings and return the edit distance&#x2f;Levenshtein distance.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

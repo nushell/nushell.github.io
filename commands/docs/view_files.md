@@ -2,7 +2,7 @@
 title: view files
 categories: |
   debug
-version: 0.115.0
+version: 0.115.1
 debug: |
   View the files registered in nushell's EngineState memory.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `view files` for [debug](/commands/categories/debug.md)
 
 <div class='command-title'>View the files registered in nushell&#x27;s EngineState memory.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

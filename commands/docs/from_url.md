@@ -2,7 +2,7 @@
 title: from url
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Parse url-encoded string as a record.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `from url` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Parse url-encoded string as a record.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

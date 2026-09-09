@@ -2,7 +2,7 @@
 title: str title-case
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Convert a string to Title Case.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `str title-case` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Convert a string to Title Case.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

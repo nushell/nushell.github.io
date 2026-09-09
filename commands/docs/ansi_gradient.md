@@ -2,7 +2,7 @@
 title: ansi gradient
 categories: |
   platform
-version: 0.115.0
+version: 0.115.1
 platform: |
   Add a color gradient (using ANSI color codes) to the given string.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `ansi gradient` for [platform](/commands/categories/platform.md)
 
 <div class='command-title'>Add a color gradient (using ANSI color codes) to the given string.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

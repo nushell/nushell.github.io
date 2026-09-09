@@ -2,7 +2,7 @@
 title: bytes starts-with
 categories: |
   bytes
-version: 0.115.0
+version: 0.115.1
 bytes: |
   Check if binary data starts with a pattern.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `bytes starts-with` for [bytes](/commands/categories/bytes.md)
 
 <div class='command-title'>Check if binary data starts with a pattern.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

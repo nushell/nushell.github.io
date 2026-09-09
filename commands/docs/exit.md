@@ -2,7 +2,7 @@
 title: exit
 categories: |
   shells
-version: 0.115.0
+version: 0.115.1
 shells: |
   Exit Nu.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `exit` for [shells](/commands/categories/shells.md)
 
 <div class='command-title'>Exit Nu.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

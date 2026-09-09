@@ -2,7 +2,7 @@
 title: split cell-path
 categories: |
   conversions
-version: 0.115.0
+version: 0.115.1
 conversions: |
   Split a cell-path into its components.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `split cell-path` for [conversions](/commands/categories/conversions.md)
 
 <div class='command-title'>Split a cell-path into its components.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

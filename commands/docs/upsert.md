@@ -2,7 +2,7 @@
 title: upsert
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Update an existing column to have a new value, or insert a new column.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `upsert` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Update an existing column to have a new value, or insert a new column.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

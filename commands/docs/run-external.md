@@ -2,7 +2,7 @@
 title: run-external
 categories: |
   system
-version: 0.115.0
+version: 0.115.1
 system: |
   Runs external command.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `run-external` for [system](/commands/categories/system.md)
 
 <div class='command-title'>Runs external command.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

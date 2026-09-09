@@ -2,7 +2,7 @@
 title: ansi link
 categories: |
   platform
-version: 0.115.0
+version: 0.115.1
 platform: |
   Add a link (using OSC 8 escape sequence) to the given string.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `ansi link` for [platform](/commands/categories/platform.md)
 
 <div class='command-title'>Add a link (using OSC 8 escape sequence) to the given string.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: stor insert
 categories: |
   database
-version: 0.115.0
+version: 0.115.1
 database: |
   Insert information into a specified table in the in-memory sqlite database.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `stor insert` for [database](/commands/categories/database.md)
 
 <div class='command-title'>Insert information into a specified table in the in-memory sqlite database.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

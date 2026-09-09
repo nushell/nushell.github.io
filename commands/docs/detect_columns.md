@@ -2,7 +2,7 @@
 title: detect columns
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Attempt to automatically split text into multiple columns.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `detect columns` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Attempt to automatically split text into multiple columns.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

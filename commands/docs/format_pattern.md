@@ -2,7 +2,7 @@
 title: format pattern
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Format columns into a string using a simple pattern.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `format pattern` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Format columns into a string using a simple pattern.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

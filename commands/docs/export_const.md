@@ -2,7 +2,7 @@
 title: export const
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Use parse-time constant from a module and export them from this module.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `export const` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Use parse-time constant from a module and export them from this module.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

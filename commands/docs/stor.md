@@ -2,7 +2,7 @@
 title: stor
 categories: |
   database
-version: 0.115.0
+version: 0.115.1
 database: |
   Various commands for working with the in-memory sqlite database.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `stor` for [database](/commands/categories/database.md)
 
 <div class='command-title'>Various commands for working with the in-memory sqlite database.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

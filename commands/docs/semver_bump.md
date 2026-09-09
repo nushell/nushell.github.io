@@ -2,7 +2,7 @@
 title: semver bump
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Bump a semantic version to the next level.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `semver bump` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Bump a semantic version to the next level.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

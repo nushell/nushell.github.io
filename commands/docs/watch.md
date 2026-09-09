@@ -2,7 +2,7 @@
 title: watch
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   Watch for file changes and execute Nu code when they happen.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `watch` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>Watch for file changes and execute Nu code when they happen.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

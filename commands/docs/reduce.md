@@ -2,7 +2,7 @@
 title: reduce
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Aggregate a list (starting from the left) to a single value using an accumulator closure.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `reduce` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Aggregate a list (starting from the left) to a single value using an accumulator closure.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

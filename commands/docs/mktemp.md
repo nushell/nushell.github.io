@@ -2,7 +2,7 @@
 title: mktemp
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   Create temporary files or directories using uutils/coreutils mktemp.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `mktemp` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>Create temporary files or directories using uutils&#x2f;coreutils mktemp.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: job recv
 categories: |
   experimental
-version: 0.115.0
+version: 0.115.1
 experimental: |
   Read a message from a job's mailbox.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `job recv` for [experimental](/commands/categories/experimental.md)
 
 <div class='command-title'>Read a message from a job&#x27;s mailbox.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

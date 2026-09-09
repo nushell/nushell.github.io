@@ -2,7 +2,7 @@
 title: bytes add
 categories: |
   bytes
-version: 0.115.0
+version: 0.115.1
 bytes: |
   Add specified bytes to the binary input.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `bytes add` for [bytes](/commands/categories/bytes.md)
 
 <div class='command-title'>Add specified bytes to the binary input.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: touch
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   Creates one or more files.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `touch` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>Creates one or more files.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

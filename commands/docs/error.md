@@ -2,7 +2,7 @@
 title: error
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Various commands for working with errors.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `error` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Various commands for working with errors.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: from vcf
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Parse text as .vcf and create table.
 usage: |
@@ -15,6 +15,17 @@ contributors: false
 # `from vcf` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Parse text as .vcf and create table.</div>
+
+::: warning This command requires a plugin
+The `from vcf` command resides in the `formats` plugin.
+To use this command, you must install and register `nu_plugin_formats`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
 
 ## Signature
 

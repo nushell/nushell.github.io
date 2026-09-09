@@ -2,7 +2,7 @@
 title: matrix
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Various commands for working with matrices.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `matrix` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Various commands for working with matrices.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

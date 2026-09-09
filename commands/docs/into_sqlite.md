@@ -2,7 +2,7 @@
 title: into sqlite
 categories: |
   conversions
-version: 0.115.0
+version: 0.115.1
 conversions: |
   Convert table into a SQLite database.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `into sqlite` for [conversions](/commands/categories/conversions.md)
 
 <div class='command-title'>Convert table into a SQLite database.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

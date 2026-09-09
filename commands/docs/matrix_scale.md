@@ -2,7 +2,7 @@
 title: matrix scale
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Multiply all elements of a matrix by a scalar.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `matrix scale` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Multiply all elements of a matrix by a scalar.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

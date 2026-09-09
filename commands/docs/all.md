@@ -2,7 +2,7 @@
 title: all
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Test if every element of the input fulfills a predicate expression.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `all` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Test if every element of the input fulfills a predicate expression.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

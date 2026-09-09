@@ -2,7 +2,7 @@
 title: tutor
 categories: |
   misc
-version: 0.115.0
+version: 0.115.1
 misc: |
   Run the tutorial. To begin, run: tutor.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `tutor` for [misc](/commands/categories/misc.md)
 
 <div class='command-title'>Run the tutorial. To begin, run: tutor.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

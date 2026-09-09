@@ -2,7 +2,7 @@
 title: str reverse
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Reverse every string in the pipeline.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `str reverse` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Reverse every string in the pipeline.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

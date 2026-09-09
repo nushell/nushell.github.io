@@ -2,7 +2,7 @@
 title: idx
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   Manage in-memory file index state.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `idx` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>Manage in-memory file index state.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

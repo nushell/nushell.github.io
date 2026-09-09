@@ -2,7 +2,7 @@
 title: mv
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   Move files or directories using uutils/coreutils mv.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `mv` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>Move files or directories using uutils&#x2f;coreutils mv.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

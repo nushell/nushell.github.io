@@ -2,7 +2,7 @@
 title: config nu
 categories: |
   env
-version: 0.115.0
+version: 0.115.1
 env: |
   Edit nu configurations.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `config nu` for [env](/commands/categories/env.md)
 
 <div class='command-title'>Edit nu configurations.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

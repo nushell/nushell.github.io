@@ -2,7 +2,7 @@
 title: stor import
 categories: |
   database
-version: 0.115.0
+version: 0.115.1
 database: |
   Import a sqlite database file into the in-memory sqlite database.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `stor import` for [database](/commands/categories/database.md)
 
 <div class='command-title'>Import a sqlite database file into the in-memory sqlite database.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

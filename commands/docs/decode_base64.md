@@ -2,7 +2,7 @@
 title: decode base64
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Decode a Base64-encoded value.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `decode base64` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Decode a Base64-encoded value.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

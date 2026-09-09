@@ -2,7 +2,7 @@
 title: plugin rm
 categories: |
   plugin
-version: 0.115.0
+version: 0.115.1
 plugin: |
   Remove a plugin from the plugin registry file.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `plugin rm` for [plugin](/commands/categories/plugin.md)
 
 <div class='command-title'>Remove a plugin from the plugin registry file.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

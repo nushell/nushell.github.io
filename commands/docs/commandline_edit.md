@@ -2,7 +2,7 @@
 title: commandline edit
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Modify the current command line input buffer.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `commandline edit` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Modify the current command line input buffer.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: nu-highlight
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Syntax highlight the input string.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `nu-highlight` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Syntax highlight the input string.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

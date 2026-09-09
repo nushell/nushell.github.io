@@ -2,7 +2,7 @@
 title: attr deprecated
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Attribute for marking a command or flag as deprecated.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `attr deprecated` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Attribute for marking a command or flag as deprecated.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

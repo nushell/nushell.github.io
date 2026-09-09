@@ -2,7 +2,7 @@
 title: decode
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Decode bytes into a string.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `decode` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Decode bytes into a string.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

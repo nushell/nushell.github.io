@@ -2,7 +2,7 @@
 title: union
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Returns a list of unique elements from both the input and the provided list.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `union` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Returns a list of unique elements from both the input and the provided list.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: math exp
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Returns e raised to the power of x.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `math exp` for [math](/commands/categories/math.md)
 
 <div class='command-title'>Returns e raised to the power of x.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

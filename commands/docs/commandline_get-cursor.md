@@ -2,7 +2,7 @@
 title: commandline get-cursor
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Get the current cursor position.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `commandline get-cursor` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Get the current cursor position.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

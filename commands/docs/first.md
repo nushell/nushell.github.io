@@ -2,7 +2,7 @@
 title: first
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Return only the first several rows of the input. Counterpart of `last`. Opposite of `skip`. For binary input, rows can also be specified as a filesize.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `first` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Return only the first several rows of the input. Counterpart of `last`. Opposite of `skip`. For binary input, rows can also be specified as a filesize.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: intersect
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Returns a list of unique elements present in both the input and the provided list.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `intersect` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Returns a list of unique elements present in both the input and the provided list.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

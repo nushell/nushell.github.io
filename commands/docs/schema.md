@@ -2,7 +2,7 @@
 title: schema
 categories: |
   database
-version: 0.115.0
+version: 0.115.1
 database: |
   Show the schema of a SQLite database.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `schema` for [database](/commands/categories/database.md)
 
 <div class='command-title'>Show the schema of a SQLite database.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

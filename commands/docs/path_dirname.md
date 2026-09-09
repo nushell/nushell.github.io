@@ -2,7 +2,7 @@
 title: path dirname
 categories: |
   path
-version: 0.115.0
+version: 0.115.1
 path: |
   Get the parent directory of a path.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `path dirname` for [path](/commands/categories/path.md)
 
 <div class='command-title'>Get the parent directory of a path.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: format number
 categories: |
   conversions
-version: 0.115.0
+version: 0.115.1
 conversions: |
   Format a number.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `format number` for [conversions](/commands/categories/conversions.md)
 
 <div class='command-title'>Format a number.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

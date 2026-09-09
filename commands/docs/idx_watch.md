@@ -2,7 +2,7 @@
 title: idx watch
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   Stream filesystem change events from the live idx index.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `idx watch` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>Stream filesystem change events from the live idx index.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

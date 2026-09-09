@@ -2,7 +2,7 @@
 title: str capitalize
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Capitalize the first letter of text.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `str capitalize` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Capitalize the first letter of text.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

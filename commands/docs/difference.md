@@ -2,7 +2,7 @@
 title: difference
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Returns a list of unique elements in the input that are not present in the other list.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `difference` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Returns a list of unique elements in the input that are not present in the other list.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: url parse
 categories: |
   network
-version: 0.115.0
+version: 0.115.1
 network: |
   Parse a URL string into structured data.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `url parse` for [network](/commands/categories/network.md)
 
 <div class='command-title'>Parse a URL string into structured data.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

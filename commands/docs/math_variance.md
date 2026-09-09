@@ -2,7 +2,7 @@
 title: math variance
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Returns the variance of a list of numbers or of each column in a table.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `math variance` for [math](/commands/categories/math.md)
 
 <div class='command-title'>Returns the variance of a list of numbers or of each column in a table.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

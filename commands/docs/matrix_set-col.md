@@ -2,7 +2,7 @@
 title: matrix set-col
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Replace a column in a 2D matrix.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `matrix set-col` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Replace a column in a 2D matrix.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: ast
 categories: |
   debug
-version: 0.115.0
+version: 0.115.1
 debug: |
   Print the abstract syntax tree (ast) for a pipeline.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `ast` for [debug](/commands/categories/debug.md)
 
 <div class='command-title'>Print the abstract syntax tree (ast) for a pipeline.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

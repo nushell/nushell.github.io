@@ -2,7 +2,7 @@
 title: let-env
 categories: |
   removed
-version: 0.115.0
+version: 0.115.1
 removed: |
   `let-env FOO = ...` has been removed, use `$env.FOO = ...` instead.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `let-env` for [removed](/commands/categories/removed.md)
 
 <div class='command-title'>`let-env FOO = ...` has been removed, use `$env.FOO = ...` instead.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

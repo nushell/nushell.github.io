@@ -2,7 +2,7 @@
 title: grid
 categories: |
   viewers
-version: 0.115.0
+version: 0.115.1
 viewers: |
   Renders the output to a textual terminal grid.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `grid` for [viewers](/commands/categories/viewers.md)
 
 <div class='command-title'>Renders the output to a textual terminal grid.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

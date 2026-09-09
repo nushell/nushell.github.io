@@ -2,7 +2,7 @@
 title: date humanize
 categories: |
   date
-version: 0.115.0
+version: 0.115.1
 date: |
   Print a 'humanized' format for the date, relative to now.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `date humanize` for [date](/commands/categories/date.md)
 
 <div class='command-title'>Print a &#x27;humanized&#x27; format for the date, relative to now.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

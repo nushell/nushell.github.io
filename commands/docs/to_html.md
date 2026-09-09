@@ -2,7 +2,7 @@
 title: to html
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Convert table into simple HTML.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `to html` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Convert table into simple HTML.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

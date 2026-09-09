@@ -2,7 +2,7 @@
 title: return
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Return early from a custom command.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `return` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Return early from a custom command.</div>
+
+## Command Type
+
+`keyword`
 
 ## Signature
 

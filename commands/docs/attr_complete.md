@@ -2,7 +2,7 @@
 title: attr complete
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Attribute for using another command as a completion source for all arguments.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `attr complete` for [core](/commands/categories/core.md)
 
 <div class='command-title'>Attribute for using another command as a completion source for all arguments.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: join
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Join two tables.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `join` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Join two tables.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: math ln
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Returns the natural logarithm. Base: (math e).
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `math ln` for [math](/commands/categories/math.md)
 
 <div class='command-title'>Returns the natural logarithm. Base: (math e).</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

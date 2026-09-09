@@ -2,7 +2,7 @@
 title: from yml
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Parse text as .yaml/.yml and create table.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `from yml` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Parse text as .yaml&#x2f;.yml and create table.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

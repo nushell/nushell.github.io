@@ -2,7 +2,7 @@
 title: split row
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Split a string into multiple rows using a separator.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `split row` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Split a string into multiple rows using a separator.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

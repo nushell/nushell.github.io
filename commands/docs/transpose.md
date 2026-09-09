@@ -2,7 +2,7 @@
 title: transpose
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Transposes the table contents so rows become columns and columns become rows.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `transpose` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Transposes the table contents so rows become columns and columns become rows.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

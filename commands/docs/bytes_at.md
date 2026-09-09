@@ -2,7 +2,7 @@
 title: bytes at
 categories: |
   bytes
-version: 0.115.0
+version: 0.115.1
 bytes: |
   Get bytes from the input defined by a range.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `bytes at` for [bytes](/commands/categories/bytes.md)
 
 <div class='command-title'>Get bytes from the input defined by a range.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

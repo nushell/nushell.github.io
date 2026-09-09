@@ -2,7 +2,7 @@
 title: http head
 categories: |
   network
-version: 0.115.0
+version: 0.115.1
 network: |
   Get the headers from a URL.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `http head` for [network](/commands/categories/network.md)
 
 <div class='command-title'>Get the headers from a URL.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

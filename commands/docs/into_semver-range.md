@@ -2,7 +2,7 @@
 title: into semver-range
 categories: |
   conversions
-version: 0.115.0
+version: 0.115.1
 conversions: |
   Convert a string to a semver range.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `into semver-range` for [conversions](/commands/categories/conversions.md)
 
 <div class='command-title'>Convert a string to a semver range.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

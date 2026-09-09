@@ -2,7 +2,7 @@
 title: from md
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Convert markdown text into human-friendly structured rows. Use --verbose for the full AST.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `from md` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Convert markdown text into human-friendly structured rows. Use --verbose for the full AST.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

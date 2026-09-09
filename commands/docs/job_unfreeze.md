@@ -2,7 +2,7 @@
 title: job unfreeze
 categories: |
   experimental
-version: 0.115.0
+version: 0.115.1
 experimental: |
   Unfreeze a frozen process job in foreground.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `job unfreeze` for [experimental](/commands/categories/experimental.md)
 
 <div class='command-title'>Unfreeze a frozen process job in foreground.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

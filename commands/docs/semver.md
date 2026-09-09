@@ -2,7 +2,7 @@
 title: semver
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Various commands for working with semantic versions.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `semver` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Various commands for working with semantic versions.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

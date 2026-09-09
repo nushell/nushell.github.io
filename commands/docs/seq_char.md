@@ -2,7 +2,7 @@
 title: seq char
 categories: |
   generators
-version: 0.115.0
+version: 0.115.1
 generators: |
   Print a sequence of ASCII characters.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `seq char` for [generators](/commands/categories/generators.md)
 
 <div class='command-title'>Print a sequence of ASCII characters.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

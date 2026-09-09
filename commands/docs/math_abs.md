@@ -2,7 +2,7 @@
 title: math abs
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Returns the absolute value of a number.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `math abs` for [math](/commands/categories/math.md)
 
 <div class='command-title'>Returns the absolute value of a number.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

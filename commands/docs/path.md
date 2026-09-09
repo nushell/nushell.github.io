@@ -2,7 +2,7 @@
 title: path
 categories: |
   path
-version: 0.115.0
+version: 0.115.1
 path: |
   Explore and manipulate paths.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `path` for [path](/commands/categories/path.md)
 
 <div class='command-title'>Explore and manipulate paths.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

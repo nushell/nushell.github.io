@@ -2,7 +2,7 @@
 title: bits or
 categories: |
   bits
-version: 0.115.0
+version: 0.115.1
 bits: |
   Performs bitwise or for ints or binary values.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `bits or` for [bits](/commands/categories/bits.md)
 
 <div class='command-title'>Performs bitwise or for ints or binary values.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

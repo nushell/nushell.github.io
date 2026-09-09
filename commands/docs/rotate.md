@@ -2,7 +2,7 @@
 title: rotate
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Rotates a table or record clockwise (default) or counter-clockwise (use --ccw flag).
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `rotate` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Rotates a table or record clockwise (default) or counter-clockwise (use --ccw flag).</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: rm
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   Remove files and directories.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `rm` for [filesystem](/commands/categories/filesystem.md)
 
 <div class='command-title'>Remove files and directories.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

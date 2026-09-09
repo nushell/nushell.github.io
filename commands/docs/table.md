@@ -2,7 +2,7 @@
 title: table
 categories: |
   viewers
-version: 0.115.0
+version: 0.115.1
 viewers: |
   Render the table.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `table` for [viewers](/commands/categories/viewers.md)
 
 <div class='command-title'>Render the table.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

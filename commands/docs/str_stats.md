@@ -2,7 +2,7 @@
 title: str stats
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Gather word count statistics on the text.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `str stats` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Gather word count statistics on the text.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

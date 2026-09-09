@@ -2,7 +2,7 @@
 title: encode base32
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Encode a string or binary value using Base32.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `encode base32` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Encode a string or binary value using Base32.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

@@ -2,7 +2,7 @@
 title: debug info
 categories: |
   debug
-version: 0.115.0
+version: 0.115.1
 debug: |
   View process memory info.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `debug info` for [debug](/commands/categories/debug.md)
 
 <div class='command-title'>View process memory info.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

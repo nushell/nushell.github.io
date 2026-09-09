@@ -2,7 +2,7 @@
 title: config
 categories: |
   env
-version: 0.115.0
+version: 0.115.1
 env: |
   Edit nushell configuration files.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `config` for [env](/commands/categories/env.md)
 
 <div class='command-title'>Edit nushell configuration files.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

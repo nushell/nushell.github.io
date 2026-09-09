@@ -2,7 +2,7 @@
 title: each
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Run a closure on each row of the input list, creating a new list with the results.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `each` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Run a closure on each row of the input list, creating a new list with the results.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

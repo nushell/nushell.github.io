@@ -2,7 +2,7 @@
 title: polars selector digit
 categories: |
   expression
-version: 0.115.0
+version: 0.115.1
 expression: |
   Select columns whose names consist entirely of digit characters. By default uses Unicode decimal digits; use `--ascii-only` to restrict to ASCII 0-9.
 usage: |
@@ -15,6 +15,17 @@ contributors: false
 # `polars selector digit` for [expression](/commands/categories/expression.md)
 
 <div class='command-title'>Select columns whose names consist entirely of digit characters. By default uses Unicode decimal digits; use `--ascii-only` to restrict to ASCII 0-9.</div>
+
+::: warning This command requires a plugin
+The `polars selector digit` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
 
 ## Signature
 

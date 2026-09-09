@@ -2,7 +2,7 @@
 title: str contains
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Checks if string input contains a substring.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `str contains` for [strings](/commands/categories/strings.md)
 
 <div class='command-title'>Checks if string input contains a substring.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

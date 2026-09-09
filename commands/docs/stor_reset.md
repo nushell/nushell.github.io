@@ -2,7 +2,7 @@
 title: stor reset
 categories: |
   database
-version: 0.115.0
+version: 0.115.1
 database: |
   Reset the in-memory database by dropping all tables.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `stor reset` for [database](/commands/categories/database.md)
 
 <div class='command-title'>Reset the in-memory database by dropping all tables.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

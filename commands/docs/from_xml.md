@@ -2,7 +2,7 @@
 title: from xml
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Parse text as .xml and create record.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `from xml` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Parse text as .xml and create record.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

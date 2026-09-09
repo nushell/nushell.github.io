@@ -2,7 +2,7 @@
 title: lines
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Converts input to lines.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `lines` for [filters](/commands/categories/filters.md)
 
 <div class='command-title'>Converts input to lines.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

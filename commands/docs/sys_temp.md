@@ -2,7 +2,7 @@
 title: sys temp
 categories: |
   system
-version: 0.115.0
+version: 0.115.1
 system: |
   View the temperatures of system components.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `sys temp` for [system](/commands/categories/system.md)
 
 <div class='command-title'>View the temperatures of system components.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

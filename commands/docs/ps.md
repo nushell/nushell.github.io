@@ -2,7 +2,7 @@
 title: ps
 categories: |
   system
-version: 0.115.0
+version: 0.115.1
 system: |
   View information about system processes.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `ps` for [system](/commands/categories/system.md)
 
 <div class='command-title'>View information about system processes.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

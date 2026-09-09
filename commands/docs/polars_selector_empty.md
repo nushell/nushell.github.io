@@ -2,7 +2,7 @@
 title: polars selector empty
 categories: |
   expression
-version: 0.115.0
+version: 0.115.1
 expression: |
   Create an empty selector that matches no columns. Useful as a base for selector composition.
 usage: |
@@ -15,6 +15,17 @@ contributors: false
 # `polars selector empty` for [expression](/commands/categories/expression.md)
 
 <div class='command-title'>Create an empty selector that matches no columns. Useful as a base for selector composition.</div>
+
+::: warning This command requires a plugin
+The `polars selector empty` command resides in the `polars` plugin.
+To use this command, you must install and register `nu_plugin_polars`.
+See the [Plugins](/book/plugins.html) chapter in the book for more information.
+:::
+
+
+## Command Type
+
+`plugin`
 
 ## Signature
 

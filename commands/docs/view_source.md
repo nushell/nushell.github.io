@@ -2,7 +2,7 @@
 title: view source
 categories: |
   debug
-version: 0.115.0
+version: 0.115.1
 debug: |
   View a block, module, or a definition.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `view source` for [debug](/commands/categories/debug.md)
 
 <div class='command-title'>View a block, module, or a definition.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

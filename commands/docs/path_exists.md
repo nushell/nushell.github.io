@@ -2,7 +2,7 @@
 title: path exists
 categories: |
   path
-version: 0.115.0
+version: 0.115.1
 path: |
   Check whether a path exists.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `path exists` for [path](/commands/categories/path.md)
 
 <div class='command-title'>Check whether a path exists.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

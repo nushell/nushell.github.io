@@ -2,7 +2,7 @@
 title: history
 categories: |
   history
-version: 0.115.0
+version: 0.115.1
 history: |
   Get the command history.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `history` for [history](/commands/categories/history.md)
 
 <div class='command-title'>Get the command history.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

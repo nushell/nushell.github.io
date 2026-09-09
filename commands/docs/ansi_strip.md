@@ -2,7 +2,7 @@
 title: ansi strip
 categories: |
   platform
-version: 0.115.0
+version: 0.115.1
 platform: |
   Strip ANSI escape sequences from a string.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `ansi strip` for [platform](/commands/categories/platform.md)
 
 <div class='command-title'>Strip ANSI escape sequences from a string.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 

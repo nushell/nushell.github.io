@@ -2,7 +2,7 @@
 title: encode base32hex
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Encode a binary value or a string using base32hex.
 usage: |
@@ -15,6 +15,10 @@ contributors: false
 # `encode base32hex` for [formats](/commands/categories/formats.md)
 
 <div class='command-title'>Encode a binary value or a string using base32hex.</div>
+
+## Command Type
+
+`built-in`
 
 ## Signature
 
