@@ -2,7 +2,7 @@
 title: matrix multiply
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Multiply two matrices using dot product.
 usage: |

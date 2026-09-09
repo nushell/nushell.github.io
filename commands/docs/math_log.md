@@ -2,7 +2,7 @@
 title: math log
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Returns the logarithm for an arbitrary base.
 usage: |

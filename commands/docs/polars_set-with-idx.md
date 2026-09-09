@@ -2,7 +2,7 @@
 title: polars set-with-idx
 categories: |
   dataframe
-version: 0.115.0
+version: 0.115.1
 dataframe: |
   Sets value in the given index.
 usage: |

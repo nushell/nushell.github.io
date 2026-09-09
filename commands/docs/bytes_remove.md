@@ -2,7 +2,7 @@
 title: bytes remove
 categories: |
   bytes
-version: 0.115.0
+version: 0.115.1
 bytes: |
   Remove specified bytes from the input.
 usage: |

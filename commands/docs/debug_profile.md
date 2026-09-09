@@ -2,7 +2,7 @@
 title: debug profile
 categories: |
   debug
-version: 0.115.0
+version: 0.115.1
 debug: |
   Profile pipeline elements in a closure.
 usage: |

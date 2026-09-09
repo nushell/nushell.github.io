@@ -2,7 +2,7 @@
 title: matrix transpose
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Transpose a matrix (swap rows and columns). For n-dimensional arrays, reverses all axes.
 usage: |

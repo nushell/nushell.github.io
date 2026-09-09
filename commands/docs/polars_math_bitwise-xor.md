@@ -2,7 +2,7 @@
 title: polars math bitwise-xor
 categories: |
   dataframe
-version: 0.115.0
+version: 0.115.1
 dataframe: |
   Perform an aggregation of bitwise XORs over a column expression.
 usage: |

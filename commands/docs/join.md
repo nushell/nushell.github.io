@@ -2,7 +2,7 @@
 title: join
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Join two tables.
 usage: |

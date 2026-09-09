@@ -2,7 +2,7 @@
 title: decode hex
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Decode a hex-encoded value.
 usage: |

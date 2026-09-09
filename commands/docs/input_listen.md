@@ -2,7 +2,7 @@
 title: input listen
 categories: |
   platform
-version: 0.115.0
+version: 0.115.1
 platform: |
   Listen for user interface events.
 usage: |

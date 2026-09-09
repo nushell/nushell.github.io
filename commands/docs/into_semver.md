@@ -2,7 +2,7 @@
 title: into semver
 categories: |
   conversions
-version: 0.115.0
+version: 0.115.1
 conversions: |
   Convert a value (string, record, or semver) to a semantic version.
 usage: |

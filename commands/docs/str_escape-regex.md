@@ -2,7 +2,7 @@
 title: str escape-regex
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Escapes special characters in the input string with '\'.
 usage: |

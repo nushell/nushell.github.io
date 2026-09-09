@@ -2,7 +2,7 @@
 title: idx watch
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   Stream filesystem change events from the live idx index.
 usage: |

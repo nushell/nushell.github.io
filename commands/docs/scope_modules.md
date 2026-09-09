@@ -2,7 +2,7 @@
 title: scope modules
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Output info on the modules in the current scope.
 usage: |

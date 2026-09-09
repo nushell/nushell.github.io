@@ -2,7 +2,7 @@
 title: polars selector signed-integer
 categories: |
   expression
-version: 0.115.0
+version: 0.115.1
 expression: |
   Select all signed integer columns.
 usage: |

@@ -2,7 +2,7 @@
 title: input list
 categories: |
   platform
-version: 0.115.0
+version: 0.115.1
 platform: |
   Display an interactive list for user selection.
 usage: |

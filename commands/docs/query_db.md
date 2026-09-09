@@ -2,7 +2,7 @@
 title: query db
 categories: |
   database
-version: 0.115.0
+version: 0.115.1
 database: |
   Query a SQLite database with SQL statements.
 usage: |

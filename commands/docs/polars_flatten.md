@@ -2,7 +2,7 @@
 title: polars flatten
 categories: |
   lazyframe
-version: 0.115.0
+version: 0.115.1
 lazyframe: |
   An alias for polars explode.
 usage: |

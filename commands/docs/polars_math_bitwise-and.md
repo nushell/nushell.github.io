@@ -2,7 +2,7 @@
 title: polars math bitwise-and
 categories: |
   dataframe
-version: 0.115.0
+version: 0.115.1
 dataframe: |
   Perform an aggregation of bitwise ANDs over a column expression.
 usage: |

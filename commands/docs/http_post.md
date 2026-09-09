@@ -2,7 +2,7 @@
 title: http post
 categories: |
   network
-version: 0.115.0
+version: 0.115.1
 network: |
   Send a POST request to a URL with a request body.
 usage: |

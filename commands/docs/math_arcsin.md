@@ -2,7 +2,7 @@
 title: math arcsin
 categories: |
   math
-version: 0.115.0
+version: 0.115.1
 math: |
   Returns the arcsine of the number.
 usage: |

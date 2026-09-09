@@ -2,7 +2,7 @@
 title: polars lit
 categories: |
   expression
-version: 0.115.0
+version: 0.115.1
 expression: |
   Creates a literal expression.
 usage: |

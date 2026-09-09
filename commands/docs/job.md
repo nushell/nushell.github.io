@@ -2,7 +2,7 @@
 title: job
 categories: |
   experimental
-version: 0.115.0
+version: 0.115.1
 experimental: |
   Various commands for working with background jobs.
 usage: |

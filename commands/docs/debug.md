@@ -2,7 +2,7 @@
 title: debug
 categories: |
   debug
-version: 0.115.0
+version: 0.115.1
 debug: |
   Debug print the value(s) piped in.
 usage: |

@@ -2,7 +2,7 @@
 title: bits xor
 categories: |
   bits
-version: 0.115.0
+version: 0.115.1
 bits: |
   Performs bitwise xor for ints or binary values.
 usage: |

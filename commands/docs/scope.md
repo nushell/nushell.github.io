@@ -2,7 +2,7 @@
 title: scope
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Commands for getting info about what is in scope.
 usage: |

@@ -2,7 +2,7 @@
 title: sys temp
 categories: |
   system
-version: 0.115.0
+version: 0.115.1
 system: |
   View the temperatures of system components.
 usage: |

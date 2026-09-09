@@ -2,7 +2,7 @@
 title: matrix add
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Add a matrix or scalar to a matrix.
 usage: |

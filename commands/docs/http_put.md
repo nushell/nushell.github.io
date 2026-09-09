@@ -2,7 +2,7 @@
 title: http put
 categories: |
   network
-version: 0.115.0
+version: 0.115.1
 network: |
   Send a PUT request to a URL with a request body.
 usage: |

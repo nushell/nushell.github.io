@@ -2,7 +2,7 @@
 title: polars selector not
 categories: |
   expression
-version: 0.115.0
+version: 0.115.1
 expression: |
   Inverts selector.
 usage: |

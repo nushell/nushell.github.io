@@ -2,7 +2,7 @@
 title: slice
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Return only the selected rows.
 usage: |

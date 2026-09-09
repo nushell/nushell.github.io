@@ -2,7 +2,7 @@
 title: combinations
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Generates all combinations of size k from the input list.
 usage: |

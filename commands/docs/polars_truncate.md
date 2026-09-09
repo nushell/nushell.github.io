@@ -2,7 +2,7 @@
 title: polars truncate
 categories: |
   expression
-version: 0.115.0
+version: 0.115.1
 expression: |
   Divide the date/datetime range into buckets.
 usage: |

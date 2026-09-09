@@ -2,7 +2,7 @@
 title: polars
 categories: |
   dataframe
-version: 0.115.0
+version: 0.115.1
 dataframe: |
   Operate with data in a dataframe format.
 usage: |

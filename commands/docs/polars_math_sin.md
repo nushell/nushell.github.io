@@ -2,7 +2,7 @@
 title: polars math sin
 categories: |
   dataframe
-version: 0.115.0
+version: 0.115.1
 dataframe: |
   Compute the element-wise sine of a column expression.
 usage: |

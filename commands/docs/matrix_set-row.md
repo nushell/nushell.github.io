@@ -2,7 +2,7 @@
 title: matrix set-row
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Replace a row in a matrix.
 usage: |

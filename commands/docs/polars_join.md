@@ -2,7 +2,7 @@
 title: polars join
 categories: |
   lazyframe
-version: 0.115.0
+version: 0.115.1
 lazyframe: |
   Joins a lazy frame with other lazy frame.
 usage: |

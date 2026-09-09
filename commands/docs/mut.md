@@ -2,7 +2,7 @@
 title: mut
 categories: |
   core
-version: 0.115.0
+version: 0.115.1
 core: |
   Create a mutable variable and give it a value.
 usage: |

@@ -2,7 +2,7 @@
 title: bytes build
 categories: |
   bytes
-version: 0.115.0
+version: 0.115.1
 bytes: |
   Create a binary value from the provided arguments.
 usage: |

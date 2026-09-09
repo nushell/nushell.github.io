@@ -2,7 +2,7 @@
 title: from eml
 categories: |
   formats
-version: 0.115.0
+version: 0.115.1
 formats: |
   Parse text as .eml and create record.
 usage: |

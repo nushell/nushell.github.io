@@ -2,7 +2,7 @@
 title: intersect
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Returns a list of unique elements present in both the input and the provided list.
 usage: |

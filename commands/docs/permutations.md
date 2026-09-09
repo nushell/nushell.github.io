@@ -2,7 +2,7 @@
 title: permutations
 categories: |
   filters
-version: 0.115.0
+version: 0.115.1
 filters: |
   Generates all permutations of the input list.
 usage: |

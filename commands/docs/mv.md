@@ -2,7 +2,7 @@
 title: mv
 categories: |
   filesystem
-version: 0.115.0
+version: 0.115.1
 filesystem: |
   Move files or directories using uutils/coreutils mv.
 usage: |

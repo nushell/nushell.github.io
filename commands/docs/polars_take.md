@@ -2,7 +2,7 @@
 title: polars take
 categories: |
   dataframe
-version: 0.115.0
+version: 0.115.1
 dataframe: |
   Creates new dataframe using the given indices.
 usage: |

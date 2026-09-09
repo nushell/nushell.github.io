@@ -2,7 +2,7 @@
 title: polars math
 categories: |
   dataframe
-version: 0.115.0
+version: 0.115.1
 dataframe: |
   Collection of math functions to be applied on column expressions.
 usage: |

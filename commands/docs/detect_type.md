@@ -2,7 +2,7 @@
 title: detect type
 categories: |
   strings
-version: 0.115.0
+version: 0.115.1
 strings: |
   Infer Nushell datatype from a string.
 usage: |

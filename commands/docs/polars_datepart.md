@@ -2,7 +2,7 @@
 title: polars datepart
 categories: |
   expression
-version: 0.115.0
+version: 0.115.1
 expression: |
   Creates an expression for capturing the specified datepart in a column.
 usage: |

@@ -2,7 +2,7 @@
 title: polars integer
 categories: |
   dataframe
-version: 0.115.0
+version: 0.115.1
 dataframe: |
   Converts a string column into a integer column
 usage: |

@@ -2,7 +2,7 @@
 title: polars expr-not
 categories: |
   dataframe
-version: 0.115.0
+version: 0.115.1
 dataframe: |
   Creates a not expression.
 usage: |

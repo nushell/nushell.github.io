@@ -2,7 +2,7 @@
 title: random pass
 categories: |
   random
-version: 0.115.0
+version: 0.115.1
 random: |
   Generate a cryptologically secure password.
 usage: |

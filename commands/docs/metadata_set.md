@@ -2,7 +2,7 @@
 title: metadata set
 categories: |
   debug
-version: 0.115.0
+version: 0.115.1
 debug: |
   Set the metadata for items in the stream.
 usage: |

@@ -2,7 +2,7 @@
 title: polars selector list
 categories: |
   expression
-version: 0.115.0
+version: 0.115.1
 expression: |
   Select all list columns.
 usage: |
