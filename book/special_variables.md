@@ -195,6 +195,26 @@ The `$in` variable represents the pipeline input into an expression. See [Pipeli
 
 `$it` is a special variable that is _only_ available in a `where` "row condition" — a convenient shorthand which simplifies field access. See `help where` or [where](/commands/docs/where.md) for more information.
 
+## `$ans`
+
+The `$ans` variable holds information about the most recent REPL result.
+
+`$ans.last` holds the most recent output. Note that this only updates if the final part of the pipeline is an internal command. An external command output can be stored if piped into `collect`.
+
+```nu
+> fd . | collect
+bar/
+foo.txt
+> $ans
+╭───────────┬──────────────────╮
+│ last      │ bar/             │
+│           │ foo.txt          │
+│ exit_code │ 0                │
+│ duration  │ 18ms 904µs 776ns │
+│ command   │ fd . | collect   │
+╰───────────┴──────────────────╯
+```
+
 ## `$NU_LIB_DIRS`
 
 A constant version of `$env.NU_LIB_DIRS` - a list of directories which will be searched when using the `source`, `use`, or `overlay use` commands. See also:
