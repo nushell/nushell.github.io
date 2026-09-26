@@ -2,7 +2,7 @@
 title: help aliases
 categories: |
   core
-version: 0.115.1
+version: 0.116.0
 core: |
   Show help on nushell aliases.
 usage: |

@@ -2,7 +2,7 @@
 title: polars selector numeric
 categories: |
   expression
-version: 0.115.1
+version: 0.116.0
 expression: |
   Select all numeric columns.
 usage: |

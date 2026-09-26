@@ -2,7 +2,7 @@
 title: matrix subtract
 categories: |
   filters
-version: 0.115.1
+version: 0.116.0
 filters: |
   Subtract a matrix or scalar from a matrix.
 usage: |

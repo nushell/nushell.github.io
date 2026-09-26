@@ -2,7 +2,7 @@
 title: polars selector
 categories: |
   expression
-version: 0.115.1
+version: 0.116.0
 expression: |
   Create column selectors for use in polars commands.
 usage: |

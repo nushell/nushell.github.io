@@ -2,7 +2,7 @@
 title: plugin rm
 categories: |
   plugin
-version: 0.115.1
+version: 0.116.0
 plugin: |
   Remove a plugin from the plugin registry file.
 usage: |

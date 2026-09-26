@@ -2,7 +2,7 @@
 title: do
 categories: |
   core
-version: 0.115.1
+version: 0.116.0
 core: |
   Run a closure, providing it with the pipeline input.
 usage: |

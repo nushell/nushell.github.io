@@ -2,7 +2,7 @@
 title: math ceil
 categories: |
   math
-version: 0.115.1
+version: 0.116.0
 math: |
   Returns the ceil of a number (smallest integer greater than or equal to that number).
 usage: |

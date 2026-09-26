@@ -2,7 +2,7 @@
 title: to yaml
 categories: |
   formats
-version: 0.115.1
+version: 0.116.0
 formats: |
   Convert table into .yaml/.yml text.
 usage: |
@@ -27,12 +27,12 @@ contributors: false
 ## Flags
 
  -  `--serialize, -s`: Serialize nushell types that cannot be deserialized.
- -  `--non-roundtrip {string}`: How to handle values that are non-roundtrippable.
+ -  `--non-roundtrip {oneof<string, nothing>}`: How to handle values that are non-roundtrippable.
  -  `--spec {string}`: YAML spec version ('1.1' or '1.2' (default)).
  -  `--add-directives, -d`: Add YAML document directives.
  -  `--multiple, -m`: Given a list, serialize a multi document stream.
  -  `--indent, -i {int}`: Configure the indent.
- -  `--compact-list-indent`: Emit lists with a more compact indentation style.
+ -  `--list-indent {string}`: Nested list indentation style ('compact' (default) or 'indented')
  -  `--quote, -q {string}`: String quote style ('auto' (default), 'single' or 'double')
 
 

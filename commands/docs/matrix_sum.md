@@ -2,7 +2,7 @@
 title: matrix sum
 categories: |
   filters
-version: 0.115.1
+version: 0.116.0
 filters: |
   Sum all elements of a matrix, or sum along an axis.
 usage: |

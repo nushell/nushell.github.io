@@ -2,7 +2,7 @@
 title: par-each
 categories: |
   filters
-version: 0.115.1
+version: 0.116.0
 filters: |
   Run a closure on each row of the input list in parallel, creating a new list with the results.
 usage: |
@@ -92,4 +92,4 @@ Iterate over each element, producing a list showing indexes of any 2s.
 ```
 
 ## Notes
- Uses a dedicated thread pool (reused across top-level calls; sized by --threads when set). Nested par-each calls use a private pool so they cannot deadlock on the outer pool.
+ Uses a dedicated thread pool (idle top-level pools are reused; nested or overlapping calls use separate pools).

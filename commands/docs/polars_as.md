@@ -2,7 +2,7 @@
 title: polars as
 categories: |
   expression
-version: 0.115.1
+version: 0.116.0
 expression: |
   Creates an alias expression.
 usage: |

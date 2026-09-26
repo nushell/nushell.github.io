@@ -2,7 +2,7 @@
 title: polars struct-json-encode
 categories: |
   dataframe
-version: 0.115.1
+version: 0.116.0
 dataframe: |
   Convert this struct to a string column with json values.
 usage: |

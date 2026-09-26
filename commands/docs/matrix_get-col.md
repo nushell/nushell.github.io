@@ -2,7 +2,7 @@
 title: matrix get-col
 categories: |
   filters
-version: 0.115.1
+version: 0.116.0
 filters: |
   Extract a column from a 2D matrix.
 usage: |

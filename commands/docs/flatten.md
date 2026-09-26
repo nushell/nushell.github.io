@@ -2,7 +2,7 @@
 title: flatten
 categories: |
   filters
-version: 0.115.1
+version: 0.116.0
 filters: |
   Flatten a table by extracting nested values.
 usage: |
@@ -74,6 +74,17 @@ restrict the flattening by passing column names.
 
 ```
 
+Flatten a record: nested record fields are lifted, and a lifted field that collides with a top-level column is prefixed with its parent key.
+```nu
+> { a: { b: 1, c: 2 }, c: 3 } | flatten
+╭───┬───┬─────┬───╮
+│ # │ b │ a_c │ c │
+├───┼───┼─────┼───┤
+│ 0 │ 1 │   2 │ 3 │
+╰───┴───┴─────┴───╯
+
+```
+
 Flatten inner table.
 ```nu
 > { a: b, d: [ 1 2 3 4 ], e: [ 4 3 ] } | flatten d --all
@@ -99,3 +110,9 @@ Flatten inner table.
 ╰───┴───┴───┴───────────╯
 
 ```
+
+## Notes
+A record is treated as a one-row table, so the output is always a table.
+Fields of a nested record are lifted to the top level and the parent key is dropped.
+If a lifted field would collide with a top-level column, it is renamed to `<parent>_<field>`.
+A nested list is expanded into one row per element.

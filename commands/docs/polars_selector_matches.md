@@ -2,7 +2,7 @@
 title: polars selector matches
 categories: |
   expression
-version: 0.115.1
+version: 0.116.0
 expression: |
   Select all columns that match the given regex pattern.
 usage: |

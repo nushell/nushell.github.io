@@ -2,7 +2,7 @@
 title: bits and
 categories: |
   bits
-version: 0.115.1
+version: 0.116.0
 bits: |
   Performs bitwise and for ints or binary values.
 usage: |

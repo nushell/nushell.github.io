@@ -2,7 +2,7 @@
 title: load-env
 categories: |
   filesystem
-version: 0.115.1
+version: 0.116.0
 filesystem: |
   Loads an environment update from a record.
 usage: |
@@ -49,3 +49,16 @@ Load variables from an argument.
 > load-env {NAME: ABE, AGE: UNKNOWN}; $env.NAME
 ABE
 ```
+
+Load a variable, then apply its environment conversion.
+```nu
+> $env.ENV_CONVERSIONS = {MY_ENV_VAR: {from_string: { split row ':' }}}; load-env {MY_ENV_VAR: 'foo:bar'}; $env.ENV_CONVERSIONS = $env.ENV_CONVERSIONS; $env.MY_ENV_VAR
+╭───┬─────╮
+│ 0 │ foo │
+│ 1 │ bar │
+╰───┴─────╯
+
+```
+
+## Notes
+Environment conversions are not applied automatically. To apply the conversions configured in $env.ENV_CONVERSIONS after loading an update, assign $env.ENV_CONVERSIONS to itself.

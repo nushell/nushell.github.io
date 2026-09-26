@@ -2,7 +2,7 @@
 title: default
 categories: |
   filters
-version: 0.115.1
+version: 0.116.0
 filters: |
   Sets a default value if a row's column is missing or null.
 usage: |
@@ -31,7 +31,7 @@ contributors: false
 ## Parameters
 
  -  `default value`: The value to use as a default.
- -  `...rest`: The name of the column.
+ -  `...rest`: The name (or cell path) of the column.
 
 
 ## Input/output types:
@@ -87,6 +87,17 @@ Replace the empty string in the "a" column of a list
 │ 1 │ N/A │ 1 │
 ╰───┴─────┴───╯
 
+```
+
+Fill a missing nested value using a cell path
+```nu
+> {a: {b: 1}} | default 2 a.c
+╭───┬───────────╮
+│   │ ╭───┬───╮ │
+│ a │ │ b │ 1 │ │
+│   │ │ c │ 2 │ │
+│   │ ╰───┴───╯ │
+╰───┴───────────╯
 ```
 
 Generate a default value from a closure

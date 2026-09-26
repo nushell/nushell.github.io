@@ -2,7 +2,7 @@
 title: chunk-by
 categories: |
   filters
-version: 0.115.1
+version: 0.116.0
 filters: |
   Divides a sequence into sub-sequences based on a closure.
 usage: |
@@ -39,7 +39,7 @@ contributors: false
 
 Chunk data into runs of larger than zero or not.
 ```nu
-> [1, 3, -2, -2, 0, 1, 2] | chunk-by {|it| $it >= 0 }
+> [1, 3, -2, -2, 0, 1, 2] | chunk-by $it >= 0
 ╭───┬────────────╮
 │ 0 │ ╭───┬───╮  │
 │   │ │ 0 │ 1 │  │
@@ -60,7 +60,7 @@ Chunk data into runs of larger than zero or not.
 
 Identify repetitions in a string
 ```nu
-> [a b b c c c] | chunk-by { |it| $it }
+> [a b b c c c] | chunk-by $it
 ╭───┬───────────╮
 │ 0 │ ╭───┬───╮ │
 │   │ │ 0 │ a │ │

@@ -2,7 +2,7 @@
 title: polars math abs
 categories: |
   dataframe
-version: 0.115.1
+version: 0.116.0
 dataframe: |
   Compute the absolute values of a column expression.
 usage: |

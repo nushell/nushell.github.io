@@ -2,7 +2,7 @@
 title: idx dirs
 categories: |
   filesystem
-version: 0.115.1
+version: 0.116.0
 filesystem: |
   List indexed directories, or fuzzy-match directories by query.
 usage: |

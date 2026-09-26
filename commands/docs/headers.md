@@ -2,7 +2,7 @@
 title: headers
 categories: |
   filters
-version: 0.115.1
+version: 0.116.0
 filters: |
   Use the first row of the table as column names.
 usage: |

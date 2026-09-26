@@ -2,7 +2,7 @@
 title: polars math bitwise-count-zeros
 categories: |
   dataframe
-version: 0.115.1
+version: 0.116.0
 dataframe: |
   Compute the number of unset bits for each element in an integer column expression.
 usage: |

@@ -2,7 +2,7 @@
 title: commandline set-prompt
 categories: |
   core
-version: 0.115.1
+version: 0.116.0
 core: |
   Replace the current prompt and repaint it in place, without disturbing the line being edited.
 usage: |

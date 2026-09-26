@@ -2,7 +2,7 @@
 title: math median
 categories: |
   math
-version: 0.115.1
+version: 0.116.0
 math: |
   Computes the median of a list of numbers.
 usage: |

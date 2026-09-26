@@ -2,7 +2,7 @@
 title: save
 categories: |
   filesystem
-version: 0.115.1
+version: 0.116.0
 filesystem: |
   Save a file.
 usage: |
@@ -29,7 +29,7 @@ contributors: false
  -  `--stderr, -e {path}`: The filename used to save stderr, only works with `-r` flag.
  -  `--raw, -r`: Save file as raw binary.
  -  `--append, -a`: Append input to the end of the file.
- -  `--force, -f`: Overwrite the destination.
+ -  `--force, -f`: Overwrite the destination, creating missing parent directories.
  -  `--progress, -p`: Enable progress bar.
 
 ## Parameters

@@ -2,7 +2,7 @@
 title: polars cast
 categories: |
   dataframe
-version: 0.115.1
+version: 0.116.0
 dataframe: |
   Cast a column to a different dtype.
 usage: |

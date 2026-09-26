@@ -2,7 +2,7 @@
 title: drop
 categories: |
   filters
-version: 0.115.1
+version: 0.116.0
 filters: |
   Remove items/rows from the end of the input list/table, or remove bytes from the end of binary data. Counterpart of `skip`. Opposite of `last`. For binary input, `rows` can also be specified as a filesize.
 usage: |

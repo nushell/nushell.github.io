@@ -2,7 +2,7 @@
 title: update cells
 categories: |
   filters
-version: 0.115.1
+version: 0.116.0
 filters: |
   Update the table cells.
 usage: |
@@ -27,6 +27,7 @@ contributors: false
 ## Flags
 
  -  `--columns, -c {list<any>}`: List of columns to update.
+ -  `--recursive, -r`: Descend into nested records and lists, running the closure on every leaf value.
 
 ## Parameters
 
@@ -90,3 +91,22 @@ Update each value in a record.
 │ c │ 13 │
 ╰───┴────╯
 ```
+
+Update every leaf value in a nested record.
+```nu
+> {a: 1, b: {c: 2, d: [3, 4]}} | update cells --recursive { $in * 10 }
+╭───┬────────────────────╮
+│ a │ 10                 │
+│   │ ╭───┬────────────╮ │
+│ b │ │ c │ 20         │ │
+│   │ │   │ ╭───┬────╮ │ │
+│   │ │ d │ │ 0 │ 30 │ │ │
+│   │ │   │ │ 1 │ 40 │ │ │
+│   │ │   │ ╰───┴────╯ │ │
+│   │ ╰───┴────────────╯ │
+╰───┴────────────────────╯
+```
+
+## Notes
+By default the closure runs once per cell, so a cell holding a record or list is passed to the closure whole.
+With `--recursive`, nested records and lists are descended into instead and the closure runs on each leaf value inside them.

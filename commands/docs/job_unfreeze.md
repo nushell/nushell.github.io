@@ -2,7 +2,7 @@
 title: job unfreeze
 categories: |
   experimental
-version: 0.115.1
+version: 0.116.0
 experimental: |
   Unfreeze a frozen process job in foreground.
 usage: |

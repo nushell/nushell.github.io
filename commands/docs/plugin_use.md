@@ -2,7 +2,7 @@
 title: plugin use
 categories: |
   plugin
-version: 0.115.1
+version: 0.116.0
 plugin: |
   Load a plugin from the plugin registry file into scope.
 usage: |

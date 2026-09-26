@@ -2,11 +2,11 @@
 title: date list-timezone
 categories: |
   date
-version: 0.115.1
+version: 0.116.0
 date: |
-  List supported time zones.
+  List supported time zones and their current offsets.
 usage: |
-  List supported time zones.
+  List supported time zones and their current offsets.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `date list-timezone` for [date](/commands/categories/date.md)
 
-<div class='command-title'>List supported time zones.</div>
+<div class='command-title'>List supported time zones and their current offsets.</div>
 
 ## Command Type
 
@@ -27,18 +27,18 @@ contributors: false
 
 ## Input/output types:
 
-| input   | output |
-| ------- | ------ |
-| nothing | table  |
+| input   | output                                  |
+| ------- | --------------------------------------- |
+| nothing | table&lt;timezone: string, offset: string&gt; |
 ## Examples
 
 Show time zone(s) that contains 'Shanghai'.
 ```nu
 > date list-timezone | where timezone =~ Shanghai
-╭───┬───────────────╮
-│ # │   timezone    │
-├───┼───────────────┤
-│ 0 │ Asia/Shanghai │
-╰───┴───────────────╯
+╭───┬───────────────┬────────╮
+│ # │   timezone    │ offset │
+├───┼───────────────┼────────┤
+│ 0 │ Asia/Shanghai │ +08:00 │
+╰───┴───────────────┴────────╯
 
 ```

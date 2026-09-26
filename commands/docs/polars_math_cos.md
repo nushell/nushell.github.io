@@ -2,7 +2,7 @@
 title: polars math cos
 categories: |
   dataframe
-version: 0.115.1
+version: 0.116.0
 dataframe: |
   Compute the element-wise cosine of a column expression.
 usage: |

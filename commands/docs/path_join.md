@@ -2,7 +2,7 @@
 title: path join
 categories: |
   path
-version: 0.115.1
+version: 0.116.0
 path: |
   Join a structured path or a list of path parts.
 usage: |

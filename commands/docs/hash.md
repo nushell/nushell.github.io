@@ -2,7 +2,7 @@
 title: hash
 categories: |
   hash
-version: 0.115.1
+version: 0.116.0
 hash: |
   Apply hash function.
 usage: |
@@ -39,3 +39,4 @@ You must use one of the following subcommands. Using this command as-is will onl
 | ---------------------------------------------- | --------------------------------------------- | -------- |
 | [`hash md5`](/commands/docs/hash_md5.md)       | Hash a value using the md5 hash algorithm.    | built-in |
 | [`hash sha256`](/commands/docs/hash_sha256.md) | Hash a value using the sha256 hash algorithm. | built-in |
+| [`hash sha512`](/commands/docs/hash_sha512.md) | Hash a value using the sha512 hash algorithm. | built-in |

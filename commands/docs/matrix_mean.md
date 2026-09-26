@@ -2,7 +2,7 @@
 title: matrix mean
 categories: |
   filters
-version: 0.115.1
+version: 0.116.0
 filters: |
   Compute the mean of all elements in a matrix.
 usage: |

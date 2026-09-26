@@ -2,7 +2,7 @@
 title: view source
 categories: |
   debug
-version: 0.115.1
+version: 0.116.0
 debug: |
   View a block, module, or a definition.
 usage: |
@@ -23,6 +23,10 @@ contributors: false
 ## Signature
 
 ```> view source {flags} (item)```
+
+## Flags
+
+ -  `--dependencies, -d`: Also show every custom command the item calls, transitively, and every constant those bodies read.
 
 ## Parameters
 
@@ -78,8 +82,33 @@ View the source of an alias.
 echo hi
 ```
 
+View a command together with the commands it calls.
+```nu
+> def helper [] { 42 }; def caller [] { helper }; view source caller --dependencies
+def caller [] { helper }
+
+def helper [] { 42 }
+```
+
 View the file where a definition lives via metadata.
 ```nu
 > view source some_command | metadata
 
 ```
+
+## Notes
+The `def` header is rebuilt from the signature instead of being quoted from
+the source, so `export` and attributes are lost. That holds with or without
+`--dependencies`.
+
+`--dependencies` applies to a custom command; on an alias, a module, a
+closure or a block id it does nothing. It follows only the calls the parser
+can see, so a closure written inside the body is followed even when it is run
+through a variable, but one that arrives as an argument is not. And a command
+built on a large module can pull in a lot of output.
+
+A constant is rebuilt the same way, as `const <name> = <value>`, because only
+the name is recorded with a source span. So the value is the one the command
+actually reads: an expression such as `path self` shows up already resolved,
+and an explicit type annotation is lost. `$nu` and the record bound by
+`use <module>` are left out — neither is written as a `const` anywhere.

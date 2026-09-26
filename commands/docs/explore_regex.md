@@ -2,7 +2,7 @@
 title: explore regex
 categories: |
   viewers
-version: 0.115.1
+version: 0.116.0
 viewers: |
   Launch a TUI to create and explore regular expressions interactively.
 usage: |

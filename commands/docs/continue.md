@@ -2,7 +2,7 @@
 title: continue
 categories: |
   core
-version: 0.115.1
+version: 0.116.0
 core: |
   Continue a loop from the next iteration.
 usage: |

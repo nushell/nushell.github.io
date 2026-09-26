@@ -2,7 +2,7 @@
 title: is-redirected
 categories: |
   platform
-version: 0.115.1
+version: 0.116.0
 platform: |
   Check if the current custom command's return value is redirected away from display.
 usage: |

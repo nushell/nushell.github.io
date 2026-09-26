@@ -2,7 +2,7 @@
 title: attr complete
 categories: |
   core
-version: 0.115.1
+version: 0.116.0
 core: |
   Attribute for using another command as a completion source for all arguments.
 usage: |
@@ -38,8 +38,8 @@ contributors: false
 
 Use another command as completion source.
 ```nu
-> def complete-foo [spans: list<string>] {
-    [bar baz qux spam eggs] | where $it not-in $spans
+> def complete-foo [token: record] {
+    [bar baz qux spam eggs] | where $it != $token.text
 }
 
 @complete 'complete-foo'

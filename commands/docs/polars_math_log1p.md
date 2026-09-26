@@ -2,7 +2,7 @@
 title: polars math log1p
 categories: |
   dataframe
-version: 0.115.1
+version: 0.116.0
 dataframe: |
   Compute the element-wise natural log of 1 + x for a column expression.
 usage: |

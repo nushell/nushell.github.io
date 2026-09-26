@@ -2,7 +2,7 @@
 title: polars selector by-index
 categories: |
   expression
-version: 0.115.1
+version: 0.116.0
 expression: |
   Select columns by their index position. Supports negative indices (e.g., -1 for the last column).
 usage: |

@@ -2,7 +2,7 @@
 title: scope aliases
 categories: |
   core
-version: 0.115.1
+version: 0.116.0
 core: |
   Output info on the aliases in the current scope.
 usage: |

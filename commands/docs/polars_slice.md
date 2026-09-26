@@ -2,7 +2,7 @@
 title: polars slice
 categories: |
   dataframe
-version: 0.115.1
+version: 0.116.0
 dataframe: |
   Creates new dataframe from a slice of rows.
 usage: |

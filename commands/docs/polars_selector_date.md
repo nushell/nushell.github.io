@@ -2,7 +2,7 @@
 title: polars selector date
 categories: |
   expression
-version: 0.115.1
+version: 0.116.0
 expression: |
   Select all date columns.
 usage: |

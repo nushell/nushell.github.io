@@ -2,7 +2,7 @@
 title: attr
 categories: |
   core
-version: 0.115.1
+version: 0.116.0
 core: |
   Various attributes for custom commands.
 usage: |
@@ -42,4 +42,5 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`attr complete external`](/commands/docs/attr_complete_external.md) | Attribute for enabling use of the external completer for internal commands.   | built-in |
 | [`attr deprecated`](/commands/docs/attr_deprecated.md)               | Attribute for marking a command or flag as deprecated.                        | built-in |
 | [`attr example`](/commands/docs/attr_example.md)                     | Attribute for adding examples to custom commands.                             | built-in |
+| [`attr interactive`](/commands/docs/attr_interactive.md)             | Attribute marking a completer as interactive.                                 | built-in |
 | [`attr search-terms`](/commands/docs/attr_search-terms.md)           | Attribute for adding search terms to custom commands.                         | built-in |

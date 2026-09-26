@@ -2,7 +2,7 @@
 title: polars math exp
 categories: |
   dataframe
-version: 0.115.1
+version: 0.116.0
 dataframe: |
   Compute element-wise e raised to the power of a column expression.
 usage: |

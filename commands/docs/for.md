@@ -2,7 +2,7 @@
 title: for
 categories: |
   core
-version: 0.115.1
+version: 0.116.0
 core: |
   Loop over a range.
 usage: |

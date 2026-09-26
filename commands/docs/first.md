@@ -2,7 +2,7 @@
 title: first
 categories: |
   filters
-version: 0.115.1
+version: 0.116.0
 filters: |
   Return only the first several rows of the input. Counterpart of `last`. Opposite of `skip`. For binary input, rows can also be specified as a filesize.
 usage: |

@@ -2,7 +2,7 @@
 title: polars as-date
 categories: |
   dataframe
-version: 0.115.1
+version: 0.116.0
 dataframe: |
   Converts string to date.
 usage: |

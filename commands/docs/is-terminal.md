@@ -2,7 +2,7 @@
 title: is-terminal
 categories: |
   platform
-version: 0.115.1
+version: 0.116.0
 platform: |
   Check if the process stdin, stdout, or stderr is attached to a terminal device.
 usage: |

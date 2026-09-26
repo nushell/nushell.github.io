@@ -2,7 +2,7 @@
 title: into matrix
 categories: |
   conversions
-version: 0.115.1
+version: 0.116.0
 conversions: |
   Convert a nushell table or list of lists into a matrix.
 usage: |

@@ -2,7 +2,7 @@
 title: which
 categories: |
   system
-version: 0.115.1
+version: 0.116.0
 system: |
   Finds a program file, alias or custom command. If `application` is not provided, all deduplicated commands will be returned.
 usage: |

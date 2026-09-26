@@ -2,7 +2,7 @@
 title: run-internal
 categories: |
   default
-version: 0.115.1
+version: 0.116.0
 default: |
   Run a built-in command by name. Used internally by `%($cmd)` dynamic dispatch.
 usage: |

@@ -2,7 +2,7 @@
 title: help
 categories: |
   core
-version: 0.115.1
+version: 0.116.0
 core: |
   Display help information about different parts of Nushell.
 usage: |

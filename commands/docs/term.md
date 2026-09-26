@@ -2,7 +2,7 @@
 title: term
 categories: |
   platform
-version: 0.115.1
+version: 0.116.0
 platform: |
   Commands for querying information about the terminal.
 usage: |

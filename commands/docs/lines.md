@@ -2,7 +2,7 @@
 title: lines
 categories: |
   filters
-version: 0.115.1
+version: 0.116.0
 filters: |
   Converts input to lines.
 usage: |
@@ -44,5 +44,15 @@ Split multi-line string into lines
 │ 0 │ two   │
 │ 1 │ lines │
 ╰───┴───────╯
+
+```
+
+Skip empty lines
+```nu
+> "foo\n\nbar" | lines --skip-empty
+╭───┬─────╮
+│ 0 │ foo │
+│ 1 │ bar │
+╰───┴─────╯
 
 ```

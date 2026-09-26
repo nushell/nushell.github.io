@@ -2,7 +2,7 @@
 title: commandline complete
 categories: |
   core
-version: 0.115.1
+version: 0.116.0
 core: |
   Complete a string using the default completions.
 usage: |
@@ -27,15 +27,16 @@ contributors: false
 ## Flags
 
  -  `--detailed, -d`: Output completions as records, in the format expected from custom completers.
- -  `--type {string}`: The type of values to allow as completions.
+ -  `--input, -i`: Output the record a completer would receive here (`{token, place, buffer}`), instead of completions.
+ -  `--type {string}`: Restrict completions to one built-in source (directory, path, glob, command, variable, or env-var), so a completer can compose the engine's own sources with its results.
 
 
 ## Input/output types:
 
-| input   | output                            |
-| ------- | --------------------------------- |
-| nothing | oneof&lt;list&lt;string&gt;, list&lt;record&gt;&gt; |
-| string  | oneof&lt;list&lt;string&gt;, list&lt;record&gt;&gt; |
+| input   | output                                    |
+| ------- | ----------------------------------------- |
+| nothing | oneof&lt;list&lt;string&gt;, list&lt;record&gt;, record&gt; |
+| string  | oneof&lt;list&lt;string&gt;, list&lt;record&gt;, record&gt; |
 ## Examples
 
 List completions for command names.
@@ -70,8 +71,29 @@ Extend builtin completions for the current commandline.
 
 ```
 
+Compose a built-in source inside a completer: the engine's command names beside your own.
+```nu
+> def comp [token: record] { [my-alias] ++ ($token.text | commandline complete --type command) }
+
+```
+
+Return `fallback: true` to add completions beside the built-in ones rather than replacing them.
+```nu
+> def comp [token: record] { {completions: [my-preset], fallback: true} }
+
+```
+
+Inspect what a completer would be handed at the cursor, including the argument's declared shape.
+```nu
+> 'cd ma' | commandline complete --input | get place.shape
+
+```
+
 ## Notes
 This command can be used to obtain the completions that Nushell would normally provide for the given commandline contents.
 Completions will be provided as if the cursor is placed at the end of the given string.
 
 If no input is provided, the current commandline contents will be used instead.
+
+With --input, the record a completer would receive at that position is returned instead of
+completions, which is the supported way to develop and test a completer from inside Nushell.

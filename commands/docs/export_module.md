@@ -2,7 +2,7 @@
 title: export module
 categories: |
   core
-version: 0.115.1
+version: 0.116.0
 core: |
   Export a custom module from a module.
 usage: |

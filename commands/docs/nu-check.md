@@ -2,7 +2,7 @@
 title: nu-check
 categories: |
   strings
-version: 0.115.1
+version: 0.116.0
 strings: |
   Validate and parse Nushell input content.
 usage: |

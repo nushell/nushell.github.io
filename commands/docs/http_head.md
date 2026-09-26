@@ -2,7 +2,7 @@
 title: http head
 categories: |
   network
-version: 0.115.1
+version: 0.116.0
 network: |
   Get the headers from a URL.
 usage: |

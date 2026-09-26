@@ -2,7 +2,7 @@
 title: polars strftime
 categories: |
   dataframe
-version: 0.115.1
+version: 0.116.0
 dataframe: |
   Formats date based on string rule.
 usage: |

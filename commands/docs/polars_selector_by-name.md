@@ -2,7 +2,7 @@
 title: polars selector by-name
 categories: |
   expression
-version: 0.115.1
+version: 0.116.0
 expression: |
   Creates a selector that selects columns by name.
 usage: |

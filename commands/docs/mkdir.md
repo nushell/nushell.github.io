@@ -2,7 +2,7 @@
 title: mkdir
 categories: |
   filesystem
-version: 0.115.1
+version: 0.116.0
 filesystem: |
   Create directories, with intermediary directories if required using uutils/coreutils mkdir.
 usage: |
@@ -27,6 +27,7 @@ contributors: false
 ## Flags
 
  -  `--verbose, -v`: Print a message for each created directory.
+ -  `--fail-if-exists`: Error if a target path already exists instead of treating it as success.
 
 ## Parameters
 
@@ -47,14 +48,14 @@ Make a directory named foo.
 
 ```
 
-Make multiple directories and show the paths created.
+Make a directory, erroring if it already exists.
+```nu
+> mkdir --fail-if-exists foo
+
+```
+
+Make multiple directories and show the paths created, as absolute paths.
 ```nu
 > mkdir -v foo/bar foo2
-╭───┬─────────┬─────────┬───────╮
-│ # │  path   │ created │ error │
-├───┼─────────┼─────────┼───────┤
-│ 0 │ foo/bar │ true    │       │
-│ 1 │ foo2    │ true    │       │
-╰───┴─────────┴─────────┴───────╯
 
 ```

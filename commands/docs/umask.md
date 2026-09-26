@@ -2,7 +2,7 @@
 title: umask
 categories: |
   platform
-version: 0.115.1
+version: 0.116.0
 platform: |
   Get or set default file creation permissions.
 usage: |

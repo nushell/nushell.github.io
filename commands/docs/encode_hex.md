@@ -2,7 +2,7 @@
 title: encode hex
 categories: |
   formats
-version: 0.115.1
+version: 0.116.0
 formats: |
   Hex encode a binary value or a string.
 usage: |

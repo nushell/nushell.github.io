@@ -2,7 +2,7 @@
 title: debug experimental-options
 categories: |
   debug
-version: 0.115.1
+version: 0.116.0
 debug: |
   Show all experimental options.
 usage: |

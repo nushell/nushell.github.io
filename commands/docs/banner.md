@@ -2,7 +2,7 @@
 title: banner
 categories: |
   default
-version: 0.115.1
+version: 0.116.0
 default: |
   Print a banner for Nushell with information about the project
 usage: |
@@ -26,4 +26,5 @@ contributors: false
 
 ## Flags
 
- -  `--short`: Only show startup time
+ -  `--short`: Only show the startup time
+ -  `--no-startup-time`: Show the welcome message without the startup time

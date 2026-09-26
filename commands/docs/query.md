@@ -2,7 +2,7 @@
 title: query
 categories: |
   filters
-version: 0.115.1
+version: 0.116.0
 filters: |
   Show all the query commands
 usage: |

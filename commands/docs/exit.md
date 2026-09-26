@@ -2,7 +2,7 @@
 title: exit
 categories: |
   shells
-version: 0.115.1
+version: 0.116.0
 shells: |
   Exit Nu.
 usage: |

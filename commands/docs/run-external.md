@@ -2,7 +2,7 @@
 title: run-external
 categories: |
   system
-version: 0.115.1
+version: 0.116.0
 system: |
   Runs external command.
 usage: |

@@ -2,7 +2,7 @@
 title: plugin add
 categories: |
   plugin
-version: 0.115.1
+version: 0.116.0
 plugin: |
   Add a plugin to the plugin registry file.
 usage: |

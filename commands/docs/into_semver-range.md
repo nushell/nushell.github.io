@@ -2,7 +2,7 @@
 title: into semver-range
 categories: |
   conversions
-version: 0.115.1
+version: 0.116.0
 conversions: |
   Convert a string to a semver range.
 usage: |

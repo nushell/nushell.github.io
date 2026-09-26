@@ -2,7 +2,7 @@
 title: last
 categories: |
   filters
-version: 0.115.1
+version: 0.116.0
 filters: |
   Return only the last several rows of the input. Counterpart of `first`. Opposite of `drop`. For binary input, rows can also be specified as a filesize.
 usage: |

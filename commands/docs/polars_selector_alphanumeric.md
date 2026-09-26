@@ -2,7 +2,7 @@
 title: polars selector alphanumeric
 categories: |
   expression
-version: 0.115.1
+version: 0.116.0
 expression: |
   Select all columns with alphanumeric names (eg: only letters). Matching column names cannot contain *any* non-alphanumeric characters. Note that the definition of "alphanumeric" consists of all valid Unicode alphanumeric characters by default; this can be changed by setting `ascii_only=true`.
 usage: |
