@@ -9,8 +9,8 @@ title: External Completers
 ### Carapace completer
 
 ```nu
-let carapace_completer = {|spans|
-    carapace $spans.0 nushell ...$spans | from json
+let carapace_completer = {|space|
+    carapace $space.command nushell ...$spans | from json
 }
 ```
 
@@ -19,8 +19,8 @@ let carapace_completer = {|spans|
 This completer will use [the fish shell](https://fishshell.com/) to handle completions. Fish handles out of the box completions for many popular tools and commands.
 
 ```nu
-let fish_completer = {|spans|
-    fish --command $"complete '--do-complete=($spans | str replace --all "'" "\\'" | str join ' ')'"
+$env.config.completions.external.completer = {|place|
+    fish --command $"complete '--do-complete=($place.command | str replace --all "'" "\\'" | str join ' ')'"
     | from tsv --flexible --noheaders --no-infer
     | rename value description
     | update value {|row|
@@ -46,8 +46,8 @@ A couple of things to note on this command:
 Sometimes, a single external completer is not flexible enough. Luckily, as many as needed can be combined into a single one. The following example uses `$default_completer` for all commands except the ones explicitly defined in the record:
 
 ```nu
-let multiple_completers = {|spans|
-    match $spans.0 {
+let multiple_completers = {|space|
+    match $space.command {
         ls => $ls_completer
         git => $git_completer
         _ => $default_completer
@@ -69,7 +69,7 @@ Nushell currently has a [bug where autocompletions won't work for aliases](https
 
 ```nu
 # if the current command is an alias, get it's expansion
-let expanded_alias = (scope aliases | where name == $spans.0 | get -i 0 | get -i expansion)
+let expanded_alias = (scope aliases | where name == $space.command | get -i 0 | get -i expansion)
 
 # overwrite
 let spans = (if $expanded_alias != null  {
@@ -98,14 +98,14 @@ This is an example of how an external completer definition might look like:
 ```nu
 let fish_completer = ...
 
-let carapace_completer = {|spans: list<string>|
-    CARAPACE_LENIENT=1 carapace $spans.0 nushell ...$spans | from json
+let carapace_completer = {|place|
+    CARAPACE_LENIENT=1 carapace $place.command nushell ...$spans | from json
 }
 
 # This completer will use carapace by default
-let external_completer = {|spans|
+let external_completer = {|place|
     let expanded_alias = scope aliases
-    | where name == $spans.0
+    | where name == $place.command
     | get -o 0.expansion
 
     let spans = if $expanded_alias != null {
@@ -116,7 +116,7 @@ let external_completer = {|spans|
         $spans
     }
 
-    match $spans.0 {
+    match $place.command {
         # carapace completions are incorrect for nu
         nu => $fish_completer
         # fish completes commits and branch names in a nicer way
