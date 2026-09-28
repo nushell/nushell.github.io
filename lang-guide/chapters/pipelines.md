@@ -2,17 +2,35 @@
 
 ## The pipeline special variable `$in`
 
+`$in` holds the input of the current pipeline stage. It can be used in an expression that is itself a stage of the pipeline, in a closure, or in the body of a custom command:
+
+```nu
+[3 1 2] | sort | $in.0
+# => 1
+"hello" | $"($in) world"
+# => hello world
+```
+
+See [Pipeline Input and the Special `$in` Variable](/book/pipelines.md#pipeline-input-and-the-special-in-variable) in the Book for details.
+
 ## Best practices for pipeline commands
 
 ## Interaction with Unix pipes
+
+The output of an external command is a stream of bytes, which Nushell passes on to the next command as it arrives. If any external command in a pipeline exits with a non-zero exit code, the pipeline fails, even when it is not the last command (like `set -o pipefail` in Bash). Use `try` to handle the failure, or `complete` to capture the exit code:
+
+```nu
+try { ^false | lines } catch {|e| $e.exit_code }
+# => 1
+```
 
 ## Handling stdout and stderr
 
 You can handle stderr in multiple ways:
 
 1. Do nothing, stderr will be printed directly
-2. Pipe stderr to the next command, using `e>|` or `e+o>|`
-3. Redirect stderr to a file, using `e> file_path`, or `e+o> file_path`
+2. Pipe stderr to the next command, using `e>|` or `o+e>|`
+3. Redirect stderr to a file, using `e> file_path`, or `o+e> file_path`
 4. Use `do -i { cmd } | complete` to capture both stdout and stderr as structured data
 
 For the next examples, let's assume this file:
@@ -27,11 +45,11 @@ It prints `foo` to stdout and `barbar` to stderr. The following table illustrate
 
 Redirection to a pipeline:
 
-| type   | command                                     | `$result` contents | printed to terminal |
-| ------ | ------------------------------------------- | ------------------ | ------------------- |
-| \|     | `let result = nu demo.nu \| str upcase`     | "FOO"              | "barbar"            |
-| e>\|   | `let result = nu demo.nu e>\| str upcase`   | "BARBAR"           | "foo"               |
-| o+e>\| | `let result = nu demo.nu e+o>\| str upcase` | "FOO\nBARBAR"      | nothing             |
+| type   | command                                        | `$result` contents | printed to terminal |
+| ------ | ---------------------------------------------- | ------------------ | ------------------- |
+| \|     | `let result = nu demo.nu \| str uppercase`     | "FOO"              | "barbar"            |
+| e>\|   | `let result = nu demo.nu e>\| str uppercase`   | "BARBAR"           | "foo"               |
+| o+e>\| | `let result = nu demo.nu o+e>\| str uppercase` | "FOO\nBARBAR"      | nothing             |
 
 Redirection to a file:
 
@@ -51,36 +69,51 @@ Note that `e>|` and `o+e>|` only work with external command, if you pipe interna
 
 ```nu
 ls e>| str length
-# => Error:   × `e>|` only works with external streams
-# =>    ╭─[entry #1:1:1]
+# => Error: nu::shell::error
+# =>
+# =>   × Can't redirect stderr of internal command output
+# =>    ╭─[repl_entry #1:1:4]
 # =>  1 │ ls e>| str length
 # =>    ·    ─┬─
-# =>    ·     ╰── `e>|` only works on external streams
+# =>    ·     ╰── piping stderr only works on external commands
 # =>    ╰────
 
-ls e+o>| str length
-# => Error:   × `o+e>|` only works with external streams
-# =>    ╭─[entry #2:1:1]
-# =>  1 │ ls e+o>| str length
+ls o+e>| str length
+# => Error: nu::shell::error
+# =>
+# =>   × Can't redirect stderr of internal command output
+# =>    ╭─[repl_entry #2:1:4]
+# =>  1 │ ls o+e>| str length
 # =>    ·    ──┬──
-# =>    ·      ╰── `o+e>|` only works on external streams
+# =>    ·      ╰── piping stderr only works on external commands
 # =>    ╰────
 ```
 
 You can also redirect `stdout` to a file, and pipe `stderr` to next command:
 
 ```nu
-nu demo.nu o> file.txt e>| str upcase
-nu demo.nu e> file.txt | str upcase
+nu demo.nu o> file.txt e>| str uppercase
+# => BARBAR
+nu demo.nu e> file.txt | str uppercase
+# => FOO
 ```
 
 But you can't use redirection along with `o+e>|`, because it's ambiguous:
 
 ```nu
-nu demo.nu o> file.txt o+e>| str upcase
+nu demo.nu o> file.txt o+e>| str uppercase
+# => Error: nu::parser::multiple_redirections
+# =>
+# =>   × Multiple redirections provided for stdout.
+# =>    ╭─[repl_entry #1:1:12]
+# =>  1 │ nu demo.nu o> file.txt o+e>| str uppercase
+# =>    ·            ─┬          ──┬──
+# =>    ·             │            ╰── second redirection
+# =>    ·             ╰── first redirection
+# =>    ╰────
 ```
 
-Also note that `complete` is special, it doesn't work with `e>|`, `o+e>|`.
+Also note that `complete` treats whatever is piped into it as the command's stdout. With `e>|`, the `stdout` field of the result holds the command's stderr (and `stderr` holds its stdout). With `o+e>|`, both streams end up in `stdout`. Use a plain `|` to get the two streams in their own fields.
 
 ## Stdio and redirection behavior examples
 

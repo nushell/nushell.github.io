@@ -59,18 +59,24 @@ The path to the module can be:
   ::: details Example
 
   ```nu
-  # cd then use the mod.nu in the relative nupm directory
   cd ~/nushell/modules
+  ```
+
+  Then use the `mod.nu` in the relative `nupm` directory:
+
+  ```nu
   use nupm
   # or
   use nupm/
   ```
 
   Note that the module name (its directory) can end in a `/` (or `\` on Windows), but as with most commands that take a paths (e.g., `cd`), this is completely optional.
+
+  Enter the `cd` and the `use` as separate command lines. `use` looks for the module when its command line is parsed, before any `cd` on the same command line has run.
   :::
 
   ::: important Important! Importing modules from `$NU_LIB_DIRS` or `$env.NU_LIB_DIRS`
-  When importing a module via a relative path, Nushell first searches from the current directory. If a matching module is not found at that location, Nushell then searches each directory in the constant `$NU_LIB_DIRS` list, and then `$env.NU_LIB_DIRS` (deprecated).
+  When importing a module via a relative path, Nushell first searches from the current directory. If a matching module is not found at that location, Nushell then searches each directory in the constant `$NU_LIB_DIRS` list, and then the environment variable version, `$env.NU_LIB_DIRS`. By default, both include the `scripts` directory in your Nushell configuration directory and the `completions` directory in your Nushell data directory. The constant is the recommended place to add your own directories.
 
   This allows you to install modules to a location that is easily accessible via a relative path regardless of the current directory.
   :::
@@ -80,10 +86,17 @@ The path to the module can be:
   ::: details Example
 
   ```nu
-  use ~/nushell/modules/std-rfc/bulk-rename.nu
-  # Or
+  use ~/nushell/modules/my-utils/bulk-rename.nu
+  ```
+
+  Or:
+
+  ```nu
   cd ~/nushell/modules
-  use std-rfc/bulk-rename.nu
+  ```
+
+  ```nu
+  use my-utils/bulk-rename.nu
   ```
 
   :::
@@ -91,7 +104,7 @@ The path to the module can be:
 - A virtual directory:
 
   ::: details Example
-  The standard library modules mentioned above are stored in a virtual filesystem with a `std` directory. Consider this an alternate form of the "absolute path" examples above.
+  The standard library modules mentioned above are stored in a virtual filesystem with a `std` directory. (The [candidate modules](../standard_library.md#the-standard-library-candidate-module) are in a `std-rfc` directory, e.g., `use std-rfc/str`.) Consider this an alternate form of the "absolute path" examples above.
 
   ```nu
   use std/assert
@@ -143,7 +156,9 @@ Of course, you always have the option to choose a form that works best for your 
 
   ```nu
   use std/math PI
-  let circle = 2 * $PI * $radius
+  let radius = 2
+  2 * $PI * $radius
+  # => 12.566370614359172
   ```
 
   Keep in mind that the definitions can be:
@@ -162,14 +177,64 @@ Of course, you always have the option to choose a form that works best for your 
   ```
 
   ::: note Importing submodules
-  While you can import a submodule by itself using `use <module> </submodule>` (e.g., `use std help`), the entire parent module and _all_ of its definitions (and thus submodules) will be _parsed_ when using this form. When possible, loading the submodule as a _module_ will result in faster code. For example:
+  While you can import a submodule by itself using `use <module> <submodule>`, the entire parent module and _all_ of its definitions (and thus submodules) will be _parsed_ when using this form. When possible, loading the submodule as a _module_ will result in faster code. For example:
 
   ```nu
-  # Faster
+  # Faster, and imports `help` with all of its subcommands
   use std/help
+  # Slower, and imports only the `help` command itself, because the
+  # Standard Library re-exports its submodules' commands with `export use`
+  use std help
   ```
 
   :::
+
+### Submodules
+
+Importing an entire module with `use <module>` imports the module's own definitions, but _not_ the commands of a submodule that the module declares with `export module`. (Nushell versions before 0.114 imported these too.) For example, given this `greetings.nu` module file:
+
+```nu
+# greetings.nu
+export def hello [] { "Hello!" }
+
+export module formal {
+    export def hello [] { "Good day!" }
+}
+```
+
+`use greetings.nu` imports `greetings hello`, but not `greetings formal hello`:
+
+```nu
+use greetings.nu
+greetings hello
+# => Hello!
+greetings formal hello
+# => Error: nu::shell::external_command
+# =>
+# =>   × External command failed
+# =>    ╭─[repl_entry #3:1:1]
+# =>  1 │ greetings formal hello
+# =>    · ────┬────
+# =>    ·     ╰── Command `greetings` not found
+# =>    ╰────
+# =>   help: Did you mean `greetings hello`?
+```
+
+To use the submodule, import it explicitly with one of the forms described above:
+
+```nu
+# All definitions, including the submodule
+use greetings.nu *
+formal hello
+# => Good day!
+
+# Only the submodule
+use greetings.nu formal
+formal hello
+# => Good day!
+```
+
+Some modules re-export their submodules' commands with `export use`, which makes them part of the parent module. That is why `use std` in the example above still provides `std log info`. See [Creating Modules - Submodules](./creating_modules.md#submodules) for the difference between the two forms.
 
 ## Importing Constants
 
@@ -206,40 +271,76 @@ The `hide` command also accepts import patterns, similar to [`use`](/commands/do
 - If the name is a custom command, the `hide` command hides it directly.
 - If the name is a module name, it hides all of its exports prefixed with the module name
 
-For example, using `std/assert`:
+For example, with this module:
 
 ```nu
-use std/assert
-assert equal 1 2
-# => Assertion failed
-assert true
-# => Assertion passes
+module greet {
+    export def main [] { "Hello!" }
+    export def loud [] { "HELLO!" }
+}
 
-hide assert
-assert equal 1 1
-# => Error:
-# => help: A command with that name exists in module `assert`. Try importing it with `use`
+use greet
+greet
+# => Hello!
 
-assert true
-# => Error:
-# => help: A command with that name exists in module `assert`. Try importing it with `use`
+greet loud
+# => HELLO!
+```
+
+Now hide the module:
+
+```nu
+hide greet
+```
+
+Neither `greet loud` nor `greet` itself is available anymore:
+
+```nu
+greet loud
+# => Error: nu::shell::external_command
+# =>
+# =>   × External command failed
+# =>    ╭─[repl_entry #5:1:1]
+# =>  1 │ greet loud
+# =>    · ──┬──
+# =>    ·   ╰── Command `greet` not found
+# =>    ╰────
+# =>   help: A command with that name exists in module `greet`. Try importing it with `use`
+
+greet
+# => Error: nu::shell::external_command
+# =>
+# =>   × External command failed
+# =>    ╭─[repl_entry #6:1:1]
+# =>  1 │ greet
+# =>    · ──┬──
+# =>    ·   ╰── Command `greet` not found
+# =>    ╰────
+# =>   help: A command with that name exists in module `greet`. Try importing it with `use`
 ```
 
 Just as you can `use` a subset of the module's definitions, you can also `hide` them selectively as well:
 
 ```nu
-use std/assert
-hide assert main
-assert equal 1 1
-# => assertion passes
+use greet
+hide greet main
+greet loud
+# => HELLO!
 
-assert true
-# => Error:
-# => help: A command with that name exists in module `assert`. Try importing it with `use`
+greet
+# => Error: nu::shell::external_command
+# =>
+# =>   × External command failed
+# =>    ╭─[repl_entry #8:1:1]
+# =>  1 │ greet
+# =>    · ──┬──
+# =>    ·   ╰── Command `greet` not found
+# =>    ╰────
+# =>   help: A command with that name exists in module `greet`. Try importing it with `use`
 ```
 
 ::: tip
-`main` is covered in more detail in [Creating Modules](./creating_modules.md#main-exports), but for end-users, `main` simply means "the command named the same as the module." In this case the `assert` module exports a `main` command that "masquerades" as the `assert` command. Hiding `main` has the effect of hiding the `assert` command, but not its subcommands.
+`main` is covered in more detail in [Creating Modules](./creating_modules.md#main-exports), but for end-users, `main` simply means "the command named the same as the module." In this case the `greet` module exports a `main` command that "masquerades" as the `greet` command. Hiding `main` has the effect of hiding the `greet` command, but not its subcommands. The Standard Library's `std/assert` module works the same way: `assert` is its `main` command, and `assert equal` is one of its subcommands.
 :::
 
 ## See Also

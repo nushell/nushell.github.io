@@ -14,7 +14,14 @@
 
 ## Additional language notes
 
-- Dates and times are held together in the `datetime` type. Date values used by the system are timezone-aware. By default, dates use the UTC timezone.
+- Dates and times are held together in the `datetime` type. Date values used by the system are timezone-aware. A datetime literal without a timezone offset uses UTC, while `date now` returns the current time in the local timezone.
+
+  ```nu
+  2022-02-02T14:30:00 | format date "%+"
+  # => 2022-02-02T14:30:00+00:00
+  2022-02-02T14:30:00+05:00 | format date "%+"
+  # => 2022-02-02T14:30:00+05:00
+  ```
 
 ## Common commands that can be used with `datetime`
 
@@ -23,6 +30,7 @@ for fields and expressions. For example:
 
 - `date` and its subcommands
 - `format date`
-- `ls`
-- `ps`
-- `sys`
+- `into datetime`
+- `ls` (the `modified` column)
+- `ps --long` (the `start_time` column)
+- `sys host` (the `boot_time` column)

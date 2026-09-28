@@ -39,6 +39,7 @@ The [`describe`](/commands/docs/describe.md) command returns the type of a data 
 | [Blocks](#blocks)                     | `if true { print "hello!" }`, `loop { print "press ctrl-c to exit" }` |
 | [Null (Nothing)](#nothing-null)       | `null`                                                                |
 | [Any](#any)                           | `let p: any = 5`                                                      |
+| [SemVer](#semantic-versions)          | `'1.2.3' \| into semver`                                              |
 
 ## Basic Data Types
 
@@ -54,11 +55,21 @@ The [`describe`](/commands/docs/describe.md) command returns the type of a data 
 Simple Example:
 
 ```nu
-10 / 2
+10 // 2
 # => 5
-5 | describe
+10 // 2 | describe
 # => int
 ```
+
+::: tip
+The `/` operator always returns a float, even when both operands are integers and the result is a whole number. Use `//` (floor division) to keep an integer result.
+
+```nu
+10 / 2
+# => 5.0
+```
+
+:::
 
 ### Floats/Decimals
 
@@ -81,7 +92,7 @@ As in most programming languages, decimal values in Nushell are approximate.
 
 ```nu
 10.2 * 5.1
-# => 52.01999999999999
+# => 52.019999999999996
 ```
 
 :::
@@ -166,9 +177,9 @@ Simple example:
 
 ```nu
 3.14day
-# => 3day 3hr 21min
+# => 3day 3hr 21min 36sec
 30day / 1sec  # How many seconds in 30 days?
-# => 2592000
+# => 2592000.0
 ```
 
 ### File sizes
@@ -187,7 +198,7 @@ As with durations, Nushell supports fractional file sizes and calculations:
 0.5kB
 # => 500 B
 1GiB / 1B
-# => 1073741824
+# => 1073741824.0
 (1GiB / 1B) == 2 ** 30
 # => true
 ```
@@ -334,13 +345,13 @@ let my_record = {
   rank: 99
 }
 $my_record
-# => ╭───────┬────────────╮
-# => │ name  │ Kylian     │
-# => │ rank  │ 99         │
-# => ╰───────┴────────────╯
+# => ╭──────┬────────╮
+# => │ name │ Kylian │
+# => │ rank │ 99     │
+# => ╰──────┴────────╯
 
 $my_record | get name
-# =>  Kylian
+# => Kylian
 ```
 
 ### Tables
@@ -413,10 +424,29 @@ Using the optional operator `?` returns `null` if the requested cell-path doesn'
 let simple_record = { a: 5, b: 10 }
 $simple_record.a?
 # => 5
-$simple_record.c?
-# => Nothing is output
+$simple_record.c?  # Nothing is output
 $simple_record.c? | describe
 # => nothing
 $simple_record.c? == null
 # => true
+```
+
+### Semantic Versions
+
+|                       |                                                                                                         |
+| --------------------- | ------------------------------------------------------------------------------------------------------- |
+| **_Description:_**    | A [semantic version](https://semver.org) number, such as `1.2.3` or `2.0.0-rc.1`                        |
+| **_Annotation:_**     | N/A - This is a custom value, which `describe` reports as `semver`                                      |
+| **_Literal Syntax:_** | N/A - Convert a string or record with [`into semver`](/commands/docs/into_semver.md)                    |
+| **_See also:_**       | [`semver bump`](/commands/docs/semver_bump.md), [`into semver-range`](/commands/docs/into_semver-range.md) |
+
+Simple example - Semantic versions compare by version number, not as text:
+
+```nu
+'1.10.0' > '1.2.0'
+# => false
+('1.10.0' | into semver) > ('1.2.0' | into semver)
+# => true
+'1.2.3' | into semver | semver bump minor
+# => 1.3.0
 ```

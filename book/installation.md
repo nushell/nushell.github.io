@@ -30,10 +30,11 @@ For Windows:
 
 - [Winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/)
 
-  - Machine scope installation: `winget install nushell --scope machine`
-  - Machine scope upgrade: `winget update nushell`
-  - User scope installation: `winget install nushell` or `winget install nushell --scope user`
-  - User scope upgrade: Due to [winget-cli issue #3011](https://github.com/microsoft/winget-cli/issues/3011), running `winget update nushell` will unexpectedly install the latest version to `C:\Program Files\nu`. To work around this, run `winget install nushell` again to install the latest version in the user scope.
+  - User scope installation (the default): `winget install Nushell.Nushell`
+  - Machine scope installation (for all users): `winget install Nushell.Nushell --override 'ALLUSERS=1'`
+  - Upgrade: `winget upgrade Nushell.Nushell`
+
+  The `--scope` flag of `winget install` is not supported. Use `--override` as shown above for a machine scope installation.
 
 - [Scoop](https://scoop.sh/) (`scoop install nu`)
 
@@ -89,7 +90,7 @@ docker run --rm ghcr.io/nushell/nushell:latest-alpine -c "ls /usr/bin | where si
 
 To run a script from the current directory using Bash, use:
 
-```nu
+```sh
 docker run --rm \
     -v $(pwd):/work \
     ghcr.io/nushell/nushell:latest-alpine \
@@ -112,41 +113,45 @@ For Rust to work properly, you'll need to have a compatible compiler suite insta
 
 ### Installing Rust
 
-If you don't already have Rust on our system, the best way to install it is via [rustup](https://rustup.rs/). Rustup is a way of managing Rust installations, including managing using different Rust versions.
+If you don't already have Rust on your system, the best way to install it is via [rustup](https://rustup.rs/). Rustup is a way of managing Rust installations, including managing using different Rust versions.
 
-Nu currently requires the **latest stable (1.66.1 or later)** version of Rust. The best way is to let `rustup` find the correct version for you. When you first open `rustup` it will ask what version of Rust you wish to install:
+Nu currently requires a recent stable version of Rust (**1.96.1 or later** for Nu 0.116.0, as listed in the `rust-version` field of Nu's `Cargo.toml`). The best way is to let `rustup` find the correct version for you. When you first open `rustup` it will ask what version of Rust you wish to install:
 
 @[code](@snippets/installation/rustup_choose_rust_version.sh)
 
 Once you are ready, press 1 and then enter.
 
-If you'd rather not install Rust via `rustup`, you can also install it via other methods (e.g. from a package in a Linux distro). Just be sure to install a version of Rust that is 1.66.1 or later.
+If you'd rather not install Rust via `rustup`, you can also install it via other methods (e.g. from a package in a Linux distro). Just be sure to install a version of Rust that is 1.96.1 or later.
 
 ### Dependencies
 
+Nu is written in Rust, but a few of its dependencies (such as the bundled SQLite library and the `ring` cryptography library used for TLS) include C code, so you also need a C compiler. `pkg-config` is optional but recommended.
+
+Since version 0.105, Nu uses [rustls](https://github.com/rustls/rustls) rather than OpenSSL by default. The OpenSSL development packages listed below (`libssl-dev`, `openssl-devel`, or Homebrew's `openssl`) are only needed if you build with the `native-tls` feature.
+
 #### Debian/Ubuntu
 
-You will need to install the "pkg-config", "build-essential" and "libssl-dev" packages:
+You will need to install the "build-essential" and "pkg-config" packages:
 
 @[code](@snippets/installation/install_pkg_config_libssl_dev.sh)
 
 #### RHEL based distros
 
-You will need to install "libxcb", "openssl-devel" and "libX11-devel":
+You will need to install a C compiler ("gcc") and "pkgconf-pkg-config":
 
 @[code](@snippets/installation/install_rhel_dependencies.sh)
 
 #### macOS
 
-##### Homebrew
+##### Xcode Command Line Tools
 
-Using [Homebrew](https://brew.sh/), you will need to install "openssl" and "cmake" using:
+The Xcode Command Line Tools provide the C compiler. If you build with the `native-tls` feature, you will also need OpenSSL, which you can install with [Homebrew](https://brew.sh/):
 
 @[code](@snippets/installation/macos_deps.sh)
 
 ##### Nix
 
-If using [Nix](https://nixos.org/download/#nix-install-macos) for package management on macOS, the `openssl`, `cmake`, `pkg-config`, and `curl` packages are required. These can be installed:
+If using [Nix](https://nixos.org/download/#nix-install-macos) for package management on macOS, the `pkg-config` package is recommended (and `openssl` is required only with the `native-tls` feature). These can be installed:
 
 - Globally, using `nix-env --install` (and others).
 - Locally, using [Home Manager](https://github.com/nix-community/home-manager) in your `home.nix` config.
@@ -166,7 +171,7 @@ Note that the default plugins must be installed separately when using `cargo`. S
 
 ### Building from the GitHub repository
 
-You can also build Nu from the latest source on GitHub. This gives you immediate access to the latest features and bug fixes. First, clone the repo:
+You can also build Nu from the latest source on GitHub. This gives you immediate access to the latest features and bug fixes. If you use `rustup`, it picks up the Rust version pinned in the repository's `rust-toolchain.toml` file. First, clone the repo:
 
 @[code](@snippets/installation/git_clone_nu.sh)
 
@@ -179,3 +184,18 @@ You can also build and run Nu in release mode, which enables more optimizations:
 @[code](@snippets/installation/build_nu_from_source_release.sh)
 
 People familiar with Rust may wonder why we do both a "build" and a "run" step if "run" does a build by default. This is to get around a shortcoming of the new `default-run` option in Cargo, and ensure that all plugins are built, though this may not be required in the future.
+
+### Optional Build Features
+
+The default build enables the `dap`, `lsp`, `mcp`, `network`, `plugin`, `rustls-tls`, `sqlite`, and `trash-support` [Cargo features](https://doc.rust-lang.org/cargo/reference/features.html). You can add others with `--features`:
+
+- `system-clipboard`: lets the line editor use the system clipboard
+- `full`: all of the default features plus `system-clipboard`
+
+For example:
+
+```nu
+cargo install nu --locked --features full
+```
+
+The `rustls-tls` and `native-tls` features can't be enabled together. `native-tls` uses the platform's TLS library (such as OpenSSL on Linux). To use it, turn off the default features and list the ones you want, for example `--no-default-features --features plugin,network,sqlite,trash-support,native-tls`.

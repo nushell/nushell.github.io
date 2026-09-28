@@ -118,6 +118,7 @@ export const sidebarEn: SidebarConfig = {
         '/book/parallelism.md',
         '/book/plugins.md',
         '/book/explore.md',
+        '/book/tui.md',
       ],
     },
   ],
@@ -212,7 +213,7 @@ export const sidebarEn: SidebarConfig = {
               collapsible: true,
               children: [
                 {
-                  text: 'Types that cannot be used to declare variables',
+                  text: 'Types used only in command signatures',
                   link: '/lang-guide/chapters/types/other_types/00_not_assignable.md',
                   children: ['/lang-guide/chapters/types/other_types/path.md'],
                 },

@@ -1,6 +1,6 @@
 # Coming from CMD.EXE
 
-This table was last updated for Nu 0.67.0.
+This table was last updated for Nu 0.116.0.
 
 | CMD.EXE                              | Nu                                                                                  | Task                                                                  |
 | ------------------------------------ | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
@@ -30,22 +30,24 @@ This table was last updated for Nu 0.67.0.
 | `FTYPE`                              |                                                                                     | Displays or modifies file types used in file extension associations   |
 | `GOTO`                               |                                                                                     | Jump to a label                                                       |
 | `IF ERRORLEVEL <number> <command>`   | `if $env.LAST_EXIT_CODE >= <number> { <command> }`                                  | Run a command if the last command returned an error code >= specified |
+|                                      | `try { <command1> } catch {\|e\| if $e.exit_code >= <number> { <command> } }`       | Run a command if `<command1>` fails with an error code >= specified   |
 | `IF <string> EQU <string> <command>` | `if <string> == <string> { <command> }`                                             | Run a command if strings match                                        |
 | `IF EXIST <filename> <command>`      | `if (<filename> \| path exists) { <command> }`                                      | Run a command if the file exists                                      |
-| `IF DEFINED <variable> <command>`    | `if '$<variable>' in (scope variables).name { <command> }`                          | Run a command if the variable is defined                              |
+| `IF DEFINED <variable> <command>`    | `if '<variable>' in $env { <command> }`                                             | Run a command if the environment variable is defined                  |
+|                                      | `if '$<variable>' in (scope variables).name { <command> }`                          | Run a command if the Nu variable is defined                           |
 | `MD` or `MKDIR`                      | `mkdir`                                                                             | Create directories                                                    |
 | `MKLINK`                             |                                                                                     | Create symbolic links                                                 |
 | `MOVE`                               | `mv`                                                                                | Move files                                                            |
 | `PATH`                               | `$env.Path`                                                                         | Display the current path variable                                     |
-| `PATH <path>;%PATH%`                 | `$env.Path = ($env.Path \| append <path>`)                                          | Edit the path variable                                                |
-| `PATH %PATH%;<path>`                 | `$env.Path = ($env.Path \| prepend <path>`)                                         | Edit the path variable                                                |
+| `PATH <path>;%PATH%`                 | `$env.Path = ($env.Path \| prepend <path>)`                                         | Edit the path variable                                                |
+| `PATH %PATH%;<path>`                 | `$env.Path = ($env.Path \| append <path>)`                                          | Edit the path variable                                                |
 | `PAUSE`                              | `input "Press any key to continue . . ."`                                           | Pause script execution                                                |
 | `PROMPT <template>`                  | `$env.PROMPT_COMMAND = { <command> }`                                               | Change the terminal prompt                                            |
-| `PUSHD <path>`/`POPD`                | `enter <path>`/`dexit`                                                              | Change working directory temporarily                                  |
+| `PUSHD <path>`/`POPD`                | `dirs add <path>`/`dirs drop` (after `use std/dirs`)                                | Change working directory temporarily                                  |
 | `REM`                                | `#`                                                                                 | Comments                                                              |
 | `REN` or `RENAME`                    | `mv`                                                                                | Rename files                                                          |
 | `RD` or `RMDIR`                      | `rm`                                                                                | Remove directory                                                      |
-| `SET <var>=<string>`                 | `$env.<var> = <string>`                                                             | Set environment variables                                             |
+| `SET <var>=<string>`                 | `$env.<var> = "<string>"`                                                           | Set environment variables                                             |
 | `SETLOCAL`                           | (default behavior)                                                                  | Localize environment changes to a script                              |
 | `START <path>`                       | Partially covered by `start <path>`                                                 | Open the path in the system-configured default application            |
 | `START <internal command>`           |                                                                                     | Start a separate window to run a specified internal command           |

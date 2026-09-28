@@ -53,7 +53,7 @@ Before we get into the examples, the following glossary can help familiarise you
 | Nushell | jq             |
 | ------- | -------------- |
 | integer | number         |
-| decimal | number         |
+| float   | number         |
 | string  | string         |
 | boolean | boolean        |
 | null    | null           |
@@ -302,7 +302,7 @@ In `jq`, to output a formatted string we do:
 
 ```sh
 echo '{"name": "Alice", "age": 30}' |
-jq -r "Name: \(.name), Age: \(.age)"
+jq -r '"Name: \(.name), Age: \(.age)"'
 ```
 
 In `nu` we do:
@@ -311,6 +311,7 @@ In `nu` we do:
 '{"name": "Alice", "age": 30}'
 | from json
 | format pattern "Name: {name}, Age: {age}"
+# => Name: Alice, Age: 30
 ```
 
 ### Composing records
@@ -335,6 +336,12 @@ In `nu` we do:
 ```
 
 ## Dealing with nested items
+
+Some examples in this section use custom commands (`cherry-pick`, `flatten record-paths` and `filter-map`) that are defined in the [Appendix: Custom commands](#appendix-custom-commands). To try them, save the appendix code as `toolbox.nu` and load it first:
+
+```nu
+use toolbox.nu *
+```
 
 ### Filtering nested items
 
@@ -479,24 +486,24 @@ In `nu` we do:
 '[{"category": "A", "value": 10}, {"category": "B", "value": 20}, {"category": "A", "value": 5}]'
 | from json
 | group-by --to-table category
-# => ╭───┬───────┬──────────────────────────╮
-# => │ # │ group │          items           │
-# => ├───┼───────┼──────────────────────────┤
-# => │ 0 │ A     │ ╭───┬──────────┬───────╮ │
-# => │   │       │ │ # │ category │ value │ │
-# => │   │       │ ├───┼──────────┼───────┤ │
-# => │   │       │ │ 0 │ A        │    10 │ │
-# => │   │       │ │ 1 │ A        │     5 │ │
-# => │   │       │ ╰───┴──────────┴───────╯ │
-# => │ 1 │ B     │ ╭───┬──────────┬───────╮ │
-# => │   │       │ │ # │ category │ value │ │
-# => │   │       │ ├───┼──────────┼───────┤ │
-# => │   │       │ │ 0 │ B        │    20 │ │
-# => │   │       │ ╰───┴──────────┴───────╯ │
-# => ╰───┴───────┴──────────────────────────╯
+# => ╭───┬──────────┬──────────────────────────╮
+# => │ # │ category │          items           │
+# => ├───┼──────────┼──────────────────────────┤
+# => │ 0 │ A        │ ╭───┬──────────┬───────╮ │
+# => │   │          │ │ # │ category │ value │ │
+# => │   │          │ ├───┼──────────┼───────┤ │
+# => │   │          │ │ 0 │ A        │    10 │ │
+# => │   │          │ │ 1 │ A        │     5 │ │
+# => │   │          │ ╰───┴──────────┴───────╯ │
+# => │ 1 │ B        │ ╭───┬──────────┬───────╮ │
+# => │   │          │ │ # │ category │ value │ │
+# => │   │          │ ├───┼──────────┼───────┤ │
+# => │   │          │ │ 0 │ B        │    20 │ │
+# => │   │          │ ╰───┴──────────┴───────╯ │
+# => ╰───┴──────────┴──────────────────────────╯
 ```
 
-Note that `--to-table` was added to Nushell in [version 0.87.0](blog/2023-11-14-nushell_0_87_0.html). Before that you had to [`transpose`](/commands/docs/transpose) the record resulting from `group-by` which was substantially slower for large sets.
+With `--to-table`, `group-by` returns a table instead of a record. The column that holds the group key is named after the grouping column (`category` here), and the `items` column holds the grouped rows.
 
 ### Aggregating grouped values
 
@@ -515,6 +522,12 @@ In `nu` we do:
 | group-by --to-table category
 | update items { |row| $row.items.value | math sum }
 | rename category sum
+# => ╭───┬──────────┬─────╮
+# => │ # │ category │ sum │
+# => ├───┼──────────┼─────┤
+# => │ 0 │ A        │  15 │
+# => │ 1 │ B        │  20 │
+# => ╰───┴──────────┴─────╯
 ```
 
 ### Filtering after aggregating
@@ -578,7 +591,7 @@ In `nu` we do:
 | from json
 | get score
 | math avg
-# => 90
+# => 90.0
 ```
 
 ### Generating histogram bins
@@ -615,15 +628,20 @@ This section provides the implementation of the custom commands used in this coo
 
 ```nu
 use toolbox.nu *
-help commands | where command_type == "custom"
-# => ╭──────┬─────────────────────────┬─────────────────────────────────────────────────────────────────────────────────────────────────╮
-# => │    # │          name           │                                              usage                                              │
-# => ├──────┼─────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────┤
-# => │    0 │ cherry-pick             │ A command for cherry-picking values from a record key recursively                               │
-# => │    1 │ filter-map              │ A command for walking through a complex data structure and transforming its values recursively  │
-# => │    2 │ flatten record-paths    │ A command for flattening trees whilst keeping paths as keys                                     │
-# => ╰──────┴─────────────────────────┴─────────────────────────────────────────────────────────────────────────────────────────────────╯
+help commands | where command_type == "custom" | select name description
+# => ╭───┬──────────────────────┬────────────────────────────────────────────────────────────────────────────────────────────────╮
+# => │ # │         name         │                                          description                                           │
+# => ├───┼──────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+# => │ 0 │ banner               │ Print a banner for Nushell with information about the project                                  │
+# => │ 1 │ cherry-pick          │ A command for cherry-picking values from a record key recursively                              │
+# => │ 2 │ describe-primitive   │ Like `describe` but dropping item types for collections.                                       │
+# => │ 3 │ filter-map           │ A command for walking through a complex data structure and transforming its values recursively │
+# => │ 4 │ flatten record-paths │ A command for flattening trees whilst keeping paths as keys                                    │
+# => │ 5 │ pwd                  │ Return the current working directory                                                           │
+# => ╰───┴──────────────────────┴────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
+
+`banner` and `pwd` are also listed because they are custom commands from the standard library prelude, which Nushell loads by default.
 
 ```nu
 # toolbox.nu
@@ -703,7 +721,7 @@ export def describe-primitive []: any -> string {
 }
 
 
-# A command for cherry-picking values from a record key recursively
+# A command for flattening trees whilst keeping paths as keys
 export def "flatten record-paths" [
     --separator (-s): string = "."    # The separator to use when chaining paths
 ] {

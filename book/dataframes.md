@@ -38,7 +38,7 @@ much attention to the [`Dataframe` commands](/commands/categories/dataframe.md).
 sections of this page.
 
 ::: tip System Details
-The benchmarks presented in this section were run using a Macbook with a processor M1 pro and 32gb of ram. All examples were run on Nushell version 0.97 using `nu_plugin_polars 0.97`.
+The benchmarks presented in this section were run using a Macbook with a processor M1 pro and 32gb of ram. The timings were measured on Nushell version 0.97 using `nu_plugin_polars 0.97`, so treat them as illustrative. Current versions of `bench --pretty` print durations at full precision.
 :::
 
 ### File Information
@@ -53,19 +53,19 @@ The dataset has 5 columns and 5,429,252 rows. We can check that by using the
 ```nu
 let df_0 = polars open --eager Data7602DescendingYearOrder.csv
 polars store-ls | select key type columns rows estimated_size
-# => ╭──────────────────────────────────────┬───────────┬─────────┬─────────┬────────────────╮
-# => │                 key                  │   type    │ columns │  rows   │ estimated_size │
-# => ├──────────────────────────────────────┼───────────┼─────────┼─────────┼────────────────┤
-# => │ b2519dac-3b64-4e5d-a0d7-24bde9052dc7 │ DataFrame │       5 │ 5429252 │       184.5 MB │
-# => ╰──────────────────────────────────────┴───────────┴─────────┴─────────┴────────────────╯
+# => ╭───┬──────────────────────────────────────┬───────────┬─────────┬─────────┬────────────────╮
+# => │ # │                 key                  │   type    │ columns │  rows   │ estimated_size │
+# => ├───┼──────────────────────────────────────┼───────────┼─────────┼─────────┼────────────────┤
+# => │ 0 │ 468d6c93-d7ee-4596-8d80-5893f03380cf │ DataFrame │       5 │ 5429252 │       184.4 MB │
+# => ╰───┴──────────────────────────────────────┴───────────┴─────────┴─────────┴────────────────╯
 ```
 
 ::: tip
-As of nushell 0.97, `polars open` will open as a lazy dataframe instead of an eager dataframe.
-To open as an eager dataframe, use the `--eager` flag.
+`polars open` opens a file as a lazy dataframe by default.
+To open it as an eager dataframe, use the `--eager` flag.
 :::
 
-We can have a look at the first lines of the file using [`first`](/commands/docs/first.md):
+We can have a look at the first lines of the file using [`polars first`](/commands/docs/polars_first.md):
 
 ```nu
 $df_0 | polars first
@@ -180,7 +180,7 @@ plugin stop polars
 After seeing a glimpse of the things that can be done with [`Dataframe` commands](/commands/categories/dataframe.md),
 now it is time to start testing them. To begin let's create a sample
 CSV file that will become our sample dataframe that we will be using along with
-the examples. In your favorite file editor paste the next lines to create out
+the examples. In your favorite file editor paste the next lines to create our
 sample csv file.
 
 ```nu
@@ -219,11 +219,11 @@ To see all the dataframes that are stored in memory you can use
 
 ```nu
 polars store-ls | select key type columns rows estimated_size
-# => ╭──────────────────────────────────────┬───────────┬─────────┬──────┬────────────────╮
-# => │                 key                  │   type    │ columns │ rows │ estimated_size │
-# => ├──────────────────────────────────────┼───────────┼─────────┼──────┼────────────────┤
-# => │ e780af47-c106-49eb-b38d-d42d3946d66e │ DataFrame │       8 │   10 │          403 B │
-# => ╰──────────────────────────────────────┴───────────┴─────────┴──────┴────────────────╯
+# => ╭───┬──────────────────────────────────────┬───────────┬─────────┬──────┬────────────────╮
+# => │ # │                 key                  │   type    │ columns │ rows │ estimated_size │
+# => ├───┼──────────────────────────────────────┼───────────┼─────────┼──────┼────────────────┤
+# => │ 0 │ e780af47-c106-49eb-b38d-d42d3946d66e │ DataFrame │       8 │   10 │          403 B │
+# => ╰───┴──────────────────────────────────────┴───────────┴─────────┴──────┴────────────────╯
 ```
 
 As you can see, the command shows the created dataframes together with basic
@@ -261,7 +261,7 @@ can use `scope commands | where category =~ dataframe`
 ## Basic Aggregations
 
 Let's start with basic aggregations on the dataframe. Let's sum all the columns
-that exist in `df` by using the `aggregate` command
+that exist in `df` by using the [`polars sum`](/commands/docs/polars_sum.md) command
 
 ```nu
 $df_1 | polars sum | polars collect
@@ -272,7 +272,7 @@ $df_1 | polars sum | polars collect
 # => ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴──────╯
 ```
 
-As you can see, the aggregate function computes the sum for those columns where
+As you can see, `polars sum` computes the sum for those columns where
 a sum makes sense. If you want to filter out the text column, you can select
 the columns you want by using the [`polars select`](/commands/docs/polars_select.md) command
 
@@ -297,16 +297,18 @@ Type `let res = !!` and press enter. This will auto complete the previously
 executed command. Note the space between `=` and `!!`.
 :::
 
-And now we have two dataframes stored in memory
+And now we have two dataframes stored in memory. `polars sum` returns a
+lazy dataframe, so `$res` is listed as a `LazyFrame`. `polars store-ls` doesn't
+list the stored objects in a fixed order, so we sort them by their `created` time
 
 ```nu
-polars store-ls | select key type columns rows estimated_size
-╭──────────────────────────────────────┬───────────┬─────────┬──────┬────────────────╮
-│                 key                  │   type    │ columns │ rows │ estimated_size │
-├──────────────────────────────────────┼───────────┼─────────┼──────┼────────────────┤
-│ e780af47-c106-49eb-b38d-d42d3946d66e │ DataFrame │       8 │   10 │          403 B │
-│ 3146f4c1-f2a0-475b-a623-7375c1fdb4a7 │ DataFrame │       4 │    1 │           32 B │
-╰──────────────────────────────────────┴───────────┴─────────┴──────┴────────────────╯
+polars store-ls | sort-by created | select key type columns rows estimated_size
+# => ╭───┬──────────────────────────────────────┬───────────┬─────────┬──────┬────────────────╮
+# => │ # │                 key                  │   type    │ columns │ rows │ estimated_size │
+# => ├───┼──────────────────────────────────────┼───────────┼─────────┼──────┼────────────────┤
+# => │ 0 │ e780af47-c106-49eb-b38d-d42d3946d66e │ DataFrame │       8 │   10 │          403 B │
+# => │ 1 │ 3146f4c1-f2a0-475b-a623-7375c1fdb4a7 │ LazyFrame │       4 │    1 │           32 B │
+# => ╰───┴──────────────────────────────────────┴───────────┴─────────┴──────┴────────────────╯
 ```
 
 Pretty neat, isn't it?
@@ -386,7 +388,7 @@ the creation of the grouped pairs is the most expensive operation while doing
 group-by and there is no need to repeat it if you are planning to do multiple
 operations with the same group condition.
 
-To create a `GroupBy` object you only need to use the [`polars_group-by`](/commands/docs/polars_group-by.md) command
+To create a `GroupBy` object you only need to use the [`polars group-by`](/commands/docs/polars_group-by.md) command
 
 ```nu
 let group = $df_1 | polars group-by first
@@ -402,14 +404,16 @@ lazy operation waiting to be completed by adding an aggregation. Using the
 
 ```nu
 $group | polars agg (polars col int_1 | polars sum)
-# => ╭────────────────┬───────────────────────────────────────────────────────────────────────────────────────╮
-# => │ plan           │ AGGREGATE                                                                             │
-# => │                │     [col("int_1").sum()] BY [col("first")] FROM                                       │
-# => │                │   DF ["int_1", "int_2", "float_1", "float_2"]; PROJECT */8 COLUMNS; SELECTION: "None" │
-# => │ optimized_plan │ AGGREGATE                                                                             │
-# => │                │     [col("int_1").sum()] BY [col("first")] FROM                                       │
-# => │                │   DF ["int_1", "int_2", "float_1", "float_2"]; PROJECT 2/8 COLUMNS; SELECTION: "None" │
-# => ╰────────────────┴───────────────────────────────────────────────────────────────────────────────────────╯
+# => ╭────────────────┬───────────────────────────────────────────────────────────────────────────────────────────╮
+# => │ plan           │ AGGREGATE[maintain_order: false]                                                          │
+# => │                │   [col("int_1").sum()] BY [col("first")]                                                  │
+# => │                │   FROM                                                                                    │
+# => │                │   DF ["int_1", "int_2", "float_1", "float_2", ...]; PROJECT */8 COLUMNS                   │
+# => │ optimized_plan │ AGGREGATE[maintain_order: false]                                                          │
+# => │                │   [col("int_1").sum()] BY [col("first")]                                                  │
+# => │                │   FROM                                                                                    │
+# => │                │   DF ["int_1", "int_2", "float_1", "float_2", ...]; PROJECT["first", "int_1"] 2/8 COLUMNS │
+# => ╰────────────────┴───────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 or we can define multiple aggregations on the same or different columns
@@ -422,20 +426,18 @@ $group
     (polars col float_1 | polars sum)
     (polars col float_2 | polars count)
 ] | polars sort-by first
-# => ╭────────────────┬─────────────────────────────────────────────────────────────────────────────────────────────────────╮
-# => │ plan           │ SORT BY [col("first")]                                                                              │
-# => │                │   AGGREGATE                                                                                         │
-# => │                │       [col("int_1").n_unique(), col("int_2").min(), col("float_1")                                  │
-# => │                │ .sum(), col("float_2").count()] BY [col("first")] FROM                                              │
-# => │                │     DF ["int_1", "int_2", "float_1", "float_2                                                       │
-# => │                │ "]; PROJECT */8 COLUMNS; SELECTION: "None"                                                          │
-# => │ optimized_plan │ SORT BY [col("first")]                                                                              │
-# => │                │   AGGREGATE                                                                                         │
-# => │                │       [col("int_1").n_unique(), col("int_2").min(), col("float_1")                                  │
-# => │                │ .sum(), col("float_2").count()] BY [col("first")] FROM                                              │
-# => │                │     DF ["int_1", "int_2", "float_1", "float_2                                                       │
-# => │                │ "]; PROJECT 5/8 COLUMNS; SELECTION: "None"                                                          │
-# => ╰────────────────┴─────────────────────────────────────────────────────────────────────────────────────────────────────╯
+# => ╭────────────────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+# => │ plan           │ SORT BY [col("first")]                                                                                               │
+# => │                │   AGGREGATE[maintain_order: false]                                                                                   │
+# => │                │     [col("int_1").n_unique(), col("int_2").min(), col("float_1").sum(), col("float_2").count()] BY [col("first")]    │
+# => │                │     FROM                                                                                                             │
+# => │                │     DF ["int_1", "int_2", "float_1", "float_2", ...]; PROJECT */8 COLUMNS                                            │
+# => │ optimized_plan │ SORT BY [col("first")]                                                                                               │
+# => │                │   AGGREGATE[maintain_order: false]                                                                                   │
+# => │                │     [col("int_1").n_unique(), col("int_2").min(), col("float_1").sum(), col("float_2").count()] BY [col("first")]    │
+# => │                │     FROM                                                                                                             │
+# => │                │     DF ["int_1", "int_2", "float_1", "float_2", ...]; PROJECT["first", "int_1", "int_2", "float_1", ...] 5/8 COLUMNS │
+# => ╰────────────────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 As you can see, the `GroupBy` object is a very powerful variable and it is
@@ -460,8 +462,9 @@ $df_3
 ```
 
 ::: tip
-For the time being, not all of Nushell primitives can be converted into
-a dataframe. This will change in the future, as the dataframe feature matures
+Not every Nushell value has a matching dataframe type. Values that can't be
+converted, such as closures or lists that mix types, are stored in a column
+with the generic `object` type.
 :::
 
 We can append columns to a dataframe in order to create a new variable. As an
@@ -481,20 +484,22 @@ $df_4
 
 Nushell's powerful piping syntax allows us to create new dataframes by
 taking data from other dataframes and appending it to them. Now, if you list your
-dataframes you will see in total five dataframes
+stored objects you will see in total five dataframes and the `GroupBy` object.
+The `GroupBy` object has no `created` time, so we sort by the optional
+`created?` column, which lists it last
 
 ```nu
-polars store-ls | select key type columns rows estimated_size
-# => ╭──────────────────────────────────────┬─────────────┬─────────┬──────┬────────────────╮
-# => │                 key                  │    type     │ columns │ rows │ estimated_size │
-# => ├──────────────────────────────────────┼─────────────┼─────────┼──────┼────────────────┤
-# => │ e780af47-c106-49eb-b38d-d42d3946d66e │ DataFrame   │       8 │   10 │          403 B │
-# => │ 3146f4c1-f2a0-475b-a623-7375c1fdb4a7 │ DataFrame   │       4 │    1 │           32 B │
-# => │ 455a1483-e328-43e2-a354-35afa32803b9 │ DataFrame   │       5 │    4 │          132 B │
-# => │ 0d8532a5-083b-4f78-8f66-b5e6b59dc449 │ LazyGroupBy │         │      │                │
-# => │ 9504dfaf-4782-42d4-9110-9dae7c8fb95b │ DataFrame   │       2 │    3 │           48 B │
-# => │ 37ab1bdc-e1fb-426d-8006-c3f974764a3d │ DataFrame   │       4 │    3 │           96 B │
-# => ╰──────────────────────────────────────┴─────────────┴─────────┴──────┴────────────────╯
+polars store-ls | sort-by created? | select key type columns rows estimated_size
+# => ╭───┬──────────────────────────────────────┬─────────────┬─────────┬──────┬────────────────╮
+# => │ # │                 key                  │    type     │ columns │ rows │ estimated_size │
+# => ├───┼──────────────────────────────────────┼─────────────┼─────────┼──────┼────────────────┤
+# => │ 0 │ e780af47-c106-49eb-b38d-d42d3946d66e │ DataFrame   │       8 │   10 │          403 B │
+# => │ 1 │ 3146f4c1-f2a0-475b-a623-7375c1fdb4a7 │ LazyFrame   │       4 │    1 │           32 B │
+# => │ 2 │ 455a1483-e328-43e2-a354-35afa32803b9 │ DataFrame   │       5 │    4 │          132 B │
+# => │ 3 │ 9504dfaf-4782-42d4-9110-9dae7c8fb95b │ DataFrame   │       2 │    3 │           48 B │
+# => │ 4 │ 37ab1bdc-e1fb-426d-8006-c3f974764a3d │ DataFrame   │       4 │    3 │           96 B │
+# => │ 5 │ 0d8532a5-083b-4f78-8f66-b5e6b59dc449 │ LazyGroupBy │         │      │                │
+# => ╰───┴──────────────────────────────────────┴─────────────┴─────────┴──────┴────────────────╯
 ```
 
 One thing that is important to mention is how the memory is being optimized
@@ -704,16 +709,13 @@ We can also create a mask by checking if some values exist in other Series.
 Using the first dataframe that we created we can do something like this
 
 ```nu
-let mask_2 = $df_1 | polars col first | polars is-in [b c]
-$mask_2
-# => ╭──────────┬─────────────────────────╮
-# => │ input    │ [table 2 rows]          │
-# => │ function │ Boolean(IsIn)           │
-# => │ options  │ FunctionOptions { ... } │
-# => ╰──────────┴─────────────────────────╯
+let mask_2 = $df_1 | polars col first | polars is-in ([b c] | polars into-df)
+$mask_2 | describe
+# => polars_expression
 ```
 
-and this new mask can be used to filter the dataframe
+This time the mask is an expression instead of a Series of booleans, but it
+can be used to filter the dataframe in the same way
 
 ```nu
 $df_1 | polars filter-with $mask_2
@@ -793,7 +795,7 @@ We can use the `arg-sort` to accomplish that. In the next example we
 can sort the dataframe by the column `word`
 
 ::: tip
-The same result could be accomplished using the command [`sort`](/commands/docs/sort.md)
+The same result could be accomplished using the command [`polars sort-by`](/commands/docs/polars_sort-by.md)
 :::
 
 ```nu
@@ -843,13 +845,14 @@ Another operation that can be done with `Series` is to search for unique values
 in a list or column. Lets use again the first dataframe we created to test
 these operations.
 
-The first and most common operation that we have is `value_counts`. This
+The first and most common operation that we have is `polars value-counts`. This
 command calculates a count of the unique values that exist in a Series. For
 example, we can use it to count how many occurrences we have in the column
-`first`
+`first`. The order of the rows returned by `polars value-counts` isn't
+guaranteed, so we sort them with `polars sort-by`
 
 ```nu
-$df_1 | polars get first | polars value-counts
+$df_1 | polars get first | polars value-counts | polars sort-by first
 # => ╭───┬───────┬───────╮
 # => │ # │ first │ count │
 # => ├───┼───────┼───────┤
@@ -863,10 +866,11 @@ As expected, the command returns a new dataframe that can be used to do more
 queries.
 
 Continuing with our exploration of `Series`, the next thing that we can do is
-to only get the unique values from a series, like this
+to only get the unique values from a series (sorted again, because the order
+isn't guaranteed), like this
 
 ```nu
-$df_1 | polars get first | polars unique
+$df_1 | polars get first | polars unique | polars sort-by first
 # => ╭───┬───────╮
 # => │ # │ first │
 # => ├───┼───────┤
@@ -921,10 +925,10 @@ Let's create a small example of a lazy dataframe
 ```nu
 let lf_0 = [[a b]; [1 a] [2 b] [3 c] [4 d]] | polars into-lazy
 $lf_0
-# => ╭────────────────┬───────────────────────────────────────────────────────╮
-# => │ plan           │ DF ["a", "b"]; PROJECT */2 COLUMNS; SELECTION: "None" │
-# => │ optimized_plan │ DF ["a", "b"]; PROJECT */2 COLUMNS; SELECTION: "None" │
-# => ╰────────────────┴───────────────────────────────────────────────────────╯
+# => ╭────────────────┬────────────────────────────────────╮
+# => │ plan           │ DF ["a", "b"]; PROJECT */2 COLUMNS │
+# => │ optimized_plan │ DF ["a", "b"]; PROJECT */2 COLUMNS │
+# => ╰────────────────┴────────────────────────────────────╯
 ```
 
 As you can see, the resulting dataframe is not yet evaluated, it stays as a
@@ -954,7 +958,7 @@ dataframes.
 To find all lazy dataframe operations you can use
 
 ```nu no-run
-scope commands | where category =~ lazyframe | select name category usage
+scope commands | where category =~ lazyframe | select name category description
 ```
 
 With your lazy frame defined we can start chaining operations on it. For
@@ -979,7 +983,7 @@ $lf_0
 ```
 
 :::tip
-You can use the line buffer editor to format your queries (`ctr + o`) easily
+You can use the line buffer editor to format your queries (`ctrl + o`) easily
 :::
 
 This query uses the lazy reverse command to invert the dataframe and the
@@ -990,7 +994,7 @@ lazy commands to query the data. To list all the commands that generate an
 expression you can use
 
 ```nu no-run
-scope commands | where category =~ expression | select name category usage
+scope commands | where category =~ expression | select name category description
 ```
 
 In our previous example, we use the `polars col` command to indicate that column `a`
@@ -1036,12 +1040,13 @@ $lf_1
      (polars col value | polars sum | polars as sum)
      (polars col value | polars mean | polars as mean)
 ]
+| polars sort-by name
 | polars collect
 # => ╭───┬──────┬─────┬──────╮
 # => │ # │ name │ sum │ mean │
 # => ├───┼──────┼─────┼──────┤
-# => │ 0 │ two  │   5 │ 2.50 │
-# => │ 1 │ one  │   2 │ 1.00 │
+# => │ 0 │ one  │   2 │ 1.00 │
+# => │ 1 │ two  │   5 │ 2.50 │
 # => ╰───┴──────┴─────┴──────╯
 ```
 
@@ -1079,122 +1084,207 @@ available to work with data and be assured that there will be more as the
 feature becomes more stable.
 
 The next list shows the available dataframe commands with their descriptions, and
-whenever possible, their analogous Nushell command.
+whenever possible, their analogous Nushell command. The **Applies To** column
+lists the kinds of input each command accepts.
 
 ::: warning
-This list may be outdated. To get the up-to-date command list, see [Dataframe](/commands/categories/dataframe.md), [Lazyframe](/commands/categories/lazyframe.md), [Dataframe Or Lazyframe](/commands/categories/dataframe_or_lazyframe.md), [Expressions](/commands/categories/expression.html) command categories.
+This list may be outdated. To get the up-to-date command list, see [Dataframe](/commands/categories/dataframe.md), [Lazyframe](/commands/categories/lazyframe.md), [Dataframe Or Lazyframe](/commands/categories/dataframe_or_lazyframe.md), [Expressions](/commands/categories/expression.md) command categories.
 :::
 
 <!-- This table was updated using the script from ../tools/dataframes_md-update.nu -->
 
-| Command Name           | Applies To            | Description                                                                                      | Nushell Equivalent      |
-| ---------------------- | --------------------- | ------------------------------------------------------------------------------------------------ | ----------------------- |
-| polars agg             | dataframe             | Performs a series of aggregations from a group-by.                                               | math                    |
-| polars agg-groups      | expression            | Creates an agg_groups expression.                                                                |                         |
-| polars all-false       | dataframe             | Returns true if all values are false.                                                            |                         |
-| polars all-true        | dataframe             | Returns true if all values are true.                                                             | all                     |
-| polars append          | dataframe             | Appends a new dataframe.                                                                         |                         |
-| polars arg-max         | dataframe             | Return index for max value in series.                                                            |                         |
-| polars arg-min         | dataframe             | Return index for min value in series.                                                            |                         |
-| polars arg-sort        | dataframe             | Returns indexes for a sorted series.                                                             |                         |
-| polars arg-true        | dataframe             | Returns indexes where values are true.                                                           |                         |
-| polars arg-unique      | dataframe             | Returns indexes for unique values.                                                               |                         |
-| polars arg-where       | any                   | Creates an expression that returns the arguments where expression is true.                       |                         |
-| polars as              | expression            | Creates an alias expression.                                                                     |                         |
-| polars as-date         | dataframe             | Converts string to date.                                                                         |                         |
-| polars as-datetime     | dataframe             | Converts string to datetime.                                                                     |                         |
-| polars cache           | dataframe             | Caches operations in a new LazyFrame.                                                            |                         |
-| polars cast            | expression, dataframe | Cast a column to a different dtype.                                                              |                         |
-| polars col             | any                   | Creates a named column expression.                                                               |                         |
-| polars collect         | dataframe             | Collect lazy dataframe into eager dataframe.                                                     |                         |
-| polars columns         | dataframe             | Show dataframe columns.                                                                          |                         |
-| polars concat-str      | any                   | Creates a concat string expression.                                                              |                         |
-| polars concatenate     | dataframe             | Concatenates strings with other array.                                                           |                         |
-| polars contains        | dataframe             | Checks if a pattern is contained in a string.                                                    |                         |
-| polars count           | expression            | Creates a count expression.                                                                      |                         |
-| polars count-null      | dataframe             | Counts null values.                                                                              |                         |
-| polars cumulative      | dataframe             | Cumulative calculation for a series.                                                             |                         |
-| polars datepart        | expression            | Creates an expression for capturing the specified datepart in a column.                          |                         |
-| polars drop            | dataframe             | Creates a new dataframe by dropping the selected columns.                                        | drop                    |
-| polars drop-duplicates | dataframe             | Drops duplicate values in dataframe.                                                             |                         |
-| polars drop-nulls      | dataframe             | Drops null values in dataframe.                                                                  |                         |
-| polars dummies         | dataframe             | Creates a new dataframe with dummy variables.                                                    |                         |
-| polars explode         | expression, dataframe | Explodes a dataframe or creates an explode expression.                                            |                         |
-| polars expr-not        | expression            | Creates a not expression.                                                                        |                         |
-| polars fetch           | dataframe             | Collects the lazyframe to the selected rows.                                                     |                         |
-| polars fill-nan        | dataframe             | Replaces NaN values with the given expression.                                                   |                         |
-| polars fill-null       | dataframe             | Replaces NULL values with the given expression.                                                  |                         |
-| polars filter          | dataframe             | Filter dataframe based in expression.                                                            |                         |
-| polars filter-with     | dataframe             | Filters dataframe using a mask or expression as reference.                                       |                         |
-| polars first           | expression, dataframe | Show only the first number of rows or create a first expression                                  | first                   |
-| polars flatten         | expression, dataframe | An alias for polars explode.                                                                     |                         |
-| polars get             | dataframe             | Creates dataframe with the selected columns.                                                     | get                     |
-| polars get-day         | dataframe             | Gets day from date.                                                                              |                         |
-| polars get-hour        | dataframe             | Gets hour from date.                                                                             |                         |
-| polars get-minute      | dataframe             | Gets minute from date.                                                                           |                         |
-| polars get-month       | dataframe             | Gets month from date.                                                                            |                         |
-| polars get-nanosecond  | dataframe             | Gets nanosecond from date.                                                                       |                         |
-| polars get-ordinal     | dataframe             | Gets ordinal from date.                                                                          |                         |
-| polars get-second      | dataframe             | Gets second from date.                                                                           |                         |
-| polars get-week        | dataframe             | Gets week from date.                                                                             |                         |
-| polars get-weekday     | dataframe             | Gets weekday from date.                                                                          |                         |
-| polars get-year        | dataframe             | Gets year from date.                                                                             |                         |
-| polars group-by        | dataframe             | Creates a group-by object that can be used for other aggregations.                               | group-by                |
-| polars implode         | expression            | Aggregates a group to a Series.                                                                  |                         |
-| polars into-df         | any                   | Converts a list, table or record into a dataframe.                                               |                         |
-| polars into-lazy       | any                   | Converts a dataframe into a lazy dataframe.                                                      |                         |
-| polars into-nu         | expression, dataframe | Converts a dataframe or an expression into nushell value for access and exploration.        |                         |
-| polars is-duplicated   | dataframe             | Creates mask indicating duplicated values.                                                       |                         |
-| polars is-in           | expression, dataframe | Creates an is-in expression or checks to see if the elements are contained in the right series   | in                      |
-| polars is-not-null     | expression, dataframe | Creates mask where value is not null.                                                            |                         |
-| polars is-null         | expression, dataframe | Creates mask where value is null.                                                                | `<column_name> == null` |
-| polars is-unique       | dataframe             | Creates mask indicating unique values.                                                           |                         |
-| polars join            | dataframe             | Joins a lazy frame with other lazy frame.                                                        |                         |
-| polars last            | expression, dataframe | Creates new dataframe with tail rows or creates a last expression.                               | last                    |
-| polars lit             | any                   | Creates a literal expression.                                                                    |                         |
-| polars lowercase       | dataframe             | Lowercase the strings in the column.                                                             |                         |
-| polars max             | expression, dataframe | Creates a max expression or aggregates columns to their max value.                               |                         |
-| polars mean            | expression, dataframe | Creates a mean expression for an aggregation or aggregates columns to their mean value.          |                         |
-| polars median          | expression, dataframe | Median value from columns in a dataframe or creates expression for an aggregation                |                         |
-| polars melt            | dataframe             | Unpivot a DataFrame from wide to long format.                                                    |                         |
-| polars min             | expression, dataframe | Creates a min expression or aggregates columns to their min value.                               |                         |
-| polars n-unique        | expression, dataframe | Counts unique values.                                                                            |                         |
-| polars not             | dataframe             | Inverts boolean mask.                                                                            |                         |
-| polars open            | any                   | Opens CSV, JSON, JSON lines, arrow, avro, or parquet file to create dataframe.                   | open                    |
-| polars otherwise       | any                   | Completes a when expression.                                                                     |                         |
-| polars quantile        | expression, dataframe | Aggregates the columns to the selected quantile.                                                 |                         |
-| polars query           | dataframe             | Query dataframe using SQL. Note: The dataframe is always named 'df' in your query's from clause. |                         |
-| polars rename          | dataframe             | Rename a dataframe column.                                                                       | rename                  |
-| polars replace         | dataframe             | Replace the leftmost (sub)string by a regex pattern.                                             |                         |
-| polars replace-all     | dataframe             | Replace all (sub)strings by a regex pattern.                                                     |                         |
-| polars reverse         | dataframe             | Reverses the LazyFrame                                                                           |                         |
-| polars rolling         | dataframe             | Rolling calculation for a series.                                                                |                         |
-| polars sample          | dataframe             | Create sample dataframe.                                                                         |                         |
-| polars save            | dataframe             | Saves a dataframe to disk. For lazy dataframes a sink operation will be used if the file type supports it (parquet, ipc/arrow, csv, and ndjson).|                         |
-| polars schema          | dataframe             | Show schema for a dataframe.                                                                     |                         |
-| polars select          | dataframe             | Selects columns from lazyframe.                                                                  | select                  |
-| polars set             | dataframe             | Sets value where given mask is true.                                                             |                         |
-| polars set-with-idx    | dataframe             | Sets value in the given index.                                                                   |                         |
-| polars shape           | dataframe             | Shows column and row size for a dataframe.                                                       |                         |
-| polars shift           | dataframe             | Shifts the values by a given period.                                                             |                         |
-| polars slice           | dataframe             | Creates new dataframe from a slice of rows.                                                      |                         |
-| polars sort-by         | dataframe             | Sorts a lazy dataframe based on expression(s).                                                   | sort                    |
-| polars std             | expression, dataframe | Creates a std expression for an aggregation of std value from columns in a dataframe.            |                         |
-| polars store-get       | any, any              | Gets a Dataframe or other object from the plugin cache.                                          |                         |
-| polars store-ls        |                       | Lists stored dataframes.                                                                         |                         |
-| polars store-rm        | any                   | Removes a stored Dataframe or other object from the plugin cache.                                |                         |
-| polars str-lengths     | dataframe             | Get lengths of all strings.                                                                      |                         |
-| polars str-slice       | dataframe             | Slices the string from the start position until the selected length.                             |                         |
-| polars strftime        | dataframe             | Formats date based on string rule.                                                               |                         |
-| polars sum             | expression, dataframe | Creates a sum expression for an aggregation or aggregates columns to their sum value.            |                         |
-| polars summary         | dataframe             | For a dataframe, produces descriptive statistics (summary statistics) for its numeric columns.   |                         |
-| polars take            | dataframe             | Creates new dataframe using the given indices.                                                   |                         |
-| polars unique          | dataframe             | Returns unique values from a dataframe.                                                          | uniq                    |
-| polars uppercase       | dataframe             | Uppercase the strings in the column.                                                             |                         |
-| polars value-counts    | dataframe             | Returns a dataframe with the counts for unique values in series.                                 |                         |
-| polars var             | expression, dataframe | Create a var expression for an aggregation.                                                      |                         |
-| polars when            | expression            | Creates and modifies a when expression.                                                          |                         |
-| polars with-column     | dataframe             | Adds a series to the dataframe.                                                                  | `insert <column_name> <value> \| upsert <column_name> { <new_value> }` |
+| Command Name                       | Applies To                                 | Description                                                                                       | Nushell Equivalent      |
+| ---------------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------- | ----------------------- |
+| polars agg                         | dataframe, lazyframe, group_by             | Performs a series of aggregations from a group-by.                                                | math                    |
+| polars agg-groups                  | expression, selector                       | Creates an agg_groups expression.                                                                 |                         |
+| polars all-false                   | dataframe, lazyframe                       | Returns true if all values are false.                                                             |                         |
+| polars all-true                    | dataframe, lazyframe                       | Returns true if all values are true.                                                              | all                     |
+| polars append                      | dataframe, lazyframe                       | Appends a new dataframe.                                                                          |                         |
+| polars arg-max                     | dataframe, lazyframe                       | Return index for max value in series.                                                             |                         |
+| polars arg-min                     | dataframe, lazyframe                       | Return index for min value in series.                                                             |                         |
+| polars arg-sort                    | dataframe, lazyframe                       | Returns indexes for a sorted series.                                                              |                         |
+| polars arg-true                    | dataframe, lazyframe                       | Returns indexes where values are true.                                                            |                         |
+| polars arg-unique                  | dataframe, lazyframe                       | Returns indexes for unique values.                                                                |                         |
+| polars arg-where                   | any                                        | Creates an expression that returns the arguments where expression is true.                        |                         |
+| polars as                          | expression, selector                       | Creates an alias expression.                                                                      |                         |
+| polars as-date                     | dataframe, lazyframe, expression, selector | Converts string to date.                                                                          |                         |
+| polars as-datetime                 | dataframe, lazyframe, expression, selector | Converts string to datetime.                                                                      |                         |
+| polars cache                       | dataframe, lazyframe                       | Caches operations in a new LazyFrame.                                                             |                         |
+| polars cast                        | dataframe, lazyframe, expression, selector | Cast a column to a different dtype.                                                               |                         |
+| polars col                         | any                                        | Creates a named column expression.                                                                |                         |
+| polars collect                     | dataframe, lazyframe                       | Collect lazy dataframe into eager dataframe.                                                      |                         |
+| polars columns                     | dataframe, lazyframe                       | Show dataframe columns.                                                                           |                         |
+| polars concat                      | any                                        | Concatenate two or more dataframes.                                                               |                         |
+| polars concat-str                  | any                                        | Creates a concat string expression.                                                               |                         |
+| polars contains                    | dataframe, lazyframe, expression, selector | Checks if a pattern is contained in a string.                                                     |                         |
+| polars convert-time-zone           | expression, selector                       | Convert datetime to target timezone.                                                              |                         |
+| polars count                       | expression, selector                       | Returns the number of non-null values in the column.                                              |                         |
+| polars count-null                  | dataframe, lazyframe                       | Counts null values.                                                                               |                         |
+| polars cumulative                  | dataframe, lazyframe, expression, selector | Cumulative calculation for a column or series.                                                    |                         |
+| polars cut                         | dataframe, lazyframe                       | Bin continuous values into discrete categories for a series.                                      |                         |
+| polars date-range                  | any                                        | Create a date range expression.                                                                   |                         |
+| polars date-ranges                 | any                                        | Create a column of date ranges.                                                                   |                         |
+| polars datepart                    | expression, selector                       | Creates an expression for capturing the specified datepart in a column.                           |                         |
+| polars datetime-range              | any                                        | Create a datetime range expression.                                                               |                         |
+| polars datetime-ranges             | any                                        | Create a column of datetime ranges.                                                               |                         |
+| polars decimal                     | expression, selector                       | Converts a string column into a decimal column                                                    |                         |
+| polars drop                        | dataframe, lazyframe                       | Creates a new dataframe by dropping the selected columns.                                         | reject                  |
+| polars drop-duplicates             | dataframe, lazyframe                       | Drops duplicate values in dataframe.                                                              |                         |
+| polars drop-nulls                  | dataframe, lazyframe                       | Drops null values in dataframe.                                                                   |                         |
+| polars dummies                     | dataframe, lazyframe                       | Creates a new dataframe with dummy variables.                                                     |                         |
+| polars entropy                     | expression, selector                       | Compute the entropy as `-sum(pk * log(pk))` where `pk` are discrete probabilities.                |                         |
+| polars explode                     | dataframe, lazyframe, expression, selector | Explodes a dataframe or creates a explode expression.                                             |                         |
+| polars expr-not                    | expression, selector                       | Creates a not expression.                                                                         |                         |
+| polars fill-nan                    | dataframe, lazyframe, expression, selector | Replaces NaN values with the given expression.                                                    |                         |
+| polars fill-null                   | dataframe, lazyframe, expression, selector | Replaces NULL values with the given expression.                                                   |                         |
+| polars filter                      | dataframe, lazyframe, expression, selector | Filter dataframe based in expression.                                                             |                         |
+| polars filter-with                 | dataframe, lazyframe                       | Filters dataframe using a mask or expression as reference.                                        |                         |
+| polars first                       | dataframe, lazyframe, group_by, expression, selector | Show only the first number of rows or create a first expression                                   | first                   |
+| polars flatten                     | dataframe, expression, selector            | An alias for polars explode.                                                                      |                         |
+| polars get                         | dataframe, lazyframe                       | Creates dataframe with the selected columns.                                                      | get                     |
+| polars get-day                     | dataframe, lazyframe, expression, selector | Gets day from date.                                                                               |                         |
+| polars get-hour                    | dataframe, lazyframe, expression, selector | Gets hour from datetime.                                                                          |                         |
+| polars get-minute                  | dataframe, lazyframe, expression, selector | Gets minute from date.                                                                            |                         |
+| polars get-month                   | dataframe, lazyframe, expression, selector | Gets month from date.                                                                             |                         |
+| polars get-nanosecond              | dataframe, lazyframe, expression, selector | Gets nanosecond from date.                                                                        |                         |
+| polars get-ordinal                 | dataframe, lazyframe, expression, selector | Gets ordinal from date.                                                                           |                         |
+| polars get-second                  | dataframe, lazyframe, expression, selector | Gets second from date.                                                                            |                         |
+| polars get-week                    | dataframe, lazyframe, expression, selector | Gets week from date.                                                                              |                         |
+| polars get-weekday                 | dataframe, lazyframe, expression, selector | Gets weekday from date.                                                                           |                         |
+| polars get-year                    | dataframe, lazyframe, expression, selector | Gets year from date.                                                                              |                         |
+| polars group-by                    | dataframe, lazyframe                       | Creates a group-by object that can be used for other aggregations.                                | group-by                |
+| polars horizontal                  | any                                        | Horizontal calculation across multiple columns.                                                   |                         |
+| polars implode                     | expression, selector                       | Aggregates values into a list.                                                                    |                         |
+| polars integer                     | expression, selector                       | Converts a string column into a integer column                                                    |                         |
+| polars into-df                     | any                                        | Converts a list, table or record into a dataframe.                                                |                         |
+| polars into-dtype                  | string                                     | Convert a string to a specific datatype.                                                          |                         |
+| polars into-lazy                   | any                                        | Converts a dataframe into a lazy dataframe.                                                       |                         |
+| polars into-nu                     | dataframe, lazyframe, group_by, expression, selector, when, datatype, schema | Converts a dataframe or an expression into nushell value for access and exploration.              |                         |
+| polars into-repr                   | dataframe, lazyframe                       | Display a dataframe in its repr format.                                                           |                         |
+| polars into-schema                 | any                                        | Convert a value to a polars schema object                                                         |                         |
+| polars is-duplicated               | dataframe, lazyframe                       | Creates mask indicating duplicated values.                                                        |                         |
+| polars is-in                       | expression, selector                       | Creates an is-in expression or checks to see if the elements are contained in the right series    | in                      |
+| polars is-not-null                 | dataframe, lazyframe, expression, selector | Creates mask where value is not null.                                                             |                         |
+| polars is-null                     | dataframe, lazyframe, expression, selector | Creates mask where value is null.                                                                 | `<column_name> == null` |
+| polars is-unique                   | dataframe, lazyframe                       | Creates mask indicating unique values.                                                            |                         |
+| polars join                        | dataframe, lazyframe                       | Joins a lazy frame with other lazy frame.                                                         |                         |
+| polars join-where                  | dataframe, lazyframe                       | Joins a lazy frame with other lazy frame based on conditions.                                     |                         |
+| polars last                        | dataframe, lazyframe, group_by, expression, selector | Creates new dataframe with tail rows or creates a last expression.                                | last                    |
+| polars len                         | any                                        | Return the number of rows in the context. This is similar to COUNT(*) in SQL.                     |                         |
+| polars list-contains               | expression, selector                       | Checks if an element is contained in a list.                                                      |                         |
+| polars lit                         | any                                        | Creates a literal expression.                                                                     |                         |
+| polars lowercase                   | dataframe, lazyframe, expression, selector | Lowercase the strings in the column.                                                              |                         |
+| polars map-batches                 | dataframe, lazyframe                       | Map a custom Nushell closure over one or more dataframe columns.                                  |                         |
+| polars math                        |                                            | Collection of math functions to be applied on column expressions.                                 |                         |
+| polars math abs                    | expression, selector                       | Compute the absolute values of a column expression.                                               |                         |
+| polars math bitwise-and            | expression, selector                       | Perform an aggregation of bitwise ANDs over a column expression.                                  |                         |
+| polars math bitwise-count-ones     | expression, selector                       | Compute the number of set bits for each element in an integer column expression.                  |                         |
+| polars math bitwise-count-zeros    | expression, selector                       | Compute the number of unset bits for each element in an integer column expression.                |                         |
+| polars math bitwise-leading-ones   | expression, selector                       | Compute the number of leading set bits for each element in an integer column expression.          |                         |
+| polars math bitwise-leading-zeros  | expression, selector                       | Compute the number of leading unset bits for each element in an integer column expression.        |                         |
+| polars math bitwise-or             | expression, selector                       | Perform an aggregation of bitwise ORs over a column expression.                                   |                         |
+| polars math bitwise-trailing-ones  | expression, selector                       | Compute the number of trailing set bits for each element in an integer column expression.         |                         |
+| polars math bitwise-trailing-zeros | expression, selector                       | Compute the number of trailing unset bits for each element in an integer column expression.       |                         |
+| polars math bitwise-xor            | expression, selector                       | Perform an aggregation of bitwise XORs over a column expression.                                  |                         |
+| polars math cos                    | expression, selector                       | Compute the element-wise cosine of a column expression.                                           |                         |
+| polars math dot                    | expression, selector                       | Compute the dot product of two column expressions.                                                |                         |
+| polars math exp                    | expression, selector                       | Compute element-wise e raised to the power of a column expression.                                |                         |
+| polars math log                    | expression, selector                       | Compute the element-wise logarithm of a column expression.                                        |                         |
+| polars math log1p                  | expression, selector                       | Compute the element-wise natural log of 1 + x for a column expression.                            |                         |
+| polars math sign                   | expression, selector                       | Compute the element-wise sign of a column expression, returning -1, 0, or 1.                      |                         |
+| polars math sin                    | expression, selector                       | Compute the element-wise sine of a column expression.                                             |                         |
+| polars math sqrt                   | expression, selector                       | Compute the element-wise square root of a column expression.                                      |                         |
+| polars max                         | dataframe, lazyframe, expression, selector | Creates a max expression or aggregates columns to their max value.                                |                         |
+| polars mean                        | dataframe, lazyframe, expression, selector | Creates a mean expression for an aggregation or aggregates columns to their mean value.           |                         |
+| polars median                      | dataframe, lazyframe, expression, selector | Median value from columns in a dataframe or creates expression for an aggregation                 |                         |
+| polars min                         | dataframe, lazyframe, expression, selector | Creates a min expression or aggregates columns to their min value.                                |                         |
+| polars n-unique                    | dataframe, lazyframe, expression, selector | Counts unique values.                                                                             |                         |
+| polars not                         | dataframe, lazyframe                       | Inverts boolean mask.                                                                             |                         |
+| polars open                        | any                                        | Opens CSV, JSON, NDJSON/JSON lines, arrow, avro, or parquet file to create dataframe. A lazy dataframe will be created by default, if supported. | open                    |
+| polars otherwise                   | any                                        | Completes a when expression.                                                                      |                         |
+| polars over                        | expression, selector                       | Compute expressions over a window group defined by partition expressions.                         |                         |
+| polars pivot                       | dataframe, lazyframe                       | Pivot a DataFrame from long to wide format.                                                       |                         |
+| polars profile                     | dataframe, lazyframe                       | Profile a lazy dataframe.                                                                         |                         |
+| polars qcut                        | dataframe, lazyframe                       | Bin continuous values into discrete categories based on their quantiles for a series.             |                         |
+| polars quantile                    | dataframe, lazyframe, expression, selector | Aggregates the columns to the selected quantile.                                                  |                         |
+| polars query                       | dataframe, lazyframe                       | Query dataframe using SQL. Note: The dataframe is always named 'df' in your query's from clause.  |                         |
+| polars rename                      | dataframe, lazyframe                       | Rename a dataframe column.                                                                        | rename                  |
+| polars replace                     | expression, selector                       | Create an expression that replaces old values with new values                                     |                         |
+| polars replace-time-zone           | expression, selector                       | Replace the timezone information in a datetime column.                                            |                         |
+| polars reverse                     | dataframe, lazyframe                       | Reverses the LazyFrame                                                                            |                         |
+| polars rolling                     | dataframe, lazyframe, expression           | Rolling calculation for a series or expression, or a rolling group-by for a lazyframe.            |                         |
+| polars sample                      | dataframe, lazyframe                       | Create sample dataframe.                                                                          |                         |
+| polars save                        | any                                        | Saves a dataframe to disk. For lazy dataframes a sink operation will be used if the file type supports it (parquet, ipc/arrow, csv, and ndjson). |                         |
+| polars schema                      | any                                        | Show schema for a dataframe.                                                                      |                         |
+| polars select                      | dataframe, lazyframe                       | Selects columns from lazyframe.                                                                   | select                  |
+| polars selector                    |                                            | Create column selectors for use in polars commands.                                               |                         |
+| polars selector all                | any                                        | Creates a selector that selects all columns.                                                      |                         |
+| polars selector alpha              | any                                        | Select all columns with alphabetic names (eg: only letters). Matching column names cannot contain *any* non-alphabetic characters. Note that the definition of "alphabetic" consists of all valid Unicode alphabetic characters by default; this can be changed by setting `--ascii-only`. |                         |
+| polars selector alphanumeric       | any                                        | Select all columns with alphanumeric names (eg: only letters). Matching column names cannot contain *any* non-alphanumeric characters. Note that the definition of "alphanumeric" consists of all valid Unicode alphanumeric characters by default; this can be changed by setting `ascii_only=true`. |                         |
+| polars selector array              | any                                        | Select all array columns. Optionally filter by fixed width.                                       |                         |
+| polars selector binary             | any                                        | Select all binary columns.                                                                        |                         |
+| polars selector boolean            | any                                        | Select all boolean columns.                                                                       |                         |
+| polars selector by-dtype           | any                                        | Creates a selector that selects columns by data type.                                             |                         |
+| polars selector by-index           | any                                        | Select columns by their index position. Supports negative indices (e.g., -1 for the last column). |                         |
+| polars selector by-name            | any                                        | Creates a selector that selects columns by name.                                                  |                         |
+| polars selector categorical        | any                                        | Select all categorical columns.                                                                   |                         |
+| polars selector contains           | any                                        | Select columns whose names contain the given literal substring(s).                                |                         |
+| polars selector date               | any                                        | Select all date columns.                                                                          |                         |
+| polars selector datetime           | any                                        | Select all datetime columns. Optionally filter by time unit (ns, us, ms) and/or timezone.         |                         |
+| polars selector decimal            | any                                        | Select all decimal columns.                                                                       |                         |
+| polars selector digit              | any                                        | Select columns whose names consist entirely of digit characters. By default uses Unicode decimal digits; use `--ascii-only` to restrict to ASCII 0-9. |                         |
+| polars selector duration           | any                                        | Select all duration columns. Optionally filter by time unit (ns, us, ms).                         |                         |
+| polars selector empty              | any                                        | Create an empty selector that matches no columns. Useful as a base for selector composition.      |                         |
+| polars selector ends-with          | any                                        | Select columns that end with the given substring(s).                                              |                         |
+| polars selector enum               | any                                        | Select all enum columns.                                                                          |                         |
+| polars selector exclude            | any                                        | Select all columns except those with the given name(s). This is the inverse of `polars selector by-name`. |                         |
+| polars selector first              | any                                        | Creates a selector that selects the first column(s) by index.                                     |                         |
+| polars selector float              | any                                        | Select all float columns.                                                                         |                         |
+| polars selector integer            | any                                        | Select all integer columns.                                                                       |                         |
+| polars selector last               | any                                        | Creates a selector that selects the last column(s) by index.                                      |                         |
+| polars selector list               | any                                        | Select all list columns.                                                                          |                         |
+| polars selector matches            | any                                        | Select all columns that match the given regex pattern.                                            |                         |
+| polars selector nested             | any                                        | Select all nested columns (list, array, or struct).                                               |                         |
+| polars selector not                | selector                                   | Inverts selector.                                                                                 |                         |
+| polars selector numeric            | any                                        | Select all numeric columns.                                                                       |                         |
+| polars selector object             | any                                        | Select all object columns.                                                                        |                         |
+| polars selector signed-integer     | any                                        | Select all signed integer columns.                                                                |                         |
+| polars selector starts-with        | any                                        | Select columns that start with the given substring(s).                                            |                         |
+| polars selector string             | any                                        | Select all string columns. Use `--include-categorical` to also select categorical columns.        |                         |
+| polars selector struct             | any                                        | Select all struct columns.                                                                        |                         |
+| polars selector temporal           | any                                        | Select all temporal columns (date, datetime, duration, and time).                                 |                         |
+| polars selector unsigned-integer   | any                                        | Select all unsigned integer columns.                                                              |                         |
+| polars set                         | dataframe, lazyframe                       | Sets value where given mask is true.                                                              |                         |
+| polars set-with-idx                | dataframe, lazyframe                       | Sets value in the given index.                                                                    |                         |
+| polars shape                       | dataframe, lazyframe                       | Shows column and row size for a dataframe.                                                        |                         |
+| polars shift                       | dataframe, lazyframe, expression, selector | Shifts the values by a given period.                                                              |                         |
+| polars slice                       | dataframe, lazyframe                       | Creates new dataframe from a slice of rows.                                                       |                         |
+| polars sort-by                     | dataframe, lazyframe                       | Sorts a lazy dataframe based on expression(s).                                                    | sort                    |
+| polars std                         | dataframe, lazyframe, expression, selector | Creates a std expression for an aggregation of std value from columns in a dataframe.             |                         |
+| polars store-get                   | any                                        | Gets a Dataframe or other object from the plugin cache.                                           |                         |
+| polars store-ls                    |                                            | Lists stored polars objects.                                                                      |                         |
+| polars store-rm                    | any                                        | Removes a stored Dataframe or other object from the plugin cache.                                 |                         |
+| polars str-join                    | dataframe, lazyframe, expression, selector | Concatenates strings within a column or dataframes                                                |                         |
+| polars str-lengths                 | dataframe, lazyframe, expression, selector | Get lengths of all strings.                                                                       |                         |
+| polars str-replace                 | dataframe, lazyframe, expression, selector | Replace the leftmost (sub)string by a regex pattern.                                              |                         |
+| polars str-replace-all             | dataframe, lazyframe, expression, selector | Replace all (sub)strings by a regex pattern.                                                      |                         |
+| polars str-slice                   | dataframe, lazyframe, expression, selector | Slices the string from the start position until the selected length.                              |                         |
+| polars str-split                   | expression, selector                       | Split the string by a substring. The resulting dtype is list<str>.                                |                         |
+| polars str-strip-chars             | expression, selector                       | Strips specified characters from strings in a column                                              |                         |
+| polars strftime                    | dataframe, lazyframe, expression, selector | Formats date based on string rule.                                                                |                         |
+| polars struct-json-encode          | expression                                 | Convert this struct to a string column with json values.                                          |                         |
+| polars sum                         | dataframe, lazyframe, expression, selector | Creates a sum expression for an aggregation or aggregates columns to their sum value.             |                         |
+| polars summary                     | dataframe, lazyframe                       | For a dataframe, produces descriptive statistics (summary statistics) for its numeric columns.    |                         |
+| polars take                        | dataframe, lazyframe                       | Creates new dataframe using the given indices.                                                    |                         |
+| polars truncate                    | expression, selector                       | Divide the date/datetime range into buckets.                                                      |                         |
+| polars unique                      | dataframe, lazyframe, expression, selector | Returns unique values from a dataframe.                                                           | uniq                    |
+| polars unnest                      | dataframe, lazyframe                       | Decompose struct columns into separate columns for each of their fields. The new columns will be inserted into the dataframe at the location of the struct column. |                         |
+| polars unpivot                     | dataframe, lazyframe                       | Unpivot a DataFrame from wide to long format.                                                     |                         |
+| polars uppercase                   | dataframe, lazyframe, expression, selector | Uppercase the strings in the column.                                                              |                         |
+| polars value-counts                | dataframe, lazyframe                       | Returns a dataframe with the counts for unique values in series.                                  |                         |
+| polars var                         | dataframe, lazyframe, expression, selector | Create a var expression for an aggregation.                                                       |                         |
+| polars when                        | expression, selector                       | Creates and modifies a when expression.                                                           |                         |
+| polars with-column                 | dataframe, lazyframe                       | Adds a series to the dataframe.                                                                   | `insert <column_name> <value> \| upsert <column_name> { <new_value> }` |
 
 ## Future of Dataframes
 
@@ -1202,9 +1292,9 @@ We hope that by the end of this page you have a solid grasp of how to use the
 dataframe commands. As you can see they offer powerful operations that can
 help you process data faster and natively.
 
-However, the future of these dataframes is still very experimental. New
-commands and tools that take advantage of these commands will be added as they
-mature.
+However, the dataframe commands are still evolving, and commands are sometimes
+renamed or removed as Polars itself changes. New commands and tools that take
+advantage of these commands will be added as they mature.
 
 Check this chapter, as well as our [Blog](/blog/), regularly to learn about new
 dataframes features and how they can help you process data faster and efficiently.

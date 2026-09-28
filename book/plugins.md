@@ -23,7 +23,7 @@ There are two types of plugins:
 - "Core plugins" are officially maintained and are usually installed with Nushell, in the same directory as the Nushell executable.
 - Third-party plugins are also available from many sources.
 
-The `$NU_LIB_DIRS` constant or `$env.NU_LIB_DIRS` environment variable can be used to set the search-path for plugins.
+The `$NU_PLUGIN_DIRS` constant or `$env.NU_PLUGIN_DIRS` environment variable can be used to set the search-path for plugins.
 
 ### Core Plugin Quickstart
 
@@ -32,13 +32,23 @@ To begin using the Polars plugin:
 1. Most package managers will automatically install the core plugins with Nushell. A notable exception, however, is `cargo`. If you installed
    Nushell using `cargo`, see [Installing Core Plugins](#core-plugins) below.
 
-2. (Recommended) Set the plugin search path to include the directory where Nushell and its plugins are installed. Assuming the core plugins are installed
-   in the same directory as the Nushell binary, the following can be added to your startup config:
+2. Make sure the plugin search path includes the directory where the plugins are installed. By default, it contains the `plugins` directory in your
+   Nushell configuration directory and the directory of the Nushell binary itself, so core plugins installed alongside Nushell are found automatically:
+
+   ```nu
+   $NU_PLUGIN_DIRS
+   # => ╭───┬────────────────────────────────────╮
+   # => │ 0 │ /home/user/.config/nushell/plugins │
+   # => │ 1 │ /home/user/.cargo/bin              │
+   # => ╰───┴────────────────────────────────────╯
+   ```
+
+   If your plugins are installed somewhere else, add that directory in your startup config:
 
    ```nu
    const NU_PLUGIN_DIRS = [
-     ($nu.current-exe | path dirname)
      ...$NU_PLUGIN_DIRS
+     ($nu.home-dir | path join "my-plugins")
    ]
    ```
 
@@ -53,7 +63,7 @@ To begin using the Polars plugin:
    plugin list # Confirm it was added to the registry
    ```
 
-   Alternatively, if you did not add the binary directory to the plugin path in Step 2, you can still use an absolute path:
+   Alternatively, if the plugin's directory is not in the plugin search path, you can still use an absolute path:
 
    ```nu
    plugin add ~/.local/share/rust/cargo/bin/nu_plugin_polars
@@ -70,7 +80,7 @@ To begin using the Polars plugin:
 
    ```nu
    ls | polars into-df | describe
-   # => NuDataFrame
+   # => polars_dataframe
    ```
 
 ## Installing Plugins
@@ -82,7 +92,7 @@ Nushell ships with a set of officially maintained plugins which includes:
 - `polars`: Extremely fast columnar operations using DataFrames via the [Polars Library](https://github.com/pola-rs/polars). See the [DataFrames Chapter](dataframes.html) for more details.
 - `formats`: Support for several additional data formats - EML, ICS, INI, plist, and VCF.
 - `gstat`: Returns information on the status of a Git repository as Nushell structured data.
-- `query`: Support for querying SQL, XML, JSON, HTML (via selector), and WebPage Metadata
+- `query`: Support for querying XML (via XPath), JSON, HTML (via CSS selectors), and web page metadata
 - `inc`: Increment a value or version (e.g., semver). This plugin acts as both an end-user plugin as well as a simple developer example of how to create a plugin.
 
 Nushell also ships with several plugins that serve as examples or tools for plugin developers. These include `nu_plugin_example`, `nu_plugin_custom_values`, and `nu_plugin_stress_internals`.
@@ -178,6 +188,12 @@ It is not necessary to add `plugin use` statements to your config file. All prev
 nu --plugins '[./my_plugins/nu_plugin_cool]'
 ```
 
+The `--plugins` option can also be repeated, once for each plugin:
+
+```nu
+nu --plugins ./my_plugins/nu_plugin_cool --plugins ./my_plugins/nu_plugin_other
+```
+
 :::
 
 ### Plugin Search Path
@@ -198,26 +214,25 @@ Installed plugins are displayed using [`plugin list`](/commands/docs/plugin_list
 
 ```nu
 plugin list
-# =>
-╭───┬───────┬─────────┬─────────┬───────┬───────────────────────┬───────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ # │ name  │ version │ status  │  pid  │       filename        │ shell │           commands                                                                                                   │
-├───┼───────┼─────────┼─────────┼───────┼───────────────────────┼───────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ 0 │ gstat │ 0.113.0 │ loaded  │       │ .../nu_plugin_gstat   │       │ ╭───┬───────┬──────────────────────────────╮                                                                         │
-│   │       │         │         │       │                       │       │ │ # │ name  │         description          │                                                                         │
-│   │       │         │         │       │                       │       │ ├───┼───────┼──────────────────────────────┤                                                                         │
-│   │       │         │         │       │                       │       │ │ 0 │ gstat │ Get the git status of a repo │                                                                         │
-│   │       │         │         │       │                       │       │ ╰───┴───────┴──────────────────────────────╯                                                                         │
-│ 1 │ query │ 0.113.0 │ running │ 27312 │ .../nu_plugin_query   │       │ ╭───┬────────────────────┬─────────────────────────────────────────────────────────────────────────────────────────╮ │
-│   │       │         │         │       │                       │       │ │ # │        name        │                                       description                                       │ │
-│   │       │         │         │       │                       │       │ ├───┼────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────┤ │
-│   │       │         │         │       │                       │       │ │ 0 │ query              │ Show all the query commands                                                             │ │
-│   │       │         │         │       │                       │       │ │ 1 │ query json         │ execute json query on json file (open --raw <file> | query json 'query string')         │ │
-│   │       │         │         │       │                       │       │ │ 2 │ query web          │ execute selector query on html/web                                                      │ │
-│   │       │         │         │       │                       │       │ │ 3 │ query webpage-info │ uses the webpage crate to extract info from html: title, description, language, links,  │ │
-│   │       │         │         │       │                       │       │ │   │                    │ RSS feeds, Opengraph, Schema.org, and more                                              │ │
-│   │       │         │         │       │                       │       │ │ 4 │ query xml          │ Execute XPath 1.0 query on XML input                                                    │ │
-│   │       │         │         │       │                       │       │ ╰───┴────────────────────┴─────────────────────────────────────────────────────────────────────────────────────────╯ │
-╰───┴───────┴─────────┴─────────┴───────┴───────────────────────┴───────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+# => ╭───┬───────┬─────────┬─────────┬───────┬───────────────────────┬───────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+# => │ # │ name  │ version │ status  │  pid  │       filename        │ shell │           commands                                                                                                   │
+# => ├───┼───────┼─────────┼─────────┼───────┼───────────────────────┼───────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+# => │ 0 │ gstat │ 0.116.0 │ loaded  │       │ .../nu_plugin_gstat   │       │ ╭───┬───────┬──────────────────────────────╮                                                                         │
+# => │   │       │         │         │       │                       │       │ │ # │ name  │         description          │                                                                         │
+# => │   │       │         │         │       │                       │       │ ├───┼───────┼──────────────────────────────┤                                                                         │
+# => │   │       │         │         │       │                       │       │ │ 0 │ gstat │ Get the git status of a repo │                                                                         │
+# => │   │       │         │         │       │                       │       │ ╰───┴───────┴──────────────────────────────╯                                                                         │
+# => │ 1 │ query │ 0.116.0 │ running │ 27312 │ .../nu_plugin_query   │       │ ╭───┬────────────────────┬─────────────────────────────────────────────────────────────────────────────────────────╮ │
+# => │   │       │         │         │       │                       │       │ │ # │        name        │                                       description                                       │ │
+# => │   │       │         │         │       │                       │       │ ├───┼────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────┤ │
+# => │   │       │         │         │       │                       │       │ │ 0 │ query              │ Show all the query commands                                                             │ │
+# => │   │       │         │         │       │                       │       │ │ 1 │ query json         │ execute json query on json file (open --raw <file> | query json 'query string')         │ │
+# => │   │       │         │         │       │                       │       │ │ 2 │ query web          │ execute selector query on html/web                                                      │ │
+# => │   │       │         │         │       │                       │       │ │ 3 │ query webpage-info │ uses the webpage crate to extract info from html: title, description, language, links,  │ │
+# => │   │       │         │         │       │                       │       │ │   │                    │ RSS feeds, Opengraph, Schema.org, and more                                              │ │
+# => │   │       │         │         │       │                       │       │ │ 4 │ query xml          │ Execute XPath 1.0 query on XML input                                                    │ │
+# => │   │       │         │         │       │                       │       │ ╰───┴────────────────────┴─────────────────────────────────────────────────────────────────────────────────────────╯ │
+# => ╰───┴───────┴─────────┴─────────┴───────┴───────────────────────┴───────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 All of the commands from installed plugins are available in the current scope:
@@ -233,15 +248,13 @@ Plugins stay running while they are in use, and are automatically stopped by def
 For example, run the `query` command from the corresponding plugin, then check its `status` status:
 
 ```nu
-http get http://example.com | query web --document --query body
-# => query output
+http get http://example.com | query web --document --query body | ignore
 plugin list | where name == query | select name status
-# =>
-╭───┬───────┬─────────╮
-│ # │ name  │ status  │
-├───┼───────┼─────────┤
-│ 0 │ query │ running │
-╰───┴───────┴─────────╯
+# => ╭───┬───────┬─────────╮
+# => │ # │ name  │ status  │
+# => ├───┼───────┼─────────┤
+# => │ 0 │ query │ running │
+# => ╰───┴───────┴─────────╯
 ```
 
 Now stop the plugin manually, and we can see that it is no longer running:
@@ -249,12 +262,11 @@ Now stop the plugin manually, and we can see that it is no longer running:
 ```nu
 plugin stop query
 plugin list | where name == query | select name status
-# =>
-╭───┬───────┬────────╮
-│ # │ name  │ status │
-├───┼───────┼────────┤
-│ 0 │ query │ loaded │
-╰───┴───────┴────────╯
+# => ╭───┬───────┬────────╮
+# => │ # │ name  │ status │
+# => ├───┼───────┼────────┤
+# => │ 0 │ query │ loaded │
+# => ╰───┴───────┴────────╯
 ```
 
 ### Plugin Garbage Collector
@@ -308,6 +320,7 @@ Nu's main repo contains example plugins that are useful for learning how the plu
 
 - [Rust](https://github.com/nushell/nushell/tree/main/crates/nu_plugin_example)
 - [Python](https://github.com/nushell/nushell/blob/main/crates/nu_plugin_python)
+- [Nu](https://github.com/nushell/nushell/tree/main/crates/nu_plugin_nu_example)
 
 ### Debugging
 
@@ -318,7 +331,7 @@ The simplest way to debug a plugin is to print to stderr; plugins' standard erro
 The Nu plugin protocol message stream may be captured for diagnostic purposes using [trace_nu_plugin](https://crates.io/crates/trace_nu_plugin/).
 
 ::: warning
-Trace output will accumulate for as long as the plugin is installed with the trace wrapper. Large files are possible. Be sure to remove the plugin with `plugin rm` when finished tracing, and reinstall without the trace wrapper.\*\*
+Trace output will accumulate for as long as the plugin is installed with the trace wrapper. Large files are possible. Be sure to remove the plugin with `plugin rm` when finished tracing, and reinstall without the trace wrapper.
 :::
 
 ### Developer Help

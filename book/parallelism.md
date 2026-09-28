@@ -1,6 +1,6 @@
 # Parallelism
 
-Nushell now has early support for running code in parallel. This allows you to process elements of a stream using more hardware resources of your computer.
+Nushell can run code in parallel. This allows you to process elements of a stream using more hardware resources of your computer.
 
 You will notice these commands with their characteristic `par-` naming. Each corresponds to a non-parallel version, allowing you to easily write code in a serial style first, and then go back and easily convert serial scripts into parallel scripts with a few extra characters.
 
@@ -41,3 +41,20 @@ ls | where type == dir | par-each { |row|
 ```
 
 You'll notice, if you look at the results, that they come back in different orders each run (depending on the number of hardware threads on your system). As tasks finish, and we get the correct result, we may need to add additional steps if we want our results in a particular order. For example, for the above, we may want to sort the results by the "name" field. This allows both [`each`](/commands/docs/each.md) and [`par-each`](/commands/docs/par-each.md) versions of our script to give the same result.
+
+Alternatively, `par-each --keep-order` (`-k`) returns the results in the same order as the input:
+
+```nu
+1..5 | par-each --keep-order {|x| $x * 2 }
+# => ╭───┬────╮
+# => │ 0 │  2 │
+# => │ 1 │  4 │
+# => │ 2 │  6 │
+# => │ 3 │  8 │
+# => │ 4 │ 10 │
+# => ╰───┴────╯
+```
+
+You can also limit how many threads `par-each` uses with `--threads` (`-t`).
+
+To run commands in the background while you continue to use the shell, see [Background Jobs](background_jobs.md).

@@ -3,7 +3,7 @@
 Nushell provides several commands that help determine how different groups of code are executed. In programming languages this functionality is often referred to as _control flow_.
 
 ::: tip
-One thing to note is that all of the commands discussed on this page use [blocks](/book/types_of_data.html#blocks). This means you can mutate [environmental variables](/book/environment.html) and other [mutable variables](/book/variables.html#mutable-variables) in them.
+One thing to note is that all of the commands discussed on this page use [blocks](/book/types_of_data.html#blocks). This means you can mutate [environmental variables](/book/environment.html) and other [mutable variables](/book/variables.html#mutable-variables) in them. The exceptions are the `catch` and `finally` parts of [`try`](#try), which are closures.
 :::
 
 ## Already covered
@@ -36,7 +36,9 @@ The choice/conditional commands are expressions so they return values, unlike th
 [`if`](/commands/docs/if.html) evaluates branching [blocks](/book/types_of_data.html#blocks) of code based on the results of one or more conditions similar to the "if" functionality in other programming languages. For example:
 
 ```nu
+let x = 5
 if $x > 0 { 'positive' }
+# => positive
 ```
 
 Returns `'positive`' when the condition is `true` (`$x` is greater than zero) and `null` when the condition is `false` (`$x` is less than or equal to zero).
@@ -44,7 +46,9 @@ Returns `'positive`' when the condition is `true` (`$x` is greater than zero) an
 We can add an `else` branch to the `if` after the first block which executes and returns the resulting value from the `else` block when the condition is `false`. For example:
 
 ```nu
+let x = -5
 if $x > 0 { 'positive' } else { 'non-positive' }
+# => non-positive
 ```
 
 This time it returns `'positive'` when the condition is `true` (`$x` is greater than zero) and `'non-positive`' when the condition is `false` (`$x` is less than or equal to zero).
@@ -52,7 +56,9 @@ This time it returns `'positive'` when the condition is `true` (`$x` is greater 
 We can also chain multiple `if`s together like the following:
 
 ```nu
+let x = 0
 if $x > 0 { 'positive' } else if $x == 0 { 'zero' } else { "negative" }
+# => zero
 ```
 
 When the first condition is `true` (`$x` is greater than zero) it will return `'positive'`, when the first condition is `false` and the next condition is `true` (`$x` equals zero) it will return `'zero'`, otherwise it will return `'negative'` (when `$x` is less than zero).
@@ -162,16 +168,16 @@ While it may be tempting to use loops if you're familiar with them in other lang
 
 The biggest downside of loops is that they are statements, unlike [`each`](/commands/docs/each.html) which is an expression. Expressions, like [`each`](/commands/docs/each.html) always result in some output value, however statements do not.
 
-This means that they don't work well with immutable variables and using immutable variables is considered a more [Nushell-style](/book/thinking_in_nu.html#variables-are-immutable-by-default). Without a mutable variable declared beforehand in the example in the previous section, it would be impossible to use [`for`](/commands/docs/each.html) to get the list of numbers with incremented numbers, or any value at all.
+This means that they don't work well with immutable variables and using immutable variables is considered a more [Nushell-style](/book/thinking_in_nu.html#variables-are-immutable-by-default). Without a mutable variable declared beforehand in the example in the previous section, it would be impossible to use [`for`](/commands/docs/for.html) to get the list of numbers with incremented numbers, or any value at all.
 
 Statements also don't work in Nushell pipelines which require some output. In fact Nushell will give an error if you try:
 
 ```nu
 [1 2 3] | for x in $in { $x + 1 } | $in ++ [5 6 7]
 # => Error: nu::parser::unexpected_keyword
-# => 
+# =>
 # =>   × Statement used in pipeline.
-# =>    ╭─[entry #5:1:1]
+# =>    ╭─[repl_entry #1:1:11]
 # =>  1 │ [1 2 3] | for x in $in { $x + 1 } | $in ++ [5 6 7]
 # =>    ·           ─┬─
 # =>    ·            ╰── not allowed in pipeline
@@ -189,10 +195,11 @@ If loops have such a big disadvantage, why do they exist? Well, one reason is th
 mut foo = []
 [1 2 3] | each { $foo = ($foo | append ($in + 1)) }
 # => Error: nu::parser::expected_keyword
-# => 
+# =>
 # =>   × Capture of mutable variable.
-# =>    ╭─[entry #8:1:1]
-# =>  1 │ [1 2 3] | each { $foo = ($foo | append ($in + 1)) }
+# =>    ╭─[repl_entry #1:2:18]
+# =>  1 │ mut foo = []
+# =>  2 │ [1 2 3] | each { $foo = ($foo | append ($in + 1)) }
 # =>    ·                  ──┬─
 # =>    ·                    ╰── capture of mutable variable
 # =>    ╰────
@@ -218,20 +225,19 @@ Creating an error in a pipeline yields a pipeline evaluation error *and* the cus
 ```nu
 [0] | each { error make { msg: "Custom error" } | default '' }
 # => Error: nu::shell::eval_block_with_input
-# => 
+# =>
 # =>   × Eval block failed with pipeline input
-# =>    ╭─[entry #20:1:2]
+# =>    ╭─[repl_entry #1:1:2]
 # =>  1 │ [0] | each { error make { msg: "Custom error" } | default '' }
 # =>    ·  ┬
 # =>    ·  ╰── source value
 # =>    ╰────
-# => 
+# =>
 # => Error:
 # =>   × Custom error
-# =>    ╭─[entry #20:1:14]
+# =>    ╭─[repl_entry #1:1:25]
 # =>  1 │ [0] | each { error make { msg: "Custom error" } | default '' }
-# =>    ·              ─────┬────
-# =>    ·                   ╰── originates from here
+# =>    ·                         ───────────────────────
 # =>    ╰────
 ```
 
@@ -240,12 +246,11 @@ When using a loop, a `for` loop in this example, evaluation succeeds and only th
 ```nu
 for x in [0] { error make { msg: "Custom error" } }
 # => Error: nu::shell::error
-# => 
+# =>
 # =>   × Custom error
-# =>    ╭─[entry #18:1:16]
+# =>    ╭─[repl_entry #2:1:27]
 # =>  1 │ for x in [0] { error make { msg: "Custom error" } }
-# =>    ·                ─────┬────
-# =>    ·                     ╰── originates from here
+# =>    ·                           ───────────────────────
 # =>    ╰────
 ```
 
@@ -264,7 +269,7 @@ for x in [1 2 3] { $x * $x | print }
 
 - [`each`](/commands/docs/each.html)
 - [`par-each`](/commands/docs/par-each.html)
-- [`where`](/commands/docs/where.html)/[`filter`](/commands/docs/filter.html)
+- [`where`](/commands/docs/where.html)
 - [`reduce`](/commands/docs/reduce.html)
 
 ### `while`
@@ -327,11 +332,12 @@ mut x = -1; while $x <= 6 { $x = $x + 1; if $x mod 3 == 0 { continue }; print $x
 ```nu
 print 'printed'; error make { msg: 'Some error info' }; print 'unprinted'
 # => printed
-# => Error:   × Some error info
-# =>    ╭─[entry #9:1:1]
+# => Error: nu::shell::error
+# =>
+# =>   × Some error info
+# =>    ╭─[repl_entry #1:1:29]
 # =>  1 │ print 'printed'; error make { msg: 'Some error info' }; print 'unprinted'
-# =>    ·                  ─────┬────
-# =>    ·                       ╰── originates from here
+# =>    ·                             ──────────────────────────
 # =>    ╰────
 ```
 
@@ -366,6 +372,13 @@ try { 1 / 0 } catch { 'An error happened!' } | $in ++ ' And now I am resuming.'
 
 It will not execute the `catch` block if an error did not occur.
 
+The `catch` closure can take a parameter, which receives a record describing the error:
+
+```nu
+try { 1 / 0 } catch {|err| $err.msg }
+# => Division by zero.
+```
+
 `try` also works for external commands:
 
 ```nu
@@ -374,14 +387,67 @@ try { ^nonexisting }; print 'a'
 
 ^nonexisting; print 'a'
 # => Error: nu::shell::external_command
-# => 
+# =>
 # =>   × External command failed
-# =>    ╭─[entry #3:1:2]
+# =>    ╭─[repl_entry #2:1:2]
 # =>  1 │ ^nonexisting; print 'a'
 # =>    ·  ─────┬─────
 # =>    ·       ╰── Command `nonexisting` not found
 # =>    ╰────
 # =>   help: `nonexisting` is neither a Nushell built-in or a known external command
+```
+
+#### `finally`
+
+A `finally` block can be added after `try` (with or without a `catch`). It always runs when the `try` expression is finished, whether the `try` block succeeded, an error was caught, or an error is still on its way up. This makes it a good place for cleanup code:
+
+```nu
+try { 1 / 0 } catch { 'caught' } finally { print 'cleaning up' }
+# => cleaning up
+# => caught
+```
+
+`finally` also runs when the code leaves the `try` or `catch` block early through `return`, `break`, `continue` or [`exit`](/commands/docs/exit.md). (Use `exit --abort` to exit without running it.)
+
+```nu
+def get-answer [] {
+  try {
+    return 42
+  } finally {
+    print 'cleaning up'
+  }
+}
+
+get-answer
+# => cleaning up
+# => 42
+```
+
+The value of the whole expression is the value of the `try` or `catch` block. Whatever `finally` returns is discarded. The `finally` closure can take a parameter, which is also available as `$in`. It receives:
+
+- the value of the `try` or `catch` block, if it completed normally;
+- the error record, if an error occurred and wasn't handled by a `catch`;
+- `nothing`, if the block was left through `return`, `break`, `continue` or `exit`.
+
+```nu
+try { 'result' } finally {|v| print $"finally got: ($v)" }
+# => finally got: result
+# => result
+```
+
+Without a `catch`, the error isn't suppressed. `finally` runs, and then the error continues to propagate:
+
+```nu
+try { 1 / 0 } finally { print 'cleaning up' }
+# => cleaning up
+# => Error: nu::shell::division_by_zero
+# =>
+# =>   × Division by zero.
+# =>    ╭─[repl_entry #1:1:9]
+# =>  1 │ try { 1 / 0 } finally { print 'cleaning up' }
+# =>    ·         ┬
+# =>    ·         ╰── division by zero
+# =>    ╰────
 ```
 
 ## Other

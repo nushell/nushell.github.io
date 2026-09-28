@@ -11,7 +11,7 @@ There are other ways to view these values and variables, however setting up your
 
 ### Configure your path and other environment variables
 
-In your `env.nu`, you can set up your environment.
+In your `config.nu`, you can set up your environment.
 
 To configure environment variables, you use the `$env` variable:
 
@@ -29,12 +29,12 @@ $env.PATH ++= ['~/.local/bin']
 Because you can append a list of paths, you can append multiple at once. You can also use subcommands to construct the paths in line.
 
 ```nu
-$env.PATH ++= [ '~/.local/bin', ($env.CARGO_HOME | path join "bin") ]
+$env.PATH ++= [ '~/.local/bin', ($nu.home-dir | path join ".cargo" "bin") ]
 ```
 
 Because PATH order makes a difference, you may want to _prepend_ your paths instead, so that they take precedence over other executables with the same name:
 
-```
+```nu
 use std/util "path add"
 path add '~/.local/bin'
 ```
@@ -45,23 +45,27 @@ For more information, see the documentation about [environment variables](/book/
 
 ```nu
 $env
-# => ─────────────────────────────────┬────────────────────────────────────────────
-# =>  ALLUSERSPROFILE                 │ C:\ProgramData
-# =>  CARGO_PKG_AUTHORS               │ The Nu Project Contributors
-# =>  CARGO_PKG_DESCRIPTION           │ A new type of shell
-# =>  CARGO_PKG_HOMEPAGE              │ https://www.nushell.sh
-# =>  CARGO_PKG_LICENSE               │ MIT
-# =>  CARGO_PKG_LICENSE_FILE          │
-# =>  CARGO_PKG_NAME                  │ nu
-# =>  CARGO_PKG_REPOSITORY            │ https://github.com/nushell/nushell
-# =>  CARGO_PKG_VERSION               │ 0.59.0
-# =>  CARGO_PKG_VERSION_MAJOR         │ 0
+# => ╭─────────────────┬────────────────────╮
+# => │ EDITOR          │ vim                │
+# => │ ENV_CONVERSIONS │ {record 0 fields}  │
+# => │ HOME            │ /home/user         │
+# => │ LANG            │ en_US.UTF-8        │
+# => │ NU_LIB_DIRS     │ [list 2 items]     │
+# => │ NU_PLUGIN_DIRS  │ [list 0 items]     │
+# => │ NU_VERSION      │ 0.116.0            │
+# => │ PATH            │ [list 3 items]     │
+# => │ PWD             │ /home/user         │
+# => │ SHELL           │ /usr/bin/nu        │
+# => │ TERM            │ xterm-256color     │
+# => │ USER            │ user               │
+# => │ config          │ {record 38 fields} │
+# => ╰─────────────────┴────────────────────╯
 ```
 
-Let's practise that and set `$EDITOR` in our `env.nu` file using `vim` (or an editor of your choice)
+Let's practise that and set `$EDITOR` in our `config.nu` file using `vim` (or an editor of your choice)
 
 ```nu
-vim $nu.env-path
+vim $nu.config-path
 ```
 
 Note: if you've never used `vim` before and you want to leave typing `:q!` will close without saving.
@@ -82,7 +86,7 @@ You should now be able to run `config nu` or `config env` and edit those files e
 ### How to get a single environment variable's value
 
 ```nu
-$env.APPDATA
+$env.PWD
 ```
 
 ---
@@ -106,7 +110,7 @@ currently activated.
 ```nu
 # set NU_OVERLAYS with overlay list, useful for starship prompt
 $env.config.hooks.pre_prompt = ($env.config.hooks.pre_prompt | append {||
-  let overlays = overlay list | slice 1..
+  let overlays = overlay list | where active and name != zero | get name
   if not ($overlays | is-empty) {
     $env.NU_OVERLAYS = $overlays | str join ", "
   } else {

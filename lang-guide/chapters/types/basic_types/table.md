@@ -49,11 +49,11 @@ This list-of-records pattern plays on the Nushell data model, which sees a list 
 - `table`
 - `ls`
 - `ps`
-- `sys`
+- `sys disks`, `sys net`
 - `select`
 - `get`
 - `where`
-- `range`
+- `slice`
 
 ::: tip Note
 Most of Nushell's filter commands work with tables. For a longer list see: `help commands | where category == filters`.

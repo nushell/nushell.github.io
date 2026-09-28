@@ -25,12 +25,7 @@ Unlike closures, blocks:
       $x += 1000
   }
   print $x
-  ```
-
-  Result:
-
-  ```nu
-  1001
+  # => 1001
   ```
 
 ## Language Notes
@@ -41,23 +36,25 @@ Unlike closures, blocks:
 
   ```nu
   let b: block = {}
-  Error:   × Blocks are not support as first-class values
-    ╭─[entry #9:1:8]
-  1 │ let p: block = {}
-    ·        ──┬──
-    ·          ╰── blocks are not supported as values
-    ╰────
-    help: Use 'closure' instead of 'block'
+  # => Error: nu::parser::error
+  # =>
+  # =>   × Blocks are not support as first-class values
+  # =>    ╭─[repl_entry #1:1:8]
+  # =>  1 │ let b: block = {}
+  # =>    ·        ──┬──
+  # =>    ·          ╰── blocks are not supported as values
+  # =>    ╰────
+  # =>   help: Use 'closure' instead of 'block'
   ```
 
 - A closure that takes no parameters may look like a block but is actually a closure. For example:
 
   ```nu
-  > { echo foo } | describe
-  closure
+  { echo foo } | describe
+  # => closure
   # Alternatively
-  > {|| echo foo } | describe
-  closure
+  {|| echo foo } | describe
+  # => closure
   ```
 
 - A block establishes a new variable scope. Variables defined within the new scope having the same name as a variable in an outer scope will alias (a.k.a. shadow) that name for the lifetime of that block's scope. Example:
@@ -68,10 +65,10 @@ Unlike closures, blocks:
   if true {
     # inner scope
     let x: string = '8'
-    $x | describe
-    # => string
+    print ($x | describe)
   }
-  echo $x
+  # => string
+  $x
   # => 9
   ```
 
@@ -85,9 +82,23 @@ E.g.
 # This won't work
 mut x = 9
 do { $x += 1 }
-# => Error: Capture of mutable variable.
-# But this will work:
+# => Error: nu::parser::expected_keyword
+# =>
+# =>   × Capture of mutable variable.
+# =>    ╭─[repl_entry #1:3:6]
+# =>  2 │ mut x = 9
+# =>  3 │ do { $x += 1 }
+# =>    ·      ─┬
+# =>    ·       ╰── capture of mutable variable
+# =>    ╰────
+```
+
+But this will work:
+
+```nu
+mut x = 9
 if true { $x += 1 }
+$x
 # => 10
 ```
 
@@ -95,9 +106,9 @@ Note: Aliasing still occurs within the block:
 
 ```nu
 mut x = 9
-if true { mut x = 8; $x += 100; echo $x }
+if true { mut x = 8; $x += 100; print $x }
 # => 108
-echo $x
+$x
 # => 9
 ```
 

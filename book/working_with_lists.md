@@ -29,14 +29,25 @@ We can [`insert`](/commands/docs/insert.md) values into lists as they flow throu
 
 ```nu
 [1, 2, 3, 4] | insert 2 10
-# => [1, 2, 10, 3, 4]
+# => ╭───┬────╮
+# => │ 0 │  1 │
+# => │ 1 │  2 │
+# => │ 2 │ 10 │
+# => │ 3 │  3 │
+# => │ 4 │  4 │
+# => ╰───┴────╯
 ```
 
 We can also use [`update`](/commands/docs/update.md) to replace the 2nd element with the value `10`.
 
 ```nu
 [1, 2, 3, 4] | update 1 10
-# => [1, 10, 3, 4]
+# => ╭───┬────╮
+# => │ 0 │  1 │
+# => │ 1 │ 10 │
+# => │ 2 │  3 │
+# => │ 3 │  4 │
+# => ╰───┴────╯
 ```
 
 ## Removing or Adding Items from List
@@ -52,7 +63,26 @@ let colors = ($colors | append purple)
 let colors = ($colors ++ ["blue"])
 let colors = (["black"] ++ $colors)
 $colors
-# => [black red yellow green purple blue]
+# => ╭───┬────────╮
+# => │ 0 │ black  │
+# => │ 1 │ red    │
+# => │ 2 │ yellow │
+# => │ 3 │ green  │
+# => │ 4 │ purple │
+# => │ 5 │ blue   │
+# => ╰───┴────────╯
+```
+
+`append` also accepts several values at once:
+
+```nu
+[yellow green] | append purple blue
+# => ╭───┬────────╮
+# => │ 0 │ yellow │
+# => │ 1 │ green  │
+# => │ 2 │ purple │
+# => │ 3 │ blue   │
+# => ╰───┴────────╯
 ```
 
 In case you want to remove items from list, there are many ways. [`skip`](/commands/docs/skip.md) allows you skip first rows from input, while [`drop`](/commands/docs/drop.md) allows you to skip specific numbered rows from end of list.
@@ -62,7 +92,9 @@ let colors = [red yellow green purple]
 let colors = ($colors | skip 1)
 let colors = ($colors | drop 2)
 $colors
-# => [yellow]
+# => ╭───┬────────╮
+# => │ 0 │ yellow │
+# => ╰───┴────────╯
 ```
 
 We also have [`last`](/commands/docs/last.md) and [`first`](/commands/docs/first.md) which allow you to [`take`](/commands/docs/take.md) from the end or beginning of the list, respectively.
@@ -71,7 +103,11 @@ We also have [`last`](/commands/docs/last.md) and [`first`](/commands/docs/first
 let colors = [red yellow green purple black magenta]
 let colors = ($colors | last 3)
 $colors
-# => [purple black magenta]
+# => ╭───┬─────────╮
+# => │ 0 │ purple  │
+# => │ 1 │ black   │
+# => │ 2 │ magenta │
+# => ╰───┴─────────╯
 ```
 
 And from the beginning of a list,
@@ -80,7 +116,27 @@ And from the beginning of a list,
 let colors = [yellow green purple]
 let colors = ($colors | first 2)
 $colors
-# => [yellow green]
+# => ╭───┬────────╮
+# => │ 0 │ yellow │
+# => │ 1 │ green  │
+# => ╰───┴────────╯
+```
+
+To take or skip items based on a condition rather than a count, use [`take while`](/commands/docs/take_while.md), [`take until`](/commands/docs/take_until.md), [`skip while`](/commands/docs/skip_while.md), or [`skip until`](/commands/docs/skip_until.md). Like `where`, these accept either a closure or a row condition, where `$it` is the current item:
+
+```nu
+let scores = [7 10 8 6 7]
+$scores | take while $it > 6
+# => ╭───┬────╮
+# => │ 0 │  7 │
+# => │ 1 │ 10 │
+# => │ 2 │  8 │
+# => ╰───┴────╯
+$scores | skip until $it < 7
+# => ╭───┬───╮
+# => │ 0 │ 6 │
+# => │ 1 │ 7 │
+# => ╰───┴───╯
 ```
 
 ### Using the Spread Operator
@@ -106,8 +162,8 @@ let x = [1 2]
 
 ## Iterating over Lists
 
-To iterate over the items in a list, use the [`each`](/commands/docs/each.md) command with a [block](types_of_data.html#blocks)
-of Nu code that specifies what to do to each item. The block parameter (e.g. `|elt|` in `{ |elt| print $elt }`) is the current list
+To iterate over the items in a list, use the [`each`](/commands/docs/each.md) command with a [closure](types_of_data.html#closures)
+of Nu code that specifies what to do to each item. The closure parameter (e.g. `|elt|` in `{ |elt| print $elt }`) is the current list
 item, but the [`enumerate`](/commands/docs/enumerate.md) filter can be used to provide `index` and `item` values if needed. For example:
 
 ```nu
@@ -126,7 +182,7 @@ The following example gets all the colors whose names end in "e".
 ```nu
 let colors = [red orange yellow green blue purple]
 $colors | where ($it | str ends-with 'e')
-# The block passed to `where` must evaluate to a boolean.
+# The condition passed to `where` must evaluate to a boolean.
 # This outputs the list [orange blue purple].
 ```
 
@@ -138,7 +194,7 @@ $scores | where $it > 7 # [10 8]
 ```
 
 The [`reduce`](/commands/docs/reduce.md) command computes a single value from a list.
-It uses a block which takes 2 parameters: the current item (conventionally named `elt`) and an accumulator
+It uses a closure which takes 2 parameters: the current item (conventionally named `elt`) and an accumulator
 (conventionally named `acc`). To specify an initial value for the accumulator, use the `--fold` (`-f`) flag.
 To change `elt` to have `index` and `item` values, use the [`enumerate`](/commands/docs/enumerate.md) filter.
 For example:
@@ -238,6 +294,62 @@ $scores | all {|elt| $elt > 7 } # false
 
 # Are all scores even?
 $scores | all {|elt| $elt mod 2 == 0 } # false
+```
+
+Like `where`, both `any` and `all` also accept a row condition in place of a closure, using `$it` for the current item:
+
+```nu
+let scores = [3 8 4]
+$scores | any $it > 7 # true
+$scores | all $it > 2 # true
+```
+
+## Set Operations and Combinations
+
+The [`union`](/commands/docs/union.md), [`intersect`](/commands/docs/intersect.md), and [`difference`](/commands/docs/difference.md) commands treat lists as sets. Their results contain no duplicates, and items stay in the order in which they first appear:
+
+```nu
+let a = [1 2 3 4]
+let b = [3 4 5 6]
+$a | union $b
+# => ╭───┬───╮
+# => │ 0 │ 1 │
+# => │ 1 │ 2 │
+# => │ 2 │ 3 │
+# => │ 3 │ 4 │
+# => │ 4 │ 5 │
+# => │ 5 │ 6 │
+# => ╰───┴───╯
+$a | intersect $b
+# => ╭───┬───╮
+# => │ 0 │ 3 │
+# => │ 1 │ 4 │
+# => ╰───┴───╯
+$a | difference $b
+# => ╭───┬───╮
+# => │ 0 │ 1 │
+# => │ 1 │ 2 │
+# => ╰───┴───╯
+```
+
+[`combinations`](/commands/docs/combinations.md) returns every way to choose a given number of items from a list, and [`permutations`](/commands/docs/permutations.md) returns every ordering of a list. Both return a list of lists, so the examples below join each inner list into a string:
+
+```nu
+[red green blue] | combinations 2 | each { str join "+" }
+# => ╭───┬────────────╮
+# => │ 0 │ red+green  │
+# => │ 1 │ red+blue   │
+# => │ 2 │ green+blue │
+# => ╰───┴────────────╯
+[a b c] | permutations | each { str join }
+# => ╭───┬─────╮
+# => │ 0 │ abc │
+# => │ 1 │ bac │
+# => │ 2 │ cab │
+# => │ 3 │ acb │
+# => │ 4 │ bca │
+# => │ 5 │ cba │
+# => ╰───┴─────╯
 ```
 
 ## Converting the List

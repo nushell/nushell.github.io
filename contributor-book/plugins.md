@@ -56,9 +56,11 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-nu-plugin = "0.104.0"
-nu-protocol = "0.104.0"
+nu-plugin = "0.116.0"
+nu-protocol = "0.116.0"
 ```
+
+Use the same version for both crates, matching the version of Nushell you want to use the plugin with. Nushell checks this version when it launches the plugin. Before 1.0, the minor version has to match: a plugin built with `nu-plugin` 0.116.0 works with any Nushell 0.116.x, but not with 0.115 or 0.117.
 
 With this, we can open up `src/main.rs` and create our plugin.
 
@@ -254,37 +256,43 @@ Here we import everything we need -- types and functions -- to be able to create
 Once we have finished our plugin, to use it all we need to do is install it.
 
 ```nu
-> cargo install --path . --locked
+cargo install --path . --locked
 # nushell only (run with `nu -c` if not in nushell)
-> plugin add ~/.cargo/bin/nu_plugin_len # add .exe on Windows
+plugin add ~/.cargo/bin/nu_plugin_len # add .exe on Windows
 ```
 
 If you're already running `nu` during the installation process of your plugin, ensure you restart `nu` so that it can load your plugin, or call `plugin use` to load it immediately:
 
 ```nu
-> plugin use len # the name of the plugin (without `nu_plugin_`)
+plugin use len # the name of the plugin (without `nu_plugin_`)
 ```
 
 Once `nu` starts up, it will discover the plugin and add its commands to the scope.
 
 ```nu
-nu
 "hello" | len
 # => 5
 help len
 # => calculates the length of its input
-# => 
+# =>
 # => Usage:
 # =>   > len
-# => 
+# =>
 # => Flags:
-# =>   -h, --help - Display the help message for this command
-# => 
-# => Signatures:
-# =>   <string> | len -> <int>
+# =>   -h, --help: Display the help message for this command
+# =>
+# => Command Type:
+# =>   > plugin
+# =>
+# => Input/output types:
+# =>   ╭───┬────────┬────────╮
+# =>   │ # │ input  │ output │
+# =>   ├───┼────────┼────────┤
+# =>   │ 0 │ string │ int    │
+# =>   ╰───┴────────┴────────╯
 ```
 
-Run `plugin list` to see all plugins currently registered and available to this Nu session, including whether or not they are running, and their process ID if so.
+Run `plugin list` to see all plugins currently registered and available to this Nu session. Its `status` column shows whether each plugin is running, and the `pid` column shows its process ID if so.
 
 ## Using streams in plugins
 
@@ -350,11 +358,11 @@ impl PluginCommand for Len {
 With this change, we can pipe a list (even a long one) to the command to get its length:
 
 ```nu
-$ seq 1 10000 | len
-10000
+seq 1 10000 | len
+# => 10000
 ```
 
-Since `run()` also returns `PipelineData`, it is also possible for the plugin to produce a stream, or even to transform a stream. For example, if we wanted our plugin to multiply every integer by
+Since `run()` also returns `PipelineData`, it is also possible for the plugin to produce a stream, or even to transform a stream. For example, if we wanted our plugin to have a `double` command that multiplies every integer by
 two:
 
 ```rust
@@ -363,7 +371,7 @@ fn run(
     engine: &EngineInterface,
     call: &EvaluatedCall,
     input: PipelineData,
-) -> Result<PipelineData, ShellError> {
+) -> Result<PipelineData, LabeledError> {
     input.map(|value| {
         let span = value.span();
         match value.as_int() {
@@ -387,16 +395,17 @@ fn run(
 }
 ```
 
-Since the input and output are both streaming, this will work even on an infinite stream:
+Since the input and output are both streaming, this will work even on an infinite stream. Here, `first 5` stops reading after five values:
 
 ```nu
-$ generate { |n| {out: $n, next: ($n + 1)} } 0 | plugin
-0
-2
-4
-6
-8
-# ...
+generate { |n| {out: $n, next: ($n + 1)} } 0 | double | first 5
+# => ╭───┬───╮
+# => │ 0 │ 0 │
+# => │ 1 │ 2 │
+# => │ 2 │ 4 │
+# => │ 3 │ 6 │
+# => │ 4 │ 8 │
+# => ╰───┴───╯
 ```
 
 ## Plugin configuration
@@ -415,7 +424,7 @@ The plugin configuration can be retrieved with [`EngineInterface::get_plugin_con
 
 ```rust
 use nu_plugin::*;
-use nu_protocol::{Signature, Type, Value};
+use nu_protocol::{LabeledError, Signature, Type, Value};
 
 struct MotdPlugin;
 
@@ -477,9 +486,9 @@ fn main() {
 Example:
 
 ```nu
-> $env.config.plugins.motd = {message: "Nushell rocks!"}
-> motd
-Nushell rocks!
+$env.config.plugins.motd = {message: "Nushell rocks!"}
+motd
+# => Nushell rocks!
 ```
 
 For a full example, see [`nu_plugin_example`](https://github.com/nushell/plugin-examples/tree/main/rust/nu_plugin_example).
@@ -490,7 +499,7 @@ Plugins can accept and evaluate closures using [`EngineInterface::eval_closure`]
 
 ```rust
 use nu_plugin::*;
-use nu_protocol::{PipelineData, Signature, SyntaxShape, Type, Value};
+use nu_protocol::{LabeledError, PipelineData, Signature, SyntaxShape, Type, Value};
 
 struct MyEachPlugin;
 
@@ -526,7 +535,7 @@ impl PluginCommand for MyEach {
                 SyntaxShape::Closure(Some(vec![SyntaxShape::Any])),
                 "The closure to evaluate",
             )
-            .input_output_type(Type::ListStream, Type::ListStream)
+            .input_output_type(Type::list(Type::Any), Type::list(Type::Any))
     }
 
     fn run(
@@ -536,13 +545,13 @@ impl PluginCommand for MyEach {
         call: &EvaluatedCall,
         input: PipelineData,
     ) -> Result<PipelineData, LabeledError> {
-        let engine = engine.clone();
         let closure = call.req(0)?;
+        let engine_clone = engine.clone();
         Ok(input.map(move |item| {
             let span = item.span();
-            engine.eval_closure(&closure, vec![item.clone()], Some(item))
+            engine_clone.eval_closure(&closure, vec![item.clone()], Some(item))
                 .unwrap_or_else(|err| Value::error(err, span))
-        }, None)?)
+        }, engine.signals())?)
     }
 }
 
@@ -554,21 +563,21 @@ fn main() {
 `my-each` works just like `each`:
 
 ```nu
-> [1 2 3] | my-each { |i| $i * 2 }
-╭───┬───╮
-│ 0 │ 2 │
-│ 1 │ 4 │
-│ 2 │ 6 │
-╰───┴───╯
+[1 2 3] | my-each { |i| $i * 2 }
+# => ╭───┬───╮
+# => │ 0 │ 2 │
+# => │ 1 │ 4 │
+# => │ 2 │ 6 │
+# => ╰───┴───╯
 ```
 
 At present, the closures can only refer to values that would be valid to send to the plugin. This means that custom values from other plugins are not allowed. This is likely to be fixed in a future release.
 
 ## Custom values
 
-Plugins can create custom values that embed plugin-specific data within the engine. In Rust, this data is automatically serialized using [bincode](https://crates.io/crates/bincode), so all you need to do is implement the [`CustomValue`](https://docs.rs/nu-protocol/latest/nu_protocol/trait.CustomValue.html) trait on a type that has `Serialize` and `Deserialize` implementations compatible with bincode. This includes any attributes that would cause a dependency on field names or field presence, such as `#[serde(skip_serializing_if = "...")]` or `#[serde(untagged)]`. We use the [typetag](https://crates.io/crates/typetag) crate to reconstruct the correct custom value type.
+Plugins can create custom values that embed plugin-specific data within the engine. In Rust, this data is automatically serialized as MessagePack using [rmp-serde](https://crates.io/crates/rmp-serde), which writes structs without their field names, so all you need to do is implement the [`CustomValue`](https://docs.rs/nu-protocol/latest/nu_protocol/trait.CustomValue.html) trait on a type that has `Serialize` and `Deserialize` implementations compatible with that format. Avoid any attributes that would cause a dependency on field names or field presence, such as `#[serde(skip_serializing_if = "...")]` or `#[serde(untagged)]`. We use the [typetag](https://crates.io/crates/typetag) crate to reconstruct the correct custom value type, so add `serde` (with the `derive` feature) and `typetag` to your plugin's dependencies.
 
-To embed the custom value in a `Value`, use [`Value::custom()`](https://docs.rs/nu-protocol/latest/nu_protocol/enum.Value.html#method.custom_value). A minimal example:
+To embed the custom value in a `Value`, use [`Value::custom()`](https://docs.rs/nu-protocol/latest/nu_protocol/enum.Value.html#method.custom). A minimal example:
 
 ```rust
 use nu_protocol::{CustomValue, ShellError, Span, Value, record};
@@ -590,7 +599,7 @@ pub enum Animal {
 #[typetag::serde]
 impl CustomValue for Animal {
     fn clone_value(&self, span: Span) -> Value {
-        Value::custom_value(Box::new(self.clone()), span)
+        Value::custom(Box::new(self.clone()), span)
     }
 
     fn type_name(&self) -> String {
@@ -652,12 +661,13 @@ impl Plugin for AnimalPlugin {
     // ...
     fn custom_value_dropped(
         &self,
-        engine: &EngineInterface,
+        _engine: &EngineInterface,
         custom_value: Box<dyn CustomValue>,
-    ) {
+    ) -> Result<(), LabeledError> {
         if let Some(animal) = custom_value.as_any().downcast_ref::<Animal>() {
             eprintln!("Animal dropped: {:?}", animal);
         }
+        Ok(())
     }
 }
 ```
@@ -671,8 +681,8 @@ For a full example, see [`DropCheck`](https://github.com/nushell/nushell/blob/ma
 Environment variables can be get or set through the [`EngineInterface`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html). For example:
 
 ```rust
-// Get the PATH environment variable
-let paths: Value = engine.get_env_var("PATH")?;
+// Get the PATH environment variable (`None` if it isn't set)
+let paths: Option<Value> = engine.get_env_var("PATH")?;
 // Get all environment variables
 let envs: HashMap<String, Value> = engine.get_env_vars()?;
 // Set an environment variable
@@ -690,10 +700,10 @@ use std::path::Path;
 use nu_protocol::Spanned;
 
 let relative_path: Spanned<String> = call.req(0)?;
-let absolute_path = Path::new(&engine.get_current_dir()?).join(&provided_path.item);
+let absolute_path = Path::new(&engine.get_current_dir()?).join(&relative_path.item);
 
 // For example:
-if absolute_path.exists() {
+if !absolute_path.exists() {
     return Err(
         LabeledError::new(format!("{} does not exist", absolute_path.display()))
             .with_label("file not found", relative_path.span)
@@ -769,7 +779,7 @@ let ir_of_assert = engine
         // Call `view ir --decl-id <std_assert>`
         EvaluatedCall::new(call.head)
             .with_flag("decl-id".into_spanned(call.head))
-            .with_positional(Value::int(std_assert as i64, call.head)),
+            .with_positional(Value::int(std_assert.get() as i64, call.head)),
         PipelineData::Empty,
         true,
         false,
@@ -780,13 +790,19 @@ eprintln!("IR of `std assert`:");
 eprintln!("{ir_of_assert}");
 ```
 
+The `.into_spanned()` method comes from the `nu_protocol::IntoSpanned` trait. In this example, `std assert` is only in scope if the user ran `use std` before calling the plugin command. Otherwise, `find_decl()` returns `None` and the command fails with the "can't find" error.
+
 Keep in mind that the engine will not validate that the parameters of a call made by the plugin actually matches the signature of the command being called, so care must be taken when designing the plugin to try to match the documented signature. There is not currently a way to look up the signature of a command before running it, but we may add that in the future to make it easier to ensure a plugin call behaves as expected. As performance is a priority for plugins, we do not intend to validate call arguments from plugins at this time.
 
 There is some overhead when making calls from plugins back to the engine, and it may be difficult to construct some of the arguments for commands - for example, it's not possible to create new closures from within plugins. We recommend trying to implement functionality within the plugin if possible, and falling back to command calls only when necessary. It is virtually guaranteed that a script that chains multiple commands together will be more performant than trying to put pipelines together from within a plugin, so you may want to provide a companion script with your plugins, or expect your users to compose pipelines made up of simple commands [rather than providing lots of different options](https://www.nushell.sh/contributor-book/philosophy_0_80.html#command-philosophy).
 
+## Argument completions
+
+Plugin commands can compute completions for their flags and positional arguments when the user presses <kbd>Tab</kbd>. In Rust, implement the `get_dynamic_completion()` method of `PluginCommand` or `SimplePluginCommand`. It receives the call being completed and an `ArgType` (`ArgType::Flag(name)` or `ArgType::Positional(index)`), and returns `Some` list of `DynamicSuggestion`s, or `None` to fall back to Nushell's default completions. This API is experimental and likely to change, which is why the method takes a deprecated `ExperimentalMarker` parameter (put `#[allow(deprecated)]` on your implementation to silence the warning). For a complete example, see [`arg_completion.rs`](https://github.com/nushell/nushell/blob/main/crates/nu_plugin_example/src/commands/arg_completion.rs) in `nu_plugin_example`. You can check the results with `commandline complete`, e.g. `'my-command --flag ' | commandline complete`.
+
 ## Testing plugins
 
-Rust-based plugins can use the [`nu-plugin-test-support`](https://docs.rs/nu-plugin-test-support/) crate to write tests. Examples can be tested automatically:
+Rust-based plugins can use the [`nu-plugin-test-support`](https://docs.rs/nu-plugin-test-support/) crate to write tests. Add it as a development dependency with the same version as `nu-plugin` (`cargo add --dev nu-plugin-test-support`). Examples can be tested automatically:
 
 ```rust
 use nu_protocol::{Example, ShellError, Value};
@@ -806,7 +822,7 @@ impl PluginCommand for Fib {
 
     // ...
 
-    fn examples(&self) -> Vec<Example> {
+    fn examples(&self) -> Vec<Example<'_>> {
         vec![
             Example {
                 example: "fib 20",
@@ -823,7 +839,7 @@ impl PluginCommand for Fib {
 fn test_examples() -> Result<(), ShellError> {
     use nu_plugin_test_support::PluginTest;
 
-    PluginTest::new("fib", FibPlugin.into())?.test_examples(&Fib)
+    PluginTest::new("fib", FibPlugin.into())?.test_command_examples(&Fib)
 }
 ```
 
@@ -839,9 +855,10 @@ fn test_fib_on_input() -> Result<(), ShellError> {
     // including a stream
     let result = PluginTest::new("fib", FibPlugin.into())?
         .eval_with("fib", Value::test_int(20).into_pipeline_data())?
-        .into_value(Span::test_data());
+        .into_value(Span::test_data())?;
 
     assert_eq!(Value::test_int(6765), result);
+    Ok(())
 }
 ```
 
@@ -858,6 +875,7 @@ fn test_fib_with_sequence() -> Result<(), ShellError> {
         .eval("seq 1 10 | fib")?;
 
     assert_eq!(10, result.into_iter().count());
+    Ok(())
 }
 ```
 
@@ -867,7 +885,7 @@ Tests on custom values are fully supported as well, but they will be serialized 
 
 ## Under the hood
 
-Writing Nu plugins in Rust is convenient because we can make use of the `nu-plugin` and `nu-protocol` crates, which are part of Nu itself and define the interface protocol. To write a plugin in another language you will need to implement that protocol yourself. If you're goal is to write Nu plugins in Rust you can stop here. If you'd like to explore the low level plugin interface or write plugins in other languages such as Python, keep reading.
+Writing Nu plugins in Rust is convenient because we can make use of the `nu-plugin` and `nu-protocol` crates, which are part of Nu itself and define the interface protocol. To write a plugin in another language you will need to implement that protocol yourself. If your goal is to write Nu plugins in Rust you can stop here. If you'd like to explore the low level plugin interface or write plugins in other languages such as Python, keep reading.
 
 Ordinarily, Nu will execute the plugin and knows what data to pass to it and how to interpret the responses. Here we'll be doing it manually. Note that we'll be playing with our plugin using a conventional shell (like bash or zsh) as in Nu all of this happens under the hood.
 
@@ -877,18 +895,18 @@ Assuming you've built the Rust plugin described above let's now run it with `--s
 
 ```sh
 $ ./target/release/nu_plugin_len --stdio
-json
+json{"Hello":{"protocol":"nu-plugin","version":"0.116.0","features":[{"name":"LocalSocket"}]}}
 ```
 
-The application on start up prints the keyword `json` and blocks for input on STDIN. This tells Nu that the plugin wants to communicate via the JSON protocol rather than MsgPack. In the JSON protocol, the plugin will listen for each JSON object written on stdin and respond accordingly. Newlines are not required, but it is likely that the plugin will not see your input before you hit `enter`, as terminals usually line buffer by default.
+The application on start up prints the keyword `json`, followed by its own [`Hello`](plugin_protocol_reference.md#hello) message, and blocks for input on STDIN. The keyword tells Nu that the plugin wants to communicate via the JSON protocol rather than MsgPack. (It is preceded by a byte containing the length of the keyword, 4, which the terminal doesn't display.) In the JSON protocol, the plugin will listen for each JSON object written on stdin and respond accordingly. Newlines are not required, but it is likely that the plugin will not see your input before you hit `enter`, as terminals usually line buffer by default.
 
-We can simulate an initial plugin registration by sending a [`Hello`](plugin_protocol_reference.md#hello) message first, in order to let the plugin know that we are compatible with it. It is important to use the version of `nu-plugin` that the plugin was built with here for the `"version"` as this is a critical part of how Nu ensures that plugins run with a compatible engine.
+We can simulate an initial plugin registration by sending a [`Hello`](plugin_protocol_reference.md#hello) message first, in order to let the plugin know that we are compatible with it. It is important to use a `"version"` that is compatible with the one the plugin reported (the version of `nu-plugin` that it was built with, `0.116.0` here), as this is a critical part of how Nu ensures that plugins run with a compatible engine. If the versions aren't compatible, the plugin exits without answering any calls.
 
 ```json
 {
   "Hello": {
     "protocol": "nu-plugin",
-    "version": "0.90.2",
+    "version": "0.116.0",
     "features": []
   }
 }
@@ -906,10 +924,10 @@ Putting that together, it looks like this:
 
 ```sh
 $ ./target/release/nu_plugin_len --stdio
-json{"Hello":{"protocol":"nu-plugin","version":"0.90.2","features":[]}}
-{"Hello":{"protocol":"nu-plugin","version":"0.90.2","features":[]}}
+json{"Hello":{"protocol":"nu-plugin","version":"0.116.0","features":[{"name":"LocalSocket"}]}}
+{"Hello":{"protocol":"nu-plugin","version":"0.116.0","features":[]}}
 {"Call":[0,"Signature"]}
-{"CallResponse":[0, {"Signature":[{"sig":{"name":"len","description":"calculates the length of its input","extra_description":"","search_terms":[],"required_positional":[],"optional_positional":[],"rest_positional":null,"vectorizes_over_list":false,"named":[{"long":"help","short":"h","arg":null,"required":false,"desc":"Display the help message for this command","var_id":null,"default_value":null}],"input_type":"String","output_type":"Int","input_output_types":[],"allow_variants_without_examples":false,"is_filter":false,"creates_scope":false,"allows_unknown_args":false,"category":"Default"},"examples":[]}]}]}
+{"CallResponse":[0,{"Signature":[{"sig":{"name":"len","description":"calculates the length of its input","extra_description":"","search_terms":[],"required_positional":[],"optional_positional":[],"rest_positional":null,"named":[{"long":"help","short":"h","arg":null,"required":false,"desc":"Display the help message for this command","completion":null,"var_id":null,"default_value":null}],"input_output_types":[["String","Int"]],"allow_variants_without_examples":false,"is_filter":false,"creates_scope":false,"allows_unknown_args":false,"complete":null,"category":"Default"},"examples":[]}]}]}
 ```
 
 The plugin prints its signature serialized as JSON. We'll reformat for readability.
@@ -926,7 +944,6 @@ The plugin prints its signature serialized as JSON. We'll reformat for readabili
         "required_positional": [],
         "optional_positional": [],
         "rest_positional": null,
-        "vectorizes_over_list": false,
         "named": [
           {
             "long": "help",
@@ -934,17 +951,17 @@ The plugin prints its signature serialized as JSON. We'll reformat for readabili
             "arg": null,
             "required": false,
             "desc": "Display the help message for this command",
+            "completion": null,
             "var_id": null,
             "default_value": null
           }
         ],
-        "input_type": "String",
-        "output_type": "Int",
-        "input_output_types": [],
+        "input_output_types": [["String", "Int"]],
         "allow_variants_without_examples": false,
         "is_filter": false,
         "creates_scope": false,
         "allows_unknown_args": false,
+        "complete": null,
         "category": "Default"
       },
       "examples": []
@@ -953,14 +970,14 @@ The plugin prints its signature serialized as JSON. We'll reformat for readabili
 }
 ```
 
-This signature tells Nu everything it needs to pass data in and out of the plugin as well as format the help message and support type aware tab completion. A full description of these fields is beyond the scope of this tutorial, but the response is simply a serialized form of the [`PluginSignature`](https://docs.rs/nu-protocol/latest/nu_protocol/struct.PluginSignature.html) struct in the `nu-plugin` crate.
+This signature tells Nu everything it needs to pass data in and out of the plugin as well as format the help message and support type aware tab completion. A full description of these fields is beyond the scope of this tutorial, but the response is simply a serialized form of the [`PluginSignature`](https://docs.rs/nu-protocol/latest/nu_protocol/struct.PluginSignature.html) struct in the `nu-protocol` crate.
 
 Now let's try simulating an invocation. Above we tested the plugin within Nu by executing the command `"hello" | len` and we got the response `5`. Of course this hides all of the typed data handling that makes Nu so powerful.
 
-```nu
-$ echo '{"Hello":{"protocol":"nu-plugin","version":"0.90.2","features":[]}}{"Call":[0,{"Run":{"name":"len","call":{"head":{"start":100953,"end":100957},"positional":[],"named":[]},"input":{"Value":{"String":{"val":"hello","span":{"start":100953,"end":100957}}}}}}]}' | target/release/nu_plugin_len --stdio
-json{"Hello":{"protocol":"nu-plugin","version":"0.90.2","features":[]}}
-{"PipelineData":{"Value":{"Int":{"val":5,"span":{"start":100953,"end":100957}}}}}
+```sh
+$ echo '{"Hello":{"protocol":"nu-plugin","version":"0.116.0","features":[]}}{"Call":[0,{"Run":{"name":"len","call":{"head":{"start":100953,"end":100957},"positional":[],"named":[]},"input":{"Value":[{"String":{"val":"hello","span":{"start":100953,"end":100957}}},null]}}}]}' | target/release/nu_plugin_len --stdio
+json{"Hello":{"protocol":"nu-plugin","version":"0.116.0","features":[{"name":"LocalSocket"}]}}
+{"CallResponse":[0,{"PipelineData":{"Value":[{"Int":{"val":5,"span":{"start":100953,"end":100957}}},null]}}]}
 ```
 
 We invoked our plugin and passed a [`Run`](plugin_protocol_reference.md#run-plugin-call) plugin call that looks like the following on stdin:
@@ -978,34 +995,40 @@ We invoked our plugin and passed a [`Run`](plugin_protocol_reference.md#run-plug
       "named": []
     },
     "input": {
-      "Value": {
-        "String": {
-          "val": "hello",
-          "span": {
-            "start": 100953,
-            "end": 100957
+      "Value": [
+        {
+          "String": {
+            "val": "hello",
+            "span": {
+              "start": 100953,
+              "end": 100957
+            }
           }
-        }
-      }
+        },
+        null
+      ]
     }
   }
 }
 ```
 
-That is, we passed len the string "hello" and it replied with the following [`PipelineData`](plugin_protocol_reference.md#pipelinedata-plugin-call-response) response:
+That is, we passed len the string "hello". A single `Value` input is a two-element array: the value itself, and its pipeline metadata (`null` here, as there is none). The plugin replied with a [`CallResponse`](plugin_protocol_reference.md#callresponse) for call ID `0`, containing the following [`PipelineData`](plugin_protocol_reference.md#pipelinedata-plugin-call-response) response:
 
 ```json
 {
   "PipelineData": {
-    "Value": {
-      "Int": {
-        "val": 5,
-        "span": {
-          "start": 100953,
-          "end": 100957
+    "Value": [
+      {
+        "Int": {
+          "val": 5,
+          "span": {
+            "start": 100953,
+            "end": 100957
+          }
         }
-      }
-    }
+      },
+      null
+    ]
   }
 }
 ```
@@ -1036,16 +1059,21 @@ def signature():
             "required_positional": [],
             "optional_positional": [],
             "rest_positional": None,
-            "vectorizes_over_list": False,
-            "named": [],
-            "input_type": "String",
-            "output_type":"Int",
-            "input_output_types":[],
+            "named": [
+                {
+                    "long": "help",
+                    "short": "h",
+                    "arg": None,
+                    "required": False,
+                    "desc": "Display the help message for this command"
+                }
+            ],
+            "input_output_types": [["String", "Int"]],
             "allow_variants_without_examples": True,
             "is_filter": False,
             "creates_scope": False,
-            "allows_unknown_args":False,
-            "category":"Default"
+            "allows_unknown_args": False,
+            "category": "Default"
         },
         "examples": []
     }
@@ -1062,7 +1090,7 @@ def send_hello():
     hello = {
         "Hello": {
             "protocol": "nu-plugin",
-            "version": "0.90.2",
+            "version": "0.116.0",
             "features": []
         }
     }
@@ -1081,9 +1109,13 @@ def send_response(id, response):
 def send_error(id, error_msg, span):
     error = {
         "Error": {
-            "label": "Len Error",
-            "msg": error_msg,
-            "span": span,
+            "msg": "Len Error",
+            "labels": [
+                {
+                    "text": error_msg,
+                    "span": span,
+                }
+            ],
         }
     }
     send_response(id, error)
@@ -1091,15 +1123,19 @@ def send_error(id, error_msg, span):
 
 def handle_call(id, call_info):
     try:
-        input = call_info["input"]["Value"]["String"]
+        [value, metadata] = call_info["input"]["Value"]
+        input = value["String"]
         output = {
             "PipelineData": {
-                "Value": {
-                    "Int": {
-                        "val": len(input["val"]),
-                        "span": input["span"]
-                    }
-                }
+                "Value": [
+                    {
+                        "Int": {
+                            "val": len(input["val"]),
+                            "span": input["span"]
+                        }
+                    },
+                    None
+                ]
             }
         }
         send_response(id, output)
@@ -1107,7 +1143,7 @@ def handle_call(id, call_info):
         send_error(
             id,
             "Could not process input",
-            call_info["call"]["head"]["span"]
+            call_info["call"]["head"]
         )
 
 
@@ -1186,7 +1222,7 @@ def send_hello():
     hello = {
         "Hello": {
             "protocol": "nu-plugin",
-            "version": "0.90.2",
+            "version": "0.116.0",
             "features": []
         }
     }
@@ -1194,7 +1230,7 @@ def send_hello():
     sys.stdout.flush()
 ```
 
-The first thing our plugin must do is write out the desired serialization format, in this case JSON. We do that with the `send_encoder()` method. Then we use `send_hello()` to send our [`Hello`](plugin_protocol_reference.md#hello) message, informing Nu of our compatibility with it, and which is required before we can send any other messages. Then we read the JSON serialized messages that Nu sends us. Since Nu always sends each message on its own line, we simply read each line of input and parse it separately.
+The first thing our plugin must do is write out the desired serialization format, in this case JSON, preceded by a byte with the length of its name. We do that with the `send_encoder()` method. Then we use `send_hello()` to send our [`Hello`](plugin_protocol_reference.md#hello) message, informing Nu of our compatibility with it, and which is required before we can send any other messages. Its `"version"` must be compatible with the Nushell version that runs the plugin, or Nu refuses to load it. Then we read the JSON serialized messages that Nu sends us. Since Nu always sends each message on its own line, we simply read each line of input and parse it separately.
 
 Each [`Call`](plugin_protocol_reference.md#call) comes with an ID number, which we must keep for the [`CallResponse`](plugin_protocol_reference.md#callresponse) (including errors).
 
@@ -1205,15 +1241,19 @@ When sent a `Run` request, we parse the supplied JSON and respond to the request
 ```python
 def handle_call(id, call_info):
     try:
-        input = call_info["input"]["Value"]["String"]
+        [value, metadata] = call_info["input"]["Value"]
+        input = value["String"]
         output = {
             "PipelineData": {
-                "Value": {
-                    "Int": {
-                        "val": len(input["val"]),
-                        "span": input["span"]
-                    }
-                }
+                "Value": [
+                    {
+                        "Int": {
+                            "val": len(input["val"]),
+                            "span": input["span"]
+                        }
+                    },
+                    None
+                ]
             }
         }
         send_response(id, output)
@@ -1221,13 +1261,13 @@ def handle_call(id, call_info):
         send_error(
             id,
             "Could not process input",
-            call_info["call"]["head"]["span"]
+            call_info["call"]["head"]
         )
 ```
 
-The work of processing input is done by this `handle_call` function. Here, we assume we're given strings (we could make this more robust in the future and return meaningful errors otherwise), and then we extract the string we're given. From there, we measure the length of the string and create a new `Int` value for that length.
+The work of processing input is done by this `handle_call` function. Here, we assume we're given strings (we could make this more robust in the future and return meaningful errors otherwise), and then we extract the string we're given. A single `Value` input arrives as a two-element array of the value and its pipeline metadata, so we unpack it first. From there, we measure the length of the string and create a new `Int` value for that length.
 
-Finally, we use the same item we were given and replace the payload with this new Int. We do this to reuse the `span` that was passed to us with the string, though this is an optional step. We could have instead opted to create new metadata and passed that out instead.
+Finally, we use the same item we were given and replace the payload with this new Int. We do this to reuse the `span` that was passed to us with the string, though this is an optional step. We could have instead opted to create new metadata and passed that out instead. We send `None` (`null`) as the pipeline metadata of our response. If the input isn't what we expect, we send an error labeled with the span of the call's `head`, which points at the command name.
 
 We have a couple of helpers:
 
@@ -1246,15 +1286,19 @@ def send_response(id, response):
 def send_error(id, error_msg, span):
     error = {
         "Error": {
-            "label": "Len Error",
-            "msg": error_msg,
-            "span": span,
+            "msg": "Len Error",
+            "labels": [
+                {
+                    "text": error_msg,
+                    "span": span,
+                }
+            ],
         }
     }
     send_response(id, error)
 ```
 
-`send_error()` formats and sends an error response for us.
+`send_error()` formats and sends an error response for us. An error is a [`LabeledError`](plugin_protocol_reference.md#labelederror): a `msg`, plus optional `labels` that each attach some `text` to a `span`.
 
 ```python
 import json
@@ -1264,9 +1308,20 @@ import sys
 All of this takes a few imports to accomplish, so we make sure to include them.
 
 ```python
-#!/usr/local/bin/python3
+#!/usr/bin/env python3
 ```
 
-Finally, to make it easier to run our Python, we make this file executable (using something like `chmod +x nu_plugin_len.py`) and add the path to our python at the top. This trick works for Unix-based platforms, for Windows we would need to create an .exe or .bat file that would invoke the python code for us.
+Finally, we add a shebang line at the top that points to our Python interpreter.
+
+Nu runs plugin files whose names end in `.py` with the `python` command found in your `PATH`, so the shebang line isn't used for them. If your interpreter has a different name, such as `python3`, pass its full path with `--shell` when adding the plugin:
+
+```nu
+plugin add --shell /usr/bin/python3 nu_plugin_len.py
+plugin use len
+"hello" | len
+# => 5
+```
+
+On Unix-based platforms, you can instead save the file without the `.py` extension (as `nu_plugin_len`) and make it executable (using something like `chmod +x nu_plugin_len`). Nu then runs it directly, and the shebang line selects the interpreter.
 
 Please see the [example Python plugin](https://github.com/nushell/nushell/tree/main/crates/nu_plugin_python) for a comprehensive example on how to implement a Nushell plugin in another language, including Python.

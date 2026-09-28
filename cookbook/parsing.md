@@ -33,16 +33,21 @@ df -h | str replace "Mounted on" Mounted_On | detect columns
 # => │  5 │ /dev/nvme0n1p8                    │ 48G  │ 16G  │ 30G   │ 35%  │ /var                               │
 # => │  6 │ efivarfs                          │ 128K │ 24K  │ 100K  │ 20%  │ /sys/firmware/efi/efivars          │
 # => │  7 │ tmpfs                             │ 32G  │ 41M  │ 32G   │ 1%   │ /tmp                               │
-# => │  9 │ /dev/nvme0n1p3                    │ 315G │ 230G │ 69G   │ 77%  │ /home                              │
-# => │ 10 │ /dev/nvme0n1p1                    │ 197M │ 120M │ 78M   │ 61%  │ /boot                              │
-# => │ 11 │ /dev/mapper/vgBigData-lvBigData01 │ 5.5T │ 4.1T │ 1.1T  │ 79%  │ /bigdata01                         │
-# => │ 12 │ tmpfs                             │ 1.0M │ 4.0K │ 1020K │ 1%   │ /run/credentials/nix-serve.service │
-# => │ 13 │ tmpfs                             │ 6.3G │ 32M  │ 6.3G  │ 1%   │ /run/user/1000                     │
+# => │  8 │ /dev/nvme0n1p3                    │ 315G │ 230G │ 69G   │ 77%  │ /home                              │
+# => │  9 │ /dev/nvme0n1p1                    │ 197M │ 120M │ 78M   │ 61%  │ /boot                              │
+# => │ 10 │ /dev/mapper/vgBigData-lvBigData01 │ 5.5T │ 4.1T │ 1.1T  │ 79%  │ /bigdata01                         │
+# => │ 11 │ tmpfs                             │ 1.0M │ 4.0K │ 1020K │ 1%   │ /run/credentials/nix-serve.service │
+# => │ 12 │ tmpfs                             │ 6.3G │ 32M  │ 6.3G  │ 1%   │ /run/user/1000                     │
 # => ╰────┴───────────────────────────────────┴──────┴──────┴───────┴──────┴────────────────────────────────────╯
 ```
 
 For an output like from `df` this is probably the most compact way to achieve a nice tabular output.
 The `str replace` is needed here because one of the column headers has a space in it.
+Alternatively, `detect columns --guess` works out the columns from their widths, so it keeps the `Mounted on` header intact without the `str replace`:
+
+```nu
+df -h | detect columns --guess
+```
 
 ### Using `from ssv`
 
@@ -64,19 +69,24 @@ How to parse an arbitrary pattern from a string of text into a multi-column tabl
 
 ```nu
 cargo search shells --limit 10 | lines | parse "{crate_name} = {version} #{description}" | str trim
-# => ───┬──────────────┬─────────────────┬────────────────────────────────────────────────────────────────────────────────
-# =>  # │  crate_name  │     version     │                                  description
-# => ───┼──────────────┼─────────────────┼────────────────────────────────────────────────────────────────────────────────
-# =>  0 │ shells       │ "0.2.0"         │ Sugar-coating for invoking shell commands directly from Rust.
-# =>  1 │ pyc-shell    │ "0.3.0"         │ Pyc is a simple CLI application, which allows you to perform shell commands in
-# =>    │              │                 │ cyrillic and other a…
-# =>  2 │ ion-shell    │ "0.0.0"         │ The Ion Shell
-# =>  3 │ sheldon      │ "0.6.6"         │ Fast, configurable, shell plugin manager.
-# =>  4 │ nu           │ "0.44.0"        │ A new type of shell
-# =>  5 │ git-gamble   │ "2.3.0"         │ blend TCR + TDD to make sure to develop the right thing, babystep by babystep
-# =>  6 │ martin       │ "1.0.0-alpha.0" │ Blazing fast and lightweight PostGIS vector tiles server
-# =>  7 │ fnm          │ "1.29.2"        │ Fast and simple Node.js version manager
-# =>  8 │ remote_shell │ "2.0.0"         │ remote shell written by rust.
-# =>  9 │ sauce        │ "0.6.6"         │ A tool for managing directory-specific state.
-# => ───┴──────────────┴─────────────────┴────────────────────────────────────────────────────────────────────────────────
+# => ╭───┬─────────────────────────┬──────────┬─────────────────────────────────────────────────────────╮
+# => │ # │       crate_name        │ version  │                       description                       │
+# => ├───┼─────────────────────────┼──────────┼─────────────────────────────────────────────────────────┤
+# => │ 0 │ shells                  │ "0.2.0"  │ Sugar-coating for invoking shell commands directly from │
+# => │   │                         │          │  Rust.                                                  │
+# => │ 1 │ virtiofsd               │ "1.14.0" │ A virtio-fs vhost-user device daemon                    │
+# => │ 2 │ hurl                    │ "8.0.1"  │ Hurl, run and test HTTP requests                        │
+# => │ 3 │ shell-quote             │ "0.8.0"  │ A Rust library for shell-quoting strings, e.g. for      │
+# => │   │                         │          │ interpolating into a Bash script.                       │
+# => │ 4 │ coreutils               │ "0.12.0" │ coreutils ~ GNU coreutils (updated); implemented as     │
+# => │   │                         │          │ universal (cross-platform) utils, wri…                  │
+# => │ 5 │ command-stream          │ "1.1.0"  │ Modern shell command execution library with streaming,  │
+# => │   │                         │          │ async iteration, and event support                      │
+# => │ 6 │ datafusion-sqllogictest │ "55.1.0" │ DataFusion sqllogictest driver                          │
+# => │ 7 │ skim                    │ "5.7.2"  │ Fuzzy Finder in rust!                                   │
+# => │ 8 │ bashrs                  │ "7.4.1"  │ Rust-to-Shell transpiler for deterministic bootstrap    │
+# => │   │                         │          │ scripts                                                 │
+# => │ 9 │ shell-words             │ "1.1.1"  │ Process command line according to parsing rules of UNIX │
+# => │   │                         │          │  shell                                                  │
+# => ╰───┴─────────────────────────┴──────────┴─────────────────────────────────────────────────────────╯
 ```

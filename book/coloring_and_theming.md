@@ -22,6 +22,7 @@ The options for `$env.config.table.mode` can be listed with `table --list`:
 - `default`
 - `dots`
 - `double`
+- `frameless`
 - `heavy`
 - `light`
 - `markdown`
@@ -44,7 +45,7 @@ table --list | first 5
 # => │ 1 │ compact        │
 # => │ 2 │ compact_double │
 # => │ 3 │ default        │
-# => │ 4 │ heavy          │
+# => │ 4 │ frameless      │
 # => ╰───┴────────────────╯
 
 $env.config.table.mode = 'psql'
@@ -53,7 +54,9 @@ table --list | first 5
 # =>  1 | compact
 # =>  2 | compact_double
 # =>  3 | default
-# =>  4 | heavy
+# =>  4 | frameless
+
+$env.config.table.mode = 'rounded' # back to the default
 ```
 
 ## Color Configuration
@@ -258,21 +261,16 @@ For example:
 $env.config.color_config.filesize = {|x| if $x == 0b { 'dark_gray' } else if $x < 1mb { 'cyan' } else { 'blue' } }
 $env.config.color_config.bool = {|x| if $x { 'green' } else { 'light_red' } }
 {a:true,b:false,c:0mb,d:0.5mb,e:10mib}
+# => ╭───┬──────────╮
+# => │ a │ true     │
+# => │ b │ false    │
+# => │ c │ 0 B      │
+# => │ d │ 500.0 kB │
+# => │ e │ 10.4 MB  │
+# => ╰───┴──────────╯
 ```
 
-prints
-
-```nu
-╭───┬───────────╮
-│ a │ true      │
-│ b │ false     │
-│ c │ 0 B       │
-│ d │ 488.3 KiB │
-│ e │ 10.0 MiB  │
-╰───┴───────────╯
-```
-
-with a green `true`, a light red `false`, a dark grey `0 B`, a cyan `488.3 KiB`, and a blue `10.0 MiB`.
+The table shows a green `true`, a light red `false`, a dark grey `0 B`, a cyan `500.0 kB`, and a blue `10.4 MB`.
 
 ## Primitive Values
 
@@ -280,73 +278,85 @@ Primitive values are things like `int` and `string`. Primitive values and shapes
 
 This is the current list of primitives. Not all of these are configurable. The configurable ones are marked with \*.
 
-| primitive    | default color         | configurable |
-| ------------ | --------------------- | ------------ |
-| `any`        |                       |              |
-| `binary`     | Color::White.normal() | \*           |
-| `block`      | Color::White.normal() | \*           |
-| `bool`       | Color::White.normal() | \*           |
-| `cell-path`   | Color::White.normal() | \*           |
-| `condition`  |                       |              |
-| `custom`     |                       |              |
-| `datetime`       | Color::White.normal() | \*           |
-| `duration`   | Color::White.normal() | \*           |
-| `expression` |                       |              |
-| `filesize`   | Color::White.normal() | \*           |
-| `float`      | Color::White.normal() | \*           |
-| `glob`       |                       |              |
-| `import`     |                       |              |
-| `int`        | Color::White.normal() | \*           |
-| `list`       | Color::White.normal() | \*           |
-| `nothing`    | Color::White.normal() | \*           |
-| `number`     |                       |              |
-| `operator`   |                       |              |
-| `path`       |                       |              |
-| `range`      | Color::White.normal() | \*           |
-| `record`     | Color::White.normal() | \*           |
-| `signature`  |                       |              |
-| `string`     | Color::White.normal() | \*           |
-| `table`      |                       |              |
-| `var`        |                       |              |
-| `vardecl`    |                       |              |
-| `variable`   |                       |              |
+| primitive      | default color | configurable |
+| -------------- | ------------- | ------------ |
+| `any`          |               |              |
+| `binary`       | `default`     | \*           |
+| `block`        | `default`     | \*           |
+| `bool`         | `light_cyan`  | \*           |
+| `cell-path`    | `default`     | \*           |
+| `closure`      | `green_bold`  | \*           |
+| `condition`    |               |              |
+| `custom`       | `default`     | \*           |
+| `datetime`     | `purple`      | \*           |
+| `duration`     | `default`     | \*           |
+| `expression`   |               |              |
+| `filesize`     | `cyan`        | \*           |
+| `float`        | `default`     | \*           |
+| `glob`         | `cyan_bold`   | \*           |
+| `import`       |               |              |
+| `int`          | `default`     | \*           |
+| `list`         | `default`     | \*           |
+| `nothing`      | `default`     | \*           |
+| `number`       |               |              |
+| `operator`     |               |              |
+| `path`         |               |              |
+| `range`        | `default`     | \*           |
+| `record`       | `default`     | \*           |
+| `semver`       | `cyan_bold`   | \*           |
+| `semver-range` | `cyan_bold`   | \*           |
+| `signature`    |               |              |
+| `string`       | `default`     | \*           |
+| `table`        |               |              |
+| `var`          |               |              |
+| `vardecl`      |               |              |
+| `variable`     |               |              |
 
 ### Special "primitives" (not really primitives but they exist solely for coloring)
 
 | primitive                   | default color              | configurable |
 | --------------------------- | -------------------------- | ------------ |
-| `leading_trailing_space_bg` | Color::Rgb(128, 128, 128)) | \*           |
-| `header`                    | Color::Green.bold()        | \*           |
-| `empty`                     | Color::Blue.normal()       | \*           |
-| `row_index`                 | Color::Green.bold()        | \*           |
-| `hints`                     | Color::DarkGray.normal()   | \*           |
+| `leading_trailing_space_bg` | `{ attr: n }`              | \*           |
+| `header`                    | `green_bold`               | \*           |
+| `empty`                     | `blue`                     | \*           |
+| `row_index`                 | `green_bold`               | \*           |
+| `separator`                 | `default`                  | \*           |
+| `hints`                     | `dark_gray`                | \*           |
+| `search_result`             | `{ bg: red, fg: default }` | \*           |
+| `selection`                 | `{ attr: r }`              | \*           |
+| `selection_cursor`          | `{ attr: n }`              | \*           |
+| `binary_null_char`          | `grey42`                   | \*           |
+| `binary_printable`          | `cyan_bold`                | \*           |
+| `binary_whitespace`         | `green_bold`               | \*           |
+| `binary_ascii_other`        | `purple_bold`              | \*           |
+| `binary_non_ascii`          | `yellow_bold`              | \*           |
 
-Here's a small example of changing some of these values.
+Here's a small example of changing some of these values. Note that the color names are quoted: Nushell treats a bare word on the right side of `=` as a command name, so `= purple` is a parse error.
 
 ```nu
-$env.config.color_config.separator = purple
+$env.config.color_config.separator = 'purple'
 $env.config.color_config.leading_trailing_space_bg = "#ffffff"
-$env.config.color_config.header = gb
-$env.config.color_config.datetime = wd
-$env.config.color_config.filesize = c
-$env.config.color_config.row_index = cb
-$env.config.color_config.bool = red
-$env.config.color_config.int = green
-$env.config.color_config.duration = blue_bold
-$env.config.color_config.range = purple
-$env.config.color_config.float = red
-$env.config.color_config.string = white
-$env.config.color_config.nothing = red
-$env.config.color_config.binary = red
-$env.config.color_config.cell-path = cyan
-$env.config.color_config.hints = dark_gray
+$env.config.color_config.header = 'gb'
+$env.config.color_config.datetime = 'wd'
+$env.config.color_config.filesize = 'c'
+$env.config.color_config.row_index = 'cb'
+$env.config.color_config.bool = 'red'
+$env.config.color_config.int = 'green'
+$env.config.color_config.duration = 'blue_bold'
+$env.config.color_config.range = 'purple'
+$env.config.color_config.float = 'red'
+$env.config.color_config.string = 'white'
+$env.config.color_config.nothing = 'red'
+$env.config.color_config.binary = 'red'
+$env.config.color_config.cell-path = 'cyan'
+$env.config.color_config.hints = 'dark_gray'
 ```
 
 Here's another small example using multiple color syntaxes with some comments.
 
 ```nu
 $env.config.color_config.separator = "#88b719" # this sets only the foreground color like PR #486
-$env.config.color_config.leading_trailing_space_bg = white # this sets only the foreground color in the original style
+$env.config.color_config.leading_trailing_space_bg = 'white' # this sets only the foreground color in the original style
 $env.config.color_config.header = { # this is like PR #489
     fg: "#B01455", # note, quotes are required on the values with hex colors
     bg: "#ffb900", # note, commas are not required, it could also be all on one line
@@ -366,39 +376,51 @@ As mentioned above, `shape` is a term used to indicate the syntax coloring.
 
 Here's the current list of flat shapes.
 
-| shape                        | default style                          | configurable |
-| ---------------------------- | -------------------------------------- | ------------ |
-| `shape_block`                | fg(Color::Blue).bold()                 | \*           |
-| `shape_bool`                 | fg(Color::LightCyan)                   | \*           |
-| `shape_custom`               | bold()                                 | \*           |
-| `shape_external`             | fg(Color::Cyan)                        | \*           |
-| `shape_externalarg`          | fg(Color::Green).bold()                | \*           |
-| `shape_filepath`             | fg(Color::Cyan)                        | \*           |
-| `shape_flag`                 | fg(Color::Blue).bold()                 | \*           |
-| `shape_float`                | fg(Color::Purple).bold()               | \*           |
-| `shape_garbage`              | fg(Color::White).on(Color::Red).bold() | \*           |
-| `shape_globpattern`          | fg(Color::Cyan).bold()                 | \*           |
-| `shape_int`                  | fg(Color::Purple).bold()               | \*           |
-| `shape_internalcall`         | fg(Color::Cyan).bold()                 | \*           |
-| `shape_list`                 | fg(Color::Cyan).bold()                 | \*           |
-| `shape_literal`              | fg(Color::Blue)                        | \*           |
-| `shape_nothing`              | fg(Color::LightCyan)                   | \*           |
-| `shape_operator`             | fg(Color::Yellow)                      | \*           |
-| `shape_pipe`                 | fg(Color::Purple).bold()               | \*           |
-| `shape_range`                | fg(Color::Yellow).bold()               | \*           |
-| `shape_record`               | fg(Color::Cyan).bold()                 | \*           |
-| `shape_signature`            | fg(Color::Green).bold()                | \*           |
-| `shape_string`               | fg(Color::Green)                       | \*           |
-| `shape_string_interpolation` | fg(Color::Cyan).bold()                 | \*           |
-| `shape_table`                | fg(Color::Blue).bold()                 | \*           |
-| `shape_variable`             | fg(Color::Purple)                      | \*           |
+| shape                        | default style                       | configurable |
+| ---------------------------- | ----------------------------------- | ------------ |
+| `shape_binary`               | `purple_bold`                       | \*           |
+| `shape_block`                | `blue_bold`                         | \*           |
+| `shape_bool`                 | `light_cyan`                        | \*           |
+| `shape_closure`              | `green_bold`                        | \*           |
+| `shape_custom`               | `green`                             | \*           |
+| `shape_datetime`             | `cyan_bold`                         | \*           |
+| `shape_directory`            | `cyan`                              | \*           |
+| `shape_external`             | `cyan`                              | \*           |
+| `shape_external_resolved`    | `light_yellow_bold`                 | \*           |
+| `shape_externalarg`          | `green_bold`                        | \*           |
+| `shape_filepath`             | `cyan`                              | \*           |
+| `shape_flag`                 | `blue_bold`                         | \*           |
+| `shape_float`                | `purple_bold`                       | \*           |
+| `shape_garbage`              | `{ fg: default, bg: red, attr: b }` | \*           |
+| `shape_glob_interpolation`   | `cyan_bold`                         | \*           |
+| `shape_globpattern`          | `cyan_bold`                         | \*           |
+| `shape_int`                  | `purple_bold`                       | \*           |
+| `shape_internalcall`         | `cyan_bold`                         | \*           |
+| `shape_keyword`              | `cyan_bold`                         | \*           |
+| `shape_list`                 | `cyan_bold`                         | \*           |
+| `shape_literal`              | `blue`                              | \*           |
+| `shape_match_pattern`        | `green`                             | \*           |
+| `shape_matching_brackets`    | `default_underline`                 | \*           |
+| `shape_nothing`              | `light_cyan`                        | \*           |
+| `shape_operator`             | `yellow`                            | \*           |
+| `shape_pipe`                 | `purple_bold`                       | \*           |
+| `shape_range`                | `yellow_bold`                       | \*           |
+| `shape_raw_string`           | `light_purple`                      | \*           |
+| `shape_record`               | `cyan_bold`                         | \*           |
+| `shape_redirection`          | `purple_bold`                       | \*           |
+| `shape_signature`            | `green_bold`                        | \*           |
+| `shape_string`               | `green`                             | \*           |
+| `shape_string_interpolation` | `cyan_bold`                         | \*           |
+| `shape_table`                | `blue_bold`                         | \*           |
+| `shape_variable`             | `purple`                            | \*           |
+| `shape_vardecl`              | `purple`                            | \*           |
 
 Here's a small example of how to apply color to these items. Anything not overridden will receive its default color.
 
 ```nu
-$env.config.color_config.shape_garbage: { fg: "#FFFFFF" bg: "#FF0000" attr: b}
-$env.config.color_config.shape_bool: green
-$env.config.color_config.shape_int: { fg: "#0000ff" attr: b}
+$env.config.color_config.shape_garbage = { fg: "#FFFFFF" bg: "#FF0000" attr: b}
+$env.config.color_config.shape_bool = 'green'
+$env.config.color_config.shape_int = { fg: "#0000ff" attr: b}
 ```
 
 ## Prompt Configuration and Coloring
@@ -407,9 +429,9 @@ The Nushell prompt is configurable through these environment variables and confi
 
 - `PROMPT_COMMAND`: Code to execute for setting up the prompt (block)
 - `PROMPT_COMMAND_RIGHT`: Code to execute for setting up the _RIGHT_ prompt (block) (see oh-my.nu in nu_scripts)
-- `PROMPT_INDICATOR` = "〉": The indicator printed after the prompt (by default ">"-like Unicode symbol)
-- `PROMPT_INDICATOR_VI_INSERT` = ": "
-- `PROMPT_INDICATOR_VI_NORMAL` = "v "
+- `PROMPT_INDICATOR` = "> ": The indicator printed after the prompt in Emacs mode
+- `PROMPT_INDICATOR_VI_INSERT` = ": ": The indicator in Vi insert mode (and Helix insert mode)
+- `PROMPT_INDICATOR_VI_NORMAL` = "> ": The indicator in Vi normal and visual mode (and Helix normal and select mode)
 - `PROMPT_MULTILINE_INDICATOR` = "::: "
 - `render_right_prompt_on_last_line`: Bool value to enable or disable the right prompt to be rendered on the last line of the prompt
 
@@ -422,7 +444,7 @@ $env.PROMPT_COMMAND = { $"(date now | format date '%m/%d/%Y %I:%M:%S%.3f'): (pwd
 If you don't like the default `PROMPT_INDICATOR` you could change it like this.
 
 ```nu
-$env.PROMPT_INDICATOR = "> "
+$env.PROMPT_INDICATOR = "❯ "
 ```
 
 If you're using `starship`, you'll most likely want to show the right prompt on the last line of the prompt, just like zsh or fish. You could modify the `config.nu` file, just set `render_right_prompt_on_last_line` to true:
@@ -499,7 +521,7 @@ You can put this command into your [Nushell configuration](/book/configuration.m
 
 Theming combines all the coloring above. Here's a quick example of one we put together quickly to demonstrate the ability to theme. This is a spin on the `base16` themes that we see so widespread on the web.
 
-The key to making theming work is to make sure you specify all themes and colors you're going to use in the `config.nu` file _before_ you declare the `let config = ` line.
+The key to making theming work is to make sure you define all themes and colors you're going to use in the `config.nu` file _before_ you assign them to `$env.config.color_config`.
 
 ```nu
 # let's define some colors
@@ -564,15 +586,14 @@ let base16_theme = {
 
 # now let's apply our regular config settings but also apply the "color_config:" theme that we specified above.
 
-$env.config.color_config: $base16_theme # <-- this is the theme
-$env.config.edit_mode: emacs # vi
-$env.config.filesize.unit: metric
-$env.config.float_precision: 2
-$env.config.footer_mode: always #always, never, number_of_rows, auto
-$env.config.history.max_size: 10000
-$env.config.ls.use_ls_colors: true
-$env.config.table.mode: rounded # ascii_rounded, basic, basic_compact, compact, compact_double, default, dots, double, heavy, light, markdown, none, psql, reinforced, restructured, rounded, single, thin, with_love
-$env.config.use_ansi_coloring: true
+$env.config.color_config = $base16_theme # <-- this is the theme
+$env.config.edit_mode = 'emacs' # emacs, vi, helix
+$env.config.filesize.unit = 'metric'
+$env.config.float_precision = 2
+$env.config.footer_mode = 'always' # always, never, auto, or a number of rows
+$env.config.ls.use_ls_colors = true
+$env.config.table.mode = 'rounded' # ascii_rounded, basic, basic_compact, compact, compact_double, default, dots, double, frameless, heavy, light, markdown, none, psql, reinforced, restructured, rounded, single, thin, with_love
+$env.config.use_ansi_coloring = 'auto' # auto, true, false
 ```
 
 If you want to go full-tilt on theming, you'll want to theme all the items I mentioned at the very beginning, including LS_COLORS, and the prompt. Good luck!
@@ -586,11 +607,7 @@ If you are working on a light background terminal, you can apply the light theme
 # in $nu.config-path
 use std/config light-theme   # add this line to load the theme into scope
 
-$env.config = {
-  # ...
-  color_config: (light-theme)   # after using dark-theme or light-theme from std, you can change this with `(dark-theme)` in place of `(light-theme)`.
-  # ...
-}
+$env.config.color_config = (light-theme)
 ```
 
 You can also load the dark theme.
@@ -599,11 +616,7 @@ You can also load the dark theme.
 # in $nu.config-path
 use std/config dark-theme
 
-$env.config = {
-  # ...
-  color_config: (dark-theme)
-  # ...
-}
+$env.config.color_config = (dark-theme)
 ```
 
 ## Accessibility
@@ -612,20 +625,17 @@ It's often desired to have the minimum amount of decorations when using a screen
 
 ```nu
 # in $nu.config-path
-$env.config = {
-  ...
-  table: {
-   ...
-    mode: "none"
-   ...
-  }
-  error_style: "plain"
-  ...
-}
+$env.config.table.mode = "none"
+$env.config.error_style = "plain"
 ```
 
 ## Line Editor Menus (completion, history, help…)
 
-Reedline (Nu’s line editor) style is not using the `color_config` key.
+Reedline (Nu’s line editor) menus don't use the `color_config` key.
 Instead, each menu has its own style to be configured separately.
 See the [section dedicated to Reedline’s menus configuration](line_editor.md#menus) to learn more on this.
+
+The line editor does use a few `color_config` keys: `hints` styles the inline hints,
+`selection` styles text selected in Vi visual mode or Helix mode, and `selection_cursor`
+styles the character under the cursor inside a selection. The `shape_*` keys above
+style the syntax highlighting of the command line.

@@ -18,6 +18,7 @@ Given Nushell's strong support for structured data, some of the more common task
   - Example - `select` with multiple rows and columns
 - [Handling missing data using the optional operator](#the-optional-operator)
 - [Key/Column names with spaces](#key-column-names-with-spaces)
+- [Case-insensitive access](#case-insensitive-access)
 - [Other commands for navigating structured data](#other-commands-for-accessing-structured-data)
 
 ## Background
@@ -90,47 +91,48 @@ let data = [
 ::: details Expand for a visual representation of this data
 
 ```nu
-╭───┬─────────────┬───────────────┬───────────╮
-│ # │    date     │     temps     │ condition │
-├───┼─────────────┼───────────────┼───────────┤
-│ 0 │ 2 years ago │ ╭───┬───────╮ │ sunny     │
-│   │             │ │ 0 │ 38.24 │ │           │
-│   │             │ │ 1 │ 38.50 │ │           │
-│   │             │ │ 2 │ 37.99 │ │           │
-│   │             │ │ 3 │ 37.98 │ │           │
-│   │             │ │ 4 │ 39.10 │ │           │
-│   │             │ ╰───┴───────╯ │           │
-│ 1 │ 2 years ago │ ╭───┬───────╮ │ sunny     │
-│   │             │ │ 0 │ 35.24 │ │           │
-│   │             │ │ 1 │ 35.94 │ │           │
-│   │             │ │ 2 │ 34.91 │ │           │
-│   │             │ │ 3 │ 35.24 │ │           │
-│   │             │ │ 4 │ 36.65 │ │           │
-│   │             │ ╰───┴───────╯ │           │
-│ 2 │ 2 years ago │ ╭───┬───────╮ │ cloudy    │
-│   │             │ │ 0 │ 35.17 │ │           │
-│   │             │ │ 1 │ 36.67 │ │           │
-│   │             │ │ 2 │ 34.42 │ │           │
-│   │             │ │ 3 │ 35.76 │ │           │
-│   │             │ │ 4 │ 36.52 │ │           │
-│   │             │ ╰───┴───────╯ │           │
-│ 3 │ 2 years ago │ ╭───┬───────╮ │ rain      │
-│   │             │ │ 0 │ 39.24 │ │           │
-│   │             │ │ 1 │ 40.94 │ │           │
-│   │             │ │ 2 │ 39.21 │ │           │
-│   │             │ │ 3 │ 38.99 │ │           │
-│   │             │ │ 4 │ 38.80 │ │           │
-│   │             │ ╰───┴───────╯ │           │
-╰───┴─────────────┴───────────────┴───────────╯
+$data
+# => ╭───┬─────────────┬───────────────┬───────────╮
+# => │ # │    date     │     temps     │ condition │
+# => ├───┼─────────────┼───────────────┼───────────┤
+# => │ 0 │ 4 years ago │ ╭───┬───────╮ │ sunny     │
+# => │   │             │ │ 0 │ 38.24 │ │           │
+# => │   │             │ │ 1 │ 38.50 │ │           │
+# => │   │             │ │ 2 │ 37.99 │ │           │
+# => │   │             │ │ 3 │ 37.98 │ │           │
+# => │   │             │ │ 4 │ 39.10 │ │           │
+# => │   │             │ ╰───┴───────╯ │           │
+# => │ 1 │ 4 years ago │ ╭───┬───────╮ │ sunny     │
+# => │   │             │ │ 0 │ 35.24 │ │           │
+# => │   │             │ │ 1 │ 35.94 │ │           │
+# => │   │             │ │ 2 │ 34.91 │ │           │
+# => │   │             │ │ 3 │ 35.24 │ │           │
+# => │   │             │ │ 4 │ 36.65 │ │           │
+# => │   │             │ ╰───┴───────╯ │           │
+# => │ 2 │ 4 years ago │ ╭───┬───────╮ │ cloudy    │
+# => │   │             │ │ 0 │ 35.17 │ │           │
+# => │   │             │ │ 1 │ 36.67 │ │           │
+# => │   │             │ │ 2 │ 34.42 │ │           │
+# => │   │             │ │ 3 │ 35.76 │ │           │
+# => │   │             │ │ 4 │ 36.52 │ │           │
+# => │   │             │ ╰───┴───────╯ │           │
+# => │ 3 │ 4 years ago │ ╭───┬───────╮ │ rain      │
+# => │   │             │ │ 0 │ 39.24 │ │           │
+# => │   │             │ │ 1 │ 40.94 │ │           │
+# => │   │             │ │ 2 │ 39.21 │ │           │
+# => │   │             │ │ 3 │ 38.99 │ │           │
+# => │   │             │ │ 4 │ 38.80 │ │           │
+# => │   │             │ ╰───┴───────╯ │           │
+# => ╰───┴─────────────┴───────────────┴───────────╯
 ```
 
 :::
 
 This represents weather data in the form of a table with three columns:
 
-1. **_date_**: A Nushell `date` for each day
+1. **_date_**: A Nushell `datetime` for each day
 2. **_temps_**: A Nushell `list` of 5 `float` values representing temperature readings at different weather stations in the area
-3. **_conditions_**: A Nushell `string` for each day's weather condition for the area
+3. **_condition_**: A Nushell `string` for each day's weather condition for the area
 
 #### Example - Access a Table Row (Record)
 
@@ -139,7 +141,7 @@ Access the second day's data as a record:
 ```nu
 $data.1
 # => ╭───────────┬───────────────╮
-# => │ date      │ 2 years ago   │
+# => │ date      │ 4 years ago   │
 # => │           │ ╭───┬───────╮ │
 # => │ temps     │ │ 0 │ 35.24 │ │
 # => │           │ │ 1 │ 35.94 │ │
@@ -204,7 +206,7 @@ Continuing with the sample table above:
 ```nu
 $data | get 1
 # => ╭───────────┬───────────────╮
-# => │ date      │ 2 years ago   │
+# => │ date      │ 4 years ago   │
 # => │           │ ╭───┬───────╮ │
 # => │ temps     │ │ 0 │ 35.24 │ │
 # => │           │ │ 1 │ 35.94 │ │
@@ -219,7 +221,7 @@ $data | select 1
 # => ╭───┬─────────────┬───────────────┬───────────╮
 # => │ # │    date     │     temps     │ condition │
 # => ├───┼─────────────┼───────────────┼───────────┤
-# => │ 0 │ 2 years ago │ ╭───┬───────╮ │ sunny     │
+# => │ 0 │ 4 years ago │ ╭───┬───────╮ │ sunny     │
 # => │   │             │ │ 0 │ 35.24 │ │           │
 # => │   │             │ │ 1 │ 35.94 │ │           │
 # => │   │             │ │ 2 │ 34.91 │ │           │
@@ -254,8 +256,8 @@ $data | select date condition 0 1
 # => ╭───┬─────────────┬───────────╮
 # => │ # │    date     │ condition │
 # => ├───┼─────────────┼───────────┤
-# => │ 0 │ 2 years ago │ sunny     │
-# => │ 1 │ 2 years ago │ sunny     │
+# => │ 0 │ 4 years ago │ sunny     │
+# => │ 1 │ 4 years ago │ sunny     │
 # => ╰───┴─────────────┴───────────╯
 ```
 
@@ -295,6 +297,20 @@ $record_example."1"
 
 Do not confuse the key name with a row index in this case. Here, the first item is _assigned_ the key name `1` (a string). If converted to a table using the `transpose` command, key `1` (`string`) would be at row-index `0` (an integer).
 
+## Case-insensitive access
+
+Cell-path members are case-sensitive, so `$person.name` fails with a "Name not found" error when the key is `Name`. To match a member regardless of case, add `!` after it. To make every member of a cell-path case-insensitive, use the `--ignore-case` flag of `get`, `select`, or `reject`:
+
+```nu
+let person = { Name: "Sam" }
+$person.name!
+# => Sam
+$person | get --ignore-case name
+# => Sam
+```
+
+(Environment variables are an exception: `$env.path` and `$env.PATH` both work.)
+
 ## Handling Missing Data
 
 ### The Optional Operator
@@ -313,6 +329,16 @@ $data | reject temps | get $cp
 ```
 
 By default missing cells will be replaced by `null` when accessed via the optional operator.
+
+To make every member of a cell-path optional, you can also use the `--optional` (`-o`) flag of `get`, `select`, or `reject`:
+
+```nu
+[{a: 1} {b: 2}] | get -o a
+# => ╭───┬───╮
+# => │ 0 │ 1 │
+# => │ 1 │   │
+# => ╰───┴───╯
+```
 
 ### Assigning a `default` for missing or `null` data
 

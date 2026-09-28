@@ -26,17 +26,19 @@ def my-command [x: int, y: string] { }
 do {|nums : list<int>| $nums | describe} [ 1 2 3 ]
 
 # Input and Return type declaration on a custom command
-def my-filter []: nothing -> list { }
+def my-filter []: nothing -> list { [] }
 
 # Multiple Input/Return type signatures on a custom command
-def my-filter []: [
+def my-other-filter []: [
   nothing -> list
   range -> list
-] { }
+] { [] }
 ```
 
+The body of a command with an output type must produce a value of that type. An empty body (`{ }`) outputs its input, so `def my-filter []: nothing -> list { }` is rejected with `nu::parser::output_type_mismatch`.
+
 For a further discussion on custom command signatures please refer to: [Custom Commands](/book/custom_commands.html)
-And also: [Command Signature](/book/command_signature.html)
+And also: [Pipeline Input-Output Signature](/book/custom_commands.html#pipeline-input-output-signature)
 
 ## Kinds of type signatures
 
@@ -45,7 +47,9 @@ There are 3 forms of valid type signatures in Nu:
 - Basic: E.g. `int`, `bool`, `string`, etc.
 - Compound:
   - `list<string>`,
-    `record<type: int, bar: string>`
+    `record<type: int, bar: string>`,
+    `table<name: string, size: filesize>`
+- Union: `oneof<int, string>` matches a value of any of the listed types.
 
 ## Custom command parameters and flags
 
@@ -79,3 +83,13 @@ and `false` if not present.
 
 You cannot use the `bool` type as a flag annotation as that is the same
 as the existence or not of the occurrence of the flag.
+
+A typed flag that is not passed has the value `null`:
+
+```nu
+def f [--count: int, --verbose] { {count: $count, verbose: $verbose} }
+f | to nuon
+# => {count: null, verbose: false}
+f --count 3 --verbose | to nuon
+# => {count: 3, verbose: true}
+```

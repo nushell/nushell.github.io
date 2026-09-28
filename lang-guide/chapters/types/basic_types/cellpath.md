@@ -1,31 +1,66 @@
 # Cell-Path
 
-|                               |                                                                                                                                                                                                           |
-| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **_Description:_**            | An expression that is used to navigated to an inner value in a structured value.                                                                                                                          |
-| **_Annotation:_**             | `cell-path`                                                                                                                                                                                               |
-| **_Literal syntax example:_** | A dot-separated list of row (int) and column (string) IDs. E.g., `name.4.5`. Optionally, use a leading `$.` when needed for disambiguation, such as when assigning a cell-path to a variable (see below). |
-| **_Casts:_**                  | [`into cell-path`](/commands/docs/into_cell-path.md)                                                                                                                                                      |
-| **_See also:_**               | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md) for an in-depth overview.                                                                                                 |
+|                               |                                                                                                                                                                                                            |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **_Description:_**            | An expression that is used to navigated to an inner value in a structured value.                                                                                                                           |
+| **_Annotation:_**             | `cell-path`                                                                                                                                                                                                |
+| **_Literal syntax example:_** | A dot-separated list of row (int) and column (string) IDs. E.g., `temps.3.2`. Optionally, use a leading `$.` when needed for disambiguation, such as when assigning a cell-path to a variable (see below). |
+| **_Casts:_**                  | [`into cell-path`](/commands/docs/into_cell-path.md)                                                                                                                                                       |
+| **_See also:_**               | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md) for an in-depth overview.                                                                                                  |
 
 ## Literal Syntax Options
+
+The examples on this page use the weather data from [Navigating and Accessing Structured Data](/book/navigating_structured_data.md#tables):
+
+```nu
+let data = [
+    [date                        temps                                   condition      ];
+    [2022-02-01T14:30:00+05:00,  [38.24, 38.50, 37.99, 37.98, 39.10],   'sunny'       ],
+    [2022-02-02T14:30:00+05:00,  [35.24, 35.94, 34.91, 35.24, 36.65],   'sunny'       ],
+    [2022-02-03T14:30:00+05:00,  [35.17, 36.67, 34.42, 35.76, 36.52],   'cloudy'      ],
+    [2022-02-04T14:30:00+05:00,  [39.24, 40.94, 39.21, 38.99, 38.80],   'rain'        ]
+]
+```
 
 - Relaxed form:
 
   ```nu
-  > $data | get name.5
+  $data | get condition.2
+  # => cloudy
   ```
 
 - Leading `$.` form:
 
-  When assigning a cell path to a variable, the leading `$.` syntax is required:
+  When assigning a cell path to a variable, the leading `$.` syntax is required. Without it, `condition.2` is treated as the name of an external command:
 
   ```nu
-  > let cp: cell-path = name.5
-  # => Error
-  > let cp: cell-path = $.name.5
+  let cp: cell-path = condition.2
+  # => Error: nu::shell::external_command
+  # =>
+  # =>   × External command failed
+  # =>    ╭─[repl_entry #1:1:21]
+  # =>  1 │ let cp: cell-path = condition.2
+  # =>    ·                     ─────┬─────
+  # =>    ·                          ╰── Command `condition.2` not found
+  # =>    ╰────
+  # =>   help: `condition.2` is neither a Nushell built-in or a known external command
+
+  let cp: cell-path = $.condition.2
+  $data | get $cp
+  # => cloudy
+  ```
 
   This is not required when using cell-path arguments to a custom command.
+
+- Member modifiers:
+
+  A `?` after a member makes it optional (a missing value becomes `null` instead of an error), and a `!` makes it case-insensitive:
+
+  ```nu
+  {a: 1}.b? | describe
+  # => nothing
+  {Name: 1}.name!
+  # => 1
   ```
 
 ## Additional Language Notes
@@ -35,26 +70,28 @@
    - When accessing a cell in a table using a cell-path, either the row index or the column name can be listed first.
 
      ```nu
-     > ls | get name.0
-     # Returns the name of the first file
-     > ls | get 0.name
-     # Same result - The name of the first file
+     # Returns the condition of the first day
+     $data | get condition.0
+     # => sunny
+     # Same result - The condition of the first day
+     $data | get 0.condition
+     # => sunny
      ```
 
 - However, when accessing **nested** data, the ordering of _subsequent_ (nested) rows and columns is important.
 
-  Using the [nested weather data example](/book/navigating_structured_data.md#tables):
+  Using the nested weather data from above:
 
   ```nu
   # Accesses the second day, third temperature
-  > $data.1.temps.2
-  34.91
+  $data.1.temps.2
+  # => 34.91
   # Also accesses the second day, third temperature
-  > $data.temps.1.2
-  34.91
+  $data.temps.1.2
+  # => 34.91
   # Accesses the third day, second temperature
-  > $data.temps.2.1
-  36.67
+  $data.temps.2.1
+  # => 36.67
   ```
 
   Notice that the first row/column can be swapped without changing the meaning, but swapping the position of the two row indices results in a different path.
@@ -95,8 +132,11 @@
    ```nu
    let grr = 2 # using IATA codes for variable names
    let cp: cell-path = ([3, temps, $grr] | into cell-path)
+   $cp
+   # => $.3.temps.2
+   # Returns the GRR temperature for the fourth day
    $data | get $cp
-   # returns just temps for GRR
+   # => 39.21
    ```
 
 ## Common commands that can be used with `cell-path`

@@ -35,18 +35,38 @@ let year = (
 )
 ```
 
+## Assigning Pipeline Results with `let`
+
+`let` can also be used as a stage in a pipeline. At the end of a pipeline, it stores the pipeline's result in a new variable:
+
+```nu
+ls | get name | let files
+# Equivalent to:
+let files = ls | get name
+```
+
+`let` passes its input through unchanged, so it can also be placed in the middle of a pipeline to name an intermediate value while the pipeline keeps going. (Because of this, a `let` at the end of a pipeline still displays the value in the REPL.)
+
+```nu
+"hello" | let msg | str length
+# => 5
+$msg
+# => hello
+```
+
 ## Semicolons
 
 Take this example:
 
 ```nu
-line1; line2 | line3
+ls; "hello" | str uppercase
+# => HELLO
 ```
 
 Here, semicolons are used in conjunction with pipelines. When a semicolon is used, no output data is produced to be piped. As such, the `$in` variable will not work when used immediately after the semicolon.
 
-- As there is a semicolon after `line1`, the command runs to completion and its output is discarded.
-- `line2 | line3` is a normal pipeline. It runs, and as the final value, its contents are returned and displayed.
+- As there is a semicolon after `ls`, the command runs to completion and its output is discarded.
+- `"hello" | str uppercase` is a normal pipeline. It runs, and as the final value, its contents are returned and displayed.
 
 See: [Thinking in Nu -> Single Return Value per Expression](thinking_in_nu.html#single-return-value-per-expression)
 
@@ -112,8 +132,8 @@ In most filters, the pipeline input and its resulting `$in` will be the same as 
 However, some filters will assign an even more convenient value to their closures' input. The `update` filter is one example. The pipeline input to the `update` command's closure (as well as `$in`) refers to the _column_ being updated, while the closure parameter refers to the entire record. As a result, the following two examples are also equivalent:
 
 ```nu
-ls | update name {|file| $file.name | str upcase}
-ls | update name {str upcase}
+ls | update name {|file| $file.name | str uppercase}
+ls | update name {str uppercase}
 ```
 
 With most filters, the second version would refer to the entire `file` record (with `name`, `type`, `size`, and `modified` columns). However, with `update`, it refers specifically to the contents of the _column_ being updated, in this case `name`.
@@ -146,23 +166,20 @@ See: [Custom Commands -> Pipeline Input](custom_commands.html#pipeline-input)
     print $in
     $in
   }
+  # => a
+  # => a
+  # => b
+  # => b
+  # => c
+  # => c
+  # => ╭───┬───╮
+  # => │ 0 │ a │
+  # => │ 1 │ b │
+  # => │ 2 │ c │
+  # => ╰───┴───╯
   ```
 
-  All three of the `$in` values are the same on each iteration, so this outputs:
-
-  ```nu
-  a
-  a
-  b
-  b
-  c
-  c
-  ╭───┬───╮
-  │ 0 │ a │
-  │ 1 │ b │
-  │ 2 │ c │
-  ╰───┴───╯
-  ```
+  All three of the `$in` values are the same on each iteration, so each item is printed twice, and then the list of the returned values is displayed.
 
 - **_Rule 2:_** When used anywhere else in a pipeline (other than the first position), `$in` refers to the previous expression's result:
 
@@ -172,8 +189,8 @@ See: [Custom Commands -> Pipeline Input](custom_commands.html#pipeline-input)
   4               # Pipeline input
   | $in * $in     # $in is 4 in this expression
   | $in / 2       # $in is now 16 in this expression
-  | $in           # $in is now 8
-  # =>   8
+  | $in           # $in is now 8.0
+  # =>   8.0
   ```
 
 - **_Rule 2.5:_** Inside a closure or block, Rule 2 usage occurs inside a new scope (a sub-expression) where that "new" `$in` value is valid. This means that Rule 1 and Rule 2 usage can coexist in the same closure or block.
@@ -187,20 +204,17 @@ See: [Custom Commands -> Pipeline Input](custom_commands.html#pipeline-input)
     let p = (            # explicit sub-expression, but one will be created regardless
       $in * $in          # initial-pipeline position $in is still 4 here
       | $in / 2          # $in is now 16
-    )                    # $p is the result, 8 - Sub-expression scope ends
+    )                    # $p is the result, 8.0 - Sub-expression scope ends
 
     print $in            # At the closure-scope, the "original" $in is still 4
     print $p
   }
+  # => 4
+  # => 4
+  # => 8.0
   ```
 
-  So the output from the 3 `print` statements is:
-
-  ```nu
-  4
-  4
-  8
-  ```
+  The output comes from the 3 `print` statements.
 
   Again, this would hold true even if the command above used the more compact, implicit sub-expression form:
 
@@ -213,10 +227,9 @@ See: [Custom Commands -> Pipeline Input](custom_commands.html#pipeline-input)
     print $in                       # At the closure-scope, $in is still 4
     print $p
   }
-
-  4
-  4
-  8
+  # => 4
+  # => 4
+  # => 8.0
   ```
 
 - **_Rule 3:_** When used with no input, `$in` is null.
@@ -295,45 +308,55 @@ Data coming from an external command into Nu will come in as bytes that Nushell 
 
 Nu works with data piped between two external commands in the same way as other shells, like Bash would. The `stdout` of external_command_1 is connected to the `stdin` of external_command_2. This lets data flow naturally between the two commands.
 
+### Failing External Commands in a Pipeline
+
+If any external command in a pipeline exits with a non-zero code, the whole pipeline fails, even when the commands after it succeed. This is the same as running Bash with `set -o pipefail`. For example, `^false | lines` still produces an empty list, but a script stops at that line, and in the REPL `$env.LAST_EXIT_CODE` is set to `1`. When several external commands in a pipeline fail, `$env.LAST_EXIT_CODE` holds the exit code of the rightmost one that failed.
+
+You can handle the failure with `try`/`catch`, whose error record includes the exit code:
+
+```nu
+try { ^false | lines } catch {|e| $e.exit_code }
+# => 1
+```
+
+To capture the output and exit code of an external command without failing, use [`complete`](/commands/docs/complete.md). See [Stdout, Stderr, and Exit Codes](stdout_stderr_exit_codes.md) for more.
+
 ### Command Input and Output Types
 
 The Basics section above describes how commands can be combined in pipelines as input, filters, or output.
 How you can use commands depends on what they offer in terms of input/output handling.
 
 You can check what a command supports with [`help <command name>`](/commands/docs/help.md), which shows the relevant *Input/output types*.
+The same table is available as data in the `input_output` column of [`help commands`](/commands/docs/help_commands.md).
 
-For example, through `help first` we can see that the [`first` command](/commands/docs/first.md) supports multiple input and output types:
+For example, `help first` (or this `help commands` query) shows that the [`first` command](/commands/docs/first.md) supports multiple input and output types:
 
 ```nu
-help first
-# => […]
-# => Input/output types:
-# =>   ╭───┬───────────┬────────╮
-# =>   │ # │   input   │ output │
-# =>   ├───┼───────────┼────────┤
-# =>   │ 0 │ list<any> │ any    │
-# =>   │ 1 │ binary    │ binary │
-# =>   │ 2 │ range     │ any    │
-# =>   ╰───┴───────────┴────────╯
+help commands | where name == first | get 0.input_output
+# => ╭───┬───────────┬────────╮
+# => │ # │   input   │ output │
+# => ├───┼───────────┼────────┤
+# => │ 0 │ list<any> │ any    │
+# => │ 1 │ binary    │ binary │
+# => │ 2 │ range     │ any    │
+# => ╰───┴───────────┴────────╯
 
-[a b c] | first                                                                                                                                   took 1ms
+[a b c] | first
 # => a
 
-1..4 | first                                                                                                                                     took 21ms
+1..4 | first
 # => 1
 ```
 
 As another example, the [`ls` command](/commands/docs/ls.md) supports output but not input:
 
 ```nu
-help ls
-# => […]
-# => Input/output types:
-# =>   ╭───┬─────────┬────────╮
-# =>   │ # │  input  │ output │
-# =>   ├───┼─────────┼────────┤
-# =>   │ 0 │ nothing │ table  │
-# =>   ╰───┴─────────┴────────╯
+help commands | where name == ls | get 0.input_output
+# => ╭───┬─────────┬────────╮
+# => │ # │  input  │ output │
+# => ├───┼─────────┼────────┤
+# => │ 0 │ nothing │ table  │
+# => ╰───┴─────────┴────────╯
 ```
 
 This means, for example, that attempting to pipe into `ls` (`echo .. | ls`) leads to unintended results.
@@ -352,14 +375,12 @@ Other commands without default behavior may fail in different ways, and with exp
 For example, `help sleep` tells us that [`sleep`](/commands/docs/sleep.md) supports no input and no output types:
 
 ```nu
-help sleep
-# => […]
-# => Input/output types:
-# =>   ╭───┬─────────┬─────────╮
-# =>   │ # │  input  │ output  │
-# =>   ├───┼─────────┼─────────┤
-# =>   │ 0 │ nothing │ nothing │
-# =>   ╰───┴─────────┴─────────╯
+help commands | where name == sleep | get 0.input_output
+# => ╭───┬─────────┬─────────╮
+# => │ # │  input  │ output  │
+# => ├───┼─────────┼─────────┤
+# => │ 0 │ nothing │ nothing │
+# => ╰───┴─────────┴─────────╯
 ```
 
 When we erroneously pipe into it, instead of unintended behavior like in the `ls` example above, we receive an error:
@@ -369,7 +390,7 @@ echo 1sec | sleep
 # => Error: nu::parser::missing_positional
 # => 
 # =>   × Missing required positional argument.
-# =>    ╭─[entry #53:1:18]
+# =>    ╭─[repl_entry #53:1:18]
 # =>  1 │ echo 1sec | sleep
 # =>    ╰────
 # =>   help: Usage: sleep <duration> ...(rest) . Use `--help` for more information.
@@ -448,23 +469,16 @@ $env.config.hooks.display_output = null
 ## Output Result to External Commands
 
 Sometimes you want to output Nushell structured data to an external command for further processing. However, Nushell's default formatting options for structured data may not be what you want.
-For example, you want to find a file named "tutor" under "/usr/share/vim/runtime" and check its ownership
+For example, you want to find a file named "tutor" under "/usr/share/nvim/runtime" and check its ownership
 
 ```nu
-ls /usr/share/nvim/runtime/
-# => ╭────┬───────────────────────────────────────┬──────┬─────────┬───────────────╮
-# => │  # │                 name                  │ type │  size   │   modified    │
-# => ├────┼───────────────────────────────────────┼──────┼─────────┼───────────────┤
-# => │  0 │ /usr/share/nvim/runtime/autoload      │ dir  │  4.1 KB │ 2 days ago    │
-# => ..........
-# => ..........
-# => ..........
-# => 
-# => │ 31 │ /usr/share/nvim/runtime/tools         │ dir  │  4.1 KB │ 2 days ago    │
-# => │ 32 │ /usr/share/nvim/runtime/tutor         │ dir  │  4.1 KB │ 2 days ago    │
-# => ├────┼───────────────────────────────────────┼──────┼─────────┼───────────────┤
-# => │  # │                 name                  │ type │  size   │   modified    │
-# => ╰────┴───────────────────────────────────────┴──────┴─────────┴───────────────╯
+ls /usr/share/nvim/runtime/ | last 2
+# => ╭───┬───────────────────────────────┬──────┬────────┬────────────╮
+# => │ # │             name              │ type │  size  │  modified  │
+# => ├───┼───────────────────────────────┼──────┼────────┼────────────┤
+# => │ 0 │ /usr/share/nvim/runtime/tools │ dir  │ 4.1 kB │ 2 days ago │
+# => │ 1 │ /usr/share/nvim/runtime/tutor │ dir  │ 4.1 kB │ 2 days ago │
+# => ╰───┴───────────────────────────────┴──────┴────────┴────────────╯
 ```
 
 You decided to use `grep` and [pipe](https://www.nushell.sh/book/pipelines.html) the result to external `^ls`

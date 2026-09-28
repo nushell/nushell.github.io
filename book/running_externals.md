@@ -18,6 +18,35 @@ External command (typically `/usr/bin/ls`):
 On Windows, `ls` is a PowerShell _alias_ by default, so `^ls` will not find a matching system _command_.
 :::
 
+## Running a Built-in Command with `%`
+
+The percent (`%`) sigil does the opposite of the caret: it always runs the Nushell built-in command, even when a custom command or alias with the same name shadows it:
+
+```nu
+def echo [...args] { "custom echo" }
+echo hello
+# => custom echo
+%echo hello
+# => hello
+```
+
+A `%` call only resolves to built-in commands. It still finds a built-in that has been hidden with [`hide`](/commands/docs/hide.md), and it never falls back to an external command or a custom command. If no built-in has that name, Nushell reports an error:
+
+```nu
+%lss
+# => Error: nu::parser::error
+# =>
+# =>   × percent sigil requires a built-in command
+# =>    ╭─[repl_entry #1:1:2]
+# =>  1 │ %lss
+# =>    ·  ─┬─
+# =>    ·   ╰── unknown built-in command
+# =>    ╰────
+# =>   help: remove `%` to use normal resolution, or use `^` to run an external command explicitly
+```
+
+Like `^`, the `%` sigil also accepts a command name stored in a variable, such as `%$cmd`.
+
 ## Passing Arguments
 
 External arguments are separated by Nushell syntax, not by spaces inside a quoted string. Quote a string to keep its spaces inside one argument:

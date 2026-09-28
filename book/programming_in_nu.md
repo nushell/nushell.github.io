@@ -22,7 +22,9 @@ Not all operations are supported for all data types, and Nushell will make sure 
 You can store intermediate results to [variables](variables.md).
 Variables can be immutable, mutable, or a parse-time constant.
 
-The last three sections are aimed at organizing your code:
+[Control flow](control_flow.md) commands such as `if`, `match`, `for` and `try` decide which code runs and how many times.
+
+The next three sections are aimed at organizing your code:
 
 [Scripts](scripts.md) are the simplest form of code organization: You just put the code into a file and source it.
 However, you can also run scripts as standalone programs with command line signatures using the "special" `main` command.

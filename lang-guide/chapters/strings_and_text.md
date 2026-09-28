@@ -2,9 +2,16 @@
 
 ## String literals
 
-- Maybe it's the backtick quote?
-- Should we have a `r"some\nliteral\tstring"` ala rust?
-- Should we have something like python's triple double quotes like `"""` which helps with multi-line strings and also does string literal things?
+Nushell has raw strings, which work like Rust's raw strings. A raw string starts with `r#'` and ends with `'#`. Escapes are not interpreted, and the string can span multiple lines. Add more `#` characters on both sides if the text itself contains `'#`:
+
+```nu
+r#'some\nliteral\tstring'#
+# => some\nliteral\tstring
+r##'contains '# inside'##
+# => contains '# inside
+```
+
+See [Raw Strings](/book/working_with_strings.md#raw-strings) in the Book.
 
 ## String interpolation
 
@@ -30,17 +37,18 @@ Sometimes you need to build a path to execute external commands or build command
 #### Example:
 
 ```nu
-let path1 = "/part1"
-let path2 = "/part2"
-let fn = "filename"
+let path1 = "/bin"
+let path2 = "/"
+let fn = "echo"
 let arguments = ["arg1", "-a", "arg2"]
 
 ^$"($path1)($path2)($fn)" ...$arguments
+# => arg1 -a arg2
 ```
 
 The caret `^` before the string interpolation symbol `$` allows that external command to be executed.
 
-The percent sigin `%` can be used to call the built-in command (without arguments).
+The percent sigil `%` calls the built-in command with that name, even if a custom command or alias shadows it. Only built-in commands can be called this way. When the name comes from a variable or string, as below, arguments are passed as positional values, so flags such as `-a` are not recognized.
 
 ```nu
 let cmd = "ls"
@@ -69,7 +77,7 @@ This would be interpreted as a red foreground `Hello` and a magenta/purple foreg
 3. `[35m` means use whatever is defined as `magenta/purple` foreground in your terminal.
 4. `[0m` means reset all ANSI escape sequences.
 
-There are other escapes defined by Nushell found in [parser.rs](https://github.com/nushell/nushell/blob/main/crates/nu-parser/src/parser.rs#L2496) around line 2500 in the `unescape_string` function.
+There are other escapes defined by Nushell found in [parse_literals.rs](https://github.com/nushell/nushell/blob/main/crates/nu-parser/src/parse_literals.rs) in the `unescape_string` function.
 
 Recognized Nushell escapes:
 
@@ -93,7 +101,10 @@ Recognized Nushell escapes:
 - `n` - Line feed aka New Line
 - `r` - Carriage return
 - `t` - Tab aka Horizontal Tab
-- `uXXXX` - Unicode hex value for a char - requires 4 chars. It would be nice if \uXX was acceptable as well.
+- `0` - Null character
+- a space character - Space (`"a\ b"` is `a b`)
+- `xHH` - A byte given as exactly 2 hex digits, e.g. `\x41` is `A`
+- `u{X...}` - Unicode hex value for a char, with 1 to 6 hex digits inside the braces, e.g. `\u{41}` or `\u{1F600}`. The old `\uXXXX` form without braces is an error.
 
 Double quotes work within string interpolation as well.
 
@@ -129,9 +140,18 @@ The key to always remember is that double quotes recognize and interpret escapes
 
 ```nu
 # Why doesn't this work?
-cd "C:\Program Files\somedir"
+"C:\Program Files\somedir"
+# => Error: nu::parser::error
+# =>
+# =>   × Invalid literal
+# =>    ╭─[repl_entry #1:2:4]
+# =>  1 │ # Why doesn't this work?
+# =>  2 │ "C:\Program Files\somedir"
+# =>    ·    ───────────┬───────────
+# =>    ·               ╰── unrecognized escape sequence '\P' in string
+# =>    ╰────
 ```
 
-It doesn't work because it sees `\P` and `\s` as escapes that are not recognized.
+It doesn't work because it sees `\P` and `\s` as escapes that are not recognized. Use single quotes or a raw string instead: `'C:\Program Files\somedir'` or `r#'C:\Program Files\somedir'#`.
 
 ## Bare word

@@ -6,9 +6,9 @@
 | **_Annotation:_**     | `list`                                                                          |
 | **_Literal syntax:_** | See below                                                                       |
 | **_Casts:_**          | N/A                                                                             |
-| **_See Also:_**       | [Working with Tables](/book/working_with_tables.md)                             |
+| **_See Also:_**       | [Working with Lists](/book/working_with_lists.md)                               |
 |                       | [Navigating and Accessing Structured Data](/book/navigating_structured_data.md) |
-|                       | [Types of Data - Tables](/book/types_of_data.md#tables)                         |
+|                       | [Types of Data - Lists](/book/types_of_data.md#lists)                           |
 
 ## List-literal Syntax
 
@@ -17,38 +17,38 @@ List syntax is very similar to that of arrays in JSON. However, commas are _not_
 - Commas
 
   ```nu
-  > [ foo, bar, baz ]
-  ╭───┬─────╮
-  │ 0 │ foo │
-  │ 1 │ bar │
-  │ 2 │ baz │
-  ╰───┴─────╯
+  [ foo, bar, baz ]
+  # => ╭───┬─────╮
+  # => │ 0 │ foo │
+  # => │ 1 │ bar │
+  # => │ 2 │ baz │
+  # => ╰───┴─────╯
   ```
 
 - Spaces (when unambiguous):
 
   ```nu
-  > [ foo bar baz ]
-  ╭───┬─────╮
-  │ 0 │ foo │
-  │ 1 │ bar │
-  │ 2 │ baz │
-  ╰───┴─────╯
+  [ foo bar baz ]
+  # => ╭───┬─────╮
+  # => │ 0 │ foo │
+  # => │ 1 │ bar │
+  # => │ 2 │ baz │
+  # => ╰───┴─────╯
   ```
 
 - Line breaks:
 
   ```nu
-  > [
-      foo
-      bar
-      baz
-    ]
-  ╭───┬─────╮
-  │ 0 │ foo │
-  │ 1 │ bar │
-  │ 2 │ baz │
-  ╰───┴─────╯
+  [
+    foo
+    bar
+    baz
+  ]
+  # => ╭───┬─────╮
+  # => │ 0 │ foo │
+  # => │ 1 │ bar │
+  # => │ 2 │ baz │
+  # => ╰───┴─────╯
   ```
 
 ## Additional Language Notes
@@ -65,7 +65,7 @@ there are too many commands to list here. Here are a few:
 - `all`
 - `get`
 - `select`
-- `each`, `par-each`, `filter`, `reduce`
+- `each`, `par-each`, `where`, `reduce`
 - `skip`, `skip until`, `skip while`, `take`, `take until`, `take while`
 - `first`, `last`, `length`
 - `insert`, `update`, `upsert`, `append`
@@ -76,5 +76,13 @@ there are too many commands to list here. Here are a few:
 
 ## Common operators that can be used with `list`
 
-- in For set membership
-  - `not (12 in [1 2 3])` for inverse set membership
+- `in` and `has` for set membership (`12 in [1 2 3]` and `[1 2 3] has 12` are equivalent)
+  - `not-in` and `not-has` for inverse set membership (`12 not-in [1 2 3]` is the same as `not (12 in [1 2 3])`)
+- `++` to concatenate two lists
+
+  ```nu
+  [1 2] ++ [3 4] | to nuon
+  # => [1, 2, 3, 4]
+  ```
+
+  Both operands must be lists. To add a single value, use `append` (or wrap the value in a list: `$list ++ [$value]`).

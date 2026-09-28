@@ -8,7 +8,7 @@
 | **_Casts:_**          | N/A                                                                                                                                             |
 | **_See also:_**       | [Types of Data - Closures](/book/types_of_data.md#closures)                                                                                     |
 
-Closures are used in Nu extensively as parameters to iteration style commands like `each`, `filter`, and `reduce`, to name but a few. A closure acts like a custom command that can be invoked either explicitly or by other commands. Closures can take parameters, return values and be passed to commands, either builtin or custom.
+Closures are used in Nu extensively as parameters to iteration style commands like `each`, `where`, and `reduce`, to name but a few. A closure acts like a custom command that can be invoked either explicitly or by other commands. Closures can take parameters, return values and be passed to commands, either builtin or custom.
 
 ## Language Notes
 
@@ -63,7 +63,16 @@ Closures are used in Nu extensively as parameters to iteration style commands li
      mut x = 9
      do {|p| $p + $x }
    }
-   # => Error: Capture of mutable variable.
+   # => Error: nu::parser::expected_keyword
+   # =>
+   # =>   × Capture of mutable variable.
+   # =>    ╭─[repl_entry #1:3:16]
+   # =>  2 │   mut x = 9
+   # =>  3 │   do {|p| $p + $x }
+   # =>    ·                ─┬
+   # =>    ·                 ╰── capture of mutable variable
+   # =>  4 │ }
+   # =>    ╰────
    ```
 
 1. You cannot pass a closure to an external command; they are reserved only for Nu usage.
@@ -82,7 +91,7 @@ Closures are used in Nu extensively as parameters to iteration style commands li
    # => 3
    ```
 
-1. You can also use [pipeline input as `$in`](pipelines.html#pipeline-input-and-the-special-in-variable) in most closures instead of providing an explicit parameter. For example:
+1. You can also use [pipeline input as `$in`](/book/pipelines.md#pipeline-input-and-the-special-in-variable) in most closures instead of providing an explicit parameter. For example:
 
    ```nu
    1..5 | each { print $in }
@@ -100,7 +109,7 @@ Closures are used in Nu extensively as parameters to iteration style commands li
 
    ```nu
    {|a,b| $a + $b} | do $in 34 8
-   # => 43
+   # => 42
    ```
 
 1. As seen above, closures can be returned from a custom command. They can also be returned from another closure.
@@ -125,7 +134,6 @@ Closures are used in Nu extensively as parameters to iteration style commands li
 - [`do`](/commands/docs/do.md)
 - [`each`](/commands/docs/each.md)
 - [`explain`](/commands/docs/explain.md)
-- [`filter`](/commands/docs/filter.md)
 - [`group-by`](/commands/docs/group-by.md)
 - [`interleave`](/commands/docs/interleave.md)
 - [`items`](/commands/docs/items.md)
@@ -134,9 +142,11 @@ Closures are used in Nu extensively as parameters to iteration style commands li
 - [`skip until`](/commands/docs/skip_until.md)
 - [`skip while`](/commands/docs/skip_while.md)
 - [`take until`](/commands/docs/take_until.md)
+- [`take while`](/commands/docs/take_while.md)
 - [`tee`](/commands/docs/tee.md)
 - [`update`](/commands/docs/update.md)
 - [`upsert`](/commands/docs/upsert.md)
+- [`where`](/commands/docs/where.md)
 - [`zip`](/commands/docs/zip.md)
 
 ### Examples of using closures

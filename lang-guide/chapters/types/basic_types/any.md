@@ -31,13 +31,15 @@
      }
 
      $x
-     # =>'No', which is a string
+     # => No
+     $x | describe
+     # => string
      ```
 
    - Annotate a command parameter that can accept any type
 
    ```nu
-   def takes-anything [v: any] -> string {
+   def takes-anything [v: any]: nothing -> string {
      $v | describe
    }
 
@@ -50,18 +52,22 @@
    - Annotate a type signature for a command that can accept any type as input or might output any type
 
    ```nu
-   def passthrough [] any -> any { $in }
+   def passthrough []: any -> any { $in }
    "Virat Kohli" | passthrough | describe
-   # =>string
+   # => string
 
    {||} | passthrough | describe
-   # =>closure
+   # => closure
    ```
 
 3. Annotate a `list` to indicate that it can hold any type
 
+   As with other `any` values, `describe` reports the types of the values the list actually holds. A list with mixed element types is shown as a `oneof<...>` of those types. Only an empty list reports `list<any>`:
+
    ```nu
-   let various = [ true false 42 'Nushell' ]
+   let various: list<any> = [ true false 42 'Nushell' ]
    $various | describe
-   # =>list<any>
+   # => list<oneof<bool, int, string>>
+   [] | describe
+   # => list<any>
    ```

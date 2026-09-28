@@ -10,21 +10,22 @@ To start off, let's get a table that we can use:
 
 ```nu
 ls
-# => ───┬───────────────┬──────┬─────────┬────────────
-# =>  # │ name          │ type │ size    │ modified
-# => ───┼───────────────┼──────┼─────────┼────────────
-# =>  0 │ files.rs      │ File │  4.6 KB │ 5 days ago
-# =>  1 │ lib.rs        │ File │   330 B │ 5 days ago
-# =>  2 │ lite_parse.rs │ File │  6.3 KB │ 5 days ago
-# =>  3 │ parse.rs      │ File │ 49.8 KB │ 1 day ago
-# =>  4 │ path.rs       │ File │  2.1 KB │ 5 days ago
-# =>  5 │ shapes.rs     │ File │  4.7 KB │ 5 days ago
-# =>  6 │ signature.rs  │ File │  1.2 KB │ 5 days ago
-# => ───┴───────────────┴──────┴─────────┴────────────
+# => ╭───┬───────────────┬──────┬─────────┬─────────────╮
+# => │ # │     name      │ type │  size   │  modified   │
+# => ├───┼───────────────┼──────┼─────────┼─────────────┤
+# => │ 0 │ files.rs      │ file │  4.6 kB │ 5 days ago  │
+# => │ 1 │ lib.rs        │ file │   330 B │ 5 days ago  │
+# => │ 2 │ lite_parse.rs │ file │  6.3 kB │ 5 days ago  │
+# => │ 3 │ parse.rs      │ file │ 49.8 kB │ a day ago   │
+# => │ 4 │ path.rs       │ file │  2.1 kB │ 5 days ago  │
+# => │ 5 │ rustfmt.toml  │ file │    17 B │ a month ago │
+# => │ 6 │ shapes.rs     │ file │  4.7 kB │ 5 days ago  │
+# => │ 7 │ signature.rs  │ file │  1.2 kB │ 5 days ago  │
+# => ╰───┴───────────────┴──────┴─────────┴─────────────╯
 ```
 
 ::: tip Changing how tables are displayed
-Nu will try to expands all table's structure by default. You can change this behavior by changing the `display_output` hook.
+By default, Nu expands nested data inside tables when the terminal is at least 100 columns wide. You can change this behavior by changing the `display_output` hook.
 See [hooks](/book/hooks.md#changing-how-output-is-displayed) for more information.
 :::
 
@@ -34,20 +35,21 @@ We can sort a table by calling the [`sort-by`](/commands/docs/sort-by.md) comman
 
 ```nu
 ls | sort-by size
-# => ───┬───────────────┬──────┬─────────┬────────────
-# =>  # │ name          │ type │ size    │ modified
-# => ───┼───────────────┼──────┼─────────┼────────────
-# =>  0 │ lib.rs        │ File │   330 B │ 5 days ago
-# =>  1 │ signature.rs  │ File │  1.2 KB │ 5 days ago
-# =>  2 │ path.rs       │ File │  2.1 KB │ 5 days ago
-# =>  3 │ files.rs      │ File │  4.6 KB │ 5 days ago
-# =>  4 │ shapes.rs     │ File │  4.7 KB │ 5 days ago
-# =>  5 │ lite_parse.rs │ File │  6.3 KB │ 5 days ago
-# =>  6 │ parse.rs      │ File │ 49.8 KB │ 1 day ago
-# => ───┴───────────────┴──────┴─────────┴────────────
+# => ╭───┬───────────────┬──────┬─────────┬─────────────╮
+# => │ # │     name      │ type │  size   │  modified   │
+# => ├───┼───────────────┼──────┼─────────┼─────────────┤
+# => │ 0 │ rustfmt.toml  │ file │    17 B │ a month ago │
+# => │ 1 │ lib.rs        │ file │   330 B │ 5 days ago  │
+# => │ 2 │ signature.rs  │ file │  1.2 kB │ 5 days ago  │
+# => │ 3 │ path.rs       │ file │  2.1 kB │ 5 days ago  │
+# => │ 4 │ files.rs      │ file │  4.6 kB │ 5 days ago  │
+# => │ 5 │ shapes.rs     │ file │  4.7 kB │ 5 days ago  │
+# => │ 6 │ lite_parse.rs │ file │  6.3 kB │ 5 days ago  │
+# => │ 7 │ parse.rs      │ file │ 49.8 kB │ a day ago   │
+# => ╰───┴───────────────┴──────┴─────────┴─────────────╯
 ```
 
-We can sort a table by any column that can be compared. For example, we could also have sorted the above using the "name", "accessed", or "modified" columns.
+We can sort a table by any column that can be compared. For example, we could also have sorted the above using the "name", "type", or "modified" columns.
 
 For more info on sorting, see [Sorting](/book/sorting.md).
 
@@ -61,32 +63,33 @@ We can select data from a table by choosing to select specific columns or specif
 
 ```nu
 ls | select name size
-# => ───┬───────────────┬─────────
-# =>  # │ name          │ size
-# => ───┼───────────────┼─────────
-# =>  0 │ files.rs      │  4.6 KB
-# =>  1 │ lib.rs        │   330 B
-# =>  2 │ lite_parse.rs │  6.3 KB
-# =>  3 │ parse.rs      │ 49.8 KB
-# =>  4 │ path.rs       │  2.1 KB
-# =>  5 │ shapes.rs     │  4.7 KB
-# =>  6 │ signature.rs  │  1.2 KB
-# => ───┴───────────────┴─────────
+# => ╭───┬───────────────┬─────────╮
+# => │ # │     name      │  size   │
+# => ├───┼───────────────┼─────────┤
+# => │ 0 │ files.rs      │  4.6 kB │
+# => │ 1 │ lib.rs        │   330 B │
+# => │ 2 │ lite_parse.rs │  6.3 kB │
+# => │ 3 │ parse.rs      │ 49.8 kB │
+# => │ 4 │ path.rs       │  2.1 kB │
+# => │ 5 │ rustfmt.toml  │    17 B │
+# => │ 6 │ shapes.rs     │  4.7 kB │
+# => │ 7 │ signature.rs  │  1.2 kB │
+# => ╰───┴───────────────┴─────────╯
 ```
 
 This helps to create a table that's more focused on what we need. Next, let's say we want to only look at the 5 smallest files in this directory:
 
 ```nu
 ls | sort-by size | first 5
-# => ───┬──────────────┬──────┬────────┬────────────
-# =>  # │ name         │ type │ size   │ modified
-# => ───┼──────────────┼──────┼────────┼────────────
-# =>  0 │ lib.rs       │ File │  330 B │ 5 days ago
-# =>  1 │ signature.rs │ File │ 1.2 KB │ 5 days ago
-# =>  2 │ path.rs      │ File │ 2.1 KB │ 5 days ago
-# =>  3 │ files.rs     │ File │ 4.6 KB │ 5 days ago
-# =>  4 │ shapes.rs    │ File │ 4.7 KB │ 5 days ago
-# => ───┴──────────────┴──────┴────────┴────────────
+# => ╭───┬──────────────┬──────┬────────┬─────────────╮
+# => │ # │     name     │ type │  size  │  modified   │
+# => ├───┼──────────────┼──────┼────────┼─────────────┤
+# => │ 0 │ rustfmt.toml │ file │   17 B │ a month ago │
+# => │ 1 │ lib.rs       │ file │  330 B │ 5 days ago  │
+# => │ 2 │ signature.rs │ file │ 1.2 kB │ 5 days ago  │
+# => │ 3 │ path.rs      │ file │ 2.1 kB │ 5 days ago  │
+# => │ 4 │ files.rs     │ file │ 4.6 kB │ 5 days ago  │
+# => ╰───┴──────────────┴──────┴────────┴─────────────╯
 ```
 
 You'll notice we first sort the table by size to get to the smallest file, and then we use the `first 5` to return the first 5 rows of the table.
@@ -95,13 +98,13 @@ You can also [`skip`](/commands/docs/skip.md) rows that you don't want. Let's sk
 
 ```nu
 ls | sort-by size | first 5 | skip 2
-# => ───┬───────────┬──────┬────────┬────────────
-# =>  # │ name      │ type │ size   │ modified
-# => ───┼───────────┼──────┼────────┼────────────
-# =>  0 │ path.rs   │ File │ 2.1 KB │ 5 days ago
-# =>  1 │ files.rs  │ File │ 4.6 KB │ 5 days ago
-# =>  2 │ shapes.rs │ File │ 4.7 KB │ 5 days ago
-# => ───┴───────────┴──────┴────────┴────────────
+# => ╭───┬──────────────┬──────┬────────┬────────────╮
+# => │ # │     name     │ type │  size  │  modified  │
+# => ├───┼──────────────┼──────┼────────┼────────────┤
+# => │ 0 │ signature.rs │ file │ 1.2 kB │ 5 days ago │
+# => │ 1 │ path.rs      │ file │ 2.1 kB │ 5 days ago │
+# => │ 2 │ files.rs     │ file │ 4.6 kB │ 5 days ago │
+# => ╰───┴──────────────┴──────┴────────┴────────────╯
 ```
 
 We've narrowed it to three rows we care about.
@@ -110,24 +113,25 @@ Let's look at a few other commands for selecting data. You may have wondered why
 
 ```nu
 ls | sort-by name
-# => ───┬───────────────┬──────┬─────────┬────────────
-# =>  # │ name          │ type │ size    │ modified
-# => ───┼───────────────┼──────┼─────────┼────────────
-# =>  0 │ files.rs      │ File │  4.6 KB │ 5 days ago
-# =>  1 │ lib.rs        │ File │   330 B │ 5 days ago
-# =>  2 │ lite_parse.rs │ File │  6.3 KB │ 5 days ago
-# =>  3 │ parse.rs      │ File │ 49.8 KB │ 1 day ago
-# =>  4 │ path.rs       │ File │  2.1 KB │ 5 days ago
-# =>  5 │ shapes.rs     │ File │  4.7 KB │ 5 days ago
-# =>  6 │ signature.rs  │ File │  1.2 KB │ 5 days ago
-# => ───┴───────────────┴──────┴─────────┴────────────
+# => ╭───┬───────────────┬──────┬─────────┬─────────────╮
+# => │ # │     name      │ type │  size   │  modified   │
+# => ├───┼───────────────┼──────┼─────────┼─────────────┤
+# => │ 0 │ files.rs      │ file │  4.6 kB │ 5 days ago  │
+# => │ 1 │ lib.rs        │ file │   330 B │ 5 days ago  │
+# => │ 2 │ lite_parse.rs │ file │  6.3 kB │ 5 days ago  │
+# => │ 3 │ parse.rs      │ file │ 49.8 kB │ a day ago   │
+# => │ 4 │ path.rs       │ file │  2.1 kB │ 5 days ago  │
+# => │ 5 │ rustfmt.toml  │ file │    17 B │ a month ago │
+# => │ 6 │ shapes.rs     │ file │  4.7 kB │ 5 days ago  │
+# => │ 7 │ signature.rs  │ file │  1.2 kB │ 5 days ago  │
+# => ╰───┴───────────────┴──────┴─────────┴─────────────╯
 
 ls | sort-by name | select 5
-# => ───┬───────────────┬──────┬─────────┬────────────
-# =>  # │ name          │ type │ size    │ modified
-# => ───┼───────────────┼──────┼─────────┼────────────
-# =>  0 │ shapes.rs     │ File │  4.7 KB │ 5 days ago
-# => ───┴───────────────┴──────┴─────────┴────────────
+# => ╭───┬──────────────┬──────┬──────┬─────────────╮
+# => │ # │     name     │ type │ size │  modified   │
+# => ├───┼──────────────┼──────┼──────┼─────────────┤
+# => │ 0 │ rustfmt.toml │ file │ 17 B │ a month ago │
+# => ╰───┴──────────────┴──────┴──────┴─────────────╯
 ```
 
 ## Getting Data out of a Table
@@ -136,15 +140,16 @@ So far, we've worked with tables by trimming the table down to only what we need
 
 ```nu
 ls | get name
-# => ───┬───────────────
-# =>  0 │ files.rs
-# =>  1 │ lib.rs
-# =>  2 │ lite_parse.rs
-# =>  3 │ parse.rs
-# =>  4 │ path.rs
-# =>  5 │ shapes.rs
-# =>  6 │ signature.rs
-# => ───┴───────────────
+# => ╭───┬───────────────╮
+# => │ 0 │ files.rs      │
+# => │ 1 │ lib.rs        │
+# => │ 2 │ lite_parse.rs │
+# => │ 3 │ parse.rs      │
+# => │ 4 │ path.rs       │
+# => │ 5 │ rustfmt.toml  │
+# => │ 6 │ shapes.rs     │
+# => │ 7 │ signature.rs  │
+# => ╰───┴───────────────╯
 ```
 
 We now have the values for each of the filenames.
@@ -153,17 +158,18 @@ This might look like the [`select`](/commands/docs/select.md) command we saw ear
 
 ```nu
 ls | select name
-# => ───┬───────────────
-# =>  # │ name
-# => ───┼───────────────
-# =>  0 │ files.rs
-# =>  1 │ lib.rs
-# =>  2 │ lite_parse.rs
-# =>  3 │ parse.rs
-# =>  4 │ path.rs
-# =>  5 │ shapes.rs
-# =>  6 │ signature.rs
-# => ───┴───────────────
+# => ╭───┬───────────────╮
+# => │ # │     name      │
+# => ├───┼───────────────┤
+# => │ 0 │ files.rs      │
+# => │ 1 │ lib.rs        │
+# => │ 2 │ lite_parse.rs │
+# => │ 3 │ parse.rs      │
+# => │ 4 │ path.rs       │
+# => │ 5 │ rustfmt.toml  │
+# => │ 6 │ shapes.rs     │
+# => │ 7 │ signature.rs  │
+# => ╰───┴───────────────╯
 ```
 
 These look very similar! Let's see if we can spell out the difference between these two commands to make it clear:
@@ -187,12 +193,12 @@ We can concatenate tables using [`append`](/commands/docs/append.md):
 let first = [[a b]; [1 2]]
 let second = [[a b]; [3 4]]
 $first | append $second
-# => ───┬───┬───
-# =>  # │ a │ b
-# => ───┼───┼───
-# =>  0 │ 1 │ 2
-# =>  1 │ 3 │ 4
-# => ───┴───┴───
+# => ╭───┬───┬───╮
+# => │ # │ a │ b │
+# => ├───┼───┼───┤
+# => │ 0 │ 1 │ 2 │
+# => │ 1 │ 3 │ 4 │
+# => ╰───┴───┴───╯
 ```
 
 If the column names are not identical then additional columns and values will be created as necessary:
@@ -202,26 +208,26 @@ let first = [[a b]; [1 2]]
 let second = [[a b]; [3 4]]
 let third = [[a c]; [3 4]]
 $first | append $second | append $third
-# => ───┬───┬────┬────
-# =>  # │ a │ b  │ c
-# => ───┼───┼────┼────
-# =>  0 │ 1 │  2 │ ❎
-# =>  1 │ 3 │  4 │ ❎
-# =>  2 │ 3 │ ❎ │  4
-# => ───┴───┴────┴────
+# => ╭───┬───┬────┬────╮
+# => │ # │ a │ b  │ c  │
+# => ├───┼───┼────┼────┤
+# => │ 0 │ 1 │  2 │ ❎ │
+# => │ 1 │ 3 │  4 │ ❎ │
+# => │ 2 │ 3 │ ❎ │  4 │
+# => ╰───┴───┴────┴────╯
 ```
 
 You can also use the `++` operator as an inline replacement for `append`:
 
 ```nu
 $first ++ $second ++ $third
-# => ───┬───┬────┬────
-# =>  # │ a │ b  │ c
-# => ───┼───┼────┼────
-# =>  0 │ 1 │  2 │ ❎
-# =>  1 │ 3 │  4 │ ❎
-# =>  2 │ 3 │ ❎ │  4
-# => ───┴───┴────┴───
+# => ╭───┬───┬────┬────╮
+# => │ # │ a │ b  │ c  │
+# => ├───┼───┼────┼────┤
+# => │ 0 │ 1 │  2 │ ❎ │
+# => │ 1 │ 3 │  4 │ ❎ │
+# => │ 2 │ 3 │ ❎ │  4 │
+# => ╰───┴───┴────┴────╯
 ```
 
 ### Merging Tables
@@ -232,11 +238,11 @@ We can use the [`merge`](/commands/docs/merge.md) command to merge two (or more)
 let first = [[a b]; [1 2]]
 let second = [[c d]; [3 4]]
 $first | merge $second
-# => ───┬───┬───┬───┬───
-# =>  # │ a │ b │ c │ d
-# => ───┼───┼───┼───┼───
-# =>  0 │ 1 │ 2 │ 3 │ 4
-# => ───┴───┴───┴───┴───
+# => ╭───┬───┬───┬───┬───╮
+# => │ # │ a │ b │ c │ d │
+# => ├───┼───┼───┼───┼───┤
+# => │ 0 │ 1 │ 2 │ 3 │ 4 │
+# => ╰───┴───┴───┴───┴───╯
 ```
 
 Let's add a third table:
@@ -249,22 +255,22 @@ We could join all three tables together like this:
 
 ```nu
 $first | merge $second  | merge $third
-# => ───┬───┬───┬───┬───┬───┬───
-# =>  # │ a │ b │ c │ d │ e │ f
-# => ───┼───┼───┼───┼───┼───┼───
-# =>  0 │ 1 │ 2 │ 3 │ 4 │ 5 │ 6
-# => ───┴───┴───┴───┴───┴───┴───
+# => ╭───┬───┬───┬───┬───┬───┬───╮
+# => │ # │ a │ b │ c │ d │ e │ f │
+# => ├───┼───┼───┼───┼───┼───┼───┤
+# => │ 0 │ 1 │ 2 │ 3 │ 4 │ 5 │ 6 │
+# => ╰───┴───┴───┴───┴───┴───┴───╯
 ```
 
 Or we could use the [`reduce`](/commands/docs/reduce.md) command to dynamically merge all tables:
 
 ```nu
 [$first $second $third] | reduce {|elt, acc| $acc | merge $elt }
-# => ───┬───┬───┬───┬───┬───┬───
-# =>  # │ a │ b │ c │ d │ e │ f
-# => ───┼───┼───┼───┼───┼───┼───
-# =>  0 │ 1 │ 2 │ 3 │ 4 │ 5 │ 6
-# => ───┴───┴───┴───┴───┴───┴───
+# => ╭───┬───┬───┬───┬───┬───┬───╮
+# => │ # │ a │ b │ c │ d │ e │ f │
+# => ├───┼───┼───┼───┼───┼───┼───┤
+# => │ 0 │ 1 │ 2 │ 3 │ 4 │ 5 │ 6 │
+# => ╰───┴───┴───┴───┴───┴───┴───╯
 ```
 
 ### Adding a new Column
@@ -273,40 +279,40 @@ We can use the [`insert`](/commands/docs/insert.md) command to add a new column 
 
 ```nu
 open rustfmt.toml
-# => ─────────┬──────
-# =>  edition │ 2018
-# => ─────────┴──────
+# => ╭─────────┬──────╮
+# => │ edition │ 2018 │
+# => ╰─────────┴──────╯
 ```
 
 Let's add a column called "next_edition" with the value 2021:
 
 ```nu
 open rustfmt.toml | insert next_edition 2021
-# => ──────────────┬──────
-# =>  edition      │ 2018
-# =>  next_edition │ 2021
-# => ──────────────┴──────
+# => ╭──────────────┬──────╮
+# => │ edition      │ 2018 │
+# => │ next_edition │ 2021 │
+# => ╰──────────────┴──────╯
 ```
 
 This visual may be slightly confusing, because it looks like what we've just done is add a row. In this case, remember: rows have numbers, columns have names. If it still is confusing, note that appending one more row will make the table render as expected:
 
 ```nu
 open rustfmt.toml | insert next_edition 2021 | append {edition: 2021 next_edition: 2024}
-# => ───┬─────────┬──────────────
-# =>  # │ edition │ next_edition
-# => ───┼─────────┼──────────────
-# =>  0 │    2018 │         2021
-# =>  1 │    2021 │         2024
-# => ───┴─────────┴──────────────
+# => ╭───┬─────────┬──────────────╮
+# => │ # │ edition │ next_edition │
+# => ├───┼─────────┼──────────────┤
+# => │ 0 │ 2018    │         2021 │
+# => │ 1 │    2021 │         2024 │
+# => ╰───┴─────────┴──────────────╯
 ```
 
 Notice that if we open the original file, the contents have stayed the same:
 
 ```nu
 open rustfmt.toml
-# => ─────────┬──────
-# =>  edition │ 2018
-# => ─────────┴──────
+# => ╭─────────┬──────╮
+# => │ edition │ 2018 │
+# => ╰─────────┴──────╯
 ```
 
 Changes in Nu are functional changes, meaning that they work on values themselves rather than trying to cause a permanent change. This lets us do many different types of work in our pipeline until we're ready to write out the result with any changes we'd like if we choose to. Here we could write out the result using the [`save`](/commands/docs/save.md) command:
@@ -314,10 +320,10 @@ Changes in Nu are functional changes, meaning that they work on values themselve
 ```nu
 open rustfmt.toml | insert next_edition 2021 | save rustfmt2.toml
 open rustfmt2.toml
-# => ──────────────┬──────
-# =>  edition      │ 2018
-# =>  next_edition │ 2021
-# => ──────────────┴──────
+# => ╭──────────────┬──────╮
+# => │ edition      │ 2018 │
+# => │ next_edition │ 2021 │
+# => ╰──────────────┴──────╯
 ```
 
 ### Updating a Column
@@ -326,18 +332,18 @@ In a similar way to the [`insert`](/commands/docs/insert.md) command, we can als
 
 ```nu
 open rustfmt.toml
-# => ─────────┬──────
-# =>  edition │ 2018
-# => ─────────┴──────
+# => ╭─────────┬──────╮
+# => │ edition │ 2018 │
+# => ╰─────────┴──────╯
 ```
 
 And now, let's update the edition to point at the next edition we hope to support:
 
 ```nu
 open rustfmt.toml | update edition 2021
-# => ─────────┬──────
-# =>  edition │ 2021
-# => ─────────┴──────
+# => ╭─────────┬──────╮
+# => │ edition │ 2021 │
+# => ╰─────────┴──────╯
 ```
 
 You can also use the [`upsert`](/commands/docs/upsert.md) command to insert or update depending on whether the column already exists.
@@ -347,16 +353,16 @@ You can also use the [`upsert`](/commands/docs/upsert.md) command to insert or u
 You can use [`move`](/commands/docs/move.md) to move columns in the table. For example, if we wanted to move the "name" column from [`ls`](/commands/docs/ls.md) after the "size" column, we could do:
 
 ```nu
-ls | move name --after size
-# => ╭────┬──────┬─────────┬───────────────────┬──────────────╮
-# => │ #  │ type │  size   │       name        │   modified   │
-# => ├────┼──────┼─────────┼───────────────────┼──────────────┤
-# => │  0 │ dir  │   256 B │ Applications      │ 3 days ago   │
-# => │  1 │ dir  │   256 B │ Data              │ 2 weeks ago  │
-# => │  2 │ dir  │   448 B │ Desktop           │ 2 hours ago  │
-# => │  3 │ dir  │   192 B │ Disks             │ a week ago   │
-# => │  4 │ dir  │   416 B │ Documents         │ 4 days ago   │
-# => ...
+ls | move name --after size | first 5
+# => ╭───┬──────┬─────────┬───────────────┬────────────╮
+# => │ # │ type │  size   │     name      │  modified  │
+# => ├───┼──────┼─────────┼───────────────┼────────────┤
+# => │ 0 │ file │  4.6 kB │ files.rs      │ 5 days ago │
+# => │ 1 │ file │   330 B │ lib.rs        │ 5 days ago │
+# => │ 2 │ file │  6.3 kB │ lite_parse.rs │ 5 days ago │
+# => │ 3 │ file │ 49.8 kB │ parse.rs      │ a day ago  │
+# => │ 4 │ file │  2.1 kB │ path.rs       │ 5 days ago │
+# => ╰───┴──────┴─────────┴───────────────┴────────────╯
 ```
 
 ### Renaming Columns
@@ -364,16 +370,16 @@ ls | move name --after size
 You can also [`rename`](/commands/docs/rename.md) columns in a table by passing it through the rename command. If we wanted to run [`ls`](/commands/docs/ls.md) and rename the columns, we can use this example:
 
 ```nu
-ls | rename filename filetype filesize date
-# => ╭────┬───────────────────┬──────────┬──────────┬──────────────╮
-# => │ #  │     filename      │ filetype │ filesize │     date     │
-# => ├────┼───────────────────┼──────────┼──────────┼──────────────┤
-# => │  0 │ Applications      │ dir      │    256 B │ 3 days ago   │
-# => │  1 │ Data              │ dir      │    256 B │ 2 weeks ago  │
-# => │  2 │ Desktop           │ dir      │    448 B │ 2 hours ago  │
-# => │  3 │ Disks             │ dir      │    192 B │ a week ago   │
-# => │  4 │ Documents         │ dir      │    416 B │ 4 days ago   │
-# => ...
+ls | rename filename filetype filesize date | first 5
+# => ╭───┬───────────────┬──────────┬──────────┬────────────╮
+# => │ # │   filename    │ filetype │ filesize │    date    │
+# => ├───┼───────────────┼──────────┼──────────┼────────────┤
+# => │ 0 │ files.rs      │ file     │   4.6 kB │ 5 days ago │
+# => │ 1 │ lib.rs        │ file     │    330 B │ 5 days ago │
+# => │ 2 │ lite_parse.rs │ file     │   6.3 kB │ 5 days ago │
+# => │ 3 │ parse.rs      │ file     │  49.8 kB │ a day ago  │
+# => │ 4 │ path.rs       │ file     │   2.1 kB │ 5 days ago │
+# => ╰───┴───────────────┴──────────┴──────────┴────────────╯
 ```
 
 ### Rejecting/Deleting Columns
@@ -381,19 +387,19 @@ ls | rename filename filetype filesize date
 You can also [`reject`](/commands/docs/reject.md) columns in a table by passing it through the reject command. If we wanted to run [`ls`](/commands/docs/ls.md) and delete the columns, we can use this example:
 
 ```nu
-ls -l / | reject readonly num_links inode created accessed modified
-# => ╭────┬────────┬─────────┬─────────┬───────────┬──────┬───────┬────────╮
-# => │  # │  name  │  type   │ target  │   mode    │ uid  │ group │  size  │
-# => ├────┼────────┼─────────┼─────────┼───────────┼──────┼───────┼────────┤
-# => │  0 │ /bin   │ symlink │ usr/bin │ rwxrwxrwx │ root │ root  │    7 B │
-# => │  1 │ /boot  │ dir     │         │ rwxr-xr-x │ root │ root  │ 1.0 KB │
-# => │  2 │ /dev   │ dir     │         │ rwxr-xr-x │ root │ root  │ 4.1 KB │
-# => │  3 │ /etc   │ dir     │         │ rwxr-xr-x │ root │ root  │ 3.6 KB │
-# => │  4 │ /home  │ dir     │         │ rwxr-xr-x │ root │ root  │   12 B │
-# => │  5 │ /lib   │ symlink │ usr/lib │ rwxrwxrwx │ root │ root  │    7 B │
-# => │  6 │ /lib64 │ symlink │ usr/lib │ rwxrwxrwx │ root │ root  │    7 B │
-# => │  7 │ /mnt   │ dir     │         │ rwxr-xr-x │ root │ root  │    0 B │
-# => ...
+ls -l / | reject readonly num_links inode created accessed modified | first 8
+# => ╭───┬────────┬─────────┬─────────┬───────────┬──────┬───────┬────────╮
+# => │ # │  name  │  type   │ target  │   mode    │ user │ group │  size  │
+# => ├───┼────────┼─────────┼─────────┼───────────┼──────┼───────┼────────┤
+# => │ 0 │ /bin   │ symlink │ usr/bin │ rwxrwxrwx │ root │ root  │    7 B │
+# => │ 1 │ /boot  │ dir     │         │ rwxr-xr-x │ root │ root  │ 1.0 kB │
+# => │ 2 │ /dev   │ dir     │         │ rwxr-xr-x │ root │ root  │ 4.1 kB │
+# => │ 3 │ /etc   │ dir     │         │ rwxr-xr-x │ root │ root  │ 3.6 kB │
+# => │ 4 │ /home  │ dir     │         │ rwxr-xr-x │ root │ root  │   12 B │
+# => │ 5 │ /lib   │ symlink │ usr/lib │ rwxrwxrwx │ root │ root  │    7 B │
+# => │ 6 │ /lib64 │ symlink │ usr/lib │ rwxrwxrwx │ root │ root  │    7 B │
+# => │ 7 │ /mnt   │ dir     │         │ rwxr-xr-x │ root │ root  │    0 B │
+# => ╰───┴────────┴─────────┴─────────┴───────────┴──────┴───────┴────────╯
 ```
 
 ### The # Index Column
@@ -415,62 +421,71 @@ You've noticed that every table, by default, starts with a column with the headi
 
      ```nu
      ls | each { insert index { 1000 }} | first 5
-     # => ╭──────┬─────────────────┬──────┬─────────┬──────────────╮
-     # => │    # │      name       │ type │  size   │   modified   │
-     # => ├──────┼─────────────────┼──────┼─────────┼──────────────┤
-     # => │ 1000 │ CNAME           │ file │    15 B │ 9 months ago │
-     # => │ 1000 │ CONTRIBUTING.md │ file │ 4.3 KiB │ 9 hours ago  │
-     # => │ 1000 │ LICENSE         │ file │ 1.0 KiB │ 9 months ago │
-     # => │ 1000 │ README.md       │ file │ 2.2 KiB │ 3 weeks ago  │
-     # => │ 1000 │ assets          │ dir  │ 4.0 KiB │ 9 months ago │
-     # => ╰──────┴─────────────────┴──────┴─────────┴──────────────╯
+     # => ╭──────┬───────────────┬──────┬─────────┬────────────╮
+     # => │    # │     name      │ type │  size   │  modified  │
+     # => ├──────┼───────────────┼──────┼─────────┼────────────┤
+     # => │ 1000 │ files.rs      │ file │  4.6 kB │ 5 days ago │
+     # => │ 1000 │ lib.rs        │ file │   330 B │ 5 days ago │
+     # => │ 1000 │ lite_parse.rs │ file │  6.3 kB │ 5 days ago │
+     # => │ 1000 │ parse.rs      │ file │ 49.8 kB │ a day ago  │
+     # => │ 1000 │ path.rs       │ file │  2.1 kB │ 5 days ago │
+     # => ╰──────┴───────────────┴──────┴─────────┴────────────╯
      ```
 
      - If an `index` key is added to each row in the table, then it can be accessed via `select` and `get`:
 
      ```nu
      ls | each { insert index { 1000 }} | first 5 | select index name
-     # => ╭──────┬─────────────────╮
-     # => │    # │      name       │
-     # => ├──────┼─────────────────┤
-     # => │ 1000 │ CNAME           │
-     # => │ 1000 │ CONTRIBUTING.md │
-     # => │ 1000 │ LICENSE         │
-     # => │ 1000 │ README.md       │
-     # => │ 1000 │ assets          │
-     # => ╰──────┴─────────────────╯
+     # => ╭──────┬───────────────╮
+     # => │    # │     name      │
+     # => ├──────┼───────────────┤
+     # => │ 1000 │ files.rs      │
+     # => │ 1000 │ lib.rs        │
+     # => │ 1000 │ lite_parse.rs │
+     # => │ 1000 │ parse.rs      │
+     # => │ 1000 │ path.rs       │
+     # => ╰──────┴───────────────╯
      ```
 
-     - On the other hand, if some rows have an `index` key and others don't, the result is no longer a table; it is a `list<any>` due to the different record types:
+     - On the other hand, if some rows have an `index` key and others don't, `index` is not a column of the whole table. The table's type only includes the columns that every row has, so `index` can only be accessed as an optional column:
 
        ```nu
        ls | upsert 3.index { "--->" } | first 5
-       # => ╭──────┬─────────────────┬──────┬─────────┬──────────────╮
-       # => │    # │      name       │ type │  size   │   modified   │
-       # => ├──────┼─────────────────┼──────┼─────────┼──────────────┤
-       # => │    0 │ CNAME           │ file │    15 B │ 9 months ago │
-       # => │    1 │ CONTRIBUTING.md │ file │ 4.3 KiB │ 9 hours ago  │
-       # => │    2 │ LICENSE         │ file │ 1.0 KiB │ 9 months ago │
-       # => │ ---> │ README.md       │ file │ 2.2 KiB │ 3 weeks ago  │
-       # => │    4 │ assets          │ dir  │ 4.0 KiB │ 9 months ago │
-       # => ╰──────┴─────────────────┴──────┴─────────┴──────────────╯
+       # => ╭──────┬───────────────┬──────┬─────────┬────────────╮
+       # => │    # │     name      │ type │  size   │  modified  │
+       # => ├──────┼───────────────┼──────┼─────────┼────────────┤
+       # => │    0 │ files.rs      │ file │  4.6 kB │ 5 days ago │
+       # => │    1 │ lib.rs        │ file │   330 B │ 5 days ago │
+       # => │    2 │ lite_parse.rs │ file │  6.3 kB │ 5 days ago │
+       # => │ ---> │ parse.rs      │ file │ 49.8 kB │ a day ago  │
+       # => │    4 │ path.rs       │ file │  2.1 kB │ 5 days ago │
+       # => ╰──────┴───────────────┴──────┴─────────┴────────────╯
 
        ls | upsert 3.index { "--->" } | first 5 | describe
-       # => list<any> (stream)
+       # => table<name: string, type: string, size: filesize, modified: datetime> (stream)
 
        ls | upsert 3.index { "--->" } | select index name
-       # Error: cannot find column 'index'
+       # => Error: nu::shell::column_not_found
+       # =>
+       # =>   × Cannot find column 'index'
+       # =>    ╭─[repl_entry #1:1:1]
+       # =>  1 │ ls | upsert 3.index { "--->" } | select index name
+       # =>    · ─┬                                      ──┬──
+       # =>    ·  │                                        ╰── column 'index' is missing in one or more values
+       # =>    ·  ╰── value originates here
+       # =>    ╰────
+       # =>   help: If some rows have this column, try using 'index?' for optional access, or pre-fill using the `default` command
 
        ls | upsert 3.index { "--->" } | select index? name | first 5
-       # => ╭──────┬─────────────────╮
-       # => │    # │      name       │
-       # => ├──────┼─────────────────┤
-       # => │      │ CNAME           │
-       # => │      │ CONTRIBUTING.md │
-       # => │      │ LICENSE         │
-       # => │ ---> │ README.md       │
-       # => │      │ assets          │
-       # => ╰──────┴─────────────────╯
+       # => ╭──────┬───────────────╮
+       # => │    # │     name      │
+       # => ├──────┼───────────────┤
+       # => │      │ files.rs      │
+       # => │      │ lib.rs        │
+       # => │      │ lite_parse.rs │
+       # => │ ---> │ parse.rs      │
+       # => │      │ path.rs       │
+       # => ╰──────┴───────────────╯
        ```
 
    - As demonstrated in the example above, any rows (records) in the table without an `index` key will continue to display the internal representation.
@@ -489,22 +504,22 @@ While the results _look_ the same, the `index` is now decoupled from the interna
 
 ```nu
 ls | enumerate | flatten | sort-by modified | first 5
-# => ╭────┬──────────────┬──────┬─────────┬──────────────╮
-# => │  # │     name     │ type │  size   │   modified   │
-# => ├────┼──────────────┼──────┼─────────┼──────────────┤
-# => │  0 │ CNAME        │ file │    15 B │ 9 months ago │
-# => │  2 │ LICENSE      │ file │ 1.0 KiB │ 9 months ago │
-# => │  4 │ assets       │ dir  │ 4.0 KiB │ 9 months ago │
-# => │ 17 │ lefthook.yml │ file │ 1.1 KiB │ 9 months ago │
-# => │ 24 │ snippets     │ dir  │ 4.0 KiB │ 9 months ago │
-# => ╰────┴──────────────┴──────┴─────────┴──────────────╯
+# => ╭───┬──────────────┬──────┬────────┬─────────────╮
+# => │ # │     name     │ type │  size  │  modified   │
+# => ├───┼──────────────┼──────┼────────┼─────────────┤
+# => │ 5 │ rustfmt.toml │ file │   17 B │ a month ago │
+# => │ 8 │ signature.rs │ file │ 1.2 kB │ 5 days ago  │
+# => │ 1 │ lib.rs       │ file │  330 B │ 5 days ago  │
+# => │ 4 │ path.rs      │ file │ 2.1 kB │ 5 days ago  │
+# => │ 0 │ files.rs     │ file │ 4.6 kB │ 5 days ago  │
+# => ╰───┴──────────────┴──────┴────────┴─────────────╯
 
 ls | enumerate | flatten | sort-by modified | select 4
-# => ╭────┬──────────┬──────┬─────────┬──────────────╮
-# => │  # │   name   │ type │  size   │   modified   │
-# => ├────┼──────────┼──────┼─────────┼──────────────┤
-# => │ 24 │ snippets │ dir  │ 4.0 KiB │ 9 months ago │
-# => ╰────┴──────────┴──────┴─────────┴──────────────╯
+# => ╭───┬──────────┬──────┬────────┬────────────╮
+# => │ # │   name   │ type │  size  │  modified  │
+# => ├───┼──────────┼──────┼────────┼────────────┤
+# => │ 0 │ files.rs │ file │ 4.6 kB │ 5 days ago │
+# => ╰───┴──────────┴──────┴────────┴────────────╯
 ```
 
 The `sort-by modified` now _also_ sorts the `index` along with the rest of the columns.

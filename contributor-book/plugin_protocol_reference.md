@@ -45,7 +45,7 @@ After the encoding type has been decided, both the engine and plugin **must** se
 | **version**  | string | The engine's version, or the target version of Nu that the plugin supports.           |
 | **features** | array  | Protocol features supported by the plugin. Unrecognized elements **must** be ignored. |
 
-To be accepted, the `version` specified **must** be [semver](https://semver.org) compatible with the engine's version. "0.x.y" and "x.y.z" for differing values of "x" are considered to be incompatible.
+To be accepted, the `version` specified **must** be [semver](https://semver.org) compatible with the engine's version. "0.x.y" and "x.y.z" for differing values of "x" are considered to be incompatible. More precisely, the higher of the two versions must match a caret requirement on the lower one (for example, `0.116.2` matches `^0.116.0`, but `0.117.0` does not). Pre-release suffixes such as `-nightly.3` are ignored. If the versions are incompatible, the engine refuses to load the plugin.
 
 Plugins **may** decide to refuse engine versions with more strict criteria than specified here.
 
@@ -55,7 +55,7 @@ Example:
 {
   "Hello": {
     "protocol": "nu-plugin",
-    "version": "0.94.0",
+    "version": "0.116.0",
     "features": []
   }
 }
@@ -77,7 +77,7 @@ Example:
 }
 ```
 
-When local socket communication is advertised to an engine supporting the feature, the engine will cease stdio communication and launch the plugin again with the `--local-socket` command line argument. The second argument is either a path to a Unix domain socket on Linux, Android, macOS, and other Unix-like operating systems, or the name of a named pipe (without the `\\.\pipe\` prefix) on Windows.
+When local socket communication is advertised to an engine supporting the feature, the engine will send [`Goodbye`](#goodbye), cease stdio communication, and launch the plugin again with the `--local-socket` command line argument. The second argument is either a path to a Unix domain socket on Linux, Android, macOS, and other Unix-like operating systems, or the name of a named pipe (without the `\\.\pipe\` prefix) on Windows.
 
 In either case, during startup, the plugin is expected to establish two separate connections to the socket, in this order:
 
@@ -135,55 +135,128 @@ Tell the plugin to run a command. The argument is the following map:
 
 `EvaluatedCall` is a map:
 
-| Field          | Type                                              | Description                                             |
-| -------------- | ------------------------------------------------- | ------------------------------------------------------- |
-| **head**       | [`Span`](#span)                                   | The position of the beginning of the command execution. |
-| **positional** | [`Value`](#value) array                           | Positional arguments.                                   |
-| **named**      | 2-tuple (string, [`Value`](#value) or null) array | Named arguments, such as switches.                      |
+| Field          | Type                                                      | Description                                             |
+| -------------- | --------------------------------------------------------- | ------------------------------------------------------- |
+| **head**       | [`Span`](#span)                                           | The position of the beginning of the command execution. |
+| **positional** | [`Value`](#value) array                                   | Positional arguments.                                   |
+| **named**      | 2-tuple (spanned string, [`Value`](#value) or null) array | Named arguments, such as switches.                      |
 
-Named arguments are always sent by their long name, never their short name.
+The name of each named argument is a map with an `item` (the name) and a `span` (the position of the flag in the source). Named arguments are always sent by their long name, never their short name. A switch given without a value (e.g. `--major`) has a `null` value, but one given an explicit value (e.g. `--major=false`) has a `Bool` value. Switches that weren't given are not sent.
 
 Returns [`PipelineData`](#pipelinedata-plugin-call-response) or [`Error`](#error-plugin-call-response).
 
 Example:
 
+```nu
+"0.1.2" | inc --major
+```
+
 ```json
 {
   "Call": [
-    0,
+    2,
     {
       "Run": {
         "name": "inc",
         "call": {
           "head": {
-            "start": 40400,
-            "end": 40403
+            "start": 169342,
+            "end": 169345
           },
-          "positional": [
+          "positional": [],
+          "named": [
+            [
+              {
+                "item": "major",
+                "span": {
+                  "start": 169346,
+                  "end": 169353
+                }
+              },
+              null
+            ]
+          ]
+        },
+        "input": {
+          "Value": [
             {
               "String": {
                 "val": "0.1.2",
                 "span": {
-                  "start": 40407,
-                  "end": 40415
+                  "start": 169332,
+                  "end": 169339
                 }
               }
-            }
-          ],
-          "named": [
-            [
-              "major",
-              {
-                "Bool": {
-                  "val": true,
-                  "span": {
-                    "start": 40404,
-                    "end": 40406
-                  }
-                }
-              }
-            ]
+            },
+            null
           ]
+        }
+      }
+    }
+  ]
+}
+```
+
+#### `GetCompletion` plugin call
+
+Ask the plugin for completion suggestions for an argument of one of its commands. The engine sends this call when the user asks for completions while typing an argument of a plugin command. This call is **experimental**, and its format is likely to change. The argument is the following map:
+
+| Field        | Type   | Description                                                     |
+| ------------ | ------ | --------------------------------------------------------------- |
+| **name**     | string | The name of the command being completed.                        |
+| **arg_type** | map    | Either `{"Flag": "<long name>"}` or `{"Positional": <index>}`.  |
+| **call**     | map    | Information about the command call as parsed so far. See below. |
+
+`call` contains the following fields:
+
+| Field     | Type             | Description                                                                                                                                                    |
+| --------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **call**  | map              | The parsed call ([`ast::Call`](https://docs.rs/nu-protocol/latest/nu_protocol/ast/struct.Call.html)), with unevaluated arguments. This is an internal Nu type. |
+| **strip** | boolean          | Whether there is a placeholder in the input buffer.                                                                                                            |
+| **pos**   | unsigned integer | The position of the cursor, in the same coordinates as spans, which can be used to find the placeholder in the arguments.                                      |
+
+The plugin can make [engine calls](#enginecall) in the context of this call, but only the ones that don't change state or run code: `GetConfig`, `GetPluginConfig`, `GetEnvVar`, `GetEnvVars`, `GetCurrentDir`, `GetHelp` and `GetSpanContents`.
+
+Returns [`CompletionItems`](#completionitems-plugin-call-response) or [`Error`](#error-plugin-call-response).
+
+Example, for a plugin command `spy` with a `--named` flag, after the user typed `spy --named ` and pressed Tab:
+
+```json
+{
+  "Call": [
+    2,
+    {
+      "GetCompletion": {
+        "name": "spy",
+        "arg_type": {
+          "Flag": "named"
+        },
+        "call": {
+          "call": {
+            "decl_id": 548,
+            "head": {
+              "start": 169438,
+              "end": 169441
+            },
+            "arguments": [
+              {
+                "Named": [
+                  {
+                    "item": "named",
+                    "span": {
+                      "start": 169442,
+                      "end": 169449
+                    }
+                  },
+                  null,
+                  null
+                ]
+              }
+            ],
+            "parser_info": {}
+          },
+          "strip": false,
+          "pos": 169450
         }
       }
     }
@@ -195,7 +268,9 @@ Example:
 
 Perform an operation on a custom value received from the plugin. The argument is a 2-tuple (array): (`custom_value`, `op`).
 
-The custom value is specified in spanned format, as a [`PluginCustomValue`](#plugincustomvalue) without the `type` field, and not as a `Value` - see the examples.
+The custom value is specified in spanned format, as a [`PluginCustomValue`](#custom) without the `type` field, and not as a `Value` - see the examples.
+
+In the examples below, `$version` is a variable holding a custom value named `version` that one of the plugin's commands returned earlier, so the Nu code only works with such a plugin loaded.
 
 ##### `ToBaseValue`
 
@@ -228,7 +303,14 @@ Example:
 
 ##### `FollowPathInt`
 
-Returns the result of following a numeric cell path (e.g. `$custom_value.0`) on the custom value. This is most commonly used with custom types that act like lists or tables. The argument is a spanned unsigned integer. The response type is [`PipelineData`](#pipelinedata-plugin-call-response) or [`Error`](#error-plugin-call-response). The result **may** be another custom value. If the operation produces a stream, it will be consumed to a value.
+Returns the result of following a numeric cell path (e.g. `$custom_value.0`) on the custom value. This is most commonly used with custom types that act like lists or tables. The argument is a map:
+
+| Field        | Type                     | Description                                                                                                                     |
+| ------------ | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| **index**    | spanned unsigned integer | The index to follow, as a map with `item` and `span`.                                                                           |
+| **optional** | boolean                  | `true` if the path member was optional (`.0?`), in which case a missing index **should** produce `Nothing` instead of an error. |
+
+The response type is [`PipelineData`](#pipelinedata-plugin-call-response) or [`Error`](#error-plugin-call-response). The result **may** be another custom value. If the operation produces a stream, it will be consumed to a value.
 
 Example:
 
@@ -254,11 +336,14 @@ $version.0
         },
         {
           "FollowPathInt": {
-            "item": 0,
-            "span": {
-              "start": 320,
-              "end": 321
-            }
+            "index": {
+              "item": 0,
+              "span": {
+                "start": 320,
+                "end": 321
+              }
+            },
+            "optional": false
           }
         }
       ]
@@ -269,7 +354,15 @@ $version.0
 
 ##### `FollowPathString`
 
-Returns the result of following a string cell path (e.g. `$custom_value.field`) on the custom value. This is most commonly used with custom types that act like lists or tables. The argument is a spanned string. The response type is [`PipelineData`](#pipelinedata-plugin-call-response) or [`Error`](#error-plugin-call-response). The result **may** be another custom value. If the operation produces a stream, it will be consumed to a value.
+Returns the result of following a string cell path (e.g. `$custom_value.field`) on the custom value. This is most commonly used with custom types that act like lists or tables. The argument is a map:
+
+| Field           | Type           | Description                                                                                                                          |
+| --------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **column_name** | spanned string | The column name to follow, as a map with `item` and `span`.                                                                          |
+| **optional**    | boolean        | `true` if the path member was optional (`.field?`), in which case a missing column **should** produce `Nothing` instead of an error. |
+| **casing**      | string         | `"Sensitive"`, or `"Insensitive"` if the path member was marked case-insensitive (`.field!`).                                        |
+
+The response type is [`PipelineData`](#pipelinedata-plugin-call-response) or [`Error`](#error-plugin-call-response). The result **may** be another custom value. If the operation produces a stream, it will be consumed to a value.
 
 Example:
 
@@ -295,11 +388,15 @@ $version.field
         },
         {
           "FollowPathString": {
-            "item": "field",
-            "span": {
-              "start": 320,
-              "end": 326
-            }
+            "column_name": {
+              "item": "field",
+              "span": {
+                "start": 320,
+                "end": 326
+              }
+            },
+            "optional": false,
+            "casing": "Sensitive"
           }
         }
       ]
@@ -310,7 +407,7 @@ $version.field
 
 ##### `PartialCmp`
 
-Compares the custom value to another value and returns the [`Ordering`](#ordering) that should be used, if any. The argument type is a [`Value`](#value), which may be any value - not just the same custom value type. The response type is [`Ordering`](#ordering-plugin-call-response). [`Error`](#error-plugin-call-response) may also be returned, but at present the error is unlikely to be presented to the user - the engine will act as if you had sent `{"Ordering": null}`.
+Compares the custom value to another value and returns the [`Ordering`](#ordering) that should be used, if any. This is used to order values, for example when sorting; comparison operators such as `<` are sent as an [`Operation`](#operation) instead. The argument type is a [`Value`](#value), which may be any value - not just the same custom value type. The response type is [`Ordering`](#ordering-plugin-call-response). [`Error`](#error-plugin-call-response) may also be returned, but at present the error is unlikely to be presented to the user - the engine will act as if you had sent `{"Ordering": null}`.
 
 Example (comparing two `version` custom values):
 
@@ -381,7 +478,7 @@ $version + 7
           "Operation": [
             {
               "item": {
-                "Math": "Plus"
+                "Math": "Add"
               },
               "span": {
                 "start": 180,
@@ -405,9 +502,63 @@ $version + 7
 }
 ```
 
+##### `Save`
+
+Saves the custom value to a file when it is piped to the [`save`](/commands/docs/save.md) command, unless `save` first converts it based on the file extension (e.g. with `to json` for a `.json` file). The argument is a map:
+
+| Field              | Type            | Description                                                     |
+| ------------------ | --------------- | --------------------------------------------------------------- |
+| **path**           | spanned string  | The absolute path to save to, as a map with `item` and `span`.  |
+| **save_call_span** | [`Span`](#span) | The span of the `save` command call, useful for error messages. |
+
+The response type is [`Ok`](#ok-plugin-call-response) if the value was saved, or [`Error`](#error-plugin-call-response).
+
+Example:
+
+```nu
+$version | save version.bin
+```
+
+```json
+{
+  "Call": [
+    0,
+    {
+      "CustomValueOp": [
+        {
+          "item": {
+            "name": "version",
+            "data": [0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0]
+          },
+          "span": {
+            "start": 90,
+            "end": 96
+          }
+        },
+        {
+          "Save": {
+            "path": {
+              "item": "/home/user/version.bin",
+              "span": {
+                "start": 104,
+                "end": 115
+              }
+            },
+            "save_call_span": {
+              "start": 99,
+              "end": 103
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
 ##### `Dropped`
 
-This op is used to notify the plugin that a [`PluginCustomValue`](#plugincustomvalue) that had `notify_on_drop` set to `true` was dropped in the engine - i.e., all copies of it have gone out of scope. For more information on exactly under what circumstances this is sent, see the [drop notification](plugins.md#drop-notification) section of the plugin reference. The response type is [`Empty` pipeline data](#empty-header-variant) or [`Error`](#error-plugin-call-response).
+This op is used to notify the plugin that a [`PluginCustomValue`](#custom) that had `notify_on_drop` set to `true` was dropped in the engine - i.e., all copies of it have gone out of scope. For more information on exactly under what circumstances this is sent, see the [drop notification](plugins.md#drop-notification) section of the plugin reference. The response type is [`Empty` pipeline data](#empty-header-variant) or [`Error`](#error-plugin-call-response). The span sent with the custom value is always zero, as there is no source code associated with the drop.
 
 Example:
 
@@ -424,8 +575,8 @@ Example:
             "notify_on_drop": true
           },
           "span": {
-            "start": 1820,
-            "end": 1835
+            "start": 0,
+            "end": 0
           }
         },
         "Dropped"
@@ -437,7 +588,7 @@ Example:
 
 ### `EngineCallResponse`
 
-A response to an [engine call](#enginecall) made by the plugin. The argument is a 2-tuple (array): (`engine_call_id`, `engine_call`)
+A response to an [engine call](#enginecall) made by the plugin. The argument is a 2-tuple (array): (`engine_call_id`, `response`)
 
 The `engine_call_id` refers to the same number that the engine call being responded to originally contained. The plugin **must** send unique IDs for each engine call it makes. Like [`CallResponse`](#callresponse), there are multiple types of responses:
 
@@ -453,14 +604,12 @@ Example:
     0,
     {
       "Error": {
-        "LabeledError": {
-          "msg": "The connection closed.",
-          "labels": [],
-          "code": null,
-          "url": null,
-          "help": null,
-          "inner": []
-        }
+        "msg": "The connection closed.",
+        "labels": [],
+        "code": null,
+        "url": null,
+        "help": null,
+        "inner": []
       }
     }
   ]
@@ -478,11 +627,14 @@ Example:
   "EngineCallResponse": [
     0,
     {
-      "ListStream": {
-        "id": 23,
-        "span": {
-          "start": 8081,
-          "end": 8087
+      "PipelineData": {
+        "ListStream": {
+          "id": 23,
+          "span": {
+            "start": 8081,
+            "end": 8087
+          },
+          "metadata": null
         }
       }
     }
@@ -492,7 +644,7 @@ Example:
 
 #### `Config` engine call response
 
-A successful result of a [`Config` engine call](#config-engine-call). The body is a [`Config`](#config).
+A successful result of a [`GetConfig` engine call](#getconfig-engine-call). The body is a [`Config`](#config).
 
 Example:
 
@@ -502,10 +654,22 @@ Example:
     0,
     {
       "Config": {
-        "external_completer": null,
-        "filesize_metric": true,
-        "table_mode": "Rounded",
-        "table_move_header": false,
+        "filesize": {
+          "unit": "Metric",
+          "show_unit": true,
+          "precision": 1
+        },
+        "table": {
+          "mode": "Rounded",
+          "index_mode": "Always",
+          ...
+        },
+        "footer_mode": {
+          "RowCount": 25
+        },
+        "float_precision": 2,
+        "use_ansi_coloring": "Auto",
+        "edit_mode": "Emacs",
         ...
       }
     }
@@ -554,6 +718,43 @@ Example:
     0,
     {
       "Identifier": 4221
+    }
+  ]
+}
+```
+
+#### `IrBlock` engine call response
+
+A successful result of a [`GetBlockIR` engine call](#getblockir-engine-call). The body is the compiled intermediate representation (IR) of a block, as an [`IrBlock`](https://docs.rs/nu-protocol/latest/nu_protocol/ir/struct.IrBlock.html). This is an internal Nu type that can change between versions.
+
+Example (for the closure `{|x| $x + 1}`):
+
+```json
+{
+  "EngineCallResponse": [
+    13,
+    {
+      "IrBlock": {
+        "instructions": [
+          { "LoadVariable": { "dst": 0, "var_id": 77, "preserve_origin": false } },
+          { "LoadLiteral": { "dst": 1, "lit": { "Int": 1 } } },
+          { "BinaryOp": { "lhs_dst": 0, "op": { "Math": "Add" }, "rhs": 1 } },
+          { "Span": { "src_dst": 0 } },
+          { "Return": { "src": 0 } }
+        ],
+        "spans": [
+          { "start": 169382, "end": 169384 },
+          { "start": 169387, "end": 169388 },
+          { "start": 169385, "end": 169386 },
+          { "start": 169382, "end": 169388 },
+          { "start": 169377, "end": 169389 }
+        ],
+        "data": [],
+        "ast": [null, null, null, null, null],
+        "comments": ["", "", "", "", ""],
+        "register_count": 2,
+        "file_count": 0
+      }
     }
   ]
 }
@@ -630,6 +831,18 @@ Example:
 }
 ```
 
+#### `Ok` plugin call response
+
+A successful response with no data, used for operations that don't return anything, such as the [`Save`](#save) custom value op. This message is not a map, it is just the bare string `"Ok"`.
+
+Example:
+
+```json
+{
+  "CallResponse": [0, "Ok"]
+}
+```
+
 #### `Metadata` plugin call response
 
 A successful response to a [`Metadata` plugin call](#metadata-plugin-call). The body contains fields that describe the plugin, none of which are required:
@@ -672,9 +885,17 @@ Example:
             "extra_description": "",
             "search_terms": [],
             "required_positional": [],
-            "optional_positional": [],
+            "optional_positional": [
+              {
+                "name": "cell_path",
+                "desc": "Cell path to measure.",
+                "shape": "CellPath",
+                "completion": null,
+                "var_id": null,
+                "default_value": null
+              }
+            ],
             "rest_positional": null,
-            "vectorizes_over_list": false,
             "named": [
               {
                 "long": "help",
@@ -682,17 +903,17 @@ Example:
                 "arg": null,
                 "required": false,
                 "desc": "Display the help message for this command",
+                "completion": null,
                 "var_id": null,
                 "default_value": null
               }
             ],
-            "input_type": "String",
-            "output_type": "Int",
-            "input_output_types": [],
+            "input_output_types": [["String", "Int"]],
             "allow_variants_without_examples": false,
             "is_filter": false,
             "creates_scope": false,
             "allows_unknown_args": false,
+            "complete": null,
             "category": "Default"
           },
           "examples": []
@@ -733,6 +954,55 @@ Example with incomparable values:
 }
 ```
 
+#### `CompletionItems` plugin call response
+
+A successful response to a [`GetCompletion` plugin call](#getcompletion-plugin-call). The body is either `null`, which tells the engine to fall back to its default completions, or an array of suggestions (which may be empty, meaning that there are no suggestions). Each suggestion is a map:
+
+| Field                 | Type                    | Description                                                                         |
+| --------------------- | ----------------------- | ----------------------------------------------------------------------------------- |
+| **value**             | string                  | The text that will replace the argument being completed.                            |
+| **display_override**  | string?                 | Text to display to the user instead of `value`.                                     |
+| **description**       | string?                 | A description of the suggestion.                                                    |
+| **extra**             | string array?           | Extra information, e.g. examples.                                                   |
+| **append_whitespace** | boolean                 | **Required.** Whether to append a space after the suggestion is accepted.           |
+| **match_indices**     | unsigned integer array? | Indices of the graphemes in the suggestion that matched the typed text.             |
+| **span**              | [`Span`](#span)?        | The part of the input buffer to replace, if different from the argument's span.     |
+| **kind**              | string or map?          | The kind of suggestion, such as `"File"` or `"Directory"`, which affects its style. |
+
+Example:
+
+```json
+{
+  "CallResponse": [
+    2,
+    {
+      "CompletionItems": [
+        {
+          "value": "alpha",
+          "display_override": null,
+          "description": "first choice",
+          "extra": null,
+          "append_whitespace": true,
+          "match_indices": null,
+          "span": null,
+          "kind": null
+        },
+        {
+          "value": "beta",
+          "display_override": null,
+          "description": null,
+          "extra": null,
+          "append_whitespace": true,
+          "match_indices": null,
+          "span": null,
+          "kind": null
+        }
+      ]
+    }
+  ]
+}
+```
+
 #### `PipelineData` plugin call response
 
 A successful result with a Nu [`Value`](#value) or stream. The body is a [`PipelineDataHeader`](#pipelinedataheader).
@@ -744,14 +1014,19 @@ Example:
   "CallResponse": [
     0,
     {
-      "Value": {
-        "Int": {
-          "val": 42,
-          "span": {
-            "start": 12,
-            "end": 14
-          }
-        }
+      "PipelineData": {
+        "Value": [
+          {
+            "Int": {
+              "val": 42,
+              "span": {
+                "start": 12,
+                "end": 14
+              }
+            }
+          },
+          null
+        ]
       }
     }
   ]
@@ -953,13 +1228,14 @@ Example:
 
 #### `GetSpanContents` engine call
 
-Get the contents of a [`Span`](#span) from the engine. This can be used for viewing the source code that generated a value. The argument is a [`Span`](#span). The response on success is [`Value` pipeline data](3value-header-variant) containing a [`Binary`](#binary) value, as the result is not guaranteed to be valid UTF-8.
+Get the contents of a [`Span`](#span) from the engine. This can be used for viewing the source code that generated a value. The argument is a [`Span`](#span). The response on success is [`Value` pipeline data](#value-header-variant) containing a [`Binary`](#binary) value, as the result is not guaranteed to be valid UTF-8.
 
 Example:
 
 ```json
 {
   "EngineCall": {
+    "context": 7,
     "id": 72,
     "call": {
       "GetSpanContents": {
@@ -1056,7 +1332,7 @@ Pass a command's declaration ID (found via [`FindDecl`](#finddecl-engine-call)) 
 | **redirect_stdout** | boolean                                     | Whether to redirect stdout if the declared command ends in an external command. |
 | **redirect_stderr** | boolean                                     | Whether to redirect stderr if the declared command ends in an external command. |
 
-Example:
+Example (calling `"hello" | str length --grapheme-clusters`, where `str length` was found by `FindDecl` with ID 226):
 
 ```json
 {
@@ -1065,52 +1341,63 @@ Example:
     "id": 49,
     "call": {
       "CallDecl": {
-        "decl_id": 432,
+        "decl_id": 226,
         "call": {
           "head": {
             "start": 40400,
             "end": 40403
           },
-          "positional": [
-            {
-              "String": {
-                "val": "0.1.2",
-                "span": {
-                  "start": 40407,
-                  "end": 40415
-                }
-              }
-            }
-          ],
+          "positional": [],
           "named": [
             [
-              "major",
               {
-                "Bool": {
-                  "val": true,
-                  "span": {
-                    "start": 40404,
-                    "end": 40406
-                  }
+                "item": "grapheme-clusters",
+                "span": {
+                  "start": 40404,
+                  "end": 40423
                 }
-              }
+              },
+              null
             ]
           ]
         },
         "input": {
-          "Value": {
-            "Int": {
-              "val": 400,
-              "span": {
-                "start": 40390,
-                "end": 40393
+          "Value": [
+            {
+              "String": {
+                "val": "hello",
+                "span": {
+                  "start": 40390,
+                  "end": 40397
+                }
               }
-            }
-          }
+            },
+            null
+          ]
         },
         "redirect_stdout": true,
         "redirect_stderr": false
       }
+    }
+  }
+}
+```
+
+#### `GetBlockIR` engine call
+
+Get the compiled intermediate representation (IR) of a block, such as the block of a [`Closure`](#closure) passed to the plugin. The argument is the block ID, as an unsigned integer. Returns an [`IrBlock` response](#irblock-engine-call-response) if successful, or an [error](#error-engine-call-response) if the block doesn't exist or wasn't compiled.
+
+The IR format is internal to Nu and can change between versions, so plugins that use this call are likely to depend on a specific Nu version.
+
+Example:
+
+```json
+{
+  "EngineCall": {
+    "context": 2,
+    "id": 13,
+    "call": {
+      "GetBlockIR": 294
     }
   }
 }
@@ -1187,9 +1474,12 @@ Examples:
     {
       "Raw": {
         "Err": {
-          "IOError": {
-            "msg": "disconnected"
-          }
+          "msg": "disconnected",
+          "labels": [],
+          "code": null,
+          "url": null,
+          "help": null,
+          "inner": []
         }
       }
     }
@@ -1267,7 +1557,7 @@ let _guard = engine.register_signal_handler(Box::new(move |action| {
         SignalAction::Interrupt => println!("Interrupt signal received"),
         SignalAction::Reset => println!("Reset signal received"),
     }
-}));
+}))?;
 ```
 
 #### `signals()`
@@ -1291,7 +1581,7 @@ The engine is more strict about the format it emits: every message ends with a n
 
 Byte arrays are encoded as plain JSON arrays of numbers representing each byte. While this is inefficient, it is maximally portable.
 
-MessagePack **should** be preferred where possible if performance is desired, especially if byte streams are expected to be a common input or output of the plugin.
+MessagePack **should** be preferred where possible if performance is desired.
 
 ### MessagePack
 
@@ -1303,7 +1593,7 @@ Most messages are encoded in the same way as their JSON analogue. For example, t
 {
   "Hello": {
     "protocol": "nu-plugin",
-    "version": "0.94.0",
+    "version": "0.116.0",
     "features": []
   }
 }
@@ -1318,14 +1608,14 @@ is encoded in the MessagePack format as:
     a8 "protocol"    // 8-character string
     a9 "nu-plugin"   // 9-character string
     a7 "version"     // 7-character string
-    a6 "0.94.0"      // 6-character string
+    a7 "0.116.0"     // 7-character string
     a8 "features"    // 8-character string
     90               // array, zero elements
 ```
 
 (verbatim byte strings quoted for readability, non-printable bytes in hexadecimal)
 
-Byte arrays are encoded with MessagePack's native byte arrays, which impose zero constraints on the formatting of the bytes within. In general, the MessagePack encoding is much more efficient than JSON and **should** be the first choice for plugins where performance is important and MessagePack is available.
+Byte arrays are encoded the same way as in JSON: as MessagePack arrays of integers, one per byte. When decoding, Nu also accepts MessagePack's native `bin` type for byte arrays. In general, the MessagePack encoding is much more efficient than JSON and **should** be the first choice for plugins where performance is important and MessagePack is available.
 
 <a name="value"></a>
 
@@ -1448,7 +1738,7 @@ Example:
 ```json
 {
   "Filesize": {
-    "val": 33973248,
+    "val": 33973862,
     "span": {
       "start": 7740,
       "end": 7747
@@ -1517,35 +1807,28 @@ A range of values.
 
 | Field    | Type            |
 | -------- | --------------- |
-| **val**  | `Range`         |
+| **val**  | string          |
 | **span** | [`Span`](#span) |
 
-`Range` has two variants, `IntRange` and `FloatRange`:
+The range is encoded as a string, using Nu's range syntax:
 
-#### `IntRange`
+| Form               | Meaning                                                                                        |
+| ------------------ | ---------------------------------------------------------------------------------------------- |
+| `start..end`       | From `start` to `end`, inclusive.                                                              |
+| `start..<end`      | From `start` to `end`, excluding `end`.                                                        |
+| `start..`          | From `start`, with no end.                                                                     |
+| `start..next..end` | From `start` to `end`, with a step of `next - start`. This also works with `..<end` or no end. |
 
-| Field     | Type            |
-| --------- | --------------- |
-| **start** | integer         |
-| **step**  | integer         |
-| **end**   | `Bound` integer |
+If any of the numbers contains a `.`, the range is a float range; otherwise, it is an int range. Nu always writes floats with a decimal point (`1.0`, not `1`) and only writes the step if it isn't 1. Nu also fills in parts that were left out in the source code, so `..5` is sent as `"0..5"`, and `5..1` (which counts down) is sent as `"5..4..1"`.
 
 Examples:
 
-```nu
-0..
-```
+The unbounded range `0..` (don't type this one at the prompt on its own, as Nu will try to print every number in it):
 
 ```json
 {
   "Range": {
-    "val": {
-      "IntRange": {
-        "start": 0,
-        "step": 1,
-        "end": "Unbounded"
-      }
-    },
+    "val": "0..",
     "span": {
       "start": 1380,
       "end": 1383
@@ -1561,13 +1844,7 @@ Examples:
 ```json
 {
   "Range": {
-    "val": {
-      "IntRange": {
-        "start": 7,
-        "step": 1,
-        "end": { "Included": 10 }
-      }
-    },
+    "val": "7..10",
     "span": {
       "start": 1380,
       "end": 1385
@@ -1583,13 +1860,7 @@ Examples:
 ```json
 {
   "Range": {
-    "val": {
-      "IntRange": {
-        "start": 7,
-        "step": 1,
-        "end": { "Excluded": 10 }
-      }
-    },
+    "val": "7..<10",
     "span": {
       "start": 1380,
       "end": 1386
@@ -1605,13 +1876,7 @@ Examples:
 ```json
 {
   "Range": {
-    "val": {
-      "IntRange": {
-        "start": 0,
-        "step": 64,
-        "end": { "Included": 128 }
-      }
-    },
+    "val": "0..64..128",
     "span": {
       "start": 1380,
       "end": 1390
@@ -1620,18 +1885,6 @@ Examples:
 }
 ```
 
-#### `FloatRange`
-
-Identical to [`IntRange`](#intrange) but for floats instead.
-
-| Field     | Type           |
-| --------- | -------------- |
-| **start** | double         |
-| **step**  | double         |
-| **end**   | `Bound` double |
-
-Example:
-
 ```nu
 7.5..10.5
 ```
@@ -1639,13 +1892,7 @@ Example:
 ```json
 {
   "Range": {
-    "val": {
-      "FloatRange": {
-        "start": 7.5,
-        "step": 1,
-        "end": { "Included": 10.5 }
-      }
-    },
+    "val": "7.5..10.5",
     "span": {
       "start": 1380,
       "end": 1389
@@ -1822,29 +2069,6 @@ Example:
 }
 ```
 
-### `Block`
-
-A reference to a parsed block of Nushell code, without any captured variables.
-
-| Field    | Type                        |
-| -------- | --------------------------- |
-| **val**  | unsigned integer (block id) |
-| **span** | [`Span`](#span)             |
-
-Example:
-
-```json
-{
-  "Block": {
-    "val": 44500,
-    "span": {
-      "start": 59400,
-      "end": 59480
-    }
-  }
-}
-```
-
 ### `Closure`
 
 A reference to a parsed block of Nushell code, with variables captured from scope.
@@ -1927,44 +2151,49 @@ null
 
 An error contained within a value. Trying to operate on the value will most likely cause the error to be forwarded. When writing plugins, error values should typically be handled by returning the error from the command when encountered.
 
-| Field    | Type                            |
-| -------- | ------------------------------- |
-| **val**  | [`LabeledError`](#labelederror) |
-| **span** | [`Span`](#span)                 |
+| Field     | Type                            |
+| --------- | ------------------------------- |
+| **error** | [`LabeledError`](#labelederror) |
+| **span**  | [`Span`](#span)                 |
 
-Example:
+Note that the field containing the error is named `error`, not `val`.
+
+Example, for the error created by:
 
 ```nu
-error make {
-  msg: "foo"
-  label: {
-    text: "bar"
-    span: {
-      start: 0
-      end: 0
-    }
-  }
-}
+error make {msg: "foo", help: "bar"}
+# => Error: nu::shell::error
+# =>
+# =>   × foo
+# =>    ╭─[repl_entry #1:1:12]
+# =>  1 │ error make {msg: "foo", help: "bar"}
+# =>    ·            ─────────────────────────
+# =>    ╰────
+# =>   help: bar
 ```
 
 ```json
 {
   "Error": {
-    "val": {
+    "error": {
       "msg": "foo",
       "labels": [
         {
-          "text": "bar",
+          "text": "",
           "span": {
-            "start": 0,
-            "end": 0
+            "start": 11,
+            "end": 36
           }
         }
       ],
       "code": null,
       "url": null,
-      "help": null,
+      "help": "bar",
       "inner": []
+    },
+    "span": {
+      "start": 0,
+      "end": 36
     }
   }
 }
@@ -1979,7 +2208,7 @@ An array of raw bytes. This is sometimes returned from operations that detect da
 | **val**  | byte array      |
 | **span** | [`Span`](#span) |
 
-Note that the encoding of byte arrays in [JSON](#json) and [MessagePack](#messagepack) is different - the former uses an array of numbers, but the latter uses the native byte array support.
+Byte arrays are encoded as arrays of numbers in both [JSON](#json) and [MessagePack](#messagepack). See the [MessagePack](#messagepack) section for details.
 
 Example:
 
@@ -2005,69 +2234,26 @@ Represents a path into subfields of lists, records, and tables.
 
 | Field    | Type            |
 | -------- | --------------- |
-| **val**  | `CellPath`      |
+| **val**  | string          |
 | **span** | [`Span`](#span) |
 
-`CellPath` is defined as:
+The cell path is encoded as a string: `$` followed by each path member with a `.` in front of it. An empty cell path is `$.`. Members that are unsigned integers index into lists and tables. Other members are column names, which are quoted if necessary (e.g. `$."a b"` or `$."0"`). Each member can be followed by modifiers:
 
-| Field       | Type         |
-| ----------- | ------------ |
-| **members** | `PathMember` |
+- `!` marks a column name as case-insensitive.
+- `?` marks the member as optional. Optional path members will not cause errors if they can't be accessed - the path access will just return [`Nothing`](#nothing) instead.
 
-`PathMember` has two variants, `String` or `Int`, and both contain the following fields:
-
-| Field        | Type                      |
-| ------------ | ------------------------- |
-| **val**      | string / unsigned integer |
-| **span**     | [`Span`](#span)           |
-| **optional** | boolean                   |
-
-Optional path members will not cause errors if they can't be accessed - the path access will just return [`Nothing`](#nothing) instead.
+The spans of the individual path members are not sent.
 
 Example:
 
 ```nu
-foo.0?.bar
-# [foo {value: 0, optional: true} bar] | into cell-path
+$.foo.0?.bar
 ```
 
 ```json
 {
   "CellPath": {
-    "val": {
-      "members": [
-        {
-          "String": {
-            "val": "foo",
-            "span": {
-              "start": 659835,
-              "end": 659838
-            },
-            "optional": false
-          }
-        },
-        {
-          "Int": {
-            "val": 0,
-            "span": {
-              "start": 659847,
-              "end": 659848
-            },
-            "optional": true
-          }
-        },
-        {
-          "String": {
-            "val": "bar",
-            "span": {
-              "start": 659866,
-              "end": 659869
-            },
-            "optional": false
-          }
-        }
-      ]
-    },
+    "val": "$.foo.0?.bar",
     "span": {
       "start": 659873,
       "end": 659887
@@ -2166,21 +2352,48 @@ The representation is the following string:
 
 #### `Value` header variant
 
-A single value. Does not start a stream, so there is no identifier. Contains a [`Value`](#value).
+A single value. Does not start a stream, so there is no identifier. The body is a 2-tuple (array): (`value`, `metadata`), where `value` is a [`Value`](#value) and `metadata` is either [`PipelineMetadata`](#pipelinemetadata) or `null`. Both elements **must** be present.
 
 Example:
 
 ```json
 {
-  "Value": {
-    "Int": {
-      "val": 2,
-      "span": {
-        "start": 9090,
-        "end": 9093
+  "Value": [
+    {
+      "Int": {
+        "val": 2,
+        "span": {
+          "start": 9090,
+          "end": 9093
+        }
       }
+    },
+    null
+  ]
+}
+```
+
+Example with metadata, from `"x" | metadata set --content-type "text/plain"`:
+
+```json
+{
+  "Value": [
+    {
+      "String": {
+        "val": "x",
+        "span": {
+          "start": 169453,
+          "end": 169456
+        }
+      }
+    },
+    {
+      "data_source": "None",
+      "path_columns": [],
+      "content_type": "text/plain",
+      "custom": {}
     }
-  }
+  ]
 }
 ```
 
@@ -2190,10 +2403,11 @@ Starts a list stream. Expect [`Data`](#data) messages of the `List` variant with
 
 Contains <a name="liststreaminfo">`ListStreamInfo`</a>, a map:
 
-| Field    | Type            | Description                                       |
-| -------- | --------------- | ------------------------------------------------- |
-| **id**   | integer         | The stream identifier                             |
-| **span** | [`Span`](#span) | The source code reference that caused the stream. |
+| Field        | Type                                     | Description                                       |
+| ------------ | ---------------------------------------- | ------------------------------------------------- |
+| **id**       | integer                                  | The stream identifier                             |
+| **span**     | [`Span`](#span)                          | The source code reference that caused the stream. |
+| **metadata** | [`PipelineMetadata`](#pipelinemetadata)? | Metadata about the stream, or `null`.             |
 
 Example:
 
@@ -2204,7 +2418,8 @@ Example:
     "span": {
       "start": 33911,
       "end": 33942
-    }
+    },
+    "metadata": null
   }
 }
 ```
@@ -2213,11 +2428,12 @@ Example:
 
 Starts a byte stream. Expect [`Data`](#data) messages of the `Raw` variant with the referenced ID.
 
-| Field    | Type                                | Description                                       |
-| -------- | ----------------------------------- | ------------------------------------------------- |
-| **id**   | integer                             | The stream identifier                             |
-| **span** | [`Span`](#span)                     | The source code reference that caused the stream. |
-| **type** | [`ByteStreamType`](#bytestreamtype) | The expected type of the stream.                  |
+| Field        | Type                                     | Description                                       |
+| ------------ | ---------------------------------------- | ------------------------------------------------- |
+| **id**       | integer                                  | The stream identifier                             |
+| **span**     | [`Span`](#span)                          | The source code reference that caused the stream. |
+| **type**     | [`ByteStreamType`](#bytestreamtype)      | The expected type of the stream.                  |
+| **metadata** | [`PipelineMetadata`](#pipelinemetadata)? | Metadata about the stream, or `null`.             |
 
 <a name="bytestreamtype"></a> Byte streams carry a `type` field with one of the three following strings:
 
@@ -2239,8 +2455,37 @@ Example:
       "start": 49011,
       "end": 49027
     },
-    "type": "String"
+    "type": "String",
+    "metadata": null
   }
+}
+```
+
+### `PipelineMetadata`
+
+[Documentation](https://docs.rs/nu-protocol/latest/nu_protocol/struct.PipelineMetadata.html)
+
+Metadata that can be attached to pipeline data, as shown by the [`metadata`](/commands/docs/metadata.md) command. It is a map:
+
+| Field            | Type                             | Description                                                                        |
+| ---------------- | -------------------------------- | ---------------------------------------------------------------------------------- |
+| **data_source**  | string or map                    | Where the data came from: `"None"`, `"HtmlThemes"`, or `{"FilePath": "<path>"}`.   |
+| **path_columns** | string array                     | Names of columns that contain file paths (e.g. `["name"]` for the output of `ls`). |
+| **content_type** | string?                          | The MIME type of the data, e.g. `"application/json"`.                              |
+| **custom**       | map: string ⇒ [`Value`](#value)? | Other metadata, set by commands and plugins. Defaults to an empty map.             |
+
+`data_source` and `path_columns` are required.
+
+Example, from `open --raw data.json`:
+
+```json
+{
+  "data_source": {
+    "FilePath": "/home/user/data.json"
+  },
+  "path_columns": [],
+  "content_type": "application/json",
+  "custom": {}
 }
 ```
 
@@ -2320,9 +2565,10 @@ We serialize the Rust `Ordering` type as literal strings, for example:
 Serialized with serde's default enum representation. Examples:
 
 ```js
-{ "Math": "Append" }           // ++   Math(Append)
-{ "Bits": "BitOr" }            // |    Bits(BitOr)
-{ "Comparison": "RegexMatch" } // =~   Comparison(RegexMatch)
+{ "Math": "Add" }              // +       Math(Add)
+{ "Math": "Concatenate" }      // ++      Math(Concatenate)
+{ "Bits": "BitOr" }            // bit-or  Bits(BitOr)
+{ "Comparison": "RegexMatch" } // =~      Comparison(RegexMatch)
 ```
 
 ### `SignalAction`

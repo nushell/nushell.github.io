@@ -6,21 +6,22 @@ You can see the current environment variables in the $env variable:
 
 ```nu
 $env | table -e
-# => ╭──────────────────────────────────┬───────────────────────────────────────────╮
-# => │                                  │ ╭──────┬────────────────────────────────╮ │
-# => │ ENV_CONVERSIONS                  │ │      │ ╭─────────────┬──────────────╮ │ │
-# => │                                  │ │ PATH │ │ from_string │ <Closure 32> │ │ │
-# => │                                  │ │      │ │ to_string   │ <Closure 34> │ │ │
-# => │                                  │ │      │ ╰─────────────┴──────────────╯ │ │
-# => │                                  │ │      │ ╭─────────────┬──────────────╮ │ │
-# => │                                  │ │ Path │ │ from_string │ <Closure 36> │ │ │
-# => │                                  │ │      │ │ to_string   │ <Closure 38> │ │ │
-# => │                                  │ │      │ ╰─────────────┴──────────────╯ │ │
-# => │                                  │ ╰──────┴────────────────────────────────╯ │
-# => │ HOME                             │ /Users/jelle                              │
-# => │ LSCOLORS                         │ GxFxCxDxBxegedabagaced                    │
-# => | ...                              | ...                                       |
-# => ╰──────────────────────────────────┴───────────────────────────────────────────╯
+# => ╭──────────────────────┬───────────────────────────────────────────────────────────────────────────╮
+# => │ ENV_CONVERSIONS      │ {record 0 fields}                                                         │
+# => │ HOME                 │ /Users/jelle                                                              │
+# => │ LSCOLORS             │ GxFxCxDxBxegedabagaced                                                    │
+# => │                      │ ╭───┬──────────────────────────────────────────────────────────────╮      │
+# => │ NU_LIB_DIRS          │ │ 0 │ /Users/jelle/Library/Application Support/nushell/scripts     │      │
+# => │                      │ │ 1 │ /Users/jelle/Library/Application Support/nushell/completions │      │
+# => │                      │ ╰───┴──────────────────────────────────────────────────────────────╯      │
+# => │ NU_PLUGIN_DIRS       │ [list 0 items]                                                            │
+# => │ NU_VERSION           │ 0.116.0                                                                   │
+# => │                      │ ╭───┬──────────╮                                                          │
+# => │ PATH                 │ │ 0 │ /usr/bin │                                                          │
+# => │                      │ │ 1 │ /bin     │                                                          │
+# => │                      │ ╰───┴──────────╯                                                          │
+# => │ ...                  │ ...                                                                       │
+# => ╰──────────────────────┴───────────────────────────────────────────────────────────────────────────╯
 ```
 
 In Nushell, environment variables can be any value and have any type. You can see the type of an env variable with the describe command, for example: `$env.PROMPT_COMMAND | describe`.
@@ -41,13 +42,15 @@ Using the `$env.VAR = "val"` is the most straightforward method
 $env.FOO = 'BAR'
 ```
 
-So, if you want to extend the Windows `Path` variable, for example, you could do that as follows.
+So, if you want to extend the `PATH` variable, for example, you could do that as follows.
 
 ```nu
-$env.Path = ($env.Path | prepend 'C:\path\you\want\to\add')
+$env.PATH = ($env.PATH | prepend '/path/you/want/to/add')
+# or, with a Windows path:
+# $env.PATH = ($env.PATH | prepend 'C:\path\you\want\to\add')
 ```
 
-Here we've prepended our folder to the existing folders in the Path, so it will have the highest priority.
+Here we've prepended our folder to the existing folders in the path, so it will have the highest priority.
 If you want to give it the lowest priority instead, you can use the [`append`](/commands/docs/append.md) command.
 
 ### [`load-env`](/commands/docs/load-env.md)
@@ -80,24 +83,25 @@ $env.FOO
 # => BAR
 ```
 
-Sometimes, you may want to access an environmental variable which might be unset. Consider using the [question mark operator](types_of_data.md#optional-cell-paths) to avoid an error:
+Sometimes, you may want to access an environmental variable which might be unset. Consider using the [optional operator](navigating_structured_data.md#the-optional-operator) to avoid an error:
 
 ```nu
-$env.FOO | describe
+$env.NOT_SET | describe
 # => Error: nu::shell::column_not_found
-# => 
-# =>   × Cannot find column
-# =>    ╭─[entry #1:1:1]
-# =>  1 │ $env.FOO
-# =>    · ──┬─ ─┬─
-# =>    ·   │   ╰── cannot find column 'FOO'
-# =>    ·   ╰── value originates here
+# =>
+# =>   × Cannot find column 'NOT_SET'
+# =>    ╭─[repl_entry #1:1:1]
+# =>  1 │ $env.NOT_SET | describe
+# =>    · ──────┬─────┬
+# =>    ·       │     ╰── value originates here
+# =>    ·       ╰── column 'NOT_SET' is missing in one or more values
 # =>    ╰────
+# =>   help: If some rows have this column, try using 'NOT_SET?' for optional access, or pre-fill using the `default` command
 
-$env.FOO? | describe
+$env.NOT_SET? | describe
 # => nothing
 
-$env.FOO? | default "BAR"
+$env.NOT_SET? | default "BAR"
 # => BAR
 ```
 
@@ -115,13 +119,19 @@ if "FOO" in $env {
 
 ### Case sensitivity
 
-Nushell's `$env` is case-insensitive, regardless of the OS. Although `$env` behaves mostly like a record, it is special in that it ignores the case when reading or updating. This means, for example, you can use any of `$env.PATH`, `$env.Path`, or `$env.path`, and they all work the same on any OS.
+Nushell's `$env` is case-insensitive, regardless of the OS. Although `$env` behaves mostly like a record, it is special in that it ignores the case when reading or updating. This means, for example, you can use any of `$env.PATH`, `$env.Path`, or `$env.path`, and they all work the same on any OS:
 
-If you want to read `$env` in a case-sensitive manner, use `$env | get --sensitive`.
+```nu
+$env.FOO = 'BAR'
+$env.foo
+# => BAR
+```
+
+This only applies when you access `$env` directly with a cell path, like `$env.foo`. When `$env` is used as a value, such as when it is piped into a command or used with the `in` operator, it is a regular record with case-sensitive keys. So if you want to read `$env` in a case-sensitive manner, use `$env | get FOO` (`$env | get foo` is an error) or `"FOO" in $env`.
 
 ## Scoping
 
-When you set an environment variable, it will be available only in the current scope (the block you're in and any block inside of it).
+When you set an environment variable inside a closure or a custom command (unless the command is defined with `def --env`), it will be available only in that scope (the closure or command and any block inside of it).
 
 Here is a small example to demonstrate the environment scoping:
 
@@ -134,6 +144,14 @@ do {
 # => true
 $env.FOO == "BAR"
 # => true
+```
+
+The blocks of control flow keywords such as [`if`](/commands/docs/if.md), [`for`](/commands/docs/for.md), [`while`](/commands/docs/while.md), [`loop`](/commands/docs/loop.md), and [`match`](/commands/docs/match.md) are not closures, so environment changes made inside them remain after the block ends:
+
+```nu
+if true { $env.FOO = "BAZ" }
+$env.FOO
+# => BAZ
 ```
 
 See also: [Changing the Environment in a Custom Command](./custom_commands.html#changing-the-environment-in-a-custom-command).
@@ -174,8 +192,8 @@ $env.FOO = 'BAR'
 ## Environment Variable Conversions
 
 You can set the `ENV_CONVERSIONS` environment variable to convert other environment variables between a string and a value.
-For example, the [default environment config](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/default_files/default_env.nu) includes conversion of PATH (and Path used on Windows) environment variables from a string to a list.
-After both `env.nu` and `config.nu` are loaded, any existing environment variable specified inside `ENV_CONVERSIONS` will be translated according to its `from_string` field into a value of any type.
+Nushell itself converts the `PATH` (and `Path` used on Windows) environment variable from a string to a list when it starts, before any configuration file is loaded, so it does not need an entry in `ENV_CONVERSIONS` (which is an empty record by default).
+When you assign `$env.ENV_CONVERSIONS`, any existing string environment variable specified inside it is immediately translated according to its `from_string` field into a value of any type.
 External tools require environment variables to be strings, therefore, any non-string environment variable needs to be converted first.
 The conversion of value -> string is set by the `to_string` field of `ENV_CONVERSIONS` and is done every time an external command is run.
 
@@ -184,7 +202,6 @@ Put the following in your config.nu:
 
 ```nu
 $env.ENV_CONVERSIONS = {
-    # ... you might have Path and PATH already there, add:
     FOO : {
         from_string: { |s| $s | split row '-' }
         to_string: { |v| $v | str join '-' }
@@ -192,22 +209,31 @@ $env.ENV_CONVERSIONS = {
 }
 ```
 
-Now, within a Nushell instance:
+Now, when Nushell starts with `FOO` set to `'a-b-c'` in its environment (for example, when you run `with-env { FOO: 'a-b-c' } { nu }`), `config.nu` assigns `$env.ENV_CONVERSIONS`, which converts `FOO` into a list in the new instance.
+
+Because the conversion happens whenever `$env.ENV_CONVERSIONS` is assigned, you can also try it in your current session:
 
 ```nu
-with-env { FOO : 'a-b-c' } { nu }  # runs Nushell with FOO env. var. set to 'a-b-c'
-
+$env.FOO = 'a-b-c'
+$env.ENV_CONVERSIONS = $env.ENV_CONVERSIONS  # re-apply the conversions to the existing variables
 $env.FOO
-# =>   0   a
-# =>   1   b
-# =>   2   c
+# => ╭───┬───╮
+# => │ 0 │ a │
+# => │ 1 │ b │
+# => │ 2 │ c │
+# => ╰───┴───╯
 ```
 
-You can see the `$env.FOO` is now a list in a new Nushell instance with the updated config.
+You can see the `$env.FOO` is now a list.
 You can also test the conversion manually by
 
 ```nu
 do $env.ENV_CONVERSIONS.FOO.from_string 'a-b-c'
+# => ╭───┬───╮
+# => │ 0 │ a │
+# => │ 1 │ b │
+# => │ 2 │ c │
+# => ╰───┴───╯
 ```
 
 Now, to test the conversion list -> string, run:
@@ -221,15 +247,14 @@ Because `nu` is an external program, Nushell translated the `[ a b c ]` list acc
 Running commands with `nu -c` does not load the config file, therefore the env conversion for `FOO` is missing and it is displayed as a plain string -- this way we can verify the translation was successful.
 You can also run this step manually by `do $env.ENV_CONVERSIONS.FOO.to_string [a b c]`
 
-_(Important! The environment conversion string -> value happens **after** the env.nu and config.nu are evaluated. All environment variables in env.nu and config.nu are still strings unless you set them manually to some other values.)_
+_(Important! The string -> value conversion happens only for variables that already exist when `$env.ENV_CONVERSIONS` is assigned, such as those inherited from the parent process. A variable that you set as a string afterwards stays a string. To convert it, set it before assigning `ENV_CONVERSIONS`, or assign `$env.ENV_CONVERSIONS` to itself again.)_
 
 ## Removing Environment Variables
 
-You can remove an environment variable only if it was set in the current scope via [`hide-env`](/commands/docs/hide-env.md):
+You can remove an environment variable with [`hide-env`](/commands/docs/hide-env.md):
 
 ```nu
 $env.FOO = 'BAR'
-# => ...
 hide-env FOO
 ```
 

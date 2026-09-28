@@ -19,10 +19,22 @@ exported environment variables:
 ```nu
 # This works, using zsh to print "Hello"
 'echo Hello' | zsh -c $in
+# => Hello
 
 # This exits with an error because $env.VAR is not defined
 'export VAR="Hello"' | zsh -c $in
 print $env.VAR
+# => Error: nu::shell::column_not_found
+# =>
+# =>   × Cannot find column 'VAR'
+# =>    ╭─[repl_entry #2:4:7]
+# =>  3 │ 'export VAR="Hello"' | zsh -c $in
+# =>  4 │ print $env.VAR
+# =>    ·       ────┬───┬
+# =>    ·           │   ╰── value originates here
+# =>    ·           ╰── column 'VAR' is missing in one or more values
+# =>    ╰────
+# =>   help: If some rows have this column, try using 'VAR?' for optional access, or pre-fill using the `default` command
 ```
 
 This chapter presents two workarounds for getting around this issue, and the
@@ -88,7 +100,7 @@ def capture-foreign-env [
         echo '<ENV_CAPTURE_EVAL_FENCE>'
         eval "$SCRIPT_TO_SOURCE"
         echo '<ENV_CAPTURE_EVAL_FENCE>'
-        env -0 -u _ -u _AST_FEATURES -u SHLVL` # Filter out known changing variables
+        env -0 -u _ -u _AST_FEATURES -u SHLVL -u SCRIPT_TO_SOURCE` # Filter out known changing variables
     }
     | split row '<ENV_CAPTURE_EVAL_FENCE>'
     | {
@@ -113,8 +125,8 @@ Usage, e.g. in `env.nu`:
 load-env (open script.sh | capture-foreign-env)
 
 # Running a different shell's script
-# fish might be elsewhere on your system, if it's in the PATH, `fish` is enough
-load-env (open script.fish | capture-foreign-env --shell /usr/local/bin/fish)
+# `fish` is enough if it's in your PATH, otherwise give its full path (e.g. /usr/local/bin/fish)
+load-env (open script.fish | capture-foreign-env --shell fish)
 ```
 
 The command runs a foreign shell script and captures the changed environment
@@ -201,7 +213,7 @@ env
 echo '<ENV_CAPTURE_EVAL_FENCE>'
 eval "$SCRIPT_TO_SOURCE"
 echo '<ENV_CAPTURE_EVAL_FENCE>'
-env -u _ -u _AST_FEATURES -u SHLVL
+env -0 -u _ -u _AST_FEATURES -u SHLVL -u SCRIPT_TO_SOURCE
 ```
 
 These POSIX-shell compatible commands, available in UNIX-like OSes, do the
@@ -219,9 +231,10 @@ following:
    correctly.
 4. Log the "fence" again to stdout so we know where the "after" list of
    variables starts.
-5. Log all environment variables after the script run. We are excluding a few
-   variables here that are commonly changed by a few shells that have nothing to
-   do with the particular script that was run.
+5. Log all environment variables after the script run, separated by NUL
+   characters (`-0`) instead of newlines. We are excluding a few variables here
+   that are commonly changed by a few shells that have nothing to do with the
+   particular script that was run, as well as `SCRIPT_TO_SOURCE` itself.
 
 We then take the script output and save all lines from the `env` output before
 and after running the passed script, using the `<ENV_CAPTURE_EVAL_FENCE>` logs.
@@ -231,7 +244,7 @@ and after running the passed script, using the `<ENV_CAPTURE_EVAL_FENCE>` logs.
 | split row '<ENV_CAPTURE_EVAL_FENCE>'
 | {
     before: ($in | first | str trim | lines)
-    after: ($in | last | str trim | lines)
+    after: ($in | last | str trim | split row (char --integer 0))
 }
 ```
 
