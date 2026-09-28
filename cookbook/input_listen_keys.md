@@ -10,6 +10,22 @@ A common "key listening" pattern is to:
 - Take action depending on which key was pressed
 - Loop if one of the expected keys wasn't pressed
 
+`input listen --types [key]` waits for a single keypress and returns a record that describes it. For example, pressing <kbd>Ctrl</kbd>+<kbd>C</kbd> returns:
+
+```nu
+input listen --types [key]
+# => ╭───────────┬───────────────────────────────╮
+# => │ type      │ key                           │
+# => │ key_type  │ char                          │
+# => │ code      │ c                             │
+# => │           │ ╭───┬───────────────────────╮ │
+# => │ modifiers │ │ 0 │ keymodifiers(control) │ │
+# => │           │ ╰───┴───────────────────────╯ │
+# => ╰───────────┴───────────────────────────────╯
+```
+
+The examples below compare the `code` and `modifiers` fields of this record against the keys they expect.
+
 There are several patterns that can accomplish this, each with advantages and disadvantages. You can choose from one of the following patterns that best fits your use-case and coding style:
 
 1.  A first attempt might be the following simple loop. This will work for some cases, but a `loop` cannot itself return a _value_:
@@ -19,7 +35,6 @@ There are several patterns that can accomplish this, each with advantages and di
       print "I'm running the code, but I can't return a"
       print "value because I need to `break` out of the loop."
       42
-      break
     }
 
     print '(a) Run some code (x) Exit'
@@ -28,6 +43,7 @@ There are several patterns that can accomplish this, each with advantages and di
       let key = (input listen --types [key])
       if ($key.code == 'a') and ($key.modifiers == []) {
           run_some_code
+          break
       } else if ($key.code == 'x') and ($key.modifiers == []) {
           print 'User exited'
           break
@@ -124,7 +140,8 @@ There are several patterns that can accomplish this, each with advantages and di
 
     print '(a) Run some code (x) Exit'
 
-    let key_generator = {|_|
+    # The parameter's default value is the initial value that `generate` requires
+    let key_generator = {|_ = null|
       let key = (input listen --types [key])
 
       if ($key.code == 'a') and ($key.modifiers == []) {
@@ -144,7 +161,7 @@ There are several patterns that can accomplish this, each with advantages and di
       }
     }
 
-    generate null $key_generator | get 0
+    generate $key_generator | get 0
     ```
 
 ## Using match statements with a list of keycodes
@@ -163,7 +180,7 @@ let keys = {
   x:      [ 'x' [] ]
   ctrl-c: [ 'c' ['keymodifiers(control)'] ]
 }
-mut key = {keycode: '', modifiers: ['']}
+mut key: record = {}
 print '(a) Run some code (x) Exit'
 
 loop {

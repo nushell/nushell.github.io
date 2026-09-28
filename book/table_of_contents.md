@@ -1,41 +1,68 @@
 # Table of Contents
 
-- [Installation](installation.md) - Installing Nushell
 - [Introduction](README.md) - Getting started
-- [Thinking in Nu](thinking_in_nu.md) - Thinking in Nushell
-- [Moving around](moving_around.md) - Moving around in Nushell
-- [Types of data](types_of_data.md) - Types of data in Nushell
-- [Loading data](loading_data.md) - Loading data and using it
-- [Strings](working_with_strings.md) - Strings, escape characters, and string interpolation
-- [Working with lists](working_with_lists.md) - Working with Nu lists
-- [Working with tables](working_with_tables.md) - Working with Nu tables
-- [Pipelines](pipelines.md) - How the pipeline works
-- [Configuration](configuration.md) - How to configure Nushell
-- [3rd Party Prompts](3rdpartyprompts.md) - How to configure 3rd party prompts
-- [Custom commands](custom_commands.md) - Creating your own commands
-- [Aliases](aliases.md) - How to alias commands
-- [Operators](operators.md) - Operators supported by Nushell
-- [Variables](variables.md) - Working with variables
-- [Control flow](control_flow.md) - Working with the control flow commands
-- [Environment](environment.md) - Working with environment variables
-- [Stdout, stderr, and exit codes](stdout_stderr_exit_codes.md) - Working with stdout, stderr, and exit codes
-- [Modules](modules.md) - Creating and using your own modules
-- [Hooks](hooks.md) - Adding code snippets to be run automatically
-- [Scripts](scripts.md) - Creating your own scripts
-- [Metadata](metadata.md) - An explanation of Nu's metadata system
-- [Creating your own errors](creating_errors.md) - Creating your own error messages
-- [Directory Stack](directory_stack.md) - Working with multiple locations
-- [Running External (System) Commands](./running_externals.md) - Running external commands with a naming conflict
-- [Plugins](plugins.md) - Enhancing Nushell with more features using plugins
-- [Parallelism](parallelism.md) - Running your code in parallel
-- [Line editor](line_editor.md) - Nushell's line editor
-- [Dataframes](dataframes.md) - Working with dataframes in Nushell
-- [Explore](explore.md) - Using the Nushell TUI
-- [Coloring and Theming](coloring_and_theming.md) - How to change the colors and themes in Nushell
+- [Installation](installation.md) - Installing Nushell
+  - [Default Shell](default_shell.md) - Setting Nushell as your default login shell
+- [Getting Started](getting_started.md)
+  - [Quick Tour](quick_tour.md) - A quick tour of Nushell's features
+  - [Moving Around the System](moving_around.md) - Moving around in Nushell
+  - [Thinking in Nu](thinking_in_nu.md) - Thinking in Nushell
+  - [Nushell Cheat Sheet](cheat_sheet.md) - A summary of common commands and syntax
+- [Nu Fundamentals](nu_fundamentals.md)
+  - [Types of Data](types_of_data.md) - Types of data in Nushell
+  - [Loading Data](loading_data.md) - Loading data and using it
+  - [Pipelines](pipelines.md) - How the pipeline works
+  - [Working with Strings](working_with_strings.md) - Strings, escape characters, and string interpolation
+  - [Working with Lists](working_with_lists.md) - Working with Nu lists
+  - [Working with Records](working_with_records.md) - Working with Nu records
+  - [Working with Tables](working_with_tables.md) - Working with Nu tables
+  - [Navigating and Accessing Structured Data](navigating_structured_data.md) - Cell paths and getting at nested data
+  - [Special Variables](special_variables.md) - Variables that Nushell defines for you
+- [Programming in Nu](programming_in_nu.md)
+  - [Custom Commands](custom_commands.md) - Creating your own commands
+  - [Aliases](aliases.md) - How to alias commands
+  - [Operators](operators.md) - Operators supported by Nushell
+  - [Variables](variables.md) - Working with variables
+  - [Control Flow](control_flow.md) - Working with the control flow commands
+  - [Scripts](scripts.md) - Creating your own scripts
+  - [Modules](modules.md) - Creating and using your own modules
+    - [Using Modules](modules/using_modules.md)
+    - [Creating Modules](modules/creating_modules.md)
+  - [Overlays](overlays.md) - Activating and deactivating layers of definitions
+  - [Sorting](sorting.md) - Sorting lists, records, and tables
+  - [Testing your Nushell Code](testing.md) - Writing tests with the standard library
+  - [Best Practices](style_guide.md) - Formatting and naming conventions
+- [Nu as a Shell](nu_as_a_shell.md)
+  - [Configuration](configuration.md) - How to configure Nushell
+  - [Environment](environment.md) - Working with environment variables
+  - [Stdout, Stderr, and Exit Codes](stdout_stderr_exit_codes.md) - Working with stdout, stderr, and exit codes
+  - [Running System (External) Commands](running_externals.md) - Running external commands with a naming conflict
+  - [How to Configure 3rd Party Prompts](3rdpartyprompts.md) - How to configure 3rd party prompts
+  - [Directory Stack](directory_stack.md) - Working with multiple locations
+  - [Reedline, Nu's Line Editor](line_editor.md) - Nushell's line editor
+  - [Custom Completions](custom_completions.md) - Adding completions to your commands
+  - [Externs](externs.md) - Describing the signatures of external commands
+  - [Coloring and Theming in Nu](coloring_and_theming.md) - How to change the colors and themes in Nushell
+  - [Hooks](hooks.md) - Adding code snippets to be run automatically
+  - [Background Jobs](background_jobs.md) - Running code in the background
+- [Coming to Nu](coming_to_nu.md)
+  - [Coming from Bash](coming_from_bash.md) - Guide for those coming to Nushell from Bash
+  - [Coming from CMD.EXE](coming_from_cmd.md) - Guide for those coming to Nushell from CMD.EXE
+  - [Coming from PowerShell](coming_from_powershell.md) - Guide for those coming to Nushell from PowerShell
+  - [Nu map from other shells and domain specific languages](nushell_map.md) - Guide to show how Nushell compares with SQL, LINQ, PowerShell, and Bash
+  - [Nu Map from Imperative Languages](nushell_map_imperative.md) - Guide to show how Nushell compares with Python, Kotlin, C++, C#, and Rust
+  - [Nu Map from Functional Languages](nushell_map_functional.md) - Guide to show how Nushell compares with Clojure, Tablecloth (OCaml / Elm) and Haskell
+  - [Nushell operator map](nushell_operator_map.md) - Guide to show how Nushell operators compare with those in general purpose programming languages
+- [Design Notes](design_notes.md)
+  - [How Nushell Code Gets Run](how_nushell_code_gets_run.md) - Parsing, evaluation, and why some things must be known at parse time
+- [(Not So) Advanced](advanced.md)
+  - [Standard Library](standard_library.md) - Nushell's standard library
+  - [Dataframes](dataframes.md) - Working with dataframes in Nushell
+  - [Metadata](metadata.md) - An explanation of Nu's metadata system
+  - [Creating Your Own Errors](creating_errors.md) - Creating your own error messages
+  - [Parallelism](parallelism.md) - Running your code in parallel
+  - [Plugins](plugins.md) - Enhancing Nushell with more features using plugins
+  - [Explore](explore.md) - Browsing structured data with `explore`
+  - [Building TUIs with `tui`](tui.md) - Building your own interactive terminal interfaces
 - [Regular Expressions](regular_expressions.md) - Guide to use regex
-- [Coming from Bash](coming_from_bash.md) - Guide for those coming to Nushell from Bash
-- [Nushell map from shells/DSL](nushell_map.md) - Guide to show how Nushell compares with SQL, LINQ, PowerShell, and Bash
-- [Nushell map from imperative languages](nushell_map_imperative.md) - Guide to show how Nushell compares with Python, Kotlin, C++, C#, and Rust
-- [Nushell map from functional languages](nushell_map_functional.md) - Guide to show how Nushell compares with Clojure, Tablecloth (OCaml / Elm) and Haskell
-- [Nushell operator map](nushell_operator_map.md) - Guide to show how Nushell operators compare with those in general purpose programming languages
 - [Command Reference](/commands/) - List of all Nushell's commands

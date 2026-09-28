@@ -2,7 +2,7 @@
 
 ## Dumping Files into Directory
 
-A common pattern in traditional shells is dumping and auto-sourcing files from a directory (for example, loading custom completions). In Nushell, doing this directly is currently not possible, but directory modules can still be used.
+A common pattern in traditional shells is dumping and auto-sourcing files from a directory (for example, loading custom completions). In Nushell, every `.nu` file in the user autoload directories (`$nu.user-autoload-dirs`) is sourced at startup (see [Configuration](/book/configuration.md#configuration-overview)). Another option is a directory module, which keeps the files together under one name.
 
 Here we'll create a simple completion module with a submodule dedicated to some Git completions:
 
@@ -42,15 +42,14 @@ Here we'll create a simple completion module with a submodule dedicated to some 
 5. Add the parent of the `completions` directory to your `NU_LIB_DIRS` inside `env.nu`
 
    ```nu
-   $env.NU_LIB_DIRS = [
-       ...
-       $nu.default-config-dir
-   ]
+   $env.NU_LIB_DIRS ++= [ $nu.default-config-dir ]
    ```
 
 6. Import the completions to Nushell in your `config.nu`:
 
    `use completions *`
+
+   The `*` matters: `use completions` on its own does not bring in the commands of the `git` submodule (this changed in Nushell 0.114). Use `use completions *` or `use completions git` instead.
 
 Now you've set up a directory where you can put your completion files, and you should have some Git completions the next time you start Nushell.
 
@@ -81,18 +80,24 @@ print $"('A' in $env) ('B' in $env)"
 # => true false
 ```
 
-Now let's create a module `env` with a `load` command that loads the environment from `env.json`, and use it as an overlay:
+Now let's create a module `env` with a `load` command that loads the environment from `env.json`:
 
 ```nu
 'export def --env load [] { open env.json | load-env }' | save env.nu
+```
 
+Then use it as an overlay. `overlay use` reads the module file when the command is parsed, so run it as a separate command once `env.nu` has been saved:
+
+```nu
 overlay use ./env.nu
 
 overlay list
-# => ╭───┬──────╮
-# => │ 0 │ zero │
-# => │ 1 │ env  │
-# => ╰───┴──────╯
+# => ╭───┬──────┬────────╮
+# => │ # │ name │ active │
+# => ├───┼──────┼────────┤
+# => │ 0 │ zero │ true   │
+# => │ 1 │ env  │ true   │
+# => ╰───┴──────┴────────╯
 ```
 
 Now we load the `env.json` file:
@@ -114,7 +119,7 @@ print $"('A' in $env) ('B' in $env)"
 ```
 
 Note that - as documented in [Overlays](/book/overlays.md) - reactivating the overlay will recover the loaded environment variables,
-not create a new context for as long as the Nushell session remains active, despite `overlay list` no longer listing the overlay.
+not create a new context for as long as the Nushell session remains active. `overlay list` still lists the hidden overlay, with `active` set to `false`.
 
 More related information and specifically about environment variables and their modification can be found in [Environment](/book/environment.md), [Modules](/book/modules.md), [Overlay](/book/overlays.md),
 and the respective command documentation of [`def --env`](/commands/docs/def.md), [`export def --env`](/commands/docs/export_def.md), [`load-env`](/commands/docs/load-env.md), and [`export-env`](/commands/docs/export-env.md).

@@ -37,11 +37,11 @@ Jobs can also be killed/interrupted by using the [`job kill`](/commands/docs/job
 let id = job spawn { sleep 1day }
 
 job list
-# => ┏━━━┳━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━┓
-# => ┃ # ┃ id ┃  type  ┃      pids      ┃
-# => ┣━━━╋━━━━╋━━━━━━━━╋━━━━━━━━━━━━━━━━┫
-# => ┃ 0 ┃  1 ┃ thread ┃ [list 0 items] ┃
-# => ┗━━━┻━━━━┻━━━━━━━━┻━━━━━━━━━━━━━━━━┛
+# => ╭───┬────┬────────┬────────────────╮
+# => │ # │ id │  type  │      pids      │
+# => ├───┼────┼────────┼────────────────┤
+# => │ 0 │  2 │ thread │ [list 0 items] │
+# => ╰───┴────┴────────┴────────────────╯
 
 job kill $id
 
@@ -51,21 +51,43 @@ job list
 # => ╰────────────╯
 ```
 
+## Describing jobs
+
+To make jobs easier to tell apart, you can give a job a description when you spawn it with `job spawn --description`, or change it later with [`job describe`](/commands/docs/job_describe.md). The description is shown in an additional `description` column of `job list`:
+
+```nu
+let id = job spawn --description "long nap" { sleep 1day }
+job describe $id "longer nap"
+
+job list
+# => ╭───┬────┬────────┬────────────────┬─────────────╮
+# => │ # │ id │  type  │      pids      │ description │
+# => ├───┼────┼────────┼────────────────┼─────────────┤
+# => │ 0 │  3 │ thread │ [list 0 items] │ longer nap  │
+# => ╰───┴────┴────────┴────────────────┴─────────────╯
+
+job kill $id
+```
+
 ## Job suspension
 
 On Unix targets, such as Linux and macOS, Nushell also supports suspending external commands using <kbd>Ctrl</kbd>+<kbd>Z</kbd>. When a running process is suspended, it is turned into a "frozen" background job:
 
 ```nu
-long_running_process # this starts running, then Ctrl+Z is pressed
-# => Job 1 is frozen
+^sleep 100 # this starts running, then Ctrl+Z is pressed
+# => Job 4 is frozen
 
 job list
-# => ┏━━━┳━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━┓
-# => ┃ # ┃ id ┃  type  ┃      pids      ┃
-# => ┣━━━╋━━━━╋━━━━━━━━╋━━━━━━━━━━━━━━━━┫
-# => ┃ 0 ┃  1 ┃ frozen ┃ [list 1 items] ┃
-# => ┗━━━┻━━━━┻━━━━━━━━┻━━━━━━━━━━━━━━━━┛
+# => ╭───┬────┬────────┬──────────────┬─────────────╮
+# => │ # │ id │  type  │     pids     │ description │
+# => ├───┼────┼────────┼──────────────┼─────────────┤
+# => │ 0 │  4 │ frozen │ ╭───┬──────╮ │ sleep       │
+# => │   │    │        │ │ 0 │ 6337 │ │             │
+# => │   │    │        │ ╰───┴──────╯ │             │
+# => ╰───┴────┴────────┴──────────────┴─────────────╯
 ```
+
+A frozen job is automatically described with the name of the suspended program.
 
 A frozen job can be brought back into foreground with the [`job unfreeze`](/commands/docs/job_unfreeze.md) command:
 
@@ -87,12 +109,12 @@ By default, `job unfreeze` will unfreeze the most recently frozen job. However, 
 
 ```nu
 vim
-# => Job 1 is frozen
+# => Job 5 is frozen
 
-long_running_process
-# => Job 2 is frozen
+^sleep 100
+# => Job 6 is frozen
 
-job unfreeze 1
+job unfreeze 5
 # we're back in vim
 ```
 
@@ -124,6 +146,20 @@ job spawn {
 job recv
 # => Hello from a background job
 ```
+
+Messages can carry a numeric tag with `job send --tag`. `job recv --tag` then only receives messages with that tag, leaving others in the mailbox, and `job recv --timeout` stops waiting after the given duration:
+
+```nu
+'low priority' | job send 0 --tag 2
+'urgent' | job send 0 --tag 1
+
+job recv --tag 1
+# => urgent
+job recv --timeout 0sec
+# => low priority
+```
+
+To discard messages without reading them, use [`job flush`](/commands/docs/job_flush.md), which clears the whole mailbox of the current job, or only the messages with a given tag when used with `--tag`.
 
 ## Exit Behavior
 

@@ -3,7 +3,7 @@ prev:
   text: How Nushell Code Gets Run
   link: /book/how_nushell_code_gets_run.md
 next:
-  text: Standard Library (Preview)
+  text: Standard Library
   link: /book/standard_library.md
 ---
 # (Not so) Advanced
@@ -22,7 +22,7 @@ This metadata can be used, for example, to [create custom errors](creating_error
 
 Thanks to Nushell's strict scoping rules, it is very easy to [iterate over collections in parallel](parallelism.md) which can help you speed up long-running scripts by just typing a few characters.
 
-You can [interactively explore data](explore.md) with the [`explore`](/commands/docs/explore.md) command.
+You can [interactively explore data](explore.md) with the [`explore`](/commands/docs/explore.md) command, and you can [build your own terminal user interfaces](tui.md), such as pickers, dialogs, and dashboards, with the `tui` family of commands.
 
 Finally, you can extend Nushell's functionality with [plugins](plugins.md).
 Almost anything can be a plugin as long as it communicates with Nushell in a protocol that Nushell understands.

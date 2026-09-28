@@ -14,14 +14,15 @@ let val = 42
 $val
 # => 42
 $val = 100
-# => Error: nu::shell::assignment_requires_mutable_variable
-# => 
+# => Error: nu::parser::assignment_requires_mutable_variable
+# =>
 # =>   × Assignment to an immutable variable.
-# =>    ╭─[entry #10:1:1]
+# =>    ╭─[repl_entry #3:1:1]
 # =>  1 │ $val = 100
 # =>    · ──┬─
 # =>    ·   ╰── needs to be a mutable variable
 # =>    ╰────
+# =>   help: declare the variable with `mut`, or shadow it again with `let`
 ```
 
 However, immutable variables can be 'shadowed'. Shadowing means that they are redeclared and their initial value cannot be used anymore within the same scope.
@@ -33,9 +34,35 @@ do { let val = 101;  $val }    # in an inner scope, shadow the variable
 $val                           # in the outer scope the variable remains unchanged
 # => 42
 let val = $val + 1             # now, in the outer scope, shadow the original variable
-$val                           # in the outer scope, the variable is now shadowed, and
-# => 43                               # its original value is no longer available.
+$val                           # the variable is now shadowed, and its original value is no longer available
+# => 43
 ```
+
+#### Using `let` in a Pipeline
+
+`let` can also be used as a step in a pipeline. At the end of a pipeline, `let <name>` stores the pipeline's result in the variable and also outputs it:
+
+```nu
+[3 1 2] | sort | let nums
+# => ╭───┬───╮
+# => │ 0 │ 1 │
+# => │ 1 │ 2 │
+# => │ 2 │ 3 │
+# => ╰───┴───╯
+$nums | length
+# => 3
+```
+
+In the middle of a pipeline, `let` stores its input and passes it through unchanged to the next command:
+
+```nu
+"hello" | let greeting | str length
+# => 5
+$greeting
+# => hello
+```
+
+If you don't want to see the value at the end of a pipeline, add `| ignore`, or use the regular `let nums = ...` form.
 
 ### Mutable Variables
 
@@ -57,12 +84,12 @@ There are a couple of assignment operators used with mutable variables
 | `-=`     | Subtracts a value from the variable and makes the difference its new value |
 | `*=`     | Multiplies the variable by a value and makes the product its new value     |
 | `/=`     | Divides the variable by a value and makes the quotient its new value       |
-| `++=`    | Appends a list or a value to a variable                                    |
+| `++=`    | Concatenates a list, string, or binary value to the variable               |
 
 ::: tip Note
 
-1. `+=`, `-=`, `*=` and `/=` are only valid in the contexts where their root operations are expected to work. For example, `+=` uses addition, so it can not be used for contexts where addition would normally fail
-2. `++=` requires that either the variable **or** the argument is a list.
+1. `+=`, `-=`, `*=` and `/=` are only valid in the contexts where their root operations are expected to work. For example, `+=` uses addition, so it can not be used for contexts where addition would normally fail. The result must also fit the variable's type: `/` always produces a `float`, so `$x /= 2` is an error when `$x` holds an `int` (use `$x = $x // 2` instead).
+2. `++=` requires that the variable and the value are the same kind: both lists, both strings, or both binary values. To add a single item to a list, use `$list ++= [$item]`.
 
 :::
 
@@ -75,6 +102,15 @@ Closures and nested `def`s cannot capture mutable variables from their environme
 mut x = 0
 
 [1 2 3] | each { $x += 1 }   # error: $x is captured in a closure
+# => Error: nu::parser::expected_keyword
+# =>
+# =>   × Capture of mutable variable.
+# =>    ╭─[repl_entry #1:4:18]
+# =>  3 │
+# =>  4 │ [1 2 3] | each { $x += 1 }   # error: $x is captured in a closure
+# =>    ·                  ─┬
+# =>    ·                   ╰── capture of mutable variable
+# =>    ╰────
 ```
 
 To use mutable variables for such behaviour, you are encouraged to use the loops
@@ -83,9 +119,12 @@ To use mutable variables for such behaviour, you are encouraged to use the loops
 
 A constant variable is an immutable variable that can be fully evaluated at parse-time. These are useful with commands that need to know the value of an argument at parse time, like [`source`](/commands/docs/source.md), [`use`](/commands/docs/use.md) and [`plugin use`](/commands/docs/plugin_use.md). See [how nushell code gets run](how_nushell_code_gets_run.md) for a deeper explanation. They are declared using the `const` keyword
 
+For example, if the file `hello.nu` in the current directory contains `print "Hello from hello.nu"`, you can source it through a constant:
+
 ```nu
-const script_file = 'path/to/script.nu'
+const script_file = 'hello.nu'
 source $script_file
+# => Hello from hello.nu
 ```
 
 ## Choosing between mutable and immutable variables
@@ -105,15 +144,12 @@ For instance, loop counters are a common pattern for mutable variables and are b
 
 ```nu
 ls | enumerate | each { |elt| $"Item #($elt.index) is size ($elt.item.size)" }
-# => ╭───┬───────────────────────────╮
-# => │ 0 │ Item #0 is size 812 B     │
-# => │ 1 │ Item #1 is size 3.4 KiB   │
-# => │ 2 │ Item #2 is size 11.0 KiB  │
-# => │ 3 │ ...                       │
-# => │ 4 │ Item #18 is size 17.8 KiB │
-# => │ 5 │ Item #19 is size 482 B    │
-# => │ 6 │ Item #20 is size 4.0 KiB  │
-# => ╰───┴───────────────────────────╯
+# => ╭───┬─────────────────────────╮
+# => │ 0 │ Item #0 is size 812 B   │
+# => │ 1 │ Item #1 is size 3.4 kB  │
+# => │ 2 │ Item #2 is size 28 B    │
+# => │ 3 │ Item #3 is size 11.2 kB │
+# => ╰───┴─────────────────────────╯
 ```
 
 You can also use the [`reduce`](/commands/docs/reduce.md) command to work in the same way you might mutate a variable in a loop. For example, if you wanted to find the largest string in a list of strings, you might do:
@@ -126,8 +162,7 @@ You can also use the [`reduce`](/commands/docs/reduce.md) command to work in the
       $max
   }
 }
-
-three
+# => three
 ```
 
 While `reduce` processes lists, the [`generate`](/commands/docs/generate.md) command can be used with arbitrary sources such as external REST APIs, also without requiring mutable variables. Here's an example that retrieves local weather data every hour and generates a continuous list from that data. The `each` command can be used to consume each new list item as it becomes available.
@@ -162,42 +197,62 @@ generate {|weather_station|
 
 Using [filter commands](/commands/categories/filters.html) with immutable variables is often far more performant than mutable variables with traditional flow-control statements such as `for` and `while`. For example:
 
-- Using a `for` statement to create a list of 50,000 random numbers:
+- Using a `for` statement to create a list of 10,000 random numbers:
 
   ```nu
   timeit {
     mut randoms = []
-    for _ in 1..50_000 {
+    for _ in 1..10_000 {
       $randoms = ($randoms | append (random int))
     }
   }
   ```
 
-  Result: 1min 4sec 191ms 135µs 90ns
+  Result: 1sec 282ms 658µs 250ns
 
 - Using `each` to do the same:
 
   ```nu
   timeit {
-    let randoms = (1..50_000 | each {random int})
+    let randoms = (1..10_000 | each {random int})
   }
   ```
 
-  Result: 19ms 314µs 205ns
+  Result: 10ms 449µs 500ns
 
-- Using `each` with 10,000,000 iterations:
+- Using `each` with 1,000,000 iterations:
 
   ```nu
   timeit {
-    let randoms = (1..10_000_000 | each {random int})
+    let randoms = (1..1_000_000 | each {random int})
   }
   ```
 
-  Result: 4sec 233ms 865µs 238ns
+  Result: 1sec 47ms 554µs 250ns
 
   As with many filters, the `each` statement also streams its results, meaning the next stage of the pipeline can continue processing without waiting for the results to be collected into a variable.
 
   For tasks which can be optimized by parallelization, as mentioned above, `par-each` can have even more drastic performance gains.
+
+## Deleting Variables
+
+A variable normally lives until the end of the scope it was declared in. To free a variable earlier, for example one that holds a large amount of data, delete it with [`unlet`](/commands/docs/unlet.md). Afterwards, the variable can no longer be used:
+
+```nu
+let a = 1
+let b = 2
+unlet $a $b
+$a
+# => Error: nu::shell::variable_not_found
+# =>
+# =>   × Variable not found
+# =>    ╭─[repl_entry #1:4:1]
+# =>  3 │ unlet $a $b
+# =>  4 │ $a
+# =>    · ─┬
+# =>    ·  ╰── variable not found
+# =>    ╰────
+```
 
 ## Variable Names
 

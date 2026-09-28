@@ -53,23 +53,27 @@ $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 |                                      | `rm -t <path>`                                                | Move the given file to the system trash                           |
 | `rm -rf <path>`                      | `rm -r <path>`                                                | Recursively removes the given path                                |
 | `date -d <date>`                     | `"<date>" \| into datetime -f <format>`                       | Parse a date ([format documentation](https://docs.rs/chrono/0.4.15/chrono/format/strftime/index.html)) |
+| `date -d "tomorrow"`                 | `"tomorrow" \| date from-human`                               | Parse a human-readable date                                       |
 | `sed`                                | `str replace`                                                 | Find and replace a pattern in a string                            |
 | `grep <pattern>`                     | `where $it =~ <substring>` or `find <substring>`              | Filter strings that contain the substring                         |
+| `grep -i <pattern>`                  | `find -i <substring>`                                         | Filter strings that contain the substring, ignoring case          |
 | `man <command>`                      | `help <command>`                                              | Get the help for a given command                                  |
 |                                      | `help commands`                                               | List all available commands                                       |
 |                                      | `help --find <string>`                                        | Search for match in all available commands                        |
 | `command1 && command2`               | `command1; command2`                                          | Run a command, and if it's successful run a second                |
+| `command1 \|\| command2`               | `try { command1 } catch { command2 }`                         | Run a command, and if it fails run a second                       |
 | `stat $(which git)`                  | `stat ...(which git).path`                                    | Use command output as argument for other command                  |
 | `echo /tmp/$RANDOM`                  | `$"/tmp/(random int)"`                                        | Use command output in a string                                    |
 | `cargo b --jobs=$(nproc)`            | `cargo b $"--jobs=(sys cpu \| length)"`                       | Use command output in an option                                   |
 | `echo $PATH`                         | `$env.PATH` (Non-Windows) or `$env.Path` (Windows)            | See the current path                                              |
 | `echo $?`                            | `$env.LAST_EXIT_CODE`                                         | See the exit status of the last executed command                  |
+| `set -o pipefail`                    | (default behavior)                                            | Fail a pipeline if any external command in it fails               |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                                         | Update PATH permanently                                           |
 | `export PATH = $PATH:/usr/other/bin` | `$env.PATH = ($env.PATH \| append /usr/other/bin)`            | Update PATH temporarily                                           |
 | `export`                             | `$env`                                                        | List the current environment variables                            |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                                         | Update environment variables permanently                          |
 | `FOO=BAR ./bin`                      | `FOO=BAR ./bin`                                               | Update environment temporarily                                    |
-| `export FOO=BAR`                     | `$env.FOO = BAR`                                              | Set environment variable for current session                      |
+| `export FOO=BAR`                     | `$env.FOO = "BAR"`                                            | Set environment variable for current session                      |
 | `echo $FOO`                          | `$env.FOO`                                                    | Use environment variables                                         |
 | `echo ${FOO:-fallback}`              | `$env.FOO? \| default "ABC"`                                  | Use a fallback in place of an unset variable                      |
 | `unset FOO`                          | `hide-env FOO`                                                | Unset environment variable for current session                    |

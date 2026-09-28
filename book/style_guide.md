@@ -150,8 +150,8 @@ Correct:
   {name: "Thomas", age: 26}
 ]
 
-let selectedProfile = (for it in ($credentials | transpose name credentials) {
-    echo $it.name
+let file_names = (ls | each {|it|
+    $it.name
 })
 ```
 
@@ -178,10 +178,10 @@ Incorrect:
 [{name: "Teresa", age: 24},
   {name: "Thomas", age: 26}]
 
-let selectedProfile = (
-    # too many "\n" before "foo": no "\n" is allowed
-    for it in ($credentials | transpose name credentials) {
-        echo $it.name
+let file_names = (
+    # too many "\n" before "ls": no "\n" is allowed
+    ls | each {|it|
+        $it.name
 })
 ```
 
@@ -195,17 +195,20 @@ commonly used.
 Correct:
 
 ```nu
-query-user --id 123
+def query-user [--id: int] {
+    {id: $id, name: "Alice"}
+}
 
-$user.name | str downcase
+query-user --id 123 | get name | str lowercase
+# => alice
 ```
 
 Incorrect:
 
 ```nu
-qry-usr --id 123
-
-$user.name | string downcase
+def qry-usr [--id: int] {
+    {id: $id, name: "Alice"}
+}
 ```
 
 ### Case
@@ -217,14 +220,21 @@ $user.name | string downcase
 Correct:
 
 ```nu
-fetch-user --id 123
+def fetch-user [--id: int] {
+    # ...
+}
 ```
 
 Incorrect:
 
 ```nu
-fetch_user --id 123
-fetchUser --id 123
+def fetch_user [--id: int] {
+    # ...
+}
+
+def fetchUser [--id: int] {
+    # ...
+}
 ```
 
 See also [Naming Commands](custom_commands.md#naming-commands).
@@ -292,13 +302,16 @@ def fetch-user [user_id: int] {
 Incorrect:
 
 ```nu
-let user-id = 123
 let userId = 123
 
-def fetch-user [user-id: int] {
+def fetch-user [userId: int] {
   # ...
 }
 ```
+
+::: note
+Kebab-case isn't just discouraged for variables and positional parameters, it isn't allowed: `let user-id = 123` and `def fetch-user [user-id: int] {}` are parse errors ("expected valid variable name"). Flags are the exception: a `--user-id` flag is available inside the command as `$user_id` (see [Flags](#flags) above).
+:::
 
 #### Environment Variables
 

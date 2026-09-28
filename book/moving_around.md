@@ -14,14 +14,14 @@ The [`ls`](/commands/docs/ls.md) command also takes an optional argument to chan
 
 ```nu
 ls *.md
-# => ╭───┬────────────────────┬──────┬──────────┬──────────────╮
-# => │ # │        name        │ type │   size   │   modified   │
-# => ├───┼────────────────────┼──────┼──────────┼──────────────┤
-# => │ 0 │ CODE_OF_CONDUCT.md │ file │  3.4 KiB │ 9 months ago │
-# => │ 1 │ CONTRIBUTING.md    │ file │ 11.0 KiB │ 5 months ago │
-# => │ 2 │ README.md          │ file │ 12.0 KiB │ 6 days ago   │
-# => │ 3 │ SECURITY.md        │ file │  2.6 KiB │ 2 months ago │
-# => ╰───┴────────────────────┴──────┴──────────┴──────────────╯
+# => ╭───┬────────────────────┬──────┬─────────┬──────────────╮
+# => │ # │        name        │ type │  size   │   modified   │
+# => ├───┼────────────────────┼──────┼─────────┼──────────────┤
+# => │ 0 │ CODE_OF_CONDUCT.md │ file │  3.4 kB │ 9 months ago │
+# => │ 1 │ CONTRIBUTING.md    │ file │ 11.2 kB │ 5 months ago │
+# => │ 2 │ README.md          │ file │ 12.2 kB │ 6 days ago   │
+# => │ 3 │ SECURITY.md        │ file │  2.6 kB │ 2 months ago │
+# => ╰───┴────────────────────┴──────┴─────────┴──────────────╯
 ```
 
 ## Glob Patterns (wildcards)
@@ -34,20 +34,20 @@ Nushell also supports a double `*` which will traverse paths that are nested ins
 
 ```nu
 ls **/*.md
-# => ╭───┬───────────────────────────────┬──────┬──────────┬──────────────╮
-# => │ # │             name              │ type │   size   │   modified   │
-# => ├───┼───────────────────────────────┼──────┼──────────┼──────────────┤
-# => │ 0 │ CODE_OF_CONDUCT.md            │ file │  3.4 KiB │ 5 months ago │
-# => │ 1 │ CONTRIBUTING.md               │ file │ 11.0 KiB │ a month ago  │
-# => │ 2 │ README.md                     │ file │ 12.0 KiB │ a month ago  │
-# => │ 3 │ SECURITY.md                   │ file │  2.6 KiB │ 5 hours ago  │
-# => │ 4 │ benches/README.md             │ file │    249 B │ 2 months ago │
-# => │ 5 │ crates/README.md              │ file │    795 B │ 5 months ago │
-# => │ 6 │ crates/nu-cli/README.md       │ file │    388 B │ 5 hours ago  │
-# => │ 7 │ crates/nu-cmd-base/README.md  │ file │    262 B │ 5 hours ago  │
-# => │ 8 │ crates/nu-cmd-extra/README.md │ file │    669 B │ 2 months ago │
-# => │ 9 │ crates/nu-cmd-lang/README.md  │ file │  1.5 KiB │ a month ago  │
-# => ╰───┴───────────────────────────────┴──────┴──────────┴──────────────╯
+# => ╭───┬───────────────────────────────┬──────┬─────────┬──────────────╮
+# => │ # │             name              │ type │  size   │   modified   │
+# => ├───┼───────────────────────────────┼──────┼─────────┼──────────────┤
+# => │ 0 │ CODE_OF_CONDUCT.md            │ file │  3.4 kB │ 9 months ago │
+# => │ 1 │ CONTRIBUTING.md               │ file │ 11.2 kB │ 5 months ago │
+# => │ 2 │ README.md                     │ file │ 12.2 kB │ 6 days ago   │
+# => │ 3 │ SECURITY.md                   │ file │  2.6 kB │ 2 months ago │
+# => │ 4 │ benches/README.md             │ file │   249 B │ 2 months ago │
+# => │ 5 │ crates/README.md              │ file │   795 B │ 5 months ago │
+# => │ 6 │ crates/nu-cli/README.md       │ file │   388 B │ 5 hours ago  │
+# => │ 7 │ crates/nu-cmd-base/README.md  │ file │   262 B │ 5 hours ago  │
+# => │ 8 │ crates/nu-cmd-extra/README.md │ file │   669 B │ 2 months ago │
+# => │ 9 │ crates/nu-cmd-lang/README.md  │ file │  1.5 kB │ a month ago  │
+# => ╰───┴───────────────────────────────┴──────┴─────────┴──────────────╯
 ```
 
 Here, we're looking for any file that ends with ".md". The double-asterisks further specify _"in any directory starting from here."_
@@ -86,6 +86,10 @@ However, _backtick_ quoted strings do not escape globs. For example, compare the
    ```nu
    rm `*myfile*`
    ```
+
+::: tip
+When a glob is passed to [`ls`](/commands/docs/ls.md), [`cp`](/commands/docs/cp.md), [`mv`](/commands/docs/mv.md), [`rm`](/commands/docs/rm.md), or [`du`](/commands/docs/du.md), it doesn't match hidden files (names that start with a `.`). To include them, pass `--all` (`-a`). For example, `rm *myfile*` leaves a file named `.myfile.bak` alone, but `rm --all *myfile*` removes it too.
+:::
 
 ::: tip
 Nushell also includes a dedicated [`glob` command](https://www.nushell.sh/commands/docs/glob.html) with support for more complex globbing scenarios.
@@ -141,9 +145,10 @@ As with most other shells, the [`mkdir` command](/commands/docs/mkdir.md) is use
 
   ```nu
   mkdir modules/my/new_module
-  mkdir modules/my/new_module
-  # => No error
+  mkdir modules/my/new_module  # No error
   ```
+
+  If you want an error when the directory already exists, use `mkdir --fail-if-exists`.
 
   ::: tip
   A common mistake when coming to Nushell is to attempt to use `mkdir -p <directory>` as in the native Linux/Unix version. However, this will generate an `Unknown Flag` error on Nushell.
@@ -172,16 +177,14 @@ You can also add additional dots to go up additional directory levels:
 ```nu
 # Change to the parent directory
 cd ..
-# or
-..
 # Go up two levels (parent's parent)
 cd ...
-# or
-...
 # Go up three levels (parent of parent's parent)
 cd ....
 # Etc.
 ```
+
+As with a directory name, you can also leave out `cd` and enter just the dots (such as `..` or `...`) on their own at the prompt.
 
 ::: tip
 Multi-dot shortcuts are available to both internal Nushell [filesystem commands](/commands/categories/filesystem.html) as well as to external commands. For example, running `^stat ....` on a Linux/Unix system will show that the path is expanded to `../../..`
@@ -194,7 +197,7 @@ cd ../sibling
 ```
 
 ::: tip IMPORTANT TIP
-Changing the directory with [`cd`](/commands/docs/cd.md) changes the `PWD` environment variable. This means that a change of a directory is kept to the current scope (e.g. block or closure). Once you exit the block, you'll return to the previous directory. You can learn more about this in the [Environment](./environment.md) chapter.
+Changing the directory with [`cd`](/commands/docs/cd.md) changes the `PWD` environment variable. This means that a change of directory inside a closure (e.g. `do { cd somewhere }`) or a custom command is kept to that scope. Once the closure ends, you'll return to the previous directory. The blocks of keywords like `if` and `for` are not closures, so a `cd` inside them stays in effect. You can learn more about this in the [Environment](./environment.md) chapter.
 :::
 
 ## Filesystem Commands

@@ -3,7 +3,7 @@
 <!-- prettier-ignore -->
 |     |     |
 | --- | --- |
-| **_Description:_**    | A string that will be expanded into a fully qualified pathname when passed to a command or closure
+| **_Description:_**    | A string that is treated as a filesystem path when passed to a custom command. `~` and multi-dot (`...`) shorthands are expanded.
 | **_Annotation:_**     | `path`                                                                                 
 | **_Literal syntax:_** | None
 | **_Casts:_**          | N/A (see below)
@@ -11,8 +11,17 @@
 ## Additional Language Notes
 
 1. `path` is technically a "syntax shape" rather than a full "type".
-   It is used for annotating strings that should be treated as a path to a filename or directory.
-   `~` and `.` characters in the string will automatically be expanded treated as a `path`.
+   It is used for annotating custom command parameters that should be treated as a path to a filename or directory.
+   Inside the command, the value is a `string`.
+
+   When a bare-word (unquoted) argument is passed to a `path` parameter:
+
+   - A leading `~` is expanded to the home directory.
+   - Multi-dot shorthands are expanded: `...` becomes `../..`, `....` becomes `../../..`, and so on.
+   - `.` and `..` segments are resolved textually (`foo/../bar` becomes `bar`).
+   - A relative path stays relative. It is **not** converted to an absolute path.
+
+   Quoted strings and values passed in variables are not changed.
 
    Example:
 
@@ -21,24 +30,26 @@
     p: path
     s: string
    ] {
-    print $"The path is expanded: ($p)"
-    print $"The string is not: ($s)"
+    print $"The path is: ($p)"
+    print $"The string is: ($s)"
    }
 
    # Results
-   cd ~/testing
-   show_difference . .
-   # => The path is expanded: /home/username/testing
-   # => The string is not: .
    show_difference ~ ~
-   # => The path is expanded: /home/username
-   # => The string is not: ~
-
-   # Multi-level directory traversal is also supported
+   # => The path is: /home/username
+   # => The string is: ~
    show_difference ... ...
-   # => The path is expanded: /home/
-   # => The string is not: ...
+   # => The path is: ../..
+   # => The string is: ...
+   show_difference foo/../bar foo/../bar
+   # => The path is: bar
+   # => The string is: foo/../bar
+   show_difference . .
+   # => The path is: .
+   # => The string is: .
    ```
+
+   Use `path expand` inside the command when you need an absolute path.
 
 2. The built-in syntax highlighting also treats strings and
    paths differently. Notice when typing the commands in the

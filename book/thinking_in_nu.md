@@ -15,8 +15,8 @@ Nushell is both a programming language and a shell. Because of this, it has its 
 For example, the following commandline works the same in both Bash and Nushell on Unix/Linux platforms:
 
 ```nu
+# Returns contributors to Nushell, ordered by number of contributions
 curl -s https://api.github.com/repos/nushell/nushell/contributors | jq -c '.[] | {login,contributions}'
-# => returns contributors to Nushell, ordered by number of contributions
 ```
 
 Nushell has many other similarities with Bash (and other shells) and many commands in common.
@@ -261,7 +261,7 @@ Consider a simple two-line file:
 This helps demonstrate why the following examples cannot run as a single expression (e.g., a script) in Nushell:
 
 ::: note
-The following examples use the [`source` command](/commands/docs/source.md), but similar conclusions apply to other commands that parse Nushell source code, such as [`use`](/commands/docs/use.md), [`overlay use`](/commands/docs/overlay_use.md), [`hide`](/commands/docs/hide.md) or [`source-env`](/commands/docs/source-env.md).
+The following examples use the [`source` command](/commands/docs/source.md), but similar conclusions apply to other commands that parse Nushell source code, such as [`use`](/commands/docs/use.md), [`overlay use`](/commands/docs/overlay_use.md), [`hide`](/commands/docs/hide.md), [`source-env`](/commands/docs/source-env.md) or [`run`](/commands/docs/run.md).
 
 :::
 
@@ -275,9 +275,9 @@ source output.nu)
 # => Error: nu::parser::sourced_file_not_found
 # =>
 # =>   × File not found
-# =>    ╭─[entry #5:2:8]
-# =>  1 │ "print Hello" | save output.nu
-# =>  2 │ source output.nu
+# =>    ╭─[repl_entry #5:2:8]
+# =>  1 │ ("print Hello" | save output.nu;
+# =>  2 │ source output.nu)
 # =>    ·        ────┬────
 # =>    ·            ╰── File not found: output.nu
 # =>    ╰────
@@ -304,11 +304,12 @@ Another common scenario when coming from another shell might be attempting to dy
 ```nu
 let my_path = "~/nushell-files"
 source $"($my_path)/common.nu"
-# => Error:
+# => Error: nu::parser::error
+# =>
 # =>   × Error: nu::shell::not_a_constant
 # =>   │
 # =>   │   × Not a constant.
-# =>   │    ╭─[entry #6:2:11]
+# =>   │    ╭─[repl_entry #6:2:11]
 # =>   │  1 │ let my_path = "~/nushell-files"
 # =>   │  2 │ source $"($my_path)/common.nu"
 # =>   │    ·           ────┬───
@@ -316,7 +317,7 @@ source $"($my_path)/common.nu"
 # =>   │    ╰────
 # =>   │   help: Only a subset of expressions are allowed constants during parsing. Try using the 'const' command or typing the value literally.
 # =>   │
-# =>    ╭─[entry #6:2:8]
+# =>    ╭─[repl_entry #6:2:8]
 # =>  1 │ let my_path = "~/nushell-files"
 # =>  2 │ source $"($my_path)/common.nu"
 # =>    ·        ───────────┬───────────
@@ -348,11 +349,12 @@ If you've ever written a simple program in any of these languages, you can see t
 :::
 
 ::: tip See Also
-As noted in the error message, however, this can work if `my_path` can be defined as a [constant](/book/variables#constant-variables) since constants can be (and are) resolved during parsing.
+As noted in the error message, however, this can work if `my_path` can be defined as a [constant](/book/variables#constant-variables) since constants can be (and are) resolved during parsing. For example, if `~/nushell-files/common.nu` contains `print "Loaded common.nu"`:
 
 ```nu
 const my_path = "~/nushell-files"
 source $"($my_path)/common.nu"
+# => Loaded common.nu
 ```
 
 See [Parse-time Constant Evaluation](./how_nushell_code_gets_run.md#parse-time-constant-evaluation) for more details.
@@ -360,16 +362,27 @@ See [Parse-time Constant Evaluation](./how_nushell_code_gets_run.md#parse-time-c
 
 #### Example: Change to a different directory (`cd`) and `source` a file
 
-Here's one more — Change to a different directory and then attempt to `source` a file in that directory.
+Here's one more — Change to a different directory and then attempt to `source` a file in that directory. Assume that `spam/foo.nu` exists and contains `$env.SPAM = "eggs"`:
 
 ```nu:line-numbers
 if ('spam/foo.nu' | path exists) {
     cd spam
     source-env foo.nu
 }
+# => Error: nu::parser::sourced_file_not_found
+# =>
+# =>   × File not found
+# =>    ╭─[repl_entry #7:3:16]
+# =>  2 │     cd spam
+# =>  3 │     source-env foo.nu
+# =>    ·                ───┬──
+# =>    ·                   ╰── File not found: foo.nu
+# =>  4 │ }
+# =>    ╰────
+# =>   help: sourced files need to be available before your script is run
 ```
 
-Based on what we've covered about Nushell's Parse/Eval stages, see if you can spot the problem with that example.
+Even though `spam/foo.nu` exists, this fails. Based on what we've covered about Nushell's Parse/Eval stages, see if you can spot why.
 
 ::: details Solution
 
@@ -378,7 +391,11 @@ In line 3, during Parsing, the `source-env` attempts to parse `foo.nu`. However,
 To resolve this, of course, simply use the full-path to the file to be sourced.
 
 ```nu
+if ('spam/foo.nu' | path exists) {
     source-env spam/foo.nu
+}
+$env.SPAM
+# => eggs
 ```
 
 :::
@@ -411,18 +428,29 @@ A nice bonus is the performance increase you can realize by running parts of you
 
 Nushell takes multiple design cues from compiled languages. One such cue is that languages should avoid global mutable state. Shells have commonly used global mutation to update the environment, but Nushell attempts to steer clear of this approach.
 
-In Nushell, blocks control their own environment. Changes to the environment are scoped to the block where they occur.
+In Nushell, closures and custom commands control their own environment. Changes to the environment made inside a closure (such as the ones passed to `each` or `do`) or a custom command are scoped to it, and are discarded when it finishes.
 
 In practice, this lets you write (as just one example) more concise code for working with subdirectories. Here's an example that builds each sub-project in the current directory:
 
 ```nu
-ls | each { |row|
+ls | where type == dir | each { |row|
   cd $row.name
   make
 }
 ```
 
-The [`cd`](/commands/docs/cd.md) command changes the `PWD` environment variables, but this variable change does not survive past the end of the block. This allows each iteration to start from the current directory and then enter the next subdirectory.
+The [`cd`](/commands/docs/cd.md) command changes the `PWD` environment variable, but this variable change does not survive past the end of the closure. This allows each iteration to start from the current directory and then enter the next subdirectory.
+
+The blocks of keywords such as `if`, `match`, `for`, `while`, `loop`, and `try` are not closures, so environment changes made inside them remain in effect after the block ends:
+
+```nu
+do { $env.FOO = "closure" }
+$env.FOO? == null
+# => true
+if true { $env.FOO = "block" }
+$env.FOO
+# => block
+```
 
 Having a scoped environment makes commands more predictable, easier to read, and when the time comes, easier to debug. It's also another feature that is key to the `par-each` command we discussed above.
 

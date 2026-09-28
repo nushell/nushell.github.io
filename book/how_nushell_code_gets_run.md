@@ -42,9 +42,22 @@ Nushell follows this pattern, and its "Interpreter" is split into two parts:
 1. `Source Code → Parser → Intermediate Representation (IR)`
 2. `IR → Evaluation Engine → Result`
 
-First, the source code is analyzed by the Parser and converted into an intermediate representation (IR), which in Nushell's case is just a collection of data structures. Then, these data structures are passed to the Engine for evaluation and output of the results.
+First, the source code is analyzed by the Parser and converted into an intermediate representation (IR), which in Nushell's case is a compact list of instructions. Then, these instructions are passed to the Engine for evaluation and output of the results.
 
 This, as well, is common in interpreted languages. For example, Python's source code is typically [converted into bytecode](https://github.com/python/cpython/blob/main/InternalDocs/interpreter.md) before evaluation.
+
+You can see the IR for a block of code with the [`view ir`](/commands/docs/view_ir.md) command:
+
+```nu
+view ir { print "Hello, World!" }
+# => # 2 registers, 6 instructions, 13 bytes of data
+# =>    0: load-literal           %1, string("Hello, World!")
+# =>    1: push-positional        %1
+# =>    2: redirect-out           caller
+# =>    3: redirect-err           caller
+# =>    4: call                   decl 511 "print", %0
+# =>    5: return                 %0
+```
 
 ### Compiled Languages
 
@@ -168,7 +181,7 @@ This is the complete Parse/Eval sequence.
 ::: tip Takeaway
 By not allowing `eval`-like functionality, Nushell prevents these types of `eval`-related bugs. Calling a non-existent definition is guaranteed to be caught at parse-time in Nushell.
 
-Furthermore, after parsing completes, we can be certain the bytecode (IR) won't change during evaluation. This gives us a deep insight into the resulting bytecode (IR), allowing for powerful and reliable static analysis and IDE integration which can be challenging to achieve with more dynamic languages.
+Furthermore, after parsing completes, we can be certain the bytecode (IR) won't change during evaluation. This gives us a deep insight into the resulting bytecode (IR), allowing for powerful and reliable static analysis and IDE integration which can be challenging to achieve with more dynamic languages. Nushell's language server (`nu --lsp`) provides this kind of editor integration. For stepping through a script while it runs, `nu --dap` (added in 0.116.0) starts a Debug Adapter Protocol server that DAP-capable editors can use to set breakpoints and inspect variables.
 
 In general, you have more peace of mind that errors will be caught earlier when scaling Nushell programs.
 :::
@@ -178,20 +191,11 @@ In general, you have more peace of mind that errors will be caught earlier when 
 As with most any shell, Nushell has a _"Read→Eval→Print Loop"_ ([REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)) that is started when you run `nu` without any file. This is often thought of, but isn't quite the same, as the _"commandline"_.
 
 ::: tip Note
-In this section, the `> ` character at the beginning of a line in a code-block is used to represent the commandline **_prompt_**. For instance:
+In this section, each code block represents a single commandline, typed at the commandline **_prompt_** and executed by pressing the <kbd>Enter</kbd> key. For example:
 
 ```nu
-> some code...
-```
-
-Code after the prompt in the following examples is executed by pressing the <kbd>Enter</kbd> key. For example:
-
-```nu
-> print "Hello world!"
+print "Hello world!"
 # => Hello world!
-
-> ls
-# => prints files and directories...
 ```
 
 The above means:
@@ -200,9 +204,8 @@ The above means:
   1. Type `print "Hello world!"`
   1. Press <kbd>Enter</kbd>
   1. Nushell will display the result
-  1. Type `ls`
-  1. Press <kbd>Enter</kbd>
-  1. Nushell will display the result
+
+When an example needs several separate commandlines, each one is shown in its own code block.
 
 :::
 
@@ -217,21 +220,37 @@ When you press <kbd>Enter</kbd> after typing a commandline, Nushell:
 
 In other words, each REPL invocation is its own separate parse-evaluation sequence. By merging the environment back to the Nushell's state, we maintain continuity between the REPL invocations.
 
-Compare a simplified version of the [`cd` example](./thinking_in_nu.md#example-change-to-a-different-directory-cd-and-source-a-file) from _"Thinking in Nu"_:
+Compare a simplified version of the [`cd` example](./thinking_in_nu.md#example-change-to-a-different-directory-cd-and-source-a-file) from _"Thinking in Nu"_, where `spam/foo.nu` is a file containing `$env.FOO = "bar"`:
 
 ```nu
 cd spam
 source-env foo.nu
+# => Error: nu::parser::sourced_file_not_found
+# =>
+# =>   × File not found
+# =>    ╭─[repl_entry #1:2:12]
+# =>  1 │ cd spam
+# =>  2 │ source-env foo.nu
+# =>    ·            ───┬──
+# =>    ·               ╰── File not found: foo.nu
+# =>    ╰────
+# =>   help: sourced files need to be available before your script is run
 ```
 
 There we saw that this cannot work (as a script or other single expression) because the directory will be changed _after_ the parse-time [`source-env` keyword](/commands/docs/source-env.md) attempts to read the file.
 
-Running these commands as separate REPL entries, however, works:
+Running these commands as separate REPL entries, however, works. First enter:
 
 ```nu
-> cd spam
-> source-env foo.nu
-# Yay, works!
+cd spam
+```
+
+Then enter:
+
+```nu
+source-env foo.nu
+$env.FOO
+# => bar
 ```
 
 To see why, let's break down what happens in the example:
@@ -248,7 +267,11 @@ When `source-env` tries to open `foo.nu` during the parsing in Step 5, it can do
 
 ### Multiline REPL Commandlines
 
-Keep in mind that this only works for **_separate_** commandlines.
+Keep in mind that this only works for **_separate_** commandlines. If you're following along, first return to the original directory:
+
+```nu
+cd ..
+```
 
 In Nushell, it's possible to group multiple commands into one commandline using:
 
@@ -256,16 +279,25 @@ In Nushell, it's possible to group multiple commands into one commandline using:
 
   ```nu
   cd spam; source-env foo.nu
+  # => Error: nu::parser::sourced_file_not_found
+  # =>
+  # =>   × File not found
+  # =>    ╭─[repl_entry #5:1:21]
+  # =>  1 │ cd spam; source-env foo.nu
+  # =>    ·                     ───┬──
+  # =>    ·                        ╰── File not found: foo.nu
+  # =>    ╰────
+  # =>   help: sourced files need to be available before your script is run
   ```
 
 - A newline:
 
   ```
-  > cd span
+  > cd spam
     source-env foo.nu
   ```
 
-  Notice there is no "prompt" before the second line. This type of multiline commandline is usually created with a [keybinding](./line_editor.md#keybindings) to insert a Newline when <kbd>Alt</kbd>+<kbd>Enter</kbd> or <kbd>Shift</kbd>+ <kbd>Enter</kbd> is pressed.
+  Here, `>` represents the prompt. Notice there is no prompt before the second line. This type of multiline commandline is usually created with a [keybinding](./line_editor.md#keybindings) to insert a Newline when <kbd>Alt</kbd>+<kbd>Enter</kbd> or <kbd>Shift</kbd>+ <kbd>Enter</kbd> is pressed.
 
 These two examples behave exactly the same in the Nushell REPL. The entire commandline (both statements) are processed a single Read→Eval→Print Loop. As such, they will fail the same way that the earlier script-example did.
 
@@ -287,13 +319,32 @@ In the text below, we use the term _"constant"_ to refer to:
 
 By their nature, **_constants_** and constant values are known at Parse-time. This, of course, is in sharp contrast to _variable_ declarations and values.
 
-As a result, we can utilize constants as safe, known arguments to parse-time keywords like [`source`](/commands/docs/source.md), [`use`](/commands/docs/use.md), and related commands.
+As a result, we can utilize constants as safe, known arguments to parse-time keywords like [`source`](/commands/docs/source.md), [`use`](/commands/docs/use.md), [`run`](/commands/docs/run.md), and related commands.
 
 Consider [this example](./thinking_in_nu.md#example-dynamically-creating-a-filename-to-be-sourced) from _"Thinking in Nu"_:
 
 ```nu
 let my_path = "~/nushell-files"
 source $"($my_path)/common.nu"
+# => Error: nu::parser::error
+# =>
+# =>   × Error: nu::shell::not_a_constant
+# =>   │
+# =>   │   × Not a constant.
+# =>   │    ╭─[repl_entry #6:2:11]
+# =>   │  1 │ let my_path = "~/nushell-files"
+# =>   │  2 │ source $"($my_path)/common.nu"
+# =>   │    ·           ────┬───
+# =>   │    ·               ╰── Value is not a parse-time constant
+# =>   │    ╰────
+# =>   │   help: Only a subset of expressions are allowed constants during parsing. Try using the 'const' command or typing the value literally.
+# =>   │
+# =>    ╭─[repl_entry #6:2:8]
+# =>  1 │ let my_path = "~/nushell-files"
+# =>  2 │ source $"($my_path)/common.nu"
+# =>    ·        ───────────┬───────────
+# =>    ·                   ╰── Encountered error during parse-time evaluation
+# =>    ╰────
 ```
 
 As noted there, we **_can_**, however, do the following instead:
@@ -328,6 +379,23 @@ For example, the following is not allowed:
 
 ```nu
 const foo_contents = (open foo.nu)
+# => Error: nu::parser::error
+# =>
+# =>   × Error: nu::shell::not_a_const_command
+# =>   │
+# =>   │   × Not a const command.
+# =>   │    ╭─[repl_entry #1:1:23]
+# =>   │  1 │ const foo_contents = (open foo.nu)
+# =>   │    ·                       ──┬─
+# =>   │    ·                         ╰── This command cannot run at parse time.
+# =>   │    ╰────
+# =>   │   help: Only a subset of builtin commands can run at parse time.
+# =>   │
+# =>    ╭─[repl_entry #1:1:22]
+# =>  1 │ const foo_contents = (open foo.nu)
+# =>    ·                      ──────┬──────
+# =>    ·                            ╰── Encountered error during parse-time evaluation
+# =>    ╰────
 ```
 
 Put differently, only a small subset of commands and expressions can generate a constant value. For a command to be allowed:

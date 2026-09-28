@@ -2,39 +2,41 @@
 
 Nushell supports the following operators for common math, logic, and string operations:
 
-| Operator           | Description                                             |
-| ------------------ | ------------------------------------------------------- |
-| `+`                | add                                                     |
-| `-`                | subtract                                                |
-| `*`                | multiply                                                |
-| `/`                | divide                                                  |
-| `//`               | floor division                                          |
-| `mod`              | modulo                                                  |
-| `**`               | exponentiation (power)                                  |
-| `==`               | equal                                                   |
-| `!=`               | not equal                                               |
-| `<`                | less than                                               |
-| `<=`               | less than or equal                                      |
-| `>`                | greater than                                            |
-| `>=`               | greater than or equal                                   |
-| `=~` or `like`     | regex match / string contains another                   |
-| `!~` or `not-like` | inverse regex match / string does *not* contain another |
-| `in`               | value in list                                           |
-| `not-in`           | value not in list                                       |
-| `has`              | list has value                                          |
-| `not-has`          | list does not have value                                |
-| `not`              | logical not                                             |
-| `and`              | and two Boolean expressions (short-circuits)            |
-| `or`               | or two Boolean expressions (short-circuits)             |
-| `xor`              | exclusive or two boolean expressions                    |
-| `bit-or`           | bitwise or                                              |
-| `bit-xor`          | bitwise xor                                             |
-| `bit-and`          | bitwise and                                             |
-| `bit-shl`          | bitwise shift left                                      |
-| `bit-shr`          | bitwise shift right                                     |
-| `starts-with`      | string starts with                                      |
-| `ends-with`        | string ends with                                        |
-| `++`               | append lists                                            |
+| Operator           | Description                                                                    |
+| ------------------ | ------------------------------------------------------------------------------ |
+| `+`                | add                                                                            |
+| `-`                | subtract                                                                       |
+| `*`                | multiply                                                                       |
+| `/`                | divide                                                                         |
+| `//`               | floor division                                                                 |
+| `mod`              | modulo                                                                         |
+| `**`               | exponentiation (power)                                                         |
+| `==`               | equal                                                                          |
+| `!=`               | not equal                                                                      |
+| `<`                | less than                                                                      |
+| `<=`               | less than or equal                                                             |
+| `>`                | greater than                                                                   |
+| `>=`               | greater than or equal                                                          |
+| `=~` or `like`     | regex match / string contains another                                          |
+| `!~` or `not-like` | inverse regex match / string does *not* contain another                        |
+| `in`               | value in list, substring of string, or key in record                           |
+| `not-in`           | value not in list, not a substring, or not a key in record                     |
+| `has`              | list has value, string contains another, or record has key                     |
+| `not-has`          | list does not have value, string does not contain another, or record lacks key |
+| `not`              | logical not                                                                    |
+| `and`              | and two Boolean expressions (short-circuits)                                   |
+| `or`               | or two Boolean expressions (short-circuits)                                    |
+| `xor`              | exclusive or two boolean expressions                                           |
+| `bit-or`           | bitwise or                                                                     |
+| `bit-xor`          | bitwise xor                                                                    |
+| `bit-and`          | bitwise and                                                                    |
+| `bit-shl`          | bitwise shift left                                                             |
+| `bit-shr`          | bitwise shift right                                                            |
+| `starts-with`      | string starts with                                                             |
+| `not-starts-with`  | string does not start with                                                     |
+| `ends-with`        | string ends with                                                               |
+| `not-ends-with`    | string does not end with                                                       |
+| `++`               | concatenate two lists, two strings, or two binary values                       |
 
 
 Parentheses can be used for grouping to specify evaluation order or for calling commands and using the results in an expression.
@@ -50,15 +52,15 @@ Presented in descending order of precedence, the article details the operations 
 - Multiply (`*`), Divide (`/`), Integer/Floor Division (`//`), and Modulo (`mod`)
 - Add (`+`) and Subtract (`-`)
 - Bit shifting (`bit-shl`, `bit-shr`)
-- Comparison operations (`==`, `!=`, `<`, `>`, `<=`, `>=`), membership tests (`in`, `not-in`, `starts-with`, `ends-with`), regex matching (`=~`, `!~`), and list appending (`++`)
+- Comparison operations (`==`, `!=`, `<`, `>`, `<=`, `>=`), membership tests (`in`, `not-in`, `has`, `not-has`, `starts-with`, `not-starts-with`, `ends-with`, `not-ends-with`), regex matching (`=~`, `!~`, `like`, `not-like`), and concatenation (`++`)
 - Bitwise and (`bit-and`)
 - Bitwise xor (`bit-xor`)
 - Bitwise or (`bit-or`)
+- Logical not (`not`)
 - Logical and (`and`)
 - Logical xor (`xor`)
 - Logical or (`or`)
 - Assignment operations
-- Logical not (`not`)
 
 ```nu
 3 * (1 + 2)
@@ -71,20 +73,42 @@ Not all operations make sense for all data types.
 If you attempt to perform an operation on non-compatible data types, you will be met with an error message that should explain what went wrong:
 ```nu
 "spam" - 1
-# => Error: nu::parser::unsupported_operation (link)
-# => 
-# =>   × Types mismatched for operation.
-# =>    ╭─[entry #49:1:1]
+# => Error: nu::parser::operator_unsupported_type
+# =>
+# =>   × The '-' operator does not work on values of type 'string'.
+# =>    ╭─[repl_entry #1:1:1]
 # =>  1 │ "spam" - 1
-# =>    · ───┬── ┬ ┬
-# =>    ·    │   │ ╰── int
-# =>    ·    │   ╰── doesn't support these values.
+# =>    · ───┬── ┬
+# =>    ·    │   ╰── does not support 'string'
 # =>    ·    ╰── string
 # =>    ╰────
-# =>   help: Change string or int to be the right types and try again.
 ```
 
 The rules might sometimes feel a bit strict, but on the other hand there should be less unexpected side effects.
+
+For example, `++` only concatenates two values of the same kind: two lists, two strings, or two binary values. To add a single item to a list, wrap the item in a list or use [`append`](/commands/docs/append.md):
+
+```nu
+[1 2] ++ 3
+# => Error: nu::parser::operator_unsupported_type
+# =>
+# =>   × The '++' operator does not work on values of type 'int'.
+# =>    ╭─[repl_entry #2:1:7]
+# =>  1 │ [1 2] ++ 3
+# =>    ·       ─┬ ┬
+# =>    ·        │ ╰── int
+# =>    ·        ╰── does not support 'int'
+# =>    ╰────
+# =>   help: if you meant to append a value to a list or a record to a table, use the `append` command or wrap the value in a list. For example: `$list ++ $value` should be `$list ++ [$value]` or `$list
+# =>         | append $value`.
+
+[1 2] ++ [3]
+# => ╭───┬───╮
+# => │ 0 │ 1 │
+# => │ 1 │ 2 │
+# => │ 2 │ 3 │
+# => ╰───┴───╯
+```
 
 ## Regular Expression / string-contains Operators
 
@@ -96,8 +120,8 @@ The `=~` and `!~` operators provide a convenient way to evaluate [regular expres
 For example:
 
 ```nu
-foobarbaz =~ bar # returns true
-foobarbaz !~ bar # returns false
+"foobarbaz" =~ "bar" # returns true
+"foobarbaz" !~ "bar" # returns false
 ls | where name =~ ^nu # returns all files whose names start with "nu"
 ```
 
@@ -120,10 +144,10 @@ Operators are usually case-sensitive when operating on strings. There are a few 
 "FOO" | str contains --ignore-case "foo"
 ```
 
-3. Convert strings to lowercase with [`str downcase`](/commands/docs/str_downcase.md) before comparing:
+3. Convert strings to lowercase with [`str lowercase`](/commands/docs/str_lowercase.md) before comparing:
 
 ```nu
-("FOO" | str downcase) == ("Foo" | str downcase)
+("FOO" | str lowercase) == ("Foo" | str lowercase)
 ```
 
 ## Spread operator
@@ -204,15 +228,15 @@ Let's say you have a record with some configuration information and you want to 
 this record:
 
 ```nu
-let config = { path: /tmp, limit: 5 }
+let settings = { path: /tmp, limit: 5 }
 ```
 
-You can make a new record with all the fields of `$config` and some new additions using the spread
+You can make a new record with all the fields of `$settings` and some new additions using the spread
 operator. You can use the spread multiple records inside a single record literal.
 
 ```nu
 {
-  ...$config,
+  ...$settings,
   users: [alice bob],
   ...{ url: example.com },
   ...(sys mem)
@@ -241,8 +265,9 @@ whitespace between the `...` and the next expression for it to be recognized as 
 
 ### In Command calls
 
-You can also spread arguments to a command, provided that it either has a rest parameter or is an
-external command.
+You can also spread arguments to a command. A list can be spread into a command that has a rest
+parameter or into an external command, and a record can be spread into
+[named flags](#spreading-records-into-flags).
 
 Here is an example custom command that has a rest parameter:
 
@@ -261,9 +286,9 @@ recognized before variables, subexpressions, and list literals, and no whitespac
 
 ```nu
 foo "bar" "baz" ...[1 2 3] # With ..., the numbers are treated as separate arguments
-# => { flag: false, req: bar, opt: baz, args: [1, 2, 3] }
+# => {flag: false, req: bar, opt: baz, args: [1, 2, 3]}
 foo "bar" "baz" [1 2 3] # Without ..., [1 2 3] is treated as a single argument
-# => { flag: false, req: bar, opt: baz, args: [[1, 2, 3]] }
+# => {flag: false, req: bar, opt: baz, args: [[1, 2, 3]]}
 ```
 
 A more useful way to use the spread operator is if you have another command with a rest parameter
@@ -272,21 +297,21 @@ and you want it to forward its arguments to `foo`:
 ```nu
 def bar [ ...args ] { foo --flag "bar" "baz" ...$args }
 bar 1 2 3
-# => { flag: true, req: bar, opt: baz, args: [1, 2, 3] }
+# => {flag: true, req: bar, opt: baz, args: [1, 2, 3]}
 ```
 
 You can spread multiple lists in a single call, and also intersperse individual arguments:
 
 ```nu
 foo "bar" "baz" 1 ...[2 3] 4 5 ...(6..9 | take 2) last
-# => { flag: false, req: bar, opt: baz, args: [1, 2, 3, 4, 5, 6, 7, last] }
+# => {flag: false, req: bar, opt: baz, args: [1, 2, 3, 4, 5, 6, 7, last]}
 ```
 
 Flags/named arguments can go after a spread argument, just like they can go after regular rest arguments:
 
 ```nu
 foo "bar" "baz" 1 ...[2 3] --flag 4
-# => { flag: true, req: bar, opt: baz, args: [1, 2, 3, 4] }
+# => {flag: true, req: bar, opt: baz, args: [1, 2, 3, 4]}
 ```
 
 If a spread argument comes before an optional positional parameter, that optional parameter is treated
@@ -294,5 +319,28 @@ as being omitted:
 
 ```nu
 foo "bar" ...[1 2] "not opt" # The null means no argument was given for opt
-# => { flag: false, req: bar, opt: null, args: [1, 2, "not opt"] }
+# => {flag: false, req: bar, opt: null, args: [1, 2, "not opt"]}
 ```
+
+#### Spreading Records into Flags
+
+A record can be spread into a command call to pass named flags. Each field name is a flag name
+(without the leading `--`), and its value is the flag's value. For a switch like `--flag`, `true`
+sets it, while `false` or `null` leaves it off. This works with both built-in and custom commands:
+
+```nu
+foo ...{ flag: true } "bar"
+# => {flag: true, req: bar, opt: null, args: []}
+
+let sort_options = { reverse: true }
+[3 1 2] | sort ...$sort_options
+# => ╭───┬───╮
+# => │ 0 │ 3 │
+# => │ 1 │ 2 │
+# => │ 2 │ 1 │
+# => ╰───┴───╯
+```
+
+Field values are checked against the types of the flags, and a field that doesn't match any flag
+of the command is an error. See [Custom Commands](custom_commands.md#passing-flags-from-a-record)
+for more examples, including how `null` values are handled for flags that take a value.

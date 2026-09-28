@@ -13,20 +13,49 @@
 1. While `error` may be used as a type annotation, there is currently no known use-case for doing so, since an `error` value can never be _assigned_ to a variable or custom command parameter. Any error condition results in termination of the current command/expression and will also terminate any assignment expression or custom command. For example:
 
    ```nu
-   > let e: error = (error make --unspanned { msg: "This is an error" })
-   Error:   × This is an error
+   let e: error = (error make --unspanned { msg: "This is an error" })
+   # => Error: nu::shell::error
+   # =>
+   # =>   × This is an error
+   # =>
 
-   > $e
-   Error: nu::shell::variable_not_found
-
-   × Variable not found
-      ╭─[entry #19:1:1]
-   1 │ $e
-      · ─┬
-      ·  ╰── variable not found
-      ╰────
+   $e
+   # => Error: nu::shell::variable_not_found
+   # =>
+   # =>   × Variable not found
+   # =>    ╭─[repl_entry #2:1:1]
+   # =>  1 │ $e
+   # =>    · ─┬
+   # =>    ·  ╰── variable not found
+   # =>    ╰────
    ```
 
 1. The `error` type is also returned from internal Nushell commands to indicate an error condition, but as with assignment, there is no way to use this result.
 
 1. Surrounding code that might potentially throw an `error` with a `try`/`catch {|e|}` block will result in an `$e` variable that is a `record`, not an `error` type.
+
+   The record has the fields `msg`, `debug`, `raw`, `rendered` and `details`. `details` is a record with the `msg`, `labels`, `code`, `url`, `help` and `inner` of the error:
+
+   ```nu
+   try { 1 / 0 } catch {|e| $e.msg }
+   # => Division by zero.
+   try { 1 / 0 } catch {|e| $e.details.code }
+   # => nu::shell::division_by_zero
+   ```
+
+   The `raw` field holds the original `error` value. Evaluating it raises the error again, so it can be used to re-throw an error after handling it:
+
+   ```nu
+   try { 1 / 0 } catch {|e| print "cleaning up"; $e.raw }
+   # => cleaning up
+   # => Error: nu::shell::division_by_zero
+   # =>
+   # =>   × Division by zero.
+   # =>    ╭─[repl_entry #1:1:9]
+   # =>  1 │ try { 1 / 0 } catch {|e| print "cleaning up"; $e.raw }
+   # =>    ·         ┬
+   # =>    ·         ╰── division by zero
+   # =>    ╰────
+   ```
+
+   See [`try`/`catch`](../../flow_control/try-catch.md) for more about handling errors.

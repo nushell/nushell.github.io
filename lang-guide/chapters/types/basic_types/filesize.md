@@ -26,14 +26,26 @@ The full list of `filesize` units is:
 | `EB`: exabytes           | `EiB`: exbibytes        |
 
 ::: tip
-File size units are case-insensitive. E.g., `1KiB`, `1kib`, and `1Kib` are all equivalent.
+File size units in literals are case-insensitive. E.g., `1KiB`, `1kib`, and `1Kib` are all equivalent.
+The unit argument of `format filesize`, however, must be written exactly as in the table above (e.g., `kB` or `KiB`).
 :::
+
+By default, file sizes are displayed with metric units (see `$env.config.filesize.unit`):
+
+```nu
+1500B
+# => 1.5 kB
+1MB | format filesize kB
+# => 1000 kB
+```
 
 ## Common commands that can work with `filesizes`
 
 - `ls`
 - `du`
-- `sys`
+- `ps`
+- `sys mem`, `sys disks`, `sys net`
+- `into filesize`, `format filesize`
 
 Note: The `where` command and other filters can use filesize in comparison expressions.
 
@@ -42,3 +54,12 @@ Note: The `where` command and other filters can use filesize in comparison expre
 - `==`, `!=`
 - `+`, `-`
 - `<`, `<=`, `>`, `>=`
+- `*`, `/`, `//` and `mod` with a number, which return a filesize
+- `/` with another filesize, which returns a `float` (use `//` for an `int`)
+
+  ```nu
+  10MB / 2
+  # => 5.0 MB
+  1GiB / 1B
+  # => 1073741824.0
+  ```

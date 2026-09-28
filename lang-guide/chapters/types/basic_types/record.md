@@ -13,7 +13,15 @@
 # Language Notes
 
 - The keys maintain the order of insertion or the order defined in a record literal.
-- Keys are guaranteed to be unique. Inserting the same key twice will keep only the last insertion or definition.
+- Keys are guaranteed to be unique. Defining the same key twice in a record literal is an error (`nu::shell::column_defined_twice`), and `insert` refuses to add a key that already exists (`nu::shell::column_already_exists`). Use `upsert`, `update` or `merge` to replace the value of an existing key:
+
+  ```nu
+  {a: 1, b: 2} | merge {a: 5}
+  # => ╭───┬───╮
+  # => │ a │ 5 │
+  # => │ b │ 2 │
+  # => ╰───┴───╯
+  ```
 
 (TBD: complex hashable/equality checkable keys)
 
@@ -24,34 +32,34 @@ Record syntax is very similar to objects in JSON. However, commas are _not_ requ
 - Commas
 
   ```nu
-  > {name: "Sam", rank: 10}
-  ╭──────┬─────╮
-  │ name │ Sam │
-  │ rank │ 10  │
-  ╰──────┴─────╯
+  {name: "Sam", rank: 10}
+  # => ╭──────┬─────╮
+  # => │ name │ Sam │
+  # => │ rank │ 10  │
+  # => ╰──────┴─────╯
   ```
 
 - Spaces (when unambiguous):
 
   ```nu
-  > {name: "Sam" rank: 10}
-  ╭──────┬─────╮
-  │ name │ Sam │
-  │ rank │ 10  │
-  ╰──────┴─────╯
+  {name: "Sam" rank: 10}
+  # => ╭──────┬─────╮
+  # => │ name │ Sam │
+  # => │ rank │ 10  │
+  # => ╰──────┴─────╯
   ```
 
 - Line breaks:
 
   ```nu
-  > {
-      name: "Sam"
-      rank: 10
-    }
-  ╭──────┬─────╮
-  │ name │ Sam │
-  │ rank │ 10  │
-  ╰──────┴─────╯
+  {
+    name: "Sam"
+    rank: 10
+  }
+  # => ╭──────┬─────╮
+  # => │ name │ Sam │
+  # => │ rank │ 10  │
+  # => ╰──────┴─────╯
   ```
 
 ## Common commands that can be used with `record`

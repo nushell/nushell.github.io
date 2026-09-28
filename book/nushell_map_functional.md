@@ -2,7 +2,7 @@
 
 The idea behind this table is to help you understand how Nu builtins and plugins relate to functional languages. We've tried to produce a map of relevant Nu commands and what their equivalents are in other languages. Contributions are welcome.
 
-Note: this table assumes Nu 0.43 or later.
+Note: this table assumes Nu 0.116.0 or later.
 
 | Nushell                                        | Clojure                      | Tablecloth (Ocaml / Elm)        | Haskell                  |
 |------------------------------------------------|------------------------------|---------------------------------|--------------------------|
@@ -10,12 +10,15 @@ Note: this table assumes Nu 0.43 or later.
 | [into binary](../commands/docs/into_binary.md) | Integer/toHexString          |                                 | showHex                  |
 | [length](../commands/docs/length.md)           | count                        | length, size                    | length, size             |
 | [date](../commands/docs/date.md)               | java.time.LocalDate/now      |                                 |                          |
+| [difference](../commands/docs/difference.md)   | clojure.set/difference       |                                 | (\\\\)                   |
 | [each](../commands/docs/each.md)               | map, mapv, iterate           | map, forEach                    | map, mapM                |
-| [exit](../commands/docs/each.md)               | System/exit                  |                                 |                          |
+| [exit](../commands/docs/exit.md)               | System/exit                  |                                 |                          |
+| [generate](../commands/docs/generate.md)       | iterate                      |                                 | iterate, unfoldr         |
 | [first](../commands/docs/first.md)             | first                        | head                            | head                     |
 | [format](../commands/docs/format.md)           | format                       |                                 | Text.Printf.printf       |
 | [group-by](../commands/docs/group-by.md)       | group-by                     |                                 | group, groupBy           |
 | [help](../cookbook/help.md)                    | doc                          |                                 |                          |
+| [intersect](../commands/docs/intersect.md)     | clojure.set/intersection     |                                 | intersect                |
 | [is-empty](../commands/docs/is-empty.md)       | empty?                       | isEmpty                         |                          |
 | [last](../commands/docs/last.md)               | last, peek, take-last        | last                            | last                     |
 | [lines](../commands/docs/lines.md)             |                              |                                 | lines, words, split-with |
@@ -23,6 +26,7 @@ Note: this table assumes Nu 0.43 or later.
 | [select](../commands/docs/select.md)           | nth                          | Array.get                       | lookup                   |
 | [open](../commands/docs/open.md)               | with-open                    |                                 |                          |
 | [transpose](../commands/docs/transpose.md)     | (apply mapv vector matrix)   |                                 | transpose                |
+| [par-each](../commands/docs/par-each.md)       | pmap                         |                                 | parMap                   |
 | [prepend](../commands/docs/prepend.md)         | cons                         | cons, ::                        | ::                       |
 | [print](../commands/docs/print.md)             | println                      |                                 | putStrLn, print          |
 | [slice](../commands/docs/slice.md), 1..10      | range                        | range                           | 1..10, 'a'..'f'          |
@@ -43,5 +47,7 @@ Note: this table assumes Nu 0.43 or later.
 | [take](../commands/docs/take.md)               | take, drop-last, pop         | take, init                      | take, init               |
 | [take until](../commands/docs/take_until.md)   | take-while                   | takeWhile                       | takeWhile                |
 | [take while](../commands/docs/take_while.md)   | take-while                   | takeWhile                       | takeWhile                |
+| [union](../commands/docs/union.md)             | clojure.set/union            |                                 | union                    |
 | [uniq](../commands/docs/uniq.md)               | set                          | Set.empty                       | Data.Set                 |
 | [where](../commands/docs/where.md)             | filter, filterv, select      | filter, filterMap               | filter                   |
+| [zip](../commands/docs/zip.md)                 | map vector                   |                                 | zip                      |

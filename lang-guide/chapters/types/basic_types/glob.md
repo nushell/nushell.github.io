@@ -99,7 +99,7 @@
 
    ```nu
    # Nostalgic for the Good Ole DOS days?
-   ls **/*.txt | get name | str upcase
+   ls **/*.txt | get name | str uppercase
    ```
 
 ## The `glob` command
@@ -110,19 +110,31 @@ Simple example:
 
 ```nu
 glob *.nu
-# => [ /home/you/dev/foo.nu /home/you/dev/bar.nu ]
+# => ╭───┬──────────────────────╮
+# => │ 0 │ /home/you/dev/baz.nu │
+# => │ 1 │ /home/you/dev/bar.nu │
+# => │ 2 │ /home/you/dev/foo.nu │
+# => ╰───┴──────────────────────╯
 ```
 
 Notice the glob, after expansion, always returns a `list` of fully qualified pathnames.
 
 ### Additional `glob` command options
 
-For example, it can ignore directories using the `-D` flag:
+For example, it can ignore directories using the `-D` flag. Here `build` is a directory:
 
 ```nu
-glob -D * | path basename | str join ' '
-foo.nu bar.nu
-# => foo.nu bar.nu baz.nu
+glob b* | path basename | sort
+# => ╭───┬────────╮
+# => │ 0 │ bar.nu │
+# => │ 1 │ baz.nu │
+# => │ 2 │ build  │
+# => ╰───┴────────╯
+glob -D b* | path basename | sort
+# => ╭───┬────────╮
+# => │ 0 │ bar.nu │
+# => │ 1 │ baz.nu │
+# => ╰───┴────────╯
 ```
 
 ## Common commands that can work with `glob`

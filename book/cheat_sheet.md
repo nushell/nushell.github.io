@@ -201,6 +201,7 @@ $planets | each { |elt| $"($elt) is a planet of the solar system" }
 iterate over a list with an index and value:
 
 ```nu
+let planets = [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]
 $planets | enumerate | each { |elt| $"($elt.index + 1) - ($elt.item)" }
 # => ╭───┬─────────────╮
 # => │ 0 │ 1 - Mercury │
@@ -332,7 +333,7 @@ glob **/*.{rs,toml} --depth 2
 watch a file, run command whenever it changes:
 
 ```nu
-watch . --glob=**/*.rs {|| cargo test }
+for _ in (watch . --glob=**/*.rs) { cargo test }
 ```
 
 ## Custom Commands
@@ -435,20 +436,26 @@ closures and nested defs cannot capture mutable variables from their environment
 mut x = 0
 [1 2 3] | each { $x += 1 }
 # => Error: nu::parser::expected_keyword
-# => 
+# =>
 # =>   × Capture of mutable variable.
-# =>    ╭─[entry #83:1:18]
-# =>  1 │ [1 2 3] | each { $x += 1 }
+# =>    ╭─[repl_entry #83:2:18]
+# =>  1 │ mut x = 0
+# =>  2 │ [1 2 3] | each { $x += 1 }
 # =>    ·                  ─┬
 # =>    ·                   ╰── capture of mutable variable
 # =>    ╰────
 ```
 
-a constant variable is immutable and is fully evaluated at parse-time:
+a constant variable is immutable and is fully evaluated at parse-time, so it can be used where a value is needed while parsing, such as the file name passed to `source`:
 
 ```nu
-const file = 'path/to/file.nu'
+'print "hello from file.nu"' | save --force file.nu
+```
+
+```nu
+const file = 'file.nu'
 source $file
+# => hello from file.nu
 ```
 
 use question mark operator `?` to return null instead of error if provided path is incorrect:
@@ -481,6 +488,7 @@ module greetings {
 }
 use greetings hello
 hello "world"
+# => hello world!
 ```
 
 import module from file and use its environment in current scope:
@@ -493,18 +501,20 @@ export-env {
 export def hello [] {
     $"hello ($env.MYNAME)"
 }
+```
 
+```nu
 use greetings.nu
 $env.MYNAME
 # => Arthur, King of the Britons
 greetings hello
-# => hello Arthur, King of the Britons!
+# => hello Arthur, King of the Britons
 ```
 
 use main command in module:
 
 ```nu
-# greetings.nu
+# salutations.nu
 export def hello [name: string] {
     $"hello ($name)!"
 }
@@ -516,10 +526,12 @@ export def hi [where: string] {
 export def main [] {
     "greetings and salutations!"
 }
+```
 
-use greetings.nu
-greetings
+```nu
+use salutations.nu
+salutations
 # => greetings and salutations!
-greetings hello world
+salutations hello world
 # => hello world!
 ```

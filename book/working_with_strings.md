@@ -50,15 +50,19 @@ Nushell currently supports the following escape characters:
 - `\'` - single-quote character
 - `\\` - backslash
 - `\/` - forward slash
+- `\0` - null character (`NUL`)
+- `\a` - bell (alert)
 - `\b` - backspace
+- `\e` - escape character, as used in ANSI escape sequences
 - `\f` - formfeed
 - `\r` - carriage return
 - `\n` - newline (line feed)
 - `\t` - tab
-- `\u{X...}` - a single unicode character, where X... is 1-6 hex digits (0-9, A-F)
- 
-To create a `\0` (`NUL`) character, you may use `\u{0}` or
-[string interpolation](#string-interpolation) with [`(char nul)`](/commands/docs/char.md).
+- `\xHH` - a single byte, where HH is exactly 2 hex digits (the resulting string must still be valid UTF-8)
+- `\u{X...}` - a single unicode character, where X... is 1-6 hex digits (0-9, A-F, a-f)
+- `\(`, `\)`, `\{`, `\}`, `\$`, `\^`, `\#`, `\|`, `\~` - the character itself
+
+An unrecognized escape sequence, such as `\q`, is a parse error. Special characters can also be created with the [`char`](/commands/docs/char.md) command, for example `(char nul)` inside [string interpolation](#string-interpolation).
 
 ## Raw Strings
 
@@ -99,12 +103,12 @@ hello
 # => Error: nu::shell::external_command
 # => 
 # =>   × External command failed
-# =>    ╭─[entry #5:1:1]
+# =>    ╭─[repl_entry #5:1:1]
 # =>  1 │ hello
 # =>    · ──┬──
-# =>    ·   ╰── executable was not found
+# =>    ·   ╰── Command `hello` not found
 # =>    ╰────
-# =>   help: program not found
+# =>   help: `hello` is neither a Nushell built-in or a known external command
 ```
 
 Also, many bare words have special meaning in nu, and so will not be interpreted as a string:
@@ -120,12 +124,12 @@ trueX | describe
 # => Error: nu::shell::external_command
 # => 
 # =>   × External command failed
-# =>    ╭─[entry #5:1:1]
+# =>    ╭─[repl_entry #5:1:1]
 # =>  1 │ trueX | describe
 # =>    · ──┬──
-# =>    ·   ╰── executable was not found
+# =>    ·   ╰── Command `trueX` not found
 # =>    ╰────
-# =>   help: program not found
+# =>   help: `trueX` is neither a Nushell built-in or a known external command
 ```
 
 So, while bare strings are useful for informal command line usage, when programming more formally in nu, you should generally use quotes.
@@ -141,12 +145,18 @@ For example:
 ```nu
 # Run the external ls binary found on the path
 `ls`
+```
 
-# Move up one directory
-`..`
+A backtick-quoted path entered on its own at the prompt changes to that directory. For example, this changes to the "my dir" subdirectory, if it exists:
 
-# Change to the "my dir" subdirectory, if it exists
+```nu
 `./my dir`
+```
+
+And this moves back up one directory:
+
+```nu
+`..`
 ```
 
 Backtick-quoted strings can be useful for combining globs with files or directories which include spaces:
@@ -159,11 +169,10 @@ Backtick-quoted strings cannot contain _unmatched_ backticks in the string itsel
 
 `````nu
 echo ````
-``
-
-echo ```
-# Unterminated string which will start a new line in the CLI
+# => ``
 `````
+
+In contrast, <code>echo \`\`\`</code> is an unterminated string, which will start a new line in the CLI.
 
 ## Strings as external commands
 
@@ -176,7 +185,7 @@ let foo = 'C:\Program Files\exiftool.exe'
 ^$foo
 ```
 
-You can also use the [`run-external`](/commands/docs/run-external.md) command for this purpose, which provides additional flags and options.
+You can also use the [`run-external`](/commands/docs/run-external.md) command for this purpose.
 
 ## Appending and Prepending to strings
 
@@ -190,8 +199,8 @@ There are various ways to prepend, or append strings. If you want to add somethi
 You can also use a regex to replace the beginning or end of a string:
 
 ```nu
-['foo', 'bar'] | str replace -r '^' '~/'# ~/foo, ~/bar
-['foo', 'bar'] | str replace -r '$' '~/'# foo~/, bar~/
+['foo', 'bar'] | str replace -r '^' '~/' # ~/foo, ~/bar
+['foo', 'bar'] | str replace -r '$' '~/' # foo~/, bar~/
 ```
 
 If you want to combine a list into a string, then `str join` is your friend:
@@ -228,7 +237,7 @@ By wrapping expressions in `()`, we can run them to completion and use the resul
 
 String interpolation has both a single-quoted, `$' '`, and a double-quoted, `$" "`, form. These correspond to the single-quoted and double-quoted strings: single-quoted string interpolation doesn't support escape characters while double-quoted string interpolation does.
 
-As of version 0.61, interpolated strings support escaping parentheses, so that the `(` and `)` characters may be used in a string without Nushell trying to evaluate what appears between them:
+Double-quoted interpolated strings support escaping parentheses, so that the `(` and `)` characters may be used in a string without Nushell trying to evaluate what appears between them:
 
 ```nu
 $"2 + 2 is (2 + 2) \(you guessed it!)"
@@ -237,7 +246,7 @@ $"2 + 2 is (2 + 2) \(you guessed it!)"
 
 Interpolated strings can be evaluated at parse time, but if they include values whose formatting depends
 on your configuration and your `config.nu` hasn't been loaded yet, they will use the default configuration.
-So if you have something like this in your `config.nu`, `x` will be `"2.0 KB"` even if your config says to use
+So if you have something like this in your `config.nu`, `x` will be `"2.0 kB"` even if your config says to use
 `MB` for all file sizes (datetimes will similarly use the default config).
 
 ```nu
@@ -262,7 +271,7 @@ The [`split column`](/commands/docs/split_column.md) command will create a table
 ```nu
 "red,green,blue" | split column ","
 # => ╭───┬─────────┬─────────┬─────────╮
-# => │ # │ column1 │ column2 │ column3 │
+# => │ # │ column0 │ column1 │ column2 │
 # => ├───┼─────────┼─────────┼─────────┤
 # => │ 0 │ red     │ green   │ blue    │
 # => ╰───┴─────────┴─────────┴─────────╯

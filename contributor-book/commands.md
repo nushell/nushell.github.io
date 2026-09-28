@@ -8,7 +8,7 @@ Commands are the building blocks for pipelines in Nu. They do the action of the 
 
 ## Internal commands
 
-All commands inside of Nu, including plugins, are internal commands. Internal commands communicate with each other using [`PipelineData`](https://docs.rs/nu-protocol/latest/nu_protocol/enum.PipelineData.html).
+All commands inside of Nu, including custom commands written in Nu and commands provided by plugins, are internal commands. Internal commands communicate with each other using [`PipelineData`](https://docs.rs/nu-protocol/latest/nu_protocol/enum.PipelineData.html).
 
 ### Signature
 
@@ -18,12 +18,13 @@ Commands use a light typechecking pass to ensure that arguments passed to them c
 - The positional arguments (e.g. in `start x y` the `x` and `y` are positional arguments)
 - If the command takes an unbounded number of additional positional arguments (e.g. `start a1 a2 a3 ... a99 a100`)
 - The named arguments (e.g. `ansi gradient --fgstart '0x40c9ff'`)
+- The input and output types the command supports (e.g. `string -> int`)
 
 With this information, a pipeline can be checked for potential problems before it's executed.
 
 ## External commands
 
-An external command is any command that is not part of the Nu built-in commands or plugins. If a command is called that Nu does not know about, it will call out to the underlying environment with the provided arguments in an attempt to invoke this command as an external program.
+An external command is any command that is not part of the Nu built-in commands or plugins. If a command is called that Nu does not know about, it will call out to the underlying environment with the provided arguments in an attempt to invoke this command as an external program. Prefixing a command with `^` (e.g. `^ls`) always runs the external program, even if Nu has an internal command with the same name.
 
 ## Communicating between internal and external commands
 
@@ -33,13 +34,30 @@ Internal commands communicate with each other using the complete value stream th
 
 ### Internal to external
 
-Internal commands that send text to external commands need to have prepared text strings ahead of time. If an object is sent directly to an external command, that is considered an error as there is no way to infer how the structured data should be represented for the external command. The user is expected to either narrow down to a simple data cell or to use one of the file type converters (like `to json`) to convert the table into a string representation.
+Internal commands that send text to external commands need to have prepared text strings ahead of time. Binary data is sent as-is. If structured data is sent directly to an external command, Nu renders it as text the way the `table` command would (without colors) and sends that:
+
+```nu
+[[name size]; [foo 1] [bar 2]] | ^cat
+# => ╭───┬──────┬──────╮
+# => │ # │ name │ size │
+# => ├───┼──────┼──────┤
+# => │ 0 │ foo  │    1 │
+# => │ 1 │ bar  │    2 │
+# => ╰───┴──────┴──────╯
+```
+
+This is rarely what the external command expects, so the user should either narrow down to a simple data cell or use one of the file type converters (like `to json`) to convert the table into a string representation.
 
 The external command is opened so that its `stdin` is redirected, so that the data can be sent to it.
 
 ### External to internal
 
-External commands send a series of strings via their `stdout`. These strings are read into the pipeline and are made available to the internal command that is next in the pipeline, or displayed to the user if the external command is the last step of the pipeline.
+External commands send a stream of bytes via their `stdout`. Nu reads this output as a byte stream and makes it available to the internal command that is next in the pipeline, or displays it to the user if the external command is the last step of the pipeline. Commands like `lines` or `from json` turn the byte stream into structured data.
+
+```nu
+^echo hello | describe
+# => byte stream
+```
 
 ### External to external
 

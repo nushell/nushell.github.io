@@ -17,15 +17,15 @@
 - `is-admin`
 - `is-terminal`
 
-The following commands take a closure as their main argument. The return value from the closure must be a boolean:
+The following commands take a closure (or a row condition) as their main argument. The return value from the closure must be a boolean:
 
-- `where`/`filter`
+- `where`
 - `any`, `all`, `skip until`, `skip while`, `take until`, `take while`
 
 ## Common operators that can be used with `bool`
 
 - `==`, `!=`, `<`, `<=`, `>`, `>=`
-- `and`, `or`, `not`
+- `and`, `or`, `xor`, `not`
 - `in`
 - Regex comparison operators: `=~`, `!~` `<regex>`
 - String comparison operators: `ends-with`, `starts-with`

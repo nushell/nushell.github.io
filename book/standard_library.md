@@ -3,9 +3,9 @@ prev:
   text: (Not so) Advanced
   link: /book/advanced.md
 ---
-# Standard Library (Preview)
+# Standard Library
 
-Nushell ships with a standard library of useful commands written in native Nu. By default, the standard library is loaded into memory (but not automatically imported) when Nushell starts.
+Nushell ships with a standard library of useful commands written in native Nu. By default, the standard library is loaded into memory (but not automatically imported) when Nushell starts. The exception is the small `std/prelude` module, which is imported automatically and provides the [`banner`](/commands/docs/banner.md) and [`pwd`](/commands/docs/pwd.md) commands.
 
 [[toc]]
 
@@ -65,12 +65,19 @@ These submodules are normally imported with `use std/<submodule>` (without a glo
 
 - `use std/assert`: `assert` and its subcommands
 - `use std/bench`: The benchmarking command `bench`
+- `use std/clip`: `clip copy52` and `clip paste52`, which copy to and paste from the system clipboard through the terminal (OSC 52), and `clip prefix`, which adds a prefix to each line of the content to be copied
+- `use std/config`: `config dark-theme` and `config light-theme` (themes for `$env.config.color_config`) and `config env-conversions`
 - `use std/dirs`: The directory stack command `dirs` and its subcommands
 - `use std/input`: The `input display` command
 - `use std/help`: An alternative version of the `help` command and its subcommands which supports completion and other features
-- `use std/iters`: Additional `iters`-prefixed iteration commands.
+- `use std/iter`: Additional `iter`-prefixed iteration commands, such as `iter find` and `iter scan`
 - `use std/log`: The `log <subcommands>` such as `log warning <msg>`
 - `use std/math`: Mathematical constants such as `$math.E`. These can also be imported as definitions as in Form #2 below.
+- `use std/random`: The `random dice` command
+
+::: tip
+Nushell also has experimental built-in `clip copy` and `clip paste` commands that use the operating system's clipboard directly instead of OSC 52. To try them, start Nushell with `nu --experimental-options '[native-clip]'`.
+:::
 
 #### 2. Import the _definitions_ (contents) of the module directly
 
@@ -83,9 +90,11 @@ ls | to jsonl
 
 Submodules that are normally imported with `use std/<submodule> *` (**with** a glob/`*`):
 
-- `use std/dt *`: Additional commands for working with `date` values
+- `use std/dt *`: Additional commands for working with `datetime` values
 - `use std/formats *`: Additional `to` and `from` format conversions
 - `use std/math *`: The math constants without a prefix, such as `$E`. Note that the prefixed form #1 above is likely more understandable when reading and maintaining code.
+- `use std/testing *`: The `@test`, `@ignore`, `@before-each`, `@before-all`, `@after-each`, and `@after-all` attributes for marking tests
+- `use std/util *`: Miscellaneous commands such as `path add`, `repeat`, `null-device`, and `structure`
 - `use std/xml *`: Additional commands for working with XML data
 
 #### 3. `use std <submodule>`
@@ -93,19 +102,22 @@ Submodules that are normally imported with `use std/<submodule> *` (**with** a g
 It is _possible_ to import Standard Library submodules using a space-separated form:
 
 ```nu
-use std log
 use std formats *
 ```
 
 ::: important
 As mentioned in [Using Modules](./modules/using_modules.md#module-definitions), this form (like `use std *`) first loads the _entire_ Standard Library into scope and _then_ imports the submodules. In contrast, the slash-separated versions in #1 and #2 above _only_ import the submodule and will be much faster as a result.
+
+This form also doesn't work for submodules that have a command of the same name. For example, `use std log` imports only the `log` command itself, not `log info` or the other subcommands. Use `use std/log` instead.
 :::
 
 ## The Standard Library Candidate Module
 
 `std-rfc`, found in the [nushell Repository](https://github.com/nushell/nushell/tree/main/crates/nu-std/std-rfc), serves as a staging ground for possible Standard Library additions.
 
-If you are interested in adding to the Standard Library, please submit your code via PR to the `std-rfc` module in that repository. We also encourage you to install this module and provide feedback on upcoming candidate commands.
+`std-rfc` ships with Nushell, so its submodules can be imported the same way as the Standard Library's, for example `use std-rfc/str`. It currently includes the `conversions`, `date`, `iter`, `kv`, `path`, `pb`, `random`, `str`, `tables`, `url`, and `xml` submodules.
+
+If you are interested in adding to the Standard Library, please submit your code via PR to the `std-rfc` module in that repository. We also encourage you to try these candidate commands and provide feedback on them.
 
 ::: details More details
 
@@ -137,17 +149,17 @@ To disable the standard library, you can start Nushell using:
 nu --no-std-lib
 ```
 
-This can be especially useful to minimize overhead when running a command in a subshell using `nu -c`. For example:
+This can be especially useful to minimize overhead when running a command in a subshell using `nu -c`. With `-c`, `$nu.startup-time` shows how long Nushell took to start before running the command, so you can compare the two:
 
 ```nu
 nu --no-std-lib -n -c "$nu.startup-time"
-# => 1ms 125µs 10ns
+# => 9ms 650µs 250ns
 
 nu -n -c "$nu.startup-time"
-# => 4ms 889µs 576ns
+# => 11ms 558µs 83ns
 ```
 
-You will not be able to import the library, any of its submodules, nor use any of its commands, when it is disabled in this way.
+You will not be able to import the library, any of its submodules, nor use any of its commands, when it is disabled in this way. This includes the `banner` and `pwd` commands from `std/prelude`.
 
 ## Using `std/log` in Modules
 
@@ -158,22 +170,22 @@ You will not be able to import the library, any of its submodules, nor use any o
 
 ## Optimal Startup
 
-If Nushell's startup time is important to your workflow, review your [startup configuration]([./configuration.md]) in `config.nu`, `env.nu`, and potentially others for inefficient use of the standard library. The following command should identify any problem areas:
+If Nushell's startup time is important to your workflow, review your [startup configuration](./configuration.md) in `config.nu`, `env.nu`, and potentially others for inefficient use of the standard library. The following command should identify any problem areas:
 
 ```nu
 view files
 | enumerate | flatten
 | where filename !~ '^std'
-| where filename !~ '^entry'
+| where filename !~ '^repl_entry'
 | where {|file|
-    (view span $file.start $file.end) =~ 'use\W+std[^\/]'
+    (view span $file.start $file.end) =~ 'use\s+std(\s|;|$)'
   }
 ```
 
 Edit those files to use the recommended syntax in the [Importing Submodules](#importing-submodules) section above.
 
 ::: note
-If a Nushell library (e.g., from [the `nu_scripts` repository](https://github.com/nushell/nu_scripts)), example, or doc is using this syntax, please report it via an issue or PR. These will be updated over time after Nushell 0.99.0 is released.
+If a Nushell library (e.g., from [the `nu_scripts` repository](https://github.com/nushell/nu_scripts)), example, or doc is still using this syntax, please report it via an issue or PR.
 
 If a third-party module is using this syntax, please report it to the author/maintainers to update.
 :::

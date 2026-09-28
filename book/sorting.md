@@ -112,28 +112,28 @@ Here's an example directory, sorted by filesize:
 
 ```nu
 ls | sort-by size
-# => ╭───┬─────────────────────┬──────┬──────────┬────────────────╮
-# => │ # │        name         │ type │   size   │    modified    │
-# => ├───┼─────────────────────┼──────┼──────────┼────────────────┤
-# => │ 0 │ my-secret-plans.txt │ file │    100 B │ 10 minutes ago │
-# => │ 1 │ shopping_list.txt   │ file │    100 B │ 2 months ago   │
-# => │ 2 │ myscript.nu         │ file │  1.1 KiB │ 2 weeks ago    │
-# => │ 3 │ bigfile.img         │ file │ 10.0 MiB │ 3 weeks ago    │
-# => ╰───┴─────────────────────┴──────┴──────────┴────────────────╯
+# => ╭───┬─────────────────────┬──────┬─────────┬──────────────╮
+# => │ # │        name         │ type │  size   │   modified   │
+# => ├───┼─────────────────────┼──────┼─────────┼──────────────┤
+# => │ 0 │ my-secret-plans.txt │ file │   100 B │ 2 days ago   │
+# => │ 1 │ shopping_list.txt   │ file │   100 B │ 2 months ago │
+# => │ 2 │ myscript.nu         │ file │  1.1 kB │ 2 weeks ago  │
+# => │ 3 │ bigfile.img         │ file │ 10.0 MB │ 3 weeks ago  │
+# => ╰───┴─────────────────────┴──────┴─────────┴──────────────╯
 ```
 
 We can also provide multiple cell paths to `sort-by`, which will sort by each cell path in order of priority. You can think of providing multiple cell paths as a "tiebreaker" for elements which have equal values. Let's sort first by size, then by modification time:
 
 ```nu
 ls | sort-by size modified
-# => ╭───┬─────────────────────┬──────┬──────────┬────────────────╮
-# => │ # │        name         │ type │   size   │    modified    │
-# => ├───┼─────────────────────┼──────┼──────────┼────────────────┤
-# => │ 0 │ shopping_list.txt   │ file │    100 B │ 2 months ago   │
-# => │ 1 │ my-secret-plans.txt │ file │    100 B │ 10 minutes ago │
-# => │ 2 │ myscript.nu         │ file │  1.1 KiB │ 2 weeks ago    │
-# => │ 3 │ bigfile.img         │ file │ 10.0 MiB │ 3 weeks ago    │
-# => ╰───┴─────────────────────┴──────┴──────────┴────────────────╯
+# => ╭───┬─────────────────────┬──────┬─────────┬──────────────╮
+# => │ # │        name         │ type │  size   │   modified   │
+# => ├───┼─────────────────────┼──────┼─────────┼──────────────┤
+# => │ 0 │ shopping_list.txt   │ file │   100 B │ 2 months ago │
+# => │ 1 │ my-secret-plans.txt │ file │   100 B │ 2 days ago   │
+# => │ 2 │ myscript.nu         │ file │  1.1 kB │ 2 weeks ago  │
+# => │ 3 │ bigfile.img         │ file │ 10.0 MB │ 3 weeks ago  │
+# => ╰───┴─────────────────────┴──────┴─────────┴──────────────╯
 ```
 
 This time, `shopping_list.txt` comes before `my-secret-plans.txt`, since it has an earlier modification time, but two larger files remain sorted after the `.txt` files.
@@ -177,14 +177,38 @@ let assignments = [
     {name: 'Project', grades: [92 81 82 84 83] }
 ]
 $assignments | sort-by { get grades | math avg }
-# => ╭───┬────────────┬───────────────────────╮
-# => │ # │    name    │        grades         │
-# => ├───┼────────────┼───────────────────────┤
-# => │ 0 │ Exam 1     │ [78, 88, 78, 53, 90]  │
-# => │ 1 │ Project    │ [92, 81, 82, 84, 83]  │
-# => │ 2 │ Homework 2 │ [91, 100, 60, 82, 91] │
-# => │ 3 │ Homework 1 │ [97, 89, 86, 92, 89]  │
-# => ╰───┴────────────┴───────────────────────╯
+# => ╭───┬────────────┬─────────────╮
+# => │ # │    name    │   grades    │
+# => ├───┼────────────┼─────────────┤
+# => │ 0 │ Exam 1     │ ╭───┬────╮  │
+# => │   │            │ │ 0 │ 78 │  │
+# => │   │            │ │ 1 │ 88 │  │
+# => │   │            │ │ 2 │ 78 │  │
+# => │   │            │ │ 3 │ 53 │  │
+# => │   │            │ │ 4 │ 90 │  │
+# => │   │            │ ╰───┴────╯  │
+# => │ 1 │ Project    │ ╭───┬────╮  │
+# => │   │            │ │ 0 │ 92 │  │
+# => │   │            │ │ 1 │ 81 │  │
+# => │   │            │ │ 2 │ 82 │  │
+# => │   │            │ │ 3 │ 84 │  │
+# => │   │            │ │ 4 │ 83 │  │
+# => │   │            │ ╰───┴────╯  │
+# => │ 2 │ Homework 2 │ ╭───┬─────╮ │
+# => │   │            │ │ 0 │  91 │ │
+# => │   │            │ │ 1 │ 100 │ │
+# => │   │            │ │ 2 │  60 │ │
+# => │   │            │ │ 3 │  82 │ │
+# => │   │            │ │ 4 │  91 │ │
+# => │   │            │ ╰───┴─────╯ │
+# => │ 3 │ Homework 1 │ ╭───┬────╮  │
+# => │   │            │ │ 0 │ 97 │  │
+# => │   │            │ │ 1 │ 89 │  │
+# => │   │            │ │ 2 │ 86 │  │
+# => │   │            │ │ 3 │ 92 │  │
+# => │   │            │ │ 4 │ 89 │  │
+# => │   │            │ ╰───┴────╯  │
+# => ╰───┴────────────┴─────────────╯
 ```
 
 The value is passed into the pipeline input of the key closure, however, you can also use it as a parameter:
@@ -209,14 +233,14 @@ For a simple example, we could rewrite a cell path sort as a custom sort. This c
 
 ```nu
 ls | sort-by -c {|a, b| $a.size < $b.size }
-# => ╭───┬─────────────────────┬──────┬──────────┬────────────────╮
-# => │ # │        name         │ type │   size   │    modified    │
-# => ├───┼─────────────────────┼──────┼──────────┼────────────────┤
-# => │ 0 │ my-secret-plans.txt │ file │    100 B │ 10 minutes ago │
-# => │ 1 │ shopping_list.txt   │ file │    100 B │ 2 months ago   │
-# => │ 2 │ myscript.nu         │ file │  1.1 KiB │ 2 weeks ago    │
-# => │ 3 │ bigfile.img         │ file │ 10.0 MiB │ 3 weeks ago    │
-# => ╰───┴─────────────────────┴──────┴──────────┴────────────────╯
+# => ╭───┬─────────────────────┬──────┬─────────┬──────────────╮
+# => │ # │        name         │ type │  size   │   modified   │
+# => ├───┼─────────────────────┼──────┼─────────┼──────────────┤
+# => │ 0 │ my-secret-plans.txt │ file │   100 B │ 2 days ago   │
+# => │ 1 │ shopping_list.txt   │ file │   100 B │ 2 months ago │
+# => │ 2 │ myscript.nu         │ file │  1.1 kB │ 2 weeks ago  │
+# => │ 3 │ bigfile.img         │ file │ 10.0 MB │ 3 weeks ago  │
+# => ╰───┴─────────────────────┴──────┴─────────┴──────────────╯
 ```
 
 ::: tip
@@ -245,6 +269,14 @@ let my_sort = {|a, b|
     }
 }
 $queue | sort-by -c $my_sort
+# => ╭───┬──────┬───────────┬──────────╮
+# => │ # │ task │ work_time │ priority │
+# => ├───┼──────┼───────────┼──────────┤
+# => │ 0 │  583 │         0 │        5 │
+# => │ 1 │  139 │         0 │        1 │
+# => │ 2 │   52 │       355 │        8 │
+# => │ 3 │  948 │        72 │        2 │
+# => ╰───┴──────┴───────────┴──────────╯
 ```
 
 ## Special sorts
@@ -354,14 +386,14 @@ $compatible | sort-by -c {|a, b| $a < $b | default ($a != null) }
 # => │ 4 │      │
 # => ╰───┴──────╯
 $incompatible | sort-by -c {|a, b| $a < $b | default ($a != null) }
-# => Error: nu::shell::type_mismatch
+# => Error: nu::shell::operator_incompatible_types
 # =>
-# =>   × Type mismatch during operation.
-# =>    ╭─[entry #26:1:36]
+# =>   × Types 'int' and 'string' are not compatible for the '<' operator.
+# =>    ╭─[repl_entry #26:1:36]
 # =>  1 │ $incompatible | sort-by -c {|a, b| $a < $b | default ($a != null) }
 # =>    ·                                    ─┬ ┬ ─┬
 # =>    ·                                     │ │  ╰── string
-# =>    ·                                     │ ╰── type mismatch for operator
+# =>    ·                                     │ ╰── does not operate between 'int' and 'string'
 # =>    ·                                     ╰── int
 # =>    ╰────
 ```
@@ -378,12 +410,13 @@ let strict = {|a, b|
     }
 }
 $baddata | sort-by -c $strict
-# => Error:   × Attempt to sort null
-# =>    ╭─[entry #3:4:21]
-# =>  3 │   match [$a, $b] {
-# =>  4 │       [null, _] => (error make {msg: "Attempt to sort null"}),
-# =>    ·                     ─────┬────
-# =>    ·                          ╰── originates from here
-# =>  5 │       [_, null] => (error make {msg: "Attempt to sort null"}),
+# => Error: nu::shell::error
+# =>
+# =>   × Attempt to sort null
+# =>    ╭─[repl_entry #3:4:34]
+# =>  3 │     match [$a, $b] {
+# =>  4 │         [null, _] => (error make {msg: "Attempt to sort null"}),
+# =>    ·                                  ─────────────────────────────
+# =>  5 │         [_, null] => (error make {msg: "Attempt to sort null"}),
 # =>    ╰────
 ```

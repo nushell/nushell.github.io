@@ -37,19 +37,19 @@ When we start using `dirs`, there is only one directory in the list, the active 
 cd ~
 use std/dirs
 dirs
-# => ╭───┬────────┬─────────────────────────────────╮
-# => │ # │ active │              path               │
-# => ├───┼────────┼─────────────────────────────────┤
-# => │ 0 │ true   │ /home/myuser                    │
-# => ╰───┴────────┴─────────────────────────────────╯
+# => ╭───┬────────┬──────────────╮
+# => │ # │ active │     path     │
+# => ├───┼────────┼──────────────┤
+# => │ 0 │ true   │ /home/myuser │
+# => ╰───┴────────┴──────────────╯
 
 cd ~/src/repo/nushell
 dirs
-# => ╭───┬────────┬─────────────────────────────────╮
-# => │ # │ active │              path               │
-# => ├───┼────────┼─────────────────────────────────┤
-# => │ 0 │ true   │ /home/myuser/repo/nushell       │
-# => ╰───┴────────┴─────────────────────────────────╯
+# => ╭───┬────────┬───────────────────────────────╮
+# => │ # │ active │             path              │
+# => ├───┼────────┼───────────────────────────────┤
+# => │ 0 │ true   │ /home/myuser/src/repo/nushell │
+# => ╰───┴────────┴───────────────────────────────╯
 ```
 
 Notice that `cd` only changes the Active directory.
@@ -59,12 +59,12 @@ To _add_ the current directory to the list, change to a new active directory usi
 ```nu
 dirs add ../reedline
 dirs
-# => ╭───┬────────┬──────────────────────────────────╮
-# => │ # │ active │               path               │
-# => ├───┼────────┼──────────────────────────────────┤
-# => │ 0 │ false  │ /home/myuser/src/repo/nushell    │
-# => │ 1 │ true   │ /home/myuser/src/repo/reedline   │
-# => ╰───┴────────┴──────────────────────────────────╯
+# => ╭───┬────────┬────────────────────────────────╮
+# => │ # │ active │              path              │
+# => ├───┼────────┼────────────────────────────────┤
+# => │ 0 │ false  │ /home/myuser/src/repo/nushell  │
+# => │ 1 │ true   │ /home/myuser/src/repo/reedline │
+# => ╰───┴────────┴────────────────────────────────╯
 ```
 
 Let's go ahead and add a few more commonly used directories to the list:
@@ -73,14 +73,14 @@ Let's go ahead and add a few more commonly used directories to the list:
 dirs add ../nu_scripts
 dirs add ~
 dirs
-# => ╭───┬────────┬────────────────────────────────────╮
-# => │ # │ active │                path                │
-# => ├───┼────────┼────────────────────────────────────┤
-# => │ 0 │ false  │ /home/myuser/src/repo/nushell      │
-# => │ 1 │ false  │ /home/myuser/src/repo/reedline     │
-# => │ 2 │ false  │ /home/myuser/src/repo/nu_scripts   │
-# => │ 3 │ true   │ /home/myuser                       │
-# => ╰───┴────────┴────────────────────────────────────╯
+# => ╭───┬────────┬──────────────────────────────────╮
+# => │ # │ active │               path               │
+# => ├───┼────────┼──────────────────────────────────┤
+# => │ 0 │ false  │ /home/myuser/src/repo/nushell    │
+# => │ 1 │ false  │ /home/myuser/src/repo/reedline   │
+# => │ 2 │ false  │ /home/myuser/src/repo/nu_scripts │
+# => │ 3 │ true   │ /home/myuser                     │
+# => ╰───┴────────┴──────────────────────────────────╯
 ```
 
 We can now switch between them easily using `dirs next`, `dirs prev` or `dirs goto`:
@@ -91,6 +91,7 @@ dirs next
 pwd
 # => /home/myuser/src/repo/nushell
 dirs goto 2
+pwd
 # => /home/myuser/src/repo/nu_scripts
 ```
 
@@ -99,13 +100,13 @@ When you have finished your work in a directory, you can drop it from the list u
 ```nu
 dirs drop
 dirs
-# => ╭───┬────────┬──────────────────────────────────╮
-# => │ # │ active │               path               │
-# => ├───┼────────┼──────────────────────────────────┤
-# => │ 0 │ false  │ /home/myuser/src/repo/nushell    │
-# => │ 1 │ true   │ /home/myuser/src/repo/reedline   │
-# => │ 2 │ false  │ /home/myuser                     │
-# => ╰───┴────────┴──────────────────────────────────╯
+# => ╭───┬────────┬────────────────────────────────╮
+# => │ # │ active │              path              │
+# => ├───┼────────┼────────────────────────────────┤
+# => │ 0 │ false  │ /home/myuser/src/repo/nushell  │
+# => │ 1 │ true   │ /home/myuser/src/repo/reedline │
+# => │ 2 │ false  │ /home/myuser                   │
+# => ╰───┴────────┴────────────────────────────────╯
 ```
 
 When we drop `nu_scripts` from the list, the previous directory (`reedline`) becomes active.

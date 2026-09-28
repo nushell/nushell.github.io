@@ -22,9 +22,57 @@ ll -a
 
 And get the equivalent to having typed `ls -l -a`.
 
+## Aliasing Parent Commands
+
+An alias can also point to a command that has subcommands, such as `math` or `str`. The subcommands are then available through the alias as well:
+
+```nu
+alias m = math
+[1 2 3 4] | m sum
+# => 10
+```
+
+This is particularly handy for plugins with many subcommands. For example, after `alias pl = polars`, you can write `pl into-df`, `pl select` and `pl collect`.
+
 ## List All Loaded Aliases
 
 Your useable aliases can be seen in `scope aliases` and `help aliases`.
+
+Running `help` on an alias shows what it expands to, followed by the help for the aliased command. For example, with an alias for a small custom command:
+
+```nu
+# Say hello to someone
+def greet [name: string] { $"Hello, ($name)!" }
+alias hi = greet
+help hi
+# => Alias for greet
+# =>
+# => Alias: hi
+# =>
+# => Expansion:
+# =>   greet
+# =>
+# => Say hello to someone
+# =>
+# => Usage:
+# =>   > greet <name>
+# =>
+# => Flags:
+# =>   -h, --help: Display the help message for this command
+# =>
+# => Command Type:
+# =>   > custom
+# =>
+# => Parameters:
+# =>   name <string>
+# =>
+# => Input/output types:
+# =>   ╭───┬───────┬────────╮
+# =>   │ # │ input │ output │
+# =>   ├───┼───────┼────────┤
+# =>   │ 0 │ any   │ any    │
+# =>   ╰───┴───────┴────────╯
+```
 
 ## Persisting
 
@@ -66,39 +114,39 @@ displaying all listed files and folders in a grid.
 When replacing commands it is best to "back up" the command first and avoid a recursion error.
 :::
 
+::: tip Note
+Parser keywords such as `if`, `for` or `let` can't be replaced. Using one as the name of an alias (or a custom command) is a `nu::parser::name_is_keyword` error.
+:::
+
 How to back up a command like `ls`:
 
 ```nu
 alias core-ls = ls    # This will create a new alias core-ls for ls
 ```
 
-Now you can use `core-ls` as `ls` in your nu-programming. You will see further down how to use `core-ls`.
+Now you can use `core-ls` as `ls` in your nu-programming, even after `ls` itself has been replaced.
 
 The reason you need to use alias is because, unlike `def`, aliases are position-dependent. So, you need to "back up" the old command first with an alias, before re-defining it.
 If you do not backup the command and you replace the command using `def` you get a recursion error.
 
 ```nu
 def ls [] { ls }; ls    # Do *NOT* do this! This will throw a recursion error
-
-#output:
-#Error: nu::shell::recursion_limit_reached
-#
-#  × Recursion limit (50) reached
-#     ╭─[C:\Users\zolodev\AppData\Roaming\nushell\config.nu:807:1]
-# 807 │
-# 808 │ def ls [] { ls }; ls
-#     ·           ───┬──
-#     ·              ╰── This called itself too many times
-#     ╰────
+# => Error: nu::shell::recursion_limit_reached
+# =>
+# =>   × Recursion limit (50) reached
+# =>    ╭─[repl_entry #1:1:11]
+# =>  1 │ def ls [] { ls }; ls    # Do *NOT* do this! This will throw a recursion error
+# =>    ·           ───┬──
+# =>    ·              ╰── This called itself too many times
+# =>    ╰────
 ```
 
-The recommended way to replace an existing command is to shadow the command.
+The recommended way to replace an existing command is to shadow the command, and to call the original
+built-in inside the new definition with the `%` sigil. `%ls` always runs the built-in `ls`, even when a
+custom command or alias shadows it, so there is no recursion.
 Here is an example shadowing the `ls` command.
 
 ```nu
-# alias the built-in ls command to ls-builtins
-alias ls-builtin = ls
-
 # List the filenames, sizes, and modification times of items in a directory.
 def ls [
     --all (-a),         # Show hidden files
@@ -112,7 +160,7 @@ def ls [
     ...pattern: glob,   # The glob pattern to use.
 ]: [ nothing -> table ] {
     let pattern = if ($pattern | is-empty) { [ '.' ] } else { $pattern }
-    (ls-builtin
+    (%ls
         --all=$all
         --long=$long
         --short-names=$short_names
@@ -126,11 +174,8 @@ def ls [
 }
 ```
 
-To call the underlying built-in command you can use a percent sigil `%`, e.g. 
-```nu
-def ls [] {
-    "something else"
-}
+You can also type `%ls` at the prompt to run the built-in `ls` while it is shadowed.
 
-%ls # <- calls the original ls
-```
+Before the `%` sigil existed, the body called a backup alias instead, such as `ls-builtin` created with `alias ls-builtin = ls`. That still works, but only if the alias is created while `ls` still refers to the built-in command.
+
+See [Shadowing Built-in Commands](custom_commands.md#shadowing-built-in-commands) for more about the `%` sigil.

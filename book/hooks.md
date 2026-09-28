@@ -14,8 +14,8 @@ Currently, we support these types of hooks:
 To make it clearer, we can break down Nushell's execution cycle.
 The steps to evaluate one line in the REPL mode are as follows:
 
-1. Check for `pre_prompt` hooks and run them
 1. Check for `env_change` hooks and run them
+1. Check for `pre_prompt` hooks and run them
 1. Display prompt and wait for user input
 1. After user typed something and pressed "Enter": Check for `pre_execution` hooks and run them
 1. Parse and evaluate user input
@@ -40,7 +40,9 @@ $env.config.hooks = {
 Try putting the above into your config, running Nushell and moving around your filesystem.
 When you change a directory, the `PWD` environment variable changes and the change triggers the hook with the previous and the current values stored in `before` and `after` variables, respectively.
 
-Instead of defining just a single hook per trigger, it is possible to define a **list of hooks** which will run in sequence:
+Like environment variable names, the keys of `env_change` are case-insensitive, so a hook under `pwd` also runs when `PWD` changes.
+
+The `pre_prompt` and `pre_execution` hooks, and each variable in `env_change`, take a **list of hooks**, even if there is only one. When a list contains several hooks, they run in sequence:
 
 ```nu
 $env.config.hooks = {
@@ -67,17 +69,29 @@ Instead of replacing all hooks, you can append a new hook to existing configurat
 $env.config.hooks.pre_execution = $env.config.hooks.pre_execution | append { print "pre exec hook3" }
 ```
 
+To remove the hooks again, assign an empty list (or, for `env_change`, an empty record):
+
+```nu
+$env.config.hooks.pre_prompt = []
+$env.config.hooks.pre_execution = []
+$env.config.hooks.env_change = {}
+```
+
 ## Changing Environment
 
 One feature of the hooks is that they preserve the environment.
-Environment variables defined inside the hook **block** will be preserved in a similar way as [`def --env`](environment.md#defining-environment-from-custom-commands).
+Environment variables defined inside the hook **block** will be preserved in a similar way as [`def --env`](custom_commands.md#changing-the-environment-in-a-custom-command).
 You can test it with the following example:
 
 ```nu
 $env.config = ($env.config | upsert hooks {
-    pre_prompt: { $env.SPAM = "eggs" }
+    pre_prompt: [{ $env.SPAM = "eggs" }]
 })
+```
 
+The hook runs before the next prompt is shown, so at that prompt:
+
+```nu
 $env.SPAM
 # => eggs
 ```
@@ -98,11 +112,17 @@ $env.config = (
         print $"Command: ($env.repl_commandline)"
     } ]
 )
+```
 
+From now on, each command line is printed before it runs:
+
+```nu
 print (1 + 3)
 # => Command: print (1 + 3)
 # => 4
 ```
+
+Run `$env.config.hooks.pre_execution = []` to turn this off again.
 
 ## Conditional Hooks
 
@@ -157,9 +177,13 @@ So, the hook from the previous section can be also written as
 
 ```nu
 $env.config = ($env.config | upsert hooks {
-    pre_prompt: '$env.SPAM = "eggs"'
+    pre_prompt: ['$env.SPAM = "eggs"']
 })
+```
 
+and, at the next prompt:
+
+```nu
 $env.SPAM
 # => eggs
 ```
@@ -188,11 +212,11 @@ When defining a hook as a string, the `$before` and `$after` variables are set t
 ```nu
 $env.config = ($env.config | upsert hooks {
     env_change: {
-        PWD: {
+        PWD: [{
             code: 'print $"changing directory from ($before) to ($after)"'
-        }
+        }]
     }
-}
+})
 ```
 
 ## Examples
@@ -206,11 +230,11 @@ $env.config = ($env.config | upsert hooks.env_change.PWD {|config|
     let val = ($config | get -o hooks.env_change.PWD)
 
     if $val == null {
-        $val | append {|before, after| print $"changing directory from ($before) to ($after)" }
-    } else {
         [
             {|before, after| print $"changing directory from ($before) to ($after)" }
         ]
+    } else {
+        $val | append {|before, after| print $"changing directory from ($before) to ($after)" }
     }
 })
 ```
@@ -233,7 +257,7 @@ $env.config = ($env.config | upsert hooks.env_change.PWD {
             condition: {|before, after|
                 ('/path/to/target/dir' not-in $after
                     and '/path/to/target/dir' in ($before | default "")
-                    and 'test-env' in (overlay list))
+                    and 'test-env' in (overlay list | where active | get name))
             }
             code: "overlay hide test-env --keep-env [ PWD ]"
         }
@@ -252,7 +276,7 @@ perhaps as rich HTML text. Here is the basic idea of how to do that:
 
 ```nu
 $env.config = ($env.config | upsert hooks {
-    display_output: { to html --partial --no-color | save --raw /tmp/nu-output.html }
+    display_output: { to html --partial --no-color | save --force --raw /tmp/nu-output.html }
 })
 ```
 
@@ -279,38 +303,33 @@ $env.config = ($env.config | upsert hooks {
 The following hook uses the `pkgfile` command, to find which packages commands belong to in _Arch Linux_.
 
 ```nu
-$env.config = {
-    ...other config...
-
-    hooks: {
-        ...other hooks...
-
-        command_not_found: {
-            |cmd_name| (
-                try {
-                    let pkgs = (pkgfile --binaries --verbose $cmd_name)
-                    if ($pkgs | is-empty) {
-                        return null
-                    }
-                    (
-                        $"(ansi $env.config.color_config.shape_external)($cmd_name)(ansi reset) " +
-                        $"may be found in the following packages:\n($pkgs)"
-                    )
-                }
+$env.config.hooks.command_not_found = {
+    |cmd_name| (
+        try {
+            let pkgs = (pkgfile --binaries --verbose $cmd_name)
+            if ($pkgs | is-empty) {
+                return null
+            }
+            (
+                $"(ansi $env.config.color_config.shape_external)($cmd_name)(ansi reset) " +
+                $"may be found in the following packages:\n($pkgs)"
             )
+        } catch {
+            null
         }
-    }
+    )
 }
 ```
 
 ### `command_not_found` Hook in _NixOS_
 
-NixOS comes with the command `command-not-found`. We only need to plug it in the nushell hook:
+NixOS comes with the command `command-not-found`. We only need to plug it in the nushell hook. Its output is captured with [`complete`](/commands/docs/complete.md), so that a non-zero exit code of `command-not-found` does not stop the hook, and the hook returns the message as a string to be shown with the error:
 
 ```nu
 $env.config.hooks.command_not_found = {
   |command_name|
-  print (command-not-found $command_name | str trim)
+  let result = (command-not-found $command_name | complete)
+  $result.stdout + $result.stderr | str trim
 }
 ```
 
@@ -319,32 +338,24 @@ $env.config.hooks.command_not_found = {
 The following hook uses the `ftype` command, to find program paths in _Windows_ that might be relevant to the user for `alias`-ing.
 
 ```nu
-$env.config = {
-    ...other config...
-
-    hooks: {
-        ...other hooks...
-
-        command_not_found: {
-            |cmd_name| (
-                try {
-                    let attrs = (
-                        ftype | find $cmd_name | to text | lines | reduce -f [] { |line, acc|
-                            $line | parse "{type}={path}" | append $acc
-                        } | group-by path | transpose key value | each { |row|
-                            { path: $row.key, types: ($row.value | get type | str join ", ") }
-                        }
-                    )
-                    let len = ($attrs | length)
-
-                    if $len == 0 {
-                        return null
-                    } else {
-                        return ($attrs | table --collapse)
-                    }
+$env.config.hooks.command_not_found = {
+    |cmd_name| (
+        try {
+            let attrs = (
+                ftype | find --ignore-case --no-highlight $cmd_name | to text | lines | reduce -f [] { |line, acc|
+                    $line | parse "{type}={path}" | append $acc
+                } | group-by path | transpose key value | each { |row|
+                    { path: $row.key, types: ($row.value | get type | str join ", ") }
                 }
             )
+            let len = ($attrs | length)
+
+            if $len == 0 {
+                return null
+            } else {
+                return ($attrs | table --collapse --width 80 | collect)
+            }
         }
-    }
+    )
 }
 ```

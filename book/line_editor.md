@@ -13,13 +13,15 @@ Reedline allows Nushell commandlines to extend across multiple lines. This can b
 
 1. Pressing <kbd>Enter</kbd> when a bracketed expression is open.
 
-   For example:
+   For example, you can type this command over three lines:
 
    ```nu
    def my-command [] {
+     print "Hello from my-command"
+   }
    ```
 
-   Pressing <kbd>Enter </kbd> after the open-bracket will insert a newline. This will also occur with opening (and valid) `(` and `[` expressions.
+   Pressing <kbd>Enter</kbd> after the open-bracket will insert a newline instead of running the command. This will also occur with opening (and valid) `(` and `[` expressions.
 
    This is commonly used to create blocks and closures (as above), but also list, record, and table literals:
 
@@ -69,13 +71,9 @@ Reedline allows Nushell commandlines to extend across multiple lines. This can b
    ```
 
    ::: tip
-   It's possible that one or both of these keybindings may be intercepted by the terminal application or window-manager. For instance, Windows Terminal (and most other terminal applications on Windows) assign <kbd>Alt</kbd>+<kbd>Enter</kbd> to expand the terminal to full-screen. If neither of the above keybindings work in your terminal, you can assign a different keybinding to:
+   It's possible that one or both of these keybindings may be intercepted by the terminal application or window-manager. For instance, Windows Terminal (and most other terminal applications on Windows) assign <kbd>Alt</kbd>+<kbd>Enter</kbd> to expand the terminal to full-screen. If neither of the above keybindings work in your terminal, you can assign a different keybinding to the `insertnewline` edit (`event: { edit: insertnewline }`).
 
-   ```nu
-   event: { edit: insertnewline }
-   ```
-
-   See [Keybindings](#keybindings) below for more details.
+   See [Edit Type](#edit-type) below for an example, and [Keybindings](#keybindings) for more details.
 
    :::
 
@@ -83,9 +81,9 @@ Reedline allows Nushell commandlines to extend across multiple lines. This can b
 
 ## Setting the Editing Mode
 
-Reedline allows you to edit text using two modes — Vi and Emacs. If not
+Reedline allows you to edit text using three modes — Emacs, Vi and Helix. If not
 specified, the default mode is Emacs. To change the mode, use the
-`edit_mode` setting.
+`edit_mode` setting, which accepts `emacs`, `vi` or `helix`.
 
 ```nu
 $env.config.edit_mode = 'vi'
@@ -94,112 +92,329 @@ $env.config.edit_mode = 'vi'
 This can be changed at the commandline or persisted in `config.nu`.
 
 ::: note
-Vi is a "modal" editor with "normal" mode and an "insert" mode. We recommend
+Vi is a "modal" editor with a "normal" mode, an "insert" mode and a "visual" mode. We recommend
 becoming familiar with these modes through the use of the Vim or Neovim editors
 before using Vi mode in Nushell. Each has a built-in tutorial covering the basics
 (and more) of modal editing.
+
+Helix mode follows the [Helix editor](https://helix-editor.com/), which is also modal but
+"selection-first": you first select text with a motion, and then act on the selection.
+See [Helix Mode](#helix-mode) below.
 :::
+
+The cursor shape can be set separately for each mode with `$env.config.cursor_shape`, which has the
+keys `emacs`, `vi_insert`, `vi_normal`, `vi_visual`, `helix_normal`, `helix_select` and `helix_insert`.
+Each accepts `block`, `underscore`, `line`, `blink_block`, `blink_underscore`, `blink_line` or
+`inherit` (keep the terminal's cursor shape):
+
+```nu
+$env.config.cursor_shape.vi_insert = 'line'
+$env.config.cursor_shape.vi_normal = 'block'
+```
 
 ## Default Keybindings
 
-Each edit mode comes with common keybindings for Vi and Emacs text editing.
+Each of the three edit modes is built from a few shared sets of keybindings plus its own additions. The tables below follow Reedline's [keybinding reference](https://github.com/nushell/reedline/blob/main/KEYBINDINGS.md) for the Reedline version that ships with Nushell. Run [`keybindings default`](/commands/docs/keybindings_default.md) to list the built-in keybindings of every mode.
 
-### Emacs and Vi-insert Keybindings
+Some keys are a _fallback chain_: Reedline tries each step and takes the first one that applies. The tables write those with "otherwise". For example, <kbd>→</kbd> accepts a history hint if one is showing, otherwise moves right in an open menu, otherwise moves the cursor right.
 
-These keybinding events apply to both Emacs and Vi-insert mode:
+### Keybindings Added by Nushell
 
-| Key                                        | Event                               |
-| ------------------------------------------ | ----------------------------------- |
-| <kbd>Shift</kbd>+<kbd>Enter</kbd>          | Insert newline                      |
-| <kbd>Alt</kbd>+<kbd>Enter</kbd>            | Insert newline                      |
-| <kbd>Backspace</kbd>                       | Backspace                           |
-| <kbd>End</kbd>                             | Move to end of line                 |
-| <kbd>End</kbd>                             | Complete history hint               |
-| <kbd>Home</kbd>                            | Move to line start                  |
-| <kbd>Ctrl</kbd>+<kbd>C</kbd>               | Cancel current line                 |
-| <kbd>Ctrl</kbd>+<kbd>L</kbd>               | Clear screen                        |
-| <kbd>Ctrl</kbd>+<kbd>R</kbd>               | Search history                      |
-| <kbd>Ctrl</kbd>+<kbd>→</kbd> (Right Arrow) | Complete history word               |
-| <kbd>Ctrl</kbd>+<kbd>→</kbd> (Right Arrow) | Move word right                     |
-| <kbd>Ctrl</kbd>+<kbd>←</kbd> (Left Arrow)  | Move word left                      |
-| <kbd>↑</kbd> (Up Arrow)                    | Move up                             |
-| <kbd>↓</kbd> (Down Arrow)                  | Move down                           |
-| <kbd>←</kbd> (Left Arrow)                  | Move left                           |
-| <kbd>→</kbd> (Right Arrow)                 | Move right                          |
-| <kbd>Ctrl</kbd>+<kbd>P</kbd>               | Move up                             |
-| <kbd>Ctrl</kbd>+<kbd>N</kbd>               | Move down                           |
-| <kbd>Ctrl</kbd>+<kbd>B</kbd>               | Move left                           |
-| <kbd>Ctrl</kbd>+<kbd>F</kbd>               | Move right                          |
-| <kbd>→</kbd> (Right Arrow)                 | History-hint complete               |
-| <kbd>Ctrl</kbd>+<kbd>F</kbd>               | History-hint complete               |
-| <kbd>Alt</kbd>+<kbd>F</kbd>                | History-hint complete one word      |
-| <kbd>Alt</kbd>+<kbd>←</kbd> (Left Arrow)   | History-hint complete one word less |
+Nushell adds the following keybindings on top of Reedline's defaults. They are defined in `$env.config.keybindings`, so you can change or remove them, and they apply in every edit mode:
 
-### Vi-insert Keybindings
+| Key                                  | Action                                                                                            |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| <kbd>Tab</kbd>                       | Open the completion menu, otherwise select the next item, otherwise complete                      |
+| <kbd>Shift</kbd>+<kbd>Tab</kbd>      | Select the previous item in the menu                                                              |
+| <kbd>Ctrl</kbd>+<kbd>Space</kbd>     | Open the IDE-style completion menu, otherwise select the next item, otherwise complete            |
+| <kbd>Ctrl</kbd>+<kbd>R</kbd>         | Open the history menu (this replaces Reedline's <kbd>Ctrl</kbd>+<kbd>R</kbd> history search)      |
+| <kbd>Ctrl</kbd>+<kbd>Q</kbd>         | Search the history                                                                                |
+| <kbd>Ctrl</kbd>+<kbd>X</kbd>         | Show the next page of an open menu                                                                |
+| <kbd>Ctrl</kbd>+<kbd>Z</kbd>         | Show the previous page of an open menu, otherwise undo                                            |
+| <kbd>F1</kbd>                        | Open the help menu                                                                                |
 
-These keybinding events apply only to Vi-insert mode:
+```nu
+$env.config.keybindings | select name modifier keycode
+# => ╭───┬────────────────────────────┬──────────┬─────────╮
+# => │ # │            name            │ modifier │ keycode │
+# => ├───┼────────────────────────────┼──────────┼─────────┤
+# => │ 0 │ completion_menu            │ none     │ tab     │
+# => │ 1 │ ide_completion_menu        │ control  │ space   │
+# => │ 2 │ completion_previous        │ shift    │ backtab │
+# => │ 3 │ history_menu               │ control  │ char_r  │
+# => │ 4 │ next_page_menu             │ control  │ char_x  │
+# => │ 5 │ undo_or_previous_page_menu │ control  │ char_z  │
+# => │ 6 │ help_menu                  │ none     │ f1      │
+# => │ 7 │ search_history             │ control  │ char_q  │
+# => ╰───┴────────────────────────────┴──────────┴─────────╯
+```
 
-| Key            | Event                    |
-| -------------- | ------------------------ |
-| <kbd>Esc</kbd> | Switch to Vi-normal mode |
+### Common Keybindings
 
-### Vi-normal Keybindings
+Four sets of keybindings are shared between the edit modes:
 
-These keybinding events apply only to Vi-normal mode:
+| Set                                | Emacs | Vi insert | Vi normal / visual     | Helix insert | Helix normal / select  |
+| ---------------------------------- | ----- | --------- | ---------------------- | ------------ | ---------------------- |
+| [Control](#control-keybindings)    | yes   | yes       | yes                    | yes          | yes                    |
+| [Navigation](#navigation-keybindings) | yes | yes      | yes, rebound in visual | yes          | yes, rebound in select |
+| [Editing](#editing-keybindings)    | yes   | yes       | no                     | yes          | no                     |
+| [Selection](#selection-keybindings) | yes  | yes       | yes                    | yes          | yes                    |
 
-| Key                                        | Event               |
-| ------------------------------------------ | ------------------- |
-| <kbd>Ctrl</kbd>+<kbd>C</kbd>               | Cancel current line |
-| <kbd>Ctrl</kbd>+<kbd>L</kbd>               | Clear screen        |
-| <kbd>↑</kbd> (Up Arrow)                    | Move up             |
-| <kbd>↓</kbd> (Down Arrow)                  | Move down           |
-| <kbd>←</kbd> (Left Arrow)                  | Move left           |
-| <kbd>→</kbd> (Right Arrow)                 | Move right          |
-| <kbd>Ctrl</kbd>+<kbd>→</kbd> (Right Arrow) | Move right one word |
-| <kbd>Ctrl</kbd>+<kbd>←</kbd> (Left Arrow)  | Move left one word  |
+A mode without the editing set rebinds <kbd>Backspace</kbd> and <kbd>Delete</kbd> itself. Modes may also override single keys within a set; those keys are noted in the mode's own tables.
 
-### Vi-normal Motions
+#### Control Keybindings
 
-As with Vi, many motions and actions can be combined with an optional count in normal-mode. For example, <kbd>3</kbd><kbd>d</kbd><kbd>w</kbd> deletes the next three words.
+| Key                          | Action                                                                                    |
+| ---------------------------- | ----------------------------------------------------------------------------------------- |
+| <kbd>Esc</kbd>               | Close an open menu and clear the selection; in Vi and Helix modes, also switch mode       |
+| <kbd>Ctrl</kbd>+<kbd>C</kbd> | Cancel the current input                                                                  |
+| <kbd>Ctrl</kbd>+<kbd>D</kbd> | Delete the character under the cursor, or exit Nushell when the line is empty             |
+| <kbd>Ctrl</kbd>+<kbd>L</kbd> | Clear the screen, keeping the current input                                               |
+| <kbd>Ctrl</kbd>+<kbd>R</kbd> | Search the history (Nushell binds this key to the history menu instead, see above)        |
+| <kbd>Ctrl</kbd>+<kbd>O</kbd> | Open the current input in your editor (see `$env.config.buffer_editor`)                       |
 
-| Key                                    | Motion                                        |
-| -------------------------------------- | --------------------------------------------- |
-| <kbd>w</kbd>                           | Move to beginning of next word                |
-| <kbd>e</kbd>                           | Move to end of current or next word           |
-| <kbd>b</kbd>                           | Move to beginning of current or previous word |
-| <kbd>0</kbd>                           | Move to start of line                         |
-| <kbd>$</kbd>                           | Move to end of line                           |
-| <kbd>h</kbd>                           | Move left                                     |
-| <kbd>l</kbd>                           | Move right                                    |
-| <kbd>j</kbd>                           | Move down                                     |
-| <kbd>k</kbd>                           | Move up                                       |
-| <kbd>f</kbd>+\<char\>                  | Move right to \<char\>                        |
-| <kbd>t</kbd>+\<char\>                  | Move right to before \<char\>                 |
-| <kbd>Shift</kbd>+<kbd>F</kbd>+\<char\> | Move left to \<char\>                         |
-| <kbd>Shift</kbd>+<kbd>T</kbd>+\<char\> | Move left to after \<char\>                   |
+#### Navigation Keybindings
 
-### Vi-normal Actions
+| Key                                                     | Action                                                                                                         |
+| ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| <kbd>↑</kbd>, <kbd>Ctrl</kbd>+<kbd>P</kbd>              | Move up in an open menu, otherwise move one line up, walking back through the history from the first line     |
+| <kbd>↓</kbd>, <kbd>Ctrl</kbd>+<kbd>N</kbd>              | Move down in an open menu, otherwise move one line down, walking forward through the history from the last line |
+| <kbd>←</kbd>                                            | Move left in an open menu, otherwise move one character left                                                   |
+| <kbd>→</kbd>                                            | Accept a history hint, otherwise move right in an open menu, otherwise move one character right                |
+| <kbd>Ctrl</kbd>+<kbd>←</kbd>                            | Move one word left                                                                                             |
+| <kbd>Ctrl</kbd>+<kbd>→</kbd>                            | Accept one word of a history hint, otherwise move one word right                                               |
+| <kbd>Home</kbd>, <kbd>Ctrl</kbd>+<kbd>A</kbd>           | Move to the start of the line                                                                                  |
+| <kbd>End</kbd>, <kbd>Ctrl</kbd>+<kbd>E</kbd>            | Accept a history hint, otherwise move to the end of the line                                                   |
+| <kbd>Ctrl</kbd>+<kbd>Home</kbd>, <kbd>Alt</kbd>+<kbd>&lt;</kbd> | Move to the start of the buffer                                                                        |
+| <kbd>Ctrl</kbd>+<kbd>End</kbd>, <kbd>Alt</kbd>+<kbd>&gt;</kbd>  | Move to the end of the buffer                                                                          |
 
-These actions can be combined with many of the [motions above](#vi-normal-motions).
+On terminals that use the Kitty keyboard protocol, <kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>,</kbd> and <kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>.</kbd> also work for <kbd>Alt</kbd>+<kbd>&lt;</kbd> and <kbd>Alt</kbd>+<kbd>&gt;</kbd>.
 
-| Key                           | Action                                             |
-| ----------------------------- | -------------------------------------------------- |
-| <kbd>d</kbd>                  | Delete                                             |
-| <kbd>Shift</kbd>+<kbd>D</kbd> | Delete to end of line                              |
-| <kbd>p</kbd>                  | Paste after current character                      |
-| <kbd>Shift</kbd>+<kbd>P</kbd> | Paste before current character                     |
-| <kbd>i</kbd>                  | Enter Vi insert-mode (append) at current character |
-| <kbd>Shift</kbd>+<kbd>I</kbd> | Enter insert-mode at beginning of line             |
-| <kbd>a</kbd>                  | Append after current character                     |
-| <kbd>Shift</kbd>+<kbd>A</kbd> | Append to end of line                              |
-| <kbd>0</kbd>                  | Move to start of line                              |
-| <kbd>^</kbd>                  | Move to start of line                              |
-| <kbd>$</kbd>                  | Move to end of line                                |
-| <kbd>c</kbd>                  | Change                                             |
-| <kbd>r</kbd>                  | Replace                                            |
-| <kbd>s</kbd>                  | Substitute character(s)                            |
-| <kbd>x</kbd>                  | Delete character                                   |
-| <kbd>u</kbd>                  | Undo                                               |
+#### Editing Keybindings
+
+| Key                                                     | Action                                                     |
+| ------------------------------------------------------- | ---------------------------------------------------------- |
+| <kbd>Backspace</kbd>, <kbd>Ctrl</kbd>+<kbd>H</kbd>      | Delete the character to the left                           |
+| <kbd>Delete</kbd>                                       | Delete the character under the cursor                      |
+| <kbd>Ctrl</kbd>+<kbd>Backspace</kbd>, <kbd>Ctrl</kbd>+<kbd>W</kbd> | Delete the word to the left                     |
+| <kbd>Ctrl</kbd>+<kbd>Delete</kbd>                       | Delete the word to the right                               |
+| <kbd>Shift</kbd>+<kbd>Enter</kbd>, <kbd>Alt</kbd>+<kbd>Enter</kbd> | Insert a newline without running the input      |
+| <kbd>Ctrl</kbd>+<kbd>J</kbd>                            | Run the input, or insert a newline if it is incomplete     |
+
+None of these fill the cut buffer (Emacs mode rebinds <kbd>Ctrl</kbd>+<kbd>W</kbd> to a cut, so there it does). When Nushell is built with the `system-clipboard` feature, this set also has <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd>, <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd> and <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd> to cut, copy and paste the selection with the system clipboard.
+
+#### Selection Keybindings
+
+| Key                                                                     | Action                                           |
+| ----------------------------------------------------------------------- | ------------------------------------------------ |
+| <kbd>Shift</kbd>+<kbd>←</kbd>, <kbd>Shift</kbd>+<kbd>→</kbd>            | Extend the selection by one character            |
+| <kbd>Shift</kbd>+<kbd>↑</kbd>, <kbd>Shift</kbd>+<kbd>↓</kbd>            | Extend the selection by one line                 |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>←</kbd>, <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>→</kbd> | Extend the selection by one word |
+| <kbd>Shift</kbd>+<kbd>Home</kbd>, <kbd>Shift</kbd>+<kbd>End</kbd>       | Extend the selection to the line start or end    |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Home</kbd>, <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>End</kbd> | Extend the selection to the buffer start or end |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd>                           | Select the whole buffer                          |
+
+### Emacs Mode
+
+Emacs mode is the default. It has all four [common sets](#common-keybindings), plus:
+
+| Key                                                       | Action                                                                                          |
+| --------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| <kbd>Ctrl</kbd>+<kbd>B</kbd>                              | Move left in an open menu, otherwise move one character left                                    |
+| <kbd>Ctrl</kbd>+<kbd>F</kbd>                              | Accept a history hint, otherwise move right in an open menu, otherwise move one character right |
+| <kbd>Alt</kbd>+<kbd>←</kbd>, <kbd>Alt</kbd>+<kbd>B</kbd>  | Move one word left                                                                              |
+| <kbd>Alt</kbd>+<kbd>→</kbd>, <kbd>Alt</kbd>+<kbd>F</kbd>  | Accept one word of a history hint, otherwise move one word right                                |
+| <kbd>Enter</kbd>                                          | Run the input, or insert a newline if it is incomplete                                          |
+| <kbd>Alt</kbd>+<kbd>Backspace</kbd>, <kbd>Alt</kbd>+<kbd>M</kbd> | Delete the word to the left                                                              |
+| <kbd>Alt</kbd>+<kbd>Delete</kbd>                          | Delete the word to the right                                                                    |
+| <kbd>Ctrl</kbd>+<kbd>W</kbd>                              | Cut the word to the left                                                                        |
+| <kbd>Alt</kbd>+<kbd>D</kbd>                               | Cut the word to the right                                                                       |
+| <kbd>Ctrl</kbd>+<kbd>K</kbd>                              | Cut to the end of the line, or join the next line when already at the end                       |
+| <kbd>Ctrl</kbd>+<kbd>U</kbd>                              | Cut from the start of the line to the cursor                                                    |
+| <kbd>Ctrl</kbd>+<kbd>Y</kbd>                              | Paste the cut buffer before the cursor                                                          |
+| <kbd>Ctrl</kbd>+<kbd>T</kbd>                              | Swap the two characters around the cursor                                                       |
+| <kbd>Ctrl</kbd>+<kbd>Z</kbd>                              | Undo (Nushell binds this key to "previous menu page, otherwise undo", see above)                |
+| <kbd>Ctrl</kbd>+<kbd>G</kbd>                              | Redo                                                                                            |
+| <kbd>Alt</kbd>+<kbd>U</kbd>                               | Uppercase the word under the cursor                                                             |
+| <kbd>Alt</kbd>+<kbd>L</kbd>                               | Lowercase the word under the cursor                                                             |
+| <kbd>Alt</kbd>+<kbd>C</kbd>                               | Capitalize the character under the cursor                                                       |
+
+### Vi Mode
+
+Vi mode starts in insert mode. <kbd>Esc</kbd> switches to normal mode, <kbd>i</kbd> and its siblings return to insert mode, and <kbd>v</kbd> enters visual mode from normal mode. In visual mode, <kbd>Esc</kbd> returns to normal mode; in normal mode it cancels a half-typed command.
+
+An operator waits for a motion, and the motion picks the range the operator acts on: <kbd>d</kbd> then <kbd>w</kbd> cuts a word. A count can prefix a motion or a command, and counts on an operator and its motion multiply: <kbd>2</kbd><kbd>d</kbd><kbd>3</kbd><kbd>w</kbd> cuts six words.
+
+In every Vi mode, an <kbd>Alt</kbd>+\<char\> chord that isn't bound is read as <kbd>Esc</kbd> followed by \<char\> (the "meta" convention of readline and zsh). For example, <kbd>Alt</kbd>+<kbd>k</kbd> in insert mode recalls the previous line. This is also how you can use a terminal that doesn't send <kbd>Alt</kbd>: press <kbd>Esc</kbd> first, then the key.
+
+#### Vi Insert Mode
+
+Insert mode has all four [common sets](#common-keybindings), plus:
+
+| Key              | Action                                                                     |
+| ---------------- | -------------------------------------------------------------------------- |
+| <kbd>Enter</kbd> | Run the input, or insert a newline if it is incomplete                     |
+| <kbd>Esc</kbd>   | Switch to normal mode, moving the cursor back onto the last typed character |
+
+The Emacs cut and case commands (<kbd>Ctrl</kbd>+<kbd>K</kbd>, <kbd>Ctrl</kbd>+<kbd>U</kbd>, <kbd>Ctrl</kbd>+<kbd>Y</kbd>, <kbd>Ctrl</kbd>+<kbd>T</kbd>, <kbd>Alt</kbd>+<kbd>D</kbd>, <kbd>Alt</kbd>+<kbd>U</kbd>, <kbd>Alt</kbd>+<kbd>L</kbd> and <kbd>Alt</kbd>+<kbd>C</kbd>) are not bound in insert mode. Because of the meta convention, <kbd>Alt</kbd>+<kbd>u</kbd> undoes, and <kbd>Alt</kbd>+<kbd>d</kbd> leaves insert mode and starts a <kbd>d</kbd> operator. <kbd>Ctrl</kbd>+<kbd>W</kbd> deletes the word to the left without cutting it.
+
+#### Vi Normal Mode
+
+Normal mode and visual mode have the control, navigation and selection sets, but not the editing set. In its place:
+
+| Key                  | Action                                                                                                     |
+| -------------------- | ---------------------------------------------------------------------------------------------------------- |
+| <kbd>Backspace</kbd> | Move one character left in normal mode; extend the selection one character left in visual mode            |
+| <kbd>Delete</kbd>    | Delete the character under the cursor in normal mode; in visual mode, cut the selection like <kbd>d</kbd> |
+
+These motions move the cursor in normal mode. In visual mode, they extend the selection instead:
+
+| Key                                    | Motion                                                                          |
+| -------------------------------------- | ------------------------------------------------------------------------------- |
+| <kbd>h</kbd>, <kbd>l</kbd>             | Move one character left or right                                                |
+| <kbd>j</kbd>, <kbd>k</kbd>             | Move one line down or up, walking through the history at the edge of the buffer |
+| <kbd>w</kbd>, <kbd>W</kbd>             | Move to the start of the next word or WORD                                      |
+| <kbd>e</kbd>, <kbd>E</kbd>             | Move to the end of the next word or WORD                                        |
+| <kbd>b</kbd>, <kbd>B</kbd>             | Move to the start of the previous word or WORD                                  |
+| <kbd>0</kbd>                           | Move to the start of the line                                                   |
+| <kbd>^</kbd>                           | Move to the first non-blank character of the line                               |
+| <kbd>$</kbd>                           | Move to the end of the line                                                     |
+| <kbd>g</kbd><kbd>g</kbd>, <kbd>G</kbd> | Move to the start or end of the buffer                                          |
+| <kbd>f</kbd>\<char\>, <kbd>F</kbd>\<char\> | Move onto the next or previous occurrence of \<char\>                       |
+| <kbd>t</kbd>\<char\>, <kbd>T</kbd>\<char\> | Move just before the next or previous occurrence of \<char\>                |
+| <kbd>;</kbd>, <kbd>,</kbd>             | Repeat the last <kbd>f</kbd>/<kbd>t</kbd>/<kbd>F</kbd>/<kbd>T</kbd> search, forwards or reversed |
+
+A WORD is delimited only by whitespace; a word is also delimited by punctuation. In normal mode, <kbd>h</kbd>, <kbd>j</kbd>, <kbd>k</kbd> and <kbd>l</kbd> follow the same fallback chain as the arrow keys: an open menu takes the key first, and <kbd>l</kbd> accepts a history hint before it moves.
+
+Normal mode commands:
+
+| Key                        | Action                                                                              |
+| -------------------------- | ----------------------------------------------------------------------------------- |
+| <kbd>i</kbd>, <kbd>a</kbd> | Insert before or after the cursor                                                   |
+| <kbd>I</kbd>, <kbd>A</kbd> | Insert at the start or at the end of the line                                       |
+| <kbd>o</kbd>, <kbd>O</kbd> | Open a line below or above, and insert                                              |
+| <kbd>v</kbd>               | Enter [visual mode](#vi-visual-mode)                                                |
+| <kbd>x</kbd>, <kbd>X</kbd> | Cut the character under or before the cursor                                        |
+| <kbd>s</kbd>               | Cut the character under the cursor and insert                                       |
+| <kbd>r</kbd>\<char\>       | Replace the character under the cursor with \<char\>                                |
+| <kbd>C</kbd>               | Change to the end of the line, without filling the cut buffer                       |
+| <kbd>S</kbd>               | Change the whole line                                                               |
+| <kbd>D</kbd>               | Cut to the end of the line                                                          |
+| <kbd>p</kbd>, <kbd>P</kbd> | Paste the cut buffer after or before the cursor                                     |
+| <kbd>u</kbd>               | Undo                                                                                |
+| <kbd>~</kbd>               | Switch the case of the character under the cursor                                   |
+| <kbd>.</kbd>               | Repeat the last change                                                              |
+| <kbd>?</kbd>               | Search the history and switch to insert mode                                        |
+| <kbd>Enter</kbd>           | Run the input, or insert a newline and switch to insert mode if it is incomplete    |
+
+#### Vi Operators and Text Objects
+
+<kbd>d</kbd>, <kbd>c</kbd> and <kbd>y</kbd> take any motion, and cut, change or copy the range it covers. Doubling an operator applies it to the whole line: <kbd>d</kbd><kbd>d</kbd>, <kbd>c</kbd><kbd>c</kbd>, <kbd>y</kbd><kbd>y</kbd>.
+
+An operator can also take a text object, with <kbd>i</kbd> for "inside" or <kbd>a</kbd> for "around":
+
+| Object                     | Selects               |
+| -------------------------- | --------------------- |
+| <kbd>w</kbd>, <kbd>W</kbd> | A word or WORD        |
+| <kbd>b</kbd>               | The enclosing brackets |
+| <kbd>q</kbd>               | The enclosing quotes  |
+
+A delimiter works as a text object too: `(`, `)`, `[`, `]`, `{`, `}`, `<`, `>`, `"`, `'`, `` ` `` and `$`. Either half of a pair does the same thing, so <kbd>d</kbd><kbd>i</kbd><kbd>(</kbd> is the same as <kbd>d</kbd><kbd>i</kbd><kbd>)</kbd>. All three operators take the inside form; only <kbd>d</kbd> and <kbd>y</kbd> take the around form.
+
+#### Vi Visual Mode
+
+Pressing <kbd>v</kbd> in normal mode starts visual mode, which selects text as you move the cursor with the [motions](#vi-normal-mode). Visual mode rebinds the navigation set so each key extends the selection the way its Vi counterpart does: the arrows follow <kbd>h</kbd>/<kbd>j</kbd>/<kbd>k</kbd>/<kbd>l</kbd>, <kbd>Ctrl</kbd>+<kbd>←</kbd>/<kbd>→</kbd> follow <kbd>b</kbd>/<kbd>w</kbd>, <kbd>Home</kbd>/<kbd>End</kbd> follow <kbd>0</kbd>/<kbd>$</kbd>, and so on. In visual mode, <kbd>↑</kbd> and <kbd>↓</kbd> never walk through the history, and history hints are not accepted.
+
+The normal mode commands apply in visual mode too, except for these keys, which act on the selection:
+
+| Key                        | Action                                                                     |
+| -------------------------- | -------------------------------------------------------------------------- |
+| <kbd>d</kbd>, <kbd>x</kbd> | Cut the selection and return to normal mode                                |
+| <kbd>X</kbd>               | Cut the selected lines, staying in visual mode                             |
+| <kbd>c</kbd>, <kbd>s</kbd> | Change the selection and switch to insert mode                             |
+| <kbd>y</kbd>               | Copy the selection and return to normal mode                               |
+| <kbd>p</kbd>, <kbd>P</kbd> | Replace the selection with the cut buffer, staying in visual mode          |
+| <kbd>u</kbd>, <kbd>U</kbd> | Make the selection lowercase or uppercase, then return to normal mode      |
+| <kbd>~</kbd>               | Switch the case of the selection, then return to normal mode               |
+| <kbd>o</kbd>, <kbd>O</kbd> | Move the cursor to the other end of the selection                          |
+| <kbd>r</kbd>\<char\>       | Replace every selected character with \<char\>, then return to normal mode |
+| <kbd>Esc</kbd>             | Drop the selection and return to normal mode                               |
+
+Normal mode and visual mode have separate keybinding tables. Keybindings for visual mode use the `vi_visual` mode name, and bindings for `vi_normal` don't apply in visual mode.
+
+### Helix Mode
+
+With `$env.config.edit_mode = 'helix'`, the line editor follows the [Helix editor](https://docs.helix-editor.com/keymap.html). A motion carries a selection with it, and a command acts on what is selected. There is no operator-pending state: <kbd>w</kbd> selects a word, and <kbd>d</kbd> then deletes it.
+
+Helix mode starts in insert mode. <kbd>Esc</kbd> switches to normal mode, <kbd>i</kbd> and its siblings return to insert mode, and <kbd>v</kbd> toggles select mode, where a motion extends the selection instead of replacing it. A count can prefix any key except <kbd>g</kbd>.
+
+Insert mode has all four [common sets](#common-keybindings), plus <kbd>Enter</kbd> (run the input, or insert a newline if it is incomplete) and <kbd>Esc</kbd> (switch to normal mode).
+
+Normal mode and select mode have the control, navigation and selection sets, but not the editing set. In its place:
+
+| Key                          | Action                                                                       |
+| ---------------------------- | ---------------------------------------------------------------------------- |
+| <kbd>Backspace</kbd>         | Move one character left in normal mode; extend one left in select mode       |
+| <kbd>Delete</kbd>            | Delete the character under the cursor                                        |
+| <kbd>Alt</kbd>+<kbd>D</kbd>  | Delete the selection without yanking it                                      |
+| <kbd>Alt</kbd>+<kbd>`</kbd>  | Make the selected text uppercase                                             |
+
+As in Vi visual mode, select mode rebinds the navigation set so each key extends the selection like its Helix counterpart, and <kbd>↑</kbd>/<kbd>↓</kbd> never walk through the history.
+
+Motions:
+
+| Key                                                 | Action                                                              |
+| --------------------------------------------------- | ------------------------------------------------------------------- |
+| <kbd>h</kbd>, <kbd>l</kbd>                          | Move left / right                                                   |
+| <kbd>j</kbd>, <kbd>k</kbd>                          | Move down / up (walking through the history at the buffer's edge)   |
+| <kbd>w</kbd>, <kbd>b</kbd>, <kbd>e</kbd>            | Move to the next word start / previous word start / next word end   |
+| <kbd>W</kbd>, <kbd>B</kbd>, <kbd>E</kbd>            | Move to the next WORD start / previous WORD start / next WORD end   |
+| <kbd>f</kbd>\<char\>, <kbd>F</kbd>\<char\>          | Find the next / previous \<char\>                                   |
+| <kbd>t</kbd>\<char\>, <kbd>T</kbd>\<char\>          | Find till the next / previous \<char\>                              |
+| <kbd>g</kbd><kbd>h</kbd>, <kbd>g</kbd><kbd>l</kbd>  | Go to the start / end of the line                                   |
+| <kbd>g</kbd><kbd>s</kbd>                            | Go to the first non-whitespace character of the line                |
+| <kbd>g</kbd><kbd>g</kbd>, <kbd>g</kbd><kbd>e</kbd>  | Go to the start / end of the buffer                                 |
+
+<kbd>h</kbd>, <kbd>l</kbd> and the <kbd>g</kbd> motions collapse the selection onto the new position, while <kbd>w</kbd>, <kbd>b</kbd>, <kbd>e</kbd>, <kbd>f</kbd> and <kbd>t</kbd> select the text they move over.
+
+Selection:
+
+| Key            | Action                                                                        |
+| -------------- | ----------------------------------------------------------------------------- |
+| <kbd>x</kbd>   | Select the current line; if it is already selected, extend to the next line  |
+| <kbd>%</kbd>   | Select the whole buffer                                                       |
+| <kbd>v</kbd>   | Toggle select mode                                                            |
+| <kbd>Esc</kbd> | Collapse the selection in normal mode; leave select mode in select mode       |
+
+Changes:
+
+| Key                        | Action                                                                                |
+| -------------------------- | ------------------------------------------------------------------------------------- |
+| <kbd>i</kbd>, <kbd>a</kbd> | Insert before / after the selection                                                   |
+| <kbd>I</kbd>, <kbd>A</kbd> | Insert at the first non-blank character of the line / at the end of the line         |
+| <kbd>o</kbd>, <kbd>O</kbd> | Open a new line below / above the selection                                           |
+| <kbd>d</kbd>               | Delete the selection                                                                  |
+| <kbd>c</kbd>               | Change the selection (delete it and enter insert mode)                                |
+| <kbd>y</kbd>               | Yank (copy) the selection                                                             |
+| <kbd>p</kbd>, <kbd>P</kbd> | Paste after / before the selection                                                    |
+| <kbd>r</kbd>\<char\>       | Replace the selection with \<char\>                                                   |
+| <kbd>~</kbd>               | Switch the case of the selected text                                                  |
+| <kbd>`</kbd>               | Make the selected text lowercase                                                      |
+| <kbd>u</kbd>, <kbd>U</kbd> | Undo / redo                                                                           |
+| <kbd>Enter</kbd>           | Run the input, or insert a newline and switch to insert mode if it is incomplete      |
+
+<kbd>d</kbd>, <kbd>y</kbd> and <kbd>p</kbd> return to normal mode, and <kbd>c</kbd> switches to insert mode. These Helix keys are not available yet: <kbd>;</kbd>, <kbd>,</kbd>, <kbd>J</kbd>, <kbd>G</kbd>, <kbd>X</kbd>, <kbd>&gt;</kbd>, <kbd>&lt;</kbd>, the <kbd>/</kbd>, <kbd>n</kbd> and <kbd>N</kbd> search commands, match mode (<kbd>m</kbd>), and the multi-cursor commands.
+
+Keybindings for Helix mode use the `helix_normal`, `helix_select` and `helix_insert` mode names. The prompt uses `PROMPT_INDICATOR_VI_INSERT` in Helix insert mode, and `PROMPT_INDICATOR_VI_NORMAL` in normal and select mode.
+
+::: tip
+The selection in Vi visual mode and Helix mode is styled with `$env.config.color_config.selection` (reverse video by default). `$env.config.color_config.selection_cursor` styles the character under the cursor inside a selection:
+
+```nu
+$env.config.color_config.selection = { bg: '#44475a' }
+```
+
+:::
 
 ## Command History
 
@@ -208,8 +423,42 @@ edited and sent to Nushell. To configure the max number of records that
 Reedline should store you will need to adjust this value in your config file:
 
 ```nu
+# in config.nu
 $env.config.history.max_size = 1000
 ```
+
+::: note
+The `history.max_size`, `history.file_format`, `history.isolation` and `history.path` settings
+must be set in `config.nu`. They can't be changed once the REPL has started. Setting
+`$env.config.history.path` to `null` turns off the history file.
+:::
+
+## Hints
+
+As you type, Reedline shows a hint in a dimmed color (`$env.config.color_config.hints`) after the
+cursor. By default the hint is the most recent matching command from your history. Press
+<kbd>→</kbd> or <kbd>End</kbd> to accept the whole hint, or <kbd>Ctrl</kbd>+<kbd>→</kbd> to accept
+one word of it. Set `$env.config.show_hints = false` to turn hints off.
+
+To compute hints yourself, set `$env.config.hinter.closure` to a closure. It receives a record with
+the current `line`, the cursor position `pos` and the working directory `cwd`, and returns the text
+to show after the cursor, or `null` for no hint. It can also return a record
+`{hint: string, next_token: string}`, where `next_token` is the part that
+<kbd>Ctrl</kbd>+<kbd>→</kbd> accepts. The closure runs on every keystroke, so keep it fast.
+
+```nu
+let snippets = ["git status", "git switch -c", "cargo build --release"]
+$env.config.hinter.closure = {|ctx|
+    let match = $snippets | where $it starts-with $ctx.line | first
+    if ($ctx.line | is-empty) or $match == null {
+        null
+    } else {
+        $match | str substring ($ctx.line | str length)..
+    }
+}
+```
+
+Set `$env.config.hinter.closure = null` to go back to the built-in history hints.
 
 ## Customizing the Prompt
 
@@ -226,7 +475,7 @@ config file.
 
 ```nu
 $env.config.keybindings ++= [{
-    name: completion_menu
+    name: completion_menu_ctrl_t
     modifier: control
     keycode: char_t
     mode: emacs
@@ -239,7 +488,11 @@ the completion command.
 
 Each keybinding requires the next elements:
 
-- name: Unique name for your keybinding for easy reference in `$config.keybindings`
+- name: A unique name for your keybinding. Assigning to `$env.config.keybindings` merges
+  the new entries into the existing bindings by name: an entry with the same name and key
+  as an existing binding replaces it, while an entry that reuses a name for a different key
+  is added as another binding and prints a `Multiple keybindings share a name` warning.
+  To clear every keybinding, assign an empty list (`$env.config.keybindings = []`).
 - modifier: A key modifier for the keybinding. The options are:
   - none
   - control
@@ -254,8 +507,8 @@ Each keybinding requires the next elements:
   - control_alt_shift
   - control_shift_alt
 - keycode: This represent the key to be pressed
-- mode: emacs, vi_insert, vi_normal (a single string or a list. e.g.
-  [`vi_insert` `vi_normal`])
+- mode: emacs, vi_insert, vi_normal, vi_visual, helix_insert, helix_normal or
+  helix_select (a single string or a list. e.g. [`vi_insert` `vi_normal`])
 - event: The type of event that is going to be sent by the keybinding. The
   options are:
   - send
@@ -276,23 +529,33 @@ moves using h, j, k or l)
 
 The event section of the keybinding entry is where the actions to be performed
 are defined. In this field you can use either a record or a list of records.
-Something like this
+For example, this keybinding sends a single event, which opens the current
+command line in your editor when you press <kbd>Alt</kbd>+<kbd>E</kbd>
 
 ```nu
-  ...
-  event: { send: Enter }
-  ...
+$env.config.keybindings ++= [{
+    name: open_editor_alt_e
+    modifier: alt
+    keycode: char_e
+    mode: emacs
+    event: { send: OpenEditor }
+}]
 ```
 
-or
+and this one sends a list of events, which moves the cursor to the start of the
+line and inserts `sudo ` there when you press <kbd>Alt</kbd>+<kbd>S</kbd>
 
 ```nu
-  ...
-  event: [
-    { edit: Clear }
-    { send: Enter }
-  ]
-  ...
+$env.config.keybindings ++= [{
+    name: prepend_sudo_alt_s
+    modifier: alt
+    keycode: char_s
+    mode: emacs
+    event: [
+        { edit: MoveToLineStart }
+        { edit: InsertString, value: "sudo " }
+    ]
+}]
 ```
 
 The first keybinding example shown in this page follows the first case; a
@@ -327,7 +590,7 @@ event to the engine
 
 ```nu
 $env.config.keybindings ++= [{
-    name: change_dir_with_fzf
+    name: change_dir_with_fzf_host_command
     modifier: CONTROL
     keycode: Char_y
     mode: emacs
@@ -351,93 +614,132 @@ To find all the available options for `send` you can use
 keybindings list | where type == events
 ```
 
-And the syntax for `send` events is the next one
-
-```nu
-    ...
-      event: { send: <NAME OF EVENT FROM LIST> }
-    ...
-```
+And the syntax for `send` events is `event: { send: <NAME OF EVENT FROM LIST> }`.
 
 ::: tip
 You can write the name of the events with capital letters. The
 keybinding parser is case insensitive
 :::
 
-There are two exceptions to this rule: the `Menu` and `ExecuteHostCommand`.
-Those two events require an extra field to be complete. The `Menu` needs the
-name of the menu to be activated (completion_menu or history_menu)
+There are three exceptions to this rule: `Menu`, `ExecuteHostCommand` and `SwitchMode`.
+Those events require an extra field to be complete. The `Menu` needs the
+name of the menu to be activated (such as completion_menu or history_menu)
 
 ```nu
-    ...
-      event: {
+$env.config.keybindings ++= [{
+    name: history_menu_alt_h
+    modifier: alt
+    keycode: char_h
+    mode: emacs
+    event: {
         send: menu
-        name: completion_menu
-      }
-    ...
+        name: history_menu
+    }
+}]
 ```
 
 and the `ExecuteHostCommand` requires a valid command that will be sent to the
 engine
 
 ```nu
-    ...
-      event: {
+$env.config.keybindings ++= [{
+    name: go_home_alt_g
+    modifier: alt
+    keycode: char_g
+    mode: emacs
+    event: {
         send: executehostcommand
         cmd: "cd ~"
-      }
-    ...
+    }
+}]
 ```
 
-It is worth mentioning that in the events list you will also see `Edit([])`,
-`Multiple([])` and `UntilFound([])`. These options are not available for the
-parser since they are constructed based on the keybinding definition. For
-example, a `Multiple([])` event is built for you when defining a list of
-records in the keybinding's event. An `Edit([])` event is the same as the
-`edit` type that was mentioned. And the `UntilFound([])` event is the same as
-the `until` type mentioned later.
+and the `SwitchMode` event needs the `mode` to switch to. It accepts the same
+mode names as the keybinding's `mode` field (such as `vi_normal` or `helix_normal`).
+This keybinding leaves Vi insert mode with <kbd>Ctrl</kbd>+<kbd>G</kbd>:
+
+```nu
+$env.config.keybindings ++= [{
+    name: vi_normal_ctrl_g
+    modifier: control
+    keycode: char_g
+    mode: vi_insert
+    event: {
+        send: switchmode
+        mode: vi_normal
+    }
+}]
+```
+
+A `SwitchMode` event can only switch between the modes of the current
+`edit_mode`, so a switch to `vi_normal` does nothing in Helix mode. A switch to
+the mode that is already active also does nothing. The older `ViChangeMode`
+(with `mode: normal`, `insert` or `visual`) and `HelixChangeMode` (with
+`mode: normal`, `insert` or `select`) events are still accepted and work like
+`SwitchMode`.
+
+It is worth mentioning that the events list also shows `event: { edit: <edit> }`,
+`event: { send: list<event> }` and `event: { until: list<event> }`. These are not
+events that you send by name. They show the other forms that the `event` field
+can take: an `edit` record (the `edit` type that was mentioned), a list of events
+that are all sent one after another, and the `until` type mentioned later.
 
 ### Edit Type
 
-The `edit` type is the simplification of the `Edit([])` event. The `event` type
-simplifies defining complex editing events for the keybindings. To list the
-available options you can use the next command
+The `edit` type sends one of Reedline's edit commands, which change the text
+of the command line or move the cursor. To list the available options you can
+use the next command
 
 ```nu
 keybindings list | where type == edits
 ```
 
-The usual syntax for an `edit` is the next one
+The usual syntax for an `edit` is `event: { edit: <NAME OF EDIT FROM LIST> }`.
+For example, this keybinding inserts a newline when you press <kbd>Alt</kbd>+<kbd>N</kbd>,
+which is useful if your terminal intercepts <kbd>Alt</kbd>+<kbd>Enter</kbd> and
+<kbd>Shift</kbd>+<kbd>Enter</kbd>
 
 ```nu
-    ...
-      event: { edit: <NAME OF EDIT FROM LIST> }
-    ...
+$env.config.keybindings ++= [{
+    name: insert_newline_alt_n
+    modifier: alt
+    keycode: char_n
+    mode: [emacs vi_insert helix_insert]
+    event: { edit: insertnewline }
+}]
 ```
 
-The syntax for the edits in the list that have a `()` changes a little bit.
-Since those edits require an extra value to be fully defined. For example, if
-we would like to insert a string where the prompt is located, then you will
-have to use
+Some edits in the list are followed by extra fields, such as
+`InsertString value: <string>`. Those edits need the extra fields to be fully
+defined. For example, if we would like to insert a string at the cursor, then
+you will have to use
 
 ```nu
-    ...
-      event: {
+$env.config.keybindings ++= [{
+    name: insert_to_json_alt_j
+    modifier: alt
+    keycode: char_j
+    mode: emacs
+    event: {
         edit: insertstring
-        value: "MY NEW STRING"
-      }
-    ...
+        value: " | to json"
+    }
+}]
 ```
 
-or say you want to move right until the first `S`
+or say you want to move right until the next `|`
 
 ```nu
-    ...
-      event: {
+$env.config.keybindings ++= [{
+    name: move_to_pipe_alt_p
+    modifier: alt
+    keycode: char_p
+    mode: emacs
+    event: {
         edit: moverightuntil
-        value: "S"
-      }
-    ...
+        value: "|"
+    }
+}]
 ```
 
 As you can see, these two types will allow you to construct any type of
@@ -464,7 +766,7 @@ The next keybinding represents this case.
 
 ```nu
 $env.config.keybindings ++= [{
-    name: completion_menu
+    name: completion_menu_ctrl_t
     modifier: control
     keycode: char_t
     mode: emacs
@@ -484,16 +786,21 @@ send is MenuNext, which means that it will move the selector to the next
 element in the menu.
 
 As you can see the `until` keyword allows us to define two events for the same
-keybinding. At the moment of this writing, only the Menu events allow this type
-of layering. The other non menu event types will always return a success value,
-meaning that the `until` event will stop as soon as it reaches the command.
+keybinding. An event only lets `until` move on to the next one when it had
+nothing to do. The `menu` event does this when a menu is already open, the other
+menu events (such as `menunext`) when no menu is open, `up` and `down` when
+there is no line or history entry to move to, `left` and `right` at the
+ends of the line, the history-hint events when there is no hint to accept, and
+`SwitchMode` when it can't switch (see [Send Type](#send-type)). Most other
+events always succeed, so the `until` event stops as soon as it reaches them.
 
-For example, the next keybinding will always send a `down` because that event
-is always successful
+For example, the next keybinding sends a `down` whenever there is a line or a
+newer history entry to move to, and only opens the completion menu when there
+isn't
 
 ```nu
 $env.config.keybindings ++= [{
-    name: completion_menu
+    name: completion_menu_ctrl_t
     modifier: control
     keycode: char_t
     mode: emacs
@@ -502,6 +809,26 @@ $env.config.keybindings ++= [{
             { send: down }
             { send: menu name: completion_menu }
             { send: menunext }
+        ]
+    }
+}]
+```
+
+The `SwitchMode` event makes one keybinding work in more than one edit mode. The
+next keybinding uses <kbd>Ctrl</kbd>+<kbd>G</kbd> to leave insert mode in both Vi
+and Helix mode: in Vi mode the first event switches to `vi_normal`, and in Helix
+mode the first event has nothing to do, so the second one switches to `helix_normal`
+
+```nu
+$env.config.keybindings ++= [{
+    name: leave_insert_mode
+    modifier: control
+    keycode: char_g
+    mode: [vi_insert helix_insert]
+    event: {
+        until: [
+            { send: SwitchMode, mode: vi_normal }
+            { send: SwitchMode, mode: helix_normal }
         ]
     }
 }]
@@ -517,7 +844,7 @@ e.g. to disable screen clearing with `Ctrl + l` for all edit modes
 $env.config.keybindings ++= [{
     modifier: control
     keycode: char_l
-    mode: [emacs, vi_normal, vi_insert]
+    mode: [emacs, vi_normal, vi_insert, vi_visual, helix_normal, helix_select, helix_insert]
     event: null
 }]
 ```
@@ -531,6 +858,32 @@ Your terminal environment may not always propagate your key combinations on to N
 Thanks to Reedline, Nushell has menus that can help you with your day to day
 shell scripting. Next we present the default menus that are always available
 when using Nushell
+
+Menus are configured in `$env.config.menus`. Assigning to this list merges your
+entries into the default menus by `name`, so an entry named `completion_menu`
+replaces the default completion menu instead of adding a second one, and
+`$env.config.menus = []` does not remove the default menus.
+
+Each menu sets `input_mode`, which controls the text that the menu searches:
+
+- `diff` - only the text typed after the menu was activated
+- `cursor_prefix` - the line from its start up to the cursor
+- `full_buffer` - the whole line, including any text after the cursor
+
+It can also set `output_mode`, which controls what an accepted suggestion replaces:
+
+- `suggested_span` - the part of the line that the suggestion names (the default)
+- `full_buffer` - the whole line
+- `extend_to_end` - from the start of the suggestion's span to the end of the line
+
+Older configurations use `only_buffer_difference` instead of `input_mode`. It still
+works: `true` is the same as `input_mode: diff`, and `false` is the same as
+`input_mode: cursor_prefix`.
+
+By default, erasing text while a menu is open can close the menu. Set
+`$env.config.completions.persistent_menus = true` to keep menus open while you edit.
+The menu then updates its suggestions instead, and only closes when you accept a
+suggestion or press <kbd>Esc</kbd> or <kbd>Ctrl</kbd>+<kbd>C</kbd>.
 
 ### Menu Keybindings
 
@@ -575,7 +928,7 @@ The help menu can be configured by modifying the next parameters
 ```nu
 $env.config.menus ++= [{
     name: help_menu
-    only_buffer_difference: true # Search is done on the text written after activating the menu
+    input_mode: diff             # Search is done on the text written after activating the menu
     marker: "? "                 # Indicator that appears with the menu is active
     type: {
         layout: description      # Type of menu
@@ -608,7 +961,7 @@ modifying these values from the config object:
 ```nu
 $env.config.menus ++= [{
     name: completion_menu
-    only_buffer_difference: false   # Search is done on the text written after activating the menu
+    input_mode: cursor_prefix       # Search is done on the text from the start of the line up to the cursor
     marker: "| "                    # Indicator that appears with the menu is active
     type: {
         layout: columnar            # Type of menu
@@ -635,7 +988,7 @@ The ide_completion_menu works much like the completion_menu but has an ide look 
 ```nu
 {
   name: ide_completion_menu
-  only_buffer_difference: false
+  input_mode: cursor_prefix
   marker: "| "
   type: {
     layout: ide
@@ -679,7 +1032,7 @@ The history menu can be configured by modifying these values from the config obj
 ```nu
 $env.config.menus ++= [{
     name: history_menu
-    only_buffer_difference: true # Search is done on the text written after activating the menu
+    input_mode: diff             # Search is done on the text written after activating the menu
     marker: "? "                 # Indicator that appears with the menu is active
     type: {
         layout: list             # Type of menu
@@ -724,7 +1077,7 @@ let a = (ls | where size > 10MiB)
 Another nice feature of the menu is the ability to quick select something from
 it. Say you have activated your menu and it looks like this
 
-```nu
+```text
 >
 0: ls | where size > 10MiB
 1: ls | where size > 20MiB
@@ -762,14 +1115,14 @@ Let's say we want to create a menu that displays all the variables created
 during your session, we are going to call it `vars_menu`. This menu will use a
 list layout (`layout: list`). To search for values, we want to use only the things
 that are written after the menu has been activated
-(`only_buffer_difference: true`).
+(`input_mode: diff`).
 
 With that in mind, the desired menu would look like this
 
 ```nu
 $env.config.menus ++= [{
     name: vars_menu
-    only_buffer_difference: true
+    input_mode: diff
     marker: "# "
     type: {
         layout: list
@@ -780,9 +1133,9 @@ $env.config.menus ++= [{
         selected_text: green_reverse
         description_text: yellow
     }
-    source: { |buffer, position|
+    source: { |token|
         scope variables
-        | where name =~ $buffer
+        | where ($it.name | str contains $token.text)
         | sort-by name
         | each { |row| {value: $row.name description: $row.type} }
     }
@@ -790,8 +1143,8 @@ $env.config.menus ++= [{
 ```
 
 As you can see, the new menu is identical to the `history_menu` previously
-described. The only huge difference is the new field called [`source`](/commands/docs/source.md). The
-[`source`](/commands/docs/source.md) field is a nushell definition of the values you want to display in the
+described. The only huge difference is the new field called `source`. The
+`source` field is a closure that returns the values you want to display in the
 menu. For this menu we are extracting the data from `scope variables` and we
 are using it to create records that will be used to populate the menu.
 
@@ -799,34 +1152,55 @@ The required structure for the record is the next one
 
 ```nu
 {
-  value:       # The value that will be inserted in the buffer
-  description: # Optional. Description that will be display with the selected value
-  span: {      # Optional. Span indicating what section of the string will be replaced by the value
-    start:
-    end:
-  }
-  extra: [string] # Optional. A list of strings that will be displayed with the selected value. Only works with a description menu
+  value: "$foo"                 # The value that will be inserted in the buffer
+  description: "int"            # Optional. Description that will be displayed with the selected value
+  display_override: "foo (int)" # Optional. Text shown in the menu in place of the value
+  style: green                  # Optional. Color of the value in the menu
+  span: { start: 5, end: 7 }    # Optional. Byte range of the line that the value replaces
+  extra: ["first", "second"]    # Optional. A list of strings that will be displayed with the selected value. Only works with a description menu
 }
 ```
 
 For the menu to display something, at least the `value` field has to be present
-in the resulting record.
+in the resulting record. The source can also return a plain list of strings, or
+`null` to show nothing. It can return the same values as a
+[custom completer](custom_completions.md), except that the `options` of a
+`{completions, options}` record are ignored.
 
-In order to make the menu interactive, these two variables are available in
-the block: `$buffer` and `$position`. The `$buffer` contains the value captured
-by the menu, when the option `only_buffer_difference` is true, `$buffer` is the
-text written after the menu was activated. If `only_buffer_difference` is
-false, `$buffer` is all the string in line. The `$position` variable can be
-used to create replacement spans based on the idea you had for your menu. The
-value of `$position` changes based on whether `only_buffer_difference` is true
-or false. When true, `$position` is the starting position in the string where
-text was inserted after the menu was activated. When the value is false,
-`$position` indicates the actual cursor position.
+In order to make the menu interactive, the `source` closure receives the same
+inputs as a [custom completer](custom_completions.md#context-aware-custom-completions).
+It asks for them by naming its parameters:
+
+- `token` - the token under the cursor, as `{text, kind, span}`. The `vars_menu`
+  above filters on `$token.text`, so typing `foo` after activating the menu shows
+  `$foo` and `$food`.
+- `place` - what is being completed. `$place.cursor` is the cursor position, and
+  `$place.target` is the part of the line that a suggestion replaces by default.
+- `buffer` - the whole line up to the cursor, whatever the menu's `input_mode` is.
+
+::: warning
+Before Nushell 0.116, a menu source was written as `{|buffer, position| ... }`, and
+with `only_buffer_difference: true`, `$buffer` held only the text typed after the
+menu was activated. A source that declares `buffer` now always receives the whole
+line up to the cursor, and a source that declares `position` still receives the
+cursor position but prints a deprecation warning. Use `$token.text` for the text
+being completed, and `$place.cursor` for the cursor position.
+:::
 
 Using this information, you can design your menu to present the information you
 require and to replace that value in the location you need it. The only thing
 extra that you need to play with your menu is to define a keybinding that will
-activate your brand new menu.
+activate your brand new menu. For example, to open it with <kbd>Alt</kbd>+<kbd>O</kbd>:
+
+```nu
+$env.config.keybindings ++= [{
+    name: vars_menu
+    modifier: alt
+    keycode: char_o
+    mode: [emacs, vi_normal, vi_insert]
+    event: { send: menu name: vars_menu }
+}]
+```
 
 ### Menu Keybindings
 
@@ -837,7 +1211,7 @@ assign the completion and history menu to `Ctrl+t` and `Ctrl+y` respectively
 ```nu
 $env.config.keybindings ++= [
     {
-        name: completion_menu
+        name: completion_menu_ctrl_t_vi
         modifier: control
         keycode: char_t
         mode: [vi_insert vi_normal]
@@ -849,7 +1223,7 @@ $env.config.keybindings ++= [
         }
     }
     {
-        name: history_menu
+        name: history_menu_ctrl_y_vi
         modifier: control
         keycode: char_y
         mode: [vi_insert vi_normal]
@@ -873,12 +1247,23 @@ stored to history, (2) the expanded command can be edited before being used.
 Abbreviations are expanded on `space` or `enter` and you can add them to your config
 like this
 
-```nushell
+```nu
 $env.config.abbreviations = {
-    ll: ls -l
-    gs: git status
-    ptop: ps | sort-by cpu -r | first 15
+    ll: "ls -l"
+    gs: "git status"
+    ptop: "ps | sort-by cpu -r | first 15"
 }
 ```
 
-You can see the currently active abbreviations with `abbr list`
+You can see the currently active abbreviations with [`abbr list`](/commands/docs/abbr_list.md):
+
+```nu
+abbr list
+# => ╭───┬──────┬────────────────────────────────╮
+# => │ # │ name │           expansion            │
+# => ├───┼──────┼────────────────────────────────┤
+# => │ 0 │ gs   │ git status                     │
+# => │ 1 │ ll   │ ls -l                          │
+# => │ 2 │ ptop │ ps | sort-by cpu -r | first 15 │
+# => ╰───┴──────┴────────────────────────────────╯
+```

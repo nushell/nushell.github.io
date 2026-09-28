@@ -3,7 +3,7 @@
 [[toc]]
 
 ::: important
-When working through the examples below, it is recommended that you start a new shell before importing an updated version of each module or command. This will help reduce any confusion caused by definitions from previous imports.
+When working through the examples below, start a new shell before importing an updated version of each module or command. This will help reduce any confusion caused by definitions from previous imports. It is also required for modules in a directory (a `mod.nu` file): within one shell session, Nushell keeps using the version of such a module that it imported first, even after you change its files.
 :::
 
 ## Overview
@@ -68,12 +68,20 @@ In the [Basic Example](#simple-module-example) above, we had a module named `inc
 
 ```nu
 mv inc.nu increment.nu
+```
+
+```nu
 use increment.nu *
 # => Error: nu::parser::named_as_module
-# => ...
-# => help: Module increment can't export command named
-# => the same as the module. Either change the module
-# => name, or export `main` command.
+# =>
+# =>   × Can't export command named same as the module.
+# =>    ╭─[/home/me/modules/increment.nu:1:12]
+# =>  1 │ export def increment []: int -> int  {
+# =>    ·            ────┬────
+# =>    ·                ╰── can't export from module increment
+# =>  2 │     $in + 1
+# =>    ╰────
+# =>   help: Module increment can't export command named the same as the module. Either change the module name, or export `main` command.
 ```
 
 As helpfully mentioned in the error message, you can simply rename the export `main`, in which case it will take on the name of the module when imported. Edit the `increment.nu` file:
@@ -105,10 +113,12 @@ use ./increment.nu
 
 Conversely, the following forms do _not_ import the `main` definition:
 
-````nu
+```nu
 use <module> <other_definition>
 # or
 use <module> [ <other_definitions> ]
+```
+
 :::
 
 ::: note
@@ -127,11 +137,13 @@ The `increment.nu` example above is clearly an example of (1) the file-form. Let
 ```nu
 mkdir increment
 mv increment.nu increment/mod.nu
+```
 
+```nu
 use increment *
 41 | increment
 # => 42
-````
+```
 
 Notice that the behavior of the module once imported is identical regardless of whether the file-form or directory-form is used; only its path changes.
 
@@ -182,6 +194,10 @@ Submodules are modules that are exported from another module. There are two ways
 1. With `export module`: Exports (a) the submodule and (b) its definitions as members of the submodule
 2. With `export use`: Exports (a) the submodule and (b) its definitions as members of the parent module
 
+::: important
+The difference matters when a user imports the entire module with `use <module>` (without `*`). That form imports only the members of the module itself, so it includes definitions added with `export use`, but _not_ the commands of a submodule added with `export module`. (Before Nushell 0.114, `use <module>` imported those as well.) Users get them by importing the submodule explicitly, with `use <module> *`, `use <module> <submodule>`, or `use <module> [<submodule> ...]`. See [Using Modules - Submodules](./using_modules.md#submodules).
+:::
+
 To demonstrate the difference, let's create a new `my-utils` module, with our `increment` example as a submodule. Additionally, we'll create a new `range-into-list` command in its own submodule.
 
 1. Create a directory for the new `my-utils` and move the `increment.nu` into it
@@ -230,19 +246,25 @@ The most common form for a submodule definition is with `export module`.
    export module ./range-into-list.nu
    ```
 
-2. We now have a module `my-utils` with the two submodules. Try it out:
+2. We now have a module `my-utils` with the two submodules. Go to the parent directory of `my-utils`:
 
    ```nu
-   # Go to the parent directory of my-utils
    cd ..
+   ```
+
+   Then try it out:
+
+   ```nu
    use my-utils *
    5 | increment by 4
    # => 9
 
    let file_indices = 0..2..<10 | range-into-list
    ls | select ...$file_indices
-   # => Returns the 1st, 3rd, 5th, 7th, and 9th file in the directory
+   # Returns the 1st, 3rd, 5th, 7th, and 9th file in the directory
    ```
+
+   Note the `*`. Without it, `use my-utils` would import nothing at all, since everything in `my-utils` is in one of its two submodules. `use my-utils increment` would import just the `increment` submodule (`increment` and `increment by`).
 
 Before proceeding to the next section, run `scope modules` and look for the `my-utils` module. Notice that it has no commands of its own; just the two submodules.
 
@@ -257,21 +279,27 @@ export use ./increment.nu
 export use ./range-into-list.nu
 ```
 
-Try it out using the same commands as above:
+Start a new shell in the parent directory of `my-utils` (see the note at the start of this chapter) and try it out using the same commands as above:
 
 ```nu
-# Go to the parent directory of my-utils
-cd ..
 use my-utils *
 5 | increment by 4
 # => 9
 
 let file_indices = 0..2..<10 | range-into-list
 ls / | sort-by modified | select ...$file_indices
-# => Returns the 1st, 3rd, 5th, 7th, and 9th file in the directory, oldest-to-newest
+# Returns the 1st, 3rd, 5th, 7th, and 9th file in the root directory, oldest-to-newest
 ```
 
 Run `scope modules` again and notice that all of the commands from the submodules are re-exported into the `my-utils` module.
+
+Because the commands are now members of `my-utils` itself, importing the module without `*` also works. The commands then become subcommands of `my-utils`:
+
+```nu
+use my-utils
+5 | my-utils increment by 4
+# => 9
+```
 
 ::: tip
 While `export module` is the recommended and most common form, there is one module-design scenario in which `export use` is required -- `export use` can be used to _selectively export_ definitions from the submodule, something `export module` cannot do. See [Additional Examples - Selective Export](#selective-export-from-a-submodule) for an example.
@@ -292,13 +320,22 @@ export use ./increment.nu
 export use ./range-into-list.nu
 ```
 
-Now examine the help:
+Now, in a new shell, examine the help:
 
 ```nu
 use my-utils *
 help my-utils
-
 # => A collection of helpful utility functions
+# =>
+# => Module: my-utils
+# =>
+# => Exported commands:
+# =>   increment, increment by, range-into-list
+# =>
+# => Exported aliases:
+# =>
+# =>
+# => This module does not export environment.
 ```
 
 Also notice that, because the commands from `increment` and `range-into-list` are re-exported with `export use ...`, those commands show up in the help for the main module as well.
@@ -318,13 +355,12 @@ export-env {
 }
 ```
 
-When this module is imported with `use`, the code inside the [`export-env`](/commands/docs/export-env.md) block is run and the its environment merged into the current scope:
+When this module is imported with `use` (again in a new shell), the code inside the [`export-env`](/commands/docs/export-env.md) block is run and the its environment merged into the current scope:
 
 ```nu
 use my-utils
 $env.NU_MODULES_DIR
-# => Returns the directory name
-cd $env.NU_MODULES_DIR
+# => /home/me/.config/nushell/scripts
 ```
 
 ::: tip
@@ -367,27 +403,39 @@ export def --env modules [] {
 }
 ```
 
-And then import it:
+And then import it. (The first line removes `$env.NU_MODULES_DIR` in case it is still set from the example above.)
 
 ```nu
+hide-env -i NU_MODULES_DIR
 use go.nu
-go home
-# => Works
+go home  # works: changes to your home directory
+cd -     # go back
 go modules
-# => Error: $env.NU_MODULES_DIR is not found
+# => Error: nu::shell::column_not_found
+# =>
+# =>   × Cannot find column 'NU_MODULES_DIR'
+# =>     ╭─[/home/me/modules/go.nu:9:8]
+# =>   8 │ export def --env modules [] {
+# =>   9 │     cd $env.NU_MODULES_DIR
+# =>     ·        ─────────┬─────────┬
+# =>     ·                 │         ╰── value originates here
+# =>     ·                 ╰── column 'NU_MODULES_DIR' is missing in one or more values
+# =>  10 │ }
+# =>     ╰────
+# =>   help: If some rows have this column, try using 'NU_MODULES_DIR?' for optional access, or pre-fill using the `default` command
 ```
 
 This doesn't work because `my-utils` isn't _evaluated_ in this case; it is only _parsed_ when the `go.nu` module is imported. While this brings all of the other exports into scope, it does not _run_ the `export-env` block.
 
 ::: important
-As mentioned at the start of this chapter, trying this while `my-utils` (and its `$env.NU_MODULES_DIR`) is still in scope from a previous import will _not_ fail as expected. Test in a new shell session to see the "normal" failure.
+As mentioned at the start of this chapter, trying this while `my-utils` (and its `$env.NU_MODULES_DIR`) is still in scope from a previous import will _not_ fail as expected. That's why the example above starts with `hide-env`. Alternatively, test in a new shell session to see the "normal" failure.
 :::
 
 To bring `my-utils` exported environment into scope for the `go.nu` module, there are two options:
 
 1. Import the module in each command where it is needed
 
-   By placing `use my-utils` in the `go home` command itself, its `export-env` will be _evaluated_ when the command is. For example:
+   By placing `use my-utils` in the `go modules` command itself, its `export-env` will be _evaluated_ when the command is. For example:
 
    ```nu
    # go.nu
@@ -423,7 +471,7 @@ To bring `my-utils` exported environment into scope for the `go.nu` module, ther
    1. The first `use my-utils` imports the module and its definitions (except for the environment) into the module scope.
    2. The second `use my-utils []` imports nothing _but_ the environment into `go.nu`'s exported environment block. Because the `export-env` of `go.nu` is executed when the module is first imported, the `use my-utils []` is also evaluated.
 
-Note that the first method keeps `my-utils` environment inside the `go.nu` module's scope. The second, on the other hand, re-exports `my-utils` environment into the user scope.
+Note that the first method only loads the `my-utils` environment when `go modules` runs. (Because `go modules` is defined with `--env`, the environment it sets, including `$env.NU_MODULES_DIR`, is then kept in the caller's scope.) The second, on the other hand, re-exports `my-utils` environment into the user scope as soon as `go.nu` is imported.
 
 ### Exports cannot be named after their module
 
@@ -432,15 +480,41 @@ A module cannot export a command, alias, or known external defined inside it tha
 ```nu
 module spam { export module spam { } }
 # => Error: nu::parser::named_as_module
-# => ...
-# => help: Module spam can't export module named
-# => the same as the module. Either change the module
-# => name, or export `mod` module.
+# =>
+# =>   × Can't export module named same as the module.
+# =>    ╭─[repl_entry #1:1:29]
+# =>  1 │ module spam { export module spam { } }
+# =>    ·                             ──┬─
+# =>    ·                               ╰── can't export from module spam
+# =>    ╰────
+# =>   help: Module spam can't export module named the same as the module. Either change the module name, or export `mod` module.
 ```
 
 ::: note
 A `.nu` file _may_ have the same name as its module directory (e.g., `spam/spam.nu`), and Nushell will import it. Still, prefer a different name: if the parent module and the same-named submodule both export a `main`, the two definitions resolve to the same command name and the parent's `main` silently wins.
 :::
+
+### Parser keywords cannot be used as names
+
+Parser keywords such as `if`, `match`, `source`, or `use` can't be used as the name of a command or alias, whether it's exported from a module or not. Such a definition fails with `nu::parser::name_is_keyword`. You can list the keywords with `help commands | where command_type == keyword`.
+
+The same applies to a module named after a keyword: it can't export a `main` command, because the parser would always handle the name as the keyword instead:
+
+```nu
+module match { export def main [] { "matched" } }
+use match
+# => Error: nu::parser::keyword_shadow_module_main
+# =>
+# =>   × Module `match` has a `main` command but `match` is a built-in parser keyword.
+# =>    ╭─[repl_entry #1:2:5]
+# =>  1 │ module match { export def main [] { "matched" } }
+# =>  2 │ use match
+# =>    ·     ──┬──
+# =>    ·       ╰── `match` is a parser keyword
+# =>    ╰────
+# =>   help: The `main` command cannot be invoked because `match` is intercepted by the parser. Either rename the module file, or remove `export def main` and use `use match.nu *` to import other
+# =>         commands.
+```
 
 ## Windows Path Syntax
 
@@ -485,8 +559,15 @@ use is-alphanumeric.nu *
 'Some punctuation?!' | str is-alphanumeric
 # => false
 'a' in (alpha-num-range)
-# => Error:
-# => help: `alpha-num-range` is neither a Nushell built-in or a known external command
+# => Error: nu::shell::external_command
+# =>
+# =>   × External command failed
+# =>    ╭─[repl_entry #4:1:9]
+# =>  1 │ 'a' in (alpha-num-range)
+# =>    ·         ───────┬───────
+# =>    ·                ╰── Command `alpha-num-range` not found
+# =>    ╰────
+# =>   help: `alpha-num-range` is neither a Nushell built-in or a known external command
 ```
 
 ### Selective Export from a Submodule
@@ -533,32 +614,49 @@ However, let's say we want to have `go.nu` be a submodule of `my-utils`. When a 
 export use ./go.nu [home, modules]
 ```
 
-That _almost_ works -- It selectively exports `home` and `modules`, but not the aliases. However, it does so without the `go` prefix. For example:
+That _almost_ works -- It selectively exports `home` and `modules`, but not the aliases. However, it does so without the `go` prefix. To see this, start a new shell in the parent directory of `my-utils`, then:
 
 ```nu
 use my-utils *
-home
-# => works
+home  # works: changes to your home directory
+cd -  # go back
 go home
-# => Error: command not found
+# => Error: nu::shell::external_command
+# =>
+# =>   × External command failed
+# =>    ╭─[repl_entry #1:4:1]
+# =>  3 │ cd -  # go back
+# =>  4 │ go home
+# =>    · ─┬
+# =>    ·  ╰── Command `go` not found
+# =>    ╰────
+# =>   help: Did you mean `do`?
 ```
 
 To export them as `go home` and `go modules`, make the following change to `my-utils/mod.nu`:
 
 ```nu
-# Replace the existing `export use` with ...
+# Replace the `export use ./go.nu [home, modules]` line with ...
 export module go {
     export use ./go.nu [home, modules]
 }
 ```
 
-This creates a new, exported submodule `go` in `my-utils` with the selectively (re)exported definitions for `go home` and `go modules`.
+This creates a new, exported submodule `go` in `my-utils` with the selectively (re)exported definitions for `go home` and `go modules`. In a new shell in the parent directory of `my-utils`, it works as expected:
 
 ```nu
 use my-utils *
-# => As expected:
-go home
-# => works
+go home  # works: changes to your home directory
+cd -     # go back
 home
-# => Error: command not found
+# => Error: nu::shell::external_command
+# =>
+# =>   × External command failed
+# =>    ╭─[repl_entry #1:4:1]
+# =>  3 │ cd -     # go back
+# =>  4 │ home
+# =>    · ──┬─
+# =>    ·   ╰── Command `home` not found
+# =>    ╰────
+# =>   help: Did you mean `go home`?
 ```
