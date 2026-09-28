@@ -9,8 +9,8 @@ title: External Completers
 ### Carapace completer
 
 ```nu
-let carapace_completer = {|space|
-    carapace $space.command nushell ...$spans | from json
+let carapace_completer = {|place|
+    carapace $place.command.0 nushell ...$place.command | from json
 }
 ```
 
@@ -46,20 +46,20 @@ A couple of things to note on this command:
 Sometimes, a single external completer is not flexible enough. Luckily, as many as needed can be combined into a single one. The following example uses `$default_completer` for all commands except the ones explicitly defined in the record:
 
 ```nu
-let multiple_completers = {|space|
-    match $space.command {
+let multiple_completers = {|place|
+    match $place.command.0 {
         ls => $ls_completer
         git => $git_completer
         _ => $default_completer
-    } | do $in $spans
+    } | do $in $place.command
 }
 ```
 
 > **Note**
-> In the example above, `$spans.0` is the command being run at the time. The completer will match the desired completer, and fallback to `$default_completer`.
+> In the example above, `$place.command.0` is the command being run at the time. The completer will match the desired completer, and fallback to `$default_completer`.
 >
-> - If we try to autocomplete `git <tab>`, `spans` will be `[git ""]`. `match $spans.0 { ... }` will return the `$git_completer`.
-> - If we try to autocomplete `other_command <tab>`, `spans` will be `[other_command ""]`. The match will fallback to the default case (`_`) and return the `$default_completer`.
+> - If we try to autocomplete `git <tab>`, `place.command` will be `[git ""]`. `match $place.command.0 { ... }` will return the `$git_completer`.
+> - If we try to autocomplete `other_command <tab>`, `place.command` will be `[other_command ""]`. The match will fallback to the default case (`_`) and return the `$default_completer`.
 
 ## Troubleshooting
 
@@ -69,16 +69,16 @@ Nushell currently has a [bug where autocompletions won't work for aliases](https
 
 ```nu
 # if the current command is an alias, get it's expansion
-let expanded_alias = (scope aliases | where name == $space.command | get -i 0 | get -i expansion)
+let expanded_alias = (scope aliases | where name == $place.command | get -i 0 | get -i expansion)
 
 # overwrite
-let spans = (if $expanded_alias != null  {
-    # put the first word of the expanded alias first in the span
-    $spans | skip 1 | prepend ($expanded_alias | split row " " | take 1)
-} else { $spans })
+let place.command = (if $expanded_alias != null  {
+    # put the first word of the expanded alias first in place.command
+    $place.command | skip 1 | prepend ($expanded_alias | split row " " | take 1)
+} else { $place.command })
 ```
 
-This code will take the first span, find the first alias that matches it, and replace the beginning of the command with the alias expansion.
+This code will take the first command, find the first alias that matches it, and replace the beginning of the command with the alias expansion.
 
 ### `ERR unknown shorthand flag` using carapace
 
@@ -99,7 +99,7 @@ This is an example of how an external completer definition might look like:
 let fish_completer = ...
 
 let carapace_completer = {|place|
-    CARAPACE_LENIENT=1 carapace $place.command nushell ...$spans | from json
+    CARAPACE_LENIENT=1 carapace $place.command.0 nushell ...$place.command | from json
 }
 
 # This completer will use carapace by default
@@ -108,15 +108,15 @@ let external_completer = {|place|
     | where name == $place.command
     | get -o 0.expansion
 
-    let spans = if $expanded_alias != null {
-        $spans
+    let place.command = if $expanded_alias != null {
+        $place.command
         | skip 1
         | prepend ($expanded_alias | split row ' ' | take 1)
     } else {
-        $spans
+        $place.command
     }
 
-    match $place.command {
+    match $place.command.0 {
         # carapace completions are incorrect for nu
         nu => $fish_completer
         # fish completes commits and branch names in a nicer way
@@ -124,7 +124,7 @@ let external_completer = {|place|
         # carapace doesn't have completions for asdf
         asdf => $fish_completer
         _ => $carapace_completer
-    } | do $in $spans
+    } | do $in $place.command
 }
 
 $env.config = {
