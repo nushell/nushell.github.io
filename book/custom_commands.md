@@ -491,6 +491,9 @@ The following [types](./types_of_data.html) can be used for parameter annotation
 - `record`
 - `string`
 - `table`
+- `oneof`
+
+See [Type signatures](/lang-guide/chapters/types/type_signatures.html) in the Language Reference Guide for more information.
 
 :::
 
