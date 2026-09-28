@@ -1269,7 +1269,7 @@ This list may be outdated. To get the up-to-date command list, see [Dataframe](/
 | polars str-replace                 | dataframe, lazyframe, expression, selector | Replace the leftmost (sub)string by a regex pattern.                                              |                         |
 | polars str-replace-all             | dataframe, lazyframe, expression, selector | Replace all (sub)strings by a regex pattern.                                                      |                         |
 | polars str-slice                   | dataframe, lazyframe, expression, selector | Slices the string from the start position until the selected length.                              |                         |
-| polars str-split                   | expression, selector                       | Split the string by a substring. The resulting dtype is list<str>.                                |                         |
+| polars str-split                   | expression, selector                       | Split the string by a substring. The resulting dtype is `list<str>`.                                |                         |
 | polars str-strip-chars             | expression, selector                       | Strips specified characters from strings in a column                                              |                         |
 | polars strftime                    | dataframe, lazyframe, expression, selector | Formats date based on string rule.                                                                |                         |
 | polars struct-json-encode          | expression                                 | Convert this struct to a string column with json values.                                          |                         |
