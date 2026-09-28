@@ -1062,7 +1062,7 @@ def send_hello():
     hello = {
         "Hello": {
             "protocol": "nu-plugin",
-            "version": "0.90.2",
+            "version": "0.100.0",
             "features": []
         }
     }
@@ -1091,15 +1091,18 @@ def send_error(id, error_msg, span):
 
 def handle_call(id, call_info):
     try:
-        input = call_info["input"]["Value"]["String"]
+        input = call_info["input"]["Value"][0]["String"]
         output = {
             "PipelineData": {
-                "Value": {
-                    "Int": {
-                        "val": len(input["val"]),
-                        "span": input["span"]
-                    }
-                }
+                "Value": [
+                    {
+                        "Int": {
+                            "val": len(input["val"]),
+                            "span": input["span"]
+                        }
+                    },
+                    None
+                ]
             }
         }
         send_response(id, output)
@@ -1186,7 +1189,7 @@ def send_hello():
     hello = {
         "Hello": {
             "protocol": "nu-plugin",
-            "version": "0.90.2",
+            "version": "0.100.0",
             "features": []
         }
     }
@@ -1205,15 +1208,18 @@ When sent a `Run` request, we parse the supplied JSON and respond to the request
 ```python
 def handle_call(id, call_info):
     try:
-        input = call_info["input"]["Value"]["String"]
+        input = call_info["input"]["Value"][0]["String"]
         output = {
             "PipelineData": {
-                "Value": {
-                    "Int": {
-                        "val": len(input["val"]),
-                        "span": input["span"]
-                    }
-                }
+                "Value": [
+                    {
+                        "Int": {
+                            "val": len(input["val"]),
+                            "span": input["span"]
+                        }
+                    },
+                    None
+                ]
             }
         }
         send_response(id, output)
