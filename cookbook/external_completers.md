@@ -19,7 +19,7 @@ let carapace_completer = {|place|
 This completer will use [the fish shell](https://fishshell.com/) to handle completions. Fish handles out of the box completions for many popular tools and commands.
 
 ```nu
-$env.config.completions.external.completer = {|place|
+let fish_completer = {|place|
     fish --command $"complete '--do-complete=($place.command | str replace --all "'" "\\'" | str join ' ')'"
     | from tsv --flexible --noheaders --no-infer
     | rename value description
