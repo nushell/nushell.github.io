@@ -1,0 +1,96 @@
+# Nushell
+
+> Nushell is a new type of shell that treats data as structured values (tables, records, lists) instead of plain text, with a built-in programming language, cross-platform pipelines, and a large set of built-in commands for filtering, transforming, and viewing data.
+
+This is a curated index of the highest-value pages on the Nushell documentation site (www.nushell.sh). The full site includes ~700+ individual command reference pages and ~450+ blog posts not listed here individually; see the Commands and Blog sections below for their index pages.
+
+## Getting Started
+
+- [Installation](https://www.nushell.sh/book/installation.html): How to install Nushell on Linux, macOS, and Windows
+- [Quick Tour](https://www.nushell.sh/book/quick_tour.html): A fast overview of Nushell's core ideas
+- [Moving Around](https://www.nushell.sh/book/moving_around.html): Navigating the filesystem and shell basics
+- [Nu Fundamentals](https://www.nushell.sh/book/nu_fundamentals.html): The core concepts that make Nushell different from POSIX shells
+- [Thinking in Nu](https://www.nushell.sh/book/thinking_in_nu.html): Mental model for working with structured data
+- [Cheat Sheet](https://www.nushell.sh/book/cheat_sheet.html): Quick syntax and command reference
+
+## Coming from Other Shells
+
+- [Coming from Bash](https://www.nushell.sh/book/coming_from_bash.html)
+- [Coming from PowerShell](https://www.nushell.sh/book/coming_from_powershell.html)
+- [Coming from CMD](https://www.nushell.sh/book/coming_from_cmd.html)
+- [Coming to Nu](https://www.nushell.sh/book/coming_to_nu.html): General migration guidance
+
+## Core Language
+
+- [Types of Data](https://www.nushell.sh/book/types_of_data.html)
+- [Variables](https://www.nushell.sh/book/variables.html)
+- [Operators](https://www.nushell.sh/book/operators.html)
+- [Control Flow](https://www.nushell.sh/book/control_flow.html)
+- [Working with Lists](https://www.nushell.sh/book/working_with_lists.html)
+- [Working with Records](https://www.nushell.sh/book/working_with_records.html)
+- [Working with Tables](https://www.nushell.sh/book/working_with_tables.html)
+- [Working with Strings](https://www.nushell.sh/book/working_with_strings.html)
+- [Navigating Structured Data](https://www.nushell.sh/book/navigating_structured_data.html)
+- [Custom Commands](https://www.nushell.sh/book/custom_commands.html)
+- [Modules](https://www.nushell.sh/book/modules.html)
+- [Overlays](https://www.nushell.sh/book/overlays.html)
+- [Scripts](https://www.nushell.sh/book/scripts.html)
+- [Pipelines](https://www.nushell.sh/book/pipelines.html)
+- [Metadata](https://www.nushell.sh/book/metadata.html)
+- [Special Variables](https://www.nushell.sh/book/special_variables.html)
+- [Standard Library](https://www.nushell.sh/book/standard_library.html)
+
+## Scripting & Extensibility
+
+- [How Nushell Code Gets Run](https://www.nushell.sh/book/how_nushell_code_gets_run.html)
+- [Hooks](https://www.nushell.sh/book/hooks.html)
+- [Aliases](https://www.nushell.sh/book/aliases.html)
+- [Custom Completions](https://www.nushell.sh/book/custom_completions.html)
+- [Externs](https://www.nushell.sh/book/externs.html)
+- [Running Externals](https://www.nushell.sh/book/running_externals.html)
+- [Plugins](https://www.nushell.sh/book/plugins.html)
+- [Dataframes](https://www.nushell.sh/book/dataframes.html)
+- [Parallelism](https://www.nushell.sh/book/parallelism.html)
+- [Testing](https://www.nushell.sh/book/testing.html)
+- [Creating Errors](https://www.nushell.sh/book/creating_errors.html)
+- [Programming in Nu](https://www.nushell.sh/book/programming_in_nu.html)
+
+## Configuration & Environment
+
+- [Configuration](https://www.nushell.sh/book/configuration.html)
+- [Environment](https://www.nushell.sh/book/environment.html)
+- [Default Shell](https://www.nushell.sh/book/default_shell.html)
+- [Coloring and Theming](https://www.nushell.sh/book/coloring_and_theming.html)
+- [Line Editor](https://www.nushell.sh/book/line_editor.html)
+- [Directory Stack](https://www.nushell.sh/book/directory_stack.html)
+- [Stdout, Stderr, Exit Codes](https://www.nushell.sh/book/stdout_stderr_exit_codes.html)
+- [Loading Data](https://www.nushell.sh/book/loading_data.html)
+- [Explore (the built-in pager/viewer)](https://www.nushell.sh/book/explore.html)
+
+## Commands Reference
+
+- [Command Index](https://www.nushell.sh/commands/): Full alphabetical list of all built-in commands (700+ pages, not individually indexed here)
+
+Key categories: [Filters](https://www.nushell.sh/commands/categories/filters.html) · [Strings](https://www.nushell.sh/commands/categories/strings.html) · [Math](https://www.nushell.sh/commands/categories/math.html) · [Date](https://www.nushell.sh/commands/categories/date.html) · [Formats](https://www.nushell.sh/commands/categories/formats.html) · [System](https://www.nushell.sh/commands/categories/system.html) · [Filesystem](https://www.nushell.sh/commands/categories/filesystem.html) · [Network](https://www.nushell.sh/commands/categories/network.html) · [Dataframe](https://www.nushell.sh/commands/categories/dataframe.html)
+
+## Cookbook
+
+- [Cookbook Index](https://www.nushell.sh/cookbook/): Task-oriented recipes
+- [Parsing](https://www.nushell.sh/cookbook/parsing.html)
+- [Tables](https://www.nushell.sh/cookbook/tables.html)
+- [HTTP](https://www.nushell.sh/cookbook/http.html)
+- [Git](https://www.nushell.sh/cookbook/git.html)
+- [jq vs Nushell](https://www.nushell.sh/cookbook/jq_v_nushell.html)
+
+## Language Design
+
+- [Language Guide Index](https://www.nushell.sh/lang-guide/): In-depth explanations of language internals and design decisions
+
+## Blog
+
+- [Blog Index](https://www.nushell.sh/blog/): Release notes and project updates (450+ posts, not individually indexed here)
+
+## Optional
+
+- [Contributor Book](https://www.nushell.sh/contributor-book/): Guide for contributing to Nushell itself
+- [Contributing Guide](https://www.nushell.sh/CONTRIBUTING.html)
