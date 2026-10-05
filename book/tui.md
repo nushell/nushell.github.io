@@ -3,7 +3,7 @@
 The `tui` family of commands lets you build interactive terminal user interfaces (TUIs) and pop-up dialogs from a Nushell pipeline, without writing any Rust. You compose widgets such as tables, trees, search boxes, previews, menus, text boxes, and buttons, then hand the result to [`tui run`](/commands/docs/tui_run.md). When the user quits or makes a selection, `tui run` returns a record describing what they picked and the state of every widget.
 
 ```nu
-ls | tui label --title "files" | tui table | tui run
+ls | tui label --titlebar "files" | tui table | tui run
 ```
 
 That one line opens a full-screen, scrollable file list. Use the arrow keys (or `j`/`k`) to move, press `Enter` to return the highlighted row, or press `q` or `Esc` to quit without a selection.
@@ -20,7 +20,7 @@ Every `tui` command except `tui run` and `tui debug` is a _builder_: it adds a w
 
 | Command                                          | Positional       | Notable flags                                                         | Purpose                                                                         |
 | ------------------------------------------------ | ---------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| [`tui label`](/commands/docs/tui_label.md)       | text or closure  | `--title`, `--status`                                                 | Static text, the title bar, or the status bar. A closure follows a row.         |
+| [`tui label`](/commands/docs/tui_label.md)       | text or closure  | `--titlebar`, `--status`                                              | Static text, the title bar, or the status bar. A closure follows a row.         |
 | [`tui table`](/commands/docs/tui_table.md)       | source closure   | `--columns`, `--multi`, `--index`, `--capture-keys`, `--on-select`    | A navigable table. Scalars show as a single `item` column.                      |
 | [`tui tree`](/commands/docs/tui_tree.md)         | source closure   | `--walk`, `--column`, `--multi`, `--on-select`                        | Nested records and lists, or a directory walk.                                  |
 | [`tui select`](/commands/docs/tui_select.md)     | list of items    | `--display`, `--multi`, `--index`, `--on-select`                      | A radio list, or a checkbox list with `--multi`.                                |
@@ -38,7 +38,7 @@ Every `tui` command except `tui run` and `tui debug` is a _builder_: it adds a w
 | [`tui run`](/commands/docs/tui_run.md)           | hook             | `--dialog`, `--size`, `--refresh`, `--no-mouse`                       | Runs the interface until the user submits or quits.                             |
 | [`tui debug`](/commands/docs/tui_debug.md)       | hook             | `--keys`, `--until`, `--size`, `--dialog`                             | Renders without a terminal and reports the layout, focus order, and pages.      |
 
-In addition, every builder accepts `--id` (a stable name for the widget) and `--focus` (start with this widget focused). The data widgets (`label`, `table`, `tree`, `select`, `log`, and `progress`) also accept `--data` and `--from`, which are described in [Where Widgets Get Their Data](#where-widgets-get-their-data).
+In addition, every builder accepts `--id` (a stable name for the widget) and `--focus` (start with this widget focused). The data widgets (`label`, `table`, `tree`, `select`, `log`, and `progress`) also accept `--data` and `--from`, which are described in [Where Widgets Get Their Data](#where-widgets-get-their-data). The widgets that draw a titled border (`table`, `tree`, `select`, `log`, `preview`, `search`, and `textbox`) accept `--title` and `--border`, which are described in [Border Titles](#border-titles) and [Border Lines](#border-lines). `tui box` and `tui menu` accept `--border` too.
 
 ## Your First TUI
 
@@ -47,24 +47,24 @@ In addition, every builder accepts `--id` (a stable name for the widget) and `--
 Because builders only describe the interface, you can look at what you have built before running it:
 
 ```nu
-tui label --title "App" | tui table | describe
+tui label --titlebar "App" | tui table | describe
 # => tui
 
-tui label --title "App" | tui table | get widgets.type
+tui label --titlebar "App" | tui table | get widgets.type
 # => ╭───┬───────╮
 # => │ 0 │ label │
 # => │ 1 │ table │
 # => ╰───┴───────╯
 ```
 
-Each widget record has an `id`, a `type`, and, for containers, `children`. Other fields depend on the kind of widget.
+Each widget record has an `id`, a `type`, and, for containers, `children`. Other fields depend on the kind of widget. For example, a label's `slot` is `titlebar`, `status`, or `content` (inline text), and a widget built with `--title` or `--border` has a `title` or `border` field.
 
 ### Rendering Without a Terminal
 
 `tui debug` returns a record. Its `screen` field holds the painted text:
 
 ```nu
-tui label --title "hello" | tui label --status "ready" | tui debug --size [40 6] | get screen
+tui label --titlebar "hello" | tui label --status "ready" | tui debug --size [40 6] | get screen
 # =>  hello
 # =>
 # =>
@@ -113,7 +113,7 @@ tui label "Delete everything?" | tui button Yes | tui button No | tui debug --si
 
 A few widgets are _chrome_ that belongs to the whole interface, and they can only be used in the outer pipeline:
 
-- `tui label --title` (the title bar at the top)
+- `tui label --titlebar` (the title bar at the top)
 - `tui label --status` (the status bar at the bottom)
 - `tui menu` (the menu bar)
 - `tui tab` (pages)
@@ -148,7 +148,7 @@ ls
 | tui run
 ```
 
-A one-cell handle sits between each pair of panes. Drag it with the mouse, or `Tab` to the split and use the arrow keys (or `hjkl`) to move the first divider by one percent at a time. `tui debug` reports the current sizes under `values`:
+A one-cell handle sits between each pair of panes. Drag any handle with the mouse, and it lands as close to the pointer as the neighboring panes allow. From the keyboard, `Tab` to the split and use the arrow keys (or `hjkl`) to move the first divider. Each press moves it one cell, or a few cells on splits wider or taller than 100 cells. Every pane keeps at least one cell. `tui debug` reports the current sizes under `values`:
 
 ```nu
 ls | tui split --ratio 60 [ (tui table) (tui preview) ] | tui debug | get values.split-0
@@ -158,7 +158,7 @@ ls | tui split --ratio 60 [ (tui table) (tui preview) ] | tui debug | get values
 # => ╰───┴─────╯
 ```
 
-A split whose children all have a fixed height (buttons, labels, text boxes, and progress bars) is not divided into panes. It takes exactly the height of its children and draws no handle. Use this to stack buttons, or to place a text box next to a button:
+A split whose children all have a fixed height (buttons, labels, text boxes, and progress bars) is not divided into panes. It takes exactly the height of its children, draws no handle, and doesn't resize from the keyboard. Use this to stack buttons, or to place a text box next to a button:
 
 ```nu
 tui split --vertical [ (tui button Yes) (tui button No) ] | tui debug --size [30 4] | get screen
@@ -179,6 +179,37 @@ tui label "name" | tui split [ (tui textbox --id name) (tui button Go) ] | tui d
 ```nu
 ls | tui split [ (tui box "list" [ (tui search) (tui table) ]) (tui preview) ] | tui run
 ```
+
+### Border Titles
+
+A bordered widget writes its name in the top border, followed by any state in parentheses, such as a row count. `--title` replaces the name and keeps the state:
+
+```nu
+[a b c] | tui table --title letters | tui debug --size [30 6] | get screen
+# => ┌ letters (3) ───────────────┐
+# => │  item                      │
+# => │▶ a                         │
+# => │  b                         │
+# => │  c                         │
+# => └────────────────────────────┘
+```
+
+| Widget       | Default title                           | With `--title files`                      |
+| ------------ | --------------------------------------- | ----------------------------------------- |
+| table        | `table (12)`, `table (12, 3 checked)`   | `files (12)`, `files (12, 3 checked)`     |
+| select, tree | `select (4)`, `tree (40)`               | `files (4)`, `files (40)`                 |
+| log          | `log`, `log (live)`, `log (paused)`     | `files`, `files (live)`, `files (paused)` |
+| search       | `search`, `search (fuzzy)`              | `files`, `files (fuzzy)`                  |
+| textbox      | `input`                                 | `files`                                   |
+| preview      | The previewed file's name, or `preview` | `files (Cargo.toml)`, or `files`          |
+
+A preview has no fixed name, because its border shows the file being previewed. With `--title`, the title comes first and the file name follows in parentheses. A search box also uses its `--title` as the placeholder, unless `--placeholder` is given. An empty `--title` is an error.
+
+`tui box` takes its title as its first argument, and `tui label --titlebar` sets the bar at the top of the whole interface.
+
+::: tip
+`tui label --titlebar` used to be spelled `tui label --title`. The old spelling still works but prints a deprecation warning, and it will be removed in 0.118.0.
+:::
 
 ### Tabs
 
@@ -238,25 +269,52 @@ tui split [ ([1 2] | tui table) ([3] | tui table) ] | tui debug | get widgets.0.
 # => ╰───┴───╯
 ```
 
-### Streams
-
-How a builder treats a stream depends on where the stream comes from:
-
-- **Output of an external command** (for example `^tail -f app.log`) stays _live_. `tui run` reads it on a background thread, and new rows appear while the interface is open. If the interface closes while the command is still running, the command is stopped.
-- **Everything else** (lists, internal streams, and ranges) is collected before the interface is shown, up to 100,000 rows. Anything beyond that stays live.
+Data piped into a child must have a widget to show it. If every widget in the child has its own `--data`, the piped rows have nowhere to go, and `tui run` and `tui debug` stop with an error:
 
 ```nu
-# Follow a growing log file until you press q
-^tail -f app.log | tui label --title "app.log" | tui log | tui run
+tui split [ ([1 2] | tui table --data [a b]) ] | tui debug
+# => Error: nu::shell::error
+# =>
+# =>   × piped data has no widget to show it
+# =>    ╭─[repl_entry #1:1:1]
+# =>  1 │ tui split [ ([1 2] | tui table --data [a b]) ] | tui debug
+# =>    · ────┬────
+# =>    ·     ╰── no widget in this child can show the data piped into it: each has its own --data, or there are none
+# =>    ╰────
 ```
 
-::: warning
-Because internal streams are collected first, a slow, never-ending internal stream such as `1.. | each {|n| sleep 100ms; $n }` has to produce 100,000 rows before anything is drawn. To show data that changes over time, use an external command's output or the [`--refresh`](#refreshing-on-a-timer) flag of `tui run`.
-:::
+### Streams
 
-Rows that arrive from a live stream are kept in one shared store of at most `max(10000, --max-lines)` rows. A container's child list can only hold collected values, so keep live producers in the outer pipeline.
+Builders don't read the streams piped into them. `tui run` reads each stream on a background thread once the interface is open, so rows appear as they arrive. That includes external command output, ranges, and slow `each` pipelines:
 
-`tui debug` reads a finite stream to the end (for up to five seconds) before painting. Don't pipe an unbounded stream into it without a limit.
+```nu
+# A new line every second, until you press q
+1.. | each {|n| sleep 1sec; $"tick ($n)" } | tui log | tui run
+
+# Follow a growing log file
+^tail -f app.log | tui label --titlebar "app.log" | tui log | tui run
+
+# A progress bar that moves as the stream runs
+1..100 | each {|n| sleep 50ms; $n } | tui progress --total 100 | tui run
+```
+
+Streams piped into a widget in a child list are live too, so each pane can follow its own source:
+
+```nu
+tui split [ (^tail -f app.log | tui log) (ls | tui table) ] | tui run
+```
+
+If the interface closes while an external command is still running, the command is stopped.
+
+Each stream keeps about its newest 100,000 rows. Older rows are dropped in batches of 12,500, so up to 12,499 extra rows can be present between drops. `tui log --max-lines` raises the limit for a log when it is larger.
+
+A few consequences of builders leaving the stream unread:
+
+- A builder always returns a `tui` value, even when its input is a stream. `1.. | tui table | first` is an error, not the first input row.
+- A `tui` value saved with `let` reads its stream on its first run. If the stream finished, later runs show the same rows. If the interface closed before the stream ended, later runs show no rows.
+- When a hook returns data (see [The Hook Contract](#the-hook-contract)), that data replaces the piped data for the rest of the run, and the stream adds no more rows.
+
+`tui debug` reads piped streams until they end (for up to five seconds) before painting, and keeps the newest rows just as `tui run` does. The `live` field of its result says whether a stream was still producing. Don't pipe an unbounded stream into it without a limit.
 
 ## Following a Row
 
@@ -349,7 +407,7 @@ ps | tui split [ (tui table --columns [pid name]) (tui preview {|p| $p | table -
 
 ```nu
 ls
-| tui label --title "files"
+| tui label --titlebar "files"
 | tui search --placeholder "filter" --bind /
 | tui table --columns [name type size]
 | tui label --status "enter: pick  /: filter  q: quit"
@@ -406,7 +464,7 @@ This makes a quick keybinding explorer:
 ```nu
 def "keys ui" [] {
     $env.config.keybindings
-    | tui label --title "keybindings"
+    | tui label --titlebar "keybindings"
     | tui search --placeholder "type to filter, or focus the list and press a chord" --bind /
     | tui table --capture-keys --columns [name modifier keycode]
     | tui label --status "/: search  chord: filter list  enter: pick  q: quit"
@@ -490,7 +548,7 @@ ls | tui split [ (tui tree --walk) (tui preview) ] | tui run
 
 ### Logs
 
-[`tui log`](/commands/docs/tui_log.md) is an append-only view that follows the end of its data. Scrolling up (with the arrow keys, `PageUp`/`PageDown`, or the mouse wheel) pauses following, and the title changes to `log (paused)`. Scroll to the bottom, or press `End`, to resume. `--max-lines` (10000 by default) limits how many lines are kept:
+[`tui log`](/commands/docs/tui_log.md) is an append-only view that follows the end of its data. Scrolling up (with the arrow keys, `PageUp`/`PageDown`, or the mouse wheel) pauses following, and the title changes to `log (paused)`. Scroll to the bottom, or press `End`, to resume. `--max-lines` (10000 by default) limits how many of the newest lines the log shows:
 
 ```nu
 1..30 | each {|n| $"tick ($n)" } | tui log | tui debug --size [30 6] | get screen
@@ -514,7 +572,7 @@ tui progress --value 0.4 --label copying | tui debug --size [40 4] | get screen
 # => █████████  done 30%
 ```
 
-Because the last number in a list is used, a live stream of numbers from an external command drives the bar as it runs. With `--from` and a closure, the bar follows another widget's highlighted row instead.
+Because the last number in a list is used, a stream of numbers drives the bar as it runs, as in `1..100 | each {|n| sleep 50ms; $n } | tui progress --total 100`. With `--from` and a closure, the bar follows another widget's highlighted row instead.
 
 ## Making It Interactive
 
@@ -522,12 +580,12 @@ Because the last number in a list is used, a live stream of numbers from an exte
 
 Every closure that reacts to the user follows the same contract. That includes `tui bind`, `tui button`, menu actions, `--on-select`, and the closure passed to `tui run` or `tui debug`. The hook receives the state record (the same record that `tui run` returns, described in [The Result Record](#the-result-record)) both as `$in` and as its first parameter, if it declares one. What the hook returns decides what happens next:
 
-| The hook returns                  | Effect                                                            |
-| --------------------------------- | ----------------------------------------------------------------- |
-| nothing                           | Nothing changes                                                   |
-| `{action: submit, selected: ...}` | The TUI closes with that selection                                |
-| `{action: quit}`                  | The TUI closes without a selection                                |
-| anything else                     | Replaces the shared data list; every widget that reads it redraws |
+| The hook returns                  | Effect                                                                                                  |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| nothing                           | Nothing changes                                                                                         |
+| `{action: submit, selected: ...}` | The TUI closes with that selection                                                                      |
+| `{action: quit}`                  | The TUI closes without a selection                                                                      |
+| anything else                     | Replaces the shared data list, and a piped stream adds no more rows; every widget that reads it redraws |
 
 If a hook raises an error, the error is shown on the status bar as `error:...` and the TUI stays open:
 
@@ -579,7 +637,7 @@ ls | tui table --columns [name] | tui label {|row| $"selected: ($row.name)  ($ro
 
 ### Refreshing on a Timer
 
-The closure passed to `tui run` is a hook that runs once before the first frame. With `--refresh`, it runs again at every interval, and its output replaces the shared data list. The highlight and any search query are kept, and a failing refresh keeps the last good rows:
+The closure passed to `tui run` is a hook that runs once before the first frame. With `--refresh`, it runs again at every interval, and its output replaces the shared data list (a piped stream then stops adding rows). The highlight and any search query are kept, and a failing refresh keeps the last good rows:
 
 ```nu
 ls | tui table | tui run --refresh 1sec { ls }
@@ -601,7 +659,7 @@ ls | tui table | tui run --refresh 1sec { ls }
 
 ```nu
 ls
-| tui label --title "Files"
+| tui label --titlebar "Files"
 | tui menu [
     {name: "&File", items: [
         {name: "&Reload", action: {|| ls }}
@@ -638,7 +696,7 @@ ls
 [`tui textbox`](/commands/docs/tui_textbox.md) is an editable field and [`tui button`](/commands/docs/tui_button.md) is a focusable label. Use `Tab` and `Shift+Tab` to move between them:
 
 ```nu
-tui label --title "rename"
+tui label --titlebar "rename"
 | tui label "new name"
 | tui textbox --id name --placeholder "type a name"
 | tui button Save {|s| $s.values.name | save name.txt; {action: quit} }
@@ -668,7 +726,7 @@ tui label "Delete?" | tui button Yes | tui button No | tui debug --keys [right e
 `tui run --dialog` (`-d`) shows the same interface in a smaller floating window on the alternate screen. Without `--size`, the dialog is about three quarters of the terminal, and at least 40×12. Drag the title bar to move it, drag the bottom-right corner to resize it, or click `x` to close it:
 
 ```nu
-[a b c] | tui label --title "pick" | tui table | tui debug --dialog --size [40 10] | get screen
+[a b c] | tui label --titlebar "pick" | tui table | tui debug --dialog --size [40 10] | get screen
 # => ┌ pick ───────────────────────────── x ┐
 # => │ pick                                 │
 # => │┌ table (3) ─────────────────────────┐│
@@ -718,16 +776,16 @@ The focusable widgets are menus, tables, selects, trees, logs, search boxes, tex
 
 The shape of each entry in `values` depends on the widget:
 
-| Widget           | Value                                          |
-| ---------------- | ---------------------------------------------- |
-| search, text box | The text                                       |
-| table, select    | `{index, row}` (plus `checked` with `--multi`) |
-| tree             | `{index, path, value}`                         |
-| log              | `{rows, follow}`                               |
-| preview          | `{title, text}`                                |
-| split            | The list of sizes                              |
-| progress         | The current value                              |
-| button           | The label                                      |
+| Widget           | Value                                                                                           |
+| ---------------- | ----------------------------------------------------------------------------------------------- |
+| search, text box | The text                                                                                        |
+| table, select    | `{index, row}` (plus `checked` with `--multi`)                                                  |
+| tree             | `{index, path, value}`                                                                          |
+| log              | `{rows, follow}`                                                                                |
+| preview          | `{title, text}`, where `title` is the previewed file's name, or empty when nothing is previewed |
+| split            | The list of sizes                                                                               |
+| progress         | The current value                                                                               |
+| button           | The label                                                                                       |
 
 ```nu
 [{name: alpha} {name: beta}] | tui search | tui table | tui debug --keys "tab,type:be" | get values | to nuon
@@ -776,13 +834,14 @@ assert equal (pick-size | tui debug --keys [esc] | get action) "quit"
 
 ## Theming
 
-Colors come from `$env.config.tui`, which has one entry per part of the interface. Each value takes the same forms as [`color_config`](coloring_and_theming.md): a color name, a `#RRGGBB` hex code, or a `{fg, bg, attr}` record.
+Colors come from `$env.config.tui`, which has one entry per part of the interface. Every key except `border_type` takes the same forms as [`color_config`](coloring_and_theming.md): a color name, a `#RRGGBB` hex code, or a `{fg, bg, attr}` record. `border_type` is a name that picks the lines of every border (see [Border Lines](#border-lines)).
 
 | Key                           | Paints                                                               | Default                                        |
 | ----------------------------- | -------------------------------------------------------------------- | ---------------------------------------------- |
-| `title_bar`                   | The title bar from `tui label --title`                               | `{ fg: white, bg: blue, attr: b }`             |
+| `title_bar`                   | The title bar from `tui label --titlebar`                            | `{ fg: white, bg: blue, attr: b }`             |
 | `status_bar`                  | The status bar from `tui label --status`                             | `{ fg: white, bg: dark_gray }`                 |
 | `border` / `border_focused`   | Widget borders, and the border of the focused widget                 | `{ fg: dark_gray }` / `{ fg: cyan }`           |
+| `border_type`                 | The lines of every border (a name, not a color)                      | `"single"`                                     |
 | `selected`                    | The highlighted row in tables, trees, selects, and menus             | `{ attr: r }`                                  |
 | `header`                      | Table column headers                                                 | `{ fg: green, attr: b }`                       |
 | `muted`                       | Placeholders and empty-state text                                    | `{ fg: dark_gray }`                            |
@@ -801,13 +860,54 @@ Run `config nu --doc` to see the documentation for every key.
 
 Table and tree cells are colored the same way as `table` and `ls` output: values by type through `color_config`, and path columns through `LS_COLORS` (following `$env.config.ls.use_ls_colors`). When `$env.config.use_ansi_coloring` is off, the TUI draws without colors and shows the selection in reverse video.
 
+### Border Lines
+
+Border lines are named like the themes of [`table --theme`](/commands/docs/table.md). `$env.config.tui.border_type` sets the lines for every border, including menu drop-downs and the `--dialog` frame. A widget's `--border` flag overrides it for that widget. The flag completes the same names as `table --theme`:
+
+```nu
+[a b c] | tui table --border rounded | tui debug --size [30 6] | get screen
+# => ╭ table (3) ─────────────────╮
+# => │  item                      │
+# => │▶ a                         │
+# => │  b                         │
+# => │  c                         │
+# => ╰────────────────────────────╯
+
+$env.config.tui.border_type = "double"
+[a b c] | tui table | tui debug --size [30 6] | get screen
+# => ╔ table (3) ═════════════════╗
+# => ║  item                      ║
+# => ║▶ a                         ║
+# => ║  b                         ║
+# => ║  c                         ║
+# => ╚════════════════════════════╝
+```
+
+`--border` works on `tui table`, `tui tree`, `tui select`, `tui log`, `tui preview`, `tui search`, `tui textbox`, and `tui box`. On `tui menu`, it sets the lines around the drop-downs. The default is `single`. Each name draws the closest outline of that table theme:
+
+| Name                                                     | Outline                                                         |
+| -------------------------------------------------------- | --------------------------------------------------------------- |
+| `single`, `thin`                                         | `┌─┐ │ └─┘`                                                     |
+| `rounded`                                                | `╭─╮ │ ╰─╯`                                                     |
+| `double`                                                 | `╔═╗ ║ ╚═╝`                                                     |
+| `heavy`                                                  | `┏━┓ ┃ ┗━┛`                                                     |
+| `reinforced`                                             | `┏─┓ │ ┗─┛`                                                     |
+| `basic`, `basic_compact`                                 | `+-+ \| +-+`                                                    |
+| `ascii_rounded`                                          | `.-. \| '-'`                                                    |
+| `dots`                                                   | `.` on top, `:` on the sides, `:..:` on the bottom              |
+| `compact`, `compact_double`, `restructured`, `with_love` | `─`, `═`, `=`, or `❤` lines on top and bottom, and blank sides |
+| `markdown`                                               | `\|` on the sides, and blank top and bottom                     |
+| `frameless`, `light`, `psql`                             | Blank all around                                                |
+
+A border always takes one cell, so `none` and `default` are not valid border names. Use `frameless` for an outline with no visible lines. It still takes its cell, and the widget's title stays visible.
+
 ## Recipes
 
 ### File Picker with Preview and Search
 
 ```nu
 ls
-| tui label --title "files"
+| tui label --titlebar "files"
 | tui search --bind /
 | tui split [ (tui table --columns [name type size]) (tui preview { nu-highlight }) ]
 | tui label --status "enter: pick  /: filter  q: quit"
@@ -850,7 +950,7 @@ A checklist over `ls`: `Space` checks files and `Enter` returns the checked rows
 ```nu
 def "pick files" [] {
     let r = ls
-        | tui label --title "pick files"
+        | tui label --titlebar "pick files"
         | tui search --bind / --columns [name]
         | tui table --multi --columns [name type size modified]
         | tui label --status "space: check  /: filter  enter: accept  q: cancel"
@@ -872,7 +972,7 @@ def "history ui" [] {
         | reverse
         | uniq
         | wrap command
-        | tui label --title "history"
+        | tui label --titlebar "history"
         | tui search --focus --bind / --fuzzy --columns [command] --placeholder "fuzzy filter"
         | tui table --columns [command]
         | tui label --status "type to filter  enter: put on the command line  esc esc: cancel"
@@ -907,7 +1007,7 @@ def "git switch-ui" [] {
         | lines
         | parse "{name}|{when}|{subject}"
     let r = $branches
-        | tui label --title "branches"
+        | tui label --titlebar "branches"
         | tui search --bind / --fuzzy --columns [name]
         | tui split --sizes [45% 1fr] [
             (tui table --columns [name when subject])
@@ -935,7 +1035,7 @@ A `ps` view that refreshes every two seconds, filters by name, shows the full re
 def "ps ui" [] {
     let snapshot = {|| ps | sort-by cpu -r | update cpu { math round -p 1 } | first 200 }
     do $snapshot
-    | tui label --title "processes"
+    | tui label --titlebar "processes"
     | tui search --bind / --columns [name]
     | tui split --sizes [1fr 44] [
         (tui table --columns [pid name cpu mem])
@@ -957,7 +1057,7 @@ Open a JSON, TOML, YAML, or NUON file as a tree, filter its keys, and see the hi
 ```nu
 def "explore-data" [file: path] {
     open $file
-    | tui label --title ($file | path basename)
+    | tui label --titlebar ($file | path basename)
     | tui search --bind /
     | tui split --sizes [40% 1fr] [
         (tui tree)
