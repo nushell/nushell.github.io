@@ -49,6 +49,7 @@ We covered the types of definitions that are available in modules briefly in the
 - Commands ([`export def`](/commands/docs/export_def.md))
 - Aliases ([`export alias`](/commands/docs/export_alias.md))
 - Constants ([`export const`](/commands/docs/export_const.md))
+- Type aliases ([`export type`](/commands/docs/export_type.md))
 - Known externals ([`export extern`](/commands/docs/export_extern.md))
 - Submodules ([`export module`](/commands/docs/export_module.md))
 - Imported symbols from other modules ([`export use`](/commands/docs/export_use.md))

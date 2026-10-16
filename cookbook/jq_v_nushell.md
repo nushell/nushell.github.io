@@ -505,6 +505,8 @@ In `nu` we do:
 
 With `--to-table`, `group-by` returns a table instead of a record. The column that holds the group key is named after the grouping column (`category` here), and the `items` column holds the grouped rows.
 
+The key column keeps the type of the values it groups by. Grouping by an `int` or `filesize` column gives `int` or `filesize` keys, and values that only look the same when printed, such as `1MB` and `1.001MB`, end up in separate groups. Without `--to-table`, the groups are the fields of a record, so the keys are always strings.
+
 ### Aggregating grouped values
 
 In `jq`, to aggregate grouped values we do:
@@ -759,8 +761,8 @@ def flatten-record-paths [separator: string, ctx?: string] {
         "table" => {
             $input | enumerate | each { |r| $r.item | flatten-record-paths $separator ([$ctx $r.index] | str join $separator) }
         }
-        "block" | "closure" => { 
-            error make {msg: "Unexpected type"} 
+        "block" | "closure" => {
+            error make {msg: "Unexpected type"}
         },
         _ => {
             {path: $ctx, value: $input}

@@ -91,6 +91,22 @@ Closures are used in Nu extensively as parameters to iteration style commands li
    # => 3
    ```
 
+1. Each closure call counts toward `$env.config.recursion_limit` (default 50), the same as a custom command call. A closure that keeps calling itself stops with an error instead of overflowing the stack:
+
+   ```nu
+   let M = {|x| do $x $x}; do $M $M
+   # => Error: nu::shell::recursion_limit_reached
+   # =>
+   # =>   × Recursion limit (50) reached
+   # =>    ╭─[repl_entry #1:1:9]
+   # =>  1 │ let M = {|x| do $x $x}; do $M $M
+   # =>    ·         ───────┬──────
+   # =>    ·                ╰── This called itself too many times
+   # =>    ╰────
+   ```
+
+   A custom command that calls itself from inside a closure (for example from `each` or `do`) uses two levels of the limit for each step, so with the default limit it stops at about 25 levels instead of 50. Raise `$env.config.recursion_limit` in your config if you need more.
+
 1. You can also use [pipeline input as `$in`](/book/pipelines.md#pipeline-input-and-the-special-in-variable) in most closures instead of providing an explicit parameter. For example:
 
    ```nu

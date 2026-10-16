@@ -45,6 +45,15 @@ The eml, ics, ini, plist, and vcf formats are provided by the `formats` [core pl
 ::: tip Did you know?
 Under the hood `open` will look for a `from ...` subcommand in your scope which matches the extension of your file.
 You can thus simply extend the set of supported file types of `open` by creating your own `from ...` subcommand.
+[`save`](/commands/docs/save.md) looks for a matching `to ...` subcommand in the same way.
+
+The converter has to be a command defined with `def`. An alias such as `alias "from jsonc" = from json` doesn't work, and `open` and `save` report an error that suggests the equivalent `def`:
+
+```nu
+def "from jsonc" [] { from json }
+open deno.jsonc
+```
+
 :::
 
 But what happens if you load a text file that isn't one of these? Let's try it:

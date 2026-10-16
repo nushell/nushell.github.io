@@ -29,7 +29,7 @@ The `$nu` constant is a record containing several useful values:
 - `temp-dir`: A path for temporary files that should be writable by the user.
 - `pid`: The PID of the currently running Nushell process.
 - `os-info`: Information about the host operating system.
-- `startup-time`: How long Nushell took to start (a duration), measured up to the point where the first prompt is ready. This includes loading configuration files and plugins, running startup hooks, and rendering the prompt. The startup banner shows this value; use `banner --no-startup-time` to hide it.
+- `startup-time`: How long Nushell took to start (a duration). The clock starts when Nushell's own `main` function begins, so the time the operating system spends loading the `nu` executable isn't counted, and `exec nu` starts a new count. In the REPL, the value is final once the first prompt is ready, and it includes loading configuration files and plugins, running startup hooks, and rendering the prompt. With `nu -c` or a script, it is final when the command or script starts running. Before then, for example while a configuration file is being evaluated, it holds the time elapsed so far. The startup banner shows this value; use `banner --no-startup-time` to hide it.
 - `is-interactive`: A boolean indicating whether Nushell was started as an interactive shell (`true`) or is running a script or command-string. For example:
 
   ```nu
@@ -49,8 +49,8 @@ The `$nu` constant is a record containing several useful values:
 - `history-enabled`: History may be disabled via `nu --no-history`, in which case this constant will be `false`.
 - `current-exe`: The full path to the currently-running `nu` binary. Can be combined with `path dirname` (which is constant) to determine the directory where the binary is located.
 - `is-lsp`: `true` when Nushell was started as a Language Server Protocol (LSP) server with `nu --lsp`.
-- `is-mcp`: `true` when Nushell is running as a Model Context Protocol (MCP) server, started with `nu --mcp`.
-- `is-dap`: `true` when Nushell was started as a Debug Adapter Protocol (DAP) server with `nu --dap`.
+- `is-mcp`: `true` when Nushell is running as a Model Context Protocol (MCP) server, started with `nu --mcp`. See [MCP Server](./mcp.md).
+- `is-dap`: `true` when Nushell was started as a Debug Adapter Protocol (DAP) server with `nu --dap`. See [Debugging Scripts](./debugging.md).
 
   In these three modes, `print` writes to stderr so that it doesn't interfere with the protocol messages on stdout.
 

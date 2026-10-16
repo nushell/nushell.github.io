@@ -6,6 +6,7 @@ next:
   text: Standard Library
   link: /book/standard_library.md
 ---
+
 # (Not so) Advanced
 
 While the "Advanced" title might sound daunting and you might be tempted to skip this chapter, in fact, some of the most interesting and powerful features can be found here.
@@ -24,5 +25,7 @@ Thanks to Nushell's strict scoping rules, it is very easy to [iterate over colle
 
 You can [interactively explore data](explore.md) with the [`explore`](/commands/docs/explore.md) command, and you can [build your own terminal user interfaces](tui.md), such as pickers, dialogs, and dashboards, with the `tui` family of commands.
 
-Finally, you can extend Nushell's functionality with [plugins](plugins.md).
+You can extend Nushell's functionality with [plugins](plugins.md).
 Almost anything can be a plugin as long as it communicates with Nushell in a protocol that Nushell understands.
+
+Finally, Nushell can run as an [MCP server](mcp.md), so AI agents and other Model Context Protocol clients can look up its commands and run Nushell code.

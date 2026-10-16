@@ -45,7 +45,7 @@ Running `help` on an alias shows what it expands to, followed by the help for th
 def greet [name: string] { $"Hello, ($name)!" }
 alias hi = greet
 help hi
-# => Alias for greet
+# => Alias for `greet`
 # =>
 # => Alias: hi
 # =>
@@ -73,6 +73,43 @@ help hi
 # =>   │ 0 │ any   │ any    │
 # =>   ╰───┴───────┴────────╯
 ```
+
+When an alias runs a subcommand, `help` on the parent command lists the alias under its own name, right after the subcommand it runs:
+
+```nu
+# Manage notes
+def notes [] {}
+# Add a note
+def "notes add" [text: string] {}
+# List notes
+def "notes list" [] {}
+alias nl = notes list
+help notes
+# => Manage notes
+# =>
+# => Usage:
+# =>   > notes
+# =>
+# => Subcommands:
+# =>   notes add (custom) - Add a note
+# =>   notes list (custom) - List notes
+# =>   nl (alias) - Alias for `notes list`
+# =>
+# => Flags:
+# =>   -h, --help: Display the help message for this command
+# =>
+# => Command Type:
+# =>   > custom
+# =>
+# => Input/output types:
+# =>   ╭───┬───────┬────────╮
+# =>   │ # │ input │ output │
+# =>   ├───┼───────┼────────┤
+# =>   │ 0 │ any   │ any    │
+# =>   ╰───┴───────┴────────╯
+```
+
+The same works for built-in commands: after `alias st = str trim`, `help str` lists `st (alias)` right after `str trim`. Hidden commands and aliases are left out.
 
 ## Persisting
 

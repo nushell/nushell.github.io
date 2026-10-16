@@ -137,6 +137,83 @@ Alternatively, you can [transpose](/commands/docs/transpose.md) the record into 
 # => ╰───┴─────────────────────╯
 ```
 
+## Transforming Records
+
+The `record` family of commands takes a record and returns a record, so you don't need to `transpose` it into a table and back, or rebuild it from [`items`](/commands/docs/items.md) with `into record`. Each of them also accepts a table and works on every row.
+
+[`record where`](/commands/docs/record_where.md) keeps the fields that match a row condition on `key` and `value`:
+
+```nu
+{ "apples": 543, "bananas": 411, "oranges": 0 } | record where value > 0
+# => ╭─────────┬─────╮
+# => │ apples  │ 543 │
+# => │ bananas │ 411 │
+# => ╰─────────┴─────╯
+{ "apples": 543, "bananas": 411, "oranges": 0 } | record where key starts-with b
+# => ╭─────────┬─────╮
+# => │ bananas │ 411 │
+# => ╰─────────┴─────╯
+```
+
+It also takes a closure, which receives the key and the value as arguments. With `--keys` or `--values`, placed before the condition, the closure gets only one of them:
+
+```nu
+{ "apples": 543, "bananas": 411, "oranges": 0 } | record where --values {|count| $count > 500 }
+# => ╭────────┬─────╮
+# => │ apples │ 543 │
+# => ╰────────┴─────╯
+```
+
+[`record each`](/commands/docs/record_each.md) builds a new record from the records its closure returns, so it can change keys and values in one pass:
+
+```nu
+{ "apples": 543, "bananas": 411, "oranges": 0 }
+| record each {|fruit, count| {($fruit | str uppercase): ($count * 2)} }
+# => ╭─────────┬──────╮
+# => │ APPLES  │ 1086 │
+# => │ BANANAS │ 822  │
+# => │ ORANGES │ 0    │
+# => ╰─────────┴──────╯
+```
+
+[`record walk`](/commands/docs/record_walk.md) runs a closure on every value nested anywhere inside the record and puts the result back in the same place. The closure receives the value and its cell path. For example, to hide every secret in a configuration record:
+
+```nu
+{db: {host: prod, password: hunter2}, api: {token: abc}}
+| record walk {|value, path|
+    if ($path | to text) =~ "(?i)secret|token|password" { "***" } else { $value }
+}
+| to nuon
+# => {db: {host: prod, password: ***}, api: {token: ***}}
+```
+
+By default, only the leaves are visited. `--containers` also passes the nested records and lists to the closure, and `--no-lists` treats a list as a single value instead of walking into it.
+
+[`record apply`](/commands/docs/record_apply.md) takes a record of closures and runs each one on the field with the same name. Fields without a closure are left alone:
+
+```nu
+{age: "42", email: "A@B.COM", tags: [x]} | record apply {age: {into int}, email: {str lowercase}}
+# => ╭───────┬───────────────╮
+# => │ age   │ 42            │
+# => │ email │ a@b.com       │
+# => │ tags  │ [list 1 item] │
+# => ╰───────┴───────────────╯
+```
+
+Because a table is a list of records, the same record of closures converts a column in every row:
+
+```nu
+[{name: a, size: "1"} {name: b, size: "2"}] | record apply {size: {into int}}
+# => ╭───┬──────┬──────╮
+# => │ # │ name │ size │
+# => ├───┼──────┼──────┤
+# => │ 0 │ a    │    1 │
+# => │ 1 │ b    │    2 │
+# => ╰───┴──────┴──────╯
+```
+
+A closure for a field that the input doesn't have is ignored, unless you pass `--strict`, which makes it an error.
+
 ## Accessing Record Values
 
 See [Navigating and Accessing Structured Data](/book/navigating_structured_data.md) for an in-depth explanation of how to access record values (and other structured data).

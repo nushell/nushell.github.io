@@ -60,6 +60,17 @@ Any operator can be used, and conditions combine with `and`, `or` and `not`. Use
 # => ╰───┴───┴───╯
 ```
 
+A bare word on either side of `and`, `or` or `xor`, or after `not`, is a column too, so a `bool` column can be used as a condition by itself:
+
+```nu
+[{name: a, done: true, urgent: true} {name: b, done: false, urgent: true} {name: c, done: false, urgent: false}] | where not done and urgent
+# => ╭───┬──────┬───────┬────────╮
+# => │ # │ name │ done  │ urgent │
+# => ├───┼──────┼───────┼────────┤
+# => │ 0 │ b    │ false │ true   │
+# => ╰───┴──────┴───────┴────────╯
+```
+
 Variables from the surrounding scope can be used on either side: `let limit = 2; $list | where $it > $limit`.
 
 A row condition is syntax, not a value. It cannot be stored in a variable; use a closure for that.

@@ -2,13 +2,13 @@
 
 Nushell has three keywords that declare variables:
 
-| Keyword                              | Value computed    | Reassignable | Captured by closures | Usable at parse time |
-| ------------------------------------ | ----------------- | ------------ | -------------------- | -------------------- |
-| [`let`](/commands/docs/let.md)       | When it runs      | No           | Yes                  | No                   |
-| [`mut`](/commands/docs/mut.md)       | When it runs      | Yes          | No                   | No                   |
-| [`const`](/commands/docs/const.md)   | While parsing     | No           | Yes                  | Yes                  |
+| Keyword                            | Value computed | Reassignable | Captured by closures | Usable at parse time |
+| ---------------------------------- | -------------- | ------------ | -------------------- | -------------------- |
+| [`let`](/commands/docs/let.md)     | When it runs   | No           | Yes                  | No                   |
+| [`mut`](/commands/docs/mut.md)     | When it runs   | Yes          | No                   | No                   |
+| [`const`](/commands/docs/const.md) | While parsing  | No           | Yes                  | Yes                  |
 
-[`unlet`](/commands/docs/unlet.md) removes a variable again. Commands, aliases, modules and externals are declared with [`def`](./custom_commands.md), [`alias`](/commands/docs/alias.md), [`module`](/commands/docs/module.md) and [`extern`](/commands/docs/extern.md).
+[`unlet`](/commands/docs/unlet.md) removes a variable again. Commands, aliases, modules and externals are declared with [`def`](./custom_commands.md), [`alias`](/commands/docs/alias.md), [`module`](/commands/docs/module.md) and [`extern`](/commands/docs/extern.md). Names for types are declared with [`type`](#type).
 
 See also: [Variables](/book/variables.md) in the Book. Where declarations are visible is covered in [Variable Scope](./variable_scope.md).
 
@@ -175,6 +175,47 @@ unlet $nu
 # =>    ·        ╰── '$nu' is a built-in variable and cannot be deleted
 # =>    ╰────
 ```
+
+## `type`
+
+`type` declares a type alias, a name that stands for a type signature. How aliases expand is described in [Type aliases](./types/type_signatures.md#type-aliases). This section covers where one is visible.
+
+A type alias is visible from its definition to the end of the enclosing block, the same as `alias` and `const`. At the REPL, it stays defined for later lines. An alias defined in a block isn't visible after the block:
+
+```nu
+do { type Id = int; let x: Id = 1 }; let y: Id = 2
+# => Error: nu::parser::unknown_type
+# =>
+# =>   × Unknown type.
+# =>    ╭─[repl_entry #1:1:45]
+# =>  1 │ do { type Id = int; let x: Id = 1 }; let y: Id = 2
+# =>    ·                                             ─┬
+# =>    ·                                              ╰── unknown type
+# =>    ╰────
+# =>   help: check the spelling; a type alias must be defined with `type Name = <type>` above this line, or imported with `use <module> Name`
+```
+
+Type aliases are defined in order. Using one above its definition is an error that points at both places:
+
+```nu
+let x: Id = 1; type Id = int
+# => Error: nu::parser::type_alias_used_before_definition
+# =>
+# =>   × Type alias `Id` is used before its definition.
+# =>    ╭─[repl_entry #1:1:8]
+# =>  1 │ let x: Id = 1; type Id = int
+# =>    ·        ─┬      ──────┬──────
+# =>    ·         │            ╰── defined here
+# =>    ·         ╰── used here
+# =>    ╰────
+# =>   help: move the `type` statement above its first use
+```
+
+A second `type` with the same name shadows the first from that point on.
+
+In a module, a type alias is private unless it is declared with `export type`. An exported alias is imported by `use <module> Name`, `use <module> [Name ...]`, `use <module> *`, `export use`, and `overlay use` without `--prefix`. A bare `use <module>` doesn't import it, because a type name can't take the module-name prefix that commands get. See [Using Modules](/book/modules/using_modules.md#importing-type-aliases) in the Book.
+
+`type` and `export type` are parser keywords. A command, alias or extern can't be named `type` (`nu::parser::name_is_keyword`), and `alias ty = type` is an error (`nu::parser::cant_alias_keyword`).
 
 ## Reserved Names
 

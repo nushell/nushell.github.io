@@ -273,6 +273,33 @@ Or we could use the [`reduce`](/commands/docs/reduce.md) command to dynamically 
 # => ╰───┴───┴───┴───┴───┴───┴───╯
 ```
 
+### Joining Tables
+
+`merge` lines rows up by position. To combine rows by matching values in a column instead, as a database join does, use [`join`](/commands/docs/join.md). It takes the right-hand table, the join column of the left table, and, if its name is different, the join column of the right table:
+
+```nu
+let orders = [[id customer]; [1 alice] [2 bob] [3 carol]]
+let shipped = [[order_id carrier]; [1 ups] [3 fedex]]
+$orders | join $shipped id order_id
+# => ╭───┬────┬──────────┬──────────┬─────────╮
+# => │ # │ id │ customer │ order_id │ carrier │
+# => ├───┼────┼──────────┼──────────┼─────────┤
+# => │ 0 │  1 │ alice    │        1 │ ups     │
+# => │ 1 │  3 │ carol    │        3 │ fedex   │
+# => ╰───┴────┴──────────┴──────────┴─────────╯
+```
+
+By default, only rows that have a match in both tables are kept. `--left`, `--right`, and `--outer` also keep the rows without a match from one or both sides. `--anti` keeps only the rows of the left table that have _no_ match, without adding any columns, which answers questions like "which orders haven't shipped?":
+
+```nu
+$orders | join --anti $shipped id order_id
+# => ╭───┬────┬──────────╮
+# => │ # │ id │ customer │
+# => ├───┼────┼──────────┤
+# => │ 0 │  2 │ bob      │
+# => ╰───┴────┴──────────╯
+```
+
 ### Adding a new Column
 
 We can use the [`insert`](/commands/docs/insert.md) command to add a new column to the table. Let's look at an example:

@@ -122,16 +122,16 @@ Some keys are a _fallback chain_: Reedline tries each step and takes the first o
 
 Nushell adds the following keybindings on top of Reedline's defaults. They are defined in `$env.config.keybindings`, so you can change or remove them, and they apply in every edit mode:
 
-| Key                                  | Action                                                                                            |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------- |
-| <kbd>Tab</kbd>                       | Open the completion menu, otherwise select the next item, otherwise complete                      |
-| <kbd>Shift</kbd>+<kbd>Tab</kbd>      | Select the previous item in the menu                                                              |
-| <kbd>Ctrl</kbd>+<kbd>Space</kbd>     | Open the IDE-style completion menu, otherwise select the next item, otherwise complete            |
-| <kbd>Ctrl</kbd>+<kbd>R</kbd>         | Open the history menu (this replaces Reedline's <kbd>Ctrl</kbd>+<kbd>R</kbd> history search)      |
-| <kbd>Ctrl</kbd>+<kbd>Q</kbd>         | Search the history                                                                                |
-| <kbd>Ctrl</kbd>+<kbd>X</kbd>         | Show the next page of an open menu                                                                |
-| <kbd>Ctrl</kbd>+<kbd>Z</kbd>         | Show the previous page of an open menu, otherwise undo                                            |
-| <kbd>F1</kbd>                        | Open the help menu                                                                                |
+| Key                              | Action                                                                                       |
+| -------------------------------- | -------------------------------------------------------------------------------------------- |
+| <kbd>Tab</kbd>                   | Open the completion menu, otherwise select the next item, otherwise complete                 |
+| <kbd>Shift</kbd>+<kbd>Tab</kbd>  | Select the previous item in the menu                                                         |
+| <kbd>Ctrl</kbd>+<kbd>Space</kbd> | Open the IDE-style completion menu, otherwise select the next item, otherwise complete       |
+| <kbd>Ctrl</kbd>+<kbd>R</kbd>     | Open the history menu (this replaces Reedline's <kbd>Ctrl</kbd>+<kbd>R</kbd> history search) |
+| <kbd>Ctrl</kbd>+<kbd>Q</kbd>     | Search the history                                                                           |
+| <kbd>Ctrl</kbd>+<kbd>X</kbd>     | Show the next page of an open menu                                                           |
+| <kbd>Ctrl</kbd>+<kbd>Z</kbd>     | Show the previous page of an open menu, otherwise undo                                       |
+| <kbd>F1</kbd>                    | Open the help menu                                                                           |
 
 ```nu
 $env.config.keybindings | select name modifier keycode
@@ -153,91 +153,91 @@ $env.config.keybindings | select name modifier keycode
 
 Four sets of keybindings are shared between the edit modes:
 
-| Set                                | Emacs | Vi insert | Vi normal / visual     | Helix insert | Helix normal / select  |
-| ---------------------------------- | ----- | --------- | ---------------------- | ------------ | ---------------------- |
-| [Control](#control-keybindings)    | yes   | yes       | yes                    | yes          | yes                    |
-| [Navigation](#navigation-keybindings) | yes | yes      | yes, rebound in visual | yes          | yes, rebound in select |
-| [Editing](#editing-keybindings)    | yes   | yes       | no                     | yes          | no                     |
-| [Selection](#selection-keybindings) | yes  | yes       | yes                    | yes          | yes                    |
+| Set                                   | Emacs | Vi insert | Vi normal / visual     | Helix insert | Helix normal / select  |
+| ------------------------------------- | ----- | --------- | ---------------------- | ------------ | ---------------------- |
+| [Control](#control-keybindings)       | yes   | yes       | yes                    | yes          | yes                    |
+| [Navigation](#navigation-keybindings) | yes   | yes       | yes, rebound in visual | yes          | yes, rebound in select |
+| [Editing](#editing-keybindings)       | yes   | yes       | no                     | yes          | no                     |
+| [Selection](#selection-keybindings)   | yes   | yes       | yes                    | yes          | yes                    |
 
 A mode without the editing set rebinds <kbd>Backspace</kbd> and <kbd>Delete</kbd> itself. Modes may also override single keys within a set; those keys are noted in the mode's own tables.
 
 #### Control Keybindings
 
-| Key                          | Action                                                                                    |
-| ---------------------------- | ----------------------------------------------------------------------------------------- |
-| <kbd>Esc</kbd>               | Close an open menu and clear the selection; in Vi and Helix modes, also switch mode       |
-| <kbd>Ctrl</kbd>+<kbd>C</kbd> | Cancel the current input                                                                  |
-| <kbd>Ctrl</kbd>+<kbd>D</kbd> | Delete the character under the cursor, or exit Nushell when the line is empty             |
-| <kbd>Ctrl</kbd>+<kbd>L</kbd> | Clear the screen, keeping the current input                                               |
-| <kbd>Ctrl</kbd>+<kbd>R</kbd> | Search the history (Nushell binds this key to the history menu instead, see above)        |
-| <kbd>Ctrl</kbd>+<kbd>O</kbd> | Open the current input in your editor (see `$env.config.buffer_editor`)                       |
+| Key                          | Action                                                                              |
+| ---------------------------- | ----------------------------------------------------------------------------------- |
+| <kbd>Esc</kbd>               | Close an open menu and clear the selection; in Vi and Helix modes, also switch mode |
+| <kbd>Ctrl</kbd>+<kbd>C</kbd> | Cancel the current input                                                            |
+| <kbd>Ctrl</kbd>+<kbd>D</kbd> | Delete the character under the cursor, or exit Nushell when the line is empty       |
+| <kbd>Ctrl</kbd>+<kbd>L</kbd> | Clear the screen, keeping the current input                                         |
+| <kbd>Ctrl</kbd>+<kbd>R</kbd> | Search the history (Nushell binds this key to the history menu instead, see above)  |
+| <kbd>Ctrl</kbd>+<kbd>O</kbd> | Open the current input in your editor (see `$env.config.buffer_editor`)             |
 
 #### Navigation Keybindings
 
-| Key                                                     | Action                                                                                                         |
-| ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| <kbd>↑</kbd>, <kbd>Ctrl</kbd>+<kbd>P</kbd>              | Move up in an open menu, otherwise move one line up, walking back through the history from the first line     |
-| <kbd>↓</kbd>, <kbd>Ctrl</kbd>+<kbd>N</kbd>              | Move down in an open menu, otherwise move one line down, walking forward through the history from the last line |
-| <kbd>←</kbd>                                            | Move left in an open menu, otherwise move one character left                                                   |
-| <kbd>→</kbd>                                            | Accept a history hint, otherwise move right in an open menu, otherwise move one character right                |
-| <kbd>Ctrl</kbd>+<kbd>←</kbd>                            | Move one word left                                                                                             |
-| <kbd>Ctrl</kbd>+<kbd>→</kbd>                            | Accept one word of a history hint, otherwise move one word right                                               |
-| <kbd>Home</kbd>, <kbd>Ctrl</kbd>+<kbd>A</kbd>           | Move to the start of the line                                                                                  |
-| <kbd>End</kbd>, <kbd>Ctrl</kbd>+<kbd>E</kbd>            | Accept a history hint, otherwise move to the end of the line                                                   |
-| <kbd>Ctrl</kbd>+<kbd>Home</kbd>, <kbd>Alt</kbd>+<kbd>&lt;</kbd> | Move to the start of the buffer                                                                        |
-| <kbd>Ctrl</kbd>+<kbd>End</kbd>, <kbd>Alt</kbd>+<kbd>&gt;</kbd>  | Move to the end of the buffer                                                                          |
+| Key                                                             | Action                                                                                                          |
+| --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| <kbd>↑</kbd>, <kbd>Ctrl</kbd>+<kbd>P</kbd>                      | Move up in an open menu, otherwise move one line up, walking back through the history from the first line       |
+| <kbd>↓</kbd>, <kbd>Ctrl</kbd>+<kbd>N</kbd>                      | Move down in an open menu, otherwise move one line down, walking forward through the history from the last line |
+| <kbd>←</kbd>                                                    | Move left in an open menu, otherwise move one character left                                                    |
+| <kbd>→</kbd>                                                    | Accept a history hint, otherwise move right in an open menu, otherwise move one character right                 |
+| <kbd>Ctrl</kbd>+<kbd>←</kbd>                                    | Move one word left                                                                                              |
+| <kbd>Ctrl</kbd>+<kbd>→</kbd>                                    | Accept one word of a history hint, otherwise move one word right                                                |
+| <kbd>Home</kbd>, <kbd>Ctrl</kbd>+<kbd>A</kbd>                   | Move to the start of the line                                                                                   |
+| <kbd>End</kbd>, <kbd>Ctrl</kbd>+<kbd>E</kbd>                    | Accept a history hint, otherwise move to the end of the line                                                    |
+| <kbd>Ctrl</kbd>+<kbd>Home</kbd>, <kbd>Alt</kbd>+<kbd>&lt;</kbd> | Move to the start of the buffer                                                                                 |
+| <kbd>Ctrl</kbd>+<kbd>End</kbd>, <kbd>Alt</kbd>+<kbd>&gt;</kbd>  | Move to the end of the buffer                                                                                   |
 
 On terminals that use the Kitty keyboard protocol, <kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>,</kbd> and <kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>.</kbd> also work for <kbd>Alt</kbd>+<kbd>&lt;</kbd> and <kbd>Alt</kbd>+<kbd>&gt;</kbd>.
 
 #### Editing Keybindings
 
-| Key                                                     | Action                                                     |
-| ------------------------------------------------------- | ---------------------------------------------------------- |
-| <kbd>Backspace</kbd>, <kbd>Ctrl</kbd>+<kbd>H</kbd>      | Delete the character to the left                           |
-| <kbd>Delete</kbd>                                       | Delete the character under the cursor                      |
-| <kbd>Ctrl</kbd>+<kbd>Backspace</kbd>, <kbd>Ctrl</kbd>+<kbd>W</kbd> | Delete the word to the left                     |
-| <kbd>Ctrl</kbd>+<kbd>Delete</kbd>                       | Delete the word to the right                               |
-| <kbd>Shift</kbd>+<kbd>Enter</kbd>, <kbd>Alt</kbd>+<kbd>Enter</kbd> | Insert a newline without running the input      |
-| <kbd>Ctrl</kbd>+<kbd>J</kbd>                            | Run the input, or insert a newline if it is incomplete     |
+| Key                                                                | Action                                                 |
+| ------------------------------------------------------------------ | ------------------------------------------------------ |
+| <kbd>Backspace</kbd>, <kbd>Ctrl</kbd>+<kbd>H</kbd>                 | Delete the character to the left                       |
+| <kbd>Delete</kbd>                                                  | Delete the character under the cursor                  |
+| <kbd>Ctrl</kbd>+<kbd>Backspace</kbd>, <kbd>Ctrl</kbd>+<kbd>W</kbd> | Delete the word to the left                            |
+| <kbd>Ctrl</kbd>+<kbd>Delete</kbd>                                  | Delete the word to the right                           |
+| <kbd>Shift</kbd>+<kbd>Enter</kbd>, <kbd>Alt</kbd>+<kbd>Enter</kbd> | Insert a newline without running the input             |
+| <kbd>Ctrl</kbd>+<kbd>J</kbd>                                       | Run the input, or insert a newline if it is incomplete |
 
 None of these fill the cut buffer (Emacs mode rebinds <kbd>Ctrl</kbd>+<kbd>W</kbd> to a cut, so there it does). When Nushell is built with the `system-clipboard` feature, this set also has <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd>, <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd> and <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd> to cut, copy and paste the selection with the system clipboard.
 
 #### Selection Keybindings
 
-| Key                                                                     | Action                                           |
-| ----------------------------------------------------------------------- | ------------------------------------------------ |
-| <kbd>Shift</kbd>+<kbd>←</kbd>, <kbd>Shift</kbd>+<kbd>→</kbd>            | Extend the selection by one character            |
-| <kbd>Shift</kbd>+<kbd>↑</kbd>, <kbd>Shift</kbd>+<kbd>↓</kbd>            | Extend the selection by one line                 |
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>←</kbd>, <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>→</kbd> | Extend the selection by one word |
-| <kbd>Shift</kbd>+<kbd>Home</kbd>, <kbd>Shift</kbd>+<kbd>End</kbd>       | Extend the selection to the line start or end    |
+| Key                                                                                               | Action                                          |
+| ------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| <kbd>Shift</kbd>+<kbd>←</kbd>, <kbd>Shift</kbd>+<kbd>→</kbd>                                      | Extend the selection by one character           |
+| <kbd>Shift</kbd>+<kbd>↑</kbd>, <kbd>Shift</kbd>+<kbd>↓</kbd>                                      | Extend the selection by one line                |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>←</kbd>, <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>→</kbd>      | Extend the selection by one word                |
+| <kbd>Shift</kbd>+<kbd>Home</kbd>, <kbd>Shift</kbd>+<kbd>End</kbd>                                 | Extend the selection to the line start or end   |
 | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Home</kbd>, <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>End</kbd> | Extend the selection to the buffer start or end |
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd>                           | Select the whole buffer                          |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd>                                                     | Select the whole buffer                         |
 
 ### Emacs Mode
 
 Emacs mode is the default. It has all four [common sets](#common-keybindings), plus:
 
-| Key                                                       | Action                                                                                          |
-| --------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| <kbd>Ctrl</kbd>+<kbd>B</kbd>                              | Move left in an open menu, otherwise move one character left                                    |
-| <kbd>Ctrl</kbd>+<kbd>F</kbd>                              | Accept a history hint, otherwise move right in an open menu, otherwise move one character right |
-| <kbd>Alt</kbd>+<kbd>←</kbd>, <kbd>Alt</kbd>+<kbd>B</kbd>  | Move one word left                                                                              |
-| <kbd>Alt</kbd>+<kbd>→</kbd>, <kbd>Alt</kbd>+<kbd>F</kbd>  | Accept one word of a history hint, otherwise move one word right                                |
-| <kbd>Enter</kbd>                                          | Run the input, or insert a newline if it is incomplete                                          |
-| <kbd>Alt</kbd>+<kbd>Backspace</kbd>, <kbd>Alt</kbd>+<kbd>M</kbd> | Delete the word to the left                                                              |
-| <kbd>Alt</kbd>+<kbd>Delete</kbd>                          | Delete the word to the right                                                                    |
-| <kbd>Ctrl</kbd>+<kbd>W</kbd>                              | Cut the word to the left                                                                        |
-| <kbd>Alt</kbd>+<kbd>D</kbd>                               | Cut the word to the right                                                                       |
-| <kbd>Ctrl</kbd>+<kbd>K</kbd>                              | Cut to the end of the line, or join the next line when already at the end                       |
-| <kbd>Ctrl</kbd>+<kbd>U</kbd>                              | Cut from the start of the line to the cursor                                                    |
-| <kbd>Ctrl</kbd>+<kbd>Y</kbd>                              | Paste the cut buffer before the cursor                                                          |
-| <kbd>Ctrl</kbd>+<kbd>T</kbd>                              | Swap the two characters around the cursor                                                       |
-| <kbd>Ctrl</kbd>+<kbd>Z</kbd>                              | Undo (Nushell binds this key to "previous menu page, otherwise undo", see above)                |
-| <kbd>Ctrl</kbd>+<kbd>G</kbd>                              | Redo                                                                                            |
-| <kbd>Alt</kbd>+<kbd>U</kbd>                               | Uppercase the word under the cursor                                                             |
-| <kbd>Alt</kbd>+<kbd>L</kbd>                               | Lowercase the word under the cursor                                                             |
-| <kbd>Alt</kbd>+<kbd>C</kbd>                               | Capitalize the character under the cursor                                                       |
+| Key                                                              | Action                                                                                          |
+| ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| <kbd>Ctrl</kbd>+<kbd>B</kbd>                                     | Move left in an open menu, otherwise move one character left                                    |
+| <kbd>Ctrl</kbd>+<kbd>F</kbd>                                     | Accept a history hint, otherwise move right in an open menu, otherwise move one character right |
+| <kbd>Alt</kbd>+<kbd>←</kbd>, <kbd>Alt</kbd>+<kbd>B</kbd>         | Move one word left                                                                              |
+| <kbd>Alt</kbd>+<kbd>→</kbd>, <kbd>Alt</kbd>+<kbd>F</kbd>         | Accept one word of a history hint, otherwise move one word right                                |
+| <kbd>Enter</kbd>                                                 | Run the input, or insert a newline if it is incomplete                                          |
+| <kbd>Alt</kbd>+<kbd>Backspace</kbd>, <kbd>Alt</kbd>+<kbd>M</kbd> | Delete the word to the left                                                                     |
+| <kbd>Alt</kbd>+<kbd>Delete</kbd>                                 | Delete the word to the right                                                                    |
+| <kbd>Ctrl</kbd>+<kbd>W</kbd>                                     | Cut the word to the left                                                                        |
+| <kbd>Alt</kbd>+<kbd>D</kbd>                                      | Cut the word to the right                                                                       |
+| <kbd>Ctrl</kbd>+<kbd>K</kbd>                                     | Cut to the end of the line, or join the next line when already at the end                       |
+| <kbd>Ctrl</kbd>+<kbd>U</kbd>                                     | Cut from the start of the line to the cursor                                                    |
+| <kbd>Ctrl</kbd>+<kbd>Y</kbd>                                     | Paste the cut buffer before the cursor                                                          |
+| <kbd>Ctrl</kbd>+<kbd>T</kbd>                                     | Swap the two characters around the cursor                                                       |
+| <kbd>Ctrl</kbd>+<kbd>Z</kbd>                                     | Undo (Nushell binds this key to "previous menu page, otherwise undo", see above)                |
+| <kbd>Ctrl</kbd>+<kbd>G</kbd>                                     | Redo                                                                                            |
+| <kbd>Alt</kbd>+<kbd>U</kbd>                                      | Uppercase the word under the cursor                                                             |
+| <kbd>Alt</kbd>+<kbd>L</kbd>                                      | Lowercase the word under the cursor                                                             |
+| <kbd>Alt</kbd>+<kbd>C</kbd>                                      | Capitalize the character under the cursor                                                       |
 
 ### Vi Mode
 
@@ -251,9 +251,9 @@ In every Vi mode, an <kbd>Alt</kbd>+\<char\> chord that isn't bound is read as <
 
 Insert mode has all four [common sets](#common-keybindings), plus:
 
-| Key              | Action                                                                     |
-| ---------------- | -------------------------------------------------------------------------- |
-| <kbd>Enter</kbd> | Run the input, or insert a newline if it is incomplete                     |
+| Key              | Action                                                                      |
+| ---------------- | --------------------------------------------------------------------------- |
+| <kbd>Enter</kbd> | Run the input, or insert a newline if it is incomplete                      |
 | <kbd>Esc</kbd>   | Switch to normal mode, moving the cursor back onto the last typed character |
 
 The Emacs cut and case commands (<kbd>Ctrl</kbd>+<kbd>K</kbd>, <kbd>Ctrl</kbd>+<kbd>U</kbd>, <kbd>Ctrl</kbd>+<kbd>Y</kbd>, <kbd>Ctrl</kbd>+<kbd>T</kbd>, <kbd>Alt</kbd>+<kbd>D</kbd>, <kbd>Alt</kbd>+<kbd>U</kbd>, <kbd>Alt</kbd>+<kbd>L</kbd> and <kbd>Alt</kbd>+<kbd>C</kbd>) are not bound in insert mode. Because of the meta convention, <kbd>Alt</kbd>+<kbd>u</kbd> undoes, and <kbd>Alt</kbd>+<kbd>d</kbd> leaves insert mode and starts a <kbd>d</kbd> operator. <kbd>Ctrl</kbd>+<kbd>W</kbd> deletes the word to the left without cutting it.
@@ -262,50 +262,50 @@ The Emacs cut and case commands (<kbd>Ctrl</kbd>+<kbd>K</kbd>, <kbd>Ctrl</kbd>+<
 
 Normal mode and visual mode have the control, navigation and selection sets, but not the editing set. In its place:
 
-| Key                  | Action                                                                                                     |
-| -------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Key                  | Action                                                                                                    |
+| -------------------- | --------------------------------------------------------------------------------------------------------- |
 | <kbd>Backspace</kbd> | Move one character left in normal mode; extend the selection one character left in visual mode            |
 | <kbd>Delete</kbd>    | Delete the character under the cursor in normal mode; in visual mode, cut the selection like <kbd>d</kbd> |
 
 These motions move the cursor in normal mode. In visual mode, they extend the selection instead:
 
-| Key                                    | Motion                                                                          |
-| -------------------------------------- | ------------------------------------------------------------------------------- |
-| <kbd>h</kbd>, <kbd>l</kbd>             | Move one character left or right                                                |
-| <kbd>j</kbd>, <kbd>k</kbd>             | Move one line down or up, walking through the history at the edge of the buffer |
-| <kbd>w</kbd>, <kbd>W</kbd>             | Move to the start of the next word or WORD                                      |
-| <kbd>e</kbd>, <kbd>E</kbd>             | Move to the end of the next word or WORD                                        |
-| <kbd>b</kbd>, <kbd>B</kbd>             | Move to the start of the previous word or WORD                                  |
-| <kbd>0</kbd>                           | Move to the start of the line                                                   |
-| <kbd>^</kbd>                           | Move to the first non-blank character of the line                               |
-| <kbd>$</kbd>                           | Move to the end of the line                                                     |
-| <kbd>g</kbd><kbd>g</kbd>, <kbd>G</kbd> | Move to the start or end of the buffer                                          |
-| <kbd>f</kbd>\<char\>, <kbd>F</kbd>\<char\> | Move onto the next or previous occurrence of \<char\>                       |
-| <kbd>t</kbd>\<char\>, <kbd>T</kbd>\<char\> | Move just before the next or previous occurrence of \<char\>                |
-| <kbd>;</kbd>, <kbd>,</kbd>             | Repeat the last <kbd>f</kbd>/<kbd>t</kbd>/<kbd>F</kbd>/<kbd>T</kbd> search, forwards or reversed |
+| Key                                        | Motion                                                                                           |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| <kbd>h</kbd>, <kbd>l</kbd>                 | Move one character left or right                                                                 |
+| <kbd>j</kbd>, <kbd>k</kbd>                 | Move one line down or up, walking through the history at the edge of the buffer                  |
+| <kbd>w</kbd>, <kbd>W</kbd>                 | Move to the start of the next word or WORD                                                       |
+| <kbd>e</kbd>, <kbd>E</kbd>                 | Move to the end of the next word or WORD                                                         |
+| <kbd>b</kbd>, <kbd>B</kbd>                 | Move to the start of the previous word or WORD                                                   |
+| <kbd>0</kbd>                               | Move to the start of the line                                                                    |
+| <kbd>^</kbd>                               | Move to the first non-blank character of the line                                                |
+| <kbd>$</kbd>                               | Move to the end of the line                                                                      |
+| <kbd>g</kbd><kbd>g</kbd>, <kbd>G</kbd>     | Move to the start or end of the buffer                                                           |
+| <kbd>f</kbd>\<char\>, <kbd>F</kbd>\<char\> | Move onto the next or previous occurrence of \<char\>                                            |
+| <kbd>t</kbd>\<char\>, <kbd>T</kbd>\<char\> | Move just before the next or previous occurrence of \<char\>                                     |
+| <kbd>;</kbd>, <kbd>,</kbd>                 | Repeat the last <kbd>f</kbd>/<kbd>t</kbd>/<kbd>F</kbd>/<kbd>T</kbd> search, forwards or reversed |
 
 A WORD is delimited only by whitespace; a word is also delimited by punctuation. In normal mode, <kbd>h</kbd>, <kbd>j</kbd>, <kbd>k</kbd> and <kbd>l</kbd> follow the same fallback chain as the arrow keys: an open menu takes the key first, and <kbd>l</kbd> accepts a history hint before it moves.
 
 Normal mode commands:
 
-| Key                        | Action                                                                              |
-| -------------------------- | ----------------------------------------------------------------------------------- |
-| <kbd>i</kbd>, <kbd>a</kbd> | Insert before or after the cursor                                                   |
-| <kbd>I</kbd>, <kbd>A</kbd> | Insert at the start or at the end of the line                                       |
-| <kbd>o</kbd>, <kbd>O</kbd> | Open a line below or above, and insert                                              |
-| <kbd>v</kbd>               | Enter [visual mode](#vi-visual-mode)                                                |
-| <kbd>x</kbd>, <kbd>X</kbd> | Cut the character under or before the cursor                                        |
-| <kbd>s</kbd>               | Cut the character under the cursor and insert                                       |
-| <kbd>r</kbd>\<char\>       | Replace the character under the cursor with \<char\>                                |
-| <kbd>C</kbd>               | Change to the end of the line, without filling the cut buffer                       |
-| <kbd>S</kbd>               | Change the whole line                                                               |
-| <kbd>D</kbd>               | Cut to the end of the line                                                          |
-| <kbd>p</kbd>, <kbd>P</kbd> | Paste the cut buffer after or before the cursor                                     |
-| <kbd>u</kbd>               | Undo                                                                                |
-| <kbd>~</kbd>               | Switch the case of the character under the cursor                                   |
-| <kbd>.</kbd>               | Repeat the last change                                                              |
-| <kbd>?</kbd>               | Search the history and switch to insert mode                                        |
-| <kbd>Enter</kbd>           | Run the input, or insert a newline and switch to insert mode if it is incomplete    |
+| Key                        | Action                                                                           |
+| -------------------------- | -------------------------------------------------------------------------------- |
+| <kbd>i</kbd>, <kbd>a</kbd> | Insert before or after the cursor                                                |
+| <kbd>I</kbd>, <kbd>A</kbd> | Insert at the start or at the end of the line                                    |
+| <kbd>o</kbd>, <kbd>O</kbd> | Open a line below or above, and insert                                           |
+| <kbd>v</kbd>               | Enter [visual mode](#vi-visual-mode)                                             |
+| <kbd>x</kbd>, <kbd>X</kbd> | Cut the character under or before the cursor                                     |
+| <kbd>s</kbd>               | Cut the character under the cursor and insert                                    |
+| <kbd>r</kbd>\<char\>       | Replace the character under the cursor with \<char\>                             |
+| <kbd>C</kbd>               | Change to the end of the line, without filling the cut buffer                    |
+| <kbd>S</kbd>               | Change the whole line                                                            |
+| <kbd>D</kbd>               | Cut to the end of the line                                                       |
+| <kbd>p</kbd>, <kbd>P</kbd> | Paste the cut buffer after or before the cursor                                  |
+| <kbd>u</kbd>               | Undo                                                                             |
+| <kbd>~</kbd>               | Switch the case of the character under the cursor                                |
+| <kbd>.</kbd>               | Repeat the last change                                                           |
+| <kbd>?</kbd>               | Search the history and switch to insert mode                                     |
+| <kbd>Enter</kbd>           | Run the input, or insert a newline and switch to insert mode if it is incomplete |
 
 #### Vi Operators and Text Objects
 
@@ -313,11 +313,11 @@ Normal mode commands:
 
 An operator can also take a text object, with <kbd>i</kbd> for "inside" or <kbd>a</kbd> for "around":
 
-| Object                     | Selects               |
-| -------------------------- | --------------------- |
-| <kbd>w</kbd>, <kbd>W</kbd> | A word or WORD        |
+| Object                     | Selects                |
+| -------------------------- | ---------------------- |
+| <kbd>w</kbd>, <kbd>W</kbd> | A word or WORD         |
 | <kbd>b</kbd>               | The enclosing brackets |
-| <kbd>q</kbd>               | The enclosing quotes  |
+| <kbd>q</kbd>               | The enclosing quotes   |
 
 A delimiter works as a text object too: `(`, `)`, `[`, `]`, `{`, `}`, `<`, `>`, `"`, `'`, `` ` `` and `$`. Either half of a pair does the same thing, so <kbd>d</kbd><kbd>i</kbd><kbd>(</kbd> is the same as <kbd>d</kbd><kbd>i</kbd><kbd>)</kbd>. All three operators take the inside form; only <kbd>d</kbd> and <kbd>y</kbd> take the around form.
 
@@ -352,56 +352,56 @@ Insert mode has all four [common sets](#common-keybindings), plus <kbd>Enter</kb
 
 Normal mode and select mode have the control, navigation and selection sets, but not the editing set. In its place:
 
-| Key                          | Action                                                                       |
-| ---------------------------- | ---------------------------------------------------------------------------- |
-| <kbd>Backspace</kbd>         | Move one character left in normal mode; extend one left in select mode       |
-| <kbd>Delete</kbd>            | Delete the character under the cursor                                        |
-| <kbd>Alt</kbd>+<kbd>D</kbd>  | Delete the selection without yanking it                                      |
-| <kbd>Alt</kbd>+<kbd>`</kbd>  | Make the selected text uppercase                                             |
+| Key                         | Action                                                                 |
+| --------------------------- | ---------------------------------------------------------------------- |
+| <kbd>Backspace</kbd>        | Move one character left in normal mode; extend one left in select mode |
+| <kbd>Delete</kbd>           | Delete the character under the cursor                                  |
+| <kbd>Alt</kbd>+<kbd>D</kbd> | Delete the selection without yanking it                                |
+| <kbd>Alt</kbd>+<kbd>`</kbd> | Make the selected text uppercase                                       |
 
 As in Vi visual mode, select mode rebinds the navigation set so each key extends the selection like its Helix counterpart, and <kbd>↑</kbd>/<kbd>↓</kbd> never walk through the history.
 
 Motions:
 
-| Key                                                 | Action                                                              |
-| --------------------------------------------------- | ------------------------------------------------------------------- |
-| <kbd>h</kbd>, <kbd>l</kbd>                          | Move left / right                                                   |
-| <kbd>j</kbd>, <kbd>k</kbd>                          | Move down / up (walking through the history at the buffer's edge)   |
-| <kbd>w</kbd>, <kbd>b</kbd>, <kbd>e</kbd>            | Move to the next word start / previous word start / next word end   |
-| <kbd>W</kbd>, <kbd>B</kbd>, <kbd>E</kbd>            | Move to the next WORD start / previous WORD start / next WORD end   |
-| <kbd>f</kbd>\<char\>, <kbd>F</kbd>\<char\>          | Find the next / previous \<char\>                                   |
-| <kbd>t</kbd>\<char\>, <kbd>T</kbd>\<char\>          | Find till the next / previous \<char\>                              |
-| <kbd>g</kbd><kbd>h</kbd>, <kbd>g</kbd><kbd>l</kbd>  | Go to the start / end of the line                                   |
-| <kbd>g</kbd><kbd>s</kbd>                            | Go to the first non-whitespace character of the line                |
-| <kbd>g</kbd><kbd>g</kbd>, <kbd>g</kbd><kbd>e</kbd>  | Go to the start / end of the buffer                                 |
+| Key                                                | Action                                                            |
+| -------------------------------------------------- | ----------------------------------------------------------------- |
+| <kbd>h</kbd>, <kbd>l</kbd>                         | Move left / right                                                 |
+| <kbd>j</kbd>, <kbd>k</kbd>                         | Move down / up (walking through the history at the buffer's edge) |
+| <kbd>w</kbd>, <kbd>b</kbd>, <kbd>e</kbd>           | Move to the next word start / previous word start / next word end |
+| <kbd>W</kbd>, <kbd>B</kbd>, <kbd>E</kbd>           | Move to the next WORD start / previous WORD start / next WORD end |
+| <kbd>f</kbd>\<char\>, <kbd>F</kbd>\<char\>         | Find the next / previous \<char\>                                 |
+| <kbd>t</kbd>\<char\>, <kbd>T</kbd>\<char\>         | Find till the next / previous \<char\>                            |
+| <kbd>g</kbd><kbd>h</kbd>, <kbd>g</kbd><kbd>l</kbd> | Go to the start / end of the line                                 |
+| <kbd>g</kbd><kbd>s</kbd>                           | Go to the first non-whitespace character of the line              |
+| <kbd>g</kbd><kbd>g</kbd>, <kbd>g</kbd><kbd>e</kbd> | Go to the start / end of the buffer                               |
 
 <kbd>h</kbd>, <kbd>l</kbd> and the <kbd>g</kbd> motions collapse the selection onto the new position, while <kbd>w</kbd>, <kbd>b</kbd>, <kbd>e</kbd>, <kbd>f</kbd> and <kbd>t</kbd> select the text they move over.
 
 Selection:
 
-| Key            | Action                                                                        |
-| -------------- | ----------------------------------------------------------------------------- |
-| <kbd>x</kbd>   | Select the current line; if it is already selected, extend to the next line  |
-| <kbd>%</kbd>   | Select the whole buffer                                                       |
-| <kbd>v</kbd>   | Toggle select mode                                                            |
-| <kbd>Esc</kbd> | Collapse the selection in normal mode; leave select mode in select mode       |
+| Key            | Action                                                                      |
+| -------------- | --------------------------------------------------------------------------- |
+| <kbd>x</kbd>   | Select the current line; if it is already selected, extend to the next line |
+| <kbd>%</kbd>   | Select the whole buffer                                                     |
+| <kbd>v</kbd>   | Toggle select mode                                                          |
+| <kbd>Esc</kbd> | Collapse the selection in normal mode; leave select mode in select mode     |
 
 Changes:
 
-| Key                        | Action                                                                                |
-| -------------------------- | ------------------------------------------------------------------------------------- |
-| <kbd>i</kbd>, <kbd>a</kbd> | Insert before / after the selection                                                   |
-| <kbd>I</kbd>, <kbd>A</kbd> | Insert at the first non-blank character of the line / at the end of the line         |
-| <kbd>o</kbd>, <kbd>O</kbd> | Open a new line below / above the selection                                           |
-| <kbd>d</kbd>               | Delete the selection                                                                  |
-| <kbd>c</kbd>               | Change the selection (delete it and enter insert mode)                                |
-| <kbd>y</kbd>               | Yank (copy) the selection                                                             |
-| <kbd>p</kbd>, <kbd>P</kbd> | Paste after / before the selection                                                    |
-| <kbd>r</kbd>\<char\>       | Replace the selection with \<char\>                                                   |
-| <kbd>~</kbd>               | Switch the case of the selected text                                                  |
-| <kbd>`</kbd>               | Make the selected text lowercase                                                      |
-| <kbd>u</kbd>, <kbd>U</kbd> | Undo / redo                                                                           |
-| <kbd>Enter</kbd>           | Run the input, or insert a newline and switch to insert mode if it is incomplete      |
+| Key                        | Action                                                                           |
+| -------------------------- | -------------------------------------------------------------------------------- |
+| <kbd>i</kbd>, <kbd>a</kbd> | Insert before / after the selection                                              |
+| <kbd>I</kbd>, <kbd>A</kbd> | Insert at the first non-blank character of the line / at the end of the line     |
+| <kbd>o</kbd>, <kbd>O</kbd> | Open a new line below / above the selection                                      |
+| <kbd>d</kbd>               | Delete the selection                                                             |
+| <kbd>c</kbd>               | Change the selection (delete it and enter insert mode)                           |
+| <kbd>y</kbd>               | Yank (copy) the selection                                                        |
+| <kbd>p</kbd>, <kbd>P</kbd> | Paste after / before the selection                                               |
+| <kbd>r</kbd>\<char\>       | Replace the selection with \<char\>                                              |
+| <kbd>~</kbd>               | Switch the case of the selected text                                             |
+| <kbd>`</kbd>               | Make the selected text lowercase                                                 |
+| <kbd>u</kbd>, <kbd>U</kbd> | Undo / redo                                                                      |
+| <kbd>Enter</kbd>           | Run the input, or insert a newline and switch to insert mode if it is incomplete |
 
 <kbd>d</kbd>, <kbd>y</kbd> and <kbd>p</kbd> return to normal mode, and <kbd>c</kbd> switches to insert mode. These Helix keys are not available yet: <kbd>;</kbd>, <kbd>,</kbd>, <kbd>J</kbd>, <kbd>G</kbd>, <kbd>X</kbd>, <kbd>&gt;</kbd>, <kbd>&lt;</kbd>, the <kbd>/</kbd>, <kbd>n</kbd> and <kbd>N</kbd> search commands, match mode (<kbd>m</kbd>), and the multi-cursor commands.
 
@@ -885,6 +885,9 @@ By default, erasing text while a menu is open can close the menu. Set
 The menu then updates its suggestions instead, and only closes when you accept a
 suggestion or press <kbd>Esc</kbd> or <kbd>Ctrl</kbd>+<kbd>C</kbd>.
 
+Typing past the last match doesn't close an open completion menu. It shows
+`NO RECORDS FOUND` and fills again as soon as the text matches something.
+
 ### Menu Keybindings
 
 When a menu is active, some keybindings change based on the keybinding [`until` specifier](#until-type) discussed above. Common keybindings for menus are:
@@ -983,6 +986,7 @@ By modifying these parameters you can customize the layout of your menu to your
 liking.
 
 ### Ide Completion Menu
+
 The ide_completion_menu works much like the completion_menu but has an ide look and feel about it.
 
 ```nu
@@ -1251,7 +1255,7 @@ like this
 $env.config.abbreviations = {
     ll: "ls -l"
     gs: "git status"
-    ptop: "ps | sort-by cpu -r | first 15"
+    ptop: "ps | compact cpu | sort-by cpu -r | first 15"
 }
 ```
 
@@ -1259,11 +1263,11 @@ You can see the currently active abbreviations with [`abbr list`](/commands/docs
 
 ```nu
 abbr list
-# => ╭───┬──────┬────────────────────────────────╮
-# => │ # │ name │           expansion            │
-# => ├───┼──────┼────────────────────────────────┤
-# => │ 0 │ gs   │ git status                     │
-# => │ 1 │ ll   │ ls -l                          │
-# => │ 2 │ ptop │ ps | sort-by cpu -r | first 15 │
-# => ╰───┴──────┴────────────────────────────────╯
+# => ╭───┬──────┬──────────────────────────────────────────────╮
+# => │ # │ name │                  expansion                   │
+# => ├───┼──────┼──────────────────────────────────────────────┤
+# => │ 0 │ gs   │ git status                                   │
+# => │ 1 │ ll   │ ls -l                                        │
+# => │ 2 │ ptop │ ps | compact cpu | sort-by cpu -r | first 15 │
+# => ╰───┴──────┴──────────────────────────────────────────────╯
 ```

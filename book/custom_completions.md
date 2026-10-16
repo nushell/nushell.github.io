@@ -309,6 +309,20 @@ def --wrapped jc [...args] {
 }
 ```
 
+A `def --wrapped` command passes flags it doesn't declare on to its rest parameter. So a completer on that rest parameter is also called for arguments that start with `-`, and its suggestions are listed together with the command's own flags:
+
+```nu
+def "nu-complete what" [] { [--verbose --color=always plain] }
+def --wrapped what [--local, ...args: string@"nu-complete what"] { $args }
+
+'what --' | commandline complete
+# => ╭───┬────────────────╮
+# => │ 0 │ --local        │
+# => │ 1 │ --color=always │
+# => │ 2 │ --verbose      │
+# => ╰───┴────────────────╯
+```
+
 ## Custom Descriptions and Styles
 
 As an alternative to returning a list of strings, a completion function can also return a list of records with a `value` field and any of these optional fields:
@@ -370,7 +384,7 @@ def open-file [path: string@pick-file] {
 }
 ```
 
-Typing `open-file ` and pressing <kbd>Tab</kbd> opens `fzf`, and the file you pick is inserted into the command line.
+Typing `open-file ` and pressing <kbd>Tab</kbd> opens `fzf`, and the file you pick is inserted into the command line. If you cancel the picker instead (for example with <kbd>Esc</kbd>), nothing is inserted and no menu stays open; pressing <kbd>Tab</kbd> again opens the picker again.
 
 ## Testing Completers
 

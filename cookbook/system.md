@@ -79,39 +79,44 @@ Run `sys` by itself to list all of its subcommands.
 
 ```nu
 ps | where cpu > 0 | sort-by cpu | reverse
-# => ╭───┬───────┬───────┬────────────────────┬───────┬─────────┬─────────╮
-# => │ # │  pid  │ ppid  │        name        │  cpu  │   mem   │ virtual │
-# => ├───┼───────┼───────┼────────────────────┼───────┼─────────┼─────────┤
-# => │ 0 │ 11928 │ 10224 │ nu.exe             │ 32.12 │ 47.7 MB │ 20.9 MB │
-# => │ 1 │ 11728 │  6380 │ Teams.exe          │ 10.71 │ 53.8 MB │ 50.8 MB │
-# => │ 2 │ 21460 │ 14776 │ msedgewebview2.exe │  8.43 │ 54.0 MB │ 36.8 MB │
-# => ╰───┴───────┴───────┴────────────────────┴───────┴─────────┴─────────╯
+# => ╭───┬───────┬──────┬─────────────────┬──────┬──────────┬──────┬───────────────────────────────┬──────────╮
+# => │ # │  pid  │ ppid │      name       │ user │  status  │ cpu  │           cpu_time            │   mem    │
+# => ├───┼───────┼──────┼─────────────────┼──────┼──────────┼──────┼───────────────────────────────┼──────────┤
+# => │ 0 │ 48401 │    1 │ ghostty         │ me   │ Sleeping │ 5.20 │  4min 23sec 480ms 196µs 125ns │ 181.5 MB │
+# => │ 1 │   768 │    1 │ WindowManager   │ me   │ Sleeping │ 5.08 │ 12min 59sec 751ms 746µs 208ns │  32.6 MB │
+# => │ 2 │ 19095 │    1 │ mdworker_shared │ me   │ Sleeping │ 3.25 │        1sec 987ms 245µs 916ns │  26.1 MB │
+# => ╰───┴───────┴──────┴─────────────────┴──────┴──────────┴──────┴───────────────────────────────┴──────────╯
+```
+
+`cpu` is the percentage of one core that the process used during a short sample, like `top` shows. It is `null` when the operating system doesn't report it for a process; on macOS, that's the case for other users' processes unless you run Nushell as root. `where cpu > 0` leaves those rows out. If you sort without filtering, drop them first with `compact`, because `null` sorts after every number and would come first in a reversed sort:
+
+```nu
+ps | compact cpu | sort-by cpu --reverse | first 5
 ```
 
 ---
 
 ### Find and kill a hanging process
 
-Sometimes a process doesn't shut down correctly. Using `ps` it's fairly easy to find the pid of this process:
+Sometimes a process doesn't shut down correctly. Using `ps` it's fairly easy to find the pid of this process. Here, a `sleep` process stands in for the one that hangs:
 
 ```nu
-ps | where name == Notepad2.exe
-# => ╭───┬──────┬──────┬──────────────┬──────┬─────────┬─────────╮
-# => │ # │ pid  │ ppid │     name     │ cpu  │   mem   │ virtual │
-# => ├───┼──────┼──────┼──────────────┼──────┼─────────┼─────────┤
-# => │ 0 │ 9268 │ 7040 │ Notepad2.exe │ 0.00 │ 32.0 MB │  9.8 MB │
-# => ╰───┴──────┴──────┴──────────────┴──────┴─────────┴─────────╯
+ps | where name == sleep
+# => ╭───┬───────┬───────┬───────┬──────┬──────────┬──────┬─────────────────┬────────╮
+# => │ # │  pid  │ ppid  │ name  │ user │  status  │ cpu  │    cpu_time     │  mem   │
+# => ├───┼───────┼───────┼───────┼──────┼──────────┼──────┼─────────────────┼────────┤
+# => │ 0 │ 56866 │ 56857 │ sleep │ me   │ Sleeping │ 0.00 │ 1ms 585µs 875ns │ 1.0 MB │
+# => ╰───┴───────┴───────┴───────┴──────┴──────────┴──────┴─────────────────┴────────╯
 ```
 
 This process can be sent the kill signal in a one-liner:
 
 ```nu
-ps | where name == Notepad2.exe | get pid.0 | kill $in
-# => SUCCESS: Sent termination signal to the process with PID 9268.
+ps | where name == sleep | get pid.0 | kill $in
 ```
 
 Notes:
 
 - `kill` is a built-in Nu command that works on all platforms. If you wish to use the classic Unix `kill` command, you can do so with `^kill`.
 - Filtering with the `where` command as shown above is case-sensitive.
-- The `ps` output above is from Windows. On Linux and macOS, `ps` also has a `status` column.
+- `ps` returns the same columns on Linux, macOS, Windows, and the BSDs. Use `ps --long` for more columns, such as `command`, `exe`, `start_time`, and `cwd`.

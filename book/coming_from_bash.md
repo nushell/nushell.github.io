@@ -57,6 +57,7 @@ $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 | `sed`                                | `str replace`                                                 | Find and replace a pattern in a string                            |
 | `grep <pattern>`                     | `where $it =~ <substring>` or `find <substring>`              | Filter strings that contain the substring                         |
 | `grep -i <pattern>`                  | `find -i <substring>`                                         | Filter strings that contain the substring, ignoring case          |
+| `grep -o <regex>`                    | `find -o -r <regex>`                                          | Output only the matched text, one value per match                 |
 | `man <command>`                      | `help <command>`                                              | Get the help for a given command                                  |
 |                                      | `help commands`                                               | List all available commands                                       |
 |                                      | `help --find <string>`                                        | Search for match in all available commands                        |
@@ -86,6 +87,10 @@ $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 | `pwd` or `echo $PWD`                 | `pwd` or `$env.PWD`                                           | Display the current directory                                     |
 | `read var`                           | `let var = input`                                             | Get input from the user                                           |
 | `read -s secret`                     | `let secret = input -s`                                       | Get a secret value from the user without printing keystrokes      |
+
+::: tip
+In Nushell, `type` is the keyword that declares a [type alias](./custom_commands.md#type-aliases), so `type FOO` is a parse error rather than a command lookup. Use `which FOO` instead. If your system has an external `type` program (macOS has `/usr/bin/type`), run it as `^type FOO`.
+:::
 
 ## History Substitutions and Default Keybindings:
 

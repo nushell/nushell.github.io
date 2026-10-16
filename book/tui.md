@@ -248,10 +248,12 @@ An explicit `--id` is never renumbered, and using the same explicit id twice is 
 
 Each data widget shows the first of these that exists:
 
-1. Its own `--data`, or the value piped into it inside a container's child list, as in `[(ls | tui table)]`.
-2. What its `--from` source produces (see [Following a Row](#following-a-row)).
+1. What its `--from` source or closure produces (see [Following a Row](#following-a-row)).
+2. Its own `--data`, or the value piped into it inside a container's child list, as in `[(ls | tui table)]`.
 3. The data of the nearest enclosing container.
 4. The data piped into the outer pipeline.
+
+`--data` can't be combined with `--from` or a closure, because the widget would never show it. `tui progress --value` follows the same rule.
 
 This means one pipeline can feed every widget, or each pane can have its own rows:
 
@@ -376,7 +378,23 @@ A label becomes a caption for the highlighted row:
 # => size: 2.0 kB
 ```
 
-Without `--from`, a widget with a source closure follows the nearest list, just like a preview does. Without a closure, the row itself becomes the widget's data. A source closure re-runs only when the highlighted row changes or the pane is resized. If `--from` names a widget that doesn't exist, `tui run` and `tui debug` stop with an error.
+Without `--from`, a widget with a source closure follows the nearest list, just like a preview does. If the page shown has no table, tree, or select, it follows one on another [`tui tab`](#tabs) page. Without a closure, the row itself becomes the widget's data. A source closure re-runs only when the highlighted row changes or the pane is resized.
+
+`tui run` and `tui debug` stop with an error when a closure has nothing to follow: there is no table, tree, or select at all, `--from` names a widget that doesn't exist or has no rows, `--from` names the widget itself, or the widgets could only follow each other. For example, a log of streamed lines with a closure but no list to follow:
+
+```nu
+1..5 | each {|n| $"tick ($n)"} | tui label --titlebar "ticks" | tui log { $in } | tui run
+# => Error: nu::shell::error
+# =>
+# =>   × nothing for the closure to follow
+# =>    ╭─[repl_entry #1:1:65]
+# =>  1 │ 1..5 | each {|n| $"tick ($n)"} | tui label --titlebar "ticks" | tui log { $in } | tui run
+# =>    ·                                                                 ───┬───
+# =>    ·                                                                    ╰── `log-0` runs its closure on the highlighted row of a table, tree, or select, but none can be followed: a widget never follows its own row, or one that follows it. Add one, or drop the closure
+# =>    ╰────
+```
+
+Drop the closure (`tui log`) to show the piped lines as they arrive.
 
 ### Fitting Output to a Pane
 
@@ -885,19 +903,19 @@ $env.config.tui.border_type = "double"
 
 `--border` works on `tui table`, `tui tree`, `tui select`, `tui log`, `tui preview`, `tui search`, `tui textbox`, and `tui box`. On `tui menu`, it sets the lines around the drop-downs. The default is `single`. Each name draws the closest outline of that table theme:
 
-| Name                                                     | Outline                                                         |
-| -------------------------------------------------------- | --------------------------------------------------------------- |
-| `single`, `thin`                                         | `┌─┐ │ └─┘`                                                     |
-| `rounded`                                                | `╭─╮ │ ╰─╯`                                                     |
-| `double`                                                 | `╔═╗ ║ ╚═╝`                                                     |
-| `heavy`                                                  | `┏━┓ ┃ ┗━┛`                                                     |
-| `reinforced`                                             | `┏─┓ │ ┗─┛`                                                     |
-| `basic`, `basic_compact`                                 | `+-+ \| +-+`                                                    |
-| `ascii_rounded`                                          | `.-. \| '-'`                                                    |
-| `dots`                                                   | `.` on top, `:` on the sides, `:..:` on the bottom              |
+| Name                                                     | Outline                                                        |
+| -------------------------------------------------------- | -------------------------------------------------------------- |
+| `single`, `thin`                                         | `┌─┐ │ └─┘`                                                    |
+| `rounded`                                                | `╭─╮ │ ╰─╯`                                                    |
+| `double`                                                 | `╔═╗ ║ ╚═╝`                                                    |
+| `heavy`                                                  | `┏━┓ ┃ ┗━┛`                                                    |
+| `reinforced`                                             | `┏─┓ │ ┗─┛`                                                    |
+| `basic`, `basic_compact`                                 | `+-+ \| +-+`                                                   |
+| `ascii_rounded`                                          | `.-. \| '-'`                                                   |
+| `dots`                                                   | `.` on top, `:` on the sides, `:..:` on the bottom             |
 | `compact`, `compact_double`, `restructured`, `with_love` | `─`, `═`, `=`, or `❤` lines on top and bottom, and blank sides |
-| `markdown`                                               | `\|` on the sides, and blank top and bottom                     |
-| `frameless`, `light`, `psql`                             | Blank all around                                                |
+| `markdown`                                               | `\|` on the sides, and blank top and bottom                    |
+| `frameless`, `light`, `psql`                             | Blank all around                                               |
 
 A border always takes one cell, so `none` and `default` are not valid border names. Use `frameless` for an outline with no visible lines. It still takes its cell, and the widget's title stays visible.
 
@@ -1033,7 +1051,7 @@ A `ps` view that refreshes every two seconds, filters by name, shows the full re
 
 ```nu
 def "ps ui" [] {
-    let snapshot = {|| ps | sort-by cpu -r | update cpu { math round -p 1 } | first 200 }
+    let snapshot = {|| ps | compact cpu | sort-by cpu -r | update cpu { math round -p 1 } | first 200 }
     do $snapshot
     | tui label --titlebar "processes"
     | tui search --bind / --columns [name]
@@ -1048,7 +1066,7 @@ def "ps ui" [] {
 }
 ```
 
-The same closure feeds the first frame, the timer, and the reload after a kill, so the list is always sorted the same way.
+The same closure feeds the first frame, the timer, and the reload after a kill, so the list is always sorted the same way. `compact cpu` drops the processes whose CPU use the operating system doesn't report, such as other users' processes on macOS, because `math round` can't round a `null`.
 
 ### Explore a Data File
 

@@ -31,6 +31,7 @@
   - [Overlays](overlays.md) - Activating and deactivating layers of definitions
   - [Sorting](sorting.md) - Sorting lists, records, and tables
   - [Testing your Nushell Code](testing.md) - Writing tests with the standard library
+  - [Debugging Scripts](debugging.md) - Stepping through scripts in your editor with `nu --dap`
   - [Best Practices](style_guide.md) - Formatting and naming conventions
 - [Nu as a Shell](nu_as_a_shell.md)
   - [Configuration](configuration.md) - How to configure Nushell
@@ -64,5 +65,6 @@
   - [Plugins](plugins.md) - Enhancing Nushell with more features using plugins
   - [Explore](explore.md) - Browsing structured data with `explore`
   - [Building TUIs with `tui`](tui.md) - Building your own interactive terminal interfaces
+  - [MCP Server](mcp.md) - Letting AI agents run Nushell code through the Model Context Protocol
 - [Regular Expressions](regular_expressions.md) - Guide to use regex
 - [Command Reference](/commands/) - List of all Nushell's commands
