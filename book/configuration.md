@@ -240,6 +240,8 @@ $env.PROMPT_COMMAND_RIGHT = {
 
 `commandline set-prompt` sets the left prompt by default. Use `--right`, `--indicator`, `--vi-insert`, `--vi-normal`, or `--multiline` to set the other prompt components. The new text lasts until the next prompt is drawn.
 
+A job started from a prompt closure, or from a `pre_prompt` or `env_change` [hook](./hooks.md), can finish before the prompt is drawn, for example when `git` answers quickly. Its `commandline set-prompt` still shows on that prompt. The same is true when a hook or prompt closure calls `commandline set-prompt` directly: the pushed text replaces what the prompt variable gives that segment.
+
 ### ENV_CONVERSIONS
 
 Certain variables, such as those containing multiple paths, are often stored as a
@@ -665,6 +667,7 @@ The following stages and their steps _may_ occur during startup, based on the fl
   - ❌ Does not enter the REPL
   - ❌ Does not source the files in `vendor-autoload-dirs`
   - ❌ Does not source the files in `user-autoload-dirs`
+
 - `nu -l -c "ls"`:
 
   - ✅ Makes the Standard Library available
@@ -751,4 +754,3 @@ The following stages and their steps _may_ occur during startup, based on the fl
   - ❌ Does not enter the REPL
   - ❌ Does not source the files in `vendor-autoload-dirs`
   - ❌ Does not source the files in `user-autoload-dirs`
-

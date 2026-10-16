@@ -6,6 +6,7 @@ next:
   text: Custom Commands
   link: /book/custom_commands.md
 ---
+
 # Programming in Nu
 
 This chapter goes into more detail of Nushell as a programming language.
@@ -36,4 +37,4 @@ Modules let you define a public interface vs. private commands and you can impor
 By defining an overlay, you bring in module's definitions into its own swappable "layer" that gets applied on top of other overlays.
 This enables features like activating virtual environments or overriding sets of default commands with custom variants.
 
-The standard library also has a [testing framework](testing.md) if you want to prove your reusable code works perfectly.
+The standard library also has a [testing framework](testing.md) if you want to prove your reusable code works perfectly, and when it doesn't, you can [step through it in your editor's debugger](debugging.md).

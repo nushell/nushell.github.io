@@ -3,6 +3,7 @@ prev:
   text: Getting Started
   link: /book/getting_started.md
 ---
+
 # Quick Tour
 
 [[toc]]
@@ -89,15 +90,16 @@ Let's look at a different command:
 
 ```nu:no-line-numbers
 ps
-# => ╭───┬──────┬──────┬───────────────┬──────────┬──────┬──────────┬─────────╮
-# => │ # │ pid  │ ppid │     name      │  status  │ cpu  │   mem    │ virtual │
-# => ├───┼──────┼──────┼───────────────┼──────────┼──────┼──────────┼─────────┤
-# => │ 0 │    1 │    0 │ init(void)    │ Sleeping │ 0.00 │   1.2 MB │  2.3 MB │
-# => │ 1 │    8 │    1 │ init          │ Sleeping │ 0.00 │ 126.9 kB │  2.4 MB │
-# => │ 2 │ 6565 │    1 │ SessionLeader │ Sleeping │ 0.00 │ 110.5 kB │  2.3 MB │
-# => │ 3 │ 6566 │ 6565 │ Relay(6567)   │ Sleeping │ 0.00 │ 118.7 kB │  2.3 MB │
-# => │ 4 │ 6567 │ 6566 │ nu            │ Running  │ 0.00 │  29.7 MB │  1.1 GB │
-# => ╰───┴──────┴──────┴───────────────┴──────────┴──────┴──────────┴─────────╯
+# => ╭───┬───────┬───────┬──────────────────────────┬──────┬──────────┬──────┬───────────────────┬──────────╮
+# => │ # │  pid  │ ppid  │           name           │ user │  status  │ cpu  │     cpu_time      │   mem    │
+# => ├───┼───────┼───────┼──────────────────────────┼──────┼──────────┼──────┼───────────────────┼──────────┤
+# => │ 0 │ 56110 │ 56106 │ nu                       │ me   │ Running  │ 1.47 │   12ms 33µs 750ns │  18.6 MB │
+# => │ 1 │ 56106 │ 12680 │ zsh                      │ me   │ Sleeping │ 0.00 │   4ms 658µs 750ns │   3.0 MB │
+# => │ 2 │ 55705 │     1 │ biomesyncd               │ me   │ Sleeping │ 0.00 │ 166ms 868µs 125ns │  12.1 MB │
+# => │ 3 │ 55622 │ 31385 │ Helium Helper (Renderer) │ me   │ Sleeping │ 0.35 │       208ms 202µs │ 110.4 MB │
+# => │ 4 │ 52941 │     1 │ mdworker_shared          │ me   │ Sleeping │ 0.00 │  109ms 944µs 83ns │  19.7 MB │
+# => │ … │ …     │ …     │ …                        │ …    │ …        │ …    │ …                 │ …        │
+# => ╰───┴───────┴───────┴──────────────────────────┴──────┴──────────┴──────┴───────────────────┴──────────╯
 ```
 
 You may be familiar with the Linux/Unix `ps` command. It provides a list of all of the current processes running in the system along with their current status. As with `ls`, Nushell provides a cross-platform, built-in [`ps` command](/commands/docs/ps.md) that returns its results as structured data.
@@ -118,11 +120,11 @@ What if we wanted to just show the processes that are actively running? As with 
 
 ```nu
 ps | where status == Running
-# => ╭───┬──────┬──────┬──────┬─────────┬──────┬─────────┬─────────╮
-# => │ # │ pid  │ ppid │ name │ status  │ cpu  │   mem   │ virtual │
-# => ├───┼──────┼──────┼──────┼─────────┼──────┼─────────┼─────────┤
-# => │ 0 │ 6585 │ 6584 │ nu   │ Running │ 0.00 │ 33.4 MB │  1.2 GB │
-# => ╰───┴──────┴──────┴──────┴─────────┴──────┴─────────┴─────────╯
+# => ╭───┬───────┬───────┬──────┬──────┬─────────┬──────┬──────────────────┬─────────╮
+# => │ # │  pid  │ ppid  │ name │ user │ status  │ cpu  │     cpu_time     │   mem   │
+# => ├───┼───────┼───────┼──────┼──────┼─────────┼──────┼──────────────────┼─────────┤
+# => │ 0 │ 56110 │ 56106 │ nu   │ me   │ Running │ 1.03 │ 34ms 254µs 125ns │ 23.7 MB │
+# => ╰───┴───────┴───────┴──────┴──────┴─────────┴──────┴──────────────────┴─────────╯
 ```
 
 ::: tip
@@ -132,8 +134,10 @@ You can examine the types for the table's columns using:
 
 ```nu
 ps | describe
-# => table<pid: int, ppid: int, name: string, status: string, cpu: float, mem: filesize, virtual: filesize> (stream)
+# => table<pid: int, ppid: int, name: string, user: string, status: oneof<string, nothing>, cpu: oneof<float, nothing>, cpu_time: oneof<duration, nothing>, mem: oneof<filesize, nothing>> (stream)
 ```
+
+`ps` has the same columns on every platform. When the operating system doesn't report a value for a process, that cell is `null`, so the column's type also includes `nothing`. The output above is from macOS, where the status, CPU, and memory use of another user's processes can only be read as root. `ps --long` adds more columns, such as `command`, `start_time`, `threads`, and `cwd`.
 
 The [`describe` command](/commands/docs/describe.md) can be used to display the output type of any command or expression.
 

@@ -73,3 +73,10 @@ Here are a few commands that use records:
 - `merge`
 - `update`
 - `upsert`
+
+The `record` subcommands take a record and return a record, without converting it to a table and back. Given a table, they work on each row. See [Transforming Records](/book/working_with_records.md#transforming-records) in the Book.
+
+- `record where`: keep the fields for which a row condition on `key` and `value`, or a closure, is true
+- `record each`: build a new record from the records a closure returns for each field
+- `record walk`: run a closure on every nested value, rebuilding the record from the results
+- `record apply`: run a record of closures on the fields with the same names

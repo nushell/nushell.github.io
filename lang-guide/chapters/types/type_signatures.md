@@ -51,6 +51,73 @@ There are 3 forms of valid type signatures in Nu:
     `table<name: string, size: filesize>`
 - Union: `oneof<int, string>` matches a value of any of the listed types.
 
+  When a literal argument is passed to a `oneof` parameter, it is parsed as the first listed type it matches, except that the text-like types (`string`, `path`, `directory`, `glob`, `cell-path`, `external_arg` and `any`) are always tried last. The order in which the types are written doesn't matter:
+
+  ```nu
+  def show [x: oneof<string, list<string>>] { $x | describe }
+  show [foo bar]
+  # => list<string>
+  show foo
+  # => string
+  ```
+
+  A literal that looks like one of the other types gets that type, so with `oneof<string, int>`, `007` arrives as the int `7`. Quote it (`"007"`) to pass the text. A parameter declared as plain `string` is unaffected.
+
+Any of these can be given a name with a [type alias](#type-aliases).
+
+## Type aliases
+
+`type Name = <type>` gives a type signature a name. The name can then be used wherever a type signature can: parameters, flags, rest parameters, closure parameters, input/output types, `let`/`mut`/`const` annotations, inside other types, and on the right-hand side of another `type`:
+
+```nu
+type Point = record<x: float, y: float>
+type Polygon = list<Point>
+
+def first-x [poly: Polygon]: nothing -> float { $poly.0.x }
+first-x [{x: 1.0, y: 2.0} {x: 3.0, y: 4.0}]
+# => 1.0
+```
+
+An alias is not a new type. The parser replaces the name with its type at every use, so a value never "has" the alias as its type, and `describe`, `help`, `scope commands` and error messages show the expanded type:
+
+```nu
+type Point = record<x: float, y: float>
+let p: Point = {x: 1.0, y: 2.0}
+$p | describe
+# => record<x: float, y: float>
+```
+
+An alias can't refer to itself:
+
+```nu
+type Tree = list<Tree>
+# => Error: nu::parser::type_alias_self_reference
+# =>
+# =>   × Type alias `Tree` refers to itself.
+# =>    ╭─[repl_entry #1:1:18]
+# =>  1 │ type Tree = list<Tree>
+# =>    ·                  ──┬─
+# =>    ·                    ╰── refers to itself
+# =>    ╰────
+# =>   help: type aliases can't be recursive
+```
+
+A [custom completer](/book/custom_completions.md) is part of a parameter, not of its type, so it goes on the parameter that uses the alias, as in `def paint [color: Color@[red green blue]] { $color }`. Attaching one to the alias is an error:
+
+```nu
+type Color = string@[red green blue]
+# => Error: nu::parser::error
+# =>
+# =>   × Unexpected custom completer in type spec
+# =>    ╭─[repl_entry #1:1:14]
+# =>  1 │ type Color = string@[red green blue]
+# =>    ·              ───────────┬───────────
+# =>    ·                         ╰── Type specifications do not support custom completers
+# =>    ╰────
+```
+
+Where a type alias is visible, and how modules export and import one, is covered under [`type`](../declarations.md#type) in Declarations.
+
 ## Custom command parameters and flags
 
 This section does not enumerate all of the various ways to create parameters

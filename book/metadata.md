@@ -66,6 +66,15 @@ open Cargo.toml | metadata
 
 Other commands attach other metadata. For instance, [`to json`](/commands/docs/to_json.md) and the other `to` commands set a `content_type` (such as `application/json`), [`ls`](/commands/docs/ls.md) marks its `name` column as containing [paths](#path-columns), and the HTTP commands attach the [HTTP response](#http-response-metadata).
 
+The two forms don't mix. When `metadata` is given an argument, it returns only that argument's `span` and ignores any pipeline input. That makes it safe to use inside a closure or block, whose first command receives the block's input:
+
+```nu
+[1 2] | each {|x| (metadata $x).span } | to nuon
+# => [[start, end]; [170379, 170380], [170381, 170382]]
+```
+
+This also means `metadata $in` reports only a span. To see the metadata that came with the pipeline input, such as `source` or `content_type`, use `metadata` without an argument.
+
 ## Custom Metadata
 
 You can attach arbitrary metadata to pipeline data using the [`metadata set`](/commands/docs/metadata_set.md) command with the optional closure parameter:

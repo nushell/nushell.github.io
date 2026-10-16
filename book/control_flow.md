@@ -117,6 +117,18 @@ match $foo {
 
 The `_` in the second branch means it matches any record with field `name` and `count`, not just ones where `name` is `'bar'`.
 
+Lists unpack the same way. In a list pattern, `..` stands for any number of items, and it can go at the start, in the middle, or at the end. `..$name` also binds those items to a variable:
+
+```nu
+let steps = [build test done]
+match $steps {
+    [] => 'nothing to do',
+    [.., 'done'] => 'finished',
+    [$current, ..] => $"running ($current)"
+}
+# => finished
+```
+
 #### Guards
 
 You can also add an additional condition to each branch called a "guard" to determine if the branch should be matched. To do so, after the matched pattern put `if` and then the condition before the `=>`.
@@ -218,30 +230,21 @@ $result
 # => ╰───┴───╯
 ```
 
-When creating custom errors, loops have an advantage over pipelines because they don't fail evaluation.
-
-Creating an error in a pipeline yields a pipeline evaluation error *and* the custom error:
+Errors, on the other hand, are not a reason to pick one over the other. When the closure given to `each` fails, Nushell reports the closure's own error, with an extra `source value` label on the input item that was being processed:
 
 ```nu
 [0] | each { error make { msg: "Custom error" } | default '' }
-# => Error: nu::shell::eval_block_with_input
+# => Error: nu::shell::error
 # =>
-# =>   × Eval block failed with pipeline input
+# =>   × Custom error
 # =>    ╭─[repl_entry #1:1:2]
 # =>  1 │ [0] | each { error make { msg: "Custom error" } | default '' }
-# =>    ·  ┬
+# =>    ·  ┬                      ───────────────────────
 # =>    ·  ╰── source value
-# =>    ╰────
-# =>
-# => Error:
-# =>   × Custom error
-# =>    ╭─[repl_entry #1:1:25]
-# =>  1 │ [0] | each { error make { msg: "Custom error" } | default '' }
-# =>    ·                         ───────────────────────
 # =>    ╰────
 ```
 
-When using a loop, a `for` loop in this example, evaluation succeeds and only the created error occurs:
+A `for` loop reports the same error, without the `source value` label:
 
 ```nu
 for x in [0] { error make { msg: "Custom error" } }

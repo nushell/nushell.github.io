@@ -6,6 +6,7 @@ next:
   text: Getting Started
   link: /book/getting_started.md
 ---
+
 # Default Shell
 
 ## Setting Nu as default shell on your terminal
@@ -37,3 +38,11 @@ You may see an error similar to the one below if you haven't updated the `shells
 
 You can add Nu to the list of allowed shells by appending your Nu binary to the `shells` file.
 The path to add can be found with the command `which nu`, usually it is `$HOME/.cargo/bin/nu`.
+
+## Using Nu as `ComSpec` (Windows)
+
+Windows programs that run a command through "the shell" read the `ComSpec` environment variable, which normally points to `cmd.exe`, and start it as `<ComSpec> /c <command line>`. Nushell accepts `/c` (or `/C`) on Windows for this: everything after it on the command line is run as Nushell code, with its original quoting kept. On other platforms, `/c` is an ordinary path.
+
+::: warning
+Programs that use `ComSpec` usually send commands written for `cmd.exe`. With `ComSpec` pointing to `nu.exe`, those commands run as Nushell code, which can fail or behave differently.
+:::

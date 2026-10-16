@@ -3,6 +3,7 @@ prev:
   text: Nu Fundamentals
   link: /book/nu_fundamentals.md
 ---
+
 # Types of Data
 
 Traditional Unix shell commands communicate with each other using strings of text -- One command writes text to standard output (often abbreviated `stdout`) and the other reads text from standard input (or `stdin`). This allows multiple commands to be combined together to communicate through what is called a "pipeline".
@@ -17,6 +18,8 @@ The [`describe`](/commands/docs/describe.md) command returns the type of a data 
 42 | describe
 # => int
 ```
+
+Each type below lists its _annotation_: the name you write after `:` to declare the type of a parameter or variable, such as `let x: int = 42`. To give a long annotation such as `record<x: float, y: float>` a short name of your own, define a [type alias](./custom_commands.md#type-aliases) with `type`.
 
 ## Types at a Glance
 
@@ -433,11 +436,11 @@ $simple_record.c? == null
 
 ### Semantic Versions
 
-|                       |                                                                                                         |
-| --------------------- | ------------------------------------------------------------------------------------------------------- |
-| **_Description:_**    | A [semantic version](https://semver.org) number, such as `1.2.3` or `2.0.0-rc.1`                        |
-| **_Annotation:_**     | N/A - This is a custom value, which `describe` reports as `semver`                                      |
-| **_Literal Syntax:_** | N/A - Convert a string or record with [`into semver`](/commands/docs/into_semver.md)                    |
+|                       |                                                                                                            |
+| --------------------- | ---------------------------------------------------------------------------------------------------------- |
+| **_Description:_**    | A [semantic version](https://semver.org) number, such as `1.2.3` or `2.0.0-rc.1`                           |
+| **_Annotation:_**     | N/A - This is a custom value, which `describe` reports as `semver`                                         |
+| **_Literal Syntax:_** | N/A - Convert a string or record with [`into semver`](/commands/docs/into_semver.md)                       |
 | **_See also:_**       | [`semver bump`](/commands/docs/semver_bump.md), [`into semver-range`](/commands/docs/into_semver-range.md) |
 
 Simple example - Semantic versions compare by version number, not as text:

@@ -271,10 +271,11 @@ Strings which might be confused with other parser patterns should be avoided. Fo
 
 - `1`, `"1"`, or `"1.5"`: Nushell will not allow numbers to be used as command names
 - `4MiB` or `"4MiB"`: Nushell will not allow filesizes to be used as command names
-- `"number#four"` or `"number^four"`: Carets and hash symbols are not allowed in command names
+- `"number#four"`, `"number^four"`, or `"number%four"`: Carets, hash symbols, and percent signs are not allowed in command names
+- `"foo  bar"`, `" foo"`, or `"foo "`: The words of a command name must be separated by single spaces, with no leading or trailing whitespace. Such a name could never be called, so `def`, `extern`, and `alias` reject it.
 - `-a`, `"{foo}"`, `"(bar)"`: Will not be callable, as Nushell will interpret them as flags, closures, or expressions.
 
-Parser keywords such as `if`, `for`, `let`, `def`, `use` or `where` can't be used as command names at all, because shadowing them would break the language constructs they implement:
+Parser keywords such as `if`, `for`, `let`, `def`, `type`, `use` or `where` can't be used as command names at all, because shadowing them would break the language constructs they implement:
 
 ```nu
 def if [] { "my if" }
@@ -553,7 +554,7 @@ Most types can be used as type-annotations. In addition, there are a few "shapes
 - `path`: A string that is treated as a filesystem path. A leading `~` is expanded to the home directory, and "n-dot" shorthands such as `...` are expanded to `../..`. Relative paths stay relative: `.` stays `.`, and `foo/../bar` becomes `bar`. See [Path](/lang-guide/chapters/types/other_types/path.html) in the Language Reference Guide for example usage.
 - `directory`: A subset of `path` (above). Only directories will be offered when using tab-completion for the parameter. Expansions take place just as with `path`.
 - `external_arg`: Parses the argument the way an [external command](./running_externals.md) would. A bare word is kept exactly as typed, so `0001` or `true` is not turned into an `int` or `bool`, while quoted strings, variables and subexpressions keep their own value. This is mainly useful for the `main` command of a [script](./scripts.md) that receives arguments from another shell.
-- `oneof<...>`: Accepts any one of the listed types, for example `oneof<int, string>`.
+- `oneof<...>`: Accepts any one of the listed types, for example `oneof<int, string>`. A literal argument gets the first listed type that it matches, with the text-like types (`string`, `path`, `directory`, `glob`, `cell-path`, `external_arg`, and `any`) tried last whatever their position. So with `oneof<string, list<string>>`, `[foo bar]` is a list, and with `oneof<string, int>`, `5` (and `007`) is an `int`. Quote the argument if you need the text.
 - `error`: Available, but currently no known valid usage. See [Error](/lang-guide/chapters/types/other_types/error.html) in the Language Reference Guide for more information.
 
 For example, compare an untyped parameter with an `external_arg` parameter:
@@ -588,6 +589,49 @@ The following [types](./types_of_data.html) can be used for parameter annotation
 - `string`
 - `table`
 
+:::
+
+### Type Aliases
+
+When several commands take or return the same structured data, writing out a type like `record<x: float, y: float>` each time gets long and easy to get wrong. The [`type`](/commands/docs/type.md) keyword gives a type a name:
+
+```nu
+type Point = record<x: float, y: float>
+type Polygon = list<Point>
+
+def first-x [poly: Polygon]: nothing -> float { $poly.0.x }
+
+first-x [{x: 1.0, y: 2.0} {x: 3.0, y: 4.0}]
+# => 1.0
+```
+
+A type alias is only a shorter way to write its type. The parser replaces the name with the full type wherever the name is used, so `help`, [`describe`](/commands/docs/describe.md), and error messages show the full type:
+
+```nu
+type Point = record<x: float, y: float>
+def length-of [p: Point]: nothing -> float { ($p.x ** 2 + $p.y ** 2) | math sqrt }
+
+length-of {x: 1, y: 2}
+# => Error: nu::parser::type_mismatch
+# =>
+# =>   × Type mismatch.
+# =>    ╭─[repl_entry #3:1:11]
+# =>  1 │ length-of {x: 1, y: 2}
+# =>    ·           ──────┬─────
+# =>    ·                 ╰── expected record<x: float, y: float>, found record<x: int, y: int>
+# =>    ╰────
+```
+
+You can use a type alias anywhere a type annotation goes: positional parameters, flags, rest parameters, closure parameters, input/output types, the annotations of `let`, `mut`, and `const`, inside other types (such as `list<Point>`), and on the right-hand side of another `type`.
+
+A few rules apply:
+
+- Like [`alias`](./aliases.md) and `const`, a type alias is visible from its definition to the end of the enclosing block. It must be defined above its first use, and it can't refer to itself.
+- A custom completer belongs to the parameter, not the type. Write it on the parameter, as in `def paint [color: Color@[red green blue]] { ... }`. `type Color = string@[red green blue]` is an error.
+- In a module, a type alias is private unless it is defined with `export type`. See [Modules](./modules/creating_modules.md#exports) for how to export one and [Using Modules](./modules/using_modules.md#importing-type-aliases) for how to import it.
+
+::: warning
+`type` is a parser keyword, so a custom command, alias, or extern can't be named `type`. To run an external command named `type`, call it as `^type`, or use Nushell's [`which`](/commands/docs/which.md) to see what a command name refers to.
 :::
 
 ### Flags

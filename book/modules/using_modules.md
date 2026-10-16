@@ -166,6 +166,7 @@ Of course, you always have the option to choose a form that works best for your 
   - Commands
   - Aliases
   - Constants
+  - [Type aliases](#importing-type-aliases)
   - Externs
   - Other modules (as submodules)
   - Environment variables (always imported)
@@ -260,6 +261,24 @@ use std/math *
 $PI
 # => 3.141592653589793
 ```
+
+## Importing Type Aliases
+
+A module can export [type aliases](../custom_commands.md#type-aliases) with `export type`. Unlike commands and constants, a type alias isn't imported when you import the entire module with `use <module>`, because its name can't take the module name as a prefix. Import it by name, in a list, or with `*`:
+
+```nu
+module geo {
+    export type Point = record<x: float, y: float>
+    export def origin []: nothing -> Point { {x: 0.0, y: 0.0} }
+}
+
+use geo [Point origin]
+let p: Point = origin
+$p | describe
+# => record<x: float, y: float>
+```
+
+`use geo Point` and `use geo *` work as well. With only `use geo`, the `Point` annotation above is an `Unknown type` error. Type aliases also come along when another module re-exports them with `export use`, and when a module is activated with `overlay use` (without `--prefix`).
 
 ## Hiding
 

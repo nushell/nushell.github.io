@@ -181,7 +181,7 @@ This is the complete Parse/Eval sequence.
 ::: tip Takeaway
 By not allowing `eval`-like functionality, Nushell prevents these types of `eval`-related bugs. Calling a non-existent definition is guaranteed to be caught at parse-time in Nushell.
 
-Furthermore, after parsing completes, we can be certain the bytecode (IR) won't change during evaluation. This gives us a deep insight into the resulting bytecode (IR), allowing for powerful and reliable static analysis and IDE integration which can be challenging to achieve with more dynamic languages. Nushell's language server (`nu --lsp`) provides this kind of editor integration. For stepping through a script while it runs, `nu --dap` (added in 0.116.0) starts a Debug Adapter Protocol server that DAP-capable editors can use to set breakpoints and inspect variables.
+Furthermore, after parsing completes, we can be certain the bytecode (IR) won't change during evaluation. This gives us a deep insight into the resulting bytecode (IR), allowing for powerful and reliable static analysis and IDE integration which can be challenging to achieve with more dynamic languages. Nushell's language server (`nu --lsp`) provides this kind of editor integration. For stepping through a script while it runs, `nu --dap` (added in 0.116.0) starts a Debug Adapter Protocol server that DAP-capable editors can use to set breakpoints and inspect variables (see [Debugging Scripts](debugging.md)).
 
 In general, you have more peace of mind that errors will be caught earlier when scaling Nushell programs.
 :::

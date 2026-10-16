@@ -3,6 +3,7 @@ next:
   text: Coming to Nu
   link: /book/coming_to_nu.md
 ---
+
 # Background Jobs
 
 Nushell currently has experimental support for thread-based background jobs.
@@ -175,3 +176,12 @@ for spawning independent background processes (see [#15201](https://github.com/n
 Additionally, if the user is running an interactive Nushell session and runs
 [`exit`](/commands/docs/exit.md) while there are background jobs running,
 the shell will warn about them before prompting the user to confirm `exit`.
+
+Pressing <kbd>Ctrl</kbd>+<kbd>C</kbd> at the REPL interrupts only the command running in the foreground.
+Background jobs and frozen jobs keep running.
+
+When Nushell runs a script or a command given with `nu -c`, it stops any jobs that are still running,
+along with their child processes, before it exits. This also happens when the script was interrupted
+with <kbd>Ctrl</kbd>+<kbd>C</kbd> and the interruption was caught.
+
+Calling `exit` inside a job's closure ends that job, not the shell.

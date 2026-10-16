@@ -28,5 +28,12 @@ E.g.
     # => int
     ```
 
+    Durations written with units, including several units in a row, are detected too:
+
+    ```nu
+    "1hr 3min" | detect type | describe
+    # => duration
+    ```
+
 - `ast`
   - In the branches of abstract syntax tree that describe the type of some element

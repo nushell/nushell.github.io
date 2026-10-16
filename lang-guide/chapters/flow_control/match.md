@@ -31,18 +31,18 @@ See also: [`match` command help](/commands/docs/match.md) and [Control Flow - `m
 
 ## Patterns
 
-| Pattern                        | Matches                                                                   |
-| ------------------------------ | ------------------------------------------------------------------------- |
-| `3`, `'text'`, `true`, `null`  | A value equal to the literal. A bare word such as `foo` is a string.      |
-| `1..10`, `5..`, `1..<5`        | A number inside the range                                                 |
-| `(40 + 2)`, `($some_const)`    | The value of a parse-time constant expression                             |
-| `$name`                        | Any value, and binds it to `$name` for the guard and the arm              |
-| `_`                            | Any value (catch-all)                                                     |
-| `p1 \| p2`                     | Either pattern                                                            |
-| `[$a, $b]`, `[]`               | A list with exactly that many items                                       |
-| `[$first, ..$rest]`, `[$a, ..]` | A list with at least the listed items; `..$rest` binds the remainder      |
-| `{name: $n, type: file}`       | A record that has at least these fields, with matching values             |
-| `{$name}`                      | Shorthand for `{name: $name}`                                             |
+| Pattern                                              | Matches                                                                          |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `3`, `'text'`, `true`, `null`                        | A value equal to the literal. A bare word such as `foo` is a string.             |
+| `1..10`, `5..`, `1..<5`                              | A number inside the range                                                        |
+| `(40 + 2)`, `($some_const)`                          | The value of a parse-time constant expression                                    |
+| `$name`                                              | Any value, and binds it to `$name` for the guard and the arm                     |
+| `_`                                                  | Any value (catch-all)                                                            |
+| `p1 \| p2`                                           | Either pattern                                                                   |
+| `[$a, $b]`, `[]`                                     | A list with exactly that many items                                              |
+| `[$first, ..$rest]`, `[.., $last]`, `[$a, ..$m, $z]` | A list with at least the listed items; `..$rest` binds the items `..` stands for |
+| `{name: $n, type: file}`                             | A record that has at least these fields, with matching values                    |
+| `{$name}`                                            | Shorthand for `{name: $name}`                                                    |
 
 List and record patterns can be nested, and a pattern can be followed by an `if` guard.
 
@@ -116,6 +116,20 @@ List and record patterns can be nested, and a pattern can be followed by an `if`
    # => │       │ ╰───┴───╯ │
    # => ╰───────┴───────────╯
    ```
+
+1. `..` or `..$name` can stand anywhere in a list pattern, not only at the end. The items before it match the start of the list, the items after it match the end, and `..$name` binds whatever is left in between (an empty list when nothing is):
+
+   ```nu
+   match [1 2 3 4] { [$first, ..$middle, $last] => {first: $first, middle: $middle, last: $last} } | to nuon
+   # => {first: 1, middle: [2, 3], last: 4}
+   ```
+
+   ```nu
+   match [build test done] { [.., 'done'] => 'finished', _ => 'running' }
+   # => finished
+   ```
+
+   A list pattern can hold only one `..`. A second one is a parse error, `` `..` can only be used once per list pattern``. Each nested list pattern gets its own, so `[[.., 2], ..]` is allowed.
 
 1. A record pattern ignores extra fields, but every field it names must be present. Literal field values let you dispatch on a "tag" field:
 
