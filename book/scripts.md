@@ -250,12 +250,17 @@ str uppercase
 # => helloNushell
 ```
 
+A script like this has no parameters, so `run` ignores any arguments after the script name.
+
 If the script defines `main`, `run` calls it with the pipeline input and with any arguments given after the script name:
 
 ```nu
 # prefix.nu
-def main [--prefix: string = ">"] {
-  each {|line| $"($prefix) ($line)" }
+def main [--prefix(-p): string = ">", --upper(-u)] {
+  each {|line|
+    let line = if $upper { $line | str uppercase } else { $line }
+    $"($prefix) ($line)"
+  }
 }
 ```
 
@@ -267,13 +272,68 @@ def main [--prefix: string = ">"] {
 # => ╰───┴───────╯
 ```
 
-The script runs in its own scope, so environment changes it makes (such as setting `$env.FOO` or calling `cd`) don't carry over to the caller.
+### Arguments to `main`
+
+`run` matches the arguments after the script name to the parameters of `main`, the same way a call to `main` does. A flag can take its value after `=`, short flags can be combined, and a record spread sets flags by name. Each of these calls returns the same table:
+
+```nu
+[a b] | run prefix.nu -u --prefix=">>>"
+[a b] | run prefix.nu -up ">>>"
+[a b] | run prefix.nu ...{upper: true, prefix: ">>>"}
+# => ╭───┬───────╮
+# => │ 0 │ >>> A │
+# => │ 1 │ >>> B │
+# => ╰───┴───────╯
+```
+
+An argument that `main` doesn't accept is an error. That includes an unknown flag, an extra positional argument, a flag missing its value, and a value of the wrong type.
+
+Running a script with `nu` converts each argument to the type of its parameter, as described in [Argument Type Interpretation](#argument-type-interpretation). `run` doesn't. Nushell parses the arguments before it reads the script, so a bare `23` is an `int` even where `main` expects a `string`. Quote the value to pass a string:
+
+```nu
+[a b] | run prefix.nu --prefix 23
+# => Error: nu::shell::cant_convert
+# =>
+# =>   × Can't convert to string.
+# =>    ╭─[repl_entry #1:1:32]
+# =>  1 │ [a b] | run prefix.nu --prefix 23
+# =>    ·                                ─┬
+# =>    ·                                 ╰── can't convert int to string
+# =>    ╰────
+# =>   help: `run` doesn't convert script arguments; quote the value to pass a
+# =>         string
+
+[a b] | run prefix.nu --prefix "23"
+# => ╭───┬──────╮
+# => │ 0 │ 23 a │
+# => │ 1 │ 23 b │
+# => ╰───┴──────╯
+```
+
+`run`'s own flags, such as `--full-reparse`, go before the script name. Everything after the script name belongs to `main`. So `run prefix.nu -f` passes `-f` to `main`, which has no such flag, and `run prefix.nu --help` shows the help for `main` instead of the help for `run`.
+
+To pass a value that starts with `-` as a positional argument, put `--` in front of it, as described in [Arguments Starting with a Dash](#arguments-starting-with-a-dash):
+
+```nu
+run greet.nu --upper -- -alice
+# => -ALICE
+```
+
+A list spread such as `...$args` fills the rest parameter of `main`. Its items stay values even when they look like flags, so a list containing `--upper` can't turn on `--upper`. To set flags from a variable, spread a record instead.
+
+`run` only calls `main`, never one of its [subcommands](#subcommands). With `myscript.nu` from that section, `nu myscript.nu build` calls `main build`, but `run myscript.nu build` passes `build` to `main`. That `main` takes no arguments, so the call fails with an extra positional argument error.
+
+### Scope and Reloading
+
+The script runs in its own scope, so environment changes it makes (such as setting `$env.FOO` or calling `cd`) don't carry over to the caller. While it runs, `$env.CURRENT_FILE` holds the full path of the script and `$env.FILE_PWD` holds its directory.
 
 Like `source`, `run` is a parser keyword: the file name must be a constant, and the file is looked up in the current directory and then in `$NU_LIB_DIRS`. The script is parsed together with the code that calls it. If the script can change after that, for example when a loop calls it again each time you save the file, use `--full-reparse` (`-f`) to reload and reparse it on every call:
 
 ```nu
 for _ in (watch . --glob=*.nu) { run --full-reparse ./test.nu }
 ```
+
+If the file name is `null`, `run` does nothing and passes its input on unchanged.
 
 ## Shebangs (`#!`)
 
