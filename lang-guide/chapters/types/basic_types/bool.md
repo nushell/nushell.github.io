@@ -29,3 +29,29 @@ The following commands take a closure (or a row condition) as their main argumen
 - `in`
 - Regex comparison operators: `=~`, `!~` `<regex>`
 - String comparison operators: `ends-with`, `starts-with`
+
+## Short-circuit evaluation
+
+`and` and `or` short-circuit: the right-hand operand is only evaluated when the left-hand operand doesn't already decide the result. With `and`, the right-hand side is skipped when the left-hand side is `false`; with `or`, it is skipped when the left-hand side is `true`.
+
+```nu
+def check [] { print "check was called"; true }
+
+false and (check)
+# => false
+
+true or (check)
+# => true
+
+true and (check)
+# => check was called
+# => true
+```
+
+This means a condition can guard an expression that would otherwise fail:
+
+```nu
+let text = ""
+($text != "") and (($text | split chars | last) == "%")
+# => false
+```
