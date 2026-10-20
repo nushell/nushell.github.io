@@ -385,7 +385,7 @@ $env.PROMPT_INDICATOR = "> "
 ```
 
 Den Prompt einfärben wird duch den `block` `PROMPT_COMMAND` kontrolliert und individualisiert.
-In [nu_scripts repo](https://github.com/nushell/nu_scripts/blob/main/prompt/oh-my.nu) wurde ein recht ausgefallener geschrieben, welcher den git Status darstellt.
+In [nu_scripts repo](https://github.com/nushell/nu_scripts/blob/main/modules/prompt/oh-my.nu) wurde ein recht ausgefallener geschrieben, welcher den git Status darstellt.
 
 ## `LS_COLORS` Farben für den `ls` Befehl
 
