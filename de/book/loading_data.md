@@ -95,7 +95,7 @@ Als Parameter reicht das Trennzeichen, der Rest ist automatisch:
 ```nu
 open people.txt | lines | split column "|"
 # => ───┬──────────┬───────────┬───────────
-# =>  # │ column1  │ column2   │ column3
+# =>  # │ column0  │ column1   │ column2
 # => ───┼──────────┼───────────┼───────────
 # =>  0 │ Octavia  │  Butler   │  Writer
 # =>  1 │ Bob      │  Ross     │  Painter
@@ -109,7 +109,7 @@ Mit dem [`trim`](/commands/docs/str_trim.md) Befehl wird dieser beseitigt:
 ```nu
 open people.txt | lines | split column "|" | str trim
 # => ───┬─────────┬─────────┬──────────
-# =>  # │ column1 │ column2 │ column3
+# =>  # │ column0 │ column1 │ column2
 # => ───┼─────────┼─────────┼──────────
 # =>  0 │ Octavia │ Butler  │ Writer
 # =>  1 │ Bob     │ Ross    │ Painter
@@ -121,7 +121,7 @@ Nicht schlecht. Der [`split`](/commands/docs/split.md) Befehl gibt nicht nur bra
 sondern bezeichnet auch noch standardmässig die Spaltennamen:
 
 ```nu
-open people.txt | lines | split column "|" | str trim | get column1
+open people.txt | lines | split column "|" | str trim | get column0
 # => ───┬─────────
 # =>  0 │ Octavia
 # =>  1 │ Bob

@@ -80,7 +80,7 @@ Podemos darnos cuenta que estamos trabajando con las líneas porque estamos de v
 ```nu
 open gente.txt | lines | split column "|"
 # => ---+----------+-----------+-----------
-# =>  # | Column1  | Column2   | Column3
+# =>  # | column0  | column1   | column2
 # => ---+----------+-----------+-----------
 # =>  0 | Octavia  |  Butler   |  Writer
 # =>  1 | Bob      |  Ross     |  Painter
@@ -93,7 +93,7 @@ Casi se ve correcto. Parece que hay espacio extra ahí. Cambiemos nuestro delimi
 ```nu
 open gente.txt | lines | split column " | "
 # => ---+---------+---------+----------
-# =>  # | Column1 | Column2 | Column3
+# =>  # | column0 | column1 | column2
 # => ---+---------+---------+----------
 # =>  0 | Octavia | Butler  | Writer
 # =>  1 | Bob     | Ross    | Painter
@@ -104,7 +104,7 @@ open gente.txt | lines | split column " | "
 Nada mal. El comando `split` nos da datos que podemos usar. Adicionalmente nos crea nombres de columnas predeterminadas:
 
 ```nu
-open gente.txt | lines | split column " | " | get Column1
+open gente.txt | lines | split column " | " | get column0
 # => ---+---------
 # =>  # | value
 # => ---+---------

@@ -80,7 +80,7 @@ Podemos notar que estamos lidando com linhas porque voltamos a ver uma lista. No
 ```nu
 open people.txt | lines | split column "|"
 # => ---+----------+-----------+-----------
-# =>  # | Column1  | Column2   | Column3
+# =>  # | column0  | column1   | column2
 # => ---+----------+-----------+-----------
 # =>  0 | Octavia  |  Butler   |  Writer
 # =>  1 | Bob      |  Ross     |  Painter
@@ -93,7 +93,7 @@ Está quase certo. Parece que tem um espaço extra ali. Vamos mudar nosso delimi
 ```nu
 open people.txt | lines | split column " | "
 # => ---+---------+---------+----------
-# =>  # | Column1 | Column2 | Column3
+# =>  # | column0 | column1 | column2
 # => ---+---------+---------+----------
 # =>  0 | Octavia | Butler  | Writer
 # =>  1 | Bob     | Ross    | Painter
@@ -104,7 +104,7 @@ open people.txt | lines | split column " | "
 Nada mal. O comando `split column` retorna dados que podemos usar. Ele também vai além e nos dá nomes de coluna padrão:
 
 ```nu
-open people.txt | lines | split column " | " | get Column1
+open people.txt | lines | split column " | " | get column0
 # => ---+---------
 # =>  # | value
 # => ---+---------

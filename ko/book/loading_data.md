@@ -122,7 +122,7 @@ open people.txt | lines
 ```nu
 open people.txt | lines | split column "|"
 # => ───┬──────────┬───────────┬───────────
-# =>  # │ column1  │ column2   │ column3
+# =>  # │ column0  │ column1   │ column2
 # => ───┼──────────┼───────────┼───────────
 # =>  0 │ Octavia  │  Butler   │  Writer
 # =>  1 │ Bob      │  Ross     │  Painter
@@ -135,7 +135,7 @@ open people.txt | lines | split column "|"
 ```nu
 open people.txt | lines | split column "|" | str trim
 # => ───┬─────────┬─────────┬──────────
-# =>  # │ column1 │ column2 │ column3
+# =>  # │ column0 │ column1 │ column2
 # => ───┼─────────┼─────────┼──────────
 # =>  0 │ Octavia │ Butler  │ Writer
 # =>  1 │ Bob     │ Ross    │ Painter
@@ -146,7 +146,7 @@ open people.txt | lines | split column "|" | str trim
 나쁘지 않습니다. [`split`](/commands/docs/split.md) 명령은 사용할 수 있는 데이터를 제공합니다. 또한 기본 열 이름을 제공합니다.
 
 ```nu
-open people.txt | lines | split column "|" | str trim | get column1
+open people.txt | lines | split column "|" | str trim | get column0
 # => ───┬─────────
 # =>  0 │ Octavia
 # =>  1 │ Bob

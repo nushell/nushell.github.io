@@ -248,7 +248,7 @@ const x = $"(2kb)"
 ```nu
 "red,green,blue" | split column ","
 # => ╭───┬─────────┬─────────┬─────────╮
-# => │ # │ column1 │ column2 │ column3 │
+# => │ # │ column0 │ column1 │ column2 │
 # => ├───┼─────────┼─────────┼─────────┤
 # => │ 0 │ red     │ green   │ blue    │
 # => ╰───┴─────────┴─────────┴─────────╯

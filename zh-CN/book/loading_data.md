@@ -122,7 +122,7 @@ open people.txt | lines
 ```nu
 open people.txt | lines | split column "|"
 # => ───┬──────────┬───────────┬───────────
-# =>  # │ column1  │ column2   │ column3
+# =>  # │ column0  │ column1   │ column2
 # => ───┼──────────┼───────────┼───────────
 # =>  0 │ Octavia  │  Butler   │  Writer
 # =>  1 │ Bob      │  Ross     │  Painter
@@ -135,7 +135,7 @@ open people.txt | lines | split column "|"
 ```nu
 open people.txt | lines | split column "|" | str trim
 # => ───┬─────────┬─────────┬──────────
-# =>  # │ column1 │ column2 │ column3
+# =>  # │ column0 │ column1 │ column2
 # => ───┼─────────┼─────────┼──────────
 # =>  0 │ Octavia │ Butler  │ Writer
 # =>  1 │ Bob     │ Ross    │ Painter
@@ -146,7 +146,7 @@ open people.txt | lines | split column "|" | str trim
 还不错，[`split`](/commands/docs/split.md)命令返回给我们可以使用的数据，还预设了默认的列名：
 
 ```nu
-open people.txt | lines | split column "|" | str trim | get column1
+open people.txt | lines | split column "|" | str trim | get column0
 # => ───┬─────────
 # =>  0 │ Octavia
 # =>  1 │ Bob
