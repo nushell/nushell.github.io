@@ -2,7 +2,7 @@
 title: attr
 categories: |
   core
-version: 0.116.0
+version: 0.116.2
 core: |
   Various attributes for custom commands.
 usage: |
@@ -44,3 +44,4 @@ You must use one of the following subcommands. Using this command as-is will onl
 | [`attr example`](/commands/docs/attr_example.md)                     | Attribute for adding examples to custom commands.                             | built-in |
 | [`attr interactive`](/commands/docs/attr_interactive.md)             | Attribute marking a completer as interactive.                                 | built-in |
 | [`attr search-terms`](/commands/docs/attr_search-terms.md)           | Attribute for adding search terms to custom commands.                         | built-in |
+| [`attr structured`](/commands/docs/attr_structured.md)               | Attribute for getting structured output from an external command.             | built-in |

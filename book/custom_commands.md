@@ -1333,6 +1333,10 @@ help commands | where category == deprecated | select name category command_type
 # => ╰───┴───────┴────────────┴──────────────╯
 ```
 
+Attributes also work on [`extern`](externs.md) declarations. One of them, [`@structured`](/commands/docs/attr_structured.md),
+applies only to `extern`. It lets an external command return data instead of text. See
+[Structured Output](externs.md#structured-output) for examples.
+
 To see other attributes available for use within nushell, check the [command reference](/commands/docs/attr.html)
 or run `help attr` from the nushell REPL.
 
