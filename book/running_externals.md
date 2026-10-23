@@ -71,7 +71,7 @@ let program = "git"
 ^$program status
 ```
 
-See [Strings as external commands](working_with_strings.md#strings-as-external-commands) for the supported string forms. An [`extern` declaration](externs.md) can add type checking and completions for a known external command; calling it follows the same argument rules described here.
+See [Strings as external commands](working_with_strings.md#strings-as-external-commands) for the supported string forms. An [`extern` declaration](externs.md) can add type checking and completions for a known external command, and its [`@structured`](externs.md#structured-output) attribute can turn the command's output into data. Calling it follows the same argument rules described here.
 
 ## Additional Windows Notes
 
