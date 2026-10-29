@@ -41,6 +41,11 @@ Nushell 提供并使用了一系列特殊变量和常量。其中许多在本手
 - `is-login`: 指示 Nushell 是否作为登录 shell 启动
 - `history-enabled`: 可以通过 `nu --no-history` 禁用历史记录，此时该常量将为 `false`
 - `current-exe`: 当前运行的 `nu` 二进制文件的完整路径。可以与 `path dirname`(也是常量)结合使用来确定二进制文件所在的目录
+- `is-lsp`: 当 Nushell 通过 `nu --lsp` 作为语言服务器协议（LSP）服务器启动时为 `true`。
+- `is-mcp`: 当 Nushell 通过 `nu --mcp` 作为模型上下文协议（MCP）服务器运行时为 `true`。参见 [MCP 服务器](./mcp.md)。
+- `is-dap`: 当 Nushell 通过 `nu --dap` 作为调试适配器协议（DAP）服务器启动时为 `true`。参见[脚本调试](./debugging.md)。
+
+  在这三种模式下，`print` 都会输出到 stderr，以免干扰 stdout 上的协议消息。
 
 ## `$env`
 
