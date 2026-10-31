@@ -106,7 +106,7 @@ $items | sort
 
 ### 单元格路径
 
-为了排序更复杂的类型，如表格，可以使用`sort-by`命令。`sort-by`可以通过[单元格路径](navigating_structured_data.html#单元格路径)对其输入进行排序。
+为了排序更复杂的类型，如表格，可以使用`sort-by`命令。`sort-by`可以通过[单元格路径](navigating_structured_data.md#单元格路径)对其输入进行排序。
 
 这是一个按文件大小排序的目录示例：
 
@@ -167,7 +167,7 @@ $cities | sort-by info.established
 
 ### 按键闭包排序
 
-有时，以比"递增"或"递减"更复杂的方式排序数据很有用。你可以提供一个[闭包](types_of_data.html#闭包)，它将每个值转换为[排序键](https://en.wikipedia.org/wiki/Collation#Sort_keys)，而**不改变底层数据**。这是一个按键闭包的例子，我们想按平均成绩排序作业列表：
+有时，以比"递增"或"递减"更复杂的方式排序数据很有用。你可以提供一个[闭包](types_of_data.md#闭包)，它将每个值转换为[排序键](https://en.wikipedia.org/wiki/Collation#Sort_keys)，而**不改变底层数据**。这是一个按键闭包的例子，我们想按平均成绩排序作业列表：
 
 ```nu
 let assignments = [
@@ -335,12 +335,12 @@ $data | sort -n
 
 - [严格排序](#严格排序)以禁止对不兼容类型进行排序
 - [自然排序](#自然排序)以排序混合的数字和数字字符串
-- 使用[`to text`](/commands/docs/to_text.md)、[`to nuon`](/commands/docs/to_nuon.html)或[`to json`](/commands/docs/to_json.html)的[键排序](#按键闭包排序)
-- 使用[`describe`](/commands/docs/describe.html)显式检查类型的[自定义排序](#自定义排序顺序)
+- 使用[`to text`](/commands/docs/to_text.md)、[`to nuon`](/commands/docs/to_nuon.md)或[`to json`](/commands/docs/to_json.md)的[键排序](#按键闭包排序)
+- 使用[`describe`](/commands/docs/describe.md)显式检查类型的[自定义排序](#自定义排序顺序)
 
 ### 严格排序
 
-自定义排序闭包还提供了一种简单的方法来对数据进行排序，同时确保只有具有明确定义比较的类型才能一起排序。这利用了[要求兼容数据类型的运算符](operators.html#types)：
+自定义排序闭包还提供了一种简单的方法来对数据进行排序，同时确保只有具有明确定义比较的类型才能一起排序。这利用了[要求兼容数据类型的运算符](operators.md#类型)：
 
 ```nu
 let compatible = [8 3.2 null 58 2]

@@ -208,7 +208,7 @@ $p * 6
 1. _阶段 1 (解析器):_ 解析**整个**源代码
 2. _阶段 2 (引擎):_ 评估**整个**源代码
 
-将 Nushell 的解析阶段视为[静态](./how_nushell_code_gets_run.md#dynamic-vs-static-languages)语言（如 Rust 或 C++）中的*编译*可能会有所帮助。我们的意思是，所有将在阶段 2 中评估的代码必须在解析阶段**已知且可用**。
+将 Nushell 的解析阶段视为[静态](./how_nushell_code_gets_run.md#动态语言-vs-静态语言)语言（如 Rust 或 C++）中的*编译*可能会有所帮助。我们的意思是，所有将在阶段 2 中评估的代码必须在解析阶段**已知且可用**。
 
 ::: important
 然而，这也意味着 Nushell 目前不支持像*动态*语言（如 Bash 或 Python）中的 `eval` 结构。
@@ -284,7 +284,7 @@ source output.nu
 
 只有当两者作为单个表达式*一起*解析时才会出现限制，这可能是脚本、块、闭包或其他表达式的一部分。
 
-有关更多解释，请参阅*“Nushell 代码如何运行”*中的 [REPL](./how_nushell_code_gets_run.md#the-nushell-repl) 部分。
+有关更多解释，请参阅*“Nushell 代码如何运行”*中的 [REPL](./how_nushell_code_gets_run.md#nushell-交互式解释器) 部分。
 :::
 
 #### 示例：动态创建要加载的文件名
@@ -337,14 +337,14 @@ use format!("{}::common", my_path);
 :::
 
 ::: tip 另见
-然而，正如错误消息中所指出的，如果 `my_path` 可以定义为[常量](/zh-CN/book/variables#constant-variables)，这将起作用，因为常量可以在解析期间解析。
+然而，正如错误消息中所指出的，如果 `my_path` 可以定义为[常量](./variables.md#常量变量)，这将起作用，因为常量可以在解析期间解析。
 
 ```nu
 const my_path = "~/nushell-files"
 source $"($my_path)/common.nu"
 ```
 
-有关更多详细信息，请参阅[解析时常量评估](./how_nushell_code_gets_run.md#parse-time-constant-evaluation)。
+有关更多详细信息，请参阅[解析时常量评估](./how_nushell_code_gets_run.md#解析时常量求值)。
 :::
 
 #### 示例：切换到不同目录 (`cd`) 并 `source` 一个文件
@@ -388,7 +388,7 @@ Nushell 被设计为对每个表达式或文件使用单个解析阶段。此解
 
 不可变变量也是 Nushell 的 [`par-each` 命令](/commands/docs/par-each.md)的关键，它允许你使用线程并行处理多个值。
 
-有关更多信息，请参阅[不可变变量](variables.html#immutable-variables)和[在可变和不可变变量之间进行选择](variables.html#choosing-between-mutable-and-immutable-variables)。
+有关更多信息，请参阅[不可变变量](variables.md#不可变变量)和[在可变和不可变变量之间进行选择](variables.md#在可变和不可变变量之间进行选择)。
 
 ::: warning 以 Nushell 的方式思考
 如果你习惯于依赖可变变量，可能需要一些时间来重新学习如何以更函数化的风格编写代码。Nushell 有许多函数式特性和命令，它们对不可变变量进行操作。学习它们将帮助你以更符合 Nushell 风格的方式编写代码。
@@ -418,7 +418,7 @@ ls | each { |row|
 Nushell 还提供了像 [`load-env`](/commands/docs/load-env.md) 这样的辅助命令，作为一次性加载多个环境更新的便捷方式。
 
 ::: tip 另见
-[环境 - 作用域](./environment.md#scoping)
+[环境 - 作用域](./environment.md#作用域)
 :::
 
 ::: note

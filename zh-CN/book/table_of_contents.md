@@ -1,41 +1,70 @@
 # 目录
 
-- [安装](installation.md) - 安装 Nushell
 - [介绍](README.md) - 开始使用
-- [Nushell 开发思想](thinking_in_nu.md) - Nushell 开发思想
-- [移动操作](moving_around.md) - 在 Nushell 中移动
-- [数据类型](types_of_data.md) - Nushell 中的数据类型
-- [加载数据](loading_data.md) - 加载及使用数据
-- [字符串](working_with_strings.md) - 字符串、转义字符和字符串插值
-- [使用列表](working_with_lists.md) - 使用 Nushell 的列表
-- [使用表格](working_with_tables.md) - 使用 Nushell 的表格
-- [管道](pipelines.md) - 管道工作原理
-- [配置](configuration.md) - 如何配置 Nushell
-- [第三方提示符](3rdpartyprompts.md) - 如何配置第三方提示符
-- [自定义命令](custom_commands.md) - 创建自定义命令
-- [别名](aliases.md) - 如何创建命令别名
-- [运算符](operators.md) - Nushell 支持的运算符
-- [变量](variables.md) - 使用变量
-- [控制流](control_flow.md) - 使用控制流命令
-- [环境变量](environment.md) - 使用环境变量
-- [标准输出、错误和退出码](stdout_stderr_exit_codes.md) - 处理标准输出、错误和退出码
-- [模块](modules.md) - 创建和使用模块
-- [钩子](hooks.md) - 添加自动运行的代码片段
-- [脚本](scripts.md) - 创建脚本
-- [元数据](metadata.md) - Nushell 元数据系统说明
-- [创建自定义错误](creating_errors.md) - 创建自定义错误信息
-- [目录栈](directory_stack.md) - 在多个位置间工作
-- [运行外部命令](running_externals.md) - 运行有命名冲突的外部命令
-- [插件](plugins.md) - 使用插件扩展功能
-- [并行](parallelism.md) - 并行运行代码
-- [行编辑器](line_editor.md) - Nushell 行编辑器
-- [数据帧](dataframes.md) - 使用数据帧
-- [探索](explore.md) - 使用 Nushell TUI
-- [配色和主题](coloring_and_theming.md) - 修改颜色和主题
-- [正则表达式](regular_expressions.md) - 正则表达式指南
-- [从 Bash 迁移](coming_from_bash.md) - Bash 用户指南
-- [Nushell 与其他 Shell/DSL 对比](nushell_map.md) - 与 SQL、LINQ、PowerShell 和 Bash 的比较
-- [Nushell 与命令式语言对比](nushell_map_imperative.md) - 与 Python、Kotlin、C++、C# 和 Rust 的比较
-- [Nushell 与函数式语言对比](nushell_map_functional.md) - 与 Clojure、Tablecloth (OCaml/Elm) 和 Haskell 的比较
-- [Nushell 运算符对比](nushell_operator_map.md) - 与通用编程语言运算符比较
-- [命令参考](/commands/) - Nushell 命令列表
+- [安装](installation.md) - 安装 Nushell
+  - [默认 Shell](default_shell.md) - 将 Nushell 设置为默认登录 shell
+- [入门](getting_started.md)
+  - [快速概览](quick_tour.md) - Nushell 功能快速概览
+  - [在系统内移动](moving_around.md) - 在 Nushell 中移动
+  - [用 Nushell 的方式思考](thinking_in_nu.md) - 用 Nushell 的方式思考
+  - [Nushell 速查表](cheat_sheet.md) - 常用命令与语法汇总
+- [Nushell 基础](nu_fundamentals.md)
+  - [数据类型](types_of_data.md) - Nushell 中的数据类型
+  - [加载数据](loading_data.md) - 加载并使用数据
+  - [管道](pipelines.md) - 管道的工作原理
+  - [使用字符串](working_with_strings.md) - 字符串、转义字符与字符串插值
+  - [使用列表](working_with_lists.md) - 使用 Nushell 的列表
+  - [使用记录](working_with_records.md) - 使用 Nushell 的记录
+  - [使用表格](working_with_tables.md) - 使用 Nushell 的表格
+  - [浏览与访问结构化数据](navigating_structured_data.md) - 单元格路径与访问嵌套数据
+  - [特殊变量](special_variables.md) - Nushell 为你定义的变量
+- [Nushell 编程](programming_in_nu.md)
+  - [自定义命令](custom_commands.md) - 创建你自己的命令
+  - [别名](aliases.md) - 如何为命令设置别名
+  - [运算符](operators.md) - Nushell 支持的运算符
+  - [变量](variables.md) - 使用变量
+  - [控制流](control_flow.md) - 使用控制流命令
+  - [脚本](scripts.md) - 创建你自己的脚本
+  - [模块](modules.md) - 创建和使用你自己的模块
+    - [使用模块](modules/using_modules.md)
+    - [创建模块](modules/creating_modules.md)
+  - [覆盖层](overlays.md) - 激活与停用定义层
+  - [排序](sorting.md) - 对列表、记录和表格排序
+  - [测试你的 Nushell 代码](testing.md) - 用标准库编写测试
+  - [调试脚本](debugging.md) - 用 `nu --dap` 在编辑器中单步调试脚本
+  - [最佳实践](style_guide.md) - 格式与命名约定
+- [作为 Shell 的 Nushell](nu_as_a_shell.md)
+  - [配置](configuration.md) - 如何配置 Nushell
+  - [环境变量](environment.md) - 使用环境变量
+  - [标准输出、标准错误与退出码](stdout_stderr_exit_codes.md) - 处理标准输出、标准错误和退出码
+  - [运行系统（外部）命令](running_externals.md) - 运行存在命名冲突的外部命令
+  - [如何配置第三方提示符](3rdpartyprompts.md) - 如何配置第三方提示符
+  - [目录栈](directory_stack.md) - 在多个位置间工作
+  - [Reedline，Nushell 的行编辑器](line_editor.md) - Nushell 的行编辑器
+  - [自定义补全](custom_completions.md) - 为你的命令添加补全
+  - [外部命令签名](externs.md) - 描述外部命令的签名
+  - [Nushell 中的配色与主题](coloring_and_theming.md) - 如何更改 Nushell 的颜色与主题
+  - [钩子](hooks.md) - 添加自动运行的代码片段
+  - [后台任务](background_jobs.md) - 在后台运行代码
+- [迁移到 Nushell](coming_to_nu.md)
+  - [从 Bash 迁移](coming_from_bash.md) - 为从 Bash 转到 Nushell 的用户准备的指南
+  - [从 CMD.EXE 迁移](coming_from_cmd.md) - 为从 CMD.EXE 转到 Nushell 的用户准备的指南
+  - [从 PowerShell 迁移](coming_from_powershell.md) - 为从 PowerShell 转到 Nushell 的用户准备的指南
+  - [Nushell 与其他 Shell 及领域特定语言的对照](nushell_map.md) - 展示 Nushell 与 SQL、LINQ、PowerShell 和 Bash 的比较
+  - [Nushell 与命令式语言的对照](nushell_map_imperative.md) - 展示 Nushell 与 Python、Kotlin、C++、C# 和 Rust 的比较
+  - [Nushell 与函数式语言的对照](nushell_map_functional.md) - 展示 Nushell 与 Clojure、Tablecloth（OCaml / Elm）和 Haskell 的比较
+  - [Nushell 运算符对照](nushell_operator_map.md) - 展示 Nushell 的运算符与通用编程语言运算符的比较
+- [设计说明](design_notes.md)
+  - [Nushell 代码是如何运行的](how_nushell_code_gets_run.md) - 解析、求值，以及为什么有些内容必须在解析期确定
+- [（不那么）高级](advanced.md)
+  - [标准库](standard_library.md) - Nushell 的标准库
+  - [数据帧](dataframes.md) - 在 Nushell 中使用数据帧
+  - [元数据](metadata.md) - Nu 元数据系统的说明
+  - [创建你自己的错误](creating_errors.md) - 创建你自己的错误消息
+  - [并行](parallelism.md) - 并行运行你的代码
+  - [插件](plugins.md) - 用插件为 Nushell 扩展更多功能
+  - [探索](explore.md) - 用 `explore` 浏览结构化数据
+  - [用 `tui` 构建 TUI](tui.md) - 构建你自己的交互式终端界面
+  - [MCP 服务器](mcp.md) - 让 AI 智能体通过 Model Context Protocol 运行 Nushell 代码
+- [正则表达式](regular_expressions.md) - 正则表达式使用指南
+- [命令参考](/commands/) - Nushell 全部命令的列表

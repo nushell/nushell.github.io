@@ -28,7 +28,7 @@ ls
 
 ## 对数据进行操作
 
-接下来，让我们按每个文件的大小对这个表进行排序。为此，我们将获取 [`ls`](/commands/docs/ls.md) 的输出，并将其输入到一个可以根据列中的*值*对表进行排序的命令中。
+接下来，让我们按每个文件的大小对这个表格进行排序。为此，我们将获取 [`ls`](/commands/docs/ls.md) 的输出，并将其输入到一个可以根据列中的*值*对表格进行排序的命令中。
 
 ```nu:no-line-numbers
 ls | sort-by size | reverse
@@ -50,10 +50,10 @@ ls | sort-by size | reverse
 请注意，我们没有向 [`ls`](/commands/docs/ls.md) 传递命令行参数或开关。相反，我们使用 Nushell 的内置命令 [`sort-by`](/commands/docs/sort-by.md) 来对 `ls` 命令的*输出*进行排序。然后，为了让最大的文件显示在最上面，我们对 `sort-by` 的*输出*使用了 [`reverse`](/commands/docs/reverse.md)。
 
 ::: tip 酷！
-如果你仔细比较排序顺序，你可能会发现数据不是按字母顺序排序的，甚至不是按*数值*排序的。相反，由于 `size` 列是 [`filesize` 类型](./types_of_data.md#file-sizes)，Nushell 知道 `1.1 KiB` (kibibytes) 比 `812 B` (bytes) 大。
+如果你仔细比较排序顺序，你可能会发现数据不是按字母顺序排序的，甚至不是按*数值*排序的。相反，由于 `size` 列是 [`filesize` 类型](./types_of_data.md#文件大小)，Nushell 知道 `1.1 KiB` (kibibytes) 比 `812 B` (bytes) 大。
 :::
 
-# 使用 `where` 命令查找数据
+## 使用 `where` 命令查找数据
 
 Nu 提供了许多可以对前一个命令的结构化输出进行操作的命令。这些在 Nushell 中通常被归类为“过滤器”。
 
@@ -131,7 +131,7 @@ ps | describe
 
 ## 管道中的命令参数
 
-有时，命令接受的是*参数*而不是管道*输入*。对于这种情况，Nushell 提供了 [`$in` 变量](./pipelines.md#pipeline-input-and-the-special-in-variable)，让你可以在变量形式中使用前一个命令的输出。例如：
+有时，命令接受的是*参数*而不是管道*输入*。对于这种情况，Nushell 提供了 [`$in` 变量](./pipelines.md#管道输入和特殊的-in-变量)，让你可以在变量形式中使用前一个命令的输出。例如：
 
 ```nu:line-numbers
 ls
@@ -153,17 +153,17 @@ ls
 ls | sort-by size | reverse | first | get name | cp $in ~
 ```
 
-另请参阅：[多行编辑](./line_editor.md#multi-line-editing)
+另请参阅：[多行编辑](./line_editor.md#多行编辑)
 :::
 
 前三行与我们在上面第二个例子中使用的命令相同，所以让我们来看看后三行：
 
-4. [`first` 命令](/commands/docs/first.md)只是从表格中返回第一个值。在这种情况下，这意味着大小最大的文件。如果使用上面第二个例子中的目录列表，那就是 `Cargo.lock` 文件。这个“文件”是表格中的一个 [`record`](./types_of_data.md#records)（记录），它仍然包含 `name`、`type`、`size` 和 `modified` 列/字段。
-5. `get name` 从前一个命令返回 `name` 字段的*值*，即 `"Cargo.lock"`（一个字符串）。这也是一个 [`cell-path`](./types_of_data.md#cell-paths)（单元格路径）的简单例子，可用于导航和隔离结构化数据。
+4. [`first` 命令](/commands/docs/first.md)只是从表格中返回第一个值。在这种情况下，这意味着大小最大的文件。如果使用上面第二个例子中的目录列表，那就是 `Cargo.lock` 文件。这个“文件”是表格中的一个 [`record`](./types_of_data.md#记录)（记录），它仍然包含 `name`、`type`、`size` 和 `modified` 列/字段。
+5. `get name` 从前一个命令返回 `name` 字段的*值*，即 `"Cargo.lock"`（一个字符串）。这也是一个 [`cell-path`](./types_of_data.md#单元格路径)（单元格路径）的简单例子，可用于导航和隔离结构化数据。
 6. 最后一行使用 `$in` 变量来引用第 5 行的输出。结果是一个命令，意思是*“将 'Cargo.lock' 复制到主目录”*
 
 ::: tip
-[`get`](/commands/docs/get.md) 和它的对应命令 [`select`](/commands/docs/select.md) 是 Nushell 中最常用的两个过滤器，但乍一看可能不容易发现它们之间的区别。当你准备好更广泛地使用它们时，请参阅[使用 `get` 和 `select`](./navigating_structured_data.md#using-get-and-select)指南。
+[`get`](/commands/docs/get.md) 和它的对应命令 [`select`](/commands/docs/select.md) 是 Nushell 中最常用的两个过滤器，但乍一看可能不容易发现它们之间的区别。当你准备好更广泛地使用它们时，请参阅[使用 `get` 和 `select`](./navigating_structured_data.md#使用get和select)指南。
 :::
 
 ## 获取帮助
@@ -181,7 +181,7 @@ help escapes
 ```
 
 ::: tip 酷！
-按 <kbd>F1</kbd> 键访问帮助[菜单](./line_editor.md#menus)。在这里搜索 `ps` 命令，但*先不要按 <kbd>Enter</kbd> 键*！
+按 <kbd>F1</kbd> 键访问帮助[菜单](./line_editor.md#菜单)。在这里搜索 `ps` 命令，但*先不要按 <kbd>Enter</kbd> 键*！
 
 相反，按 <kbd>向下箭头</kbd> 键，你会发现你正在滚动浏览示例部分。高亮一个示例，*然后*按 <kbd>Enter</kbd> 键，该示例将被输入到命令行中，准备运行！
 
@@ -214,7 +214,7 @@ help commands
 ```
 
 ::: tip
-请注意，上面输出的 `params` 和 `input_output` 列是*嵌套*表。Nushell 允许[任意嵌套的数据结构](./navigating_structured_data.md#background)。
+请注意，上面输出的 `params` 和 `input_output` 列是*嵌套*表格。Nushell 允许[任意嵌套的数据结构](./navigating_structured_data.md#背景)。
 :::
 
 ## 开始 `explore`(浏览) 这里

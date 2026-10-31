@@ -65,7 +65,7 @@ load-env { "BOB": "FOO", "JAY": "BAR" }
 
 ### 调用[`def --env`](/commands/docs/def.md)定义的命令
 
-详情见[从自定义命令中定义环境](custom_commands.md#changing-the-environment-in-a-custom-command)。
+详情见[从自定义命令中定义环境](custom_commands.md#在自定义命令中更改环境)。
 
 ### 使用模块导出
 
@@ -80,7 +80,7 @@ $env.FOO
 # => BAR
 ```
 
-有时，你可能想访问一个可能未设置的环境变量。考虑使用[问号操作符](types_of_data.md#optional-cell-paths)来避免错误：
+有时，你可能想访问一个可能未设置的环境变量。考虑使用[问号操作符](types_of_data.md#单元格路径)来避免错误：
 
 ```nu
 $env.FOO | describe
@@ -136,7 +136,7 @@ $env.FOO == "BAR"
 # => true
 ```
 
-另请参阅：[在自定义命令中更改环境](./custom_commands.html#changing-the-environment-in-a-custom-command)。
+另请参阅：[在自定义命令中更改环境](./custom_commands.md#在自定义命令中更改环境)。
 
 ## 目录切换
 
@@ -160,7 +160,7 @@ with-env { FOO: BAR } { $env.FOO }
 # => BAR
 ```
 
-[`with-env`](/commands/docs/with-env.md)命令将暂时把环境变量设置为给定的值（这里：变量 "FOO" 被赋为 "BAR" 值）。一旦这样做了，[块](types_of_data.html#块) 将在这个新的环境变量设置下运行。
+[`with-env`](/commands/docs/with-env.md)命令将暂时把环境变量设置为给定的值（这里：变量 "FOO" 被赋为 "BAR" 值）。一旦这样做了，[块](types_of_data.md#代码块) 将在这个新的环境变量设置下运行。
 
 ## 永久性环境变量
 

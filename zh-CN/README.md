@@ -59,11 +59,11 @@ winget install nushell --scope machine
 
 ## 文档
 
-- [入门](/zh-CN/book/getting_started.html) 指引你熟悉 Nushell
-- [Nu 之异同](/zh-CN/book/coming_to_nu.html) 描述了 Nu 与其他语言和 Shell 的异同之处
-- [Nu 基础](/zh-CN/book/nu_fundamentals.html) 是对 Nu 基础知识更详尽、更有条理的描述
-- [Nu 编程](/zh-CN/book/programming_in_nu.html) 将 Nu 作为一门编程语言进行描述
-- [作为 Shell 的 Nu](/zh-CN/book/nu_as_a_shell.html) 让你深入了解 Shell 环境中的交互功能和可配置性
+- [入门](/zh-CN/book/getting_started.md) 指引你熟悉 Nushell
+- [Nu 之异同](/zh-CN/book/coming_to_nu.md) 描述了 Nu 与其他语言和 Shell 的异同之处
+- [Nu 基础](/zh-CN/book/nu_fundamentals.md) 是对 Nu 基础知识更详尽、更有条理的描述
+- [Nu 编程](/zh-CN/book/programming_in_nu.md) 将 Nu 作为一门编程语言进行描述
+- [作为 Shell 的 Nu](/zh-CN/book/nu_as_a_shell.md) 让你深入了解 Shell 环境中的交互功能和可配置性
 
 ## 社区
 

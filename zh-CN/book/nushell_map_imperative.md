@@ -1,8 +1,8 @@
 # 从命令式语言到 Nu
 
-这个表格的目的是帮助你了解 Nu 的内置和插件所提供的命令与命令式语言的关系。我们试图制作一张所有 Nu 命令和它们在其他语言中的对应关系的表。欢迎大家参与贡献。
+这个表格的目的是帮助你了解 Nu 的内置和插件所提供的命令与命令式语言的关系。我们试图制作一张所有 Nu 命令和它们在其他语言中的对应关系的表格。欢迎大家参与贡献。
 
-注意：此表假设 Nu 0.94 或更高版本。
+注意：此表假设 Nu 0.116.0 或更高版本。
 
 | Nushell                                                                                                                                | Python                               | Kotlin (Java)                                               | C++                         | Rust                                                 |
 | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ | ----------------------------------------------------------- | --------------------------- | ---------------------------------------------------- |
@@ -45,7 +45,7 @@
 | [`print`](/commands/docs/print.md)                                                                                                     | `print`                              | `println`                                                   | `printf`                    | `println!`                                           |
 | [`ps`](/commands/docs/ps.md)                                                                                                           | `os.listdir('/proc')`                |                                                             |                             |                                                      |
 | [`pwd`](/commands/docs/pwd.md)                                                                                                         | `os.getcwd`                          |                                                             |                             | `env::current_dir`                                   |
-| [`range`](types_of_data.html#ranges) type                                                                                              | `range`                              | `..`, `until`, `downTo`, `step`                             | `iota`                      | `..`                                                 |
+| [`range`](types_of_data.md#区间) type                                                                                                  | `range`                              | `..`, `until`, `downTo`, `step`                             | `iota`                      | `..`                                                 |
 | [`reduce`](/commands/docs/reduce.md)                                                                                                   | `functools.reduce`                   | `reduce`                                                    | `reduce`                    | `fold`, `rfold`, `scan`                              |
 | [`reject`](/commands/docs/reject.md)                                                                                                   | `del`                                |                                                             |                             |                                                      |
 | [`rename`](/commands/docs/rename.md)                                                                                                   | `dict[\"key2\"] = dict.pop(\"key\")` |                                                             |                             | `map.insert(\"key2\", map.remove(\"key\").unwrap())` |

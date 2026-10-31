@@ -70,7 +70,7 @@ $env.config.hooks.pre_execution = $env.config.hooks.pre_execution | append { pri
 ## 修改环境变量
 
 钩子的一个特点是它们保留了环境。
-在钩子**代码块**内定义的环境变量将以类似于 [`def --env`](environment.md#从自定义命令中定义环境变量) 的方式被保留下来。
+在钩子**代码块**内定义的环境变量将以类似于 [`def --env`](custom_commands.md#在自定义命令中更改环境) 的方式被保留下来。
 你可以用下面的例子测试一下：
 
 ```nu

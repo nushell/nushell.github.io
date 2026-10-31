@@ -14,7 +14,7 @@ Nu 插件**必须**是一个可执行文件，文件名必须以 `nu_plugin_` �
 
 其他命令行参数保留给将来可能添加的选项，包括其他通信方法。支持本文档所述协议的插件**应该**拒绝其他参数，并向 stderr 打印信息性消息。
 
-启动插件后，Nu 期望插件立即发送其编码类型。目前支持两种编码类型：[`json`](#json) 和 [`msgpack`](#messagepack)。所需的编码类型**应该**首先发送，字符串长度作为单字节整数，然后是编码类型字符串。即，使用类似 C 的转义语法：`"\x04json"` 或 `"\x07msgpack"`。在本文档中，为了可读性将使用 JSON 格式，但 MessagePack 格式大致等效。有关格式的具体细节，请参阅[编码](#encoding)部分。
+启动插件后，Nu 期望插件立即发送其编码类型。目前支持两种编码类型：[`json`](#json) 和 [`msgpack`](#messagepack)。所需的编码类型**应该**首先发送，字符串长度作为单字节整数，然后是编码类型字符串。即，使用类似 C 的转义语法：`"\x04json"` 或 `"\x07msgpack"`。在本文档中，为了可读性将使用 JSON 格式，但 MessagePack 格式大致等效。有关格式的具体细节，请参阅[编码](#编码)部分。
 
 然后 Nu 将以所需的编码发送消息。第一条消息始终是 [`Hello`](#hello)。插件**必须**发送一条 `Hello` 消息，指示其兼容的预期 Nu 版本以及任何支持的协议功能。引擎也会发送一条 `Hello` 消息，包含其版本和任何支持的协议功能。插件**可以**验证其是否与引擎提供的 Nu 版本兼容，但如果确定不支持，引擎将结束与插件的通信。插件**不得**使用其支持但引擎在其 `Hello` 消息中未确认支持的协议功能。在发送 `Hello` 之前不允许发送任何其他消息。
 
@@ -98,7 +98,7 @@ Nu 插件**必须**是一个可执行文件，文件名必须以 `nu_plugin_` �
 
 #### `Metadata` 插件调用
 
-要求插件发送有关其自身的元数据。不接受参数。返回 [`Metadata`](#metadata-plugin-call-response) 或 [`Error`](#error-plugin-call-response)。
+要求插件发送有关其自身的元数据。不接受参数。返回 [`Metadata`](#metadata-插件调用响应) 或 [`Error`](#error-插件调用响应)。
 
 示例：
 
@@ -110,7 +110,7 @@ Nu 插件**必须**是一个可执行文件，文件名必须以 `nu_plugin_` �
 
 #### `Signature` 插件调用
 
-要求插件发送其命令签名。不接受参数。返回 [`Signature`](#signature-plugin-call-response) 或 [`Error`](#error-plugin-call-response)。
+要求插件发送其命令签名。不接受参数。返回 [`Signature`](#signature-插件调用响应) 或 [`Error`](#error-插件调用响应)。
 
 示例：
 
@@ -142,7 +142,7 @@ Nu 插件**必须**是一个可执行文件，文件名必须以 `nu_plugin_` �
 
 命名参数始终以其长名称发送，而不是短名称。
 
-返回 [`PipelineData`](#pipelinedata-plugin-call-response) 或 [`Error`](#error-plugin-call-response)。
+返回 [`PipelineData`](#pipelinedata-插件调用响应) 或 [`Error`](#error-插件调用响应)。
 
 示例：
 
@@ -198,7 +198,7 @@ Nu 插件**必须**是一个可执行文件，文件名必须以 `nu_plugin_` �
 
 ##### `ToBaseValue`
 
-返回一个代表自定义值的普通值，如果不可能则返回错误。不允许为此操作发送回自定义值。响应类型是 [`PipelineData`](#pipelinedata-plugin-call-response) 或 [`Error`](#error-plugin-call-response)。如果操作产生流，它将被消费为一个值。
+返回一个代表自定义值的普通值，如果不可能则返回错误。不允许为此操作发送回自定义值。响应类型是 [`PipelineData`](#pipelinedata-插件调用响应) 或 [`Error`](#error-插件调用响应)。如果操作产生流，它将被消费为一个值。
 
 示例：
 
@@ -227,7 +227,7 @@ Nu 插件**必须**是一个可执行文件，文件名必须以 `nu_plugin_` �
 
 ##### `FollowPathInt`
 
-返回在自定义值上跟随数字单元格路径（例如 `$custom_value.0`）的结果。这最常用于像列表或表格一样操作的自定义类型。参数是一个带范围的无符号整数。响应类型是 [`PipelineData`](#pipelinedata-plugin-call-response) 或 [`Error`](#error-plugin-call-response)。结果**可能**是另一个自定义值。如果操作产生流，它将被消费为一个值。
+返回在自定义值上跟随数字单元格路径（例如 `$custom_value.0`）的结果。这最常用于像列表或表格一样操作的自定义类型。参数是一个带范围的无符号整数。响应类型是 [`PipelineData`](#pipelinedata-插件调用响应) 或 [`Error`](#error-插件调用响应)。结果**可能**是另一个自定义值。如果操作产生流，它将被消费为一个值。
 
 示例：
 
@@ -268,7 +268,7 @@ $version.0
 
 ##### `FollowPathString`
 
-返回在自定义值上跟随字符串单元格路径（例如 `$custom_value.field`）的结果。这最常用于像列表或表格一样操作的自定义类型。参数是一个带范围的字符串。响应类型是 [`PipelineData`](#pipelinedata-plugin-call-response) 或 [`Error`](#error-plugin-call-response)。结果**可能**是另一个自定义值。如果操作产生流，它将被消费为一个值。
+返回在自定义值上跟随字符串单元格路径（例如 `$custom_value.field`）的结果。这最常用于像列表或表格一样操作的自定义类型。参数是一个带范围的字符串。响应类型是 [`PipelineData`](#pipelinedata-插件调用响应) 或 [`Error`](#error-插件调用响应)。结果**可能**是另一个自定义值。如果操作产生流，它将被消费为一个值。
 
 示例：
 
@@ -309,7 +309,7 @@ $version.field
 
 ##### `PartialCmp`
 
-将自定义值与另一个值进行比较，并返回应使用的 [`Ordering`](#ordering)（如果有）。参数类型是 [`Value`](#value)，可以是任何值 - 不仅仅是相同的自定义值类型。响应类型是 [`Ordering`](#ordering-plugin-call-response)。也可能返回 [`Error`](#error-plugin-call-response)，但目前错误不太可能呈现给用户 - 引擎将表现得好像你发送了 `{"Ordering": null}`。
+将自定义值与另一个值进行比较，并返回应使用的 [`Ordering`](#ordering)（如果有）。参数类型是 [`Value`](#value)，可以是任何值 - 不仅仅是相同的自定义值类型。响应类型是 [`Ordering`](#ordering-插件调用响应)。也可能返回 [`Error`](#error-插件调用响应)，但目前错误不太可能呈现给用户 - 引擎将表现得好像你发送了 `{"Ordering": null}`。
 
 示例（比较两个 `version` 自定义值）：
 
@@ -352,7 +352,7 @@ $version.field
 
 ##### `Operation`
 
-返回在此自定义值和另一个值上评估 [`Operator`](#operator) 的结果。参数是一个 2 元组：(`operator`, `value`)，其中 `operator` 是一个带范围的 [`Operator`](#operator)，`value` 是一个 [`Value`](#value)，可以是任何值 - 不仅仅是相同的自定义值类型。响应类型是 [`PipelineData`](#pipelinedata-plugin-call-response) 或 [`Error`](#error-plugin-call-response)。结果**可能**是另一个自定义值。如果操作产生流，它将被消费为一个值。
+返回在此自定义值和另一个值上评估 [`Operator`](#operator) 的结果。参数是一个 2 元组：(`operator`, `value`)，其中 `operator` 是一个带范围的 [`Operator`](#operator)，`value` 是一个 [`Value`](#value)，可以是任何值 - 不仅仅是相同的自定义值类型。响应类型是 [`PipelineData`](#pipelinedata-插件调用响应) 或 [`Error`](#error-插件调用响应)。结果**可能**是另一个自定义值。如果操作产生流，它将被消费为一个值。
 
 示例：
 
@@ -406,7 +406,7 @@ $version + 7
 
 ##### `Dropped`
 
-此操作用于通知插件，一个在引擎中设置了 `notify_on_drop` 为 `true` 的 [`PluginCustomValue`](#plugincustomvalue) 已被丢弃 - 即，它的所有副本都已超出范围。有关在什么情况下发送此消息的更多信息，请参阅插件参考中的[丢弃通知](plugins.md#drop-notification)部分。响应类型是 [`Empty` pipeline data](#empty-header-variant) 或 [`Error`](#error-plugin-call-response)。
+此操作用于通知插件，一个在引擎中设置了 `notify_on_drop` 为 `true` 的 [`PluginCustomValue`](#plugincustomvalue) 已被丢弃 - 即，它的所有副本都已超出范围。有关在什么情况下发送此消息的更多信息，请参阅插件参考中的[丢弃通知](plugins.md#丢弃通知)部分。响应类型是 [`Empty` pipeline data](#empty-头变体) 或 [`Error`](#error-插件调用响应)。
 
 示例：
 
@@ -491,7 +491,7 @@ $version + 7
 
 #### `Config` 引擎调用响应
 
-[`Config` 引擎调用](#config-engine-call)的成功结果。主体是一个 [`Config`](#config)。
+[`GetConfig` 引擎调用](#getconfig-引擎调用)的成功结果。主体是一个 [`Config`](#config)。
 
 示例：
 
@@ -516,7 +516,7 @@ $version + 7
 
 #### `ValueMap` 引擎调用响应
 
-产生普通映射的引擎调用（例如 [`GetEnvVars` 引擎调用](#getenvvars-engine-call)）的成功结果。主体是从字符串到 [`Value`s](#value) 的映射。
+产生普通映射的引擎调用（例如 [`GetEnvVars` 引擎调用](#getenvvars-引擎调用)）的成功结果。主体是从字符串到 [`Value`s](#value) 的映射。
 
 示例：
 
@@ -543,7 +543,7 @@ $version + 7
 
 #### `Identifier` 引擎调用响应
 
-产生内部标识符的引擎调用（例如 [`FindDecl`](#finddecl-engine-call)）的成功结果。主体是一个 `usize`（无符号整数，平台指针大小）。
+产生内部标识符的引擎调用（例如 [`FindDecl`](#finddecl-引擎调用)）的成功结果。主体是一个 `usize`（无符号整数，平台指针大小）。
 
 示例：
 
@@ -631,7 +631,7 @@ $version + 7
 
 #### `Metadata` 插件调用响应
 
-[`Metadata` 插件调用](#metadata-plugin-call)的成功响应。主体包含描述插件的字段，这些字段都不是必需的：
+[`Metadata` 插件调用](#metadata-插件调用)的成功响应。主体包含描述插件的字段，这些字段都不是必需的：
 
 | 字段        | 类型    | 描述                                                                                           |
 | ----------- | ------- | ---------------------------------------------------------------------------------------------- |
@@ -654,7 +654,7 @@ $version + 7
 
 #### `Signature` 插件调用响应
 
-[`Signature` 插件调用](#signature-plugin-call)的成功响应。主体是一个[签名](https://docs.rs/nu-protocol/latest/nu_protocol/struct.PluginSignature.html)数组。
+[`Signature` 插件调用](#signature-插件调用)的成功响应。主体是一个[签名](https://docs.rs/nu-protocol/latest/nu_protocol/struct.PluginSignature.html)数组。
 
 示例：
 
@@ -772,7 +772,7 @@ $version + 7
 上下文**必须**是已接收的[调用](#call)的 ID，该调用当前处于以下两种状态之一：
 
 1. [响应](#callresponse)尚未发送。
-2. 响应包含流数据（即 [`ListStream`](#liststream-header-variant) 或 [`ByteStream`](#bytestream-header-variant)），并且响应启动的至少一个流仍在发送数据（即 [`End`](#end) 尚未发送）。
+2. 响应包含流数据（即 [`ListStream`](#liststream-头变体) 或 [`ByteStream`](#bytestream-头变体)），并且响应启动的至少一个流仍在发送数据（即 [`End`](#end) 尚未发送）。
 
 在响应完全发送且流结束后，该调用的 `context` 不能再使用。
 
@@ -780,7 +780,7 @@ $version + 7
 
 #### `GetConfig` 引擎调用
 
-获取 Nushell 引擎配置。如果成功，返回一个 [`Config` 响应](#config-engine-call-response)。
+获取 Nushell 引擎配置。如果成功，返回一个 [`Config` 响应](#config-引擎调用响应)。
 
 示例：
 
@@ -796,9 +796,9 @@ $version + 7
 
 #### `GetPluginConfig` 引擎调用
 
-从 `$env.config.plugins.NAME` 中的插件部分获取插件的配置（如果存在）。如果成功，返回一个 [`PipelineData` 响应](#pipelinedata-engine-call-response)，如果设置了插件配置，它将包含一个 [`Value`](#value-header-variant)，如果没有设置插件配置，则为 [`Empty`](#empty-header-variant)。
+从 `$env.config.plugins.NAME` 中的插件部分获取插件的配置（如果存在）。如果成功，返回一个 [`PipelineData` 响应](#pipelinedata-引擎调用响应)，如果设置了插件配置，它将包含一个 [`Value`](#value-头变体)，如果没有设置插件配置，则为 [`Empty`](#empty-头变体)。
 
-如果插件配置被指定为闭包，引擎将评估该闭包并返回结果，这可能会导致[错误响应](#error-engine-call-response)。
+如果插件配置被指定为闭包，引擎将评估该闭包并返回结果，这可能会导致[错误响应](#error-引擎调用响应)。
 
 示例：
 
@@ -814,7 +814,7 @@ $version + 7
 
 #### `GetEnvVar` 引擎调用
 
-从调用者的作用域获取环境变量。如果成功，返回一个 [`PipelineData` 响应](#pipelinedata-engine-call-response)，如果环境变量存在，它将包含一个 [`Value`](#value-header-variant)，如果环境变量不存在，则为 [`Empty`](#empty-header-variant)。
+从调用者的作用域获取环境变量。如果成功，返回一个 [`PipelineData` 响应](#pipelinedata-引擎调用响应)，如果环境变量存在，它将包含一个 [`Value`](#value-头变体)，如果环境变量不存在，则为 [`Empty`](#empty-头变体)。
 
 示例：
 
@@ -832,7 +832,7 @@ $version + 7
 
 #### `GetEnvVars` 引擎调用
 
-从调用者的作用域获取所有环境变量。如果成功，返回一个 [`ValueMap` 响应](#valuemap-engine-call-response)，包含作用域中的所有环境变量。
+从调用者的作用域获取所有环境变量。如果成功，返回一个 [`ValueMap` 响应](#valuemap-引擎调用响应)，包含作用域中的所有环境变量。
 
 示例：
 
@@ -848,7 +848,7 @@ $version + 7
 
 #### `GetCurrentDir` 引擎调用
 
-获取调用者作用域中的当前目录路径。如果成功，始终返回一个绝对路径作为字符串 [`Value` pipeline data](#value-header-variant) 响应。值响应中包含的范围不太可能有用，可能为零。
+获取调用者作用域中的当前目录路径。如果成功，始终返回一个绝对路径作为字符串 [`Value` pipeline data](#value-头变体) 响应。值响应中包含的范围不太可能有用，可能为零。
 
 示例：
 
@@ -864,7 +864,7 @@ $version + 7
 
 #### `AddEnvVar` 引擎调用
 
-在调用者的作用域中设置环境变量。只有在插件调用响应发送之前调用，环境变量才能传播到调用者的作用域。无论哪种方式，它都会传播到同一上下文中进行的其他引擎调用。参数是一个 2 元组：(`name`, `value`)。成功时的响应类型是 [`Empty` pipeline data](#empty-header-variant)。
+在调用者的作用域中设置环境变量。只有在插件调用响应发送之前调用，环境变量才能传播到调用者的作用域。无论哪种方式，它都会传播到同一上下文中进行的其他引擎调用。参数是一个 2 元组：(`name`, `value`)。成功时的响应类型是 [`Empty` pipeline data](#empty-头变体)。
 
 示例：
 
@@ -893,7 +893,7 @@ $version + 7
 
 #### `GetHelp` 引擎调用
 
-获取当前命令的完全格式化帮助文本。这有助于实现仅列出其子命令的顶级命令，而不是实现任何特定功能。成功时的响应是 [`Value` pipeline data](#value-header-variant)，始终包含一个字符串。
+获取当前命令的完全格式化帮助文本。这有助于实现仅列出其子命令的顶级命令，而不是实现任何特定功能。成功时的响应是 [`Value` pipeline data](#value-头变体)，始终包含一个字符串。
 
 示例：
 
@@ -909,13 +909,13 @@ $version + 7
 
 #### `EnterForeground` 引擎调用
 
-以操作系统定义的方式将插件移动到前台组以进行直接终端访问。当插件将以原始模式驱动终端时（例如实现终端 UI），应调用此方法。在这种情况下，插件可能还需要在[本地套接字模式](#localsocket-feature)下运行。
+以操作系统定义的方式将插件移动到前台组以进行直接终端访问。当插件将以原始模式驱动终端时（例如实现终端 UI），应调用此方法。在这种情况下，插件可能还需要在[本地套接字模式](#localsocket-功能)下运行。
 
-当插件不需要任何操作时，此调用在成功时响应 [`Empty` pipeline data](#empty-header-variant)。在类 Unix 操作系统上，如果响应是 [`Value` pipeline data](#value-header-variant)，它包含一个 [`Int`](#int)，这是插件必须使用 `setpgid()` 加入的进程组 ID，以便处于前台。
+当插件不需要任何操作时，此调用在成功时响应 [`Empty` pipeline data](#empty-头变体)。在类 Unix 操作系统上，如果响应是 [`Value` pipeline data](#value-头变体)，它包含一个 [`Int`](#int)，这是插件必须使用 `setpgid()` 加入的进程组 ID，以便处于前台。
 
 如果插件已经在前台，此调用将失败并返回错误。
 
-插件**应该**在不再需要处于前台时调用 [`LeaveForeground`](#leaveforeground-engine-call)。请注意，当接收到插件调用响应时，插件也会自动从前台移除，即使插件调用返回流也是如此。
+插件**应该**在不再需要处于前台时调用 [`LeaveForeground`](#leaveforeground-引擎调用)。请注意，当接收到插件调用响应时，插件也会自动从前台移除，即使插件调用返回流也是如此。
 
 示例：
 
@@ -931,11 +931,11 @@ $version + 7
 
 #### `LeaveForeground` 引擎调用
 
-重置由 [`EnterForeground`](#enterforeground-engine-call) 设置的状态。
+重置由 [`EnterForeground`](#enterforeground-引擎调用) 设置的状态。
 
 如果插件曾被 `EnterForeground` 的响应要求更改进程组，它也应该通过调用 `setpgid(0)` 来重置该状态，因为插件通常在自己的进程组中。
 
-此调用在成功时响应 [`Empty` pipeline data](#empty-header-variant)。
+此调用在成功时响应 [`Empty` pipeline data](#empty-头变体)。
 
 示例：
 
@@ -951,7 +951,7 @@ $version + 7
 
 #### `GetSpanContents` 引擎调用
 
-从引擎获取 [`Span`](#span) 的内容。这可用于查看生成值的源代码。参数是一个 [`Span`](#span)。成功时的响应是 [`Value` pipeline data](3value-header-variant)，包含一个 [`Binary`](#binary) 值，因为结果不能保证是有效的 UTF-8。
+从引擎获取 [`Span`](#span) 的内容。这可用于查看生成值的源代码。参数是一个 [`Span`](#span)。成功时的响应是 [`Value` pipeline data](#value-头变体)，包含一个 [`Binary`](#binary) 值，因为结果不能保证是有效的 UTF-8。
 
 示例：
 
@@ -971,7 +971,7 @@ $version + 7
 
 #### `EvalClosure` 引擎调用
 
-将 [`Closure`](#closure) 和参数传递给引擎进行评估。如果成功，返回一个 [`PipelineData` 响应](#pipelinedata-engine-call-response)，其中包含闭包的输出，可能是一个流。
+将 [`Closure`](#closure) 和参数传递给引擎进行评估。如果成功，返回一个 [`PipelineData` 响应](#pipelinedata-引擎调用响应)，其中包含闭包的输出，可能是一个流。
 
 | 字段                | 类型                                        | 描述                                        |
 | ------------------- | ------------------------------------------- | ------------------------------------------- |
@@ -1024,7 +1024,7 @@ $version + 7
 
 #### `FindDecl` 引擎调用
 
-查找作用域中命令的声明 ID。主体是所需命令的名称，作为字符串。如果成功，返回一个 [`Identifier` 响应](#identifier-engine-call-response)，其中包含声明命令的 ID，如果在插件调用的作用域中找不到具有给定名称的命令，则返回一个[空](#empty-header-variant)的 [`PipelineData` 响应](#pipelinedata-engine-call-response)。
+查找作用域中命令的声明 ID。主体是所需命令的名称，作为字符串。如果成功，返回一个 [`Identifier` 响应](#identifier-引擎调用响应)，其中包含声明命令的 ID，如果在插件调用的作用域中找不到具有给定名称的命令，则返回一个[空](#empty-头变体)的 [`PipelineData` 响应](#pipelinedata-引擎调用响应)。
 
 建议在找不到命令时提供描述性错误，说明需要什么命令，因为即使是 Nushell 提供的核心命令也可能被 `hide`。支持从同一或其他插件查找和调用命令，但请记住，在可能的情况下，在插件内部执行操作通常更高效。
 
@@ -1044,7 +1044,7 @@ $version + 7
 
 #### `CallDecl` 引擎调用
 
-将命令的声明 ID（通过 [`FindDecl`](#finddecl-engine-call) 找到）和参数传递给引擎进行调用。如果成功，返回一个 [`PipelineData` 响应](#pipelinedata-engine-call-response)，其中包含命令的输出，可能是一个流。
+将命令的声明 ID（通过 [`FindDecl`](#finddecl-引擎调用) 找到）和参数传递给引擎进行调用。如果成功，返回一个 [`PipelineData` 响应](#pipelinedata-引擎调用响应)，其中包含命令的输出，可能是一个流。
 
 | 字段                | 类型                                        | 描述                                              |
 | ------------------- | ------------------------------------------- | ------------------------------------------------- |
@@ -1862,7 +1862,7 @@ UTF-8 字符串。
 | **block_id** | unsigned integer                                              |
 | **captures** | array of pairs (unsigned integer `var_id`, [`Value`](#value)) |
 
-插件**不应该**尝试检查闭包的内容。建议仅将其用作 [`EvalClosure` 引擎调用](#evalclosure-engine-call)的参数。闭包的确切表示可能会在未来更改，以避免序列化所有捕获。
+插件**不应该**尝试检查闭包的内容。建议仅将其用作 [`EvalClosure` 引擎调用](#evalclosure-引擎调用)的参数。闭包的确切表示可能会在未来更改，以避免序列化所有捕获。
 
 示例：
 
@@ -2083,12 +2083,12 @@ foo.0?.bar
 
 插件的 `Custom` 值**可能**仅包含以下内容映射：
 
-| 字段               | 类型       | 描述                                                                       |
-| ------------------ | ---------- | -------------------------------------------------------------------------- |
-| **type**           | string     | **必须**为 `"PluginCustomValue"`。                                         |
-| **name**           | string     | 插件发出的人类可读的自定义值名称。                                         |
-| **data**           | byte array | 插件定义的自定义值表示。                                                   |
-| **notify_on_drop** | boolean    | 启用[丢弃通知](plugins.md#drop-notification)。如果不存在，默认为 `false`。 |
+| 字段               | 类型       | 描述                                                              |
+| ------------------ | ---------- | ----------------------------------------------------------------- |
+| **type**           | string     | **必须**为 `"PluginCustomValue"`。                                |
+| **name**           | string     | 插件发出的人类可读的自定义值名称。                                |
+| **data**           | byte array | 插件定义的自定义值表示。                                          |
+| **notify_on_drop** | boolean    | 启用[丢弃通知](plugins.md#丢弃通知)。如果不存在，默认为 `false`。 |
 
 插件只会收到它们之前发出的自定义值。不允许发送来自其他插件的自定义值或在 Nu 引擎本身内使用的自定义值。
 
@@ -2148,12 +2148,12 @@ Rust 枚举通常以 [serde](https://serde.rs) 的默认格式编码：
 
 描述单个值或流的开始。
 
-| 变体                                       | 描述                 |
-| ------------------------------------------ | -------------------- |
-| [`Empty`](#empty-header-variant)           | 不产生值；空流。     |
-| [`Value`](#value-header-variant)           | 单个值               |
-| [`ListStream`](#liststream-header-variant) | 指定将发送的列表流。 |
-| [`ByteStream`](#bytestream-header-variant) | 指定将发送的字节流。 |
+| 变体                               | 描述                 |
+| ---------------------------------- | -------------------- |
+| [`Empty`](#empty-头变体)           | 不产生值；空流。     |
+| [`Value`](#value-头变体)           | 单个值               |
+| [`ListStream`](#liststream-头变体) | 指定将发送的列表流。 |
+| [`ByteStream`](#bytestream-头变体) | 指定将发送的字节流。 |
 
 #### `Empty` 头变体
 

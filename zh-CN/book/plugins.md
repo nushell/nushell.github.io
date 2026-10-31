@@ -29,7 +29,7 @@ Nu 可以通过插件进行扩展。插件的行为与 Nu 的内置命令很相�
 
 要开始使用 Polars 插件：
 
-1. 大多数包管理器会自动随 Nushell 安装核心插件。然而，一个显著的例外是 `cargo`。如果你使用 `cargo` 安装了 Nushell，请参阅下面的[安装核心插件](#core-plugins)。
+1. 大多数包管理器会自动随 Nushell 安装核心插件。然而，一个显著的例外是 `cargo`。如果你使用 `cargo` 安装了 Nushell，请参阅下面的[安装核心插件](#核心插件)。
 
 2. (推荐) 将插件搜索路径设置为包括 Nushell 及其插件的安装目录。假设核心插件与 Nushell 二进制文件安装在同一目录中，可以将以下内容添加到你的启动配置中：
 
@@ -77,7 +77,7 @@ Nu 可以通过插件进行扩展。插件的行为与 Nu 的内置命令很相�
 
 Nushell 附带了一组官方维护的插件，其中包括：
 
-- `polars`：使用 [Polars 库](https://github.com/pola-rs/polars) 通过 DataFrame 进行极快的列式操作。有关更多详细信息，请参阅[DataFrame 章节](dataframes.html)。
+- `polars`：使用 [Polars 库](https://github.com/pola-rs/polars) 通过 DataFrame 进行极快的列式操作。有关更多详细信息，请参阅[DataFrame 章节](dataframes.md)。
 - `formats`：支持多种附加数据格式 - EML、ICS、INI、plist 和 VCF。
 - `gstat`：以 Nushell 结构化数据的形式返回 Git 仓库的状态信息。
 - `query`：支持查询 SQL、XML、JSON、HTML（通过选择器）和网页元数据。
@@ -182,7 +182,7 @@ nu --plugins '[./my_plugins/nu_plugin_cool]'
 
 Nushell 包括两个可用于设置插件搜索路径的 `list` 变量。这仅适用于使用 `plugin add` 注册插件时，但如果你经常添加和删除插件，这可能是一个很好的快捷方式。
 
-- `const NU_PLUGIN_DIRS`：一个常量，设置后立即生效。但是，作为一个常量，只有某些命令可以与它一起使用。例如，可以像[上面的快速入门](#core-plugin-quickstart)中看到的那样更新它。
+- `const NU_PLUGIN_DIRS`：一个常量，设置后立即生效。但是，作为一个常量，只有某些命令可以与它一起使用。例如，可以像[上面的快速入门](#核心插件快速入门)中看到的那样更新它。
 - `$env.NU_PLUGIN_DIRS`：一个环境变量，是可变的，可以接受任何更新其列表的命令。但是，对其的更改直到解析*下一个*表达式时才会生效。
 
 ### 更新插件
@@ -225,7 +225,7 @@ scope commands | where type == "plugin"
 
 ### 插件生命周期
 
-插件在使用时保持运行，并且在一段时间不活动后默认会自动停止。此行为由[插件垃圾回收器](#plugin-garbage-collector)管理。要手动停止插件，请使用其名称调用 `plugin stop`：
+插件在使用时保持运行，并且在一段时间不活动后默认会自动停止。此行为由[插件垃圾回收器](#插件垃圾回收器)管理。要手动停止插件，请使用其名称调用 `plugin stop`：
 
 例如，从相应的插件运行 `query` 命令，然后检查其 `status` 状态：
 
@@ -281,7 +281,7 @@ $env.config.plugin_gc = {
 }
 ```
 
-有关何时认为插件处于活动状态的信息，请参阅[贡献者手册中的相关部分](/zh-CN/contributor-book/plugins.html#plugin-garbage-collection)。
+有关何时认为插件处于活动状态的信息，请参阅[贡献者手册中的相关部分](../contributor-book/plugins.md#插件垃圾收集)。
 
 ## 移除插件
 

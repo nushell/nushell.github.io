@@ -100,8 +100,8 @@ try {
 使用 `source`、`use` 或 `overlay use` 命令时将搜索的目录列表。另请参阅：
 
 - 下面的 `$NU_LIB_DIRS` 常量
-- [模块路径](./modules/using_modules.md#module-path)
-- [配置 - `$NU_LIB_DIRS`](./configuration.md#nu-lib-dirs-constant)
+- [模块路径](./modules/using_modules.md#模块路径)
+- [配置 - `$NU_LIB_DIRS`](./configuration.md#nu-lib-dirs-常量)
 
 ### `$env.NU_LOG_LEVEL`
 
@@ -138,7 +138,7 @@ nu --log-level 'debug' -c '1 | print; use std/log; log debug 1111; 9 | print'
 
 使用 `plugin add` 注册插件时将搜索的目录列表。另请参阅：
 
-- [插件搜索路径](./plugins.md#plugin-search-path)
+- [插件搜索路径](./plugins.md#插件搜索路径)
 
 ### `$env.NU_VERSION`
 
@@ -160,7 +160,7 @@ nu --log-level 'debug' -c '1 | print; use std/log; log debug 1111; 9 | print'
 
 有许多变量可用于配置出现在每个命令行上的 Nushell 提示符。另请参阅：
 
-- [配置 - 提示符配置](./configuration.md#prompt-configuration)
+- [配置 - 提示符配置](./configuration.md#提示符配置)
 - `config nu --doc`
 
 ### `$env.SHLVL`

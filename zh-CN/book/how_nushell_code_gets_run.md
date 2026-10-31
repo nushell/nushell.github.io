@@ -1,6 +1,6 @@
 # Nushell代码执行原理
 
-在[用Nu的方式思考](./thinking_in_nu.md#think-of-nushell-as-a-compiled-language)中，我们建议你"将Nushell视为编译型语言"，这是因为Nushell代码的处理方式。我们还介绍了一些由于这种处理方式而在Nushell中无法工作的代码示例。
+在[用Nu的方式思考](./thinking_in_nu.md#将-nushell-视为一门编译型语言)中，我们建议你"将Nushell视为编译型语言"，这是因为Nushell代码的处理方式。我们还介绍了一些由于这种处理方式而在Nushell中无法工作的代码示例。
 
 其根本原因是Nushell严格分离了 **_解析和评估_** 阶段，并 **_禁止类似`eval`的功能_** 。在本节中，我们将详细解释这意味着什么、为什么这样做以及其影响。解释尽可能简单，但如果你之前使用过其他编程语言可能会更容易理解。
 
@@ -74,7 +74,7 @@ fn main() {
 ::: tip 术语说明
 一般来说，动态语言和静态语言的区别在于源代码在编译(或解析)阶段与求值/运行时阶段的处理程度：
 
-- _"静态"_ 语言在编译/解析阶段执行更多代码分析(如类型检查、[数据所有权](https://doc.rust-lang.org/stable/book/ch04-00-understanding-ownership.html))
+- _"静态"_ 语言在编译/解析阶段执行更多代码分析(如类型检查、[数据所有权](https://doc.rust-lang.org/stable/book/ch04-00-understanding-ownership.md))
 
 - _"动态"_ 语言在求值/运行时执行更多代码分析，包括对额外代码的`求值函数`调用
 
@@ -83,7 +83,7 @@ fn main() {
 
 ### 求值函数
 
-大多数动态解释型语言都有`求值函数`。例如[Python的eval](https://docs.python.org/3/library/functions.html#eval)(以及[Python的exec](https://docs.python.org/3/library/functions.html#exec))或[Bash的eval](https://linux.die.net/man/1/bash)。
+大多数动态解释型语言都有`求值函数`。例如[Python的eval](https://docs.python.org/3/library/functions.md#eval)(以及[Python的exec](https://docs.python.org/3/library/functions.md#exec))或[Bash的eval](https://linux.die.net/man/1/bash)。
 
 `求值函数`的参数是 _"源代码中的源代码"_，通常是条件计算或动态生成的。这意味着当解释型语言在解析/求值过程中遇到`求值函数`时，通常会中断正常的求值过程，对`求值函数`的源代码参数启动新的解析/求值过程。
 
@@ -163,7 +163,7 @@ hello()
 总的来说，在扩展Nushell程序时，你可以更放心错误会被更早发现。
 :::
 
-## Nushell交互式解释器(REPL)
+## Nushell 交互式解释器
 
 与大多数Shell一样，Nushell有个 _"读取→求值→打印循环"_ ([REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop))，在你不带任何文件参数运行 `nu` 时启动。这通常被认为是 _"命令行"_，但并不完全相同。
 
@@ -207,7 +207,7 @@ hello()
 
 换句话说，每个REPL调用都是独立的解析-求值序列。通过将环境合并回Nushell状态，我们保持了REPL调用之间的连续性。
 
-比较 _"用Nu的方式思考"_ 中的简化版[`cd`示例](./thinking_in_nu.md#example-change-to-a-different-directory-cd-and-source-a-file)：
+比较 _"用Nu的方式思考"_ 中的简化版[`cd`示例](./thinking_in_nu.md#示例-切换到不同目录-cd-并-source-一个文件)：
 
 ```nu
 cd spam
@@ -255,7 +255,7 @@ source-env foo.nu
     source-env foo.nu
   ```
 
-  注意第二行前没有"提示符"。这种多行命令行通常通过[键绑定](./line_editor.md#keybindings)创建，在按下<kbd>Alt</kbd>+<kbd>Enter</kbd>或<kbd>Shift</kbd>+<kbd>Enter</kbd>时插入换行符。
+  注意第二行前没有"提示符"。这种多行命令行通常通过[键绑定](./line_editor.md#按键绑定)创建，在按下<kbd>Alt</kbd>+<kbd>Enter</kbd>或<kbd>Shift</kbd>+<kbd>Enter</kbd>时插入换行符。
 
 这两个示例在Nushell REPL中的行为完全相同。整个命令行(两个语句)作为单个读取→求值→打印循环处理。因此，它们会像前面的脚本示例一样失败。
 
@@ -279,7 +279,7 @@ source-env foo.nu
 
 因此，我们可以将常量用作[`source`](/commands/docs/source.md)、[`use`](/commands/docs/use.md)等解析时关键字的安全已知参数。
 
-考虑 _"用Nu的方式思考"_ 中的[这个示例](./thinking_in_nu.md#example-dynamically-creating-a-filename-to-be-sourced)：
+考虑 _"用Nu的方式思考"_ 中的[这个示例](./thinking_in_nu.md#示例-动态创建要加载的文件名)：
 
 ```nu
 let my_path = "~/nushell-files"

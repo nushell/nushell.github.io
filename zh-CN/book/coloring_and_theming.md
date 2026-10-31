@@ -632,4 +632,4 @@ $env.config = {
 
 Reedline（Nu 的行编辑器）样式不使用 `color_config` 键。
 相反，每个菜单都有自己的样式需要单独配置。
-有关此内容的更多信息，请参阅[专门介绍 Reedline 菜单配置的部分](line_editor.md#menus)。
+有关此内容的更多信息，请参阅[专门介绍 Reedline 菜单配置的部分](line_editor.md#菜单)。

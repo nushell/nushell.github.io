@@ -83,7 +83,7 @@ date now                    # 1: 今天
 - 它可以通过简单的 <kbd>↑</kbd> (上箭头) 来重复前一个命令并添加管道的下一个阶段，从而逐步组合。
 - 它可以说更具可读性。
 - 如果需要，可以对每个步骤进行注释。
-- 管道中的每个步骤都可以用 [`inspect` 进行调试](/commands/docs/inspect.html)。
+- 管道中的每个步骤都可以用 [`inspect` 进行调试](/commands/docs/inspect.md)。
 
 让我们检查上面例子中每一行 `$in` 的内容：
 
@@ -93,7 +93,7 @@ date now                    # 1: 今天
 
 ### 过滤器闭包中的管道输入
 
-某些[过滤器命令](/commands/categories/filters.html)可能会修改其闭包的管道输入，以便更方便地访问预期的上下文。例如：
+某些[过滤器命令](/commands/categories/filters.md)可能会修改其闭包的管道输入，以便更方便地访问预期的上下文。例如：
 
 ```nu
 1..10 | each {$in * 2}
@@ -118,7 +118,7 @@ ls | update name {str upcase}
 
 ### 自定义命令定义和脚本中的管道输入
 
-参见：[自定义命令 -> 管道输入](custom_commands.html#pipeline-input)
+参见：[自定义命令 -> 管道输入](custom_commands.md#管道输入)
 
 ### `$in` 何时改变（以及何时可以重用）？
 
@@ -273,7 +273,7 @@ def "date info" [] {
 
 ### `$in` 的可收集性
 
-目前，在管道中的流上使用 `$in` 会产生一个“已收集”的值，这意味着管道在处理 `$in` 之前会“等待”流完成。但是，此行为在将来的版本中不保证。为确保将流收集到单个变量中，请使用 [`collect` 命令](/commands/docs/collect.html)。
+目前，在管道中的流上使用 `$in` 会产生一个“已收集”的值，这意味着管道在处理 `$in` 之前会“等待”流完成。但是，此行为在将来的版本中不保证。为确保将流收集到单个变量中，请使用 [`collect` 命令](/commands/docs/collect.md)。
 
 同样，当正常的管道输入足够时，请避免使用 `$in`，因为在内部 `$in` 会强制从 `PipelineData` 转换为 `Value`，并且*可能*导致性能下降和/或内存使用增加。
 
@@ -381,7 +381,7 @@ echo 1sec | sleep
 
 ## 渲染显示结果
 
-在交互模式下，当管道结束时，[`display_output` 钩子配置](https://www.nushell.sh/book/hooks.html#changing-how-output-is-displayed) 定义了结果将如何显示。
+在交互模式下，当管道结束时，[`display_output` 钩子配置](https://www.nushell.sh/book/hooks.md#changing-how-output-is-displayed) 定义了结果将如何显示。
 默认配置使用 [`table` 命令](/commands/docs/table.md) 将结构化数据呈现为可视化表格。
 
 以下示例显示了 `display_output` 钩子如何呈现
@@ -465,7 +465,7 @@ ls /usr/share/nvim/runtime/
 # => ╰────┴───────────────────────────────────────┴──────┴─────────┴───────────────╯
 ```
 
-你决定使用 `grep` 并将结果通过[管道](https://www.nushell.sh/book/pipelines.html)传递给外部的 `^ls`
+你决定使用 `grep` 并将结果通过[管道](https://www.nushell.sh/book/pipelines.md)传递给外部的 `^ls`
 
 ```nu
 ls /usr/share/nvim/runtime/ | get name | ^grep tutor | ^ls -la $in
@@ -512,7 +512,7 @@ do { $env.config.table.mode = "none"; ls }
 do { $env.config.table.mode = "none"; ls } | table
 ```
 
-因为 Nushell `$env` 变量是[作用域的](https://www.nushell.sh/book/environment.html#scoping)，这意味着示例中的 `table` 命令不受 `do` 块内环境修改的影响，数据将不会以应用的配置显示。
+因为 Nushell `$env` 变量是[作用域的](https://www.nushell.sh/book/environment.md#作用域)，这意味着示例中的 `table` 命令不受 `do` 块内环境修改的影响，数据将不会以应用的配置显示。
 
 如果希望尽早显示数据，可以在作用域内显式应用 `| table`，或使用 `print` 命令。
 

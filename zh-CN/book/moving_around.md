@@ -8,7 +8,7 @@ Shell 的一个决定性特征是能够在文件系统中导航和交互。Nushe
 ls
 ```
 
-正如在快速入门中看到的，[`ls`](/commands/docs/ls.md) 命令返回目录的内容。Nushell 的 `ls` 将以[表格](types_of_data.html#tables)的形式返回内容。
+正如在快速入门中看到的，[`ls`](/commands/docs/ls.md) 命令返回目录的内容。Nushell 的 `ls` 将以[表格](types_of_data.md#表格)的形式返回内容。
 
 [`ls`](/commands/docs/ls.md) 命令还需要一个可选的参数，以改变你想查看的内容。例如，我们可以列出以 `.md` 结尾的文件：
 
@@ -52,15 +52,15 @@ ls **/*.md
 
 这里，我们正在寻找任何以 ".md" 结尾的文件。双星号进一步指定了“从这里开始的任何目录中”。
 
-Nushell 的通配符语法不仅支持 `*`，还支持用 `?` 匹配[单个字符和用 `[...]` 匹配字符组](https://docs.rs/nu-glob/latest/nu_glob/struct.Pattern.html)。
+Nushell 的通配符语法不仅支持 `*`，还支持用 `?` 匹配[单个字符和用 `[...]` 匹配字符组](https://docs.rs/nu-glob/latest/nu_glob/struct.Pattern.md)。
 
-通过将 `*`、`?` 和 `[]` 模式包含在单引号、双引号或[原始字符串](working_with_strings.md#raw-strings)中，可以对它们进行转义。例如，要显示名为 `[slug]` 的目录的内容，请使用 `ls "[slug]"` 或 `ls '[slug]'`。
+通过将 `*`、`?` 和 `[]` 模式包含在单引号、双引号或[原始字符串](working_with_strings.md#原始字符串)中，可以对它们进行转义。例如，要显示名为 `[slug]` 的目录的内容，请使用 `ls "[slug]"` 或 `ls '[slug]'`。
 
 然而，*反引号*引用的字符串不会转义通配符。例如，比较以下场景：
 
 1.  未引用：通配符模式
 
-    一个带有通配符字符的未引用的[裸词字符串](working_with_strings.html#bare-word-strings)被解释为一个通配符模式，所以下面的命令将删除当前目录中所有文件名中包含 `myfile` 的文件：
+    一个带有通配符字符的未引用的[裸词字符串](working_with_strings.md#裸词字符串)被解释为一个通配符模式，所以下面的命令将删除当前目录中所有文件名中包含 `myfile` 的文件：
 
     ```nu
     rm *myfile*
@@ -68,7 +68,7 @@ Nushell 的通配符语法不仅支持 `*`，还支持用 `?` 匹配[单个字�
 
 2.  引用：带星号的字符串字面量
 
-    当使用单引号或双引号引用，或使用[原始字符串](working_with_strings.html#raw-strings)时，一个带有字面量、转义的星号（或其他通配符字符）的*字符串*被传递给命令。结果不是一个通配符。以下命令将只删除一个字面量名为 `*myfile*`（包括星号）的文件。名称中包含 `myfile` 的其他文件不受影响：
+    当使用单引号或双引号引用，或使用[原始字符串](working_with_strings.md#原始字符串)时，一个带有字面量、转义的星号（或其他通配符字符）的*字符串*被传递给命令。结果不是一个通配符。以下命令将只删除一个字面量名为 `*myfile*`（包括星号）的文件。名称中包含 `myfile` 的其他文件不受影响：
 
     ```nu
     rm "*myfile*"
@@ -76,7 +76,7 @@ Nushell 的通配符语法不仅支持 `*`，还支持用 `?` 匹配[单个字�
 
 3.  反引号引用：通配符模式
 
-    [反引号引用的字符串](working_with_strings.html#backtick-quoted-strings)中的星号（和其他通配符模式）被解释为一个通配符模式。请注意，这与上面 #1 中的裸词字符串示例的行为相同。
+    [反引号引用的字符串](working_with_strings.md#反引号字符串)中的星号（和其他通配符模式）被解释为一个通配符模式。请注意，这与上面 #1 中的裸词字符串示例的行为相同。
 
     以下命令与第一个示例一样，删除当前目录中所有文件名中包含 `myfile` 的文件：
 
@@ -85,7 +85,7 @@ Nushell 的通配符语法不仅支持 `*`，还支持用 `?` 匹配[单个字�
     ```
 
 ::: tip 提示
-Nushell 还包括一个专门的 [`glob` 命令](https://www.nushell.sh/commands/docs/glob.html)，支持更复杂的通配符场景。
+Nushell 还包括一个专门的 [`glob` 命令](https://www.nushell.sh/commands/docs/glob.md)，支持更复杂的通配符场景。
 :::
 
 ### 将字符串转换为通配符
@@ -94,7 +94,7 @@ Nushell 还包括一个专门的 [`glob` 命令](https://www.nushell.sh/commands
 
 1.  `into glob`
 
-    [`into glob` 命令](/commands/docs/into_glob.html)可用于将字符串（和其他类型）转换为通配符。例如：
+    [`into glob` 命令](/commands/docs/into_glob.md)可用于将字符串（和其他类型）转换为通配符。例如：
 
     ```nu
     # 查找文件名包含当前月份（格式为 YYYY-mm）的文件
@@ -103,9 +103,9 @@ Nushell 还包括一个专门的 [`glob` 命令](https://www.nushell.sh/commands
     ls $glob_pattern
     ```
 
-2.  扩展操作符与 [`glob` 命令](/commands/docs/glob.html)结合使用：
+2.  扩展操作符与 [`glob` 命令](/commands/docs/glob.md)结合使用：
 
-    [`glob` 命令](/commands/docs/glob.html)（注意：与 `into glob` 不同）生成一个与通配符模式匹配的[`列表`](types_of_data.html#lists)文件名。这个列表可以使用[扩展操作符](operators.html#spread-operator)展开并传递给文件系统命令：
+    [`glob` 命令](/commands/docs/glob.md)（注意：与 `into glob` 不同）生成一个与通配符模式匹配的[`列表`](types_of_data.md#列表)文件名。这个列表可以使用[扩展操作符](operators.md#扩展运算符)展开并传递给文件系统命令：
 
     ```nu
     # 查找文件名包含当前月份（格式为 YYYY-mm）的文件
@@ -181,7 +181,7 @@ cd ....
 ```
 
 ::: tip 提示
-多点快捷方式可用于内部 Nushell [文件系统命令](/commands/categories/filesystem.html)以及外部命令。例如，在 Linux/Unix 系统上运行 `^stat ....` 将显示路径被扩展为 `../../..`
+多点快捷方式可用于内部 Nushell [文件系统命令](/commands/categories/filesystem.md)以及外部命令。例如，在 Linux/Unix 系统上运行 `^stat ....` 将显示路径被扩展为 `../../..`
 :::
 
 你也可以将相对目录级别与目录名结合起来：
@@ -196,7 +196,7 @@ cd ../sibling
 
 ## 文件系统命令
 
-Nu 还提供了一些可以跨平台工作的基本[文件系统命令](/commands/categories/filesystem.html)，例如：
+Nu 还提供了一些可以跨平台工作的基本[文件系统命令](/commands/categories/filesystem.md)，例如：
 
 - [`mv`](/commands/docs/mv.md) 用于重命名或将文件或目录移动到新位置
 - [`cp`](/commands/docs/cp.md) 用于将项目复制到新位置
@@ -207,7 +207,7 @@ Nu 还提供了一些可以跨平台工作的基本[文件系统命令](/command
 
 - 它们在可能没有二进制版本的平台（例如 Windows）上工作一致。这允许创建跨平台的脚本、模块和自定义命令。
 - 它们与 Nushell 更紧密地集成，允许它们理解 Nushell 类型和其他构造。
-- 如[快速入门](quick_tour.html)中所述，它们在 Nushell 帮助系统中有文档记录。运行 `help <command>` 或 `<command> --help` 将显示该命令的 Nushell 文档。
+- 如[快速入门](quick_tour.md)中所述，它们在 Nushell 帮助系统中有文档记录。运行 `help <command>` 或 `<command> --help` 将显示该命令的 Nushell 文档。
 
 虽然通常建议使用 Nushell 内置版本，但也可以访问 Linux 二进制文件。有关详细信息，请参阅[运行外部命令](./running_externals.md)。
 :::

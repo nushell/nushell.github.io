@@ -18,7 +18,7 @@ ls | tui label --titlebar "files" | tui table | tui run
 
 除了 `tui run` 和 `tui debug` 之外，每个 `tui` 命令都是一个*构建器（builder）*：它向 `tui` 值中添加一个部件，并返回更新后的值。
 
-| 命令                                             | 位置参数            | 重要选项                                                              | 功能说明                                             |
+| 命令                                             | 位置参数            | 重要标志                                                              | 功能说明                                             |
 | ------------------------------------------------ | ------------------- | --------------------------------------------------------------------- | ---------------------------------------------------- |
 | [`tui label`](/commands/docs/tui_label.md)       | 文本或闭包          | `--titlebar`, `--status`                                              | 静态文本、标题栏或状态栏。闭包可跟随选中行动态求值。 |
 | [`tui table`](/commands/docs/tui_table.md)       | 数据源闭包          | `--columns`, `--multi`, `--index`, `--capture-keys`, `--on-select`    | 可导航的表格。标量数据显示为单列 `item`。            |
@@ -496,7 +496,7 @@ def "keys ui" [] {
 
 ### 多行选择
 
-`--multi` 将表格、树形视图或选择列表转换为复选清单。按 `Space` 勾选高亮行，按 `Enter` 提交所有已勾选的行（如果未勾选任何行，则提交当前高亮行）。`--index`（适用于表格和选择列表）可改为提交元素位置索引而非数据行：
+`--multi` 将表格、树形视图或选择列表转换为复选列表。按 `Space` 勾选高亮行，按 `Enter` 提交所有已勾选的行（如果未勾选任何行，则提交当前高亮行）。`--index`（适用于表格和选择列表）可改为提交元素位置索引而非数据行：
 
 ```nu
 [a b c] | tui table --multi | tui debug --keys [space down space enter] | get selected
@@ -903,19 +903,19 @@ $env.config.tui.border_type = "double"
 
 `--border` 支持用于 `tui table`、`tui tree`、`tui select`、`tui log`、`tui preview`、`tui search`、`tui textbox` 以及 `tui box`。在 `tui menu` 上，它用于设置下拉菜单周围的边框。默认线型为 `single`。每种名称绘制该表格主题最贴近的边框样式：
 
-| 线型名称                                                 | 外观样式                                      |
-| -------------------------------------------------------- | --------------------------------------------- |
-| `single`, `thin`                                         | `┌─┐ │ └─┘`                                   |
-| `rounded`                                                | `╭─╮ │ ╰─╯`                                   |
-| `double`                                                 | `╔═╗ ║ ╚═╝`                                   |
-| `heavy`                                                  | `┏━┓ ┃ ┗━┛`                                   |
-| `reinforced`                                             | `┏─┓ │ ┗─┛`                                   |
-| `basic`, `basic_compact`                                 | `+-+ \| +-+`                                  |
-| `ascii_rounded`                                          | `.-. \| '-'`                                  |
-| `dots`                                                   | 顶部 `.`，侧边 `:`，底部 `:..:`               |
+| 线型名称                                                 | 外观样式                                     |
+| -------------------------------------------------------- | -------------------------------------------- |
+| `single`, `thin`                                         | `┌─┐ │ └─┘`                                  |
+| `rounded`                                                | `╭─╮ │ ╰─╯`                                  |
+| `double`                                                 | `╔═╗ ║ ╚═╝`                                  |
+| `heavy`                                                  | `┏━┓ ┃ ┗━┛`                                  |
+| `reinforced`                                             | `┏─┓ │ ┗─┛`                                  |
+| `basic`, `basic_compact`                                 | `+-+ \| +-+`                                 |
+| `ascii_rounded`                                          | `.-. \| '-'`                                 |
+| `dots`                                                   | 顶部 `.`，侧边 `:`，底部 `:..:`              |
 | `compact`, `compact_double`, `restructured`, `with_love` | 顶底为 `─`、`═`、`=` 或 `❤` 边框线，侧边留空 |
-| `markdown`                                               | 侧边为 `\|`，顶部和底部留空                   |
-| `frameless`, `light`, `psql`                             | 全四周均无线条                                |
+| `markdown`                                               | 侧边为 `\|`，顶部和底部留空                  |
+| `frameless`, `light`, `psql`                             | 全四周均无线条                               |
 
 边框始终占据 1 个单元格宽度，因此 `none` 和 `default` 不是合法的边框名称。如需完全无线条的边框轮廓，请使用 `frameless`。它依然保留所占单元格，且部件的标题保持可见。
 
@@ -963,7 +963,7 @@ if (confirm "Delete build output?") {
 
 ### 多文件勾选器
 
-针对 `ls` 输出的复选清单：按 `Space` 勾选文件，按 `Enter` 返回所有已勾选的数据行。在未勾选任何文件时，按 `Enter` 仅返回当前高亮行，因此该选择器对单选和多选场景同样适用：
+针对 `ls` 输出的复选列表：按 `Space` 勾选文件，按 `Enter` 返回所有已勾选的数据行。在未勾选任何文件时，按 `Enter` 仅返回当前高亮行，因此该选择器对单选和多选场景同样适用：
 
 ```nu
 def "pick files" [] {

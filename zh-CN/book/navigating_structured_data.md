@@ -17,7 +17,7 @@
   - 示例 - `get`与`select`对比(表格行)
   - 示例 - `select`多行多列
 - [使用可选操作符处理缺失数据](#可选操作符)
-- [带空格的键/列名](#带空格的键列名)
+- [带空格的键/列名](#带空格的键-列名)
 - [其他访问结构化数据的命令](#其他访问结构化数据的命令)
 
 ## 背景
@@ -295,6 +295,20 @@ $record_example."1"
 
 不要将键名与此情况下的行索引混淆。这里，第一项被*分配*了键名`1`(字符串)。如果使用`transpose`命令转换为表格，键`1`(`string`)将位于行索引`0`(整数)。
 
+## 大小写不敏感的访问
+
+单元格路径成员是区分大小写的，所以当键是 `Name` 时，`$person.name` 会失败并报"Name not found"错误。要让某个成员忽略大小写，可以在其后添加 `!`。要让单元格路径的每个成员都忽略大小写，可以使用 `get`、`select` 或 `reject` 的 `--ignore-case` 标志：
+
+```nu
+let person = { Name: "Sam" }
+$person.name!
+# => Sam
+$person | get --ignore-case name
+# => Sam
+```
+
+（环境变量是个例外：`$env.path` 和 `$env.PATH` 都可以使用。）
+
 ## 处理缺失数据
 
 ### 可选操作符
@@ -316,7 +330,7 @@ $data | reject temps | get $cp
 
 ### 为缺失或`null`数据设置默认值
 
-[`default`命令](/commands/docs/default.html)可用于为缺失或null的列结果应用默认值。
+[`default`命令](/commands/docs/default.md)可用于为缺失或null的列结果应用默认值。
 
 ```nu
 let missing_value = [{a:1 b:2} {b:1}]
@@ -344,4 +358,4 @@ $with_default_value.1.a
 ## 其他访问结构化数据的命令
 
 - [`reject`](/commands/docs/reject.md) 与`select`相反，移除指定的行和列
-- [`range`](/commands/docs/range.md) 使用[`range`](./types_of_data.md#ranges)类型指定要选择的列表或表的行范围
+- [`slice`](/commands/docs/slice.md) 使用[`range`](./types_of_data.md#区间)类型指定要选择的列表或表格的行范围
