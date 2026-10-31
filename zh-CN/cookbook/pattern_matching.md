@@ -6,7 +6,7 @@ title: 模式匹配
 
 ## 使用 `match` 关键字
 
-像许多其他语言一样，nu 提供了一个 [`match`](https://www.nushell.sh/commands/docs/match.html#frontmatter-title-for-core) 关键字。通常这被用作 `if-else` 语句的一个稍微更符合人体工程学的版本，如果你有很多分支的话。
+像许多其他语言一样，nu 提供了一个 [`match`](https://www.nushell.sh/commands/docs/match.md#frontmatter-title-for-core) 关键字。通常这被用作 `if-else` 语句的一个稍微更符合人体工程学的版本，如果你有很多分支的话。
 
 ```nu
 [black red yellow green purple blue indigo] | each {|c|
@@ -61,7 +61,7 @@ title: 模式匹配
 
 ## 类型上的模式匹配
 
-你可以使用 [`describe`](https://www.nushell.sh/commands/docs/describe.html) 命令获取有关值类型的更多信息。例如：
+你可以使用 [`describe`](https://www.nushell.sh/commands/docs/describe.md) 命令获取有关值类型的更多信息。例如：
 
 ```nu
 {one: 1 two: 2} | describe

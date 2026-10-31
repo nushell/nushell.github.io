@@ -45,14 +45,14 @@ use std *
 但是，在自定义命令和脚本中应避免这种形式，因为它的加载时间最长。
 
 ::: important 使用标准库时的优化启动
-请参阅[下面的说明](#optimal-startup)以确保你的配置不会加载整个标准库。
+请参阅[下面的说明](#优化启动时间)以确保你的配置不会加载整个标准库。
 :::
 
 ### 导入子模块
 
 标准库的每个子模块都可以单独加载。再次强调，_为了获得最佳性能，只加载代码中需要的子模块_。
 
-关于使用模块的一般信息，请参阅[导入模块](./modules/using_modules.md#importing-modules)。下面是标准库各子模块的推荐导入方式：
+关于使用模块的一般信息，请参阅[导入模块](./modules/using_modules.md#导入模块)。下面是标准库各子模块的推荐导入方式：
 
 #### 1. 使用 `<command> <subcommand>` 形式的子模块
 
@@ -93,7 +93,7 @@ use std formats *
 ```
 
 ::: important
-如[使用模块](./modules/using_modules.md#module-definitions)中所述，这种形式(像 `use std *` 一样)会先将整个标准库加载到作用域中，然后再导入子模块。相比之下，上面的 #1 和 #2 中的斜杠分隔版本只会导入子模块，因此会快得多。
+如[使用模块](./modules/using_modules.md#模块定义)中所述，这种形式(像 `use std *` 一样)会先将整个标准库加载到作用域中，然后再导入子模块。相比之下，上面的 #1 和 #2 中的斜杠分隔版本只会导入子模块，因此会快得多。
 :::
 
 ## 标准库候选模块
@@ -147,7 +147,7 @@ nu -n -c "$nu.startup-time"
 ## 在模块中使用 `std/log`
 
 ::: warning 重要！
-`std/log` 会导出环境变量。要在你自己的模块中使用 `std/log` 模块，请参阅"创建模块"章节中的[这个注意事项](./modules/creating_modules.md#export-env-runs-only-when-the-use-call-is-evaluated)。
+`std/log` 会导出环境变量。要在你自己的模块中使用 `std/log` 模块，请参阅"创建模块"章节中的[这个注意事项](./modules/creating_modules.md#示例-使用-export-module-的子模块)。
 
 :::
 
@@ -165,7 +165,7 @@ view files
   }
 ```
 
-编辑这些文件，使用上面[导入子模块](#importing-submodules)部分推荐的语法。
+编辑这些文件，使用上面[导入子模块](#导入子模块)部分推荐的语法。
 
 ::: note
 如果 Nushell 库(例如来自 [nu_scripts 仓库](https://github.com/nushell/nu_scripts))、示例或文档使用了这种语法，请通过 issue 或 PR 报告。在 Nushell 0.99.0 发布后，这些将会逐步更新。

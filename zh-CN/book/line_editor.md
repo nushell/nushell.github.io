@@ -203,7 +203,7 @@ $env.config.history.max_size = 1000
 
 ## 定制提示
 
-Reedline 提示符是使用多个环境变量配置的。有关详细信息，请参阅[提示符配置](./configuration.md#prompt-configuration)。
+Reedline 提示符是使用多个环境变量配置的。有关详细信息，请参阅[提示符配置](./configuration.md#提示符配置)。
 
 ## 按键绑定
 

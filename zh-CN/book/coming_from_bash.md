@@ -32,7 +32,7 @@ $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 |                                      | `\| save --append <path>`                                     | 将命令输出作为结构化数据追加到文件         |
 | `> /dev/null`                        | `\| ignore`                                                   | 丢弃命令输出                               |
 | `> /dev/null 2>&1`                   | `out+err>\| ignore` or `o+e>\| ignore`                        | 丢弃命令输出，包括 stderr                  |
-| `command 2>&1 \| less`               | `command out+err>\| less` or `command o+e>\| less`            | 将外部命令的 stdout 和 stderr 通过管道传给 less（注意：内部命令的分页输出请使用 [explore](explore.html)） |
+| `command 2>&1 \| less`               | `command out+err>\| less` or `command o+e>\| less`            | 将外部命令的 stdout 和 stderr 通过管道传给 less（注意：内部命令的分页输出请使用 [explore](explore.md)） |
 | `cmd1 \| tee log.txt \| cmd2`        | `cmd1 \| tee { save log.txt } \| cmd2`                        | 将命令输出 tee 到日志文件                  |
 | `command \| head -5`                 | `command \| first 5`                                          | 将内部命令的输出限制为前 5 行（另见 `last` 和 `skip`） |
 | `cat <path>`                         | `open --raw <path>`                                           | 显示给定文件的内容                         |
@@ -45,7 +45,7 @@ $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 | `rm <path>`                          | `rm <path>`                                                   | 删除给定的文件                             |
 |                                      | `rm -t <path>`                                                | 将给定的文件移到系统垃圾箱                 |
 | `rm -rf <path>`                      | `rm -r <path>`                                                | 递归地删除给定的路径                       |
-| `date -d <date>`                     | `"<date>" \| into datetime -f <format>`                       | 解析日期 ([日期格式文档](https://docs.rs/chrono/0.4.15/chrono/format/strftime/index.html)) |
+| `date -d <date>`                     | `"<date>" \| into datetime -f <format>`                       | 解析日期 ([日期格式文档](https://docs.rs/chrono/0.4.15/chrono/format/strftime/index.md)) |
 | `sed`                                | `str replace`                                                 | 查找和替换一个字符串中的模式               |
 | `grep <pattern>`                     | `where $it =~ <substring>` or `find <substring>`              | 过滤包含特定字符串的字符串                 |
 | `man <command>`                      | `help <command>`                                              | 获得特定命令的帮助信息                     |
@@ -90,7 +90,7 @@ $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 | (Emacs 模式) <kbd>Ctrl</kbd>+<kbd>X</kbd><kbd>Ctrl</kbd>+<kbd>E</kbd> | <kbd>Ctrl/Cmd</kbd>+<kbd>O</kbd> | 在 `$env.EDITOR` 定义的编辑器中编辑命令行 |
 | (Vi 命令模式) <kbd>V</kbd>       | <kbd>Ctrl/Cmd</kbd>+<kbd>O</kbd>                              | 在 `$env.EDITOR` 定义的编辑器中编辑命令行 |
 
-大多数常见的 Emacs 模式和 Vi 模式键绑定也可用。请参阅 [Reedline 章节](line_editor.html#editing-mode)。
+大多数常见的 Emacs 模式和 Vi 模式键绑定也可用。请参阅 [Reedline 章节](line_editor.md#设置编辑模式)。
 
 ::: tip
 在 Bash 中，历史替换在按下 <kbd>Enter</kbd> 执行命令行后立即发生。

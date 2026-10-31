@@ -114,7 +114,7 @@ use <module> [ <other_definitions> ]
 :::
 
 ::: note
-此外，无论是否导出，`main` 在脚本文件中都有特殊行为。有关更多详细信息，请参见[脚本](../scripts.html#parameterizing-scripts)章节。
+此外，无论是否导出，`main` 在脚本文件中都有特殊行为。有关更多详细信息，请参见[脚本](../scripts.md#参数化脚本)章节。
 :::
 
 ## 模块文件

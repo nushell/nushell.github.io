@@ -29,7 +29,7 @@ echo '{"title": "jq vs Nushell", "publication_date": "2023-11-20"}' | jq -r '.'
 # => ╰──────────────────┴───────────────╯
 ```
 
-`jq` 的输出是 JSON 字符串，而在 `nu` 中它是 Nushell 值。要将任何管道的输出作为 JSON 获取，只需在末尾应用 [`to json`](/commands/docs/to_json.html)：
+`jq` 的输出是 JSON 字符串，而在 `nu` 中它是 Nushell 值。要将任何管道的输出作为 JSON 获取，只需在末尾应用 [`to json`](/commands/docs/to_json.md)：
 
 ```nu
 '[{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]'
@@ -46,7 +46,7 @@ echo '{"title": "jq vs Nushell", "publication_date": "2023-11-20"}' | jq -r '.'
 }
 ```
 
-当你的 JSON 数据存储在文件中时，你可以使用 [open](/commands/docs/open.html) 而不是 [from json](/commands/docs/from_json.html)。
+当你的 JSON 数据存储在文件中时，你可以使用 [open](/commands/docs/open.md) 而不是 [from json](/commands/docs/from_json.md)。
 
 在我们深入示例之前，以下词汇表可以帮助你熟悉 Nushell 数据类型如何映射到 jq 数据类型。
 
@@ -288,7 +288,7 @@ jq -r 'map(select(. != null))'
 # => ╰───┴───╯
 ```
 
-或者，你可以使用 [`compact`](/commands/docs/compact.html)：
+或者，你可以使用 [`compact`](/commands/docs/compact.md)：
 
 ```nu
 '[1, null, 3, null, 5]'
@@ -315,7 +315,7 @@ jq -r "Name: \(.name), Age: \(.age)"
 # => Name: Alice, Name: 30
 ```
 
-这种方法有点复杂，但如果我们[安装完整版本](https://github.com/nushell/nushell/releases)，其中包含*额外命令*，我们可以受益于 [`format`](/commands/docs/format.html)：
+这种方法有点复杂，但如果我们[安装完整版本](https://github.com/nushell/nushell/releases)，其中包含*额外命令*，我们可以受益于 [`format`](/commands/docs/format.md)：
 
 ```nu
 '{"name": "Alice", "age": 30}'
@@ -377,7 +377,7 @@ echo '{"data": [{"values": [1, 2, 3]}, {"values": [4, 5, 6]}]}' |
 jq -r '.data[].values[] | select(. > 3)'
 ```
 
-在 `nu` 中，我们可以利用[记录列表实际上是表](/zh-CN/book/types_of_data.html#tables)这一事实，简单地这样做：
+在 `nu` 中，我们可以利用[记录列表实际上是表](/zh-CN/book/types_of_data.md#表格)这一事实，简单地这样做：
 
 ```nu
 '{"data": [{"values": [1, 2, 3]}, {"values": [4, 5, 6]}]}'
@@ -505,7 +505,7 @@ jq -r 'group_by(.category)'
 # => ╰───┴───────┴──────────────────────────╯
 ```
 
-注意 `--to-table` 是在 [版本 0.87.0](blog/2023-11-14-nushell_0_87_0.html) 中添加到 Nushell 的。在此之前，你必须对 `group-by` 产生的记录进行 [`transpose`](/commands/docs/transpose)，这对于大型数据集来说速度要慢得多。
+注意 `--to-table` 是在 [版本 0.87.0](/blog/2023-11-14-nushell_0_87_0.md) 中添加到 Nushell 的。在此之前，你必须对 `group-by` 产生的记录进行 [`transpose`](/commands/docs/transpose)，这对于大型数据集来说速度要慢得多。
 
 ### 聚合分组值
 
@@ -620,7 +620,7 @@ jq -r 'group_by(. / 5 | floor * 5) | map({ bin: .[0], count: length })'
 
 ## 附录：自定义命令
 
-本节提供了本实战指南中使用的自定义命令的实现。请注意，它们是说明性的，并且没有针对大型输入进行优化。如果你对此感兴趣，[插件](/zh-CN/book/plugins.html)可能是答案，因为它们可以用通用语言（如 Rust 或 Python）编写。
+本节提供了本实战指南中使用的自定义命令的实现。请注意，它们是说明性的，并且没有针对大型输入进行优化。如果你对此感兴趣，[插件](/zh-CN/book/plugins.md)可能是答案，因为它们可以用通用语言（如 Rust 或 Python）编写。
 
 ```nu
 use toolbox.nu *

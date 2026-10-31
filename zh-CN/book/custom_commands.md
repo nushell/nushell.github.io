@@ -161,7 +161,7 @@ def "random file" [] {
 与内置命令一样，自定义命令的返回值可以传递到管道中的下一个命令。自定义命令也可以接受管道输入。此外，只要有可能，管道输入和输出都会在可用时进行流式处理。
 
 ::: tip 重要！
-另请参阅：[管道](./pipelines.html)
+另请参阅：[管道](./pipelines.md)
 :::
 
 ### 管道输出
@@ -187,7 +187,7 @@ my-ls | get name
 # => ╰───┴───────────────────────╯
 ```
 
-这使我们可以轻松地构建自定义命令并处理其输出。请记住，我们不像其他语言那样使用 return 语句。相反，[隐式返回](#returning-values-from-a-command)允许我们构建输出数据流的管道，这些数据流可以连接到其他管道。
+这使我们可以轻松地构建自定义命令并处理其输出。请记住，我们不像其他语言那样使用 return 语句。相反，[隐式返回](#从命令返回值)允许我们构建输出数据流的管道，这些数据流可以连接到其他管道。
 
 ::: tip 注意
 在这种情况下，`ls` 内容仍然是流式的，即使它在一个单独的命令中。在慢速（例如，网络）文件系统上对长目录运行此命令将会在行可用时返回它们。
@@ -228,7 +228,7 @@ def double [] {
 按 <kbd>Ctrl</kbd>+<kbd>C</kbd> 停止命令。
 :::
 
-我们还可以使用 [`$in` 变量](pipelines.html#pipeline-input-and-the-special-in-variable)存储输入以供以后使用：
+我们还可以使用 [`$in` 变量](pipelines.md#管道输入和特殊的-in-变量)存储输入以供以后使用：
 
 ```nu
 def nullify [...cols] {
@@ -303,7 +303,7 @@ def "custom command" [] {
 
 ### 多个参数
 
-在 `def` 命令中，参数在 [`list`](./types_of_data.md#lists) 中定义。这意味着多个参数可以用空格、逗号或换行符分隔。
+在 `def` 命令中，参数在 [`list`](./types_of_data.md#列表) 中定义。这意味着多个参数可以用空格、逗号或换行符分隔。
 
 例如，这里是一个接受两个名称的 `greet` 版本。这三个定义中的任何一个都可以工作：
 
@@ -410,7 +410,7 @@ greet world
 # => Hello, World!
 ```
 
-你还可以将默认值与[类型注解](#parameter-types)结合起来：
+你还可以将默认值与[类型注解](#参数类型)结合起来：
 
 ```nu
 def congratulate [age: int = 18] {
@@ -428,7 +428,7 @@ def greet [name: string] {
 }
 ```
 
-如果参数没有类型注解，Nushell 会将其视为 [`any` 类型](./types_of_data.html#any)。如果你在参数上注解了类型，Nushell 会在你调用函数时检查其类型。
+如果参数没有类型注解，Nushell 会将其视为 [`any` 类型](./types_of_data.md#任意类型)。如果你在参数上注解了类型，Nushell 会在你调用函数时检查其类型。
 
 例如，假设你只想接受一个 `int` 而不是 `string`：
 
@@ -463,11 +463,11 @@ Error: nu::parser::parse_mismatch
 大多数类型都可以用作类型注解。此外，还有一些“形状”可以使用。例如：
 
 - `number`: 接受 `int` 或 `float`
-- `path`: 一个字符串，其中 `~` 和 `.` 字符具有特殊含义，并将自动扩展为等效的完整路径。有关示例用法，请参阅语言参考指南中的[路径](/lang-guide/chapters/types/other_types/path.html)。
+- `path`: 一个字符串，其中 `~` 和 `.` 字符具有特殊含义，并将自动扩展为等效的完整路径。有关示例用法，请参阅语言参考指南中的[路径](/lang-guide/chapters/types/other_types/path.md)。
 - `directory`: `path`（上文）的子集。使用制表符补全参数时，只会提供目录。扩展方式与 `path` 相同。
-- `error`: 可用，但目前没有已知的有效用法。有关更多信息，请参阅语言参考指南中的[错误](/lang-guide/chapters/types/other_types/error.html)。
+- `error`: 可用，但目前没有已知的有效用法。有关更多信息，请参阅语言参考指南中的[错误](/lang-guide/chapters/types/other_types/error.md)。
 
-以下[类型](./types_of_data.html)可用于参数注解：
+以下[类型](./types_of_data.md)可用于参数注解：
 
 - `any`
 - `binary`
@@ -668,7 +668,7 @@ vip-greet Rahul Priya Arjun Anjali Vikram
 # => And a special welcome to our VIP today, Rahul!
 ```
 
-要将列表传递给剩余参数，你可以使用[展开运算符](/zh-CN/book/operators#spread-operator) (`...`)。使用上面的 `vip-greet` 命令定义：
+要将列表传递给剩余参数，你可以使用[展开运算符](/zh-CN/book/operators.md#扩展运算符) (`...`)。使用上面的 `vip-greet` 命令定义：
 
 ```nu
 let vip = "Tanisha"
@@ -730,7 +730,7 @@ ezal -G commands
 
 ## 管道输入输出签名
 
-默认情况下，自定义命令接受 [`<any>` 类型](./types_of_data.md#any)作为管道输入，同样可以输出 `<any>` 类型。但自定义命令也可以被赋予明确的签名以缩小允许的类型范围。
+默认情况下，自定义命令接受 [`<any>` 类型](./types_of_data.md#任意类型)作为管道输入，同样可以输出 `<any>` 类型。但自定义命令也可以被赋予明确的签名以缩小允许的类型范围。
 
 例如，[`str stats`](/commands/docs/str_stats.md) 的签名如下所示：
 
@@ -922,7 +922,7 @@ scope commands
 
 ## 在自定义命令中更改环境
 
-通常，环境变量定义和更改在块内是*作用域*的（[./environment.html#scoping](./environment.html#scoping)）。这意味着当它们在块结束时超出作用域时，对这些变量的更改将丢失，包括自定义命令的块。
+通常，环境变量定义和更改在块内是*作用域*的（[./environment.html#scoping](./environment.md#作用域)）。这意味着当它们在块结束时超出作用域时，对这些变量的更改将丢失，包括自定义命令的块。
 
 ```nu
 def foo [] {
@@ -969,6 +969,6 @@ pwd
 
 - 直接在你的 `config.nu` 中
 - 由你的 `config.nu` 加载的文件中
-- 由你的 `config.nu` 导入的[模块](./modules.html)中
+- 由你的 `config.nu` 导入的[模块](./modules.md)中
 
 有关更多详细信息，请参阅[配置章节](configuration.md)。

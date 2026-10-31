@@ -109,8 +109,8 @@ $env.config.buffer_editor = 'code'
 
 `config.nu` 通常用于：
 
-- 为 Nushell 和其他应用程序[设置环境变量](#set-environment-variables)
-- 在 [`$env.config`](#nushell-settings-in-the-envconfig-record) 中设置 Nushell 设置
+- 为 Nushell 和其他应用程序[设置环境变量](#设置环境变量)
+- 在 [`$env.config`](#env-config-记录中的-nushell-设置) 中设置 Nushell 设置
 - 加载模块或源文件，以便其命令随时可用
 - 在启动时运行任何其他应用程序或命令
 
@@ -125,7 +125,7 @@ $env.config.buffer_editor = 'code'
 与大多数 shell 一样，Nushell 搜索名为 `PATH`（或其变体）的环境变量。
 
 :::tip
-与某些 shell 不同，Nushell 尝试对环境变量“不区分大小写”。`Path`、`path`、`PATH`，甚至 `pAtH` 都是同一环境变量的允许变体。有关详细信息，请参阅[环境 - 大小写敏感性](./environment.md#case-sensitivity)。
+与某些 shell 不同，Nushell 尝试对环境变量“不区分大小写”。`Path`、`path`、`PATH`，甚至 `pAtH` 都是同一环境变量的允许变体。有关详细信息，请参阅[环境 - 大小写敏感性](./environment.md#大小写敏感性)。
 :::
 
 当 Nushell 启动时，它通常继承 `PATH` 作为一个字符串。但是，Nushell 会自动将其转换为 Nushell 列表以便于访问。这意味着你可以使用例如以下方式*追加*到路径：
@@ -372,7 +372,7 @@ $env.config.history = {
 
 - `$env.XDG_CONFIG_HOME`: 如果设置了此环境变量，它将用于更改 Nushell 搜索其配置文件（如 `env.nu`、`config.nu`、`login.nu` 和 `<config>/autoload` 目录）的目录。历史记录和插件文件默认也存储在此目录中。
 
-  Nushell 启动后，此值存储在 `$nu.default-config-dir` 常量中。请参阅下面的[使用常量](#using-constants)。
+  Nushell 启动后，此值存储在 `$nu.default-config-dir` 常量中。请参阅下面的[使用常量](#使用常量)。
 
 - `$env.XDG_DATA_HOME`: 如果设置了此环境变量，Nushell 会将 `$nu.data-dir` 常量设置为此值。`data-dir` 用于多个启动任务：
 
@@ -449,7 +449,7 @@ source ($nu.default-config-dir | path join "myfile.nu")
 因为常量值在解析时已知，所以它可以与 `source` 和 `use` 等解析时关键字一起使用。
 
 :::tip 另请参阅
-有关此过程的更多详细信息，请参阅[解析时常量求值](./how_nushell_code_gets_run.md#parse-time-constant-evaluation)。
+有关此过程的更多详细信息，请参阅[解析时常量求值](./how_nushell_code_gets_run.md#解析时常量求值)。
 :::
 
 #### `$nu` 常量
@@ -536,41 +536,41 @@ alias open = ^open
 
 ### 启动阶段
 
-以下阶段及其步骤*可能*在启动期间发生，具体取决于传递给 `nu` 的标志。有关每个标志如何影响该过程，请参阅紧随此表之后的[标志行为](#flag-behavior)：
+以下阶段及其步骤*可能*在启动期间发生，具体取决于传递给 `nu` 的标志。有关每个标志如何影响该过程，请参阅紧随此表之后的[标志行为](#标志行为)：
 
-| 步骤 | 阶段                        | Nushell 操作                                                                                                                                                                                                                                                              |
-| ---- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 0.   | (杂项)                      | 通过其内部 Rust 实现设置内部默认值。实际上，这可能要到“首次使用”设置或变量时才会发生，但对于控制 Nushell 行为的大多数（但不是所有）设置和变量，通常会有一个 Rust 默认值。然后，这些默认值可以被以下步骤取代。                                                             |
-| 1.   | (主要)                      | 从调用进程继承其初始环境。这些最初将转换为 Nushell 字符串，但稍后可以使用 `ENV_CONVERSIONS`（见下文）转换为其他结构。                                                                                                                                                     |
-| 2.   | (主要)                      | 获取配置目录。这取决于操作系统（请参阅 [dirs::config_dir](https://docs.rs/dirs/latest/dirs/fn.config_dir.html)），但可以在所有平台上使用 `XDG_CONFIG_HOME` 覆盖，如[上文](#changing-default-directories)所述。                                                            |
-| 3.   | (主要)                      | 创建初始的 `$env.NU_LIB_DIRS` 变量。默认情况下，它是一个空列表。                                                                                                                                                                                                          |
-| 4.   | (主要)                      | 创建初始的 `$NU_LIB_DIRS` 变量。默认情况下，它包括（1）配置目录下的 `scripts` 目录，以及（2）默认数据目录（`$env.XDG_DATA_HOME` 或 [dirs crate 提供的默认值](https://docs.rs/dirs/latest/dirs/fn.data_dir.html)）下的 `nushell/completions`。这些目录默认情况下不会创建。 |
-| 5.   | (主要)                      | 创建初始的 `$env.NU_PLUGIN_DIRS` 变量。默认情况下，它是一个空列表。                                                                                                                                                                                                       |
-| 6.   | (主要)                      | 创建初始的 `$NU_PLUGIN_DIRS` 变量。默认情况下，这将包括（1）配置目录下的 `plugins` 目录，以及（2）当前运行的 `nu`/`nu.exe` 所在的目录。                                                                                                                                   |
-| 7.   | (主要)                      | 初始化内存中的 SQLite 数据库。这允许在以下配置文件中使用 `stor` 系列命令。                                                                                                                                                                                                |
-| 8.   | (主要)                      | 处理命令行参数，例如 `--plugin-config <file>`、`--plugins <list>` 等。有关完整列表，请参阅 `nu --help`。                                                                                                                                                                  |
-| 9.   | (主要)                      | 获取 `env.nu` 和 `config.nu` 的路径。默认情况下，这些位于配置目录中，但可以使用 `--env-config <path>` 和 `--config <path>` 标志覆盖其中一个或两个。                                                                                                                       |
-| 10.  | (主要)                      | 如果使用了 `--include-path (-I)` 标志，它将覆盖上面获得的默认 `$env.NU_LIB_DIRS`。                                                                                                                                                                                        |
-| 11.  | (主要)                      | 从内部默认值加载初始的 `$env.config` 值。                                                                                                                                                                                                                                 |
-| 12.  | (主要)                      | 将搜索路径从继承的 `string` 转换为 Nushell `list`。                                                                                                                                                                                                                       |
-| 13.  | (stdlib)                    | 将[标准库](./standard_library.md)和 `std-rfc` 加载到虚拟文件系统中。此时它不会被解析或求值。                                                                                                                                                                              |
-| 14.  | (stdlib)                    | 解析并求值 `std/prelude`，这将 `banner` 和 `pwd` 命令带入作用域。                                                                                                                                                                                                         |
-| 15.  | (主要)                      | 生成初始的 [`$nu` 记录常量](#using-constants)，以便可以在以下配置文件中使用 `$nu.default-config-dir` 等项。                                                                                                                                                               |
-| 16.  | (主要)                      | 加载使用 `--plugin` 标志指定的任何插件。                                                                                                                                                                                                                                  |
-| 17.  | (repl)                      | 设置仅在 REPL 中应用的几个默认环境变量（与提示符相关的和 `SHLVL`）。请注意，使用闭包的与提示符相关的变量在 `default_env.nu` 中设置。                                                                                                                                      |
-| 18.  | (配置文件) (插件)           | 处理用户的 `plugin.msgpackz`（位于配置目录中）中的签名，以便可以在以下配置文件中使用添加的插件。                                                                                                                                                                          |
-| 19.  | (配置文件)                  | 如果这是 Nushell 首次启动，则创建配置目录。“首次启动”取决于配置目录是否存在。                                                                                                                                                                                             |
-| 20.  | (配置文件)                  | 同样，如果这是 Nushell 首次启动，则在该目录中创建一个基本上为空的（除了一些注释）`env.nu` 和 `config .nu`。                                                                                                                                                               |
-| 21.  | (配置文件) (default_env.nu) | 从内部 `default_env.nu` 加载默认环境变量。可以使用以下命令查看此文件：`config env --default \| nu-highlight \| less -R`。                                                                                                                                                 |
-| 22.  | (配置文件) (env.nu)         | 将 `PATH` 变量转换为列表，以便在下一步中可以更轻松地访问它。                                                                                                                                                                                                              |
-| 23.  | (配置文件) (env.nu)         | 加载（解析和求值）用户的 `env.nu`（其路径已在上面确定）。                                                                                                                                                                                                                 |
-| 24.  | (配置文件) (config.nu)      | 从内部 `default_config.nu` 加载一个最小的 `$env.config` 记录。可以使用以下命令查看此文件：`config nu --default \| nu-highlight \| less -R`。大多数未在 `default_config.nu` 中定义的值将使用其内部默认值自动填充到 `$env.config` 中。                                      |
-| 25.  | (配置文件) (config.nu)      | 加载（解析和求值）用户的 `config.nu`（其路径已在上面确定）。                                                                                                                                                                                                              |
-| 26.  | (配置文件) (login)          | 当 Nushell 作为登录 shell 运行时，加载用户的 `login.nu`。                                                                                                                                                                                                                 |
-| 27.  | (配置文件)                  | 循环遍历供应商自动加载目录并加载找到的任何 `.nu` 文件。目录按 `$nu.vendor-autoload-dirs` 中的顺序处理，这些目录中的文件按字母顺序处理。                                                                                                                                   |
-| 28.  | (配置文件)                  | 循环遍历用户自动加载目录并加载找到的任何 `.nu` 文件。目录按 `$nu.user-autoload-dirs` 中的顺序处理，这些目录中的文件按字母顺序处理。                                                                                                                                       |
-| 29.  | (repl) 和 (stdlib)          | 如果已配置，则显示横幅。                                                                                                                                                                                                                                                  |
-| 29.  | (repl)                      | Nushell 进入正常的命令行（REPL）。                                                                                                                                                                                                                                        |
+| 步骤 | 阶段                        | Nushell 操作                                                                                                                                                                                                                                                            |
+| ---- | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0.   | (杂项)                      | 通过其内部 Rust 实现设置内部默认值。实际上，这可能要到“首次使用”设置或变量时才会发生，但对于控制 Nushell 行为的大多数（但不是所有）设置和变量，通常会有一个 Rust 默认值。然后，这些默认值可以被以下步骤取代。                                                           |
+| 1.   | (主要)                      | 从调用进程继承其初始环境。这些最初将转换为 Nushell 字符串，但稍后可以使用 `ENV_CONVERSIONS`（见下文）转换为其他结构。                                                                                                                                                   |
+| 2.   | (主要)                      | 获取配置目录。这取决于操作系统（请参阅 [dirs::config_dir](https://docs.rs/dirs/latest/dirs/fn.config_dir.md)），但可以在所有平台上使用 `XDG_CONFIG_HOME` 覆盖，如[上文](#更改默认目录)所述。                                                                            |
+| 3.   | (主要)                      | 创建初始的 `$env.NU_LIB_DIRS` 变量。默认情况下，它是一个空列表。                                                                                                                                                                                                        |
+| 4.   | (主要)                      | 创建初始的 `$NU_LIB_DIRS` 变量。默认情况下，它包括（1）配置目录下的 `scripts` 目录，以及（2）默认数据目录（`$env.XDG_DATA_HOME` 或 [dirs crate 提供的默认值](https://docs.rs/dirs/latest/dirs/fn.data_dir.md)）下的 `nushell/completions`。这些目录默认情况下不会创建。 |
+| 5.   | (主要)                      | 创建初始的 `$env.NU_PLUGIN_DIRS` 变量。默认情况下，它是一个空列表。                                                                                                                                                                                                     |
+| 6.   | (主要)                      | 创建初始的 `$NU_PLUGIN_DIRS` 变量。默认情况下，这将包括（1）配置目录下的 `plugins` 目录，以及（2）当前运行的 `nu`/`nu.exe` 所在的目录。                                                                                                                                 |
+| 7.   | (主要)                      | 初始化内存中的 SQLite 数据库。这允许在以下配置文件中使用 `stor` 系列命令。                                                                                                                                                                                              |
+| 8.   | (主要)                      | 处理命令行参数，例如 `--plugin-config <file>`、`--plugins <list>` 等。有关完整列表，请参阅 `nu --help`。                                                                                                                                                                |
+| 9.   | (主要)                      | 获取 `env.nu` 和 `config.nu` 的路径。默认情况下，这些位于配置目录中，但可以使用 `--env-config <path>` 和 `--config <path>` 标志覆盖其中一个或两个。                                                                                                                     |
+| 10.  | (主要)                      | 如果使用了 `--include-path (-I)` 标志，它将覆盖上面获得的默认 `$env.NU_LIB_DIRS`。                                                                                                                                                                                      |
+| 11.  | (主要)                      | 从内部默认值加载初始的 `$env.config` 值。                                                                                                                                                                                                                               |
+| 12.  | (主要)                      | 将搜索路径从继承的 `string` 转换为 Nushell `list`。                                                                                                                                                                                                                     |
+| 13.  | (stdlib)                    | 将[标准库](./standard_library.md)和 `std-rfc` 加载到虚拟文件系统中。此时它不会被解析或求值。                                                                                                                                                                            |
+| 14.  | (stdlib)                    | 解析并求值 `std/prelude`，这将 `banner` 和 `pwd` 命令带入作用域。                                                                                                                                                                                                       |
+| 15.  | (主要)                      | 生成初始的 [`$nu` 记录常量](#使用常量)，以便可以在以下配置文件中使用 `$nu.default-config-dir` 等项。                                                                                                                                                                    |
+| 16.  | (主要)                      | 加载使用 `--plugin` 标志指定的任何插件。                                                                                                                                                                                                                                |
+| 17.  | (repl)                      | 设置仅在 REPL 中应用的几个默认环境变量（与提示符相关的和 `SHLVL`）。请注意，使用闭包的与提示符相关的变量在 `default_env.nu` 中设置。                                                                                                                                    |
+| 18.  | (配置文件) (插件)           | 处理用户的 `plugin.msgpackz`（位于配置目录中）中的签名，以便可以在以下配置文件中使用添加的插件。                                                                                                                                                                        |
+| 19.  | (配置文件)                  | 如果这是 Nushell 首次启动，则创建配置目录。“首次启动”取决于配置目录是否存在。                                                                                                                                                                                           |
+| 20.  | (配置文件)                  | 同样，如果这是 Nushell 首次启动，则在该目录中创建一个基本上为空的（除了一些注释）`env.nu` 和 `config .nu`。                                                                                                                                                             |
+| 21.  | (配置文件) (default_env.nu) | 从内部 `default_env.nu` 加载默认环境变量。可以使用以下命令查看此文件：`config env --default \| nu-highlight \| less -R`。                                                                                                                                               |
+| 22.  | (配置文件) (env.nu)         | 将 `PATH` 变量转换为列表，以便在下一步中可以更轻松地访问它。                                                                                                                                                                                                            |
+| 23.  | (配置文件) (env.nu)         | 加载（解析和求值）用户的 `env.nu`（其路径已在上面确定）。                                                                                                                                                                                                               |
+| 24.  | (配置文件) (config.nu)      | 从内部 `default_config.nu` 加载一个最小的 `$env.config` 记录。可以使用以下命令查看此文件：`config nu --default \| nu-highlight \| less -R`。大多数未在 `default_config.nu` 中定义的值将使用其内部默认值自动填充到 `$env.config` 中。                                    |
+| 25.  | (配置文件) (config.nu)      | 加载（解析和求值）用户的 `config.nu`（其路径已在上面确定）。                                                                                                                                                                                                            |
+| 26.  | (配置文件) (login)          | 当 Nushell 作为登录 shell 运行时，加载用户的 `login.nu`。                                                                                                                                                                                                               |
+| 27.  | (配置文件)                  | 循环遍历供应商自动加载目录并加载找到的任何 `.nu` 文件。目录按 `$nu.vendor-autoload-dirs` 中的顺序处理，这些目录中的文件按字母顺序处理。                                                                                                                                 |
+| 28.  | (配置文件)                  | 循环遍历用户自动加载目录并加载找到的任何 `.nu` 文件。目录按 `$nu.user-autoload-dirs` 中的顺序处理，这些目录中的文件按字母顺序处理。                                                                                                                                     |
+| 29.  | (repl) 和 (stdlib)          | 如果已配置，则显示横幅。                                                                                                                                                                                                                                                |
+| 29.  | (repl)                      | Nushell 进入正常的命令行（REPL）。                                                                                                                                                                                                                                      |
 
 ### 标志行为
 

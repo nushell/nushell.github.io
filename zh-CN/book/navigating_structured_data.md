@@ -17,7 +17,7 @@
   - 示例 - `get`与`select`对比(表格行)
   - 示例 - `select`多行多列
 - [使用可选操作符处理缺失数据](#可选操作符)
-- [带空格的键/列名](#带空格的键列名)
+- [带空格的键/列名](#带空格的键-列名)
 - [其他访问结构化数据的命令](#其他访问结构化数据的命令)
 
 ## 背景
@@ -316,7 +316,7 @@ $data | reject temps | get $cp
 
 ### 为缺失或`null`数据设置默认值
 
-[`default`命令](/commands/docs/default.html)可用于为缺失或null的列结果应用默认值。
+[`default`命令](/commands/docs/default.md)可用于为缺失或null的列结果应用默认值。
 
 ```nu
 let missing_value = [{a:1 b:2} {b:1}]
@@ -344,4 +344,4 @@ $with_default_value.1.a
 ## 其他访问结构化数据的命令
 
 - [`reject`](/commands/docs/reject.md) 与`select`相反，移除指定的行和列
-- [`range`](/commands/docs/range.md) 使用[`range`](./types_of_data.md#ranges)类型指定要选择的列表或表的行范围
+- [`range`](/commands/docs/range.md) 使用[`range`](./types_of_data.md#区间)类型指定要选择的列表或表的行范围

@@ -217,7 +217,7 @@ fetch_user --id 123
 fetchUser --id 123
 ```
 
-另见[命名命令](custom_commands.md#naming-commands)。
+另见[命名命令](custom_commands.md#命名命令)。
 
 #### 子命令
 
@@ -236,7 +236,7 @@ def "login basic-auth" [username: string password: string] {
 }
 ```
 
-另见[命名子命令](custom_commands.md#subcommands)。
+另见[命名子命令](custom_commands.md#子命令)。
 
 #### 标志
 
@@ -261,7 +261,7 @@ def greet [name: string, --all_caps] {
 ::: tip
 请注意，用于访问标志的名称是通过将破折号替换为结果变量名中的下划线来访问的。
 
-见[标志](custom_commands.md#flags)。
+见[标志](custom_commands.md#标志)。
 :::
 
 #### 变量和命令参数

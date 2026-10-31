@@ -18,7 +18,7 @@
 ::: warning
 Nu 不打算与 POSIX 兼容。
 请注意，你系统上的某些程序（或其文档）可能假定你的登录 shell 与 [POSIX](https://en.wikipedia.org/wiki/POSIX) 兼容。
-打破该假设可能会导致意外问题。有关更多详细信息，请参阅[配置 - 登录 Shell](./configuration.md#configuring-nu-as-a-login-shell)。
+打破该假设可能会导致意外问题。有关更多详细信息，请参阅[配置 - 登录 Shell](./configuration.md#将-nu-配置为登录-shell)。
 :::
 
 要设置登录 shell，你可以使用 [`chsh`](https://linux.die.net/man/1/chsh) 命令。

@@ -160,7 +160,7 @@ generate {|weather_station|
 
 ### 性能考虑
 
-使用带有不可变变量的[过滤器命令](/commands/categories/filters.html)通常比使用带有传统流控制语句（如 `for` 和 `while`）的可变变量性能要好得多。例如：
+使用带有不可变变量的[过滤器命令](/commands/categories/filters.md)通常比使用带有传统流控制语句（如 `for` 和 `while`）的可变变量性能要好得多。例如：
 
 - 使用 `for` 语句创建包含 50,000 个随机数的列表：
 

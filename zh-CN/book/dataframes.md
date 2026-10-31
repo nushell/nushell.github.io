@@ -428,7 +428,7 @@ polars store-ls | select key type columns rows estimated_size
 # => ╰──────────────────────────────────────┴─────────────┴─────────┴──────┴────────────────╯
 ```
 
-值得一提的是，在使用 dataframe 时，内存是如何被优化的呢？这要感谢 **Apache Arrow** 和 **Polars**。在一个非常简单的表示中，dataframe 中的每一列都是一个 Arrow 数组，它使用了几种内存规格，以塞满尽可能多的数据（查看 [Arrow 列格式](https://arrow.apache.org/docs/format/Columnar.html) ）；另一个优化技巧是，只要有可能，dataframe 中的列就会在多个 dataframes 之间共享，避免了相同数据的内存重复占用。这意味着 dataframe `$df_3`和`$df_4`共享我们用 `polars into-df` 命令创建的两个列。由于这个原因，不能改变 dataframe 中某一列的值。然而，你可以根据其他列或 dataframes 的数据创建新的列。
+值得一提的是，在使用 dataframe 时，内存是如何被优化的呢？这要感谢 **Apache Arrow** 和 **Polars**。在一个非常简单的表示中，dataframe 中的每一列都是一个 Arrow 数组，它使用了几种内存规格，以塞满尽可能多的数据（查看 [Arrow 列格式](https://arrow.apache.org/docs/format/Columnar.md) ）；另一个优化技巧是，只要有可能，dataframe 中的列就会在多个 dataframes 之间共享，避免了相同数据的内存重复占用。这意味着 dataframe `$df_3`和`$df_4`共享我们用 `polars into-df` 命令创建的两个列。由于这个原因，不能改变 dataframe 中某一列的值。然而，你可以根据其他列或 dataframes 的数据创建新的列。
 
 ## 使用系列
 
@@ -952,7 +952,7 @@ $lf_2 | polars join $group name name | polars collect
 
 ::: warning
 此列表可能已过时。要获取最新的命令列表，请参阅
-[Dataframe](/commands/categories/dataframe.md), [Lazyframe](/commands/categories/lazyframe.md), [Dataframe Or Lazyframe](/commands/categories/dataframe_or_lazyframe.md), [Expressions](/commands/categories/expression.html)
+[Dataframe](/commands/categories/dataframe.md), [Lazyframe](/commands/categories/lazyframe.md), [Dataframe Or Lazyframe](/commands/categories/dataframe_or_lazyframe.md), [Expressions](/commands/categories/expression.md)
 命令类别。
 :::
 

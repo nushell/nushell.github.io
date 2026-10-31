@@ -100,7 +100,7 @@ foobarbaz !~ bar # returns false
 ls | where name =~ ^nu # returns all files whose names start with "nu"
 ```
 
-两个运算符都使用了 [Rust regex 包的 `is_match()` 函数](https://docs.rs/regex/latest/regex/struct.Regex.html#method.is_match)。
+两个运算符都使用了 [Rust regex 包的 `is_match()` 函数](https://docs.rs/regex/latest/regex/struct.Regex.md#method.is_match)。
 
 ## 大小写敏感性
 
@@ -131,9 +131,9 @@ Nushell 有一个用于解包列表和记录的扩展运算符 (`...`)。如果�
 
 你可以在三个地方使用扩展运算符：
 
-- [在列表字面量中](#in-list-literals)
-- [在记录字面量中](#in-record-literals)
-- [在命令调用中](#in-command-calls)
+- [在列表字面量中](#在列表字面量中)
+- [在记录字面量中](#在记录字面量中)
+- [在命令调用中](#在命令调用中)
 
 ### 在列表字面量中
 
@@ -238,7 +238,7 @@ def foo [ --flag req opt? ...args ] {
 
 它有一个标志 (`--flag`)、一个必需的位置参数 (`req`)、一个可选的位置参数 (`opt?`) 和一个剩余参数 (`args`)。
 
-如果你有一个要传递给 `args` 的参数列表，你可以像在[列表字面量中](#in-list-literals)扩展列表一样扩展它。规则相同：扩展运算符仅在变量、子表达式和列表字面量之前被识别，并且中间不允许有空格。
+如果你有一个要传递给 `args` 的参数列表，你可以像在[列表字面量中](#在列表字面量中)扩展列表一样扩展它。规则相同：扩展运算符仅在变量、子表达式和列表字面量之前被识别，并且中间不允许有空格。
 
 ```nu
 foo "bar" "baz" ...[1 2 3] # 使用 ...，数字被视为单独的参数

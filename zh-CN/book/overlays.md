@@ -59,7 +59,7 @@ overlay list
 # => ───┴──────
 ```
 
-它将模块的定义带入当前作用域，并以与 [`use`](/commands/docs/use.md) 命令相同的方式评估 [`export-env`](/commands/docs/export-env.md) 代码块（参见[模块](modules.md#environment-variables)章节）。
+它将模块的定义带入当前作用域，并以与 [`use`](/commands/docs/use.md) 命令相同的方式评估 [`export-env`](/commands/docs/export-env.md) 代码块（参见[模块](modules.md#环境变量)章节）。
 
 ::: tip
 在下面的章节中，`>` 的提示语前面会有最后一个活动覆层的名称。

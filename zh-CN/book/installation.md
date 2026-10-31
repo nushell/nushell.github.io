@@ -156,7 +156,7 @@ cargo install nu --locked
 
 `cargo` 工具将完成下载 Nu 及其源码依赖，构建并将其安装到 cargo bin 路径中。
 
-请注意，使用 `cargo` 时，必须单独安装默认插件。有关说明，请参阅本书的[插件安装](./plugins.html#core-plugins)部分。
+请注意，使用 `cargo` 时，必须单独安装默认插件。有关说明，请参阅本书的[插件安装](./plugins.md#核心插件)部分。
 
 ### 从 GitHub 仓库构建
 
