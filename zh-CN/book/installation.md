@@ -132,9 +132,9 @@ Nu 目前需要 **最新（1.66.1 或更高）的稳定** 版本的 Rust。最�
 
 #### macOS
 
-##### Homebrew
+##### Xcode 命令行工具
 
-使用 [Homebrew](https://brew.sh/)，你需要通过如下方式安装 "openssl" 和 "cmake" ：
+Xcode 命令行工具提供了 C 编译器。如果你使用 `native-tls` 特性进行构建，你还需要 OpenSSL，可以通过 [Homebrew](https://brew.sh/) 安装：
 
 @[code](@snippets/installation/macos_deps.sh)
 
@@ -173,3 +173,16 @@ cargo install nu --locked
 @[code](@snippets/installation/build_nu_from_source_release.sh)
 
 熟悉 Rust 的人可能会问，如果 `run` 默认会构建，为什么我们还要做 `build` 和 `run` 这两个步骤？这是为了解决 Cargo 中新的 `default-run` 选项的缺陷，并确保所有插件都被构建，尽管这在将来可能不再需要。
+
+### 可选构建特性
+
+默认构建会启用 `dap`、`lsp`、`mcp`、`network`、`plugin`、`rustls-tls`、`sqlite` 和 `trash-support` 这些[Cargo 特性](https://doc.rust-lang.org/cargo/reference/features.html)。你可以用 `--features` 添加其他特性：
+
+- `system-clipboard`：让行编辑器可以使用系统剪贴板
+- `full`：所有默认特性再加上 `system-clipboard`
+
+例如：
+
+```nu
+cargo install nu --locked --features full
+```

@@ -284,7 +284,7 @@ source output.nu
 
 只有当两者作为单个表达式*一起*解析时才会出现限制，这可能是脚本、块、闭包或其他表达式的一部分。
 
-有关更多解释，请参阅*“Nushell 代码如何运行”*中的 [REPL](./how_nushell_code_gets_run.md#nushell交互式解释器-repl) 部分。
+有关更多解释，请参阅*“Nushell 代码如何运行”*中的 [REPL](./how_nushell_code_gets_run.md#nushell-交互式解释器) 部分。
 :::
 
 #### 示例：动态创建要加载的文件名
@@ -337,7 +337,7 @@ use format!("{}::common", my_path);
 :::
 
 ::: tip 另见
-然而，正如错误消息中所指出的，如果 `my_path` 可以定义为[常量](/zh-CN/book/variables.md#常量变量)，这将起作用，因为常量可以在解析期间解析。
+然而，正如错误消息中所指出的，如果 `my_path` 可以定义为[常量](./variables.md#常量变量)，这将起作用，因为常量可以在解析期间解析。
 
 ```nu
 const my_path = "~/nushell-files"

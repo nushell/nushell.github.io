@@ -3,7 +3,7 @@
 Nushell 提供了几个命令来帮助确定不同代码组的执行方式。在编程语言中，这种功能通常被称为*控制流*。
 
 ::: tip
-需要注意的一点是，本页讨论的所有命令都使用[代码块](/zh-CN/book/types_of_data.md#代码块)。这意味着你可以在其中改变[环境变量](/zh-CN/book/environment.md)和其他[可变变量](/zh-CN/book/variables.md#可变变量)。
+需要注意的一点是，本页讨论的所有命令都使用[代码块](./types_of_data.md#代码块)。这意味着你可以在其中改变[环境变量](/zh-CN/book/environment.md)和其他[可变变量](./variables.md#可变变量)。
 :::
 
 ## 已涵盖内容
@@ -33,7 +33,7 @@ Nushell 提供了几个命令来帮助确定不同代码组的执行方式。在
 
 ### `if`
 
-[`if`](/commands/docs/if.md) 根据一个或多个条件的结果来评估分支[代码块](/zh-CN/book/types_of_data.md#代码块)，类似于其他编程语言中的 "if" 功能。例如：
+[`if`](/commands/docs/if.md) 根据一个或多个条件的结果来评估分支[代码块](./types_of_data.md#代码块)，类似于其他编程语言中的 "if" 功能。例如：
 
 ```nu
 if $x > 0 { 'positive' }
@@ -76,7 +76,7 @@ match 3 {
 # => three
 ```
 
-分支可以返回单个值，或者如第二个分支所示，可以返回[代码块](/zh-CN/book/types_of_data.md#代码块)的结果。
+分支可以返回单个值，或者如第二个分支所示，可以返回[代码块](./types_of_data.md#代码块)的结果。
 
 #### 捕获所有分支
 
@@ -135,7 +135,7 @@ match $foo {
 
 ### 循环和其他迭代命令
 
-循环命令的功能类似于将闭包应用于列表或表中的元素的命令，例如 [`each`](/commands/docs/each.md) 或 [`where`](/commands/docs/where.md)，很多时候你可以用任何一种方法完成同样的事情。例如：
+循环命令的功能类似于将闭包应用于列表或表格中的元素的命令，例如 [`each`](/commands/docs/each.md) 或 [`where`](/commands/docs/where.md)，很多时候你可以用任何一种方法完成同样的事情。例如：
 
 ```nu
 mut result = []
@@ -162,7 +162,7 @@ $result
 
 循环最大的缺点是它们是语句，而 [`each`](/commands/docs/each.md) 是表达式。像 [`each`](/commands/docs/each.md) 这样的表达式总会产生某个输出值，而语句则不会。
 
-这意味着它们不能很好地与不可变变量一起工作，而使用不可变变量被认为是更符合 [Nushell 风格](/zh-CN/book/thinking_in_nu.md#变量默认是不可变的)的。在上一节的示例中，如果没有预先声明的可变变量，就不可能使用 [`for`](/commands/docs/each.md) 来获取递增数字的列表，或任何值。
+这意味着它们不能很好地与不可变变量一起工作，而使用不可变变量被认为是更符合 [Nushell 风格](./thinking_in_nu.md#变量默认是不可变的)的。在上一节的示例中，如果没有预先声明的可变变量，就不可能使用 [`for`](/commands/docs/each.md) 来获取递增数字的列表，或任何值。
 
 语句在需要某些输出的 Nushell 管道中也无法工作。事实上，如果你尝试这样做，Nushell 会报错：
 
@@ -198,7 +198,7 @@ mut foo = []
 # =>    ╰────
 ```
 
-如果你在闭包中修改环境变量，你可以，但它只会在闭包的作用域内修改它，在其他地方保持不变。然而，循环使用[代码块](/zh-CN/book/types_of_data.md#代码块)，这意味着它们可以在更大的作用域内修改常规的可变变量或环境变量。
+如果你在闭包中修改环境变量，你可以，但它只会在闭包的作用域内修改它，在其他地方保持不变。然而，循环使用[代码块](./types_of_data.md#代码块)，这意味着它们可以在更大的作用域内修改常规的可变变量或环境变量。
 
 ```nu
 mut result = []
@@ -213,7 +213,7 @@ $result
 
 ### `for`
 
-[`for`](/commands/docs/for.md) 循环遍历一个范围或集合，如列表或表。
+[`for`](/commands/docs/for.md) 循环遍历一个范围或集合，如列表或表格。
 
 ```nu
 for x in [1 2 3] { $x * $x | print }

@@ -476,6 +476,7 @@ module greetings {
 }
 use greetings hello
 hello "world"
+# => hello world!
 ```
 
 从文件导入模块并在当前作用域中使用其环境：
@@ -488,18 +489,20 @@ export-env {
 export def hello [] {
     $"hello ($env.MYNAME)"
 }
+```
 
+```nu
 use greetings.nu
 $env.MYNAME
 # => Arthur, King of the Britons
 greetings hello
-# => hello Arthur, King of the Britons!
+# => hello Arthur, King of the Britons
 ```
 
 在模块中使用 main 命令：
 
 ```nu
-# greetings.nu
+# salutations.nu
 export def hello [name: string] {
     $"hello ($name)!"
 }

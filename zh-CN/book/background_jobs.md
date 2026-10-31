@@ -45,6 +45,24 @@ job list
 # => ╰────────────╯
 ```
 
+## 描述任务
+
+为了更容易区分不同的任务，你可以在用 `job spawn --description` 启动任务时给它一个描述，或者稍后用 [`job describe`](/commands/docs/job_describe.md) 修改它。该描述会显示在 `job list` 额外增加的一列 `description` 中：
+
+```nu
+let id = job spawn --description "long nap" { sleep 1day }
+job describe $id "longer nap"
+
+job list
+# => ╭───┬────┬────────┬────────────────┬─────────────╮
+# => │ # │ id │  type  │      pids      │ description │
+# => ├───┼────┼────────┼────────────────┼─────────────┤
+# => │ 0 │  3 │ thread │ [list 0 items] │ longer nap  │
+# => ╰───┴────┴────────┴────────────────┴─────────────╯
+
+job kill $id
+```
+
 ## 任务挂起
 
 在 Unix 目标（如 Linux 和 macOS）上，Nushell 还支持使用 <kbd>Ctrl</kbd>+<kbd>Z</kbd> 挂起外部命令。当一个正在运行的进程被挂起时，它会变成一个“冻结”的后台任务：

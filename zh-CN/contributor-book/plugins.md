@@ -26,7 +26,7 @@ Nu 维护一个称为"插件注册文件"的插件注册表，位于配置变量
 
 shell 中设置的环境变量在从插件调用启动插件时设置在其环境中。
 
-插件总是以其可执行文件的目录作为工作目录启动。这是因为它们可能随时间被发送具有不同 shell 工作目录上下文的调用。[`EngineInterface::get_current_dir()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.get_current_dir) 可用于确定调用上下文的当前工作目录。有关更多信息，请参阅[此部分](#current-directory)。
+插件总是以其可执行文件的目录作为工作目录启动。这是因为它们可能随时间被发送具有不同 shell 工作目录上下文的调用。[`EngineInterface::get_current_dir()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.get_current_dir) 可用于确定调用上下文的当前工作目录。有关更多信息，请参阅[此部分](#当前目录)。
 
 ## 创建插件（在 Rust 中）
 
@@ -139,7 +139,7 @@ fn main() {
 
 在 `main()` 中，我们只调用一个函数 `serve_plugin`。这将完成调用我们的插件、处理 JSON 序列化/反序列化以及向 Nu 发送值和错误的工作。要启动它，我们传递给它实现 `Plugin` trait 的东西和实现 `PluginEncoder` trait 的东西。我们被提供了 Nu 支持的序列化格式的选择。通常用 Rust 编写的插件应该使用 `MsgPackSerializer`，因为它相当快，但这里我们选择 JSON 来演示本教程后面通信协议的工作原理。
 
-在 `main()` 上面是我们的插件将暴露的 `len` 命令的 `SimplePluginCommand` trait 的实现，由 `Len` 类型表示。我们使用 `SimplePluginCommand` 而不是 `PluginCommand` 以简化我们的实现并避免[处理插件中的流](#using-streams-in-plugins)。让我们看看我们如何实现这个 trait：
+在 `main()` 上面是我们的插件将暴露的 `len` 命令的 `SimplePluginCommand` trait 的实现，由 `Len` 类型表示。我们使用 `SimplePluginCommand` 而不是 `PluginCommand` 以简化我们的实现并避免[处理插件中的流](#在插件中使用流)。让我们看看我们如何实现这个 trait：
 
 ```rust
 impl SimplePluginCommand for Len {
@@ -682,7 +682,7 @@ engine.add_env_var("FOO", Value::string("bar", call.head))?;
 
 ### 当前目录
 
-如[启动环境](#launch-environment)部分前面所述，插件总是以其可执行文件的目录作为工作目录启动。这是有意为之，试图确保 shell 上下文的当前目录得到正确处理。对于处理文件系统路径的插件，相对路径应始终与 [`EngineInterface::get_current_dir()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.get_current_dir) 返回的路径连接：
+如[启动环境](#启动环境)部分前面所述，插件总是以其可执行文件的目录作为工作目录启动。这是有意为之，试图确保 shell 上下文的当前目录得到正确处理。对于处理文件系统路径的插件，相对路径应始终与 [`EngineInterface::get_current_dir()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.get_current_dir) 返回的路径连接：
 
 ```rust
 use std::path::Path;
@@ -704,11 +704,11 @@ if absolute_path.exists() {
 
 ## 插件垃圾收集
 
-Nu 附带一个[插件垃圾收集器](/zh-CN/book/plugins.html#plugin-garbage-collector)，它会根据用户的偏好自动停止不再活跃使用的插件。如果满足以下所有条件，则认为插件不活跃进行垃圾收集：
+Nu 附带一个[插件垃圾收集器](../book/plugins.md#插件垃圾回收器)，它会根据用户的偏好自动停止不再活跃使用的插件。如果满足以下所有条件，则认为插件不活跃进行垃圾收集：
 
 1. 它们没有任何尚未发送响应的待处理插件调用
 2. 它们当前没有作为响应的一部分写入任何流
-3. 它们没有[明确选择退出](#disabling-garbage-collection)垃圾收集
+3. 它们没有[明确选择退出](#禁用垃圾收集)垃圾收集
 
 请注意，以下情况**不会**导致插件被视为活跃：
 
@@ -717,7 +717,7 @@ Nu 附带一个[插件垃圾收集器](/zh-CN/book/plugins.html#plugin-garbage-c
 - 在另一个线程上在后台进行工作
 - 上面未提及的任何其他内容
 
-当插件被 Nu 停止时，它们不会被杀死。相反，Nu 等待任何积极使用插件的东西完成，然后发送 [`Goodbye`](plugin_protocol_reference.html#goodbye) 并可能关闭 stdin，此时插件应该优雅退出。
+当插件被 Nu 停止时，它们不会被杀死。相反，Nu 等待任何积极使用插件的东西完成，然后发送 [`Goodbye`](plugin_protocol_reference.md#goodbye) 并可能关闭 stdin，此时插件应该优雅退出。
 
 ### 禁用垃圾收集
 
@@ -728,7 +728,7 @@ engine.set_gc_disabled(true); // Turn off garbage collection
 engine.set_gc_disabled(false); // Turn it back on
 ```
 
-此选项对插件是全局的，并且将持续超出插件调用的范围。在其他语言中，可以随时发送 [`GcDisabled` 选项](plugin_protocol_reference.html#gcdisabled-option)：
+此选项对插件是全局的，并且将持续超出插件调用的范围。在其他语言中，可以随时发送 [`GcDisabled` 选项](plugin_protocol_reference.md#gcdisabled-选项)：
 
 ```json
 {
@@ -740,11 +740,11 @@ engine.set_gc_disabled(false); // Turn it back on
 
 请注意，选择退出垃圾收集并不会阻止用户使用 `plugin stop` 命令明确停止你的插件。我们建议不要禁用垃圾收集，除非你的插件有充分的理由保持运行 - 例如，将数据保存在内存中，进行后台处理，或保持共享资源（如套接字或文件）打开。对于包含解释它们所需的所有数据的自定义值，插件总是可以根据需要重新启动。
 
-如果你的插件启动时间特别长，你可以向用户建议更改他们的[垃圾收集设置](/zh-CN/book/plugins.html#plugin-garbage-collector)，要么增加 `stop_after` 持续时间，要么完全为你的插件禁用垃圾收集。
+如果你的插件启动时间特别长，你可以向用户建议更改他们的[垃圾收集设置](../book/plugins.md#插件垃圾回收器)，要么增加 `stop_after` 持续时间，要么完全为你的插件禁用垃圾收集。
 
 ## 调用其他 Nushell 命令
 
-插件可以在原始插件调用的范围内查找和调用其他 Nushell 命令。这包括内部命令、用 Nushell 编写的自定义命令，以及插件提供的命令。相关的调用是 [`FindDecl`](plugin_protocol_reference.html#finddecl-engine-call) 和 [`CallDecl`](plugin_protocol_reference.html#calldecl-engine-call)。
+插件可以在原始插件调用的范围内查找和调用其他 Nushell 命令。这包括内部命令、用 Nushell 编写的自定义命令，以及插件提供的命令。相关的调用是 [`FindDecl`](plugin_protocol_reference.md#finddecl-引擎调用) 和 [`CallDecl`](plugin_protocol_reference.md#calldecl-引擎调用)。
 
 从 Rust 中，使用 `EngineInterface` 上的 [`.find_decl()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.find_decl) 和 [`.call_decl()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.call_decl) 方法。通过构建器或 setter 方法将它们添加到 [`EvaluatedCall`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EvaluatedCall.html) 中来提供参数。例如：
 
@@ -893,7 +893,7 @@ json
 }
 ```
 
-之后，我们向插件发送一个带有 ID `0` 的 [`Signature`](plugin_protocol_reference.md#signature-plugin-call) 调用：
+之后，我们向插件发送一个带有 ID `0` 的 [`Signature`](plugin_protocol_reference.md#signature-插件调用) 调用：
 
 ```json
 {
@@ -962,7 +962,7 @@ json{"Hello":{"protocol":"nu-plugin","version":"0.90.2","features":[]}}
 {"PipelineData":{"Value":{"Int":{"val":5,"span":{"start":100953,"end":100957}}}}}
 ```
 
-我们调用了我们的插件，并在 stdin 上传递了一个 [`Run`](plugin_protocol_reference.md#run-plugin-call) 插件调用，看起来像这样：
+我们调用了我们的插件，并在 stdin 上传递了一个 [`Run`](plugin_protocol_reference.md#run-插件调用) 插件调用，看起来像这样：
 
 ```json
 {
@@ -991,7 +991,7 @@ json{"Hello":{"protocol":"nu-plugin","version":"0.90.2","features":[]}}
 }
 ```
 
-也就是说，我们向 len 传递了字符串 "hello"，它回复了以下 [`PipelineData`](plugin_protocol_reference.md#pipelinedata-plugin-call-response) 响应：
+也就是说，我们向 len 传递了字符串 "hello"，它回复了以下 [`PipelineData`](plugin_protocol_reference.md#pipelinedata-插件调用响应) 响应：
 
 ```json
 {

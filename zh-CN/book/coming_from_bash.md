@@ -37,6 +37,8 @@ $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 | `command \| head -5`                 | `command \| first 5`                                          | 将内部命令的输出限制为前 5 行（另见 `last` 和 `skip`） |
 | `cat <path>`                         | `open --raw <path>`                                           | 显示给定文件的内容                         |
 |                                      | `open <path>`                                                 | 将文件作为结构化数据读取                   |
+| `cat <(<command1>) <(<command2>)`    | `[(command1), (command2)] \| str join`                        | 将 command1 和 command2 的输出拼接起来     |
+| `cat <path> <(<command>)`            | `[(open --raw <path>), (command)] \| str join`                | 将给定文件的内容与命令的输出拼接起来       |
 | `mv <source> <dest>`                 | `mv <source> <dest>`                                          | 移动文件到新的位置                         |
 | `for f in *.md; do echo $f; done`    | `ls *.md \| each { $in.name }`                                | 遍历列表并返回结果                         |
 | `for i in $(seq 1 10); do echo $i; done` | `for i in 1..10 { print $i }`                             | 遍历列表并对结果运行命令                   |
@@ -46,17 +48,22 @@ $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 |                                      | `rm -t <path>`                                                | 将给定的文件移到系统垃圾箱                 |
 | `rm -rf <path>`                      | `rm -r <path>`                                                | 递归地删除给定的路径                       |
 | `date -d <date>`                     | `"<date>" \| into datetime -f <format>`                       | 解析日期 ([日期格式文档](https://docs.rs/chrono/0.4.15/chrono/format/strftime/index.md)) |
+| `date -d "tomorrow"`                 | `"tomorrow" \| date from-human`                               | 解析人类可读的日期                         |
 | `sed`                                | `str replace`                                                 | 查找和替换一个字符串中的模式               |
 | `grep <pattern>`                     | `where $it =~ <substring>` or `find <substring>`              | 过滤包含特定字符串的字符串                 |
+| `grep -i <pattern>`                  | `find -i <substring>`                                         | 过滤包含特定字符串的字符串，忽略大小写     |
+| `grep -o <regex>`                    | `find -o -r <regex>`                                          | 只输出匹配到的文本，每个匹配一个值         |
 | `man <command>`                      | `help <command>`                                              | 获得特定命令的帮助信息                     |
 |                                      | `help commands`                                               | 列出所有可用的命令                         |
 |                                      | `help --find <string>`                                        | 在所有可用的命令中搜索                     |
 | `command1 && command2`               | `command1; command2`                                          | 运行一条命令，如果成功的话，再运行第二条   |
+| `command1 \|\| command2`             | `try { command1 } catch { command2 }`                         | 运行一条命令，如果失败则运行第二条         |
 | `stat $(which git)`                  | `stat ...(which git).path`                                    | 使用命令输出作为其他命令的参数             |
 | `echo /tmp/$RANDOM`                  | `$"/tmp/(random int)"`                                        | 在字符串中使用命令输出                     |
 | `cargo b --jobs=$(nproc)`            | `cargo b $"--jobs=(sys cpu \| length)"`                       | 在选项中使用命令输出                       |
 | `echo $PATH`                         | `$env.PATH` (非 Windows) or `$env.Path` (Windows)             | 查看当前路径                               |
 | `echo $?`                            | `$env.LAST_EXIT_CODE`                                         | 查看最后执行命令的退出状态                 |
+| `set -o pipefail`                    | (default behavior)                                            | 如果管道中任何外部命令失败，则整个管道失败 |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                                         | 永久地更新 PATH                            |
 | `export PATH = $PATH:/usr/other/bin` | `$env.PATH = ($env.PATH \| append /usr/other/bin)`            | 临时更新 PATH                              |
 | `export`                             | `$env`                                                        | 列出当前的环境变量                         |
@@ -82,10 +89,10 @@ $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 | ------------------------------------ | ------------------------------------------------------------- | ----------------------------------------------------------------- |
 | `!!`                                 | `!!`                                                          | 插入历史中的最后一条命令行                 |
 | `!$`                                 | `!$`                                                          | 插入历史中最后一个以空格分隔的标记         |
-| `!<n>` (例如, `!5`)                  | `!<n>`                                                        | 从历史记录的开头插入第 n 条命令            |
+| `!<n>`（例如，`!5`）                 | `!<n>`                                                        | 从历史记录的开头插入第 n 条命令            |
 |                                      |                                                               | 提示：`history \| enumerate \| last 10` 显示最近的位置 |
-| `!<-n>` (例如, `!-5`)                | `!<-n>`                                                       | 从历史记录的末尾插入第 n 条命令            |
-| `!<string>` (例如, `!ls`)            | `!<string>`                                                   | 插入以该字符串开头的最近的历史项           |
+| `!<-n>`（例如，`!-5`）               | `!<-n>`                                                       | 从历史记录的末尾插入第 n 条命令            |
+| `!<string>`（例如，`!ls`）           | `!<string>`                                                   | 插入以该字符串开头的最近的历史项           |
 | <kbd>Ctrl/Cmd</kbd>+<kbd>R</kbd>     | <kbd>Ctrl/Cmd</kbd>+<kbd>R</kbd>                              | 反向历史搜索                               |
 | (Emacs 模式) <kbd>Ctrl</kbd>+<kbd>X</kbd><kbd>Ctrl</kbd>+<kbd>E</kbd> | <kbd>Ctrl/Cmd</kbd>+<kbd>O</kbd> | 在 `$env.EDITOR` 定义的编辑器中编辑命令行 |
 | (Vi 命令模式) <kbd>V</kbd>       | <kbd>Ctrl/Cmd</kbd>+<kbd>O</kbd>                              | 在 `$env.EDITOR` 定义的编辑器中编辑命令行 |

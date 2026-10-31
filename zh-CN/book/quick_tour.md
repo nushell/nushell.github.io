@@ -28,7 +28,7 @@ ls
 
 ## 对数据进行操作
 
-接下来，让我们按每个文件的大小对这个表进行排序。为此，我们将获取 [`ls`](/commands/docs/ls.md) 的输出，并将其输入到一个可以根据列中的*值*对表进行排序的命令中。
+接下来，让我们按每个文件的大小对这个表格进行排序。为此，我们将获取 [`ls`](/commands/docs/ls.md) 的输出，并将其输入到一个可以根据列中的*值*对表格进行排序的命令中。
 
 ```nu:no-line-numbers
 ls | sort-by size | reverse
@@ -53,7 +53,7 @@ ls | sort-by size | reverse
 如果你仔细比较排序顺序，你可能会发现数据不是按字母顺序排序的，甚至不是按*数值*排序的。相反，由于 `size` 列是 [`filesize` 类型](./types_of_data.md#文件大小)，Nushell 知道 `1.1 KiB` (kibibytes) 比 `812 B` (bytes) 大。
 :::
 
-# 使用 `where` 命令查找数据
+## 使用 `where` 命令查找数据
 
 Nu 提供了许多可以对前一个命令的结构化输出进行操作的命令。这些在 Nushell 中通常被归类为“过滤器”。
 
@@ -214,7 +214,7 @@ help commands
 ```
 
 ::: tip
-请注意，上面输出的 `params` 和 `input_output` 列是*嵌套*表。Nushell 允许[任意嵌套的数据结构](./navigating_structured_data.md#背景)。
+请注意，上面输出的 `params` 和 `input_output` 列是*嵌套*表格。Nushell 允许[任意嵌套的数据结构](./navigating_structured_data.md#背景)。
 :::
 
 ## 开始 `explore`(浏览) 这里

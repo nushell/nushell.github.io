@@ -163,7 +163,7 @@ hello()
 总的来说，在扩展Nushell程序时，你可以更放心错误会被更早发现。
 :::
 
-## Nushell交互式解释器(REPL)
+## Nushell 交互式解释器
 
 与大多数Shell一样，Nushell有个 _"读取→求值→打印循环"_ ([REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop))，在你不带任何文件参数运行 `nu` 时启动。这通常被认为是 _"命令行"_，但并不完全相同。
 
@@ -207,7 +207,7 @@ hello()
 
 换句话说，每个REPL调用都是独立的解析-求值序列。通过将环境合并回Nushell状态，我们保持了REPL调用之间的连续性。
 
-比较 _"用Nu的方式思考"_ 中的简化版[`cd`示例](./thinking_in_nu.md#example-change-to-a-different-directory-cd-and-source-a-file)：
+比较 _"用Nu的方式思考"_ 中的简化版[`cd`示例](./thinking_in_nu.md#示例-切换到不同目录-cd-并-source-一个文件)：
 
 ```nu
 cd spam
@@ -279,7 +279,7 @@ source-env foo.nu
 
 因此，我们可以将常量用作[`source`](/commands/docs/source.md)、[`use`](/commands/docs/use.md)等解析时关键字的安全已知参数。
 
-考虑 _"用Nu的方式思考"_ 中的[这个示例](./thinking_in_nu.md#example-dynamically-creating-a-filename-to-be-sourced)：
+考虑 _"用Nu的方式思考"_ 中的[这个示例](./thinking_in_nu.md#示例-动态创建要加载的文件名)：
 
 ```nu
 let my_path = "~/nushell-files"

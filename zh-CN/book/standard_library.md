@@ -147,13 +147,13 @@ nu -n -c "$nu.startup-time"
 ## 在模块中使用 `std/log`
 
 ::: warning 重要！
-`std/log` 会导出环境变量。要在你自己的模块中使用 `std/log` 模块，请参阅"创建模块"章节中的[这个注意事项](./modules/creating_modules.md#示例-使用-export-module-的子模块)。
+`std/log` 会导出环境变量。要在你自己的模块中使用 `std/log` 模块，请参阅"创建模块"章节中的[这个注意事项](./modules/creating_modules.md#export-env-仅在-use-调用被求值时运行)。
 
 :::
 
 ## 优化启动时间
 
-如果 Nushell 的启动时间对你的工作流程很重要，请检查 `config.nu`、`env.nu` 和其他可能的[启动配置]([./configuration.md])中对标准库的低效使用。以下命令可以帮助识别问题区域：
+如果 Nushell 的启动时间对你的工作流程很重要，请检查 `config.nu`、`env.nu` 和其他可能的[启动配置](./configuration.md)中对标准库的低效使用。以下命令可以帮助识别问题区域：
 
 ```nu
 view files

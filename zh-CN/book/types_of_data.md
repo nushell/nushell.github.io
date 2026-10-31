@@ -88,7 +88,7 @@ Nushell 继承了这种方法，并扩展支持除字符串外的其他数据类
 | **描述:**       | 表示文本的字符序列                                                    |
 | **类型标注:**   | `string`                                                              |
 | **字面量语法:** | 参见[字符串处理](working_with_strings.md)                             |
-| **参见:**       | [处理字符串](/zh-CN/book/loading_data.md#处理字符串)                  |
+| **参见:**       | [处理字符串](./loading_data.md#处理字符串)                            |
 |                 | [语言参考 - 字符串](/lang-guide/chapters/types/basic_types/string.md) |
 
 Nushell提供了多种表示字符串的方式和许多处理字符串的命令。
@@ -408,4 +408,24 @@ $simple_record.c? | describe
 # => nothing
 $simple_record.c? == null
 # => true
+```
+
+### 语义化版本
+
+|                   |                                                                                                            |
+| ----------------- | ---------------------------------------------------------------------------------------------------------- |
+| **_描述:_**       | 一个[语义化版本](https://semver.org)号，例如 `1.2.3` 或 `2.0.0-rc.1`                                       |
+| **_类型标注:_**   | 不适用 - 这是一个自定义值，`describe` 会将其报告为 `semver`                                                |
+| **_字面量语法:_** | 不适用 - 用 [`into semver`](/commands/docs/into_semver.md) 转换字符串或记录                                |
+| **_参见:_**       | [`semver bump`](/commands/docs/semver_bump.md)、[`into semver-range`](/commands/docs/into_semver-range.md) |
+
+简单示例 - 语义化版本按版本号比较，而不是按文本比较：
+
+```nu
+'1.10.0' > '1.2.0'
+# => false
+('1.10.0' | into semver) > ('1.2.0' | into semver)
+# => true
+'1.2.3' | into semver | semver bump minor
+# => 1.3.0
 ```

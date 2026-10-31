@@ -157,7 +157,7 @@ jq -r '.items | map({(.name): (.price * 2)}) | add'
 # => ╰───┴────────┴───────╯
 ```
 
-在这种情况下，nu 不需要创建新记录，因为我们可以利用记录列表实际上是表的事实。然而，在其他情况下可能需要，正如我们在[组合记录](#composing-records)中看到的那样。
+在这种情况下，nu 不需要创建新记录，因为我们可以利用记录列表实际上是表的事实。然而，在其他情况下可能需要，正如我们在[组合记录](#组合记录)中看到的那样。
 
 ### 排序列表
 
@@ -355,7 +355,7 @@ echo '{"data": {"value": 42, "nested": {"value": 24}}}' |
 jq -r '.. | .value?'
 ```
 
-在 `nu` 中，没有内置命令来实现这一点，但是，我们可以定义自己的可重用命令。请参阅[附录：自定义命令](#appendix-custom-commands)了解下面示例中显示的 `cherry-pick` 命令的实现。
+在 `nu` 中，没有内置命令来实现这一点，但是，我们可以定义自己的可重用命令。请参阅[附录：自定义命令](#附录-自定义命令)了解下面示例中显示的 `cherry-pick` 命令的实现。
 
 ```nu
 '{"data": {"value": 42, "nested": {"value": 24}}}'
@@ -377,7 +377,7 @@ echo '{"data": [{"values": [1, 2, 3]}, {"values": [4, 5, 6]}]}' |
 jq -r '.data[].values[] | select(. > 3)'
 ```
 
-在 `nu` 中，我们可以利用[记录列表实际上是表](/zh-CN/book/types_of_data.md#表格)这一事实，简单地这样做：
+在 `nu` 中，我们可以利用[记录列表实际上是表](../book/types_of_data.md#表格)这一事实，简单地这样做：
 
 ```nu
 '{"data": [{"values": [1, 2, 3]}, {"values": [4, 5, 6]}]}'
@@ -401,7 +401,7 @@ echo '{"person": {"name": {"first": "Alice", "last": "Smith"}, "age": 30}}' |
 jq -r 'paths as $p | select(getpath($p) | type != "object") | ($p | join(".")) + " = " + (getpath($p) | tostring)'
 ```
 
-在 `nu` 中，没有内置命令来实现这一点。请参阅[附录：自定义命令](#appendix-custom-commands)了解下面示例中显示的 `flatten record-paths` 命令的实现。
+在 `nu` 中，没有内置命令来实现这一点。请参阅[附录：自定义命令](#附录-自定义命令)了解下面示例中显示的 `flatten record-paths` 命令的实现。
 
 ```nu
 '{"person": {"name": {"first": "Alice", "last": "Smith"}, "age": 30}}'
@@ -425,7 +425,7 @@ echo '{"data": {"value": 42, "nested": {"value": 24}}}' |
 jq -r 'recurse | .value? | select(. != null) | { value: (. * 5) } | add'
 ```
 
-在 `nu` 中，没有与 `recurse` 等效的内置函数。但是，我们可以重用[过滤嵌套项](#filtering-nested-items)中的解决方案来提取要操作的值：
+在 `nu` 中，没有与 `recurse` 等效的内置函数。但是，我们可以重用[过滤嵌套项](#过滤嵌套项)中的解决方案来提取要操作的值：
 
 ```nu
 '{"data": {"value": 42, "nested": {"value": 24}}}'
@@ -448,7 +448,7 @@ echo '{"data": {"values": [1, 2, 3], "nested": {"values": [4, 5, 6]}}}' |
 jq -r 'walk(if type == "number" then . * 2 else . end)'
 ```
 
-在 `nu` 中，没有内置函数来实现这一点。请参阅[附录：自定义命令](#appendix-custom-commands)了解下面示例中显示的 `filter-map` 命令的实现。
+在 `nu` 中，没有内置函数来实现这一点。请参阅[附录：自定义命令](#附录-自定义命令)了解下面示例中显示的 `filter-map` 命令的实现。
 
 ````nu
 '{"data": {"values": [1, 2, 3], "nested": {"values": [4, 5, 6]}}}'

@@ -281,7 +281,7 @@ $env.config.plugin_gc = {
 }
 ```
 
-有关何时认为插件处于活动状态的信息，请参阅[贡献者手册中的相关部分](/zh-CN/contributor-book/plugins.md#插件垃圾收集)。
+有关何时认为插件处于活动状态的信息，请参阅[贡献者手册中的相关部分](../contributor-book/plugins.md#插件垃圾收集)。
 
 ## 移除插件
 

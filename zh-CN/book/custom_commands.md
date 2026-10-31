@@ -113,7 +113,7 @@ exponents-of-three
 
 要从输入列表中返回值，请使用诸如 `each` 命令之类的过滤器：
 
-````nu
+```nu
 def exponents-of-three [] {
   [ 0 1 2 3 4 5 ] | each {|x|
     3 ** $x
@@ -130,9 +130,12 @@ exponents-of-three
 # => │ 4 │  81 │
 # => │ 5 │ 243 │
 # => ╰───┴─────╯
+```
+
 :::
 
 ::: details Match 表达式
+
 ```nu
 # 返回当前目录中的一个随机文件
 def "random file" [] {
@@ -147,14 +150,13 @@ def "random file" [] {
     }
   }
 }
-````
+```
 
 在这种情况下，最后一个表达式是 `match` 语句，它可以返回：
 
 - 如果目录为空，则返回 `null`
 - 否则，返回一个表示随机选择的文件的 `record`
-
-:::
+  :::
 
 ## 自定义命令和管道
 
@@ -181,9 +183,10 @@ def my-ls [] { ls }
 ```nu
 my-ls | get name
 # => ╭───┬───────────────────────╮
-# => │ 0 │ myscript.nu           │
-# => │ 1 │ myscript2.nu          │
-# => │ 2 │ welcome_to_nushell.md │
+# => │ 0 │ commands              │
+# => │ 1 │ myscript.nu           │
+# => │ 2 │ myscript2.nu          │
+# => │ 3 │ welcome_to_nushell.md │
 # => ╰───┴───────────────────────╯
 ```
 
@@ -220,12 +223,17 @@ def double [] {
 此命令演示了输入和输出*流式处理*。尝试使用无限输入运行它：
 
 ```nu
-1.. | each {||} | double
+1.. | each {||} | double | first 3
+# => ╭───┬───╮
+# => │ 0 │ 2 │
+# => │ 1 │ 4 │
+# => │ 2 │ 6 │
+# => ╰───┴───╯
 ```
 
-即使输入命令尚未结束，`double` 命令仍然可以在值可用时接收和输出它们。
+即使输入命令永远不会结束，`double` 命令仍然可以在值可用时接收和输出它们，因此 `first` 取得它的三个值后管道就会停止。
 
-按 <kbd>Ctrl</kbd>+<kbd>C</kbd> 停止命令。
+如果没有 `first 3`，管道将永远运行下去。按 <kbd>Ctrl</kbd>+<kbd>C</kbd> 停止它。
 :::
 
 我们还可以使用 [`$in` 变量](pipelines.md#管道输入和特殊的-in-变量)存储输入以供以后使用：
@@ -242,9 +250,10 @@ ls | nullify name size
 # => ╭───┬──────┬──────┬──────┬───────────────╮
 # => │ # │ name │ type │ size │   modified    │
 # => ├───┼──────┼──────┼──────┼───────────────┤
-# => │ 0 │      │ file │      │ 8 minutes ago │
+# => │ 0 │      │ dir  │      │ 8 minutes ago │
 # => │ 1 │      │ file │      │ 8 minutes ago │
 # => │ 2 │      │ file │      │ 8 minutes ago │
+# => │ 3 │      │ file │      │ 8 minutes ago │
 # => ╰───┴──────┴──────┴──────┴───────────────╯
 ```
 
@@ -256,8 +265,24 @@ ls | nullify name size
 
 - `1`、`"1"` 或 `"1.5"`：Nushell 不允许使用数字作为命令名
 - `4MiB` 或 `"4MiB"`：Nushell 不允许使用文件大小作为命令名
-- `"number#four"` 或 `"number^four"`：命令名中不允许使用插入符号和哈希符号
+- `"number#four"`、`"number^four"` 或 `"number%four"`：命令名中不允许使用插入符号、哈希符号和百分号
+- `"foo  bar"`、`" foo"` 或 `"foo "`：命令名中的单词必须用单个空格分隔，不能有前导或尾随空白。这样的名称永远无法被调用，因此 `def`、`extern` 和 `alias` 会拒绝它。
 - `-a`、`"{foo}"`、`"(bar)"`：将无法调用，因为 Nushell 会将它们解释为标志、闭包或表达式。
+
+解析器关键字，例如 `if`、`for`、`let`、`def`、`type`、`use` 或 `where`，根本不能用作命令名，因为遮蔽它们会破坏其所实现的语言结构：
+
+```nu
+def if [] { "my if" }
+# => Error: nu::parser::name_is_keyword
+# =>
+# =>   × Can't use parser keyword `if` as command name.
+# =>    ╭─[repl_entry #1:1:5]
+# =>  1 │ def if [] { "my if" }
+# =>    ·     ─┬
+# =>    ·      ╰── 'if' is a parser keyword
+# =>    ╰────
+# =>   help: Parser keywords cannot be shadowed (including via module exports and `use *`). Choose a different command name so language constructs keep working.
+```
 
 虽然像 `"+foo"` 这样的名称可能有效，但最好避免使用，因为解析器规则可能会随着时间的推移而改变。如有疑问，请使命令名尽可能简单。
 
@@ -271,6 +296,15 @@ ls | nullify name size
 ```nu
 let name = "foo"
 def $name [] { foo }
+# => Error: nu::parser::unknown_state
+# =>
+# =>   × Unknown state.
+# =>    ╭─[repl_entry #1:2:5]
+# =>  1 │ let name = "foo"
+# =>  2 │ def $name [] { foo }
+# =>    ·     ──┬──
+# =>    ·       ╰── Could not get string from string expression
+# =>    ╰────
 ```
 
 :::
@@ -289,6 +323,7 @@ def "str mycommand" [] {
 
 ```nu
 str mycommand
+# => hello
 ```
 
 当然，名称中带空格的命令也以同样的方式定义：
@@ -298,6 +333,49 @@ def "custom command" [] {
   "This is a custom command with a space in the name!"
 }
 ```
+
+### 遮蔽内置命令
+
+自定义命令可以与内置命令同名。此时该自定义命令会*遮蔽*内置命令：调用这个名称会运行你的版本。要仍然调用内置命令，可以在其名称前加上 `%` 符号，这与 `^` 强制调用[外部命令](./running_externals.md)很像：
+
+```nu
+def echo [...args] { "echo is turned off" }
+
+echo hello
+# => echo is turned off
+
+%echo hello
+# => hello
+```
+
+当内置命令的名称存储在变量中（`%$cmd`）或在子表达式中计算（`%($cmd)`）时，`%` 符号同样有效：
+
+```nu
+let cmd = "echo"
+%$cmd hello
+# => hello
+```
+
+只有内置命令可以这样调用。对自定义命令、别名或未知名称使用 `%` 是一个解析错误：
+
+```nu
+def greet [] { "hi" }
+%greet
+# => Error: nu::parser::error
+# =>
+# =>   × percent sigil requires a built-in command
+# =>    ╭─[repl_entry #1:2:2]
+# =>  1 │ def greet [] { "hi" }
+# =>  2 │ %greet
+# =>    ·  ──┬──
+# =>    ·    ╰── unknown built-in command
+# =>    ╰────
+# =>   help: remove `%` to use normal resolution, or use `^` to run an external command explicitly
+```
+
+::: tip
+在遮蔽了内置命令的命令内部，`%` 非常方便，因为命令体可以调用原始命令而不会递归调用自身。替换 `ls` 的完整示例参见[别名](./aliases.md#使用别名替换现有命令)。
+:::
 
 ## 参数
 
@@ -312,12 +390,16 @@ def "custom command" [] {
 def greet [name1 name2] {
   $"Hello, ($name1) and ($name2)!"
 }
+```
 
+```nu
 # 逗号
 def greet [name1, name2] {
   $"Hello, ($name1) and ($name2)!"
 }
+```
 
+```nu
 # 换行符
 def greet [
   name1
@@ -345,7 +427,7 @@ greet Wei
 # => Error: nu::parser::missing_positional
 # =>
 # =>   × Missing required positional argument.
-# =>    ╭─[entry #1:1:10]
+# =>    ╭─[repl_entry #3:1:10]
 # =>  1 │ greet Wei
 # =>    ╰────
 # =>   help: Usage: greet <name1> <name2> . Use `--help` for more information.
@@ -407,7 +489,7 @@ greet
 # => Hello, Nushell!
 
 greet world
-# => Hello, World!
+# => Hello, world!
 ```
 
 你还可以将默认值与[类型注解](#参数类型)结合起来：
@@ -436,21 +518,21 @@ def greet [name: string] {
 def greet [name: int] {
   $"hello ($name)"
 }
-
-greet World
 ```
 
-如果我们尝试运行上面的代码，Nushell 会告诉我们类型不匹配：
+如果我们用字符串调用它，Nushell 会告诉我们类型不匹配：
 
 ```nu
-Error: nu::parser::parse_mismatch
-
-  × Parse mismatch during operation.
-   ╭─[entry #1:1:7]
- 1 │ greet World
-   ·       ──┬──
-   ·         ╰── expected int
-   ╰────
+greet World
+# => Error: nu::parser::parse_mismatch
+# =>
+# =>   × Parse mismatch: expected int.
+# =>    ╭─[repl_entry #2:1:7]
+# =>  1 │ greet World
+# =>    ·       ──┬──
+# =>    ·         ╰── expected int
+# =>    ╰────
+# =>   help: Check the syntax around this position — a typo, missing delimiter, or wrong separator is common.
 ```
 
 ::: tip 酷！
@@ -463,9 +545,23 @@ Error: nu::parser::parse_mismatch
 大多数类型都可以用作类型注解。此外，还有一些“形状”可以使用。例如：
 
 - `number`: 接受 `int` 或 `float`
-- `path`: 一个字符串，其中 `~` 和 `.` 字符具有特殊含义，并将自动扩展为等效的完整路径。有关示例用法，请参阅语言参考指南中的[路径](/lang-guide/chapters/types/other_types/path.md)。
+- `path`：被视为文件系统路径的字符串。前导 `~` 会展开为主目录，而诸如 `...` 这样的“n 点”简写会展开为 `../..`。相对路径保持相对：`.` 仍然是 `.`，而 `foo/../bar` 变成 `bar`。有关示例用法，请参阅语言参考指南中的[路径](/lang-guide/chapters/types/other_types/path.md)。
 - `directory`: `path`（上文）的子集。使用制表符补全参数时，只会提供目录。扩展方式与 `path` 相同。
-- `error`: 可用，但目前没有已知的有效用法。有关更多信息，请参阅语言参考指南中的[错误](/lang-guide/chapters/types/other_types/error.md)。
+- `external_arg`：以[外部命令](./running_externals.md)解析参数的方式解析该参数。裸词会保持输入时的原样，因此 `0001` 或 `true` 不会被转换为 `int` 或 `bool`，而带引号的字符串、变量和子表达式则保留各自的值。这主要用于从另一个 shell 接收参数的[脚本](./scripts.md)的 `main` 命令。
+- `oneof<...>`：接受所列类型中的任意一个，例如 `oneof<int, string>`。字面量参数会取它匹配的第一个所列类型，而文本类类型（`string`、`path`、`directory`、`glob`、`cell-path`、`external_arg` 和 `any`）无论其位置如何都会最后尝试。因此对于 `oneof<string, list<string>>`，`[foo bar]` 是一个列表；而对于 `oneof<string, int>`，`5`（以及 `007`）是一个 `int`。如果你需要文本，请给参数加引号。
+- `error`：可用，但目前没有已知的有效用法。有关更多信息，请参阅语言参考指南中的[错误](/lang-guide/chapters/types/other_types/error.md)。
+
+例如，比较一个无类型参数和一个 `external_arg` 参数：
+
+```nu
+def as-any [value] { $value }
+def as-external [value: external_arg] { $value }
+
+as-any 0001
+# => 1
+as-external 0001
+# => 0001
+```
 
 以下[类型](./types_of_data.md)可用于参数注解：
 
@@ -487,6 +583,49 @@ Error: nu::parser::parse_mismatch
 - `string`
 - `table`
 
+:::
+
+### 类型别名
+
+当多个命令接收或返回相同的结构化数据时，每次都写出 `record<x: float, y: float>` 这样的类型会很长，而且容易写错。[`type`](/commands/docs/type.md) 关键字可以为类型命名：
+
+```nu
+type Point = record<x: float, y: float>
+type Polygon = list<Point>
+
+def first-x [poly: Polygon]: nothing -> float { $poly.0.x }
+
+first-x [{x: 1.0, y: 2.0} {x: 3.0, y: 4.0}]
+# => 1.0
+```
+
+类型别名只是其类型的简短写法。解析器会在使用名称的地方把名称替换为完整类型，因此 `help`、[`describe`](/commands/docs/describe.md) 和错误消息显示的都是完整类型：
+
+```nu
+type Point = record<x: float, y: float>
+def length-of [p: Point]: nothing -> float { ($p.x ** 2 + $p.y ** 2) | math sqrt }
+
+length-of {x: 1, y: 2}
+# => Error: nu::parser::type_mismatch
+# =>
+# =>   × Type mismatch.
+# =>    ╭─[repl_entry #3:1:11]
+# =>  1 │ length-of {x: 1, y: 2}
+# =>    ·           ──────┬─────
+# =>    ·                 ╰── expected record<x: float, y: float>, found record<x: int, y: int>
+# =>    ╰────
+```
+
+类型别名可以用在任何需要类型注解的地方：位置参数、标志、剩余参数、闭包参数、输入/输出类型、`let`、`mut` 和 `const` 的注解、其它类型内部（例如 `list<Point>`），以及另一个 `type` 的右侧。
+
+以下几点规则适用：
+
+- 与 [`alias`](./aliases.md) 和 `const` 一样，类型别名从定义处到所在块结束处可见。它必须定义在首次使用之前，且不能引用自身。
+- 自定义补全器属于参数，而不属于类型。应写在参数上，例如 `def paint [color: Color@[red green blue]] { ... }`。`type Color = string@[red green blue]` 是错误的。
+- 在模块中，类型别名默认是私有的，除非用 `export type` 定义。如何导出参见[模块](./modules/creating_modules.md#导出)，如何导入参见[使用模块](./modules/using_modules.md#导入类型别名)。
+
+::: warning
+`type` 是一个解析器关键字，因此自定义命令、别名或 extern 不能命名为 `type`。要运行名为 `type` 的外部命令，请以 `^type` 调用，或使用 Nushell 的 [`which`](/commands/docs/which.md) 查看某个命令名指向什么。
 :::
 
 ### 标志
@@ -570,7 +709,7 @@ def greet [
 ] {
     let greeting = $"Hello, ($name)!"
     if $caps {
-      $greeting | str upcase
+      $greeting | str uppercase
     } else {
       $greeting
     }
@@ -598,16 +737,36 @@ greet Hiroshi --caps=true
 
 ```nu
 greet Gabriel --caps true
+# => Error: nu::parser::extra_positional
+# =>
+# =>   × Extra positional argument.
+# =>    ╭─[repl_entry #1:1:22]
+# =>  1 │ greet Gabriel --caps true
+# =>    ·                      ──┬─
+# =>    ·                        ╰── extra positional argument
+# =>    ╰────
+# =>   help: Usage: greet {flags} <name>
 ```
 
-键入空格而不是等号会将 `true` 作为位置参数传递，这可能不是期望的结果！
+键入空格而不是等号会将 `true` 作为位置参数传递，这可能不是期望的结果！这里 `greet`
+只接受一个位置参数，因此 Nushell 会报错。
 
 为避免混淆，不允许在标志上注解布尔类型：
 
 ```nu
 def greet [
-    --caps: bool   # 不允许
-] { ... }
+    --caps: bool   # Not allowed
+] { $caps }
+# => Error: nu::parser::error
+# =>
+# =>   × Type annotations are not allowed for boolean switches.
+# =>    ╭─[repl_entry #1:2:13]
+# =>  1 │ def greet [
+# =>  2 │     --caps: bool   # Not allowed
+# =>    ·             ──┬─
+# =>    ·               ╰── Remove the `: bool` type annotation.
+# =>  3 │ ] { $caps }
+# =>    ╰────
 ```
 
 :::
@@ -621,11 +780,72 @@ def greet [
 ] {
     let greeting = $"Hello, ($name)!"
     if $all_caps {
-      $greeting | str upcase
+      $greeting | str uppercase
     } else {
       $greeting
     }
 }
+```
+
+#### 值为 `null` 的标志
+
+当标志被赋予 `null` 作为其值时，结果取决于该标志的类型：
+
+- 如果类型不接受 `nothing`（例如 `--age: int`），Nushell 会将其视为未传入该标志，因此使用其默认值（或 `null`）。
+- 如果类型接受 `nothing`（例如 `--age: any` 或 `--age: oneof<int, nothing>`），`null` 会被原样传递给命令。
+
+这让编写一个把可选标志转发给另一个命令的命令变得容易。在下面的示例中，我们将使用这个版本的 `greet`：
+
+```nu
+def greet [
+  name: string
+  --age: int = 18
+  --caps
+] {
+  let greeting = $"Hello, ($name)! You are ($age)."
+  if $caps { $greeting | str uppercase } else { $greeting }
+}
+```
+
+`party` 转发它自己的 `--age` 标志。当调用者省略它时，`$age` 为 `null`，因此 `greet` 回退到其默认值：
+
+```nu
+def party [name: string, --age: int] {
+  greet $name --age=$age
+}
+
+party Kai
+# => Hello, Kai! You are 18.
+
+party Kai --age 30
+# => Hello, Kai! You are 30.
+```
+
+#### 从记录传递标志
+
+你还可以使用[展开运算符](./operators.md#扩展运算符)（`...`）把记录作为命名标志传递。每个字段名就是一个标志名（不带 `--`），每个值成为该标志的值。对于开关，`true` 会设置该标志，而 `false` 或 `null` 则不设置：
+
+```nu
+let options = { age: 30, caps: true }
+greet Kai ...$options
+# => HELLO, KAI! YOU ARE 30.
+
+greet Kai ...{ age: null, caps: false }
+# => Hello, Kai! You are 18.
+```
+
+字段值会按标志定义进行类型检查，不匹配任何标志的字段是一个错误：
+
+```nu
+greet Kai ...{ colour: red }
+# => Error: nu::shell::error
+# =>
+# =>   × Unknown flag `colour` in spread record
+# =>    ╭─[repl_entry #1:1:14]
+# =>  1 │ greet Kai ...{ colour: red }
+# =>    ·              ───────┬───────
+# =>    ·                     ╰── `colour` is not a named argument of this command
+# =>    ╰────
 ```
 
 ### 剩余参数
@@ -645,7 +865,7 @@ multi-greet Elin Lars Erik
 # => Hello, Erik!
 ```
 
-我们可以用任意数量的参数调用上面 `greet` 命令的定义，包括完全没有参数。所有参数都将收集到 `$names` 列表中。
+我们可以用任意数量的参数调用上面 `multi-greet` 命令的定义，包括完全没有参数。所有参数都将收集到 `$names` 列表中。
 
 剩余参数可以和位置参数一起使用：
 
@@ -668,7 +888,7 @@ vip-greet Rahul Priya Arjun Anjali Vikram
 # => And a special welcome to our VIP today, Rahul!
 ```
 
-要将列表传递给剩余参数，你可以使用[展开运算符](/zh-CN/book/operators.md#扩展运算符) (`...`)。使用上面的 `vip-greet` 命令定义：
+要将列表传递给剩余参数，你可以使用[展开运算符](./operators.md#扩展运算符) (`...`)。使用上面的 `vip-greet` 命令定义：
 
 ```nu
 let vip = "Tanisha"
@@ -680,9 +900,30 @@ vip-greet $vip ...$guests
 # => And a special welcome to our VIP today, Tanisha!
 ```
 
+### 用 `--` 结束标志解析
+
+以 `-` 开头的参数通常会被解析为标志，因此把 `-x` 这样的值作为位置参数传递是一个错误。与 POSIX shell 一样，单独的 `--` 会结束标志解析。它之后的每个参数都被视为位置参数，即使以 `-` 开头，而 `--` 本身不会传递给命令：
+
+```nu
+def show-args [...args] { $args }
+
+show-args -- --verbose -x foo
+# => ╭───┬───────────╮
+# => │ 0 │ --verbose │
+# => │ 1 │ -x        │
+# => │ 2 │ foo       │
+# => ╰───┴───────────╯
+```
+
+这对内置命令同样有效，例如 `[a b] | str join -- -x` 返回 `a-xb`。用 `def --wrapped` 定义的命令（见下文）是个例外：它们会在剩余参数中收到 `--`，因此可以原样传递给它们所包装的外部命令。
+
 ### 带包装的外部命令的剩余参数
 
-使用 `def --wrapped` 定义的自定义命令会将任何未知的标志和参数收集到一个剩余参数中，然后可以通过列表展开将其传递给外部命令。这允许自定义命令“包装”和扩展外部命令，同时仍然接受其所有原始参数。例如，外部 `eza` 命令显示目录列表。默认情况下，它显示网格排列：
+使用 `def --wrapped` 定义的自定义命令会将任何未知的标志和参数收集到一个
+剩余参数中，然后可以通过列表展开将其传递给外部命令。这允许
+自定义命令“包装”和扩展外部命令，同时仍然接受其所有原始参数。
+例如，外部 `eza` 命令显示目录列表。
+默认情况下，它显示网格排列：
 
 ```nu
 eza commands
@@ -698,10 +939,13 @@ def --wrapped ezal [...rest] {
 ```
 
 :::note
-你也可以添加 `--icons`。我们在此示例中省略它，只是因为这些图标在本指南中显示效果不佳。
+你也可以添加 `--icons`。我们在此示例中省略它，
+只是因为这些图标在本指南中显示效果不佳。
 :::
 
-请注意，`--wrapped` 会将任何其他参数强制放入 `rest` 参数中，因此可以使用 `eza` 支持的任何参数调用该命令。这些附加参数将通过列表展开操作 `...$rest` 进行扩展。
+请注意，`--wrapped` 会将任何其他参数强制放入 `rest` 参数中，因此
+可以使用 `eza` 支持的任何参数调用该命令。这些附加参数将通过列表展开
+操作 `...$rest` 进行扩展。
 
 ```nu
 ezal commands
@@ -713,7 +957,8 @@ ezal -d commands
 # => drwxr-xr-x - ntd 14 Jun  2024 commands
 ```
 
-自定义命令可以检查某些参数并相应地更改其行为。例如，当使用 `-G` 选项强制使用网格时，我们可以省略向 `eza` 传递 `-l`：
+自定义命令可以检查某些参数并相应地更改其行为。例如，当使用 `-G` 选项
+强制使用网格时，我们可以省略向 `eza` 传递 `-l`：
 
 ```nu
 def --wrapped ezal [...rest] {
@@ -735,7 +980,7 @@ ezal -G commands
 例如，[`str stats`](/commands/docs/str_stats.md) 的签名如下所示：
 
 ```nu
-def "str stats" []: string -> record { }
+def "str stats" []: string -> record { {} }
 ```
 
 在这里，`string -> record` 定义了命令的*管道输入和输出*的允许类型：
@@ -743,13 +988,17 @@ def "str stats" []: string -> record { }
 - 它接受一个 `string` 作为管道输入
 - 它输出一个 `record`
 
+::: tip 注意
+带有输入输出签名的命令体必须产生声明的输出类型。空命令体（`{ }`）会输出它的输入，在这里是一个 `string`，因此 Nushell 会报错。这就是上面的占位命令体返回一个空记录（`{}`）的原因。
+:::
+
 如果有多个输入/输出类型，它们可以放在括号内并用逗号或换行符分隔，如 [`str join`](/commands/docs/str_join.md) 中所示：
 
 ```nu
 def "str join" [separator?: string]: [
   list -> string
   string -> string
-] { }
+] { "" }
 ```
 
 这表示 `str join` 可以接受 `list<any>` 或 `string` 作为管道输入。在任何一种情况下，它都将输出一个 `string`。
@@ -785,7 +1034,7 @@ scope commands | where name == <command_name>
   # => Error: nu::parser::output_type_mismatch
   # =>
   # =>   × Command output doesn't match int.
-  # =>    ╭─[entry #1:1:24]
+  # =>    ╭─[repl_entry #1:1:24]
   # =>  1 │ ╭─▶ def inc []: int -> int {
   # =>  2 │ │     $in + 1
   # =>  3 │ │     print "Did it!"
@@ -802,8 +1051,9 @@ scope commands | where name == <command_name>
   # => Error: nu::parser::input_type_mismatch
   # =>
   # =>   × Command does not support string input.
-  # =>    ╭─[entry #1:1:8]
-  # =>  1 │ "Hi" | inc
+  # =>    ╭─[repl_entry #1:2:8]
+  # =>  1 │ def inc []: int -> int { $in + 1 }
+  # =>  2 │ "Hi" | inc
   # =>    ·        ─┬─
   # =>    ·         ╰── command doesn't support string input
   # =>    ╰────
@@ -822,7 +1072,10 @@ Usage:
   > vip-greet <vip> ...(names)
 
 Flags:
-  -h, --help - Display the help message for this command
+  -h, --help: Display the help message for this command
+
+Command Type:
+  > custom
 
 Parameters:
   vip <string>
@@ -846,8 +1099,9 @@ Input/output types:
 # 问候客人和一位贵宾
 #
 # 用于生日、毕业派对、
-# 退休，以及任何其他庆祝
-# 特定人物事件的活动。
+# 退休，以及任何其他
+# 庆祝特定人物事件的
+# 活动。
 def vip-greet [
   vip: string        # 特别嘉宾
    ...names: string  # 其他客人
@@ -863,39 +1117,32 @@ def vip-greet [
 现在再次运行 `help vip-greet` 来看看有什么不同：
 
 ```text
-问候客人和一位贵宾
+Greet guests along with a VIP
 
-用于生日、毕业派对、
-退休，以及任何其他庆祝
-特定人物事件的活动。
-
-Category: default
-
-This command:
-- does not create a scope.
-- is not a built-in command.
-- is not a subcommand.
-- is not part of a plugin.
-- is a custom command.
-- is not a keyword.
+Use for birthdays, graduation parties,
+retirements, and any other event which
+celebrates an event # for a particular
+person.
 
 Usage:
-  > vip-greet <vip>
-
+  > vip-greet <vip> ...(names)
 
 Flags:
+  -h, --help: Display the help message for this command
 
-
-  -h, --help - Display the help message for this command
-
-Signatures:
-
-  <any> | vip-greet[ <string>] -> <any>
+Command Type:
+  > custom
 
 Parameters:
+  vip <string>: The special guest
+  ...names <string>: The other guests
 
-  vip: <string> The special guest
-  ...rest: <string> The other guests
+Input/output types:
+  ╭───┬───────┬────────╮
+  │ # │ input │ output │
+  ├───┼───────┼────────┤
+  │ 0 │ any   │ any    │
+  ╰───┴───────┴────────╯
 ```
 
 请注意，`def` 语句前紧接的注释行成为帮助系统中命令的描述。可以使用多行注释。第一行（在空注释行之前）成为帮助的 `description`。此信息在制表符补全命令时也会显示。
@@ -917,12 +1164,180 @@ scope commands
 参数后面的注释成为它们的描述。对于参数，只允许单行注释。
 
 ::: tip 注意
-用于参数文档目的的同一行上的 Nushell 注释需要在 `#` 磅号前有一个空格。
+用于参数文档目的的同一行上的 Nushell 注释需要在 ` #` 磅号前有一个空格。
 :::
+
+## 通过 `attr` 为自定义命令添加属性
+
+从 0.103.0 版本开始，Nushell 允许自定义命令的作者在命令定义之前用 `attr`
+内置命令的子命令来丰富自己的命令，这些子命令以 `@` 符号为前缀。
+对于来自 Python、Java 或 JavaScript 的人来说，
+这看起来类似于装饰器或注解，但用途略有不同。
+
+让我们改进 `vip-greet` 自定义命令的文档。`example` 属性会添加到
+`help {command}` 或 `{command} -h` 的输出中：
+
+```nu
+# 问候客人和一位贵宾
+#
+# 用于生日、毕业派对、
+# 退休，以及任何其他
+# 庆祝特定人物事件的
+# 活动。
+@example "Greet a VIP" {vip-greet "Bob"} --result "And a special welcome to our VIP today, Bob!"
+@example "Greet multiple people" {vip-greet "Bob" "Alice" "Charlie"} --result "Hello, Alice!
+Hello, Charlie!
+And a special welcome to our VIP today, Bob!"
+def vip-greet [
+  vip: string        # 特别嘉宾
+   ...names: string  # 其他客人
+] {
+  for $name in $names {
+    print $"Hello, ($name)!"
+  }
+
+  print $"And a special welcome to our VIP today, ($vip)!"
+}
+```
+
+现在，运行 `help vip-greet` 就能看到新增的示例。
+
+```text
+Greet guests along with a VIP
+
+Use for birthdays, graduation parties,
+retirements, and any other event which
+celebrates an event # for a particular
+person.
+
+Usage:
+  > vip-greet <vip> ...(names)
+
+Flags:
+  -h, --help: Display the help message for this command
+
+Command Type:
+  > custom
+
+Parameters:
+  vip <string>: The special guest
+  ...names <string>: The other guests
+
+Input/output types:
+  ╭───┬───────┬────────╮
+  │ # │ input │ output │
+  ├───┼───────┼────────┤
+  │ 0 │ any   │ any    │
+  ╰───┴───────┴────────╯
+
+Examples:
+  Greet a VIP
+  > vip-greet "Bob"
+  And a special welcome to our VIP today, Bob!
+
+  Greet multiple people
+  > vip-greet "Bob" "Alice" "Charlie"
+  Hello, Alice!
+  Hello, Charlie!
+  And a special welcome to our VIP today, Bob!
+```
+
+在维护用 nu 编写的脚本、模块、插件或库时，某些自定义命令
+可能最终会被更新的版本取代或被完全移除，
+但仍会临时保留一段时间，
+以便用户有时间从旧功能过渡过来。
+
+`deprecated` 属性会在运行该自定义命令时
+向用户发出警告。
+
+```nu
+@deprecated
+def greet [
+  name: string
+  --all-caps
+] {
+    let greeting = $"Hello, ($name)!"
+    if $all_caps {
+      $greeting | str uppercase
+    } else {
+      $greeting
+    }
+}
+```
+
+运行 `greet {name}` 就能看到该警告。
+
+```nu
+greet "bob"
+# => Warning: nu::parser::deprecated
+# =>
+# =>   ⚠ Command deprecated.
+# =>    ╭─[repl_entry #2:1:1]
+# =>  1 │ greet "bob"
+# =>    · ─────┬─────
+# =>    ·      ╰── greet is deprecated and will be removed in a future release.
+# =>    ╰────
+# =>
+# => Hello, bob!
+```
+
+默认情况下，警告只在该命令于会话中首次使用时显示。
+添加 `--report every` 可在每次调用时都发出警告。
+
+如果有替代命令或额外的上下文可以帮助用户更新其工作流，
+可以在 `@deprecated` 之后添加文本。
+
+`category` 属性会在使用 `scope commands`
+或 `help` 命令时赋予指定的标签。
+
+```nu
+@deprecated "Use vip-greet as a replacement." --report every
+@category "deprecated"
+def greet [
+  name: string
+  --all-caps
+] {
+    let greeting = $"Hello, ($name)!"
+    if $all_caps {
+      $greeting | str uppercase
+    } else {
+      $greeting
+    }
+}
+```
+
+```nu
+greet bob
+# => Warning: nu::parser::deprecated
+# =>
+# =>   ⚠ Command deprecated.
+# =>    ╭─[repl_entry #2:1:1]
+# =>  1 │ greet bob
+# =>    · ────┬────
+# =>    ·     ╰── greet is deprecated and will be removed in a future release.
+# =>    ╰────
+# =>   help: Use vip-greet as a replacement.
+# =>
+# => Hello, bob!
+
+help commands | where category == deprecated | select name category command_type
+# => ╭───┬───────┬────────────┬──────────────╮
+# => │ # │ name  │  category  │ command_type │
+# => ├───┼───────┼────────────┼──────────────┤
+# => │ 0 │ greet │ deprecated │ custom       │
+# => ╰───┴───────┴────────────┴──────────────╯
+```
+
+属性也适用于 [`extern`](./externs.md) 声明。其中 [`@structured`](/commands/docs/attr_structured.md)
+仅适用于 `extern`。它让外部命令返回数据而不是文本。
+示例参见[结构化输出](./externs.md#结构化输出)。
+
+要查看 Nushell 中可用的其它属性，请查阅[命令参考](/commands/docs/attr.md)，
+或在 Nushell REPL 中运行 `help attr`。
 
 ## 在自定义命令中更改环境
 
-通常，环境变量定义和更改在块内是*作用域*的（[./environment.html#scoping](./environment.md#作用域)）。这意味着当它们在块结束时超出作用域时，对这些变量的更改将丢失，包括自定义命令的块。
+通常，环境变量定义和更改在块内是*作用域*的（[作用域](./environment.md#作用域)）。这意味着当它们在块结束时超出作用域时，对这些变量的更改将丢失，包括自定义命令的块。
 
 ```nu
 def foo [] {
@@ -953,14 +1368,14 @@ $env.FOO
 同样，使用 `cd` 命令更改目录会导致 `$env.PWD` 环境变量的更改。这意味着当自定义命令结束时，目录更改（`$env.PWD` 变量）也将被重置。如上所述，解决方案是使用 `def --env` 或 `export def --env`。
 
 ```nu
-def --env go-home [] {
-  cd ~
+def --env go-root [] {
+  cd /
 }
 
-cd /
-go-home
+cd ~
+go-root
 pwd
-# => Your home directory
+# => /
 ```
 
 ## 持久化

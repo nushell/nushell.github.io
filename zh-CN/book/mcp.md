@@ -89,9 +89,9 @@ nu --mcp --mcp-transport http --mcp-host 0.0.0.0 --mcp-allowed-hosts nu.example.
 
 任何携带其他 `Host` 标头的请求都将被拒绝并返回 `403 Forbidden`。基于浏览器的客户端还会发送 `Origin` 标头。除非使用 `--mcp-allowed-origins` 列出允许的源（例如 `--mcp-allowed-origins https://app.example.com`），否则不会检查该标头。
 
-## 命令行选项
+## 命令行标志
 
-| 选项                                 | 说明                                                            |
+| 标志                                 | 说明                                                            |
 | ------------------------------------ | --------------------------------------------------------------- |
 | `--mcp`                              | 启动 MCP 服务器。                                               |
 | `--mcp-transport <stdio\|http>`      | 要使用的传输方式。默认值：`stdio`。                             |
