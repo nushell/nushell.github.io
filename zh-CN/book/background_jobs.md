@@ -4,7 +4,8 @@ Nushell 目前对基于线程的后台任务有实验性支持。
 
 ## 生成任务
 
-任务可以使用 [`job spawn`](/commands/docs/job_spawn.md) 生成，它接收一个闭包并在后台线程中开始执行，返回一个生成的任务的唯一整数 ID：
+任务可以使用 [`job spawn`](/commands/docs/job_spawn.md) 生成，它接收一个闭包并在后台线程中开始执行，返回
+一个生成的任务的唯一整数 ID：
 
 ```nu
 'i am' | save status.txt
@@ -31,11 +32,11 @@ open status.txt
 let id = job spawn { sleep 1day }
 
 job list
-# => ┏━━━┳━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━┓
-# => ┃ # ┃ id ┃  type  ┃      pids      ┃
-# => ┣━━━╋━━━━╋━━━━━━━━╋━━━━━━━━━━━━━━━━┫
-# => ┃ 0 ┃  1 ┃ thread ┃ [list 0 items] ┃
-# => ┗━━━┻━━━━┻━━━━━━━━┻━━━━━━━━━━━━━━━━┛
+# => ╭───┬────┬────────┬────────────────╮
+# => │ # │ id │  type  │      pids      │
+# => ├───┼────┼────────┼────────────────┤
+# => │ 0 │  2 │ thread │ [list 0 items] │
+# => ╰───┴────┴────────┴────────────────╯
 
 job kill $id
 
@@ -68,16 +69,20 @@ job kill $id
 在 Unix 目标（如 Linux 和 macOS）上，Nushell 还支持使用 <kbd>Ctrl</kbd>+<kbd>Z</kbd> 挂起外部命令。当一个正在运行的进程被挂起时，它会变成一个“冻结”的后台任务：
 
 ```nu
-long_running_process # 这开始运行，然后按下 Ctrl+Z
-# => Job 1 is frozen
+^sleep 100 # 这条命令开始运行，然后按下 Ctrl+Z
+# => Job 4 is frozen
 
 job list
-# => ┏━━━┳━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━┓
-# => ┃ # ┃ id ┃  type  ┃      pids      ┃
-# => ┣━━━╋━━━━╋━━━━━━━━╋━━━━━━━━━━━━━━━━┫
-# => ┃ 0 ┃  1 ┃ frozen ┃ [list 1 items] ┃
-# => ┗━━━┻━━━━┻━━━━━━━━┻━━━━━━━━━━━━━━━━┛
+# => ╭───┬────┬────────┬──────────────┬─────────────╮
+# => │ # │ id │  type  │     pids     │ description │
+# => ├───┼────┼────────┼──────────────┼─────────────┤
+# => │ 0 │  4 │ frozen │ ╭───┬──────╮ │ sleep       │
+# => │   │    │        │ │ 0 │ 6337 │ │             │
+# => │   │    │        │ ╰───┴──────╯ │             │
+# => ╰───┴────┴────────┴──────────────┴─────────────╯
 ```
+
+冻结的任务会自动以被挂起的程序的名称作为描述。
 
 可以使用 [`job unfreeze`](/commands/docs/job_unfreeze.md) 命令将冻结的任务带回前台：
 
@@ -99,12 +104,12 @@ alias fg = job unfreeze
 
 ```nu
 vim
-# => Job 1 is frozen
+# => Job 5 is frozen
 
-long_running_process
-# => Job 2 is frozen
+^sleep 100
+# => Job 6 is frozen
 
-job unfreeze 1
+job unfreeze 5
 # 我们回到了 vim
 ```
 
@@ -137,16 +142,40 @@ job recv
 # => Hello from a background job
 ```
 
+消息可以用 `job send --tag` 带上一个数字标签。`job recv --tag` 便只接收带有该标签的消息，其余消息留在信箱里；`job recv --timeout` 则会在给定的时长之后停止等待：
+
+```nu
+'low priority' | job send 0 --tag 2
+'urgent' | job send 0 --tag 1
+
+job recv --tag 1
+# => urgent
+job recv --timeout 0sec
+# => low priority
+```
+
+要丢弃消息而不读取它们，可以使用 [`job flush`](/commands/docs/job_flush.md)，它会清空当前任务的整个信箱；配合 `--tag` 使用时则只清除带有指定标签的消息。
+
 ## 退出行为
 
 与许多其他 shell 不同，Nushell 任务**不是**独立的进程，
 而是作为后台线程实现的。
 
-一个重要的副作用是，一旦 shell 进程退出，所有后台任务都将终止。
-因此，Nushell 没有类似 UNIX 的 `disown` 命令来防止任务在 shell 退出后终止。
+一个重要的副作用是，一旦 shell 进程退出，所有后台任务
+都将终止。因此，Nushell 没有类似 UNIX 的 `disown` 命令来防止
+任务在 shell 退出后终止。
 为了解决这个问题，未来计划实现 `job dispatch`，
 用于生成独立的后台进程（有关进展，请参阅 [#15201](https://github.com/nushell/nushell/issues/15193?issue=nushell%7Cnushell%7C15201)）。
 
 此外，如果用户正在运行交互式 Nushell 会话并在有后台任务运行时运行
 [`exit`](/commands/docs/exit.md)，
 shell 会在提示用户确认 `exit` 之前警告他们。
+
+在 REPL 中按下 <kbd>Ctrl</kbd>+<kbd>C</kbd> 只会中断在前台运行的命令。
+后台任务和冻结的任务会继续运行。
+
+当 Nushell 运行一个脚本或用 `nu -c` 给出的命令时，它会在退出前停止任何仍在运行的任务，
+以及它们的子进程。当脚本被 <kbd>Ctrl</kbd>+<kbd>C</kbd> 中断且
+该中断被捕获时，同样会发生这种情况。
+
+在任务的闭包内调用 `exit` 会结束该任务，而不是结束 shell。

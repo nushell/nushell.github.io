@@ -100,7 +100,7 @@ $items | sort
 # => ╰───┴─────┴──────────┴───────╯
 ```
 
-在这个例子中，所有项目的`id`列都相等。然后，数量为`5`的两个项目排在数量为`10`的项目之前。最后，价格为`1`的项目排在价格为`8`的项目之前。
+在这个例子中，所有项目的`id`列都相等。然后，数量为`5`的两个项目排在数量为`10`的项目之前。最后，价格为`1`的`item`排在价格为`8`的项目之前。
 
 ## 结构化数据排序
 
@@ -112,28 +112,28 @@ $items | sort
 
 ```nu
 ls | sort-by size
-# => ╭───┬─────────────────────┬──────┬──────────┬────────────────╮
-# => │ # │        name         │ type │   size   │    modified    │
-# => ├───┼─────────────────────┼──────┼──────────┼────────────────┤
-# => │ 0 │ my-secret-plans.txt │ file │    100 B │ 10 minutes ago │
-# => │ 1 │ shopping_list.txt   │ file │    100 B │ 2 months ago   │
-# => │ 2 │ myscript.nu         │ file │  1.1 KiB │ 2 weeks ago    │
-# => │ 3 │ bigfile.img         │ file │ 10.0 MiB │ 3 weeks ago    │
-# => ╰───┴─────────────────────┴──────┴──────────┴────────────────╯
+# => ╭───┬─────────────────────┬──────┬─────────┬──────────────╮
+# => │ # │        name         │ type │  size   │   modified   │
+# => ├───┼─────────────────────┼──────┼─────────┼──────────────┤
+# => │ 0 │ my-secret-plans.txt │ file │   100 B │ 2 days ago   │
+# => │ 1 │ shopping_list.txt   │ file │   100 B │ 2 months ago │
+# => │ 2 │ myscript.nu         │ file │  1.1 kB │ 2 weeks ago  │
+# => │ 3 │ bigfile.img         │ file │ 10.0 MB │ 3 weeks ago  │
+# => ╰───┴─────────────────────┴──────┴─────────┴──────────────╯
 ```
 
 我们还可以向`sort-by`提供多个单元格路径，这将按每个单元格路径的优先级顺序排序。你可以将提供多个单元格路径视为对具有相等值的元素的"决胜局"。让我们先按大小排序，然后按修改时间排序：
 
 ```nu
 ls | sort-by size modified
-# => ╭───┬─────────────────────┬──────┬──────────┬────────────────╮
-# => │ # │        name         │ type │   size   │    modified    │
-# => ├───┼─────────────────────┼──────┼──────────┼────────────────┤
-# => │ 0 │ shopping_list.txt   │ file │    100 B │ 2 months ago   │
-# => │ 1 │ my-secret-plans.txt │ file │    100 B │ 10 minutes ago │
-# => │ 2 │ myscript.nu         │ file │  1.1 KiB │ 2 weeks ago    │
-# => │ 3 │ bigfile.img         │ file │ 10.0 MiB │ 3 weeks ago    │
-# => ╰───┴─────────────────────┴──────┴──────────┴────────────────╯
+# => ╭───┬─────────────────────┬──────┬─────────┬──────────────╮
+# => │ # │        name         │ type │  size   │   modified   │
+# => ├───┼─────────────────────┼──────┼─────────┼──────────────┤
+# => │ 0 │ shopping_list.txt   │ file │   100 B │ 2 months ago │
+# => │ 1 │ my-secret-plans.txt │ file │   100 B │ 2 days ago   │
+# => │ 2 │ myscript.nu         │ file │  1.1 kB │ 2 weeks ago  │
+# => │ 3 │ bigfile.img         │ file │ 10.0 MB │ 3 weeks ago  │
+# => ╰───┴─────────────────────┴──────┴─────────┴──────────────╯
 ```
 
 这次，`shopping_list.txt`排在`my-secret-plans.txt`之前，因为它有更早的修改时间，但两个较大的文件仍然排在`.txt`文件之后。
@@ -167,7 +167,7 @@ $cities | sort-by info.established
 
 ### 按键闭包排序
 
-有时，以比"递增"或"递减"更复杂的方式排序数据很有用。你可以提供一个[闭包](types_of_data.md#闭包)，它将每个值转换为[排序键](https://en.wikipedia.org/wiki/Collation#Sort_keys)，而**不改变底层数据**。这是一个按键闭包的例子，我们想按平均成绩排序作业列表：
+有时，以比"递增"或"递减"更复杂的方式排序数据很有用。除了把单元格路径传给 `sort-by`，你还可以提供一个[闭包](types_of_data.md#闭包)，它将每个值转换为[排序键](https://en.wikipedia.org/wiki/Collation#Sort_keys)，而**不改变底层数据**。这是一个按键闭包的例子，我们想按平均成绩排序作业列表：
 
 ```nu
 let assignments = [
@@ -177,14 +177,38 @@ let assignments = [
     {name: 'Project', grades: [92 81 82 84 83] }
 ]
 $assignments | sort-by { get grades | math avg }
-# => ╭───┬────────────┬───────────────────────╮
-# => │ # │    name    │        grades         │
-# => ├───┼────────────┼───────────────────────┤
-# => │ 0 │ Exam 1     │ [78, 88, 78, 53, 90]  │
-# => │ 1 │ Project    │ [92, 81, 82, 84, 83]  │
-# => │ 2 │ Homework 2 │ [91, 100, 60, 82, 91] │
-# => │ 3 │ Homework 1 │ [97, 89, 86, 92, 89]  │
-# => ╰───┴────────────┴───────────────────────╯
+# => ╭───┬────────────┬─────────────╮
+# => │ # │    name    │   grades    │
+# => ├───┼────────────┼─────────────┤
+# => │ 0 │ Exam 1     │ ╭───┬────╮  │
+# => │   │            │ │ 0 │ 78 │  │
+# => │   │            │ │ 1 │ 88 │  │
+# => │   │            │ │ 2 │ 78 │  │
+# => │   │            │ │ 3 │ 53 │  │
+# => │   │            │ │ 4 │ 90 │  │
+# => │   │            │ ╰───┴────╯  │
+# => │ 1 │ Project    │ ╭───┬────╮  │
+# => │   │            │ │ 0 │ 92 │  │
+# => │   │            │ │ 1 │ 81 │  │
+# => │   │            │ │ 2 │ 82 │  │
+# => │   │            │ │ 3 │ 84 │  │
+# => │   │            │ │ 4 │ 83 │  │
+# => │   │            │ ╰───┴────╯  │
+# => │ 2 │ Homework 2 │ ╭───┬─────╮ │
+# => │   │            │ │ 0 │  91 │ │
+# => │   │            │ │ 1 │ 100 │ │
+# => │   │            │ │ 2 │  60 │ │
+# => │   │            │ │ 3 │  82 │ │
+# => │   │            │ │ 4 │  91 │ │
+# => │   │            │ ╰───┴─────╯ │
+# => │ 3 │ Homework 1 │ ╭───┬────╮  │
+# => │   │            │ │ 0 │ 97 │  │
+# => │   │            │ │ 1 │ 89 │  │
+# => │   │            │ │ 2 │ 86 │  │
+# => │   │            │ │ 3 │ 92 │  │
+# => │   │            │ │ 4 │ 89 │  │
+# => │   │            │ ╰───┴────╯  │
+# => ╰───┴────────────┴─────────────╯
 ```
 
 值被传递到键闭包的管道输入中，但你也可以将其用作参数：
@@ -209,14 +233,14 @@ let weight = {alpha: 10, beta: 5, gamma: 3}
 
 ```nu
 ls | sort-by -c {|a, b| $a.size < $b.size }
-# => ╭───┬─────────────────────┬──────┬──────────┬────────────────╮
-# => │ # │        name         │ type │   size   │    modified    │
-# => ├───┼─────────────────────┼──────┼──────────┼────────────────┤
-# => │ 0 │ my-secret-plans.txt │ file │    100 B │ 10 minutes ago │
-# => │ 1 │ shopping_list.txt   │ file │    100 B │ 2 months ago   │
-# => │ 2 │ myscript.nu         │ file │  1.1 KiB │ 2 weeks ago    │
-# => │ 3 │ bigfile.img         │ file │ 10.0 MiB │ 3 weeks ago    │
-# => ╰───┴─────────────────────┴──────┴──────────┴────────────────╯
+# => ╭───┬─────────────────────┬──────┬─────────┬──────────────╮
+# => │ # │        name         │ type │  size   │   modified   │
+# => ├───┼─────────────────────┼──────┼─────────┼──────────────┤
+# => │ 0 │ my-secret-plans.txt │ file │   100 B │ 2 days ago   │
+# => │ 1 │ shopping_list.txt   │ file │   100 B │ 2 months ago │
+# => │ 2 │ myscript.nu         │ file │  1.1 kB │ 2 weeks ago  │
+# => │ 3 │ bigfile.img         │ file │ 10.0 MB │ 3 weeks ago  │
+# => ╰───┴─────────────────────┴──────┴─────────┴──────────────╯
 ```
 
 ::: tip
@@ -245,6 +269,14 @@ let my_sort = {|a, b|
     }
 }
 $queue | sort-by -c $my_sort
+# => ╭───┬──────┬───────────┬──────────╮
+# => │ # │ task │ work_time │ priority │
+# => ├───┼──────┼───────────┼──────────┤
+# => │ 0 │  583 │         0 │        5 │
+# => │ 1 │  139 │         0 │        1 │
+# => │ 2 │   52 │       355 │        8 │
+# => │ 3 │  948 │        72 │        2 │
+# => ╰───┴──────┴───────────┴──────────╯
 ```
 
 ## 特殊排序
@@ -354,14 +386,14 @@ $compatible | sort-by -c {|a, b| $a < $b | default ($a != null) }
 # => │ 4 │      │
 # => ╰───┴──────╯
 $incompatible | sort-by -c {|a, b| $a < $b | default ($a != null) }
-# => Error: nu::shell::type_mismatch
+# => Error: nu::shell::operator_incompatible_types
 # =>
-# =>   × Type mismatch during operation.
-# =>    ╭─[entry #26:1:36]
+# =>   × Types 'int' and 'string' are not compatible for the '<' operator.
+# =>    ╭─[repl_entry #26:1:36]
 # =>  1 │ $incompatible | sort-by -c {|a, b| $a < $b | default ($a != null) }
 # =>    ·                                    ─┬ ┬ ─┬
 # =>    ·                                     │ │  ╰── string
-# =>    ·                                     │ ╰── type mismatch for operator
+# =>    ·                                     │ ╰── does not operate between 'int' and 'string'
 # =>    ·                                     ╰── int
 # =>    ╰────
 ```
@@ -378,12 +410,13 @@ let strict = {|a, b|
     }
 }
 $baddata | sort-by -c $strict
-# => Error:   × Attempt to sort null
-# =>    ╭─[entry #3:4:21]
-# =>  3 │   match [$a, $b] {
-# =>  4 │       [null, _] => (error make {msg: "Attempt to sort null"}),
-# =>    ·                     ─────┬────
-# =>    ·                          ╰── originates from here
-# =>  5 │       [_, null] => (error make {msg: "Attempt to sort null"}),
+# => Error: nu::shell::error
+# =>
+# =>   × Attempt to sort null
+# =>    ╭─[repl_entry #3:4:34]
+# =>  3 │     match [$a, $b] {
+# =>  4 │         [null, _] => (error make {msg: "Attempt to sort null"}),
+# =>    ·                                  ─────────────────────────────
+# =>  5 │         [_, null] => (error make {msg: "Attempt to sort null"}),
 # =>    ╰────
 ```

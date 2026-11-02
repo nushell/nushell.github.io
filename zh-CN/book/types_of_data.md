@@ -13,27 +13,30 @@ Nushell 继承了这种方法，并扩展支持除字符串外的其他数据类
 # => int
 ```
 
+下面每种类型都列出了它的*类型标注*：即在 `:` 之后书写的、用于声明参数或变量类型的名字，例如 `let x: int = 42`。若想给 `record<x: float, y: float>` 这样很长的标注起一个简短名字，可以用 `type` 定义[类型别名](./custom_commands.md#类型别名)。
+
 ## 数据类型概览
 
-| 类型                      | 示例                                                              |
-| ------------------------- | ----------------------------------------------------------------- |
-| [整数](#整数)             | `-65535`                                                          |
-| [浮点数](#浮点数)         | `9.9999`, `Infinity`                                              |
-| [字符串](#字符串)         | `"第18洞"`, `'第18洞'`, \`第18洞\`, 第18洞, r#'第18洞'#           |
-| [布尔值](#布尔值)         | `true`                                                            |
-| [日期](#日期)             | `2000-01-01`                                                      |
-| [时间间隔](#时间间隔)     | `2min + 12sec`                                                    |
-| [文件大小](#文件大小)     | `64mb`                                                            |
-| [区间](#区间)             | `0..4`, `0..<5`, `0..`, `..4`                                     |
-| [二进制数据](#二进制数据) | `0x[FE FF]`                                                       |
-| [列表](#列表)             | `[0 1 '二' 3]`                                                    |
-| [记录](#记录)             | `{name:"Nushell", lang: "Rust"}`                                  |
-| [表格](#表格)             | `[{x:12, y:15}, {x:8, y:9}]`, `[[x, y]; [12, 15], [8, 9]]`        |
-| [闭包](#闭包)             | `{\|e\| $e + 1 \| into string }`, `{ $in.name.0 \| path exists }` |
-| [单元格路径](#单元格路径) | `$.name.0`                                                        |
-| [代码块](#代码块)         | `if true { print "你好!" }`, `loop { print "按ctrl-c退出" }`      |
-| [空值](#空值)             | `null`                                                            |
-| [任意类型](#任意类型)     | `let p: any = 5`                                                  |
+| 类型                      | 示例                                                                  |
+| ------------------------- | --------------------------------------------------------------------- |
+| [整数](#整数)             | `-65535`                                                              |
+| [浮点数](#浮点数)         | `9.9999`, `Infinity`                                                  |
+| [字符串](#字符串)         | <code>"hole 18", 'hole 18', \`hole 18\`, hole18, r#'hole18'#</code>   |
+| [布尔值](#布尔值)         | `true`                                                                |
+| [日期](#日期)             | `2000-01-01`                                                          |
+| [时间间隔](#时间间隔)     | `2min + 12sec`                                                        |
+| [文件大小](#文件大小)     | `64mb`                                                                |
+| [区间](#区间)             | `0..4`, `0..<5`, `0..`, `..4`                                         |
+| [二进制数据](#二进制数据) | `0x[FE FF]`                                                           |
+| [列表](#列表)             | `[0 1 'two' 3]`                                                       |
+| [记录](#记录)             | `{name:"Nushell", lang: "Rust"}`                                      |
+| [表格](#表格)             | `[{x:12, y:15}, {x:8, y:9}]`, `[[x, y]; [12, 15], [8, 9]]`            |
+| [闭包](#闭包)             | `{\|e\| $e + 1 \| into string }`, `{ $in.name.0 \| path exists }`     |
+| [单元格路径](#单元格路径) | `$.name.0`                                                            |
+| [代码块](#代码块)         | `if true { print "hello!" }`, `loop { print "press ctrl-c to exit" }` |
+| [空值](#空值)             | `null`                                                                |
+| [任意类型](#任意类型)     | `let p: any = 5`                                                      |
+| [语义化版本](#语义化版本) | `'1.2.3' \| into semver`                                              |
 
 ## 基础数据类型
 
@@ -49,11 +52,21 @@ Nushell 继承了这种方法，并扩展支持除字符串外的其他数据类
 简单示例:
 
 ```nu
-10 / 2
+10 // 2
 # => 5
-5 | describe
+10 // 2 | describe
 # => int
 ```
+
+::: tip
+`/` 运算符总是返回浮点数，即使两个操作数都是整数且结果是整数。使用 `//`（向下取整除法）可以保持整数结果。
+
+```nu
+10 / 2
+# => 5.0
+```
+
+:::
 
 ### 浮点数
 
@@ -76,7 +89,7 @@ Nushell 继承了这种方法，并扩展支持除字符串外的其他数据类
 
 ```nu
 10.2 * 5.1
-# => 52.01999999999999
+# => 52.019999999999996
 ```
 
 :::
@@ -161,9 +174,9 @@ date now | format date '%s'
 
 ```nu
 3.14day
-# => 3day 3hr 21min
+# => 3day 3hr 21min 36sec
 30day / 1sec  # How many seconds in 30 days?
-# => 2592000
+# => 2592000.0
 ```
 
 ### 文件大小
@@ -174,16 +187,20 @@ date now | format date '%s'
 | **类型标注:**   | `filesize`                                                                    |
 | **字面量语法:** | 参见[语言参考 - 文件大小](/lang-guide/chapters/types/basic_types/filesize.md) |
 
-Nushell支持分数文件大小和计算:
+Nushell 还有一种专门表示文件大小的类型。
+
+与时间间隔一样，Nushell 支持小数文件大小和计算：
 
 ```nu
 0.5kB
 # => 500 B
 1GiB / 1B
-# => 1073741824
+# => 1073741824.0
 (1GiB / 1B) == 2 ** 30
 # => true
 ```
+
+完整的单位列表和更多细节见[语言参考](/lang-guide/chapters/types/basic_types/filesize.md)。
 
 ### 区间
 
@@ -221,7 +238,7 @@ Nushell支持分数文件大小和计算:
 | **字面语法:** | 行号(整数)和列名(字符串)的点分隔列表。例如`name.4.5`                        |
 |               | 需要时可以使用前导`$.`消除歧义，例如将单元格路径赋值给变量时                |
 | **参见:**     | [语言参考 - 单元格路径](/lang-guide/chapters/types/basic_types/cellpath.md) |
-|               | [导航和访问结构化数据](/zh-CN/book/navigating_structured_data.md)章节       |
+|               | [导航和访问结构化数据](./navigating_structured_data.md)章节                 |
 
 简单示例:
 
@@ -256,6 +273,8 @@ $original_list | where $compare_closure
 # => │ 3 │ 16 │
 # => ╰───┴────╯
 ```
+
+闭包是一种实用的方式，用来表示可通过[过滤器](../lang-guide/chapters/filters/00_filters_overview.md)对每行数据执行的代码。
 
 ### 二进制数据
 
@@ -292,17 +311,17 @@ Nushell包含一组可以包含上述基本类型的结构化数据类型。例�
 | **类型标注:**   | `list`                                                                |
 | **字面量语法:** | 参见[语言指南 - 列表](/lang-guide/chapters/types/basic_types/list.md) |
 | **参见:**       | [使用列表](./working_with_lists.md)                                   |
-|                 | [导航和访问结构化数据](/zh-CN/book/navigating_structured_data.md)     |
+|                 | [导航和访问结构化数据](./navigating_structured_data.md)               |
 
 简单示例:
 
 ```nu
-[张三 李四 王五]
-# => ╭───┬──────╮
-# => │ 0 │ 张三 │
-# => │ 1 │ 李四 │
-# => │ 2 │ 王五 │
-# => ╰───┴──────╯
+[Sam Fred George]
+# => ╭───┬────────╮
+# => │ 0 │ Sam    │
+# => │ 1 │ Fred   │
+# => │ 2 │ George │
+# => ╰───┴────────╯
 ```
 
 ### 记录
@@ -313,23 +332,23 @@ Nushell包含一组可以包含上述基本类型的结构化数据类型。例�
 | **类型标注:**   | `record`                                                                |
 | **字面量语法:** | 参见[语言指南 - 记录](/lang-guide/chapters/types/basic_types/record.md) |
 | **参见:**       | [使用记录](./working_with_records.md)                                   |
-|                 | [导航和访问结构化数据](/zh-CN/book/navigating_structured_data.md)       |
+|                 | [导航和访问结构化数据](./navigating_structured_data.md)                 |
 
 简单示例:
 
 ```nu
 let my_record = {
-  name: "张三"
+  name: "Kylian"
   rank: 99
 }
 $my_record
-# => ╭───────┬────────────╮
-# => │ name  │ 张三       │
-# => │ rank  │ 99         │
-# => ╰───────┴────────────╯
+# => ╭──────┬────────╮
+# => │ name │ Kylian │
+# => │ rank │ 99     │
+# => ╰──────┴────────╯
 
 $my_record | get name
-# => 张三
+# => Kylian
 ```
 
 ### 表格
@@ -339,7 +358,7 @@ $my_record | get name
 | **描述:**     | 具有行和列的二维容器，每个单元格可以保存任何基本或结构化数据类型   |
 | **类型标注:** | `table`                                                            |
 | **参见:**     | [使用表格](./working_with_tables.md)                               |
-|               | [导航和访问结构化数据](/zh-CN/book/navigating_structured_data.md)  |
+|               | [导航和访问结构化数据](./navigating_structured_data.md)            |
 |               | [语言指南 - 表格](/lang-guide/chapters/types/basic_types/table.md) |
 
 表格是Nushell中的核心数据结构。运行命令时，你会发现许多命令返回表格作为输出。表格有行和列。
@@ -402,8 +421,7 @@ if true { print "It's true" }
 let simple_record = { a: 5, b: 10 }
 $simple_record.a?
 # => 5
-$simple_record.c?
-# => Nothing is output
+$simple_record.c?  # 不输出任何内容
 $simple_record.c? | describe
 # => nothing
 $simple_record.c? == null

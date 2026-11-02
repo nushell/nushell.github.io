@@ -96,7 +96,7 @@ $my_record | update age { $in + 1 }
   # =>   ╰───────┴───────╯
   ```
 
-- 使用[展开运算符](operators.md#扩展运算符)（`...`）在新记录中展开第一个记录：
+- 使用[展开运算符](operators.md#展开运算符)（`...`）在新记录中展开第一个记录：
 
   ```nu
   let first_record = { name: "Sam", rank: 10 }

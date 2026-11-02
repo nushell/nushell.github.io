@@ -23,7 +23,7 @@ Nu 可以通过插件进行扩展。插件的行为与 Nu 的内置命令很相�
 - “核心插件”是官方维护的，通常与 Nushell 一起安装，在与 Nushell 可执行文件相同的目录中。
 - 第三方插件也可从许多来源获得。
 
-`$NU_LIB_DIRS` 常量或 `$env.NU_LIB_DIRS` 环境变量可用于设置插件的搜索路径。
+`$NU_PLUGIN_DIRS` 常量或 `$env.NU_PLUGIN_DIRS` 环境变量可用于设置插件的搜索路径。
 
 ### 核心插件快速入门
 
@@ -31,12 +31,22 @@ Nu 可以通过插件进行扩展。插件的行为与 Nu 的内置命令很相�
 
 1. 大多数包管理器会自动随 Nushell 安装核心插件。然而，一个显著的例外是 `cargo`。如果你使用 `cargo` 安装了 Nushell，请参阅下面的[安装核心插件](#核心插件)。
 
-2. (推荐) 将插件搜索路径设置为包括 Nushell 及其插件的安装目录。假设核心插件与 Nushell 二进制文件安装在同一目录中，可以将以下内容添加到你的启动配置中：
+2. 确保插件搜索路径包含插件的安装目录。默认情况下，它包含你的 Nushell 配置目录下的 `plugins` 目录以及 Nushell 二进制文件本身所在的目录，因此与 Nushell 一起安装的核心插件会被自动找到：
+
+   ```nu
+   $NU_PLUGIN_DIRS
+   # => ╭───┬────────────────────────────────────╮
+   # => │ 0 │ /home/user/.config/nushell/plugins │
+   # => │ 1 │ /home/user/.cargo/bin              │
+   # => ╰───┴────────────────────────────────────╯
+   ```
+
+   如果你的插件安装在别处，在你的启动配置中添加该目录：
 
    ```nu
    const NU_PLUGIN_DIRS = [
-     ($nu.current-exe | path dirname)
      ...$NU_PLUGIN_DIRS
+     ($nu.home-dir | path join "my-plugins")
    ]
    ```
 
@@ -51,7 +61,7 @@ Nu 可以通过插件进行扩展。插件的行为与 Nu 的内置命令很相�
    plugin list # 确认它已添加到注册表
    ```
 
-   或者，如果你在第 2 步中没有将二进制目录添加到插件路径，你仍然可以使用绝对路径：
+   或者，如果插件所在的目录不在插件搜索路径中，你仍然可以使用绝对路径：
 
    ```nu
    plugin add ~/.local/share/rust/cargo/bin/nu_plugin_polars
@@ -61,14 +71,14 @@ Nu 可以通过插件进行扩展。插件的行为与 Nu 的内置命令很相�
 
    ```nu
    # 插件的名称，不带前导的 `nu_plugin` 和任何扩展名
-   use polars
+   plugin use polars
    ```
 
 5. 确认插件正在工作：
 
    ```nu
    ls | polars into-df | describe
-   # => NuDataFrame
+   # => polars_dataframe
    ```
 
 ## 安装插件
@@ -80,7 +90,7 @@ Nushell 附带了一组官方维护的插件，其中包括：
 - `polars`：使用 [Polars 库](https://github.com/pola-rs/polars) 通过 DataFrame 进行极快的列式操作。有关更多详细信息，请参阅[DataFrame 章节](dataframes.md)。
 - `formats`：支持多种附加数据格式 - EML、ICS、INI、plist 和 VCF。
 - `gstat`：以 Nushell 结构化数据的形式返回 Git 仓库的状态信息。
-- `query`：支持查询 SQL、XML、JSON、HTML（通过选择器）和网页元数据。
+- `query`：支持查询 XML（通过 XPath）、JSON、HTML（通过 CSS 选择器）和网页元数据。
 - `inc`：递增一个值或版本（例如，semver）。此插件既可作为最终用户插件，也可作为如何创建插件的简单开发者示例。
 
 Nushell 还附带了几个插件，作为插件开发人员的示例或工具。其中包括 `nu_plugin_example`、`nu_plugin_custom_values` 和 `nu_plugin_stress_internals`。
@@ -154,7 +164,7 @@ cargo install --path . --locked
 当 [`plugin add`](/commands/docs/plugin_add.md) 被调用时，Nu：
 
 - 运行插件二进制文件
-- 通过[插件协议](/zh-CN/contributor-book/plugin_protocol_reference.md)进行通信，以确保兼容性并获取其支持的所有命令的列表
+- 通过[插件协议](../contributor-book/plugin_protocol_reference.md)进行通信，以确保兼容性并获取其支持的所有命令的列表
 - 然后将此插件信息保存到插件注册表文件（`$nu.plugin-path`）中，该文件充当缓存
 
 ### 导入插件
@@ -176,6 +186,12 @@ plugin use cool
 nu --plugins '[./my_plugins/nu_plugin_cool]'
 ```
 
+`--plugins` 选项也可以重复，每个插件用一次：
+
+```nu
+nu --plugins ./my_plugins/nu_plugin_cool --plugins ./my_plugins/nu_plugin_other
+```
+
 :::
 
 ### 插件搜索路径
@@ -195,26 +211,25 @@ Nushell 包括两个可用于设置插件搜索路径的 `list` 变量。这仅�
 
 ```nu
 plugin list
-# =>
-╭───┬───────┬─────────┬─────────┬───────┬───────────────────────┬───────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ # │ name  │ version │ status  │  pid  │       filename        │ shell │           commands                                                                                                   │
-├───┼───────┼─────────┼─────────┼───────┼───────────────────────┼───────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ 0 │ gstat │ 0.113.0 │ loaded  │       │ .../nu_plugin_gstat   │       │ ╭───┬───────┬──────────────────────────────╮                                                                         │
-│   │       │         │         │       │                       │       │ │ # │ name  │         description          │                                                                         │
-│   │       │         │         │       │                       │       │ ├───┼───────┼──────────────────────────────┤                                                                         │
-│   │       │         │         │       │                       │       │ │ 0 │ gstat │ Get the git status of a repo │                                                                         │
-│   │       │         │         │       │                       │       │ ╰───┴───────┴──────────────────────────────╯                                                                         │
-│ 1 │ query │ 0.113.0 │ running │ 27312 │ .../nu_plugin_query   │       │ ╭───┬────────────────────┬─────────────────────────────────────────────────────────────────────────────────────────╮ │
-│   │       │         │         │       │                       │       │ │ # │        name        │                                       description                                       │ │
-│   │       │         │         │       │                       │       │ ├───┼────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────┤ │
-│   │       │         │         │       │                       │       │ │ 0 │ query              │ Show all the query commands                                                             │ │
-│   │       │         │         │       │                       │       │ │ 1 │ query json         │ execute json query on json file (open --raw <file> | query json 'query string')         │ │
-│   │       │         │         │       │                       │       │ │ 2 │ query web          │ execute selector query on html/web                                                      │ │
-│   │       │         │         │       │                       │       │ │ 3 │ query webpage-info │ uses the webpage crate to extract info from html: title, description, language, links,  │ │
-│   │       │         │         │       │                       │       │ │   │                    │ RSS feeds, Opengraph, Schema.org, and more                                              │ │
-│   │       │         │         │       │                       │       │ │ 4 │ query xml          │ Execute XPath 1.0 query on XML input                                                    │ │
-│   │       │         │         │       │                       │       │ ╰───┴────────────────────┴─────────────────────────────────────────────────────────────────────────────────────────╯ │
-╰───┴───────┴─────────┴─────────┴───────┴───────────────────────┴───────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+# => ╭───┬───────┬─────────┬─────────┬───────┬───────────────────────┬───────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+# => │ # │ name  │ version │ status  │  pid  │       filename        │ shell │           commands                                                                                                   │
+# => ├───┼───────┼─────────┼─────────┼───────┼───────────────────────┼───────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+# => │ 0 │ gstat │ 0.116.0 │ loaded  │       │ .../nu_plugin_gstat   │       │ ╭───┬───────┬──────────────────────────────╮                                                                         │
+# => │   │       │         │         │       │                       │       │ │ # │ name  │         description          │                                                                         │
+# => │   │       │         │         │       │                       │       │ ├───┼───────┼──────────────────────────────┤                                                                         │
+# => │   │       │         │         │       │                       │       │ │ 0 │ gstat │ Get the git status of a repo │                                                                         │
+# => │   │       │         │         │       │                       │       │ ╰───┴───────┴──────────────────────────────╯                                                                         │
+# => │ 1 │ query │ 0.116.0 │ running │ 27312 │ .../nu_plugin_query   │       │ ╭───┬────────────────────┬─────────────────────────────────────────────────────────────────────────────────────────╮ │
+# => │   │       │         │         │       │                       │       │ │ # │        name        │                                       description                                       │ │
+# => │   │       │         │         │       │                       │       │ ├───┼────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────┤ │
+# => │   │       │         │         │       │                       │       │ │ 0 │ query              │ Show all the query commands                                                             │ │
+# => │   │       │         │         │       │                       │       │ │ 1 │ query json         │ execute json query on json file (open --raw <file> | query json 'query string')         │ │
+# => │   │       │         │         │       │                       │       │ │ 2 │ query web          │ execute selector query on html/web                                                      │ │
+# => │   │       │         │         │       │                       │       │ │ 3 │ query webpage-info │ uses the webpage crate to extract info from html: title, description, language, links,  │ │
+# => │   │       │         │         │       │                       │       │ │   │                    │ RSS feeds, Opengraph, Schema.org, and more                                              │ │
+# => │   │       │         │         │       │                       │       │ │ 4 │ query xml          │ Execute XPath 1.0 query on XML input                                                    │ │
+# => │   │       │         │         │       │                       │       │ ╰───┴────────────────────┴─────────────────────────────────────────────────────────────────────────────────────────╯ │
+# => ╰───┴───────┴─────────┴─────────┴───────┴───────────────────────┴───────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 已安装插件的所有命令在当前作用域中都可用：
@@ -230,15 +245,13 @@ scope commands | where type == "plugin"
 例如，从相应的插件运行 `query` 命令，然后检查其 `status` 状态：
 
 ```nu
-http get http://example.com | query web --document --query body
-# => query output
+http get http://example.com | query web --document --query body | ignore
 plugin list | where name == query | select name status
-# =>
-╭───┬───────┬─────────╮
-│ # │ name  │ status  │
-├───┼───────┼─────────┤
-│ 0 │ query │ running │
-╰───┴───────┴─────────╯
+# => ╭───┬───────┬─────────╮
+# => │ # │ name  │ status  │
+# => ├───┼───────┼─────────┤
+# => │ 0 │ query │ running │
+# => ╰───┴───────┴─────────╯
 ```
 
 现在手动停止插件，我们可以看到它不再运行：
@@ -246,12 +259,11 @@ plugin list | where name == query | select name status
 ```nu
 plugin stop query
 plugin list | where name == query | select name status
-# =>
-╭───┬───────┬────────╮
-│ # │ name  │ status │
-├───┼───────┼────────┤
-│ 0 │ query │ loaded │
-╰───┴───────┴────────╯
+# => ╭───┬───────┬────────╮
+# => │ # │ name  │ status │
+# => ├───┼───────┼────────┤
+# => │ 0 │ query │ loaded │
+# => ╰───┴───────┴────────╯
 ```
 
 ### 插件垃圾回收器
@@ -305,6 +317,7 @@ Nu 的主仓库包含一些插件的例子，这些例子对学习插件协议�
 
 - [Rust](https://github.com/nushell/nushell/tree/main/crates/nu_plugin_example)
 - [Python](https://github.com/nushell/nushell/blob/main/crates/nu_plugin_python)
+- [Nu](https://github.com/nushell/nushell/tree/main/crates/nu_plugin_nu_example)
 
 ### 调试
 
@@ -324,4 +337,4 @@ Nu 的插件文档尚在撰写中，如果你对某件事情不确定 [Nu Discor
 
 ### 更多细节
 
-[贡献者手册中的插件章节](/zh-CN/contributor-book/plugins.md)从软件开发人员的角度提供了有关插件工作原理的更多细节。
+[贡献者手册中的插件章节](../contributor-book/plugins.md)从软件开发人员的角度提供了有关插件工作原理的更多细节。

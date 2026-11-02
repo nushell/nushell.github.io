@@ -14,14 +14,14 @@ ls
 
 ```nu
 ls *.md
-# => ╭───┬────────────────────┬──────┬──────────┬──────────────╮
-# => │ # │        name        │ type │   size   │   modified   │
-# => ├───┼────────────────────┼──────┼──────────┼──────────────┤
-# => │ 0 │ CODE_OF_CONDUCT.md │ file │  3.4 KiB │ 9 months ago │
-# => │ 1 │ CONTRIBUTING.md    │ file │ 11.0 KiB │ 5 months ago │
-# => │ 2 │ README.md          │ file │ 12.0 KiB │ 6 days ago   │
-# => │ 3 │ SECURITY.md        │ file │  2.6 KiB │ 2 months ago │
-# => ╰───┴────────────────────┴──────┴──────────┴──────────────╯
+# => ╭───┬────────────────────┬──────┬─────────┬──────────────╮
+# => │ # │        name        │ type │  size   │   modified   │
+# => ├───┼────────────────────┼──────┼─────────┼──────────────┤
+# => │ 0 │ CODE_OF_CONDUCT.md │ file │  3.4 kB │ 9 months ago │
+# => │ 1 │ CONTRIBUTING.md    │ file │ 11.2 kB │ 5 months ago │
+# => │ 2 │ README.md          │ file │ 12.2 kB │ 6 days ago   │
+# => │ 3 │ SECURITY.md        │ file │  2.6 kB │ 2 months ago │
+# => ╰───┴────────────────────┴──────┴─────────┴──────────────╯
 ```
 
 ## 通配符模式 (wildcards)
@@ -34,25 +34,25 @@ Nu 也使用双星号 `**`，它允许你访问更深的目录。比如，`ls **
 
 ```nu
 ls **/*.md
-# => ╭───┬───────────────────────────────┬──────┬──────────┬──────────────╮
-# => │ # │             name              │ type │   size   │   modified   │
-# => ├───┼───────────────────────────────┼──────┼──────────┼──────────────┤
-# => │ 0 │ CODE_OF_CONDUCT.md            │ file │  3.4 KiB │ 5 months ago │
-# => │ 1 │ CONTRIBUTING.md               │ file │ 11.0 KiB │ a month ago  │
-# => │ 2 │ README.md                     │ file │ 12.0 KiB │ a month ago  │
-# => │ 3 │ SECURITY.md                   │ file │  2.6 KiB │ 5 hours ago  │
-# => │ 4 │ benches/README.md             │ file │    249 B │ 2 months ago │
-# => │ 5 │ crates/README.md              │ file │    795 B │ 5 months ago │
-# => │ 6 │ crates/nu-cli/README.md       │ file │    388 B │ 5 hours ago  │
-# => │ 7 │ crates/nu-cmd-base/README.md  │ file │    262 B │ 5 hours ago  │
-# => │ 8 │ crates/nu-cmd-extra/README.md │ file │    669 B │ 2 months ago │
-# => │ 9 │ crates/nu-cmd-lang/README.md  │ file │  1.5 KiB │ a month ago  │
-# => ╰───┴───────────────────────────────┴──────┴──────────┴──────────────╯
+# => ╭───┬───────────────────────────────┬──────┬─────────┬──────────────╮
+# => │ # │             name              │ type │  size   │   modified   │
+# => ├───┼───────────────────────────────┼──────┼─────────┼──────────────┤
+# => │ 0 │ CODE_OF_CONDUCT.md            │ file │  3.4 kB │ 9 months ago │
+# => │ 1 │ CONTRIBUTING.md               │ file │ 11.2 kB │ 5 months ago │
+# => │ 2 │ README.md                     │ file │ 12.2 kB │ 6 days ago   │
+# => │ 3 │ SECURITY.md                   │ file │  2.6 kB │ 2 months ago │
+# => │ 4 │ benches/README.md             │ file │   249 B │ 2 months ago │
+# => │ 5 │ crates/README.md              │ file │   795 B │ 5 months ago │
+# => │ 6 │ crates/nu-cli/README.md       │ file │   388 B │ 5 hours ago  │
+# => │ 7 │ crates/nu-cmd-base/README.md  │ file │   262 B │ 5 hours ago  │
+# => │ 8 │ crates/nu-cmd-extra/README.md │ file │   669 B │ 2 months ago │
+# => │ 9 │ crates/nu-cmd-lang/README.md  │ file │  1.5 kB │ a month ago  │
+# => ╰───┴───────────────────────────────┴──────┴─────────┴──────────────╯
 ```
 
 这里，我们正在寻找任何以 ".md" 结尾的文件。双星号进一步指定了“从这里开始的任何目录中”。
 
-Nushell 的通配符语法不仅支持 `*`，还支持用 `?` 匹配[单个字符和用 `[...]` 匹配字符组](https://docs.rs/nu-glob/latest/nu_glob/struct.Pattern.md)。
+Nushell 的通配符语法不仅支持 `*`，还支持用 `?` 匹配[单个字符和用 `[...]` 匹配字符组](https://docs.rs/nu-glob/latest/nu_glob/struct.Pattern.html)。
 
 通过将 `*`、`?` 和 `[]` 模式包含在单引号、双引号或[原始字符串](working_with_strings.md#原始字符串)中，可以对它们进行转义。例如，要显示名为 `[slug]` 的目录的内容，请使用 `ls "[slug]"` 或 `ls '[slug]'`。
 
@@ -84,8 +84,12 @@ Nushell 的通配符语法不仅支持 `*`，还支持用 `?` 匹配[单个字�
     rm `*myfile*`
     ```
 
+:::: tip
+当通配符传给 [`ls`](/commands/docs/ls.md)、[`cp`](/commands/docs/cp.md)、[`mv`](/commands/docs/mv.md)、[`rm`](/commands/docs/rm.md) 或 [`du`](/commands/docs/du.md) 时，它不匹配隐藏文件（以 `.` 开头的名字）。要包含它们，请传 `--all`（`-a`）。例如，`rm *myfile*` 不会动名为 `.myfile.bak` 的文件，但 `rm --all *myfile*` 会连它一起删除。
+::::
+
 ::: tip 提示
-Nushell 还包括一个专门的 [`glob` 命令](https://www.nushell.sh/commands/docs/glob.md)，支持更复杂的通配符场景。
+Nushell 还包括一个专门的 [`glob` 命令](/commands/docs/glob.md)，支持更复杂的通配符场景。
 :::
 
 ### 将字符串转换为通配符
@@ -103,9 +107,9 @@ Nushell 还包括一个专门的 [`glob` 命令](https://www.nushell.sh/commands
     ls $glob_pattern
     ```
 
-2.  扩展操作符与 [`glob` 命令](/commands/docs/glob.md)结合使用：
+2.  展开运算符与 [`glob` 命令](/commands/docs/glob.md)结合使用：
 
-    [`glob` 命令](/commands/docs/glob.md)（注意：与 `into glob` 不同）生成一个与通配符模式匹配的[`列表`](types_of_data.md#列表)文件名。这个列表可以使用[扩展操作符](operators.md#扩展运算符)展开并传递给文件系统命令：
+    [`glob` 命令](/commands/docs/glob.md)（注意：与 `into glob` 不同）生成一个与通配符模式匹配的[`列表`](types_of_data.md#列表)文件名。这个列表可以使用[展开运算符](operators.md#展开运算符)展开并传递给文件系统命令：
 
     ```nu
     # 查找文件名包含当前月份（格式为 YYYY-mm）的文件
@@ -138,8 +142,7 @@ Nushell 还包括一个专门的 [`glob` 命令](https://www.nushell.sh/commands
 
   ```nu
   mkdir modules/my/new_module
-  mkdir modules/my/new_module
-  # => 没有错误
+  mkdir modules/my/new_module  # 没有错误
   ```
 
   ::: tip 提示
@@ -169,16 +172,14 @@ cookbook/
 ```nu
 # 切换到父目录
 cd ..
-# 或者
-..
 # 上移两层（父目录的父目录）
 cd ...
-# 或者
-...
 # 上移三层（父目录的父目录的父目录）
 cd ....
 # 等等
 ```
+
+与输入目录名一样，你也可以省略 `cd`，在提示符下只输入点（例如 `..` 或 `...`）。
 
 ::: tip 提示
 多点快捷方式可用于内部 Nushell [文件系统命令](/commands/categories/filesystem.md)以及外部命令。例如，在 Linux/Unix 系统上运行 `^stat ....` 将显示路径被扩展为 `../../..`
@@ -191,7 +192,7 @@ cd ../sibling
 ```
 
 ::: tip 重要提示
-用 [`cd`](/commands/docs/cd.md) 改变目录会改变 `PWD` 环境变量。这意味着目录的改变会保留到当前代码块（例如，块或闭包）中。一旦你退出这个代码块，你就会返回到以前的目录。你可以在[环境篇](environment.md)中了解更多关于这方面的信息。
+用 [`cd`](/commands/docs/cd.md) 改变目录会改变 `PWD` 环境变量。这意味着在闭包（例如 `do { cd somewhere }`）或自定义命令中改变目录，其作用范围仅限该闭包或命令。闭包结束后，你会回到之前的目录。`if`、`for` 这类关键字的块不是闭包，因此在其中执行的 `cd` 会一直生效。你可以在[环境](./environment.md)章节中了解更多。
 :::
 
 ## 文件系统命令

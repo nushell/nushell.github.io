@@ -14,7 +14,7 @@ open Cargo.toml | update workspace.dependencies.base64 0.24.2 | save Cargo_new.t
 
 第二个命令：`update workspace.dependencies.base64 0.24.2` 是一个过滤器。过滤器获取输入的数据并对其进行处理。它们可能会修改它（如我们例子中的[`update`](/commands/docs/update.md)命令），或者在值通过时对其做其他操作，如记录。
 
-最后一条命令：`save "Cargo_new.toml"` 是一个输出（有时称为 "接收者"）。输出从管道中获取输入，并对其进行一些最终操作。在我们的例子中，我们在最后一步把通过管道的内容保存到一个文件中。还有一些其他类型的输出命令可以获取数值并供用户查看。
+最后一条命令：`save Cargo_new.toml` 是一个输出（有时称为 "接收者"）。输出从管道中获取输入，并对其进行一些最终操作。在我们的例子中，我们在最后一步把通过管道的内容保存到一个文件中。还有一些其他类型的输出命令可以获取数值并供用户查看。
 
 `$in` 变量可以将管道收集成一个值，允许你将整个流作为一个参数访问，比如：
 
@@ -35,18 +35,41 @@ let year = (
 )
 ```
 
+## 用 `let` 赋值管道结果
+
+`let` 也可以作为管道中的一级使用。在管道末尾，它会把管道的结果存入一个新变量：
+
+```nu
+ls | get name | let files
+# 等价于：
+let files = ls | get name
+```
+
+`let` 会原封不动地把输入传下去，所以它也可以放在管道中间，为中间值命名，而管道继续往后执行。
+（正因如此，管道末尾的 `let` 在 REPL 中仍会显示该值。）
+
+```nu
+"hello" | let msg | str length
+# => 5
+$msg
+# => hello
+```
+
 ## 分号
 
 看这个例子：
 
 ```nu
-line1; line2 | line3
+ls; "hello" | str uppercase
+# => HELLO
 ```
 
 这里，分号与管道结合使用。当使用分号时，不会产生任何输出数据用于管道。因此，紧跟在分号后面的 `$in` 变量将不起作用。
 
-- 因为 `line1` 后面有分号，所以该命令将运行到完成并在屏幕上显示。
-- `line2` | `line3` 是一个正常的管道。它运行，其内容在 `line1` 的内容之后显示。
+- 因为 `ls` 后面有分号，所以该命令会运行到完成，其输出被丢弃。
+- `"hello" | str uppercase` 是一个正常的管道。它运行，作为最终值，其内容会被返回并显示。
+
+参见：[用 Nu 的方式思考 -> 每个表达式只有一个返回值](./thinking_in_nu.md#每个表达式只有一个返回值)
 
 ## 管道输入和特殊的 `$in` 变量
 
@@ -110,8 +133,8 @@ date now                    # 1: 今天
 然而，一些过滤器会为其闭包的输入分配一个更方便的值。`update` 过滤器就是一个例子。`update` 命令闭包的管道输入（以及 `$in`）指的是正在更新的*列*，而闭包参数指的是整个记录。因此，以下两个示例也是等效的：
 
 ```nu
-ls | update name {|file| $file.name | str upcase}
-ls | update name {str upcase}
+ls | update name {|file| $file.name | str uppercase}
+ls | update name {str uppercase}
 ```
 
 对于大多数过滤器，第二个版本将引用整个 `file` 记录（包含 `name`、`type`、`size` 和 `modified` 列）。然而，对于 `update`，它特指正在更新的*列*的内容，在本例中是 `name`。
@@ -144,23 +167,20 @@ ls | update name {str upcase}
     print $in
     $in
   }
+  # => a
+  # => a
+  # => b
+  # => b
+  # => c
+  # => c
+  # => ╭───┬───╮
+  # => │ 0 │ a │
+  # => │ 1 │ b │
+  # => │ 2 │ c │
+  # => ╰───┴───╯
   ```
 
-  在每次迭代中，所有三个 `$in` 的值都是相同的，所以输出为：
-
-  ```nu
-  a
-  a
-  b
-  b
-  c
-  c
-  ╭───┬───╮
-  │ 0 │ a │
-  │ 1 │ b │
-  │ 2 │ c │
-  ╰───┴───╯
-  ```
+  在每次迭代中，所有三个 `$in` 的值都是相同的，所以每个条目被打印两次，然后显示返回值的列表。
 
 - **_规则 2：_** 当在管道中的任何其他位置（而不是第一个位置）使用时，`$in` 指的是前一个表达式的结果：
 
@@ -170,8 +190,8 @@ ls | update name {str upcase}
   4               # 管道输入
   | $in * $in     # 此表达式中 $in 为 4
   | $in / 2       # 此表达式中 $in 现在为 16
-  | $in           # $in 现在为 8
-  # =>   8
+  | $in           # $in 现在为 8.0
+  # =>   8.0
   ```
 
 - **_规则 2.5：_** 在闭包或块内部，规则 2 的使用发生在一个新的作用域（子表达式）中，其中“新”的 `$in` 值是有效的。这意味着规则 1 和规则 2 的使用可以在同一个闭包或块中共存。
@@ -185,19 +205,14 @@ ls | update name {str upcase}
     let p = (            # 显式子表达式，但无论如何都会创建一个
       $in * $in          # 初始管道位置的 $in 在这里仍然是 4
       | $in / 2          # $in 现在是 16
-    )                    # $p 是结果，8 - 子表达式作用域结束
+    )                    # $p 是结果，8.0 - 子表达式作用域结束
 
     print $in            # 在闭包作用域，"原始"的 $in 仍然是 4
     print $p
   }
-  ```
-
-  所以 3 个 `print` 语句的输出是：
-
-  ```nu
-  4
-  4
-  8
+  # => 4
+  # => 4
+  # => 8.0
   ```
 
   同样，即使上面的命令使用更紧凑、隐式的子表达式形式，这也将成立：
@@ -211,10 +226,9 @@ ls | update name {str upcase}
     print $in                       # 在闭包作用域， $in 仍然是 4
     print $p
   }
-
-  4
-  4
-  8
+  # => 4
+  # => 4
+  # => 8.0
   ```
 
 - **_规则 3：_** 当没有输入时使用 `$in`，`$in` 为 null。
@@ -293,45 +307,59 @@ Nu 命令之间使用 Nu 的数据类型进行通信（见[数据类型](types_o
 
 Nu 在两个外部命令之间以与其他 Shell 相同的方式处理数据管道，比如 Bash。`external_command_1`的`stdout`与`external_command_2`的`stdin`相连，这让数据在两个命令之间自然流动。
 
+### 管道中失败的外部命令
+
+如果管道中任何一个外部命令以非零状态码退出，整个管道就会失败，即使它后面的命令执行成功了。
+这与在 Bash 中执行 `set -o pipefail` 的效果相同。例如，`^false | lines` 仍然会产生一个空列表，
+但脚本会在那一行停止，而在 REPL 中 `$env.LAST_EXIT_CODE` 会被设为 `1`。
+当管道中有多个外部命令失败时，`$env.LAST_EXIT_CODE` 保存的是**最右边那个**失败命令的退出码。
+
+可以用 `try`/`catch` 来处理这种失败，其错误记录中包含退出码：
+
+```nu
+try { ^false | lines } catch {|e| $e.exit_code }
+# => 1
+```
+
+如果想在不失败的前提下捕获外部命令的输出和退出码，请使用
+[`complete`](/commands/docs/complete.md)。更多内容参见
+[标准输出、标准错误和退出码](./stdout_stderr_exit_codes.md)。
+
 ### 命令输入和输出类型
 
 上面的基础部分描述了如何在管道中将命令组合为输入、过滤器或输出。
 如何使用命令取决于它们在输入/输出处理方面提供了什么。
 
-你可以使用 [`help <command name>`](/commands/docs/help.md) 来检查命令支持什么，它会显示相关的*输入/输出类型*。
+你可以使用 [`help <command name>`](/commands/docs/help.md) 来检查命令支持什么，它会显示相关的*输入/输出类型*。同一张表也可以作为数据，从 [`help commands`](/commands/docs/help_commands.md) 的 `input_output` 列获取。
 
 例如，通过 `help first` 我们可以看到 [`first` 命令](/commands/docs/first.md) 支持多种输入和输出类型：
 
 ```nu
-help first
-# => […]
-# => Input/output types:
-# =>   ╭───┬───────────┬────────╮
-# =>   │ # │   input   │ output │
-# =>   ├───┼───────────┼────────┤
-# =>   │ 0 │ list<any> │ any    │
-# =>   │ 1 │ binary    │ binary │
-# =>   │ 2 │ range     │ any    │
-# =>   ╰───┴───────────┴────────╯
+help commands | where name == first | get 0.input_output
+# => ╭───┬───────────┬────────╮
+# => │ # │   input   │ output │
+# => ├───┼───────────┼────────┤
+# => │ 0 │ list<any> │ any    │
+# => │ 1 │ binary    │ binary │
+# => │ 2 │ range     │ any    │
+# => ╰───┴───────────┴────────╯
 
-[a b c] | first                                                                                                                                   took 1ms
+[a b c] | first
 # => a
 
-1..4 | first                                                                                                                                     took 21ms
+1..4 | first
 # => 1
 ```
 
 再举一个例子，[`ls` 命令](/commands/docs/ls.md) 支持输出但不支持输入：
 
 ```nu
-help ls
-# => […]
-# => Input/output types:
-# =>   ╭───┬─────────┬────────╮
-# =>   │ # │  input  │ output │
-# =>   ├───┼─────────┼────────┤
-# =>   │ 0 │ nothing │ table  │
-# =>   ╰───┴─────────┴────────╯
+help commands | where name == ls | get 0.input_output
+# => ╭───┬─────────┬────────╮
+# => │ # │  input  │ output │
+# => ├───┼─────────┼────────┤
+# => │ 0 │ nothing │ table  │
+# => ╰───┴─────────┴────────╯
 ```
 
 这意味着，例如，尝试将管道输入到 `ls` (`echo .. | ls`) 会导致意想不到的结果。
@@ -350,14 +378,12 @@ echo .. | ls $in
 例如，`help sleep` 告诉我们 [`sleep`](/commands/docs/sleep.md) 不支持输入和输出类型：
 
 ```nu
-help sleep
-# => […]
-# => Input/output types:
-# =>   ╭───┬─────────┬─────────╮
-# =>   │ # │  input  │ output  │
-# =>   ├───┼─────────┼─────────┤
-# =>   │ 0 │ nothing │ nothing │
-# =>   ╰───┴─────────┴─────────╯
+help commands | where name == sleep | get 0.input_output
+# => ╭───┬─────────┬─────────╮
+# => │ # │  input  │ output  │
+# => ├───┼─────────┼─────────┤
+# => │ 0 │ nothing │ nothing │
+# => ╰───┴─────────┴─────────╯
 ```
 
 当我们错误地将管道输入到它时，我们不会像上面的 `ls` 示例那样得到意想不到的行为，而是会收到一个错误：
@@ -367,7 +393,7 @@ echo 1sec | sleep
 # => Error: nu::parser::missing_positional
 # =>
 # =>   × Missing required positional argument.
-# =>    ╭─[entry #53:1:18]
+# =>    ╭─[repl_entry #53:1:18]
 # =>  1 │ echo 1sec | sleep
 # =>    ╰────
 # =>   help: Usage: sleep <duration> ...(rest) . Use `--help` for more information.
@@ -377,11 +403,11 @@ echo 1sec | sleep
 或者做“感觉正确”的事情。
 例如，`sleep` 不支持输入流的行为与 Bash `sleep` 的行为相匹配。
 
-然而，许多命令确实有管道输入/输出，如果 कभी不清楚，请如上所述检查它们的 `help` 文档。
+然而，许多命令确实有管道输入/输出，如果有什么地方不清楚，请如上所述检查它们的 `help` 文档。
 
 ## 渲染显示结果
 
-在交互模式下，当管道结束时，[`display_output` 钩子配置](https://www.nushell.sh/book/hooks.md#changing-how-output-is-displayed) 定义了结果将如何显示。
+在交互模式下，当管道结束时，[`display_output` 钩子配置](./hooks.md#改变输出的显示方式) 定义了结果将如何显示。
 默认配置使用 [`table` 命令](/commands/docs/table.md) 将结构化数据呈现为可视化表格。
 
 以下示例显示了 `display_output` 钩子如何呈现
@@ -446,26 +472,19 @@ $env.config.hooks.display_output = null
 ## 将输出结果传递给外部命令
 
 有时你希望将 Nushell 结构化数据输出到外部命令以进行进一步处理。但是，Nushell 对结构化数据的默认格式化选项可能不是你想要的。
-例如，你想在“/usr/share/vim/runtime”下找到一个名为“tutor”的文件并检查其所有权
+例如，你想在“/usr/share/nvim/runtime”下找到一个名为“tutor”的文件并检查其所有权
 
 ```nu
-ls /usr/share/nvim/runtime/
-# => ╭────┬───────────────────────────────────────┬──────┬─────────┬───────────────╮
-# => │  # │                 name                  │ type │  size   │   modified    │
-# => ├────┼───────────────────────────────────────┼──────┼─────────┼───────────────┤
-# => │  0 │ /usr/share/nvim/runtime/autoload      │ dir  │  4.1 KB │ 2 days ago    │
-# => ..........
-# => ..........
-# => ..........
-# =>
-# => │ 31 │ /usr/share/nvim/runtime/tools         │ dir  │  4.1 KB │ 2 days ago    │
-# => │ 32 │ /usr/share/nvim/runtime/tutor         │ dir  │  4.1 KB │ 2 days ago    │
-# => ├────┼───────────────────────────────────────┼──────┼─────────┼───────────────┤
-# => │  # │                 name                  │ type │  size   │   modified    │
-# => ╰────┴───────────────────────────────────────┴──────┴─────────┴───────────────╯
+ls /usr/share/nvim/runtime/ | last 2
+# => ╭───┬───────────────────────────────┬──────┬────────┬────────────╮
+# => │ # │             name              │ type │  size  │  modified  │
+# => ├───┼───────────────────────────────┼──────┼────────┼────────────┤
+# => │ 0 │ /usr/share/nvim/runtime/tools │ dir  │ 4.1 kB │ 2 days ago │
+# => │ 1 │ /usr/share/nvim/runtime/tutor │ dir  │ 4.1 kB │ 2 days ago │
+# => ╰───┴───────────────────────────────┴──────┴────────┴────────────╯
 ```
 
-你决定使用 `grep` 并将结果通过[管道](https://www.nushell.sh/book/pipelines.md)传递给外部的 `^ls`
+你决定使用 `grep` 并将结果通过[管道](./pipelines.md)传递给外部的 `^ls`
 
 ```nu
 ls /usr/share/nvim/runtime/ | get name | ^grep tutor | ^ls -la $in
@@ -512,7 +531,7 @@ do { $env.config.table.mode = "none"; ls }
 do { $env.config.table.mode = "none"; ls } | table
 ```
 
-因为 Nushell `$env` 变量是[作用域的](https://www.nushell.sh/book/environment.md#作用域)，这意味着示例中的 `table` 命令不受 `do` 块内环境修改的影响，数据将不会以应用的配置显示。
+因为 Nushell `$env` 变量是[作用域的](./environment.md#作用域)，这意味着示例中的 `table` 命令不受 `do` 块内环境修改的影响，数据将不会以应用的配置显示。
 
 如果希望尽早显示数据，可以在作用域内显式应用 `| table`，或使用 `print` 命令。
 

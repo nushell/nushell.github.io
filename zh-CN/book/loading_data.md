@@ -1,6 +1,6 @@
 # 加载数据
 
-之前我们使用了[`ls`](/commands/docs/ls.md)、[`ps`](/commands/docs/ps.md)、[`date`](/commands/docs/date.md)和[`sys`](/commands/docs/sys.md)等命令来加载关于文件、进程、日期时间和系统本身的信息。每条命令都会给我们提供一个信息表，以对其进行探索。我们也可以通过其他方式将数据载入表格以供使用。
+之前我们使用了[`ls`](/commands/docs/ls.md)、[`ps`](/commands/docs/ps.md)、[`date`](/commands/docs/date.md)和[`sys host`](/commands/docs/sys_host.md)等命令来加载关于文件、进程、日期时间和系统本身的信息。每条命令都会给我们提供一个信息表，以对其进行探索。我们也可以通过其他方式将数据载入表格以供使用。
 
 ## 打开文件
 
@@ -24,27 +24,44 @@ Nu 目前支持直接从以下格式加载表数据：
 - ics
 - ini
 - json
+- [kdl](#kdl)
+- [md (Markdown)](#markdown)
+- msgpack / msgpackz
 - [nuon](#nuon)
 - ods
+- plist
 - [SQLite 数据库](#sqlite)
 - ssv
 - toml
 - tsv
 - url
 - vcf
-- xlsx / xls
+- xlsx
 - xml
-- yaml / yml
+- [yaml / yml](#yaml)
+
+`eml`、`ics`、`ini`、`plist` 和 `vcf` 格式由 `formats` [核心插件](plugins.md#核心插件)提供。
 
 ::: tip 你知道吗？
 在底层，`open` 会在你的作用域中查找与文件扩展名匹配的 `from ...` 子命令。
 因此，你可以通过创建自己的 `from ...` 子命令来简单地扩展 `open` 支持的文件类型集。
+[`save`](/commands/docs/save.md) 以相同的方式查找匹配的 `to ...` 子命令。
+
+转换器必须是用 `def` 定义的命令。像 `alias "from jsonc" = from json` 这样的别名行不通，`open` 和 `save` 会报错并提示等价的 `def`：
+
+```nu
+def "from jsonc" [] { from json }
+open deno.jsonc
+```
+
 :::
 
 但是，当你加载其他的文本文件时会发生什么呢？让我们试一试：
 
 ```nu
-open README.md
+open notes.txt
+# => Remember to water the plants.
+# => Call Mom on Sunday.
 ```
 
 我们会看到该文件的内容。
@@ -55,7 +72,7 @@ open README.md
 
 Nushell 对象表示法（Nushell Object Notation，NUON）旨在成为 Nushell 的 JavaScript 对象表示法（JavaScript Object Notation，JSON）。
 也就是说，NUON 代码是描述某种数据结构的有效 Nushell 代码。
-例如，这是一个有效的 NUON（示例来自[默认配置文件](https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/default_files/default_config.nu)）：
+例如，这是一个有效的 NUON（示例改编自[已文档化的配置文件](https://github.com/nushell/nushell/blob/main/crates/nu-config/default_files/doc_config.nu)，你也可以用 `config nu --doc` 查看）：
 
 ```nu
 {
@@ -64,7 +81,7 @@ Nushell 对象表示法（Nushell Object Notation，NUON）旨在成为 Nushell 
     # 注意缺少 source 参数
     {
       name: completion_menu
-      only_buffer_difference: false
+      input_mode: cursor_prefix
       marker: "| "
       type: {
           layout: columnar
@@ -89,7 +106,77 @@ Nushell 对象表示法（Nushell Object Notation，NUON）旨在成为 Nushell 
 例如，允许注释，并且不需要逗号。
 
 目前 NUON 的一个限制是它不能表示所有的 Nushell [数据类型](types_of_data.md)。
-最值得注意的是，NUON 不允许序列化代码块。
+最值得注意的是，NUON 不允许序列化闭包（`to nuon --serialize` 会把它们写成字符串，读回时不会还原成闭包）。
+
+## Markdown、KDL 和 YAML
+
+### Markdown
+
+Markdown 是 `open` 能识别的格式之一，所以打开一个 `.md` 文件得到的不是字符串。以下面这个 `README.md` 为例，
+先用 [`open --raw`](#以原始模式打开) 把它作为文本显示：
+
+```nu
+open --raw README.md
+# => # My Project
+# =>
+# => A short description.
+# =>
+# => ## Install
+# =>
+# => - Download it
+# => - Run it
+```
+
+不加 `--raw` 时，[`from md`](/commands/docs/from_md.md) 会把它转成一张表格，
+每个标题、段落、列表项等各占一行：
+
+```nu
+open README.md | select element content
+# => ╭───┬─────────┬──────────────────────╮
+# => │ # │ element │       content        │
+# => ├───┼─────────┼──────────────────────┤
+# => │ 0 │ text    │ My Project           │
+# => │ 1 │ text    │ A short description. │
+# => │ 2 │ text    │ Install              │
+# => │ 3 │ text    │ Download it          │
+# => │ 4 │ text    │ Run it               │
+# => ╰───┴─────────┴──────────────────────╯
+```
+
+这张表格还有一个 `content_span` 列，记录每个元素在文件中的位置；对于有属性的元素
+（例如标题的层级），还会有 `attributes` 列。使用 `from md --verbose` 可以获取完整的语法树。
+
+### KDL
+
+[KDL](https://kdl.dev) 文档会被读取为一张节点表格。每一行包含节点的 `name`、
+位置参数 `args`、具名属性 `props` 以及它的 `children`：
+
+```nu
+'package name=nu version="0.116.0"' | from kdl | get 0.props
+# => ╭─────────┬─────────╮
+# => │ name    │ nu      │
+# => │ version │ 0.116.0 │
+# => ╰─────────┴─────────╯
+```
+
+[`from kdl`](/commands/docs/from_kdl.md) 默认按 KDL 2 版读取。读取 KDL 1 文档请使用 `--spec 1`。
+
+### YAML
+
+[`from yaml`](/commands/docs/from_yaml.md) 默认遵循 YAML 1.2，
+所以像 `yes` 这样的值会保持为字符串而不会变成布尔值。
+要按旧的 YAML 1.1 规则读取文件，请使用 `--spec 1.1`：
+
+```nu
+'enabled: yes' | from yaml
+# => ╭─────────┬─────╮
+# => │ enabled │ yes │
+# => ╰─────────┴─────╯
+'enabled: yes' | from yaml --spec 1.1
+# => ╭─────────┬──────╮
+# => │ enabled │ true │
+# => ╰─────────┴──────╯
+```
 
 ## 处理字符串
 
@@ -110,74 +197,74 @@ open people.txt
 
 ```nu
 open people.txt | lines
-# => ───┬──────────────────────────────
-# =>  0 │ Octavia | Butler | Writer
-# =>  1 │ Bob | Ross | Painter
-# =>  2 │ Antonio | Vivaldi | Composer
-# => ───┴──────────────────────────────
+# => ╭───┬──────────────────────────────╮
+# => │ 0 │ Octavia | Butler | Writer    │
+# => │ 1 │ Bob | Ross | Painter         │
+# => │ 2 │ Antonio | Vivaldi | Composer │
+# => ╰───┴──────────────────────────────╯
 ```
 
 可以看到，我们正在处理这些行，因为我们又回到了一个列表中。下一步是看看是否可以把行分割成更有用的东西。为此，我们将使用[`split`](/commands/docs/split.md)命令。[`split`](/commands/docs/split.md)，顾名思义，为我们提供了一种分割字符串的方法。我们将使用[`split`](/commands/docs/split.md)的`column`子命令，将内容分成多列。我们会告诉它分隔符是什么，剩下的就由它来完成：
 
 ```nu
 open people.txt | lines | split column "|"
-# => ───┬──────────┬───────────┬───────────
-# =>  # │ column0  │ column1   │ column2
-# => ───┼──────────┼───────────┼───────────
-# =>  0 │ Octavia  │  Butler   │  Writer
-# =>  1 │ Bob      │  Ross     │  Painter
-# =>  2 │ Antonio  │  Vivaldi  │  Composer
-# => ───┴──────────┴───────────┴───────────
+# => ╭───┬──────────┬───────────┬───────────╮
+# => │ # │ column0  │  column1  │  column2  │
+# => ├───┼──────────┼───────────┼───────────┤
+# => │ 0 │ Octavia  │  Butler   │  Writer   │
+# => │ 1 │ Bob      │  Ross     │  Painter  │
+# => │ 2 │ Antonio  │  Vivaldi  │  Composer │
+# => ╰───┴──────────┴───────────┴───────────╯
 ```
 
 这看起来差不多了，只是还有一些额外的空白字符，让我们 [`trim`](/commands/docs/str_trim.md) 掉这些空格：
 
 ```nu
 open people.txt | lines | split column "|" | str trim
-# => ───┬─────────┬─────────┬──────────
-# =>  # │ column0 │ column1 │ column2
-# => ───┼─────────┼─────────┼──────────
-# =>  0 │ Octavia │ Butler  │ Writer
-# =>  1 │ Bob     │ Ross    │ Painter
-# =>  2 │ Antonio │ Vivaldi │ Composer
-# => ───┴─────────┴─────────┴──────────
+# => ╭───┬─────────┬─────────┬──────────╮
+# => │ # │ column0 │ column1 │ column2  │
+# => ├───┼─────────┼─────────┼──────────┤
+# => │ 0 │ Octavia │ Butler  │ Writer   │
+# => │ 1 │ Bob     │ Ross    │ Painter  │
+# => │ 2 │ Antonio │ Vivaldi │ Composer │
+# => ╰───┴─────────┴─────────┴──────────╯
 ```
 
 还不错，[`split`](/commands/docs/split.md)命令返回给我们可以使用的数据，还预设了默认的列名：
 
 ```nu
 open people.txt | lines | split column "|" | str trim | get column0
-# => ───┬─────────
-# =>  0 │ Octavia
-# =>  1 │ Bob
-# =>  2 │ Antonio
-# => ───┴─────────
+# => ╭───┬─────────╮
+# => │ 0 │ Octavia │
+# => │ 1 │ Bob     │
+# => │ 2 │ Antonio │
+# => ╰───┴─────────╯
 ```
 
 我们也可以用自定义的列名代替默认的：
 
 ```nu
 open people.txt | lines | split column "|" first_name last_name job | str trim
-# => ───┬────────────┬───────────┬──────────
-# =>  # │ first_name │ last_name │ job
-# => ───┼────────────┼───────────┼──────────
-# =>  0 │ Octavia    │ Butler    │ Writer
-# =>  1 │ Bob        │ Ross      │ Painter
-# =>  2 │ Antonio    │ Vivaldi   │ Composer
-# => ───┴────────────┴───────────┴──────────
+# => ╭───┬────────────┬───────────┬──────────╮
+# => │ # │ first_name │ last_name │   job    │
+# => ├───┼────────────┼───────────┼──────────┤
+# => │ 0 │ Octavia    │ Butler    │ Writer   │
+# => │ 1 │ Bob        │ Ross      │ Painter  │
+# => │ 2 │ Antonio    │ Vivaldi   │ Composer │
+# => ╰───┴────────────┴───────────┴──────────╯
 ```
 
 现在，我们的数据加载到一个表中了，我们可以使用之前对表所用的各种命令来处理它：
 
 ```nu
 open people.txt | lines | split column "|" first_name last_name job | str trim | sort-by first_name
-# => ───┬────────────┬───────────┬──────────
-# =>  # │ first_name │ last_name │ job
-# => ───┼────────────┼───────────┼──────────
-# =>  0 │ Antonio    │ Vivaldi   │ Composer
-# =>  1 │ Bob        │ Ross      │ Painter
-# =>  2 │ Octavia    │ Butler    │ Writer
-# => ───┴────────────┴───────────┴──────────
+# => ╭───┬────────────┬───────────┬──────────╮
+# => │ # │ first_name │ last_name │   job    │
+# => ├───┼────────────┼───────────┼──────────┤
+# => │ 0 │ Antonio    │ Vivaldi   │ Composer │
+# => │ 1 │ Bob        │ Ross      │ Painter  │
+# => │ 2 │ Octavia    │ Butler    │ Writer   │
+# => ╰───┴────────────┴───────────┴──────────╯
 ```
 
 其他可用于字符串的命令有：
@@ -188,12 +275,15 @@ open people.txt | lines | split column "|" first_name last_name job | str trim |
 如果我们已经知道待处理的数据具有 Nu 能够理解的格式，则可以使用一些辅助命令，例如，我们打开一个 Rust 的 Cargo.lock 文件：
 
 ```nu
-open Cargo.lock
-# => # This file is automatically @generated by Cargo.
-# => # It is not intended for manual editing.
-# => [[package]]
-# => name = "adhoc_derive"
-# => version = "0.1.2"
+open Cargo.lock | lines | first 6
+# => ╭───┬───────────────────────────────────────────────────╮
+# => │ 0 │ # This file is automatically @generated by Cargo. │
+# => │ 1 │ # It is not intended for manual editing.          │
+# => │ 2 │ version = 4                                       │
+# => │ 3 │                                                   │
+# => │ 4 │ [[package]]                                       │
+# => │ 5 │ name = "adhoc_derive"                             │
+# => ╰───┴───────────────────────────────────────────────────╯
 ```
 
 "Cargo.lock" 实际上是一个 .toml 文件，但是文件扩展名不是 .toml。没关系，我们可以使用 `from` 命令和 `toml` 子命令：
@@ -208,37 +298,62 @@ open Cargo.lock
 
 ```nu
 open Cargo.toml --raw
-# => [package]                                                                                        name = "nu"
-# => version = "0.1.3"
-# => authors = ["Yehuda Katz <wycats@gmail.com>", "Sophia Turner <547158+sophiajt@users.noreply.github.com>"]
-# => description = "A shell for the GitHub era"
-# => license = "MIT"
+# => [package]
+# => name = "demo"
+# => version = "0.1.0"
+# => edition = "2024"
+# =>
+# => [dependencies]
+# => adhoc_derive = "0.1.2"
 ```
 
 ## SQLite
 
-SQLite 数据库会被 [`open`](/commands/docs/open.md) 自动检测，无论其文件扩展名是什么。你可以打开整个数据库：
+SQLite 数据库会被 [`open`](/commands/docs/open.md) 自动检测，无论其文件扩展名是什么。要试一试，先用 [`into sqlite`](/commands/docs/into_sqlite.md) 创建一个小数据库：
+
+```nu
+[[name age]; [Alice 30] [Bob 25]] | into sqlite foo.db --table-name some_table
+```
+
+你可以打开整个数据库：
 
 ```nu
 open foo.db
+# => ╭────────────┬─────────────────────╮
+# => │            │ ╭───┬───────┬─────╮ │
+# => │ some_table │ │ # │ name  │ age │ │
+# => │            │ ├───┼───────┼─────┤ │
+# => │            │ │ 0 │ Alice │  30 │ │
+# => │            │ │ 1 │ Bob   │  25 │ │
+# => │            │ ╰───┴───────┴─────╯ │
+# => ╰────────────┴─────────────────────╯
 ```
 
 或者 [`get`](/commands/docs/get.md) 一个特定的表：
 
 ```nu
 open foo.db | get some_table
+# => ╭───┬───────┬─────╮
+# => │ # │ name  │ age │
+# => ├───┼───────┼─────┤
+# => │ 0 │ Alice │  30 │
+# => │ 1 │ Bob   │  25 │
+# => ╰───┴───────┴─────╯
 ```
 
 或者运行任何你喜欢的 SQL 查询：
 
 ```nu
-open foo.db | query db "select * from some_table"
+open foo.db | query db "select * from some_table where age > 26"
+# => ╭───┬───────┬─────╮
+# => │ # │ name  │ age │
+# => ├───┼───────┼─────┤
+# => │ 0 │ Alice │  30 │
+# => ╰───┴───────┴─────╯
 ```
-
-（注意：一些旧版本的 Nu 使用 `into db | query` 而不是 `query db`）
 
 ## 获取 URLs
 
-除了从文件系统中加载文件，你还可以通过使用[`http get`](/commands/docs/http.md)命令来加载 URLs。这将从互联网上获取 URL 的内容并返回：
+除了从文件系统中加载文件，你还可以通过使用[`http get`](/commands/docs/http_get.md)命令来加载 URLs。这将从互联网上获取 URL 的内容并返回：
 
 @[code](@snippets/loading_data/rust-lang-feed.sh)

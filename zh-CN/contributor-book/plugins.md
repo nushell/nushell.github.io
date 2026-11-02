@@ -56,9 +56,11 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-nu-plugin = "0.104.0"
-nu-protocol = "0.104.0"
+nu-plugin = "0.116.0"
+nu-protocol = "0.116.0"
 ```
+
+对两个 crate 使用相同的版本，与你想要使用该插件的 Nushell 版本匹配。Nushell 在启动插件时会检查此版本。在 1.0 之前，次版本号必须匹配：用 `nu-plugin` 0.116.0 构建的插件适用于任何 Nushell 0.116.x，但不适用于 0.115 或 0.117。
 
 有了这个，我们可以打开 `src/main.rs` 并创建我们的插件。
 
@@ -254,21 +256,20 @@ use nu_protocol::{LabeledError, Signature, Type, Value};
 一旦我们完成了插件，要使用它，我们需要做的就是安装它。
 
 ```nu
-> cargo install --path . --locked
+cargo install --path . --locked
 # nushell only (run with `nu -c` if not in nushell)
-> plugin add ~/.cargo/bin/nu_plugin_len # add .exe on Windows
+plugin add ~/.cargo/bin/nu_plugin_len # add .exe on Windows
 ```
 
 如果你在安装插件的过程中已经在运行 `nu`，确保你重启 `nu` 以便它可以加载你的插件，或者调用 `plugin use` 立即加载它：
 
 ```nu
-> plugin use len # the name of the plugin (without `nu_plugin_`)
+plugin use len # the name of the plugin (without `nu_plugin_`)
 ```
 
 一旦 `nu` 启动，它将发现插件并将其命令添加到范围中。
 
 ```nu
-nu
 "hello" | len
 # => 5
 help len
@@ -278,13 +279,20 @@ help len
 # =>   > len
 # =>
 # => Flags:
-# =>   -h, --help - Display the help message for this command
+# =>   -h, --help: Display the help message for this command
 # =>
-# => Signatures:
-# =>   <string> | len -> <int>
+# => Command Type:
+# =>   > plugin
+# =>
+# => Input/output types:
+# =>   ╭───┬────────┬────────╮
+# =>   │ # │ input  │ output │
+# =>   ├───┼────────┼────────┤
+# =>   │ 0 │ string │ int    │
+# =>   ╰───┴────────┴────────╯
 ```
 
-运行 `plugin list` 查看当前注册并可用于此 Nu 会话的所有插件，包括它们是否正在运行，以及如果是的话它们的进程 ID。
+运行 `plugin list` 查看当前注册并可用于此 Nu 会话的所有插件。它的 `status` 列显示每个插件是否正在运行，如果是，`pid` 列会显示其进程 ID。
 
 ## 在插件中使用流
 
@@ -350,11 +358,11 @@ impl PluginCommand for Len {
 有了这个改变，我们可以管道一个列表（甚至是一个长列表）到命令来获取它的长度：
 
 ```nu
-$ seq 1 10000 | len
-10000
+seq 1 10000 | len
+# => 10000
 ```
 
-由于 `run()` 也返回 `PipelineData`，插件也可以产生流，甚至转换流。例如，如果我们希望我们的插件将每个整数乘以二：
+由于 `run()` 也返回 `PipelineData`，插件也可以产生流，甚至转换流。例如，如果我们希望插件有一个将每个整数乘以二的 `double` 命令：
 
 ```rust
 fn run(
@@ -362,7 +370,7 @@ fn run(
     engine: &EngineInterface,
     call: &EvaluatedCall,
     input: PipelineData,
-) -> Result<PipelineData, ShellError> {
+) -> Result<PipelineData, LabeledError> {
     input.map(|value| {
         let span = value.span();
         match value.as_int() {
@@ -386,16 +394,17 @@ fn run(
 }
 ```
 
-由于输入和输出都是流，这甚至可以在无限流上工作：
+由于输入和输出都是流式的，这甚至可以在无限流上工作。这里 `first 5` 会在读到五个值后停止：
 
 ```nu
-$ generate { |n| {out: $n, next: ($n + 1)} } 0 | plugin
-0
-2
-4
-6
-8
-# ...
+generate { |n| {out: $n, next: ($n + 1)} } 0 | double | first 5
+# => ╭───┬───╮
+# => │ 0 │ 0 │
+# => │ 1 │ 2 │
+# => │ 2 │ 4 │
+# => │ 3 │ 6 │
+# => │ 4 │ 8 │
+# => ╰───┴───╯
 ```
 
 ## 插件配置
@@ -414,7 +423,7 @@ $env.config.plugins = {
 
 ```rust
 use nu_plugin::*;
-use nu_protocol::{Signature, Type, Value};
+use nu_protocol::{LabeledError, Signature, Type, Value};
 
 struct MotdPlugin;
 
@@ -476,9 +485,9 @@ fn main() {
 示例：
 
 ```nu
-> $env.config.plugins.motd = {message: "Nushell rocks!"}
-> motd
-Nushell rocks!
+$env.config.plugins.motd = {message: "Nushell rocks!"}
+motd
+# => Nushell rocks!
 ```
 
 有关完整示例，请参阅 [`nu_plugin_example`](https://github.com/nushell/plugin-examples/tree/main/rust/nu_plugin_example)。
@@ -489,7 +498,7 @@ Nushell rocks!
 
 ```rust
 use nu_plugin::*;
-use nu_protocol::{PipelineData, Signature, SyntaxShape, Type, Value};
+use nu_protocol::{LabeledError, PipelineData, Signature, SyntaxShape, Type, Value};
 
 struct MyEachPlugin;
 
@@ -525,7 +534,7 @@ impl PluginCommand for MyEach {
                 SyntaxShape::Closure(Some(vec![SyntaxShape::Any])),
                 "The closure to evaluate",
             )
-            .input_output_type(Type::ListStream, Type::ListStream)
+            .input_output_type(Type::list(Type::Any), Type::list(Type::Any))
     }
 
     fn run(
@@ -535,13 +544,13 @@ impl PluginCommand for MyEach {
         call: &EvaluatedCall,
         input: PipelineData,
     ) -> Result<PipelineData, LabeledError> {
-        let engine = engine.clone();
         let closure = call.req(0)?;
+        let engine_clone = engine.clone();
         Ok(input.map(move |item| {
             let span = item.span();
-            engine.eval_closure(&closure, vec![item.clone()], Some(item))
+            engine_clone.eval_closure(&closure, vec![item.clone()], Some(item))
                 .unwrap_or_else(|err| Value::error(err, span))
-        }, None)?)
+        }, engine.signals())?)
     }
 }
 
@@ -553,21 +562,21 @@ fn main() {
 `my-each` 的工作方式就像 `each`：
 
 ```nu
-> [1 2 3] | my-each { |i| $i * 2 }
-╭───┬───╮
-│ 0 │ 2 │
-│ 1 │ 4 │
-│ 2 │ 6 │
-╰───┴───╯
+[1 2 3] | my-each { |i| $i * 2 }
+# => ╭───┬───╮
+# => │ 0 │ 2 │
+# => │ 1 │ 4 │
+# => │ 2 │ 6 │
+# => ╰───┴───╯
 ```
 
 目前，闭包只能引用可以发送到插件的有效值。这意味着不允许来自其他插件的自定义值。这很可能在未来的版本中修复。
 
 ## 自定义值
 
-插件可以创建自定义值，在引擎中嵌入插件特定的数据。在 Rust 中，这些数据使用 [bincode](https://crates.io/crates/bincode) 自动序列化，所以你只需要在具有 `Serialize` 和 `Deserialize` 实现的类型上实现 [`CustomValue`](https://docs.rs/nu-protocol/latest/nu_protocol/trait.CustomValue.html) trait，这些实现与 bincode 兼容。这包括任何会导致依赖字段名称或字段存在的属性，例如 `#[serde(skip_serializing_if = "...")]` 或 `#[serde(untagged)]`。我们使用 [typetag](https://crates.io/crates/typetag) crate 来重建正确的自定义值类型。
+插件可以创建自定义值，在引擎中嵌入插件特定的数据。在 Rust 中，这些数据使用 [rmp-serde](https://crates.io/crates/rmp-serde) 自动序列化为 MessagePack（它写入结构体时不带字段名），所以你只需要在具有与该格式兼容的 `Serialize` 和 `Deserialize` 实现的类型上实现 [`CustomValue`](https://docs.rs/nu-protocol/latest/nu_protocol/trait.CustomValue.html) trait。**避免**任何会导致依赖字段名称或字段存在的属性，例如 `#[serde(skip_serializing_if = "...")]` 或 `#[serde(untagged)]`。我们使用 [typetag](https://crates.io/crates/typetag) crate 来重建正确的自定义值类型，因此请把 `serde`（带 `derive` 特性）和 `typetag` 加入你的插件依赖。
 
-要将自定义值嵌入到 `Value` 中，使用 [`Value::custom()`](https://docs.rs/nu-protocol/latest/nu_protocol/enum.Value.html#method.custom_value)。一个最小示例：
+要将自定义值嵌入到 `Value` 中，使用 [`Value::custom()`](https://docs.rs/nu-protocol/latest/nu_protocol/enum.Value.html#method.custom)。一个最小示例：
 
 ```rust
 use nu_protocol::{CustomValue, ShellError, Span, Value, record};
@@ -589,7 +598,7 @@ pub enum Animal {
 #[typetag::serde]
 impl CustomValue for Animal {
     fn clone_value(&self, span: Span) -> Value {
-        Value::custom_value(Box::new(self.clone()), span)
+        Value::custom(Box::new(self.clone()), span)
     }
 
     fn type_name(&self) -> String {
@@ -651,12 +660,13 @@ impl Plugin for AnimalPlugin {
     // ...
     fn custom_value_dropped(
         &self,
-        engine: &EngineInterface,
+        _engine: &EngineInterface,
         custom_value: Box<dyn CustomValue>,
-    ) {
+    ) -> Result<(), LabeledError> {
         if let Some(animal) = custom_value.as_any().downcast_ref::<Animal>() {
             eprintln!("Animal dropped: {:?}", animal);
         }
+        Ok(())
     }
 }
 ```
@@ -670,8 +680,8 @@ impl Plugin for AnimalPlugin {
 可以通过 [`EngineInterface`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html) 获取或设置环境变量。例如：
 
 ```rust
-// Get the PATH environment variable
-let paths: Value = engine.get_env_var("PATH")?;
+// Get the PATH environment variable (`None` if it isn't set)
+let paths: Option<Value> = engine.get_env_var("PATH")?;
 // Get all environment variables
 let envs: HashMap<String, Value> = engine.get_env_vars()?;
 // Set an environment variable
@@ -689,10 +699,10 @@ use std::path::Path;
 use nu_protocol::Spanned;
 
 let relative_path: Spanned<String> = call.req(0)?;
-let absolute_path = Path::new(&engine.get_current_dir()?).join(&provided_path.item);
+let absolute_path = Path::new(&engine.get_current_dir()?).join(&relative_path.item);
 
 // For example:
-if absolute_path.exists() {
+if !absolute_path.exists() {
     return Err(
         LabeledError::new(format!("{} does not exist", absolute_path.display()))
             .with_label("file not found", relative_path.span)
@@ -768,7 +778,7 @@ let ir_of_assert = engine
         // Call `view ir --decl-id <std_assert>`
         EvaluatedCall::new(call.head)
             .with_flag("decl-id".into_spanned(call.head))
-            .with_positional(Value::int(std_assert as i64, call.head)),
+            .with_positional(Value::int(std_assert.get() as i64, call.head)),
         PipelineData::Empty,
         true,
         false,
@@ -779,13 +789,19 @@ eprintln!("IR of `std assert`:");
 eprintln!("{ir_of_assert}");
 ```
 
+`.into_spanned()` 方法来自 `nu_protocol::IntoSpanned` trait。在这个例子中，`std assert` 只有在用户调用插件命令之前运行过 `use std` 时才在作用域内。否则 `find_decl()` 会返回 `None`，命令会因"找不到"错误而失败。
+
 请记住，引擎不会验证插件进行的调用的参数是否实际匹配被调用命令的签名，因此在设计插件以尝试匹配记录的签名时必须小心。目前没有方法在运行命令之前查找命令的签名，但我们可能在将来添加它，以使确保插件调用按预期行为更容易。由于性能是插件的优先事项，我们目前不打算验证来自插件的调用参数。
 
-从插件调用回引擎有一些开销，并且可能难以构造某些命令的参数 - 例如，不可能从插件内创建新的闭包。我们建议在可能的情况下尝试在插件内实现功能，仅在必要时回退到命令调用。几乎可以肯定的是，将多个命令链接在一起的脚本将比尝试从插件内组装管道更高效，因此你可能希望为你的插件提供配套脚本，或者期望你的用户组成由简单命令组成的管道[而不是提供许多不同的选项](https://www.nushell.sh/contributor-book/philosophy_0_80.html#command-philosophy)。
+从插件调用回引擎有一些开销，并且可能难以构造某些命令的参数 - 例如，不可能从插件内创建新的闭包。我们建议在可能的情况下尝试在插件内实现功能，仅在必要时回退到命令调用。几乎可以肯定的是，将多个命令链接在一起的脚本将比尝试从插件内组装管道更高效，因此你可能希望为你的插件提供配套脚本，或者期望你的用户组成由简单命令组成的管道[而不是提供许多不同的选项](./philosophy_0_80.md#命令理念)。
+
+## 参数补全
+
+当用户按下 <kbd>Tab</kbd> 时，插件命令可以为其标志和位置参数计算补全。在 Rust 中，实现 `PluginCommand` 或 `SimplePluginCommand` 的 `get_dynamic_completion()` 方法。它接收正在补全的调用和一个 `ArgType`（`ArgType::Flag(name)` 或 `ArgType::Positional(index)`），返回 `Some` 一组 `DynamicSuggestion` 列表，或返回 `None` 以回退到 Nushell 的默认补全。这个 API 是实验性的，很可能会变化，这就是为什么该方法带有一个已弃用的 `ExperimentalMarker` 参数（在你的实现上加 `#[allow(deprecated)]` 可以消除该警告）。完整示例见 `nu_plugin_example` 中的 [`arg_completion.rs`](https://github.com/nushell/nushell/blob/main/crates/nu_plugin_example/src/commands/arg_completion.rs)。你可以用 `commandline complete` 检查结果，例如 `'my-command --flag ' | commandline complete`。
 
 ## 测试插件
 
-基于 Rust 的插件可以使用 [`nu-plugin-test-support`](https://docs.rs/nu-plugin-test-support/) crate 来编写测试。示例可以自动测试：
+基于 Rust 的插件可以使用 [`nu-plugin-test-support`](https://docs.rs/nu-plugin-test-support/) crate 来编写测试。把它作为开发依赖加入，版本与 `nu-plugin` 相同（`cargo add --dev nu-plugin-test-support`）。示例可以自动测试：
 
 ```rust
 use nu_protocol::{Example, ShellError, Value};
@@ -805,7 +821,7 @@ impl PluginCommand for Fib {
 
     // ...
 
-    fn examples(&self) -> Vec<Example> {
+    fn examples(&self) -> Vec<Example<'_>> {
         vec![
             Example {
                 example: "fib 20",
@@ -822,7 +838,7 @@ impl PluginCommand for Fib {
 fn test_examples() -> Result<(), ShellError> {
     use nu_plugin_test_support::PluginTest;
 
-    PluginTest::new("fib", FibPlugin.into())?.test_examples(&Fib)
+    PluginTest::new("fib", FibPlugin.into())?.test_command_examples(&Fib)
 }
 ```
 
@@ -838,9 +854,10 @@ fn test_fib_on_input() -> Result<(), ShellError> {
     // including a stream
     let result = PluginTest::new("fib", FibPlugin.into())?
         .eval_with("fib", Value::test_int(20).into_pipeline_data())?
-        .into_value(Span::test_data());
+        .into_value(Span::test_data())?;
 
     assert_eq!(Value::test_int(6765), result);
+    Ok(())
 }
 ```
 
@@ -857,10 +874,11 @@ fn test_fib_with_sequence() -> Result<(), ShellError> {
         .eval("seq 1 10 | fib")?;
 
     assert_eq!(10, result.into_iter().count());
+    Ok(())
 }
 ```
 
-请记住，这将增加你的测试的编译时间，所以通常 preferred 在可能的情况下在 Rust 内做你的其他测试逻辑。
+请记住，这将增加你的测试的编译时间，所以通常更推荐在可能的情况下用 Rust 编写其余的测试逻辑。
 
 对自定义值的测试完全支持，但它们将被序列化和反序列化，以确保它们能够安全地通过插件和引擎之间发生的自定义值的序列化。
 
@@ -876,18 +894,18 @@ fn test_fib_with_sequence() -> Result<(), ShellError> {
 
 ```sh
 $ ./target/release/nu_plugin_len --stdio
-json
+json{"Hello":{"protocol":"nu-plugin","version":"0.116.0","features":[{"name":"LocalSocket"}]}}
 ```
 
-应用程序在启动时打印关键字 `json` 并阻塞在 STDIN 上等待输入。这告诉 Nu 插件希望通过 JSON 协议而不是 MsgPack 进行通信。在 JSON 协议中，插件将监听在 stdin 上写入的每个 JSON 对象并相应响应。不需要换行符，但插件可能在你点击 `enter` 之前看不到你的输入，因为终端通常默认行缓冲。
+应用程序在启动时打印关键字 `json`，后跟它自己的 [`Hello`](plugin_protocol_reference.md#hello) 消息，然后阻塞在 STDIN 上等待输入。这告诉 Nu 插件希望通过 JSON 协议而不是 MsgPack 进行通信。在 JSON 协议中，插件将监听在 stdin 上写入的每个 JSON 对象并相应响应。不需要换行符，但插件可能在你点击 `enter` 之前看不到你的输入，因为终端通常默认行缓冲。
 
-我们可以通过首先发送 [`Hello`](plugin_protocol_reference.md#hello) 消息来模拟初始插件注册，以便让插件知道我们与它兼容。在这里为 `"version"` 使用插件构建时使用的 `nu-plugin` 版本很重要，因为这是 Nu 如何确保插件与兼容引擎运行的关键部分。
+我们可以通过首先发送 [`Hello`](plugin_protocol_reference.md#hello) 消息来模拟初始插件注册，以便让插件知道我们与它兼容。在这里为 `"version"` 使用一个与插件所报告版本兼容的版本（即它构建时使用的 `nu-plugin` 版本，此处为 0.116.0）很重要，因为这是 Nu 确保插件与兼容引擎一起运行的关键部分。如果版本不兼容，插件会直接退出而不响应任何调用。
 
 ```json
 {
   "Hello": {
     "protocol": "nu-plugin",
-    "version": "0.90.2",
+    "version": "0.116.0",
     "features": []
   }
 }
@@ -905,10 +923,10 @@ json
 
 ```sh
 $ ./target/release/nu_plugin_len --stdio
-json{"Hello":{"protocol":"nu-plugin","version":"0.90.2","features":[]}}
-{"Hello":{"protocol":"nu-plugin","version":"0.90.2","features":[]}}
+json{"Hello":{"protocol":"nu-plugin","version":"0.116.0","features":[{"name":"LocalSocket"}]}}
+{"Hello":{"protocol":"nu-plugin","version":"0.116.0","features":[]}}
 {"Call":[0,"Signature"]}
-{"CallResponse":[0, {"Signature":[{"sig":{"name":"len","description":"calculates the length of its input","extra_description":"","search_terms":[],"required_positional":[],"optional_positional":[],"rest_positional":null,"vectorizes_over_list":false,"named":[{"long":"help","short":"h","arg":null,"required":false,"desc":"Display the help message for this command","var_id":null,"default_value":null}],"input_type":"String","output_type":"Int","input_output_types":[],"allow_variants_without_examples":false,"is_filter":false,"creates_scope":false,"allows_unknown_args":false,"category":"Default"},"examples":[]}]}]}
+{"CallResponse":[0,{"Signature":[{"sig":{"name":"len","description":"calculates the length of its input","extra_description":"","search_terms":[],"required_positional":[],"optional_positional":[],"rest_positional":null,"named":[{"long":"help","short":"h","arg":null,"required":false,"desc":"Display the help message for this command","completion":null,"var_id":null,"default_value":null}],"input_output_types":[["String","Int"]],"allow_variants_without_examples":false,"is_filter":false,"creates_scope":false,"allows_unknown_args":false,"complete":null,"category":"Default"},"examples":[]}]}]}
 ```
 
 插件将其签名序列化为 JSON 打印。我们将重新格式化以便于阅读。
@@ -925,7 +943,6 @@ json{"Hello":{"protocol":"nu-plugin","version":"0.90.2","features":[]}}
         "required_positional": [],
         "optional_positional": [],
         "rest_positional": null,
-        "vectorizes_over_list": false,
         "named": [
           {
             "long": "help",
@@ -933,17 +950,17 @@ json{"Hello":{"protocol":"nu-plugin","version":"0.90.2","features":[]}}
             "arg": null,
             "required": false,
             "desc": "Display the help message for this command",
+            "completion": null,
             "var_id": null,
             "default_value": null
           }
         ],
-        "input_type": "String",
-        "output_type": "Int",
-        "input_output_types": [],
+        "input_output_types": [["String", "Int"]],
         "allow_variants_without_examples": false,
         "is_filter": false,
         "creates_scope": false,
         "allows_unknown_args": false,
+        "complete": null,
         "category": "Default"
       },
       "examples": []
@@ -952,14 +969,14 @@ json{"Hello":{"protocol":"nu-plugin","version":"0.90.2","features":[]}}
 }
 ```
 
-这个签名告诉 Nu 它需要知道的一切，以便将数据传入和传出插件，以及格式化帮助消息和支持类型感知的选项卡完成。这些字段的完整描述超出了本教程的范围，但响应只是 `nu-plugin` crate 中 [`PluginSignature`](https://docs.rs/nu-protocol/latest/nu_protocol/struct.PluginSignature.html) 结构体的序列化形式。
+这个签名告诉 Nu 它需要知道的一切，以便将数据传入和传出插件，以及格式化帮助消息和支持类型感知的 Tab 补全。这些字段的完整描述超出了本教程的范围，但响应只是 `nu-protocol` crate 中 [`PluginSignature`](https://docs.rs/nu-protocol/latest/nu_protocol/struct.PluginSignature.html) 结构体的序列化形式。
 
 现在让我们尝试模拟一个调用。上面我们在 Nu 中通过执行命令 `"hello" | len` 测试了插件，并得到了响应 `5`。当然，这隐藏了使 Nu 如此强大的类型化数据处理。
 
-```nu
-$ echo '{"Hello":{"protocol":"nu-plugin","version":"0.90.2","features":[]}}{"Call":[0,{"Run":{"name":"len","call":{"head":{"start":100953,"end":100957},"positional":[],"named":[]},"input":{"Value":{"String":{"val":"hello","span":{"start":100953,"end":100957}}}}}}]}' | target/release/nu_plugin_len --stdio
-json{"Hello":{"protocol":"nu-plugin","version":"0.90.2","features":[]}}
-{"PipelineData":{"Value":{"Int":{"val":5,"span":{"start":100953,"end":100957}}}}}
+```sh
+$ echo '{"Hello":{"protocol":"nu-plugin","version":"0.116.0","features":[]}}{"Call":[0,{"Run":{"name":"len","call":{"head":{"start":100953,"end":100957},"positional":[],"named":[]},"input":{"Value":[{"String":{"val":"hello","span":{"start":100953,"end":100957}}},null]}}}]}' | target/release/nu_plugin_len --stdio
+json{"Hello":{"protocol":"nu-plugin","version":"0.116.0","features":[{"name":"LocalSocket"}]}}
+{"CallResponse":[0,{"PipelineData":{"Value":[{"Int":{"val":5,"span":{"start":100953,"end":100957}}},null]}}]}
 ```
 
 我们调用了我们的插件，并在 stdin 上传递了一个 [`Run`](plugin_protocol_reference.md#run-插件调用) 插件调用，看起来像这样：
@@ -977,34 +994,40 @@ json{"Hello":{"protocol":"nu-plugin","version":"0.90.2","features":[]}}
       "named": []
     },
     "input": {
-      "Value": {
-        "String": {
-          "val": "hello",
-          "span": {
-            "start": 100953,
-            "end": 100957
+      "Value": [
+        {
+          "String": {
+            "val": "hello",
+            "span": {
+              "start": 100953,
+              "end": 100957
+            }
           }
-        }
-      }
+        },
+        null
+      ]
     }
   }
 }
 ```
 
-也就是说，我们向 len 传递了字符串 "hello"，它回复了以下 [`PipelineData`](plugin_protocol_reference.md#pipelinedata-插件调用响应) 响应：
+也就是说，我们向 len 传递了字符串 "hello"。单个 `Value` 输入是一个二元素数组：值本身及其管道元数据（此处为 `null`，因为没有）。插件回复了调用 ID `0` 的 [`CallResponse`](plugin_protocol_reference.md#callresponse)，其中包含以下 [`PipelineData`](plugin_protocol_reference.md#pipelinedata-插件调用响应) 响应：
 
 ```json
 {
   "PipelineData": {
-    "Value": {
-      "Int": {
-        "val": 5,
-        "span": {
-          "start": 100953,
-          "end": 100957
+    "Value": [
+      {
+        "Int": {
+          "val": 5,
+          "span": {
+            "start": 100953,
+            "end": 100957
+          }
         }
-      }
-    }
+      },
+      null
+    ]
   }
 }
 ```
@@ -1035,16 +1058,21 @@ def signature():
             "required_positional": [],
             "optional_positional": [],
             "rest_positional": None,
-            "vectorizes_over_list": False,
-            "named": [],
-            "input_type": "String",
-            "output_type":"Int",
-            "input_output_types":[],
+            "named": [
+                {
+                    "long": "help",
+                    "short": "h",
+                    "arg": None,
+                    "required": False,
+                    "desc": "Display the help message for this command"
+                }
+            ],
+            "input_output_types": [["String", "Int"]],
             "allow_variants_without_examples": True,
             "is_filter": False,
             "creates_scope": False,
-            "allows_unknown_args":False,
-            "category":"Default"
+            "allows_unknown_args": False,
+            "category": "Default"
         },
         "examples": []
     }
@@ -1061,7 +1089,7 @@ def send_hello():
     hello = {
         "Hello": {
             "protocol": "nu-plugin",
-            "version": "0.90.2",
+            "version": "0.116.0",
             "features": []
         }
     }
@@ -1080,9 +1108,13 @@ def send_response(id, response):
 def send_error(id, error_msg, span):
     error = {
         "Error": {
-            "label": "Len Error",
-            "msg": error_msg,
-            "span": span,
+            "msg": "Len Error",
+            "labels": [
+                {
+                    "text": error_msg,
+                    "span": span,
+                }
+            ],
         }
     }
     send_response(id, error)
@@ -1090,15 +1122,19 @@ def send_error(id, error_msg, span):
 
 def handle_call(id, call_info):
     try:
-        input = call_info["input"]["Value"]["String"]
+        [value, metadata] = call_info["input"]["Value"]
+        input = value["String"]
         output = {
             "PipelineData": {
-                "Value": {
-                    "Int": {
-                        "val": len(input["val"]),
-                        "span": input["span"]
-                    }
-                }
+                "Value": [
+                    {
+                        "Int": {
+                            "val": len(input["val"]),
+                            "span": input["span"]
+                        }
+                    },
+                    None
+                ]
             }
         }
         send_response(id, output)
@@ -1106,7 +1142,7 @@ def handle_call(id, call_info):
         send_error(
             id,
             "Could not process input",
-            call_info["call"]["head"]["span"]
+            call_info["call"]["head"]
         )
 
 
@@ -1185,7 +1221,7 @@ def send_hello():
     hello = {
         "Hello": {
             "protocol": "nu-plugin",
-            "version": "0.90.2",
+            "version": "0.116.0",
             "features": []
         }
     }
@@ -1193,26 +1229,30 @@ def send_hello():
     sys.stdout.flush()
 ```
 
-我们的插件必须做的第一件事是写出所需的序列化格式，在这种情况下是 JSON。我们用 `send_encoder()` 方法做到这一点。然后我们使用 `send_hello()` 发送我们的 [`Hello`](plugin_protocol_reference.md#hello) 消息，通知 Nu 我们与它的兼容性，这是在我们发送任何其他消息之前必需的。然后我们读取 Nu 发送给我们的 JSON 序列化消息。由于 Nu 总是将每条消息放在自己的行上，我们只需读取输入的每一行并分别解析它。
+我们的插件必须做的第一件事是写出所需的序列化格式，在这种情况下是 JSON，前面还有一个包含其名称长度的字节。我们用 `send_encoder()` 方法做到这一点。然后我们使用 `send_hello()` 发送我们的 [`Hello`](plugin_protocol_reference.md#hello) 消息，通知 Nu 我们与它的兼容性，这是在我们发送任何其他消息之前必需的。然后我们读取 Nu 发送给我们的 JSON 序列化消息。由于 Nu 总是将每条消息放在自己的行上，我们只需读取输入的每一行并分别解析它。
 
 每个 [`Call`](plugin_protocol_reference.md#call) 都带有一个 ID 号，我们必须为 [`CallResponse`](plugin_protocol_reference.md#callresponse)（包括错误）保留。
 
-当我们发送 `Signature` 请求时，我们使用此插件的签名进行响应，这是一些信息，告诉 Nu 应如何调用命令。
+当我们收到 `Signature` 请求时，我们使用此插件的签名进行响应，这是一些信息，告诉 Nu 应如何调用命令。
 
-当我们发送 `Run` 请求时，我们解析提供的 JSON 并响应请求
+当收到 `Run` 请求时，我们解析提供的 JSON 并响应请求
 
 ```python
 def handle_call(id, call_info):
     try:
-        input = call_info["input"]["Value"]["String"]
+        [value, metadata] = call_info["input"]["Value"]
+        input = value["String"]
         output = {
             "PipelineData": {
-                "Value": {
-                    "Int": {
-                        "val": len(input["val"]),
-                        "span": input["span"]
-                    }
-                }
+                "Value": [
+                    {
+                        "Int": {
+                            "val": len(input["val"]),
+                            "span": input["span"]
+                        }
+                    },
+                    None
+                ]
             }
         }
         send_response(id, output)
@@ -1220,13 +1260,13 @@ def handle_call(id, call_info):
         send_error(
             id,
             "Could not process input",
-            call_info["call"]["head"]["span"]
+            call_info["call"]["head"]
         )
 ```
 
-处理输入的工作由这个 `handle_call` 函数完成。在这里，我们假设我们被给予字符串（我们可以在将来使这个更健壮并返回有意义的错误），然后我们提取给我们的字符串。从那里，我们测量字符串的长度并为此长度创建一个新的 `Int` 值。
+处理输入的工作由这个 `handle_call` 函数完成。在这里，我们假设我们被给予字符串（我们可以在将来使这个更健壮并返回有意义的错误），然后我们提取给我们的字符串。单个 `Value` 输入作为值及其管道元数据组成的二元素数组到达，所以我们先解包它。从那里，我们测量字符串的长度并为此长度创建一个新的 `Int` 值。
 
-最后，我们使用给我们的相同项目并用这个新的 Int 替换有效负载。我们这样做是为了重用传递给我们的字符串的 `span`，尽管这是一个可选步骤。我们可以选择创建新的元数据并传递出去。
+最后，我们使用给我们的相同项目并用这个新的 Int 替换有效负载。我们这样做是为了重用传递给我们的字符串的 `span`，尽管这是一个可选步骤。我们把 `None`（`null`）作为响应的管道元数据发送。如果输入不是我们期望的，我们会发送一个以调用 `head` 的 span 标注的错误，该 span 指向命令名称。我们可以选择创建新的元数据并传递出去。
 
 我们有一些辅助函数：
 
@@ -1245,15 +1285,19 @@ def send_response(id, response):
 def send_error(id, error_msg, span):
     error = {
         "Error": {
-            "label": "Len Error",
-            "msg": error_msg,
-            "span": span,
+            "msg": "Len Error",
+            "labels": [
+                {
+                    "text": error_msg,
+                    "span": span,
+                }
+            ],
         }
     }
     send_response(id, error)
 ```
 
-`send_error()` 格式化并发送错误响应给我们。
+`send_error()` 为我们格式化并发送错误响应。错误是一个 [`LabeledError`](plugin_protocol_reference.md#labelederror)：一个 `msg`，加上可选的 `labels`，其中每一项把某段 `text` 关联到一个 `span`。
 
 ```python
 import json
@@ -1263,9 +1307,20 @@ import sys
 所有这些都需要一些导入才能完成，所以确保包含它们。
 
 ```python
-#!/usr/local/bin/python3
+#!/usr/bin/env python3
 ```
 
-最后，为了使运行我们的 Python 更容易，我们使这个文件可执行（使用类似 `chmod +x nu_plugin_len.py` 的东西）并在顶部添加我们的 python 路径。这个技巧适用于基于 Unix 的平台，对于 Windows 我们需要创建一个 .exe 或 .bat 文件来为我们调用 python 代码。
+最后，我们在顶部添加一个指向 Python 解释器的 shebang 行。
+
+Nu 会用你的 `PATH` 中找到的 `python` 命令来运行以 `.py` 结尾的插件文件，因此 shebang 行对它们不起作用。如果你的解释器名字不同，比如 `python3`，请在添加插件时用 `--shell` 传入它的完整路径：
+
+```nu
+plugin add --shell /usr/bin/python3 nu_plugin_len.py
+plugin use len
+"hello" | len
+# => 5
+```
+
+在基于 Unix 的平台上，你也可以把文件保存为不带 `.py` 扩展名的名字（如 `nu_plugin_len`）并使其可执行（使用类似 `chmod +x nu_plugin_len` 的命令）。Nu 会直接运行它，由 shebang 行选择解释器。
 
 请参阅[示例 Python 插件](https://github.com/nushell/nushell/tree/main/crates/nu_plugin_python)以获取关于如何用另一种语言（包括 Python）实现 Nushell 插件的全面示例。
