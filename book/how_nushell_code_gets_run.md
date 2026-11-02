@@ -405,12 +405,16 @@ Put differently, only a small subset of commands and expressions can generate a 
 
 In general, the commands and resulting expressions will be fairly simple and **_without side effects_**. Otherwise, the parser could all-too-easily enter an unrecoverable state. Imagine, for instance, attempting to assign an infinite stream to a constant. The Parse stage would never complete!
 
+A constant that is merely slow to compute, such as `const x = (1..10000000000 | math sum)`, can still be stopped. In a script or with `nu -c`, <kbd>Ctrl</kbd>+<kbd>C</kbd> interrupts it with an `Operation interrupted` error.
+
 ::: tip
 You can see which Nushell commands can return constant values using:
 
 ```nu
 help commands | where is_const
 ```
+
+When a line in the REPL uses only these commands, the [status line](./line_editor.md#status-line) previews its value as you type.
 
 :::
 
