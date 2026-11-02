@@ -336,7 +336,7 @@ def --wrapped what [--local, ...args: string@"nu-complete what"] { $args }
 样式可以是以下之一：
 
 - 前景色字符串，可以是十六进制代码或颜色名，例如 `yellow`。有效颜色名的列表请见 `ansi --list`。
-- 带有 `fg`（前景色）、`bg`（背景色）和 `attr`（如下划线、粗体等属性）字段的记录。该记录与 `ansi --escape` 接受的格式相同。`attr` 字段的可能取值列表请参阅 [`ansi`](/commands/docs/ansi) 命令参考。
+- 带有 `fg`（前景色）、`bg`（背景色）和 `attr`（如下划线、粗体等属性）字段的记录。该记录与 `ansi --escape` 接受的格式相同。`attr` 字段的可能取值列表请参阅 [`ansi`](/commands/docs/ansi.md) 命令参考。
 - 同样的记录，但转换为 JSON 字符串。
 
 ```nu

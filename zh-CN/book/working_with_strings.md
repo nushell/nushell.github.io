@@ -21,6 +21,10 @@ Nushell 中最简单的字符串是单引号字符串。这种字符串使用`'`
 ```nu
 'hello world'
 # => hello world
+'The
+end'
+# => The
+# => end
 ```
 
 单引号字符串不会对它们所给予的文本做任何事情，这使得它们成为容纳广泛文本数据的理想选择。
@@ -45,27 +49,34 @@ Nushell 目前支持以下转义字符：
 - `\'` - 单引号
 - `\\` - 反斜杠
 - `\/` - 斜杠
+- `\0` - 空字符（`NUL`）
+- `\a` - 响铃（alert）
 - `\b` - 退格字符
+- `\e` - 转义字符，用于 ANSI 转义序列
 - `\f` - 换页符
 - `\r` - 回车符
 - `\n` - 换行符 (line feed)
 - `\t` - 制表符
-- `\u{X...}` - Unicode 字符, 其中 X...为 1 到 6 位的十六进制数字
+- `\xHH` - 单个字节，其中 HH 恰好是 2 位十六进制数字（结果字符串仍必须是有效的 UTF-8）
+- `\u{X...}` - 单个 Unicode 字符，其中 X... 为 1 到 6 位十六进制数字（0-9、A-F、a-f）
+- `\(`, `\)`, `\{`, `\}`, `\$`, `\^`, `\#`, `\|`, `\~` - 字符本身
+
+未识别的转义序列（例如 `\q`）是解析错误。特殊字符也可以用 [`char`](/commands/docs/char.md) 命令创建，例如在[字符串插值](#字符串插值)中写 `(char nul)`。
 
 ## 原始字符串
 
 原始字符串的行为与单引号字符串相同，不同之处在于原始字符串也可以包含单引号。这是可能的，因为原始字符串由起始的`r#'`和结束的`'#`包围。这种语法对Rust用户来说应该很熟悉。
 
 ```nu
-r#'原始字符串可以包含'引号'文本'#
-# => 原始字符串可以包含'引号'文本
+r#'Raw strings can contain 'quoted' text.'#
+# => Raw strings can contain 'quoted' text.
 ```
 
 可以在原始字符串的开始和结束处添加额外的`#`符号来包围字符串中比`'`符号少一个的相同数量的`#`符号。这可以用来嵌套原始字符串：
 
 ```nu
-r###'r##'这是一个原始字符串的例子'##'###
-# => r##'这是一个原始字符串的例子'##
+r###'r##'This is an example of a raw string.'##'###
+# => r##'This is an example of a raw string.'##
 ```
 
 ## 裸词字符串
@@ -86,12 +97,12 @@ hello
 # => Error: nu::shell::external_command
 # =>
 # =>   × External command failed
-# =>    ╭─[entry #5:1:1]
+# =>    ╭─[repl_entry #5:1:1]
 # =>  1 │ hello
 # =>    · ──┬──
-# =>    ·   ╰── executable was not found
+# =>    ·   ╰── Command `hello` not found
 # =>    ╰────
-# =>   help: program not found
+# =>   help: `hello` is neither a Nushell built-in or a known external command
 ```
 
 此外，许多裸词在nu中有特殊含义，因此不会被解释为字符串：
@@ -107,29 +118,38 @@ trueX | describe
 # => Error: nu::shell::external_command
 # =>
 # =>   × External command failed
-# =>    ╭─[entry #5:1:1]
+# =>    ╭─[repl_entry #5:1:1]
 # =>  1 │ trueX | describe
 # =>    · ──┬──
-# =>    ·   ╰── executable was not found
+# =>    ·   ╰── Command `trueX` not found
 # =>    ╰────
-# =>   help: program not found
+# =>   help: `trueX` is neither a Nushell built-in or a known external command
 ```
+
+因此，虽然裸词字符串在非正式的命令行使用中很方便，但当你用 nu 进行更正式的编程时，通常应该使用引号。
 
 ## 反引号字符串
 
 裸词字符串本质上不能包含空格或引号。作为替代方案，Nushell还包括使用<code>`</code>字符的反引号字符串。在大多数情况下，这些应该与裸词字符串的操作方式相同。
 
-例如，与裸词一样，表达式第一个位置的反引号字符串将被解释为*命令*或*路径*。例如：
+例如，与裸词一样，表达式第一个位置的反引号字符串将被解释为*命令*或*路径*。
+例如：
 
 ```nu
-# 运行路径中找到的外部ls二进制文件
+# 运行路径中找到的外部 ls 二进制文件
 `ls`
+```
 
-# 向上移动一个目录
-`..`
+在提示符下单独输入一个反引号包裹的路径会切换到该目录。例如，如果存在的话，下面这会切换到 "my dir" 子目录：
 
-# 切换到"my dir"子目录(如果存在)
+```nu
 `./my dir`
+```
+
+而下面这会向上移动一个目录：
+
+```nu
+`..`
 ```
 
 反引号字符串对于将glob与包含空格的文件或目录组合很有用：
@@ -142,11 +162,10 @@ ls `./my dir/*`
 
 `````nu
 echo ````
-``
-
-echo ```
-# 未终止的字符串将在CLI中开始新行
+# => ``
 `````
+
+相反，<code>echo \`\`\`</code> 是一个未终止的字符串，会在 CLI 中另起一行。
 
 ## 字符串作为外部命令
 
@@ -159,7 +178,7 @@ let foo = 'C:\Program Files\exiftool.exe'
 ^$foo
 ```
 
-你也可以使用[`run-external`](/commands/docs/run-external.md)命令来实现此目的，该命令提供了额外的标志和选项。
+你也可以使用[`run-external`](/commands/docs/run-external.md)命令来实现此目的。
 
 ## 字符串拼接
 
@@ -173,8 +192,8 @@ let foo = 'C:\Program Files\exiftool.exe'
 你也可以使用正则表达式替换字符串的开头或结尾：
 
 ```nu
-['foo', 'bar'] | str replace -r '^' '~/'# ~/foo, ~/bar
-['foo', 'bar'] | str replace -r '$' '~/'# foo~/, bar~/
+['foo', 'bar'] | str replace -r '^' '~/' # ~/foo, ~/bar
+['foo', 'bar'] | str replace -r '$' '~/' # foo~/, bar~/
 ```
 
 如果你想在最后得到一个字符串，那么`str join`是你的朋友：
@@ -190,6 +209,8 @@ let foo = 'C:\Program Files\exiftool.exe'
 ```
 
 不过在字符串的情况下，特别是如果你不必对字符串进行操作，使用`str join`通常更容易且更正确(注意上面例子中末尾多余的+)。
+
+最后你也可以使用字符串插值，不过它比较复杂，会在下面单独的小节中介绍。
 
 ## 字符串插值
 
@@ -209,32 +230,68 @@ $"greetings, ($name)"
 
 字符串插值有单引号：`$' '` 和双引号：`$" "` 这两种形式，分别对应于单引号和双引号字符串 —— 单引号字符串插值不支持转义字符，而双引号字符串插值支持。
 
-从 0.61 版开始，字符串插值支持转义小括号，所以`(`和`)`字符可以在一个字符串中使用，而 Nushell 不会试图计算它们之间出现的内容：
+双引号插值字符串支持转义括号，因此 `(` 和 `)` 字符可以在字符串中使用，而 Nushell 不会试图计算它们之间出现的内容：
 
 ```nu
 $"2 + 2 is (2 + 2) \(you guessed it!)"
 # => 2 + 2 is 4 (you guessed it!)
 ```
 
+插值字符串可以在解析时求值，但如果其中包含格式取决于你的配置的值，而你的 `config.nu` 尚未加载，它们将使用默认配置。因此，如果你的 `config.nu` 里有下面这样的内容，即使你的配置指定所有文件大小都用 `MB`，`x` 也会是 `"2.0 kB"`（日期时间同样会使用默认配置）。
+
+```nu
+const x = $"(2kb)"
+```
+
 ## 分割字符串
 
-[`split row`](/commands/docs/split_row.md)命令从一个基于分隔符的字符串创建一个列表。
-例如，`let colors = ("red,green,blue" | split row ",")` 创建列表`[red green blue]`。
+[`split row`](/commands/docs/split_row.md)命令根据分隔符将一个字符串创建为一个列表。
 
-[`split column`](/commands/docs/split_column.md)命令将从一个基于分隔符的字符串中创建一个表格。例如，`let colors = ("red,green,blue" | split column ",")` 创建一个表格，并为每个元素添加一列。
+```nu
+"red,green,blue" | split row ","
+# => ╭───┬───────╮
+# => │ 0 │ red   │
+# => │ 1 │ green │
+# => │ 2 │ blue  │
+# => ╰───┴───────╯
+```
 
-最后, [`split chars`](/commands/docs/split_chars.md)命令将一个字符串分割成一个字符列表。
+[`split column`](/commands/docs/split_column.md)命令根据分隔符将一个字符串创建为一个表格。它会为表格套用通用的列名。
+
+```nu
+"red,green,blue" | split column ","
+# => ╭───┬─────────┬─────────┬─────────╮
+# => │ # │ column0 │ column1 │ column2 │
+# => ├───┼─────────┼─────────┼─────────┤
+# => │ 0 │ red     │ green   │ blue    │
+# => ╰───┴─────────┴─────────┴─────────╯
+```
+
+最后，[`split chars`](/commands/docs/split_chars.md)命令将一个字符串分割成一个字符列表。
+
+```nu
+'aeiou' | split chars
+# => ╭───┬───╮
+# => │ 0 │ a │
+# => │ 1 │ e │
+# => │ 2 │ i │
+# => │ 3 │ o │
+# => │ 4 │ u │
+# => ╰───┴───╯
+```
 
 ## `str` 命令
 
 许多字符串函数是`str`命令的子命令，你可以使用`help str`来获得一个完整的 `str` 命令列表。
 
-例如, 你可以使用`str contains`来检查一个字符串是否包含某个特定的字符：
+例如，你可以使用 [`str contains`](/commands/docs/str_contains.md) 检查一个字符串是否包含某个特定的子字符串：
 
 ```nu
-"hello world" | str contains "w"
+"hello world" | str contains "o wo"
 # => true
 ```
+
+（为了简洁，你可能也更喜欢使用 `=~` 运算符（见下文）。）
 
 ### 修剪字符串
 
@@ -245,9 +302,9 @@ $"2 + 2 is (2 + 2) \(you guessed it!)"
 # => My   string
 ```
 
-你可以用 `--right` 和 `--left` 选项来指定对哪一边进行修剪。
+你可以用 `--right` 和 `--left` 选项来指定对哪一边进行修剪（`-r` 和 `-l` 分别是它们的短形式选项）。
 
-要修剪一个特定的字符，使用 `--char <Character>` 来指定要修剪的字符。
+要修剪一个特定的字符，使用 `--char <Character>` 或 `-c <Character>` 来指定要修剪的字符。
 
 下面是一个传入了所有选项的例子：
 
@@ -266,12 +323,12 @@ $"2 + 2 is (2 + 2) \(you guessed it!)"
 'Hello World!' | str index-of 'r'
 # => 8
 'Hello World!' | str substring 4..8
-# => o Wo
+# => o Wor
 ```
 
 ### 字符串填充
 
-[`fill`](/commands/docs/fill.md)：
+通过 [`fill`](/commands/docs/fill.md) 命令，你可以为字符串添加填充。填充会向字符串中添加字符，直到达到某个长度。例如：
 
 ```nu
 '1234' | fill -a right -c '0' -w 10
@@ -300,18 +357,42 @@ $"2 + 2 is (2 + 2) \(you guessed it!)"
 通过 [`parse`](/commands/docs/parse.md) 命令，你可以将一个字符串解析成若干列。比如：
 
 ```nu
-'Nushell is the best' | parse '{shell} is {type}'
-# => ╭───┬─────────┬──────────╮
-# => │ # │  shell  │   type   │
-# => ├───┼─────────┼──────────┤
-# => │ 0 │ Nushell │ the best │
-# => ╰───┴─────────┴──────────╯
-'Bash is kinda cringe' | parse --regex '(?P<shell>\w+) is (?P<type>[\w\s]+)'
-# => ╭───┬───────┬──────────────╮
-# => │ # │ shell │     type     │
-# => ├───┼───────┼──────────────┤
-# => │ 0 │ Bash  │ kinda cringe │
-# => ╰───┴───────┴──────────────╯
+'Nushell 0.80' | parse '{shell} {version}'
+# => ╭───┬─────────┬─────────╮
+# => │ # │  shell  │ version │
+# => ├───┼─────────┼─────────┤
+# => │ 0 │ Nushell │ 0.80    │
+# => ╰───┴─────────┴─────────╯
+'where all data is structured!' | parse --regex '(?P<subject>\w*\s?\w+) is (?P<adjective>\w+)'
+# => ╭───┬──────────┬────────────╮
+# => │ # │ subject  │ adjective  │
+# => ├───┼──────────┼────────────┤
+# => │ 0 │ all data │ structured │
+# => ╰───┴──────────┴────────────╯
+```
+
+如果已知某个字符串包含逗号分隔、制表符分隔或多空格分隔的数据，你可以使用 [`from csv`](/commands/docs/from_csv.md)、[`from tsv`](/commands/docs/from_tsv.md) 或 [`from ssv`](/commands/docs/from_ssv.md)：
+
+```nu
+"acronym,long\nAPL,A Programming Language" | from csv
+# => ╭───┬─────────┬────────────────────────╮
+# => │ # │ acronym │          long          │
+# => ├───┼─────────┼────────────────────────┤
+# => │ 0 │ APL     │ A Programming Language │
+# => ╰───┴─────────┴────────────────────────╯
+"name  duration\nonestop.mid  4:06" | from ssv
+# => ╭───┬─────────────┬──────────╮
+# => │ # │    name     │ duration │
+# => ├───┼─────────────┼──────────┤
+# => │ 0 │ onestop.mid │ 4:06     │
+# => ╰───┴─────────────┴──────────╯
+"rank\tsuit\nJack\tSpades\nAce\tClubs" | from tsv
+# => ╭───┬──────┬────────╮
+# => │ # │ rank │  suit  │
+# => ├───┼──────┼────────┤
+# => │ 0 │ Jack │ Spades │
+# => │ 1 │ Ace  │ Clubs  │
+# => ╰───┴──────┴────────╯
 ```
 
 ## 字符串比较
@@ -359,4 +440,8 @@ $'(ansi purple_bold)This text is a bold purple!(ansi reset)'
 
 `ansi purple_bold` 使文本紫色加粗
 
-`ansi reset` 将着色重置为默认值。(提示: 你应该总是用 `ansi reset` 来结束着色的字符串)
+`ansi reset` 将着色重置为默认值。
+
+:::: tip
+你应该总是用 `ansi reset` 来结束着色的字符串
+::::

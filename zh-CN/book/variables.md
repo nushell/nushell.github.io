@@ -14,14 +14,15 @@ let val = 42
 $val
 # => 42
 $val = 100
-# => Error: nu::shell::assignment_requires_mutable_variable
+# => Error: nu::parser::assignment_requires_mutable_variable
 # =>
 # =>   × Assignment to an immutable variable.
-# =>    ╭─[entry #10:1:1]
+# =>    ╭─[repl_entry #3:1:1]
 # =>  1 │ $val = 100
 # =>    · ──┬─
 # =>    ·   ╰── needs to be a mutable variable
 # =>    ╰────
+# =>   help: declare the variable with `mut`, or shadow it again with `let`
 ```
 
 然而，不可变变量可以被“遮蔽”。遮蔽意味着它们被重新声明，并且它们的初始值在同一作用域内不能再使用。
@@ -33,9 +34,36 @@ do { let val = 101;  $val }    # 在内部作用域中，遮蔽该变量
 $val                           # 在外部作用域中，变量保持不变
 # => 42
 let val = $val + 1             # 现在，在外部作用域中，遮蔽原始变量
-$val                           # 在外部作用域中，变量现在被遮蔽，并且
-# => 43                               # 其原始值不再可用。
+$val                           # 变量现在被遮蔽，其原始值不再可用
+# => 43
 ```
+
+#### 在管道中使用 `let`
+
+`let` 也可以作为管道中的一步使用。在管道末尾，`let <名称>` 会把管道的结果存入变量，
+同时也会把它输出出来：
+
+```nu
+[3 1 2] | sort | let nums
+# => ╭───┬───╮
+# => │ 0 │ 1 │
+# => │ 1 │ 2 │
+# => │ 2 │ 3 │
+# => ╰───┴───╯
+$nums | length
+# => 3
+```
+
+在管道中间，`let` 会保存它的输入，并原封不动地传给下一个命令：
+
+```nu
+"hello" | let greeting | str length
+# => 5
+$greeting
+# => hello
+```
+
+如果你不想在管道末尾看到这个值，加上 `| ignore`，或者改用常规的 `let nums = ...` 形式。
 
 ### 可变变量
 
@@ -57,12 +85,12 @@ $val
 | `-=`   | 从变量中减去一个值，并使差成为其新值 |
 | `*=`   | 将变量乘以一个值，并使积成为其新值   |
 | `/=`   | 将变量除以一个值，并使商成为其新值   |
-| `++=`  | 将列表或值附加到变量                 |
+| `++=`  | 将列表、字符串或二进制值连接到变量   |
 
 ::: tip 注意
 
-1. `+=`、`-=`、`*=` 和 `/=` 仅在其根操作预期工作的上下文中有效。例如，`+=` 使用加法，因此不能用于加法通常会失败的上下文
-2. `++=` 要求变量**或**参数是列表。
+1. `+=`、`-=`、`*=` 和 `/=` 仅在其根操作预期工作的上下文中有效。例如，`+=` 使用加法，因此不能用于加法通常会失败的上下文。结果还必须符合变量的类型：`/` 总是产生 `float`，因此当 `$x` 是 `int` 时 `$x /= 2` 会报错（请改用 `$x = $x // 2`）。
+2. `++=` 要求变量和值的类型相同：都是列表、都是字符串，或都是二进制值。要向列表追加单个元素，请使用 `$list ++= [$item]`。
 
 :::
 
@@ -75,6 +103,15 @@ $val
 mut x = 0
 
 [1 2 3] | each { $x += 1 }   # 错误：$x 在闭包中被捕获
+# => Error: nu::parser::expected_keyword
+# =>
+# =>   × Capture of mutable variable.
+# =>    ╭─[repl_entry #1:4:18]
+# =>  3 │
+# =>  4 │ [1 2 3] | each { $x += 1 }   # error: $x is captured in a closure
+# =>    ·                  ─┬
+# =>    ·                   ╰── capture of mutable variable
+# =>    ╰────
 ```
 
 要为此类行为使用可变变量，鼓励你使用循环
@@ -84,15 +121,16 @@ mut x = 0
 常量变量是一个不可变变量，可以在解析时完全求值。这对于需要在解析时知道参数值的命令很有用，例如 [`source`](/commands/docs/source.md)、[`use`](/commands/docs/use.md) 和 [`plugin use`](/commands/docs/plugin_use.md)。有关更深入的解释，请参阅 [Nushell 代码如何运行](how_nushell_code_gets_run.md)。它们使用 `const` 关键字声明
 
 ```nu
-const script_file = 'path/to/script.nu'
+const script_file = 'hello.nu'
 source $script_file
+# => Hello from hello.nu
 ```
 
 ## 在可变和不可变变量之间进行选择
 
 在大多数用例中，尽量使用不可变变量。
 
-你可能想知道为什么 Nushell 默认使用不可变变量。在 Nushell 开发的最初几年，可变变量并不是一种语言特性。在 Nushell 开发的早期，我们决定看看在语言中使用更注重数据、函数式风格能走多远。当 Nushell 引入并行性时，这个实验显示了其价值。通过在任何 Nushell 脚本中从 [`each`](/commands/docs/each.md) 切换到 [`par-each`](/commands/docs/par-each.md)，你可以在输入上并行运行相应的代码块。这是可能的，因为 Nushell 的设计严重依赖于不可变性、组合和流水线。
+你可能想知道为什么 Nushell 默认使用不可变变量。在 Nushell 开发的最初几年，可变变量并不是一种语言特性。在 Nushell 开发的早期，我们决定看看在语言中使用更注重数据、函数式风格能走多远。当 Nushell 引入并行性时，这个实验显示了其价值。通过在任何 Nushell 脚本中从 [`each`](/commands/docs/each.md) 切换到 [`par-each`](/commands/docs/par-each.md)，你可以在输入上并行运行相应的代码块。这是可能的，因为 Nushell 的设计严重依赖于不可变性、组合和管道。
 
 在 Nushell 中，许多（如果不是大多数）可变变量的用例都有一个函数式解决方案，该解决方案：
 
@@ -105,15 +143,12 @@ source $script_file
 
 ```nu
 ls | enumerate | each { |elt| $"Item #($elt.index) is size ($elt.item.size)" }
-# => ╭───┬───────────────────────────╮
-# => │ 0 │ Item #0 is size 812 B     │
-# => │ 1 │ Item #1 is size 3.4 KiB   │
-# => │ 2 │ Item #2 is size 11.0 KiB  │
-# => │ 3 │ ...                       │
-# => │ 4 │ Item #18 is size 17.8 KiB │
-# => │ 5 │ Item #19 is size 482 B    │
-# => │ 6 │ Item #20 is size 4.0 KiB  │
-# => ╰───┴───────────────────────────╯
+# => ╭───┬─────────────────────────╮
+# => │ 0 │ Item #0 is size 812 B   │
+# => │ 1 │ Item #1 is size 3.4 kB  │
+# => │ 2 │ Item #2 is size 28 B    │
+# => │ 3 │ Item #3 is size 11.2 kB │
+# => ╰───┴─────────────────────────╯
 ```
 
 你还可以使用 [`reduce`](/commands/docs/reduce.md) 命令以与在循环中改变变量相同的方式工作。例如，如果你想在字符串列表中找到最长的字符串，你可以这样做：
@@ -126,8 +161,7 @@ ls | enumerate | each { |elt| $"Item #($elt.index) is size ($elt.item.size)" }
       $max
   }
 }
-
-three
+# => three
 ```
 
 虽然 `reduce` 处理列表，但 [`generate`](/commands/docs/generate.md) 命令可以与任意源一起使用，例如外部 REST API，也无需可变变量。这是一个示例，它每小时检索一次本地天气数据，并从该数据生成一个连续的列表。`each` 命令可用于在每个新列表项可用时使用它。
@@ -162,12 +196,12 @@ generate {|weather_station|
 
 使用带有不可变变量的[过滤器命令](/commands/categories/filters.md)通常比使用带有传统流控制语句（如 `for` 和 `while`）的可变变量性能要好得多。例如：
 
-- 使用 `for` 语句创建包含 50,000 个随机数的列表：
+- 使用 `for` 语句创建包含 10,000 个随机数的列表：
 
   ```nu
   timeit {
     mut randoms = []
-    for _ in 1..50_000 {
+    for _ in 1..10_000 {
       $randoms = ($randoms | append (random int))
     }
   }
@@ -179,25 +213,46 @@ generate {|weather_station|
 
   ```nu
   timeit {
-    let randoms = (1..50_000 | each {random int})
+    let randoms = (1..10_000 | each {random int})
   }
   ```
 
-  结果：19毫秒 314微秒 205纳秒
+  结果：10ms 449µs 500ns
 
 - 使用 `each` 进行 10,000,000 次迭代：
 
   ```nu
   timeit {
-    let randoms = (1..10_000_000 | each {random int})
+    let randoms = (1..1_000_000 | each {random int})
   }
   ```
 
-  结果：4秒 233毫秒 865微秒 238纳秒
+  结果：1sec 47ms 554µs 250ns
 
   与许多过滤器一样，`each` 语句也流式传输其结果，这意味着管道的下一阶段可以继续处理，而无需等待结果被收集到变量中。
 
   对于可以通过并行化优化的任务，如上所述，`par-each` 可以获得更显着的性能提升。
+
+## 删除变量
+
+变量的生命周期通常持续到声明它的作用域结束。要提前释放一个变量（例如它持有大量数据），
+可以用 [`unlet`](/commands/docs/unlet.md) 删除它。之后该变量就不能再使用了：
+
+```nu
+let a = 1
+let b = 2
+unlet $a $b
+$a
+# => Error: nu::shell::variable_not_found
+# =>
+# =>   × Variable not found
+# =>    ╭─[repl_entry #1:4:1]
+# =>  3 │ unlet $a $b
+# =>  4 │ $a
+# =>    · ─┬
+# =>    ·  ╰── variable not found
+# =>    ╰────
+```
 
 ## 变量名
 

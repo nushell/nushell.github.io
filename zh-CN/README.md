@@ -6,7 +6,7 @@ tagline: 一种新的 Shell
 actionText: 点此了解更多 →
 actionLink: /zh-CN/book/
 features:
-  - title: 利用管道控制任意系统
+  - title: 跨平台
     details: Nu 可以在 Linux、macOS、BSD 和 Windows 上运行。一次学习，处处可用。
   - title: 一切皆数据
     details: Nu 管道使用结构化数据，你可以用同样的方式安全地选择，过滤和排序。停止解析字符串，开始解决问题。
@@ -18,7 +18,7 @@ features:
 
 ### Nu 可以与现有数据一起工作
 
-Nu 开箱即用支持 [JSON、YAML、SQLite、Excel 等](/zh-CN/book/loading_data.md)。无论是文件、数据库还是网络 API 中的数据，都可以很容易地引入 Nu 管道：
+Nu 开箱即用支持 [JSON、YAML、SQLite、Excel 等](./book/loading_data.md)。无论是文件、数据库还是网络 API 中的数据，都可以很容易地引入 Nu 管道：
 
 <img src="https://www.nushell.sh/frontpage/fetch-example.png" alt="Screenshot showing fetch with a web API" class="hero"/>
 
@@ -30,7 +30,7 @@ Nu 在类型化的数据上操作，所以它能捕捉到其他 Shell 无法捕�
 
 ## 获取 Nu
 
-Nushell 可以通过 [你喜欢的软件包管理器](https://repology.org/project/nushell/versions) 来安装，可以下载 [二进制文件](https://github.com/nushell/nushell/releases)，可以在 [GitHub Action](https://github.com/marketplace/actions/setup-nu) 中使用，此外也可以以 [源码](https://github.com/nushell/nushell)方式获得。在此阅读 [详细的安装说明](/zh-CN/book/installation.md) 或直接开始：
+Nushell 可以通过 [你喜欢的软件包管理器](https://repology.org/project/nushell/versions) 来安装，可以下载 [二进制文件](https://github.com/nushell/nushell/releases)，可以在 [GitHub Action](https://github.com/marketplace/actions/setup-nu) 中使用，此外也可以以 [源码](https://github.com/nushell/nushell)方式获得。在此阅读 [详细的安装说明](./book/installation.md) 或直接开始：
 
 #### macOS / Linux:
 
@@ -59,11 +59,11 @@ winget install nushell --scope machine
 
 ## 文档
 
-- [入门](/zh-CN/book/getting_started.md) 指引你熟悉 Nushell
-- [Nu 之异同](/zh-CN/book/coming_to_nu.md) 描述了 Nu 与其他语言和 Shell 的异同之处
-- [Nu 基础](/zh-CN/book/nu_fundamentals.md) 是对 Nu 基础知识更详尽、更有条理的描述
-- [Nu 编程](/zh-CN/book/programming_in_nu.md) 将 Nu 作为一门编程语言进行描述
-- [作为 Shell 的 Nu](/zh-CN/book/nu_as_a_shell.md) 让你深入了解 Shell 环境中的交互功能和可配置性
+- [入门](./book/getting_started.md) 指引你熟悉 Nushell
+- [Nu 之异同](./book/coming_to_nu.md) 描述了 Nu 与其他语言和 Shell 的异同之处
+- [Nu 基础](./book/nu_fundamentals.md) 是对 Nu 基础知识更详尽、更有条理的描述
+- [Nu 编程](./book/programming_in_nu.md) 将 Nu 作为一门编程语言进行描述
+- [作为 Shell 的 Nu](./book/nu_as_a_shell.md) 让你深入了解 Shell 环境中的交互功能和可配置性
 
 ## 社区
 

@@ -22,7 +22,7 @@ Nushell 提供并使用了一系列特殊变量和常量。其中许多在本手
 - `temp-dir`: 用户可写的临时文件路径
 - `pid`: 当前运行的 Nushell 进程的 PID
 - `os-info`: 主机操作系统信息
-- `startup-time`: Nushell 启动并处理所有配置文件所花费的时间(持续时间)
+- `startup-time`: Nushell 启动所花费的时间（一个时间间隔）。计时从 Nushell 自己的 `main` 函数开始，因此操作系统加载 `nu` 可执行文件的时间不计入在内，而 `exec nu` 会重新开始计时。在 REPL 中，该值在第一个提示符就绪后即为最终值，它包括加载配置文件和插件、运行启动钩子以及渲染提示符的时间。使用 `nu -c` 或脚本时，它在命令或脚本开始运行时即为最终值。在此之前（例如正在求值某个配置文件时），它保存的是到目前为止已过去的时间。启动横幅会显示这个值；使用 `banner --no-startup-time` 可以隐藏它。
 - `is-interactive`: 布尔值，指示 Nushell 是否作为交互式 shell 启动(`true`)或正在运行脚本或命令字符串。例如：
 
   ```nu
@@ -71,15 +71,15 @@ Nushell 还使用以下几个环境变量用于特定目的：
 
 ### `$env.FILE_PWD`
 
-在脚本、模块或源文件中，此变量保存文件所在目录的完全限定名称。注意，此值也可以通过以下方式作为常量获取：
+在脚本、模块或源文件中，此变量保存文件所在目录的完全限定名称。注意，此值也可以在脚本或模块文件中使用 [`path self`](/commands/docs/path_self.md) 作为常量获取：
 
 ```nu
-path self | path dirname
+const this_dir = path self | path dirname
 ```
 
 ### `$env.LAST_EXIT_CODE`
 
-最后一个命令的退出代码，通常用于外部命令 - 相当于 POSIX 中的 `$?`。注意，此信息也会在外部命令的 `try` 表达式的 `catch` 块中可用。例如：
+最后一个命令的退出代码，通常用于外部命令 —— 相当于 POSIX 中的 `$?`。如果管道中有多个外部命令失败，它保存的是最右侧那个失败命令的退出代码（参见[管道 - 管道中失败的外部命令](./pipelines.md#管道中失败的外部命令)）。注意，此信息也会在外部命令的 `try` 表达式的 `catch` 块中可用。例如：
 
 ```nu
 ^ls file-that-does-not-exist e> /dev/null
@@ -97,6 +97,12 @@ try {
 
 ### `$env.NU_LIB_DIRS`
 
+::: tip
+
+优先使用 `$NU_LIB_DIRS` 常量（见下文），它在解析时也可用。启动时，`$env.NU_LIB_DIRS` 和 `$NU_LIB_DIRS` 都被设置为同一个列表：从 `NU_LIB_DIRS` 环境变量继承的任何目录，或用 `nu --include-path` 传入的任何目录，然后是默认目录。环境变量在常量之后被搜索。
+
+:::
+
 使用 `source`、`use` 或 `overlay use` 命令时将搜索的目录列表。另请参阅：
 
 - 下面的 `$NU_LIB_DIRS` 常量
@@ -105,7 +111,7 @@ try {
 
 ### `$env.NU_LOG_LEVEL`
 
-[标准库](/zh-CN/book/standard_library.md)在 `std/log` 中提供日志记录功能。`NU_LOG_LEVEL` 环境变量用于定义自定义命令、模块和脚本使用的日志级别。
+[标准库](./standard_library.md)在 `std/log` 中提供日志记录功能。`NU_LOG_LEVEL` 环境变量用于定义自定义命令、模块和脚本使用的日志级别。
 
 ```nu
 nu -c '1 | print; use std/log; log debug 1111; 9 | print'
@@ -127,7 +133,7 @@ nu -c '1 | print; use std/log; $env.NU_LOG_LEVEL = "debug"; log debug 1111; 9 | 
 
 ```nu
 nu --log-level 'debug' -c '1 | print; use std/log; log debug 1111; 9 | print'
-# => … 更多日志消息，带有对 Nushell 命令 Rust 源文件的引用
+# => … a lot more log messages, with references to the Nushell command Rust source files
 #      但没有我们自己的 `log debug` 消息
 # => 1
 # => 9
@@ -166,52 +172,77 @@ nu --log-level 'debug' -c '1 | print; use std/log; log debug 1111; 9 | print'
 ### `$env.SHLVL`
 
 `SHLVL` 在大多数 shell 进入新的子 shell 时会递增。它可以用来确定嵌套 shell 的数量。例如，
-如果 `$env.SHLVL == 2
+如果 `$env.SHLVL == 2`，那么输入 `exit` 应该会让你回到父 shell。
+
+### `$env.XDG_CONFIG_HOME`
+
+可用于可选地覆盖 `$nu.default-config-dir` 的位置。
+参见[配置 - 启动变量](./configuration.md#启动变量)。
+
+### `$env.XDG_DATA_HOME`
+
+可用于可选地覆盖 `$nu.data-dir` 的位置。
+参见[配置 - 启动变量](./configuration.md#启动变量)。
 
 ## `$in`
 
-`$in` 是一个特殊变量，表示管道中的输入值。当命令通过管道连接时，前一个命令的输出会作为 `$in` 传递给下一个命令。
-
-```nu
-ls | where size > 10kb | each {|file| $in.name}
-```
+`$in` 变量表示表达式的管道输入。参见[管道 - 特殊的 `$in` 变量](./pipelines.md#管道输入和特殊的-in-变量)。
 
 ## `$it`
 
-`$it` 是 `each` 块中的默认参数变量，当没有显式指定参数名时使用：
+`$it` 是一个只在"行条件"中可用的特殊变量——行条件是一种简化字段访问的便捷写法。行条件被 [`where`](/commands/docs/where.md) 接受，也被 [`any`](/commands/docs/any.md)、[`all`](/commands/docs/all.md)、[`take while`](/commands/docs/take_while.md)、[`take until`](/commands/docs/take_until.md)、[`skip while`](/commands/docs/skip_while.md)、[`skip until`](/commands/docs/skip_until.md) 和 [`chunk-by`](/commands/docs/chunk-by.md) 接受。在行条件中，`$it` 是当前项，记录中的列也可以直接按名字引用。更多信息参见 `help where`。
 
 ```nu
-ls | each { echo $it.name }
+[1 5 12 3] | where $it > 4
+# => ╭───┬────╮
+# => │ 0 │  5 │
+# => │ 1 │ 12 │
+# => ╰───┴────╯
+[1 5 12 3] | any $it > 10
+# => true
 ```
 
-等同于：
+## `$ans`
+
+`$ans` 变量保存了 REPL 中最近一次运行命令的信息：它的 `exit_code`、`duration` 和 `command` 文本。
+
+`$ans.last` 保存最近一次的输出，但只有当 `$env.config.max_last_result_size` 被设置为大于零的值时才有效。
+默认值是 `0b`，即禁用它（此时 `$ans` 里不会有 `last`）。要启用它，可以在 `config.nu` 里加上类似这样的配置：
 
 ```nu
-ls | each {|file| echo $file.name }
+$env.config.max_last_result_size = 1MB
 ```
+
+注意，只有管道的最后一部分是内部命令时，`$ans.last` 才会更新。外部命令的输出如果通过管道传给 `collect`，也可以被保存。
+
+```nu
+fd . | collect
+# => bar/
+# => foo.txt
+$ans
+# => ╭───────────┬──────────────────╮
+# => │ last      │ bar/             │
+# => │           │ foo.txt          │
+# => │ exit_code │ 0                │
+# => │ duration  │ 18ms 904µs 776ns │
+# => │ command   │ fd . | collect   │
+# => ╰───────────┴──────────────────╯
+```
+
+超过 `max_last_result_size` 的结果会被截断，此时显示 `$ans.last` 会打印一条
+`nu::shell::last_result_truncated` 警告。单独运行 `$ans`（或 `$ans.<field>`）会更新
+`exit_code`、`duration` 和 `command`，但会保留之前的 `last` 值。
+`ans` 是保留名，因此 `let ans = ...` 会报错。
 
 ## `$NU_LIB_DIRS`
 
-`$NU_LIB_DIRS` 是一个常量列表，指定 Nushell 查找模块文件的目录。这些目录会在以下情况下被搜索：
+`$NU_LIB_DIRS` 是 `$env.NU_LIB_DIRS` 的常量版本——使用 `source`、`use` 或 `overlay use` 命令时会被搜索的目录列表。另请参阅：
 
-1. 使用 `source` 命令加载脚本时
-2. 使用 `use` 命令导入模块时
-3. 使用 `overlay use` 命令加载覆盖层时
-
-默认包含以下目录：
-
-- Nushell 标准库路径
-- `~/.config/nushell` 下的模块目录
-
-可以通过 `$env.NU_LIB_DIRS` 环境变量扩展此列表。
+- [模块路径](./modules/using_modules.md#模块路径)
+- [配置 - `$NU_LIB_DIRS`](./configuration.md#nu-lib-dirs-常量)
 
 ## `$NU_PLUGIN_DIRS`
 
-`$NU_PLUGIN_DIRS` 是一个常量列表，指定 Nushell 查找插件的目录。这些目录会在使用 `plugin add` 命令时被搜索。
+`$env.NU_PLUGIN_DIRS` 的常量版本——使用 `plugin add` 注册插件时会被搜索的目录列表。另请参阅：
 
-默认包含以下目录：
-
-- Nushell 内置插件路径
-- `~/.config/nushell` 下的插件目录
-
-可以通过 `$env.NU_PLUGIN_DIRS` 环境变量扩展此列表。
+- [插件搜索路径](./plugins.md#插件搜索路径)

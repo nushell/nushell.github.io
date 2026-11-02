@@ -2,7 +2,7 @@
 
 ## 将文件转储到目录
 
-传统 shell 中的一个常见模式是将文件转储到目录并自动加载（例如，加载自定义补全）。在 Nushell 中，直接这样做目前还不可能，但仍然可以使用目录模块。
+传统 shell 中的一个常见模式是将文件转储到目录并自动加载（例如，加载自定义补全）。在 Nushell 中，用户自动加载目录（`$nu.user-autoload-dirs`）中的每个 `.nu` 文件都会在启动时被加载（参见[配置](../book/configuration.md#配置概述)）。另一种选择是目录模块，它把这些文件以一个名字归拢在一起。
 
 这里我们将创建一个简单的补全模块，其中包含一个专门用于某些 Git 补全的子模块：
 
@@ -42,15 +42,14 @@
 5. 在 `env.nu` 中将 `completions` 目录的父目录添加到你的 `NU_LIB_DIRS` 中
 
    ```nu
-   $env.NU_LIB_DIRS = [
-       ...
-       $nu.default-config-dir
-   ]
+   $env.NU_LIB_DIRS ++= [ $nu.default-config-dir ]
    ```
 
 6. 在 `config.nu` 中导入补全到 Nushell：
 
    `use completions *`
+
+   这个 `*` 很重要：单独使用 `use completions` 并不会引入 `git` 子模块的命令（这一点自 Nushell 0.114 起改变）。请改用 `use completions *` 或 `use completions git`。
 
 现在你已经设置了一个可以放置补全文件的目录，下次启动 Nushell 时应该会有一些 Git 补全。
 
@@ -62,7 +61,7 @@
 
 ## 覆层和"虚拟环境"
 
-[覆层](/zh-CN/book/overlays.md)是 **层** 的 **定义** 。我们可以利用它来建立一个临时的虚拟环境，其中包含自定义环境变量，最后再丢弃这些变量。
+[覆层](../book/overlays.md)是定义的层。我们可以利用它们建立一个临时的虚拟环境，其中包含自定义环境变量，并在最后丢弃它们。
 
 我们在这个示例中的目标是：
 
@@ -81,18 +80,24 @@ print $"('A' in $env) ('B' in $env)"
 # => true false
 ```
 
-现在让我们创建一个带有 `load` 命令的 `env` 模块，该命令从 `env.json` 加载环境，并将其用作覆层：
+现在让我们创建一个带有 `load` 命令的 `env` 模块，该命令从 `env.json` 加载环境：
 
 ```nu
 'export def --env load [] { open env.json | load-env }' | save env.nu
+```
 
+然后将它用作覆层。`overlay use` 在命令被解析时读取模块文件，所以在保存好 `env.nu` 之后，把它作为单独的一条命令运行：
+
+```nu
 overlay use ./env.nu
 
 overlay list
-# => ╭───┬──────╮
-# => │ 0 │ zero │
-# => │ 1 │ env  │
-# => ╰───┴──────╯
+# => ╭───┬──────┬────────╮
+# => │ # │ name │ active │
+# => ├───┼──────┼────────┤
+# => │ 0 │ zero │ true   │
+# => │ 1 │ env  │ true   │
+# => ╰───┴──────┴────────╯
 ```
 
 现在我们加载 `env.json` 文件：
@@ -113,15 +118,15 @@ print $"('A' in $env) ('B' in $env)"
 # => true false
 ```
 
-请注意 - 如[覆层](/zh-CN/book/overlays.md)中所述 - 重新激活覆层将恢复加载的环境变量，
-只要 Nushell 会话保持活动状态，就不会创建新的上下文，尽管 `overlay list` 不再列出覆层。
+请注意 - 如[覆层](../book/overlays.md)中所述 - 重新激活覆层将恢复加载的环境变量，
+只要 Nushell 会话保持活动状态，就不会创建新的上下文。`overlay list` 仍会列出被隐藏的覆层，其 `active` 为 `false`。
 
-更多相关信息，特别是关于环境变量及其修改的信息，可以在[环境](/zh-CN/book/environment.md)、[模块](/zh-CN/book/modules.md)、[覆层](/zh-CN/book/overlays.md)中找到，
+更多相关信息，特别是关于环境变量及其修改的信息，可以在[环境](../book/environment.md)、[模块](../book/modules.md)、[覆层](../book/overlays.md)中找到，
 以及相应的命令文档：[`def --env`](/commands/docs/def.md)、[`export def --env`](/commands/docs/export_def.md)、[`load-env`](/commands/docs/load-env.md) 和 [`export-env`](/commands/docs/export-env.md)。
 
 ### 复杂的虚拟环境
 
-这种覆盖环境的方法可用于限定更复杂的虚拟环境，包括更改 `PATH` 环境变量，或在环境变量或文件中定义的其他工具设置。
+这种用覆层叠加环境的方法可用于限定更复杂的虚拟环境，包括更改 `PATH` 环境变量，或在环境变量或文件中定义的其他工具设置。
 
 像 conda 或 Python virtualenv 这样的工具管理和隔离环境变量集。
 [官方 virtualenv 集成](https://github.com/pypa/virtualenv/blob/main/src/virtualenv/activation/nushell/activate.nu)利用了这些概念。

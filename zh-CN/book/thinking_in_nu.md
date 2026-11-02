@@ -1,6 +1,6 @@
 # 用 Nu 的方式思考
 
-Nushell 与众不同！新用户通常会带着来自其他 Shell 或语言的现有"习惯"或思维模式。
+Nushell 与众不同！新用户带着来自其他 Shell 或语言的现有"习惯"或思维模式是很常见的（而且是可以预料的！）。
 
 新用户最常见的问题通常属于以下主题之一：
 
@@ -15,8 +15,8 @@ Nushell 既是一种编程语言，也是一个 Shell。因此，它有自己处
 例如，以下命令行在 Unix/Linux 平台上的 Bash 和 Nushell 中都能工作：
 
 ```nu
+# 返回 Nushell 的贡献者，按贡献数量排序
 curl -s https://api.github.com/repos/nushell/nushell/contributors | jq -c '.[] | {login,contributions}'
-# => 返回 Nushell 的贡献者，按贡献数量排序
 ```
 
 Nushell 与 Bash（和其他 Shell）有许多其他相似之处和许多共同的命令。
@@ -38,7 +38,7 @@ Nushell 从许多 Shell 和语言中借鉴了概念。你可能会发现 Nushell
 
 ### 但它不是 Bash
 
-然而，正因为如此，有时很容易忘记：一些 Bash（和一般的 POSIX）风格的设计在 Nushell 中就是不起作用。例如，在 Bash 中，通常会这样写：
+然而，正因为如此，有时很容易忘记：一些 Bash（和一般的 POSIX）风格的语法结构在 Nushell 中就是不起作用。例如，在 Bash 中，通常会这样写：
 
 ```sh
 # 使用 > 重定向
@@ -68,7 +68,8 @@ echo $?
 
 ## 隐式返回
 
-来自其他 Shell 的用户可能非常熟悉 `echo` 命令。Nushell 的 [`echo`](/commands/docs/echo.md) 乍一看可能相同，但它非常不同。
+来自其他 Shell 的用户很可能非常熟悉 `echo` 命令。Nushell 的
+[`echo`](/commands/docs/echo.md) 乍一看可能一样，但它*非常*不同。
 
 首先，注意以下输出在 Bash 和 Nushell（甚至 PowerShell 和 Fish）中看起来如何相同：
 
@@ -77,7 +78,8 @@ echo "Hello, World"
 # => Hello, World
 ```
 
-但是，当其他 Shell 将 `Hello, World` 直接发送到标准输出时，Nushell 的 `echo` 只是返回一个值。然后 Nushell 渲染命令（或更技术地说，表达式）的返回值。
+但是，当其他 Shell 把 `Hello, World` 直接发送到*标准输出*时，Nushell 的 `echo`
+只是*返回一个值*。然后 Nushell *渲染*一个命令（更技术地说，一个*表达式*）的返回值。
 
 更重要的是，Nushell 隐式返回表达式的值。这在许多方面类似于 PowerShell 或 Rust。
 
@@ -167,7 +169,8 @@ echo 60
 
 - 第一个值被评估为整数 40，但不会被返回
 - 第二个值被评估为整数 50，但不会被返回
-- 第三个值被评估为整数 60，并且由于它是最后一个值，它被返回并显示（渲染）。
+- 第三个值被评估为整数 60，并且由于它是最后一个
+  值，它被返回并显示（渲染）。
 
 ::: warning 以 Nushell 的方式思考
 在调试意外结果时，请注意：
@@ -191,12 +194,18 @@ print $p
 $p * 6
 ```
 
-1. 第 1 行：整数 7 被赋给 `$p`，但 [`let` 命令](/commands/docs/let.md) 本身的返回值是 `null`。然而，因为它不是表达式中的最后一个值，所以它不会被显示。
-2. 第 2 行：`print` 命令本身的返回值是 `null`，但 `print` 命令强制其参数（`$p`，即 7）被*显示*。与第 1 行一样，`null` 返回值被丢弃，因为这不是表达式中的最后一个值。
-3. 第 3 行：评估为整数值 42。作为表达式中的最后一个值，这是返回结果，并且也会被显示（渲染）。
+1. 第 1 行：整数 7 被赋给 `$p`，但 [`let` 命令](/commands/docs/let.md)
+   本身的返回值是 `null`。然而，因为它不是表达式中的最后一个
+   值，所以它不会被显示。
+2. 第 2 行：`print` 命令本身的返回值是 `null`，但 `print`
+   命令强制其参数（`$p`，即 7）被*显示*。与第 1 行一样，`null`
+   返回值被丢弃，因为这不是表达式中的最后一个值。
+3. 第 3 行：求值为整数值 42。作为表达式中的最后一个值，这是
+   返回结果，并且也会被显示（渲染）。
 
 ::: warning 以 Nushell 的方式思考
-熟悉常用命令的输出类型将帮助你理解如何将简单的命令组合在一起以实现复杂的结果。
+熟悉常用命令的输出类型将帮助你理解如何
+把简单的命令组合在一起以实现复杂的结果。
 
 `help <command>` 将显示 Nushell 中每个命令的签名，包括输出类型。
 :::
@@ -227,7 +236,7 @@ $p * 6
 - 自定义命令参数解析
 - 语法高亮
 - 实时错误高亮
-- 分析和调试命令
+- 性能剖析和调试命令
 - (未来) 格式化
 - (未来) 保存 IR (中间表示) “编译”结果以加快执行速度
 
@@ -252,7 +261,8 @@ Nushell 的静态特性常常让来自具有 `eval` 功能的语言的用户感�
 这有助于说明为什么以下示例不能在 Nushell 中作为单个表达式（例如，脚本）运行：
 
 ::: note
-以下示例使用 [`source` 命令](/commands/docs/source.md)，但类似的结论也适用于解析 Nushell 源代码的其他命令，例如 [`use`](/commands/docs/use.md)、[`overlay use`](/commands/docs/overlay_use.md)、[`hide`](/commands/docs/hide.md) 或 [`source-env`](/commands/docs/source-env.md)。
+以下示例使用 [`source` 命令](/commands/docs/source.md)，但类似的结论也适用于解析 Nushell 源代码的其他命令，例如 [`use`](/commands/docs/use.md)、[`overlay use`](/commands/docs/overlay_use.md)、[`hide`](/commands/docs/hide.md)、[`source-env`](/commands/docs/source-env.md) 或 [`run`](/commands/docs/run.md)。
+
 :::
 
 #### 示例：动态生成源代码
@@ -260,14 +270,14 @@ Nushell 的静态特性常常让来自具有 `eval` 功能的语言的用户感�
 考虑以下场景：
 
 ```nu
-"print Hello" | save output.nu
-source output.nu
+("print Hello" | save output.nu;
+source output.nu)
 # => Error: nu::parser::sourced_file_not_found
 # =>
 # =>   × File not found
-# =>    ╭─[entry #5:2:8]
-# =>  1 │ "print Hello" | save output.nu
-# =>  2 │ source output.nu
+# =>    ╭─[repl_entry #5:2:8]
+# =>  1 │ ("print Hello" | save output.nu;
+# =>  2 │ source output.nu)
 # =>    ·        ────┬────
 # =>    ·            ╰── File not found: output.nu
 # =>    ╰────
@@ -294,11 +304,12 @@ source output.nu
 ```nu
 let my_path = "~/nushell-files"
 source $"($my_path)/common.nu"
-# => Error:
+# => Error: nu::parser::error
+# =>
 # =>   × Error: nu::shell::not_a_constant
 # =>   │
 # =>   │   × Not a constant.
-# =>   │    ╭─[entry #6:2:11]
+# =>   │    ╭─[repl_entry #6:2:11]
 # =>   │  1 │ let my_path = "~/nushell-files"
 # =>   │  2 │ source $"($my_path)/common.nu"
 # =>   │    ·           ────┬───
@@ -306,7 +317,7 @@ source $"($my_path)/common.nu"
 # =>   │    ╰────
 # =>   │   help: Only a subset of expressions are allowed constants during parsing. Try using the 'const' command or typing the value literally.
 # =>   │
-# =>    ╭─[entry #6:2:8]
+# =>    ╭─[repl_entry #6:2:8]
 # =>  1 │ let my_path = "~/nushell-files"
 # =>  2 │ source $"($my_path)/common.nu"
 # =>    ·        ───────────┬───────────
@@ -314,7 +325,7 @@ source $"($my_path)/common.nu"
 # =>    ╰────
 ```
 
-因为 `let` 赋值直到评估时才被解析，所以如果传递一个变量，解析器关键字 `source` 将在解析期间失败。
+因为 `let` 赋值直到求值时才会被确定，所以如果传递一个变量，解析器关键字 `source` 将在解析期间失败。
 
 ::: details 比较 Rust 和 C++
 想象一下，上面的代码是用典型的编译型语言（如 C++）编写的：
@@ -334,14 +345,16 @@ use format!("{}::common", my_path);
 ```
 
 如果你曾经用这些语言中的任何一种编写过一个简单的程序，你就会发现这些示例在这些语言中是无效的。与 Nushell 一样，编译型语言要求所有源代码文件都预先准备好并可供编译器使用。
+
 :::
 
 ::: tip 另见
-然而，正如错误消息中所指出的，如果 `my_path` 可以定义为[常量](./variables.md#常量变量)，这将起作用，因为常量可以在解析期间解析。
+然而，正如错误消息中所指出的，如果 `my_path` 可以被定义为[常量](./variables.md#常量变量)，这就可以工作，因为常量能够（而且确实会）在解析期间被解析。例如，如果 `~/nushell-files/common.nu` 包含 `print "Loaded common.nu"`：
 
 ```nu
 const my_path = "~/nushell-files"
 source $"($my_path)/common.nu"
+# => Loaded common.nu
 ```
 
 有关更多详细信息，请参阅[解析时常量评估](./how_nushell_code_gets_run.md#解析时常量求值)。
@@ -349,25 +362,40 @@ source $"($my_path)/common.nu"
 
 #### 示例：切换到不同目录 (`cd`) 并 `source` 一个文件
 
-还有一个例子 —— 切换到不同目录，然后尝试在该目录中 `source` 一个文件。
+还有一个例子 —— 切换到不同的目录，然后尝试在该目录中 `source` 一个文件。假设 `spam/foo.nu` 存在并包含 `$env.SPAM = "eggs"`：
 
 ```nu:line-numbers
 if ('spam/foo.nu' | path exists) {
     cd spam
     source-env foo.nu
 }
+# => Error: nu::parser::sourced_file_not_found
+# =>
+# =>   × File not found
+# =>    ╭─[repl_entry #7:3:16]
+# =>  2 │     cd spam
+# =>  3 │     source-env foo.nu
+# =>    ·                ───┬──
+# =>    ·                   ╰── File not found: foo.nu
+# =>  4 │ }
+# =>    ╰────
+# =>   help: sourced files need to be available before your script is run
 ```
 
-根据我们对 Nushell 的解析/评估阶段的了解，看看你是否能发现该示例中的问题。
+即使 `spam/foo.nu` 存在，这也会失败。根据我们对 Nushell 解析/求值阶段的了解，看看你是否能发现原因。
 
 ::: details 解决方案
 
-在第 3 行，在解析期间，`source-env` 尝试解析 `foo.nu`。然而，`cd` 直到评估时才发生。这会导致解析时错误，因为在*当前*目录中找不到该文件。
+在第 3 行，在解析期间，`source-env` 尝试解析 `foo.nu`。然而，`cd` 直到求值时才发生。这会导致一个解析时错误，因为在*当前*目录中找不到该文件。
 
-要解决这个问题，当然，只需使用要加载的文件的完整路径。
+要解决这个问题，当然，只需使用待加载文件的完整路径即可。
 
 ```nu
+if ('spam/foo.nu' | path exists) {
     source-env spam/foo.nu
+}
+$env.SPAM
+# => eggs
 ```
 
 :::
@@ -400,20 +428,31 @@ Nushell 被设计为对每个表达式或文件使用单个解析阶段。此解
 
 Nushell 从编译型语言中借鉴了多种设计理念。其中之一是语言应避免全局可变状态。Shell 通常使用全局突变来更新环境，但 Nushell 试图避免这种方法。
 
-在 Nushell 中，块控制自己的环境。对环境的更改仅限于它们发生的块的作用域。
+在 Nushell 中，闭包和自定义命令控制它们自己的环境。在闭包（例如传给 `each` 或 `do` 的那些）或自定义命令中对环境所做的更改，其作用域仅限于该闭包或命令，并在它结束时被丢弃。
 
-在实践中，这使你可以（仅举一例）编写更简洁的代码来处理子目录。这是一个在当前目录中构建每个子项目的示例：
+在实践中，这使你可以（仅举一例）编写更简洁的代码来处理子目录。以下是一个构建当前目录中每个子项目的示例：
 
 ```nu
-ls | each { |row|
+ls | where type == dir | each { |row|
   cd $row.name
   make
 }
 ```
 
-[`cd`](/commands/docs/cd.md) 命令更改 `PWD` 环境变量，但此变量更改不会在块结束时保留。这允许每次迭代从当前目录开始，然后进入下一个子目录。
+[`cd`](/commands/docs/cd.md) 命令会更改 `PWD` 环境变量，但该变量的更改不会在闭包结束后继续存在。这使得每次迭代都从当前目录开始，然后进入下一个子目录。
 
-拥有一个作用域环境使命令更具可预测性、更易于阅读，并且在需要时更容易调试。这也是我们上面讨论的 `par-each` 命令的另一个关键特性。
+`if`、`match`、`for`、`while`、`loop` 和 `try` 等关键字的块不是闭包，因此在它们内部所做的环境更改在块结束后仍然有效：
+
+```nu
+do { $env.FOO = "closure" }
+$env.FOO? == null
+# => true
+if true { $env.FOO = "block" }
+$env.FOO
+# => block
+```
+
+拥有作用域环境使命令更具可预测性、更易于阅读，并且在需要时更容易调试。这也是我们上面讨论过的 `par-each` 命令的另一个关键特性。
 
 Nushell 还提供了像 [`load-env`](/commands/docs/load-env.md) 这样的辅助命令，作为一次性加载多个环境更新的便捷方式。
 

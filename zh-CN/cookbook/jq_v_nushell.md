@@ -32,7 +32,7 @@ echo '{"title": "jq vs Nushell", "publication_date": "2023-11-20"}' | jq -r '.'
 `jq` 的输出是 JSON 字符串，而在 `nu` 中它是 Nushell 值。要将任何管道的输出作为 JSON 获取，只需在末尾应用 [`to json`](/commands/docs/to_json.md)：
 
 ```nu
-'[{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]'
+'{"title": "jq vs Nushell", "publication_date": "2023-11-20"}'
 | from json
 | to json
 ```
@@ -53,7 +53,7 @@ echo '{"title": "jq vs Nushell", "publication_date": "2023-11-20"}' | jq -r '.'
 | Nushell | jq             |
 | ------- | -------------- |
 | integer | number         |
-| decimal | number         |
+| float   | number         |
 | string  | string         |
 | boolean | boolean        |
 | null    | null           |
@@ -157,7 +157,7 @@ jq -r '.items | map({(.name): (.price * 2)}) | add'
 # => ╰───┴────────┴───────╯
 ```
 
-在这种情况下，nu 不需要创建新记录，因为我们可以利用记录列表实际上是表的事实。然而，在其他情况下可能需要，正如我们在[组合记录](#组合记录)中看到的那样。
+在这种情况下，nu 不需要创建新记录，因为我们可以利用记录列表实际上是表格这一事实。然而，在其他情况下可能需要，正如我们在[组合记录](#组合记录)中看到的那样。
 
 ### 排序列表
 
@@ -302,7 +302,7 @@ jq -r 'map(select(. != null))'
 
 ```sh
 echo '{"name": "Alice", "age": 30}' |
-jq -r "Name: \(.name), Age: \(.age)"
+jq -r '"Name: \(.name), Age: \(.age)"'
 ```
 
 在 `nu` 中我们这样做：
@@ -310,17 +310,8 @@ jq -r "Name: \(.name), Age: \(.age)"
 ```nu
 '{"name": "Alice", "age": 30}'
 | from json
-| items { |key, value| ["Name" $value] | str join ": " }
-| str join ", "
-# => Name: Alice, Name: 30
-```
-
-这种方法有点复杂，但如果我们[安装完整版本](https://github.com/nushell/nushell/releases)，其中包含*额外命令*，我们可以受益于 [`format`](/commands/docs/format.md)：
-
-```nu
-'{"name": "Alice", "age": 30}'
-| from json
-| format "Name: {name}, Age: {age}"
+| format pattern "Name: {name}, Age: {age}"
+# => Name: Alice, Age: 30
 ```
 
 ### 组合记录
@@ -345,6 +336,12 @@ jq -r '{name: .name, age: (.age + 5)}'
 ```
 
 ## 处理嵌套项
+
+本节中的一些示例使用了[附录：自定义命令](#附录-自定义命令)中定义的自定义命令（`cherry-pick`、`flatten record-paths` 和 `filter-map`）。要试用它们，请把附录代码保存为 `toolbox.nu` 并先加载它：
+
+```nu
+use toolbox.nu *
+```
 
 ### 过滤嵌套项
 
@@ -377,7 +374,7 @@ echo '{"data": [{"values": [1, 2, 3]}, {"values": [4, 5, 6]}]}' |
 jq -r '.data[].values[] | select(. > 3)'
 ```
 
-在 `nu` 中，我们可以利用[记录列表实际上是表](../book/types_of_data.md#表格)这一事实，简单地这样做：
+在 `nu` 中，我们可以利用[记录列表实际上是表格](../book/types_of_data.md#表格)这一事实，简单地这样做：
 
 ```nu
 '{"data": [{"values": [1, 2, 3]}, {"values": [4, 5, 6]}]}'
@@ -450,7 +447,7 @@ jq -r 'walk(if type == "number" then . * 2 else . end)'
 
 在 `nu` 中，没有内置函数来实现这一点。请参阅[附录：自定义命令](#附录-自定义命令)了解下面示例中显示的 `filter-map` 命令的实现。
 
-````nu
+```nu
 '{"data": {"values": [1, 2, 3], "nested": {"values": [4, 5, 6]}}}'
 | from json
 | filter-map {|value| if ($value | describe) == "int" { $value * 2 } else { $value }}
@@ -470,6 +467,7 @@ jq -r 'walk(if type == "number" then . * 2 else . end)'
 # => │      │ │        │ ╰────────┴────────────╯ │ │
 # => │      │ ╰────────┴─────────────────────────╯ │
 # => ╰──────┴──────────────────────────────────────╯
+```
 
 ## 分组和聚合
 
@@ -480,7 +478,7 @@ jq -r 'walk(if type == "number" then . * 2 else . end)'
 ```sh
 echo '[{"category": "A", "value": 10}, {"category": "B", "value": 20}, {"category": "A", "value": 5}]' |
 jq -r 'group_by(.category)'
-````
+```
 
 在 `nu` 中我们这样做：
 
@@ -488,24 +486,26 @@ jq -r 'group_by(.category)'
 '[{"category": "A", "value": 10}, {"category": "B", "value": 20}, {"category": "A", "value": 5}]'
 | from json
 | group-by --to-table category
-# => ╭───┬───────┬──────────────────────────╮
-# => │ # │ group │          items           │
-# => ├───┼───────┼──────────────────────────┤
-# => │ 0 │ A     │ ╭───┬──────────┬───────╮ │
-# => │   │       │ │ # │ category │ value │ │
-# => │   │       │ ├───┼──────────┼───────┤ │
-# => │   │       │ │ 0 │ A        │    10 │ │
-# => │   │       │ │ 1 │ A        │     5 │ │
-# => │   │       │ ╰───┴──────────┴───────╯ │
-# => │ 1 │ B     │ ╭───┬──────────┬───────╮ │
-# => │   │       │ │ # │ category │ value │ │
-# => │   │       │ ├───┼──────────┼───────┤ │
-# => │   │       │ │ 0 │ B        │    20 │ │
-# => │   │       │ ╰───┴──────────┴───────╯ │
-# => ╰───┴───────┴──────────────────────────╯
+# => ╭───┬──────────┬──────────────────────────╮
+# => │ # │ category │          items           │
+# => ├───┼──────────┼──────────────────────────┤
+# => │ 0 │ A        │ ╭───┬──────────┬───────╮ │
+# => │   │          │ │ # │ category │ value │ │
+# => │   │          │ ├───┼──────────┼───────┤ │
+# => │   │          │ │ 0 │ A        │    10 │ │
+# => │   │          │ │ 1 │ A        │     5 │ │
+# => │   │          │ ╰───┴──────────┴───────╯ │
+# => │ 1 │ B        │ ╭───┬──────────┬───────╮ │
+# => │   │          │ │ # │ category │ value │ │
+# => │   │          │ ├───┼──────────┼───────┤ │
+# => │   │          │ │ 0 │ B        │    20 │ │
+# => │   │          │ ╰───┴──────────┴───────╯ │
+# => ╰───┴──────────┴──────────────────────────╯
 ```
 
-注意 `--to-table` 是在 [版本 0.87.0](/blog/2023-11-14-nushell_0_87_0.md) 中添加到 Nushell 的。在此之前，你必须对 `group-by` 产生的记录进行 [`transpose`](/commands/docs/transpose)，这对于大型数据集来说速度要慢得多。
+使用 `--to-table` 时，`group-by` 返回一个表格而不是记录。存放分组键的列以分组所依据的列命名（这里是 `category`），`items` 列存放分组后的各行。
+
+键列保持其所分组的值的类型。按 `int` 或 `filesize` 列分组会得到 `int` 或 `filesize` 键，而那些只在打印时看起来相同的值（例如 `1MB` 和 `1.001MB`）会分到不同的组。不使用 `--to-table` 时，分组是记录的字段，因此键始终是字符串。
 
 ### 聚合分组值
 
@@ -524,6 +524,12 @@ jq -r 'group_by(.category) | map({category: .[0].category, sum: map(.value) | ad
 | group-by --to-table category
 | update items { |row| $row.items.value | math sum }
 | rename category sum
+# => ╭───┬──────────┬─────╮
+# => │ # │ category │ sum │
+# => ├───┼──────────┼─────┤
+# => │ 0 │ A        │  15 │
+# => │ 1 │ B        │  20 │
+# => ╰───┴──────────┴─────╯
 ```
 
 ### 聚合后过滤
@@ -587,7 +593,7 @@ jq -r 'map(.score) | add / length'
 | from json
 | get score
 | math avg
-# => 90
+# => 90.0
 ```
 
 ### 生成直方图分箱
@@ -616,23 +622,28 @@ jq -r 'group_by(. / 5 | floor * 5) | map({ bin: .[0], count: length })'
 # => ╰───┴─────┴───────╯
 ```
 
-注意，如果你想要计算直方图，可以受益于 [`histogram`](/commands/docs/histogram) 命令。
+注意，如果你想要计算直方图，可以受益于 [`histogram`](/commands/docs/histogram.md) 命令。
 
 ## 附录：自定义命令
 
-本节提供了本实战指南中使用的自定义命令的实现。请注意，它们是说明性的，并且没有针对大型输入进行优化。如果你对此感兴趣，[插件](/zh-CN/book/plugins.md)可能是答案，因为它们可以用通用语言（如 Rust 或 Python）编写。
+本节提供了本实战指南中使用的自定义命令的实现。请注意，它们是说明性的，并且没有针对大型输入进行优化。如果你对此感兴趣，[插件](../book/plugins.md)可能是答案，因为它们可以用通用语言（如 Rust 或 Python）编写。
 
 ```nu
 use toolbox.nu *
-help commands | where command_type == "custom"
-# => ╭──────┬─────────────────────────┬─────────────────────────────────────────────────────────────────────────────────────────────────╮
-# => │    # │          name           │                                              usage                                              │
-# => ├──────┼─────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────┤
-# => │    0 │ cherry-pick             │ A command for cherry-picking values from a record key recursively                               │
-# => │    1 │ filter-map              │ A command for walking through a complex data structure and transforming its values recursively  │
-# => │    2 │ flatten record-paths    │ A command for flattening trees whilst keeping paths as keys                                     │
-# => ╰──────┴─────────────────────────┴─────────────────────────────────────────────────────────────────────────────────────────────────╯
+help commands | where command_type == "custom" | select name description
+# => ╭───┬──────────────────────┬────────────────────────────────────────────────────────────────────────────────────────────────╮
+# => │ # │         name         │                                          description                                           │
+# => ├───┼──────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────┤
+# => │ 0 │ banner               │ Print a banner for Nushell with information about the project                                  │
+# => │ 1 │ cherry-pick          │ A command for cherry-picking values from a record key recursively                              │
+# => │ 2 │ describe-primitive   │ Like `describe` but dropping item types for collections.                                       │
+# => │ 3 │ filter-map           │ A command for walking through a complex data structure and transforming its values recursively │
+# => │ 4 │ flatten record-paths │ A command for flattening trees whilst keeping paths as keys                                    │
+# => │ 5 │ pwd                  │ Return the current working directory                                                           │
+# => ╰───┴──────────────────────┴────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
+
+`banner` 和 `pwd` 也会被列出，因为它们是标准库 prelude 中的自定义命令，Nushell 默认就会加载。
 
 ```nu
 # toolbox.nu
@@ -712,7 +723,7 @@ export def describe-primitive []: any -> string {
 }
 
 
-# A command for cherry-picking values from a record key recursively
+# 一个在把树展平的同时将路径保留为键的命令
 export def "flatten record-paths" [
     --separator (-s): string = "."    # The separator to use when chaining paths
 ] {

@@ -823,7 +823,7 @@ party Kai --age 30
 
 #### 从记录传递标志
 
-你还可以使用[展开运算符](./operators.md#扩展运算符)（`...`）把记录作为命名标志传递。每个字段名就是一个标志名（不带 `--`），每个值成为该标志的值。对于开关，`true` 会设置该标志，而 `false` 或 `null` 则不设置：
+你还可以使用[展开运算符](./operators.md#展开运算符)（`...`）把记录作为命名标志传递。每个字段名就是一个标志名（不带 `--`），每个值成为该标志的值。对于开关，`true` 会设置该标志，而 `false` 或 `null` 则不设置：
 
 ```nu
 let options = { age: 30, caps: true }
@@ -888,7 +888,7 @@ vip-greet Rahul Priya Arjun Anjali Vikram
 # => And a special welcome to our VIP today, Rahul!
 ```
 
-要将列表传递给剩余参数，你可以使用[展开运算符](./operators.md#扩展运算符) (`...`)。使用上面的 `vip-greet` 命令定义：
+要将列表传递给剩余参数，你可以使用[展开运算符](./operators.md#展开运算符) (`...`)。使用上面的 `vip-greet` 命令定义：
 
 ```nu
 let vip = "Tanisha"

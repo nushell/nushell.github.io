@@ -174,5 +174,23 @@ export const sidebarZhCN: SidebarConfig = {
       ],
     },
   ],
+  '/zh-CN/lang-guide/': [
+    {
+      text: '语言参考指南',
+      link: '/zh-CN/lang-guide/README.md',
+      collapsible: false,
+    },
+    {
+      text: '过滤器',
+      link: '/zh-CN/lang-guide/chapters/filters/00_filters_overview.md',
+      collapsible: true,
+      children: [
+        '/zh-CN/lang-guide/chapters/filters/each-par-each.md',
+        '/zh-CN/lang-guide/chapters/filters/selecting_data.md',
+        '/zh-CN/lang-guide/chapters/filters/where-filter.md',
+        '/zh-CN/lang-guide/chapters/filters/select-get.md',
+      ],
+    },
+  ],
   '/blog/': false,
 };

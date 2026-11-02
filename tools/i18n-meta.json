@@ -54,7 +54,7 @@
   {
     "name": "background_jobs.md",
     "en": "In progress",
-    "zh-CN": "-",
+    "zh-CN": "ff1c4786@passionworkeer",
     "fr": "-",
     "de": "f08ae29d@petrisch",
     "tr": "-",
@@ -171,7 +171,7 @@
   {
     "name": "control_flow.md",
     "en": "Completed",
-    "zh-CN": "-",
+    "zh-CN": "ff1c4786@passionworkeer",
     "fr": "-",
     "de": "-",
     "tr": "-",
@@ -197,7 +197,7 @@
   {
     "name": "custom_commands.md",
     "en": "Completed",
-    "zh-CN": "d6efb9a35a@hustcer",
+    "zh-CN": "ca4ed426@passionworkeer",
     "fr": "-",
     "de": "translated by @sebastian-xyz",
     "tr": "-",
@@ -210,7 +210,7 @@
   {
     "name": "custom_completions.md",
     "en": "Completed",
-    "zh-CN": "f5987a82d@hustcer",
+    "zh-CN": "ff1c4786@passionworkeer",
     "fr": "-",
     "de": "5993a92b@petrisch",
     "tr": "-",
@@ -236,7 +236,7 @@
   {
     "name": "dataframes.md",
     "en": "Completed",
-    "zh-CN": "129cc2ddea@hustcer",
+    "zh-CN": "ad327bb7@passionworkeer",
     "fr": "-",
     "de": "-",
     "tr": "-",
@@ -392,7 +392,7 @@
   {
     "name": "loading_data.md",
     "en": "Completed",
-    "zh-CN": "fa90895307@hustcer",
+    "zh-CN": "ff1c4786@passionworkeer",
     "fr": "-",
     "de": "0c788acfec@petrisch",
     "tr": "-",
@@ -535,7 +535,7 @@
   {
     "name": "operators.md",
     "en": "Completed",
-    "zh-CN": "1b7d01ac3b@hustcer",
+    "zh-CN": "ad327bb7@passionworkeer",
     "fr": "-",
     "de": "c39efa00@petrisch",
     "tr": "-",
@@ -587,7 +587,7 @@
   {
     "name": "plugins.md",
     "en": "Completed",
-    "zh-CN": "ae23eeba3@hustcer",
+    "zh-CN": "ad327bb7@passionworkeer",
     "fr": "-",
     "de": "translated by @sebastian-xyz",
     "tr": "-",
@@ -663,6 +663,32 @@
     "ko": "-"
   },
   {
+    "name": "sorting.md",
+    "en": "Completed",
+    "zh-CN": "ad327bb7@passionworkeer",
+    "fr": "-",
+    "de": "-",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-",
+    "ru": "-",
+    "ko": "-"
+  },
+  {
+    "name": "special_variables.md",
+    "en": "Completed",
+    "zh-CN": "ff1c4786@passionworkeer",
+    "fr": "-",
+    "de": "-",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-",
+    "ru": "-",
+    "ko": "-"
+  },
+  {
     "name": "standard_library.md",
     "en": "In progress",
     "zh-CN": "-",
@@ -678,7 +704,7 @@
   {
     "name": "stdout_stderr_exit_codes.md",
     "en": "Completed",
-    "zh-CN": "73ef7f3153@hustcer",
+    "zh-CN": "ad327bb7@passionworkeer",
     "fr": "-",
     "de": "-",
     "tr": "-",
@@ -730,7 +756,7 @@
   {
     "name": "thinking_in_nu.md",
     "en": "Completed",
-    "zh-CN": "fa90895307@hustcer",
+    "zh-CN": "ad327bb7@passionworkeer",
     "fr": "4a47be5a@Loic Riegel",
     "de": "c39efa00@petrisch",
     "tr": "-",
@@ -756,7 +782,7 @@
   {
     "name": "types_of_data.md",
     "en": "Completed",
-    "zh-CN": "73ef7f3153@hustcer",
+    "zh-CN": "ff1c4786@passionworkeer",
     "fr": "-",
     "de": "-",
     "tr": "-",
@@ -769,7 +795,7 @@
   {
     "name": "variables.md",
     "en": "Completed",
-    "zh-CN": "1b7d01ac3b@hustcer",
+    "zh-CN": "ad327bb7@passionworkeer",
     "fr": "-",
     "de": "translated by @sebastian-xyz",
     "tr": "-",
@@ -782,9 +808,22 @@
   {
     "name": "working_with_lists.md",
     "en": "Completed",
-    "zh-CN": "73ef7f3153@hustcer",
+    "zh-CN": "ad327bb7@passionworkeer",
     "fr": "-",
     "de": "ad03c8d55c@petrisch",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-",
+    "ru": "-",
+    "ko": "-"
+  },
+  {
+    "name": "working_with_records.md",
+    "en": "Completed",
+    "zh-CN": "ff1c4786@passionworkeer",
+    "fr": "-",
+    "de": "-",
     "tr": "-",
     "ja": "-",
     "es": "-",
