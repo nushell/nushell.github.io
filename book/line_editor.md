@@ -3,7 +3,7 @@
 Nushell's line-editor [Reedline](https://github.com/nushell/reedline) is
 cross-platform and designed to be modular and flexible. The line-editor is
 in charge of controlling the command history, validations, completions, hints,
-screen paint, and more.
+the status line, screen paint, and more.
 
 [[toc]]
 
@@ -459,6 +459,81 @@ $env.config.hinter.closure = {|ctx|
 ```
 
 Set `$env.config.hinter.closure = null` to go back to the built-in history hints.
+
+## Status Line
+
+Below the line you're editing, Nushell draws a status line, one row that tells you what the parser
+makes of the line so far. Nushell already parses the line on every keystroke to highlight it, and
+the status line reuses that parse. Running the line erases the status line, and it stays hidden
+while you search the history.
+
+```text
+~> "a,b" | split row ","
+  split row {flags} <separator>   → list<string>   = [a, b]
+```
+
+The status line has up to three parts, left to right:
+
+- **Signature.** The signature of the command under the cursor, with the parameter you're typing
+  in bold and underlined. Required parameters are in `<angle brackets>`, optional ones in
+  `(parentheses)`, and a rest parameter starts with `...`. `{flags}` stands for all of the
+  command's flags, and it's the part underlined while the cursor is on a flag or its value.
+- **Type.** `→` and the type that the pipeline at the cursor outputs, as far as the parser can
+  tell. Inside a closure, block or subexpression, it's the type of the pipeline inside it. The
+  status line leaves out `any` and `nothing`.
+- **Preview.** `=` and the value of the line, when every command in it is a
+  [const command](./how_nushell_code_gets_run.md#parse-time-constant-evaluation). A line such as
+  `ls | length` gets no preview, because `ls` can't run at parse time. If a preview takes longer
+  than 25 milliseconds, Nushell stops computing it and leaves it out.
+
+| Line, with the cursor at the end             | Status line                                      |
+| -------------------------------------------- | ------------------------------------------------ |
+| `"hello" \| str length`                      | `str length {flags} ...(rest)   → int   = 5`     |
+| `[1 2 3] \| math sum`                        | `math sum {flags} ...(columns)   → number   = 6` |
+| `ls \| update name {\|r\| [1 2] \| math sum` | `math sum {flags} ...(columns)   → number`       |
+| `ls \| `                                     | `→ table`                                        |
+| `1 + 2`                                      | `→ int   = 3`                                    |
+
+In `str substring 1..2`, the cursor is on the range, so the status line underlines `<range>` in
+`str substring {flags} <range> ...(rest)`.
+
+When the line has a parse or type error, the status line shows the first one instead, in red:
+
+```text
+~> let x: int = "a"
+  ✗ Type mismatch: expected int, found string
+```
+
+An error shows up only once it's no longer about the text you're still typing:
+
+- `let x: int = "a"` shows no error until you type a space after `"a"`.
+- `str substring ` doesn't report its missing range while the cursor waits for it. Move on to
+  `str substring | str length` and the status line shows
+  `✗ Missing required positional argument: missing range`.
+- An unfinished line, such as one with an open `{`, shows no error.
+- A line that `use`s a module that isn't loaded yet shows no error and no preview. The parse behind
+  the highlighting doesn't load the module, so the names it imports would look unknown.
+
+Each part can be turned off on its own. All of these default to `true`, and a change takes effect
+at the next prompt:
+
+```nu
+$env.config.status_line.enable = true    # false hides the status line entirely
+$env.config.status_line.errors = true    # the first parse or type error
+$env.config.status_line.signature = true # the signature of the command under the cursor
+$env.config.status_line.type = true      # the type the pipeline outputs
+$env.config.status_line.preview = true   # the value of a line of const commands
+```
+
+The status line is drawn in `$env.config.color_config.status_line`, or in the `hints` style when
+that key isn't set. Errors use `$env.config.color_config.status_line_error`, which is `red` by
+default. With `$env.config.use_ansi_coloring = false`, the status line is plain text. See
+[Coloring and Theming](./coloring_and_theming.md) for the style syntax.
+
+```nu
+$env.config.color_config.status_line = 'cyan'
+$env.config.color_config.status_line_error = { fg: 'yellow' attr: b }
+```
 
 ## Customizing the Prompt
 

@@ -322,6 +322,8 @@ This is the current list of primitives. Not all of these are configurable. The c
 | `row_index`                 | `green_bold`               | \*           |
 | `separator`                 | `default`                  | \*           |
 | `hints`                     | `dark_gray`                | \*           |
+| `status_line`               | the `hints` style          | \*           |
+| `status_line_error`         | `red`                      | \*           |
 | `search_result`             | `{ bg: red, fg: default }` | \*           |
 | `selection`                 | `{ attr: r }`              | \*           |
 | `selection_cursor`          | `{ attr: n }`              | \*           |
@@ -637,5 +639,6 @@ See the [section dedicated to Reedline’s menus configuration](line_editor.md#m
 
 The line editor does use a few `color_config` keys: `hints` styles the inline hints,
 `selection` styles text selected in Vi visual mode or Helix mode, and `selection_cursor`
-styles the character under the cursor inside a selection. The `shape_*` keys above
-style the syntax highlighting of the command line.
+styles the character under the cursor inside a selection. `status_line` styles the
+[status line](line_editor.md#status-line) under the prompt, and `status_line_error` styles
+an error shown there. The `shape_*` keys above style the syntax highlighting of the command line.
