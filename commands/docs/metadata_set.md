@@ -2,7 +2,7 @@
 title: metadata set
 categories: |
   debug
-version: 0.116.0
+version: 0.117.0
 debug: |
   Set the metadata for items in the stream.
 usage: |
@@ -29,7 +29,7 @@ contributors: false
  -  `--datasource-filepath, -f {path}`: Assign the DataSource::FilePath metadata to the input.
  -  `--path-columns, -p {list<string>}`: A list of columns in the input for which path metadata will be assigned.
  -  `--content-type, -c {oneof<string, nothing>}`: Assign content type metadata to the input.
- -  `--table-width-priority-columns, -w {list<string>}`: A list of columns to prioritize during table width allocation.
+ -  `--table-width-priority-columns, -w {list<string>}`: A list of columns to prioritize during table width allocation: a listed column shows wherever it would unlisted, other columns shrink first, and columns to its right hide to leave it up to a third of the table width.
 
 ## Parameters
 

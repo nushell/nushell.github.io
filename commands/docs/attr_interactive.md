@@ -2,7 +2,7 @@
 title: attr interactive
 categories: |
   core
-version: 0.116.0
+version: 0.117.0
 core: |
   Attribute marking a completer as interactive.
 usage: |

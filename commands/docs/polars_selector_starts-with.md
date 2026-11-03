@@ -2,7 +2,7 @@
 title: polars selector starts-with
 categories: |
   expression
-version: 0.116.0
+version: 0.117.0
 expression: |
   Select columns that start with the given substring(s).
 usage: |

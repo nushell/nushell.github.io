@@ -2,7 +2,7 @@
 title: math variance
 categories: |
   math
-version: 0.116.0
+version: 0.117.0
 math: |
   Returns the variance of a list of numbers or of each column in a table.
 usage: |
@@ -91,6 +91,12 @@ Variance of filesizes is a number of base units squared (bytes²).
 ```nu
 > [1KB 3KB] | math variance
 1000000.0
+```
+
+Variance of large, close values is computed accurately.
+```nu
+> [506250000.0 506250001.0] | math variance
+0.25
 ```
 
 ## Notes

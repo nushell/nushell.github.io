@@ -2,7 +2,7 @@
 title: matrix scale
 categories: |
   filters
-version: 0.116.0
+version: 0.117.0
 filters: |
   Multiply all elements of a matrix by a scalar.
 usage: |

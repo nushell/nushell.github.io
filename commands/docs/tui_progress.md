@@ -2,7 +2,7 @@
 title: tui progress
 categories: |
   viewers
-version: 0.116.0
+version: 0.117.0
 viewers: |
   Add a progress bar.
 usage: |
@@ -31,12 +31,12 @@ contributors: false
  -  `--label, -l {string}`: Text before the percentage.
  -  `--id {string}`: Widget id.
  -  `--focus`: Start with this widget focused.
- -  `--data {any}`: Data for this widget alone, instead of the outer pipeline's.
+ -  `--data {any}`: Data for this widget alone, instead of the outer pipeline's. Not with --from or a closure.
  -  `--from {string}`: Id of the table, tree, or select whose highlighted row drives this widget.
 
 ## Parameters
 
- -  `source`: Closure over the --from row that yields the value.
+ -  `source`: Closure over the highlighted row of --from, or of the nearest table, tree, or select, that yields the value.
 
 
 ## Input/output types:
@@ -63,4 +63,4 @@ A bar driven by a stream
 ## Notes
 The bar shows `--value`, or otherwise reads its data: a number, a `{value, total}` record's `value`, or the last number in a list, so a streamed counter drives it live. Values above 1 are read out of `--total` (default 100).
 
-With `--from` and a closure the bar follows another widget's highlighted row: `tui progress --from table-0 {|row| $row.pct }`.
+With a closure the bar follows the highlighted row of a table, tree, or select instead, e.g. `tui progress --from table-0 {|row| $row.pct }`. It follows the one named by `--from`, else the focused one, else the nearest, which may be on another tab page. A closure with no table, tree, or select to follow is an error when the TUI starts. `--value` and `--data` cannot be combined with `--from` or a closure.

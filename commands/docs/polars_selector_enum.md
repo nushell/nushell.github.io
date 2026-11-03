@@ -2,7 +2,7 @@
 title: polars selector enum
 categories: |
   expression
-version: 0.116.0
+version: 0.117.0
 expression: |
   Select all enum columns.
 usage: |

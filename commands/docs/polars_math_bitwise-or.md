@@ -2,7 +2,7 @@
 title: polars math bitwise-or
 categories: |
   dataframe
-version: 0.116.0
+version: 0.117.0
 dataframe: |
   Perform an aggregation of bitwise ORs over a column expression.
 usage: |

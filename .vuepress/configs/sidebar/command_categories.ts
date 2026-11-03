@@ -28,7 +28,6 @@ export const commandCategories = [
   '/commands/categories/plugin.md',
   '/commands/categories/prompt.md',
   '/commands/categories/random.md',
-  '/commands/categories/removed.md',
   '/commands/categories/shells.md',
   '/commands/categories/strings.md',
   '/commands/categories/system.md',

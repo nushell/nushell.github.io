@@ -2,7 +2,7 @@
 title: tui menu
 categories: |
   viewers
-version: 0.116.0
+version: 0.117.0
 viewers: |
   Add a menu bar with mnemonics, dropdown items, and actions.
 usage: |
@@ -26,6 +26,7 @@ contributors: false
 
 ## Flags
 
+ -  `--border {string}`: Border lines, named like `table --theme` (rounded, double, heavy, ...).
  -  `--id {string}`: Widget id.
  -  `--focus`: Start with this widget focused.
 
@@ -45,7 +46,7 @@ contributors: false
 
 A plain bar; Enter submits the item name
 ```nu
-> tui label --title "Editor" | tui menu ["&File" "&Edit" "&View"] | tui table | tui debug --keys "alt+e,enter" | get selected
+> tui label --titlebar "Editor" | tui menu ["&File" "&Edit" "&View"] | tui table | tui debug --keys "alt+e,enter" | get selected
 
 ```
 
@@ -62,4 +63,4 @@ Mnemonics: `&` before a letter in a name picks it (`"&File"` shows as File with 
 
 Activating an item with an `action` runs it as a hook: it receives the state record, a returned value replaces the data list, `{action: submit|quit}` ends the TUI, and an error goes to the status bar. Activating an item without an action submits it: `selected` is `{menu: "File", item: "Open", row: <highlighted row>}` for a dropdown entry, or the bar item's name.
 
-The menu is top-level chrome and cannot be nested in `tui split` or `tui box`.
+The menu is top-level chrome and cannot be nested in `tui split` or `tui box`. `--border` sets the lines around its dropdowns.

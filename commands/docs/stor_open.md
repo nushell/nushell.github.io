@@ -2,7 +2,7 @@
 title: stor open
 categories: |
   database
-version: 0.116.0
+version: 0.117.0
 database: |
   Opens the in-memory sqlite database.
 usage: |

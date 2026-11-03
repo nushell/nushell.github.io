@@ -2,7 +2,7 @@
 title: tui log
 categories: |
   viewers
-version: 0.116.0
+version: 0.117.0
 viewers: |
   Add an append-only log view. Streamed rows appear at the bottom.
 usage: |
@@ -26,15 +26,17 @@ contributors: false
 
 ## Flags
 
+ -  `--title {string}`: Border title, in place of the widget's name. Counts, state, or the previewed file follow in parentheses.
+ -  `--border {string}`: Border lines, named like `table --theme` (rounded, double, heavy, ...).
  -  `--max-lines {int}`: Keep only the last N lines (default 10000).
  -  `--id {string}`: Widget id.
  -  `--focus`: Start with this widget focused.
- -  `--data {any}`: Data for this widget alone, instead of the outer pipeline's.
+ -  `--data {any}`: Data for this widget alone, instead of the outer pipeline's. Not with --from or a closure.
  -  `--from {string}`: Id of the table, tree, or select whose highlighted row drives this widget.
 
 ## Parameters
 
- -  `source`: Closure over the source row whose output is shown.
+ -  `source`: Closure over the highlighted row of --from, or of the nearest table, tree, or select, whose output is shown.
 
 
 ## Input/output types:
@@ -48,11 +50,11 @@ contributors: false
 
 Live log of a slow stream
 ```nu
-> 1.. | each {|n| sleep 100ms; $"tick ($n)"} | tui label --title "ticks" | tui log | tui run
+> 1.. | each {|n| sleep 100ms; $"tick ($n)"} | tui label --titlebar "ticks" | tui log | tui run
 
 ```
 
 ## Notes
-Follows the tail as new items arrive. Mouse wheel and Up/Down scroll; scrolling up pauses follow until you hit the bottom again. `--max-lines` keeps that many newest lines in the view. Streamed rows share a global store capped at max(10000, --max-lines).
+Follows the tail as new items arrive. Mouse wheel and Up/Down scroll; scrolling up pauses follow until you hit the bottom again. `--max-lines` keeps that many newest lines in the view. A stream keeps its newest 100,000 rows, or `--max-lines` if that is more.
 
-With `--from` and a closure the log shows the closure's output for the highlighted row of another widget, e.g. `tui log --from table-0 {|row| open $row.name | lines }`.
+With a closure the log shows the closure's output for the highlighted row of a table, tree, or select instead of the piped data, e.g. `tui log --from table-0 {|row| open $row.name | lines }`. It follows the one named by `--from`, else the focused one, else the nearest, which may be on another tab page. A closure with no table, tree, or select to follow is an error when the TUI starts; to show a stream, pipe it in without a closure.

@@ -2,7 +2,7 @@
 title: abbr list
 categories: |
   platform
-version: 0.116.0
+version: 0.117.0
 platform: |
   List all defined abbreviations.
 usage: |

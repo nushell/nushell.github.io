@@ -2,11 +2,11 @@
 title: tui label
 categories: |
   viewers
-version: 0.116.0
+version: 0.117.0
 viewers: |
-  Add static text: inline, or as the title bar (--title) or status bar (--status).
+  Add static text: inline, or as the title bar (--titlebar) or status bar (--status).
 usage: |
-  Add static text: inline, or as the title bar (--title) or status bar (--status).
+  Add static text: inline, or as the title bar (--titlebar) or status bar (--status).
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `tui label` for [viewers](/commands/categories/viewers.md)
 
-<div class='command-title'>Add static text: inline, or as the title bar (--title) or status bar (--status).</div>
+<div class='command-title'>Add static text: inline, or as the title bar (--titlebar) or status bar (--status).</div>
 
 ## Command Type
 
@@ -26,11 +26,12 @@ contributors: false
 
 ## Flags
 
- -  `--title`: Show as the title bar at the top.
+ -  `--titlebar`: Show as the title bar at the top.
+ -  `--title`: Show as the title bar at the top (deprecated, use --titlebar).
  -  `--status`: Show as the status bar at the bottom.
  -  `--id {string}`: Widget id.
  -  `--focus`: Start with this widget focused.
- -  `--data {any}`: Data for this widget alone, instead of the outer pipeline's.
+ -  `--data {any}`: Data for this widget alone, instead of the outer pipeline's. Not with --from or a closure.
  -  `--from {string}`: Id of the table, tree, or select whose highlighted row drives this widget.
 
 ## Parameters
@@ -49,7 +50,7 @@ contributors: false
 
 Title and status around a table
 ```nu
-> ls | tui label --title "files" | tui table | tui label --status "enter: pick  q: quit" | tui run
+> ls | tui label --titlebar "files" | tui table | tui label --status "enter: pick  q: quit" | tui run
 
 ```
 
@@ -66,6 +67,6 @@ A label that follows the highlighted row
 ```
 
 ## Notes
-Without a flag the text is drawn where it appears in the layout. `--title` puts it on the one-line bar at the top (also used as the dialog title). `--status` puts it on the bottom bar, where live focus/filter/row hints are appended.
+Without a flag the text is drawn where it appears in the layout. `--titlebar` puts it on the one-line bar at the top (also used as the dialog title). `--status` puts it on the bottom bar, where live focus/filter/row hints are appended.
 
-A closure instead of text makes the label follow a list: it receives the highlighted row of `--from` (or the nearest table/tree/select) and its output is shown.
+A closure instead of text makes the label follow a list: it receives the highlighted row of `--from` (or the nearest table/tree/select) and its output is shown. A closure with no table, tree, or select to follow is an error when the TUI starts.

@@ -2,7 +2,7 @@
 title: export type
 categories: |
   core
-version: 0.116.2
+version: 0.117.0
 core: |
   Give a name to a type annotation and export it from a module.
 usage: |

@@ -2,7 +2,7 @@
 title: job kill
 categories: |
   experimental
-version: 0.116.0
+version: 0.117.0
 experimental: |
   Kill a background job.
 usage: |

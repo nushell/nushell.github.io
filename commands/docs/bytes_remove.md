@@ -2,7 +2,7 @@
 title: bytes remove
 categories: |
   bytes
-version: 0.116.0
+version: 0.117.0
 bytes: |
   Remove specified bytes from the input.
 usage: |
@@ -73,6 +73,14 @@ Remove find binary from end not found.
 > 0x[10 AA 10 BB CC AA 10] | bytes remove --end 0x[11]
 Length: 7 (0x7) bytes | null_char printable whitespace ascii_other non_ascii
 00000000:   10 aa 10 bb  cc aa 10                                •×•×××•
+
+```
+
+Remove find binary from end not found (multi-byte pattern).
+```nu
+> 0x[10 11 12 13] | bytes remove --end 0x[AA BB]
+Length: 4 (0x4) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   10 11 12 13                                          ••••
 
 ```
 

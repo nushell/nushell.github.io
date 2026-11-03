@@ -2,7 +2,7 @@
 title: polars value-counts
 categories: |
   dataframe
-version: 0.116.0
+version: 0.117.0
 dataframe: |
   Returns a dataframe with the counts for unique values in series.
 usage: |

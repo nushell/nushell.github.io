@@ -2,7 +2,7 @@
 title: help modules
 categories: |
   core
-version: 0.116.0
+version: 0.117.0
 core: |
   Show help on nushell modules.
 usage: |
@@ -59,6 +59,6 @@ Search for string in module names and descriptions.
 ```
 
 ## Notes
-When requesting help for a single module, its commands and aliases will be highlighted if they
+When requesting help for a single module, its commands, aliases and type aliases will be highlighted if they
 are also available in the current scope. Commands/aliases that were imported under a different name
 (such as with a prefix after `use some-module`) will be highlighted in parentheses.

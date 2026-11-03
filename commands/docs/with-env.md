@@ -2,11 +2,11 @@
 title: with-env
 categories: |
   env
-version: 0.116.0
+version: 0.117.0
 env: |
-  Runs a block with an environment variable set.
+  Runs a block with temporary environment variables. A config record updates the configuration for the duration of the block.
 usage: |
-  Runs a block with an environment variable set.
+  Runs a block with temporary environment variables. A config record updates the configuration for the duration of the block.
 editLink: false
 contributors: false
 ---
@@ -14,7 +14,7 @@ contributors: false
 
 # `with-env` for [env](/commands/categories/env.md)
 
-<div class='command-title'>Runs a block with an environment variable set.</div>
+<div class='command-title'>Runs a block with temporary environment variables. A config record updates the configuration for the duration of the block.</div>
 
 ## Command Type
 
@@ -23,6 +23,10 @@ contributors: false
 ## Signature
 
 ```> with-env {flags} (variable) (block)```
+
+## Flags
+
+ -  `--no-convert`: Set the values as given, without $env.ENV_CONVERSIONS or making PATH a list.
 
 ## Parameters
 
@@ -46,3 +50,28 @@ Set by key-value record.
 ╰───┴───╯
 
 ```
+
+Run a block with changed configuration.
+```nu
+> with-env {config: {float_precision: 4}} { $env.config.float_precision }
+4
+```
+
+Set a variable, which its environment conversion turns into a list.
+```nu
+> $env.ENV_CONVERSIONS = {MY_ENV_VAR: {from_string: { split row ':' }}}; with-env {MY_ENV_VAR: 'foo:bar'} { $env.MY_ENV_VAR }
+╭───┬─────╮
+│ 0 │ foo │
+│ 1 │ bar │
+╰───┴─────╯
+
+```
+
+Set a variable as given, without converting it.
+```nu
+> $env.ENV_CONVERSIONS = {MY_ENV_VAR: {from_string: { split row ':' }}}; with-env --no-convert {MY_ENV_VAR: 'foo:bar'} { $env.MY_ENV_VAR }
+foo:bar
+```
+
+## Notes
+The values are converted as `load-env` converts them: each string value with a `from_string` conversion in $env.ENV_CONVERSIONS is converted, and a string PATH becomes a list. `FOO=bar command` sets FOO this way too. With --no-convert, the values are set as given.

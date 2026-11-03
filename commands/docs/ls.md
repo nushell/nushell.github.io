@@ -2,7 +2,7 @@
 title: ls
 categories: |
   filesystem
-version: 0.116.0
+version: 0.117.0
 filesystem: |
   List the filenames, sizes, and modification times of items in a directory.
 usage: |
@@ -85,7 +85,7 @@ List the full path of all dirs in your home directory.
 
 List only the names (not paths) of all dirs in your home directory which have not been modified in 7 days.
 ```nu
-> ls -as ~ | where type == dir and modified < ((date now) - 7day)
+> ls -as ~ | where type == dir and modified older-than 7day
 
 ```
 

@@ -2,7 +2,7 @@
 title: tui box
 categories: |
   viewers
-version: 0.116.0
+version: 0.117.0
 viewers: |
   Group widgets inside a titled, bordered box.
 usage: |
@@ -26,6 +26,7 @@ contributors: false
 
 ## Flags
 
+ -  `--border {string}`: Border lines, named like `table --theme` (rounded, double, heavy, ...).
  -  `--id {string}`: Widget id.
  -  `--focus`: Start with this widget focused.
 

@@ -2,7 +2,7 @@
 title: tui table
 categories: |
   viewers
-version: 0.116.0
+version: 0.117.0
 viewers: |
   Add a navigable table. Pipeline rows become the rows; scalars show as one `item` column.
 usage: |
@@ -26,19 +26,21 @@ contributors: false
 
 ## Flags
 
+ -  `--title {string}`: Border title, in place of the widget's name. Counts, state, or the previewed file follow in parentheses.
+ -  `--border {string}`: Border lines, named like `table --theme` (rounded, double, heavy, ...).
  -  `--columns {list<string>}`: Columns to show. Defaults to the columns of the input table.
  -  `--capture-keys`: A chord pressed on the focused table becomes the filter query.
  -  `--index, -i`: Select row indexes instead of rows.
  -  `--id {string}`: Widget id.
  -  `--focus`: Start with this widget focused.
- -  `--data {any}`: Data for this widget alone, instead of the outer pipeline's.
+ -  `--data {any}`: Data for this widget alone, instead of the outer pipeline's. Not with --from or a closure.
  -  `--from {string}`: Id of the table, tree, or select whose highlighted row drives this widget.
  -  `--on-select {closure(any)}`: Hook run when the highlighted row changes; receives the state record.
  -  `--multi, -m`: Space toggles rows; the selection is the checked rows.
 
 ## Parameters
 
- -  `source`: Closure over the --from row whose output is this table's rows.
+ -  `source`: Closure over the highlighted row of --from, or of the nearest other table, tree, or select, whose output is this table's rows.
 
 
 ## Input/output types:
@@ -53,6 +55,12 @@ contributors: false
 Show a small table and pick a row
 ```nu
 > [{name: foo, size: 1}, {name: bar, size: 2}] | tui table --columns [name size] | tui debug --keys down,enter | get selected.name
+
+```
+
+Rename the border title; the row count stays
+```nu
+> ls | tui table --title files | tui debug | get screen
 
 ```
 
@@ -75,8 +83,8 @@ Keybinding explorer: press a chord to filter
 ```
 
 ## Notes
-Up/Down, j/k, PageUp/PageDown, Home/End, and mouse wheel move the selection. Enter submits the current row (`--index` submits its index). With `--multi`, Space checks rows and the selection is the checked rows. A `tui search` widget filters rows as you type. Streams append while the TUI runs (oldest rows drop after 10,000).
+Up/Down, j/k, PageUp/PageDown, Home/End, and mouse wheel move the selection. Enter submits the current row (`--index` submits its index). With `--multi`, Space checks rows and the selection is the checked rows. A `tui search` widget filters rows as you type. Streams append while the TUI runs; a stream keeps its newest 100,000 rows.
 
-`--data` gives this table its own rows; `--from <id>` with a closure makes it a detail view of another widget's highlighted row: `tui table --from tree-0 {|node| ls $node.name }`. `--on-select` runs a hook whenever the highlight moves.
+`--data` gives this table its own rows; a closure makes it a detail view of the highlighted row of another table, tree, or select (the one named by `--from`, else the focused one, else the nearest, which may be on another tab page): `tui table --from tree-0 {|node| ls $node.name }`. A closure with no other table, tree, or select to follow is an error when the TUI starts. `--on-select` runs a hook whenever the highlight moves.
 
 `--capture-keys` turns a chord pressed on the focused table (for example Ctrl+R) into the filter query, so a keybinding table filters to bindings that match that chord. Rows with `modifier`/`keycode` fields match reedline-style chords.

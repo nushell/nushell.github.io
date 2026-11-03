@@ -2,7 +2,7 @@
 title: tui tree
 categories: |
   viewers
-version: 0.116.0
+version: 0.117.0
 viewers: |
   Add a tree for nested records or a directory walk.
 usage: |
@@ -26,18 +26,20 @@ contributors: false
 
 ## Flags
 
+ -  `--title {string}`: Border title, in place of the widget's name. Counts, state, or the previewed file follow in parentheses.
+ -  `--border {string}`: Border lines, named like `table --theme` (rounded, double, heavy, ...).
  -  `--walk`: Expand directories on disk when a node is opened.
  -  `--column {string}`: Path/name column (default name).
  -  `--id {string}`: Widget id.
  -  `--focus`: Start with this widget focused.
- -  `--data {any}`: Data for this widget alone, instead of the outer pipeline's.
+ -  `--data {any}`: Data for this widget alone, instead of the outer pipeline's. Not with --from or a closure.
  -  `--from {string}`: Id of the table, tree, or select whose highlighted row drives this widget.
  -  `--on-select {closure(any)}`: Hook run when the highlighted row changes; receives the state record.
  -  `--multi, -m`: Space toggles rows; the selection is the checked rows.
 
 ## Parameters
 
- -  `source`: Closure over the --from row whose output is this tree's data.
+ -  `source`: Closure over the highlighted row of --from, or of the nearest other table, tree, or select, whose output is this tree's data.
 
 
 ## Input/output types:

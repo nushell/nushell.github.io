@@ -2,7 +2,7 @@
 title: matrix max
 categories: |
   filters
-version: 0.116.0
+version: 0.117.0
 filters: |
   Find the maximum value in a matrix, or max along an axis.
 usage: |

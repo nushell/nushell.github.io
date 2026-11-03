@@ -2,7 +2,7 @@
 title: find
 categories: |
   filters
-version: 0.116.0
+version: 0.117.0
 filters: |
   Search for terms in the input data.
 usage: |
@@ -33,6 +33,7 @@ contributors: false
  -  `--columns, -c {list<string>}`: Column names to be searched.
  -  `--no-highlight, -n`: No-highlight mode: find without marking with ansi code.
  -  `--invert, -v`: Invert the match.
+ -  `--only-matching, -o`: Print only the matched parts, with each match on a separate line.
  -  `--rfind, -R`: Search from the end of the string and only return the first match.
 
 ## Parameters
@@ -198,4 +199,50 @@ Find and highlight the last occurrence in a string.
 ```nu
 > 'hello world hello' | find --rfind hello
 hello world hello
+```
+
+Return only matching parts of a string.
+```nu
+> 'abc abc' | find --only-matching ab
+╭───┬────╮
+│ 0 │ ab │
+│ 1 │ ab │
+╰───┴────╯
+
+```
+
+Return only the last matching part of a string.
+```nu
+> 'abc abc' | find --only-matching --rfind ab
+╭───┬────╮
+│ 0 │ ab │
+╰───┴────╯
+
+```
+
+Return only matching parts while preserving original case.
+```nu
+> 'ABC' | find --only-matching --ignore-case a
+╭───┬───╮
+│ 0 │ A │
+╰───┴───╯
+
+```
+
+Return only exact scalar matches for search terms.
+```nu
+> [5 35] | find --only-matching 5
+╭───┬───╮
+│ 0 │ 5 │
+╰───┴───╯
+
+```
+
+Return only matches from selected columns of a table.
+```nu
+> [[name desc]; [foo bar]] | find --only-matching --columns [name] bar
+╭────────────╮
+│ empty list │
+╰────────────╯
+
 ```

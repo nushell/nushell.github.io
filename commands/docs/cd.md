@@ -2,7 +2,7 @@
 title: cd
 categories: |
   filesystem
-version: 0.116.0
+version: 0.117.0
 filesystem: |
   Change the current working directory.
 usage: |
@@ -61,6 +61,12 @@ Changing directory with a custom command requires 'def --env'.
 Move two directories up in the tree (the parent directory's parent). Additional dots can be added for additional levels.
 ```nu
 > cd ...
+
+```
+
+On Windows, switch to drive D:. Stays put if already on D:, otherwise goes to the current directory of D: inherited from the parent process, or its root.
+```nu
+> cd d:
 
 ```
 

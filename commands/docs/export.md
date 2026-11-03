@@ -2,7 +2,7 @@
 title: export
 categories: |
   core
-version: 0.116.0
+version: 0.117.0
 core: |
   Export definitions or environment variables from a module.
 usage: |
@@ -51,4 +51,5 @@ This command is a parser keyword. For details, check:
 | [`export def`](/commands/docs/export_def.md)       | Define a custom command and export it from a module.                             | keyword |
 | [`export extern`](/commands/docs/export_extern.md) | Define an extern and export it from a module.                                    | keyword |
 | [`export module`](/commands/docs/export_module.md) | Export a custom module from a module.                                            | keyword |
+| [`export type`](/commands/docs/export_type.md)     | Give a name to a type annotation and export it from a module.                    | keyword |
 | [`export use`](/commands/docs/export_use.md)       | Use definitions from a module and export them from this module.                  | keyword |

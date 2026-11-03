@@ -2,7 +2,7 @@
 title: ps
 categories: |
   system
-version: 0.116.0
+version: 0.117.0
 system: |
   View information about system processes.
 usage: |
@@ -44,13 +44,19 @@ List the system processes
 
 List the top 5 system processes with the highest memory usage
 ```nu
-> ps | sort-by mem | last 5
+> ps | compact mem | sort-by mem | last 5
 
 ```
 
 List the top 3 system processes with the highest CPU usage
 ```nu
-> ps | sort-by cpu | last 3
+> ps | compact cpu | sort-by cpu | last 3
+
+```
+
+List the 3 system processes that have used the most CPU time
+```nu
+> ps | compact cpu_time | sort-by cpu_time | last 3
 
 ```
 
@@ -65,3 +71,10 @@ Get the parent process id of the current nu process
 > ps | where pid == $nu.pid | get ppid
 
 ```
+
+## Notes
+The columns are the same on every platform. `cpu` is the percent of one CPU core the process used during a short (about 100ms) sample, like `top` shows, and `cpu_time` is the total CPU time it has used since it started. `mem` is resident memory.
+
+With `--long`, `virtual` is the size of the process's virtual address space and `private` is the memory only it uses, the number Activity Monitor and Task Manager show as "Memory". `read` and `written` count bytes of storage I/O since the process started; on Windows they count all I/O, including pipes and network. `user_id` is the numeric user id on unix and the SID string (for example `S-1-5-18`) on Windows. Windows has priority classes rather than nice values, so its `nice` is the priority class on the nice scale, the way libuv and Node.js map it, and its `process_group_id` is the console process group.
+
+A column is null when the operating system doesn't make that value available for a process: for example, macOS only shows the CPU, memory, threads, environment and working directory of other users' processes to root (their `command` is the executable's path), and the BSDs count disk I/O in blocks rather than bytes. Null sorts after every number and can't be matched with `=~`, so use `compact` to drop those rows before sorting or matching text.

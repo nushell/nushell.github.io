@@ -2,7 +2,7 @@
 title: tui textbox
 categories: |
   viewers
-version: 0.116.0
+version: 0.117.0
 viewers: |
   Add an editable text field. Tab to focus it, then type.
 usage: |
@@ -26,6 +26,8 @@ contributors: false
 
 ## Flags
 
+ -  `--title {string}`: Border title, in place of the widget's name. Counts, state, or the previewed file follow in parentheses.
+ -  `--border {string}`: Border lines, named like `table --theme` (rounded, double, heavy, ...).
  -  `--placeholder {string}`: Shown when empty.
  -  `--value {string}`: Initial text.
  -  `--id {string}`: Widget id.

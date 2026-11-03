@@ -2,7 +2,7 @@
 title: polars math sqrt
 categories: |
   dataframe
-version: 0.116.0
+version: 0.117.0
 dataframe: |
   Compute the element-wise square root of a column expression.
 usage: |

@@ -2,7 +2,7 @@
 title: metadata access
 categories: |
   debug
-version: 0.116.0
+version: 0.117.0
 debug: |
   Access the metadata for the input stream within a closure.
 usage: |

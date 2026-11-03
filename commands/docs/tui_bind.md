@@ -2,7 +2,7 @@
 title: tui bind
 categories: |
   viewers
-version: 0.116.0
+version: 0.117.0
 viewers: |
   Run a hook when a key is pressed anywhere in the TUI.
 usage: |
