@@ -32,7 +32,7 @@ contributors: false
  -  `--interactive, -i`: Prompt before overwriting.
  -  `--update, -u`: Move and overwrite only when the SOURCE file is newer than the destination file or when the destination file is missing.
  -  `--no-clobber, -n`: Do not overwrite an existing file.
- -  `--all, -a`: Move hidden files if '*' is provided.
+ -  `--all, -a`: Let glob patterns match hidden names (those starting with '.') at any depth.
 
 ## Parameters
 

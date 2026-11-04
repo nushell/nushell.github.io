@@ -31,7 +31,7 @@ contributors: false
  -  `--exclude, -x {glob}`: Exclude these file names.
  -  `--max-depth, -d {int}`: Directory recursion limit.
  -  `--min-size, -m {int}`: Exclude files below this size.
- -  `--all, -a`: Include hidden files if '*' is provided.
+ -  `--all, -a`: Let glob patterns match hidden names (those starting with '.') at any depth.
 
 ## Parameters
 
