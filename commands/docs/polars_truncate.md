@@ -53,7 +53,7 @@ Truncate a series of dates by period length
 │ 0 │ 2 years ago │ 2 years ago │
 │ 1 │ 2 years ago │ 2 years ago │
 │ 2 │ 2 years ago │ 2 years ago │
-│ 3 │ a year ago  │ 2 years ago │
+│ 3 │ 2 years ago │ 2 years ago │
 ╰───┴─────────────┴─────────────╯
 
 ```
