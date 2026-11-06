@@ -1,6 +1,12 @@
-# 标准库 (预览版)
+---
+prev:
+  text: （没那么）高级
+  link: /zh-CN/book/advanced.md
+---
 
-Nushell 内置了一个用原生 Nu 编写的有用命令的标准库。默认情况下，标准库会在 Nushell 启动时加载到内存中(但不会自动导入)。
+# 标准库
+
+Nushell 内置了一个标准库，其中包含用原生 Nu 编写的实用命令。默认情况下，标准库会在 Nushell 启动时加载到内存中（但不会自动导入）。小型模块 `std/prelude` 是个例外：它会自动导入，提供 [`banner`](/commands/docs/banner.md) 和 [`pwd`](/commands/docs/pwd.md) 命令。
 
 [[toc]]
 
@@ -60,12 +66,19 @@ use std *
 
 - `use std/assert`: `assert` 及其子命令
 - `use std/bench`: 基准测试命令 `bench`
+- `use std/clip`: `clip copy52` 和 `clip paste52`，通过终端（OSC 52）复制到系统剪贴板或从中粘贴；以及 `clip prefix`，为待复制内容的每一行添加前缀
+- `use std/config`: `config dark-theme` 和 `config light-theme`（用于 `$env.config.color_config` 的主题），以及 `config env-conversions`
 - `use std/dirs`: 目录栈命令 `dirs` 及其子命令
 - `use std/input`: `input display` 命令
 - `use std/help`: 支持补全和其他功能的替代版 `help` 命令及其子命令
-- `use std/iters`: 额外的 `iters` 前缀迭代命令
+- `use std/iter`: 额外的 `iter` 前缀迭代命令，例如 `iter find` 和 `iter scan`
 - `use std/log`: `log <subcommands>` 如 `log warning <msg>`
 - `use std/math`: 数学常量如 `$math.E`。这些也可以像下面的形式 #2 那样作为定义导入
+- `use std/random`: `random dice` 命令
+
+::: tip
+Nushell 还提供实验性的内置命令 `clip copy` 和 `clip paste`，它们直接使用操作系统的剪贴板，而不是 OSC 52。要试用它们，请用 `nu --experimental-options '[native-clip]'` 启动 Nushell。
+:::
 
 #### 2. 直接导入模块的定义(内容)
 
@@ -78,9 +91,11 @@ ls | to jsonl
 
 通常使用 `use std/<submodule> *` (**带**通配符/`*`)导入的子模块：
 
-- `use std/dt *`: 处理 `date` 值的额外命令
+- `use std/dt *`: 处理 `datetime` 值的额外命令
 - `use std/formats *`: 额外的 `to` 和 `from` 格式转换
 - `use std/math *`: 不带前缀的数学常量，如 `$E`。注意上面的形式 #1 在阅读和维护代码时可能更易理解
+- `use std/testing *`: 用于标记测试的 `@test`、`@ignore`、`@before-each`、`@before-all`、`@after-each` 和 `@after-all` 属性
+- `use std/util *`: 各种实用命令，例如 `path add`、`repeat`、`null-device` 和 `structure`
 - `use std/xml *`: 处理 XML 数据的额外命令
 
 #### 3. `use std <submodule>`
@@ -88,19 +103,22 @@ ls | to jsonl
 也可以使用空格分隔的形式导入标准库子模块：
 
 ```nu
-use std log
 use std formats *
 ```
 
 ::: important
 如[使用模块](./modules/using_modules.md#模块定义)中所述，这种形式(像 `use std *` 一样)会先将整个标准库加载到作用域中，然后再导入子模块。相比之下，上面的 #1 和 #2 中的斜杠分隔版本只会导入子模块，因此会快得多。
+
+这种形式也不适用于包含同名命令的子模块。例如，`use std log` 只导入 `log` 命令本身，不会导入 `log info` 或其他子命令。请改用 `use std/log`。
 :::
 
 ## 标准库候选模块
 
 `std-rfc` 位于 [nushell 仓库](https://github.com/nushell/nushell/tree/main/crates/nu-std/std-rfc)，作为标准库可能的添加项的暂存区。
 
-如果你有兴趣为标准库添加内容，请通过 PR 提交代码到该仓库的 `std-rfc` 模块。我们也鼓励你安装这个模块并对即将成为候选的命令提供反馈。
+`std-rfc` 随 Nushell 一同提供，因此可以像导入标准库子模块一样导入它的子模块，例如 `use std-rfc/str`。它目前包含 `conversions`、`date`、`iter`、`kv`、`path`、`pb`、`random`、`str`、`tables`、`url` 和 `xml` 子模块。
+
+如果你有兴趣为标准库添加内容，请通过 PR 提交代码到该仓库的 `std-rfc` 模块。我们也鼓励你试用这些候选命令并提供反馈。
 
 ::: details 更多详情
 
@@ -132,17 +150,17 @@ use std formats *
 nu --no-std-lib
 ```
 
-在使用 `nu -c` 在子 shell 中运行命令时，这尤其有助于最小化开销。例如：
+在使用 `nu -c` 在子 shell 中运行命令时，这尤其有助于减少开销。使用 `-c` 时，`$nu.startup-time` 表示 Nushell 在运行命令之前的启动耗时，因此可以比较两种方式：
 
 ```nu
 nu --no-std-lib -n -c "$nu.startup-time"
-# => 1ms 125µs 10ns
+# => 9ms 650µs 250ns
 
 nu -n -c "$nu.startup-time"
-# => 4ms 889µs 576ns
+# => 11ms 558µs 83ns
 ```
 
-当以这种方式禁用时，你将无法导入标准库、它的任何子模块或使用它的任何命令。
+当以这种方式禁用时，你将无法导入标准库、它的任何子模块或使用它的任何命令，包括 `std/prelude` 中的 `banner` 和 `pwd`。
 
 ## 在模块中使用 `std/log`
 
@@ -159,16 +177,16 @@ nu -n -c "$nu.startup-time"
 view files
 | enumerate | flatten
 | where filename !~ '^std'
-| where filename !~ '^entry'
+| where filename !~ '^repl_entry'
 | where {|file|
-    (view span $file.start $file.end) =~ 'use\W+std[^\/]'
+    (view span $file.start $file.end) =~ 'use\s+std(\s|;|$)'
   }
 ```
 
 编辑这些文件，使用上面[导入子模块](#导入子模块)部分推荐的语法。
 
 ::: note
-如果 Nushell 库(例如来自 [nu_scripts 仓库](https://github.com/nushell/nu_scripts))、示例或文档使用了这种语法，请通过 issue 或 PR 报告。在 Nushell 0.99.0 发布后，这些将会逐步更新。
+如果 Nushell 库（例如来自 [nu_scripts 仓库](https://github.com/nushell/nu_scripts)）、示例或文档仍在使用这种语法，请通过 issue 或 PR 报告。
 
 如果第三方模块使用了这种语法，请报告给作者/维护者进行更新。
 :::

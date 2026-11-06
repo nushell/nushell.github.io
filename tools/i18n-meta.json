@@ -273,6 +273,19 @@
     "ko": "-"
   },
   {
+    "name": "directory_stack.md",
+    "en": "In progress",
+    "zh-CN": "badd5aa21c3690769e81dfb416a69d2f8ea20fa5",
+    "fr": "-",
+    "de": "-",
+    "tr": "-",
+    "ja": "-",
+    "es": "-",
+    "pt-BR": "-",
+    "ru": "-",
+    "ko": "-"
+  },
+  {
     "name": "environment.md",
     "en": "Completed",
     "zh-CN": "d6efb9a35a@hustcer",
@@ -691,7 +704,7 @@
   {
     "name": "standard_library.md",
     "en": "In progress",
-    "zh-CN": "-",
+    "zh-CN": "badd5aa21c3690769e81dfb416a69d2f8ea20fa5",
     "fr": "-",
     "de": "-",
     "tr": "-",
@@ -743,7 +756,7 @@
   {
     "name": "testing.md",
     "en": "In progress",
-    "zh-CN": "-",
+    "zh-CN": "badd5aa21c3690769e81dfb416a69d2f8ea20fa5",
     "fr": "-",
     "de": "-",
     "tr": "-",

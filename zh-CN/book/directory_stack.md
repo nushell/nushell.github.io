@@ -48,7 +48,7 @@ dirs
 # => ╭───┬────────┬─────────────────────────────────╮
 # => │ # │ active │              path               │
 # => ├───┼────────┼─────────────────────────────────┤
-# => │ 0 │ true   │ /home/myuser/repo/nushell       │
+# => │ 0 │ true   │ /home/myuser/src/repo/nushell   │
 # => ╰───┴────────┴─────────────────────────────────╯
 ```
 
@@ -91,6 +91,7 @@ dirs next
 pwd
 # => /home/myuser/src/repo/nushell
 dirs goto 2
+pwd
 # => /home/myuser/src/repo/nu_scripts
 ```
 
