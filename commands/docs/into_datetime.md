@@ -98,7 +98,7 @@ Sat, 27 Feb 2021 13:55:40 +0000 (5 years ago)
 Convert non-standard timestamp string, without timezone offset, to datetime with custom formatting.
 ```nu
 > '16.11.1984 8:00 am' | into datetime --format '%d.%m.%Y %H:%M %P'
-Fri, 16 Nov 1984 08:00:00 +0800 (41 years ago)
+Fri, 16 Nov 1984 08:00:00 +0800 (42 years ago)
 ```
 
 Interpret a formatted datetime in the Europe/Berlin timezone.
