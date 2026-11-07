@@ -2,7 +2,7 @@
 title: path relative-to
 categories: |
   path
-version: 0.116.0
+version: 0.117.0
 path: |
   Express a path as relative to another path.
 usage: |
@@ -24,9 +24,13 @@ contributors: false
 
 ```> path relative-to {flags} (path)```
 
+## Flags
+
+ -  `--walk-up`: Allow `..` components when the argument path is not a parent of the input path.
+
 ## Parameters
 
- -  `path`: Parent shared with the input path.
+ -  `path`: Path to express the input path relative to.
 
 
 ## Input/output types:
@@ -59,7 +63,19 @@ Find a relative path from two relative paths.
 spam
 ```
 
+Walk up with `..` when the argument path is not a parent of the input path.
+```nu
+> '/home/viking' | path relative-to '/home/spam/eggs' --walk-up
+../../viking
+```
+
 ## Notes
 Can be used only when the input and the argument paths are either both
-absolute or both relative. The argument path needs to be a parent of the input
-path.
+absolute or both relative. Without --walk-up, the argument path needs to be a
+parent of the input path.
+
+The paths are compared as text, without touching the filesystem. With --walk-up,
+each `..` in the result stands for the textual parent of the argument path, so
+if the argument path goes through a symbolic link, the result may point
+somewhere else than the textual path suggests. When --walk-up has to add `..`,
+names are compared with exact case, even on Windows and macOS.

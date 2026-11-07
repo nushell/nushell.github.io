@@ -2,7 +2,7 @@
 title: record walk
 categories: |
   filters
-version: 0.116.2
+version: 0.117.0
 filters: |
   Run a closure on every value nested inside a record, rebuilding the record from the results.
 usage: |

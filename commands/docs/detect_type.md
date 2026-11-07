@@ -2,7 +2,7 @@
 title: detect type
 categories: |
   strings
-version: 0.116.0
+version: 0.117.0
 strings: |
   Infer Nushell datatype from a string.
 usage: |
@@ -116,8 +116,29 @@ Prefer DMY for ambiguous dates
 Sat, 1 Feb 2025 00:00:00 +0800 (2 years ago)
 ```
 
+Composite durations
+```nu
+> '5ns' | detect type
+5ns
+```
+
 Unknown stays a string
 ```nu
 > 'not-a-number' | detect type
 not-a-number
 ```
+
+Numbers with leading whitespace stay strings
+```nu
+> ' 42' | detect type
+ 42
+```
+
+Out-of-range integers stay strings
+```nu
+> '9223372036854775808' | detect type
+9223372036854775808
+```
+
+## Notes
+Strings with leading or trailing whitespace are preserved. If conversion fails, the original input is returned unchanged.

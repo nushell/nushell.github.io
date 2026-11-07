@@ -2,7 +2,7 @@
 title: kill
 categories: |
   platform
-version: 0.116.0
+version: 0.117.0
 platform: |
   Kill a process using its process ID.
 usage: |
@@ -44,7 +44,7 @@ contributors: false
 
 Kill the pid using the most memory.
 ```nu
-> ps | sort-by mem | last | kill $in.pid
+> ps | compact mem | sort-by mem | last | kill $in.pid
 
 ```
 

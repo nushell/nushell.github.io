@@ -2,7 +2,7 @@
 title: hash sha512
 categories: |
   hash
-version: 0.116.0
+version: 0.117.0
 hash: |
   Hash a value using the sha512 hash algorithm.
 usage: |

@@ -2,7 +2,7 @@
 title: record each
 categories: |
   filters
-version: 0.116.2
+version: 0.117.0
 filters: |
   Build a new record from the entries a closure returns for each field of a record.
 usage: |

@@ -2,7 +2,7 @@
 title: export extern
 categories: |
   core
-version: 0.116.0
+version: 0.117.0
 core: |
   Define an extern and export it from a module.
 usage: |
@@ -23,6 +23,10 @@ contributors: false
 ## Signature
 
 ```> export extern {flags} (def_name) (params)```
+
+## Flags
+
+ -  `--strict`: Reject flags the signature doesn't declare (`--help` still reaches the command).
 
 ## Parameters
 
@@ -46,3 +50,5 @@ Export the signature for an external command.
 ## Notes
 This command is a parser keyword. For details, check:
   https://www.nushell.sh/book/thinking_in_nu.html
+
+`--strict` checks flags when the call is parsed. A count like `-10`, a flag spelled at run time (`-$x`, `--(expr)`) and the items of a list spread (`...$args`) still pass through unchecked.

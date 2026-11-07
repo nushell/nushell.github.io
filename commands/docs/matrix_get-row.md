@@ -2,7 +2,7 @@
 title: matrix get-row
 categories: |
   filters
-version: 0.116.0
+version: 0.117.0
 filters: |
   Extract a row from a matrix.
 usage: |

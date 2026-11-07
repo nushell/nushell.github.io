@@ -2,7 +2,7 @@
 title: load-env
 categories: |
   filesystem
-version: 0.116.0
+version: 0.117.0
 filesystem: |
   Loads an environment update from a record.
 usage: |
@@ -23,6 +23,10 @@ contributors: false
 ## Signature
 
 ```> load-env {flags} (update)```
+
+## Flags
+
+ -  `--no-convert`: Load the values as given, without $env.ENV_CONVERSIONS or making PATH a list.
 
 ## Parameters
 
@@ -50,9 +54,15 @@ Load variables from an argument.
 ABE
 ```
 
-Load a variable, then apply its environment conversion.
+Update the configuration from a config record.
 ```nu
-> $env.ENV_CONVERSIONS = {MY_ENV_VAR: {from_string: { split row ':' }}}; load-env {MY_ENV_VAR: 'foo:bar'}; $env.ENV_CONVERSIONS = $env.ENV_CONVERSIONS; $env.MY_ENV_VAR
+> load-env {config: {show_banner: false}}; $env.config.show_banner
+false
+```
+
+Load a variable, which its environment conversion turns into a list.
+```nu
+> $env.ENV_CONVERSIONS = {MY_ENV_VAR: {from_string: { split row ':' }}}; load-env {MY_ENV_VAR: 'foo:bar'}; $env.MY_ENV_VAR
 ╭───┬─────╮
 │ 0 │ foo │
 │ 1 │ bar │
@@ -60,5 +70,11 @@ Load a variable, then apply its environment conversion.
 
 ```
 
+Load a variable as given, without converting it.
+```nu
+> $env.ENV_CONVERSIONS = {MY_ENV_VAR: {from_string: { split row ':' }}}; load-env --no-convert {MY_ENV_VAR: 'foo:bar'}; $env.MY_ENV_VAR
+foo:bar
+```
+
 ## Notes
-Environment conversions are not applied automatically. To apply the conversions configured in $env.ENV_CONVERSIONS after loading an update, assign $env.ENV_CONVERSIONS to itself.
+A config record updates the current configuration. Each string value with a `from_string` conversion in $env.ENV_CONVERSIONS is converted, as nushell converts the environment it starts with, and a string PATH becomes a list; `with-env` converts the same way. When a conversion fails, nothing is loaded. A record holding ENV_CONVERSIONS is loaded first and then converts every variable, as assigning it does, so a failed conversion leaves it loaded. With --no-convert, the values are loaded as given.

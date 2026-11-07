@@ -2,7 +2,7 @@
 title: from
 categories: |
   formats
-version: 0.116.0
+version: 0.117.0
 formats: |
   Parse a string or binary data into structured data.
 usage: |
@@ -38,6 +38,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | name                                               | description                                                                                                                | type     |
 | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------- |
 | [`from csv`](/commands/docs/from_csv.md)           | Parse text as .csv and create table.                                                                                       | built-in |
+| [`from dotenv`](/commands/docs/from_dotenv.md)     | Parse text as a .env file and create a record.                                                                             | built-in |
 | [`from eml`](/commands/docs/from_eml.md)           | Parse text as .eml and create record.                                                                                      | plugin   |
 | [`from ics`](/commands/docs/from_ics.md)           | Parse text as .ics and create table.                                                                                       | plugin   |
 | [`from ini`](/commands/docs/from_ini.md)           | Parse text as .ini and create table.                                                                                       | plugin   |

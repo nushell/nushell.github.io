@@ -2,7 +2,7 @@
 title: table
 categories: |
   viewers
-version: 0.116.0
+version: 0.117.0
 viewers: |
   Render the table.
 usage: |
@@ -34,7 +34,6 @@ contributors: false
  -  `--flatten`: Flatten simple arrays.
  -  `--flatten-separator {string}`: Sets a separator when 'flatten' is used.
  -  `--collapse, -c`: Expand the table structure in collapse mode.
-Be aware collapse mode currently doesn't support width control.
  -  `--abbreviated, -a {int}`: Abbreviate the data in the table by truncating the middle part and only showing amount provided on top and bottom.
  -  `--list, -l`: List available table modes/themes.
  -  `--icons, -o`: Add icons to file paths in tables.

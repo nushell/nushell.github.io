@@ -2,7 +2,7 @@
 title: version check
 categories: |
   platform
-version: 0.116.0
+version: 0.117.0
 platform: |
   Checks to see if you have the latest version of nushell.
 usage: |
@@ -39,4 +39,9 @@ Check if you have the latest version of nushell
 ```
 
 ## Notes
-If you're running nushell nightly, `version check` will check to see if you are running the latest nightly version. If you are running the nushell release, `version check` will check to see if you're running the latest release version.
+If you're running nushell nightly, `version check` will check to see if you are running
+ the latest nightly version. If you are running the nushell release, `version check` will check
+ to see if you're running the latest release version.
+
+If `GITHUB_TOKEN` (or `GH_TOKEN`) is set in the environment, it will be used to authenticate the
+ check against the GitHub API. When both are set, `GH_TOKEN` takes precedence, as with the `gh` CLI.

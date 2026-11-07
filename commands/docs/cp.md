@@ -2,7 +2,7 @@
 title: cp
 categories: |
   filesystem
-version: 0.116.0
+version: 0.117.0
 filesystem: |
   Copy files using uutils/coreutils cp.
 usage: |
@@ -40,7 +40,7 @@ contributors: false
                     if not specified only mode is preserved
                     possible values: mode, ownership (unix only), timestamps, context, link, links, xattr.
  -  `--debug`: Explain how a file is copied. Implies -v.
- -  `--all, -a`: Copy hidden files if '*' is provided.
+ -  `--all, -a`: Let glob patterns match hidden names (those starting with '.') at any depth.
 
 ## Parameters
 

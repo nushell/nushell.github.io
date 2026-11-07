@@ -2,7 +2,7 @@
 title: group-by
 categories: |
   filters
-version: 0.116.0
+version: 0.117.0
 filters: |
   Splits a list or table into groups, and returns a record containing those groups.
 usage: |
@@ -26,7 +26,7 @@ contributors: false
 
 ## Flags
 
- -  `--to-table`: Return a table with "groups" and "items" columns.
+ -  `--to-table`: Return a table with a column per grouper and an "items" column. Group keys keep their type.
  -  `--prune`: Remove a column after grouping, if applicable.
 
 ## Parameters
@@ -87,6 +87,27 @@ You can also group by raw values by leaving out the argument.
 ╰───┴───────────╯
 ```
 
+Group by a non-string column, keeping the keys' original type.
+```nu
+> [{n: 1} {n: 2} {n: 1}] | group-by n --to-table
+╭───┬───┬───────────╮
+│ # │ n │   items   │
+├───┼───┼───────────┤
+│ 0 │ 1 │ ╭───┬───╮ │
+│   │   │ │ # │ n │ │
+│   │   │ ├───┼───┤ │
+│   │   │ │ 0 │ 1 │ │
+│   │   │ │ 1 │ 1 │ │
+│   │   │ ╰───┴───╯ │
+│ 1 │ 2 │ ╭───┬───╮ │
+│   │   │ │ # │ n │ │
+│   │   │ ├───┼───┤ │
+│   │   │ │ 0 │ 2 │ │
+│   │   │ ╰───┴───╯ │
+╰───┴───┴───────────╯
+
+```
+
 You can also output a table instead of a record.
 ```nu
 > ['1' '3' '1' '3' '2' '1' '1'] | group-by --to-table
@@ -123,6 +144,28 @@ Group bools, whether they are strings or actual bools.
 │       │ │ 1 │ false │ │
 │       │ ╰───┴───────╯ │
 ╰───────┴───────────────╯
+```
+
+Bools and strings are different keys in a table.
+```nu
+> [true "true" false "false"] | group-by --to-table
+╭───┬───────┬───────────────╮
+│ # │ group │     items     │
+├───┼───────┼───────────────┤
+│ 0 │ true  │ ╭───┬──────╮  │
+│   │       │ │ 0 │ true │  │
+│   │       │ ╰───┴──────╯  │
+│ 1 │ true  │ ╭───┬──────╮  │
+│   │       │ │ 0 │ true │  │
+│   │       │ ╰───┴──────╯  │
+│ 2 │ false │ ╭───┬───────╮ │
+│   │       │ │ 0 │ false │ │
+│   │       │ ╰───┴───────╯ │
+│ 3 │ false │ ╭───┬───────╮ │
+│   │       │ │ 0 │ false │ │
+│   │       │ ╰───┴───────╯ │
+╰───┴───────┴───────────────╯
+
 ```
 
 Group items by multiple columns' values.
@@ -213,9 +256,8 @@ Group items by column and delete the original.
 ```
 
 ## Notes
-the group-by command makes some assumptions:
-    - if the input data is not a string, the grouper will convert the key to string but the values will remain in their original format. e.g. with bools, "true" and true would be in the same group (see example).
-    - datetime is formatted based on your configuration setting. use `format date` to change the format.
-    - filesize is formatted based on your configuration setting. use `format filesize` to change the format.
-    - some nushell values are not supported, such as closures.
-    - null group keys are never mapped to the empty string. The default record output omits null groups (records cannot use null as a key); use --to-table to include them as null values. Optional cell paths (e.g. `foo?`) still ignore rows where access yields null.
+By default the output is a record. Record keys are strings, so each group key is converted to its display string, and values that display alike share a group: "true" and true, 1 and "1", and filesizes such as 1MB and 1.001MB. Dates and filesizes display according to your config. Records cannot use null as a key, so null groups are omitted.
+
+With --to-table the output is a table with one column per grouper (named `group` when no grouper is given) and an `items` column. Grouping compares the values themselves: keys share a group only when they have the same type and the same value, so 1 and 1.0 are separate groups, as are "true" and true, and 1MB and 1.001MB. Records with the same fields in a different order share a group, as do dates at the same instant in different time zones. Group columns keep their original types, and null groups are kept. A grouper named `items` is rejected (use `{ get items }` or rename the column), and so are duplicate grouper names.
+
+To choose how values are bucketed, convert them in a closure, for example `group-by { get modified | format date "%F" }`. Optional cell paths (e.g. `foo?`) skip rows where access yields null.

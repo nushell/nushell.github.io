@@ -2,7 +2,7 @@
 title: metadata
 categories: |
   debug
-version: 0.116.0
+version: 0.117.0
 debug: |
   Get the metadata for items in the stream.
 usage: |
@@ -26,7 +26,7 @@ contributors: false
 
 ## Parameters
 
- -  `expression`: The expression you want metadata for.
+ -  `expression`: The expression you want metadata for. When given, pipeline input is ignored.
 
 
 ## Input/output types:
@@ -48,6 +48,17 @@ Get the metadata of the input.
 
 ```
 
+Get the metadata of a closure parameter. The closure's input is ignored.
+```nu
+> [1] | each {|x| metadata $x } | columns
+╭───┬──────╮
+│ 0 │ span │
+╰───┴──────╯
+
+```
+
+## Notes
+With an expression, the result describes only that expression (its span) and pipeline input is ignored. Without one, the result is the input's pipeline metadata.
 
 ## Subcommands:
 

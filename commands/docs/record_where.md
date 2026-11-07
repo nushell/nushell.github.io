@@ -2,7 +2,7 @@
 title: record where
 categories: |
   filters
-version: 0.116.2
+version: 0.117.0
 filters: |
   Keep the fields of a record for which a row condition or closure is true.
 usage: |

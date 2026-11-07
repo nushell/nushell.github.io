@@ -2,7 +2,7 @@
 title: commandline set-prompt
 categories: |
   core
-version: 0.116.0
+version: 0.117.0
 core: |
   Replace the current prompt and repaint it in place, without disturbing the line being edited.
 usage: |
@@ -96,6 +96,10 @@ segments that have finished computing. The line and cursor are preserved.
 `--indicator` sets only the default/emacs indicator. Use `--vi-insert` and
 `--vi-normal` to set the vi mode indicators independently.
 
-The pushed prompt lasts only until the next prompt is drawn.
+The pushed prompt lasts only until the next prompt is drawn. The exception is a
+push from code that runs while the next prompt is built (a `pre_prompt` or
+`env_change` hook, or a prompt closure such as `$env.PROMPT_COMMAND`), or from a
+job that code starts: it shows on that prompt even if it lands before the prompt
+is drawn.
 
 meant for REPL sessions only

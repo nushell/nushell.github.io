@@ -2,7 +2,7 @@
 title: polars datepart
 categories: |
   expression
-version: 0.116.0
+version: 0.117.0
 expression: |
   Creates an expression for capturing the specified datepart in a column.
 usage: |
@@ -65,10 +65,11 @@ Creates an expression to capture multiple date parts
                 (polars col datetime | polars datepart minute | polars as datetime_minute ),
                 (polars col datetime | polars datepart second | polars as datetime_second ),
                 (polars col datetime | polars datepart nanosecond | polars as datetime_ns ) ]
-╭───┬─────────────┬───────────────┬────────────────┬──────────────┬───────────────┬─────────────────┬─────╮
-│ # │  datetime   │ datetime_year │ datetime_month │ datetime_day │ datetime_hour │ datetime_minute │ ... │
-├───┼─────────────┼───────────────┼────────────────┼──────────────┼───────────────┼─────────────────┼─────┤
-│ 0 │ 4 years ago │          2021 │             12 │           30 │             1 │               2 │ ... │
-╰───┴─────────────┴───────────────┴────────────────┴──────────────┴───────────────┴─────────────────┴─────╯
+╭───┬─────────────┬────────────┬────────────┬────────────┬────────────┬────────────┬────────────┬────────────╮
+│ # │  datetime   │ datetime_y │ datetime_m │ datetime_d │ datetime_h │ datetime_m │ datetime_s │ datetime_n │
+│   │             │ ear        │ onth       │ ay         │ our        │ inute      │ econd      │ s          │
+├───┼─────────────┼────────────┼────────────┼────────────┼────────────┼────────────┼────────────┼────────────┤
+│ 0 │ 4 years ago │       2021 │         12 │         30 │          1 │          2 │          3 │  123456789 │
+╰───┴─────────────┴────────────┴────────────┴────────────┴────────────┴────────────┴────────────┴────────────╯
 
 ```

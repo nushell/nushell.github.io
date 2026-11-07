@@ -2,7 +2,7 @@
 title: into datetime
 categories: |
   conversions
-version: 0.116.0
+version: 0.117.0
 conversions: |
   Convert text or timestamp into a datetime.
 usage: |
@@ -26,10 +26,11 @@ contributors: false
 
 ## Flags
 
- -  `--timezone, -z {string}`: Specify timezone to interpret timestamps and formatted datetime input. Valid options: 'UTC' ('u') or 'LOCAL' ('l').
+ -  `--timezone, -z {string}`: Specify timezone to interpret timestamps and formatted datetime input. Valid options: 'UTC' ('u'), 'LOCAL' ('l') or any of `date list-timezone`.
  -  `--offset, -o {int}`: Specify timezone by offset from UTC to interpret timestamps and formatted datetime input, like '+8', '-4'.
- -  `--format, -f {string}`: Specify expected format of INPUT string to parse to datetime. Use --list to see options.
+ -  `--format, -f {string}`: Specify expected format of INPUT string to parse to datetime. Use --list to see options, or --formats for the formats read without one.
  -  `--list, -l`: Show all possible variables for use in --format flag.
+ -  `--formats`: Show the formats read without --format, with an example of each.
 
 ## Parameters
 
@@ -64,6 +65,30 @@ Convert standard timestamp string to datetime with timezone offset.
 Sat, 27 Feb 2021 13:55:40 +0000 (5 years ago)
 ```
 
+Convert a date written with a month name, an ordinal and a 12-hour time.
+```nu
+> 'April 18th, 2025 4:04 PM +05:30' | into datetime
+Fri, 18 Apr 2025 16:04:00 +0530 (2 years ago)
+```
+
+Convert a date-time in an IANA time zone.
+```nu
+> '2025-04-18 04:04:32 America/New_York' | into datetime
+Fri, 18 Apr 2025 04:04:32 -0400 (2 years ago)
+```
+
+Convert a relative date.
+```nu
+> 'tomorrow 10am' | into datetime
+
+```
+
+List the formats read without --format, with an example of each.
+```nu
+> into datetime --formats
+
+```
+
 Convert non-standard timestamp string, with timezone offset, to datetime using a custom format.
 ```nu
 > '20210227_135540+0000' | into datetime --format '%Y%m%d_%H%M%S%z'
@@ -73,7 +98,13 @@ Sat, 27 Feb 2021 13:55:40 +0000 (5 years ago)
 Convert non-standard timestamp string, without timezone offset, to datetime with custom formatting.
 ```nu
 > '16.11.1984 8:00 am' | into datetime --format '%d.%m.%Y %H:%M %P'
-Fri, 16 Nov 1984 08:00:00 +0800 (41 years ago)
+Fri, 16 Nov 1984 08:00:00 +0800 (42 years ago)
+```
+
+Interpret a formatted datetime in the Europe/Berlin timezone.
+```nu
+> '2024-07-01 12:00' | into datetime --format '%Y-%m-%d %H:%M' --timezone Europe/Berlin
+Mon, 1 Jul 2024 12:00:00 +0200 (2 years ago)
 ```
 
 Convert nanosecond-precision unix timestamp to a datetime with offset from UTC.
@@ -97,7 +128,7 @@ Sat, 27 Feb 2021 13:55:40 +0000 (5 years ago)
 Using a record as input.
 ```nu
 > {year: 2025, month: 3, day: 30, hour: 12, minute: 15, second: 59, timezone: '+02:00'} | into datetime
-Sun, 30 Mar 2025 10:15:59 +0000 (a year ago)
+Sun, 30 Mar 2025 10:15:59 +0000 (2 years ago)
 ```
 
 Convert list of timestamps to datetimes.
@@ -120,3 +151,6 @@ Passing a list of datetimes through is a no-op.
 ╰───┴─────────────╯
 
 ```
+
+## Notes
+Without --format, a string is a date, a time, or a date with a time after T, a space or a comma, and an offset or time zone can follow the time. Parts left out come from today, and a time without an offset is local time. An int, or a string of digits, is nanoseconds since 1970-01-01 UTC. Run `into datetime --formats` to list each format with an example.

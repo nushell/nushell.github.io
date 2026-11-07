@@ -2,7 +2,7 @@
 title: idx drop
 categories: |
   filesystem
-version: 0.116.0
+version: 0.117.0
 filesystem: |
   Drop the current idx runtime from memory.
 usage: |

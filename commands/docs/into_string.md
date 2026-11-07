@@ -2,7 +2,7 @@
 title: into string
 categories: |
   conversions
-version: 0.116.0
+version: 0.117.0
 conversions: |
   Convert value to a string.
 usage: |
@@ -133,3 +133,6 @@ convert semver to string.
 > '1.2.3' | into semver | into string
 1.2.3
 ```
+
+## Notes
+Binary input is accepted only to point you to the right command: `into string` does not decode bytes, so it returns an error that suggests `decode`. Use `decode` (for example `decode utf-8`) to turn binary data into a string.

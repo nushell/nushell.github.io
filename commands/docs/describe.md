@@ -2,7 +2,7 @@
 title: describe
 categories: |
   core
-version: 0.116.0
+version: 0.117.0
 core: |
   Describe the type and structure of the value(s) piped in.
 usage: |
@@ -67,12 +67,12 @@ Describe the type of a record in a detailed way.
 │               │ │ features     │ │ type          │ record                                              │ │ │
 │               │ │              │ │ detailed_type │ record<bugs: bool, multiplatform: bool, speed: int> │ │ │
 │               │ │              │ │               │ ╭───────────────┬─────────────────────────────────╮ │ │ │
-│               │ │              │ │ columns       │ │               │ ╭──────────────────┬──────────╮ │ │ │ │
-│               │ │              │ │               │ │ bugs          │ │ type             │ bool     │ │ │ │ │
-│               │ │              │ │               │ │               │ │ detailed_type    │ bool     │ │ │ │ │
-│               │ │              │ │               │ │               │ │ rust_type        │ bool     │ │ │ │ │
-│               │ │              │ │               │ │               │ │ value            │ false    │ │ │ │ │
-│               │ │              │ │               │ │               │ ╰──────────────────┴──────────╯ │ │ │ │
+│               │ │              │ │ columns       │ │               │ ╭───────────────┬─────────────╮ │ │ │ │
+│               │ │              │ │               │ │ bugs          │ │ type          │ bool        │ │ │ │ │
+│               │ │              │ │               │ │               │ │ detailed_type │ bool        │ │ │ │ │
+│               │ │              │ │               │ │               │ │ rust_type     │ bool        │ │ │ │ │
+│               │ │              │ │               │ │               │ │ value         │ false       │ │ │ │ │
+│               │ │              │ │               │ │               │ ╰───────────────┴─────────────╯ │ │ │ │
 │               │ │              │ │               │ │               │ ╭───────────────┬──────╮        │ │ │ │
 │               │ │              │ │               │ │ multiplatform │ │ type          │ bool │        │ │ │ │
 │               │ │              │ │               │ │               │ │ detailed_type │ bool │        │ │ │ │
@@ -89,22 +89,22 @@ Describe the type of a record in a detailed way.
 │               │ │              │ │ rust_type     │ &nu_utils::shared_cow::SharedCow<nu_protocol::value │ │ │
 │               │ │              │ │               │ ::record::Record>                                   │ │ │
 │               │ │              │ ╰───────────────┴─────────────────────────────────────────────────────╯ │ │
-│               │ │              │ ╭─────────────────┬───────────────────────────────────────────────────╮ │ │
-│               │ │ fib          │ │ type            │ list                                              │ │ │
-│               │ │              │ │ detailed_type   │ list<int>                                         │ │ │
-│               │ │              │ │ length          │ 6                                                 │ │ │
-│               │ │              │ │ rust_type       │ &mut alloc::vec::Vec<nu_protocol::value::Value>   │ │ │
-│               │ │              │ │                 │ ╭───┬──────┬───────────────┬───────────┬───────╮  │ │ │
-│               │ │              │ │ value           │ │ # │ type │ detailed_type │ rust_type │ value │  │ │ │
-│               │ │              │ │                 │ ├───┼──────┼───────────────┼───────────┼───────┤  │ │ │
-│               │ │              │ │                 │ │ 0 │ int  │ int           │ i64       │     1 │  │ │ │
-│               │ │              │ │                 │ │ 1 │ int  │ int           │ i64       │     1 │  │ │ │
-│               │ │              │ │                 │ │ 2 │ int  │ int           │ i64       │     2 │  │ │ │
-│               │ │              │ │                 │ │ 3 │ int  │ int           │ i64       │     3 │  │ │ │
-│               │ │              │ │                 │ │ 4 │ int  │ int           │ i64       │     5 │  │ │ │
-│               │ │              │ │                 │ │ 5 │ int  │ int           │ i64       │     8 │  │ │ │
-│               │ │              │ │                 │ ╰───┴──────┴───────────────┴───────────┴───────╯  │ │ │
-│               │ │              │ ╰─────────────────┴───────────────────────────────────────────────────╯ │ │
+│               │ │              │ ╭───────────────┬─────────────────────────────────────────────────────╮ │ │
+│               │ │ fib          │ │ type          │ list                                                │ │ │
+│               │ │              │ │ detailed_type │ list<int>                                           │ │ │
+│               │ │              │ │ length        │ 6                                                   │ │ │
+│               │ │              │ │ rust_type     │ &mut alloc::vec::Vec<nu_protocol::value::Value>     │ │ │
+│               │ │              │ │               │ ╭───┬──────┬───────────────┬───────────┬───────╮    │ │ │
+│               │ │              │ │ value         │ │ # │ type │ detailed_type │ rust_type │ value │    │ │ │
+│               │ │              │ │               │ ├───┼──────┼───────────────┼───────────┼───────┤    │ │ │
+│               │ │              │ │               │ │ 0 │ int  │ int           │ i64       │     1 │    │ │ │
+│               │ │              │ │               │ │ 1 │ int  │ int           │ i64       │     1 │    │ │ │
+│               │ │              │ │               │ │ 2 │ int  │ int           │ i64       │     2 │    │ │ │
+│               │ │              │ │               │ │ 3 │ int  │ int           │ i64       │     3 │    │ │ │
+│               │ │              │ │               │ │ 4 │ int  │ int           │ i64       │     5 │    │ │ │
+│               │ │              │ │               │ │ 5 │ int  │ int           │ i64       │     8 │    │ │ │
+│               │ │              │ │               │ ╰───┴──────┴───────────────┴───────────┴───────╯    │ │ │
+│               │ │              │ ╰───────────────┴─────────────────────────────────────────────────────╯ │ │
 │               │ │              │ ╭───────────────┬─────────────────────────────────────────────────────╮ │ │
 │               │ │ first_commit │ │ type          │ datetime                                            │ │ │
 │               │ │              │ │ detailed_type │ datetime                                            │ │ │

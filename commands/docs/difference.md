@@ -2,7 +2,7 @@
 title: difference
 categories: |
   filters
-version: 0.116.0
+version: 0.117.0
 filters: |
   Returns a list of unique elements in the input that are not present in the other list.
 usage: |

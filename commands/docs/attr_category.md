@@ -2,7 +2,7 @@
 title: attr category
 categories: |
   core
-version: 0.116.0
+version: 0.117.0
 core: |
   Attribute for adding a category to custom commands.
 usage: |

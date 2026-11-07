@@ -2,7 +2,7 @@
 title: matrix map
 categories: |
   filters
-version: 0.116.0
+version: 0.117.0
 filters: |
   Apply a closure to each element of a matrix and return a new matrix.
 usage: |

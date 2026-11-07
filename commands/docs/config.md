@@ -2,7 +2,7 @@
 title: config
 categories: |
   env
-version: 0.116.0
+version: 0.117.0
 env: |
   Edit nushell configuration files.
 usage: |
@@ -37,6 +37,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 | name                                                       | description                                                                                                                           | type     |
 | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| [`config default`](/commands/docs/config_default.md)       | Show the default configuration.                                                                                                       | built-in |
 | [`config env`](/commands/docs/config_env.md)               | Edit nu environment configurations.                                                                                                   | built-in |
 | [`config flatten`](/commands/docs/config_flatten.md)       | Show the current configuration in a flattened form.                                                                                   | built-in |
 | [`config nu`](/commands/docs/config_nu.md)                 | Edit nu configurations.                                                                                                               | built-in |

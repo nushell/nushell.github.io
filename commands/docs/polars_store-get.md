@@ -2,7 +2,7 @@
 title: polars store-get
 categories: |
   dataframe
-version: 0.116.0
+version: 0.117.0
 dataframe: |
   Gets a Dataframe or other object from the plugin cache.
 usage: |

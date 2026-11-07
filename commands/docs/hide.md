@@ -2,7 +2,7 @@
 title: hide
 categories: |
   core
-version: 0.116.0
+version: 0.117.0
 core: |
   Hide definitions in the current scope.
 usage: |
@@ -22,11 +22,11 @@ contributors: false
 
 ## Signature
 
-```> hide {flags} (module) (members)```
+```> hide {flags} (name) (members)```
 
 ## Parameters
 
- -  `module`: Module or module file.
+ -  `name`: Alias, command, type alias, or module to hide.
  -  `members`: Which members of the module to hide.
 
 
@@ -49,8 +49,14 @@ Hide a custom command.
 
 ```
 
+Hide a type alias.
+```nu
+> type Id = int; hide Id
+
+```
+
 ## Notes
-Definitions are hidden by priority: First aliases, then custom commands.
+Definitions are hidden by priority: First aliases, then custom commands, then type aliases.
 
 This command is a parser keyword. For details, check:
   https://www.nushell.sh/book/thinking_in_nu.html

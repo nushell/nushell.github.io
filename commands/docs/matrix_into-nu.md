@@ -2,7 +2,7 @@
 title: matrix into-nu
 categories: |
   conversions
-version: 0.116.0
+version: 0.117.0
 conversions: |
   Convert a matrix to a nushell table (list of lists by default).
 usage: |

@@ -2,7 +2,7 @@
 title: open
 categories: |
   filesystem
-version: 0.116.0
+version: 0.117.0
 filesystem: |
   Load a file into a cell, converting to table if possible (avoid by appending '--raw').
 usage: |
@@ -84,4 +84,4 @@ Show the extensions for which the `open` command will automatically parse.
 ```
 
 ## Notes
-Support to automatically parse files with an extension `.xyz` can be provided by a `from xyz` command in scope.
+Support to automatically parse files with an extension `.xyz` can be provided by a `from xyz` command in scope. Files named like `.env`, `.env.local` or `prod.env` are parsed with `from dotenv` when they hold text.

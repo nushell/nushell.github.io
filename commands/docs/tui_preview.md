@@ -2,7 +2,7 @@
 title: tui preview
 categories: |
   viewers
-version: 0.116.0
+version: 0.117.0
 viewers: |
   Show text for the selected table, tree, or select row. Arrow keys stay on the source.
 usage: |
@@ -26,6 +26,8 @@ contributors: false
 
 ## Flags
 
+ -  `--title {string}`: Border title, in place of the widget's name. Counts, state, or the previewed file follow in parentheses.
+ -  `--border {string}`: Border lines, named like `table --theme` (rounded, double, heavy, ...).
  -  `--from {string}`: Table, tree, or select id to follow.
  -  `--max-bytes {int}`: Maximum bytes to read from a file (default 65536).
  -  `--id {string}`: Widget id.
@@ -65,3 +67,5 @@ A closure with no parameters transforms that file text: it receives the contents
 A closure with one parameter is the source: it receives the selected row and whatever it returns is shown. Nothing is read from disk, so any column or computed value can be previewed: `{|row| $row.event | to nuon }` or `{|row| open --raw $row.path }`.
 
 The preview follows the focused list, else the nearest one in the same container. `--from` names one explicitly.
+
+The border shows the previewed file's name. With `--title`, the title comes first and the file name follows in parentheses: `--title src` shows `src (Cargo.toml)`.

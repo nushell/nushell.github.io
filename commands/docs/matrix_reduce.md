@@ -2,7 +2,7 @@
 title: matrix reduce
 categories: |
   filters
-version: 0.116.0
+version: 0.117.0
 filters: |
   Reduce all elements of a matrix to a single value.
 usage: |

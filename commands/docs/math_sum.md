@@ -2,7 +2,7 @@
 title: math sum
 categories: |
   math
-version: 0.116.0
+version: 0.117.0
 math: |
   Returns the sum of a list of numbers or of each column in a table.
 usage: |
@@ -53,12 +53,26 @@ Get the disk usage for the current directory.
 
 ```
 
+Get the disk usage as a record with a `size` column.
+```nu
+> ls | math sum size
+
+```
+
 Compute the sum of each column in a table.
 ```nu
 > [[a b]; [1 2] [3 4]] | math sum
 ╭───┬───╮
 │ a │ 4 │
 │ b │ 6 │
+╰───┴───╯
+```
+
+Sum only the named columns of a table.
+```nu
+> [[name a b]; [x 1 2] [y 3 4]] | math sum a
+╭───┬───╮
+│ a │ 4 │
 ╰───┴───╯
 ```
 

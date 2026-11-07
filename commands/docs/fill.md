@@ -2,7 +2,7 @@
 title: fill
 categories: |
   conversions
-version: 0.116.0
+version: 0.117.0
 conversions: |
   Fill and align text in columns.
 usage: |
@@ -27,7 +27,7 @@ contributors: false
 ## Flags
 
  -  `--width, -w {int}`: The width of the output. Defaults to 1.
- -  `--alignment, -a {string}`: The alignment of the output. Defaults to Left (Left(l), Right(r), Center(c/m), MiddleRight(cr/mr)).
+ -  `--alignment, -a {string}`: The alignment of the output. Defaults to Left (left (l), right (r), center/middle (c/m), centerright/middleright (cr/mr)).
  -  `--character, -c {string}`: The character to fill with. Defaults to ' ' (space).
 
 

@@ -2,7 +2,7 @@
 title: sys cpu
 categories: |
   system
-version: 0.116.0
+version: 0.117.0
 system: |
   View information about the system CPUs.
 usage: |

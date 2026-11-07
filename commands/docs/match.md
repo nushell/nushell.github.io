@@ -2,7 +2,7 @@
 title: match
 categories: |
   core
-version: 0.116.0
+version: 0.117.0
 core: |
   Conditionally run a block on a matched value.
 usage: |
@@ -77,6 +77,16 @@ Match against a list.
 ```nu
 > match [1, 2, 3] { [$a, $b, $c] => { $a + $b + $c }, _ => 0 }
 6
+```
+
+Match the first and last items of a list, capturing the items between them.
+```nu
+> match [1, 2, 3, 4] { [$first, ..$middle, $last] => $middle }
+╭───┬───╮
+│ 0 │ 2 │
+│ 1 │ 3 │
+╰───┴───╯
+
 ```
 
 Match against pipeline input.

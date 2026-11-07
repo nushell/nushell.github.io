@@ -2,7 +2,7 @@
 title: tui run
 categories: |
   viewers
-version: 0.116.0
+version: 0.117.0
 viewers: |
   Run a composed TUI until the user quits or submits a selection.
 usage: |
@@ -46,7 +46,7 @@ contributors: false
 
 Pick a file
 ```nu
-> ls | tui label --title "files" | tui table | tui run | get selected.name
+> ls | tui label --titlebar "files" | tui table | tui run | get selected.name
 
 ```
 
@@ -75,7 +75,7 @@ Interactive keys:
 
 The result is `{action, focused, selected, page, values, rows, live}`. `action` is `submit` or `quit`; `selected` is the focused widget's selection (a table row, checked rows with --multi, a text box's text, ...); `values` holds every widget's state by id, e.g. `values.table-0.index`.
 
-A closure runs as a hook with the state record as `$in`: its output replaces the data list, `{action: submit, selected: ...}` ends the TUI, `null` does nothing. `--refresh 1sec { ls }` re-runs it on that interval; without `--refresh` it runs once at start.
+A closure runs as a hook with the state record as `$in`: its output replaces the data list (a piped stream then stops adding to it), `{action: submit, selected: ...}` ends the TUI, `null` does nothing. `--refresh 1sec { ls }` re-runs it on that interval; without `--refresh` it runs once at start.
 `--dialog` opens a floating popup on the alternate screen; `--size [70 20]` sets its size.
 
 To render without a terminal, or to replay keys in a test, use `tui debug`.

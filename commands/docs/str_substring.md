@@ -2,7 +2,7 @@
 title: str substring
 categories: |
   strings
-version: 0.116.0
+version: 0.117.0
 strings: |
   Get part of a string. Note that the first character of a string is index 0.
 usage: |
@@ -47,18 +47,49 @@ contributors: false
 
 Get a substring "nushell" from the text "good nushell" using a range.
 ```nu
->  'good nushell' | str substring 5..11
+> 'good nushell' | str substring 5..11
 nushell
 ```
 
 Count indexes and split using grapheme clusters.
 ```nu
->  '🇯🇵ほげ ふが ぴよ' | str substring --grapheme-clusters 4..5
+> '🇯🇵ほげ ふが ぴよ' | str substring --grapheme-clusters 4..5
 ふが
 ```
 
-sub string by negative index.
+Get a substring using a negative end index.
 ```nu
->  'good nushell' | str substring 5..-2
+> 'good nushell' | str substring 5..-2
 nushel
+```
+
+Get a substring from a string field in a record.
+```nu
+> { name: 'Paul Smith', number: 13 } | str substring 0..3 name
+╭────────┬──────╮
+│ name   │ Paul │
+│ number │ 13   │
+╰────────┴──────╯
+```
+
+Get substrings from string fields in a table.
+```nu
+> [{name: 'Alice', age: 24}, {name: 'Robert', age: 23}] | str substring 0..2 name
+╭───┬──────┬─────╮
+│ # │ name │ age │
+├───┼──────┼─────┤
+│ 0 │ Ali  │  24 │
+│ 1 │ Rob  │  23 │
+╰───┴──────┴─────╯
+
+```
+
+Get substrings from a list of strings.
+```nu
+> ['good nushell' 'hello world'] | str substring 0..3
+╭───┬──────╮
+│ 0 │ good │
+│ 1 │ hell │
+╰───┴──────╯
+
 ```

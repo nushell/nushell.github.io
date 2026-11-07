@@ -2,7 +2,7 @@
 title: tui search
 categories: |
   viewers
-version: 0.116.0
+version: 0.117.0
 viewers: |
   Add a search box that filters tables, logs, trees, and selects as you type.
 usage: |
@@ -26,7 +26,9 @@ contributors: false
 
 ## Flags
 
- -  `--placeholder {string}`: Placeholder text.
+ -  `--title {string}`: Border title, in place of the widget's name. Counts, state, or the previewed file follow in parentheses.
+ -  `--border {string}`: Border lines, named like `table --theme` (rounded, double, heavy, ...).
+ -  `--placeholder {string}`: Placeholder text (default: the --title, else 'search').
  -  `--bind {string}`: Key that focuses search, for example '/' or 'ctrl+r'.
  -  `--fuzzy, -f`: Fuzzy matching instead of substring.
  -  `--case-sensitive, -s`: Respect case when matching.

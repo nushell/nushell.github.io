@@ -2,7 +2,7 @@
 title: uniq
 categories: |
   filters
-version: 0.116.0
+version: 0.117.0
 filters: |
   Return the distinct values in the input.
 usage: |
@@ -27,6 +27,7 @@ contributors: false
 ## Flags
 
  -  `--count, -c`: Return a table containing the distinct input values together with their counts.
+ -  `--keep-last, -l`: Keep the last occurrence of each unique value, in the position of its first occurrence.
  -  `--repeated, -d`: Return the input values that occur more than once.
  -  `--ignore-case, -i`: Compare input values case-insensitively.
  -  `--unique, -u`: Return the input values that occur once only.
@@ -75,6 +76,15 @@ Ignore differences in case when comparing input values.
 │ 0 │ hello   │
 │ 1 │ goodbye │
 ╰───┴─────────╯
+
+```
+
+Ignore differences in case when comparing input values, keeping the casing of the last occurrence of each duplicate. --keep-last only has a visible effect like this when combined with something like --ignore-case, since otherwise duplicate values are already identical.
+```nu
+> ['Hello' 'HELLO' 'hello'] | uniq --ignore-case --keep-last
+╭───┬───────╮
+│ 0 │ hello │
+╰───┴───────╯
 
 ```
 

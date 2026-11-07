@@ -2,7 +2,7 @@
 title: attr structured
 categories: |
   core
-version: 0.116.2
+version: 0.117.0
 core: |
   Attribute for getting structured output from an external command.
 usage: |

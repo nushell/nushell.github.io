@@ -2,7 +2,7 @@
 title: record
 categories: |
   filters
-version: 0.116.2
+version: 0.117.0
 filters: |
   Various commands for working with records.
 usage: |

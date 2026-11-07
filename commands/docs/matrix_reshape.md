@@ -2,7 +2,7 @@
 title: matrix reshape
 categories: |
   filters
-version: 0.116.0
+version: 0.117.0
 filters: |
   Change the dimensions of a matrix.
 usage: |
