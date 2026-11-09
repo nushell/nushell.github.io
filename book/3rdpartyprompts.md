@@ -99,7 +99,12 @@ Now restart Nu.
 nushell on 📙 main is 📦 v0.116.0 via 🦀 v1.96.1
 ❯
 ```
-
+if you have the experimental [jobs](/commands/docs/job.html) feature you can also have starship display the currently active job
+```nu
+def create_left_prompt [] {
+    starship prompt --cmd-duration $env.CMD_DURATION_MS $'--status=($env.LAST_EXIT_CODE)' $'--jobs=(job list | length)'
+}
+```
 ## Purs
 
 [repo](https://github.com/xcambar/purs)
