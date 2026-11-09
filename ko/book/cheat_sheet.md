@@ -202,6 +202,7 @@ $planets | each { |elt| $"($elt) is a planet of the solar system" }
 인덱스와 값으로 목록을 반복합니다.
 
 ```nu
+let planets = [Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune]
 $planets | enumerate | each { |elt| $"($elt.index + 1) - ($elt.item)" }
 # => ╭───┬─────────────╮
 # => │ 0 │ 1 - Mercury │
@@ -333,7 +334,7 @@ glob **/*.{rs,toml} --depth 2
 파일 감시, 변경될 때마다 명령 실행:
 
 ```nu
-watch . --glob=**/*.rs {|| cargo test }
+for _ in (watch . --glob=**/*.rs) { cargo test }
 ```
 
 ## 사용자 지정 명령
@@ -438,18 +439,24 @@ mut x = 0
 # => Error: nu::parser::expected_keyword
 # =>
 # =>   × Capture of mutable variable.
-# =>    ╭─[entry #83:1:18]
-# =>  1 │ [1 2 3] | each { $x += 1 }
+# =>    ╭─[repl_entry #83:2:18]
+# =>  1 │ mut x = 0
+# =>  2 │ [1 2 3] | each { $x += 1 }
 # =>    ·                  ─┬
 # =>    ·                   ╰── capture of mutable variable
 # =>    ╰────
 ```
 
-상수 변수는 불변이며 구문 분석 시 완전히 평가됩니다.
+상수 변수는 불변이며 구문 분석 시 완전히 평가되므로, `source`에 전달되는 파일 이름처럼 구문 분석 중에 값이 필요한 곳에서 사용할 수 있습니다.
 
 ```nu
-const file = 'path/to/file.nu'
+'print "hello from file.nu"' | save --force file.nu
+```
+
+```nu
+const file = 'file.nu'
 source $file
+# => hello from file.nu
 ```
 
 제공된 경로가 잘못된 경우 오류 대신 null을 반환하려면 물음표 연산자 `?`를 사용합니다.
@@ -482,6 +489,7 @@ module greetings {
 }
 use greetings hello
 hello "world"
+# => hello world!
 ```
 
 파일에서 모듈을 가져오고 현재 범위에서 해당 환경을 사용합니다.
@@ -494,18 +502,20 @@ export-env {
 export def hello [] {
     $"hello ($env.MYNAME)"
 }
+```
 
+```nu
 use greetings.nu
 $env.MYNAME
 # => Arthur, King of the Britons
 greetings hello
-# => hello Arthur, King of the Britons!
+# => hello Arthur, King of the Britons
 ```
 
 모듈에서 주 명령 사용:
 
 ```nu
-# greetings.nu
+# salutations.nu
 export def hello [name: string] {
     $"hello ($name)!"
 }
@@ -517,10 +527,12 @@ export def hi [where: string] {
 export def main [] {
     "greetings and salutations!"
 }
+```
 
-use greetings.nu
-greetings
+```nu
+use salutations.nu
+salutations
 # => greetings and salutations!
-greetings hello world
+salutations hello world
 # => hello world!
 ```
