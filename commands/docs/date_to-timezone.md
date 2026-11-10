@@ -2,7 +2,7 @@
 title: date to-timezone
 categories: |
   date
-version: 0.116.0
+version: 0.117.0
 date: |
   Convert a date to a given time zone.
 usage: |
@@ -60,21 +60,21 @@ Get the current date in Hawaii.
 Get a date in a different time zone, from a string.
 ```nu
 > "2020-10-10 10:00:00 +02:00" | date to-timezone "+0500"
-Sat, 10 Oct 2020 13:00:00 +0500 (5 years ago)
+Sat, 10 Oct 2020 13:00:00 +0500 (6 years ago)
 ```
 
 Get a date in a different time zone, from a datetime.
 ```nu
 > "2020-10-10 10:00:00 +02:00" | into datetime | date to-timezone "+0500"
-Sat, 10 Oct 2020 13:00:00 +0500 (5 years ago)
+Sat, 10 Oct 2020 13:00:00 +0500 (6 years ago)
 ```
 
 Convert a list of datetimes to a given time zone.
 ```nu
 > [2021-10-22T10:00:00+02:00, 2021-10-23T10:00:00+02:00] | date to-timezone "+0500"
 ╭───┬─────────────╮
-│ 0 │ 4 years ago │
-│ 1 │ 4 years ago │
+│ 0 │ 5 years ago │
+│ 1 │ 5 years ago │
 ╰───┴─────────────╯
 
 ```
@@ -83,8 +83,8 @@ Convert a list of date strings to a given time zone.
 ```nu
 > ["2020-10-10 10:00:00 +02:00", "2020-10-10 12:00:00 +02:00"] | date to-timezone "+0500"
 ╭───┬─────────────╮
-│ 0 │ 5 years ago │
-│ 1 │ 5 years ago │
+│ 0 │ 6 years ago │
+│ 1 │ 6 years ago │
 ╰───┴─────────────╯
 
 ```

@@ -2,7 +2,7 @@
 title: flatten
 categories: |
   filters
-version: 0.116.0
+version: 0.117.0
 filters: |
   Flatten a table by extracting nested values.
 usage: |
@@ -115,4 +115,5 @@ Flatten inner table.
 A record is treated as a one-row table, so the output is always a table.
 Fields of a nested record are lifted to the top level and the parent key is dropped.
 If a lifted field would collide with a top-level column, it is renamed to `<parent>_<field>`.
+If a lifted and renamed field would still collide with a top-level column, an error is raised.
 A nested list is expanded into one row per element.

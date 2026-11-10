@@ -2,7 +2,7 @@
 title: gstat
 categories: |
   prompt
-version: 0.116.0
+version: 0.117.0
 prompt: |
   Get the git status of a repo
 usage: |
@@ -38,3 +38,6 @@ See the [Plugins](/book/plugins.html) chapter in the book for more information.
 ## Parameters
 
  -  `path`: Path to repo.
+
+## Notes
+Every count is -1 outside a git repository. Inside one, the status counts (idx_*, wt_*, ignored and conflicts) are -1 when the status can't be read, for example with a split or sparse index or in a bare repository. wt_renamed counts unstaged renames, a deleted file paired with a similar untracked file, which then don't count as wt_deleted or wt_untracked; a renamed file that was also edited counts in wt_modified too. An ignored directory counts once in ignored.

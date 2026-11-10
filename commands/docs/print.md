@@ -2,7 +2,7 @@
 title: print
 categories: |
   strings
-version: 0.116.0
+version: 0.117.0
 strings: |
   Print the given values to stdout.
 usage: |

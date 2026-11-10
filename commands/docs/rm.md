@@ -2,7 +2,7 @@
 title: rm
 categories: |
   filesystem
-version: 0.116.0
+version: 0.117.0
 filesystem: |
   Remove files and directories.
 usage: |
@@ -33,7 +33,7 @@ contributors: false
  -  `--verbose, -v`: Return a table for each processed path.
  -  `--interactive, -i`: Ask user to confirm action.
  -  `--interactive-once, -I`: Ask user to confirm action only once.
- -  `--all, -a`: Remove hidden files if '*' is provided.
+ -  `--all, -a`: Let glob patterns match hidden names (those starting with '.') at any depth.
 
 ## Parameters
 

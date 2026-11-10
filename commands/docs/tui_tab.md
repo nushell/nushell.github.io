@@ -2,7 +2,7 @@
 title: tui tab
 categories: |
   viewers
-version: 0.116.0
+version: 0.117.0
 viewers: |
   Group widgets as a page in the tab bar.
 usage: |

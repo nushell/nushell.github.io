@@ -2,7 +2,7 @@
 title: tui select
 categories: |
   viewers
-version: 0.116.0
+version: 0.117.0
 viewers: |
   Add a radio list of items, or a checkbox list with --multi.
 usage: |
@@ -26,11 +26,13 @@ contributors: false
 
 ## Flags
 
+ -  `--title {string}`: Border title, in place of the widget's name. Counts, state, or the previewed file follow in parentheses.
+ -  `--border {string}`: Border lines, named like `table --theme` (rounded, double, heavy, ...).
  -  `--display, -d {oneof<string, closure(any)>}`: Column or closure that produces each item's label.
  -  `--index, -i`: Select item indexes instead of items.
  -  `--id {string}`: Widget id.
  -  `--focus`: Start with this widget focused.
- -  `--data {any}`: Data for this widget alone, instead of the outer pipeline's.
+ -  `--data {any}`: Data for this widget alone, instead of the outer pipeline's. Not with --from or a closure.
  -  `--from {string}`: Id of the table, tree, or select whose highlighted row drives this widget.
  -  `--on-select {closure(any)}`: Hook run when the highlighted row changes; receives the state record.
  -  `--multi, -m`: Space toggles rows; the selection is the checked rows.

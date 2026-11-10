@@ -2,7 +2,7 @@
 title: polars get-year
 categories: |
   dataframe
-version: 0.116.0
+version: 0.117.0
 dataframe: |
   Gets year from date.
 usage: |

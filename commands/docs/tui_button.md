@@ -2,7 +2,7 @@
 title: tui button
 categories: |
   viewers
-version: 0.116.0
+version: 0.117.0
 viewers: |
   Add a button that runs a hook, or submits its label, when activated.
 usage: |

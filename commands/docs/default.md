@@ -2,7 +2,7 @@
 title: default
 categories: |
   filters
-version: 0.116.0
+version: 0.117.0
 filters: |
   Sets a default value if a row's column is missing or null.
 usage: |
@@ -117,3 +117,6 @@ Fill missing column values based on other columns
 ╰───┴───┴───╯
 
 ```
+
+## Notes
+A closure literal is run only when a default is needed, and its output becomes the default. A closure passed as a bare variable, like `default $closure`, is the default value itself.

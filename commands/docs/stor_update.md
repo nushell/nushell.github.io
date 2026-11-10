@@ -2,7 +2,7 @@
 title: stor update
 categories: |
   database
-version: 0.116.0
+version: 0.117.0
 database: |
   Update information in a specified table in the in-memory sqlite database.
 usage: |
@@ -27,7 +27,7 @@ contributors: false
 ## Flags
 
  -  `--table-name, -t {string}`: Name of the table you want to insert into.
- -  `--update-record, -u {record}`: A record of column names and column values to update in the specified table.
+ -  `--update-record, -u {record}`: A record of column names and column values to update in the specified table. Takes precedence over pipeline input.
  -  `--where-clause, -w {string}`: A sql string to use as a where clause without the WHERE keyword.
 
 

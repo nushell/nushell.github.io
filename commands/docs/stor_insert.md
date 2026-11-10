@@ -2,7 +2,7 @@
 title: stor insert
 categories: |
   database
-version: 0.116.0
+version: 0.117.0
 database: |
   Insert information into a specified table in the in-memory sqlite database.
 usage: |
@@ -27,7 +27,7 @@ contributors: false
 ## Flags
 
  -  `--table-name, -t {string}`: Name of the table you want to insert into.
- -  `--data-record, -d {record}`: A record of column names and column values to insert into the specified table.
+ -  `--data-record, -d {record}`: A record of column names and column values to insert into the specified table. Takes precedence over pipeline input.
 
 
 ## Input/output types:

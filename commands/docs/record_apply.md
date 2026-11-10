@@ -2,7 +2,7 @@
 title: record apply
 categories: |
   filters
-version: 0.116.2
+version: 0.117.0
 filters: |
   Run a record of closures on the matching fields of a record.
 usage: |

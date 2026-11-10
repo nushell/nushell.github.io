@@ -2,7 +2,7 @@
 title: job spawn
 categories: |
   experimental
-version: 0.116.0
+version: 0.117.0
 experimental: |
   Spawn a background job and retrieve its ID.
 usage: |
@@ -27,6 +27,7 @@ contributors: false
 ## Flags
 
  -  `--description, -d {string}`: An optional description for this job.
+ -  `--auto-kill, -k`: Kill this job on `exit` without warning that it is still running.
 
 ## Parameters
 
@@ -46,8 +47,18 @@ Spawn a background job to do some time consuming work.
 
 ```
 
+Spawn a job that `exit` kills without warning about it.
+```nu
+> job spawn --auto-kill { loop { sleep 1sec } }
+
+```
+
 ## Notes
 Executes the provided closure in a background thread
 and registers this task in the background job table, which can be retrieved with `job list`.
 
 This command returns the job id of the newly created job.
+
+The --auto-kill flag applies to the spawned thread job. If an external process
+inside it is suspended and registered as a separate frozen job, it would still
+trigger the exit warning.

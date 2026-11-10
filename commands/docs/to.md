@@ -2,7 +2,7 @@
 title: to
 categories: |
   formats
-version: 0.116.0
+version: 0.117.0
 formats: |
   Translate structured data to various formats.
 usage: |
@@ -38,6 +38,7 @@ You must use one of the following subcommands. Using this command as-is will onl
 | name                                           | description                                                   | type     |
 | ---------------------------------------------- | ------------------------------------------------------------- | -------- |
 | [`to csv`](/commands/docs/to_csv.md)           | Convert table into .csv text .                                | built-in |
+| [`to dotenv`](/commands/docs/to_dotenv.md)     | Convert a record into .env text.                              | built-in |
 | [`to html`](/commands/docs/to_html.md)         | Convert table into simple HTML.                               | built-in |
 | [`to json`](/commands/docs/to_json.md)         | Converts table data into JSON text.                           | built-in |
 | [`to kdl`](/commands/docs/to_kdl.md)           | Converts structured data into KDL text.                       | built-in |

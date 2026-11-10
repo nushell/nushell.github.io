@@ -2,7 +2,7 @@
 title: unlet
 categories: |
   experimental
-version: 0.116.0
+version: 0.117.0
 experimental: |
   Delete variables from nushell memory, making them unrecoverable.
 usage: |
@@ -48,6 +48,12 @@ Delete multiple variables from memory.
 
 ```
 
+Hide a constant. A command defined before the `unlet` keeps its value.
+```nu
+> const x = 1; def f [] { $x }; unlet $x; f
+
+```
+
 Attempting to delete a built-in variable fails.
 ```nu
 > unlet $nu
@@ -59,3 +65,6 @@ Attempting to delete a non-variable fails.
 > unlet 42
 
 ```
+
+## Notes
+A constant is hidden instead: it can't be used for the rest of the block, but code that used it before the `unlet` keeps its value.

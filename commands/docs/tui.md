@@ -2,7 +2,7 @@
 title: tui
 categories: |
   viewers
-version: 0.116.0
+version: 0.117.0
 viewers: |
   Build interactive terminal UIs by composing `tui` subcommands.
 usage: |
@@ -43,11 +43,11 @@ You must use one of the following subcommands. Using this command as-is will onl
 
 Builders (`tui table`, `tui split`, ...) append widgets to a `tui` value. `tui run` shows it and returns one record: `{action, focused, selected, page, values, rows, live}`, where `values` holds every widget's state by id. `tui debug` returns the same record plus the painted `screen` and the resolved layout, for scripts and tests.
 
-Data: a value piped into a builder is the shared data list. Lists and streams are collected in full (up to 100k rows); an external command's output (`tail -f log | tui log`) and an unbounded range (`1..`) stay live, and their rows appear as they are produced. When the TUI closes while an external command is still running, it is stopped. A widget can have its own rows with `--data`, or by piping into it inside a container's child list: `tui split [(ls | tui table) (ps | tui table)]`. `--from <id>` (with an optional closure) makes a widget follow another's highlighted row.
+Data: a value piped into a builder is the shared data list. Builders never read a stream: a list stream, a range, or an external command's output is kept in the `tui` value and read while the TUI runs, so its rows appear as they are produced (`1.. | each {|n| sleep 1sec; $n} | tui log`). A stream keeps its newest 100k rows (older rows are dropped in batches, so up to 12.5k more may show). When the TUI closes, a stream still producing is stopped: an external command piped straight into a builder at once, and one behind other commands (`^tail -f app.log | lines | tui log`) at once in an interactive shell, elsewhere the next time it writes. Nushell code in a stream (an `each` closure) finishes the row it is on, and what it prints while the TUI runs lands on the TUI's screen. A `tui` value saved with `let` reads its stream the first time it runs; if that run read it to the end, later runs show the same rows. A widget can have its own rows with `--data`, or by piping into it inside a container's child list: `tui split [(ls | tui table) (ps | tui table)]`. A widget can also follow the highlighted row of a table, tree, or select. A closure on `tui table`, `tree`, `log`, `progress`, or `label` turns that row into what the widget shows, and `--from <id>` picks which one to follow; without it the widget follows the focused one, else the nearest, else one on another tab page, but never one that follows it back. `--from` without a closure shows the row itself. A widget with nothing to follow is an error when the TUI starts, and `--data` cannot be combined with `--from` or a closure.
 
-Hooks: `tui bind`, menu actions, `tui button`, `--on-select`, and the `tui run` refresh closure all receive the state record and may return nothing, a new data list, or `{action: submit|quit, selected: ...}`.
+Hooks: `tui bind`, menu actions, `tui button`, `--on-select`, and the `tui run` refresh closure all receive the state record and may return nothing, a new data list, or `{action: submit|quit, selected: ...}`. A new data list replaces the shared data for the rest of the run: a piped stream no longer adds to it.
 
-Layout: `tui split --sizes [30% 1fr]` arranges children; `tui box` groups them with a border; `tui tab` makes a page. Colors come from `$env.config.tui`.
+Layout: `tui split --sizes [30% 1fr]` arranges children; `tui box` groups them with a border; `tui tab` makes a page. Bordered widgets take `--title` to rename their border (`tui table --title files` shows `files (12)`); `tui label --titlebar` fills the bar at the top. Colors come from `$env.config.tui`; `--border` on a widget or `$env.config.tui.border_type` picks its border lines by `table --theme` name (`rounded`, `double`, `heavy`, ...).
 
 ## Subcommands:
 
@@ -57,7 +57,7 @@ Layout: `tui split --sizes [30% 1fr]` arranges children; `tui box` groups them w
 | [`tui box`](/commands/docs/tui_box.md)           | Group widgets inside a titled, bordered box.                                                            | built-in |
 | [`tui button`](/commands/docs/tui_button.md)     | Add a button that runs a hook, or submits its label, when activated.                                    | built-in |
 | [`tui debug`](/commands/docs/tui_debug.md)       | Render a TUI without a terminal and return the screen plus the resolved layout, focus order, and pages. | built-in |
-| [`tui label`](/commands/docs/tui_label.md)       | Add static text: inline, or as the title bar (--title) or status bar (--status).                        | built-in |
+| [`tui label`](/commands/docs/tui_label.md)       | Add static text: inline, or as the title bar (--titlebar) or status bar (--status).                     | built-in |
 | [`tui log`](/commands/docs/tui_log.md)           | Add an append-only log view. Streamed rows appear at the bottom.                                        | built-in |
 | [`tui menu`](/commands/docs/tui_menu.md)         | Add a menu bar with mnemonics, dropdown items, and actions.                                             | built-in |
 | [`tui preview`](/commands/docs/tui_preview.md)   | Show text for the selected table, tree, or select row. Arrow keys stay on the source.                   | built-in |

@@ -2,7 +2,7 @@
 title: generate
 categories: |
   generators
-version: 0.116.0
+version: 0.117.0
 generators: |
   Generate a list of values by successively invoking a closure.
 usage: |
@@ -89,3 +89,9 @@ Additionally, if an input stream is provided, the generator closure accepts two
 arguments. On each invocation an element of the input stream is provided as the
 first argument. The second argument is the `next` value from the last invocation.
 In this case, generation also stops when the input stream stops.
+
+## Subcommands:
+
+| name                                                             | description                                                                                                                                        | type     |
+| ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| [`generate completions`](/commands/docs/generate_completions.md) | Generate `extern` definitions, with completions, for an external command from its carapace spec, fish or zsh completions, man page or --help text. | built-in |

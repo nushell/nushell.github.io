@@ -2,7 +2,7 @@
 title: idx status
 categories: |
   filesystem
-version: 0.116.0
+version: 0.117.0
 filesystem: |
   Show status information for the global in-memory idx runtime.
 usage: |

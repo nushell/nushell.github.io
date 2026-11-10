@@ -2,7 +2,7 @@
 title: tee
 categories: |
   filters
-version: 0.116.0
+version: 0.117.0
 filters: |
   Copy a stream to another command in parallel.
 usage: |
@@ -60,8 +60,8 @@ Print numbers and their sum.
 
 Do something with a value on another thread, while also passing through the value.
 ```nu
-> 10000 | tee { 1..$in | print } | $in * 5
-50000
+> 100 | tee { 1..$in | print } | $in * 5
+500
 ```
 
 ## Notes

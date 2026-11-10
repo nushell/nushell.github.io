@@ -2,7 +2,7 @@
 title: polars is-null
 categories: |
   dataframe
-version: 0.116.0
+version: 0.117.0
 dataframe: |
   Creates mask where value is null.
 usage: |

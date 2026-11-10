@@ -2,7 +2,7 @@
 title: where
 categories: |
   filters
-version: 0.116.0
+version: 0.117.0
 filters: |
   Filter values of an input list based on a condition.
 usage: |
@@ -69,7 +69,7 @@ List all files with names that contain "Car".
 
 List all files that were modified in the last two weeks.
 ```nu
-> ls | where modified >= (date now) - 2wk
+> ls | where modified newer-than 2wk
 
 ```
 
@@ -140,8 +140,8 @@ A condition is evaluated for each element of the input, and only elements which 
 A condition can be either a "row condition" or a closure. A row condition is a special short-hand syntax to makes accessing fields easier.
 Each element of the input can be accessed through the `$it` variable.
 
-On the left hand side of a row condition, any field name is automatically expanded to use `$it`.
-For example, `where type == dir` is equivalent to `where $it.type == dir`. This expansion does not happen when passing a subexpression or closure to `where`.
+In a row condition, a field name on the left of an operator, or on either side of `and`, `or` and `xor`, is automatically expanded to use `$it`.
+For example, `where type == dir` is equivalent to `where $it.type == dir`, and `where a and not b` to `where $it.a and not $it.b`. The right side of a comparison stays a value, so `dir` above is a string. This expansion does not happen when passing a subexpression or closure to `where`.
 
 When using a closure, the element is passed as an argument and as pipeline input (`$in`) to the closure. Unlike row conditions, the `$it` variable isn't available inside closures.
 

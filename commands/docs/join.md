@@ -2,7 +2,7 @@
 title: join
 categories: |
   filters
-version: 0.116.0
+version: 0.117.0
 filters: |
   Join two tables.
 usage: |
@@ -32,6 +32,7 @@ contributors: false
  -  `--left, -l`: Left-outer join.
  -  `--right, -r`: Right-outer join.
  -  `--outer, -o`: Outer join.
+ -  `--anti, -a`: Anti join: keep rows with no match in right.
 
 ## Parameters
 
@@ -79,3 +80,28 @@ Join multiple tables with a prefix for the right table's columns
 ╰───┴────┴────┴─────╯
 
 ```
+
+Pick a subset of rows without a matching row in the right table
+```nu
+> [{id: 1 x: 10}, {id: 2 x: 9}] | join --anti [{id: 1}] id
+╭───┬────┬───╮
+│ # │ id │ x │
+├───┼────┼───┤
+│ 0 │  2 │ 9 │
+╰───┴────┴───╯
+
+```
+
+Left join a table whose rows all lack the join column by adding the column first
+```nu
+> [{id: 1 x: 10}] | join --left ([{y: 20}] | default null id) id
+╭───┬────┬────┬───╮
+│ # │ id │ x  │ y │
+├───┼────┼────┼───┤
+│ 0 │  1 │ 10 │   │
+╰───┴────┴────┴───╯
+
+```
+
+## Notes
+If the input table or the right table has rows but none of them has its join column (`left-on` for the input, `right-on` for the right table), the join fails with a column-not-found error. This applies to every join type, including --left, --right, --outer and --anti. An empty table passes this check. In a table where only some rows have the join column, the other rows join as non-matching rows. To join a table whose rows all lack the column, add it first, for example with `default null <column>`.

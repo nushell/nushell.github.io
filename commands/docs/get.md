@@ -2,7 +2,7 @@
 title: get
 categories: |
   filters
-version: 0.116.0
+version: 0.117.0
 filters: |
   Extract data using a cell path.
 usage: |
@@ -22,19 +22,16 @@ contributors: false
 
 ## Signature
 
-```> get {flags} (cell_path) ...rest```
+```> get {flags} ...rest```
 
 ## Flags
 
  -  `--optional, -o`: Make all cell path members optional (returns `null` for missing values).
  -  `--ignore-case`: Make all cell path members case insensitive.
- -  `--ignore-errors, -i`: Ignore missing data (make all cell path members optional) (deprecated).
- -  `--sensitive, -s`: Get path in a case sensitive manner (deprecated).
 
 ## Parameters
 
- -  `cell_path`: The cell path to the data.
- -  `...rest`: Additional cell paths.
+ -  `...rest`: The cell paths to the data.
 
 
 ## Input/output types:
@@ -51,6 +48,17 @@ Get an item from a list.
 ```nu
 > [0 1 2] | get 1
 1
+```
+
+Return the input unchanged if no cell path is given.
+```nu
+> [0 1 2] | get
+╭───┬───╮
+│ 0 │ 0 │
+│ 1 │ 1 │
+│ 2 │ 2 │
+╰───┴───╯
+
 ```
 
 Get a column from a table.
@@ -90,6 +98,63 @@ Get a cell from a table.
 A0
 ```
 
+Get multiple columns from a table using a spread list.
+```nu
+> [[a b c]; [1 2 3]] | get ...[a c]
+╭───┬───────────╮
+│ 0 │ ╭───┬───╮ │
+│   │ │ 0 │ 1 │ │
+│   │ ╰───┴───╯ │
+│ 1 │ ╭───┬───╮ │
+│   │ │ 0 │ 3 │ │
+│   │ ╰───┴───╯ │
+╰───┴───────────╯
+
+```
+
+Get columns from a table using a spread variable.
+```nu
+> let cols = [a b]; [{a: 1, b: 2, c: 3}] | get ...$cols
+╭───┬───────────╮
+│ 0 │ ╭───┬───╮ │
+│   │ │ 0 │ 1 │ │
+│   │ ╰───┴───╯ │
+│ 1 │ ╭───┬───╮ │
+│   │ │ 0 │ 2 │ │
+│   │ ╰───┴───╯ │
+╰───┴───────────╯
+
+```
+
+A spread always produces a list of values, even when it holds a single path.
+```nu
+> let cols = [a]; [{a: 1, b: 2}] | get ...$cols
+╭───┬───────────╮
+│ 0 │ ╭───┬───╮ │
+│   │ │ 0 │ 1 │ │
+│   │ ╰───┴───╯ │
+╰───┴───────────╯
+
+```
+
+An empty spread produces an empty list.
+```nu
+> let cols = []; [{a: 1, b: 2}] | get ...$cols
+╭────────────╮
+│ empty list │
+╰────────────╯
+
+```
+
+Spread nested paths as cell-path values, since spread strings are single column names.
+```nu
+> let paths = [$.a.b]; {a: {b: 1}} | get ...$paths
+╭───┬───╮
+│ 0 │ 1 │
+╰───┴───╯
+
+```
+
 Extract the name of the 3rd record in a list (same as `ls | $in.name.2`).
 ```nu
 > ls | get name.2
@@ -123,4 +188,6 @@ Getting Path in a case sensitive way, won't work for 'PATH'.
 ## Notes
 This is equivalent to using the cell path access syntax: `$env.OS` is the same as `$env | get OS`.
 
-If multiple cell paths are given, this will produce a list of values.
+With no cell path, the input is returned unchanged. With one cell path and no spread, this returns the value at that path. If multiple cell paths are given, or any argument is a spread (`...$paths`), this produces a list with one value per path, so the result has the same shape however many paths the spread holds, and an empty spread produces an empty list.
+
+Strings in a spread are single column names: `...[a.b]` looks for a column named `a.b`. To spread nested paths, use cell-path values such as `$.a.b`, or convert with `into cell-path`.

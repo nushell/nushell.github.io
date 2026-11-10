@@ -2,7 +2,7 @@
 title: math cbrt
 categories: |
   math
-version: 0.116.0
+version: 0.117.0
 math: |
   Returns the real-valued cube root of the input number.
 usage: |

@@ -2,7 +2,7 @@
 title: type
 categories: |
   core
-version: 0.116.2
+version: 0.117.0
 core: |
   Give a name to a type annotation.
 usage: |

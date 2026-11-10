@@ -2,7 +2,7 @@
 title: tui debug
 categories: |
   viewers
-version: 0.116.0
+version: 0.117.0
 viewers: |
   Render a TUI without a terminal and return the screen plus the resolved layout, focus order, and pages.
 usage: |
@@ -46,7 +46,7 @@ contributors: false
 
 Paint a title and status bar
 ```nu
-> tui label --title "Demo" | tui label --status "ready" | tui debug | get screen
+> tui label --titlebar "Demo" | tui label --status "ready" | tui debug | get screen
 
 ```
 
@@ -77,4 +77,4 @@ Use this to test a TUI in a script or CI, or to see why it looks the way it does
 
 `--keys` replays tokens before painting, as a comma-separated string or a list: enter, esc, tab, shift+tab, up, down, left, right, home, end, pageup, pagedown, backspace, delete, space, insert, ctrl+c, alt+a, f1, a single character, `type:hello`, `click:COL,ROW`, `drag:COL,ROW`, `scroll-up`, `scroll-down`. `action` is `render` when the keys finished without Enter or quit. `--until {|state| ...}` stops the replay early once the closure returns true.
 
-A live stream is read for up to 5 seconds (and no more rows than the widgets keep) before painting. A hook closure runs once with the state record, as `tui run` would.
+Piped streams are read until they end, for up to 5 seconds, before painting; each keeps its newest rows, as in `tui run`. `live` says whether one was still producing. A hook closure runs once with the state record, as `tui run` would.

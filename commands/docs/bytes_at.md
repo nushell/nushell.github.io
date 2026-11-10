@@ -2,7 +2,7 @@
 title: bytes at
 categories: |
   bytes
-version: 0.116.0
+version: 0.117.0
 bytes: |
   Get bytes from the input defined by a range.
 usage: |
