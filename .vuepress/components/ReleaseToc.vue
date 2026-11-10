@@ -53,6 +53,7 @@ function filterHeaders(root: OrganizedHeader): OrganizedHeader {
   const wanted = [
     'Highlights and themes of this release',
     'Changes',
+    'Reedline',
     'Notes for plugin developers',
     'Hall of fame',
     'Full changelog',
