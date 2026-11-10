@@ -29,3 +29,7 @@ feeze = "feeze"
 alues = "alues"
 Flippin = "Flippin"
 
+[type.release-0-117]
+extend-glob = ["2026-11-09-nushell_v0_117_0.md"]
+extend-words = { IST = "IST" }
+
