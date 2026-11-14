@@ -46,9 +46,30 @@ There are 3 forms of valid type signatures in Nu:
 
 - Basic: E.g. `int`, `bool`, `string`, etc.
 - Compound:
+
   - `list<string>`,
     `record<type: int, bar: string>`,
     `table<name: string, size: filesize>`
+
+  `list<T>` takes exactly one type parameter. `list<int, string>` fails with "expected a single type parameter", so write `list<oneof<int, string>>` for a list that mixes the two. A bare `list` means `list<any>`, and `help` shows it that way.
+
+  In `record<...>` and `table<...>`, a key without a type, such as `name` in `record<name>`, has the type `any`. A key that isn't a bare word can be quoted, as in `record<"a b": int>`. A bare `record` or `table` places no limit on the fields or columns.
+
+  The item type is checked. With `def f [x: list<int>] {}`, the call `f [1.5]` fails to parse with "expected int", and `let x: list<int> = [1.5]` is a `nu::parser::type_mismatch`. A list with mixed items has the type `list<oneof<...>>`, which the parser can't rule out, so a mixed list assigned to an annotated variable is checked when the assignment runs:
+
+  ```nu
+  let x: list<int> = [1 a]
+  # => Error: nu::shell::type_mismatch
+  # =>
+  # =>   × Type mismatch.
+  # =>    ╭─[repl_entry #1:1:1]
+  # =>  1 │ let x: list<int> = [1 a]
+  # =>    · ─┬─                ──┬──
+  # =>    ·  │                   ╰── the value is a list<oneof<int, string>>
+  # =>    ·  ╰── expected list<int>, got list<oneof<int, string>>
+  # =>    ╰────
+  ```
+
 - Union: `oneof<int, string>` matches a value of any of the listed types.
 
   When a literal argument is passed to a `oneof` parameter, it is parsed as the first listed type it matches, except that the text-like types (`string`, `path`, `directory`, `glob`, `cell-path`, `external_arg` and `any`) are always tried last. The order in which the types are written doesn't matter:
@@ -154,6 +175,26 @@ type Tree = list<Tree>
 # =>    ╰────
 # =>   help: type aliases can't be recursive
 ```
+
+The name of an alias follows these rules:
+
+- It starts with a letter or `_` and continues with letters, digits, `_` and `-`, as in `Point`, `_my-type2` or `Polygon3d`. Any other name, such as `1abc` or `my.type`, fails with `nu::parser::type_alias_name_not_valid`.
+- It can't be the name of a built-in type, such as `int`, `list`, `record`, `number`, `path` or `oneof`. Names are case-sensitive, so `Int` is allowed.
+
+  ```nu
+  type int = string
+  # => Error: nu::parser::type_alias_shadows_builtin
+  # =>
+  # =>   × `int` is a built-in type.
+  # =>    ╭─[repl_entry #1:1:6]
+  # =>  1 │ type int = string
+  # =>    ·      ─┬─
+  # =>    ·       ╰── built-in type
+  # =>    ╰────
+  # =>   help: choose a name that isn't a built-in type
+  ```
+
+- An alias has no type parameters. `type Point<T> = record<x: T>` is an invalid name, and using a plain alias with parameters, as in `let p: Point<int> = ...`, fails with `nu::parser::type_alias_with_params` ("Type alias `Point` takes no type parameters").
 
 A [custom completer](/book/custom_completions.md) is part of a parameter, not of its type, so it goes on the parameter that uses the alias, as in `def paint [color: Color@[red green blue]] { $color }`. Attaching one to the alias is an error:
 

@@ -19,11 +19,25 @@ Closures are used in Nu extensively as parameters to iteration style commands li
    # => 42
    ```
 
+   `do --capture-errors` (`-c`) changes how an external command that fails inside the closure is handled. Without the flag, the commands after `do` receive the external's output as it streams, and the non-zero exit code is reported afterward. With it, `do` waits for the external to finish, and if it exited with a non-zero code, the pipeline stops with a `nu::shell::non_zero_exit_code` error before anything downstream sees the output:
+
+   ```nu
+   try { do { ^nu -c "print out; exit 3" } | lines | each { print $"got ($in)" } | ignore } catch {|err| $"failed with ($err.exit_code)" }
+   # => got out
+   # => failed with 3
+   try { do -c { ^nu -c "print out; exit 3" } | lines | each { print $"got ($in)" } | ignore } catch {|err| $"failed with ($err.exit_code)" }
+   # => failed with 3
+   ```
+
+   The flag has no effect on errors from Nushell commands, which stop the pipeline either way. Don't combine it with [`complete`](/commands/docs/complete.md): the error comes before `complete` can record the exit code, so use plain `do` there.
+
 1. The `|args|` list can also contain 0 arguments (`||`) or more than one argument `|arg1,arg2|`
 
 1. When there are 0 arguments, the `||` is optional as long as the closure cannot be mistaken for a record (which also uses the curly-brace style).
 
    - An empty (no-op) closure can be represented as `{||}`
+   - Empty braces, `{}`, are an empty record where a value is expected, as in `let x = {}` or for a `record` or `any` parameter. Where a command expects a closure, `{}` is an empty closure instead. An empty closure returns its input, so `[1 2 3] | each {}` passes the items through unchanged.
+   - Braces holding only a variable or expression, such as `{$a}`, are a closure, not a record. See [No field shorthand](record.md#no-field-shorthand).
 
 1. As in other languages with closures, an important feature is their ability to "close over" variables from the parent scope and use their values even after the parent's scope has ended.
 
@@ -107,6 +121,8 @@ Closures are used in Nu extensively as parameters to iteration style commands li
 
    A custom command that calls itself from inside a closure (for example from `each` or `do`) uses two levels of the limit for each step, so with the default limit it stops at about 25 levels instead of 50. Raise `$env.config.recursion_limit` in your config if you need more.
 
+   Every closure call counts, whether `do` runs the closure, a command such as `each` or `where` runs it for you, or a [hook](/book/hooks.md) runs it. The limit must be greater than 1. Setting it to 1 or less is rejected with "expected an int greater than 1", and the old value stays.
+
 1. You can also use [pipeline input as `$in`](/book/pipelines.md#pipeline-input-and-the-special-in-variable) in most closures instead of providing an explicit parameter. For example:
 
    ```nu
@@ -141,6 +157,17 @@ Closures are used in Nu extensively as parameters to iteration style commands li
    do {|a:int,b:int| $a + $b } 34 8
    # => 42
    ```
+
+   Closure parameters can also be optional (`b?`), have a default value (`c = 5`), or collect the remaining arguments (`...rest`), as the positional parameters of a [custom command](/book/custom_commands.md) can:
+
+   ```nu
+   do {|a, b?, c = 5, ...rest| {a: $a, b: $b, c: $c, rest: $rest} } 1 | to nuon
+   # => {a: 1, b: null, c: 5, rest: []}
+   do {|a, b?, c = 5, ...rest| {a: $a, b: $b, c: $c, rest: $rest} } 1 2 3 4 5 | to nuon
+   # => {a: 1, b: 2, c: 3, rest: [4, 5]}
+   ```
+
+   A missing required argument is a `nu::shell::missing_parameter` error. Extra arguments with no `...rest` parameter to take them are ignored.
 
 ## Common commands that can be used with a `closure`
 

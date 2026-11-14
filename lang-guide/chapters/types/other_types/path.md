@@ -64,6 +64,35 @@ There is no `into path` command, but several commands can be used to convert to 
 - `path join`
 - `path parse`
 
+### Absolute paths with `path expand`
+
+[`path expand`](/commands/docs/path_expand.md) turns a string, or a list of strings, into absolute paths. It expands a leading `~` to the home directory and multi-dot shorthands such as `...`, makes a relative path absolute against the current directory, and removes `.` and `..` segments.
+
+When the path exists, `path expand` also resolves symbolic links, so the result is the real location. When it doesn't exist, the command still returns the expanded text, without an error. Two flags change this:
+
+- `--no-symlink` (`-n`) skips the symlink resolution. `..` segments are then removed as text, so `link/..` becomes the directory holding `link`, not the parent of the link's target.
+- `--strict` (`-s`) makes a path that doesn't exist an error ("Could not expand path"). With `--no-symlink` as well, the path must still exist, but the result keeps its links.
+
+With `link` a symbolic link to the directory `real`, in `/home/you/proj`:
+
+```nu
+"link/f.txt" | path expand
+# => /home/you/proj/real/f.txt
+"link/f.txt" | path expand --no-symlink
+# => /home/you/proj/link/f.txt
+"nope/x" | path expand
+# => /home/you/proj/nope/x
+"nope/x" | path expand --strict
+# => Error: nu::shell::error
+# =>
+# =>   × Could not expand path
+# =>    ╭─[repl_entry #1:1:1]
+# =>  1 │ "nope/x" | path expand --strict
+# =>    · ────┬───
+# =>    ·     ╰── could not be expanded (path might not exist, non-final component is not a directory, or other cause)
+# =>    ╰────
+```
+
 ## Common commands that can work with `path`
 
 - `path (subcommands)`

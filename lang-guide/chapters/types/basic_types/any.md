@@ -71,3 +71,16 @@
    [] | describe
    # => list<any>
    ```
+
+   Two mixes don't become a `oneof`. Ints mixed with floats widen to `number`. Records widen to a `table` that keeps only the columns every record has, so records with no key in common give a `table` with no columns. A column whose values differ in type becomes a `oneof` inside the table:
+
+   ```nu
+   [1 2.0] | describe
+   # => list<number>
+   [{a: 1} {a: 2, b: 3}] | describe
+   # => table<a: int>
+   [{a: 1} {b: 2}] | describe
+   # => table
+   [{a: 1} {a: "x"}] | describe
+   # => table<a: oneof<int, string>>
+   ```

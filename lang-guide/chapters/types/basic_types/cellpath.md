@@ -90,6 +90,27 @@ let data = [
 
   A negative int passed to `get` fails at runtime with "can't convert negative number to cell path". Use [`last`](/commands/docs/last.md) to get items from the end of a list.
 
+- Directly on a value:
+
+  A cell path can follow a variable, as in `$data.condition`, and it can also follow a list, record or table literal, or a subexpression in parentheses. There is no need to store the value in a variable or pipe it to `get` first:
+
+  ```nu
+  [1 2].0
+  # => 1
+  {a: {b: 2}}.a.b
+  # => 2
+  [[a]; [1] [2]].a | to nuon
+  # => [1, 2]
+  (1..5).2
+  # => 3
+  ({a: 1} | insert b 2).b
+  # => 2
+  ```
+
+  A command's output in parentheses works the same way, so `(ls).name` is the list of file names.
+
+  A quoted string can't take a cell path. `"abc".0` is a parse error ("Invalid characters after closing delimiter"), and `("abc").0` fails with "string doesn't support cell paths".
+
 ## Additional Language Notes
 
 1. Ordering
@@ -164,6 +185,26 @@ let data = [
    # Returns the GRR temperature for the fourth day
    $data | get $cp
    # => 39.21
+   ```
+
+   `into cell-path` takes three kinds of input:
+
+   - An int gives a one-member path: `5 | into cell-path` is `$.5`. A negative int is an error.
+   - A list of ints and strings gives one member per item. An int is a row index and a string is a column name, so the string `"1"` names a column called `1`, not row 1.
+   - A table with a `value` column gives one member per row. The optional `optional` and `insensitive` columns hold bools that add the `?` and `!` modifiers. Other columns are ignored.
+
+   ```nu
+   [[value optional insensitive]; [a true false] [B false true]] | into cell-path
+   # => $.a?.B!
+   ```
+
+   A string on its own is rejected on purpose. Text such as `"a.b"` could name the column `a.b` or the path `a` then `b`, so split it yourself, and convert the parts that are row numbers to ints:
+
+   ```nu
+   "x.1" | split row "." | into cell-path
+   # => $.x."1"
+   "x.1" | split row "." | each {|m| try { $m | into int } catch { $m } } | into cell-path
+   # => $.x.1
    ```
 
 ## Common commands that can be used with `cell-path`

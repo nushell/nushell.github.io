@@ -21,16 +21,38 @@
 
 1. This chart shows all duration units currently supported:
 
-   | Duration  | Length      |
-   | --------- | ----------- |
-   | `ns`      | nanosecond  |
-   | `us`/`μs` | microsecond |
-   | `ms`      | millisecond |
-   | `sec`     | second      |
-   | `min`     | minute      |
-   | `hr`      | hour        |
-   | `day`     | day         |
-   | `wk`      | week        |
+   | Duration           | Length      |
+   | ------------------ | ----------- |
+   | `ns`               | nanosecond  |
+   | `us`, `µs` or `μs` | microsecond |
+   | `ms`               | millisecond |
+   | `sec`              | second      |
+   | `min`              | minute      |
+   | `hr`               | hour        |
+   | `day`              | day         |
+   | `wk`               | week        |
+
+   The microsecond unit has three spellings: `us`, `µs` with U+00B5 MICRO SIGN, and `μs` with U+03BC GREEK SMALL LETTER MU. The two look alike but are different characters. Nushell displays microseconds with the micro sign, `µs`.
+
+1. Rules for duration literals:
+
+   - Units are case-sensitive. `1Sec` and `1HR` are not durations. At the start of a pipeline Nushell looks for a command with that name, and anywhere else the word is a string.
+   - The number can have `_` separators, a leading `+`, an exponent, or a leading dot: `1_000ms`, `+5sec`, `1e3sec` and `.5sec` are all durations. A leading dot can't follow a sign, though. `-.5sec` is a string, so write `-0.5sec`.
+   - A fraction of a nanosecond is dropped, so `1.5ns` is `1ns`.
+   - A literal has one number and one unit. `1hr30min` is not a duration. Add the parts instead: `1hr + 30min`.
+   - A duration is a signed 64-bit count of nanoseconds, which covers about 292 years in either direction. A literal outside that range is a parse error, and arithmetic that leaves it is a `nu::shell::operator_overflow` error:
+
+     ```nu
+     9223372036854775808ns
+     # => Error: nu::parser::literal_too_large
+     # =>
+     # =>   × Invalid literal
+     # =>    ╭─[repl_entry #1:1:1]
+     # =>  1 │ 9223372036854775808ns
+     # =>    · ──────────┬──────────
+     # =>    ·           ╰── duration too large
+     # =>    ╰────
+     ```
 
 1. Datetime values can be combined with durations in calculations:
 
@@ -71,3 +93,9 @@
   10sec mod 3sec
   # => 1sec
   ```
+
+- `+` with a datetime, in either order, and `-` from a datetime. See [Datetime](datetime.md#operators-that-can-be-used-with-datetime).
+
+A number can also go on the left of `*`, so `2 * 1hr` is `2hr` and `1.5 * 1hr` is `1hr 30min`. It can't go on the left of `/`: `2 / 1hr` is an error.
+
+A duration and a plain number don't mix in `+`, `-`, `<`, `<=`, `>` or `>=`, because a bare number has no unit. `1hr + 1` and `1hr > 60` are parse errors. Write the unit: `1hr + 1sec`. `==` and `!=` don't fail. Values of different types are never equal, so `1hr == 60` is `false`.

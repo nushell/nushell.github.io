@@ -42,6 +42,7 @@ Each type below lists its _annotation_: the name you write after `:` to declare 
 | [Blocks](#blocks)                     | `if true { print "hello!" }`, `loop { print "press ctrl-c to exit" }` |
 | [Null (Nothing)](#nothing-null)       | `null`                                                                |
 | [Any](#any)                           | `let p: any = 5`                                                      |
+| [Number](#number)                     | `let n: number = 2.5`                                                 |
 | [SemVer](#semantic-versions)          | `'1.2.3' \| into semver`                                              |
 
 ## Basic Data Types
@@ -291,7 +292,7 @@ Closures are a useful way to represent code that can be executed on each row of 
 | **_Description:_**    | Represents binary data                                                      |
 | **_Annotation:_**     | `binary`                                                                    |
 | **_Literal Syntax:_** | `0x[ffffffff]` - hex-based binary representation                            |
-|                       | `0o[1234567]` - octal-based binary representation                           |
+|                       | `0o[377 001]` - octal-based binary representation                           |
 |                       | `0b[10101010101]` - binary-based binary representation                      |
 | **_See also:_**       | [Language Guide - Binary](/lang-guide/chapters/types/basic_types/binary.md) |
 
@@ -395,6 +396,25 @@ Internally, tables are simply **lists of records**. This means that any command 
 | **_Literal syntax:_** | N/A - Any literal value can be assigned to an `any` type                                                    |
 | **_See also:_**       | [Language Reference - Any](/lang-guide/chapters/types/basic_types/any.md)                                   |
 
+### Number
+
+|                       |                                                                                    |
+| --------------------- | ---------------------------------------------------------------------------------- |
+| **_Description:_**    | When used in a type annotation or signature, matches either an `int` or a `float`. |
+| **_Annotation:_**     | `number`                                                                           |
+| **_Literal syntax:_** | N/A - Any int or float literal can be assigned to a `number` type                  |
+| **_See also:_**       | [Language Reference - Number](/lang-guide/chapters/types/basic_types/number.md)    |
+
+A value keeps its own type, so `describe` reports `int` or `float`. `number` shows up in `describe` output only for a collection that mixes the two:
+
+```nu
+let n: number = 2.5
+$n | describe
+# => float
+[1 2.5] | describe
+# => list<number>
+```
+
 ### Blocks
 
 |                       |                                                                               |
@@ -455,3 +475,5 @@ Simple example - Semantic versions compare by version number, not as text:
 '1.2.3' | into semver | semver bump minor
 # => 1.3.0
 ```
+
+A semver's parts can be read with a cell path (`$v.major`, `$v.minor`, `$v.patch`, `$v.pre`, `$v.build` and `$v.prefix`), and a version range from `into semver-range` tests versions with `in`. The [SemVer section](/lang-guide/chapters/types/other_types/custom_value.md#semver) of the Language Reference covers these, along with `into semver --loose` and record input.

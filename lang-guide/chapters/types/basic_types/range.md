@@ -51,6 +51,15 @@
    # => ╰───┴───╯
    ```
 
+   The second value sets the direction too, so a second value below the start counts down. The step form also works with an exclusive end:
+
+   ```nu
+   10..8..0 | each {} | to nuon
+   # => [10, 8, 6, 4, 2, 0]
+   1..3..<9 | each {} | to nuon
+   # => [1, 3, 5, 7]
+   ```
+
 1. Exclusive range - You can also use `..<` to have values up to, but not including, the range end.
 
    Values from 1 to 5 (exclusive):
@@ -89,6 +98,40 @@
    # => [1.0, 2.0]
    ```
 
+1. The start, second and end values can be variables or subexpressions, not just literals:
+
+   ```nu
+   let start = 2
+   let end = 5
+   $start..$end | each {} | to nuon
+   # => [2, 3, 4, 5]
+   let list = [a b c]
+   0..<($list | length) | each {} | to nuon
+   # => [0, 1, 2]
+   ```
+
+   A negative start works where an expression begins (`-2..0`), but not as a command argument, where a word that starts with `-` is read as a flag:
+
+   ```nu
+   [a b c d e] | slice -2..
+   # => Error: nu::parser::unknown_flag
+   # =>
+   # =>   × The `slice` command doesn't have flag `-2`.
+   # =>    ╭─[repl_entry #1:1:22]
+   # =>  1 │ [a b c d e] | slice -2..
+   # =>    ·                      ┬
+   # =>    ·                      ╰── unknown flag
+   # =>    ╰────
+   # =>   help: Use `--help` to see available flags
+   ```
+
+   Put the number in parentheses, or pass it in a variable:
+
+   ```nu
+   [a b c d e] | slice (-2).. | to nuon
+   # => [d, e]
+   ```
+
 1. The start, second and end values must be numbers. A range of strings or dates is a parse error:
 
    ```nu
@@ -105,6 +148,24 @@
    ```
 
    Without the parentheses, `'a'..'z'` isn't a range at all. A quoted word runs to its last quote, so it is the single string `a'..'z` (see [Quotes inside a quoted word](/book/working_with_strings.md#quotes-inside-a-quoted-word)). For a sequence of letters, use [`seq char`](/commands/docs/seq_char.md), and for dates use [`seq date`](/commands/docs/seq_date.md).
+
+   `seq char` includes both ends, and counts down when the start comes after the end. Each bound must be a single ASCII character, and anything else is an error. The characters follow ASCII order, so a run from uppercase to lowercase picks up the punctuation in between:
+
+   ```nu
+   seq char e a | str join
+   # => edcba
+   seq char Y b | str join
+   # => YZ[\]^_`ab
+   seq char é z
+   # => Error: nu::shell::error
+   # =>
+   # =>   × seq char only accepts individual ASCII characters as parameters
+   # =>    ╭─[repl_entry #1:1:10]
+   # =>  1 │ seq char é z
+   # =>    ·          ┬
+   # =>    ·          ╰── input should be a single ASCII character
+   # =>    ╰────
+   ```
 
 1. When no second value is given, the step is `1` (or `-1` when counting down). The exception is a float range whose start and end are less than `1` apart. Its step is based on the order of magnitude of the difference:
 

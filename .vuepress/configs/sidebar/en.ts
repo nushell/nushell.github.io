@@ -193,6 +193,7 @@ export const sidebarEn: SidebarConfig = {
               collapsible: true,
               children: [
                 '/lang-guide/chapters/types/basic_types/any.md',
+                '/lang-guide/chapters/types/basic_types/number.md',
                 '/lang-guide/chapters/types/basic_types/bool.md',
                 '/lang-guide/chapters/types/basic_types/int.md',
                 '/lang-guide/chapters/types/basic_types/float.md',
@@ -218,7 +219,10 @@ export const sidebarEn: SidebarConfig = {
                 {
                   text: 'Types used only in command signatures',
                   link: '/lang-guide/chapters/types/other_types/00_not_assignable.md',
-                  children: ['/lang-guide/chapters/types/other_types/path.md'],
+                  children: [
+                    '/lang-guide/chapters/types/other_types/path.md',
+                    '/lang-guide/chapters/types/other_types/external_arg.md',
+                  ],
                 },
                 {
                   text: 'Types which are not declarable',

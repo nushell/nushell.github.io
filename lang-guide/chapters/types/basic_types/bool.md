@@ -24,11 +24,11 @@ The following commands take a closure (or a row condition) as their main argumen
 
 ## Common operators that can be used with `bool`
 
-- `==`, `!=`, `<`, `<=`, `>`, `>=`
+- `==`, `!=`, `<`, `<=`, `>`, `>=`. When ordered, `false` comes before `true`, so `false < true` is `true`.
 - `and`, `or`, `xor`, `not`
-- `in`
-- Regex comparison operators: `=~`, `!~` `<regex>`
-- String comparison operators: `ends-with`, `starts-with`
+- `in`, `not-in`, `has` and `not-has`, to test whether a list holds a bool, as in `true in [true false]`
+
+The regex operators `=~` and `!~` (also spelled `like` and `not-like`), and `starts-with` and `ends-with`, return a bool, but they compare strings. A bool operand is a parse error, as in `true =~ "t"`. See [Comparison Operators](../../operators.md#comparison-operators).
 
 ## Short-circuit evaluation
 

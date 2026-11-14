@@ -79,3 +79,23 @@
 
 - [`default`](/commands/docs/default.html): Set a default value for missing (`null`) fields in a record or table
 - [`compact`](/commands/docs/compact.html): Removes `null` values from a list
+
+### Removing nulls with `compact`
+
+Given a list, `compact` drops the `null` items. Given a record, it drops the fields whose value is `null`. `--empty` (`-e`) also drops empty strings, lists and records. `0`, `false` and a string of spaces are not empty, so they stay:
+
+```nu
+[1 null 2 "" [] {}] | compact | to nuon
+# => [1, 2, "", [], {}]
+[1 null 2 "" [] {}] | compact --empty | to nuon
+# => [1, 2]
+{a: 1, b: null, c: ""} | compact | to nuon
+# => {a: 1, c: ""}
+```
+
+A table row is a record, not `null`, so `compact` on its own keeps every row. Name columns to drop the rows where any of those columns is `null` (or empty, with `--empty`):
+
+```nu
+[[a b]; [1 null] [null 2] [3 4]] | compact a | to nuon
+# => [[a, b]; [1, null], [3, 4]]
+```
