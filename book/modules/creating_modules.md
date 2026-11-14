@@ -384,7 +384,7 @@ Running this command changes the directory _locally_ in the module, but the chan
 ### `export-env` runs only when the `use` call is _evaluated_
 
 ::: note
-This scenario is commonly encountered when creating a module that uses `std/log`.
+This scenario is commonly encountered when creating a module that uses `std/dirs`.
 :::
 
 Attempting to import a module's environment within another environment may not work as expected. Let's create a new module `go.nu` that creates "shortcuts" to common directories. One of these will be the `$env.NU_MODULES_DIR` defined above in `my-utils`.

@@ -43,7 +43,7 @@ The `$nu` constant is a record containing several useful values:
   # => true
   ```
 
-  Note: When started as an interactive shell, startup config files are processed. When started as a non-interactive shell, no config files are read unless explicitly called via flag.
+  Note: When started as an interactive shell (the REPL), startup config files are processed. When started as a non-interactive shell, no config files are read unless explicitly called via flag. `--interactive (-i)` doesn't change that. `nu -i -c` and `nu -i script.nu` still read no config files, and they exit when they finish.
 
 - `is-login`: Indicates whether or not Nushell was started as a login shell.
 - `history-enabled`: History may be disabled via `nu --no-history`, in which case this constant will be `false`.

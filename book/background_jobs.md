@@ -175,7 +175,11 @@ for spawning independent background processes (see [#15201](https://github.com/n
 
 Additionally, if the user is running an interactive Nushell session and runs
 [`exit`](/commands/docs/exit.md) while there are background jobs running,
-the shell will warn about them before prompting the user to confirm `exit`.
+the shell doesn't exit. It prints a `background_jobs_running` warning with the number of
+running jobs and returns to the prompt. Running `exit` again as the next command kills the
+jobs and exits; if you run any other command first, the next `exit` warns again.
+Jobs started with `job spawn --auto-kill` don't count toward the warning and are killed
+on exit without one.
 
 Pressing <kbd>Ctrl</kbd>+<kbd>C</kbd> at the REPL interrupts only the command running in the foreground.
 Background jobs and frozen jobs keep running.

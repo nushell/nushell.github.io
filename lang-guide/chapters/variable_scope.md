@@ -85,7 +85,7 @@ g
 # => 1
 ```
 
-`def` and `alias` definitions are scoped like variables: a command defined inside a block, closure or other command is not visible outside it. Unlike variables, definitions are available in their whole block, even before the line that defines them:
+`def` and `alias` definitions are scoped like variables: a command defined inside a block, closure or other command is not visible outside it. An `alias` can only be used after its definition, but a `def` is available in its whole block, even before the line that defines it:
 
 ```nu
 print (greet); def greet [] { 'defined later' }

@@ -1,6 +1,6 @@
 # Loading Data
 
-Earlier, we saw how you can use commands like [`ls`](/commands/docs/ls.md), [`ps`](/commands/docs/ps.md), [`date`](/commands/docs/date.md), and [`sys host`](/commands/docs/sys_host.md) to load information about your files, processes, time of day, and the system itself. Each command gives us a table of information that we can explore. There are other ways we can load in a table of data to work with.
+Earlier, we saw how you can use commands like [`ls`](/commands/docs/ls.md), [`ps`](/commands/docs/ps.md), [`date now`](/commands/docs/date_now.md), and [`sys host`](/commands/docs/sys_host.md) to load information about your files, processes, time of day, and the system itself. Each command gives us a table of information that we can explore. There are other ways we can load in a table of data to work with.
 
 ## Opening files
 

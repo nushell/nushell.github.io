@@ -113,7 +113,7 @@ Remember you can combine it with `--peek`.
 
 ## Exploring Your Configuration
 
-[`explore config`](/commands/docs/explore_config.md) opens your current `$env.config` as a tree with an editor pane. Use `Tab` to switch between the tree and the editor, the arrow keys to move and to expand or collapse nodes, and `Enter` to start editing a value. Press `Ctrl+S` to apply an edit. When you quit with `q`, your changes are applied to the running session; `Ctrl+C` quits without saving them.
+[`explore config`](/commands/docs/explore_config.md) opens your current `$env.config` as a tree with an editor pane. Use `Tab` to switch between the tree and the editor, the arrow keys to move and to expand or collapse nodes, and `Enter` to start editing a value. Press `Ctrl+S` to apply an edit to the tree. After an edit, `q` won't quit and shows "Unsaved changes!" until you press `Ctrl+S` again while you aren't editing a value, which stages your changes. When `explore config` exits, every edit you applied to the tree is written to `$env.config` in the running session. That includes quitting with `Ctrl+C`, which skips the check and drops only an edit you haven't applied yet.
 
 ```nu
 # Browse and edit the running configuration

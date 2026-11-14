@@ -4,7 +4,7 @@
 |     |     |
 | --- | --- |
 | **_Description:_**    | An opaque data type that is only used internally in Nushell by built-in commands or plugins.
-| **_Annotation:_**     | None
+| **_Annotation:_**     | The type name reported by `describe`, such as `semver`, when a command in scope declares it (see [Types which are not declarable](./01_not_declarable.md))
 | **_Literal syntax:_** | None
 | **_Casts:_**          | None
 

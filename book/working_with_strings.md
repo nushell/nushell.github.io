@@ -7,12 +7,12 @@ and much more. Strings are so common that Nushell offers multiple string formats
 
 | Format of string                                     | Example                 | Escapes                   | Notes                                                                  |
 | ---------------------------------------------------- | ----------------------- | ------------------------- | ---------------------------------------------------------------------- |
-| [Single-quoted string](#single-quoted-strings)       | `'[^\n]+'`              | None                      | Cannot contain single quotes within the string                         |
+| [Single-quoted string](#single-quoted-strings)       | `'[^\n]+'`              | None                      | Inner `'` only in pairs, kept as written: `'a''b'` is `a''b`           |
 | [Double-quoted string](#double-quoted-strings)       | `"The\nEnd"`            | C-style backslash escapes | All literal backslashes must be escaped                                |
 | [Raw strings](#raw-strings)                          | `r#'Raw string'#`       | None                      | May include single quotes                                              |
 | [Bare word string](#bare-word-strings)               | `ozymandias`            | None                      | Can only contain "word" characters; Cannot be used in command position |
 | [Backtick string](#backtick-quoted-strings)          | <code>\`[^\n]+\`</code> | None                      | Bare string that can include whitespace. Cannot contain any backticks  |
-| [Single-quoted interpolation](#string-interpolation) | `$'Captain ($name)'`    | None                      | Cannot contain any `'` or unmatched `()`                               |
+| [Single-quoted interpolation](#string-interpolation) | `$'Captain ($name)'`    | None                      | Inner `'` only in pairs, as above. No unmatched `()`                   |
 | [Double-quoted interpolation](#string-interpolation) | `$"Captain ($name)"`    | C-style backslash escapes | All literal backslashes and `()` must be escaped                       |
 
 ## Single-quoted Strings
@@ -29,6 +29,15 @@ end'
 ```
 
 Single-quoted strings don't do anything to the text they're given, making them ideal for holding a wide range of text data.
+
+There is no escape for `'` inside a single-quoted string. Inner single quotes work only in pairs, and only when the word ends with `'`. Nushell keeps them as written, so `''` is not read as one quote the way it is in SQL:
+
+```nu
+'it''s'
+# => it''s
+```
+
+For text with a lone `'`, such as `don't`, use a double-quoted string, a backtick string, or a [raw string](#raw-strings).
 
 ## Double-quoted Strings
 

@@ -114,7 +114,7 @@ $env.config.cursor_shape.vi_normal = 'block'
 
 ## Default Keybindings
 
-Each of the three edit modes is built from a few shared sets of keybindings plus its own additions. The tables below follow Reedline's [keybinding reference](https://github.com/nushell/reedline/blob/main/KEYBINDINGS.md) for the Reedline version that ships with Nushell. Run [`keybindings default`](/commands/docs/keybindings_default.md) to list the built-in keybindings of every mode.
+Each of the three edit modes is built from a few shared sets of keybindings plus its own additions. The tables below follow Reedline's [keybinding reference](https://github.com/nushell/reedline/blob/main/KEYBINDINGS.md) for the Reedline version that ships with Nushell. Run [`keybindings default`](/commands/docs/keybindings_default.md) to list Reedline's built-in key table for the `emacs`, `vi_normal`, `vi_insert`, `helix_normal` and `helix_insert` modes. It has no rows for `vi_visual` or `helix_select`, and it leaves out the plain-key Vi and Helix commands such as <kbd>w</kbd> and <kbd>d</kbd>, which Reedline handles outside that table.
 
 Some keys are a _fallback chain_: Reedline tries each step and takes the first one that applies. The tables write those with "otherwise". For example, <kbd>→</kbd> accepts a history hint if one is showing, otherwise moves right in an open menu, otherwise moves the cursor right.
 
@@ -179,6 +179,8 @@ A mode without the editing set rebinds <kbd>Backspace</kbd> and <kbd>Delete</kbd
 | --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | <kbd>↑</kbd>, <kbd>Ctrl</kbd>+<kbd>P</kbd>                      | Move up in an open menu, otherwise move one line up, walking back through the history from the first line       |
 | <kbd>↓</kbd>, <kbd>Ctrl</kbd>+<kbd>N</kbd>                      | Move down in an open menu, otherwise move one line down, walking forward through the history from the last line |
+| <kbd>PageUp</kbd>                                               | Move one page up in an open menu, otherwise jump to the oldest history entry                                    |
+| <kbd>PageDown</kbd>                                             | Move one page down in an open menu, otherwise leave the history for the line you were typing                    |
 | <kbd>←</kbd>                                                    | Move left in an open menu, otherwise move one character left                                                    |
 | <kbd>→</kbd>                                                    | Accept a history hint, otherwise move right in an open menu, otherwise move one character right                 |
 | <kbd>Ctrl</kbd>+<kbd>←</kbd>                                    | Move one word left                                                                                              |
@@ -237,7 +239,7 @@ Emacs mode is the default. It has all four [common sets](#common-keybindings), p
 | <kbd>Ctrl</kbd>+<kbd>G</kbd>                                     | Redo                                                                                            |
 | <kbd>Alt</kbd>+<kbd>U</kbd>                                      | Uppercase the word under the cursor                                                             |
 | <kbd>Alt</kbd>+<kbd>L</kbd>                                      | Lowercase the word under the cursor                                                             |
-| <kbd>Alt</kbd>+<kbd>C</kbd>                                      | Capitalize the character under the cursor                                                       |
+| <kbd>Alt</kbd>+<kbd>C</kbd>                                      | Uppercase the first letter of the word under the cursor and lowercase the rest                  |
 
 ### Vi Mode
 
@@ -561,13 +563,14 @@ $env.config.keybindings ++= [{
 After loading this new `config.nu`, your new keybinding (`Ctrl + t`) will open
 the completion command.
 
-Each keybinding requires the next elements:
+Each keybinding has the next elements:
 
-- name: A unique name for your keybinding. Assigning to `$env.config.keybindings` merges
-  the new entries into the existing bindings by name: an entry with the same name and key
-  as an existing binding replaces it, while an entry that reuses a name for a different key
-  is added as another binding and prints a `Multiple keybindings share a name` warning.
-  To clear every keybinding, assign an empty list (`$env.config.keybindings = []`).
+- name: A label for your keybinding. It is optional, and Nushell doesn't use it to match
+  entries. Assigning a list to `$env.config.keybindings` replaces the whole list, including
+  the default bindings that open the menus (such as <kbd>Tab</kbd> for the completion menu),
+  so add your bindings with `++=` as in the example above. When two entries bind the same
+  mode, modifier and keycode, the later one wins. `$env.config.keybindings = []` removes
+  every binding in the list, but Reedline's built-in bindings for moving and editing stay.
 - modifier: A key modifier for the keybinding. The options are:
   - none
   - control
@@ -931,13 +934,15 @@ Your terminal environment may not always propagate your key combinations on to N
 ## Menus
 
 Thanks to Reedline, Nushell has menus that can help you with your day to day
-shell scripting. Next we present the default menus that are always available
+shell scripting. Next we present the default menus that are available
 when using Nushell
 
-Menus are configured in `$env.config.menus`. Assigning to this list merges your
-entries into the default menus by `name`, so an entry named `completion_menu`
-replaces the default completion menu instead of adding a second one, and
-`$env.config.menus = []` does not remove the default menus.
+Menus are configured in `$env.config.menus`. Assigning a list to it replaces every
+menu, including the defaults, so `$env.config.menus = []` removes them all and
+<kbd>Tab</kbd> no longer opens a completion menu. To add a menu or change a default
+one, append it with `++=`. When two menus share a `name`, the later one replaces the
+earlier one, so an appended `completion_menu` takes the place of the default
+completion menu.
 
 Each menu sets `input_mode`, which controls the text that the menu searches:
 

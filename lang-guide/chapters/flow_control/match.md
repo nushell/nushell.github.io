@@ -98,6 +98,13 @@ List and record patterns can be nested, and a pattern can be followed by an `if`
    # => string
    ```
 
+   Ints and floats are the exception. They compare by numeric value, so the float `1.0` matches the pattern `1`:
+
+   ```nu
+   match 1.0 { 1 => 'int pattern', 1.0 => 'float pattern' }
+   # => int pattern
+   ```
+
 1. A list pattern without `..` must have exactly as many items as the list:
 
    ```nu

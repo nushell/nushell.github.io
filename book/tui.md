@@ -867,7 +867,7 @@ Colors come from `$env.config.tui`, which has one entry per part of the interfac
 | `tab_active` / `tab_inactive` | The tab bar                                                          | `{ fg: cyan, attr: bu }` / `{ fg: dark_gray }` |
 | `progress`                    | The filled part of a progress bar                                    | `{ fg: green }`                                |
 | `button`                      | Button labels                                                        | `{ fg: white, bg: blue }`                      |
-| `surface` / `backdrop`        | The fill behind widgets, and behind a `--dialog` (only `bg` is used) | unset (a near-black fill)                      |
+| `surface` / `backdrop`        | The fill behind widgets, and behind a `--dialog` (only `bg` is used) | `{ bg: default }`, the terminal's background   |
 
 ```nu
 $env.config.tui.title_bar = { fg: black, bg: yellow, attr: b }

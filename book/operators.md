@@ -125,7 +125,7 @@ For example:
 ls | where name =~ ^nu # returns all files whose names start with "nu"
 ```
 
-Both operators use [the Rust regex crate's `is_match()` function](https://docs.rs/regex/latest/regex/struct.Regex.html#method.is_match).
+Both operators use the [`fancy-regex`](https://docs.rs/fancy-regex) crate, which adds look-around and backreferences to the syntax of Rust's `regex` crate. See [Regular Expressions](./regular_expressions.md) for the syntax.
 
 ## Case Sensitivity
 

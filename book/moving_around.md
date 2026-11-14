@@ -110,6 +110,8 @@ The quoting techniques above are useful when constructing glob-literals, but you
    ls $glob_pattern
    ```
 
+   An interpolated string written directly as the argument doesn't need `into glob`. Nushell expands it as a glob, so `ls $"*($current_month)*"` finds the same files. The conversion is needed when the pattern is stored in a variable first, as above, or comes from another command.
+
 2. The spread operator combined with the [`glob` command](/commands/docs/glob.html):
 
    The [`glob` command](/commands/docs/glob.html) (note: not the same as `into glob`) produces a [`list`](types_of_data.html#lists) of filenames that match the glob pattern. This list can be expanded and passed to filesystem commands using the [spread operator](operators.html#spread-operator):

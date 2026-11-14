@@ -76,7 +76,7 @@ The path to the module can be:
   :::
 
   ::: important Important! Importing modules from `$NU_LIB_DIRS` or `$env.NU_LIB_DIRS`
-  When importing a module via a relative path, Nushell first searches from the current directory. If a matching module is not found at that location, Nushell then searches each directory in the constant `$NU_LIB_DIRS` list, and then the environment variable version, `$env.NU_LIB_DIRS`. By default, both include the `scripts` directory in your Nushell configuration directory and the `completions` directory in your Nushell data directory. The constant is the recommended place to add your own directories.
+  When importing a module via a relative path, Nushell first searches from the directory of the file that contains the `use` (or `source`) call. For a command typed at the prompt or passed to `nu -c`, that is the current directory. If a matching module is not found at that location, Nushell then searches each directory in the constant `$NU_LIB_DIRS` list, and then the environment variable version, `$env.NU_LIB_DIRS`. By default, both include the `scripts` directory in your Nushell configuration directory and the `completions` directory in your Nushell data directory. The constant is the recommended place to add your own directories.
 
   This allows you to install modules to a location that is easily accessible via a relative path regardless of the current directory.
   :::

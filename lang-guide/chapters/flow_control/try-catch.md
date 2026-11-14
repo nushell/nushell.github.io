@@ -70,7 +70,7 @@ try { error make {msg: "disk full", help: "free some space"} } catch { $in.detai
    # => 1
    ```
 
-1. Errors raised inside `catch` propagate normally. When `catch` raises a new error with `error make`, the original error is attached to it and printed after it:
+1. Errors raised inside `catch` propagate normally. `error make` attaches an error record it receives as input to the new error, and the input of `catch` is the original error. So when `error make` is the first command in `catch`, the original error is attached to the new one and printed after it:
 
    ```nu
    try { error make {msg: a} } catch {|e| error make {msg: b} }
@@ -89,6 +89,8 @@ try { error make {msg: "disk full", help: "free some space"} } catch { $in.detai
    # =>    ·                  ────────
    # =>    ╰────
    ```
+
+   After any other statement, the original error is no longer the input. Pipe it in (`$e | error make {msg: b}`) or pass it as `inner` to keep it attached: `catch {|e| print "logging"; error make {msg: b, inner: [$e]} }`.
 
    To log an error and re-raise it unchanged, return `$e.raw`: `catch {|e| print "logging"; $e.raw }`.
 

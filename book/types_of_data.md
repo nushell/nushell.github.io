@@ -26,7 +26,7 @@ Each type below lists its _annotation_: the name you write after `:` to declare 
 | Type                                  | Example                                                               |
 | ------------------------------------- | --------------------------------------------------------------------- |
 | [Integers](#integers)                 | `-65535`                                                              |
-| [Floats (decimals)](#floats-decimals) | `9.9999`, `Infinity`                                                  |
+| [Floats (decimals)](#floats-decimals) | `9.9999`, `inf`, `-inf`, `NaN`                                        |
 | [Strings](#text-strings)              | <code>"hole 18", 'hole 18', \`hole 18\`, hole18, r#'hole18'#</code>   |
 | [Booleans](#booleans)                 | `true`                                                                |
 | [Dates](#dates)                       | `2000-01-01`                                                          |
@@ -439,7 +439,7 @@ $simple_record.c? == null
 |                       |                                                                                                            |
 | --------------------- | ---------------------------------------------------------------------------------------------------------- |
 | **_Description:_**    | A [semantic version](https://semver.org) number, such as `1.2.3` or `2.0.0-rc.1`                           |
-| **_Annotation:_**     | N/A - This is a custom value, which `describe` reports as `semver`                                         |
+| **_Annotation:_**     | `semver`, a custom value type that `describe` also reports as `semver`                                     |
 | **_Literal Syntax:_** | N/A - Convert a string or record with [`into semver`](/commands/docs/into_semver.md)                       |
 | **_See also:_**       | [`semver bump`](/commands/docs/semver_bump.md), [`into semver-range`](/commands/docs/into_semver-range.md) |
 

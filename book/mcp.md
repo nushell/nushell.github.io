@@ -67,7 +67,7 @@ Every result is also stored in the `$history` list, at the `history_index` given
 
 | Variable               | Default  | Effect                                                                                                                                                                               |
 | ---------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `NU_MCP_OUTPUT_LIMIT`  | `10kb`   | Larger results are left out of the response, which has a `note` field in place of `output`: `output truncated, full result in $history.0`. `0b` turns truncation off.                |
+| `NU_MCP_OUTPUT_LIMIT`  | `10kib`  | Larger results are left out of the response, which has a `note` field in place of `output`: `output truncated, full result in $history.0`. `0b` turns truncation off.                |
 | `NU_MCP_HISTORY_LIMIT` | `100`    | How many results `$history` keeps. Older results are dropped.                                                                                                                        |
 | `NU_MCP_PROMOTE_AFTER` | `120sec` | A call that runs longer than this becomes a [background job](./background_jobs.md). The response is an error with the job id, and the result can be collected later with `job recv`. |
 

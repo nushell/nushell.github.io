@@ -72,9 +72,9 @@ Nushell uses multiple, optional configuration files. These files are loaded in t
 1. The first file loaded is `env.nu`, which was historically used to override environment variables. However, the current "best-practice" recommendation is to set all environment variables (and other configuration) using `config.nu` and the autoload directories below.
 
 2. `config.nu` is typically used to override default Nushell settings, define (or import) custom commands, or run any other startup tasks.
-3. `*.nu` files in `$nu.vendor-autoload-dirs` are loaded. These directories are intended for vendors' and package managers' startup files.
-4. `*.nu` files in `$nu.user-autoload-dirs` are loaded. These files may be used for any startup tasks and are a good way to modularize the configuration.
-5. `login.nu` runs commands or handles configuration that should only take place when Nushell is running as a login shell.
+3. `login.nu` runs commands or handles configuration that should only take place when Nushell is running as a login shell.
+4. `*.nu` files in `$nu.vendor-autoload-dirs` are loaded. These directories are intended for vendors' and package managers' startup files.
+5. `*.nu` files in `$nu.user-autoload-dirs` are loaded. These files may be used for any startup tasks and are a good way to modularize the configuration.
 
 By default, `env.nu`, `config.nu`, and `login.nu` are read from the `$nu.default-config-dir` directory. For example:
 
@@ -330,23 +330,24 @@ To avoid overwriting existing settings, it's best to simply assign updated value
 ```nu
 $env.config = {
   show_banner: false
+  color_config: { string: red }
 }
 ```
 
-This would reset any _other_ settings that had been changed, since the entire record would be overwritten.
+Nushell merges a record assigned to `$env.config` into the current settings, so the keys it doesn't name keep their values. A key that holds a list or a free-form record is replaced whole, though. Here `color_config` ends up with only the `string` entry, and every other color setting is dropped. The same happens to `keybindings`, `menus`, `abbreviations`, `explore`, `tui`, `plugins`, `hooks.env_change`, and the `pre_prompt` and `pre_execution` hook lists.
 :::
 
 ::: tip Right
 
 ```nu
 $env.config.show_banner = false
+$env.config.color_config.string = 'red'
 ```
 
-This changes _only_ the `show_banner` key/value pair, leaving all other keys with their existing values.
+This changes _only_ the `show_banner` and `color_config.string` values, leaving all other keys with their existing values.
 :::
 
-Certain keys are themselves also records. It's okay to overwrite these records, but it's best-practice
-to set all values when doing so. For example:
+Certain keys are themselves also records. Assigning a record to one of them merges it the same way, so you only need to list the values you want to change. For example:
 
 ```nu
 # In config.nu
@@ -633,7 +634,7 @@ The following stages and their steps _may_ occur during startup, based on the fl
 | Normal Shell        | `nu` (no flags)                            | All launch steps **_except_** those marked with **_(login)_** occur.                                                                                                                                                                                                                                     |
 | Login Shell         | `nu --login/-l`                            | All launch steps occur.                                                                                                                                                                                                                                                                                  |
 | Command-string      | `nu --commands <command-string>` (or `-c`) | All Launch stages **_except_** those marked with **_(config files)_** or **_(repl)_** occur. However, **_(default_env.nu)_** and **_(plugin)_** do occur, so plugins can be used in the command-string. With `--login/-l`, the **_(env.nu)_**, **_(config.nu)_**, and **_(login)_** steps occur as well. |
-| Script file         | `nu <script_file>`                         | Same as with Command-string.                                                                                                                                                                                                                                                                             |
+| Script file         | `nu <script_file>`                         | Same as with Command-string, except that `--login/-l` doesn't add the **_(env.nu)_**, **_(config.nu)_**, and **_(login)_** steps.                                                                                                                                                                        |
 | No config           | `nu -n`                                    | **_(config files)_** stages do **_not_** occur, regardless of other flags.                                                                                                                                                                                                                               |
 | No Standard Library | `nu --no-std-lib`                          | Regardless of other flags, the steps marked **_(stdlib)_** will **_not_** occur.                                                                                                                                                                                                                         |
 | Force config file   | `nu --config <file>`                       | Forces steps marked with **_(config.nu)_** above to run with the provided config `<file>`, unless `-n` was also specified                                                                                                                                                                                |

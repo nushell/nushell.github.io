@@ -125,7 +125,7 @@ In Nushell 0.113 and earlier, this information was available as a JSON string in
 
 ## Chaining Errors
 
-If you call `error make` inside a `catch` block, the caught error becomes an inner error of the new one, and both are reported:
+`error make` adds an error record that it receives as input to the new error's `inner` list. A `catch` block's input is the caught error, so when `error make` is the first command in the block, the caught error becomes an inner error of the new one, and both are reported:
 
 ```nu
 try { check-range 10 1 } catch { error make "could not build the range" }
@@ -147,3 +147,5 @@ try { check-range 10 1 } catch { error make "could not build the range" }
 # =>    ╰────
 # =>   help: swap the two arguments
 ```
+
+After any other statement in the block, such as a `print`, the caught error is no longer the input, and `error make` reports only the new error. To keep the chain, pipe the error in with `$err | error make "..."`, or pass it with `inner`, as in `catch {|err| print 'cleaning up'; error make {msg: 'could not build the range', inner: [$err]} }`.

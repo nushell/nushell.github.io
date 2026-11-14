@@ -204,9 +204,9 @@ The `sort-by` command sorts a list or table. The closure determines and returns 
 # => ╰───┴────────╯
 ```
 
-The `reduce` command processes a list to accumulate a single result. The closure defines how to combine the current item with the (intermediate) accumulated value.
+The `reduce` command processes a list to accumulate a single result. The closure defines how to combine the current item with the (intermediate) accumulated value. It receives the current item first and the accumulated value second.
 
 ```nu
-[1 2 3 4] | reduce {|accumulator, current_value| $accumulator + $current_value }
+[1 2 3 4] | reduce {|current_value, accumulator| $accumulator + $current_value }
 # => 10
 ```

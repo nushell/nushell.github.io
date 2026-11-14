@@ -247,7 +247,7 @@ Because `nu` is an external program, Nushell translated the `[ a b c ]` list acc
 Running commands with `nu -c` does not load the config file, therefore the env conversion for `FOO` is missing and it is displayed as a plain string -- this way we can verify the translation was successful.
 You can also run this step manually by `do $env.ENV_CONVERSIONS.FOO.to_string [a b c]`
 
-_(Important! The string -> value conversion happens only for variables that already exist when `$env.ENV_CONVERSIONS` is assigned, such as those inherited from the parent process. A variable that you set as a string afterwards stays a string. To convert it, set it before assigning `ENV_CONVERSIONS`, or assign `$env.ENV_CONVERSIONS` to itself again.)_
+_(Important! The string -> value conversion happens only for variables that already exist when `$env.ENV_CONVERSIONS` is assigned, such as those inherited from the parent process. A variable that you set as a string afterwards with `$env.FOO = ...` stays a string. To convert it, set it before assigning `ENV_CONVERSIONS`, or assign `$env.ENV_CONVERSIONS` to itself again. [`load-env`](/commands/docs/load-env.md), [`with-env`](/commands/docs/with-env.md) and `FOO=bar cmd` don't have this limit. They run each string they set through its `from_string` conversion and turn a string `PATH` into a list. Pass `--no-convert` to `load-env` or `with-env` to set the values as given.)_
 
 ## Removing Environment Variables
 

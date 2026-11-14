@@ -398,7 +398,7 @@ $incompatible | sort-by -c {|a, b| $a < $b | default ($a != null) }
 # =>    ╰────
 ```
 
-Special handling is required for `null` values, since comparison between any value and `null` returns `null`. To instead reject `null` values, try the following:
+Special handling is required for `null` values, since an ordering comparison (`<`, `<=`, `>`, `>=`) between any value and `null` returns `null`. `==` and `!=` still return a `bool`, so `1 == null` is `false`. To instead reject `null` values, try the following:
 
 ```nu
 let baddata = [8 3.2 null 58 2]

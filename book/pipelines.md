@@ -404,15 +404,15 @@ Many commands do have piped input/output however, and if it's ever unclear, chec
 
 ## Rendering Display Results
 
-In interactive mode, when a pipeline ends, the [`display_output` hook configuration](https://www.nushell.sh/book/hooks.html#changing-how-output-is-displayed) defines how the result will be displayed.
-The default configuration uses the [`table` command](/commands/docs/table.md) to render structured data as a visual table.
+When a pipeline typed at the prompt ends, or a script or `nu -c` command finishes, the [`display_output` hook configuration](https://www.nushell.sh/book/hooks.html#changing-how-output-is-displayed) defines how the result will be displayed.
+The default hook is `if (term size).columns >= 100 { table -e } else { table }`, which uses the [`table` command](/commands/docs/table.md) to render structured data as a visual table, expanding nested data when the terminal is at least 100 columns wide.
 
 The following example shows how the `display_output` hook can render
 
 - an expanded table with `table -e`
 - an unexpanded table with `table`
 - an empty closure `{||}` and empty string `''` lead to simple output
-- `null` can be assigned to clear any customization, reverting back to default behavior
+- `null` removes the hook, and Nushell then renders results with a plain `table`, without the default's `-e` on wide terminals
 
 ```nu
 $env.config.hooks.display_output = { table -e }
@@ -455,7 +455,7 @@ $env.config.hooks.display_output = ''
 # => 5
 # => 6]
 
-# clear to default behavior
+# remove the hook: a plain `table`, even on a wide terminal
 $env.config.hooks.display_output = null
 [1,2,3,[4,5,6]]
 # => ╭───┬────────────────╮
@@ -465,6 +465,8 @@ $env.config.hooks.display_output = null
 # => │ 3 │ [list 3 items] │
 # => ╰───┴────────────────╯
 ```
+
+To restore the default, assign its string again: `$env.config.hooks.display_output = 'if (term size).columns >= 100 { table -e } else { table }'`.
 
 ## Output Result to External Commands
 

@@ -1,7 +1,8 @@
 # Hooks
 
 Hooks allow you to run a code snippet at some predefined situations.
-They are only available in the interactive mode ([REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)), they do not work if you run Nushell with a script (`nu script.nu`) or command (`nu -c "print foo"`) argument.
+The `pre_prompt`, `pre_execution` and `env_change` hooks only run in the interactive mode ([REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)). They do not run if you run Nushell with a script (`nu script.nu`) or command (`nu -c "print foo"`) argument.
+The `display_output` and `command_not_found` hooks work there too. `display_output` formats the value that the script or command returns, and `command_not_found` runs when it calls a command that doesn't exist.
 
 Currently, we support these types of hooks:
 

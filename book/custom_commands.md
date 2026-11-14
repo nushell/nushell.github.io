@@ -1166,7 +1166,7 @@ scope commands
 This will show the Help _record_ that Nushell creates.
 :::
 
-The comments following the parameters become their description. Only a single-line comment is valid for parameters.
+The comments following the parameters become their description. A comment can continue on the lines below its parameter. Nushell adds each comment-only line, up to the next parameter, to that parameter's description as a new line.
 
 ::: tip Note
 A Nushell comment that continues on the same line for argument documentation purposes requires a space before the ` #` pound sign.

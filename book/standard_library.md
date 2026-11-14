@@ -161,10 +161,12 @@ nu -n -c "$nu.startup-time"
 
 You will not be able to import the library, any of its submodules, nor use any of its commands, when it is disabled in this way. This includes the `banner` and `pwd` commands from `std/prelude`.
 
-## Using `std/log` in Modules
+## Using `std/dirs` in Modules
 
 ::: warning Important!
-`std/log` exports environment variables. To use the `std/log` module in your own module, please see [this caveat](./modules/creating_modules.md#export-env-runs-only-when-the-use-call-is-evaluated) in the "Creating Modules" Chapter.
+`std/dirs` sets up its environment variables in an `export-env` block. If your own module imports it with a top-level `use std/dirs`, that block doesn't run when your module is imported, and `dirs` fails with `Cannot find column 'DIRS_LIST'`. To use the `std/dirs` module in your own module, please see [this caveat](./modules/creating_modules.md#export-env-runs-only-when-the-use-call-is-evaluated) in the "Creating Modules" Chapter.
+
+`std/log` doesn't need this. Its commands fall back to their default formats when its environment variables aren't set.
 
 :::
 
