@@ -427,52 +427,59 @@ $env.config.color_config.shape_int = { fg: "#0000ff" attr: b}
 
 ## Prompt Configuration and Coloring
 
-The Nushell prompt is configurable through these environment variables and config items:
+The Nushell prompt is configurable through these keys of `$env.config.prompt`:
 
-- `PROMPT_COMMAND`: Code to execute for setting up the prompt (block)
-- `PROMPT_COMMAND_RIGHT`: Code to execute for setting up the _RIGHT_ prompt (block) (see oh-my.nu in nu_scripts)
-- `PROMPT_INDICATOR` = "> ": The indicator printed after the prompt in Emacs mode
-- `PROMPT_INDICATOR_VI_INSERT` = ": ": The indicator in Vi insert mode (and Helix insert mode)
-- `PROMPT_INDICATOR_VI_NORMAL` = "> ": The indicator in Vi normal and visual mode (and Helix normal and select mode)
-- `PROMPT_MULTILINE_INDICATOR` = "::: "
-- `render_right_prompt_on_last_line`: Bool value to enable or disable the right prompt to be rendered on the last line of the prompt
+- `left`: Code to execute for setting up the prompt (closure or string)
+- `right`: Code to execute for setting up the _RIGHT_ prompt (closure or string) (see oh-my.nu in nu_scripts)
+- `indicator` = "> ": The indicator printed after the prompt in Emacs mode
+- `vi_insert` = "> ": The indicator in Vi insert mode (and Helix insert mode)
+- `vi_normal` = ": ": The indicator in Vi normal mode (and Helix normal mode)
+- `vi_visual` = "+ ": The indicator in Vi visual mode (and Helix select mode)
+- `multiline` = "::: "
+- `render_right_on_last_line`: Bool value to enable or disable the right prompt to be rendered on the last line of the prompt
 
-Example: For a simple prompt one could do this. Note that `PROMPT_COMMAND` requires a `block` whereas the others require a `string`.
+::: tip
+Before Nushell 0.118 these were the `PROMPT_*` environment variables (`$env.PROMPT_COMMAND`, `$env.PROMPT_INDICATOR`, ...). Those are deprecated but still take precedence when set. See [Prompt Configuration](configuration.md#prompt-configuration).
+:::
 
-```nu
-$env.PROMPT_COMMAND = { $"(date now | format date '%m/%d/%Y %I:%M:%S%.3f'): (pwd | path basename)" }
-```
-
-If you don't like the default `PROMPT_INDICATOR` you could change it like this.
-
-```nu
-$env.PROMPT_INDICATOR = "❯ "
-```
-
-If you're using `starship`, you'll most likely want to show the right prompt on the last line of the prompt, just like zsh or fish. You could modify the `config.nu` file, just set `render_right_prompt_on_last_line` to true:
+Example: For a simple prompt one could do this. Note that `left` and `right` accept a closure whereas the indicators require a `string`.
 
 ```nu
-$env.config.render_right_prompt_on_last_line = true
+$env.config.prompt.left = { $"(date now | format date '%m/%d/%Y %I:%M:%S%.3f'): (pwd | path basename)" }
 ```
 
-Coloring of the prompt is controlled by the `block` in `PROMPT_COMMAND` where you can write your own custom prompt. We've written a slightly fancy one that has git statuses located in the [nu_scripts repo](https://github.com/nushell/nu_scripts/blob/main/modules/prompt/oh-my.nu).
+If you don't like the default `indicator` you could change it like this.
+
+```nu
+$env.config.prompt.indicator = "❯ "
+```
+
+If you're using `starship`, you'll most likely want to show the right prompt on the last line of the prompt, just like zsh or fish. You could modify the `config.nu` file, just set `render_right_on_last_line` to true:
+
+```nu
+$env.config.prompt.render_right_on_last_line = true
+```
+
+Coloring of the prompt is controlled by the closure in `$env.config.prompt.left` where you can write your own custom prompt. We've written a slightly fancy one that has git statuses located in the [nu_scripts repo](https://github.com/nushell/nu_scripts/blob/main/modules/prompt/oh-my.nu).
+
+Text in a custom prompt that sets no color of its own is shown in the terminal's default foreground. The indicators are colored by the line editor; to style one yourself, include the escape codes in its value, e.g. `$"(ansi light_red)> "`.
 
 ### Transient Prompt
 
 If you want a different prompt displayed for previously entered commands, you can use Nushell's transient prompt feature. This can be useful if your prompt has lots of information that is unnecessary to show for previous lines (e.g. time and Git status), since you can make it so that previous lines show with a shorter prompt.
 
-Each of the `PROMPT_*` variables has a corresponding `TRANSIENT_PROMPT_*` variable to be used for changing that segment when displaying past prompts: `TRANSIENT_PROMPT_COMMAND`, `TRANSIENT_PROMPT_COMMAND_RIGHT`, `TRANSIENT_PROMPT_INDICATOR`, `TRANSIENT_PROMPT_INDICATOR_VI_INSERT`, `TRANSIENT_PROMPT_INDICATOR_VI_NORMAL`, `TRANSIENT_PROMPT_MULTILINE_INDICATOR`. By default, the `PROMPT_*` variables are used for displaying past prompts.
+Each of the keys above has a counterpart under `$env.config.prompt.transient` to be used for changing that segment when displaying past prompts: `transient.left`, `transient.right`, `transient.indicator`, `transient.vi_insert`, `transient.vi_normal`, `transient.vi_visual`, `transient.multiline`. A key set to `null` keeps what the normal prompt showed. That is the default for all of them except `transient.right` and `transient.multiline`, which default to an empty string.
 
 For example, if you want to make past prompts show up without a left prompt entirely and leave only the indicator, you can use:
 
 ```nu
-$env.TRANSIENT_PROMPT_COMMAND = ""
+$env.config.prompt.transient.left = ""
 ```
 
-If you want to go back to the normal left prompt, you'll have to unset `TRANSIENT_PROMPT_COMMAND`:
+If you want to go back to the normal left prompt, set the key back to `null`:
 
 ```nu
-hide-env TRANSIENT_PROMPT_COMMAND
+$env.config.prompt.transient.left = null
 ```
 
 ## `LS_COLORS` Colors for the [`ls`](/commands/docs/ls.md) Command

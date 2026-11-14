@@ -163,34 +163,55 @@ Nushell provides a number of prompt configuration options. By default, Nushell i
 
 - A prompt which includes the current directory, abbreviated using `~` if it is (or is under)
   the home directory.
-- A prompt indicator which appears immediately to the right of the prompt. This defaults to `> ` when in normal editing mode, or a `: ` when in Vi-insert mode. Note extra space after the character to provide separation of the command from the prompt.
+- A prompt indicator which appears immediately to the right of the prompt. This defaults to `> ` in Emacs and Vi-insert mode, `: ` in Vi-normal mode and `+ ` in Vi-visual mode. Note extra space after the character to provide separation of the command from the prompt.
 - A right-prompt with the date and time
 - An indicator which is displayed when the current commandline extends over multiple lines - `::: ` by default
 
-The environment variables which control these prompt components are:
+These prompt components are configured under `$env.config.prompt`:
 
-- `$env.PROMPT_COMMAND`: The prompt itself
-- `$env.PROMPT_COMMAND_RIGHT`: A prompt which can appear on the right side of the terminal
-- `$env.PROMPT_INDICATOR`: Emacs mode indicator
-- `$env.PROMPT_INDICATOR_VI_NORMAL`: Vi-normal mode indicator
-- `$env.PROMPT_INDICATOR_VI_INSERT`: Vi-insert mode indicator
-- `$env.PROMPT_MULTILINE_INDICATOR`: The multi-line indicator
+- `$env.config.prompt.left`: The prompt itself
+- `$env.config.prompt.right`: A prompt which can appear on the right side of the terminal
+- `$env.config.prompt.indicator`: Emacs mode indicator
+- `$env.config.prompt.vi_insert`: Vi-insert mode indicator
+- `$env.config.prompt.vi_normal`: Vi-normal mode indicator
+- `$env.config.prompt.vi_visual`: Vi-visual mode indicator
+- `$env.config.prompt.multiline`: The multi-line indicator
+- `$env.config.prompt.render_right_on_last_line`: Whether the right prompt sits on the last line of a multi-line left prompt (`false` by default)
 
-Each of these variables accepts either:
+`left` and `right` accept either:
 
 - A string, in which case the component will be statically displayed as that string.
 - A closure (with no parameters), in which case the component will be dynamically displayed based on the closure's code.
-- `null`, in which case the component will revert to its internal default value.
+- `null`, in which case the line editor's built-in prompt is used.
+
+The indicators are plain strings. Which one is shown depends on the current edit mode, so they cannot be computed inside the prompt closure.
+
+The default `left` and `right` prompts are closures. You can read them with `view source $env.config.prompt.left`, build on them by keeping a reference, and get them back from [`config default`](/commands/docs/config_default.md):
+
+```nu
+# Wrap the default prompt
+let default_left = $env.config.prompt.left
+$env.config.prompt.left = {|| $"[(do $default_left)] " }
+
+# Restore the default prompt
+$env.config.prompt = (config default).prompt
+```
 
 ::: tip
 To disable the right-prompt, for instance, add the following to your startup config:
 
 ```nu
-$env.PROMPT_COMMAND_RIGHT = ""
-# or
-$env.PROMPT_COMMAND_RIGHT = {||}
+$env.config.prompt.right = ""
 ```
 
+:::
+
+::: warning Prompt environment variables
+Before Nushell 0.118, the prompt was configured through environment variables: `$env.PROMPT_COMMAND`, `$env.PROMPT_COMMAND_RIGHT`, `$env.PROMPT_INDICATOR`, `$env.PROMPT_INDICATOR_VI_INSERT`, `$env.PROMPT_INDICATOR_VI_NORMAL`, `$env.PROMPT_MULTILINE_INDICATOR` and their `TRANSIENT_PROMPT_*` counterparts.
+
+These are deprecated. A variable that you (or a tool such as Starship or oh-my-posh) set still takes precedence over the matching `$env.config.prompt` key, so existing configurations keep working.
+
+Nushell no longer sets them at startup. Code that _reads_ one to find the current prompt, such as `let old = $env.PROMPT_COMMAND`, has to read `$env.config.prompt.left` instead.
 :::
 
 #### Transient Prompts
@@ -200,25 +221,26 @@ Nushell also supports transient prompts, which allow a different prompt to be sh
 - When using a multi-line prompt, the transient prompt can be a more condensed version.
 - Removing the transient multiline indicator and right-prompt can simplify copying from the terminal.
 
-As with the normal prompt commands above, each transient prompt can accept a (static) string, a (dynamic) closure, or a `null` to use the Nushell internal defaults.
+Every key under `$env.config.prompt.transient` mirrors one of the keys above. Setting a key to `null` keeps whatever the normal prompt showed for that component, so only the components worth condensing need to be set.
 
-The environment variables which control the transient prompt components are:
+- `$env.config.prompt.transient.left`: The prompt itself after the commandline has been executed
+- `$env.config.prompt.transient.right`: A prompt which can appear on the right side of the terminal
+- `$env.config.prompt.transient.indicator`: Emacs mode indicator
+- `$env.config.prompt.transient.vi_insert`: Vi-insert mode indicator
+- `$env.config.prompt.transient.vi_normal`: Vi-normal mode indicator
+- `$env.config.prompt.transient.vi_visual`: Vi-visual mode indicator
+- `$env.config.prompt.transient.multiline`: The multi-line indicator
 
-- `$env.TRANSIENT_PROMPT_COMMAND`: The prompt itself after the commandline has been executed
-- `$env.TRANSIENT_PROMPT_COMMAND_RIGHT`: A prompt which can appear on the right side of the terminal
-- `$env.TRANSIENT_PROMPT_INDICATOR`: Emacs mode indicator
-- `$env.TRANSIENT_PROMPT_INDICATOR_VI_NORMAL`: Vi-normal mode indicator
-- `$env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT`: Vi-insert mode indicator
-- `$env.TRANSIENT_PROMPT_MULTILINE_INDICATOR`: The multi-line indicator
+As with the normal prompt, `left` and `right` accept a (static) string or a (dynamic) closure, and the indicators accept a string.
 
 ::: tip
-Nushell sets `TRANSIENT_PROMPT_COMMAND_RIGHT` and `TRANSIENT_PROMPT_MULTILINE_INDICATOR` to an empty string (`""`) so that each disappears after the previous command is entered. This simplifies copying and pasting from the terminal.
+`transient.right` and `transient.multiline` default to an empty string (`""`) so that each disappears after the previous command is entered. This simplifies copying and pasting from the terminal. The other keys default to `null`.
 
 To disable this feature and always show those items, set:
 
 ```nu
-$env.TRANSIENT_PROMPT_COMMAND_RIGHT = null
-$env.TRANSIENT_PROMPT_MULTILINE_INDICATOR = null
+$env.config.prompt.transient.right = null
+$env.config.prompt.transient.multiline = null
 ```
 
 :::
@@ -228,7 +250,7 @@ $env.TRANSIENT_PROMPT_MULTILINE_INDICATOR = null
 A prompt closure that takes a long time to run, such as one that calls `git`, delays every prompt. Instead, the closure can start a [background job](./background_jobs.md) and return right away. When the job finishes, it calls [`commandline set-prompt`](/commands/docs/commandline_set-prompt.md) to fill in the missing part without disturbing the line being edited. For example, to show the current Git branch in the right prompt:
 
 ```nu
-$env.PROMPT_COMMAND_RIGHT = {
+$env.config.prompt.right = {
     job spawn {
         let branch = (git branch --show-current | complete | get stdout | str trim)
         commandline set-prompt --right $"(ansi yellow)($branch)(ansi reset)"
@@ -238,9 +260,9 @@ $env.PROMPT_COMMAND_RIGHT = {
 }
 ```
 
-`commandline set-prompt` sets the left prompt by default. Use `--right`, `--indicator`, `--vi-insert`, `--vi-normal`, or `--multiline` to set the other prompt components. The new text lasts until the next prompt is drawn.
+`commandline set-prompt` sets the left prompt by default. Use `--right`, `--indicator`, `--vi-insert`, `--vi-normal`, `--vi-visual`, or `--multiline` to set the other prompt components. The new text lasts until the next prompt is drawn.
 
-A job started from a prompt closure, or from a `pre_prompt` or `env_change` [hook](./hooks.md), can finish before the prompt is drawn, for example when `git` answers quickly. Its `commandline set-prompt` still shows on that prompt. The same is true when a hook or prompt closure calls `commandline set-prompt` directly: the pushed text replaces what the prompt variable gives that segment.
+A job started from a prompt closure, or from a `pre_prompt` or `env_change` [hook](./hooks.md), can finish before the prompt is drawn, for example when `git` answers quickly. Its `commandline set-prompt` still shows on that prompt. The same is true when a hook or prompt closure calls `commandline set-prompt` directly: the pushed text replaces what the prompt configuration gives that segment.
 
 ### ENV_CONVERSIONS
 

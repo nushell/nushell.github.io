@@ -405,7 +405,7 @@ Changes:
 
 <kbd>d</kbd>, <kbd>y</kbd> and <kbd>p</kbd> return to normal mode, and <kbd>c</kbd> switches to insert mode. These Helix keys are not available yet: <kbd>;</kbd>, <kbd>,</kbd>, <kbd>J</kbd>, <kbd>G</kbd>, <kbd>X</kbd>, <kbd>&gt;</kbd>, <kbd>&lt;</kbd>, the <kbd>/</kbd>, <kbd>n</kbd> and <kbd>N</kbd> search commands, match mode (<kbd>m</kbd>), and the multi-cursor commands.
 
-Keybindings for Helix mode use the `helix_normal`, `helix_select` and `helix_insert` mode names. The prompt uses `PROMPT_INDICATOR_VI_INSERT` in Helix insert mode, and `PROMPT_INDICATOR_VI_NORMAL` in normal and select mode.
+Keybindings for Helix mode use the `helix_normal`, `helix_select` and `helix_insert` mode names. The prompt uses `$env.config.prompt.vi_insert` in Helix insert mode, `$env.config.prompt.vi_normal` in normal mode and `$env.config.prompt.vi_visual` in select mode.
 
 ::: tip
 The selection in Vi visual mode and Helix mode is styled with `$env.config.color_config.selection` (reverse video by default). `$env.config.color_config.selection_cursor` styles the character under the cursor inside a selection:

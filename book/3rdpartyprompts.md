@@ -33,7 +33,7 @@ For MacOS users:
 
 1. You can install oh-my-posh using `brew`, just following the [guide here](https://ohmyposh.dev/docs/installation/macos)
 2. Download and install a [nerd font](https://github.com/ryanoasis/nerd-fonts).
-3. Set the PROMPT_COMMAND in the file output by `$nu.config-path`, here is a code snippet:
+3. Set the prompt in the file output by `$nu.config-path`, here is a code snippet:
 
 ```nu
 let posh_dir = (brew --prefix oh-my-posh | str trim)
@@ -41,9 +41,9 @@ let posh_theme = $'($posh_dir)/share/oh-my-posh/themes/'
 # Change the theme names to: zash/space/robbyrussell/powerline/powerlevel10k_lean/
 # material/half-life/lambda Or double lines theme: amro/pure/spaceship, etc.
 # For more [Themes demo](https://ohmyposh.dev/docs/themes)
-$env.PROMPT_COMMAND = { || oh-my-posh print primary --config $'($posh_theme)/zash.omp.json' }
+$env.config.prompt.left = { || oh-my-posh print primary --config $'($posh_theme)/zash.omp.json' }
 # Optional
-$env.PROMPT_INDICATOR = $"(ansi y)$> (ansi reset)"
+$env.config.prompt.indicator = $"(ansi y)$> (ansi reset)"
 ```
 
 ## Starship
@@ -82,15 +82,15 @@ def create_left_prompt [] {
 }
 
 # Use nushell functions to define your right and left prompt
-$env.PROMPT_COMMAND = { || create_left_prompt }
-$env.PROMPT_COMMAND_RIGHT = ""
+$env.config.prompt.left = { || create_left_prompt }
+$env.config.prompt.right = ""
 
-# The prompt indicators are environmental variables that represent
+# The prompt indicators are strings that represent
 # the state of the prompt
-$env.PROMPT_INDICATOR = ""
-$env.PROMPT_INDICATOR_VI_INSERT = ": "
-$env.PROMPT_INDICATOR_VI_NORMAL = "〉"
-$env.PROMPT_MULTILINE_INDICATOR = "::: "
+$env.config.prompt.indicator = ""
+$env.config.prompt.vi_insert = ": "
+$env.config.prompt.vi_normal = "〉"
+$env.config.prompt.multiline = "::: "
 ```
 
 Now restart Nu.
