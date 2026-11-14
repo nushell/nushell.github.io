@@ -178,7 +178,7 @@ Closures are used in Nu extensively as parameters to iteration style commands li
 - [`each`](/commands/docs/each.md)
 - [`explain`](/commands/docs/explain.md)
 - [`group-by`](/commands/docs/group-by.md)
-- [`interleave`](/commands/docs/interleave.md)
+- [`interleave`](/commands/docs/interleave.md) (see [`interleave`](../../filters/changing_data.md#interleave))
 - [`items`](/commands/docs/items.md)
 - [`par-each`](/commands/docs/par-each.md)
 - [`reduce`](/commands/docs/reduce.md)

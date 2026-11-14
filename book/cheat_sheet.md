@@ -477,7 +477,7 @@ recursively search for files by file name:
 glob **/*.{rs,toml} --depth 2
 ```
 
-watch a file, run command whenever it changes:
+watch a file, run command whenever it changes (see [Running a command when files change](/cookbook/files.md#running-a-command-when-files-change)):
 
 ```nu
 for _ in (watch . --glob=**/*.rs) { cargo test }

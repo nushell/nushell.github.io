@@ -597,7 +597,7 @@ For this, set `$env.config.completions.external.completer` in `config.nu` to a [
 
 Most external completers only need `$place.command`, the command being completed as a list of words. For example, typing `git checkout ma` and pressing <kbd>Tab</kbd> gives the closure `[git, checkout, ma]`, and typing `my-command --arg1 ` gives `[my-command, --arg1, ""]`, with an empty string for the argument that hasn't been typed yet. Aliases are already expanded: if `gco` is an alias for `git checkout`, typing `gco ma` also gives `[git, checkout, ma]`.
 
-You can configure the closure to run an external completer, such as [carapace](https://github.com/carapace-sh/carapace-bin). This example will enable carapace external completions:
+You can configure the closure to run an external completer, such as [carapace](https://github.com/carapace-sh/carapace-bin). To give one external command its own completions instead, see [Generating completions for an external command](/cookbook/system.md#generating-completions-for-an-external-command). This example will enable carapace external completions:
 
 ```nu
 $env.config.completions.external.completer = {|place|

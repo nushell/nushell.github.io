@@ -52,7 +52,7 @@ These commands work with strings explicitly
 - `into string`
 - `ansi strip`
 - `is-empty`
-- `is-not-empty`
+- `is-not-empty` (see [`length` and `is-empty`](../../filters/summarizing_lists.md#length-and-is-empty))
 
 In addition to the above commands, most other `into <type>` commands take strings
 as inputs.

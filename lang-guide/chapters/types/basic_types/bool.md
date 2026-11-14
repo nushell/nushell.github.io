@@ -13,7 +13,7 @@
 - `if`, `while`
 - `match` (in clauses where the expression matches the clause expression, or the `_` value which is always true)
 
-- `is-empty`, `is-not-empty`
+- `is-empty`, `is-not-empty` (see [`length` and `is-empty`](../../filters/summarizing_lists.md#length-and-is-empty))
 - `is-admin`
 - `is-terminal`
 

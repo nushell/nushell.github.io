@@ -1,12 +1,12 @@
 # Range
 
-|                       |                                                                                                |
-| --------------------- | ---------------------------------------------------------------------------------------------- |
-| **_Description:_**    | Describes a range of values from a starting value to an ending value, with an optional stride. |
-| **_Annotation:_**     | `range`                                                                                        |
-| **_Literal Syntax:_** | `<start_value>..<end_value>` or `<start_value>..<second_value>..<end_value>`. E.g., `1..10`.   |
-| **_Casts:_**          | [`seq`](/commands/docs/seq.md)                                                                 |
-| **_See also:_**       | [Types of Data - Ranges](/book/types_of_data.md#ranges)                                        |
+|                       |                                                                                                                           |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| **_Description:_**    | Describes a range of values from a starting value to an ending value, with an optional stride.                            |
+| **_Annotation:_**     | `range`                                                                                                                   |
+| **_Literal Syntax:_** | `<start_value>..<end_value>` or `<start_value>..<second_value>..<end_value>`. E.g., `1..10`.                              |
+| **_Casts:_**          | [`seq`](/commands/docs/seq.md) (see [Lists of numbers with `seq`](/book/working_with_lists.md#lists-of-numbers-with-seq)) |
+| **_See also:_**       | [Types of Data - Ranges](/book/types_of_data.md#ranges)                                                                   |
 
 ## Additional Language Notes
 
