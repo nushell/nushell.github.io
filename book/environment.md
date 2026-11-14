@@ -24,7 +24,7 @@ $env | table -e
 # => ╰──────────────────────┴───────────────────────────────────────────────────────────────────────────╯
 ```
 
-In Nushell, environment variables can be any value and have any type. You can see the type of an env variable with the describe command, for example: `$env.PROMPT_COMMAND | describe`.
+In Nushell, environment variables can be any value and have any type. You can see the type of an env variable with the describe command, for example: `$env.PATH | describe`.
 
 To send environment variables to external applications, the values will need to be converted to strings. See [Environment variable conversions](#environment-variable-conversions) on how this works.
 
