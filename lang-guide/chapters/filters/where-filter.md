@@ -75,6 +75,18 @@ Variables from the surrounding scope can be used on either side: `let limit = 2;
 
 A row condition is syntax, not a value. It cannot be stored in a variable; use a closure for that.
 
+Only a bare word written directly in the row condition becomes a column. Inside parentheses, a bare word is a command name again, so `where (size > 1kb)` tries to run a command called `size`. Use `$it` there:
+
+```nu
+[[name size]; [a.txt 2kb] [b.md 10b] [c.txt 5kb]] | where ($it.size > 1kb and ($it.name | str ends-with .txt))
+# => ╭───┬───────┬────────╮
+# => │ # │ name  │  size  │
+# => ├───┼───────┼────────┤
+# => │ 0 │ a.txt │ 2.0 kB │
+# => │ 1 │ c.txt │ 5.0 kB │
+# => ╰───┴───────┴────────╯
+```
+
 ## Closures
 
 A closure receives the item as its parameter and as `$in`:
@@ -86,6 +98,20 @@ A closure receives the item as its parameter and as `$in`:
 # => │ 1 │ 3 │
 # => │ 2 │ 5 │
 # => ╰───┴───╯
+```
+
+A closure body is ordinary code, so nothing in it is expanded to a column, and `$it` isn't defined there. Use the parameter or `$in` instead:
+
+```nu
+[[name size]; [a.txt 2kb] [b.md 10b]] | where {|row| $it.size > 1kb }
+# => Error: nu::shell::variable_not_found
+# =>
+# =>   × Variable not found
+# =>    ╭─[repl_entry #1:1:54]
+# =>  1 │ [[name size]; [a.txt 2kb] [b.md 10b]] | where {|row| $it.size > 1kb }
+# =>    ·                                                      ─┬─
+# =>    ·                                                       ╰── variable not found
+# =>    ╰────
 ```
 
 A closure stored in a variable can be passed to `where`. This is the use case that `filter` used to cover:
@@ -129,7 +155,41 @@ let is_odd = {|n| $n mod 2 == 1 }
 
 1. Only rows for which the condition is exactly `true` are kept.
 
-1. Row conditions are not limited to `where`. [`any`](/commands/docs/any.md), [`all`](/commands/docs/all.md), [`take while`](/commands/docs/take_while.md), [`take until`](/commands/docs/take_until.md), [`skip while`](/commands/docs/skip_while.md), [`skip until`](/commands/docs/skip_until.md) and [`chunk-by`](/commands/docs/chunk-by.md) accept them too, as well as closures:
+1. A `null` from an optional member like `a?` behaves differently depending on the operator:
+
+   - `<`, `<=`, `>` and `>=` return `null`, so the row is dropped without an error.
+   - `==` and `!=` return a `bool`, so `where a? == null` keeps the rows that lack `a`.
+   - `null` on the item side of `in` or `not-in` is fine when the right side is a list.
+   - The other operators raise an error: arithmetic (`+`, `-`, `*`, `/`, `//`, `mod`, `**`), `++`, the bit operators, `=~`, `!~`, `starts-with`, `ends-with`, `and`, `or` and `xor`. So does `not null` (it can't convert `nothing` to a `bool`), and `null` as the collection of `in`, `not-in`, `has` or `not-has`.
+
+   The first rule can turn into the last one. `size? > 1` is `null` for a row without `size`, and `null or ...` is an error:
+
+   ```nu
+   [{name: x, size: 5} {name: y} {name: z, size: 0}] | where size? > 1 or name == z
+   # => Error: nu::shell::operator_unsupported_type
+   # =>
+   # =>   × The 'or' operator does not work on values of type 'nothing'.
+   # =>    ╭─[repl_entry #1:1:59]
+   # =>  1 │ [{name: x, size: 5} {name: y} {name: z, size: 0}] | where size? > 1 or name == z
+   # =>    ·                                                           ────┬──── ─┬
+   # =>    ·                                                               │      ╰── does not support 'nothing'
+   # =>    ·                                                               ╰── nothing
+   # =>    ╰────
+   ```
+
+   Give the missing value a default first:
+
+   ```nu
+   [{name: x, size: 5} {name: y} {name: z, size: 0}] | where ($it.size? | default 0) > 1 or name == z
+   # => ╭───┬──────┬──────╮
+   # => │ # │ name │ size │
+   # => ├───┼──────┼──────┤
+   # => │ 0 │ x    │    5 │
+   # => │ 1 │ z    │    0 │
+   # => ╰───┴──────┴──────╯
+   ```
+
+1. Row conditions are not limited to `where`. [`any`](/commands/docs/any.md), [`all`](/commands/docs/all.md), [`take while`](/commands/docs/take_while.md), [`take until`](/commands/docs/take_until.md), [`skip while`](/commands/docs/skip_while.md), [`skip until`](/commands/docs/skip_until.md), [`chunk-by`](/commands/docs/chunk-by.md) and [`record where`](/commands/docs/record_where.md) accept them too, as well as closures. In `record where`, the row is a `{key, value}` record for each field (see [`record` commands](./record_commands.md)):
 
    ```nu
    [1 2 3 4 1] | take while $it < 3

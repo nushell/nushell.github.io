@@ -85,6 +85,20 @@ $colors
 # => ╰───┴────────╯
 ```
 
+A list given to `append` or `prepend` is unwrapped, so its items are added one by one, the same as `++`. To add the list as a single item, put it inside another list:
+
+```nu
+let extra = [purple blue]
+[yellow green] | append [$extra]
+# => ╭───┬────────────────╮
+# => │ 0 │ yellow         │
+# => │ 1 │ green          │
+# => │ 2 │ [list 2 items] │
+# => ╰───┴────────────────╯
+```
+
+Ranges are expanded the same way, and a single value as input, such as a string, becomes a one-item list first. See [Adding and changing data](/lang-guide/chapters/filters/changing_data.md#append-and-prepend) in the Language Guide.
+
 In case you want to remove items from list, there are many ways. [`skip`](/commands/docs/skip.md) allows you skip first rows from input, while [`drop`](/commands/docs/drop.md) allows you to skip specific numbered rows from end of list.
 
 ```nu
@@ -210,6 +224,8 @@ $"product = ($scores | reduce --fold 1 { |elt, acc| $acc * $elt })" # product = 
 $scores | enumerate | reduce --fold 0 { |elt, acc| $acc + $elt.index * $elt.item } # 0*3 + 1*8 + 2*4 = 16
 ```
 
+Without `--fold`, the first item is the starting accumulator, so the closure first runs on the second item, and an empty list is an error. With `--fold`, an empty list returns the fold value. [`math sum`](/commands/docs/math_sum.md) and [`math avg`](/commands/docs/math_avg.md) also work on lists of durations and filesizes, such as `[1sec 90sec] | math sum`. For the details of these commands and the other ones in this chapter, see [Summarizing and comparing lists](/lang-guide/chapters/filters/summarizing_lists.md) in the Language Guide.
+
 ## Accessing the List
 
 ::: tip Note
@@ -304,6 +320,8 @@ $scores | any $it > 7 # true
 $scores | all $it > 2 # true
 ```
 
+Both stop at the first item that decides the answer. For an empty list, `any` returns `false` and `all` returns `true`.
+
 ## Set Operations and Combinations
 
 The [`union`](/commands/docs/union.md), [`intersect`](/commands/docs/intersect.md), and [`difference`](/commands/docs/difference.md) commands treat lists as sets. Their results contain no duplicates, and items stay in the order in which they first appear:
@@ -332,6 +350,8 @@ $a | difference $b
 # => ╰───┴───╯
 ```
 
+Items match only when they are the same type and value, so `1` and `1.0` are different. For tables, whole rows are compared.
+
 [`combinations`](/commands/docs/combinations.md) returns every way to choose a given number of items from a list, and [`permutations`](/commands/docs/permutations.md) returns every ordering of a list. Both return a list of lists, so the examples below join each inner list into a string:
 
 ```nu
@@ -352,6 +372,8 @@ $a | difference $b
 # => ╰───┴─────╯
 ```
 
+Given a table, both return a list of tables. Asking `combinations` for more items than the list has gives an empty list, and `permutations` of a list with repeated items repeats orderings.
+
 ## Converting the List
 
 The [`flatten`](/commands/docs/flatten.md) command creates a new list from an existing list
@@ -365,8 +387,10 @@ For example:
 [[1 2] [3 [4 5 [6 7 8]]]] | flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
 ```
 
-The [`wrap`](/commands/docs/wrap.md) command converts a list to a table. Each list value will
-be converted to a separate row with a single column:
+On a table, `flatten` expands a column of lists into one row per item and lifts the fields of a record column into the row. See [Reshaping](/lang-guide/chapters/filters/changing_data.md#reshaping) in the Language Guide for `--all`, column arguments and name clashes.
+
+The [`wrap`](/commands/docs/wrap.md) command converts a list or a range to a table. Each list value will
+be converted to a separate row with a single column. A single value that isn't a list becomes a one-field record:
 
 ```nu
 let zones = [UTC CET Europe/Moscow Asia/Yekaterinburg]

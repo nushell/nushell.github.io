@@ -1,0 +1,352 @@
+# Adding and changing data
+
+These filters return a new list, table or record with something added, replaced, moved or reshaped. They never change a variable in place. [Working with Lists](/book/working_with_lists.md), [Working with Tables](/book/working_with_tables.md) and [Working with Records](/book/working_with_records.md) in the Book introduce them; this page gives the rules and edge cases.
+
+## `append` and `prepend`
+
+[`append`](/commands/docs/append.md) adds values to the end of its input, and [`prepend`](/commands/docs/prepend.md) adds them to the start. Both treat their argument the same way:
+
+- A list argument is unwrapped, and its items are added one by one. To add a list as a single item, wrap it in another list.
+- A range argument is expanded into its values.
+- Any other value is added as one item.
+
+```nu
+let more = [3 4]
+[1 2] | append $more | to nuon
+# => [1, 2, 3, 4]
+[1 2] | append [$more] | to nuon
+# => [1, 2, [3, 4]]
+[1 2] | append 3..5 | to nuon
+# => [1, 2, 3, 4, 5]
+```
+
+The input doesn't have to be a list. A single value such as a string becomes the first item of a new list, and `null` becomes an empty list:
+
+```nu
+"a" | append b | to nuon
+# => [a, b]
+null | append x | to nuon
+# => [x]
+```
+
+Appending a record to a table adds a row. Appending a table adds all of its rows.
+
+## `insert`, `update` and `upsert`
+
+All three take a cell path and a value. For a column, [`insert`](/commands/docs/insert.md) adds one that must not exist yet, [`update`](/commands/docs/update.md) replaces one that must exist, and [`upsert`](/commands/docs/upsert.md) does whichever applies. List indices work differently; see [List indices](#list-indices).
+
+| Command  | Column doesn't exist yet  | Column already exists          |
+| -------- | ------------------------- | ------------------------------ |
+| `insert` | adds it                   | error: `Column already exists` |
+| `update` | error: `column_not_found` | replaces it                    |
+| `upsert` | adds it                   | replaces it                    |
+
+```nu
+{a: 1} | insert a 2
+# => Error: nu::shell::column_already_exists
+# =>
+# =>   × Column already exists
+# =>    ╭─[repl_entry #1:1:1]
+# =>  1 │ {a: 1} | insert a 2
+# =>    · ───┬──          ┬
+# =>    ·    │            ╰── column 'a' already exists
+# =>    ·    ╰── value originates here
+# =>    ╰────
+```
+
+### What a closure receives
+
+When the new value is a closure, its argument and its `$in` depend on the command and on whether the path is a column or a list index.
+
+For a column, the closure runs once per row. Its argument is always the whole row. `$in` is:
+
+- the whole row, for `insert`;
+- the current value of the cell, for `update`;
+- the current value of the cell, or `null` when the column is being added, for `upsert`.
+
+```nu
+[[a]; [1] [2]] | update a { $in * 10 }
+# => ╭───┬────╮
+# => │ # │ a  │
+# => ├───┼────┤
+# => │ 0 │ 10 │
+# => │ 1 │ 20 │
+# => ╰───┴────╯
+[[a]; [1] [2]] | upsert b {|row| $row.a * 10 }
+# => ╭───┬───┬────╮
+# => │ # │ a │ b  │
+# => ├───┼───┼────┤
+# => │ 0 │ 1 │ 10 │
+# => │ 1 │ 2 │ 20 │
+# => ╰───┴───┴────╯
+```
+
+For a list index, the closure runs only once. Both its argument and `$in` are the value currently at that index, or `null` when the index is one past the end. With `insert`, that is the item that will move one place to the right:
+
+```nu
+[a b c] | insert 1 {|item| $item | str uppercase }
+# => ╭───┬───╮
+# => │ 0 │ a │
+# => │ 1 │ B │
+# => │ 2 │ b │
+# => │ 3 │ c │
+# => ╰───┴───╯
+```
+
+### List indices
+
+`insert` at an index puts the new item there and moves the rest one place to the right. `upsert` at an existing index replaces the item. Both accept any index up to the length of the list, so the index just past the last item appends. A larger index is an error. `update` only accepts indices of existing items:
+
+```nu
+[a b c] | upsert 3 d | to nuon
+# => [a, b, c, d]
+[a b c] | insert 5 x
+# => Error: nu::shell::access_beyond_end
+# =>
+# =>   × Inserted at wrong row number (should be 3).
+# =>    ╭─[repl_entry #1:1:18]
+# =>  1 │ [a b c] | insert 5 x
+# =>    ·                  ┬
+# =>    ·                  ╰── can't insert at index (the next available index is 3)
+# =>    ╰────
+[a b c] | update 5 x
+# => Error: nu::shell::access_beyond_end
+# =>
+# =>   × Row number too large (max: 2).
+# =>    ╭─[repl_entry #1:1:18]
+# =>  1 │ [a b c] | update 5 x
+# =>    ·                  ┬
+# =>    ·                  ╰── index too large (max: 2)
+# =>    ╰────
+```
+
+### Nested paths
+
+`insert` and `upsert` create whatever the rest of a nested path needs: a record for a column name, and a list for an index. This works on records as well as tables:
+
+```nu
+{name: nu} | upsert info.lang rust | to nuon
+# => {name: nu, info: {lang: rust}}
+{} | insert a.0.b 1 | to nuon
+# => {a: [[b]; [1]]}
+```
+
+`update` follows the path and fails at the first part that is missing.
+
+### Matrices
+
+`update` also accepts a `matrix` value (from [`into matrix`](/commands/docs/into_matrix.md)). The path is a row index, or a row and a column such as `0.1`, and the result is still a matrix. The new values have to convert to floats:
+
+```nu
+[[1 2] [3 4]] | into matrix | update 0.1 9 | matrix into-nu | to nuon
+# => [[1.0, 9.0], [3.0, 4.0]]
+```
+
+## Moving and renaming columns
+
+[`move`](/commands/docs/move.md) takes one or more column names and exactly one location: `--after <column>`, `--before <column>`, `--first` or `--last`. It works on a record or on every row of a table. The moved columns end up in the order you list them, not their original order:
+
+```nu
+{a: 1, b: 2, c: 3, d: 4} | move d --first | to nuon
+# => {d: 4, a: 1, b: 2, c: 3}
+{a: 1, b: 2, c: 3, d: 4} | move d a --after b | to nuon
+# => {b: 2, d: 4, a: 1, c: 3}
+```
+
+A column that doesn't exist, as a column to move or as the `--after`/`--before` target, is an error (`Cannot move columns`, `column does not exist`). So is leaving out the location, giving more than one, or moving a column relative to itself.
+
+[`rename`](/commands/docs/rename.md) has three forms:
+
+- New names as arguments rename the columns by position. With fewer names than columns, only the leading columns are renamed. Extra names are ignored.
+- `--column {old: new}` (`-c`) renames by name. A name that isn't in the input is an error.
+- `--block` (`-b`) runs a closure on every column name and uses its result. The name is the closure's argument and its `$in`.
+
+```nu
+{a: 1, b: 2, c: 3} | rename x y | to nuon
+# => {x: 1, y: 2, c: 3}
+{a: 1, b: 2, c: 3} | rename --column {b: B} | to nuon
+# => {a: 1, B: 2, c: 3}
+{first_name: a, last_name: b} | rename --block { str replace _name "" } | to nuon
+# => {first: a, last: b}
+```
+
+## Combining tables
+
+### `merge`
+
+[`merge`](/commands/docs/merge.md) combines its input with its argument column by column. The input and the argument must both be records, or both be tables. Mixing them is an error:
+
+```nu
+{a: 1} | merge [[b]; [2]]
+# => Error: nu::shell::only_supports_this_input_type
+# =>
+# =>   × Input type not supported.
+# =>    ╭─[repl_entry #1:1:1]
+# =>  1 │ {a: 1} | merge [[b]; [2]]
+# =>    · ───┬──   ──┬──
+# =>    ·    │       ╰── only input and argument to be both record or both table input data is supported
+# =>    ·    ╰── input type: record<a: int> and table<b: int>
+# =>    ╰────
+```
+
+When both have a column, the argument's value wins. The replacement is shallow, so a nested record in the argument replaces the whole nested record. Use [`merge deep`](/commands/docs/merge_deep.md) to merge nested records field by field:
+
+```nu
+{a: 1, b: 2} | merge {b: 20, c: 30} | to nuon
+# => {a: 1, b: 20, c: 30}
+{server: {host: a, port: 1}} | merge {server: {port: 2}} | to nuon
+# => {server: {port: 2}}
+{server: {host: a, port: 1}} | merge deep {server: {port: 2}} | to nuon
+# => {server: {host: a, port: 2}}
+```
+
+Tables are merged row by row. See [Merging tables of different size](/cookbook/tables.md#merging-tables-of-different-size) when the row counts differ.
+
+### `join`
+
+[`join`](/commands/docs/join.md) matches rows by the values in a column. When the right table has a column with the same name as one in the left table, the right one gets a `_` suffix. A join column that both tables share appears once and isn't renamed.
+
+`--prefix` (`-p`) and `--suffix` (`-s`) work differently. They add their text to every column of the right table except a shared join column, whether its name clashes or not, and the default `_` isn't added:
+
+```nu
+let users = [[id name]; [1 alice] [2 bob]]
+let devices = [[id name os]; [1 laptop linux] [1 phone android]]
+$users | join $devices id
+# => ╭───┬────┬───────┬────────┬─────────╮
+# => │ # │ id │ name  │ name_  │   os    │
+# => ├───┼────┼───────┼────────┼─────────┤
+# => │ 0 │  1 │ alice │ laptop │ linux   │
+# => │ 1 │  1 │ alice │ phone  │ android │
+# => ╰───┴────┴───────┴────────┴─────────╯
+$users | join --prefix device_ $devices id
+# => ╭───┬────┬───────┬─────────────┬───────────╮
+# => │ # │ id │ name  │ device_name │ device_os │
+# => ├───┼────┼───────┼─────────────┼───────────┤
+# => │ 0 │  1 │ alice │ laptop      │ linux     │
+# => │ 1 │  1 │ alice │ phone       │ android   │
+# => ╰───┴────┴───────┴─────────────┴───────────╯
+```
+
+If either table has rows but none of them has its join column, `join` reports `column_not_found`, even with `--left`, `--right`, `--outer` or `--anti`. This catches a misspelled column name. An empty table passes the check, and rows that lack the column in a table where other rows have it join as non-matching rows. When a table can legitimately lack the column, add it with `default null <column>` first:
+
+```nu
+[[id name]; [1 alice] [2 bob]] | join --left [{note: x}] id
+# => Error: nu::shell::column_not_found
+# =>
+# =>   × Cannot find column 'id'
+# =>    ╭─[repl_entry #1:1:58]
+# =>  1 │ [[id name]; [1 alice] [2 bob]] | join --left [{note: x}] id
+# =>    ·                                                          ─┬
+# =>    ·                                                           ╰── no row in the right table has this column
+# =>    ╰────
+# =>   help: Check the column name. To join a table whose rows lack the column, add
+# =>         it first, for example with `default null <column>`
+[[id name]; [1 alice] [2 bob]] | join --left ([{note: x}] | default null id) id
+# => ╭───┬────┬───────┬──────╮
+# => │ # │ id │ name  │ note │
+# => ├───┼────┼───────┼──────┤
+# => │ 0 │  1 │ alice │      │
+# => │ 1 │  2 │ bob   │      │
+# => ╰───┴────┴───────┴──────╯
+```
+
+## Reshaping
+
+### `flatten`
+
+[`flatten`](/commands/docs/flatten.md) works one level at a time:
+
+- A nested list in a list is spliced into the outer list.
+- A column that holds a list expands into one row per element, repeating the other columns. Only one such column can be expanded per call. With several, `flatten` fails with `can only flatten one inner list at a time`, so name the column to expand: `flatten tags`.
+- A column that holds a record has its fields lifted into the row, and the parent column goes away.
+- A column that holds a table expands into one row per inner row, but each inner row stays a record. `--all` (`-a`) also lifts the fields of those inner records, so a nested table becomes plain columns.
+
+Column-name arguments limit flattening to those columns. A record input is treated as a one-row table, so the result is always a table:
+
+```nu
+{name: nu, tags: [shell rust]} | flatten
+# => ╭───┬──────┬───────╮
+# => │ # │ name │ tags  │
+# => ├───┼──────┼───────┤
+# => │ 0 │ nu   │ shell │
+# => │ 1 │ nu   │ rust  │
+# => ╰───┴──────┴───────╯
+[[origin people]; [Ecuador [[name meal]; [Andres arepa] [Maria empanada]]]] | flatten --all
+# => ╭───┬─────────┬────────┬──────────╮
+# => │ # │ origin  │  name  │   meal   │
+# => ├───┼─────────┼────────┼──────────┤
+# => │ 0 │ Ecuador │ Andres │ arepa    │
+# => │ 1 │ Ecuador │ Maria  │ empanada │
+# => ╰───┴─────────┴────────┴──────────╯
+```
+
+When a lifted field has the same name as a column that stays, it is renamed to `<parent>_<field>`. If that new name is also taken, `flatten` stops with `column_defined_twice`:
+
+```nu
+{a: {b: 1, c: 2}, c: 3} | flatten
+# => ╭───┬───┬─────┬───╮
+# => │ # │ b │ a_c │ c │
+# => ├───┼───┼─────┼───┤
+# => │ 0 │ 1 │   2 │ 3 │
+# => ╰───┴───┴─────┴───╯
+{a: {b: 1}, b: 2, a_b: 3} | flatten
+# => Error: nu::shell::column_defined_twice
+# =>
+# =>   × Record field or table column used twice: a_b
+# =>    ╭─[repl_entry #1:1:9]
+# =>  1 │ {a: {b: 1}, b: 2, a_b: 3} | flatten
+# =>    ·         ┬              ┬
+# =>    ·         │              ╰── field redefined here
+# =>    ·         ╰── field first defined here
+# =>    ╰────
+```
+
+### `wrap`
+
+[`wrap`](/commands/docs/wrap.md) puts each item of a list or range into a one-column table. A single value that isn't a list becomes a record with one field:
+
+```nu
+1..3 | wrap n
+# => ╭───┬───╮
+# => │ # │ n │
+# => ├───┼───┤
+# => │ 0 │ 1 │
+# => │ 1 │ 2 │
+# => │ 2 │ 3 │
+# => ╰───┴───╯
+42 | wrap answer
+# => ╭────────┬────╮
+# => │ answer │ 42 │
+# => ╰────────┴────╯
+```
+
+### `transpose`
+
+[`transpose`](/commands/docs/transpose.md) swaps rows and columns. The column names of the input become the first column of the output, and the new columns are called `column0`, `column1`, and so on. Name arguments replace those names in order, and any columns left over keep the default names:
+
+```nu
+{a: 1, b: 2} | transpose
+# => ╭───┬─────────┬─────────╮
+# => │ # │ column0 │ column1 │
+# => ├───┼─────────┼─────────┤
+# => │ 0 │ a       │       1 │
+# => │ 1 │ b       │       2 │
+# => ╰───┴─────────┴─────────╯
+```
+
+The flags control what happens to the names:
+
+- `--ignore-titles` (`-i`) drops the input's column names instead of turning them into a column.
+- `--header-row` (`-r`) uses the values in the first input column as the new column names.
+- `--as-record` (`-d`) returns a record instead of a table when the result has exactly one row. Together with `-r`, this turns a key/value table back into a record.
+- With `-r`, a name that appears more than once keeps its first value. `--keep-last` (`-l`) keeps the last value instead, and `--keep-all` (`-a`) keeps every value in a list.
+
+```nu
+[[key value]; [name nu] [lang rust]] | transpose --header-row --as-record
+# => ╭──────┬──────╮
+# => │ name │ nu   │
+# => │ lang │ rust │
+# => ╰──────┴──────╯
+[[key value]; [tag a] [tag b]] | transpose -r -d --keep-all | to nuon
+# => {tag: [a, b]}
+```

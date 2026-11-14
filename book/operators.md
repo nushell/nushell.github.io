@@ -189,6 +189,8 @@ If you attempt to perform an operation on non-compatible data types, you will be
 
 The rules might sometimes feel a bit strict, but on the other hand there should be less unexpected side effects.
 
+`null` is a common source of these errors, for example from an optional cell path like `$row.size?`. Comparisons with `<`, `<=`, `>` and `>=` return `null`, `==` and `!=` return a `bool`, and most other operators fail. The [row conditions](/lang-guide/chapters/filters/where-filter.md#row-conditions) section of the `where` guide lists the rules for each operator.
+
 For example, `++` only concatenates two values of the same kind: two lists, two strings, or two binary values. To add a single item to a list, wrap the item in a list or use [`append`](/commands/docs/append.md):
 
 ```nu

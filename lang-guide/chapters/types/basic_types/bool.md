@@ -21,6 +21,9 @@ The following commands take a closure (or a row condition) as their main argumen
 
 - `where`
 - `any`, `all`, `skip until`, `skip while`, `take until`, `take while`
+- `record where`, which tests each field of a record
+
+[`chunk-by`](/commands/docs/chunk-by.md) also accepts a row condition, but its closure doesn't have to return a boolean. It starts a new chunk whenever the returned value changes.
 
 ## Common operators that can be used with `bool`
 

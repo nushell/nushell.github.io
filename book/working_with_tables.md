@@ -273,6 +273,19 @@ Or we could use the [`reduce`](/commands/docs/reduce.md) command to dynamically 
 # => ╰───┴───┴───┴───┴───┴───┴───╯
 ```
 
+When both tables have a column with the same name, the values from the argument replace the ones from the input:
+
+```nu
+$first | merge [[b c]; [20 30]]
+# => ╭───┬───┬────┬────╮
+# => │ # │ a │ b  │ c  │
+# => ├───┼───┼────┼────┤
+# => │ 0 │ 1 │ 20 │ 30 │
+# => ╰───┴───┴────┴────╯
+```
+
+`merge` needs two tables or two records. Merging a record into a table is an error.
+
 ### Joining Tables
 
 `merge` lines rows up by position. To combine rows by matching values in a column instead, as a database join does, use [`join`](/commands/docs/join.md). It takes the right-hand table, the join column of the left table, and, if its name is different, the join column of the right table:
@@ -299,6 +312,8 @@ $orders | join --anti $shipped id order_id
 # => │ 0 │  2 │ bob      │
 # => ╰───┴────┴──────────╯
 ```
+
+If the right table has a column with the same name as one in the left table, `join` renames the right one with a `_` suffix, so `name` becomes `name_`. With `--prefix` or `--suffix`, your text is added to every column from the right table instead, except a join column that both tables share. A misspelled join column is reported as `column_not_found` rather than giving an empty result. See [`join`](/lang-guide/chapters/filters/changing_data.md#join) in the Language Guide for these rules and the `default null` workaround for tables that lack the column.
 
 ### Adding a new Column
 
@@ -375,6 +390,8 @@ open rustfmt.toml | update edition 2021
 
 You can also use the [`upsert`](/commands/docs/upsert.md) command to insert or update depending on whether the column already exists.
 
+`insert` fails if the column already exists, and `update` fails if it doesn't. All three accept a closure in place of the value. What the closure receives differs between them; see [`insert`, `update` and `upsert`](/lang-guide/chapters/filters/changing_data.md#insert-update-and-upsert) in the Language Guide.
+
 ### Moving Columns
 
 You can use [`move`](/commands/docs/move.md) to move columns in the table. For example, if we wanted to move the "name" column from [`ls`](/commands/docs/ls.md) after the "size" column, we could do:
@@ -392,6 +409,8 @@ ls | move name --after size | first 5
 # => ╰───┴──────┴─────────┴───────────────┴────────────╯
 ```
 
+Instead of `--after`, you can give `--before <column>`, `--first` or `--last`. `move` takes several columns at once, and they end up in the order you list them, so `ls | move size modified --first` puts `size` first and `modified` second. A column that doesn't exist is an error.
+
 ### Renaming Columns
 
 You can also [`rename`](/commands/docs/rename.md) columns in a table by passing it through the rename command. If we wanted to run [`ls`](/commands/docs/ls.md) and rename the columns, we can use this example:
@@ -407,6 +426,13 @@ ls | rename filename filetype filesize date | first 5
 # => │ 3 │ parse.rs      │ file     │  49.8 kB │ a day ago  │
 # => │ 4 │ path.rs       │ file     │   2.1 kB │ 5 days ago │
 # => ╰───┴───────────────┴──────────┴──────────┴────────────╯
+```
+
+The new names apply to the columns in order. With fewer names than columns, the remaining columns keep their names, and extra names are ignored. To rename one column without listing the ones before it, use `--column` with a record of old and new names, and to compute every new name from the old one, use `--block` with a closure:
+
+```nu
+ls | rename --column {name: filename}
+ls | rename --block { str uppercase }
 ```
 
 ### Rejecting/Deleting Columns
@@ -619,9 +645,46 @@ This can be useful when you need to store the rendered view of structured data a
 ls | table | ansi strip
 ```
 
+[`ansi strip`](/commands/docs/ansi_strip.md) also works on data that hasn't been rendered. A list of strings is cleaned item by item. For a table or record, name the columns to clean as cell paths:
+
+```nu
+[[name status]; [build $"(ansi green)ok(ansi reset)"]] | ansi strip status | to nuon
+# => [[name, status]; [build, ok]]
+```
+
 The `table` command also has multiple options for _changing_ the rendering of a table, such as:
 
 - `-e` to expand data that would normally be collapsed when rendering. Compare `scope modules | table` to `scope modules | table -e`.
-- `-i false` to hide the `index`/`#` column
+- `-e -d 1` (`--expand-deep 1`) to expand only one level of nesting and summarize anything deeper. `-d` has no effect without `-e`.
+- `-e --flatten` to show a list of simple values on one line inside its cell, separated by spaces or by the string given to `--flatten-separator`. Like `-d`, it needs `-e`.
+- `-c` (`--collapse`) to draw nested data as merged cells instead of nested tables. This view has no `#` column.
+- `-i false` to hide the `index`/`#` column, or `-i 1` to number the rows starting at `1`.
 - `-a 5` to abbreviate the table to just the first and last 5 entries
-- And more
+- `-t light` (`--theme`) to draw this one table with a different border style than [`$env.config.table.mode`](/book/coloring_and_theming.md#table-borders). `table --list` shows the theme names.
+- `-w 80` (`--width`) to fit the table into 80 terminal columns instead of the terminal's width.
+
+```nu
+let t = [[name tags]; [nu [shell rust]] [reedline [editor]]]
+$t | table --theme markdown --index 1
+# => | # |   name   |      tags      |
+# => |---|----------|----------------|
+# => | 1 | nu       | [list 2 items] |
+# => | 2 | reedline | [list 1 item]  |
+$t | table -e --flatten --flatten-separator ", "
+# => ╭───┬──────────┬─────────────╮
+# => │ # │   name   │    tags     │
+# => ├───┼──────────┼─────────────┤
+# => │ 0 │ nu       │ shell, rust │
+# => │ 1 │ reedline │ editor      │
+# => ╰───┴──────────┴─────────────╯
+$t | table --collapse
+# => ╭──────────┬────────╮
+# => │ name     │ tags   │
+# => ├──────────┼────────┤
+# => │ nu       │ shell  │
+# => │          ├────────┤
+# => │          │ rust   │
+# => ├──────────┼────────┤
+# => │ reedline │ editor │
+# => ╰──────────┴────────╯
+```

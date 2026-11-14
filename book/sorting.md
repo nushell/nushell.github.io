@@ -80,6 +80,8 @@ To instead sort in order of values, use the `-v` flag:
 # => ╰─────┴────────╯
 ```
 
+`sort-by` doesn't take a record, even though its help lists record input. It fails with `only list, binary, range, or byte stream input data is supported`. To sort the fields of a record by anything other than the key or the value, turn it into a table first with `transpose key value`.
+
 ### Tables
 
 Table rows are sorted by comparing rows by the columns in order. If two rows have equal values in their first column, they are sorted by their second column. This repeats until the rows are sorted different or all columns are equal.
@@ -281,6 +283,21 @@ $queue | sort-by -c $my_sort
 
 ## Special sorts
 
+### Reverse sort
+
+`sort` and `sort-by` both take `--reverse` (`-r`). It reverses the whole sorted result, so `null` values come first instead of last, and items that compare equal come out in the opposite of their input order. For a record, `sort -r` reverses the key order, and `sort -v -r` the value order. `-r` also combines with `sort-by --custom`.
+
+```nu
+[[name size]; [a 1] [b 2] [c 1]] | sort-by size -r
+# => ╭───┬──────┬──────╮
+# => │ # │ name │ size │
+# => ├───┼──────┼──────┤
+# => │ 0 │ b    │    2 │
+# => │ 1 │ c    │    1 │
+# => │ 2 │ a    │    1 │
+# => ╰───┴──────┴──────╯
+```
+
 ### Case insensitive sort
 
 When using case insensitive sort, strings (and globs) which are the same except for different casing will be considered equal for sorting, while other types remain unaffected:
@@ -350,6 +367,21 @@ $data | sort -n
 # => │ 9 │ 10   │
 # => ╰───┴──────╯
 ```
+
+`sort-by` takes the same `--ignore-case` (`-i`) and `--natural` (`-n`) flags and applies them to the values it sorts by, whether they come from a cell path or a key closure. They can be combined:
+
+```nu
+[[file]; [img10.png] [Img9.png] [img1.png]] | sort-by file -n -i
+# => ╭───┬───────────╮
+# => │ # │   file    │
+# => ├───┼───────────┤
+# => │ 0 │ img1.png  │
+# => │ 1 │ Img9.png  │
+# => │ 2 │ img10.png │
+# => ╰───┴───────────╯
+```
+
+Without `-i`, `Img9.png` sorts first, because uppercase letters sort before lowercase ones.
 
 ### Sorting with mixed types
 

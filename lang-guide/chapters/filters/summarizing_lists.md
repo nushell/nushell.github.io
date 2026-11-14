@@ -1,0 +1,187 @@
+# Summarizing and comparing lists
+
+These commands turn a list or table into a single answer (a `bool`, a count, a total), remove duplicates, compare two lists as sets, or split a list into groups. [Working with Lists](/book/working_with_lists.md) in the Book introduces most of them; this page gives the rules and edge cases.
+
+## `all` and `any`
+
+[`all`](/commands/docs/all.md) checks that every item matches a condition, and [`any`](/commands/docs/any.md) checks that at least one does. Both take a closure or a row condition.
+
+- For empty input, `all` returns `true` and `any` returns `false`.
+- They stop at the first item that settles the answer. For `all` that is the first item that doesn't match, and for `any` the first one that does. Later items are never checked, so side effects in the closure don't run for them.
+- Only `true` counts as a match. A result that isn't a `bool`, such as a string or `null`, counts as `false` without an error.
+
+```nu
+[1 2 3] | all {|x| print $"checking ($x)"; $x < 2 }
+# => checking 1
+# => checking 2
+# => false
+[a b] | all {|x| "yes" }
+# => false
+```
+
+## `length` and `is-empty`
+
+[`length`](/commands/docs/length.md) counts the items of a list or the rows of a table. For a `binary` value or a byte stream, it counts bytes. `null` has length `0`. Any other input is a type error. For a record, count its fields with `columns | length`, and for a string, use [`str length`](/commands/docs/str_length.md):
+
+```nu
+0x[01 02 03] | length
+# => 3
+null | length
+# => 0
+{a: 1, b: 2} | columns | length
+# => 2
+```
+
+[`is-empty`](/commands/docs/is-empty.md) returns `true` for `null`, an empty string, list, record or binary value. Zero and `false` are not empty. For a stream, `is-empty` only reads the first item, so a long or endless stream isn't consumed:
+
+```nu
+[1 2 3] | each {|x| print $"made ($x)"; $x } | is-empty
+# => made 1
+# => false
+```
+
+Given column names, `is-empty` checks those columns of a record or table instead, and the rule changes. Only `null` counts as empty, not `""`. The result is `true` only when every named column is `null` in every row. A column that doesn't exist is a `column_not_found` error:
+
+```nu
+[[a b]; [null x] [null ""]] | is-empty a
+# => true
+[[a b]; [null x] [null ""]] | is-empty a b
+# => false
+```
+
+## `reduce`
+
+[`reduce`](/commands/docs/reduce.md) combines the items into one value. The closure gets the current item and the accumulator, in that order, and returns the new accumulator. The accumulator is also passed as `$in`. A range works as input like a list.
+
+Without `--fold`, the first item is the starting accumulator, so the closure first runs on the second item. A one-item list returns that item without running the closure, and an empty list is an error. With `--fold`, the closure runs on every item, and an empty list returns the fold value:
+
+```nu
+[1 2 3] | reduce {|it, acc| print $"acc=($acc) it=($it)"; $acc + $it }
+# => acc=1 it=2
+# => acc=3 it=3
+# => 6
+[] | reduce {|it, acc| $acc + $it }
+# => Error: nu::shell::error
+# =>
+# =>   × Expected input
+# =>    ╭─[repl_entry #1:1:6]
+# =>  1 │ [] | reduce {|it, acc| $acc + $it }
+# =>    ·      ───┬──
+# =>    ·         ╰── needs input
+# =>    ╰────
+[] | reduce --fold 0 {|it, acc| $acc + $it }
+# => 0
+[1 2 3] | reduce --fold 10 {|it| $in + $it }
+# => 16
+```
+
+## `math sum` and `math avg`
+
+[`math sum`](/commands/docs/math_sum.md) and [`math avg`](/commands/docs/math_avg.md) work on a list of numbers, durations or filesizes, and on a range. The result has the type of the items, except that the average of integers is a `float`:
+
+```nu
+[1sec 90sec] | math sum
+# => 1min 31sec
+[1kb 2kb 4kb] | math avg
+# => 2.3 kB
+1..4 | math avg
+# => 2.5
+```
+
+A table gives a record with one result per column, and a record gives one result per field. A field that holds a list gets the total or average of that list.
+
+Every column has to hold numbers, durations or filesizes, so a table with a text column fails. Name the columns to use as arguments. These are cell paths, so a nested path such as `a.b` works too:
+
+```nu
+[[name size]; [a 1kb] [b 3kb]] | math sum
+# => Error: nu::shell::only_supports_this_input_type
+# =>
+# =>   × Input type not supported.
+# =>    ╭─[repl_entry #1:1:16]
+# =>  1 │ [[name size]; [a 1kb] [b 3kb]] | math sum
+# =>    ·                ┬                 ────┬───
+# =>    ·                │                     ╰── only int, float, filesize, or duration input data is supported
+# =>    ·                ╰── input type: string
+# =>    ╰────
+[[name size]; [a 1kb] [b 3kb]] | math sum size
+# => ╭──────┬────────╮
+# => │ size │ 4.0 kB │
+# => ╰──────┴────────╯
+```
+
+Both commands also fail on an empty list (`Empty input`) and on a list that mixes kinds of values, such as numbers and durations. Integers and floats mix fine.
+
+## `uniq`
+
+[`uniq`](/commands/docs/uniq.md) keeps the first of each group of equal values. It compares whole values, so table rows are compared as whole records. Two records with the same fields in a different order count as equal, while `1`, `1.0` and `"1"` are three different values:
+
+```nu
+[{a: 1, b: 2} {b: 2, a: 1} {a: 1, b: 3}] | uniq
+# => ╭───┬───┬───╮
+# => │ # │ a │ b │
+# => ├───┼───┼───┤
+# => │ 0 │ 1 │ 2 │
+# => │ 1 │ 1 │ 3 │
+# => ╰───┴───┴───╯
+```
+
+The flags change what comes back:
+
+- `--count` (`-c`) returns a table of each distinct `value` and its `count`.
+- `--repeated` (`-d`) returns only the values that appear more than once, and `--unique` (`-u`) only those that appear exactly once.
+- `--ignore-case` (`-i`) compares strings without regard to case, and keeps the first spelling it saw.
+- `--keep-last` (`-l`) keeps the last value of each group, in the position of the first. Without `--ignore-case` the values in a group are equal, so you rarely see a difference unless you combine the two.
+
+```nu
+[a b a c a b] | uniq --count
+# => ╭───┬───────┬───────╮
+# => │ # │ value │ count │
+# => ├───┼───────┼───────┤
+# => │ 0 │ a     │     3 │
+# => │ 1 │ b     │     2 │
+# => │ 2 │ c     │     1 │
+# => ╰───┴───────┴───────╯
+[a b a c a b] | uniq --unique | to nuon
+# => [c]
+[Hello HELLO hello] | uniq --ignore-case --keep-last | to nuon
+# => [hello]
+```
+
+To compare rows by some columns only, use [`uniq-by`](/commands/docs/uniq-by.md). On a [table from a SQLite file](./selecting_data.md#tables-from-a-sqlite-file), a plain `uniq` runs as `SELECT DISTINCT`.
+
+## `union`, `intersect` and `difference`
+
+[`union`](/commands/docs/union.md), [`intersect`](/commands/docs/intersect.md) and [`difference`](/commands/docs/difference.md) compare values the same way `uniq` does. A table row matches only when the whole row matches, in any field order. Values of different types never match, so `[1 2] | union [1.0 2.0]` keeps all four. The results have no duplicates and keep the order in which items first appear:
+
+```nu
+let old = [[name ver]; [nu 1] [rl 2]]
+let new = [[name ver]; [nu 1] [rl 3]]
+$new | difference $old
+# => ╭───┬──────┬─────╮
+# => │ # │ name │ ver │
+# => ├───┼──────┼─────┤
+# => │ 0 │ rl   │   3 │
+# => ╰───┴──────┴─────╯
+```
+
+## `chunks`, `combinations` and `permutations`
+
+These return a list of lists. For a table, each inner list is itself a table.
+
+[`chunks n`](/commands/docs/chunks.md) splits its input into groups of `n` items. The last group is shorter when the input doesn't divide evenly. For a `binary` value or a byte stream, the groups are `binary` values of `n` bytes, and `n` can be a filesize such as `8kib`. A filesize with any other input is an error, and so is a size of zero or less:
+
+```nu
+[1 2 3 4 5] | chunks 2 | to nuon
+# => [[1, 2], [3, 4], [5]]
+0x[01 02 03 04 05] | chunks 2b | to nuon
+# => [0x[0102], 0x[0304], 0x[05]]
+```
+
+[`combinations k`](/commands/docs/combinations.md) returns every way to choose `k` items, keeping their input order. If `k` is larger than the input, there are none, and the result is an empty list.
+
+[`permutations`](/commands/docs/permutations.md) returns every ordering. An empty list has no permutations. Items are treated as distinct by position, so a list with repeated items gives repeated permutations; pipe the result through `uniq` to remove them:
+
+```nu
+[a a b] | permutations | each { str join } | to nuon
+# => [aab, aab, baa, aba, aba, baa]
+```

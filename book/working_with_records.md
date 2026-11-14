@@ -164,7 +164,7 @@ It also takes a closure, which receives the key and the value as arguments. With
 # => ╰────────┴─────╯
 ```
 
-[`record each`](/commands/docs/record_each.md) builds a new record from the records its closure returns, so it can change keys and values in one pass:
+[`record each`](/commands/docs/record_each.md) builds a new record from the records its closure returns, so it can change keys and values in one pass. The closure can also return a `[key, value]` list, or `null` to leave the field out:
 
 ```nu
 { "apples": 543, "bananas": 411, "oranges": 0 }
@@ -213,6 +213,8 @@ Because a table is a list of records, the same record of closures converts a col
 ```
 
 A closure for a field that the input doesn't have is ignored, unless you pass `--strict`, which makes it an error.
+
+The Language Guide's [`record` commands](/lang-guide/chapters/filters/record_commands.md) page has the exact rules for all four commands, including the order in which `record walk --containers` visits values and how `record each` handles a repeated key.
 
 ## Accessing Record Values
 
