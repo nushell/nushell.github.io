@@ -97,6 +97,21 @@ def outer [] { def helper [] { 'helper' }; helper }; outer
 # => helper
 ```
 
+An alias used above its definition isn't found, so Nushell runs the name as an external command:
+
+```nu
+ll; alias ll = ls -l
+# => Error: nu::shell::external_command
+# =>
+# =>   × External command failed
+# =>    ╭─[repl_entry #1:1:1]
+# =>  1 │ ll; alias ll = ls -l
+# =>    · ─┬
+# =>    ·  ╰── Command `ll` not found
+# =>    ╰────
+# =>   help: Did you mean `all`?
+```
+
 ## Environment Scope
 
 Changes to `$env`, including the current directory changed with `cd`, stay visible after `if`/`else`, `match`, `for`, `while`, `loop` and `try` (including its `catch` and `finally` parts). They are discarded when a closure or custom command returns, unless the closure is run with `do --env` or the command is defined with `def --env`.
