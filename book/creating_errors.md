@@ -96,7 +96,54 @@ check-range 10 1
 # =>   help: swap the two arguments
 ```
 
-Run `help error make` to see the other fields an error can have, such as `code`, `url`, `inner`, and `src` (for labels that point into another file).
+`label` and `labels` can be used together. The single `label` is added after the ones in `labels`, and all of them are shown.
+
+## Other error fields
+
+Besides `msg`, `label`, `labels` and `help`, the record can have these fields:
+
+- `code` replaces `nu::shell::error` in the first line of the message. Use it for an identifier that scripts can check with `$err.details.code`.
+- `url` is shown after the code. With colors on, Nushell prints it as `(link)`, a terminal hyperlink to the URL. With colors off, it prints the URL itself.
+- `inner` is a list of error records, which are printed after the main error. See [Chaining Errors](#chaining-errors).
+- `src` makes the labels point into other text instead of into Nushell code. Give it a `name` and the `text` itself, or a `path` to read the text from a file. The `span` offsets of the labels then count bytes in that text, and the code is always `nu::shell::outside`.
+
+```nu
+error make {msg: "invalid port", code: "my_tool::bad_port", url: "https://example.com/bad-port"}
+# => Error: my_tool::bad_port (link)
+# =>
+# =>   × invalid port
+# =>    ╭─[repl_entry #1:1:12]
+# =>  1 │ error make {msg: "invalid port", code: "my_tool::bad_port", url: "https://example.com/bad-port"}
+# =>    ·            ─────────────────────────────────────────────────────────────────────────────────────
+# =>    ╰────
+```
+
+```nu
+error make {
+    msg: "invalid port"
+    src: {name: "config.toml", text: "port = abc"}
+    labels: [{text: "not a number", span: {start: 7, end: 10}}]
+}
+# => Error: nu::shell::outside
+# =>
+# =>   × invalid port
+# =>    ╭─[config.toml:1:8]
+# =>  1 │ port = abc
+# =>    ·        ─┬─
+# =>    ·         ╰── not a number
+# =>    ╰────
+```
+
+Without any label, the error underlines the `error make` call itself. `error make --unspanned` (`-u`) leaves out the labels and the code excerpt, which suits errors that aren't about a place in the code, such as a missing file:
+
+```nu
+error make --unspanned "settings.toml not found"
+# => Error: nu::shell::error
+# =>
+# =>   × settings.toml not found
+```
+
+`error make` with no argument at all raises an error whose message is `originates from here`.
 
 ## Catching Errors
 
@@ -118,6 +165,19 @@ try { check-range 10 1 } catch {|err| $err.details | reject labels inner }
 # => │ help │ swap the two arguments │
 # => ╰──────┴────────────────────────╯
 ```
+
+`code` is empty here because `check-range` gives no `code`. The header still shows `nu::shell::error`, which is what Nushell prints for an error without one. With a string, as in `error make "message"`, `details.code` is `nu::shell::error`.
+
+Each item in `details.labels` is a record with the label's `text`, its `span` (the same `{start, end}` record that `error make` takes), and a `location` record. `location` has the `file` the label points into (or the name of the prompt entry) and the `start` and `end` byte offsets within it:
+
+```nu
+try { 1 / 0 } catch {|err| $err.details.labels.0.location.start }
+# => 8
+```
+
+The label of a division by zero points at the `/`, the ninth character of the line, so its offset is 8.
+
+`details.inner` is a list of records with the same fields as `details`, one for each inner error.
 
 ::: note
 In Nushell 0.113 and earlier, this information was available as a JSON string in `$err.json`. Use `$err.details` instead.
@@ -149,6 +209,31 @@ try { check-range 10 1 } catch { error make "could not build the range" }
 ```
 
 After any other statement in the block, such as a `print`, the caught error is no longer the input, and `error make` reports only the new error. To keep the chain, pipe the error in with `$err | error make "..."`, or pass it with `inner`, as in `catch {|err| print 'cleaning up'; error make {msg: 'could not build the range', inner: [$err]} }`.
+
+Piping works anywhere, not only in `catch`. An error record kept in a variable can be chained later:
+
+```nu
+let err = try { 1 / 0 } catch {|e| $e }
+print "still running"
+$err | error make "could not compute the ratio"
+# => still running
+# => Error: nu::shell::error
+# =>
+# =>   × could not compute the ratio
+# =>    ╭─[repl_entry #3:1:8]
+# =>  1 │ $err | error make "could not compute the ratio"
+# =>    ·        ──────────
+# =>    ╰────
+# =>
+# => Error: nu::shell::division_by_zero
+# =>
+# =>   × Division by zero.
+# =>    ╭─[repl_entry #1:1:19]
+# =>  1 │ let err = try { 1 / 0 } catch {|e| $e }
+# =>    ·                   ┬
+# =>    ·                   ╰── division by zero
+# =>    ╰────
+```
 
 ## Re-raising a caught error
 

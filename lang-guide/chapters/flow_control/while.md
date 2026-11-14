@@ -78,7 +78,7 @@ $x
    # => 4
    ```
 
-1. `while` does not accept pipeline input. To iterate over a list or table, use [`for`](/commands/docs/for.md) or a filter such as [`each`](/commands/docs/each.md). To consume a list only while a condition holds, [`take while`](/commands/docs/take_while.md) is usually simpler than a `while` loop:
+1. `while` does not accept pipeline input. To iterate over a list or table, use [`for`](./for.md) or a filter such as [`each`](/commands/docs/each.md). To consume a list only while a condition holds, [`take while`](/commands/docs/take_while.md) is usually simpler than a `while` loop:
 
    ```nu
    [1 3 5 6 7] | take while {|n| $n mod 2 == 1 }

@@ -63,6 +63,8 @@ if $x > 0 { 'positive' } else if $x == 0 { 'zero' } else { "negative" }
 
 When the first condition is `true` (`$x` is greater than zero) it will return `'positive'`, when the first condition is `false` and the next condition is `true` (`$x` equals zero) it will return `'zero'`, otherwise it will return `'negative'` (when `$x` is less than zero).
 
+The condition is a math expression, like the ones above. To use the result of a command or pipeline as the condition, wrap it in parentheses, as in `if ($files | is-empty) { ... }`. See the [Language Guide](/lang-guide/chapters/flow_control/if-else.md) for what happens without them.
+
 ::: warning
 `else` has to start on the same line as the `}` before it. A newline ends the `if` command, so Nushell runs the `if` by itself and then tries to run `else` as a separate command. The parser doesn't catch this. The script fails when it reaches the `else`, whichever branch the condition picked:
 
@@ -303,6 +305,8 @@ for x in [1 2 3] { $x * $x | print }
 # => 9
 ```
 
+A table gives one row at a time, as a record. Any other single value, including a record or a string, runs the block once with the whole value, and `null` runs it zero times. A stream, such as the output of `each` or a range like `1..` with no end, is consumed one item at a time as the loop runs. See the [Language Guide](/lang-guide/chapters/flow_control/for.md) for examples.
+
 The loop variable can have a type annotation, as in `for x: int in $numbers`. Nushell checks that the annotation names a real type, but it doesn't check the items against it, and it doesn't convert them. The variable gets the type of the items instead, so this loop runs without an error:
 
 ```nu
@@ -445,6 +449,30 @@ try { ^nonexisting }; print 'a'
 # =>   help: `nonexisting` is neither a Nushell built-in or a known external command
 ```
 
+An external command that exits with a non-zero code is an error as well, and so is one ended by a signal on Linux and macOS. `try` catches both, and the `exit_code` field of the error record holds the exit code, or the signal number made negative. See [the Language Guide](/lang-guide/chapters/flow_control/try-catch.md#language-notes) for the error codes.
+
+When such an error isn't caught, it stops the script like any other error, but Nushell doesn't always print a message for it. These settings control what you see:
+
+- [`$env.config.display_errors.exit_code`](/book/config_reference.md#display-errors) is `false` by default. A command that exits with a non-zero code then shows only what it wrote to stderr itself. A script can stop at such a command with no Nushell message at all. Its exit status is then the exit code of that command, which is also in `$env.LAST_EXIT_CODE` at the prompt. Set this to `true` to get a `nu::shell::non_zero_exit_code` error that points at the command.
+- `$env.config.display_errors.termination_signal` is `true` by default, so a command ended by a signal gets a `nu::shell::terminated_by_signal` error with a label like `terminated by SIGTERM (15)`. Set it to `false` to hide that message. The script still stops.
+
+A core dump (`nu::shell::core_dumped`) is always reported, and a command ended by `SIGPIPE` is never treated as a failure. Both settings change only what is printed. Either way, the error stops the script and `try` can catch it.
+
+```nu
+$env.config.display_errors.exit_code = true
+^false
+# => Error: nu::shell::non_zero_exit_code
+# =>
+# =>   × External command had a non-zero exit code
+# =>    ╭─[repl_entry #2:1:2]
+# =>  1 │ ^false
+# =>    ·  ──┬──
+# =>    ·    ╰── exited with code 1
+# =>    ╰────
+```
+
+`try` also catches an interrupt. If you press <kbd>Ctrl</kbd>+<kbd>C</kbd> while the `try` block runs Nushell code, the block stops with an `Operation interrupted` error. On Unix, an external command stopped by <kbd>Ctrl</kbd>+<kbd>C</kbd> fails with `External command was terminated by a signal` instead, and `try` handles that error the same way. Nushell clears the interrupt before `catch` runs, so `catch` and `finally` run to the end rather than being interrupted as well. See also [Background Jobs](./background_jobs.md#exit-behavior).
+
 #### `finally`
 
 A `finally` block can be added after `try` (with or without a `catch`). It always runs when the `try` expression is finished, whether the `try` block succeeded, an error was caught, or an error is still on its way up. This makes it a good place for cleanup code:
@@ -455,7 +483,7 @@ try { 1 / 0 } catch { 'caught' } finally { print 'cleaning up' }
 # => caught
 ```
 
-`finally` also runs when the code leaves the `try` or `catch` block early through `return`, `break`, `continue` or [`exit`](/commands/docs/exit.md). (Use `exit --abort` to exit without running it.)
+`finally` also runs when the code leaves the `try` or `catch` block early through `return`, `break`, `continue` or [`exit`](/commands/docs/exit.md). (Use `exit --abort` to exit without running it.) `catch` never runs for `exit`, so `try { exit 1 } catch { ... }` still ends the script with exit code 1.
 
 ```nu
 def get-answer [] {

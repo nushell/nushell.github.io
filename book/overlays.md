@@ -44,6 +44,24 @@ The module can be created by any of the three methods described in [Creating Mod
 - "inline" modules (used in this example)
 - file
 - directory
+
+For a file or directory, give its path to `overlay use`. The overlay is named after the file without its `.nu` extension, or after the directory. As with [`use`](modules/using_modules.md#module-path), a relative path is looked up from the current directory (or the directory of the file making the call) and then in `$NU_LIB_DIRS` and `$env.NU_LIB_DIRS`. For example, in a new shell, with a file `spam-file.nu` that contains `export def foo [] { "foo from file" }`:
+
+```nu
+overlay use ./spam-file.nu
+foo
+# => foo from file
+
+overlay list
+# => ╭───┬───────────┬────────╮
+# => │ # │   name    │ active │
+# => ├───┼───────────┼────────┤
+# => │ 0 │ zero      │ true   │
+# => │ 1 │ spam-file │ true   │
+# => ╰───┴───────────┴────────╯
+```
+
+From then on, the overlay is called `spam-file`, as in `overlay hide spam-file`.
 :::
 
 To create the overlay, call [`overlay use`](/commands/docs/overlay_use.md):
@@ -127,6 +145,8 @@ overlay list
 
 The last way to remove an overlay is to call [`overlay hide`](/commands/docs/overlay_hide.md) without an argument which will remove the last active overlay.
 
+The default `zero` overlay can't be hidden. `overlay hide zero` fails with `nu::parser::cant_hide_default_overlay`, and so does `overlay hide` without an argument when `zero` is the last active overlay. Naming an overlay that isn't active, or doesn't exist, fails with `nu::parser::active_overlay_not_found`.
+
 ## Overlays Are Recordable
 
 Any new definition (command, alias, environment variable) is recorded into the last active overlay:
@@ -195,6 +215,23 @@ overlay new scratchpad
 def eggs [] { "eggs" }
 ```
 
+If an overlay with that name already exists, `overlay new` brings it back with everything it recorded, like `overlay use`. With `--reload` (`-r`), it keeps the recorded definitions but drops the environment variables that exist only in that overlay:
+
+```nu
+overlay new scratchpad
+$env.SCRATCH = "set in scratchpad"
+def eggs [] { "eggs" }
+overlay hide scratchpad
+
+overlay new --reload scratchpad
+'SCRATCH' in $env
+# => false
+eggs
+# => eggs
+```
+
+Without `--reload`, `$env.SCRATCH` would be back as well.
+
 :::
 
 ## Prefixed Overlays
@@ -216,6 +253,23 @@ ham greet
 
 Note that this does not apply for environment variables.
 
+An overlay keeps the prefix setting it was first added with. Bringing it back with `overlay use` with `--prefix` when it was added without it, or the other way around, fails with `nu::parser::overlay_prefix_mismatch`:
+
+```nu
+overlay hide ham
+overlay use ham
+# => Error: nu::parser::overlay_prefix_mismatch
+# =>
+# =>   × Overlay prefix mismatch.
+# =>    ╭─[repl_entry #5:1:13]
+# =>  1 │ overlay use ham
+# =>    ·             ─┬─
+# =>    ·              ╰── already exists with a prefix
+# =>    ╰────
+# =>   help: Overlay ham already exists with a prefix. To add it again, do it with
+# =>         the --prefix flag.
+```
+
 ## Rename an Overlay
 
 You can change the name of the added overlay with the `as` keyword:
@@ -235,6 +289,8 @@ overlay hide breakfast
 ```
 
 This can be useful if you have a generic script name, such as virtualenv's `activate.nu` but you want a more descriptive name for your overlay.
+
+An overlay keeps the name it was first added under. Once `bacon` has been added as `breakfast`, bring it back with `overlay use breakfast`. An overlay also can't be added again under another name. After `overlay use spam` has added an overlay named `spam`, `overlay use spam as eggs` fails with `nu::parser::cant_add_overlay_help` ("Cannot add overlay as 'eggs' because it already exists under the name 'spam'"), whether `spam` is active or hidden.
 
 ## Preserving Definitions
 
@@ -279,6 +335,8 @@ foo
 $env.FOO
 # => foo
 ```
+
+The current directory is an environment variable too (`$env.PWD`), so a `cd` while an overlay is the last active one is recorded in that overlay. Hiding the overlay takes you back to the directory you were in when you activated it, and bringing it back with `overlay use` returns you to the directory you left it in. To stay where you are, hide it with `overlay hide <name> --keep-env [PWD]`.
 
 ## Ordering Overlays
 

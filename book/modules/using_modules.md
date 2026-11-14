@@ -177,6 +177,21 @@ Of course, you always have the option to choose a form that works best for your 
   use std/formats [ 'from ndjson' 'to ndjson' ]
   ```
 
+  These two commands read and write NDJSON (newline-delimited JSON), which has one JSON value on each line. Since they are now in scope under their full names, [`open`](/commands/docs/open.md) and [`save`](/commands/docs/save.md) use them for files with the `.ndjson` extension, the same way they use the built-in `from` and `to` commands:
+
+  ```nu
+  [{a: 1} {a: 2}] | save data.ndjson
+  open data.ndjson
+  # => ╭───┬───╮
+  # => │ # │ a │
+  # => ├───┼───┤
+  # => │ 0 │ 1 │
+  # => │ 1 │ 2 │
+  # => ╰───┴───╯
+  ```
+
+  After a plain `use std/formats`, the commands are named `formats from ndjson` and `formats to ndjson`, so `open` and `save` don't find them. `open` then returns the file's contents unparsed, and `save` rejects a table with `nu::shell::unsupported_input`. `to ndjson` also marks its output with the `application/x-ndjson` content type, which [`http post`](/commands/docs/http_post.md) sends as the `Content-Type` header when you don't give one.
+
   ::: note Importing submodules
   While you can import a submodule by itself using `use <module> <submodule>`, the entire parent module and _all_ of its definitions (and thus submodules) will be _parsed_ when using this form. When possible, loading the submodule as a _module_ will result in faster code. For example:
 
@@ -189,6 +204,22 @@ Of course, you always have the option to choose a form that works best for your 
   ```
 
   :::
+
+A member path can go down through more than one submodule. Each word after the module path names a submodule of the one before it, and only the last one is imported:
+
+```nu
+module a {
+    export module b {
+        export module c { export def hi [] { "hi from c" } }
+    }
+}
+
+use a b c
+c hi
+# => hi from c
+```
+
+`use a b c hi` would import just the `hi` command. A `*` or a list ends the pattern, so it has to be the last item. `use a * b` and `use a [b] c` fail with `nu::parser::wrong_import_pattern`. The names in a list have to be written out. A spread such as `use a [...$names]` is the same error ("cannot spread in an import pattern"), even when `$names` is a constant.
 
 ### Submodules
 
@@ -237,6 +268,35 @@ formal hello
 
 Some modules re-export their submodules' commands with `export use`, which makes them part of the parent module. That is why `use std` in the example above still provides `std log info`. See [Creating Modules - Submodules](./creating_modules.md#submodules) for the difference between the two forms.
 
+### Imports are scoped to their block
+
+`use` imports into the block it appears in. A `use` inside a custom command, a closure, or the block of `if`, `do`, or a loop makes the definitions available only there, and they're gone once the block ends. That lets a command import what it needs without changing the caller's scope:
+
+```nu
+module greet { export def hello [] { "hello" } }
+
+def welcome [] {
+    use greet
+    greet hello
+}
+
+welcome
+# => hello
+
+greet hello
+# => Error: nu::shell::external_command
+# =>
+# =>   × External command failed
+# =>    ╭─[repl_entry #4:1:1]
+# =>  1 │ greet hello
+# =>    · ──┬──
+# =>    ·   ╰── Command `greet` not found
+# =>    ╰────
+# =>   help: Did you mean `get`?
+```
+
+The module's `export-env` block runs at every such `use`, so here it would run on each call of `welcome`. A `use` at the top level of a script lasts until the end of the script, and one typed at the prompt lasts for the rest of the session.
+
 ## Importing Constants
 
 As seen above with the `std/math` examples, some modules may export constant definitions. When importing the entire module, constants can be accessed through a record with the same name as the module:
@@ -282,13 +342,37 @@ $p | describe
 
 ## Hiding
 
-Any custom command or alias, whether imported from a module or not, can be "hidden" to restore the previous definition using
+Any custom command, alias, or type alias, whether imported from a module or not, can be "hidden" to restore the previous definition using
 the [`hide`](/commands/docs/hide.md) command.
 
-The `hide` command also accepts import patterns, similar to [`use`](/commands/docs/use.md), but interprets them slightly differently. These patterns can be one of the following:
+The `hide` command also accepts import patterns, similar to [`use`](/commands/docs/use.md), but interprets them slightly differently. `hide` checks what the first name refers to in this order:
 
-- If the name is a custom command, the `hide` command hides it directly.
-- If the name is a module name, it hides all of its exports prefixed with the module name
+1. If the name is a module name, it hides all of its exports prefixed with the module name. A command or alias with the same name as a module that is in scope can't be hidden this way.
+2. If the name is a custom command or alias, the `hide` command hides it directly. Commands and aliases share one set of names, so `hide` hides whichever definition the name refers to at that point. If that was an alias defined in an inner block over a command from an outer scope, the command is visible again afterwards.
+3. Otherwise, if the name is a [type alias](#importing-type-aliases), `hide` hides the type alias.
+
+Type aliases have their own names, separate from commands. When a command and a type alias share a name, the first `hide` hides the command and a second one hides the type alias:
+
+```nu
+def Point [] { "a command" }
+type Point = record<x: int>
+hide Point
+let p: Point = {x: 1}   # still works: only the command is hidden
+hide Point
+let q: Point = {x: 1}
+# => Error: nu::parser::unknown_type
+# =>
+# =>   × Unknown type.
+# =>    ╭─[repl_entry #6:1:8]
+# =>  1 │ let q: Point = {x: 1}
+# =>    ·        ──┬──
+# =>    ·          ╰── unknown type
+# =>    ╰────
+# =>   help: check the spelling; a type alias must be defined with `type Name =
+# =>         <type>` above this line, or imported with `use <module> Name`
+```
+
+A type alias imported from a module can be hidden by its name or through the module, as in `hide geo Point`.
 
 For example, with this module:
 

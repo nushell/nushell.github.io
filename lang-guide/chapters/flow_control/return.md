@@ -87,6 +87,17 @@ def sign [n: int] {
    # => 5
    ```
 
+   In a script file that defines a [`main` command](/book/scripts.md#parameterizing-scripts), the top-level code runs before `main`. A `return` there ends the script, so `main` doesn't run, and the returned value isn't printed. A script can use this to stop early:
+
+   ```nu
+   # greet.nu
+   def main [] { print "main ran" }
+
+   if ($env.SKIP? == "1") { return }
+   ```
+
+   `nu greet.nu` prints `main ran`. With `SKIP` set to `1` in the environment, it prints nothing and exits with status 0.
+
 1. A `finally` block of a surrounding [`try`](./try-catch.md) still runs, and the returned value is kept:
 
    ```nu

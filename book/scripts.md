@@ -12,6 +12,16 @@ This will run the script to completion in a new instance of Nu. You can also run
 source myscript.nu
 ```
 
+`source` reads the file when the code that calls it is parsed, before anything runs, so the file name has to be a constant (see [Thinking in Nu](thinking_in_nu.md#example-change-to-a-different-directory-cd-and-source-a-file)). A relative path is looked up from the directory of the file that contains the `source` call, or the current directory at the prompt, and then in `$NU_LIB_DIRS`. Inside a sourced file, a `source` or `use` with a relative path starts from that file's directory, not from your current directory.
+
+If the file name is `null`, `source` does nothing. With a constant, this lets a config file load an optional file only when it exists:
+
+```nu
+const local_file = $nu.default-config-dir | path join "local.nu"
+const maybe_local = if ($local_file | path exists) { $local_file } else { null }
+source $maybe_local
+```
+
 To use a script as one stage of a pipeline, use [`run`](/commands/docs/run.md), described in [Scripts in a Pipeline](#scripts-in-a-pipeline) below.
 
 Let's look at an example script file:
@@ -77,6 +87,8 @@ def main [x: int] {
 nu add_ten.nu 100
 # => 110
 ```
+
+Options for `nu` itself, such as `--stdin` or `--no-config-file`, go before the script name. Everything after the script name is passed to the script. `nu add_ten.nu --stdin` passes `--stdin` to `main`, which fails with an unknown flag error.
 
 ### Help for a script
 
@@ -214,6 +226,38 @@ nu greet.nu -- -alice
 nu greet.nu --upper -- -alice
 # => -ALICE
 ```
+
+## Running code with `nu -c`
+
+`nu --commands` (`-c`) runs a string of code instead of a script file, then exits. As with a script, only the value of the last pipeline is printed:
+
+```nu
+nu -c 'print a; "b"; "c"'
+# => a
+# => c
+```
+
+The value is displayed the way it would be at the prompt, followed by a newline. `--table-mode` (`-m`) picks the table style, and `--no-newline` leaves off the final newline:
+
+```nu
+nu -m basic -c '[[a b]; [1 2]]'
+# => +---+---+---+
+# => | # | a | b |
+# => +---+---+---+
+# => | 0 | 1 | 2 |
+# => +---+---+---+
+```
+
+Without [`--stdin`](#standard-input), the code gets no input, and `$in` is empty even when something is piped into `nu`.
+
+`--error-style` sets how an error from the code is reported: `fancy` (the default), `plain` (a text description without drawing characters), or `short` (a single line). `nested` isn't accepted here, although [`$env.config.error_style`](config_reference.md#error-style) takes it. The flag only applies to `-c`. A script file and the interactive shell ignore it, so set `$env.config.error_style` for those.
+
+```nu
+nu --error-style short -c '1 / 0'
+# => Error: Division by zero.: division by zero
+```
+
+As with a script file, `nu`'s own options go before `-c`. Anything after the code is passed to it, as the next section describes, so `nu -c '[[a b]; [1 2]]' -m basic` draws the default table.
 
 ## Arguments with `nu -c`
 
@@ -385,7 +429,7 @@ A list spread such as `...$args` fills the rest parameter of `main`. Its items s
 
 The script runs in its own scope, so environment changes it makes (such as setting `$env.FOO` or calling `cd`) don't carry over to the caller. While it runs, `$env.CURRENT_FILE` holds the full path of the script and `$env.FILE_PWD` holds its directory.
 
-Like `source`, `run` is a parser keyword: the file name must be a constant, and the file is looked up in the current directory and then in `$NU_LIB_DIRS`. The script is parsed together with the code that calls it. If the script can change after that, for example when a loop calls it again each time you save the file, use `--full-reparse` (`-f`) to reload and reparse it on every call:
+Like `source`, `run` is a parser keyword: the file name must be a constant, and the file is looked up the same way, from the directory of the calling file (the current directory at the prompt) and then in `$NU_LIB_DIRS`. The script is parsed together with the code that calls it. If the script can change after that, for example when a loop calls it again each time you save the file, use `--full-reparse` (`-f`) to reload and reparse it on every call:
 
 ```nu
 for _ in (watch . --glob=*.nu) { run --full-reparse ./test.nu }
@@ -420,3 +464,16 @@ def main [] {
 echo "Hello World!" | ./stdin-script
 # => stdin: Hello World!
 ```
+
+### Standard input
+
+`--stdin` works with `-c` as well. Without it, neither a script nor `-c` code receives what is piped into `nu`:
+
+```nu
+"hello" | nu --stdin -c '$in | str uppercase'
+# => HELLO
+```
+
+The input arrives as a byte stream, so a command such as [`lines`](/commands/docs/lines.md) processes it as it is read. `$in` collects all of it into a string, or into binary data if it isn't valid UTF-8.
+
+In a script with a `main` command, `main` receives the input. In a script without one, the input goes to the first pipeline of the script, and the pipelines after it start with no input. `$in` refers to the input anywhere at the top level of the script.

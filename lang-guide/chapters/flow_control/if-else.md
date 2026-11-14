@@ -61,4 +61,31 @@ if 1 { "yes" }
 # =>    ╰────
 ```
 
+The condition is parsed as a math expression, the same as the condition of [`while`](./while.md). Variables, literals, comparisons, and `and`, `or` and `not` can be used directly. A command call or a pipeline has to be wrapped in parentheses:
+
+```nu
+let list = []
+if ($list | is-empty) { "empty" } else { "not empty" }
+# => empty
+```
+
+Without the parentheses, the `|` ends the `if` command before it has a block:
+
+```nu
+let list = []
+if $list | is-empty { "empty" } else { "not empty" }
+# => Error: nu::parser::missing_positional
+# =>
+# =>   × Missing required positional argument.
+# =>    ╭─[repl_entry #2:1:9]
+# =>  1 │ if $list | is-empty { "empty" } else { "not empty" }
+# =>    ·         ▲
+# =>    ·         ╰── missing cond
+# =>    ╰────
+# =>   help: Usage: if <cond> <then_block> (else <else_expression>) . Use `--help`
+# =>         for more information.
+```
+
+A command name on its own, as in `if is-empty { ... }`, isn't run either. It is read as a string, and the `if` fails with a type mismatch ("expected bool").
+
 See also: [`match`](./match.md) for choosing between many values.

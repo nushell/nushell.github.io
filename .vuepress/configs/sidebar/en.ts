@@ -270,6 +270,7 @@ export const sidebarEn: SidebarConfig = {
           children: [
             '/lang-guide/chapters/flow_control/if-else.md',
             '/lang-guide/chapters/flow_control/loop.md',
+            '/lang-guide/chapters/flow_control/for.md',
             '/lang-guide/chapters/flow_control/while.md',
             '/lang-guide/chapters/flow_control/match.md',
             '/lang-guide/chapters/flow_control/try-catch.md',

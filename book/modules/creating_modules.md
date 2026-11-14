@@ -102,7 +102,9 @@ use ./increment.nu
 ```
 
 ::: note
-`main` can be used for both `export def` and `export extern` definitions.
+`main` can be used for both `export def` and `export extern` definitions. An alias can't be the module's `main`. `export alias main = ...` fails with `nu::parser::export_main_alias_not_allowed`. Define a command that calls the aliased code instead.
+
+A module has only one `main`. Two `main` definitions in the same module, such as two `export def main` or an `export def main` and an `export extern main`, fail with `nu::parser::duplicate_command_def`. A second `main` merged in from a [`mod` submodule](#exports-cannot-be-named-after-their-module) fails with `nu::parser::module_double_main`.
 :::
 
 ::: tip
@@ -151,6 +153,10 @@ Notice that the behavior of the module once imported is identical regardless of 
 ::: note
 Technically, you can import this either using the directory form above or explicitly with `use increment/mod.nu *`, but the directory shorthand is preferred when using a `mod.nu`.
 :::
+
+The module name comes from the path. A file loses only its `.nu` extension, so `my.dots.nu` is the module `my.dots`. A directory keeps its whole name, dots included, so `my.mod/mod.nu` is the module `my.mod`, used as `my.mod <command>`.
+
+Importing a directory that has no `mod.nu` fails with `nu::parser::module_missing_mod_nu_file` ("Missing mod.nu file"). The `mod.nu` can be empty. Without one, you can still import each `.nu` file in the directory as a module of its own, for example `use my-dir/helpers.nu`.
 
 ## Subcommands
 
@@ -269,6 +275,19 @@ The most common form for a submodule definition is with `export module`.
 
 Before proceeding to the next section, run `scope modules` and look for the `my-utils` module. Notice that it has no commands of its own; just the two submodules.
 
+::: tip Reading `scope modules`
+[`scope modules`](/commands/docs/scope_modules.md) returns one row for each module in scope. `commands`, `aliases`, `externs`, `constants`, `type_aliases` and `submodules` list what the module exports. Each entry has a `name`, and each `submodules` entry is a full module row with these same columns. `has_env_block` tells whether the module has an `export-env` block. `description` and `extra_description` come from the [module's documentation comment](#documenting-modules). `file` is the path the module was loaded from, or `unknown` for a module defined with a `module` block. `module_id` is an internal identifier.
+
+```nu
+scope modules | where name == my-utils | get 0.submodules.name
+# => ╭───┬─────────────────╮
+# => │ 0 │ increment       │
+# => │ 1 │ range-into-list │
+# => ╰───┴─────────────────╯
+```
+
+:::
+
 ### Example: Submodule with `export use`
 
 Alternatively, we can (re)export the _definitions_ from other modules. This is slightly different from the first form, in that the commands (and other definitions, if they were present) from `increment` and `range-into-list` become _members_ of the `my-utils` module itself. We'll be able to see the difference in the output of the `scope modules` command.
@@ -310,6 +329,31 @@ While `export module` is the recommended and most common form, there is one modu
 `module` without `export` defines only a local module; it does not export a submodule.
 :::
 
+Like `export module`, `module` also takes a path to a file instead of a block. `module ./helpers.nu` defines a local module named `helpers` from that file. The module's own commands can import it, but users of the parent module can't:
+
+```nu
+# shouty/mod.nu
+module ./helpers.nu
+
+export def shout [text: string] {
+    use helpers
+    helpers loud $"($text)!"
+}
+```
+
+```nu
+# shouty/helpers.nu
+export def loud [text: string] { $text | str uppercase }
+```
+
+```nu
+use shouty
+shouty shout hi
+# => HI!
+```
+
+`use shouty *` imports `shout`, but not `helpers`.
+
 ## Documenting Modules
 
 As with [custom commands](../custom_commands.md#documenting-your-command), modules can include documentation that can be viewed with `help <module_name>`. The documentation is simply a series of commented lines at the beginning of the module file. Let's document the `my-utils` module:
@@ -340,6 +384,25 @@ help my-utils
 ```
 
 Also notice that, because the commands from `increment` and `range-into-list` are re-exported with `export use ...`, those commands show up in the help for the main module as well.
+
+Nushell reads the module's documentation comment this way:
+
+- A `#!` [shebang](../scripts.md#shebangs) on the first line is skipped.
+- As with commands, the lines up to the first empty `#` line are the description, and the lines after it are shown as extra description below it.
+- The first blank line ends the comment. Comments after it aren't part of the module's documentation.
+- The comment has to be followed by a blank line. A comment that runs straight into the first definition documents that definition instead of the module.
+
+For a module defined with a `module` block, the comment lines directly above `module` become its description, together with any comment at the start of the block:
+
+```nu
+# Greeting helpers
+module greet {
+    export def hello [] { "hello" }
+}
+
+scope modules | where name == greet | get 0.description
+# => Greeting helpers
+```
 
 ## Environment Variables
 
@@ -461,7 +524,7 @@ To bring `my-utils` exported environment into scope for the `go.nu` module, ther
 
 1. Import the module in each command where it is needed
 
-   By placing `use my-utils` in the `go modules` command itself, its `export-env` will be _evaluated_ when the command is. For example:
+   By placing `use my-utils` in the `go modules` command itself, its `export-env` will be _evaluated_ when the command is. The import applies only inside the body of `go modules` (see [Imports are scoped to their block](./using_modules.md#imports-are-scoped-to-their-block)). For example:
 
    ```nu
    # go.nu
