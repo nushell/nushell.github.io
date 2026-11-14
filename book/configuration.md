@@ -363,6 +363,70 @@ $env.config.history = {
 The history settings `file_format`, `max_size`, `isolation`, and `path` are read once, when the REPL starts. Set them in `config.nu`; changing them afterwards (for example, at the prompt) raises a `nu::shell::config_option_locked_after_startup` error.
 :::
 
+#### Errors in settings
+
+Nushell checks every value you assign to `$env.config`. When something is wrong, the assignment raises a `nu::shell::invalid_config` error that lists each problem with its own code:
+
+- `nu::shell::unknown_config_option` for a key Nushell doesn't know, often a typo.
+- `nu::shell::invalid_value` for a value outside the accepted set. The label lists the values it accepts.
+- `nu::shell::type_mismatch` for a value of the wrong type.
+- `nu::shell::missing_required_column` for a record without a key it needs, such as `table.trim` without `methodology`.
+
+Other errors can appear in the list too. For example, a keybinding without an `event` gives `nu::shell::column_not_found`. The history lock error above is reported the same way.
+
+A setting with an error keeps its old value, and the other settings in the same assignment still change:
+
+```nu
+$env.config.completions = { case_sensitive: true, algorithm: "fast", partal: false }
+# => Error: nu::shell::invalid_config
+# =>
+# =>   × Encountered 2 error(s) when updating config
+# =>
+# => Error: nu::shell::invalid_value
+# =>
+# =>   × Invalid value for $env.config.completions.algorithm
+# =>    ╭─[repl_entry #1:1:62]
+# =>  1 │ $env.config.completions = { case_sensitive: true, algorithm: "fast", partal: false }
+# =>    ·                                                              ───┬──
+# =>    ·                                                                 ╰── expected 'prefix' or 'fuzzy' or 'substring', but got 'fast'
+# =>    ╰────
+# =>
+# => Error: nu::shell::unknown_config_option
+# =>
+# =>   × Unknown config option: $env.config.completions.partal
+# =>    ╭─[repl_entry #1:1:78]
+# =>  1 │ $env.config.completions = { case_sensitive: true, algorithm: "fast", partal: false }
+# =>    ·                                                                              ──┬──
+# =>    ·                                                                                ╰── remove this
+# =>    ╰────
+$env.config.completions.case_sensitive
+# => true
+```
+
+The error stops the rest of the script, or the rest of `config.nu`, like any other error, unless you catch it with [`try`](/commands/docs/try.md). See [Problems with startup files](#problems-with-startup-files) for how startup continues after an error in `config.nu`.
+
+A common mistake is leaving out the colons in a record. `{ mode light }` is a closure, not a record, and the error says so:
+
+```nu
+$env.config.table = { mode light }
+# => Error: nu::shell::invalid_config
+# =>
+# =>   × Encountered 1 error(s) when updating config
+# =>
+# => Error: nu::shell::type_mismatch
+# =>
+# =>   × Type mismatch at $env.config.table
+# =>    ╭─[repl_entry #1:1:21]
+# =>  1 │ $env.config.table = { mode light }
+# =>    ·                     ───────┬──────
+# =>    ·                            ╰── expected record, but got closure
+# =>    ╰────
+# =>   help: If you meant a record, use `key: value` fields (colon required). A
+# =>         missing `:` makes `{ … }` parse as a closure/block.
+```
+
+A few combinations only produce a warning (`nu::shell::incompatible_options`), and the value is still set. For example, setting `history.isolation = true` in `config.nu` while history uses the plain-text format warns that isolation needs SQLite history.
+
 ### Remove Welcome Message
 
 :::note
@@ -432,6 +496,12 @@ The variables that affect Nushell file locations are:
   Note that the directory represented by `$nu.data-dir`, including any of its subdirectories, are NOT created by default. Creation and use of these directories is up to the user.
 
 - `$env.XDG_DATA_DIRS` _(Unix Platforms Only)_: If this environment variable is set, it is used to populate the `$nu.vendor-autoload-dirs` directories. Following the XDG convention that earlier entries take precedence, the directories are processed in _reverse_ order: the first directory in `XDG_DATA_DIRS` is read last, giving it the ability to override definitions from the others.
+
+- `$env.XDG_CACHE_HOME`: If this environment variable is set to an absolute path, Nushell sets the `$nu.cache-dir` constant to `($env.XDG_CACHE_HOME)/nushell`. Otherwise `$nu.cache-dir` is the `nushell` directory under the platform's cache directory, such as `~/Library/Caches/nushell` on macOS, `~/.cache/nushell` on Linux, or `%LOCALAPPDATA%\nushell` on Windows. A relative or empty value is ignored. Nushell doesn't store anything in this directory or create it. It is a standard place for your scripts and plugins to keep data they can rebuild.
+
+- `$env.NU_VENDOR_AUTOLOAD_DIR`: If this environment variable is set to an absolute path, Nushell adds that directory to the end of `$nu.vendor-autoload-dirs`, after the `$nu.data-dir` one, so its files load last among the vendor files and can override the others. Unlike the other entries, the path is used as given, without `nushell/vendor/autoload` appended. A relative path is ignored, and a directory already in the list isn't added twice.
+
+  Packagers can also set `NU_VENDOR_AUTOLOAD_DIR` when they build Nushell. The value is compiled into `nu` and placed just before the `$nu.data-dir` entry. The build-time and runtime values can be used together.
 
 ::: warning
 The `XDG_*` variables are **not** Nushell-specific and should not be set to a directory with only Nushell files. Instead, set the environment variable to the directory _above_ the one with the `nushell` directory.
@@ -755,3 +825,128 @@ The following stages and their steps _may_ occur during startup, based on the fl
   - ❌ Does not enter the REPL
   - ❌ Does not source the files in `vendor-autoload-dirs`
   - ❌ Does not source the files in `user-autoload-dirs`
+
+### Passing flags to `nu`
+
+`nu` reads its flags in the usual Unix styles:
+
+- A long flag takes its value after a space or after `=`, as in `--table-mode light` or `--table-mode=light`.
+- A short flag works the same way, as in `-m light` or `-m=light`. Writing the value right after the letter, as in `-mlight`, is an error.
+- Short flags can share one `-`, so `-nl` means `-n -l`. Only the last letter of such a group can be a flag that takes a value. `nu -nc 'ls'` works, and `nu -cn 'ls'` is an error:
+
+  ```nu
+  nu -cn 'ls'
+  # => Error: nu::shell::error
+  # =>
+  # =>   × `-c` expects a value
+  # =>   help: Move `-c` to the end, then pass a value like `-c <value>` or
+  # =>         `-c=<value>`.
+  ```
+
+- A value after `=` on a flag that doesn't take one, as in `-n=1`, is an error, and so is an empty value, as in `-c=`. A `-` on its own is an error too.
+
+When a flag is unknown, `nu` suggests a flag with a similar name if it finds one:
+
+```nu
+nu --no-config
+# => Error: nu::shell::error
+# =>
+# =>   × Unknown flag '--no-config'
+# =>   help: Did you mean '--no-config-file'?
+```
+
+Flags that accept a fixed set of values, such as `--table-mode`, `--error-style`, `--log-level`, and `--experimental-options`, check the value the same way. A misspelled value gets a suggestion, so `--table-mode rouned` suggests `rounded`, and a value that is not close to any valid one gets the list of valid values. Any of these errors stops `nu` with exit status 1 before it runs anything.
+
+### Starting the REPL without a terminal
+
+The REPL needs a terminal to read from. When `nu` would start the REPL, because neither `-c` nor a script file was given, and its standard input isn't a terminal, it prints an error and exits with status 1:
+
+```nu
+"ls" | nu
+# => Error:   × Nushell launched as a REPL, but STDIN is not a TTY; either launch in a
+# =>   │ valid terminal or provide arguments to invoke a script!
+```
+
+The same happens when a program starts Nushell as a login shell with no command and no terminal. The check comes right before the line editor starts, after `env.nu`, `config.nu`, the autoload files, and any `--execute` commands have run, so their output appears before the error. `--stdin` doesn't change this. To run Nushell code from another program, pass it with `-c` or in a script file, and add `--stdin` if that code should read the piped input as `$in`.
+
+### Problems with startup files
+
+In the REPL, an error in `env.nu`, `config.nu`, `login.nu`, or an autoload file is printed, and startup goes on with the next file. A runtime error stops the rest of that file, but changes made before the error stay in effect. Commands that the file defines with `def` are available even when their definitions come after the error, because Nushell defines them when it parses the file. A parse error means none of the file runs.
+
+With `-c` or a script file, the configuration files Nushell loads are strict. If one fails, `nu` stops before running the command or script and exits with that file's exit status, which is 1 for a Nushell error or the external command's own status. This covers the files given with `--env-config` and `--config`, and the default `env.nu` and `config.nu` that `-l` loads together with `-c`. `login.nu` is the exception. When it fails under `nu -l -c`, Nushell prints the error and still runs the command.
+
+A path given with `--config` or `--env-config` that doesn't exist is an error:
+
+```nu
+nu --config missing.nu -c 'ls'
+# => Error: File not found: missing.nu (config.nu)
+# =>   help: Check the path passed to --config / --env-config, or create the file under your config directory.
+```
+
+With `-c` or a script file, `nu` then exits with status 1. The REPL prints the same error, with the full path, and starts without that file.
+
+If Nushell itself panics while it loads the startup files for the REPL, it prints `A panic occurred while reading configuration files, using default configuration.`, resets `$env.config` to the defaults, and starts the REPL.
+
+#### Broken symlinks
+
+If you keep your configuration in another place, such as a dotfiles repository, and link to it, a broken link doesn't stop Nushell from starting. When the configuration directory, `env.nu`, `config.nu`, or `login.nu` is a symbolic link whose target doesn't exist, Nushell skips that file, keeps the built-in defaults, and prints a warning in the form `Warning: config.nu is a broken symlink (<link path> -> <target>); using built-in defaults.` For a broken configuration directory, the warning reads `config directory is a broken symlink`, and both `env.nu` and `config.nu` are skipped. Nushell never removes or replaces the link, and on first launch it doesn't create a configuration directory or default files in its place. A `--config` or `--env-config` path that is a broken link counts as a missing file and gets the `File not found` error above.
+
+### Experimental options
+
+Nushell ships some features as experimental options. An `opt-in` option is off until you turn it on, and an `opt-out` option is on until you turn it off. [`debug experimental-options`](/commands/docs/debug_experimental-options.md) lists them with their current state and a description:
+
+```nu
+debug experimental-options | select identifier enabled status
+# => ╭───┬─────────────────────────────┬─────────┬────────────────────╮
+# => │ # │         identifier          │ enabled │       status       │
+# => ├───┼─────────────────────────────┼─────────┼────────────────────┤
+# => │ 0 │ example                     │ false   │ deprecated-discard │
+# => │ 1 │ dc-glob                     │ false   │ opt-in             │
+# => │ 2 │ reorder-cell-paths          │ true    │ opt-out            │
+# => │ 3 │ pipefail                    │ true    │ opt-out            │
+# => │ 4 │ enforce-runtime-annotations │ true    │ opt-out            │
+# => │ 5 │ native-clip                 │ false   │ opt-in             │
+# => │ 6 │ cell-path-types             │ false   │ opt-in             │
+# => ╰───┴─────────────────────────────┴─────────┴────────────────────╯
+```
+
+You can set them when Nushell starts, with the `--experimental-options` flag or the `NU_EXPERIMENTAL_OPTIONS` environment variable. Each entry is an option name, which turns the option on, or `name=true` or `name=false`. A bare `all` turns on every option that isn't deprecated. The variable also accepts `all=false`, which turns all of them off, but the flag accepts only a bare `all`. The variable holds a comma-separated list:
+
+```nu
+NU_EXPERIMENTAL_OPTIONS='native-clip,pipefail=false' nu
+```
+
+Nushell reads `NU_EXPERIMENTAL_OPTIONS` once, before any configuration file, so it has to be in the environment that starts `nu`. Setting it in `config.nu` has no effect on that session. When both are given, the flag is applied after the variable, so the flag wins for an option that both name.
+
+Problems in the variable are warnings, not errors. Nushell reports an unknown name or a value other than `true` or `false`, skips that entry, and starts anyway:
+
+```nu
+NU_EXPERIMENTAL_OPTIONS='native-clp,pipefail=nope' nu
+# => Warning: nu::experimental_option::unknown
+# =>
+# =>   ⚠ Unknown experimental option `native-clp`
+# =>    ╭────
+# =>  1 │ NU_EXPERIMENTAL_OPTIONS=native-clp,pipefail=nope
+# =>    ·                         ──────────
+# =>    ╰────
+# =>   help: Known experimental options are: example, dc-glob, reorder-cell-paths,
+# =>         pipefail, enforce-runtime-annotations, native-clip, cell-path-types
+# =>
+# => Warning: nu::experimental_option::invalid_assignment
+# =>
+# =>   ⚠ Invalid assignment for `pipefail`, expected `true` or `false`, got `nope`
+# =>    ╭────
+# =>  1 │ NU_EXPERIMENTAL_OPTIONS=native-clp,pipefail=nope
+# =>    ·                                    ─────────────
+# =>    ╰────
+```
+
+Naming a deprecated option also prints a warning. For a `deprecated-discard` option, the warning says it will be removed. For a `deprecated-default` option, it says the behavior is now the default and that you can remove the option.
+
+The variable follows the same rule as your configuration files. Nushell ignores it, while still applying `--experimental-options`, in these cases:
+
+- with `-n` or `--no-config-file`
+- with `-c`, unless `-l`, `--config`, or `--env-config` is also given
+- with a script file, unless `--config` or `--env-config` is also given, since `-l` doesn't load configuration files for a script
+
+The REPL always reads it, unless `-n` is given.

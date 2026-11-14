@@ -158,7 +158,33 @@ See also: [Changing the Environment in a Custom Command](./custom_commands.html#
 
 ## Changing the Directory
 
-A common task in a shell is to change the directory using the [`cd`](/commands/docs/cd.md) command. In Nushell, calling [`cd`](/commands/docs/cd.md) is equivalent to setting the `PWD` environment variable. Therefore, it follows the same rules as other environment variables (for example, scoping).
+A common task in a shell is to change the directory using the [`cd`](/commands/docs/cd.md) command. In Nushell, [`cd`](/commands/docs/cd.md) works by changing the `PWD` environment variable. Therefore, it follows the same rules as other environment variables (for example, scoping). You can't assign `PWD` yourself, though. Use `cd` instead.
+
+## Automatic variables
+
+Nushell sets three environment variables itself:
+
+- `PWD` holds the current directory. [`cd`](/commands/docs/cd.md) changes it.
+- `FILE_PWD` holds the directory of the script, module, or sourced file that is running.
+- `CURRENT_FILE` holds the full path of that file.
+
+Nushell rejects every attempt to set or hide one of them, whether through `$env.PWD = ...`, [`load-env`](/commands/docs/load-env.md), [`with-env`](/commands/docs/with-env.md), a `PWD=... cmd` prefix, or [`hide-env`](/commands/docs/hide-env.md). The check ignores case, so `$env.pwd = ...` fails as well:
+
+```nu
+$env.PWD = '/tmp'
+# => Error: nu::compile::automatic_env_var_set_manually
+# =>
+# =>   × 'PWD' cannot be changed manually.
+# =>    ╭─[repl_entry #1:1:1]
+# =>  1 │ $env.PWD = '/tmp'
+# =>    · ────┬───
+# =>    ·     ╰── cannot change 'PWD' manually
+# =>    ╰────
+# =>   help: The environment variable 'PWD' is set automatically by Nushell and
+# =>         cannot be changed manually.
+```
+
+An assignment like this one fails before anything runs, with a `nu::compile` error. The commands fail when they run, with `nu::shell::automatic_env_var_set_manually`. To get the file's path or directory as a constant at parse time, use [`path self`](/commands/docs/path_self.md).
 
 ## Single-use Environment Variables
 

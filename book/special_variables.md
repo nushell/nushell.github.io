@@ -64,6 +64,12 @@ There are also several environment variables that Nushell uses for specific purp
 
 The amount of time in milliseconds that the previous command took to run.
 
+### `$env.COLUMNS` and `$env.LINES`
+
+On Unix, Nushell asks the terminal for its size. When there is no terminal at all, as in a cron job or a CI runner with no controlling terminal, it reads the width from `COLUMNS` and the height from `LINES` instead. Both must be set to whole numbers greater than zero, or Nushell falls back to 80 columns by 24 rows. The width decides where [`table`](/commands/docs/table.md), [`grid`](/commands/docs/grid.md), and `help` output wrap. The height decides when `$env.config.footer_mode = "auto"` shows a table footer. [`term size`](/commands/docs/term_size.md) reports both values.
+
+A terminal that is attached always wins, even when the output is redirected to a file or a pipe. Nushell reads `COLUMNS` and `LINES` from the environment it was started with, so set them before starting `nu`. Assigning `$env.COLUMNS` inside Nushell has no effect. Windows doesn't use these variables.
+
 ### `$env.config`
 
 `$env.config` is the main configuration record used in Nushell. Settings are documented in `config nu --doc`.
@@ -72,6 +78,7 @@ The amount of time in milliseconds that the previous command took to run.
 
 Inside a script, module, or sourced-file, this variable holds the fully-qualified filename. Note that this
 information is also available as a constant through the [`path self`](/commands/docs/path_self.md) command.
+Nushell sets it, so it can't be assigned or hidden. See [Automatic variables](./environment.md#automatic-variables).
 
 ### `$env.ENV_CONVERSIONS`
 
@@ -85,6 +92,28 @@ the file resides. Note that this value is also available as a constant, using [`
 ```nu
 const this_dir = path self | path dirname
 ```
+
+Like `CURRENT_FILE`, it can't be assigned or hidden.
+
+### `$env.HTTP_PROXY` and other proxy variables
+
+The [`http`](/commands/docs/http.md) commands send their requests through a proxy when `HTTP_PROXY`, `HTTPS_PROXY`, or `ALL_PROXY` is set. Nushell takes the first of the three that is set, in that order, and uses it for every request, whether the URL starts with `http://` or `https://`. So with both `HTTP_PROXY` and `HTTPS_PROXY` set, HTTPS requests also go through `HTTP_PROXY`. Like every name in `$env`, these ignore case, so `http_proxy` and `HTTP_PROXY` are the same variable.
+
+The value is the proxy's URL, such as `http://proxy.example.com:8080`. The scheme can be `http`, `https`, `socks4`, `socks4a`, `socks5`, `socks`, or `socks5h`, and a value without one is treated as `http`. A user name and password in the URL (`http://user:password@proxy.example.com:8080`) are sent to the proxy. If Nushell can't use the value as a proxy URL, for example `ftp://proxy.example.com`, it ignores it and connects directly.
+
+`NO_PROXY` lists hosts that skip the proxy, separated by commas. Each entry is one of:
+
+- an exact host name or IP address, such as `localhost` or `127.0.0.1`
+- a domain suffix starting with `.` or `*`, such as `.example.com` or `*.example.com`
+- a prefix ending with `.` or `*`, such as `10.0.` or `192.168.*`
+- `*`, which matches every host
+
+Entries match the host name only. An entry with a port, such as `localhost:8080`, never matches.
+
+Nushell reads these variables from `$env` each time an `http` command runs, so setting them in `config.nu`, at the prompt, or for a single command with [`with-env`](/commands/docs/with-env.md) works. Two cases behave differently:
+
+- Hiding an inherited proxy variable with `hide-env` doesn't turn the proxy off. With no proxy variable in `$env`, the HTTP library falls back to the environment Nushell was started with. To skip an inherited proxy, set `$env.NO_PROXY = "*"` and leave the proxy variable alone.
+- The shared client that `--pool` uses is created on the first `--pool` request and keeps that proxy for the rest of the session. It ignores `NO_PROXY` until you rebuild it with [`http pool`](/commands/docs/http_pool.md).
 
 ### `$env.LAST_EXIT_CODE`
 
@@ -103,6 +132,69 @@ try {
 }
 # => 2
 ```
+
+### `$env.LC_ALL`, `$env.LC_TIME`, and `$env.LANG`
+
+These standard locale variables set the language and the local formats for dates. Nushell uses the first one that is set, in the order `LC_ALL`, `LC_TIME`, `LANG`, and drops an encoding suffix such as `.UTF-8`. When none is set, it uses the operating system's locale. A locale Nushell doesn't know falls back to `en_US`.
+
+[`format date`](/commands/docs/format_date.md) uses the locale for day and month names and for the `%x`, `%X`, `%c`, and `%r` formats. It reads the variables from `$env`, so `with-env` or an assignment changes the result. On a system with an `en_US` locale:
+
+```nu
+let d = 2026-03-01T14:30:00
+$d | format date "%A %d %B %Y, %X"
+# => Sunday 01 March 2026, 02:30:00 PM
+with-env { LC_TIME: de_DE.UTF-8 } { $d | format date "%A %d %B %Y, %X" }
+# => Sonntag 01 März 2026, 14:30:00
+```
+
+The `datetime_format` settings in `$env.config`, which control how Nushell displays dates, work differently. They read the locale from the environment Nushell was started with, so changing `$env.LC_TIME` inside Nushell doesn't change how dates are shown. Set the variable before starting `nu`:
+
+```nu
+LC_TIME=de_DE nu -n -c '$env.config.datetime_format.normal = "%A %d %B %Y"; 2026-03-01T14:30:00'
+# => Sonntag 01 März 2026
+```
+
+### `$env.NU_BACKTRACE`
+
+When `NU_BACKTRACE` is set, an error report also shows the calls that led to the error. Each custom command or closure call that the error passed through, including a closure run with [`do`](/commands/docs/do.md), adds a `chained_error` entry labeled "error happened when running this", starting with the outermost call. The original error comes last:
+
+```nu
+NU_BACKTRACE=1 nu -n -c 'def inner [] { error make {msg: boom} }; def outer [] { inner }; outer'
+# => Error: chained_error
+# =>
+# =>   × oops
+# =>    ╭─[source:1:66]
+# =>  1 │ def inner [] { error make {msg: boom} }; def outer [] { inner }; outer
+# =>    ·                                                                  ──┬──
+# =>    ·                                                                    ╰── error happened when running this
+# =>    ╰────
+# =>
+# => Error: chained_error
+# =>
+# =>   × oops
+# =>    ╭─[source:1:57]
+# =>  1 │ def inner [] { error make {msg: boom} }; def outer [] { inner }; outer
+# =>    ·                                                         ──┬──
+# =>    ·                                                           ╰── error happened when running this
+# =>    ╰────
+# =>
+# => Error:
+# =>   × boom
+# =>    ╭─[source:1:27]
+# =>  1 │ def inner [] { error make {msg: boom} }; def outer [] { inner }; outer
+# =>    ·                           ───────────
+# =>    ╰────
+```
+
+Without `NU_BACKTRACE`, the same command prints only the `boom` error. An error from a stream, such as one raised inside [`each`](/commands/docs/each.md), also gets a label at each call the stream passed through.
+
+Any value turns it on, including `0` and `false`. Nushell checks its global environment, which takes in your changes after each startup file and after each line you run at the prompt. So you can set `NU_BACKTRACE` before starting `nu`, in `config.nu`, or at the prompt, where it applies from the next line on. Setting it inside a script or a `nu -c` command doesn't affect that same script or command.
+
+The chain also changes what [`try`](/commands/docs/try.md) catches. With `NU_BACKTRACE` set, `$e.msg` in a `catch` closure is `oops`, the message of the outer entry, instead of the original message.
+
+### `$env.NU_EXPERIMENTAL_OPTIONS`
+
+A comma-separated list of experimental options to turn on or off when Nushell starts, such as `native-clip,pipefail=false`. Nushell reads it once, before any configuration file, so it has to be in the environment that starts `nu`. It is ignored with `-n`, and for `nu -c` and scripts unless they also load configuration files. See [Configuration - Experimental options](./configuration.md#experimental-options).
 
 ### `$env.NU_LIB_DIRS`
 
@@ -155,9 +247,17 @@ A list of directories which will be searched when registering plugins with `plug
 
 - [Plugin Search Path](./plugins.md#plugin-search-path)
 
+### `$env.NU_VENDOR_AUTOLOAD_DIR`
+
+Adds a directory to `$nu.vendor-autoload-dirs`. Packagers can also set it when building Nushell. See [Configuration - Startup Variables](./configuration.md#startup-variables).
+
 ### `$env.NU_VERSION`
 
 The current Nushell version. The same as `(version).version`, but, as an environment variable, it is exported to and can be read by child processes.
+
+### `$env.NUSHELL_SHELLS`, `$env.NUSHELL_CURRENT_SHELL`, and `$env.NUSHELL_LAST_SHELL`
+
+Leftovers from the built-in `shells` and `enter` commands of older Nushell versions. Nothing in Nushell reads them, but they can show up in `$env`. When you change directories at the prompt by typing just a path (auto-cd), the REPL writes the new directory into the `NUSHELL_SHELLS` list, at the index in `NUSHELL_CURRENT_SHELL` (`0` when it isn't set), and sets `NUSHELL_LAST_SHELL`. [`cd`](/commands/docs/cd.md) doesn't touch them. To keep a list of directories and move between them, use the [`dirs` module](./directory_stack.md).
 
 ### `$env.PATH`
 
@@ -165,12 +265,20 @@ The search path for executing other applications. It is initially inherited from
 
 It is converted back to a string before running a child-process.
 
+### `$env.PATHEXT`
+
+On Windows, `PATHEXT` lists the file extensions that count as programs, separated by `;`, such as `.COM;.EXE;.BAT;.CMD`. Nushell uses it in two places:
+
+- To run an external command, Nushell looks the name up with the `PATHEXT` it inherited when it started, so `foo` finds `foo.exe` or `foo.bat` on the path. Changing `$env.PATHEXT` inside Nushell doesn't affect this lookup. When the file it finds ends in an extension other than `.COM`, `.EXE`, `.BAT`, `.CMD`, or `.PS1`, Nushell runs it through `cmd.exe /D /C`, so a file association you made with `assoc` and `ftype` applies. For example, after you associate `.nu` files with `nu.exe` and add `.NU` to `PATHEXT` before starting Nushell, typing `myscript` runs `myscript.nu`. A `.PS1` file runs with `powershell.exe -File` instead.
+- [`which`](/commands/docs/which.md) reads `$env.PATHEXT`, so it follows changes you make inside Nushell, including with `with-env`. After `hide-env PATHEXT`, `which` doesn't fall back to the inherited value.
+
+Other platforms ignore `PATHEXT`.
+
 ### `$env.PROCESS_PATH`
 
-When _executing a script_, this variable represents the name and relative path of the script. Unlike the two variables
-above, it is not present when sourcing a file or importing a module.
+When _executing a script_, this variable represents the name and relative path of the script. Unlike `CURRENT_FILE` and `FILE_PWD`, it is not present when sourcing a file or importing a module.
 
-Note: Also unlike the two variables above, the exact path (including symlinks) that was used to _invoke_ the file is returned.
+Note: Also unlike `CURRENT_FILE` and `FILE_PWD`, the exact path (including symlinks) that was used to _invoke_ the file is returned.
 
 ### `$env.PROMPT_*` and `$env.TRANSIENT_PROMPT_*`
 
@@ -179,10 +287,28 @@ A number of variables are available for configuring the Nushell prompt that appe
 - [Configuration - Prompt Configuration](./configuration.md#prompt-configuration)
 - `config nu --doc`
 
+### `$env.PWD`
+
+The current directory, as an absolute path. [`cd`](/commands/docs/cd.md) changes it, and the change follows the same scoping rules as other environment variables. Nushell sets `PWD`, `FILE_PWD`, and `CURRENT_FILE` itself, so assigning or hiding them is an error. See [Automatic variables](./environment.md#automatic-variables).
+
 ### `$env.SHLVL`
 
 `SHLVL` is incremented by most shells when entering a new subshell. It can be used to determine the number of nested shells. For instance,
 if `$env.SHLVL == 2` then typing `exit` should return you to a parent shell.
+
+### `$env.SSH_CLIENT`
+
+SSH servers set `SSH_CLIENT` in the session they start. When it is set, the file names in `ls` output are not clickable links. Normally, with `$env.config.shell_integration.osc8` on, as it is by default, Nushell writes each name as an OSC 8 hyperlink to the local path, which the terminal can open. Over SSH, those paths are on the remote machine, so Nushell leaves the links out.
+
+Nushell reads `SSH_CLIENT` from the environment it was started with, so assigning or hiding `$env.SSH_CLIENT` inside Nushell changes nothing. It checks only `SSH_CLIENT`, not `SSH_CONNECTION` or `SSH_TTY`.
+
+### `$env.TERM_PROGRAM`
+
+Many terminals set `TERM_PROGRAM` to their own name. Nushell looks for one value, `vscode`, which the terminal in Visual Studio Code sets. In that terminal, with `$env.config.shell_integration.osc633` on, as it is by default, the REPL marks the prompt, the command line, and each command's start and end with VS Code's OSC 633 escape sequences instead of the standard OSC 133 ones. It also sends VS Code the current directory and the text of each command it runs. With any other value, or with `osc633` turned off, the REPL sends OSC 133 marks when `$env.config.shell_integration.osc133` is on.
+
+### `$env.XDG_CACHE_HOME`
+
+Can be used to optionally override the `$nu.cache-dir` location. See [Configuration - Startup Variables](./configuration.md#startup-variables).
 
 ### `$env.XDG_CONFIG_HOME`
 
