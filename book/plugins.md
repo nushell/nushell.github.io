@@ -112,16 +112,7 @@ Nushell ships with a set of officially maintained plugins which includes:
 - `query`: Support for querying XML (via XPath), JSON, HTML (via CSS selectors), and web page metadata
 - `inc`: Increment a value or version (e.g., semver). This plugin acts as both an end-user plugin as well as a simple developer example of how to create a plugin.
 
-::: details What `inc` does with each kind of input
-[`inc`](/commands/docs/inc.md) takes a single value:
-
-- An integer goes up by 1: `41 | inc` returns `42`.
-- Without a flag, a string that holds a whole number goes up by 1 and stays a string, so `"41" | inc` returns `"42"`. Any other string comes back unchanged.
-- With `--major` (`-M`), `--minor` (`-m`), or `--patch` (`-p`), a string is read as a [semantic version](https://semver.org) and that part goes up by 1. The parts after it reset to 0, and a pre-release or build suffix is dropped, so `"1.2.3-beta" | inc --minor` returns `"1.3.0"`. A string that isn't a valid version comes back unchanged. If you pass more than one of these flags, `--major` wins over `--minor`, and `--minor` over `--patch`.
-- Any other type, including a list, is an error.
-
-The optional `cell_path` argument increments the value at that path and returns the whole input, so `{version: "0.1.2"} | inc version --patch` returns `{version: "0.1.3"}`. To change a column in every row of a table, call `inc` from [`update`](/commands/docs/update.md): `$table | update version { inc --patch }`.
-:::
+[Using the core plugins](#using-the-core-plugins) describes the commands each of these plugins adds.
 
 Nushell also ships with several plugins that serve as examples or tools for plugin developers. These include `nu_plugin_example`, `nu_plugin_custom_values`, and `nu_plugin_stress_internals`.
 
@@ -306,6 +297,8 @@ open $nu.plugin-path | get plugins | columns
 Change it only through `plugin add` and `plugin rm`. Saving the decoded data back with `to msgpackz` doesn't produce a file that Nu can load. If Nu can't decompress or decode the file at startup, it loads no plugins from it and reports "Error while reading plugin registry file", with the help "you might try deleting the file and registering all of your plugins again". The `plugin` commands that read the file fail with "Failed to load plugin file" and similar help. Older versions of Nushell kept registered plugins in a `plugin.nu` file of `register` commands. Nu no longer reads that format, and pointing `nu --plugin-config` at a `.nu` file gives the error ".nu plugin files are no longer supported".
 
 ## Managing Plugins
+
+The `plugin` subcommands manage plugins. [`plugin`](/commands/docs/plugin.md) on its own only prints its help text, which lists them: `plugin add`, `plugin list`, `plugin rm`, `plugin stop`, and `plugin use`.
 
 Installed plugins are displayed using [`plugin list`](/commands/docs/plugin_list.md):
 
@@ -552,6 +545,506 @@ plugin rm cool
 ```
 
 `plugin rm --force` (`-f`) skips that error, which helps in scripts that remove a plugin that may not be there. Like `plugin add`, `plugin rm` takes `--plugin-config` to edit a registry file other than `$nu.plugin-path`.
+
+## Using the core plugins
+
+Each command below links to its reference page, which lists the flags. This section covers what the commands return and the cases those pages don't explain.
+
+### The polars plugin
+
+The `polars` plugin adds the `polars` commands for working with dataframes. The [DataFrames chapter](dataframes.md) covers them, and the "Polars value types" box in the [quickstart](#core-plugin-quickstart) lists the kinds of values they return.
+
+### The formats plugin
+
+The `formats` plugin reads five more file formats: email messages (`.eml`), iCalendar files (`.ics`), INI files (`.ini`), property lists (`.plist`), and vCard contacts (`.vcf`). The only one it writes is the property list. With the plugin loaded, [`open`](/commands/docs/open.md) runs the matching `from` command for each of these extensions, and [`save`](/commands/docs/save.md) runs [`to plist`](/commands/docs/to_plist.md) for a `.plist` file. Saving structured data to one of the other extensions fails, because there's no `to` command for it.
+
+For a file with a different extension, pipe `open --raw` into the command, as in `open --raw message.txt | from eml`. [`from eml`](/commands/docs/from_eml.md), [`from ics`](/commands/docs/from_ics.md), [`from ini`](/commands/docs/from_ini.md), and [`from vcf`](/commands/docs/from_vcf.md) take text and don't convert values, so a port number or a date comes back as a string. Use [`into int`](/commands/docs/into_int.md) or [`into datetime`](/commands/docs/into_datetime.md) on the fields you need. [`from plist`](/commands/docs/from_plist.md) is different, since property lists store typed values.
+
+#### Email messages
+
+`from eml` turns one email message into a record:
+
+```nu
+let message = "From: Alice <alice@example.com>
+To: Bob <bob@example.com>, carol@example.com
+Subject: Lunch
+X-Priority: 3
+
+Are we still on for Friday? I can book a table for noon."
+$message | from eml
+# => ╭────────────┬────────────────────────────────────────────────────╮
+# => │ Subject    │ Lunch                                              │
+# => │ From       │ {record 2 fields}                                  │
+# => │ To         │ [table 2 rows]                                     │
+# => │ X-Priority │ 3                                                  │
+# => │ Body       │ Are we still on for Friday? I can book a table for │
+# => ╰────────────┴────────────────────────────────────────────────────╯
+$message | from eml | get To | to nuon
+# => [[Name, Address]; [Bob, "bob@example.com"], [null, "carol@example.com"]]
+```
+
+The record starts with `Subject`, `From`, and `To`, then has the other headers in the order they appear, then `Body`. The headers that hold addresses (`From`, `To`, `Reply-To`, `Delivered-To`, `X-Original-To`, and `Return-Path`) become a record with `Name` and `Address`, or a list of those records when there are several addresses. `Name` is `null` for a bare address. Every other header, `Cc` included, stays a string, with encoded words such as `=?UTF-8?B?...?=` decoded. A header with an empty value becomes `null`. Header names are case-sensitive, so a `subject:` header is an ordinary header and doesn't fill in `Subject`. When a header appears more than once, as `Received` usually does, the record keeps the last one.
+
+`Body` is the text after the headers, exactly as it is in the file. Quoted-printable text and MIME parts aren't decoded. It's also cut to the first 50 bytes, which is why the body above stops at "for". `--preview-body` (`-b`) sets a different limit in bytes. The cut never splits a character, and a negative limit gives an empty body. To keep the whole body, pass a limit larger than the message, such as `--preview-body 1_000_000`.
+
+Text that doesn't start with a header fails with "Can't convert to structured eml data". A message made only of headers needs a blank line after them. Without one, `from eml` fails the same way, or crashes the plugin with "Failed to receive response to plugin call from `formats`" when the text doesn't end with a newline. The address parser also misreads one kind of list. When a bare address comes before a named one, as in `bob@example.com, Carol <carol@example.com>`, the result is a single address named `bob@example.com, Carol`.
+
+#### Calendars and contacts
+
+`from ics` reads iCalendar data and `from vcf` reads vCard contacts. Both return a list with one record for each `BEGIN:VCALENDAR` or `BEGIN:VCARD` block, and both turn each property line in the block into a record with three fields:
+
+- `name`: the property name, such as `SUMMARY` or `EMAIL`.
+- `value`: the value, as a string. Dates such as `20261120T120000` aren't converted.
+- `params`: `null`, or a record that maps each parameter to a list of strings.
+
+Before parsing, both commands join each continuation line, one that starts with a space or a tab, to the line before it.
+
+A contact record has a single column, `properties`. A calendar record has `properties` for the calendar itself and a list for each kind of component: `events`, `alarms`, `to-Dos`, `journals`, `free-busys`, and `timezones`. Each component is a record with its own `properties`. Events and to-dos also have an `alarms` list, and time zones have a `transitions` list.
+
+```nu
+let calendar = 'BEGIN:VCALENDAR
+BEGIN:VEVENT
+SUMMARY:Lunch with the team
+DTSTART;TZID=America/Chicago:20261120T120000
+ATTENDEE;ROLE=CHAIR;CN=Bob:mailto:bob@example.com
+END:VEVENT
+END:VCALENDAR'
+$calendar | from ics | get 0.events.0.properties
+# => ╭───┬──────────┬────────────────────────┬───────────────────╮
+# => │ # │   name   │         value          │      params       │
+# => ├───┼──────────┼────────────────────────┼───────────────────┤
+# => │ 0 │ SUMMARY  │ Lunch with the team    │                   │
+# => │ 1 │ DTSTART  │ 20261120T120000        │ {record 1 field}  │
+# => │ 2 │ ATTENDEE │ mailto:bob@example.com │ {record 2 fields} │
+# => ╰───┴──────────┴────────────────────────┴───────────────────╯
+$calendar | from ics | get 0.events.0.properties.2.params | to nuon
+# => {ROLE: [CHAIR], CN: [Bob]}
+```
+
+To get one record per event, with a column for each property, turn each `properties` table around with [`transpose`](/commands/docs/transpose.md):
+
+```nu
+$calendar | from ics | get 0.events | each {|event|
+    $event.properties | select name value | transpose --header-row --as-record
+}
+# => ╭───┬─────────────────────┬─────────────────┬────────────────────────╮
+# => │ # │       SUMMARY       │     DTSTART     │        ATTENDEE        │
+# => ├───┼─────────────────────┼─────────────────┼────────────────────────┤
+# => │ 0 │ Lunch with the team │ 20261120T120000 │ mailto:bob@example.com │
+# => ╰───┴─────────────────────┴─────────────────┴────────────────────────╯
+```
+
+`transpose` keeps only the first of several properties with the same name, and a contact often has more than one `EMAIL` or `TEL`. Collect those with [`where`](/commands/docs/where.md) instead:
+
+```nu
+let cards = 'BEGIN:VCARD
+FN:Alice Example
+EMAIL;TYPE=work:alice@example.com
+EMAIL;TYPE=home:alice@home.example
+END:VCARD
+BEGIN:VCARD
+FN:Bob Example
+EMAIL:bob@example.com
+END:VCARD'
+$cards | from vcf | each {|card|
+    let props = $card.properties
+    {
+        name: ($props | where name == FN | get 0.value)
+        email: ($props | where name == EMAIL | get value)
+    }
+} | to nuon
+# => [[name, email]; ["Alice Example", ["alice@example.com", "alice@home.example"]], ["Bob Example", ["bob@example.com"]]]
+```
+
+`into datetime --format '%Y%m%dT%H%M%S'` turns a date such as `20261120T120000` into a datetime. The result is in your local time zone, whatever `TZID` parameter the property has.
+
+Empty input gives an empty list. Text that isn't iCalendar or vCard data doesn't stop the command. The list holds an error in place of a record, so `'hello' | from ics | length` returns `1`. The error appears when you use that item, for example when the list is displayed:
+
+```nu
+'hello' | from ics
+# => Error: nu::shell::unsupported_input
+# =>
+# =>   × Unsupported input
+# =>    ╭─[source:1:1]
+# =>  1 │ 'hello' | from ics
+# =>    · ───┬───   ────┬───
+# =>    ·    │          ╰── input cannot be parsed as .ics (property error: Line 1: Missing property name.)
+# =>    ·    ╰── value originates from here
+# =>    ╰────
+```
+
+#### INI files
+
+`from ini` returns a record with an entry for each section, which holds that section's keys and values. Keys above the first section header go in a section named with the empty string, which you can read with `get ''`:
+
+```nu
+let config = '; global settings
+name = demo
+
+[server]
+port = 8080
+host = "localhost"'
+$config | from ini | to nuon
+# => {"": {name: demo}, server: {port: "8080", host: localhost}}
+```
+
+A key and its value can be separated by `=` or `:`. Lines that start with `;` or `#` are comments, but a `;` later in a line is part of the value, so `port = 8080 ; the default` gives `"8080 ; the default"`. A section with no keys becomes an empty record.
+
+The flags turn parts of the parsing off or on:
+
+- Quotes around a value are removed. `--no-quote` (`-q`) keeps them.
+- Backslash escapes in values, such as `\t` and `\n`, become a tab and a newline. That breaks Windows paths. `C:\temp\new` turns into `C:`, a tab, `emp`, a newline, and `ew`. `--no-escape` (`-e`) keeps backslashes as they are.
+- `--indented-multiline-value` (`-m`) reads an indented line as more of the previous value, joined with a newline. Without it, an indented line runs into the next key's name. The lines `text = line one`, `  line two`, and `next = 3` give a key named `"line two\nnext"` with the value `"3"`.
+- Leading spaces in key names are trimmed unless you pass `--preserve-key-leading-whitespace` (`-w`). If you also pass `-m`, an indented line is still read as part of the previous value, not as a key.
+
+```nu
+'[paths]
+temp = C:\temp\new' | from ini --no-escape | get paths.temp
+# => C:\temp\new
+```
+
+A line with no `=` or `:` is an error:
+
+```nu
+"[server]\nport" | from ini
+# => Error: nu::shell::unsupported_input
+# =>
+# =>   × Unsupported input
+# =>    ╭─[source:1:1]
+# =>  1 │ "[server]\nport" | from ini
+# =>    · ────────┬───────   ────┬───
+# =>    ·         │              ╰── Could not load ini: 2:5 expecting "[Some('='), Some(':')]" but found EOF.
+# =>    ·         ╰── value originates from here
+# =>    ╰────
+```
+
+A section name that appears twice, or a key that appears twice in one section, fails with "Plugin failed to decode: invalid entry, duplicate keys are not allowed for `Record`".
+
+#### Property lists
+
+`from plist` reads XML, binary, and old-style text (OpenStep) property lists, from a string or from binary data. Any other input, or data that isn't a property list, fails with "Could not load plist". Because binary input works, `open` can read the binary `.plist` files that macOS keeps in `~/Library/Preferences`. `to plist` writes an XML property list as text, or a binary one with `--binary` (`-b`).
+
+| Property list type | Nushell type                         |
+| ------------------ | ------------------------------------ |
+| `dict`             | record                               |
+| `array`            | list                                 |
+| `string`           | string                               |
+| `integer`          | int (one too large for an int fails) |
+| `real`             | float                                |
+| `true`, `false`    | bool                                 |
+| `date`             | datetime, in UTC                     |
+| `data`             | binary                               |
+| UID                | float                                |
+
+`to plist` goes the other way. It also takes a filesize, which it writes as an integer number of bytes, and it writes datetimes in UTC. A round trip changes both:
+
+```nu
+{name: demo, size: 2kB, saved: 2026-11-14T12:30:00-06:00} | to plist | from plist | to nuon
+# => {name: demo, size: 2000, saved: 2026-11-14T18:30:00+00:00}
+```
+
+A value with no property list type, such as `null`, a duration, or a range, fails the whole conversion, wherever it is in the input. The error names the value:
+
+```nu
+{name: demo, timeout: 5sec} | to plist
+# => Error: nu::shell::error
+# =>
+# =>   × Cannot convert plist
+# =>   [Failed to read contents for label `Duration(5s) is not convertible` (offset: 9223372036854775807, length: 0): OutOfBounds]
+```
+
+`save settings.plist` writes an XML property list. To write a binary one, use `to plist --binary | save --raw settings.plist`. Without `--raw`, `save` runs `to plist` again on the binary data, and the file ends up as an XML property list holding one `data` element.
+
+### The gstat plugin
+
+[`gstat`](/commands/docs/gstat.md) sums up the status of a Git repository in one record, which is handy in a [prompt](./configuration.md#prompt-configuration). It reads the repository with the libgit2 library, so it doesn't need the `git` command.
+
+With no argument, `gstat` looks at the current directory. You can also pass a directory, or pipe one in as a string. Any directory inside a repository works, as it does with `git`. A path that doesn't exist or isn't a directory is an error ("path does not exist" or "path is not a directory").
+
+```nu
+gstat
+# => ╭─────────────────────┬───────────────────╮
+# => │ idx_added_staged    │ 1                 │
+# => │ idx_modified_staged │ 0                 │
+# => │ idx_deleted_staged  │ 0                 │
+# => │ idx_renamed         │ 0                 │
+# => │ idx_type_changed    │ 0                 │
+# => │ wt_untracked        │ 1                 │
+# => │ wt_modified         │ 1                 │
+# => │ wt_deleted          │ 0                 │
+# => │ wt_type_changed     │ 0                 │
+# => │ wt_renamed          │ 0                 │
+# => │ ignored             │ 1                 │
+# => │ conflicts           │ 0                 │
+# => │ ahead               │ 1                 │
+# => │ behind              │ 0                 │
+# => │ stashes             │ 0                 │
+# => │ repo_name           │ repo              │
+# => │ tag                 │ v0.1.0-2-g4450033 │
+# => │ branch              │ main              │
+# => │ remote              │ origin/main       │
+# => │ state               │ clean             │
+# => ╰─────────────────────┴───────────────────╯
+```
+
+| Column                                                                                             | Meaning                                                                                                                                                                                                                                                                           |
+| -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `idx_added_staged`, `idx_modified_staged`, `idx_deleted_staged`, `idx_renamed`, `idx_type_changed` | Files with staged changes of each kind                                                                                                                                                                                                                                            |
+| `wt_untracked`, `wt_modified`, `wt_deleted`, `wt_type_changed`, `wt_renamed`                       | Unstaged changes in the working tree. A deleted file paired with a similar untracked file counts once, in `wt_renamed`, and not in `wt_deleted` or `wt_untracked`. A renamed file that was also edited counts in `wt_modified` too                                                |
+| `ignored`                                                                                          | Ignored files. An ignored directory counts once                                                                                                                                                                                                                                   |
+| `conflicts`                                                                                        | Files with unresolved merge conflicts                                                                                                                                                                                                                                             |
+| `ahead`, `behind`                                                                                  | Commits ahead of and behind the upstream branch, or `0` when there's no upstream                                                                                                                                                                                                  |
+| `stashes`                                                                                          | Stash entries in the repository, whichever branch they were made on                                                                                                                                                                                                               |
+| `repo_name`                                                                                        | The name of the working directory, or of the repository directory in a bare repository                                                                                                                                                                                            |
+| `tag`                                                                                              | The nearest tag, the way `git describe --tags` shows it: the tag alone when `HEAD` is tagged, otherwise the tag, the number of commits since it, and `g` with the short commit hash, as in `v0.1.0-2-g4450033` above. `no_tag` when no tag is reachable                           |
+| `branch`                                                                                           | The current branch. With a detached `HEAD`, the first 8 hex digits of the commit. In a repository with no commits yet, the branch that `HEAD` names                                                                                                                               |
+| `remote`                                                                                           | The upstream branch, such as `origin/main`, or an empty string when there's none                                                                                                                                                                                                  |
+| `state`                                                                                            | The operation in progress: `clean`, `merge`, `revert`, `revertsequence`, `cherrypick`, `cherrypicksequence`, `bisect`, `rebase`, `rebaseinteractive`, `rebasemerge`, `applymailbox`, or `applymailboxorrebase`. A `git rebase` stopped at a conflict shows as `rebaseinteractive` |
+
+Outside a repository, every count is `-1`, and the text columns are `no_repository`, `no_tag`, `no_branch`, `no_remote`, and `no_state`. In a bare repository, or when libgit2 can't read the index, the status counts are `-1` and the other columns are filled in.
+
+To find the tag, `gstat` walks back through the history from `HEAD` to the nearest tagged commit. In a large repository with no recent tag, that takes time on every call. `--no-tag` skips the search and reports `no_tag`.
+
+This right prompt shows the branch and the numbers of staged, modified, and untracked files, and nothing outside a repository:
+
+```nu
+$env.PROMPT_COMMAND_RIGHT = {||
+    let status = gstat --no-tag
+    if $status.repo_name == "no_repository" {
+        ""
+    } else {
+        $"($status.branch) +($status.idx_added_staged) ~($status.wt_modified) ?($status.wt_untracked)"
+    }
+}
+```
+
+In the repository above, it shows `main +1 ~1 ?1`. The [garbage collector](#plugin-garbage-collector) stops `gstat` after 10 seconds without a call, so the prompt often has to start it again. `$env.config.plugin_gc.plugins.gstat = { enabled: false }` keeps it running. If `gstat` is still slow in a large repository, see [Slow Prompt Segments](./configuration.md#slow-prompt-segments).
+
+### The query plugin
+
+The `query` plugin adds [`query json`](/commands/docs/query_json.md), [`query xml`](/commands/docs/query_xml.md), [`query web`](/commands/docs/query_web.md) for HTML, and [`query webpage-info`](/commands/docs/query_webpage-info.md). [`query`](/commands/docs/query.md) on its own returns its help text as a string, with a list of all the `query` subcommands. The list includes [`query db`](/commands/docs/query_db.md), which is built into Nushell and isn't part of the plugin.
+
+All four commands take text. Read a file with `open --raw`, because a plain `open` parses a `.json` or `.xml` file into structured data, and structured input is an error:
+
+```nu
+{name: demo} | query json name
+# => Error: nu::shell::error
+# =>
+# =>   × Problem with input data
+# =>
+# => Error: nu::shell::cant_convert
+# =>
+# =>   × Can't convert to string.
+# =>    ╭─[source:1:1]
+# =>  1 │ {name: demo} | query json name
+# =>    · ──────┬─────
+# =>    ·       ╰── can't convert record<name: string> to string
+# =>    ╰────
+```
+
+The other commands report the same mistake as "Requires text input" (`query web`) or "Input type not supported" (`query xml` and `query webpage-info`). A page fetched with [`http get`](/commands/docs/http_get.md) is already text.
+
+#### Querying JSON
+
+`query json` runs a [GJSON](https://github.com/tidwall/gjson.rs) path against JSON text. For a plain lookup, `from json | get` does the same job. GJSON paths add `#` for the length of an array or for all of its elements, `#(...)` for the first element that matches a condition, `#(...)#` for all of them, `*` and `?` wildcards in keys, and modifiers such as `@reverse` after a `|`:
+
+```nu
+let json = '{"authors": [
+    {"name": "Ann", "commits": 120, "active": true},
+    {"name": "Bob", "commits": 45, "active": false},
+    {"name": "Cy", "commits": 7.5, "active": true}
+]}'
+$json | query json 'authors.#(active==true)#.name'
+# => ╭───┬─────╮
+# => │ 0 │ Ann │
+# => │ 1 │ Cy  │
+# => ╰───┴─────╯
+$json | query json 'authors.#(commits>100).name'
+# => Ann
+$json | query json 'authors.#.commits' | to nuon
+# => [120, 45, 7.5]
+```
+
+The result comes back as Nushell data. Objects become records and arrays become lists. A number becomes a float if it's written with a decimal point, and an int otherwise. A path that matches nothing returns `null`, not an error. The `@pretty` and `@ugly` modifiers are the exception. With either one in the path, the result is JSON text, formatted or compacted:
+
+```nu
+$json | query json 'authors.0|@ugly'
+# => {"name":"Ann","commits":120,"active":true}
+```
+
+Text that isn't JSON fails with "Invalid JSON". An object with the same key twice fails with "Plugin failed to decode: invalid entry, duplicate keys are not allowed for `Record`".
+
+#### Querying XML
+
+`query xml` runs an XPath 1.0 expression against XML text. An expression that computes a value returns it directly: a string, a bool, or a number, which is always a float. An expression that selects nodes returns a table with a row for each node, in document order.
+
+XPath 1.0 has no default namespace. In a document that declares one with `xmlns="..."`, such as an Atom feed, a plain `//entry` matches nothing. Bind a prefix to the namespace with `--namespaces` (`-n`), a record that maps each prefix to a namespace URI string, and use the prefix in the expression. The `xml` prefix is always bound.
+
+```nu
+let feed = '<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <entry><title>First post</title><link href="https://example.com/1"/></entry>
+    <entry><title>Second post</title><link href="https://example.com/2"/></entry>
+</feed>'
+$feed | query xml '//entry/title' | to nuon
+# => []
+$feed | query xml '//a:entry/a:title' --namespaces {a: "http://www.w3.org/2005/Atom"}
+# => ╭───┬──────────────╮
+# => │ # │ string_value │
+# => ├───┼──────────────┤
+# => │ 0 │ First post   │
+# => │ 1 │ Second post  │
+# => ╰───┴──────────────╯
+$feed | query xml 'count(//a:entry)' --namespaces {a: "http://www.w3.org/2005/Atom"}
+# => 2.0
+$feed | query xml 'string(/*/@xml:lang)'
+# => en
+```
+
+A prefix that isn't bound crashes the plugin with "Failed to receive response to plugin call from `query`".
+
+By default each row has only `string_value`, the node's text. `--output-type` adds `type`, which is `element`, `attribute`, `text`, `comment`, `processing_instruction`, `root`, or `namespace`. `--output-names` adds `local_name`, `namespace`, and `prefixed_name`, which are `null` for a node without a name, such as text. Once you pass any of the `--output-*` switches, only the columns you ask for appear. Add `--output-string-value` to keep the text, which this example leaves out:
+
+```nu
+$feed | query xml '//a:entry[1]/* | //a:entry[1]/a:link/@href' --namespaces {a: "http://www.w3.org/2005/Atom"} --output-type --output-names
+# => ╭───┬───────────┬────────────┬─────────────────────────────┬───────────────╮
+# => │ # │   type    │ local_name │          namespace          │ prefixed_name │
+# => ├───┼───────────┼────────────┼─────────────────────────────┼───────────────┤
+# => │ 0 │ element   │ title      │ http://www.w3.org/2005/Atom │ title         │
+# => │ 1 │ element   │ link       │ http://www.w3.org/2005/Atom │ link          │
+# => │ 2 │ attribute │ href       │                             │ href          │
+# => ╰───┴───────────┴────────────┴─────────────────────────────┴───────────────╯
+```
+
+XML that doesn't parse fails with "Invalid XML document", and an XPath expression that doesn't parse fails with "invalid xpath query". To work with the whole document as Nushell data instead, use [`from xml`](/commands/docs/from_xml.md).
+
+#### Scraping HTML
+
+`query web` picks elements out of HTML text with a CSS selector, given with `--query` (`-q`). The HTML usually comes from `http get`. Here it's a string:
+
+```nu
+let page = '<h1>Release <em>notes</em></h1>
+<ul>
+    <li><a href="/v2.html" title="Latest">Version 2</a></li>
+    <li><a href="/v1.html">Version 1</a></li>
+</ul>
+<table>
+    <tr><th>Version</th><th>Date</th><th>Notes</th></tr>
+    <tr><td>2.0</td><td>2026-11-01</td><td>New parser</td></tr>
+    <tr><td>1.0</td><td>2026-06-15</td></tr>
+</table>'
+$page | query web --query h1 | to nuon
+# => [["Release ", notes]]
+$page | query web --query h1 | each { str join }
+# => ╭───┬───────────────╮
+# => │ 0 │ Release notes │
+# => ╰───┴───────────────╯
+$page | query web --query 'li a' --attribute href | to nuon
+# => ["/v2.html", "/v1.html"]
+$page | query web --query 'li a' --attribute [href title]
+# => ╭───┬──────────┬────────╮
+# => │ # │   href   │ title  │
+# => ├───┼──────────┼────────┤
+# => │ 0 │ /v2.html │ Latest │
+# => │ 1 │ /v1.html │        │
+# => ╰───┴──────────┴────────╯
+```
+
+Each match gives a list of the pieces of text inside it, so a heading with an `em` element in it comes back as two strings, and [`str join`](/commands/docs/str_join.md) puts them back together. `--as-html` (`-m`) returns each match's HTML instead. `--attribute` (`-a`) returns the value of one attribute, or an empty string for an element that doesn't have it. Given a list of names, `--attribute` returns a table with a column for each. An empty string or an empty list counts as no `--attribute` at all, and any other kind of value gives an empty string for each match. `--attribute` takes precedence over `--as-html`, and `--as-table` takes precedence over both. Without `--query` or `--as-table`, the selector is empty, which is an error:
+
+```nu
+'<p>hi</p>' | query web
+# => Error: nu::shell::error
+# =>
+# =>   × CSS query parse error
+# =>    ╭─[source:1:15]
+# =>  1 │ '<p>hi</p>' | query web
+# =>    ·               ────┬────
+# =>    ·                   ╰─┤ Unexpected error occurred. Please report this to the developer
+# =>    ·                     │ EmptySelector
+# =>    ╰────
+# =>   help: cannot parse query as a valid CSS selector
+```
+
+`query web` parses its input as an HTML fragment, which drops the `head` and `body` tags but keeps what's inside them. A selector that names one of them, such as `body > p`, matches nothing unless you add `--document` (`-d`) to parse the input as a full document:
+
+```nu
+'<html><body><p>hi</p></body></html>' | query web --query 'body > p' | to nuon
+# => []
+'<html><body><p>hi</p></body></html>' | query web --document --query 'body > p' | to nuon
+# => [[hi]]
+```
+
+`--as-table` (`-t`) turns an HTML `table` element into a Nushell table. Give it the names of the columns you want, and it finds the tables whose first row has `th` cells with those names, with or without `--document`:
+
+```nu
+$page | query web --as-table [Version Notes]
+# => ╭───┬─────────┬─────────────────────────╮
+# => │ # │ Version │          Notes          │
+# => ├───┼─────────┼─────────────────────────┤
+# => │ 0 │ 2.0     │ New parser              │
+# => │ 1 │ 1.0     │ Missing column: 'Notes' │
+# => ╰───┴─────────┴─────────────────────────╯
+$page | query web --as-table [Price]
+# => ╭───────┬─────────────────────────────────────────────────────╮
+# => │ Price │ error: no data found (column name may be incorrect) │
+# => ╰───────┴─────────────────────────────────────────────────────╯
+```
+
+The names are case-sensitive and must match the header text exactly, but you can ask for any of the columns, in any order. Cells come back as strings with their markup removed, and a row with too few cells gets `Missing column: 'NAME'`. A table with a header row and no data rows comes back as one row of filler values, not as an empty table. When more than one table matches, the result is a list of tables. When none does, the result is a record like the one above, not an error. A name that contains a header's text without being equal to it, such as `Full Name` for a `Name` column, crashes the plugin.
+
+`--as-table []` returns every table on the page: the table itself when there's only one, and a list of tables when there are more. The columns of each come in no fixed order. A table with no `th` cells in its first row gets columns named `column0`, `column1`, and so on, and a table with its headers down the first column doesn't come out right.
+
+`--inspect` (`-i`) helps you find the header names. With `--as-table`, it prints to stderr the names you passed, the first 2047 bytes of the HTML, the header row of every table on the page, and the tables that matched. On input shorter than 2047 bytes, it crashes the plugin. With `--query`, `--inspect` ignores the selector and returns the text of the whole page.
+
+#### Page metadata
+
+`query webpage-info` collects a page's metadata into a record:
+
+```nu
+let page = '<html lang="en">
+<head>
+    <title>Release notes</title>
+    <meta name="description" content="What changed in each release">
+    <meta property="og:title" content="Release notes">
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml">
+</head>
+<body><p>See <a href="/v2.html">version 2</a>.</p></body>
+</html>'
+$page | query webpage-info | reject text_content
+# => ╭─────────────┬──────────────────────────────╮
+# => │ title       │ Release notes                │
+# => │ description │ What changed in each release │
+# => │ url         │                              │
+# => │ feed        │ /feed.xml                    │
+# => │ language    │ en                           │
+# => │ meta        │ {record 2 fields}            │
+# => │ opengraph   │ {record 5 fields}            │
+# => │ schema_org  │ [list 0 items]               │
+# => │ links       │ [table 1 row]                │
+# => ╰─────────────┴──────────────────────────────╯
+$page | query webpage-info | get opengraph | to nuon
+# => {og_type: website, properties: {title: "Release notes"}, images: [], videos: [], audios: []}
+```
+
+- `title` and `description` come from the `title` element and the `meta` tag named `description` in `head`, and `language` from the `lang` attribute of `html` or `body`. Each is `null` when the page doesn't set it.
+- `url` is the page's canonical link, from `link rel="canonical"`, or `null`. When it's set, the URLs in `links` are made absolute against it. Otherwise they stay as written, because the command sees only the HTML, not where it came from.
+- `feed` is the last RSS, Atom, or other feed linked with `rel="alternate"`.
+- `text_content` is the text of the page body, whitespace included.
+- `meta` maps the `property`, `name`, or `http-equiv` of each `meta` tag in `head` to its `content`, and has a `charset` entry when the page declares one.
+- `opengraph` holds the `og:` properties. `og_type` is `website` when the page doesn't set `og:type`. `properties` has the other properties without their `og:` prefix, and `images`, `videos`, and `audios` are lists of records with a `url` and `properties`.
+- `schema_org` has a record with `schema_type` and `value` for each JSON-LD block, a `script` element of type `application/ld+json`.
+- `links` is a table with the `url` and `text` of each link.
+
+### The inc plugin
+
+[`inc`](/commands/docs/inc.md) takes a single value:
+
+- An integer goes up by 1: `41 | inc` returns `42`.
+- Without a flag, a string that holds a whole number goes up by 1 and stays a string, so `"41" | inc` returns `"42"`. Any other string comes back unchanged.
+- With `--major` (`-M`), `--minor` (`-m`), or `--patch` (`-p`), a string is read as a [semantic version](https://semver.org) and that part goes up by 1. The parts after it reset to 0, and a pre-release or build suffix is dropped, so `"1.2.3-beta" | inc --minor` returns `"1.3.0"`. A string that isn't a valid version comes back unchanged. If you pass more than one of these flags, `--major` wins over `--minor`, and `--minor` over `--patch`.
+- Any other type, including a list, is an error.
+
+The optional `cell_path` argument increments the value at that path and returns the whole input, so `{version: "0.1.2"} | inc version --patch` returns `{version: "0.1.3"}`. To change a column in every row of a table, call `inc` from [`update`](/commands/docs/update.md): `$table | update version { inc --patch }`.
 
 ## For Plugin Developers
 
