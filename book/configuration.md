@@ -88,15 +88,25 @@ $nu.default-config-dir
 # => C:\Users\me\AppData\Roaming\nushell
 ```
 
-The first time Nushell is launched, it will create the configuration directory and an empty (other than comments) `env.nu` and `config.nu`.
+The first time Nushell is launched, it will create the configuration directory and an empty (other than comments) `env.nu` and `config.nu`. It prints where it put them:
+
+```
+Environment config file created at: /home/me/.config/nushell/env.nu
+Config file created at: /home/me/.config/nushell/config.nu
+```
+
+Nushell decides that this is the first launch only when the configuration directory doesn't exist. If you delete `config.nu` later, Nushell starts without it and doesn't write a new one. To get the commented `config.nu` back, run `config reset --nu --without-backup`. Plain [`config reset`](/commands/docs/config_reset.md) writes the same text into both files after renaming the current ones to `oldconfig-<date>.nu` and `oldenv-<date>.nu`, and fails if one of them is missing. Nushell doesn't create the `autoload` directory; see [Autoload directories](#autoload-directories).
 
 ::: tip
-You can quickly open `config.nu` in your default text editor using the `config nu` command. Likewise, the `config env` command will open `env.nu`.
+You can quickly open `config.nu` in your default text editor using the `config nu` command. Likewise, the `config env` command will open `env.nu`. If Nushell was started with `--config` or `--env-config`, these commands open that file instead.
 
-This requires that you have configured a default editor using either:
+This requires that you have configured an editor. Nushell uses the first of these that is set:
 
-- Nushell's `$env.config.buffer_editor` setting
-- The `$env.VISUAL` or `$env.EDITOR` environment variables
+1. Nushell's `$env.config.buffer_editor` setting
+2. The `$env.VISUAL` environment variable
+3. The `$env.EDITOR` environment variable
+
+If none of them is set, `config nu` fails with a `No editor configured` error.
 
 For example, place this in your `config.nu` to edit your files in Visual Studio Code:
 
@@ -104,7 +114,31 @@ For example, place this in your `config.nu` to edit your files in Visual Studio 
 $env.config.buffer_editor = 'code'
 ```
 
+A string names only the program. To pass arguments to the editor, use a list, as in `['code', '--wait']`. See [`buffer_editor`](./config_reference.md#buffer-editor) for the `{file}`, `{line}`, and `{col}` placeholders.
 :::
+
+### Autoload directories
+
+After `config.nu`, and after `login.nu` in a login shell, Nushell loads every file whose name ends in `.nu` from the autoload directories. It goes through the vendor directories first, in the order `$nu.vendor-autoload-dirs` lists them, then the user directory. Directories that don't exist are skipped.
+
+Within a directory, files load in the byte order of their names, not in dictionary order. Digits come before uppercase letters, uppercase before lowercase, and `10.nu` before `9.nu`. If the order matters, start the names with zero-padded numbers, such as `01-path.nu` and `02-aliases.nu`. Nushell doesn't look inside subdirectories and skips files with other extensions.
+
+`$nu.user-autoload-dirs` always holds exactly one directory, `autoload` inside the configuration directory, so it moves along with `XDG_CONFIG_HOME` and `--config-home`. Nushell doesn't create it. To start using it:
+
+```nu
+mkdir ($nu.user-autoload-dirs | first)
+```
+
+`$nu.vendor-autoload-dirs` is for files that package managers and other programs install. It lists, in load order:
+
+1. On macOS, `/Library/Application Support/nushell/vendor/autoload`.
+2. On Linux, macOS, and other Unix systems, `nushell/vendor/autoload` in each directory of `XDG_DATA_DIRS`, starting with the last one, so that the first directory loads last and wins. When `XDG_DATA_DIRS` is unset or empty, Nushell uses `/usr/local/share/:/usr/share/`, which packagers can change when they build Nushell. Relative entries are skipped.
+3. On Windows, `nushell\vendor\autoload` in `%ProgramData%`.
+4. The directory that packagers can compile in with `NU_VENDOR_AUTOLOAD_DIR`, if there is one.
+5. `vendor/autoload` in `$nu.data-dir`.
+6. The directory in the `NU_VENDOR_AUTOLOAD_DIR` environment variable, if it is set to an absolute path.
+
+A directory that would appear twice is listed only once, in its first place. See [Startup Variables](#startup-variables) for the variables that change these directories.
 
 ## Common Configuration Tasks in `config.nu`:
 
@@ -131,6 +165,8 @@ The [Environment](./environment.md) Chapter covers additional information on how
 
 As with most shells, Nushell searches the environment variable named `PATH` (or variants).
 
+To run an external command, Nushell looks for it in the `PATH` directories, in order. On Windows, it looks in the current directory first, before any `PATH` entry. Windows also tries the file extensions listed in `PATHEXT`. Nushell reads that list from the environment it was started with, so changing `$env.PATHEXT` inside Nushell doesn't change which files it finds.
+
 :::tip
 Unlike some shells, Nushell attempts to be "case agnostic" with environment variables. `Path`, `path`, `PATH`, and even `pAtH` are all allowed variants of the same environment variable. See [Environment - Case Sensitivity](./environment.md#case-sensitivity) for details.
 :::
@@ -151,10 +187,33 @@ path add "~/.local/bin"
 path add ($nu.home-dir | path join ".cargo" "bin")
 ```
 
+`path add` takes one or more paths and changes `$env.PATH`, or `$env.Path` when there is no `PATH` variable:
+
+- It expands each path with [`path expand --no-symlink`](/lang-guide/chapters/types/other_types/path.md#absolute-paths-with-path-expand), so `~` and relative paths become absolute and symbolic links are kept as they are.
+- `--append` (`-a`) adds the paths at the end instead of the front.
+- Afterwards, it removes repeated entries from the whole list, keeping the first. A directory that is already in the path moves to the front, or stays where it was with `--append`.
+- `--ret` (`-r`) also returns the new list.
+- A record picks a path by operating system, using the names that `$nu.os-info.name` reports, such as `linux`, `macos`, and `windows`. A record without a key for the current system adds nothing.
+- With no paths, it fails with `Empty input`, and with a value that isn't a string or a record, `Invalid input`.
+
+```nu
+path add --append {linux: "/opt/tools/bin", macos: "/opt/homebrew/bin"}
+```
+
 ::: tip
 Notice the use of `path join` in the example above. This command properly joins two path
 components regardless of whether or not the path separator is present. See `help path` for
 more commands in this category.
+
+[`path join`](/commands/docs/path_join.md) also joins a list of parts, and a part that is an absolute path replaces everything before it:
+
+```nu
+[$nu.home-dir ".cargo" "bin"] | path join
+# => /home/me/.cargo/bin
+"/home/me" | path join "/opt/tools" "bin"
+# => /opt/tools/bin
+```
+
 :::
 
 ### Prompt Configuration
@@ -162,9 +221,9 @@ more commands in this category.
 Nushell provides a number of prompt configuration options. By default, Nushell includes:
 
 - A prompt which includes the current directory, abbreviated using `~` if it is (or is under)
-  the home directory.
+  the home directory. The directory is green, or red when Nushell runs with administrator (root) rights.
 - A prompt indicator which appears immediately to the right of the prompt. This defaults to `> ` when in normal editing mode, or a `: ` when in Vi-insert mode. Note extra space after the character to provide separation of the command from the prompt.
-- A right-prompt with the date and time
+- A right-prompt with the date and time. When the last command failed, its exit code (`$env.LAST_EXIT_CODE`) appears in red in front of the date.
 - An indicator which is displayed when the current commandline extends over multiple lines - `::: ` by default
 
 The environment variables which control these prompt components are:
@@ -278,6 +337,8 @@ $env.ENV_CONVERSIONS = $env.ENV_CONVERSIONS | merge {
 }
 ```
 
+`path expand --no-symlink` makes each directory absolute without following symbolic links, so a linked directory keeps the path you gave it. See [Absolute paths with `path expand`](/lang-guide/chapters/types/other_types/path.md#absolute-paths-with-path-expand).
+
 ### `LS_COLORS`
 
 As with many `ls`-like utilities, Nushell's directory listings make use of the `LS_COLORS` environment variable for defining styles/colors to apply to certain file types and patterns.
@@ -316,12 +377,14 @@ config nu --doc | nu-highlight | bat
 config nu --doc | nu-highlight | less -R
 ```
 
-Some of the more recently added settings are:
+`config nu --default` prints the built-in `default_config.nu` instead, and `config env --doc` and `config env --default` do the same for `env.nu`. Each command takes only one of the two flags at a time; giving both is an error.
 
-- `error_style`: `"fancy"` (the default), `"plain"`, `"short"` for concise single-line error messages, or `"nested"` to show related errors nested under the main one. `error_lines` sets how many lines of source code are shown around the location of an error (default `1`).
-- `auto_cd_implicit`: when `true`, typing just the name of a subdirectory (such as `src`) changes into it. By default, auto-cd requires a path such as `./src`.
-- `history.path`: a custom location for the history file, or `null` to disable history. `history.ignore_space_prefixed` (default `true`) keeps commands that start with a space out of the history.
-- `completions.cache_size`: how many Tab-completion prefixes to remember (default `100`; `0` disables the cache). `completions.persistent_menus`: when `true`, completion and history menus stay open while you edit the commandline.
+The [Configuration reference](./config_reference.md) lists every setting with its type, default, and accepted values. Some of the more recently added settings are:
+
+- `error_style`: `"fancy"` (the default), `"plain"`, `"short"` for concise single-line error messages, or `"nested"` to show related errors nested under the main one. `error_lines` sets how many lines of source code the `fancy` and `nested` styles show above and below the line with the error (default `1`, and it can't be negative). See [Errors](./config_reference.md#errors).
+- `auto_cd_implicit`: when `true`, typing just the name of a subdirectory (such as `src`) changes into it. By default, auto-cd requires a path such as `./src`. See [`auto_cd_implicit`](./config_reference.md#auto-cd-implicit) for how auto-cd works.
+- `history.path`: a custom location for the history file, or `null` to keep no history file. `history.ignore_space_prefixed` (default `true`) keeps commands that start with a space out of the history. See [History](./config_reference.md#history).
+- `completions.cache_size`: how many Tab-completion prefixes to remember (default `100`; `0` disables the cache). `completions.persistent_menus`: when `true`, completion and history menus stay open while you edit the commandline. See [`completions.cache_size`](./config_reference.md#completions-cache-size) for when Nushell empties the cache.
 
 To avoid overwriting existing settings, it's best to simply assign updated values to the desired configuration keys, rather than the entire `config` record. In other words:
 
@@ -458,6 +521,8 @@ To remove the welcome message that displays each time Nushell starts:
 4. Save and exit your editor.
 5. Restart Nushell to test the change.
 
+To keep only the line with the startup time, set `$env.config.show_banner = "short"` instead. The setting also accepts `"full"`, which is the same as `true`, and `"none"`, which is the same as `false`. The banner's colors come from `color_config.banner_foreground`, `banner_highlight1`, and `banner_highlight2`. See [`show_banner`](./config_reference.md#show-banner).
+
 ## Additional Startup Configuration
 
 ### Changing default directories
@@ -486,16 +551,25 @@ The variables that affect Nushell file locations are:
 
   Once Nushell starts, this value is stored in the `$nu.default-config-dir` constant. See [Using Constants](#using-constants) below.
 
-  The configuration directory can also be chosen with the `--config-home <path>` flag when launching `nu`, which takes precedence over `XDG_CONFIG_HOME`. Unlike `XDG_CONFIG_HOME`, the path given to `--config-home` is the Nushell configuration directory itself (no `nushell` subdirectory is added), and a relative path is resolved against the current directory.
+  An empty value is ignored. A relative path is ignored too, but Nushell reports it with a `nu::shell::xdg_config_home_invalid` error that names the directory it uses instead, and then starts normally with the platform's default directory.
 
-- `$env.XDG_DATA_HOME`: If this environment variable is set, Nushell sets the `$nu.data-dir` constant to `($env.XDG_DATA_HOME)/nushell`. The `data-dir` is used in several startup tasks:
+  On macOS and Windows, where the platform's configuration directory isn't the XDG one, Nushell also warns when `<XDG_CONFIG_HOME>/nushell` is empty or missing while the platform's `nushell` directory still has files in it. It doesn't copy anything for you:
+
+  ```
+  WARNING: XDG_CONFIG_HOME has been set but /Users/me/dotfiles/nushell is empty.
+  Nushell will not move your configuration files from /Users/me/Library/Application Support/nushell
+  ```
+
+  The configuration directory can also be chosen with the `--config-home <path>` flag when launching `nu`, which takes precedence over `XDG_CONFIG_HOME`. Unlike `XDG_CONFIG_HOME`, the path given to `--config-home` is the Nushell configuration directory itself (no `nushell` subdirectory is added), a leading `~` is expanded to your home directory, and a relative path is resolved against the current directory.
+
+- `$env.XDG_DATA_HOME`: If this environment variable is set to an absolute path, Nushell sets the `$nu.data-dir` constant to `($env.XDG_DATA_HOME)/nushell`. Otherwise `$nu.data-dir` is the `nushell` directory under the platform's data directory, such as `~/Library/Application Support/nushell` on macOS, `~/.local/share/nushell` on Linux, or `%APPDATA%\nushell` on Windows. A relative or empty value is ignored without a warning. The `data-dir` is used in several startup tasks:
 
   - `($nu.data-dir)/completions` is added to the `const` variable [`$NU_LIB_DIRS`](./special_variables.md#nu-lib-dirs), as well as to `$env.NU_LIB_DIRS`, which starts with the same default list. The constant is the preferred way to configure the search path; see [`NU_LIB_DIRS` Constant](#nu-lib-dirs-constant) below.
   - `($nu.data-dir)/vendor/autoload` is added to `$nu.vendor-autoload-dirs` after the system vendor directories (such as those from `XDG_DATA_DIRS`). Files in this directory will be read after those in the other vendor autoload directories, thus overriding any of their settings.
 
   Note that the directory represented by `$nu.data-dir`, including any of its subdirectories, are NOT created by default. Creation and use of these directories is up to the user.
 
-- `$env.XDG_DATA_DIRS` _(Unix Platforms Only)_: If this environment variable is set, it is used to populate the `$nu.vendor-autoload-dirs` directories. Following the XDG convention that earlier entries take precedence, the directories are processed in _reverse_ order: the first directory in `XDG_DATA_DIRS` is read last, giving it the ability to override definitions from the others.
+- `$env.XDG_DATA_DIRS` _(Unix Platforms Only)_: If this environment variable is set, it is used to populate the `$nu.vendor-autoload-dirs` directories. Following the XDG convention that earlier entries take precedence, the directories are processed in _reverse_ order: the first directory in `XDG_DATA_DIRS` is read last, giving it the ability to override definitions from the others. When the variable is unset or empty, Nushell uses `/usr/local/share/:/usr/share/`. Relative entries are skipped. See [Autoload directories](#autoload-directories) for the whole list.
 
 - `$env.XDG_CACHE_HOME`: If this environment variable is set to an absolute path, Nushell sets the `$nu.cache-dir` constant to `($env.XDG_CACHE_HOME)/nushell`. Otherwise `$nu.cache-dir` is the `nushell` directory under the platform's cache directory, such as `~/Library/Caches/nushell` on macOS, `~/.cache/nushell` on Linux, or `%LOCALAPPDATA%\nushell` on Windows. A relative or empty value is ignored. Nushell doesn't store anything in this directory or create it. It is a standard place for your scripts and plugins to keep data they can rebuild.
 
@@ -666,7 +740,7 @@ The following stages and their steps _may_ occur during startup, based on the fl
 | Step | Stage                           | Nushell Action                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | ---- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 0.   | (misc)                          | Sets internal defaults via its internal Rust implementation. In practice, this may not take place until "first use" of the setting or variable, but there will typically be a Rust default for most (but not all) settings and variables that control Nushell's behavior. These defaults can then be superseded by the steps below.                                                                                             |
-| 1.   | (main)                          | Processes commandline arguments such as `--plugin-config <file>`, `--plugins <list>`, `--experimental-options <list>`, and others. See `nu --help` for a complete list.                                                                                                                                                                                                                                                         |
+| 1.   | (main)                          | Processes commandline arguments such as `--plugin-config <file>`, `--plugins <list>`, `--experimental-options <list>`, and others. See [`nu` flags](#nu-flags) for a complete list.                                                                                                                                                                                                                                             |
 | 2.   | (main)                          | Gets the configuration directory. This is OS-dependent (see [dirs::config_dir](https://docs.rs/dirs/latest/dirs/fn.config_dir.html)), but can be overridden using `XDG_CONFIG_HOME` on all platforms as discussed [above](#changing-default-directories), or with the `--config-home <path>` flag.                                                                                                                              |
 | 3.   | (main)                          | Gets the path to `env.nu` and `config.nu`. By default, these are located in the config directory, but either or both can be overridden using the `--env-config <path>` and `--config <path>` flags. The data directory, the autoload directories, and the plugin registry file are located at this point as well.                                                                                                               |
 | 4.   | (main)                          | Creates the initial `$env.NU_PLUGIN_DIRS` variable. By default, it is an empty list.                                                                                                                                                                                                                                                                                                                                            |
@@ -689,8 +763,8 @@ The following stages and their steps _may_ occur during startup, based on the fl
 | 21.  | (config files) (config.nu)      | Loads the internal `default_config.nu`, which is essentially empty, since the defaults for all `$env.config` settings are now built into Nushell (step 7). This file can be viewed with: `config nu --default \| nu-highlight \| less -R`.                                                                                                                                                                                      |
 | 22.  | (config files) (config.nu)      | Loads (parses and evaluates) the user's `config.nu` (the path to which was determined above).                                                                                                                                                                                                                                                                                                                                   |
 | 23.  | (config files) (login)          | When Nushell is running as a login shell, loads the user's `login.nu`.                                                                                                                                                                                                                                                                                                                                                          |
-| 24.  | (config files)                  | Loops through the vendor autoload directories and loads any `.nu` files found. The directories are processed in the order found in `$nu.vendor-autoload-dirs`, and files in those directories are processed in alphabetical order.                                                                                                                                                                                              |
-| 25.  | (config files)                  | Loops through the user autoload directories and loads any `.nu` files found. The directories are processed in the order found in `$nu.user-autoload-dirs`, and files in those directories are processed in alphabetical order.                                                                                                                                                                                                  |
+| 24.  | (config files)                  | Loops through the vendor autoload directories and loads any `.nu` files found. The directories are processed in the order found in `$nu.vendor-autoload-dirs`, and files in those directories are processed in the byte order of their names (see [Autoload directories](#autoload-directories)).                                                                                                                               |
+| 25.  | (config files)                  | Loops through the user autoload directory and loads any `.nu` files found. `$nu.user-autoload-dirs` holds one directory, and files in it are processed in the byte order of their names.                                                                                                                                                                                                                                        |
 | 26.  | (repl)                          | Runs the commands given with the `--execute (-e)` flag, if any.                                                                                                                                                                                                                                                                                                                                                                 |
 | 27.  | (repl)                          | Sets up the line editor and the command history. From this point on, the `history.file_format`, `history.max_size`, `history.isolation`, and `history.path` settings can no longer be changed.                                                                                                                                                                                                                                  |
 | 28.  | (repl) and (stdlib)             | Shows the welcome banner if configured.                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -785,6 +859,10 @@ The following stages and their steps _may_ occur during startup, based on the fl
   - ❌ Does not source the files in `vendor-autoload-dirs`
   - ❌ Does not source the files in `user-autoload-dirs`
 
+- `nu -l test.nu`
+
+  - Same as `nu test.nu`. Unlike with `-c`, `-l` doesn't make Nushell load `env.nu`, `config.nu`, or `login.nu` for a script file.
+
 - `nu --config foo_config.nu test.nu`
 
   - ✅ Makes the Standard Library available
@@ -825,6 +903,54 @@ The following stages and their steps _may_ occur during startup, based on the fl
   - ❌ Does not enter the REPL
   - ❌ Does not source the files in `vendor-autoload-dirs`
   - ❌ Does not source the files in `user-autoload-dirs`
+
+### `nu` flags
+
+`nu --help` lists every flag with a one-line description. It prints the list in color only when its output goes to a terminal. The tables below say more about what each flag does. A command line is `nu [flags] [script file] [script arguments]`.
+
+Running commands:
+
+| Flag                          | What it does                                                                                                                                                                                                                                                                                                        |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-c`, `--commands <string>`   | Runs the commands and exits. Any arguments after the commands go to their `main` command; see [Arguments with `nu -c`](./scripts.md#arguments-with-nu-c).                                                                                                                                                           |
+| `-e`, `--execute <string>`    | Runs the commands after the startup files have loaded, then starts the REPL. It is ignored when `-c` or a script file is given.                                                                                                                                                                                     |
+| `-l`, `--login`               | Starts a login shell, which also loads `login.nu`. Nushell starts as a login shell, too, when the name it was started under (`argv[0]`) begins with `-`, which is how `login` and `sshd` start a user's shell. With `-c`, `-l` also loads `env.nu` and `config.nu`; with a script file, it loads none of the three. |
+| `-i`, `--interactive`         | Treats a `-c` or script run as an interactive session. On Unix, Nushell then takes control of the terminal and hands it to each external command while it runs, as the REPL does.                                                                                                                                   |
+| `--stdin`                     | Lets the `-c` commands or the script read the input piped to `nu` as `$in`. See [Shebangs](./scripts.md#shebangs).                                                                                                                                                                                                  |
+| `--no-newline`                | Prints the result of the `-c` commands without a newline at the end.                                                                                                                                                                                                                                                |
+| `-m`, `--table-mode <string>` | Draws tables in this mode for the whole run, over the `table.mode` setting from the configuration files. `$env.config.table.mode` still shows the configured value.                                                                                                                                                 |
+| `--error-style <string>`      | Sets the error style to `fancy`, `plain`, or `short` for a `-c` run. It has no effect on a script file or the REPL, and it doesn't accept `nested`; set `$env.config.error_style` for those.                                                                                                                        |
+
+Configuration:
+
+| Flag                            | What it does                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `-n`, `--no-config-file`        | Skips the plugin registry, `default_env.nu`, `env.nu`, `config.nu`, `login.nu`, and the autoload files. Nushell also ignores the `NU_EXPERIMENTAL_OPTIONS` variable. Plugins given with `--plugins` still load.                                                                                                                                                                                                    |
+| `--no-std-lib`                  | Starts without the [Standard Library](./standard_library.md). The `std` modules, the banner, and the `pwd` command from the standard library aren't available; `pwd` then runs the external program of that name, if there is one.                                                                                                                                                                                 |
+| `--no-history`                  | Starts the REPL without reading or writing the history file. `$nu.history-enabled` is `false`.                                                                                                                                                                                                                                                                                                                     |
+| `-I`, `--include-path <string>` | Adds directories to `$NU_LIB_DIRS` and `$env.NU_LIB_DIRS`, after those from an inherited `NU_LIB_DIRS` variable and before the default ones. Separate several directories with `:`, `;`, or the ASCII record separator character, `(char record_sep)`, on every platform. Because `:` separates too, a Windows path with a drive letter, such as `C:\libs`, is split in two.                                       |
+| `--config <path>`               | Loads this file instead of `config.nu`. `$nu.config-path` shows it, and `config nu` opens it.                                                                                                                                                                                                                                                                                                                      |
+| `--env-config <path>`           | Loads this file instead of `env.nu`. `$nu.env-path` shows it, and `config env` opens it.                                                                                                                                                                                                                                                                                                                           |
+| `--config-home <path>`          | Uses this directory as the configuration directory, instead of `<XDG_CONFIG_HOME>/nushell` or the platform default. See [Startup Variables](#startup-variables).                                                                                                                                                                                                                                                   |
+| `--plugin-config <path>`        | Uses this file as the plugin registry instead of `plugin.msgpackz` in the configuration directory. Nushell loads the plugins registered in it at startup, [`plugin add`](/commands/docs/plugin_add.md), `plugin rm`, and `plugin use` read and write it, and `$nu.plugin-path` shows it. If the file's directory doesn't exist, Nushell reports `File not found` for that directory and starts without a registry. |
+| `--plugins <path>`              | Loads these plugin executables for this session only, without adding them to the registry. Give several with repeated flags or a list, as in `--plugins '[/path/a /path/b]'`.                                                                                                                                                                                                                                      |
+| `--experimental-options <list>` | Turns experimental options on or off. See [Experimental options](#experimental-options).                                                                                                                                                                                                                                                                                                                           |
+
+In the four path flags, a leading `~` is expanded to your home directory, and a relative path is resolved against the current directory. A `--config` or `--env-config` file that doesn't exist is an error; see [Problems with startup files](#problems-with-startup-files). With `-n`, Nushell loads none of these files. `$nu.plugin-path` still shows the `--plugin-config` path, but `plugin add`, `plugin rm`, and `plugin use` fail with `Plugin registry file not set` unless you pass them their own `--plugin-config`.
+
+Other flags:
+
+| Flag                                                                                                   | What it does                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-h`, `--help`                                                                                         | Prints the list of flags and exits.                                                                                                                                             |
+| `-v`, `--version`                                                                                      | Prints the version number and exits.                                                                                                                                            |
+| `--log-level <string>`                                                                                 | Turns on Nushell's internal diagnostic log at `error`, `warn`, `info`, `debug`, `trace`, or `perf` level. This is unrelated to the [`std/log`](./standard_library.md) commands. |
+| `--log-target <string>`, `--log-file <path>`                                                           | Sends the log to `stderr` (the default), `stdout`, `mixed`, or a `file` named with `--log-file`.                                                                                |
+| `--log-include <string...>`, `--log-exclude <string...>`                                               | Keeps or drops log lines by the Rust module they come from, such as `nu_cli`.                                                                                                   |
+| `--mcp`, `--mcp-transport`, `--mcp-port`, `--mcp-host`, `--mcp-allowed-hosts`, `--mcp-allowed-origins` | Start Nushell as a Model Context Protocol server. See [MCP Server](./mcp.md).                                                                                                   |
+| `--lsp`                                                                                                | Starts Nushell as a language server. See [Language server](./language_server.md).                                                                                               |
+| `--dap`                                                                                                | Starts Nushell as a debug adapter. See [Debugging Scripts](./debugging.md).                                                                                                     |
+| `--ide-goto-def`, `--ide-hover`, `--ide-complete`, `--ide-check`, `--ide-ast`                          | Answer one question about the script file that follows and print the answer as JSON, for editor integrations.                                                                   |
 
 ### Passing flags to `nu`
 

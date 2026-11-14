@@ -75,6 +75,7 @@ export const sidebarEn: SidebarConfig = {
       collapsible: false,
       children: [
         '/book/configuration.md',
+        '/book/config_reference.md',
         '/book/environment.md',
         '/book/stdout_stderr_exit_codes.md',
         '/book/running_externals.md',
