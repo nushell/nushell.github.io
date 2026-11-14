@@ -44,6 +44,28 @@ The second way is to use the [`complete`](/commands/docs/complete.md) command.
 
 A non-zero exit code is treated as an error. In a script, execution stops at the failing command, and the lines after it do not run. (In the REPL, type `$env.LAST_EXIT_CODE` on its own line after the failing command, as above.)
 
+Nushell doesn't print an error message of its own for a non-zero exit code. You only see what the command printed. Set `$env.config.display_errors.exit_code` to `true` to also get a Nushell error that points at the failing command:
+
+```nu
+^cat unknown.txt
+# => cat: unknown.txt: No such file or directory
+$env.config.display_errors.exit_code = true
+^cat unknown.txt
+# => cat: unknown.txt: No such file or directory
+# => Error: nu::shell::non_zero_exit_code
+# =>
+# =>   × External command had a non-zero exit code
+# =>    ╭─[repl_entry #3:1:2]
+# =>  1 │ ^cat unknown.txt
+# =>    ·  ─┬─
+# =>    ·   ╰── exited with code 1
+# =>    ╰────
+```
+
+On Unix-like systems, a command that is stopped by a signal gets a "terminated by a signal" error, which names the signal. Set `$env.config.display_errors.termination_signal` to `false` to hide it. A core dump is always reported. These two settings only control the message. The command fails either way, and `$env.LAST_EXIT_CODE` is set either way.
+
+SIGPIPE never counts as a failure. A command receives it when it writes to a pipe that the next command has stopped reading, as `yes` does in `^yes | ^head -n 1`. That pipeline succeeds, and `$env.LAST_EXIT_CODE` is `0`.
+
 This also applies to externals in the middle of a pipeline: if _any_ external command in a pipeline fails, the whole pipeline fails, even when the commands after it succeed (similar to `set -o pipefail` in Bash). `$env.LAST_EXIT_CODE` is then set to the exit code of the rightmost command that failed. To handle a failure yourself, use [`try`](/commands/docs/try.md), whose `catch` closure receives an error record with an `exit_code` field, or capture the exit code with `complete`:
 
 ```nu
@@ -52,7 +74,9 @@ try { ^false | lines } catch {|err| $err.exit_code }
 ```
 
 ::: tip
-This pipeline behavior is an opt-out experimental option named `pipefail`. To turn it off, start Nushell with `nu --experimental-options '[pipefail=false]'`.
+This pipeline behavior is an opt-out experimental option named `pipefail`. To turn it off, start Nushell with `nu --experimental-options '[pipefail=false]'`. [Experimental options](./configuration.md#experimental-options) lists the other ways to set it.
+
+With `pipefail` off, only the last command of a pipeline decides whether the pipeline fails. `^false | ^cat` succeeds, `try` has nothing to catch, and `$env.LAST_EXIT_CODE` is `0`, the exit code of `cat`. When the last command is a Nushell command, as in `^false | lines`, the failure is ignored and `$env.LAST_EXIT_CODE` keeps the value it had before.
 :::
 
 ### Nushell's own exit status
@@ -74,7 +98,64 @@ nu -c 'sh -c "kill -TERM $$"' | complete | get exit_code
 # => 241
 ```
 
-To set the status yourself, end the script with [`exit`](/commands/docs/exit.md).
+A flag that `nu` doesn't accept also gives `1`, and nothing runs (see [Passing flags to `nu`](./configuration.md#passing-flags-to-nu)).
+
+To set the status yourself, call [`exit`](/commands/docs/exit.md). Without an argument, `exit` gives `0`. With one, as in `exit 3`, it gives that number. On Unix-like systems only the low 8 bits are kept, so `exit 300` gives `44` and `exit -1` gives `255`.
+
+`exit` is not an error, so `try` doesn't stop it. A `catch` block never runs for `exit`, but a `finally` block does, and then Nushell exits with the code you gave:
+
+```nu
+nu -c 'try { exit 4 } catch { print caught } finally { print cleanup }; print after' | complete
+# => ╭───────────┬─────────╮
+# => │ stdout    │ cleanup │
+# => │           │         │
+# => │ stderr    │         │
+# => │ exit_code │ 4       │
+# => ╰───────────┴─────────╯
+```
+
+`exit --abort` skips the `finally` blocks too.
+
+### Interrupting with Ctrl+C
+
+Pressing <kbd>Ctrl</kbd>+<kbd>C</kbd> while Nushell code runs raises an `Operation interrupted` error. Loops, streams, and long-running commands such as [`sleep`](/commands/docs/sleep.md) check for it as they go, so the error points at the command that was running when you pressed the keys:
+
+```nu
+for i in 1.. { sleep 100ms }
+# => Error: nu::shell::error
+# =>
+# =>   × Operation interrupted
+# =>    ╭─[repl_entry #1:1:16]
+# =>  1 │ for i in 1.. { sleep 100ms }
+# =>    ·                ──┬──
+# =>    ·                  ╰── This operation was interrupted
+# =>    ╰────
+```
+
+Like any other error, it stops a script, and `try` can catch it. The `catch` block runs normally, even though you just pressed <kbd>Ctrl</kbd>+<kbd>C</kbd>:
+
+```nu
+try { sleep 1min } catch {|err| $err.msg }
+# => Operation interrupted
+```
+
+An external command gets the keypress itself, as the SIGINT signal. In the REPL on Unix-like systems, the command runs as the terminal's foreground job, so the signal goes to it and not to Nushell. Most commands stop when they get it, and Nushell then reports the signal as it does for any command that a signal stops:
+
+```nu
+^sleep 60
+# => Error: nu::shell::terminated_by_signal
+# =>
+# =>   × External command was terminated by a signal
+# =>    ╭─[repl_entry #1:1:2]
+# =>  1 │ ^sleep 60
+# =>    ·  ──┬──
+# =>    ·    ╰── terminated by SIGINT (2)
+# =>    ╰────
+$env.LAST_EXIT_CODE
+# => -2
+```
+
+When a script runs an external command, <kbd>Ctrl</kbd>+<kbd>C</kbd> reaches Nushell as well. If the external catches the signal and exits normally, the script still stops, with `Operation interrupted` at its next command.
 
 ## Using the [`complete`](/commands/docs/complete.md) command
 
@@ -94,11 +175,51 @@ cat unknown.txt | complete
 
 The `stderr` value ends with a newline, which is why the table shows an empty line after the message.
 
+`stdout` and `stderr` are strings when the output is valid UTF-8. When it isn't, the field holds the bytes as a `binary` value:
+
+```nu
+^printf '\377\376' | complete | describe
+# => record<stdout: binary, stderr: string, exit_code: int>
+```
+
+`complete` only takes the output of an external command. Anything else is an error:
+
+```nu
+ls | complete
+# => Error: nu::shell::error
+# =>
+# =>   × Complete only works with external commands
+# =>    ╭─[repl_entry #1:1:6]
+# =>  1 │ ls | complete
+# =>    ·      ────┬───
+# =>    ·          ╰── complete only works on external commands
+# =>    ╰────
+```
+
+`complete` doesn't change `$env.LAST_EXIT_CODE`. A failing command's exit code is only in the record.
+
 ## `echo`, `print`, and `log` commands
 
 The [`echo`](/commands/docs/echo.md) command is mainly for _pipes_. It returns its arguments, ignoring the piped-in value. There is usually little reason to use this over just writing the values as-is.
 
-In contrast, the [`print`](/commands/docs/print.md) command prints the given values to stdout as plain text. It can be used to write to standard error output, as well. Unlike [`echo`](/commands/docs/echo.md), this command does not return any value (`print | describe` will return "nothing"). Since this command has no output, there is no point in piping it with other commands.
+In contrast, the [`print`](/commands/docs/print.md) command prints the given values to stdout, or to stderr with `--stderr` (`-e`). Unlike [`echo`](/commands/docs/echo.md), this command does not return any value (`print | describe` will return "nothing"). Since this command has no output, there is no point in piping it with other commands.
+
+`print` prints each argument on its own line and shows structured values as tables, the way the REPL shows a result. `--no-newline` (`-n`) leaves out the line ending. Pipeline input is printed only when there are no arguments:
+
+```nu
+print a [1 2]
+# => a
+# => ╭───┬───╮
+# => │ 0 │ 1 │
+# => │ 1 │ 2 │
+# => ╰───┴───╯
+"piped" | print "argument"
+# => argument
+```
+
+`--raw` (`-r`) skips the tables. A list prints one item per line, and other values print as text. Binary data goes out as the bytes themselves, with no line ending added, so `0x[41 42 43] | print --raw` prints `ABC`.
+
+`print` writes straight to Nushell's own stdout or stderr, so a [file redirection](#file-redirections) doesn't capture it. `print -e oops e> err.log` still shows `oops` on the screen and leaves `err.log` empty. To get text into a file, return it as a value and redirect or [`save`](/commands/docs/save.md) that.
 
 The [standard library](/book/standard_library.md) has commands to write out messages in different logging levels. For example:
 
@@ -111,6 +232,8 @@ The log level for output can be set with the [`NU_LOG_LEVEL`](/book/special_vari
 ```nu
 NU_LOG_LEVEL=DEBUG nu std_log.nu
 ```
+
+Every `log` command writes to stderr, so its messages stay out of the pipeline and out of a file redirected with `o>`. [Logging with `std/log`](./standard_library.md#logging-with-std-log) describes the format of a log line and the `--short`, `--format`, and `--context` flags.
 
 ## File Redirections
 
@@ -133,7 +256,9 @@ cat unknown.txt o> out.log e> err.log
 cat unknown.txt o+e> log.log
 ```
 
-The `>` forms replace the file's contents. To add to the end of the file instead, use `>>`. It creates the file if it doesn't exist yet:
+Use `o+e>` to get both streams in one file. Naming the same file twice, as in `o> log.log e> log.log`, opens it twice, and the two streams write over each other's text instead of taking turns.
+
+The `>` forms replace the file's contents. To add to the end of the file instead, use `>>`. Both forms create the file if it doesn't exist yet:
 
 ```nu
 nu -c 'print one' o> out.log
@@ -162,6 +287,10 @@ use std
 cat unknown.txt o+e> (std null-device)
 ```
 
+`std null-device` returns the system's null device, `/dev/null`, or `\\.\NUL` on Windows, so this example throws both streams away. After `use std/util *`, the same command is available as `null-device`. `std/util` also exports the path as a constant, `null_device`, for places where Nushell needs the value while it parses your code, such as a parameter's default value (see [Importing Submodules](./standard_library.md#importing-submodules)).
+
+A path that isn't a string, such as the number in `o> (1 + 1)`, is a `cant_convert` error. A leading `~` in the path expands to your home directory, and a relative path starts from the current directory. The path is never treated as a glob, so `o> *.log` writes to a file named `*.log`. The directory has to exist already. A path such as `missing/out.log` fails with a `not_found` error.
+
 Semicolons follow defined pipeline behavior. In the following example, the first external command prints to stdout, and the second external command stdout becomes the output of the parentheses-subexpression and gets piped into `test.txt`.
 ```nu
 (nu -c 'print hello'; nu -c 'print world') o> test.txt
@@ -185,6 +314,27 @@ This external command behavior is in contrast to native Nushell expressions wher
 open test.txt
 # => world
 ```
+
+When the redirected command is a Nushell command, its result is written to the file as text. A string or a number is written as it is, binary data as the bytes themselves, and a list one item per line. A record, a table, or a list inside a list can't be written this way. Convert it first, for example with [`to json`](/commands/docs/to_json.md):
+
+```nu
+[a b c] o> list.txt
+open list.txt
+# => a
+# => b
+# => c
+{name: nu} o> record.txt
+# => Error: nu::shell::cant_convert
+# =>
+# =>   × Can't convert to string.
+# =>    ╭─[repl_entry #3:1:1]
+# =>  1 │ {name: nu} o> record.txt
+# =>    · ─────┬────
+# =>    ·      ╰── can't convert record<name: string> to string
+# =>    ╰────
+```
+
+`e>` only collects the stderr of external commands. A Nushell command returns no stderr stream, so `e>` on one leaves an empty file. That includes `print -e`, which [writes straight to the screen](#echo-print-and-log-commands).
 
 ## Pipe Redirections
 
@@ -286,6 +436,15 @@ nu -c 'print output; print -e error' | ignore --stdout --stderr
 
 `ignore` also ignores a non-zero exit code, so `^false | ignore` does not stop a script. Add `--show-errors` to let the failure through and set `$env.LAST_EXIT_CODE`.
 
+When a Nushell command right before `ignore` fails, plain `ignore` lets the error through. `ignore --stderr` discards it like any other error output, and the script goes on:
+
+```nu
+ls missing.txt | ignore --stderr; "still running"
+# => still running
+```
+
+`--show-errors` lets every failure through, including one that `--stderr` would discard, and sets `$env.LAST_EXIT_CODE` to the external's exit code, or to `1` when a Nushell command failed. When nothing failed, `ignore --show-errors` sets `$env.LAST_EXIT_CODE` to `0`.
+
 ## Checking for a Terminal
 
 A script may want to print colors or progress output only when a person is watching. [`is-terminal`](/commands/docs/is-terminal.md) checks whether the stdin, stdout, or stderr of the Nushell process is attached to a terminal (`--stdin`, `--stdout`, or `--stderr`). For example, a child `nu` process sees a terminal when its output goes to the screen, but not when its output is piped into another command:
@@ -295,6 +454,18 @@ nu -c 'is-terminal --stdout'
 # => true
 nu -c 'is-terminal --stdout' | str trim
 # => false
+```
+
+Without a flag, `is-terminal` checks stdout. It checks one stream per call, so giving it two flags is an error.
+
+`is-terminal` asks about the Nushell process. [`is-redirected`](/commands/docs/is-redirected.md) asks about one custom command: called inside it, it tells whether the command's result will go somewhere other than the screen, such as into another command, a variable, or a file. The two answers differ in the REPL, where stdout is always the terminal:
+
+```nu
+def report [] { print $"redirected: (is-redirected), terminal: (is-terminal)" }
+report
+# => redirected: false, terminal: true
+report | ignore
+# => redirected: true, terminal: true
 ```
 
 ## Raw Streams
@@ -310,4 +481,22 @@ If you want more control over the decoding of the byte stream, you can use the [
 ```nu
 0x[8a 4c] | decode shift-jis
 # => 貝
+```
+
+Without an argument, `decode` guesses the encoding from the bytes. A guess needs some text to go on, so name the encoding when you know it. For the two bytes above, the guess is wrong:
+
+```nu
+0x[8a 4c] | decode
+# => ŠL
+```
+
+The name can be any label from the [WHATWG Encoding Standard](https://encoding.spec.whatwg.org/#names-and-labels), such as `utf-8`, `utf-16be`, `shift_jis`, `gbk`, `euc-kr`, `latin1`, or `windows-1252`, in upper or lower case. `utf16` also works, as a name for `utf-16le`. Some DOS code pages can be named by number: `437`, `737`, `775`, `850`, `852`, `855`, `858`, `860`, `861`, `862`, `863`, `865`, and `866`. Use only these numbers. A name that isn't a known label is an error.
+
+`decode` never fails on the bytes themselves. A byte sequence that isn't valid in the encoding becomes the replacement character `�`. When the input starts with a UTF-8 or UTF-16 byte order mark, the mark decides the encoding instead of the name you gave:
+
+```nu
+0x[41 ff 42] | decode utf-8
+# => A�B
+0x[ef bb bf 41] | decode shift_jis
+# => A
 ```

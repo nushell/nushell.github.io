@@ -24,6 +24,8 @@ try { ^false | lines } catch {|e| $e.exit_code }
 # => 1
 ```
 
+This rule is the `pipefail` experimental option, which is on by default. When it is off, only the exit code of the last command in the pipeline counts. See [Exit Code](/book/stdout_stderr_exit_codes.md#exit-code) in the Book for both cases, and for the `display_errors` settings that decide whether Nushell prints its own error message for a failing command.
+
 ## Handling stdout and stderr
 
 You can handle stderr in multiple ways:

@@ -35,6 +35,28 @@ let year = (
 )
 ```
 
+Outside parentheses, a newline ends the pipeline unless the line ends with `|` or the next line starts with `|`. This works in scripts as well as at the prompt. Comment lines can sit between the stages, but a blank line ends the pipeline:
+
+```nu
+[3 1 2]
+# sort the numbers
+| sort
+# keep the smallest
+| first
+# => 1
+```
+
+With a blank line before `| sort`, `sort` would start a new pipeline with no input, and Nushell would report "Command does not support nothing input".
+
+Only a pipe carries a pipeline onto the next line. A line that ends with an operator, such as `let total = 1 +` followed by `2` on the next line, is an "Incomplete math expression" error. Put the expression in parentheses to split it:
+
+```nu
+let total = (1 +
+    2)
+$total
+# => 3
+```
+
 ## Assigning Pipeline Results with `let`
 
 `let` can also be used as a stage in a pipeline. At the end of a pipeline, it stores the pipeline's result in a new variable:
@@ -53,6 +75,8 @@ let files = ls | get name
 $msg
 # => hello
 ```
+
+In a pipeline, `let` takes only a name, so `[a b] | let x = $in` is an `assignment_requires_variable` error. A type annotation is allowed, and Nushell checks the input against it when the pipeline runs: `5 | let x: int` works, and `"a" | let x: int` fails with a type mismatch. `mut` and `const` can't be pipeline stages at all. `[a b] | mut x` is a "mut statement used in pipeline" error, which suggests writing `mut x = (value | ...)` instead.
 
 ## Semicolons
 
@@ -112,6 +136,20 @@ Let's examine the contents of `$in` on each line of the above example:
 - On line 2, `$in` refers to the results of line 1's `date now` (a datetime value).
 - On line 4, `$in` refers to tomorrow's formatted date from line 3 and is used in an interpolated string
 - On line 5, `$in` refers to the results of line 4's interpolated string, e.g. '2024-05-14 Report'
+
+Using `$in` in an argument doesn't take the input away from the command. `mkdir` ignores its pipeline input, so only the argument counts on line 5. A command that reads its input gets the value both ways:
+
+```nu
+[1 2 3] | append $in
+# => ╭───┬───╮
+# => │ 0 │ 1 │
+# => │ 1 │ 2 │
+# => │ 2 │ 3 │
+# => │ 3 │ 1 │
+# => │ 4 │ 2 │
+# => │ 5 │ 3 │
+# => ╰───┴───╯
+```
 
 ### Pipeline Input in Filter Closures
 
@@ -290,6 +328,15 @@ def "date info" [] {
 
 Currently, the use of `$in` on a stream in a pipeline results in a "collected" value, meaning the pipeline "waits" on the stream to complete before handling `$in` with the full results. However, this behavior is not guaranteed in future releases. To ensure that a stream is collected into a single variable, use the [`collect` command](/commands/docs/collect.html).
 
+[Streaming and collecting input](./custom_commands.md#streaming-and-collecting-input) lists the places where Nushell collects a stream for you. `collect` waits for the end of the stream and keeps all of it in memory, so a very large stream uses a lot of memory. Given a closure, `collect` runs it once with the collected value as both its parameter and `$in`, and returns what the closure returns:
+
+```nu
+[1 2 3] | collect {|nums| $nums.1 + ($in | length) }
+# => 5
+```
+
+Collecting also lets a pipeline read and write the same file. `open notes.txt | save -f notes.txt` fails with "pipeline input and output are the same file", but `open notes.txt | collect | save -f notes.txt` works, because the file has been read completely before `save` opens it.
+
 Likewise, avoid using `$in` when normal pipeline input will suffice, as internally `$in` forces a conversion from `PipelineData` to `Value` and _may_ result in decreased performance and/or increased memory usage.
 
 ## Working with External Commands
@@ -304,13 +351,26 @@ Data will flow from the internal_command to the external_command. This data will
 
 Data coming from an external command into Nu will come in as bytes that Nushell will try to automatically convert to UTF-8 text. If successful, a stream of text data will be sent to internal_command. If unsuccessful, a stream of binary data will be sent to internal command. Commands like [`lines`](/commands/docs/lines.md) help make it easier to bring in data from external commands, as it gives discrete lines of data to work with.
 
+[`describe`](/commands/docs/describe.md) calls this output a `byte stream`. When Nushell turns the whole output into one value, it removes one line ending (`\n` or `\r\n`) from the end. That happens in a subexpression, in `let`, with [`collect`](/commands/docs/collect.md), and in commands that read their input as one string, such as [`str length`](/commands/docs/str_length.md). Most programs end their output with a newline, so the value comes out without it. Any other line endings stay:
+
+```nu
+^echo hi | describe
+# => byte stream
+(^echo hi) == "hi"
+# => true
+(^printf "a\n\n") == "a\n"
+# => true
+```
+
+`lines` splits text at `\n` and `\r\n`. `--skip-empty` (`-s`) drops the lines that are empty or hold only whitespace. Bytes that aren't valid UTF-8 become `�`, unless you add `--strict`, which makes them an error. `lines` takes a string or an external command's output. It also takes a stream of strings, such as the output of [`each`](/commands/docs/each.md), and splits each item in turn, skipping the items that aren't strings. A list value such as `[a b]` is an error, and so is a number.
+
 `external_command_1 | external_command_2`
 
 Nu works with data piped between two external commands in the same way as other shells, like Bash would. The `stdout` of external_command_1 is connected to the `stdin` of external_command_2. This lets data flow naturally between the two commands.
 
 ### Failing External Commands in a Pipeline
 
-If any external command in a pipeline exits with a non-zero code, the whole pipeline fails, even when the commands after it succeed. This is the same as running Bash with `set -o pipefail`. For example, `^false | lines` still produces an empty list, but a script stops at that line, and in the REPL `$env.LAST_EXIT_CODE` is set to `1`. When several external commands in a pipeline fail, `$env.LAST_EXIT_CODE` holds the exit code of the rightmost one that failed.
+If any external command in a pipeline exits with a non-zero code, the whole pipeline fails, even when the commands after it succeed. This is the same as running Bash with `set -o pipefail`. For example, `^false | lines` still produces an empty list, but a script stops at that line, and in the REPL `$env.LAST_EXIT_CODE` is set to `1`. When several external commands in a pipeline fail, `$env.LAST_EXIT_CODE` holds the exit code of the rightmost one that failed. This behavior is the `pipefail` experimental option. With it turned off, only the last command of the pipeline counts (see [Exit Code](stdout_stderr_exit_codes.md#exit-code)).
 
 You can handle the failure with `try`/`catch`, whose error record includes the exit code:
 
@@ -395,6 +455,8 @@ echo 1sec | sleep
 # =>    ╰────
 # =>   help: Usage: sleep <duration> ...(rest) . Use `--help` for more information.
 ```
+
+The `...(rest)` in the usage line means `sleep` takes more durations after the first. It waits for their sum, so `sleep 1min 30sec` waits 90 seconds.
 
 While there is no steadfast rule, Nu generally tries to copy established conventions in command behavior,
 or do what 'feels right'.
@@ -500,6 +562,22 @@ ls /usr/share/nvim/runtime/ | get name | to text | ^grep tutor | tr -d '\n' | ^l
 # => -rw-r--r--@  1 pengs  admin  5514 14 Nov 13:42 tutor.tutor
 # => -rw-r--r--@  1 pengs  admin  1191 14 Nov 13:42 tutor.tutor.json
 ```
+
+`to text` puts each list item on its own line and ends the text with a newline, which `--no-newline` (`-n`) leaves out. A record becomes `key: value` lines, a table row becomes one line of `key: value` pairs separated by commas, and a list inside the list is joined with `, `:
+
+```nu
+[a [b c] {x: 1}] | to text
+# => a
+# => b, c
+# => x: 1
+# =>
+[[name size]; [a.txt 10] [b.txt 20]] | to text
+# => name: a.txt, size: 10
+# => name: b.txt, size: 20
+# =>
+```
+
+A single string or number comes through unchanged, without a newline added. A closure shows up as an ID such as `closure_305`, unless you add `--serialize` (`-s`) to get its source code.
 
 (Actually, for this simple usage you can just use [`find`](/commands/docs/find.md))
 
