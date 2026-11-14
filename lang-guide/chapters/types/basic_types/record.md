@@ -103,6 +103,43 @@ let a = 1
 
 When the braces also hold a real field, the missing colon is an error. `{a: 1, b}` and `{a: 1, $b}` both fail with "Incomplete record field". Write the key out instead: `{a: $a, b: $b}`.
 
+## Converting to a record
+
+[`into record`](/commands/docs/into_record.md) builds a record from a list in one of two shapes. A list of two-item lists gives one field per pair, with the first item as the key. A list of records merges them into one record:
+
+```nu
+[[name Ann] [city Oslo]] | into record
+# => ╭──────┬──────╮
+# => │ name │ Ann  │
+# => │ city │ Oslo │
+# => ╰──────┴──────╯
+[{a: 1, b: 2} {b: 3, c: 4}] | into record
+# => ╭───┬───╮
+# => │ a │ 1 │
+# => │ b │ 3 │
+# => │ c │ 4 │
+# => ╰───┴───╯
+```
+
+When a key comes up twice, the later value wins, as `b` shows. A table is a list of records, so a one-row table becomes that row, and a longer table collapses into one record holding the last value of each column. `null` items are skipped, and an empty list gives an empty record.
+
+A pair's key is converted to a string, so `[[1 one] [true yes]]` gives the keys `1` and `true`. A key that can't be a string, such as `null` or a list, is an error. The list has to keep to one shape. Mixing pairs and records is a "Type mismatch" error that names the item that broke the pattern, and an inner list with more or fewer than two items is an "Incorrect value" error such as "expected inner list with two elements, but found 3 element(s)".
+
+`into record` also takes a value apart into its components:
+
+- A date gives `year`, `month`, `day`, `hour`, `minute`, `second`, `millisecond`, `microsecond` and `nanosecond` as ints, and `timezone` as a string such as `+02:00`. Each sub-second field holds only its own three digits, so `.123456789` seconds is 123 milliseconds, 456 microseconds and 789 nanoseconds.
+- A duration gives one field for each unit it uses, from `week` down to `nanosecond`, and a `sign` field of `+` or `-`. Units that are zero are left out, and the largest unit is `week`: `90min` gives `{hour: 1, minute: 30, sign: +}`. A zero duration gives `{second: 0, sign: +}`.
+- A `semver` gives the six fields described in [SemVer](../other_types/custom_value.md#semver), plus `pre_identifiers` and `build_identifiers`, which split the pre-release and build metadata at the dots and turn numeric parts into ints. `"1.2.3-rc.1" | into semver | into record | get pre_identifiers` is `[rc, 1]`.
+
+[`into datetime`](/commands/docs/into_datetime.md), [`into duration`](/commands/docs/into_duration.md) and [`into semver`](/commands/docs/into_semver.md) accept these records, so you can change one component and convert back:
+
+```nu
+2024-01-02T03:04:05+02:00 | into record | update day 9 | into datetime | format date '%F %T %:z'
+# => 2024-01-09 03:04:05 +02:00
+```
+
+A record passes through unchanged. Any other input, such as a string, is an error.
+
 ## Common commands that can be used with `record`
 
 Since the record data type is foundational to Nushell's structured nature, many commands use records as inputs or as parameters. See the list of commands for tables as many of those also take records.

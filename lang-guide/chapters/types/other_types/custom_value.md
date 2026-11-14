@@ -100,6 +100,8 @@ let v = "v1.2.3-rc.1+build.5" | into semver --loose
 # => [1, 2, 3, "rc.1", "build.5", v]
 ```
 
+[`into record`](/commands/docs/into_record.md) returns all six at once, plus the pre-release and build metadata split at their dots (see [Converting to a record](../basic_types/record.md#converting-to-a-record)).
+
 Versions compare by semantic version precedence, so `1.10.0` comes after `1.2.0` and a pre-release such as `1.0.0-rc.1` comes before `1.0.0`. This holds for `<`, `>` and the other comparison operators, and for `sort`. The prefix is only for display, so `v1.0.0` and `1.0.0` are equal.
 
 When the `semver` is on the left, the right side can also be a version string, read as if by `into semver --loose`:
@@ -124,6 +126,50 @@ let v: semver = "1.2.3"
 # =>    ·                 ───┬───
 # =>    ·                    ╰── expected semver, found string
 # =>    ╰────
+```
+
+## Bumping versions
+
+The [`semver`](/commands/docs/semver.md) command on its own only prints its help. Its one subcommand, [`semver bump`](/commands/docs/semver_bump.md), returns the next version at the level you name. It takes a `semver` or a version string and returns a `semver`:
+
+```nu
+'1.2.3' | semver bump minor
+# => 1.3.0
+```
+
+`major`, `minor` and `patch` add one to that number and reset the numbers after it to 0. They also drop the pre-release and the build metadata. `release` drops those two and keeps the numbers. A pre-release comes before its release, but `patch` still moves past it, so use `release` to turn `1.2.3-rc.1` into `1.2.3`.
+
+`alpha`, `beta` and `rc` change only the pre-release and keep the numbers and the build metadata. With no pre-release, they add the level name followed by `.1`. When the pre-release already starts with that name, the number after its last dot goes up by one, or becomes `.1` if there isn't one. A pre-release with a different name starts again at `.0`:
+
+| Input            | Level     | Result           |
+| ---------------- | --------- | ---------------- |
+| `1.2.3`          | `alpha`   | `1.2.3-alpha.1`  |
+| `1.2.3-alpha.1`  | `alpha`   | `1.2.3-alpha.2`  |
+| `1.2.3-alpha`    | `alpha`   | `1.2.3-alpha.1`  |
+| `1.2.3-alpha.2`  | `beta`    | `1.2.3-beta.0`   |
+| `1.2.3-rc.1+b.7` | `rc`      | `1.2.3-rc.2+b.7` |
+| `1.2.3-rc.1`     | `patch`   | `1.2.4`          |
+| `1.2.3-rc.2+b.7` | `release` | `1.2.3`          |
+
+Because the pre-release levels keep the numbers, `1.2.3-alpha.1` sorts before the `1.2.3` it came from. To start the pre-releases of the next version, bump the number first:
+
+```nu
+'1.2.3' | semver bump minor | semver bump alpha
+# => 1.3.0-alpha.1
+```
+
+The level must be one of the seven names, in lowercase. Anything else, such as `Major`, is the error "'Major' is not a valid bump level". The flags change the rest of the result:
+
+- `--build-metadata` (`-b`) sets the build metadata of the result, at any level, as in `semver bump patch -b ci.42`. It is made of ASCII letters, digits and hyphens, in parts separated by single dots. Anything else, such as a space or `a..b`, is the error "Invalid build metadata". An empty string removes the build metadata.
+- `--preserve-build-metadata` (`-p`) keeps the input's build metadata on levels that would drop it, so `1.2.3+b.7` bumps to `1.3.0+b.7` at `minor`. When both flags are given, `-b` wins.
+- `--loose` (`-l`) accepts a string with a prefix such as `v`, the same prefixes `into semver --loose` takes, and keeps the prefix on the result. A `semver` made with `into semver --loose` already carries its prefix and doesn't need the flag.
+- `--ignore-errors` (`-i`) returns a string that isn't a valid version unchanged, instead of failing with "Value is not a valid semver version". It doesn't excuse an unknown level for a valid version.
+
+A list of versions is an input type error, so bump each item with `each`. The result is a custom value, which `to nuon` rejects, so add [`into value`](/commands/docs/into_value.md) when you need the version as a string:
+
+```nu
+['1.0.0' 'oops'] | each { semver bump minor -i | into value } | to nuon
+# => ["1.1.0", oops]
 ```
 
 ## SemVer ranges
@@ -155,9 +201,15 @@ A pre-release version only matches a requirement that names a pre-release of the
 
 The left side of `in` must be a `semver`. A string there is rejected when the code is parsed, so write `("1.5.0" | into semver) in $r`.
 
+`in` is the only operator a range works with. `not-in` is an error for a `semver`, so negate the test with `not`, as in `not ($v in $r)`, and two ranges can't be compared with `==`.
+
+A range displays its requirement in a normal form, without spaces after the operators, so `'>= 1.0, < 2' | into semver-range` shows `>=1.0, <2`. [`into value`](/commands/docs/into_value.md) turns the range into that string. A `semver-range` given to `into semver-range` comes back unchanged, and a list of strings is an input type error, so convert each item with `each`.
+
+Requirements outside Cargo's syntax are errors, including npm's hyphen ranges (`1.0 - 2.0`) and `||`, and so is an empty string. The error reads `Cannot convert "1.0 - 2.0" to a semver range`. Without `--loose`, its help suggests the flag for prefixes like `v1.2.3`.
+
 ## Matrices
 
-[`into matrix`](/commands/docs/into_matrix.md) turns a list of lists of numbers, or a table of numbers, into a `matrix`: an array of floats that the `matrix` commands work on. They cover arithmetic (`matrix add`, `matrix subtract`, `matrix scale`, and `matrix multiply` for the matrix product), reductions (`matrix sum`, `matrix mean`, `matrix max`, `matrix reduce`), shape changes (`matrix transpose`, `matrix reshape`), access to rows and columns (`matrix get-row`, `matrix set-row`, `matrix get-col`, `matrix set-col`), `matrix map`, and the constructors `matrix identity` and `matrix zeros`. `help matrix` lists them.
+[`into matrix`](/commands/docs/into_matrix.md) turns a list of lists of numbers, or a table of numbers, into a `matrix`: an array of floats that the `matrix` commands work on. They cover arithmetic (`matrix add`, `matrix subtract`, `matrix scale`, and `matrix multiply` for the matrix product), reductions (`matrix sum`, `matrix mean`, `matrix max`, `matrix reduce`), shape changes (`matrix transpose`, `matrix reshape`), access to rows and columns (`matrix get-row`, `matrix set-row`, `matrix get-col`, `matrix set-col`), `matrix map`, and the constructors `matrix identity` and `matrix zeros`. `help matrix` lists them, and the [Matrices](../../matrices.md) chapter describes them.
 
 ```nu
 let m = [[1 2] [3 4]] | into matrix
@@ -165,7 +217,7 @@ $m | matrix multiply $m | matrix into-nu | to nuon
 # => [[7.0, 10.0], [15.0, 22.0]]
 ```
 
-A table, or any list of records, is read one record at a time, with the values in each record's field order. Every row must have the same length:
+For a table, or any list of records, the first record's column names decide the columns. Later records are looked up by name, so their fields can come in any order, extra fields are ignored, and a record without one of the columns is a `Missing column` error. A list of lists is read row by row, and every row must have the same length:
 
 ```nu
 [[1 2] [3]] | into matrix
@@ -181,9 +233,27 @@ A table, or any list of records, is read one record at a time, with the values i
 
 A value that isn't a number, as in `[[1 "a"]]`, is an `only_supports_this_input_type` error.
 
-[`matrix into-nu`](/commands/docs/matrix_into-nu.md) converts a matrix back to a list of lists of floats, as `into value` does. `--as-records` (`-r`) gives a table instead, with the columns `col0`, `col1` and so on:
+[`matrix into-nu`](/commands/docs/matrix_into-nu.md) converts a matrix back to plain values. A two-dimensional matrix becomes a list of lists of floats, the same as with `into value`. `--as-records` (`-r`) gives a table instead, with the columns `col0`, `col1` and so on. The column names of a table given to `into matrix` aren't kept:
 
 ```nu
 [[1 2] [3 4]] | into matrix | matrix into-nu --as-records | to nuon
 # => [["col0", "col1"]; [1.0, 2.0], [3.0, 4.0]]
+[{x: 1, y: 2}] | into matrix | matrix into-nu --as-records | to nuon
+# => [["col0", "col1"]; [1.0, 2.0]]
 ```
+
+Some `matrix` commands return a matrix with one dimension, such as `matrix sum --axis 0`. `matrix into-nu` turns it into a list holding one row, while `into value` gives a flat list. A matrix with three or more dimensions, which `matrix reshape` can make, becomes nested lists. `into value` nests every dimension, but `matrix into-nu` nests at most three levels, so with four or more dimensions it joins the innermost ones into longer rows. The commands below show the one-dimensional case:
+
+```nu
+let m = [[1 2] [3 4]] | into matrix
+$m | matrix sum --axis 0 | matrix into-nu | to nuon
+# => [[4.0, 6.0]]
+$m | matrix sum --axis 0 | into value | to nuon
+# => [4.0, 6.0]
+```
+
+::: warning
+`--as-records` gives correct values only for a two-dimensional matrix. For a matrix with one dimension, or with three or more, it returns rows of zeros. Use the default list form for those.
+:::
+
+The input must be a matrix. Any other value, a list of lists included, is an input type error.

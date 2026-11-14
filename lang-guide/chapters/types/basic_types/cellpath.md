@@ -207,8 +207,32 @@ let data = [
    # => $.x.1
    ```
 
+1. [`split cell-path`](/commands/docs/split_cell-path.md) goes the other way. It takes a cell path apart into a table with one row per member, in the same `value`, `optional` and `insensitive` columns that `into cell-path` reads, so the two commands undo each other:
+
+   ```nu
+   $.temps?.2.Name! | split cell-path
+   # => ╭───┬───────┬──────────┬─────────────╮
+   # => │ # │ value │ optional │ insensitive │
+   # => ├───┼───────┼──────────┼─────────────┤
+   # => │ 0 │ temps │ true     │ false       │
+   # => │ 1 │     2 │ false    │ false       │
+   # => │ 2 │ Name  │ false    │ true        │
+   # => ╰───┴───────┴──────────┴─────────────╯
+   ```
+
+   A row index comes out as an int and a column name as a string, so `$.a."2"` gives the string `"2"`, not the int `2`. `insensitive` is always `false` for a row index. This lets a command inspect or change a path it received as an argument. For example, dropping the last member gives the path of the parent:
+
+   ```nu
+   def parent [p: cell-path] { $p | split cell-path | drop 1 | into cell-path }
+   parent config.color.fg
+   # => $.config.color
+   ```
+
+   The input has to be a cell-path value. A string such as `"a.b"` is an "Input type not supported" error, so turn it into a cell path first, as shown above.
+
 ## Common commands that can be used with `cell-path`
 
 - `get`
 - `select`
 - `update`/`upsert`
+- `into cell-path`, `split cell-path`

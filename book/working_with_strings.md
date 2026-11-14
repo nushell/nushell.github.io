@@ -593,12 +593,14 @@ For a record or a table, name the fields or columns to change after the command'
 # => ╰──────┴───────╯
 ```
 
-This works the same for [`str contains`](/commands/docs/str_contains.md), [`str index-of`](/commands/docs/str_index-of.md), [`str replace`](/commands/docs/str_replace.md), [`str reverse`](/commands/docs/str_reverse.md), [`str substring`](/commands/docs/str_substring.md), [`str trim`](/commands/docs/str_trim.md) and [`into string`](/commands/docs/into_string.md). For all of them except `str trim`, a record or table without any names is an error. Given a record or table and no names, `str trim` trims every string it finds at any depth and leaves other values alone:
+This works the same for [`str contains`](/commands/docs/str_contains.md), [`str index-of`](/commands/docs/str_index-of.md), [`str replace`](/commands/docs/str_replace.md), [`str reverse`](/commands/docs/str_reverse.md), [`str substring`](/commands/docs/str_substring.md), [`str trim`](/commands/docs/str_trim.md), [`into string`](/commands/docs/into_string.md), the commands in [Changing case](#changing-case), [`str starts-with`](/commands/docs/str_starts-with.md), [`str ends-with`](/commands/docs/str_ends-with.md) and [`str escape-regex`](/commands/docs/str_escape-regex.md). For all of them except `str trim`, a record or table without any names is an error. A named column has to hold strings, except for `into string`, which converts whatever it finds there. Given a record or table and no names, `str trim` trims every string it finds at any depth and leaves other values alone:
 
 ```nu
 {name: ' Ann ', meta: {city: ' Oslo '}, tags: [' a '], age: 30} | str trim | to nuon
 # => {name: Ann, meta: {city: Oslo}, tags: [a], age: 30}
 ```
+
+A few `str` commands differ. [`str distance`](#comparing-strings-by-similarity) takes a record or table with names, but not a list. [`str expand`](#expanding-braces) takes a list but no names, and [`str stats`](#counting-words-and-characters) takes only a single string.
 
 ### Trimming Strings
 
@@ -759,6 +761,146 @@ The replacement can also be a closure that computes the new text. With `--regex`
 ```
 
 Without `--regex`, every match is the same text, so the closure runs only once and its result replaces all of them.
+
+### Changing case
+
+[`str uppercase`](/commands/docs/str_uppercase.md) and [`str lowercase`](/commands/docs/str_lowercase.md) change every letter. They follow Unicode's case rules, so one letter can become two, as `ß` does. [`str capitalize`](/commands/docs/str_capitalize.md) uppercases only the first character and leaves the rest as it is:
+
+```nu
+'straße' | str uppercase
+# => STRASSE
+'hello WORLD' | str capitalize
+# => Hello WORLD
+```
+
+`str capitalize` changes nothing when the first character has no uppercase form, such as a space or a digit.
+
+[`str upcase`](/commands/docs/str_upcase.md) and [`str downcase`](/commands/docs/str_downcase.md) are the old names of `str uppercase` and `str lowercase`. They were deprecated in 0.114.0 and still work, with a warning the first time you use one in a session.
+
+Six more commands rewrite a string in a naming convention:
+
+| Command                                                                  | `'fooBar baz_qux'` becomes |
+| ------------------------------------------------------------------------ | -------------------------- |
+| [`str camel-case`](/commands/docs/str_camel-case.md)                     | `fooBarBazQux`             |
+| [`str pascal-case`](/commands/docs/str_pascal-case.md)                   | `FooBarBazQux`             |
+| [`str snake-case`](/commands/docs/str_snake-case.md)                     | `foo_bar_baz_qux`          |
+| [`str kebab-case`](/commands/docs/str_kebab-case.md)                     | `foo-bar-baz-qux`          |
+| [`str screaming-snake-case`](/commands/docs/str_screaming-snake-case.md) | `FOO_BAR_BAZ_QUX`          |
+| [`str title-case`](/commands/docs/str_title-case.md)                     | `Foo Bar Baz Qux`          |
+
+Each of them splits the text into words first. A word ends at a space, an underscore, a hyphen or any other punctuation, and the punctuation is dropped. A word also ends where a lowercase letter is followed by an uppercase one. A run of capitals counts as one word, so acronyms lose their capitals, and digits stay with the word in front of them:
+
+```nu
+['user ID' 'XMLHttpRequest' 'Hello, World!' 'version 2.0.1'] | each {|s| {text: $s, camel: ($s | str camel-case), snake: ($s | str snake-case), title: ($s | str title-case)} }
+# => ╭───┬────────────────┬────────────────┬──────────────────┬──────────────────╮
+# => │ # │      text      │     camel      │      snake       │      title       │
+# => ├───┼────────────────┼────────────────┼──────────────────┼──────────────────┤
+# => │ 0 │ user ID        │ userId         │ user_id          │ User Id          │
+# => │ 1 │ XMLHttpRequest │ xmlHttpRequest │ xml_http_request │ Xml Http Request │
+# => │ 2 │ Hello, World!  │ helloWorld     │ hello_world      │ Hello World      │
+# => │ 3 │ version 2.0.1  │ version201     │ version_2_0_1    │ Version 2 0 1    │
+# => ╰───┴────────────────┴────────────────┴──────────────────┴──────────────────╯
+```
+
+So `str title-case` isn't `str capitalize` for each word. It also lowercases the rest of every word, and `'hello WORLD'` becomes `Hello World`.
+
+These commands change values, not the keys of a record or the column names of a table. To rename keys or columns, pass one of them to [`rename --block`](/commands/docs/rename.md):
+
+```nu
+{'First Name': 'Ann', zipCode: '0815'} | rename --block { str snake-case }
+# => ╭────────────┬──────╮
+# => │ first_name │ Ann  │
+# => │ zip_code   │ 0815 │
+# => ╰────────────┴──────╯
+```
+
+`str uppercase`, `str lowercase` and `str capitalize` can run at parse time, so they work in a [`const`](/commands/docs/const.md) declaration. The six naming-convention commands can't.
+
+### Expanding braces
+
+[`str expand`](/commands/docs/str_expand.md) turns a brace pattern into a list of strings, much like Bash expands `{a,b}` on its command line:
+
+```nu
+'src/{main,lib}.rs' | str expand
+# => ╭───┬─────────────╮
+# => │ 0 │ src/main.rs │
+# => │ 1 │ src/lib.rs  │
+# => ╰───┴─────────────╯
+```
+
+Inside the braces, list alternatives separated by commas, or write a range of numbers as `{1..3}`. The text around the braces is added to each result. Several brace groups give every combination, and a group can hold another group. An empty alternative leaves just the surrounding text:
+
+```nu
+'img{1..3}.png' | str expand | to nuon
+# => ["img1.png", "img2.png", "img3.png"]
+'{a,b}{1,2}' | str expand | to nuon
+# => ["a1", "a2", "b1", "b2"]
+'log{,.1,.2}' | str expand | to nuon
+# => [log, "log.1", "log.2"]
+```
+
+Everything between the commas counts, spaces included, so the second result of `'{a, b}'` is `b` with a space in front. The results are always strings, even for a range of numbers.
+
+A range counts up by one, and both limits must be whole numbers of 0 or more. A range that counts down, such as `{3..1}`, gives an empty list. A step, as in `{1..10..2}`, is an "Extra Range Operator" error, and letters (`{a..c}`) or a minus sign (`{-1..2}`) are a "Range Can not Have Text" error. When either limit has a leading zero, every number is padded with zeros to the width of the longer limit:
+
+```nu
+'v{8..10}' | str expand | to nuon
+# => ["v8", "v9", "v10"]
+'v{08..10}' | str expand | to nuon
+# => ["v08", "v09", "v10"]
+```
+
+A backslash makes the next character plain text. `\,` is a comma that doesn't separate alternatives, `\{` and `\}` are braces that don't start or end a group, and `\\` is one backslash. That gets in the way of Windows paths, so `--path` doubles every backslash before expanding, which keeps them all in the result:
+
+```nu
+'C:\Users\{ann,bo}' | str expand --path | to nuon
+# => ["C:\\Users\\ann", "C:\\Users\\bo"]
+```
+
+Without `--path`, the `\{` in that pattern is a plain brace, so only a `}` is left, and the pattern fails with the "Format Not Supported" error for unbalanced braces. An extra `}` elsewhere is an "Extra Closing Brace" error, but an extra `{` next to a complete group is dropped without an error, so `'{a,b}{'` gives `a` and `b`. Text with no braces at all is a "No Braces" error, and an empty string is a "Pipeline empty" error.
+
+`str expand` doesn't look at the file system, so it can name files and directories that don't exist yet. Spread the list into a command that takes several arguments:
+
+```nu
+mkdir ...('out/{a,b}/{x,y}' | str expand)
+```
+
+[`glob`](/commands/docs/glob.md) understands `{a,b}` too, but it returns only the paths that exist. Given a list of strings, `str expand` returns a list of lists, one for each string. A big range such as `{1..1000000000}` takes a long time and a lot of memory to build. Press Ctrl+C to stop it.
+
+### Counting words and characters
+
+[`str stats`](/commands/docs/str_stats.md) counts the lines, words and characters of a string, like the Unix `wc` command:
+
+```nu
+"It's a well-known fact.\nSee page 42.\n" | str stats
+# => ╭───────────────┬────╮
+# => │ lines         │ 2  │
+# => │ words         │ 8  │
+# => │ bytes         │ 37 │
+# => │ chars         │ 37 │
+# => │ graphemes     │ 37 │
+# => │ unicode-width │ 37 │
+# => ╰───────────────┴────╯
+```
+
+- `lines` counts the line endings, plus one for any text after the last of them. So a final newline doesn't add an empty line, and an empty string has 0 lines. `\n`, `\r\n` and a lone `\r` each end a line, and so do form feed, the next-line character `\u{85}` and the Unicode line and paragraph separators `\u{2028}` and `\u{2029}`.
+- `words` follows Unicode's rules for word boundaries. Punctuation doesn't count, a hyphen splits a word and an apostrophe inside one doesn't, so the example counts `well` and `known` separately, `It's` once, and `42` as a word. In Chinese or Japanese text, each ideograph is a word.
+- `bytes`, `chars` and `graphemes` count UTF-8 bytes, code points and visible characters. These are the three units of [`str length`](/commands/docs/str_length.md), described in the [Language Guide](/lang-guide/chapters/types/basic_types/string.md).
+- `unicode-width` is the number of terminal columns the text fills. Chinese and Japanese characters take two columns each, and a combining accent takes none:
+
+```nu
+"日本語 cafe\u{301}" | str stats
+# => ╭───────────────┬────╮
+# => │ lines         │ 1  │
+# => │ words         │ 4  │
+# => │ bytes         │ 16 │
+# => │ chars         │ 9  │
+# => │ graphemes     │ 8  │
+# => │ unicode-width │ 11 │
+# => ╰───────────────┴────╯
+```
+
+`str stats` takes one string. A list of strings is an error, so run it on each item instead, as in `open notes.txt | lines | each { str stats }`. A file read with `open` is counted as it is. The output of an external command loses one final newline before `str stats` sees it, as [Pipelines](pipelines.md#working-with-external-commands) explains, so `^cat notes.txt | str stats` can report one byte less than `open notes.txt | str stats`. With no input at all, `str stats` fails with "Pipeline empty".
 
 ## String Parsing
 
@@ -924,6 +1066,43 @@ Two other operators exist for simpler comparisons:
 # => true
 ```
 
+The commands `str starts-with` and `str ends-with` make the same test. Unlike the operators, they work on each string of a list and on the columns you name in a table or record, and `--ignore-case` (`-i`) ignores letter case. That uses Unicode case folding, so `ß` matches `SS`:
+
+```nu
+['README.md' 'main.rs' 'NOTES.MD'] | str ends-with --ignore-case '.md'
+# => ╭───┬───────╮
+# => │ 0 │ true  │
+# => │ 1 │ false │
+# => │ 2 │ true  │
+# => ╰───┴───────╯
+'Straße' | str ends-with --ignore-case 'SSE'
+# => true
+```
+
+The operators are always case-sensitive, and they need a string on both sides. They also have negated forms, `not-starts-with` and `not-ends-with`.
+
+### Comparing strings by similarity
+
+[`str distance`](/commands/docs/str_distance.md) measures how different two strings are. It returns the Levenshtein edit distance, which is the number of characters you would insert, delete or replace to turn one string into the other. It counts code points and is case-sensitive, and swapping two neighboring characters counts as two edits:
+
+```nu
+'nushell' | str distance 'nutshell'
+# => 1
+'Nu' | str distance 'nu'
+# => 1
+'ab' | str distance 'ba'
+# => 2
+```
+
+Sorting by distance finds the closest match to a mistyped word:
+
+```nu
+[commit checkout cherry-pick clone status] | sort-by { str distance 'cheokut' } | first
+# => checkout
+```
+
+For a table or record, name the columns after the string, as in `str distance 'nushell' name`, and each named value is replaced by its distance. A list of strings is an input type error, so use [`each`](/commands/docs/each.md), or a closure as in the `sort-by` example.
+
 ## Converting Strings
 
 There are multiple ways to convert strings to and from other types.
@@ -956,6 +1135,40 @@ $"(1.0)"
 ```
 
 `into string` doesn't decode binary data. It fails with a hint to use [`decode`](/commands/docs/decode.md), as in `0x[48 69] | decode utf-8`, which gives `Hi`. A record is also an error, and its hint points to [`to nuon`](/commands/docs/to_nuon.md). A list is converted item by item, and for a table or record you name the columns to convert, as described in [Lists, records and tables](#lists-records-and-tables).
+
+The [`format`](/commands/docs/format.md) command groups more ways to turn a value into text. On its own it only prints its help. Its subcommands are [`format date`](/commands/docs/format_date.md) for dates, [`format duration`](/commands/docs/format_duration.md) and [`format filesize`](/commands/docs/format_filesize.md) for writing a value in a unit you choose, [`format bits`](/commands/docs/format_bits.md) for the bits of a number or binary value, [`format pattern`](/commands/docs/format_pattern.md) for filling a pattern such as `'{name}: {size}'` from each row of a table, and `format number`.
+
+[`format number`](/commands/docs/format_number.md) writes a number in several notations at once and returns a record of strings. Take the one you need with a cell path:
+
+```nu
+255 | format number
+# => ╭──────────┬────────────╮
+# => │ debug    │ 255        │
+# => │ display  │ 255        │
+# => │ binary   │ 0b11111111 │
+# => │ lowerexp │ 2.55e2     │
+# => │ upperexp │ 2.55E2     │
+# => │ lowerhex │ 0xff       │
+# => │ upperhex │ 0xFF       │
+# => │ octal    │ 0o377      │
+# => ╰──────────┴────────────╯
+255 | format number --no-prefix | get lowerhex
+# => ff
+```
+
+`--no-prefix` (`-n`) drops the `0b`, `0x` and `0o` in front of the binary, hex and octal forms. A negative int is written as a 64-bit two's complement number, so `-1 | format number | get lowerhex` is `0xffffffffffffffff`. For a float, those three forms show the bits of its IEEE 754 encoding, not its value. `debug` and `display` differ only for floats. `debug` keeps the `.0` of a whole number and switches to exponent notation for very large and very small values, while `display` writes all the digits:
+
+```nu
+1.0 | format number | select debug display lowerexp lowerhex
+# => ╭──────────┬────────────────────╮
+# => │ debug    │ 1.0                │
+# => │ display  │ 1                  │
+# => │ lowerexp │ 1e0                │
+# => │ lowerhex │ 0x3ff0000000000000 │
+# => ╰──────────┴────────────────────╯
+```
+
+The input has to be one int or float. A file size, a string or a list is an input type error. For a list, use `each`, as in `[10 255] | each { format number | get upperhex }`, which gives `0xA` and `0xFF`. To read hex text back into an int, use `into int --radix 16`.
 
 ### From string
 

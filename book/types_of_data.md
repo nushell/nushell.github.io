@@ -295,6 +295,7 @@ Closures are a useful way to represent code that can be executed on each row of 
 |                       | `0o[377 001]` - octal-based binary representation                           |
 |                       | `0b[10101010101]` - binary-based binary representation                      |
 | **_See also:_**       | [Language Guide - Binary](/lang-guide/chapters/types/basic_types/binary.md) |
+|                       | [Working with Binary Data](/book/working_with_binary.md)                    |
 
 Binary data, like the data from an image file, is a group of raw bytes.
 
@@ -477,3 +478,5 @@ Simple example - Semantic versions compare by version number, not as text:
 ```
 
 A semver's parts can be read with a cell path (`$v.major`, `$v.minor`, `$v.patch`, `$v.pre`, `$v.build` and `$v.prefix`), and a version range from `into semver-range` tests versions with `in`. The [SemVer section](/lang-guide/chapters/types/other_types/custom_value.md#semver) of the Language Reference covers these, along with `into semver --loose` and record input.
+
+[`semver bump`](/commands/docs/semver_bump.md) is the only subcommand of [`semver`](/commands/docs/semver.md). It moves a version to the next major, minor or patch number, adds or advances an `alpha`, `beta` or `rc` pre-release, or drops the pre-release with `release`. [Bumping versions](/lang-guide/chapters/types/other_types/custom_value.md#bumping-versions) describes each level and flag.

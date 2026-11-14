@@ -15,6 +15,32 @@ A pattern can turn on flags at its start: `(?i)` ignores case, `(?m)` makes `^` 
 # => false
 ```
 
+## Matching text literally
+
+When part of a pattern comes from a variable, characters such as `.` and `+` in it still act as regex syntax. Here `.txt` matches any character followed by `txt`, so `atxt` gets through:
+
+```nu
+let ext = '.txt'
+['a.txt' 'atxt' 'b.txt.bak'] | where $it =~ $'($ext)$'
+# => ╭───┬───────╮
+# => │ 0 │ a.txt │
+# => │ 1 │ atxt  │
+# => ╰───┴───────╯
+```
+
+[`str escape-regex`](/commands/docs/str_escape-regex.md) puts a backslash in front of each character that has a meaning in a pattern: `\ . + * ? ( ) [ ] { } | ^ $ #`. The escaped text matches only itself, and the rest of the pattern keeps working:
+
+```nu
+['a.txt' 'atxt' 'b.txt.bak'] | where $it =~ $'($ext | str escape-regex)$'
+# => ╭───┬───────╮
+# => │ 0 │ a.txt │
+# => ╰───┴───────╯
+'1+1=2' | str escape-regex
+# => 1\+1=2
+```
+
+You need it only where Nushell reads a regex: the `=~` and `!~` operators, and the `--regex` forms of `str replace`, `parse`, `split row` and `split column`. Without `--regex`, those commands already match plain text, and so does [`str contains`](/commands/docs/str_contains.md). Given a list of strings, `str escape-regex` escapes each one. For a table or record, name the columns to escape, as described in [Lists, records and tables](working_with_strings.md#lists-records-and-tables).
+
 ## Replacing with `str replace`
 
 With `--regex`, [`str replace`](/commands/docs/str_replace.md) treats the text to find as a regular expression, and the replacement can refer to capture groups. `$1`, `$2` and so on insert numbered groups, and `$name` inserts a group named with `(?<name>...)`:
