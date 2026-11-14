@@ -5,6 +5,8 @@ This feature requires the Polars plugin.  See the
 [Plugins Chapter](plugins.md) to learn how to install it.
 
 To test that this plugin is properly installed, run `help polars`.
+Running [`polars`](/commands/docs/polars.md) with no subcommand prints the same
+help text, which lists every `polars` subcommand.
 :::
 
 As we have seen so far, Nushell makes working with data its main priority.
@@ -355,6 +357,33 @@ The Hive flags apply to lazy reads only. With `--eager`, opening a directory fai
 - `--hive-try-parse-dates` turns partition values that look like dates, such as `day=2025-01-02`, into a `date` column instead of a string column.
 - `--hive-start-idx` has no effect on file paths. Polars works out where the partition directories start from the path you pass.
 
+### Saving dataframes
+
+[`polars save`](/commands/docs/polars_save.md) writes a dataframe to a file and returns nothing. Like `polars open`, it picks the format from the file extension: `csv`, `parquet` (or `parq` and `pq`), `arrow` (or `ipc`), `jsonl` (or `ndjson`), and `avro`. `--type` (`-t`) takes one of those names and overrides the extension. Plain JSON and TSV can't be written. A `.json` or `.tsv` file fails with `Unsupported type`, so write tab-separated data with `--type csv --csv-delimiter "\t"`. An existing file is overwritten without asking, and the directory has to exist already.
+
+Given a lazy dataframe, `polars save` runs the plan in streaming mode and writes rows as they come, so the whole result never has to fit in memory. That works for every format except Avro, which collects the dataframe first. This reads `test_small.csv` lazily, filters it, and writes the result with a semicolon delimiter:
+
+```nu
+polars open test_small.csv | polars filter ((polars col first) == a) | polars select int_1 word | polars save first_a.csv --csv-delimiter ";"
+open --raw first_a.csv
+# => int_1;word
+# => 1;first
+# => 2;second
+# => 3;third
+```
+
+The other flags apply to one format each:
+
+- `--csv-delimiter` sets the field separator. It has to be a single character. An eager dataframe fails with `Incorrect delimiter` otherwise, and a lazy one silently uses the first character.
+- `--csv-no-header` leaves out the header line.
+- `--avro-compression` compresses an Avro file with `deflate` or `snappy`. Any other value fails with `compression must be one of deflate or snappy`.
+
+`polars save` can also write to cloud storage, as described in [Cloud Storage](#cloud-storage).
+
+::: warning
+Saving a lazy dataframe over the file it reads from destroys the data, because Polars truncates the file before it reads it. A CSV file keeps only its header line, and a Parquet file can crash the plugin. `polars save` catches this case with `Error saving file: attempted to save into source` only when `polars open` is earlier in the same pipeline and both commands spell the path the same way. It misses `./data.csv` against `data.csv`, and a lazy dataframe stored in a variable. It also refuses `polars open --eager data.csv | polars save data.csv`, which would be safe. To overwrite a source file, collect the dataframe first, as in `polars open data.csv | polars collect | polars save data.csv`, or save to a new file.
+:::
+
 ### The object store
 
 The plugin keeps every dataframe, lazy dataframe, expression, group-by, and other Polars object you create in an in-memory store, and a Nushell value such as `$df_1` holds only a key into that store. The Polars value types table under [Core Plugin Quickstart](./plugins.md#core-plugin-quickstart) lists these kinds of values and the commands that make them. [`polars store-ls`](/commands/docs/polars_store-ls.md) lists what's stored. Right after loading `$df_1`, it holds just that one dataframe:
@@ -382,6 +411,17 @@ An object stays in the store while a Nushell value refers to it. When the last o
 Nushell's [plugin garbage collector](./plugins.md#plugin-garbage-collector) stops a plugin that has been idle for a while (10 seconds by default). The Polars plugin turns the garbage collector off for itself while anything is in its store, and back on once the store is empty. So as long as you hold a dataframe in a variable, the plugin keeps running however long it sits idle, and your `plugin_gc` settings don't stop it.
 
 `plugin stop polars` ends the plugin and throws away everything in the store. Variables that held dataframes still exist afterward, but using one fails with an error such as `Dataframe 600680b3-3242-47a6-b41a-9b71691e08ae not found in cache`, and you have to load the data again.
+
+`polars store-get` takes one key from `polars store-ls` and returns the stored object, whatever its type. A key that names nothing returns `null`, and a string that isn't a UUID fails with `Failed to convert key string to UUID`. `polars store-rm` takes any number of keys and returns one message per key, `Removed: <key>` or `No value found for key: <key>`. To free several objects at once, spread the keys from `polars store-ls`. This stores a lazy dataframe and an expression, then removes every stored object that isn't an eager dataframe:
+
+```nu
+let lf_tmp = $df_1 | polars into-lazy
+let expr_tmp = polars col int_1
+polars store-rm ...(polars store-ls | where type != DataFrame | get key) | length
+# => 2
+```
+
+`$lf_tmp` and `$expr_tmp` now behave like variables after `plugin stop polars`, and using either one fails with `not found in cache`. Use `polars store-rm` to free the memory a large dataframe holds when the variable that refers to it stays in scope, as variables defined at the prompt do for the rest of the session.
 
 ## Basic Aggregations
 
@@ -586,6 +626,38 @@ The remaining flags:
 
 Pass only one join type. `--cross` together with `--left` or `--full` fails when
 collected, with `expected join keys/predicates`.
+
+### Joining on a condition
+
+`polars join` pairs rows whose keys are equal.
+[`polars join-where`](/commands/docs/polars_join-where.md) pairs rows for which an
+expression is true, such as one column being less than another. Every left row is
+paired with every right row that satisfies the condition, and a left row that
+matches nothing is left out, as `t3` is here:
+
+```nu
+let trips = [[trip km]; [t1 120] [t2 450] [t3 1500]] | polars into-df
+let cars = [[car range_km]; [city 300] [hybrid 600] [diesel 1000]] | polars into-df
+$trips | polars join-where $cars ((polars col km) <= (polars col range_km)) | polars sort-by trip car
+# => ╭───┬──────┬─────┬────────┬──────────╮
+# => │ # │ trip │ km  │  car   │ range_km │
+# => ├───┼──────┼─────┼────────┼──────────┤
+# => │ 0 │ t1   │ 120 │ city   │      300 │
+# => │ 1 │ t1   │ 120 │ diesel │     1000 │
+# => │ 2 │ t1   │ 120 │ hybrid │      600 │
+# => │ 3 │ t2   │ 450 │ diesel │     1000 │
+# => │ 4 │ t2   │ 450 │ hybrid │      600 │
+# => ╰───┴──────┴─────┴────────┴──────────╯
+```
+
+The condition can compare columns from both sides, test a column from one side
+against a value, and join several comparisons with `and`. A right column whose
+name the left dataframe already uses gets the suffix `_right`, not the `_x` that
+`polars join` adds, and the condition refers to it by that name, as in
+`(polars col x) > (polars col x_right)`. A condition that isn't boolean fails with
+`'join_where' predicates must resolve to boolean`. The command has no flags. The
+result is eager or lazy to match the left input, and the right dataframe can be
+either kind.
 
 ## DataFrame group-by
 
@@ -839,7 +911,9 @@ the plugin prints `Falling back to object type` on stderr.
 In 0.117.0, a list column whose first list holds fewer than two items crashes
 the plugin, which also throws away everything in its store. For example,
 `[[1] [2 3]] | wrap c | polars into-df` fails with a
-`Failed to receive response to plugin call` error.
+`Failed to receive response to plugin call` error. A `null` in place of a list
+crashes it the same way, wherever it is in the column, as in
+`[[id tags]; [1 [a b]] [2 null]] | polars into-df`.
 :::
 
 To pick the types yourself, pass `--schema` (`-s`) a record of column name to
@@ -1570,6 +1644,57 @@ $lf_0 | polars collect | polars into-nu | describe
 # => table<a: int, b: string>
 ```
 
+`polars into-nu` collects a lazy dataframe itself, so the `polars collect` above is
+optional. Without flags it converts every row. `--rows` (`-n`) keeps that many
+rows from the top, and `--tail` (`-t`) takes them from the bottom instead, five
+unless you also pass `--rows`. `--index` (`-i`) adds an `index` column holding
+each row's position in the dataframe. Nushell shows that column as the `#`
+column, so after `--tail` the row numbers still match the dataframe:
+
+```nu
+$df_1 | polars select int_1 word | polars into-nu --tail --rows 3 --index
+# => ╭───┬───────┬───────╮
+# => │ # │ int_1 │ word  │
+# => ├───┼───────┼───────┤
+# => │ 7 │     8 │ eight │
+# => │ 8 │     9 │ ninth │
+# => │ 9 │     0 │ ninth │
+# => ╰───┴───────┴───────╯
+```
+
+Columns come back as the matching Nushell types, except where `polars into-df`
+already changed the type. A `duration` or `filesize` value became an `i64` column
+(see [How values become columns](#how-values-become-columns)), so it comes back
+as an `int`.
+
+`polars into-nu` also converts an expression, a selector, a schema, or a data
+type. An expression becomes a record that shows how it's built, which helps when
+an expression doesn't do what you expected:
+
+```nu
+(polars col a) * 2 | polars as b | polars into-nu | table --expand
+# => ╭───────┬────────────────────────────────────╮
+# => │       │ ╭───────┬────────────────────────╮ │
+# => │ expr  │ │       │ ╭───────┬────────────╮ │ │
+# => │       │ │ left  │ │ expr  │ column     │ │ │
+# => │       │ │       │ │ value │ a          │ │ │
+# => │       │ │       │ ╰───────┴────────────╯ │ │
+# => │       │ │ op    │ *                      │ │
+# => │       │ │       │ ╭───────┬────────────╮ │ │
+# => │       │ │ right │ │ expr  │ literal    │ │ │
+# => │       │ │       │ │ value │ dyn int: 2 │ │ │
+# => │       │ │       │ ╰───────┴────────────╯ │ │
+# => │       │ ╰───────┴────────────────────────╯ │
+# => │ alias │ b                                  │
+# => ╰───────┴────────────────────────────────────╯
+```
+
+A schema becomes a record of column names and type names, and a data type
+becomes its name as a string. A selector becomes a string in Polars' internal
+notation, such as `Some(ByName { names: ["a", "b"], strict: false })`. A
+group-by or a `polars when` object fails with `Can't convert to NuDataFrame`,
+although the command's signature lists both types.
+
 Given an eager dataframe, `polars collect` returns it unchanged, so you can end
 a pipeline with it whichever kind of dataframe reaches it. Any other input, such
 as an expression, is an error.
@@ -1742,18 +1867,25 @@ Nushell 0.117.0 the commands fall into three groups:
 
 - Most commands that accept both kinds return the kind they were given. These
   include `polars filter`, `polars filter-with`, `polars sort-by`,
-  `polars reverse`, `polars join`, `polars first`, `polars last`,
-  `polars rename`, `polars drop`, `polars take`, `polars slice`, `polars cast`,
-  `polars fill-null`, `polars drop-nulls`, `polars median`, `polars quantile`, and
-  `polars query`.
+  `polars reverse`, `polars join`, `polars join-where`, `polars first`,
+  `polars last`, `polars rename`, `polars drop`, `polars take`, `polars slice`,
+  `polars shift`, `polars cast`, `polars fill-null`, `polars drop-nulls`,
+  `polars drop-duplicates`, `polars unnest`, `polars cache`, `polars median`,
+  `polars quantile`, `polars summary`, and `polars query`. Of these,
+  `polars drop`, `polars drop-nulls`, `polars drop-duplicates`,
+  `polars summary`, and `polars query` run a lazy input's plan right away and
+  wrap the result in a new lazy dataframe.
 - Some always return a lazy dataframe, even for eager input: `polars select`,
   `polars with-column` with expressions, `polars agg`, `polars sum`,
   `polars min`, `polars max`, `polars mean`, `polars std`, `polars var`,
-  `polars concat`, `polars unpivot`, and `polars into-lazy`.
+  `polars concat`, `polars pivot`, `polars unpivot`, `polars explode`,
+  `polars flatten`, and `polars into-lazy`.
 - Commands that need the data itself, including the ones that work on a single
   column, collect a lazy input and return an eager dataframe: `polars get`,
   `polars append`, `polars shape`, `polars value-counts`, `polars is-unique`,
-  `polars is-duplicated`, `polars arg-sort`, and `polars collect`.
+  `polars is-duplicated`, `polars arg-sort`, `polars cut`, `polars qcut`,
+  `polars sample`, `polars dummies`, `polars map-batches`, `polars fill-nan`
+  given a whole dataframe, and `polars collect`.
 
 When you aren't sure, check with [`describe`](/commands/docs/describe.md):
 
@@ -1788,6 +1920,114 @@ $df_1 | polars select first int_1 word | polars group-by first | polars first | 
 Given an expression, as in `polars col int_1 | polars first`, it builds an
 expression for the first value of the column and ignores the row count. Inside
 `polars agg` that gives the first value of each group.
+
+[`polars last`](/commands/docs/polars_last.md) works the same way from the other
+end. It takes an optional row count that defaults to 1, returns the last rows of
+each group when given a group-by, and builds a last-value expression, ignoring the
+count, when given an expression or a selector.
+
+[`polars slice`](/commands/docs/polars_slice.md) takes rows from anywhere in the
+dataframe. Its arguments are the offset of the first row and the number of rows:
+
+```nu
+$df_1 | polars slice 2 3 | polars get int_1 word
+# => ╭───┬───────┬────────╮
+# => │ # │ int_1 │  word  │
+# => ├───┼───────┼────────┤
+# => │ 0 │     3 │ third  │
+# => │ 1 │     4 │ second │
+# => │ 2 │     0 │ third  │
+# => ╰───┴───────┴────────╯
+```
+
+A negative offset counts back from the end, so `polars slice -3 2` starts at the
+third row from the end. The window doesn't wrap around. On the ten rows of
+`$df_1`, `polars slice -12 4` covers two positions before the first row and
+returns only rows 0 and 1. An offset past the end returns an empty dataframe, and
+a negative size fails with `Negative value passed when positive one is required`.
+`polars first`, `polars last`, and `polars slice` all return the kind of
+dataframe they were given.
+
+[`polars get`](/commands/docs/polars_get.md) picks columns by name, like
+`polars select`, but it takes only names, not expressions or selectors, and it
+always returns an eager dataframe, collecting a lazy input first. A name that
+doesn't exist fails with `Error selecting columns`. A list of names fails with
+`Incorrect column format`, so spread it instead, as in `polars get ...$names`.
+The examples in this chapter use `polars get` to pick out the single column that
+commands such as `polars arg-sort` and `polars value-counts` work on.
+
+[`polars drop`](/commands/docs/polars_drop.md) removes the columns you name and
+keeps the rest:
+
+```nu
+$df_1 | polars drop int_2 float_1 float_2 second third | polars first 3
+# => ╭───┬───────┬───────┬────────╮
+# => │ # │ int_1 │ first │  word  │
+# => ├───┼───────┼───────┼────────┤
+# => │ 0 │     1 │ a     │ first  │
+# => │ 1 │     2 │ a     │ second │
+# => │ 2 │     3 │ a     │ third  │
+# => ╰───┴───────┴───────┴────────╯
+```
+
+A column that doesn't exist fails with `Error dropping column`. Given a lazy
+dataframe, `polars drop` runs the plan, drops the columns from the result, and
+wraps that in a new lazy dataframe, so everything before it in the pipeline runs
+right away. To keep a pipeline lazy, select everything except those columns
+instead, as in `polars select (polars selector exclude int_2 float_1)`.
+
+[`polars columns`](/commands/docs/polars_columns.md) returns the column names as a
+Nushell list of strings:
+
+```nu
+$df_1 | polars columns | first 3
+# => ╭───┬─────────╮
+# => │ 0 │ int_1   │
+# => │ 1 │ int_2   │
+# => │ 2 │ float_1 │
+# => ╰───┴─────────╯
+```
+
+Given a lazy dataframe, `polars columns` runs the whole plan to find the names,
+and fails if the plan does, for example on a CSV value that doesn't parse.
+`polars schema | columns` gives the same list from the plan without reading the
+data.
+
+To keep the rows that match a condition, pass an expression to
+[`polars filter`](/commands/docs/polars_filter.md). It takes one argument, so
+combine conditions with `and` and `or`:
+
+```nu
+$df_1 | polars filter ((polars col first) == b and (polars col int_1) > 4) | polars get first int_1 word
+# => ╭───┬───────┬───────┬────────╮
+# => │ # │ first │ int_1 │  word  │
+# => ├───┼───────┼───────┼────────┤
+# => │ 0 │ b     │     6 │ second │
+# => │ 1 │ b     │     7 │ third  │
+# => ╰───┴───────┴───────┴────────╯
+```
+
+`polars filter` takes only expressions. A series mask fails with
+`Can't convert to NuExpression.`, so filter with a mask through
+[`polars filter-with`](/commands/docs/polars_filter-with.md), as in
+[Series and Masks](#series-and-masks). A condition that isn't boolean fails with
+`` filter predicate must be of type `Boolean` ``. On an eager dataframe, that
+error and a missing column show up right away, and on a lazy one when you
+collect.
+
+`polars filter` also works on an expression, where it keeps the values for which
+the condition holds. Inside `polars agg`, that filters each group on its own:
+
+```nu
+$df_1 | polars group-by first | polars agg (polars col int_1 | polars filter ((polars col word) == second) | polars sum | polars as second_total) | polars sort-by first | polars collect
+# => ╭───┬───────┬──────────────╮
+# => │ # │ first │ second_total │
+# => ├───┼───────┼──────────────┤
+# => │ 0 │ a     │            2 │
+# => │ 1 │ b     │           10 │
+# => │ 2 │ c     │            0 │
+# => ╰───┴───────┴──────────────╯
+```
 
 [`polars col`](/commands/docs/polars_col.md) can pick more than one column:
 
@@ -1898,6 +2138,30 @@ which is larger for text with characters outside ASCII:
 
 `polars str-lengths` also works directly on a one-column dataframe, where the
 result keeps the column's name.
+
+## More dataframe commands
+
+These pages cover the dataframe commands this chapter doesn't:
+
+- [Dataframe Operations](./dataframes/frames.md) combines, reshapes, and
+  converts dataframes. It also covers nulls, duplicates, binning, sampling,
+  summary statistics, query profiling, SQL queries, and running Nushell
+  closures on columns.
+- [Column Selectors](./dataframes/selectors.md) covers the `polars selector`
+  commands, which pick columns by name, position, or type.
+- [Math Expressions](./dataframes/math.md) covers the `polars math` functions,
+  such as `polars math abs` and `polars math log`, and the bitwise commands.
+- [String Expressions](./dataframes/strings.md) covers changing case, searching
+  and replacing, splitting and joining strings, and parsing numbers from them.
+- [Dates and Times in Dataframes](./dataframes/dates.md) covers parsing,
+  formatting, and taking apart date and time columns, time zones, and date
+  ranges.
+- [Masks and Conditionals](./dataframes/conditionals.md) covers null tests,
+  mask operations, finding the positions of values, building a column from
+  conditions with `polars when`, and replacing values.
+- [Aggregations and Window Functions](./dataframes/aggregation.md) covers the
+  aggregation commands inside and outside `polars agg`, cumulative and rolling
+  windows, and `polars over`.
 
 ## Dataframe Commands
 

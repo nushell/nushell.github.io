@@ -65,6 +65,12 @@ $df | polars first 5 | polars append $ids | polars rename id_x vendor_id_length
 # => ╰───┴───────────┴───────────┴─────────────────────┴─────────────────────┴─────────────────┴──────────────────┴─────────────────┴───────────────────┴────────────┴────────────┴────────────┴────────────╯
 ```
 
+[`polars append`](/commands/docs/polars_append.md) places the columns of `$ids`
+to the right of the first five rows, so both need the same number of rows. That
+column is also named `id`, so it arrives as `id_x`, and `polars rename` gives it
+a clearer name. [Appending dataframes](../book/dataframes/frames.md#appending-dataframes)
+covers `polars append --col`, which adds rows instead of columns.
+
 Here's an alternate approach using `with-column`
 
 ```nu
