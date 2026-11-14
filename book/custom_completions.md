@@ -409,6 +409,8 @@ def build [target: string@"nu-complete dirs-or-default"] { }
 # => ╰───┴──────────╯
 ```
 
+In a script or with `nu -c`, `commandline complete` doesn't list the executables in `PATH`. Run it at the prompt to check suggestions that include them. The [completion menu](./line_editor.md#completion-menu) section of the line editor chapter uses `commandline complete` to show what Nushell completes without a custom completer, such as cell paths, operators, attributes and module exports.
+
 ## External Completions
 
 External completers can also be integrated, instead of relying solely on Nushell ones.

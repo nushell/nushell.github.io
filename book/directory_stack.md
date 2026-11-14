@@ -111,6 +111,82 @@ dirs
 
 When we drop `nu_scripts` from the list, the previous directory (`reedline`) becomes active.
 
+## Where the stack is stored
+
+The stack lives in two environment variables. `$env.DIRS_LIST` holds the directories, and
+`$env.DIRS_POSITION` holds the index of the active one. `use std/dirs` creates them when they
+don't exist yet, with the current directory as the only entry and `0` as the position:
+
+```nu
+cd /usr
+use std/dirs
+dirs add /usr/bin /usr/lib
+$env.DIRS_LIST
+# => ╭───┬──────────╮
+# => │ 0 │ /usr     │
+# => │ 1 │ /usr/bin │
+# => │ 2 │ /usr/lib │
+# => ╰───┴──────────╯
+$env.DIRS_POSITION
+# => 1
+```
+
+The stored path of the active directory can be out of date. `cd` doesn't know about the stack,
+so it changes `$env.PWD` and leaves `DIRS_LIST` alone. `dirs` shows `$env.PWD` for the active
+entry instead of the stored path, and `dirs add`, `dirs next`, `dirs prev` and `dirs goto` write
+`$env.PWD` into the active slot before they move:
+
+```nu
+cd /usr/share
+$env.DIRS_LIST
+# => ╭───┬──────────╮
+# => │ 0 │ /usr     │
+# => │ 1 │ /usr/bin │
+# => │ 2 │ /usr/lib │
+# => ╰───┴──────────╯
+dirs
+# => ╭───┬────────┬────────────╮
+# => │ # │ active │    path    │
+# => ├───┼────────┼────────────┤
+# => │ 0 │ false  │ /usr       │
+# => │ 1 │ true   │ /usr/share │
+# => │ 2 │ false  │ /usr/lib   │
+# => ╰───┴────────┴────────────╯
+dirs next
+$env.DIRS_LIST
+# => ╭───┬────────────╮
+# => │ 0 │ /usr       │
+# => │ 1 │ /usr/share │
+# => │ 2 │ /usr/lib   │
+# => ╰───┴────────────╯
+```
+
+So read the stack with `dirs` rather than straight from `$env.DIRS_LIST`.
+
+Because the stack lives in environment variables, it carries over to any Nushell started from this
+one, such as a nested `nu` or a restart with `exec nu`. Other programs see `DIRS_LIST` as a single
+string, with the directories joined by the path separator (`:`, or `;` on Windows), and
+`DIRS_POSITION` as the index written out as a string. `use std/dirs` adds an
+[`ENV_CONVERSIONS`](./configuration.md#env-conversions) entry for each variable, so in the new
+shell it turns them back into a list and an integer, and the stack is where you left it:
+
+```nu
+nu -c '$env.DIRS_LIST'
+# => /usr:/usr/share:/usr/lib
+nu -c 'use std/dirs; dirs'
+# => ╭───┬────────┬────────────╮
+# => │ # │ active │    path    │
+# => ├───┼────────┼────────────┤
+# => │ 0 │ false  │ /usr       │
+# => │ 1 │ false  │ /usr/share │
+# => │ 2 │ true   │ /usr/lib   │
+# => ╰───┴────────┴────────────╯
+```
+
+An `export-env` block in `std/dirs` creates both variables, and that block doesn't run when your
+own module imports `std/dirs` with a top-level `use`. See
+[Using `std/dirs` in Modules](./standard_library.md#using-std-dirs-in-modules).
+
 ## `shells` Aliases
 
 Some users may prefer to think of this feature as multiple "shells within shells", where each has its own directory.

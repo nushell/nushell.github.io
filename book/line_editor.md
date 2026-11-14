@@ -192,6 +192,8 @@ A mode without the editing set rebinds <kbd>Backspace</kbd> and <kbd>Delete</kbd
 
 On terminals that use the Kitty keyboard protocol, <kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>,</kbd> and <kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>.</kbd> also work for <kbd>Alt</kbd>+<kbd>&lt;</kbd> and <kbd>Alt</kbd>+<kbd>&gt;</kbd>.
 
+When the line already has text and the cursor is at its end, <kbd>↑</kbd> and <kbd>↓</kbd> only show history entries that start with that text. See [Prefix search with the arrow keys](#prefix-search-with-the-arrow-keys).
+
 #### Editing Keybindings
 
 | Key                                                                | Action                                                 |
@@ -434,6 +436,48 @@ The `history.max_size`, `history.file_format`, `history.isolation` and `history.
 must be set in `config.nu`. They can't be changed once the REPL has started. Setting
 `$env.config.history.path` to `null` turns off the history file.
 :::
+
+### Prefix search with the arrow keys
+
+On an empty line, <kbd>↑</kbd> (or <kbd>Ctrl</kbd>+<kbd>P</kbd>) steps back through the whole
+history, newest entry first. Once you have typed something and the cursor is at the end of the
+line, <kbd>↑</kbd> searches instead. It jumps to the newest entry that starts with the text you
+typed, and each further press goes to the next older match. Say your history holds, from oldest
+to newest:
+
+```nu
+echo apple
+echo banana
+echo apricot
+echo apricot
+ls
+```
+
+Typing `echo ap` and pressing <kbd>↑</kbd> gives `echo apricot`. Pressing it again gives
+`echo apple`, because the search passes over `echo banana` and `ls`, and it also skips the
+second `echo apricot` since that's the entry already on the line. At the oldest match,
+<kbd>↑</kbd> does nothing. <kbd>↓</kbd> walks back toward newer matches, and past the newest
+one it gives you back `echo ap`. If nothing in the history starts with your text, the line
+stays as you typed it.
+
+Some details:
+
+- The search text is the line as it was at the first press of <kbd>↑</kbd>, and it stays fixed
+  while you step through the matches. Editing the recalled line ends the search. The next
+  <kbd>↑</kbd> starts a new one, with the edited line as the search text.
+- An entry matches only if it starts with the search text, letter case included. `echo ap`
+  doesn't find `ECHO apple` or `print (echo ap)`.
+- With the cursor anywhere but at the end of the line, <kbd>↑</kbd> ignores the text and steps
+  through the whole history, as on an empty line. Press <kbd>End</kbd> first to search.
+- A multi-line command never searches. <kbd>↑</kbd> and <kbd>↓</kbd> move between its lines,
+  and from the first line <kbd>↑</kbd> steps through the whole history.
+- In Vi and Helix normal mode, <kbd>k</kbd> and <kbd>j</kbd> search the same way. After
+  <kbd>Esc</kbd> the cursor rests on the last character, which counts as the end of the line.
+- With `history.isolation` turned on, the search sees what plain <kbd>↑</kbd> sees, which is
+  this session's commands and the ones saved before the session started.
+
+To find a command by text in the middle of the line, use <kbd>Ctrl</kbd>+<kbd>Q</kbd> or the
+[history menu](#history-menu) instead.
 
 ## Hints
 
@@ -823,6 +867,26 @@ $env.config.keybindings ++= [{
 As you can see, these two types will allow you to construct any type of
 keybinding that you require
 
+Configurations written for older versions of Nushell may use the pair edits
+`CutInsidePair`, `CopyInsidePair`, `CutAroundPair` and `CopyAroundPair`. Each
+takes a `left` and a `right` field of one character. Reedline no longer has these
+edits and `keybindings list` doesn't show them, but Nushell still accepts them
+and turns each one into a text object edit on the pair you give. `CutInsidePair`
+and `CutAroundPair` become `CutTextObject`, the two copy edits become
+`CopyTextObject`, and `Inside` and `Around` become `scope: inner` and
+`scope: around`. These two events do the same thing. Each cuts the text between
+the parentheses around the cursor, or inside the next pair of parentheses when
+the cursor isn't between any:
+
+```nu
+event: { edit: CutInsidePair, left: "(", right: ")" }
+event: { edit: CutTextObject, scope: inner, object_type: { left: "(", right: ")" } }
+```
+
+A missing `left` or `right`, or a value longer than one character, is treated
+like any other mistake in a keybinding. Nushell prints the error before every
+prompt and doesn't apply `$env.config.keybindings` until you fix it.
+
 ### Until Type
 
 To complete this keybinding tour we need to discuss the `until` type for event.
@@ -1064,6 +1128,196 @@ $env.config.menus ++= [{
 
 By modifying these parameters you can customize the layout of your menu to your
 liking.
+
+The suggestions depend on what is under the cursor. At the start of a command the menu offers
+command names, after a `-` the command's flags, after a `$` the variables in scope, and for most
+arguments the names of files and directories. A [custom completer](./custom_completions.md) can
+replace the suggestions for a command's arguments. The IDE completion menu below shows the same
+suggestions in a different layout. The sections that follow cover built-in completions that are
+easy to miss.
+
+To see what <kbd>Tab</kbd> would offer for a line, pipe the line to
+[`commandline complete`](/commands/docs/commandline_complete.md), as the examples below do. In a
+script or with `nu -c`, `commandline complete` doesn't list the executables in `PATH`, so run the
+examples that involve them at the prompt.
+
+#### Command names, `^` and `%`
+
+Command name completion lists Nushell's own commands together with the executables in your
+`PATH`. When an executable has the same name as a Nushell command, the menu lists it with a `^`
+in front, and lists the Nushell command a second time with a `%` in front, so you can pick the
+one you mean. On a system with a `sort` executable, typing `sort` at the prompt offers:
+
+```nu
+"sort" | commandline complete
+# => ╭───┬─────────╮
+# => │ 0 │ sort    │
+# => │ 1 │ sort-by │
+# => │ 2 │ %sort   │
+# => │ 3 │ ^sort   │
+# => ╰───┴─────────╯
+```
+
+Type the sigil yourself to narrow the list. After `^`, the menu offers only executables from
+`PATH`, even when `$env.config.completions.external.enable` is `false`. After `%`, it offers only
+built-in commands. That includes a built-in hidden by a custom command or alias of the same name,
+or by [`hide`](/commands/docs/hide.md), and leaves out custom commands, aliases and externs:
+
+```nu
+"%sort" | commandline complete
+# => ╭───┬─────────╮
+# => │ 0 │ sort    │
+# => │ 1 │ sort-by │
+# => ╰───┴─────────╯
+```
+
+Accepting a suggestion keeps the sigil and replaces only the name after it, and with the cursor
+in front of the sigil, <kbd>Tab</kbd> offers nothing. See
+[Running System (External) Commands](./running_externals.md) for what `^` and `%` do when the
+command runs.
+
+The word right after `sudo` or `doas`, written with or without `^`, completes from the same list
+of command names, since it names the command to run. Typing `sudo sor` at the prompt offers the
+same four suggestions as `sort` above. Pick a plain name that is an executable. `sudo` can't run
+Nushell commands, and a sigil in this position isn't removed, so `sudo ^sort` asks `sudo` for a
+program called `^sort`. Only that first word is special. With options in between, as in `sudo -u root sor`, and for the
+arguments of the command that follows, you get the usual completion for an external command,
+which is your [external completer](./custom_completions.md#external-completions) if you have one
+and file names otherwise. The same happens when no command name matches, and when `sudo` or `doas`
+is a custom command that you defined. An alias that only names the program, such as
+`alias sudo = ^sudo`, keeps the command name completion. One that adds options, such as
+`alias doas = ^doas -n`, loses it, because the options fill the first-word slot.
+
+#### Cell paths
+
+After a variable and a dot, the menu lists the keys of a record or the columns of a table, with
+the type of each value as the description:
+
+```nu
+let user = {name: "Ada", "home dir": "/home/ada", langs: [nu rust], v2: true}
+"$user." | commandline complete --detailed | select value description
+# => ╭───┬────────────┬──────────────╮
+# => │ # │   value    │ description  │
+# => ├───┼────────────┼──────────────┤
+# => │ 0 │ "home dir" │ string       │
+# => │ 1 │ langs      │ list<string> │
+# => │ 2 │ name       │ string       │
+# => │ 3 │ "v2"       │ bool         │
+# => ╰───┴────────────┴──────────────╯
+```
+
+The menu wraps a key in double quotes when it contains anything other than ASCII letters, `_`
+and `-`, which is why `"v2"` is quoted along with `"home dir"`. Each further dot goes a level
+deeper, so `$env.config.history.` lists the history settings and `$table.0.` lists the columns
+of a table's first row. For a list of records, the menu offers every column that appears in any of
+them. A version from [`into semver`](/commands/docs/into_semver.md) completes to `major`,
+`minor`, `patch`, `pre`, `build` and `prefix`, and a matrix from
+[`into matrix`](/commands/docs/into_matrix.md) to `shape`, `ndim` and `size`.
+
+The menu reads the actual value when it has one: a variable set by an earlier command, a
+constant, `$env`, `$nu`, or a literal such as `{a: 1, b: 2}.`. Otherwise it falls back on the
+declared type. Inside a command body, a parameter typed `record<name: string, age: int>`
+completes to `age` and `name`, and `(sys host).` completes the fields that
+[`sys host`](/commands/docs/sys_host.md) declares for its output. Completion never runs the
+command, so `(ls).` offers nothing, because `ls` only declares that it returns a table.
+
+#### Operators
+
+After a value and a space, the menu offers the operators that work with the value's type, each
+with a short description. An integer gets the arithmetic, comparison and bitwise operators, and a
+float gets the same without the bitwise ones. A string gets the comparisons, the regex operators
+`=~` and `!~`, which also appear as `like` and `not-like`, then `starts-with`, `ends-with`, `has`
+and their `not-` forms, and `++`. A date gets only comparisons, among them `older-than` and
+`newer-than`:
+
+```nu
+"(date now) " | commandline complete
+# => ╭───┬────────────╮
+# => │ 0 │ !=         │
+# => │ 1 │ <          │
+# => │ 2 │ <=         │
+# => │ 3 │ ==         │
+# => │ 4 │ >          │
+# => │ 5 │ >=         │
+# => │ 6 │ in         │
+# => │ 7 │ newer-than │
+# => │ 8 │ not-in     │
+# => │ 9 │ older-than │
+# => ╰───┴────────────╯
+```
+
+A list gets `==`, `!=`, `in`, `not-in`, `has`, `not-has` and `++`, a record or a range gets the
+same without `++`, and a boolean gets `and`, `or` and `xor` plus `==`, `!=`, `in` and `not-in`.
+When the type isn't known, as for a column inside [`where`](/commands/docs/where.md)
+(`ls | where size `), the menu offers every operator. Typing the start of an operator narrows the
+list, so `1 b` offers the five `bit-` operators.
+
+A mutable variable, or a variable under `$env`, also gets the assignment operators that fit its
+type: `=`, `+=`, `-=`, `*=` and `/=` for a number, `=` and `++=` for a string or a list, and
+only `=` for a boolean, date, record or range.
+
+#### Attributes
+
+Typing `@` at the start of a line and pressing <kbd>Tab</kbd> lists the attributes you can put
+above a definition:
+
+```nu
+"@" | commandline complete
+# => ╭───┬───────────────────╮
+# => │ 0 │ category          │
+# => │ 1 │ complete          │
+# => │ 2 │ complete external │
+# => │ 3 │ deprecated        │
+# => │ 4 │ example           │
+# => │ 5 │ interactive       │
+# => │ 6 │ search-terms      │
+# => │ 7 │ structured        │
+# => ╰───┴───────────────────╯
+```
+
+These are all the commands in scope whose names start with `attr `, shown without that prefix
+and with their descriptions. Attributes you import show up too, such as `@test` and
+`@before-each` after `use std/testing *`, and so do ones you define yourself with
+`def "attr my-tag" [] { ... }`. After the attributes, the menu offers the definitions an
+attribute can be attached to, which are `def`, `export def`, `extern` and `export extern`.
+
+#### Modules and their exports
+
+The module argument of [`use`](/commands/docs/use.md), [`export use`](/commands/docs/export_use.md)
+and [`overlay use`](/commands/docs/overlay_use.md) completes from three places:
+
+- the names of modules already loaded in this session, such as one created with `module` on an
+  earlier line
+- `std` and `std-rfc`, and after `std/` or `std-rfc/` the submodules that are built into Nushell
+- `.nu` files and directories in the current directory and in the directories listed in
+  [`$NU_LIB_DIRS`](./configuration.md#nu-lib-dirs-constant) and `$env.NU_LIB_DIRS`. Other files
+  are left out.
+
+```nu
+"use std/i" | commandline complete
+# => ╭───┬───────────╮
+# => │ 0 │ std/input │
+# => │ 1 │ std/iter  │
+# => ╰───┴───────────╯
+```
+
+After the module, `use` and `export use` complete what it exports: commands, aliases, submodules
+and constants, with names that contain spaces wrapped in quotes. This works for a module file
+that isn't loaded yet, and inside a bracketed import list:
+
+```nu
+"use std/log [log-" | commandline complete
+# => ╭───┬──────────────────╮
+# => │ 0 │ log-ansi         │
+# => │ 1 │ log-level        │
+# => │ 2 │ log-prefix       │
+# => │ 3 │ log-short-prefix │
+# => ╰───┴──────────────────╯
+```
+
+`overlay use` doesn't complete a module's members. [`source-env`](/commands/docs/source-env.md)
+offers `.nu` files and directories like `use` does, but not the `std/` paths, and
+[`source`](/commands/docs/source.md) offers every file, as for any other path argument.
 
 ### Ide Completion Menu
 
