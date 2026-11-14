@@ -35,6 +35,7 @@ export const sidebarEn: SidebarConfig = {
         '/book/pipelines.md',
         '/book/working_with_strings.md',
         '/book/regular_expressions.md',
+        '/book/working_with_binary.md',
         '/book/working_with_lists.md',
         '/book/working_with_records.md',
         '/book/working_with_tables.md',

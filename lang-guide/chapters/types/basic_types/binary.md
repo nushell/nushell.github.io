@@ -9,6 +9,7 @@
 |                       | `0b[10101010101]` - binary-based binary representation       |
 | **_Casts:_**          | [`into binary`](/commands/docs/into_binary.md)               |
 | **_See also:_**       | [Types of data - Binary](/book/types_of_data.md#binary-data) |
+|                       | [Working with Binary Data](/book/working_with_binary.md)     |
 
 ## Additional Language Notes
 
@@ -53,6 +54,91 @@
    # =>         contain values between 0o000 and 0o377.
    ```
 
+## Converting with `into binary`
+
+[`into binary`](/commands/docs/into_binary.md) turns these types into bytes:
+
+| Input      | Bytes                                                                           |
+| ---------- | ------------------------------------------------------------------------------- |
+| `int`      | The number as 8 bytes, two's complement                                         |
+| `float`    | The number as an 8-byte IEEE 754 double                                         |
+| `bool`     | The int `1` or `0` as 8 bytes                                                   |
+| `filesize` | The number of bytes as an 8-byte int                                            |
+| `duration` | The number of nanoseconds as an 8-byte int                                      |
+| `string`   | Its UTF-8 bytes                                                                 |
+| `datetime` | The UTF-8 bytes of its text in `ctime` form, such as `Thu Jan  1 00:00:01 1970` |
+| `binary`   | Unchanged                                                                       |
+
+`--endian` (`-e`) sets the byte order of the numbers: `little`, `big`, or `native`, the default, which is the byte order of the machine running Nushell (little-endian on x86-64 and most ARM systems). Pass it whenever the bytes leave the machine or get compared with fixed values:
+
+```nu
+[258 -1 1.5 true 1sec 1kB] | each { into binary --endian big } | to nuon
+# => [0x[0000000000000102], 0x[FFFFFFFFFFFFFFFF], 0x[3FF8000000000000], 0x[0000000000000001], 0x[000000003B9ACA00], 0x[00000000000003E8]]
+[258 -1 1.5 true 1sec 1kB] | each { into binary --endian little } | to nuon
+# => [0x[0201000000000000], 0x[FFFFFFFFFFFFFFFF], 0x[000000000000F83F], 0x[0100000000000000], 0x[00CA9A3B00000000], 0x[E803000000000000]]
+```
+
+A datetime is written as text, not as a number. The text uses the time in the value's own offset and leaves the offset out, so `2024-03-05T14:30:00+02:00` becomes `Tue Mar  5 14:30:00 2024`. To store a datetime as a number, convert it with `into int` first, which gives nanoseconds since 1970.
+
+`--compact` (`-c`) removes the zero bytes at the high end of the result, which are the trailing zeros for little-endian and the leading zeros for big-endian. It removes only zero bytes, so a negative int keeps all 8 bytes. A result with no nonzero byte, such as `0` or `0x[]`, becomes the single byte `0x[00]`. `--compact` uses the byte order to pick a side for strings and binary input too, even though `--endian` doesn't change their bytes:
+
+```nu
+258 | into binary --compact --endian big | to nuon
+# => 0x[0102]
+258 | into binary --compact --endian little | to nuon
+# => 0x[0201]
+-1 | into binary --compact | to nuon
+# => 0x[FFFFFFFFFFFFFFFF]
+0x[00 61 00] | into binary --compact --endian big | to nuon
+# => 0x[6100]
+```
+
+[`into int`](/commands/docs/into_int.md) reads the bytes back with the same `--endian`, so `258 | into binary --endian big | into int --endian big` is `258`. See [Converting to int](int.md#converting-to-int).
+
+For a record or a table, name the fields or columns to convert after the command. The others keep their values. A record or table without them is an error, and so is a list; use [`each`](/commands/docs/each.md) for a list:
+
+```nu
+[[a b]; [1 2]] | into binary b | to nuon
+# => [[a, b]; [1, 0x[0200000000000000]]]
+```
+
+The output of an external command, or a file read with `open --raw`, is a byte stream. `into binary` only marks the stream as binary, so the stream is never collected as a string. The flags don't apply to a stream. See [Working with Binary Data](/book/working_with_binary.md#files-and-external-commands).
+
+## Operators
+
+These operators work on binary values:
+
+- `++` joins two binary values, and `++=` appends to a mutable variable. Joining binary with a string is an error.
+- `==` and `!=` compare the bytes. A binary value is never equal to a string, so `0x[61] == "a"` is `false`.
+- `in` and `not-in` check whether a binary value is in a list, as in `0x[ff] in [0x[ff] 0x[00]]`.
+
+Other operators are errors with binary values, including `+`, the `bit-` operators, `has`, `starts-with`, and `=~`. Use the [`bytes` and `bits` commands](/book/working_with_binary.md#the-bytes-commands) instead. A cell path can't index into binary data, so `0x[01 02 03] | get 1` is an error. `bytes at 1..1` returns the byte as binary, and `skip 1 | first` returns it as an int.
+
+[`sort`](/commands/docs/sort.md) orders binary values byte by byte, with a value that is a prefix of another first:
+
+```nu
+[0x[02] 0x[01 ff] 0x[01]] | sort | to nuon
+# => [0x[01], 0x[01FF], 0x[02]]
+```
+
+`<`, `>`, `<=` and `>=` are a parse error when Nushell can see that both sides are binary, as with two literals or a parameter typed `binary`. When one side's type isn't known, as with an untyped custom command parameter, the comparison runs and uses the same order as `sort`:
+
+```nu
+0x[02] < 0x[03]
+# => Error: nu::parser::operator_unsupported_type
+# =>
+# =>   × The '<' operator does not work on values of type 'binary'.
+# =>    ╭─[repl_entry #1:1:1]
+# =>  1 │ 0x[02] < 0x[03]
+# =>    · ───┬── ┬
+# =>    ·    │   ╰── does not support 'binary'
+# =>    ·    ╰── binary
+# =>    ╰────
+def less [a b] { $a < $b }
+less 0x[02] 0x[03]
+# => true
+```
+
 ## Showing the bits with `format bits`
 
 [`format bits`](/commands/docs/format_bits.md) returns a string of `0`s and `1`s, with a space between bytes. It accepts more than binary values:
@@ -89,8 +175,9 @@ For a table or record, name the columns to convert as cell paths after the comma
 
 - `into binary`
 - `format bits` to show the bits of a binary value (or a number) as a string of `0`s and `1`s
-- `bits` subcommands (see `help bits` for a list)
-- `bytes` subcommands (see `help bytes` for a list)
+- `bits` subcommands for bitwise math (see [The `bits` commands](/book/working_with_binary.md#the-bits-commands))
+- `bytes` subcommands to search, slice and edit bytes (see [The `bytes` commands](/book/working_with_binary.md#the-bytes-commands))
+- `hash` subcommands for checksums (see [Hashing with `hash`](/book/working_with_binary.md#hashing-with-hash))
 - `encode`, `decode`
 - `take`
 - `chunks` to split binary into individual bytes or groups
