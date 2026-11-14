@@ -23,6 +23,30 @@ For example, `[foo bar baz]` or `[foo, bar, baz]`.
 Nushell lists are similar to JSON arrays. The same `[ "Item1", "Item2", "Item3" ]` that represents a JSON array can also be used to create a Nushell list.
 :::
 
+### Lists of numbers with `seq`
+
+[`seq`](/commands/docs/seq.md) generates numbers. With two numbers it counts from the first to the second by 1. With three, the middle one is the increment. Both ends are included when the count lands on them:
+
+```nu
+seq 1 5 | to nuon
+# => [1, 2, 3, 4, 5]
+seq 10 -3 1 | to nuon
+# => [10, 7, 4, 1]
+```
+
+Counting down needs a negative increment, so `seq 5 1` gives an empty list. A single number gives a list that holds only that number, unlike the Unix `seq`, which counts up to it. An increment of 0 is an error, and so is calling `seq` with no numbers. With more than three numbers, the first is the start, the second the increment and the last the end, and the ones in between are ignored.
+
+If any of the numbers is a float, every value is a float. Each value is computed as the start plus a multiple of the increment, so rounding errors don't add up, but a float end can still be missed by a hair:
+
+```nu
+seq 0.1 0.1 0.3 | to nuon
+# => [0.1, 0.2]
+seq 1 3 | each { $in / 10 } | to nuon
+# => [0.1, 0.2, 0.3]
+```
+
+`seq` returns a stream, so the numbers are made only as they are read, and `seq 1 1_000_000_000 | first 3` returns at once. A [range](/lang-guide/chapters/types/basic_types/range.md) such as `1..5` covers many of the same uses, but it is a range value, not a list, and some commands, such as `window`, `every` and `shuffle`, accept only a list. `seq` gives them one. For letters and dates, use [`seq char`](/commands/docs/seq_char.md) and [`seq date`](/commands/docs/seq_date.md).
+
 ## Updating lists
 
 We can [`insert`](/commands/docs/insert.md) values into lists as they flow through the pipeline, for example let's insert the value `10` into the middle of a list:

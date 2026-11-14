@@ -142,6 +142,35 @@ For a list index, the closure runs only once. Both its argument and `$in` are th
 # => [[1.0, 9.0], [3.0, 4.0]]
 ```
 
+Replacing a whole row with a list of a different length is an `Inconsistent row lengths` error. The `matrix` commands have their own ways to change rows and columns; see [Matrices](../matrices.md).
+
+## `update cells`
+
+[`update cells`](/commands/docs/update_cells.md) runs a closure on every cell of a table or record and puts the result in its place. `update` changes one column, and its closure gets the whole row as its argument. The closure of `update cells` gets only the cell, as its argument and as `$in`, and runs for every column. Column names after the closure limit it to those columns:
+
+```nu
+[[name size count]; [a 0 3] [b 12 0]] | update cells { if $in == 0 { null } else { $in } } size count
+# => ╭───┬──────┬──────┬───────╮
+# => │ # │ name │ size │ count │
+# => ├───┼──────┼──────┼───────┤
+# => │ 0 │ a    │      │     3 │
+# => │ 1 │ b    │   12 │       │
+# => ╰───┴──────┴──────┴───────╯
+```
+
+A name that isn't a column is ignored, not an error. An empty list of names, as in `...[]`, updates no columns; only leaving the names out updates them all. The `--columns` (`-c`) flag takes the names as a list. It is deprecated since 0.117.0 in favor of the rest arguments, and names given both ways are combined.
+
+A cell that holds a record or a list goes to the closure whole. `--recursive` (`-r`) walks into nested records and lists instead, and runs the closure on each value inside them. Column names still apply only at the top level, and everything below a named column is visited:
+
+```nu
+{name: x, tags: [a b]} | update cells { $in | describe } | to nuon
+# => {name: string, tags: list<string>}
+{name: x, tags: [a b]} | update cells --recursive { str uppercase } | to nuon
+# => {name: X, tags: [A, B]}
+```
+
+`update cells` streams a table row by row. To visit every nested value of a record together with its cell path, see [`record walk`](./record_commands.md#record-walk).
+
 ## Moving and renaming columns
 
 [`move`](/commands/docs/move.md) takes one or more column names and exactly one location: `--after <column>`, `--before <column>`, `--first` or `--last`. It works on a record or on every row of a table. The moved columns end up in the order you list them, not their original order:
@@ -202,6 +231,45 @@ When both have a column, the argument's value wins. The replacement is shallow, 
 
 Tables are merged row by row. See [Merging tables of different size](/cookbook/tables.md#merging-tables-of-different-size) when the row counts differ.
 
+### `merge deep`
+
+[`merge deep`](/commands/docs/merge_deep.md) follows nested records down and merges them field by field, so it suits layering one configuration record over another. As with `merge`, the input and the argument must both be records or both be tables. Fields keep their order from the input, and new fields from the argument go at the end. Where the two values at a key aren't both records, the argument's value replaces the input's, even when one is a record and the other a number.
+
+Lists depend on `--strategy` (`-s`):
+
+- `table`, the default, merges two lists of records row by row, the way `merge` merges tables. Any other list, such as a list of strings, is replaced.
+- `overwrite` replaces every list.
+- `append` adds the argument's items after the input's, and `prepend` puts them before. This works for lists of records too.
+
+Any other strategy name is an `incorrect_value` error. With these two records:
+
+```nu
+let defaults = {server: {host: localhost, port: 80}, plugins: [git], users: [{name: ann, admin: false}]}
+let override = {server: {port: 8080}, plugins: [docker], users: [{admin: true}]}
+$defaults | merge deep $override | to nuon
+# => {server: {host: localhost, port: 8080}, plugins: [docker], users: [[name, admin]; [ann, true]]}
+```
+
+`server` is merged the same way with every strategy. The lists come out like this:
+
+| `--strategy`      | `plugins`       | `users`                                      |
+| ----------------- | --------------- | -------------------------------------------- |
+| `table` (default) | `[docker]`      | `[{name: ann, admin: true}]`                 |
+| `overwrite`       | `[docker]`      | `[{admin: true}]`                            |
+| `append`          | `[git, docker]` | `[{name: ann, admin: false}, {admin: true}]` |
+| `prepend`         | `[docker, git]` | `[{admin: true}, {name: ann, admin: false}]` |
+
+The row-by-row merge of the `table` strategy keeps the number of rows in the input. Extra rows in the argument are dropped, and an empty list counts as a list of records, so an empty list in the input stays empty. Use `append` or `overwrite` when the argument may have more rows:
+
+```nu
+{users: []} | merge deep {users: [{name: bob}]} | to nuon
+# => {users: []}
+{users: []} | merge deep --strategy append {users: [{name: bob}]} | to nuon
+# => {users: [[name]; [bob]]}
+```
+
+Two tables at the top level follow the same rules. `table` merges them row by row, and `append` or `prepend` joins their rows into one list.
+
 ### `join`
 
 [`join`](/commands/docs/join.md) matches rows by the values in a column. When the right table has a column with the same name as one in the left table, the right one gets a `_` suffix. A join column that both tables share appears once and isn't renamed.
@@ -249,6 +317,41 @@ If either table has rows but none of them has its join column, `join` reports `c
 # => │ 1 │  2 │ bob   │      │
 # => ╰───┴────┴───────┴──────╯
 ```
+
+## Pairing and interleaving lists
+
+### `zip`
+
+[`zip`](/commands/docs/zip.md) pairs the items of its input with the items of its argument, by position, and returns a list of two-item lists. It stops at the end of the shorter side, so extra items on either side are dropped:
+
+```nu
+[a b c] | zip [1 2] | to nuon
+# => [[a, 1], [b, 2]]
+[a b] | zip [1 2] | into record | to nuon
+# => {a: 1, b: 2}
+```
+
+The input can be a list, a range or a stream, but not a record. The argument can be a list or range, or a closure whose output is used. The closure runs once, without input, and its output is read only as far as the input goes, so an endless range works:
+
+```nu
+[a b c] | zip { 1.. } | each {|p| $"($p.1). ($p.0)" } | to nuon
+# => ["1. a", "2. b", "3. c"]
+```
+
+Any other argument, such as a number, counts as a list of one item, so it pairs with the first input item only. Zipping two tables gives pairs of records. To join each pair into one row, merge them: `each {|p| $p.0 | merge $p.1 }`. For two tables, [`merge`](#merge) does that directly. To alternate the items of two lists, flatten the pairs: `[a b c] | zip [1 2 3] | flatten` gives `[a, 1, b, 2, c, 3]`.
+
+### `interleave`
+
+[`interleave`](/commands/docs/interleave.md) runs each of its closures at the same time, each in its own thread, and merges everything they output into one stream. Its input, if there is any, is one more source. The closures get no input. Items come out as soon as any source produces them, so the order between sources changes from run to run, while the items of each source keep their order:
+
+```nu
+interleave { [a1 a2 a3] } { [b1 b2 b3] } | where $it starts-with a | to nuon
+# => ["a1", "a2", "a3"]
+```
+
+Use it to read the output of several slow commands, such as externals, as it arrives. Pipe an external's output through `lines` inside the closure, or its text arrives as one string or as chunks that don't follow line breaks. If a closure fails before it produces any output, `interleave` fails with that error. To alternate items in a fixed order instead, use `zip` and `flatten` as shown above.
+
+All sources feed one shared queue. `--buffer-size` (`-b`) sets how many items can wait in it before the sources have to pause. The default is 0, so each source waits until its item is taken. A larger buffer uses more memory and can speed up sources that produce a lot of output.
 
 ## Reshaping
 
@@ -350,3 +453,47 @@ The flags control what happens to the names:
 [[key value]; [tag a] [tag b]] | transpose -r -d --keep-all | to nuon
 # => {tag: [a, b]}
 ```
+
+### `rotate`
+
+[`rotate`](/commands/docs/rotate.md) also swaps rows and columns, but it turns the table a quarter turn, so the order of the data changes too. By default it turns clockwise, so the last input row becomes the first column and the column names end up in the last column. `--ccw` turns the other way. The column names come first, the rows keep their order, and the last input column becomes the first row:
+
+```nu
+[[name size]; [x 1] [y 2]] | rotate
+# => ╭───┬─────────┬─────────┬─────────╮
+# => │ # │ column0 │ column1 │ column2 │
+# => ├───┼─────────┼─────────┼─────────┤
+# => │ 0 │ y       │ x       │ name    │
+# => │ 1 │       2 │       1 │ size    │
+# => ╰───┴─────────┴─────────┴─────────╯
+[[name size]; [x 1] [y 2]] | rotate --ccw field first second | to nuon
+# => [[field, first, second]; [size, 1, 2], [name, x, y]]
+```
+
+As with `transpose`, name arguments replace `column0`, `column1` and so on, in order, and extra names are ignored. A record is rotated as a one-row table. A list of plain values, or a single value, becomes a one-row table with an item in each column, in reverse order unless you pass `--ccw`. Empty input is an error (`list input is empty`).
+
+Every row must have the same columns. A row with a different number of columns is a `record_cols_vals_mismatch` error, and when only the names differ, the output silently uses the names of one row. To turn a record into key/value rows, `transpose key value` is usually what you want, since it keeps the names in the first column.
+
+### `roll`
+
+The `roll` commands move rows or columns around in a circle. [`roll up`](/commands/docs/roll_up.md) moves the first row of a table to the end, and [`roll down`](/commands/docs/roll_down.md) moves the last row to the front. [`roll left`](/commands/docs/roll_left.md) and [`roll right`](/commands/docs/roll_right.md) do the same with the columns of a record, or of each row of a table separately. `roll` by itself only prints its help text.
+
+`--by` (`-b`) sets how many places to move. The default is 1. A count larger than the number of rows or columns wraps around, `--by 0` changes nothing, and a negative count is an error. An empty table or record comes back unchanged:
+
+```nu
+[[step]; [build] [test] [deploy]] | roll down | to nuon
+# => [[step]; [deploy], [build], [test]]
+[[step]; [build] [test] [deploy]] | roll up --by 4 | to nuon
+# => [[step]; [test], [deploy], [build]]
+```
+
+`roll left` and `roll right` move each column together with its name, so only the column order changes. With `--cells-only` (`-c`), the names stay where they are and only the values move, so each value ends up under a different name:
+
+```nu
+{name: nu, lang: rust, stars: 38000} | roll left | to nuon
+# => {lang: rust, stars: 38000, name: nu}
+{name: nu, lang: rust, stars: 38000} | roll left --cells-only | to nuon
+# => {name: rust, lang: 38000, stars: nu}
+```
+
+`roll up` and `roll down` take a table. A list such as `[1 2 3]` is rejected when the pipeline is parsed, so wrap it first: `[1 2 3] | wrap n | roll up | get n`.

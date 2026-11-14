@@ -26,6 +26,7 @@ let t = [
 | [`slice range`](/commands/docs/slice.md)                         | The rows whose index is in the range                      |
 | [`select 0 2 ...`](/commands/docs/select.md)                     | The rows with the given indices                           |
 | [`drop nth 0 2 ...`](/commands/docs/drop_nth.md)                 | Every row except the given indices                        |
+| [`every n`](/commands/docs/every.md)                             | Every `n`th row, starting with the first (with `--skip`, all the others) |
 | [`take while`](/commands/docs/take_while.md), [`skip while`](/commands/docs/skip_while.md), [`take until`](/commands/docs/take_until.md), [`skip until`](/commands/docs/skip_until.md) | Rows up to, or from, the first row where a condition changes |
 
 ```nu
@@ -157,6 +158,21 @@ The same five commands work on binary data: a `binary` value, or a byte stream s
 
 Put `--include` before the condition. The condition takes everything after it, even when it's a closure, so a trailing `--include 1` is a parse error.
 
+### Every nth row
+
+`every n` keeps the rows at index 0, `n`, `2n` and so on. `--skip` (`-s`) returns the rows in between instead, so the two results together are the whole input. To start somewhere other than the first row, `skip` first:
+
+```nu
+[a b c d e f g] | every 3 | to nuon
+# => [a, d, g]
+[a b c d e f g] | every 3 --skip | to nuon
+# => [b, c, e, f]
+[a b c d e f g] | skip 1 | every 3 | to nuon
+# => [b, e]
+```
+
+`every 0` is treated as `every 1`, so it keeps every row, and `every 0 --skip` returns an empty list. A negative stride is a `needs_positive_value` error. `every` reads a stream lazily. A range is rejected when the pipeline is parsed; a range literal has its own step instead, as in `0..3..12`.
+
 ## Columns by Name
 
 - [`select`](/commands/docs/select.md) keeps the named columns and returns a table (or a record for record input).
@@ -206,6 +222,23 @@ $t | select ...$cols | first 1
 {db: {host: prod, password: x}, port: 1} | reject db.password | to nuon
 # => {db: {host: prod}, port: 1}
 ```
+
+### Column names and values
+
+[`columns`](/commands/docs/columns.md) returns the column names of a record or table as a list of strings. For a table whose rows have different fields, it returns every name that appears in any row, in the order they first appear. [`values`](/commands/docs/values.md) is its counterpart. For a record it returns the field values in order. For a table it returns one list per column, in the same order as `columns`:
+
+```nu
+[[name size]; [a 1] [b 2]] | values | to nuon
+# => [[a, b], [1, 2]]
+[{a: 1} {b: 2, a: 3} {c: 4}] | columns | to nuon
+# => [a, b, c]
+[{a: 1} {b: 2, a: 3} {c: 4}] | values | to nuon
+# => [[1, 3], [2], [4]]
+```
+
+As the last two lines show, `values` skips the rows that lack a column instead of filling in `null`. A position in one of its lists then no longer matches a row number. When the rows can have gaps, use `get a?` for each column, which keeps a `null` for every missing cell.
+
+Both commands accept only a record or a table. A list that mixes records with other values is an `only_supports_this_input_type` error, and empty input gives an empty list. A common use of `columns` is counting the fields of a record, with `columns | length`. On a [SQLite database](#tables-from-a-sqlite-file) opened with `open`, `columns` lists the table names, and `values` returns the tables themselves, read in full.
 
 ## Cell Paths
 

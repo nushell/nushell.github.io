@@ -81,3 +81,36 @@ Or as mentioned in the [Working with Tables](https://www.nushell.sh/book/working
 # => │ 1 │ 3 │ 4 │ 5 │ 6 │ 7 │ 8 │
 # => ╰───┴───┴───┴───┴───┴───┴───╯
 ```
+
+### Calendar tables
+
+[`cal`](/commands/docs/cal.md) prints a calendar for the current month, or for a whole year with `--full-year 2024`. That calendar is text. `cal` renders the table itself, without the index column, and returns the rendered string. To filter or count days, ask for a table with `--as-table` (`-t`):
+
+```nu
+cal --full-year 2024 | describe
+# => string (stream)
+cal --as-table --full-year 2024 --month --month-names --week-start mo | first 2
+# => ╭───┬───────┬────────────┬────┬────┬────┬────┬────┬────┬────╮
+# => │ # │ month │ month_name │ mo │ tu │ we │ th │ fr │ sa │ su │
+# => ├───┼───────┼────────────┼────┼────┼────┼────┼────┼────┼────┤
+# => │ 0 │     1 │ january    │  1 │  2 │  3 │  4 │  5 │  6 │  7 │
+# => │ 1 │     1 │ january    │  8 │  9 │ 10 │ 11 │ 12 │ 13 │ 14 │
+# => ╰───┴───────┴────────────┴────┴────┴────┴────┴────┴────┴────╯
+```
+
+Each row is one week of one month, with a column per weekday named `su`, `mo`, `tu`, `we`, `th`, `fr` and `sa`. Days that belong to the previous or next month are `null`, so a week that spans two months appears once in each. `--week-start` takes one of those seven names and moves that day to the first column. Any other value, such as `monday`, is an error. `--year` (`-y`), `--quarter` (`-q`), `--month` (`-m`) and `--month-names` add the columns `year`, `quarter`, `month` and `month_name`, in that order, before the days. `--full-year` accepts any year the date library can represent, including 0 and negative years. A year far outside that range, such as `300000`, is a `The year is invalid` error.
+
+With `--as-table`, ordinary filters answer calendar questions. Which months of 2024 start on a Monday, and which have five Sundays?
+
+```nu
+cal --as-table --full-year 2024 --week-start mo --month-names | where mo == 1 | get month_name | to nuon
+# => [january, april, july]
+cal --as-table --full-year 2024 --month-names | where su != null | group-by month_name | items {|month, weeks| {month: $month, sundays: ($weeks | length)} } | where sundays == 5 | get month | to nuon
+# => [march, june, september, december]
+```
+
+When the calendar includes today, `cal` highlights today's date with the table header color, even with `--as-table`. That cell is a string that holds the number and the color codes, not an `int`, so `where sa == 14` won't match it and math on the column fails. Convert it back before filtering a calendar that includes today:
+
+```nu
+cal --as-table | update cells {|day| if ($day | describe) == string { $day | ansi strip | into int } else { $day } }
+```

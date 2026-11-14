@@ -452,3 +452,9 @@ $baddata | sort-by -c $strict
 # =>  5 │         [_, null] => (error make {msg: "Attempt to sort null"}),
 # =>    ╰────
 ```
+
+## Random order
+
+[`shuffle`](/commands/docs/shuffle.md) undoes order instead of creating it. It returns the items of a list, or the rows of a table, in a random order, and each row moves as a whole. The order is different on every run, and there is no seed to repeat one. To pick a random sample, take from the shuffled result. `$players | shuffle | first 2` picks two different players.
+
+`shuffle` reads all of its input before it returns anything, so it never finishes on an endless stream. It accepts a list or a table. A range is rejected when the pipeline is parsed, so use `seq 1 10 | shuffle` instead of `1..10 | shuffle`.

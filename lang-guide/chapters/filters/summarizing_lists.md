@@ -49,6 +49,15 @@ Given column names, `is-empty` checks those columns of a record or table instead
 # => false
 ```
 
+[`is-not-empty`](/commands/docs/is-not-empty.md) always returns the opposite of `is-empty` with the same arguments, so the same rules apply. It saves wrapping the pipeline in `not ( ... )`, for example in a `where` closure. Without column names, `""` counts as empty, so this keeps only the rows with a real address:
+
+```nu
+[[name email]; [a "a@x.org"] [b null] [c ""]] | where { $in.email | is-not-empty } | get name | to nuon
+# => [a]
+```
+
+With column names, only `null` counts as empty, so `is-not-empty` returns `true` as soon as any named column in any row holds something else, even `""`. The check stops at that row. A missing column is a `column_not_found` error, as with `is-empty`.
+
 ## `reduce`
 
 [`reduce`](/commands/docs/reduce.md) combines the items into one value. The closure gets the current item and the accumulator, in that order, and returns the new accumulator. The accumulator is also passed as `$in`. A range works as input like a list.
@@ -147,7 +156,28 @@ The flags change what comes back:
 # => [hello]
 ```
 
-To compare rows by some columns only, use [`uniq-by`](/commands/docs/uniq-by.md). On a [table from a SQLite file](./selecting_data.md#tables-from-a-sqlite-file), a plain `uniq` runs as `SELECT DISTINCT`.
+To compare rows by some columns only, use `uniq-by`. On a [table from a SQLite file](./selecting_data.md#tables-from-a-sqlite-file), a plain `uniq` runs as `SELECT DISTINCT`.
+
+## `uniq-by`
+
+[`uniq-by`](/commands/docs/uniq-by.md) compares rows by the columns you name and keeps the whole first row of each group. Two rows match when all the named columns are equal, compared the same way `uniq` compares values:
+
+```nu
+let hosts = [[host os]; [web1 linux] [web2 linux] [db1 bsd] [web3 linux]]
+$hosts | uniq-by os | to nuon
+# => [[host, os]; ["web1", linux], ["db1", bsd]]
+```
+
+It takes the same flags as `uniq`, applied to the named columns. `--keep-last` keeps the last row of each group in the place of the first, and `--repeated` and `--unique` return the rows whose values appear more than once or exactly once. With `--ignore-case`, string columns are compared without regard to case. With `--count`, the `value` column holds the kept row, not just the compared columns:
+
+```nu
+$hosts | uniq-by os --keep-last | to nuon
+# => [[host, os]; ["web3", linux], ["db1", bsd]]
+$hosts | uniq-by os --count | to nuon
+# => [[value, count]; [{host: "web1", os: linux}, 3], [{host: "db1", os: bsd}, 1]]
+```
+
+At least one column name is required. The names are plain column names, not cell paths, so `a.b` means a column called `a.b`. Every row must have every named column, or `uniq-by` fails with `column_not_found`. Fill gaps first with `default`. A list of plain values has no columns, so use `uniq` for it.
 
 ## `union`, `intersect` and `difference`
 
@@ -185,3 +215,73 @@ These return a list of lists. For a table, each inner list is itself a table.
 [a a b] | permutations | each { str join } | to nuon
 # => [aab, aab, baa, aba, aba, baa]
 ```
+
+## `chunk-by`, `split list` and `window`
+
+These also split a list or table into a list of lists, but by content or by a sliding position instead of a fixed size. All three read a stream lazily, so they work on long or endless input when you take only the first groups.
+
+### `chunk-by`
+
+[`chunk-by`](/commands/docs/chunk-by.md) runs a closure or row condition on each item and starts a new group whenever the result differs from the previous item's result. Only neighbors are grouped, so equal results that are apart end up in separate groups. That is the difference from [`group-by`](/commands/docs/group-by.md), which collects every item with the same key into one group, whatever its position, and returns a record:
+
+```nu
+[3 5 2 8 6 1] | chunk-by {|x| $x mod 2 } | to nuon
+# => [[3, 5], [2, 8, 6], [1]]
+[a a b a] | chunk-by $it | to nuon
+# => [[a, a], [b], [a]]
+```
+
+The result can be any value, not only a `bool`. It suits runs in ordered data, such as consecutive log lines with the same level:
+
+```nu
+[[time level]; [1 info] [2 info] [3 error] [4 info]] | chunk-by {|r| $r.level } | each { {level: $in.0.level, count: ($in | length)} } | to nuon
+# => [[level, count]; [info, 2], [error, 1], [info, 1]]
+```
+
+The input can be a list, a table or a range. Empty input gives an empty list.
+
+A closure that fails, for example on a missing column, doesn't stop `chunk-by` or report an error. The error becomes that item's result, and all errors count as equal, so neighboring items whose closure fails end up in one group. When a column can be missing, use an optional cell path such as `$r.level?`, which gives `null` instead.
+
+### `split list`
+
+[`split list`](/commands/docs/split_list.md) splits a list at separator items, the way [`split row`](/commands/docs/split_row.md) splits a string. The separator can be:
+
+- a value. An item is a separator when it equals the value, so `2` also matches `2.0`.
+- a regular expression, with `--regex` (`-r`). Items are converted to strings to test them. Items that can't be converted, such as records, never match.
+- a closure. An item is a separator when the closure returns `true`. Any other result counts as `false`, and so does a closure that fails, without an error.
+
+`--split` chooses what happens to each separator. `on`, the default, drops it. `before` starts the next group with it, and `after` ends the current group with it. Any other word is an error:
+
+```nu
+"# One\ntext\n# Two\nmore" | lines | split list --regex "^#" --split before | to nuon
+# => [[], ["# One", text], ["# Two", more]]
+```
+
+Groups can be empty. A separator at the start gives an empty first group, as above, two separators in a row give an empty group between them, and a separator at the end gives an empty last group with `on` or `after`. Empty input gives a list that holds one empty list. Remove empty groups with `where ($it | is-not-empty)`, or `skip 1` when you know the input starts with a separator:
+
+```nu
+[a b "" c "" "" d] | split list "" | to nuon
+# => [[a, b], [c], [], [d]]
+```
+
+### `window`
+
+[`window n`](/commands/docs/window.md) returns overlapping groups of `n` items: the first `n`, then the same group moved one item along, and so on. It is useful for moving averages and for comparing each item with its neighbors:
+
+```nu
+[1 2 3 4 5] | window 3 | each { math avg } | to nuon
+# => [2.0, 3.0, 4.0]
+```
+
+`--stride` (`-s`) sets how many items the window moves each time. With a stride equal to the size, the groups don't overlap, and with a larger stride, the items between groups are skipped.
+
+Without `--remainder`, a group with fewer than `n` items is dropped, so input shorter than `n` gives an empty list. With `--remainder` (`-r`), the shorter groups at the end are kept. With overlapping windows, that is every shrinking group up to the last item:
+
+```nu
+[1 2 3 4 5] | window 3 --remainder | to nuon
+# => [[1, 2, 3], [2, 3, 4], [3, 4, 5], [4, 5], [5]]
+[1 2 3 4 5] | window 2 --stride 2 --remainder | to nuon
+# => [[1, 2], [3, 4], [5]]
+```
+
+The size and the stride must be positive. Zero is an `incorrect_value` error and a negative number a `needs_positive_value` error. `window` takes a list or a stream. A range is rejected when the pipeline is parsed, so generate the numbers with [`seq`](/commands/docs/seq.md) instead.

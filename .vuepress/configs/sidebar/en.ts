@@ -297,6 +297,7 @@ export const sidebarEn: SidebarConfig = {
             '/lang-guide/chapters/filters/record_commands.md',
           ],
         },
+        '/lang-guide/chapters/matrices.md',
         '/lang-guide/chapters/custom_commands.md',
         '/lang-guide/chapters/declarations.md',
         '/lang-guide/chapters/variable_scope.md',
