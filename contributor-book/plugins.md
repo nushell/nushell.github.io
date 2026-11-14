@@ -24,6 +24,15 @@ When launched in `stdio` mode, `stdin` and `stdout` are redirected for use in th
 
 When launched in `local-socket` mode, `stdin` and `stdout` can also be used to interact with the user's terminal. This is the default for Rust plugins unless `local-socket` is disabled, and can be checked for by calling [`EngineInterface::is_using_stdio()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.is_using_stdio). Plugins may fall back to `stdio` mode if sockets are not working for some reason, so it is important to check this if you are going to be using `stdin` or `stdout`.
 
+`local-socket` is a default Cargo feature of `nu-plugin`. To build a plugin without it, turn off the default features:
+
+```toml
+[dependencies]
+nu-plugin = { version = "0.116.0", default-features = false }
+```
+
+A plugin built this way leaves the [`LocalSocket` feature](plugin_protocol_reference.md#localsocket-feature) out of its `Hello` message, so Nu always runs it in `stdio` mode. If it's started with `--local-socket` anyway, it prints "local socket mode is not supported" to stderr and exits with status 1.
+
 Environment variables set in the shell are set in the environment of a plugin when it is launched from a plugin call.
 
 Plugins are always started with the directory of their executable as their working directory. This is because they may be sent calls with different shell working directory contexts over time. [`EngineInterface::get_current_dir()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.get_current_dir) can be used to determine the current working directory of the context of a call. For more information, see [this section](#current-directory).
@@ -143,6 +152,8 @@ In `main()`, we just call a single function `serve_plugin`. This will do the wor
 
 `serve_plugin` reads the arguments that Nushell starts the plugin with (`--stdio`, or `--local-socket` and a socket name), tells Nushell which encoding the plugin uses, and then hands the connection to `serve_plugin_io`, which runs the protocol over any reader and writer. If two of the plugin's commands return the same `name()`, `serve_plugin_io` prints a warning to stderr when the plugin starts, and the command that comes later in `commands()` replaces the earlier one. When Nushell asks for the plugin's signatures during `plugin add`, `create_plugin_signature` builds each command's signature from its `signature()`, `description()`, `extra_description()`, `search_terms()`, and `examples()` methods. `nu-plugin` exports both functions, but they are hidden from its API documentation and aren't a public API. They exist for `nu-plugin-test-support`. In your own plugin, call `serve_plugin`, and test it with [`nu-plugin-test-support`](#testing-plugins).
 
+`serve_plugin` also handles a plugin binary that someone runs by hand. With no arguments, or with `-h` or `--help`, it prints a summary and exits with status 0: the encoder, the plugin's `version()`, the path of the binary, and then each command's description, extra description, flags, and parameters. Any other arguments make it print "This plugin must be run from within Nushell", along with a hint that the plugin may not match the Nushell version, and exit with status 1.
+
 Above `main()` is the implementation of the `SimplePluginCommand` trait for the `len` command that our plugin will expose, which is represented by the `Len` type. We use `SimplePluginCommand` rather than `PluginCommand` in order to simplify our implementation and avoid [handling streams](#using-streams-in-plugins). Let's take a look at how we implement this trait:
 
 ```rust
@@ -181,6 +192,27 @@ There are a few methods required for this implementation. We first define the `n
 
 We tell Nu that the name is "len", give it a basic description for `help` to display and declare that we expect to be passed a string and will return an integer.
 
+`PluginCommand` and `SimplePluginCommand` have a few more methods, with default implementations that you can override:
+
+- `extra_description()` returns longer help text. `help len` shows it below the description. The default is empty.
+- `search_terms()` returns other words for the command. `help --find` matches them as well as the name and description, and `help commands` lists them in its `search_terms` column. The default is an empty list.
+- `examples()` returns examples that `help` displays, and that [`nu-plugin-test-support`](#testing-plugins) can run as tests.
+- `get_dynamic_completion()` computes [argument completions](#argument-completions).
+
+```rust
+impl SimplePluginCommand for Len {
+    // ...
+
+    fn extra_description(&self) -> &str {
+        "Counts bytes, not characters, so multibyte text reports a larger length."
+    }
+
+    fn search_terms(&self) -> Vec<&str> {
+        vec!["size", "count"]
+    }
+}
+```
+
 Next, in the `run` implementation, we describe how to do work as values flow into this plugin. Here, we receive a `Value` type that we expect to be a string. We also return either `Value` or an error.
 
 ```rust
@@ -213,7 +245,41 @@ impl SimplePluginCommand for Len {
 
 We use Rust's pattern matching to check the type of the `Value` coming in, and then operate with it if it's a string. The value also contains a `span` so it carries with it where the value came from. If the value isn't a string, we give an error and let the user know where the value came from that is causing the problem. On error, we use `call.head` as the span so that Nu can underline the offending command name in the error message.
 
-Our `Len` command doesn't require any parameters, but if it did we'd get them from the `EvaluatedCall`.
+`LabeledError::new()` takes the main message, and builder methods add the rest:
+
+- `with_label(text, span)` underlines a span with a message. Call it once for each span.
+- `with_help(text)` adds a hint, shown after `help:`.
+- `with_code(code)` sets a code such as `nu_plugin_len::wrong_input`. Nu prints it after `Error:`, in place of the default `nu::shell::error`.
+- `with_url(url)` links the code to a page about the error. Terminals that support hyperlinks make the code clickable.
+- `with_inner(error)` attaches another error, such as the one that caused this one. Nu prints each inner error after the main one. It takes a `LabeledError` or any `ShellError`.
+
+```rust
+Err(LabeledError::new("Expected String input from pipeline")
+    .with_label(format!("requires string input; got {}", input.get_type()), call.head)
+    .with_help("convert the value with `into string` first")
+    .with_code("nu_plugin_len::wrong_input")
+    .with_url("https://example.org/nu_plugin_len/errors#wrong_input"))
+```
+
+Our `Len` command doesn't require any parameters, but if it did we'd get them from the `EvaluatedCall`. Its `head` field is the span of the command name, and these methods read the arguments:
+
+```rust
+// For a call like: my-command 1 a b c --count 3 --verbose
+let first: i64 = call.req(0)?;                    // a required positional
+let second: Option<String> = call.opt(1)?;        // None if not given
+let others: Vec<String> = call.rest(2)?;          // every positional from index 2 on
+let count: Option<i64> = call.get_flag("count")?; // None if not given
+let verbose: bool = call.has_flag("verbose")?;    // a switch
+```
+
+- `req(index)` and `opt(index)` convert a positional argument to any type that implements `FromValue`, such as `i64`, `String`, `Spanned<String>`, `Value`, or `Spanned<Closure>`. `req` fails if the argument is missing, and both fail if the conversion does.
+- `rest(start)` converts all positional arguments from `start` to the end, including those that a spread (`...$list`) supplied.
+- `nth(index)` returns a positional argument as an `Option<Value>`, without converting it.
+- `has_flag(name)` is `true` for `--name` and `--name=true`, `false` when the switch is absent or given `--name=false`, and an error for a non-boolean value.
+- `get_flag(name)` converts a flag's value with `FromValue`, and returns `None` when the flag is absent. `get_flag_value(name)` returns the value as an `Option<Value>` without converting it. For a switch given without a value, it returns `None`, so use `has_flag` for switches.
+- `get_flag_span(name)` returns the span of the flag itself, which is useful in an error about a switch, since a switch has no value to take a span from.
+
+Look up flags by their long name. Nu always sends the long name, even when the user typed the short one. It also doesn't fill in the `default_value` from your signature. `help` shows the default, but an argument the user left out is missing from the call, so `opt` and `get_flag` return `None` for it, and the plugin has to apply the default itself.
 
 ```rust
 struct Len;
@@ -410,6 +476,68 @@ generate { |n| {out: $n, next: ($n + 1)} } 0 | double | first 5
 # => ╰───┴───╯
 ```
 
+### Byte streams
+
+`PipelineData` can also be a `ByteStream`, which carries raw bytes instead of values, for example the output of an external command or of `open --raw`. To accept one, declare a `Type::String` or `Type::Binary` input in the signature and match `PipelineData::ByteStream(stream, metadata)`. Then read it in whichever way fits:
+
+- `stream.reader()` returns a `Reader` that implements `std::io::Read` and `BufRead`.
+- `stream.lines()` returns an iterator of `Result<String, ShellError>`, one per line, without the line endings.
+- `stream.chunks()` returns the data in pieces as string or binary `Value`s.
+- `stream.into_bytes()` and `stream.into_string()` collect the whole stream.
+
+`reader()`, `lines()`, and `chunks()` return `None` for an external command that has no standard output to read. This command counts the lines of its input:
+
+```rust
+fn run(
+    &self,
+    _plugin: &MyPlugin,
+    _engine: &EngineInterface,
+    call: &EvaluatedCall,
+    input: PipelineData,
+) -> Result<PipelineData, LabeledError> {
+    match input {
+        PipelineData::ByteStream(stream, _) => {
+            let mut count = 0;
+            if let Some(lines) = stream.lines() {
+                for line in lines {
+                    line?; // stop at the first read error
+                    count += 1;
+                }
+            }
+            Ok(Value::int(count, call.head).into_pipeline_data())
+        }
+        _ => Err(LabeledError::new("Expected a byte stream")
+            .with_label("requires string or binary input", call.head)),
+    }
+}
+```
+
+To produce bytes, return `PipelineData::byte_stream(stream, None)`. `ByteStream::from_result_iter()` builds the stream from an iterator of `Result` byte buffers (anything that implements `AsRef<[u8]>`), and `ByteStream::read()` builds it from anything that implements `Read`. Both take a `ByteStreamType`: `String` or `Binary` tells Nu how to convert the bytes when it collects them, and `Unknown` lets it decide from the data. This command, from `nu_plugin_example`'s `example collect-bytes`, joins a list of strings or binary values into one stream:
+
+```rust
+fn run(
+    &self,
+    _plugin: &MyPlugin,
+    engine: &EngineInterface,
+    call: &EvaluatedCall,
+    input: PipelineData,
+) -> Result<PipelineData, LabeledError> {
+    let stream = ByteStream::from_result_iter(
+        input.into_iter().map(Value::coerce_into_binary),
+        call.head,
+        engine.signals().clone(),
+        ByteStreamType::Unknown,
+    );
+    Ok(PipelineData::byte_stream(stream, None))
+}
+```
+
+### When input streams end
+
+Since 0.117.0, the SDK releases a call's input stream as soon as the call's response has been sent in full, or when Nu drops the call's output stream (for example after `first 5`). Reading from the input after that fails with `ShellError::Interrupted`, not a clean end of stream, so you can tell a cut-off stream from a complete one. Returning a lazy output stream that reads from the input, like `double` above, keeps the input alive for as long as that stream is being written.
+
+This matters if a plugin hands its input to a background thread and keeps reading after `run()` has returned its response. To do that, call [`engine.set_gc_disabled(true)`](#disabling-garbage-collection) first. The SDK checks the setting each time a response finishes, and skips the release while garbage collection is disabled. Dropping the output stream still releases the input, whatever the setting.
+
 ## Plugin configuration
 
 It is possible for a user to provide configuration to a plugin. For a plugin named `motd`:
@@ -493,6 +621,16 @@ motd
 # => Nushell rocks!
 ```
 
+`get_plugin_config()` returns `Ok(None)` when the user hasn't set `$env.config.plugins.motd`. If the setting is a closure, Nu runs it on every `get_plugin_config()` call, in the scope of the command call, and returns its result. When that closure fails, the method still returns `Ok`. The error arrives as `Ok(Some(Value::Error { .. }))`, so check for it if a broken configuration should fail the command:
+
+```rust
+match engine.get_plugin_config()? {
+    Some(Value::Error { error, .. }) => return Err((*error).into()),
+    Some(config) => { /* read the settings */ }
+    None => { /* use the defaults */ }
+}
+```
+
 For a full example, see [`nu_plugin_example`](https://github.com/nushell/plugin-examples/tree/main/rust/nu_plugin_example).
 
 ## Evaluating closures
@@ -573,6 +711,22 @@ fn main() {
 # => ╰───┴───╯
 ```
 
+`eval_closure()` collects the closure's output into a single `Value`, and turns an error value into `Err`. `eval_closure_with_stream()` takes `PipelineData` as input and returns `PipelineData`, so the input and output can both be streams. Its last two arguments, `redirect_stdout` and `redirect_stderr`, matter when the closure ends in an external command. With `redirect_stdout` set to `true`, the command's standard output comes back to the plugin as a byte stream. With `false`, it goes to the terminal, as it would for an external command at the end of a pipeline in the REPL, and the plugin gets no data from it. `redirect_stderr` makes the same choice for standard error, and `false` sends it to the terminal. `eval_closure()` passes `true` and `false`. This command passes its input stream through a closure and returns the closure's output stream:
+
+```rust
+fn run(
+    &self,
+    _plugin: &MyPlugin,
+    engine: &EngineInterface,
+    call: &EvaluatedCall,
+    input: PipelineData,
+) -> Result<PipelineData, LabeledError> {
+    let closure = call.req(0)?;
+    // Capture the closure's standard output, and let its standard error reach the terminal
+    Ok(engine.eval_closure_with_stream(&closure, vec![], input, true, false)?)
+}
+```
+
 At present, the closures can only refer to values that would be valid to send to the plugin. This means that custom values from other plugins are not allowed. This is likely to be fixed in a future release.
 
 ## Custom values
@@ -641,7 +795,23 @@ Value::custom(Box::new(Animal::Dog {
 }), call.head)
 ```
 
-Any of the methods in the trait can be implemented on plugin custom values, and functionality such as supporting cell paths (e.g. `$my_custom_value.field`), operators (e.g. `++`), and comparisons (e.g. for `sort`) are all supported.
+`type_name()` is what `describe` shows and what errors call the value. The trait has more methods with default implementations, which you can override to support cell paths, operators, comparison, and saving. For a plugin's custom value, Nu calls the plugin to run each of them, and starts the plugin first if it isn't running:
+
+| Method                                                                    | When Nu calls it                                                                                                                                                                            | Default                                  |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| `to_base_value(span)`                                                     | When it needs plain data: to display the value as a table, to convert it with commands like `to json`, or to turn it into a string.                                                         | Required                                 |
+| `follow_path_int(self_span, index, path_span, optional)`                  | For a numeric cell path member, as in `$value.0`. `optional` is `true` for `$value.0?`.                                                                                                     | Error: the type doesn't support cell paths |
+| `follow_path_string(self_span, column_name, path_span, optional, casing)` | For a named cell path member, as in `$value.name`. `casing` is `Casing::Insensitive` for `$value.name!`.                                                                                    | Same error                               |
+| `operation(lhs_span, operator, op_span, right)`                           | For an operator with the custom value on its left, as in `$value + 1`, `$value == $other`, or `$value =~ "x"`. Comparison operators come here too, not to `partial_cmp`. `right` can be any value. | Error: unsupported operator              |
+| `partial_cmp(other)`                                                      | When a command orders or compares values itself, as `sort` does. Return `None` when the values can't be compared.                                                                           | `None`                                   |
+| `save(path, value_span, save_span)`                                       | When the value is piped to `save`, unless `save` converts it first because of the file extension (`.json`, for example).                                                                    | Error: the type doesn't implement saving |
+| `notify_plugin_on_drop()`                                                 | See [Drop notification](#drop-notification).                                                                                                                                                | `false`                                  |
+
+An operator with the custom value on its right side never reaches the plugin, so `1 + $value` is an error, and `1 == $value` is `false`. If the plugin's `partial_cmp` returns an error, Nu logs it and treats the values as not comparable.
+
+Two other trait methods, `is_iterable()` and `update_data_at_cell_path()`, have no effect on a plugin's custom values, because Nu doesn't forward them to the plugin. Nu treats a plugin's custom value as not iterable, and changing a cell path inside one (`$value | update name 1`) works on its base value, so the result is plain data and no longer a custom value.
+
+The `Plugin` trait has a hook for each of these operations: `custom_value_to_base_value()`, `custom_value_follow_path_int()`, `custom_value_follow_path_string()`, `custom_value_operation()`, `custom_value_partial_cmp()`, and `custom_value_save()`. Their defaults call the matching `CustomValue` method. Override a hook when the answer depends on the plugin's state and not only on the value's own data, since the hook gets `&self` (the plugin) and the `EngineInterface`. For example, `nu_plugin_custom_values` stores values in a map inside the plugin and hands out small handle values, and its `custom_value_to_base_value()` looks each handle up in that map. The Polars plugin overrides these hooks the same way, because its dataframes live in the plugin's memory.
 
 ### Drop notification
 
@@ -741,7 +911,11 @@ engine.set_gc_disabled(true); // Turn off garbage collection
 engine.set_gc_disabled(false); // Turn it back on
 ```
 
-This option is global to the plugin, and will last beyond the scope of a plugin call. In other languages, the [`GcDisabled` option](plugin_protocol_reference.html#gcdisabled-option) can be sent at any time:
+This option is global to the plugin, and will last beyond the scope of a plugin call. Calls that run at the same time share it, and the last call to `set_gc_disabled` wins, so calls that turn it on and off have to coordinate, keeping it disabled until all of their background work has finished.
+
+In Rust, the setting also controls [when input streams end](#when-input-streams-end). While garbage collection is disabled, the SDK doesn't release a call's input stream when the response finishes, so a background thread can keep reading it. The user's `$env.config.plugin_gc` settings don't have this effect. Only the plugin's own `set_gc_disabled(true)` does.
+
+In other languages, the [`GcDisabled` option](plugin_protocol_reference.html#gcdisabled-option) can be sent at any time:
 
 ```json
 {
@@ -792,7 +966,17 @@ eprintln!("IR of `std assert`:");
 eprintln!("{ir_of_assert}");
 ```
 
-The `.into_spanned()` method comes from the `nu_protocol::IntoSpanned` trait. In this example, `std assert` is only in scope if the user ran `use std` before calling the plugin command. Otherwise, `find_decl()` returns `None` and the command fails with the "can't find" error.
+The `.into_spanned()` method comes from the `nu_protocol::IntoSpanned` trait. `EvaluatedCall` has three builder methods, which consume the call and return it: `with_positional(value)` adds a positional argument, `with_named(name, value)` adds a flag with a value, and `with_flag(name)` adds a switch. The `add_positional`, `add_named`, and `add_flag` methods do the same through a `&mut` reference, which suits a loop:
+
+```rust
+let mut args = EvaluatedCall::new(call.head);
+args.add_named("separator".into_spanned(call.head), Value::string(",", call.head));
+for value in values {
+    args.add_positional(value);
+}
+```
+
+Give flag names in their long form, without the leading `--`. In this example, `std assert` is only in scope if the user ran `use std` before calling the plugin command. Otherwise, `find_decl()` returns `None` and the command fails with the "can't find" error.
 
 Keep in mind that the engine will not validate that the parameters of a call made by the plugin actually matches the signature of the command being called, so care must be taken when designing the plugin to try to match the documented signature. There is not currently a way to look up the signature of a command before running it, but we may add that in the future to make it easier to ensure a plugin call behaves as expected. As performance is a priority for plugins, we do not intend to validate call arguments from plugins at this time.
 
@@ -801,6 +985,48 @@ There is some overhead when making calls from plugins back to the engine, and it
 ## Argument completions
 
 Plugin commands can compute completions for their flags and positional arguments when the user presses <kbd>Tab</kbd>. In Rust, implement the `get_dynamic_completion()` method of `PluginCommand` or `SimplePluginCommand`. It receives the call being completed and an `ArgType` (`ArgType::Flag(name)` or `ArgType::Positional(index)`), and returns `Some` list of `DynamicSuggestion`s, or `None` to fall back to Nushell's default completions. This API is experimental and likely to change, which is why the method takes a deprecated `ExperimentalMarker` parameter (put `#[allow(deprecated)]` on your implementation to silence the warning). For a complete example, see [`arg_completion.rs`](https://github.com/nushell/nushell/blob/main/crates/nu_plugin_example/src/commands/arg_completion.rs) in `nu_plugin_example`. You can check the results with `commandline complete`, e.g. `'my-command --flag ' | commandline complete`.
+
+This command offers colors for its `--color` flag, and leaves its positional arguments to Nushell's default completions:
+
+```rust
+use nu_plugin::{DynamicCompletionCall, EngineInterface, PluginCommand};
+use nu_protocol::{DynamicSuggestion, SuggestionKind, Type, engine::ArgType};
+
+impl PluginCommand for Paint {
+    // ...
+
+    #[allow(deprecated)]
+    fn get_dynamic_completion(
+        &self,
+        _plugin: &Self::Plugin,
+        _engine: &EngineInterface,
+        _call: DynamicCompletionCall,
+        arg_type: ArgType,
+        _experimental: nu_protocol::engine::ExperimentalMarker,
+    ) -> Option<Vec<DynamicSuggestion>> {
+        match arg_type {
+            ArgType::Flag(name) if name == "color" => Some(
+                ["red", "green", "blue"]
+                    .into_iter()
+                    .map(|color| DynamicSuggestion {
+                        value: color.into(),
+                        description: Some(format!("paint it {color}")),
+                        kind: Some(SuggestionKind::Value(Type::String)),
+                        ..Default::default()
+                    })
+                    .collect(),
+            ),
+            _ => None,
+        }
+    }
+}
+```
+
+Build each `DynamicSuggestion` with `..Default::default()` for the fields you don't set. The default has `append_whitespace: true`, so accepting a suggestion adds a space after it. The other fields are described with the [`CompletionItems`](plugin_protocol_reference.md#completionitems-plugin-call-response) response, where the protocol sends them. Return all of your candidates. Nushell matches them against what the user has typed, using the user's completion settings, and sorts them, so the plugin doesn't have to filter.
+
+`kind` is an optional `SuggestionKind`: `Command(CommandType, Option<DeclId>)`, `Value(Type)`, `CellPath`, `Directory`, `File`, `Flag`, `Module`, `Operator`, or `Variable`. `commandline complete --detailed` reports it in its `kind` and `type` columns, and the Nushell language server uses it to label suggestions in an editor.
+
+`DynamicCompletionCall` describes the command line as parsed so far. Its `call` field is the parser's `ast::Call`, with unevaluated argument expressions, `pos` is the cursor position, and `strip` tells whether a placeholder was added at the cursor.
 
 ## Testing plugins
 
@@ -884,6 +1110,84 @@ fn test_fib_with_sequence() -> Result<(), ShellError> {
 Keep in mind that this will increase the compilation time of your tests, so it's generally preferred to do your other test logic within Rust if you can.
 
 Tests on custom values are fully supported as well, but they will be serialized and deserialized to ensure that they are able to pass through the serialization that happens to custom values between the plugin and the engine safely.
+
+`test_command_examples(&command)` runs the examples from one command's `examples()`. `test_examples()` takes any slice of `Example`s, which lets you test cases that you don't want to show in `help`. Both skip examples whose `result` is `None`, run the rest, and compare each result with the expected value. Custom values are compared with your plugin's `custom_value_partial_cmp()`. When an example fails, the test prints the example, its description, and a diff, and returns an error after running all of them:
+
+```rust
+#[test]
+fn test_edge_cases() -> Result<(), ShellError> {
+    use nu_plugin_test_support::PluginTest;
+
+    PluginTest::new("fib", FibPlugin.into())?.test_examples(&[
+        Example {
+            example: "fib 0",
+            description: "The 0th Fibonacci number",
+            result: Some(Value::test_int(0)),
+        },
+    ])
+}
+```
+
+`engine_state()` and `engine_state_mut()` give access to the test's `EngineState`, for example to set up configuration or environment variables before calling `eval()`. To check what a custom value looks like as plain data, pass it to `custom_value_to_base_value(&value, span)`, which runs it through your plugin's `custom_value_to_base_value()` the way the engine would.
+
+## Example plugins
+
+The Nushell repository has three Rust plugins for plugin developers, which Nushell's own tests also use. They aren't published on crates.io. Build one from a checkout with `cargo build -p nu_plugin_example`, then `plugin add target/debug/nu_plugin_example`.
+
+### `nu_plugin_example`
+
+Each command shows one part of the API:
+
+| Command                          | What it shows                                                                                                    |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `example`                        | A command that only prints its subcommands' help, using `engine.get_help()`                                      |
+| `example one`                    | A signature with every kind of argument: required, optional, rest, a switch, and a named flag. Returns nothing    |
+| `example two`                    | The same signature, returning a list of records                                                                  |
+| `example three`                  | The same signature, returning a `LabeledError`                                                                   |
+| `example config`                 | Reading `$env.config.plugins.example` with `get_plugin_config()`                                                 |
+| `example env`                    | Reading environment variables, the current directory (`--cwd`), and setting a variable (`--set`)                 |
+| `example view span`              | Reading the source code behind a value's span with `get_span_contents()`                                         |
+| `example disable-gc`             | Turning garbage collection off with `set_gc_disabled()`, and back on with `--reset`                              |
+| `example ctrlc`                  | Waiting for Ctrl+C with `register_signal_handler()`                                                              |
+| `example call-decl`              | Calling another command by name with `find_decl()` and `call_decl()`, passing a record of named arguments        |
+| `example seq`                    | Producing a list stream                                                                                          |
+| `example sum`                    | Consuming a list stream of numbers                                                                               |
+| `example echo`                   | Passing its input stream through unchanged                                                                       |
+| `example collect-bytes`          | Turning a list of strings or binary values into a byte stream                                                    |
+| `example for-each`               | Running a closure on each value of an input stream with `eval_closure()`                                         |
+| `example generate`               | Producing a stream by running a closure repeatedly, like `generate`                                              |
+| `example arg-completion`         | Completing a flag and positional arguments with `get_dynamic_completion()`                                       |
+
+### `nu_plugin_custom_values`
+
+This plugin shows [custom values](#custom-values):
+
+| Command                      | What it shows                                                                                                                     |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `custom-value generate`      | Returning a custom value (`CoolCustomValue`) that supports cell paths, comparison, and the `++` operator                           |
+| `custom-value generate2`     | Returning a second custom value type, which can also be saved with `save`. With a closure argument, it passes the value to the closure |
+| `custom-value update`        | Taking a custom value as pipeline input and returning a changed copy                                                              |
+| `custom-value update-arg`    | Taking a custom value as an argument instead of as input                                                                          |
+| `custom-value drop-check`    | A custom value with `notify_plugin_on_drop()`, which prints a message when Nu drops the last copy                                  |
+| `custom-value handle make`   | Storing a value in the plugin's memory and returning a handle to it                                                               |
+| `custom-value handle get`    | Getting the stored value back from a handle                                                                                       |
+| `custom-value handle update` | Running a closure on the stored value and returning a new handle                                                                  |
+
+The handle commands keep their data in the plugin, so they override `custom_value_to_base_value()` and `custom_value_dropped()` on the `Plugin`, which removes the stored value once Nu drops the last copy of its handle.
+
+### `nu_plugin_stress_internals`
+
+This plugin tests Nushell's side of the protocol, so it doesn't use the `nu-plugin` crate. It writes JSON messages by hand, and its one command, `stress_internals`, returns the options it was started with as a string. Environment variables make it misbehave on purpose:
+
+| Variable                        | Effect                                                                         |
+| ------------------------------- | ------------------------------------------------------------------------------ |
+| `STRESS_ADVERTISE_LOCAL_SOCKET` | Advertise the `LocalSocket` feature in its `Hello`                             |
+| `STRESS_REFUSE_LOCAL_SOCKET`    | Exit with status 1 when started with `--local-socket`, to test the fallback to stdio |
+| `STRESS_EXIT_BEFORE_HELLO`      | Exit right after sending the encoding, without a `Hello`                       |
+| `STRESS_EXIT_EARLY`             | Exit right after the `Hello` exchange, without answering any call             |
+| `STRESS_WRONG_VERSION`          | Send version `0.0.0` in its `Hello`, which Nu rejects                          |
+
+Only the presence of a variable matters, not its value. The plugin also prints its arguments to stderr when it starts.
 
 ## Under the hood
 
@@ -1315,7 +1619,18 @@ All of this takes a few imports to accomplish, so we make sure to include them.
 
 Finally, we add a shebang line at the top that points to our Python interpreter.
 
-Nu runs plugin files whose names end in `.py` with the `python` command found in your `PATH`, so the shebang line isn't used for them. If your interpreter has a different name, such as `python3`, pass its full path with `--shell` when adding the plugin:
+Nu runs plugin files whose names end in `.py` with the `python` command found in your `PATH`, so the shebang line isn't used for them. Unless you pass `--shell`, Nu picks the interpreter from the extension:
+
+| Extension | Command that Nu runs                        |
+| --------- | ------------------------------------------- |
+| `.py`     | `python FILE --stdio`                       |
+| `.nu`     | `nu --stdin FILE --stdio`                   |
+| `.rb`     | `ruby FILE --stdio`                         |
+| `.jar`    | `java -jar FILE --stdio`                    |
+| `.sh`     | `sh FILE --stdio` on Windows only           |
+| other     | the file itself, as an executable           |
+
+Each interpreter is looked up in `PATH`, so a `.nu` plugin runs under the first `nu` in `PATH`, which isn't necessarily the `nu` that started it. On Unix, a `.sh` file runs directly, so that its shebang line can pick `bash` or another shell. Windows runs `.bat` and `.cmd` files without help. In local socket mode, `--local-socket` and the socket name replace `--stdio`. If your interpreter has a different name, such as `python3`, pass its full path with `--shell` when adding the plugin:
 
 ```nu
 plugin add --shell /usr/bin/python3 nu_plugin_len.py
@@ -1327,3 +1642,5 @@ plugin use len
 On Unix-based platforms, you can instead save the file without the `.py` extension (as `nu_plugin_len`) and make it executable (using something like `chmod +x nu_plugin_len`). Nu then runs it directly, and the shebang line selects the interpreter.
 
 Please see the [example Python plugin](https://github.com/nushell/nushell/tree/main/crates/nu_plugin_python) for a comprehensive example on how to implement a Nushell plugin in another language, including Python.
+
+That example is stricter about versions than Nu is. It sends the version in its `NUSHELL_VERSION` constant in its `Hello`, and it exits as soon as the engine's `Hello` carries any other version, even a compatible patch release. Nu then reports "Failed to receive response to plugin call from `python_example`" instead of a version error. Set the constant to the exact version of your `nu` before you add it, or relax the check in your own plugin to compare only the major and minor versions, the way Nu does.

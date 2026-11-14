@@ -612,7 +612,7 @@ The number of decimal places for floats in tables, lists, and records. Nushell r
 | `plugin_gc.default.stop_after` | duration | `10sec` |
 | `plugin_gc.plugins`            | record   | `{}`    |
 
-`plugins` holds settings for each plugin, under the plugin's name. Assigning a whole record to it replaces the settings of every plugin. `plugin_gc` decides when Nushell stops plugins that have been idle. See [Plugin Garbage Collector](./plugins.md#plugin-garbage-collector).
+`plugins` holds settings for each plugin, under the plugin's name (see [Plugin configuration](./plugins.md#plugin-configuration)). Assigning a whole record to it replaces the settings of every plugin. `plugin_gc` decides when Nushell stops plugins that have been idle. See [Plugin Garbage Collector](./plugins.md#plugin-garbage-collector).
 
 ## `explore` and `tui`
 
