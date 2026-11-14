@@ -114,13 +114,57 @@ For a record or table, name the columns to format as cell paths after the unit. 
 # => ╰───┴──────┴─────────────╯
 ```
 
+## Converting to a file size
+
+[`into filesize`](/commands/docs/into_filesize.md) accepts these input types:
+
+| Input      | Result                                                                             |
+| ---------- | ---------------------------------------------------------------------------------- |
+| `int`      | That many bytes                                                                    |
+| `float`    | That many bytes, with the fraction dropped, so `1.9` gives `1 B` and `-1.9` `-1 B` |
+| `string`   | The size the text holds (see below)                                                |
+| `filesize` | The value unchanged                                                                |
+
+A string holds a number and an optional unit, with or without a space between them. Units follow the table at the top of this page but don't care about case, and the `B` can be left out: `k`, `kb` and `kB` are 1000 bytes, while `Ki` and `KiB` are 1024. Without a unit, the number counts bytes and has to be whole, so `"1.5"` is an error while `"1.5 kB"` is not. A leading `+` or `-` sign is allowed, whitespace around the text is ignored, and so is the thousands separator of the system locale (`,` with an English locale):
+
+```nu
+["1.5 KiB" "2 mb" "1,234" "-1kB"] | each { into filesize | into int } | to nuon
+# => [1536, 2000000, 1234, -1000]
+"1.5" | into filesize
+# => Error: nu::shell::cant_convert
+# =>
+# =>   × Can't convert to filesize.
+# =>    ╭─[repl_entry #1:1:1]
+# =>  1 │ "1.5" | into filesize
+# =>    · ──┬──
+# =>    ·   ╰── can't convert string to filesize
+# =>    ╰────
+```
+
+Unit names written out, such as `"1 kilobyte"`, and sizes beyond the file size range (about 9.2 EB) fail with the same error.
+
+A list is converted item by item, and a `null` item becomes `0 B`. Durations and bools aren't accepted. For a table or record, name the columns to convert as cell paths after the command. Without them, a record or a table row is rejected:
+
+```nu
+[[name size]; [a "1.5 KiB"] [b "2 MB"]] | into filesize size
+# => ╭───┬──────┬────────╮
+# => │ # │ name │  size  │
+# => ├───┼──────┼────────┤
+# => │ 0 │ a    │ 1.5 kB │
+# => │ 1 │ b    │ 2.0 MB │
+# => ╰───┴──────┴────────╯
+```
+
+The `1.5 KiB` in the first row is 1536 bytes, shown in the default metric display as `1.5 kB`. See [Displaying file sizes](#displaying-file-sizes) for how to change that.
+
 ## Common commands that can work with `filesizes`
 
 - `ls`
 - `du`
 - `ps`
 - `sys mem`, `sys disks`, `sys net`
-- `into filesize`, `format filesize`
+- [`into filesize`](#converting-to-a-file-size), [`format filesize`](#format-filesize)
+- `math` subcommands such as `math sum`, `math max` and `math stddev` (see [Working with Numbers](/book/working_with_numbers.md#what-each-command-accepts))
 
 Note: The `where` command and other filters can use filesize in comparison expressions.
 

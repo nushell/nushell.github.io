@@ -326,6 +326,71 @@ remove the last field of a record (use `reject` to remove columns or fields by n
 # => ╰───────┴────╯
 ```
 
+## Numbers
+
+convert a string to a float (`into float` reads a comma as a decimal point, so remove thousands separators first):
+
+```nu
+"1.5" | into float
+# => 1.5
+```
+
+find the largest value in each column of a table:
+
+```nu
+[[a b]; [1 5] [3 2]] | math max
+# => ╭───┬───╮
+# => │ a │ 3 │
+# => │ b │ 5 │
+# => ╰───┴───╯
+```
+
+get the median and the standard deviation of a list (`--sample` divides by N - 1):
+
+```nu
+[2 4 4 4 5 5 7 9] | math median
+# => 4.5
+[2 4 4 4 5 5 7 9] | math stddev
+# => 2.0
+```
+
+apply a function to each number in a list:
+
+```nu
+[1 10 100] | math log 10
+# => ╭───┬──────╮
+# => │ 0 │ 0.00 │
+# => │ 1 │ 1.00 │
+# => │ 2 │ 2.00 │
+# => ╰───┴──────╯
+```
+
+roll a six-sided die ten times (`..` includes the end of the range, `..<` leaves it out):
+
+```nu
+1..10 | each { random int 1..6 }
+```
+
+generate a UUID (`-v 7` makes one that sorts by creation time):
+
+```nu
+random uuid
+```
+
+read a clock time as a duration and show it in minutes:
+
+```nu
+"1:30:00" | into duration | format duration min
+# => 90 min
+```
+
+read a size written as text (units are case-insensitive, and `KiB`, `MiB` and so on count in 1024s):
+
+```nu
+"1.5 GiB" | into filesize
+# => 1.6 GB
+```
+
 ## Dates
 
 get the current date and time:

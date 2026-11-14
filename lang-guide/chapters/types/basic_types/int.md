@@ -156,8 +156,9 @@ For a table or record, list the columns to convert as cell paths after the comma
 
 ## Common commands that can be used with `int`
 
-- `into int`, `into float`
-- `math` subcommands (see `help math` for a list)
-- `bits` subcommands (see `help bits` for a list)
+- `into int`, [`into float`](float.md#converting-to-float)
+- `math` subcommands, described in [Working with Numbers](/book/working_with_numbers.md#the-math-commands)
+- `random int`, described in [Working with Numbers](/book/working_with_numbers.md#random-int-and-random-float)
+- `bits` subcommands, described in [Working with Binary Data](/book/working_with_binary.md#the-bits-commands)
 - `format bits` to show the binary representation, e.g. `42 | format bits` returns `00101010`
-- `format number`
+- `format number`, described under [To string](/book/working_with_strings.md#to-string)

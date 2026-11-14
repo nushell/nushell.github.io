@@ -122,12 +122,68 @@ $env.LC_TIME = "de_DE"
 # => Montag, 15.01.2024
 ```
 
+## The `date` commands
+
+[`date`](/commands/docs/date.md) on its own only prints a list of its subcommands, which are these:
+
+| Command                                                      | What it does                                                                                         |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| [`date now`](/commands/docs/date_now.md)                     | Returns the current date and time in the local time zone                                             |
+| [`date to-timezone`](/commands/docs/date_to-timezone.md)     | Converts a date to a time zone or a fixed offset (see the [cheat sheet](/book/cheat_sheet.md#dates)) |
+| [`date list-timezone`](/commands/docs/date_list-timezone.md) | Lists the time zone names that `date to-timezone` accepts                                            |
+| [`date humanize`](/commands/docs/date_humanize.md)           | Describes a date relative to now, such as "3 minutes ago"                                            |
+| [`date from-human`](/commands/docs/date_from-human.md)       | Reads a phrase such as "next friday" as a date                                                       |
+
+Other datetime commands have their own names: [`format date`](#formatting-dates) turns a date into text, and [`into datetime`](/commands/docs/into_datetime.md) reads one from text or a number.
+
+### `date humanize`
+
+`date humanize` returns a string that says how far a date is from now, rounded to one unit: "now", "30 seconds ago", "a minute ago", "3 hours ago", "in 2 days", "a week ago", "2 years ago" and so on. Anything within 10 seconds of now is "now". The rounding is rough, so 10 days ago is "a week ago". Dates more than about 292 years away are compared by year only.
+
+```nu
+(date now) - 3min | date humanize
+# => 3 minutes ago
+(date now) + 2day | date humanize
+# => in 2 days
+```
+
+The input can be a datetime, a string, or a list of either. A string is read the way `into datetime` reads one, so `"yesterday" | date humanize` is "a day ago". A string that isn't a date is a `nu::shell::datetime_parse_error`, and a list that mixes datetimes and strings is rejected. Without input, `date humanize` fails with "Pipeline empty".
+
+Unless the [`datetime_format`](/book/config_reference.md#datetime-format) settings are changed, Nushell already shows a datetime this way in a table, and adds the same text in parentheses after a single date. `date humanize` gives you that text as a value of its own, for example to save it to a file. The result is a string, so it no longer sorts or compares as a date:
+
+```nu
+[[file modified]; [a.txt ((date now) - 3hr)]] | update modified { date humanize } | to csv
+# => file,modified
+# => a.txt,3 hours ago
+```
+
+### `date list-timezone`
+
+`date list-timezone` returns a table with a `timezone` column, holding every time zone name from the IANA time zone database that Nushell knows, and an `offset` column. The names include older aliases such as `US/Eastern` and `Asia/Katmandu`. These are the names that `date to-timezone` accepts, in any case.
+
+```nu
+date list-timezone | where offset == "+05:45"
+# => ╭───┬────────────────┬────────╮
+# => │ # │    timezone    │ offset │
+# => ├───┼────────────────┼────────┤
+# => │ 0 │ Asia/Kathmandu │ +05:45 │
+# => │ 1 │ Asia/Katmandu  │ +05:45 │
+# => ╰───┴────────────────┴────────╯
+```
+
+The offset is a string, and it is the offset in effect right now. A zone with daylight saving time shows a different offset in summer than in winter. For the offset on another date, convert that date and format it:
+
+```nu
+2024-07-01T12:00:00Z | date to-timezone "America/New_York" | format date "%:z"
+# => -04:00
+```
+
 ## Common commands that can be used with `datetime`
 
 Many of Nushell's builtin commands are datetime aware and output or use `datetime` values
 for fields and expressions. For example:
 
-- `date` and its subcommands
+- `date` and its subcommands (see [The `date` commands](#the-date-commands))
 - `format date`
 - `into datetime`
 - `ls` (the `modified` column)

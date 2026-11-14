@@ -35,6 +35,7 @@
   ```
 
 - `into int` truncates the fractional part. Use `math round`, `math floor` or `math ceil` to round instead (see [Rounding](#rounding)).
+- The other `math` commands, such as `math sqrt` and `math stddev`, are described in [Working with Numbers](/book/working_with_numbers.md).
 
 ## Rounding
 
@@ -104,3 +105,61 @@ Other places where they behave differently from ordinary floats:
 - [`to nuon`](/commands/docs/to_nuon.md) writes `inf`, `-inf` and `NaN`, which `from nuon` reads back as floats. JSON has no such values, so [`to json`](/commands/docs/to_json.md) writes each of them as `null`.
 - Converting to an int doesn't fail. `inf | into int` is the largest int, `9223372036854775807`, and `NaN | into int` is `0`. `math floor` and `math ceil` do the same, while `math round` rejects them with "cannot round non-finite number".
 - A range can't start at `inf`, `-inf` or `NaN`. See [Range](range.md#range-errors).
+
+## Converting to float
+
+[`into float`](/commands/docs/into_float.md) accepts these input types:
+
+| Input    | Result                                                                                                                       |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `int`    | The same number as a float. Above 2^53 not every int has an exact float, so `9007199254740993` becomes `9007199254740992.0`. |
+| `bool`   | `1.0` for `true`, `0.0` for `false`                                                                                          |
+| `string` | The number the text holds (see below)                                                                                        |
+| `float`  | The value unchanged                                                                                                          |
+
+Durations and file sizes aren't accepted. Divide by a unit to get a float that counts that unit:
+
+```nu
+90sec / 1min
+# => 1.5
+1500B / 1kB
+# => 1.5
+```
+
+A string can hold a decimal number with an optional sign, fraction and exponent, such as `"-1.5e3"`. Leading and trailing whitespace is ignored. `inf`, `infinity` and `NaN` are accepted in any case, with an optional sign. Unlike [`into int`](int.md#converting-to-int), `into float` doesn't read `0x`, `0o` or `0b` prefixes. Neither command accepts `_` separators. Text that isn't a number is an error:
+
+```nu
+"abc" | into float
+# => Error: nu::shell::cant_convert
+# =>
+# =>   × Can't convert to float.
+# =>    ╭─[repl_entry #1:1:1]
+# =>  1 │ "abc" | into float
+# =>    · ──┬──
+# =>    ·   ╰── can't convert string to float
+# =>    ╰────
+# =>   help: invalid float literal
+```
+
+A comma is read as a decimal point, so `"1,5" | into float` is `1.5`. A comma that groups thousands therefore gives a wrong number without an error: `"1,000" | into float` is `1.0`, while `"1,000" | into int` is `1000` with an English locale. A string with both a comma and a dot is an error:
+
+```nu
+"1,000.5" | into float
+# => Error: nu::shell::cant_convert::ambiguity
+# =>
+# =>   × Ambiguity in conversion
+# =>    ╭─[repl_entry #1:1:1]
+# =>  1 │ "1,000.5" | into float
+# =>    · ────┬────
+# =>    ·     ╰── input contains both `,` and `.`
+# =>    ╰────
+```
+
+Remove the separators first when the text groups thousands: `"1,000.5" | str replace --all "," "" | into float` is `1000.5`.
+
+A list is converted item by item, so `[1 "2" true] | into float` is `[1.0, 2.0, 1.0]`. For a table or record, name the columns to convert as cell paths after the command. Without them, a record or a table row is rejected:
+
+```nu
+[[a b]; ["1.5" x]] | into float a | to nuon
+# => [[a, b]; [1.5, x]]
+```
