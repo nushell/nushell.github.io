@@ -311,6 +311,8 @@ Nu also provides some basic [filesystem commands](/commands/categories/filesyste
 - [`cp`](/commands/docs/cp.md) to copy an item to a new location
 - [`rm`](/commands/docs/rm.md) to remove items from the filesystem
 
+The `path` commands split, join, and inspect the paths these commands take. See [Working with Paths](./working_with_paths.md).
+
 ::: tip NOTE
 Under Bash and many other shells, most filesystem commands (other than `cd`) are actually separate binaries in the system. For instance, on a Linux system, `cp` is the `/usr/bin/cp` binary. In Nushell, these commands are built-in. This has several advantages:
 
@@ -411,3 +413,70 @@ du site --max-depth 1 | update path { path basename }
 ```
 
 `--exclude` (`-x`) skips files whose path matches a glob, such as `du --exclude *.log`, and `--min-size` (`-m`) skips files smaller than a number of bytes. Both change the totals. `--long` (`-l`) adds `directories` and `files` columns. Each holds a table of the subdirectories or files directly inside, with the same columns, so you can work your way down the tree with [`get`](/commands/docs/get.md).
+
+### Creating files and setting timestamps
+
+[`touch`](/commands/docs/touch.md) creates each file you name as an empty file if it doesn't exist, and sets the access and modification times of each one that does. It never creates directories, so `touch logs/today.txt` fails with "Could not touch" when `logs` doesn't exist. Run `mkdir logs` first.
+
+An unquoted name with `*`, `?`, or `[` is a glob. `touch *.log` updates every `.log` file that exists, and when none does, it fails with "No matches found for glob" instead of creating a file called `*.log`. Quote the name if you want that file. A list literal such as `touch [a.txt b.txt]` is read as a glob too, so spread a list instead: `touch ...$names`.
+
+By default both times become the current time. These flags pick another time:
+
+- `--timestamp` (`-t`) takes a datetime value. A literal without an offset, such as `2024-01-15T12:00:00`, is in UTC, so write `2024-01-15T12:00:00-06:00` for a local time.
+- `--date` (`-d`) takes text in the format GNU `touch` accepts: a date and time such as `"2024-03-01 12:00"`, or a time relative to now such as `yesterday`, `"2 hours ago"`, or `"-1 month"`. Text it can't read is an "Invalid date" error.
+- `--reference` (`-r`) copies the times of another file. Together with a relative `--date`, the date counts from the reference file's times instead of from now.
+
+`--timestamp` can't be combined with `--date` or `--reference`. `--modified` (`-m`) changes only the modification time, and `--access` (`-a`) only the access time. Giving both is the same as giving neither:
+
+```nu
+touch notes.txt
+touch --timestamp 2024-01-15T12:00:00 notes.txt
+touch --modified --date "2024-03-01 12:00" notes.txt
+touch --reference notes.txt --date "-1 day" copy.txt
+ls --long *.txt | select name modified accessed | update modified { format date "%F" } | update accessed { format date "%F" }
+# => ╭───┬───────────┬────────────┬────────────╮
+# => │ # │   name    │  modified  │  accessed  │
+# => ├───┼───────────┼────────────┼────────────┤
+# => │ 0 │ copy.txt  │ 2024-02-29 │ 2024-01-14 │
+# => │ 1 │ notes.txt │ 2024-03-01 │ 2024-01-15 │
+# => ╰───┴───────────┴────────────┴────────────╯
+```
+
+`--no-create` (`-c`) skips names that don't exist, without an error. When a name is a symbolic link, `touch` changes the times of the file the link points to; `--no-deref` (`-s`) changes the link's own times instead, on systems that support that. The name `-` stands for standard output, so `touch -` changes the times of whatever stdout is connected to.
+
+### Temporary files and directories
+
+[`mktemp`](/commands/docs/mktemp.md) creates a file with a random name and returns its absolute path. `--directory` (`-d`) creates a directory instead. On Linux and macOS, only you can use what it creates: a file gets the mode `rw-------` and a directory `rwx------`. Nushell doesn't delete them later, so remove them when you're done:
+
+```nu
+let work = mktemp --directory
+"hello" | save ($work | path join input.txt)
+# ... use the files in $work ...
+rm --recursive $work
+```
+
+Without an argument, the name is `tmp.` followed by ten random characters, in the system's temporary directory. That's `TMPDIR` on Linux and macOS (`/tmp` when it isn't set), and `TMP` or `TEMP` on Windows, as they were set when Nushell started. Setting `$env.TMPDIR` inside Nushell doesn't move it. It's the same directory as [`$nu.temp-dir`](./special_variables.md#nu), but `mktemp` doesn't resolve symbolic links in it, so on macOS its paths start with `/var/folders` where `$nu.temp-dir` has `/private/var/folders`.
+
+A template argument sets the name. Its last run of `X`s, at least three of them, becomes random characters. With a template, the file goes in the current directory unless you add `--tmpdir` (`-t`) for the temporary directory or `--tmpdir-path` (`-p`) for another directory. A relative `--tmpdir-path` gives a relative result. `--suffix` adds text after the random part, and then the template has to end in `X`. `--dry` returns a name without creating anything:
+
+```nu
+mktemp --dry
+# => /tmp/tmp.GwOUqXVkaY
+mktemp --dry --suffix .csv
+# => /tmp/tmp.moSjapA94V.csv
+mktemp --dry --tmpdir report.XXX
+# => /tmp/report.Uh1
+mktemp --dry --tmpdir-path logs run-XXXXXX.log
+# => logs/run-xvB1Rp.log
+```
+
+The template is a file name, not a path. Put the directory in `--tmpdir-path`:
+
+```nu
+try { mktemp logs/report.XXX } catch {|e| $e.msg }
+# => invalid template, 'logs/report.XXX', contains directory separator
+try { mktemp report.XX } catch {|e| $e.msg }
+# => too few X's in template 'report.XX'
+```
+
+A `--suffix` that contains `/` and a `--tmpdir-path` directory that doesn't exist are errors too. In Nushell 0.117.0, the text of these errors can come out as an internal key; see the warning under [Reports from `mkdir`, `mv` and `rm`](/cookbook/files.md#reports-from-mkdir-mv-and-rm).

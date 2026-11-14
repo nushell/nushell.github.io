@@ -25,7 +25,9 @@ But you can pass stderr to a command or a file if you want to:
 
 - use `e>|` to pass stderr to next command.
 - use `e> file` to redirect stderr to a file.
-- use `do -i { cmd } | complete` to capture stderr message.
+- use `cmd | complete` to capture the stderr message along with stdout and the exit code.
+
+You may see `do -i { cmd } | complete` in older scripts. The `do -i` isn't needed there, and it doesn't make a failing external harmless in general. When the output of `do -i` goes to `let` or into a pipe, as in `do -i { ^false } | lines`, the failure still stops the pipeline. See the [`do --ignore-errors` note](/lang-guide/chapters/flow_control/try-catch.md#language-notes) for the full rules.
 
 ## Exit Code
 
@@ -44,7 +46,7 @@ The second way is to use the [`complete`](/commands/docs/complete.md) command.
 
 A non-zero exit code is treated as an error. In a script, execution stops at the failing command, and the lines after it do not run. (In the REPL, type `$env.LAST_EXIT_CODE` on its own line after the failing command, as above.)
 
-Nushell doesn't print an error message of its own for a non-zero exit code. You only see what the command printed. Set `$env.config.display_errors.exit_code` to `true` to also get a Nushell error that points at the failing command:
+Nushell doesn't print an error message of its own for a non-zero exit code. You only see what the command printed. Set `$env.config.display_errors.exit_code` to `true` to also get a Nushell error that points at the failing command. The [`try` section of Control Flow](./control_flow.md#try) explains both `display_errors` settings and what a script prints when it stops this way:
 
 ```nu
 ^cat unknown.txt
@@ -456,7 +458,7 @@ nu -c 'is-terminal --stdout' | str trim
 # => false
 ```
 
-Without a flag, `is-terminal` checks stdout. It checks one stream per call, so giving it two flags is an error.
+Without a flag, `is-terminal` checks stdout. It checks one stream per call, so giving it two flags is an error. To measure the terminal, ask it questions, or clear it, see [Working with the Terminal](./terminal.md).
 
 `is-terminal` asks about the Nushell process. [`is-redirected`](/commands/docs/is-redirected.md) asks about one custom command: called inside it, it tells whether the command's result will go somewhere other than the screen, such as into another command, a variable, or a file. The two answers differ in the REPL, where stdout is always the terminal:
 
@@ -466,6 +468,30 @@ report
 # => redirected: false, terminal: true
 report | ignore
 # => redirected: true, terminal: true
+```
+
+`is-redirected` gives the same answer anywhere in the command's body, so you can call it in an `if` condition or a `let`. A result that is thrown away counts as redirected. That covers `| ignore`, and also a call that isn't the last statement of a script or block, because only the last statement's value is shown. When a command returns another command's result as its own, the inner command gets the outer call's answer. Outside any custom command, `is-redirected` answers for the pipeline it's in.
+
+It looks at where Nushell sends the value, not at the process's stdout. `nu -c 'def r [] { is-redirected }; r' | cat` prints `false`, because `r`'s value goes to the display, and only the display's output goes into the pipe. To format for a person only when both checks agree:
+
+```nu
+def services [] {
+    let rows = [[name state]; [web up] [db down]]
+    if (is-terminal --stdout) and not (is-redirected) {
+        $rows | each {|r| $"($r.name) is ($r.state)" } | str join "\n"
+    } else {
+        $rows
+    }
+}
+services
+# => web is up
+# => db is down
+services | where state == down
+# => ╭───┬──────┬───────╮
+# => │ # │ name │ state │
+# => ├───┼──────┼───────┤
+# => │ 0 │ db   │ down  │
+# => ╰───┴──────┴───────╯
 ```
 
 ## Raw Streams

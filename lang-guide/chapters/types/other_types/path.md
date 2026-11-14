@@ -64,6 +64,8 @@ There is no `into path` command, but several commands can be used to convert to 
 - `path join`
 - `path parse`
 
+[Working with Paths](/book/working_with_paths.md) explains `path join`, `path parse`, and the other `path` subcommands, including which of them read the filesystem and which input forms each one accepts.
+
 ### Absolute paths with `path expand`
 
 [`path expand`](/commands/docs/path_expand.md) turns a string, or a list of strings, into absolute paths. It expands a leading `~` to the home directory and multi-dot shorthands such as `...`, makes a relative path absolute against the current directory, and removes `.` and `..` segments.
@@ -96,6 +98,6 @@ With `link` a symbolic link to the directory `real`, in `/home/you/proj`:
 ## Common commands that can work with `path`
 
 - `path (subcommands)`
-  - See: `help path` for a full list
+  - See: `help path` for a full list, and [Working with Paths](/book/working_with_paths.md) for how they behave
 - Most filesystem commands (e.g., `ls`, `rm`)
   - See: `help commands | where category == filesystem`
