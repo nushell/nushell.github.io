@@ -226,3 +226,74 @@ The server computes the hints when the file is opened or changed and always retu
 ### Semantic tokens
 
 Most editors color Nushell code with a syntax grammar that only sees the text. Such a grammar can't know which multi-word names, such as `str join`, are a single command, so it may color the second word as an argument. Semantic tokens cover that one case. The server marks each call to a command whose name has more than one word, such as `str join`, a custom command named `git sync`, or `assert equal` from the standard library, with the token type `function`. Calls to commands whose names start with `export` or `overlay` aren't marked, and neither is anything else, so the grammar still colors the rest of the file. Only full-document requests are supported.
+
+## One-shot IDE flags
+
+Before the language server existed, editor extensions asked `nu` about a file through five command-line flags, and `nu` still has them. Each one parses a file, prints one answer as JSON, and exits. The current VS Code extension uses `--lsp` instead, but the flags are handy for a quick check from a script, or in a tool that has no LSP client.
+
+All five take the file to inspect as the last argument and read it from disk, so they don't see unsaved changes in the editor. They parse the file without running it. They don't load `env.nu`, `config.nu` or the plugin registry, so your custom commands and plugin commands are unknown, and calls to them look like external commands. The standard library is loaded. Relative paths in `use` and `source` start from the file's directory. If the file can't be read, `--ide-goto-def`, `--ide-hover` and `--ide-check` print a `File not found` error and exit with status 1, `--ide-complete` exits with status 1 without a message, and `--ide-ast` prints nothing and exits with status 0. Otherwise the exit status is 0, even when the file has errors.
+
+`--ide-goto-def`, `--ide-hover` and `--ide-complete` take a cursor position, as a byte offset from the start of the file, counting from 0. An editor that tracks the cursor by line and column has to convert it, and a character outside ASCII counts as more than one byte. The examples use this `script.nu`, where `$names` on the last line starts at byte 70, `each` at byte 79, and the call to `greet` at byte 89:
+
+```nu
+def greet [name: string] { $"hello ($name)" }
+let names = [Ada Grace]
+$names | each {|n| greet $n }
+```
+
+### `--ide-goto-def`
+
+`--ide-goto-def <offset>` prints where the item at the offset is defined, as `{file, start, end}`. For a custom command, `start` and `end` are the byte range of the command's body. For a variable, they are the range of its name where it's declared. Both count from the start of `file`. `file` is the path as you gave it when the definition is in the same file, and an absolute path when it's in a file loaded with `use` or `source`. Built-in commands, external commands, and anything else without a definition give `{}`:
+
+```nu
+nu --ide-goto-def 89 script.nu
+# => {"file":"script.nu","start":25,"end":45}
+nu --ide-goto-def 70 script.nu
+# => {"file":"script.nu","start":50,"end":55}
+nu --ide-goto-def 79 script.nu
+# => {}
+```
+
+### `--ide-hover`
+
+`--ide-hover <offset>` prints `{hover, span: {start, end}}`. For a command, built-in or custom, `hover` is its help as Markdown, with the description, usage, flags, parameters, input and output types, and examples. For a variable, it's the variable's type, after the word `mutable` for a `mut` variable. For a literal, it's the kind of value, such as `string`, `int` or `file path`. `span` is the byte range of the item under the cursor. When there's nothing to describe, such as at a pipe symbol or past the end of the file, it prints nothing at all:
+
+```nu
+nu --ide-hover 70 script.nu
+# => {"hover":"list<string>","span":{"start":70,"end":76}}
+```
+
+### `--ide-complete`
+
+`--ide-complete <offset>` completes the code that comes before the offset, as if you had pressed <kbd>Tab</kbd> there in the REPL, and prints `{completions: [...]}` with the text of each suggestion. An offset past the end of the file completes at the end. For a file that holds just `str jo`:
+
+```nu
+nu --ide-complete 6 partial.nu
+# => {"completions":["str join"]}
+```
+
+### `--ide-check`
+
+`--ide-check <max-errors>` takes the most errors to report, not an offset. It prints one JSON object per line. First comes a `{type: diagnostic, severity, message, span}` object for each parse error, up to the limit. `severity` is always `Error`, and warnings, such as a call to a deprecated command, aren't reported. Then comes a `{type: hint, typename, position}` object for each variable declared with `let`, `mut`, `const` or `for`, with the type the parser inferred and the byte range of the variable's name. The hints don't count toward the limit, and they are printed even with a limit of 0. For this `check.nu`:
+
+```nu
+ls --al
+let count = 0
+$greting
+```
+
+```nu
+nu --ide-check 10 check.nu
+# => {"type":"diagnostic","severity":"Error","message":"The `ls` command doesn't have flag `al`.","span":{"start":3,"end":7}}
+# => {"type":"diagnostic","severity":"Error","message":"Variable not found.","span":{"start":22,"end":30}}
+# => {"type":"hint","typename":"int","position":{"start":12,"end":17}}
+```
+
+### `--ide-ast`
+
+`--ide-ast` takes no number. It prints the file's tokens as one JSON array, with a `{type: ast, span, shape, content}` object for each token. `shape` is the token's syntax shape, as in [`ast --flatten`](/lang-guide/chapters/helpers_and_debugging.md#ast), and `content` is its text. For a file that holds `ls | length`:
+
+```nu
+nu --ide-ast small.nu
+# => [{"type":"ast","span":{"start":0,"end":2},"shape":"shape_internalcall","content":"ls"},{"type":"ast","span":{"start":3,"end":4},"shape":"shape_pipe","content":"|"},{"type":"ast","span":{"start":5,"end":11},"shape":"shape_internalcall","content":"length"}]
+```
