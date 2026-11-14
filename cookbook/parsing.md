@@ -93,6 +93,17 @@ Some inputs don't split into columns at all:
 - If two headers have the same name, it fails with a `Failed to detect columns` error. Use `--no-headers` and rename the columns, or try `--guess`.
 - A table, or a list of records, passes through unchanged, so `detect columns` does no harm on input that is already structured.
 
+Every value that `detect columns` returns is a string, so a column of numbers can't be added up yet. [`detect type`](/commands/docs/detect_type.md), the other subcommand of [`detect`](/commands/docs/detect.md), turns a string into the type it looks like:
+
+```nu
+"name size
+a.txt 1024
+b.txt 2048" | detect columns | update size { detect type } | get size | math sum
+# => 3072
+```
+
+`detect` on its own does nothing but print its help, which lists the two subcommands.
+
 ### Using `from ssv`
 
 Also the builtin `from` data parser for `ssv` (*s*pace *s*eparated *v*alues) can be used:

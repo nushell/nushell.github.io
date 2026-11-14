@@ -19,33 +19,35 @@ open editors/vscode/package.json | get version
 
 Nu currently supports the following formats. The [`from`](/commands/docs/from.md) subcommands parse text in a format into structured data, and `open` runs them for you. The [`to`](/commands/docs/to.md) subcommands go the other way and serialize structured data into text in a format (binary for MessagePack), and [`save`](#saving-data) runs them for you.
 
-| Format                                    | Read with                                                                                            | Write with                                                                                   |
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| CSV                                       | [`from csv`](/commands/docs/from_csv.md)                                                             | [`to csv`](/commands/docs/to_csv.md)                                                         |
-| dotenv (`.env`, `.env.local`, `prod.env`) | [`from dotenv`](/commands/docs/from_dotenv.md)                                                       | [`to dotenv`](/commands/docs/to_dotenv.md)                                                   |
-| eml (plugin)                              | [`from eml`](/commands/docs/from_eml.md)                                                             |                                                                                              |
-| HTML                                      |                                                                                                      | [`to html`](/commands/docs/to_html.md)                                                       |
-| ics (plugin)                              | [`from ics`](/commands/docs/from_ics.md)                                                             |                                                                                              |
-| ini (plugin)                              | [`from ini`](/commands/docs/from_ini.md)                                                             |                                                                                              |
-| JSON                                      | [`from json`](/commands/docs/from_json.md)                                                           | [`to json`](/commands/docs/to_json.md)                                                       |
-| [KDL](#kdl)                               | [`from kdl`](/commands/docs/from_kdl.md)                                                             | [`to kdl`](/commands/docs/to_kdl.md)                                                         |
-| [Markdown (md)](#markdown)                | [`from md`](/commands/docs/from_md.md)                                                               | [`to md`](/commands/docs/to_md.md)                                                           |
-| MessagePack (msgpack, msgpackz)           | [`from msgpack`](/commands/docs/from_msgpack.md), [`from msgpackz`](/commands/docs/from_msgpackz.md) | [`to msgpack`](/commands/docs/to_msgpack.md), [`to msgpackz`](/commands/docs/to_msgpackz.md) |
-| [NUON](#nuon)                             | [`from nuon`](/commands/docs/from_nuon.md)                                                           | [`to nuon`](/commands/docs/to_nuon.md)                                                       |
-| ods                                       | [`from ods`](/commands/docs/from_ods.md)                                                             |                                                                                              |
-| plist (plugin)                            | [`from plist`](/commands/docs/from_plist.md)                                                         | [`to plist`](/commands/docs/to_plist.md)                                                     |
-| [SQLite databases](#sqlite)               | `open`                                                                                               | [`into sqlite`](/commands/docs/into_sqlite.md)                                               |
-| ssv                                       | [`from ssv`](/commands/docs/from_ssv.md)                                                             |                                                                                              |
-| Plain text (txt)                          |                                                                                                      | [`to text`](/commands/docs/to_text.md), [`to txt`](/commands/docs/to_txt.md)                 |
-| [TOML](#toml)                             | [`from toml`](/commands/docs/from_toml.md)                                                           | [`to toml`](/commands/docs/to_toml.md)                                                       |
-| TSV                                       | [`from tsv`](/commands/docs/from_tsv.md)                                                             | [`to tsv`](/commands/docs/to_tsv.md)                                                         |
-| url (query strings)                       | [`from url`](/commands/docs/from_url.md)                                                             |                                                                                              |
-| vcf (plugin)                              | [`from vcf`](/commands/docs/from_vcf.md)                                                             |                                                                                              |
-| xlsx                                      | [`from xlsx`](/commands/docs/from_xlsx.md)                                                           |                                                                                              |
-| XML                                       | [`from xml`](/commands/docs/from_xml.md)                                                             | [`to xml`](/commands/docs/to_xml.md)                                                         |
-| [YAML (yaml, yml)](#yaml)                 | [`from yaml`](/commands/docs/from_yaml.md), [`from yml`](/commands/docs/from_yml.md)                 | [`to yaml`](/commands/docs/to_yaml.md), [`to yml`](/commands/docs/to_yml.md)                 |
+| Format                                                                | Read with                                                                                            | Write with                                                                                   |
+| --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| [CSV](./data_formats.md#csv-and-tsv)                                  | [`from csv`](/commands/docs/from_csv.md)                                                             | [`to csv`](/commands/docs/to_csv.md)                                                         |
+| [dotenv](./data_formats.md#dotenv) (`.env`, `.env.local`, `prod.env`) | [`from dotenv`](/commands/docs/from_dotenv.md)                                                       | [`to dotenv`](/commands/docs/to_dotenv.md)                                                   |
+| eml (plugin)                                                          | [`from eml`](/commands/docs/from_eml.md)                                                             |                                                                                              |
+| [HTML](./data_formats.md#html)                                        |                                                                                                      | [`to html`](/commands/docs/to_html.md)                                                       |
+| ics (plugin)                                                          | [`from ics`](/commands/docs/from_ics.md)                                                             |                                                                                              |
+| ini (plugin)                                                          | [`from ini`](/commands/docs/from_ini.md)                                                             |                                                                                              |
+| [JSON](#json)                                                         | [`from json`](/commands/docs/from_json.md)                                                           | [`to json`](/commands/docs/to_json.md)                                                       |
+| [KDL](#kdl)                                                           | [`from kdl`](/commands/docs/from_kdl.md)                                                             | [`to kdl`](/commands/docs/to_kdl.md)                                                         |
+| [Markdown (md)](#markdown)                                            | [`from md`](/commands/docs/from_md.md)                                                               | [`to md`](/commands/docs/to_md.md)                                                           |
+| [MessagePack](./data_formats.md#messagepack) (msgpack, msgpackz)      | [`from msgpack`](/commands/docs/from_msgpack.md), [`from msgpackz`](/commands/docs/from_msgpackz.md) | [`to msgpack`](/commands/docs/to_msgpack.md), [`to msgpackz`](/commands/docs/to_msgpackz.md) |
+| [NUON](#nuon)                                                         | [`from nuon`](/commands/docs/from_nuon.md)                                                           | [`to nuon`](/commands/docs/to_nuon.md)                                                       |
+| [ods](./data_formats.md#spreadsheets)                                 | [`from ods`](/commands/docs/from_ods.md)                                                             |                                                                                              |
+| plist (plugin)                                                        | [`from plist`](/commands/docs/from_plist.md)                                                         | [`to plist`](/commands/docs/to_plist.md)                                                     |
+| [SQLite databases](#sqlite)                                           | `open`                                                                                               | [`into sqlite`](/commands/docs/into_sqlite.md)                                               |
+| ssv                                                                   | [`from ssv`](/commands/docs/from_ssv.md)                                                             |                                                                                              |
+| [Plain text](./data_formats.md#plain-text) (txt)                      |                                                                                                      | [`to text`](/commands/docs/to_text.md), [`to txt`](/commands/docs/to_txt.md)                 |
+| [TOML](#toml)                                                         | [`from toml`](/commands/docs/from_toml.md)                                                           | [`to toml`](/commands/docs/to_toml.md)                                                       |
+| [TSV](./data_formats.md#csv-and-tsv)                                  | [`from tsv`](/commands/docs/from_tsv.md)                                                             | [`to tsv`](/commands/docs/to_tsv.md)                                                         |
+| [url (query strings)](./data_formats.md#url-query-strings)            | [`from url`](/commands/docs/from_url.md)                                                             |                                                                                              |
+| vcf (plugin)                                                          | [`from vcf`](/commands/docs/from_vcf.md)                                                             |                                                                                              |
+| [xlsx](./data_formats.md#spreadsheets)                                | [`from xlsx`](/commands/docs/from_xlsx.md)                                                           |                                                                                              |
+| [XML](./data_formats.md#xml)                                          | [`from xml`](/commands/docs/from_xml.md)                                                             | [`to xml`](/commands/docs/to_xml.md)                                                         |
+| [YAML (yaml, yml)](#yaml)                                             | [`from yaml`](/commands/docs/from_yaml.md), [`from yml`](/commands/docs/from_yml.md)                 | [`to yaml`](/commands/docs/to_yaml.md), [`to yml`](/commands/docs/to_yml.md)                 |
 
-The eml, ics, ini, plist, and vcf formats are provided by the `formats` [core plugin](plugins.md#core-plugins).
+The eml, ics, ini, plist, and vcf formats are provided by the `formats` [core plugin](./plugins.md#the-formats-plugin).
+
+The format names in the table link to notes on how each one reads and writes data. JSON, NUON, Markdown, KDL, TOML, and YAML are covered further down this page. The others are in [Data Formats](./data_formats.md), which also covers base64, hex, and the other ways to write binary data as text.
 
 ::: tip Did you know?
 Under the hood `open` will look for a `from ...` subcommand in your scope which matches the extension of your file.
@@ -166,7 +168,102 @@ The other flags change the layout:
 - `--no-commas` separates items with spaces instead of commas, the way you'd type them in Nushell: `[[name age]; [Alice 30] [Bob 25]]`. It can't be combined with `--raw`, which would leave no separator at all.
 - `--raw-strings` writes a string that contains quotes or backslashes as a [raw string](working_with_strings.md#raw-strings), so `C:\Users\me` becomes `r#'C:\Users\me'#` instead of `"C:\\Users\\me"`.
 
+[`from nuon`](/commands/docs/from_nuon.md) reads NUON text back into values, and `open` uses it for `.nuon` files. Because NUON is Nushell syntax, it keeps the types that JSON has no way to write:
+
+```nu
+'{size: 1.5kb, wait: 90sec, when: 2024-01-02, data: 0x[ff], path: $.a.0, steps: 1..3}' | from nuon | describe
+# => record<size: filesize, wait: duration, when: datetime, data: binary, path: cell-path, steps: range>
+```
+
+`from nuon` reads data, never code. A variable, a subexpression, a closure, or a command call is an error that points at the part it can't load:
+
+```nu
+'{name: nu, home: $env.HOME}' | from nuon
+# => Error: nu::shell::error
+# =>
+# =>   × error when loading nuon text
+# =>    ╭─[repl_entry #1:1:33]
+# =>  1 │ '{name: nu, home: $env.HOME}' | from nuon
+# =>    ·                                 ────┬────
+# =>    ·                                     ╰── could not load nuon text
+# =>    ╰────
+# =>
+# => Error: nu::shell::outsidespan
+# =>
+# =>   × Error when loading
+# =>    ╭────
+# =>  1 │ {name: nu, home: $env.HOME}
+# =>    ·                  ────┬────
+# =>    ·                      ╰── subexpressions and cellpaths not supported in nuon
+# =>    ╰────
+```
+
+The text has to hold one value. Two values in a row, such as `{a: 1} {b: 2}`, fail with `error when parsing nuon text`, and so does a table row with too few cells. A record that names a field twice fails with `Record field or table column used twice`, and a file size or duration too large for 64 bits with `filesize too large` or `duration too large`. Empty text gives `null`.
+
 ## Notes on specific formats
+
+### JSON
+
+[`from json`](/commands/docs/from_json.md) reads more than strict JSON. Like [Hjson](https://hjson.github.io/), it accepts comments that start with `//`, `#`, or `/*`, trailing commas, keys without quotes, and line breaks in place of commas. That lets `open` read hand-edited files such as editor settings:
+
+```nu
+open --raw settings.json
+# => {
+# =>   // editor settings
+# =>   "tabSize": 4,
+# =>   "rulers": [80, 100,],  # trailing comma
+# => }
+open settings.json
+# => ╭─────────┬────────────────╮
+# => │ tabSize │ 4              │
+# => │ rulers  │ [list 2 items] │
+# => ╰─────────┴────────────────╯
+```
+
+Bare words are read as strings too, so `"not json" | from json` returns the string `not json` instead of failing. `--strict` (`-s`) follows the JSON specification exactly, which makes it the flag to use when you want to check that text is valid JSON:
+
+```nu
+open --raw settings.json | from json --strict
+# => Error: nu::shell::error
+# =>
+# =>   × Error while parsing JSON text
+# =>    ╭─[repl_entry #1:1:1]
+# =>  1 │ open --raw settings.json | from json --strict
+# =>    · ──┬─
+# =>    ·   ╰── error parsing JSON text
+# =>    ╰────
+# =>
+# => Error: nu::shell::outsidespan
+# =>
+# =>   × Error while parsing JSON text
+# =>    ╭─[2:3]
+# =>  1 │ {
+# =>  2 │   // editor settings
+# =>    ·   ┬
+# =>    ·   ╰── key must be a string at line 2 column 3
+# =>  3 │   "tabSize": 4,
+# =>    ╰────
+```
+
+A whole number becomes an int when it fits in 64 bits and a float when it doesn't, and a number with a decimal point or an exponent is always a float. Strings stay strings even when they hold a date, so convert those with [`into datetime`](/commands/docs/into_datetime.md). Empty input gives `null`.
+
+Log files and streaming APIs often write one JSON value per line, a format called JSON Lines or NDJSON. Plain `from json` fails on it with `trailing characters` at the second value. `--objects` (`-o`) reads each line as a separate value, skips blank lines, and returns a list:
+
+```nu
+open --raw app.log
+# => {"level": "info", "msg": "started"}
+# =>
+# => {"level": "warn", "msg": "disk almost full"}
+open app.log | from json --objects
+# => ╭───┬───────┬──────────────────╮
+# => │ # │ level │       msg        │
+# => ├───┼───────┼──────────────────┤
+# => │ 0 │ info  │ started          │
+# => │ 1 │ warn  │ disk almost full │
+# => ╰───┴───────┴──────────────────╯
+```
+
+With `--objects`, a value can't span lines, and a line that fails to parse is an error when the list reaches it. The list is a stream, read line by line as later commands ask for items, so `from json --objects | first 10` stops reading after ten values. `--objects` takes text, such as a string or the output of an external command, and fails on binary data. The [`std/formats`](./standard_library/formats.md) module wraps it as `from jsonl` and `from ndjson`, so that `open` parses `.jsonl` and `.ndjson` files.
 
 ### Markdown
 
@@ -250,6 +347,65 @@ $tree.1.children.0.attrs.value
 # => My Project
 ```
 
+[`to md`](/commands/docs/to_md.md) goes the other way, but it doesn't rebuild a document from the rows `from md` returns. It writes a table as a Markdown table, which is handy for pasting results into a README or an issue. `--pretty` (`-p`) pads the columns so they line up in the source, and `--center` (`-c`) takes a list of columns to center:
+
+```nu
+[[name size]; [a.txt 1kb] [notes.md 22kb]] | to md
+# => | name | size |
+# => | --- | --- |
+# => | a.txt | 1.0 kB |
+# => | notes.md | 22.0 kB |
+[[name size]; [a.txt 1kb] [notes.md 22kb]] | to md --pretty --center [size]
+# => | name     |  size   |
+# => | -------- |:-------:|
+# => | a.txt    | 1.0 kB  |
+# => | notes.md | 22.0 kB |
+```
+
+Each cell holds the value as text. A nested list or record is written in NUON-like form, such as `[x, y]`, a line break becomes a `<br>` tag, and a `|` or `\` is escaped with a backslash so it doesn't break the table:
+
+```nu
+[[name tags note]; [a.txt [x y] "first\nsecond"] ["b|c.txt" [] ""]] | to md
+# => | name | tags | note |
+# => | --- | --- | --- |
+# => | a.txt | [x, y] | first<br>second |
+# => | b\|c.txt | [] |  |
+```
+
+A list of plain values becomes a bulleted list. `--list ordered` (`-l`) numbers the items, `--list none` writes one item per line without a marker, and `--list unordered` is the default. Any other style is an `Invalid value` error. A single plain value, such as a string, becomes a list of one item, `* done`.
+
+A list of records is one table, even if some records stand for a heading. `--per-element` (`-e`) writes each item of the list as its own element instead. A record with a single `h1`, `h2`, `h3`, or `blockquote` field (in any case) becomes that heading or a quote, consecutive records with the same columns become one table, and other values become list items:
+
+```nu
+[{h1: Report} {blockquote: "Made with Nushell"} {h2: Files} {name: a.txt, size: 1kb} {name: b.txt, size: 2kb} {h2: Tags} cli shell] | to md --per-element
+# => # Report
+# => > Made with Nushell
+# => ## Files
+# => | name | size |
+# => | --- | --- |
+# => | a.txt | 1.0 kB |
+# => | b.txt | 2.0 kB |
+# =>
+# => ## Tags
+# => * cli
+# => * shell
+```
+
+The text in cells and items is otherwise written as it is, so Markdown or HTML in your data takes effect when the result is rendered. `--escape-md` (`-m`) puts a backslash before Markdown punctuation, `--escape-html` (`-t`) turns `<`, `>`, `&`, quotes, and `/` into HTML entities, and `--escape-all` (`-a`) does both:
+
+```nu
+[[file note]; [my_notes.md "<b>see #3</b>"]] | to md --escape-md
+# => | file | note |
+# => | --- | --- |
+# => | my\_notes\.md | \<b\>see \#3\</b\> |
+[[file note]; [my_notes.md "<b>see #3</b>"]] | to md --escape-html
+# => | file | note |
+# => | --- | --- |
+# => | my_notes.md | &lt;b&gt;see #3&lt;&#x2f;b&gt; |
+```
+
+`--escape-all` also escapes the `#` inside the entities, so a renderer shows `&#x2f;` as text where the `/` was. Use `--escape-html` alone when the data has slashes.
+
 ### KDL
 
 [KDL](https://kdl.dev) documents are read as a table of nodes. Each row has the node's `name`, its positional `args`, its named `props`, and its `children`:
@@ -297,6 +453,17 @@ $doc | from kdl --ignore-types | get 0.props
 
 `--format jik` fails on a document with more than one top-level node, and on an annotation it doesn't know (add `--ignore-types` to read those as plain values).
 
+`to kdl` does write nodes when its input came from `from kdl`. `from kdl` records the format and KDL version in the [pipeline metadata](metadata.md), and `to kdl` writes the rows back as nodes in that version, so you can change a document and save it:
+
+```nu
+'package name=nu version="0.116.0"' | from kdl | update 0.props.version 0.117.0 | to kdl
+# => package name=nu version="0.117.0"
+```
+
+With `--format nodes` or `--format jik` you choose the format yourself, and with `--spec 1` or `--spec 2` the version. `--format nodes` needs rows with `name`, `args`, `props`, and `children` columns, or a single record with them, and fails on other data with `nodes format expects a list of node rows`. The values in `args` and `props` have to be plain values, and a nested list or record there fails with `nested list/record is not a KDL literal`. Both formats write dates, durations, file sizes, binary data, ranges, globs, and cell paths with the type annotations that `from kdl` reads back. `--spec 1` writes the KDL 1 keywords `true`, `false`, and `null` instead of `#true`, `#false`, and `#null`. Any other version fails with `KDL --spec must be 1 or 2`.
+
+A closure can't be written as KDL and read back, so `to kdl` fails on one. `--non-roundtrip 'null'` writes `#null` in its place, and `--non-roundtrip lossy` writes its source code as a string, which is what `--serialize` (`-s`) does too. Put `'null'` in quotes. The flag takes a string, and a bare `null` is the null value, which fails with `expected string`. Another word fails with ``expected `error`, `null` or `lossy` ``, and `--serialize` together with `--non-roundtrip 'null'` is an `Incompatible parameters` error. The flag treats error values and plugin custom values the same way as closures.
+
 ### TOML
 
 TOML has four kinds of date and time values. [`from toml`](/commands/docs/from_toml.md) turns the three that include a date into Nushell [dates](types_of_data.md#dates). A date-time without an offset is read as UTC, and a date on its own becomes midnight UTC. A time on its own has no date to attach to, so it stays a string:
@@ -310,6 +477,51 @@ alarm = 07:32:00' | from toml | to nuon
 ```
 
 Text that isn't valid TOML fails with a `Can't convert to structured toml data` error. Its help text shows the line and column where parsing stopped and what the parser expected there.
+
+[`to toml`](/commands/docs/to_toml.md) takes only a record, because a TOML document is a table of keys. A list or a table fails with `Command does not support table<...> input`. Put it in a record, such as `{bins: $table} | to toml`, and it becomes an array of tables. A nested record becomes a `[section]`:
+
+```nu
+{name: demo, released: 2024-01-02T03:04:05Z, tags: [cli shell], deps: {serde: "1.0"}, bins: [[name path]; [a src/a.rs]]} | to toml
+# => name = "demo"
+# => released = 2024-01-02T03:04:05.0+00:00
+# => tags = [
+# =>     "cli",
+# =>     "shell",
+# => ]
+# =>
+# => [deps]
+# => serde = "1.0"
+# =>
+# => [[bins]]
+# => name = "a"
+# => path = "src/a.rs"
+```
+
+TOML has no null and no type for durations or ranges, and `to toml` writes such values in forms that don't read back as the original type. `null` becomes the string `"<Nothing>"`, a duration a string holding its nanoseconds, a range the string `"<Range>"`, a file size an integer number of bytes, binary data a list of byte values, a cell path a list of its members, a glob a plain string, and a plugin's custom value the string `"<Custom Value>"`. Drop or convert those fields before you write the file:
+
+```nu
+{name: demo, timeout: 30sec, license: null} | to toml
+# => name = "demo"
+# => timeout = "30000000000"
+# => license = "<Nothing>"
+```
+
+A closure is written as `closure_` and a number, or as its source code with `--serialize` (`-s`).
+
+When the record came from opening a `.toml` file, `to toml` and `save` keep that file's comments and layout and change only the values that differ. The [pipeline metadata](metadata.md#data-source) remembers which file the data came from. `--serialize` turns this off:
+
+```nu
+open --raw demo.toml
+# => # Project settings
+# => [package]
+# => name = "demo"   # the crate name
+# => version = "0.1.0"
+open demo.toml | upsert package.version "0.2.0" | to toml
+# => # Project settings
+# => [package]
+# => name = "demo"   # the crate name
+# => version = "0.2.0"
+```
 
 ### YAML
 
@@ -374,6 +586,8 @@ The other `to yaml` flags change the layout:
 - `--indent <n>` sets the indentation width.
 - `--list-indent indented` indents list items under their key. The default, `compact`, lines up the `-` with the key.
 - `--quote single` or `--quote double` quotes every string. The default, `auto`, quotes a string only when it would otherwise be read as another type or as YAML syntax.
+
+[`from yml`](/commands/docs/from_yml.md) and [`to yml`](/commands/docs/to_yml.md) are `from yaml` and `to yaml` under another name, with the same flags. They exist so that `open` and `save` find a converter for files that end in `.yml`.
 
 ## Handling Strings
 
@@ -641,7 +855,7 @@ open --raw people.json
 # => ]
 ```
 
-Strings and binary data are written as they are. A string that already holds JSON goes into a `.json` file unchanged. `--raw` (`-r`) skips the conversion for other input as well, and a list is then written with one item per line. Structured data that has no matching `to` command fails with an error that suggests converting it first, for example with `to json`.
+Strings and byte streams, such as the output of `open --raw` or an external command, are written as they are. A string that already holds JSON goes into a `.json` file unchanged. Binary data is written as it is only when no `to` command matches the extension. Otherwise `save` converts it like any other value, so `0x[01 02] | save data.json` writes the JSON list `[1, 2]`, and the output of `to msgpack` saved to a `.msgpack` file is [encoded twice](./data_formats.md#messagepack). `--raw` (`-r`) skips the conversion for other input as well, and a list is then written with one item per line. Structured data that has no matching `to` command fails with an error that suggests converting it first, for example with `to json`.
 
 `save` doesn't replace a file that exists. It fails with a `Destination file already exists` error instead. Use `--force` (`-f`) to overwrite the file, or `--append` (`-a`) to add to its end. `--force` also creates missing parent directories; without it, a missing directory is a `Directory not found` error.
 

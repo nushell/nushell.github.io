@@ -32,6 +32,7 @@ export const sidebarEn: SidebarConfig = {
       children: [
         '/book/types_of_data.md',
         '/book/loading_data.md',
+        '/book/data_formats.md',
         '/book/pipelines.md',
         '/book/working_with_strings.md',
         '/book/regular_expressions.md',

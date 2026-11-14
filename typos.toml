@@ -28,6 +28,7 @@ ws = "ws" # false positive in book/nushell_map.md
 feeze = "feeze"
 alues = "alues"
 Flippin = "Flippin"
+caf = "caf" # false positive in hex dump output in book/data_formats.md
 
 [type.release-0-117]
 extend-glob = ["2026-11-09-nushell_v0_117_0.md"]
