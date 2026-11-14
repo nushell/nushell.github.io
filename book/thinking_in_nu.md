@@ -56,10 +56,48 @@ In Nushell, however, the `>` is used as the greater-than operator for comparison
 # => false
 ```
 
-Since `>` is an operator, redirection to a file in Nushell is handled through a pipeline command that is dedicated to saving content - [`save`](/commands/docs/save.md):
+Since `>` is an operator, Nushell writes output to a file with the [`save`](/commands/docs/save.md) command or with the `o>` (`out>`) family of [file redirections](./stdout_stderr_exit_codes.md#file-redirections). `save` takes structured data from the pipeline:
 
 ```nu
 "hello" | save output.txt
+```
+
+Writing the Bash form anyway doesn't raise an error, and that can be surprising. In a command's arguments, `>` is an ordinary word. `echo "hello" > output.txt` passes three arguments to `echo`, which returns them as a list, and no file is written. An external command gets the `>` as an argument too:
+
+```nu
+echo "hello" > output.txt
+# => ╭───┬────────────╮
+# => │ 0 │ hello      │
+# => │ 1 │ >          │
+# => │ 2 │ output.txt │
+# => ╰───┴────────────╯
+^echo hello > output.txt
+# => hello > output.txt
+```
+
+Nushell's own redirections are `o>`, `e>` and `o+e>`. See [Stdout, Stderr, and Exit Codes](./stdout_stderr_exit_codes.md).
+
+The parser catches some other Bash operators, and its error names the Nushell replacement:
+
+| Bash             | Error                      | In Nushell                                                                    |
+| ---------------- | -------------------------- | ----------------------------------------------------------------------------- |
+| `cmd1 && cmd2`   | `nu::parser::shell_andand` | `cmd1; cmd2`, since a failing command stops the rest. Use `and` for booleans. |
+| `cmd1 \|\| cmd2` | `nu::parser::shell_oror`   | `try { cmd1 } catch { cmd2 }`. Use `or` for booleans.                         |
+| `cmd 2> file`    | `nu::parser::shell_err`    | `cmd e> file` (or `err>`)                                                     |
+| `cmd 2>&1`       | `nu::parser::shell_outerr` | `cmd o+e> file` or `cmd o+e>\| next-command`                                  |
+
+```nu
+ls && echo hi
+# => Error: nu::parser::shell_andand
+# =>
+# =>   × The '&&' operator is not supported in Nushell
+# =>    ╭─[repl_entry #1:1:4]
+# =>  1 │ ls && echo hi
+# =>    ·    ─┬
+# =>    ·     ╰── instead of '&&', use ';' or 'and'
+# =>    ╰────
+# =>   help: use ';' instead of the shell '&&', or 'and' instead of the boolean
+# =>         '&&'
 ```
 
 ::: warning Thinking in Nushell
@@ -91,6 +129,19 @@ In other words, the string _"Hello, World"_ and the output value from `echo "Hel
 
 ```nu
 "Hello, World" == (echo "Hello, World")
+# => true
+```
+
+`echo` with several arguments returns them as a list. With no arguments, it returns an empty string:
+
+```nu
+echo 1 2 3
+# => ╭───┬───╮
+# => │ 0 │ 1 │
+# => │ 1 │ 2 │
+# => │ 2 │ 3 │
+# => ╰───┴───╯
+(echo) == ""
 # => true
 ```
 

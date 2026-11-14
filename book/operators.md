@@ -17,6 +17,8 @@ Nushell supports the following operators for common math, logic, and string oper
 | `<=`               | less than or equal                                                             |
 | `>`                | greater than                                                                   |
 | `>=`               | greater than or equal                                                          |
+| `older-than`       | datetime is before another datetime, or before now minus a duration            |
+| `newer-than`       | datetime is after another datetime, or after now minus a duration              |
 | `=~` or `like`     | regex match / string contains another                                          |
 | `!~` or `not-like` | inverse regex match / string does *not* contain another                        |
 | `in`               | value in list, substring of string, or key in record                           |
@@ -39,7 +41,9 @@ Nushell supports the following operators for common math, logic, and string oper
 | `++`               | concatenate two lists, two strings, or two binary values                       |
 
 
-Parentheses can be used for grouping to specify evaluation order or for calling commands and using the results in an expression.
+Parentheses can be used for grouping to specify evaluation order or for calling commands and using the results in an expression. See [Subexpressions](#subexpressions) below.
+
+The [Operators chapter of the Language Guide](/lang-guide/chapters/operators.md) lists the types each operator accepts, with its edge cases and errors.
 
 ## Order of Operations
 
@@ -52,7 +56,7 @@ Presented in descending order of precedence, the article details the operations 
 - Multiply (`*`), Divide (`/`), Integer/Floor Division (`//`), and Modulo (`mod`)
 - Add (`+`) and Subtract (`-`)
 - Bit shifting (`bit-shl`, `bit-shr`)
-- Comparison operations (`==`, `!=`, `<`, `>`, `<=`, `>=`), membership tests (`in`, `not-in`, `has`, `not-has`, `starts-with`, `not-starts-with`, `ends-with`, `not-ends-with`), regex matching (`=~`, `!~`, `like`, `not-like`), and concatenation (`++`)
+- Comparison operations (`==`, `!=`, `<`, `>`, `<=`, `>=`, `older-than`, `newer-than`), membership tests (`in`, `not-in`, `has`, `not-has`, `starts-with`, `not-starts-with`, `ends-with`, `not-ends-with`), regex matching (`=~`, `!~`, `like`, `not-like`), and concatenation (`++`)
 - Bitwise and (`bit-and`)
 - Bitwise xor (`bit-xor`)
 - Bitwise or (`bit-or`)
@@ -66,6 +70,8 @@ Presented in descending order of precedence, the article details the operations 
 3 * (1 + 2)
 # => 9
 ```
+
+Operators on the same level group from left to right, so `10 - 2 + 3` is `11`. Only `**` groups from right to left, so `2 ** 3 ** 2` is `2 ** 9`, which is `512`. The [Language Guide](/lang-guide/chapters/operators.md#precedence) has the numeric precedence values that `help operators` shows.
 
 ## Negation
 
@@ -87,6 +93,82 @@ The `-` has to touch the value. `- $x`, with a space, is a parse error ("expecte
 Negation binds more tightly than every binary operator, `**` included, so `-$x ** 2` is `25`. Write `-($x ** 2)` to get `-25`.
 
 In a command call, Nushell reads a word that starts with `-` as a flag. `echo -$x` fails with "The `echo` command doesn't have flag `-$`", so put the negation in parentheses: `echo (-$x)`. An external command gets `-$x` as the literal text `-$x`, so use `^echo (-$x)` there too.
+
+## Subexpressions
+
+A pipeline inside parentheses is a subexpression. Nushell runs it and puts its value where the parentheses were, so a command's output can take part in an expression:
+
+```nu
+([1 2 3] | math sum) * 2
+# => 12
+```
+
+A subexpression can hold several pipelines separated by `;`. Its value is the value of the last one:
+
+```nu
+(print "one"; 2 + 3)
+# => one
+# => 5
+```
+
+A newline inside the parentheses doesn't end a pipeline. Nushell treats it as a space, which is what lets a long pipeline span several lines (see [Multi-line pipelines](./pipelines.md#multi-line-pipelines)). So a subexpression with `print a` on one line and `print b` on the next runs a single `print` with three arguments. Use `;` to separate pipelines.
+
+A cell path can follow the closing parenthesis to pick a field or an item out of the result:
+
+```nu
+let files = [[name size]; [a.txt 1kb] [b.txt 5kb]]
+($files | where size > 2kb).name
+# => ╭───┬───────╮
+# => │ 0 │ b.txt │
+# => ╰───┴───────╯
+([a b c] | reverse).0
+# => c
+```
+
+Inside an unquoted word, a subexpression is interpolated into the word. This works in arguments to external commands too:
+
+```nu
+^echo foo(1 + 2)
+# => foo3
+```
+
+See [Interpolation in bare words](./working_with_strings.md#interpolation-in-bare-words) for the rules.
+
+## Operators in command arguments
+
+Nushell decides how to read each part of a pipeline by its first word. When that word is a value, the whole part is an expression and operators work in it. A value here means:
+
+- a number or another literal, such as `10kb`, `2hr`, `2026-01-01`, `0x[ff]` or `1..5`
+- a quoted or raw string
+- a variable, such as `$x`
+- anything that starts with `(`, `[`, `{` or `-`
+- one of the words `true`, `false`, `null` or `not`
+
+Anything else is a command name, and the words after it are the command's arguments. An operator in an argument list is one more argument. `echo 1 + 2` passes `1`, `+` and `2` to `echo`, which returns them as a list, and a command with no room for the extra arguments fails with `extra_positional`. Put the expression in parentheses to pass its result:
+
+```nu
+echo 1 + 2
+# => ╭───┬───╮
+# => │ 0 │ 1 │
+# => │ 1 │ + │
+# => │ 2 │ 2 │
+# => ╰───┴───╯
+echo (1 + 2)
+# => 3
+```
+
+Some keywords and commands take a whole expression as one argument, so operators work there without parentheses. That covers the condition of `if` and `while`, the value after `=` in `let`, `mut` and `const`, and the row condition of [`where`](/commands/docs/where.md) and of filters such as `all`, `any` and `take while`. That's why `where size > 2kb` and `let x = 2 + 3` work.
+
+List items work the same way as command arguments, so `[1 + 1]` is a list of three items and `[(1 + 1)]` is `[2]`. `if` and `match` return values too, but an operator can't follow them directly. Write `(if $x { 1 } else { 2 }) + 1`.
+
+An expression ends at the end of its line. A line that ends with an operator, such as `let x = 1 +`, fails with `incomplete_math_expression` instead of continuing on the next line. Wrap the expression in parentheses to split it across lines:
+
+```nu
+let x = (1 +
+  2)
+$x
+# => 3
+```
 
 ## Types
 
@@ -131,6 +213,32 @@ For example, `++` only concatenates two values of the same kind: two lists, two 
 # => ╰───┴───╯
 ```
 
+## Comparing datetimes
+
+`older-than` and `newer-than` compare a datetime on the left with a point in time on the right. When the right side is a duration, the point is that long before now, so `$date older-than 2wk` asks whether `$date` is more than two weeks in the past. When the right side is a datetime, `older-than` is the same as `<` and `newer-than` is the same as `>`.
+
+```nu
+2020-01-01 older-than 2wk
+# => true
+2020-01-01 newer-than 2wk
+# => false
+2020-01-01 older-than 2021-01-01
+# => true
+```
+
+Both comparisons are strict, so a datetime is neither older nor newer than itself. Nushell reads the clock each time the expression runs, as it would for `(date now) - 2wk`. They're handy with [`where`](/commands/docs/where.md):
+
+```nu
+[[name modified]; [old.txt 2020-01-01] [new.txt 2099-01-01]] | where modified older-than 1wk | get name
+# => ╭───┬─────────╮
+# => │ 0 │ old.txt │
+# => ╰───┴─────────╯
+```
+
+The datetime has to be on the left, and the duration has to be a duration value, not a string such as `"2wk"`. When either side is `null`, the result is `null`, as with `<`.
+
+`<`, `<=`, `>` and `>=` don't accept a datetime and a duration. `$date < 2wk` is an error whose help points to `older-than`, and `$date > 2wk` points to `newer-than`. For `<=` and `>=`, the help suggests subtracting the duration from now, as in `$date <= (date now) - 2wk`, since `older-than` and `newer-than` never match the exact point in time.
+
 ## Regular Expression / string-contains Operators
 
 The `=~` and `!~` operators provide a convenient way to evaluate [regular expressions](https://cheatography.com/davechild/cheat-sheets/regular-expressions/). You don't need to know regular expressions to use them - they're also an easy way to check whether 1 string contains another.
@@ -147,6 +255,22 @@ ls | where name =~ ^nu # returns all files whose names start with "nu"
 ```
 
 Both operators use the [`fancy-regex`](https://docs.rs/fancy-regex) crate, which adds look-around and backreferences to the syntax of Rust's `regex` crate. See [Regular Expressions](./regular_expressions.md) for the syntax.
+
+`like` and `not-like` are other names for `=~` and `!~`. They take a regular expression as well. SQL's `%` wildcard has no special meaning, so `"abc" like "a%"` is `false`.
+
+Both sides must be strings. An `int`, a `glob` or `null` operand is a type error. A pattern that isn't a valid regular expression fails when the line runs:
+
+```nu
+"foo" =~ "("
+# => Error: nu::shell::invalid_value
+# =>
+# =>   × Invalid value
+# =>    ╭─[repl_entry #1:1:10]
+# =>  1 │ "foo" =~ "("
+# =>    ·          ─┬─
+# =>    ·           ╰── expected a valid regular expression, but got '(' (Parsing error at position 1: Opening parenthesis without closing parenthesis)
+# =>    ╰────
+```
 
 ## Case Sensitivity
 
@@ -170,6 +294,24 @@ Operators are usually case-sensitive when operating on strings. There are a few 
 ```nu
 ("FOO" | str lowercase) == ("Foo" | str lowercase)
 ```
+
+[`str lowercase`](/commands/docs/str_lowercase.md) also lowercases every string in a list. For a table or a record, name the columns to change, and the others stay as they are:
+
+```nu
+["FOO" "Bar"] | str lowercase
+# => ╭───┬─────╮
+# => │ 0 │ foo │
+# => │ 1 │ bar │
+# => ╰───┴─────╯
+[[name kind]; [FOO BAR]] | str lowercase name
+# => ╭───┬──────┬──────╮
+# => │ # │ name │ kind │
+# => ├───┼──────┼──────┤
+# => │ 0 │ foo  │ BAR  │
+# => ╰───┴──────┴──────╯
+```
+
+It replaces `str downcase`, which was deprecated in 0.114.0.
 
 ## Spread operator
 
@@ -243,6 +385,19 @@ the next expression:
 
 This is mainly so that `...` won't be confused for the spread operator in commands such as `mv ... $dir`.
 
+The value being spread has to be a list. A range is not a list, so `[...(1..3)]` fails with `cannot_spread_as_list`. Turn the range into a list first, for example with `(1..3 | each { $in })`. The one exception is `null`, which spreads to nothing:
+
+```nu
+let x = null
+[1 ...$x 2]
+# => ╭───┬───╮
+# => │ 0 │ 1 │
+# => │ 1 │ 2 │
+# => ╰───┴───╯
+```
+
+A spread can't be used in a [table literal](/lang-guide/chapters/types/basic_types/table.md#table-literal-syntax), in either the header or a row. `[[...$cols]; [1 2]]` fails with "Cannot spread in a table row".
+
 ### In Record literals
 
 Let's say you have a record with some configuration information and you want to add more fields to
@@ -283,6 +438,38 @@ operator. You can use the spread multiple records inside a single record literal
 Similarly to lists, inside record literals, the spread operator can only be used before variables (`...$foo`),
 subexpressions (`...(foo)`), and record literals (`...{foo:bar}`). Here too, there needs to be no
 whitespace between the `...` and the next expression for it to be recognized as the spread operator.
+
+A key can appear only once in a record literal, and that includes the keys a spread brings in. A
+later field doesn't override an earlier one. It's an error:
+
+```nu
+let settings = { path: /tmp, limit: 5 }
+{ ...$settings, limit: 10 }
+# => Error: nu::shell::column_defined_twice
+# =>
+# =>   × Record field or table column used twice: limit
+# =>    ╭─[repl_entry #1:2:3]
+# =>  1 │ let settings = { path: /tmp, limit: 5 }
+# =>  2 │ { ...$settings, limit: 10 }
+# =>    ·   ──────┬─────  ────┬────
+# =>    ·         │           ╰── field redefined here
+# =>    ·         ╰── field first defined here
+# =>    ╰────
+# =>   help: A record literal can't contain the same key twice, including keys
+# =>         brought in with `...`. To replace a field, use `merge` or `update`.
+```
+
+To replace fields, use [`merge`](/commands/docs/merge.md) or [`update`](/commands/docs/update.md):
+
+```nu
+$settings | merge { limit: 10 }
+# => ╭───────┬──────╮
+# => │ path  │ /tmp │
+# => │ limit │ 10   │
+# => ╰───────┴──────╯
+```
+
+As in a list literal, a variable that holds `null` spreads to nothing.
 
 ### In Command calls
 
@@ -341,6 +528,32 @@ as being omitted:
 ```nu
 foo "bar" ...[1 2] "not opt" # The null means no argument was given for opt
 # => {flag: false, req: bar, opt: null, args: [1, 2, "not opt"]}
+```
+
+A variable that holds `null` spreads to no arguments at all:
+
+```nu
+let none = null
+foo "bar" "baz" ...$none
+# => {flag: false, req: bar, opt: baz, args: []}
+```
+
+Spreading a list into a Nushell command that has no rest parameter is a parse error:
+
+```nu
+def greet [name] { $"hi ($name)" }
+greet ...[Ann]
+# => Error: nu::parser::unexpected_spread_arg
+# =>
+# =>   × This command does not have a ...rest parameter
+# =>    ╭─[repl_entry #1:2:7]
+# =>  1 │ def greet [name] { $"hi ($name)" }
+# =>  2 │ greet ...[Ann]
+# =>    ·       ────┬───
+# =>    ·           ╰── unexpected spread argument
+# =>    ╰────
+# =>   help: To spread arguments, the command needs to define a multi-positional
+# =>         parameter in its signature, such as ...rest
 ```
 
 #### Spreading Records into Flags
