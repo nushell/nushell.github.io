@@ -180,6 +180,19 @@ tui label "name" | tui split [ (tui textbox --id name) (tui button Go) ] | tui d
 ls | tui split [ (tui box "list" [ (tui search) (tui table) ]) (tui preview) ] | tui run
 ```
 
+The children stack from top to bottom inside the border, and a box can hold other boxes:
+
+```nu
+tui box "outer" [ (tui label "first") (tui box "inner" [ (tui label "nested") ]) (tui label "last") ] | tui debug --size [30 7] | get screen
+# => ┌ outer ─────────────────────┐
+# => │first                       │
+# => │┌ inner ───────────────────┐│
+# => ││nested                    ││
+# => │└──────────────────────────┘│
+# => │last                        │
+# => └────────────────────────────┘
+```
+
 ### Border Titles
 
 A bordered widget writes its name in the top border, followed by any state in parentheses, such as a row count. `--title` replaces the name and keeps the state:
@@ -227,6 +240,18 @@ Switch pages by clicking a tab, with `[` and `]`, with `Ctrl+Left` and `Ctrl+Rig
 ```nu
 ls | tui tab "a" [ (tui table) ] | tui tab "b" [ (tui table) ] | tui debug --keys ["2"] | get page
 # => 1
+```
+
+Only the tab contents change from page to page. The title bar, menu bar, search boxes, and status bar from the outer pipeline stay on screen for every page:
+
+```nu
+[a b] | tui label --titlebar "app" | tui tab "one" [ (tui table) ] | tui tab "two" [ (tui label "page two") ] | tui label --status "ready" | tui debug --keys ["2"] --size [40 6] | get screen
+# =>  app
+# =>  one                 two
+# => page two
+# =>
+# =>
+# =>  ready  rows:2  page:2/2 two  tab:focus
 ```
 
 ### Widget IDs
@@ -306,7 +331,11 @@ Streams piped into a widget in a child list are live too, so each pane can follo
 tui split [ (^tail -f app.log | tui log) (ls | tui table) ] | tui run
 ```
 
-If the interface closes while an external command is still running, the command is stopped.
+When the interface closes, Nushell stops the streams that are still producing:
+
+- An external command piped straight into a builder, as in `^tail -f app.log | tui log`, stops at once.
+- An external command with other commands between it and the builder, as in `^tail -f app.log | lines | tui log`, stops at once in an interactive shell on Unix. In a script, with `nu -c`, or on Windows, it stops the next time it writes.
+- Nushell code in the stream, such as an `each` closure, finishes the row it is on. Anything it prints while the TUI is open lands on the TUI's screen.
 
 Each stream keeps about its newest 100,000 rows. Older rows are dropped in batches of 12,500, so up to 12,499 extra rows can be present between drops. `tui log --max-lines` raises the limit for a log when it is larger.
 
@@ -322,7 +351,7 @@ A few consequences of builders leaving the stream unread:
 
 ### Previews
 
-[`tui preview`](/commands/docs/tui_preview.md) shows text for the highlighted row of a list. Without a closure, it reads the file named in the row's `name` column. Directories and binary files show a short note instead, and at most `--max-bytes` bytes (65536 by default) are read:
+[`tui preview`](/commands/docs/tui_preview.md) shows text for the highlighted row of a list. Without a closure, it reads the file named in the row's `name` column, or by the row itself when the row is a plain string. Directories and binary files show a short note instead, and at most `--max-bytes` bytes (65536 by default) are read:
 
 ```nu
 ls | tui split [ (tui table --columns [name type]) (tui preview) ] | tui run
@@ -335,6 +364,14 @@ A closure **without** parameters transforms the file text, which it receives as 
 ```nu
 ls | tui split [ (tui table) (tui preview { nu-highlight }) ] | tui run
 ```
+
+The closure isn't run for directories and binary files. The text comes with metadata. Its `source` is the file's full path, and its `content_type` is a guess based on the file's extension, such as `text/x-toml` or `application/json`. [`nu-highlight`](/commands/docs/nu-highlight.md) ignores both. It takes only a string, and it always colors it as Nushell code, with the `shape_*` colors of `$env.config.color_config`. With `--reject-garbage`, it fails on text that doesn't parse as Nushell instead. To color only Nushell scripts, read the type with [`metadata access`](/commands/docs/metadata_access.md):
+
+```nu
+ls | tui split [ (tui table) (tui preview { metadata access {|m| if $m.content_type? == "application/x-nuscript" { nu-highlight } else { $in } } }) ] | tui run
+```
+
+If a preview closure fails, the pane shows `preview error:` and the error message.
 
 A closure **with** one parameter receives the highlighted row. Nothing is read from disk; whatever the closure returns is shown:
 
@@ -490,7 +527,7 @@ def "keys ui" [] {
 }
 ```
 
-`Tab`, `Enter`, `Esc`, `q`, `[`, `]`, and the page digits keep their normal meaning.
+Some keys keep their normal meaning: the arrow keys, `hjkl`, `PageUp`/`PageDown`, `Home`/`End`, `Space`, `Tab`, `Shift+Tab`, `Enter`, `Esc`, `q`, `[`, and `]`, and the page digits when there are tabs. `Ctrl+C` always quits, and a chord bound with [`tui bind`](#key-bindings) runs its hook instead of becoming the query. Every other chord replaces the query, including `Ctrl+Left` and `Ctrl+Tab`, which switch pages elsewhere.
 
 ## Lists, Trees, and Pickers
 
@@ -539,6 +576,31 @@ tui select --multi [a b c] | tui debug --keys [space down] --size [26 5] | get s
 # => └────────────────────────┘
 ```
 
+::: details When `input list` is enough
+For a single question, [`input list`](/commands/docs/input_list.md) needs no `tui` pipeline. It draws the list below the prompt line instead of on the alternate screen, and returns the chosen item, or `null` when you cancel. A range as input returns the chosen number. While it waits, the list looks like this:
+
+```nu
+[alpha beta gamma] | input list --multi "pick"
+# => pick
+# => > [ ] alpha
+# =>   [ ] beta
+# =>   [ ] gamma
+# => [1-3 of 3, 0 selected]
+```
+
+- Move with the arrow keys, `j`/`k`, or `Ctrl+N`/`Ctrl+P`, and jump with `Home`/`End` and `PageUp`/`PageDown`. `Enter` confirms. `Esc` and `Ctrl+C` cancel, and so does `q` outside fuzzy mode.
+- `--multi` (`-m`) shows checkboxes. `Space` toggles the highlighted item, `a` toggles them all, and `Ctrl+R` narrows the list to the checked items, which you can then uncheck. The result is a list.
+- `--fuzzy` (`-f`) adds a filter line. Typing filters the list and highlights the matching characters. The filter line takes readline-style keys: `Ctrl+A`/`Ctrl+E` for the start and end, `Ctrl+B`/`Ctrl+F` and `Alt+B`/`Alt+F` to move by character and word, `Ctrl+U`/`Ctrl+K` to delete to the start or end, `Ctrl+W` or `Alt+Backspace` to delete a word, and `Ctrl+D` or `Delete` to delete the character under the cursor. With `--multi` as well, `Tab` and `Shift+Tab` toggle an item and move down or up, and `Alt+A` toggles all.
+- `--case-sensitive` (`-s`) is `true`, `false`, or `smart`. `smart`, the default, ignores case unless the filter has an uppercase letter. `Alt+C` cycles through the three while the list is open.
+- `--index` (`-i`) returns positions instead of items.
+- `--display` (`-d`) takes a cell path or a closure that gives the text to show and to filter on. The original item is still what you get back.
+- A list of records shows aligned columns. `Left`/`Right` or `h`/`l` scroll them sideways, or `Shift+Left`/`Shift+Right` in fuzzy mode. `--no-table` (`-t`), or `--display`, shows each record on one line instead. `--per-column` (`-c`) matches the filter against each column on its own, so a match can't run across two columns. `Alt+P` toggles it in fuzzy mode.
+- The footer shows the visible range and, with `--multi`, the number checked. `--no-footer` (`-n`) hides it, and `--no-separator` hides the line under the filter.
+- Colors come from `$env.config.color_config`: `search_result` for matches, `hints` for the footer, `separator` for lines, `row_index` for the markers, and `header` for column headers.
+
+When Nushell runs without any terminal, `input list` fails with an I/O error (`nu::shell::io::uncategorized_error`), the same as [`input`](/commands/docs/input.md).
+:::
+
 ### Trees
 
 [`tui tree`](/commands/docs/tui_tree.md) shows nested records and lists. The top-level keys are the roots, and leaves are shown as `key: value`. `Right` (or `l`) expands a node, `Left` (or `h`) collapses it, and `Enter` submits it:
@@ -563,6 +625,8 @@ With `--walk`, rows whose `type` is `dir` are treated as folders, and their cont
 ```nu
 ls | tui split [ (tui tree --walk) (tui preview) ] | tui run
 ```
+
+An opened folder lists one `{name, type}` record per entry, sorted by name. The `name` is the entry's full path, and the `type` is `dir` or `file`. A symbolic link is listed as `file`, even when it points to a folder. The `dir` entries open the same way, and a `file` entry opens into its two fields. A folder that can't be read opens to nothing. Only records whose `type` is `dir` (or `directory`) are listed from disk: a plain string that names a directory gets an expand marker, but opening it shows nothing.
 
 ### Logs
 
@@ -636,6 +700,8 @@ ls
 [a b] | tui table | tui bind {modifier: control, keycode: char_q} {|| {action: quit} } | tui debug --keys ctrl+q | get action
 # => quit
 ```
+
+A chord string joins `ctrl+`, `alt+`, `shift+`, and `super+` to a key name, in any order and any case, so `Ctrl+Shift+S` and `shift+ctrl+s` are the same chord. Letters ignore case, so `X` binds the `x` key. Write `shift+x` for an uppercase X. Whether a `super+` chord reaches the TUI depends on the terminal. In a record, `modifier` is `none`, `control`, `alt`, `shift`, `super`, or `meta` (the same as `super`), or a combination such as `control_shift`. `keycode` is `char_` and a letter, or a key name such as `enter`, `tab`, or `f5`.
 
 Bindings take precedence over the built-in keys, except `Ctrl+C`. A binding without a modifier doesn't fire while you are typing in a search box or text box.
 
@@ -723,7 +789,7 @@ tui label --titlebar "rename"
 | tui run
 ```
 
-While a text box is focused, `q` is just a character and `Esc` leaves the field. `Enter` submits, with the text as `selected`. The text is also available by id in `values`, and `--value` sets the initial text:
+While a text box is focused, `q` is just a character and `Esc` leaves the field. The field holds a single line. `Left` and `Right` move the cursor, `Home` and `End` (or `Ctrl+A` and `Ctrl+E`) jump to either end, `Backspace` and `Delete` remove a character, and `Ctrl+U` clears the field. A search box takes the same editing keys. `Enter` submits, with the text as `selected`. The text is also available by id in `values`, and `--value` sets the initial text:
 
 ```nu
 tui textbox --id name | tui debug --keys "type:bob,enter" | select action selected values | to nuon
@@ -792,6 +858,8 @@ The focusable widgets are menus, tables, selects, trees, logs, search boxes, tex
 
 `tui debug` adds `screen`, the resolved `widgets` tree, `focus` (the focus `order` and the `default` widget), and `pages`.
 
+Each entry in `widgets` holds the builder's settings, plus `rect` (the widget's `x`, `y`, `width`, and `height` on the canvas) and `focusable`. Tables add `resolved_columns`, the columns they show, and `rows`, the number of rows left after filtering. Search boxes add their `query`. Previews and widgets built with `--from` or a source closure add the `source` widget they follow, and lists add the `search_scope` that filters them.
+
 The shape of each entry in `values` depends on the widget:
 
 | Widget           | Value                                                                                           |
@@ -822,17 +890,17 @@ tui textbox --id name | tui run | get values.name
 
 | Token                                                              | Meaning                     |
 | ------------------------------------------------------------------ | --------------------------- |
-| `enter`, `esc`, `tab`, `shift+tab`                                 | Those keys                  |
-| `up`, `down`, `left`, `right`, `home`, `end`, `pageup`, `pagedown` | Movement                    |
-| `backspace`, `delete`, `space`, `insert`                           | Editing keys                |
-| `ctrl+c`, `ctrl+r`, `alt+f`, `f1`                                  | Modifiers and function keys |
+| `enter`, `esc` (or `escape`), `tab`, `shift+tab` (or `backtab`)    | Those keys                  |
+| `up`, `down`, `left`, `right`, `home`, `end`, `pageup` (or `pgup`), `pagedown` (or `pgdn`) | Movement |
+| `backspace` (or `bs`), `delete` (or `del`), `space`, `insert` (or `ins`) | Editing keys          |
+| `ctrl+c`, `ctrl+r`, `alt+f`, `shift+s`, `super+k`, `f1`            | Modifiers and function keys |
 | A single character, such as `q` or `/`                             | That key                    |
 | `type:hello`                                                       | Types those characters      |
 | `click:COL,ROW`                                                    | A left click                |
 | `drag:COL,ROW`                                                     | A left-button drag          |
 | `scroll-up`, `scroll-down`                                         | The mouse wheel             |
 
-In the string form, `click:10,5` keeps its comma. `--until` stops the replay as soon as its closure returns `true` for the state record:
+Modifiers combine, as in `ctrl+shift+s`, and `shift+` with a letter sends the uppercase letter, like `type:S`. In the string form, `click:10,5` keeps its comma. `--until` stops the replay as soon as its closure returns `true` for the state record:
 
 ```nu
 [a b c d] | tui table | tui debug --keys [down down down] --until {|s| $s.values.table-0.index == 1 } | get values.table-0.index
