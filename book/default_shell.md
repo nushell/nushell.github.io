@@ -44,6 +44,8 @@ The path to add can be found with the command `which nu`, usually it is `$HOME/.
 
 Windows programs that run a command through "the shell" read the `ComSpec` environment variable, which normally points to `cmd.exe`, and start it as `<ComSpec> /c <command line>`. Nushell accepts `/c` (or `/C`) on Windows for this: everything after it on the command line is run as Nushell code, with its original quoting kept. On other platforms, `/c` is an ordinary path.
 
+Nushell treats `/c` this way only where a script name could go: after Nushell's own flags, and only if no script name or `-c` came before it. After `--`, which ends the flags, `/c` is a script path on Windows too, so `nu -- /c` tries to run a file named `/c`.
+
 ::: warning
 Programs that use `ComSpec` usually send commands written for `cmd.exe`. With `ComSpec` pointing to `nu.exe`, those commands run as Nushell code, which can fail or behave differently.
 :::

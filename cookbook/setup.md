@@ -77,7 +77,9 @@ $env.EDITOR = 'vim'
 ```
 
 or `emacs`, `vscode` or whatever editor you like. Don't forget that the program needs to be accessible on the `PATH`
-and to reload your configuration with `exec nu` on linux/mac or restart your nushell on windows.
+and to reload your configuration with [`exec nu`](/commands/docs/exec.md), which starts a new Nushell that reads the updated files.
+On Linux and macOS, `exec` replaces the running Nushell with the new one. Windows can't replace a running process, so there
+the old Nushell waits for the new one and exits with its exit code when you leave it.
 
 You should now be able to run `config nu` or `config env` and edit those files easily.
 

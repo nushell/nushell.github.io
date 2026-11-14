@@ -61,6 +61,12 @@ If you have more than one environment variable you'd like to set, you can use [`
 load-env { "BOB": "FOO", "JAY": "BAR" }
 ```
 
+`load-env` also takes the record as pipeline input, which suits commands that output one, as in `direnv export json | from json | load-env` (see [Direnv](/cookbook/direnv.md)).
+
+Each string value goes through its `from_string` conversion in `$env.ENV_CONVERSIONS`, and a string `PATH` becomes a list (see [Environment Variable Conversions](#environment-variable-conversions)). `--no-convert` sets the values exactly as given. If a conversion fails, `load-env` sets none of the variables.
+
+Two kinds of keys are special. A `config` key applies its settings to `$env.config` right away, as assigning `$env.config` does. `PWD`, `FILE_PWD`, and `CURRENT_FILE` are rejected with an error (see [Automatic variables](#automatic-variables)).
+
 ### One-shot Environment Variables
 
 These are defined to be active only temporarily for a duration of executing a code block.
@@ -129,6 +135,15 @@ $env.foo
 
 This only applies when you access `$env` directly with a cell path, like `$env.foo`. When `$env` is used as a value, such as when it is piped into a command or used with the `in` operator, it is a regular record with case-sensitive keys. So if you want to read `$env` in a case-sensitive manner, use `$env | get FOO` (`$env | get foo` is an error) or `"FOO" in $env`.
 
+When you update a variable with a different spelling, using `$env.foo = ...` or [`load-env`](/commands/docs/load-env.md), Nushell changes the existing variable and keeps its original spelling. That spelling is the name external commands see:
+
+```nu
+$env.FOO = 'a'
+$env.foo = 'b'
+^printenv FOO
+# => b
+```
+
 ## Scoping
 
 When you set an environment variable inside a closure or a custom command (unless the command is defined with `def --env`), it will be available only in that scope (the closure or command and any block inside of it).
@@ -186,6 +201,10 @@ $env.PWD = '/tmp'
 
 An assignment like this one fails before anything runs, with a `nu::compile` error. The commands fail when they run, with `nu::shell::automatic_env_var_set_manually`. To get the file's path or directory as a constant at parse time, use [`path self`](/commands/docs/path_self.md).
 
+When Nushell starts, it sets `PWD` to the directory its process starts in. An inherited `PWD` variable that names a different directory is replaced. External commands always start in `$env.PWD`.
+
+`FILE_PWD` and `CURRENT_FILE` don't exist in the REPL or in `nu -c`. For when exactly they are set, see [`$env.CURRENT_FILE`](./special_variables.md#env-current-file).
+
 ## Single-use Environment Variables
 
 A common shorthand to set an environment variable once is available, inspired by Bash and others:
@@ -203,6 +222,28 @@ with-env { FOO: BAR } { $env.FOO }
 ```
 
 The [`with-env`](/commands/docs/with-env.md) command will temporarily set the environment variable to the value given (here: the variable "FOO" is given the value "BAR"). Once this is done, the [block](types_of_data.md#blocks) will run with this new environment variable set.
+
+The shorthand takes several variables, each with its own prefix:
+
+```nu
+A=1 B=2 ^env | lines | where $it =~ '^(A|B)='
+# => ╭───┬─────╮
+# => │ 0 │ A=1 │
+# => │ 1 │ B=2 │
+# => ╰───┴─────╯
+```
+
+Both forms convert the values they set the way `load-env` does. A string value goes through its `from_string` conversion in `$env.ENV_CONVERSIONS`, and a string `PATH` becomes a list:
+
+```nu
+PATH=/opt/bin:/usr/bin $env.PATH
+# => ╭───┬──────────╮
+# => │ 0 │ /opt/bin │
+# => │ 1 │ /usr/bin │
+# => ╰───┴──────────╯
+```
+
+To set the values as given, use `with-env --no-convert`.
 
 ## Permanent Environment Variables
 
@@ -275,6 +316,50 @@ You can also run this step manually by `do $env.ENV_CONVERSIONS.FOO.to_string [a
 
 _(Important! The string -> value conversion happens only for variables that already exist when `$env.ENV_CONVERSIONS` is assigned, such as those inherited from the parent process. A variable that you set as a string afterwards with `$env.FOO = ...` stays a string. To convert it, set it before assigning `ENV_CONVERSIONS`, or assign `$env.ENV_CONVERSIONS` to itself again. [`load-env`](/commands/docs/load-env.md), [`with-env`](/commands/docs/with-env.md) and `FOO=bar cmd` don't have this limit. They run each string they set through its `from_string` conversion and turn a string `PATH` into a list. Pass `--no-convert` to `load-env` or `with-env` to set the values as given.)_
 
+Spell each key in `ENV_CONVERSIONS` the way the variable is spelled. `from_string` finds the variable whatever the case of the key, but `to_string` is looked up by the variable's exact name. With the key `FOO`, a list stored in `$env.foo` has no `to_string` conversion, so it is left out of an external command's environment.
+
+If a `from_string` closure fails while `$env.ENV_CONVERSIONS` is being assigned, the assignment reports the error. The new record is stored anyway, and the variable keeps its string value.
+
+### Path list conversions from the standard library
+
+For variables that hold a list of directories, like `PATH`, the standard library has ready-made closures. `config env-conversions` from `std/config` returns a record with one entry, `path`. Its `from_string` splits the string on [`char esep`](/commands/docs/char.md) (`:`, or `;` on Windows) and expands each entry with `path expand --no-symlink`. Its `to_string` expands the entries the same way and joins them with `char esep`. Merge it into `ENV_CONVERSIONS` under the name of each variable you want converted:
+
+```nu
+use std/config
+$env.ENV_CONVERSIONS = $env.ENV_CONVERSIONS | merge {
+    XDG_DATA_DIRS: (config env-conversions).path
+}
+$env.XDG_DATA_DIRS
+# => ╭───┬──────────────────╮
+# => │ 0 │ /usr/local/share │
+# => │ 1 │ /usr/share       │
+# => ╰───┴──────────────────╯
+```
+
+### What external commands receive
+
+An external command gets the variables in `$env` at the point where it runs, except hidden ones, with each value turned into a string:
+
+- A value with a `to_string` closure in `ENV_CONVERSIONS` becomes that closure's result.
+- `PATH` (`Path` on Windows), a list, is joined as described in [`$env.PATH`](./special_variables.md#env-path).
+- Strings and globs are passed as they are.
+- Booleans, ints, and floats become their text, such as `true` and `42`.
+- Dates become RFC 3339 text, such as `2026-03-01T14:30:00.000Z`.
+- Binary values that hold valid UTF-8 become that text.
+
+Any other value is left out, with no error: records (so `$env.config` never reaches an external), lists other than `PATH`, filesizes, durations, closures, ranges, `null`, and binary values that aren't valid UTF-8. To pass one of these, give it a `to_string` closure in `ENV_CONVERSIONS`, or convert it yourself.
+
+```nu
+with-env {X_BOOL: true, X_INT: 42, X_DATE: 2026-03-01T14:30:00Z, X_LIST: [a b], X_SIZE: 1kb, X_REC: {a: 1}} {
+    ^env | lines | where $it starts-with X_ | sort
+}
+# => ╭───┬─────────────────────────────────╮
+# => │ 0 │ X_BOOL=true                     │
+# => │ 1 │ X_DATE=2026-03-01T14:30:00.000Z │
+# => │ 2 │ X_INT=42                        │
+# => ╰───┴─────────────────────────────────╯
+```
+
 ## Removing Environment Variables
 
 You can remove an environment variable with [`hide-env`](/commands/docs/hide-env.md):
@@ -283,6 +368,22 @@ You can remove an environment variable with [`hide-env`](/commands/docs/hide-env
 $env.FOO = 'BAR'
 hide-env FOO
 ```
+
+`hide-env` takes several names at once, as in `hide-env FOO BAR`. A name that isn't set is an error:
+
+```nu
+hide-env NOT_SET
+# => Error: nu::shell::env_variable_not_found
+# =>
+# =>   × Environment variable 'NOT_SET' not found
+# =>    ╭─[repl_entry #1:1:10]
+# =>  1 │ hide-env NOT_SET
+# =>    ·          ───┬───
+# =>    ·             ╰── environment variable not found
+# =>    ╰────
+```
+
+Nushell hides the names in order and stops at the first one that isn't set, so `hide-env FOO NOT_SET` still hides `FOO`. With `--ignore-errors` (`-i`), names that aren't set are skipped without an error, which is handy when you don't know whether a variable exists. A hidden variable is also left out of the environment of external commands, even one that Nushell inherited.
 
 The hiding is also scoped which both allows you to remove an environment variable temporarily and prevents you from modifying a parent environment from within a child scope:
 
