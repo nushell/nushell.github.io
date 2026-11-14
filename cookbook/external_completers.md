@@ -80,6 +80,28 @@ $env.config.completions.external.completer = $multiple_completers
 > - If we try to autocomplete `git <tab>`, `$place.command` will be `[git, ""]`. `match $place.command.0 { ... }` will return the `$fish_completer`.
 > - If we try to autocomplete `other_command <tab>`, `$place.command` will be `[other_command, ""]`. The match will fallback to the default case (`_`) and return the `$carapace_completer`.
 
+### fzf picker
+
+This completer hands carapace's suggestions to [fzf](https://github.com/junegunn/fzf), so you pick a completion from fzf's searchable list instead of the completion menu. fzf needs the terminal, so the work happens in a command marked [`@interactive`](/book/custom_completions.md#interactive-completers), and the closure calls it:
+
+```nu
+@interactive
+def "nu-complete carapace-fzf" [place: record] {
+    carapace $place.command.0 nushell ...$place.command
+    | from json
+    | get value
+    | to text
+    | ^fzf --height=40% --select-1 --exit-0
+    | lines
+}
+
+$env.config.completions.external.completer = {|place| nu-complete carapace-fzf $place }
+```
+
+Typing `git sw` and pressing <kbd>Tab</kbd> inserts `switch` straight away, because `--select-1` makes fzf take the only match without showing its list. After `git `, <kbd>Tab</kbd> opens fzf on all of git's subcommands. Pressing <kbd>Esc</kbd> in fzf leaves the line as it was, and `--exit-0` makes fzf exit at once when carapace has nothing to offer. Either way, Nushell doesn't fall back to file names.
+
+Nushell only treats the closure as interactive when the `@interactive` command is the last thing it calls. A closure that pipes the result further, or that picks a completer with `match ... | do $in $place` as in [Multiple completer](#multiple-completer), runs in the background like any other completer, where fzf can't use the terminal. With this completer set, `commandline complete` in a script stops with an error for external commands instead of running fzf.
+
 ## Troubleshooting
 
 ### Alias completions
