@@ -381,6 +381,31 @@ Running this command changes the directory _locally_ in the module, but the chan
 
 ## Caveats
 
+### A module can only contain definitions
+
+The top level of a module, whether it is a file or a `module { }` block, can only contain definitions: `def`, `extern`, `alias`, `const`, `type`, `use` and `module`, any of these with `export` in front, `export-env` blocks, and attributes on a `def` or `extern`. Any other statement, such as `let` or `print`, is a parse error:
+
+```nu
+module greetings {
+    let default_name = "world"
+    export def hello [] { $"Hello, ($default_name)!" }
+}
+# => Error: nu::parser::expected_keyword
+# =>
+# =>   × Expected keyword.
+# =>    ╭─[repl_entry #1:2:5]
+# =>  1 │ module greetings {
+# =>  2 │     let default_name = "world"
+# =>    ·     ─┬─
+# =>    ·      ╰── expected def, const, extern, alias, type, use, module, export or export-env keyword
+# =>  3 │     export def hello [] { $"Hello, ($default_name)!" }
+# =>    ╰────
+```
+
+For a module file, the error appears when you import it with `use`. A pipeline such as `ls | length` is rejected too, with `Parse mismatch: expected not a pipeline`. The rule covers only the module's top level, not the bodies of its commands.
+
+Use `const` for a value that the module's commands share. Changing `let` to `const` in the example above makes it work. Code that should run when the module is imported belongs in an [`export-env`](#environment-variables) block.
+
 ### `export-env` runs only when the `use` call is _evaluated_
 
 ::: note
@@ -490,6 +515,24 @@ module spam { export module spam { } }
 # =>    ╰────
 # =>   help: Module spam can't export module named the same as the module. Either change the module name, or export `mod` module.
 ```
+
+The `mod` in the help text is a submodule name with special handling. Whatever a submodule named `mod` exports is merged into its parent. Its commands (including `main`), aliases, known externals, type aliases and submodules become members of the parent module, as if the parent had exported them itself:
+
+```nu
+module spam {
+    export module mod {
+        export def main [] { "spam!" }
+        export def eggs [] { "eggs" }
+    }
+}
+use spam
+spam
+# => spam!
+spam eggs
+# => eggs
+```
+
+With any other submodule name, `use spam` would import neither command (see [Submodules](#submodules)). Constants that `mod` exports are dropped instead of merged. A `main` in `mod` also keeps the name `mod`, so `spam mod` runs it too. If the parent exports a `main` of its own as well, the second one is a `nu::parser::module_double_main` error.
 
 ::: note
 A `.nu` file _may_ have the same name as its module directory (e.g., `spam/spam.nu`), and Nushell will import it. Still, prefer a different name: if the parent module and the same-named submodule both export a `main`, the two definitions resolve to the same command name and the parent's `main` silently wins.

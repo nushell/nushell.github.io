@@ -383,6 +383,41 @@ def greet [] { "hi" }
 `%` is handy inside a command that shadows a built-in, because the body can call the original without recursing into itself. See [Aliases](aliases.md#replacing-existing-commands-using-aliases) for a complete example that replaces `ls`.
 :::
 
+### Defining a command more than once
+
+A block can define each command name only once. A second `def` (or [`extern`](externs.md)) with the same name in the same block is a parse error, so nothing in the block runs:
+
+```nu
+def greet [] { "hi" }; def greet [] { "hello" }
+# => Error: nu::parser::duplicate_command_def
+# =>
+# =>   × Duplicate command definition within a block.
+# =>    ╭─[repl_entry #1:1:28]
+# =>  1 │ def greet [] { "hi" }; def greet [] { "hello" }
+# =>    ·                            ──┬──
+# =>    ·                              ╰── defined more than once
+# =>    ╰────
+```
+
+A script file and a module are each a single block, so neither can define the same name twice. At the REPL, each entry is a new block, and entering a new `def greet` at the prompt replaces the earlier one:
+
+```nu
+def greet [] { "hi" }
+def greet [] { "hello" }
+greet
+# => hello
+```
+
+A `def` inside a nested block, such as a `do` closure or another command's body, shadows the outer command only within that block:
+
+```nu
+def greet [] { "hi" }
+do { def greet [] { "hello" }; greet }
+# => hello
+greet
+# => hi
+```
+
 ## Parameters
 
 ### Multiple parameters
@@ -790,6 +825,33 @@ def greet [
       $greeting
     }
 }
+```
+
+Because `--all-caps` creates `$all_caps`, it would collide with a parameter named `all_caps`. Parameters and flags share one set of variable names, and each short flag needs its own letter. Nushell rejects a repeated name when it parses the definition:
+
+```nu
+def greet [--all-caps, all_caps] { $all_caps }
+# => Error: nu::parser::duplicate_parameter
+# =>
+# =>   × Duplicate parameter or flag.
+# =>    ╭─[repl_entry #1:1:24]
+# =>  1 │ def greet [--all-caps, all_caps] { $all_caps }
+# =>    ·            ─────┬────  ────┬───
+# =>    ·                 │          ╰── `all_caps` uses a name that is already taken
+# =>    ·                 ╰── first used here
+# =>    ╰────
+# =>   help: Each parameter and flag needs its own name, and each short flag its own letter. A long flag's
+# =>         variable replaces `-` with `_`, so `--foo-bar` and `foo_bar` clash.
+```
+
+The same error covers two parameters with one name, a rest parameter that reuses a name, and two flags with the same short letter, such as `--verbose (-v)` and `--version (-v)`. A flag with only a short form, like `-v`, creates the variable `$v`, so it also collides with a parameter named `v`.
+
+The one name you can repeat is `_`. Use it for positional arguments the command doesn't need:
+
+```nu
+def third [_, _, value] { $value }
+third a b c
+# => c
 ```
 
 #### Flags with a `null` Value
@@ -1339,6 +1401,50 @@ applies only to `extern`. It lets an external command return data instead of tex
 
 To see other attributes available for use within nushell, check the [command reference](/commands/docs/attr.html)
 or run `help attr` from the nushell REPL.
+
+### Defining your own attributes
+
+An attribute such as `@owner` calls a command named `attr owner` while Nushell parses the definition, and stores the value that command returns. To create your own attribute, define an alias whose name starts with `attr ` and points to a built-in command that can run at parse time. [`echo`](/commands/docs/echo.md) is the usual choice, since it returns its arguments as they are:
+
+```nu
+alias "attr owner" = echo
+alias "attr tags" = echo
+alias "attr slow" = echo
+
+@owner "platform-team"
+@tags web api
+@slow
+@category "deploy"
+def deploy [] { "deploying" }
+
+@slow
+def rebuild [] { "rebuilding" }
+
+scope commands | where name == deploy | get 0.attributes
+# => ╭───┬───────┬────────────────╮
+# => │ # │ name  │     value      │
+# => ├───┼───────┼────────────────┤
+# => │ 0 │ owner │ platform-team  │
+# => │ 1 │ tags  │ [list 2 items] │
+# => │ 2 │ slow  │                │
+# => ╰───┴───────┴────────────────╯
+```
+
+Nushell doesn't act on custom attributes. It stores them in the `attributes` column of [`scope commands`](/commands/docs/scope_commands.md), one row per attribute, with its name and value. Several arguments, as in `@tags web api`, give a list, and an attribute without arguments, like `@slow`, stores an empty string. Using the same attribute twice adds two rows. The built-in `@example`, `@search-terms`, `@category` and `@complete` attributes are applied to the command and aren't listed.
+
+A script can read the attributes back to find the commands it cares about:
+
+```nu
+scope commands | where {|cmd| "slow" in $cmd.attributes.name } | get name
+# => ╭───┬─────────╮
+# => │ 0 │ deploy  │
+# => │ 1 │ rebuild │
+# => ╰───┴─────────╯
+```
+
+To share attributes, export the aliases from a module (`export alias "attr owner" = echo`) and import them with `use ownership.nu *`, or by name with `use ownership.nu ["attr owner"]`. A plain `use ownership.nu` puts the module name in front of the alias, so `@owner` can't find it. The standard library's `@test`, `@ignore` and other [testing attributes](./standard_library.md#importing-submodules) are aliases of `echo` exported this way.
+
+The command behind an attribute has to be one that can run at parse time. An attribute backed by a custom command, such as `def "attr owner" [x] { $x }`, fails with a `Not a const command` error. An attribute also has to come right before a `def` or `extern`. Anywhere else, it is a `nu::parser::attribute_requires_definition` error.
 
 ## Changing the Environment in a Custom Command
 

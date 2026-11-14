@@ -149,3 +149,60 @@ try { check-range 10 1 } catch { error make "could not build the range" }
 ```
 
 After any other statement in the block, such as a `print`, the caught error is no longer the input, and `error make` reports only the new error. To keep the chain, pipe the error in with `$err | error make "..."`, or pass it with `inner`, as in `catch {|err| print 'cleaning up'; error make {msg: 'could not build the range', inner: [$err]} }`.
+
+## Re-raising a caught error
+
+Sometimes a `catch` block only needs to log an error and then let it continue. The `raw` field of the error record holds the original error itself, and returning it from `catch` raises that error again, unchanged:
+
+```nu
+try { check-range 10 1 } catch {|err| print "logging the error"; $err.raw }
+# => logging the error
+# => Error: nu::shell::error
+# =>
+# =>   × invalid range
+# =>    ╭─[repl_entry #2:1:19]
+# =>  1 │ try { check-range 10 1 } catch {|err| print "logging the error"; $err.raw }
+# =>    ·                   ─┬ ┬
+# =>    ·                    │ ╰── is greater than the upper bound
+# =>    ·                    ╰── lower bound
+# =>    ╰────
+# =>   help: swap the two arguments
+```
+
+Reading `$err.raw` raises the error right away, so it can't be stored or inspected. That means `error make {msg: "new message", raw: $err.raw}` also re-raises the original error, before `error make` even runs.
+
+`error make` treats a `raw` field the same way. When the record it receives has one, `error make` raises the error stored there and ignores the other fields. The record in `$err` has a `raw` field, so `error make $err` re-raises the caught error, and so does a copy with a changed message:
+
+```nu
+try { check-range 10 1 } catch {|err| error make ($err | update msg "could not build the range") }
+# => Error: nu::shell::error
+# =>
+# =>   × invalid range
+# =>    ╭─[repl_entry #3:1:19]
+# =>  1 │ try { check-range 10 1 } catch {|err| error make ($err | update msg "could not build the range") }
+# =>    ·                   ─┬ ┬
+# =>    ·                    │ ╰── is greater than the upper bound
+# =>    ·                    ╰── lower bound
+# =>    ╰────
+# =>   help: swap the two arguments
+```
+
+To raise a new error based on the caught one, start from `$err.details` instead. It has the `msg`, `labels`, `code`, `url`, `help` and `inner` fields, but no `raw`:
+
+```nu
+try { check-range 10 1 } catch {|err| let details = $err.details | update msg "could not build the range"; error make $details }
+# => Error: nu::shell::error
+# =>
+# =>   × could not build the range
+# =>    ╭─[repl_entry #4:1:19]
+# =>  1 │ try { check-range 10 1 } catch {|err| let details = $err.details | update msg "could not build the range"; error make $details }
+# =>    ·                   ─┬ ┬
+# =>    ·                    │ ╰── is greater than the upper bound
+# =>    ·                    ╰── lower bound
+# =>    ╰────
+# =>   help: swap the two arguments
+```
+
+The new error keeps the original labels and help. Because `error make` isn't the first command in the block, the caught error isn't also attached as an inner error (see [Chaining Errors](#chaining-errors)).
+
+A `raw` field has to hold an error. Any other value, such as `raw: 5`, fails with `Can't convert to ShellError`, and `raw: null` is ignored.

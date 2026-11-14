@@ -78,6 +78,64 @@ nu add_ten.nu 100
 # => 110
 ```
 
+### Help for a script
+
+Run a script with `--help` (or `-h`) to see the help for its `main` command, shown under the script's file name. As with any [documented command](custom_commands.md#documenting-your-command), the comment directly above `def main` becomes the description and a comment after each parameter describes it. The help also lists the [subcommands](#subcommands) of `main`:
+
+```nu
+# welcome.nu
+
+# Welcome someone by name
+#
+# Prints a short greeting.
+def main [
+    name: string    # Who to welcome
+    --shout (-s)    # Print the greeting in capitals
+] {
+    let text = $"Welcome, ($name)!"
+    if $shout { $text | str uppercase } else { $text }
+}
+
+# Say goodbye instead
+def "main bye" [name: string] {
+    $"Goodbye, ($name)!"
+}
+```
+
+```nu
+nu welcome.nu --help
+# => Welcome someone by name
+# =>
+# => Prints a short greeting.
+# =>
+# => Usage:
+# =>   > welcome.nu {flags} <name>
+# =>
+# => Subcommands:
+# =>   welcome.nu bye (custom) - Say goodbye instead
+# =>
+# => Flags:
+# =>   -h, --help: Display the help message for this command
+# =>   -s, --shout: Print the greeting in capitals
+# =>
+# => Command Type:
+# =>   > custom
+# =>
+# => Parameters:
+# =>   name <string>: Who to welcome
+# =>
+# => Input/output types:
+# =>   ╭───┬───────┬────────╮
+# =>   │ # │ input │ output │
+# =>   ├───┼───────┼────────┤
+# =>   │ 0 │ any   │ any    │
+# =>   ╰───┴───────┴────────╯
+```
+
+`nu welcome.nu bye --help` shows the help for the subcommand. The blank line after `# welcome.nu` keeps that comment out of the description, because only the comment lines directly above `def main` count.
+
+Nushell runs the rest of the script before it calls `main`, so code outside any command, such as a top-level `print`, still runs before the help appears. A script without a `main` command has no help to show. It ignores `--help` like any other argument and runs as usual.
+
 ## Argument Type Interpretation
 
 By default, arguments provided to a script are interpreted with the type `Type::Any`, implying that they are not constrained to a specific data type and can be dynamically interpreted as fitting any of the available data types during script execution.

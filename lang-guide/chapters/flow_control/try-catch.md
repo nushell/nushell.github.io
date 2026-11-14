@@ -8,6 +8,8 @@ try { <block> } catch {|err| <on error> } finally {|value| <always> }
 
 Both `catch` and `finally` are optional, but if both are given, `catch` comes first.
 
+Each must start on the same line as the `}` before it. On the next line, `catch` or `finally` is a separate command that fails with a "Command not found" error after the `try` has already run without it. A bare `try` swallows the original error, and the cleanup in `finally` never runs. See the `else` example in [Control Flow](/book/control_flow.md#if), which fails the same way.
+
 See also: [`try` command help](/commands/docs/try.md), [Control Flow - `try`](/book/control_flow.md#try) and [Creating Your Own Errors](/book/creating_errors.md) in the Book.
 
 ```nu
@@ -92,7 +94,7 @@ try { error make {msg: "disk full", help: "free some space"} } catch { $in.detai
 
    After any other statement, the original error is no longer the input. Pipe it in (`$e | error make {msg: b}`) or pass it as `inner` to keep it attached: `catch {|e| print "logging"; error make {msg: b, inner: [$e]} }`.
 
-   To log an error and re-raise it unchanged, return `$e.raw`: `catch {|e| print "logging"; $e.raw }`.
+   To log an error and re-raise it unchanged, return `$e.raw`: `catch {|e| print "logging"; $e.raw }`. `error make` also re-raises the error held in the `raw` field of a record it is given, including `$e` itself, and then ignores the record's other fields. See [Re-raising a caught error](/book/creating_errors.md#re-raising-a-caught-error).
 
 1. `finally` runs after the block succeeds, after `catch`, when an uncaught error is about to propagate, and when `break`, `continue`, `return` or `exit` leaves the `try` (only `exit --abort` skips it). It receives a value as its parameter and as `$in`:
 
@@ -140,6 +142,52 @@ try { error make {msg: "disk full", help: "free some space"} } catch { $in.detai
    [1 2 3] | try { math sum } catch { 0 }
    # => 6
    ```
+
+1. `catch` accepts any expression that gives a closure, such as a variable or a command's parameter, not only a closure written in place. The closure receives the error record as its parameter and as `$in`. A value the parser already knows is not a closure, such as a string variable, is a `nu::parser::type_mismatch` error. A value it can't check in advance, such as an untyped parameter, fails with `Can't convert to Closure` when an error reaches the `catch`.
+
+   ```nu
+   let fallback = {|err| $"failed: ($err.msg)" }
+   try { 1 / 0 } catch $fallback
+   # => failed: Division by zero.
+   ```
+
+   `finally` takes only a closure written in place. A variable after `finally` is rejected before anything runs:
+
+   ```nu
+   let cleanup = {|| print "cleaning up" }
+   try { "done" } finally $cleanup
+   # => Error: nu::compile::invalid_keyword_call
+   # =>
+   # =>   × Encountered invalid `try` keyword call.
+   # =>    ╭─[repl_entry #2:1:1]
+   # =>  1 │ try { "done" } finally $cleanup
+   # =>    · ─┬─
+   # =>    ·  ╰── this call is not properly formed
+   # =>    ╰────
+   ```
+
+   Call the stored closure from a literal one instead: `try { "done" } finally { do $cleanup }`.
+
+1. With a `catch` or a `finally`, `try` collects the whole output of its block before it returns. It doesn't pass stream items on as they arrive, so an error in a later item of a stream is still caught:
+
+   ```nu
+   try { 1..3 | each {|x| if $x == 3 { error make {msg: boom} } else { $x } } } catch { "caught" }
+   # => caught
+   ```
+
+   The next command in the pipeline gets the items only after the block has finished. Here all three items are produced before the first one is consumed:
+
+   ```nu
+   try { 1..3 | each {|x| print $"producing ($x)"; $x } } catch { [] } | each {|x| print $"consuming ($x)"; $x } | ignore
+   # => producing 1
+   # => producing 2
+   # => producing 3
+   # => consuming 1
+   # => consuming 2
+   # => consuming 3
+   ```
+
+   Without `catch` and `finally`, the stream passes through and the lines alternate. A `try` with a `catch` around an endless stream never returns. External commands get one exception. When the block ends with an external command and the next command takes its stderr, as [`complete`](/commands/docs/complete.md) and `save --stderr` do, `try` still reads all of the output and waits for the external to exit, but it passes stdout and stderr on separately so that the next command receives both. A non-zero exit code is still caught.
 
 1. Parse errors cannot be caught. The whole entry or script is parsed before anything runs, so a syntax error inside a `try` block stops everything:
 

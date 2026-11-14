@@ -63,6 +63,41 @@ if $x > 0 { 'positive' } else if $x == 0 { 'zero' } else { "negative" }
 
 When the first condition is `true` (`$x` is greater than zero) it will return `'positive'`, when the first condition is `false` and the next condition is `true` (`$x` equals zero) it will return `'zero'`, otherwise it will return `'negative'` (when `$x` is less than zero).
 
+::: warning
+`else` has to start on the same line as the `}` before it. A newline ends the `if` command, so Nushell runs the `if` by itself and then tries to run `else` as a separate command. The parser doesn't catch this. The script fails when it reaches the `else`, whichever branch the condition picked:
+
+```nu
+# size.nu
+def describe-size [n: int] {
+    if $n > 100 {
+        "big"
+    }
+    else {
+        "small"
+    }
+}
+
+describe-size 5
+```
+
+```nu
+nu size.nu
+# => Error: nu::shell::external_command
+# =>
+# =>   × External command failed
+# =>    ╭─[/home/me/size.nu:5:5]
+# =>  4 │     }
+# =>  5 │     else {
+# =>    ·     ──┬─
+# =>    ·       ╰── Command `else` not found
+# =>  6 │         "small"
+# =>    ╰────
+# =>   help: Did you mean `if`?
+```
+
+Write `} else {` on one line. The same rule applies to `else if` and to the `catch` and `finally` parts of [`try`](#try). Inside parentheses a newline doesn't end the command, so wrapping the whole `if` in `( )` also lets `else` start a new line (see [Multi-line pipelines](pipelines.md#multi-line-pipelines)).
+:::
+
 ### `match`
 
 [`match`](/commands/docs/match.html) executes one of several conditional branches based on the value given to match. You can also do some [pattern matching](/cookbook/pattern_matching.html) to unpack values in composite types like lists and records.
@@ -268,6 +303,14 @@ for x in [1 2 3] { $x * $x | print }
 # => 9
 ```
 
+The loop variable can have a type annotation, as in `for x: int in $numbers`. Nushell checks that the annotation names a real type, but it doesn't check the items against it, and it doesn't convert them. The variable gets the type of the items instead, so this loop runs without an error:
+
+```nu
+for x: string in [1 2] { print ($x | describe) }
+# => int
+# => int
+```
+
 #### Expression Command Alternatives
 
 - [`each`](/commands/docs/each.html)
@@ -373,7 +416,7 @@ try { 1 / 0 } catch { 'An error happened!' } | $in ++ ' And now I am resuming.'
 # => An error happened! And now I am resuming.
 ```
 
-It will not execute the `catch` block if an error did not occur.
+It will not execute the `catch` block if an error did not occur. As with [`else`](#if), `catch` and `finally` have to start on the same line as the `}` before them.
 
 The `catch` closure can take a parameter, which receives a record describing the error:
 
@@ -381,6 +424,8 @@ The `catch` closure can take a parameter, which receives a record describing the
 try { 1 / 0 } catch {|err| $err.msg }
 # => Division by zero.
 ```
+
+Instead of writing the closure after `catch`, you can give it a closure stored in a variable or passed in as a parameter, as in `try { ... } catch $handler`. `finally` only takes a closure written in place. See [the Language Guide](/lang-guide/chapters/flow_control/try-catch.md#language-notes) for both.
 
 `try` also works for external commands:
 
@@ -452,6 +497,8 @@ try { 1 / 0 } finally { print 'cleaning up' }
 # =>    ·         ╰── division by zero
 # =>    ╰────
 ```
+
+With a `catch` or a `finally`, `try` collects the whole output of its block before it returns. An error in any item of a stream is therefore still caught, but the output doesn't stream on to the next command while the block runs. See [the Language Guide](/lang-guide/chapters/flow_control/try-catch.md#language-notes) for an example.
 
 ## Other
 

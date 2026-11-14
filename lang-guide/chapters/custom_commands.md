@@ -11,6 +11,7 @@ def <name> [<parameters>]: <input type> -> <output type> { <body> }
 ```
 
 - The name may contain spaces to make a subcommand, e.g. `def "str shout" [] { ... }`. Parser keywords such as `if`, `let` or `def` cannot be used as names.
+- A block can define each name once. A second `def` or `extern` with the same name in the same block (including a whole script or module) is a `nu::parser::duplicate_command_def` error. A `def` in a nested block shadows the outer one inside that block, and each REPL entry is a new block, so redefining a command at the prompt replaces it. See [Defining a command more than once](/book/custom_commands.md#defining-a-command-more-than-once).
 - The `: <input> -> <output>` part is optional. Several input/output pairs can be given in brackets: `[int -> int, string -> string]`.
 - `def --env` keeps changes the body makes to the environment (see [Function Scope](#function-scope)).
 - `def --wrapped` passes unknown flags through to a `...rest` parameter as strings, which is useful for wrapping external commands.
@@ -159,6 +160,16 @@ apply {|v| $v * 10 } 4
 | `...rest`, `...rest: type` | Any number of remaining positional arguments, as a list       | `[]`                   |
 
 Parameters can be separated by spaces, commas or newlines. Without a type, a parameter accepts `any` value. Flag values can be written as `--flag value` or `--flag=value`, and switches as `--flag` or `--flag=false`.
+
+Every parameter binds a variable, and all of them share one namespace:
+
+- A positional or rest parameter binds its own name. `$name` in the signature is the same as `name`.
+- A long flag binds its name with `-` replaced by `_`, so `--foo-bar` binds `$foo_bar`. A flag with only a short form, such as `-v`, binds `$v`.
+- No two parameters or flags may bind the same variable, and no two flags may share a short letter. A repeat is a `nu::parser::duplicate_parameter` error that points at both uses.
+- `_` is the exception. Positional parameters named `_` may repeat, to ignore arguments.
+- Nushell doesn't check `extern` signatures, because an `extern` binds no variables.
+
+See [Flags](/book/custom_commands.md#flags) in the Book for an example of the error.
 
 ```nu
 def greet [
