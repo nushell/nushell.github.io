@@ -233,7 +233,7 @@ The log level for output can be set with the [`NU_LOG_LEVEL`](/book/special_vari
 NU_LOG_LEVEL=DEBUG nu std_log.nu
 ```
 
-Every `log` command writes to stderr, so its messages stay out of the pipeline and out of a file redirected with `o>`. [Logging with `std/log`](./standard_library.md#logging-with-std-log) describes the format of a log line and the `--short`, `--format`, and `--context` flags.
+Every `log` command writes to stderr, so its messages stay out of the pipeline and out of a file redirected with `o>`. [`std/log`](./standard_library/log.md) describes the format of a log line and the `--short`, `--format`, and `--context` flags.
 
 ## File Redirections
 
@@ -287,7 +287,7 @@ use std
 cat unknown.txt o+e> (std null-device)
 ```
 
-`std null-device` returns the system's null device, `/dev/null`, or `\\.\NUL` on Windows, so this example throws both streams away. After `use std/util *`, the same command is available as `null-device`. `std/util` also exports the path as a constant, `null_device`, for places where Nushell needs the value while it parses your code, such as a parameter's default value (see [Importing Submodules](./standard_library.md#importing-submodules)).
+`std null-device` returns the system's null device, `/dev/null`, or `\\.\NUL` on Windows, so this example throws both streams away. After `use std/util *`, the same command is available as `null-device`. `std/util` also exports the path as a constant, `null_device`, for places where Nushell needs the value while it parses your code, such as a parameter's default value (see [`null-device` and `null_device`](./standard_library/util.md#null-device-and-null-device)).
 
 A path that isn't a string, such as the number in `o> (1 + 1)`, is a `cant_convert` error. A leading `~` in the path expands to your home directory, and a relative path starts from the current directory. The path is never treated as a glob, so `o> *.log` writes to a file named `*.log`. The directory has to exist already. A path such as `missing/out.log` fails with a `not_found` error.
 

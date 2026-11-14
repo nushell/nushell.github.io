@@ -41,7 +41,7 @@ assert ($a == 19) $"The lockout code is wrong, received: ($a)"
 # =>    ╰────
 ```
 
-There are many assert commands, which behave exactly as the base one with the proper operator. The additional value for them is the ability for better error messages.
+There are many assert commands, which behave exactly as the base one with the proper operator. The additional value for them is the ability for better error messages. [`std/assert`](./standard_library/assert.md) describes each of them, with the messages and labels it shows.
 
 For example this is not so helpful without an additional message:
 
@@ -78,6 +78,8 @@ assert str contains $b $a
 # =>    ╰────
 ```
 
+The labels show the string and the text it looked for. The message above them is a mistake in Nushell 0.117.0, where `assert str contains` reuses the text of `assert length`. Give it a message as a third argument, as in `assert str contains $b $a "the needle is missing"`, and that message comes first.
+
 In general for base `assert` command it is encouraged to always provide the additional message to show what went wrong. If you cannot use any built-in assert command, you can create a custom one with passing the label for [`error make`](/commands/docs/error_make.md) for the `assert` command:
 
 ```nu
@@ -104,6 +106,8 @@ assert even $a
 # =>    ·              ╰── 13 is not an even number
 # =>    ╰────
 ```
+
+For an error that points at more than one argument, pass a list of these records with `--error-labels`. [`std/assert`](./standard_library/assert.md#assert) has an example.
 
 ## Running the Tests
 
@@ -229,9 +233,17 @@ use it. It isn't part of the standard library and isn't built into `nu`, so down
 first, preferably from the release tag that matches your Nushell version, and import it with
 `use testing.nu`. The command it gives you is `testing run-tests`.
 
-Mark the tests with the attributes from `std/testing`. Using the `math.nu` module from the
-standalone example above, a test module `tests/test_fib.nu` could look like this, with one test
-that is wrong on purpose:
+Mark the tests with the attributes from `std/testing`, which `use std/testing *` brings into
+scope: `@test`, `@ignore`, `@before-all`, `@before-each`, `@after-each` and `@after-all`. Without
+that import, `@test` is an unknown command. The attributes don't change the command. Each one is
+an alias of [`echo`](/commands/docs/echo.md), as described in
+[Defining your own attributes](./custom_commands.md#defining-your-own-attributes), so it only
+adds a row to the command's `attributes` column in
+[`scope commands`](/commands/docs/scope_commands.md). Running the module doesn't run the tests.
+A runner has to read that column and call them, which is what `testing run-tests` does.
+
+Using the `math.nu` module from the standalone example above, a test module `tests/test_fib.nu`
+could look like this, with one test that is wrong on purpose:
 
 ```nu
 use std/assert
@@ -290,8 +302,9 @@ testing run-tests --path tests
 ```
 
 The final error lists every test, with `⨯` for a failure, `s` for a test skipped with `@ignore`,
-and nothing for a pass. When all tests pass, `testing run-tests` returns nothing and only the
-progress lines appear. Those are logged with [`std/log`](./standard_library.md#logging-with-std-log),
+and nothing for a pass. The runner never runs a skipped test, so the slow `fib-thirty` above
+takes no time. When all tests pass, `testing run-tests` returns nothing and only the
+progress lines appear. Those are logged with [`std/log`](./standard_library/log.md),
 so `$env.NU_LOG_LEVEL = "ERROR"` leaves only the failures, and `"DEBUG"` also logs the module's
 global context (see below) for each test.
 

@@ -1770,7 +1770,7 @@ scope commands | where {|cmd| "slow" in $cmd.attributes.name } | get name
 # => ╰───┴─────────╯
 ```
 
-To share attributes, export the aliases from a module (`export alias "attr owner" = echo`) and import them with `use ownership.nu *`, or by name with `use ownership.nu ["attr owner"]`. A plain `use ownership.nu` puts the module name in front of the alias, so `@owner` can't find it. The standard library's `@test`, `@ignore` and other [testing attributes](./standard_library.md#importing-submodules) are aliases of `echo` exported this way.
+To share attributes, export the aliases from a module (`export alias "attr owner" = echo`) and import them with `use ownership.nu *`, or by name with `use ownership.nu ["attr owner"]`. A plain `use ownership.nu` puts the module name in front of the alias, so `@owner` can't find it. The standard library's `@test`, `@ignore` and other [testing attributes](./testing.md#the-testing-nu-runner) are aliases of `echo` exported this way.
 
 The command behind an attribute has to be one that can run at parse time. An attribute backed by a custom command, such as `def "attr owner" [x] { $x }`, fails with a `Not a const command` error. An attribute also has to come right before a `def` or `extern`. Anywhere else, it is a `nu::parser::attribute_requires_definition` error.
 
