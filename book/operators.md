@@ -67,6 +67,27 @@ Presented in descending order of precedence, the article details the operations 
 # => 9
 ```
 
+## Negation
+
+A `-` written directly in front of a variable or a parenthesized expression negates it. This works for numbers, durations and file sizes:
+
+```nu
+let x = 5
+-$x
+# => -5
+-(1 + $x)
+# => -6
+let d = 2sec
+-$d
+# => -2sec
+```
+
+The `-` has to touch the value. `- $x`, with a space, is a parse error ("expected operator"). Negating any other type, such as a string or a bool, is a parse error with the hint "Only numbers, durations and filesizes can be negated." When the parser can't know the type, as with a variable declared `any`, the error comes when the line runs instead.
+
+Negation binds more tightly than every binary operator, `**` included, so `-$x ** 2` is `25`. Write `-($x ** 2)` to get `-25`.
+
+In a command call, Nushell reads a word that starts with `-` as a flag. `echo -$x` fails with "The `echo` command doesn't have flag `-$`", so put the negation in parentheses: `echo (-$x)`. An external command gets `-$x` as the literal text `-$x`, so use `^echo (-$x)` there too.
+
 ## Types
 
 Not all operations make sense for all data types.

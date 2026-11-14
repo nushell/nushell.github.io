@@ -30,7 +30,7 @@ end'
 
 Single-quoted strings don't do anything to the text they're given, making them ideal for holding a wide range of text data.
 
-There is no escape for `'` inside a single-quoted string. Inner single quotes work only in pairs, and only when the word ends with `'`. Nushell keeps them as written, so `''` is not read as one quote the way it is in SQL:
+There is no escape for `'` inside a single-quoted string. Inner single quotes work only in pairs, and only when the word ends with `'` (see [Quotes inside a quoted word](#quotes-inside-a-quoted-word)). Nushell keeps them as written, so `''` is not read as one quote the way it is in SQL:
 
 ```nu
 'it''s'
@@ -93,6 +93,35 @@ be used to nest raw strings:
 r###'r##'This is an example of a raw string.'##'###
 # => r##'This is an example of a raw string.'##
 ```
+
+## Quotes inside a quoted word
+
+Nushell splits a line into words at whitespace outside of quotes. When a word starts with `'` or `"`, the string runs from that quote to the last quote of the same kind in the word, and any quotes of that kind in between are part of the string. That's why `'it''s'` keeps both quotes, and why inner double quotes can go unescaped as long as the word has no spaces outside them:
+
+```nu
+"[{a: "b"}]"
+# => [{a: "b"}]
+```
+
+Text after the last quote is an error:
+
+```nu
+'a'b
+# => Error: nu::parser::extra_token_after_closing_delimiter
+# =>
+# =>   × Invalid characters after closing delimiter
+# =>    ╭─[repl_entry #1:1:4]
+# =>  1 │ 'a'b
+# =>    ·    ┬
+# =>    ·    ╰── invalid characters
+# =>    ╰────
+# =>   help: Remove these characters, or check that a delimiter closed too early
+# =>         above.
+```
+
+A space outside the inner quotes ends the word, so `"a "b c" d"` fails the same way at the `b`, and so does JSON with a space in a value, such as `"{"k": "a b"}"`. Escape the inner quotes instead (`"a \"b c\" d"`), or use the other kind of quote or a raw string: `'{"k": "a b"}'` works.
+
+The rule also catches words that look like operators. `'a'..'z'` is not a range of letters. It is the single string `a'..'z`.
 
 ## Bare Word Strings
 
@@ -253,6 +282,32 @@ $"2 + 2 is (2 + 2) \(you guessed it!)"
 # => 2 + 2 is 4 (you guessed it!)
 ```
 
+The code inside `( )` is ordinary Nushell code, not part of the surrounding string. Quotes inside it don't end the interpolated string, and you write them without escapes, the same way you would outside a string. That includes another interpolated string:
+
+```nu
+$"(["x" "y"] | str join ", ")"
+# => x, y
+$"a ($"b (1 + 1)")"
+# => a b 2
+```
+
+A `)` inside a quoted string within the parentheses doesn't close them either: `$"a (")") c"` is `a ) c`. Escaping a quote inside the parentheses is an error, because `\"` isn't valid Nushell code outside a string:
+
+```nu
+$"a (\"b\") c"
+# => Error: nu::parser::unclosed_delimiter
+# =>
+# =>   × Unclosed delimiter.
+# =>    ╭─[repl_entry #1:1:14]
+# =>  1 │ $"a (\"b\") c"
+# =>    ·     ┬        ┬
+# =>    ·     │        ╰── expected `)` here
+# =>    ·     ╰── unclosed — opens here (need `)`)
+# =>    ╰────
+# =>   help: Add a matching `)` to close this delimiter, or check that an earlier
+# =>         closer closed the wrong block.
+```
+
 Interpolated strings can be evaluated at parse time, but if they include values whose formatting depends
 on your configuration and your `config.nu` hasn't been loaded yet, they will use the default configuration.
 So if you have something like this in your `config.nu`, `x` will be `"2.0 kB"` even if your config says to use
@@ -261,6 +316,26 @@ So if you have something like this in your `config.nu`, `x` will be `"2.0 kB"` e
 ```nu
 const x = $"(2kb)"
 ```
+
+### Interpolation in bare words
+
+A [bare word](#bare-word-strings) that contains `(` is interpolated without the `$"..."`. This is handy for file names and other arguments built from a variable:
+
+```nu
+let n = 3
+echo file($n).txt
+# => file3.txt
+[v($n) ($n)-beta] | to nuon
+# => ["v3", "3-beta"]
+```
+
+It follows the rules for bare words:
+
+- It works where Nushell expects a value, such as a command argument, a list item or a record value. At the start of a pipeline or after `let x =`, a word like `v($n)` is a command name, so Nushell tries to run an external command called `v3`. A word that starts with `(`, like `($n)-beta`, works in both places.
+- There are no escapes. As in single-quoted interpolation, `v\($n)` is `v\3`.
+- It can't be attached to a quoted string. `"v"($n)` is the "Invalid characters after closing delimiter" error from [above](#quotes-inside-a-quoted-word).
+- The variable needs parentheses. Nushell reads all of `$n-beta` as one variable name and rejects it with "expected valid variable name".
+- In a command argument that takes a glob, such as for `ls` or `rm`, the result is a glob pattern: `ls ($n)*.txt` lists the files whose names start with `3` and end in `.txt`. See [Converting Strings to Globs](moving_around.md#converting-strings-to-globs).
 
 ## Splitting Strings
 

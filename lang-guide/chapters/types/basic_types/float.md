@@ -28,4 +28,31 @@
 
 - `into int` truncates the fractional part. Use `math round`, `math floor` or `math ceil` to round instead.
 
-<!-- TBD: semantics for comparison, NaN/InF. Future hashing. -->
+## Infinity and NaN
+
+The words `inf` and `NaN` are float literals for infinity and "not a number". Write `-inf` for negative infinity. `nan` is accepted as another spelling of `NaN`, and Nushell prints it as `NaN`. No other spelling is a float. `Nan`, `Inf` and `infinity` are bare-word strings:
+
+```nu
+[inf -inf nan NaN Nan Inf infinity] | to nuon
+# => [inf, -inf, NaN, NaN, "Nan", "Inf", "infinity"]
+```
+
+[`into float`](/commands/docs/into_float.md) is more lenient with text. `'infinity' | into float` returns `inf`.
+
+These values also come out of float arithmetic. A literal too large for a float becomes `inf` (`1e400` is `inf`), and `inf - inf` is `NaN`. Division by zero is an error, even for floats, so `1.0 / 0` and `0.0 / 0.0` fail with `nu::shell::division_by_zero` instead of returning `inf` or `NaN`.
+
+Comparisons follow IEEE-754. `inf == inf` is `true`, and `NaN` is not equal to anything, itself included:
+
+```nu
+NaN == NaN
+# => false
+NaN in [NaN]
+# => false
+```
+
+Other places where they behave differently from ordinary floats:
+
+- [`sort`](/commands/docs/sort.md) puts `NaN` after every other number: `[3 NaN 1 inf -inf] | sort` is `[-inf, 1, 3, inf, NaN]`.
+- [`to nuon`](/commands/docs/to_nuon.md) writes `inf`, `-inf` and `NaN`, which `from nuon` reads back as floats. JSON has no such values, so [`to json`](/commands/docs/to_json.md) writes each of them as `null`.
+- Converting to an int doesn't fail. `inf | into int` is the largest int, `9223372036854775807`, and `NaN | into int` is `0`. `math floor` and `math ceil` do the same, while `math round` rejects them with "cannot round non-finite number".
+- A range can't start at `inf`, `-inf` or `NaN`. See [Range](range.md#range-errors).

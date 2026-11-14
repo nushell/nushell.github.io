@@ -311,6 +311,8 @@ $person | get --ignore-case name
 
 (Environment variables are an exception: `$env.path` and `$env.PATH` both work.)
 
+A member can also be both case-insensitive and [optional](#the-optional-operator). Add both modifiers, in either order: `$person.age?!` returns `null` instead of failing.
+
 ## Handling Missing Data
 
 ### The Optional Operator

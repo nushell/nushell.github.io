@@ -55,6 +55,27 @@ try { ^false | lines } catch {|err| $err.exit_code }
 This pipeline behavior is an opt-out experimental option named `pipefail`. To turn it off, start Nushell with `nu --experimental-options '[pipefail=false]'`.
 :::
 
+### Nushell's own exit status
+
+When a script (`nu script.nu`) or a command string (`nu -c '...'`) stops at an error that nothing catches, Nushell prints the error and exits with a non-zero status. The status tells the calling program what failed:
+
+- `1` for an error from Nushell itself, such as a parse error, a failing built-in command, or [`error make`](/commands/docs/error_make.md).
+- The external command's own exit code when an external failed. A script that stops at an external that exited with `42` exits with `42`.
+- `256 - N` when an external was killed by signal `N`. This only happens on Unix-like systems. Inside Nushell, [`complete`](/commands/docs/complete.md) and the `exit_code` field of a `catch` error report the signal as `-N`, and the operating system keeps only the low 8 bits of that, so SIGTERM (15) becomes `241`. Bash reports `128 + N` (`143` for SIGTERM) in the same situation.
+
+```nu
+nu -c 'error make {msg: boom}' | complete | get exit_code
+# => 1
+nu -c 'nu -c "exit 42"' | complete | get exit_code
+# => 42
+sh -c 'kill -TERM $$' | complete | get exit_code
+# => -15
+nu -c 'sh -c "kill -TERM $$"' | complete | get exit_code
+# => 241
+```
+
+To set the status yourself, end the script with [`exit`](/commands/docs/exit.md).
+
 ## Using the [`complete`](/commands/docs/complete.md) command
 
 The [`complete`](/commands/docs/complete.md) command allows you to run an external to completion, and gather the stdout, stderr, and exit code together in one record.
@@ -112,6 +133,29 @@ cat unknown.txt o> out.log e> err.log
 cat unknown.txt o+e> log.log
 ```
 
+The `>` forms replace the file's contents. To add to the end of the file instead, use `>>`. It creates the file if it doesn't exist yet:
+
+```nu
+nu -c 'print one' o> out.log
+nu -c 'print two' o>> out.log
+open out.log
+# => one
+# => two
+```
+
+The combined forms can name the streams in either order, so `e+o>` and `err+out>` do the same as `o+e>`. This table lists every redirection operator, including the [pipe redirections](#pipe-redirections) described below:
+
+| Operators                                         | Effect                                           |
+| ------------------------------------------------- | ------------------------------------------------ |
+| `o>`, `out>`                                      | Write stdout to a file, replacing its contents   |
+| `o>>`, `out>>`                                    | Append stdout to a file                          |
+| `e>`, `err>`                                      | Write stderr to a file, replacing its contents   |
+| `e>>`, `err>>`                                    | Append stderr to a file                          |
+| `o+e>`, `out+err>`, `e+o>`, `err+out>`            | Write both streams to one file                   |
+| `o+e>>`, `out+err>>`, `e+o>>`, `err+out>>`        | Append both streams to one file                  |
+| `e>\|`, `err>\|`                                  | Pipe stderr to the next command                  |
+| `o+e>\|`, `out+err>\|`, `e+o>\|`, `err+out>\|`    | Pipe both streams to the next command            |
+
 Also, any expression can be used for the file path, as long as it is a string value:
 ```nu
 use std
@@ -159,6 +203,23 @@ nu -c 'print output; print -e error' o+e>| str uppercase
 # => ERROR
 ```
 
+There is no pipe redirection for stdout alone, since a plain `|` already does that job. `o>|` and `out>|` are parse errors:
+
+```nu
+nu -c 'print hello' o>| str uppercase
+# => Error: nu::parser::parse_mismatch
+# =>
+# =>   × Parse mismatch: expected `|`.  Redirecting stdout to a pipe is the same as
+# =>   │ normal piping..
+# =>    ╭─[repl_entry #1:1:21]
+# =>  1 │ nu -c 'print hello' o>| str uppercase
+# =>    ·                     ─┬─
+# =>    ·                      ╰── expected `|`.  Redirecting stdout to a pipe is the same as normal piping.
+# =>    ╰────
+# =>   help: Check the syntax around this position — a typo, missing delimiter, or
+# =>         wrong separator is common.
+```
+
 ::: note
 Because a failing external makes the whole pipeline fail (see [Exit Code](#exit-code)), the redirected output of a command that exits with an error can be lost. For example, `cat unknown.txt e>| str uppercase` prints nothing, because `cat` exits with code 1. Use [`complete`](#using-the-complete-command) when you need both the output and the exit code of a failing command.
 :::
@@ -168,6 +229,47 @@ Unlike file redirections, pipe redirections do not apply to all commands inside 
 (nu -c 'print -e one'; nu -c 'print -e two') o+e>| str uppercase
 # => one
 # => TWO
+```
+
+## Where redirections are allowed
+
+A redirection belongs to the command in front of it. One with no command, such as `ls | o> out.txt`, is an error:
+
+```nu
+ls | o> out.txt
+# => Error: nu::parser::unexpected_redirection
+# =>
+# =>   × Unexpected redirection.
+# =>    ╭─[repl_entry #1:1:6]
+# =>  1 │ ls | o> out.txt
+# =>    ·      ─┬
+# =>    ·       ╰── redirecting nothing
+# =>    ╰────
+```
+
+The keywords that define or load code can't be redirected: `def`, `extern`, `module`, `use`, `hide`, the `overlay` subcommands, `plugin use`, `source`, `source-env` and `run`, along with the `export` forms of these. `for` is in the same group. Each one fails with "Redirection can not be used with" followed by the keyword:
+
+```nu
+for i in 1..2 { ^echo $i } o> loop.txt
+# => Error: nu::parser::error
+# =>
+# =>   × Redirection can not be used with for.
+# =>    ╭─[repl_entry #1:1:28]
+# =>  1 │ for i in 1..2 { ^echo $i } o> loop.txt
+# =>    ·                            ─┬
+# =>    ·                             ╰── not allowed here
+# =>    ╰────
+```
+
+Two other keywords reject a redirection with a different error. `type T = int o> t.txt` is "Extra tokens in code", and `alias l = ls o> x.txt` is "Can't create alias to expression".
+
+To redirect what a loop prints, run it inside [`do`](/commands/docs/do.md) and redirect the `do` call. A file redirection applies to every external command inside it:
+
+```nu
+do { for i in 1..2 { ^echo $i } } o> loop.txt
+open loop.txt
+# => 1
+# => 2
 ```
 
 ## Discarding Output

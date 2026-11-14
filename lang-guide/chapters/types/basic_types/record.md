@@ -62,6 +62,47 @@ Record syntax is very similar to objects in JSON. However, commas are _not_ requ
   # => ╰──────┴─────╯
   ```
 
+As in lists, extra commas are ignored: `{a: 1,, b: 2,}` is `{a: 1, b: 2}`.
+
+## Expressions in a record literal
+
+A field's value is a single word, just like a [list item](list.md#expressions-in-a-list-literal). In `{a: 1 + 1}`, the value of `a` is `1`, and Nushell then reads `+` as the next key:
+
+```nu
+{a: 1 + 1}
+# => Error: nu::parser::error
+# =>
+# =>   × Expected `:` after record key
+# =>    ╭─[repl_entry #1:1:9]
+# =>  1 │ {a: 1 + 1}
+# =>    ·         ┬
+# =>    ·         ╰── expected `:`, found `1`
+# =>    ╰────
+# =>   help: Record fields look like `key: value`. A missing colon often causes
+# =>         this field to be parsed as a block or closure.
+```
+
+Wrap the expression in parentheses:
+
+```nu
+{a: (1 + 1)}
+# => ╭───┬───╮
+# => │ a │ 2 │
+# => ╰───┴───╯
+```
+
+## No field shorthand
+
+JavaScript lets you write `{a}` for `{a: a}`. Nushell has no such shorthand, and every field needs a key and a colon. Braces holding only a variable, such as `{$a}`, are a closure that returns `$a`:
+
+```nu
+let a = 1
+{$a} | describe
+# => closure
+```
+
+When the braces also hold a real field, the missing colon is an error. `{a: 1, b}` and `{a: 1, $b}` both fail with "Incomplete record field". Write the key out instead: `{a: $a, b: $b}`.
+
 ## Common commands that can be used with `record`
 
 Since the record data type is foundational to Nushell's structured nature, many commands use records as inputs or as parameters. See the list of commands for tables as many of those also take records.

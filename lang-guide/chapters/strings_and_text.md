@@ -155,3 +155,15 @@ The key to always remember is that double quotes recognize and interpret escapes
 It doesn't work because it sees `\P` and `\s` as escapes that are not recognized. Use single quotes or a raw string instead: `'C:\Program Files\somedir'` or `r#'C:\Program Files\somedir'#`.
 
 ## Bare word
+
+A bare word is a string written without quotes, such as `hello` or `./my-file.txt`. See [Bare Word Strings](/book/working_with_strings.md#bare-word-strings) in the Book for where Nushell reads one as a string and where it reads it as a command name.
+
+A bare word that contains `(` is an interpolated string. Each `( )` part is evaluated and joined with the text around it. Backslashes are kept as written, as in `$'...'`:
+
+```nu
+let n = 3
+echo file($n).txt
+# => file3.txt
+```
+
+In command position the word is still a command name, so `v($n)` on its own runs an external command named `v3`. A word that starts with a quote is not bare, and `"v"($n)` is a parse error. See [Interpolation in bare words](/book/working_with_strings.md#interpolation-in-bare-words) for the details.

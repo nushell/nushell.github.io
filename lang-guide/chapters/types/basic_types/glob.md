@@ -29,6 +29,17 @@
      open '*.txt'  # it's quoted, opens a file named `*.txt`
      ```
 
+   - It will interpret an interpolated string as a glob when the string has at least one `( )` part. This holds for `$"..."`, `$'...'` and [bare-word interpolation](/book/working_with_strings.md#interpolation-in-bare-words). An interpolated string with nothing to interpolate is a plain string:
+
+     ```nu
+     let prefix = "a"
+     ls $"($prefix)*.txt"   # lists the files that start with `a` and end in `.txt`
+     ls ($prefix)*.txt      # the same
+     ls $"a*.txt"           # no `( )`, so it looks for a file named `a*.txt`
+     ```
+
+     The glob comes from writing the interpolation as the argument. If you store it in a variable first, the variable holds a string, so use `into glob` or a `glob` annotation.
+
 1. There is no literal syntax for a glob. As seen above, it is usually created as a string and then interpreted by the calling command as a glob.
 
    Example
@@ -73,6 +84,8 @@
    # Concatenate files using cat and then split to a list of lines
    ^cat *.txt | lines
    ```
+
+   For an interpolated argument, only a bare word that doesn't start with `(` is expanded. `^echo *($prefix)*` passes the matching file names, while `^echo $"*($prefix)*"` and `^echo ($prefix)*` pass the text as written.
 
 1. As with most other types, globs can be saved in a variable, passed to custom commands and returned from custom commands.
 

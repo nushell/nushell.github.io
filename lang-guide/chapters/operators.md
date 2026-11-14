@@ -12,6 +12,7 @@ For a full list with precedence values, run `help operators`. See also [Operator
 - `mod` - Modulo (floor semantics: the result has the sign of the divisor)
 - `**` - Pow
 - `++` - Concatenates two lists, two strings, or two binary values
+- `-` directly before a variable or a parenthesized expression (`-$x`, `-(1 + $x)`) - Negation of a number, duration or file size. There is no space after the `-`, and negation binds more tightly than `**`. See [Negation](/book/operators.md#negation) in the Book.
 
 ```nu
 10 / 4

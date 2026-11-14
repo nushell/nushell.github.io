@@ -81,6 +81,7 @@ The `/` operator always returns a float, even when both operands are integers an
 | **_Description:_**    | Numbers with some fractional component                                           |
 | **_Annotation:_**     | `float`                                                                          |
 | **_Literal Syntax:_** | A decimal numeric value including a decimal place. E.g., `1.5`, `2.0`, `-15.333` |
+|                       | `inf`, `-inf` and `NaN` (also `nan`) for infinity and "not a number"             |
 | **_See also:_**       | [Language Reference - Float](/lang-guide/chapters/types/basic_types/float.md)    |
 
 Simple Example:
@@ -216,6 +217,7 @@ See the [Language Reference](/lang-guide/chapters/types/basic_types/filesize.htm
 | **_Annotation:_**     | `range`                                                                                        |
 | **_Literal Syntax:_** | `<start_value>..<end_value>`. E.g., `1..10`.                                                   |
 |                       | `<start_value>..<second_value>..<end_value>`. E.g., `2..4..20`                                 |
+|                       | `..<` excludes the end value (`0..<5`), and `..=` is an explicit spelling of `..` (`0..=4`)    |
 | **_See also:_**       | [Language Guide - Range](/lang-guide/chapters/types/basic_types/range.md)                      |
 
 Simple example:
@@ -232,7 +234,7 @@ Simple example:
 ```
 
 ::: tip
-You can also easily create lists of characters with a form similar to ranges with the command [`seq char`](/commands/docs/seq_char.html) as well as with dates using the [`seq date`](/commands/docs/seq_date.html) command.
+The values of a range must be numbers, so `("a")..("z")` is an error. To make a list of characters, use the [`seq char`](/commands/docs/seq_char.html) command, and for dates use [`seq date`](/commands/docs/seq_date.html).
 :::
 
 ### Cell Paths

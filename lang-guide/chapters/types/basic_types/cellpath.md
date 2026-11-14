@@ -63,6 +63,33 @@ let data = [
   # => 1
   ```
 
+  One member can have both modifiers, in either order. `?!` and `!?` mean the same thing, and Nushell displays the combination as `!?`. Repeating a modifier is a parse error: `{a: 1}.a??` fails with "expected . or !", and `.a!!` with "expected . or ?".
+
+  ```nu
+  {Name: 1}.name?!
+  # => 1
+  {Name: 1}.age!? | describe
+  # => nothing
+  ```
+
+- Negative indexes:
+
+  A row index counts from the start, and there is no negative form for counting from the end. `$list.-1` is a parse error:
+
+  ```nu
+  [1 2 3].-1
+  # => Error: nu::parser::error
+  # =>
+  # =>   × Invalid literal
+  # =>    ╭─[repl_entry #1:1:9]
+  # =>  1 │ [1 2 3].-1
+  # =>    ·         ─┬
+  # =>    ·          ╰── negative index is not supported in cell path
+  # =>    ╰────
+  ```
+
+  A negative int passed to `get` fails at runtime with "can't convert negative number to cell path". Use [`last`](/commands/docs/last.md) to get items from the end of a list.
+
 ## Additional Language Notes
 
 1. Ordering

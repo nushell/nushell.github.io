@@ -65,6 +65,59 @@ There are 3 forms of valid type signatures in Nu:
 
 Any of these can be given a name with a [type alias](#type-aliases).
 
+## Which values a type accepts
+
+An annotation accepts values of its own type and of its subtypes. These are the subtype rules:
+
+- `any` accepts every value.
+- `number` accepts `int` and `float` values.
+- `glob` accepts a `string`, but `string` doesn't accept a `glob`. Convert it with `into string` first.
+- `cell-path` accepts a `string` or an `int`, which is why `get $key` works with a plain string or int variable.
+- `list<T>` accepts any list whose item type `T` accepts, so a `list<int>` can be passed where a `list<number>` is expected. A plain `list` accepts every list.
+- `record<a: T>` accepts any record with a field `a` that `T` accepts. The record may have other fields too. A plain `record` accepts every record.
+- `table<a: T>` follows the same rule for columns. A table is also accepted as a `list<record<...>>` with the same columns, and the other way around.
+- `oneof<A, B>` accepts whatever `A` or `B` accepts.
+
+For example, a command that needs a `name` field takes any record that has one:
+
+```nu
+def name-of [r: record<name: string>] { $r.name }
+name-of {name: "nu", stars: 30}
+# => nu
+```
+
+A record without that field is rejected when the call is parsed:
+
+```nu
+def name-of [r: record<name: string>] { $r.name }; name-of {title: "nu"}
+# => Error: nu::parser::type_mismatch
+# =>
+# =>   × Type mismatch.
+# =>    ╭─[repl_entry #1:1:60]
+# =>  1 │ def name-of [r: record<name: string>] { $r.name }; name-of {title: "nu"}
+# =>    ·                                                            ──────┬──────
+# =>    ·                                                                  ╰── expected record<name: string>, found record<title: string>
+# =>    ╰────
+```
+
+The parser can only reject a value whose type it knows can't fit. When the known type is wider than the annotation, as with a variable declared `any` or `number`, the parser lets it through and the value itself is checked when the command runs. A `number` that holds `2` can be passed to an `int` parameter, but one that holds `1.5` fails:
+
+```nu
+def double [x: int] { $x * 2 }; let y: number = 1.5; double $y
+# => Error: nu::shell::cant_convert
+# =>
+# =>   × Can't convert to int.
+# =>    ╭─[repl_entry #1:1:61]
+# =>  1 │ def double [x: int] { $x * 2 }; let y: number = 1.5; double $y
+# =>    ·                                                             ─┬
+# =>    ·                                                              ╰── can't convert float to int
+# =>    ╰────
+```
+
+`glob` to `string` is different. A `glob` is never a `string`, so passing a `glob` variable to a `string` parameter is a parse error ("expected string, found glob").
+
+Custom values, such as a `semver` from `into semver` or a value from a plugin, also pass the parser when the parameter is a `list`, `record` or `table`, and are checked when the command runs. A `semver` doesn't fit any of these, so `def f [r: record] { $r }; f ('1.2.3' | into semver)` fails at runtime with "can't convert semver to record".
+
 ## Type aliases
 
 `type Name = <type>` gives a type signature a name. The name can then be used wherever a type signature can: parameters, flags, rest parameters, closure parameters, input/output types, `let`/`mut`/`const` annotations, inside other types, and on the right-hand side of another `type`:
