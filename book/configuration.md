@@ -95,7 +95,7 @@ Environment config file created at: /home/me/.config/nushell/env.nu
 Config file created at: /home/me/.config/nushell/config.nu
 ```
 
-Nushell decides that this is the first launch only when the configuration directory doesn't exist. If you delete `config.nu` later, Nushell starts without it and doesn't write a new one. To get the commented `config.nu` back, run `config reset --nu --without-backup`. Plain [`config reset`](/commands/docs/config_reset.md) writes the same text into both files after renaming the current ones to `oldconfig-<date>.nu` and `oldenv-<date>.nu`, and fails if one of them is missing. Nushell doesn't create the `autoload` directory; see [Autoload directories](#autoload-directories).
+Nushell decides that this is the first launch only when the configuration directory doesn't exist. If you delete `config.nu` later, Nushell starts without it and doesn't write a new one. To get the commented `config.nu` back, run `config reset --nu --without-backup`. Plain [`config reset`](/commands/docs/config_reset.md) writes the same text into both files after renaming the current ones to `oldconfig-<date>.nu` and `oldenv-<date>.nu`, and fails if one of them is missing (see [`config reset`](#config-reset)). Nushell doesn't create the `autoload` directory; see [Autoload directories](#autoload-directories).
 
 ::: tip
 You can quickly open `config.nu` in your default text editor using the `config nu` command. Likewise, the `config env` command will open `env.nu`. If Nushell was started with `--config` or `--env-config`, these commands open that file instead.
@@ -202,8 +202,8 @@ path add --append {linux: "/opt/tools/bin", macos: "/opt/homebrew/bin"}
 
 ::: tip
 Notice the use of `path join` in the example above. This command properly joins two path
-components regardless of whether or not the path separator is present. See `help path` for
-more commands in this category.
+components regardless of whether or not the path separator is present. See
+[Working with Paths](./working_with_paths.md) for more commands in this category.
 
 [`path join`](/commands/docs/path_join.md) also joins a list of parts, and a part that is an absolute path replaces everything before it:
 
@@ -489,6 +489,75 @@ $env.config.table = { mode light }
 ```
 
 A few combinations only produce a warning (`nu::shell::incompatible_options`), and the value is still set. For example, setting `history.isolation = true` in `config.nu` while history uses the plain-text format warns that isolation needs SQLite history.
+
+### The `config` commands
+
+[`config`](/commands/docs/config.md) on its own only prints its help. The work is done by its subcommands:
+
+| Command                                                                                  | What it does                                                                                                                    |
+| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| [`config nu`](/commands/docs/config_nu.md), [`config env`](/commands/docs/config_env.md) | Opens `config.nu` or `env.nu` in your editor. `--doc` prints the documented settings and `--default` the built-in startup file. |
+| [`config default`](/commands/docs/config_default.md)                                     | Returns the settings Nushell starts with.                                                                                       |
+| [`config flatten`](/commands/docs/config_flatten.md)                                     | Returns the current settings as one flat record.                                                                                |
+| [`config reset`](/commands/docs/config_reset.md)                                         | Replaces `config.nu` and `env.nu` with the files Nushell writes on its first launch.                                            |
+| [`config use-colors`](/commands/docs/config_use-colors.md)                               | Returns whether Nushell colors its output right now. See [`use_ansi_coloring`](./config_reference.md#use-ansi-coloring).        |
+
+#### `config default`
+
+`config default` returns the `$env.config` record as it is before any configuration file runs. In a session started with `nu -n`, `$env.config` and `config default` are equal. The record includes the keybindings and menus that Nushell adds, such as the <kbd>Tab</kbd> completion menu, but not Reedline's own key table, which [`keybindings default`](/commands/docs/keybindings_default.md) lists. `config default` also runs at parse time, so `const defaults = config default` works.
+
+Compare it with `$env.config` to find the settings you have changed:
+
+```nu
+$env.config.show_banner = false
+$env.config.edit_mode = "vi"
+let defaults = config default
+$env.config | columns | where {|key| ($env.config | get $key) != ($defaults | get $key) }
+# => ╭───┬─────────────╮
+# => │ 0 │ edit_mode   │
+# => │ 1 │ show_banner │
+# => ╰───┴─────────────╯
+```
+
+To put one group of settings back, assign it from the defaults, as in `$env.config.table = (config default).table`.
+
+#### `config flatten`
+
+`config flatten` returns the current settings as a single record with one entry per setting. Each key is the path to the setting, with its parts joined by `.`:
+
+```nu
+config flatten | transpose key value | where key starts-with history
+# => ╭───┬───────────────────────────────┬───────────╮
+# => │ # │              key              │   value   │
+# => ├───┼───────────────────────────────┼───────────┤
+# => │ 0 │ history.max_size              │    100000 │
+# => │ 1 │ history.sync_on_enter         │ true      │
+# => │ 2 │ history.file_format           │ Plaintext │
+# => │ 3 │ history.isolation             │ false     │
+# => │ 4 │ history.path                  │ Default   │
+# => │ 5 │ history.ignore_space_prefixed │ true      │
+# => ╰───┴───────────────────────────────┴───────────╯
+```
+
+Nushell builds this record from its internal form of the settings, not from `$env.config`, so the values look different in places:
+
+- Many settings with a fixed set of values show Nushell's internal names, which start with a capital letter, such as `Plaintext`, `Rounded`, and `Fancy`. The values inside `keybindings` and `menus`, such as `none` and `columnar`, keep the spelling you wrote. `history.path` shows `Default` for the default location.
+- A list gets one key per item, numbered from `0`, as in `keybindings.0.name` and `keybindings.0.mode.0`.
+- Durations are integers in nanoseconds, so `plugin_gc.default.stop_after` is `10000000000`.
+- A closure, such as a hook, shows as its source text.
+- An empty list or record has no keys at all, so `hooks.pre_prompt`, `abbreviations`, and `plugins` are missing until they have entries. `buffer_editor` is missing until you set it.
+
+Because the keys contain dots, quote a key to read it: `config flatten | get "table.mode"` returns `Rounded`. Without the quotes, `get` reads `table.mode` as a path and fails with `Name not found`.
+
+#### `config reset`
+
+`config reset` overwrites `config.nu` and `env.nu` in `$nu.default-config-dir` with the commented files that Nushell writes on its first launch. First it renames each current file to `oldconfig-<date>.nu` or `oldenv-<date>.nu` in the same directory, with the date and time down to the second, as in `oldconfig-2026-11-14-17-38-30.nu`. The running session keeps its settings. Start a new `nu` to load the reset files.
+
+- `--nu` (`-n`) resets only `config.nu`, and `--env` (`-e`) only `env.nu`. Giving both flags resets neither file.
+- `--without-backup` (`-w`) skips the renaming, so the old contents are lost.
+- `config reset` always works on the files in `$nu.default-config-dir`. A file you passed to `nu` with `--config` or `--env-config` stays as it is.
+- Unless you pass `--without-backup`, a missing file is an error, `config.nu could not be backed up` or `env.nu could not be backed up`, although the label says `Directory not found`. `config.nu` is handled first, so when only `env.nu` is missing, `config.nu` has already been reset when the error appears. To recreate a single deleted file, combine `--without-backup` with `--nu` or `--env`.
+- With `--without-backup`, a file that can't be written, for example because the configuration directory doesn't exist, is skipped without an error, and nothing is written.
 
 ### Remove Welcome Message
 
@@ -1035,6 +1104,15 @@ debug experimental-options | select identifier enabled status
 # => │ 6 │ cell-path-types             │ false   │ opt-in             │
 # => ╰───┴─────────────────────────────┴─────────┴────────────────────╯
 ```
+
+The other columns are `description`, `since`, which is the Nushell version that added the option, and `issue`, a link to the GitHub issue that tracks it. The `experimental_options` column of [`version`](/commands/docs/version.md) gives the same states as one string, which is handy to paste into a bug report:
+
+```nu
+version | get experimental_options
+# => example=false, dc-glob=false, reorder-cell-paths=true, pipefail=true, enforce-runtime-annotations=true, native-clip=false, cell-path-types=false
+```
+
+Both show the options as they were set when this `nu` started. No command changes them in a running session.
 
 You can set them when Nushell starts, with the `--experimental-options` flag or the `NU_EXPERIMENTAL_OPTIONS` environment variable. Each entry is an option name, which turns the option on, or `name=true` or `name=false`. A bare `all` turns on every option that isn't deprecated. The variable also accepts `all=false`, which turns all of them off, but the flag accepts only a bare `all`. The variable holds a comma-separated list:
 

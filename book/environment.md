@@ -63,9 +63,20 @@ load-env { "BOB": "FOO", "JAY": "BAR" }
 
 `load-env` also takes the record as pipeline input, which suits commands that output one, as in `direnv export json | from json | load-env` (see [Direnv](/cookbook/direnv.md)).
 
-Each string value goes through its `from_string` conversion in `$env.ENV_CONVERSIONS`, and a string `PATH` becomes a list (see [Environment Variable Conversions](#environment-variable-conversions)). `--no-convert` sets the values exactly as given. If a conversion fails, `load-env` sets none of the variables.
+Each string value goes through its `from_string` conversion in `$env.ENV_CONVERSIONS`, and a string `PATH` becomes a list (see [Environment Variable Conversions](#environment-variable-conversions)). `--no-convert` sets the values exactly as given. If a conversion fails, `load-env` sets none of the variables, unless the record has an `ENV_CONVERSIONS` key (see below).
 
-Two kinds of keys are special. A `config` key applies its settings to `$env.config` right away, as assigning `$env.config` does. `PWD`, `FILE_PWD`, and `CURRENT_FILE` are rejected with an error (see [Automatic variables](#automatic-variables)).
+Three kinds of keys are special. A `config` key applies its settings to `$env.config` right away, as assigning `$env.config` does. `PWD`, `FILE_PWD`, and `CURRENT_FILE` are rejected with an error (see [Automatic variables](#automatic-variables)). An `ENV_CONVERSIONS` key changes the order. `load-env` first sets every value in the record as given, then runs the new conversions on every string variable, as assigning `$env.ENV_CONVERSIONS` does. One record can therefore carry a conversion and the variable it converts:
+
+```nu
+load-env { ENV_CONVERSIONS: { FOO: { from_string: { split row '-' } } }, FOO: 'a-b' }
+$env.FOO
+# => ╭───┬───╮
+# => │ 0 │ a │
+# => │ 1 │ b │
+# => ╰───┴───╯
+```
+
+When one of those conversions fails, `load-env` reports the error, but the values from the record stay set. [`with-env`](/commands/docs/with-env.md) handles an `ENV_CONVERSIONS` key the same way.
 
 ### One-shot Environment Variables
 
@@ -174,6 +185,8 @@ See also: [Changing the Environment in a Custom Command](./custom_commands.html#
 ## Changing the Directory
 
 A common task in a shell is to change the directory using the [`cd`](/commands/docs/cd.md) command. In Nushell, [`cd`](/commands/docs/cd.md) works by changing the `PWD` environment variable. Therefore, it follows the same rules as other environment variables (for example, scoping). You can't assign `PWD` yourself, though. Use `cd` instead.
+
+Before it changes `PWD`, `cd` saves the old directory in `OLDPWD`, and `cd -` goes back to it. Auto-cd at the prompt sets `OLDPWD` too. See [`$env.OLDPWD`](./special_variables.md#env-oldpwd).
 
 ## Automatic variables
 

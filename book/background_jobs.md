@@ -6,7 +6,7 @@ next:
 
 # Background Jobs
 
-Nushell currently has experimental support for thread-based background jobs.
+Nushell currently has experimental support for thread-based background jobs. The subcommands of [`job`](/commands/docs/job.md) start, list, and control them. `job` on its own only prints its help, which lists those subcommands.
 
 ## Spawning Jobs
 
@@ -155,6 +155,24 @@ job spawn {
 job recv
 # => Hello from a background job
 ```
+
+Inside a job, [`job id`](/commands/docs/job_id.md) returns that job's own ID. Outside any job, it returns `0`, the ID of the main thread. A job spawned from another job gets an ID of its own. When several jobs report back to the same receiver, `job id` lets each message say which job sent it:
+
+```nu
+for n in 1..3 {
+    job spawn { {job: (job id), result: ($n * 10)} | job send 0 }
+}
+1..3 | each { job recv } | sort-by job
+# => ╭───┬─────┬────────╮
+# => │ # │ job │ result │
+# => ├───┼─────┼────────┤
+# => │ 0 │   1 │     10 │
+# => │ 1 │   2 │     20 │
+# => │ 2 │   3 │     30 │
+# => ╰───┴─────┴────────╯
+```
+
+The IDs depend on how many jobs the session has started before.
 
 Messages can carry a numeric tag with `job send --tag`. `job recv --tag` then only receives messages with that tag, leaving others in the mailbox, and `job recv --timeout` stops waiting after the given duration:
 

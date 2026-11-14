@@ -517,6 +517,88 @@ must be set in `config.nu`. They can't be changed once the REPL has started. Set
 `$env.config.history.path` to `null` turns off the history file.
 :::
 
+### The `history` commands
+
+[`history`](/commands/docs/history.md) returns the saved history as a table, oldest command
+first. With the default plain-text history it has two columns, `command` and `index`, the
+entry's position in the file. The table shows `index` in its `#` column:
+
+```nu
+history
+# => ╭───┬─────────╮
+# => │ # │ command │
+# => ├───┼─────────┤
+# => │ 0 │ ls      │
+# => │ 1 │ echo hi │
+# => │ 2 │ cd /tmp │
+# => ╰───┴─────────╯
+```
+
+With SQLite history, the columns are `start_timestamp`, `command`, `cwd`, `duration` and
+`exit_status`, so you can ask questions such as
+`history | where exit_status != 0 and cwd == $env.PWD`. `--long` (`-l`) adds `item_id`,
+`session_id`, `hostname` and `idx`, the row's position in the database. Plain-text history
+stores only the command lines, and `--long` changes nothing there. SQLite history is read from the
+database only when a later command needs the rows, so `describe` calls the result
+`SQLiteQueryBuilder`. Most commands treat it as a table, but a few, such as `to nuon`, reject it
+with `custom values are currently not nuon-compatible`. Pipe it through
+[`into value`](/commands/docs/into_value.md) first to get a plain table.
+
+`history` reads the history file, so it shows what has been written to it:
+
+- Plain-text history writes the new commands to the file just before the next prompt, with the
+  default `history.sync_on_enter`. The line that runs `history` isn't in the file yet, so
+  `history | last` is the command before it. With `sync_on_enter: false`, the file is written
+  only when Nushell exits, and `history` doesn't show this session's commands at all.
+- SQLite history saves each command when you press <kbd>Enter</kbd>, so `history | last` is the
+  line that runs `history`.
+
+Started with `nu --no-history`, `history` returns nothing. With `history.path` set to `null`, it
+fails with `The config directory could not be found`.
+
+`history --clear` (`-c`) deletes the history without asking. It removes the plain-text file, or
+every row of the SQLite database. With plain-text history and the default `sync_on_enter`, the
+session's own list is emptied at the next prompt too, so <kbd>↑</kbd> then finds only the
+`history --clear` line.
+
+[`history session`](/commands/docs/history_session.md) returns the ID of the current session.
+With SQLite history and `history.isolation` turned on, each command is saved with this ID in its
+`session_id` column, so this lists the commands you have run in this session:
+
+```nu
+history --long | where session_id == (history session) | get command
+```
+
+With `history.isolation` off, `history session` returns `0`, and `session_id` stays empty.
+Plain-text history can't store the ID, but with `isolation` on, `history session` still returns
+one. The ID is the time the session started, in nanoseconds since 1970, so
+`history session | into datetime` shows when that was.
+
+[`history import`](/commands/docs/history_import.md) adds commands to the history file in use.
+With no input, it copies every entry from the file of the other format, `history.sqlite3` when
+you use plain text or `history.txt` when you use SQLite, which keeps your history when you change
+`history.file_format`. It looks for that file in the configuration directory, even when
+`history.path` points elsewhere. If there's no such file, it creates an empty one and imports
+nothing. Like `history`, it does nothing in a `nu --no-history` session and fails when
+`history.path` is `null`.
+
+Piped input can be:
+
+- A string or a list of strings, one command each. This suits another shell's history file:
+  `open ~/.bash_history | lines | history import`.
+- A table with a `command` column and any of `start_timestamp` (a date), `hostname`, `cwd`,
+  `duration` (a duration) and `exit_status` (an int).
+
+Plain-text history keeps only the command, and it skips a command that is the same as the one
+before it. A missing `command` column is an error, and so is any other column, which means the
+output of `history` can't go straight back in. `history | history import` fails with
+`unsupported column names: index`.
+
+Before it writes anything, `history import` copies the current history file to `<file>.bak`, or
+to `<file>.bak.1`, `<file>.bak.2` and so on when that name is taken, and prints
+`Backed history to` and the path. It does this even when the import then fails. After 99 numbered
+backups it fails with `Too many backup files` until you delete some.
+
 ### Prefix search with the arrow keys
 
 On an empty line, <kbd>↑</kbd> (or <kbd>Ctrl</kbd>+<kbd>P</kbd>) steps back through the whole
@@ -777,6 +859,10 @@ time: `--modifiers` (`-m`), `--keycodes` (`-k`), `--modes` (`-o`), `--events` (`
 `--edits` (`-d`). Without flags it lists them all, as a table with a `type` column (`modifiers`,
 `keycodes`, `modes`, `events` or `edits`) and a `name` column. The modifier list shows only the
 common combinations, and the keycode list writes `Char_<letter>` and `F<number>` for whole ranges.
+
+[`keybindings`](/commands/docs/keybindings.md) on its own only prints its help, which lists its
+three subcommands: `keybindings default`, `keybindings list` and
+[`keybindings listen`](#troubleshooting-keybinding-problems).
 :::
 
 ::: tip
@@ -916,9 +1002,8 @@ $env.config.keybindings ++= [{
 
 The command runs without touching the line you were typing, and the line is still there
 afterwards. The command isn't saved in the history. It can read and change the line with
-[`commandline`](/commands/docs/commandline.md) and its subcommands.
-[`pre_execution` Hooks](./hooks.md#pre-execution-hooks) explains those commands, with a
-keybinding that puts `sudo ` in front of the line.
+[`commandline`](/commands/docs/commandline.md) and its subcommands, which
+[Changing the line from Nushell code](#changing-the-line-from-nushell-code) explains.
 
 and the `SwitchMode` event needs the `mode` to switch to. It accepts the same
 mode names as the keybinding's `mode` field (such as `vi_normal` or `helix_normal`).
@@ -1132,6 +1217,59 @@ $env.config.keybindings ++= [{
 }]
 ```
 
+### Changing the line from Nushell code
+
+[`commandline`](/commands/docs/commandline.md) returns the text in the line editor's buffer as a
+string. Three subcommands read or change the buffer and the cursor:
+
+- [`commandline get-cursor`](/commands/docs/commandline_get-cursor.md) returns the cursor
+  position, `0` before the first character and the length of the line when the cursor is at the
+  end. It counts characters as you see them, the way `str length --grapheme-clusters` does, so
+  `é` or an emoji counts as one.
+- [`commandline set-cursor`](/commands/docs/commandline_set-cursor.md) moves the cursor to a
+  position counted the same way. `0` or a negative position goes to the start, and a position
+  past the end goes to the end. `--end` (`-e`) also goes to the end. Given both a position and
+  `--end`, it uses the position, and given neither, it fails with
+  `Required a positional argument or a flag`.
+- [`commandline edit`](/commands/docs/commandline_edit.md) changes the text. `--replace` (`-r`),
+  the default, replaces the whole line and puts the cursor at its end. `--insert` (`-i`) inserts
+  the text at the cursor and moves the cursor past it. `--append` (`-a`) adds the text at the end
+  and leaves the cursor where it was. Only one of the three applies. `--append` beats `--insert`,
+  which beats `--replace`. `--accept` (`-A`) works with any of them and runs the line as soon as
+  the change is made, as if you had pressed <kbd>Enter</kbd>.
+
+These commands are mostly used from a keybinding with
+[`executehostcommand`](#send-type). This one types `()` at the cursor and puts the cursor between
+the parentheses, ready for a subexpression:
+
+```nu
+$env.config.keybindings ++= [{
+    name: insert_parens
+    modifier: alt
+    keycode: char_p
+    mode: [emacs vi_insert]
+    event: {
+        send: executehostcommand
+        cmd: 'commandline edit --insert "()"; commandline set-cursor ((commandline get-cursor) - 1)'
+    }
+}]
+```
+
+Where the command runs decides which line it sees and when its changes show up:
+
+- In an `executehostcommand` keybinding, `commandline` returns the line you are editing, and the
+  changes apply to that line when the command finishes.
+- Typed at the prompt, the command runs after its own line was submitted, so `commandline`
+  returns an empty string. `commandline edit` fills in the line of the next prompt instead.
+  `commandline edit 'git status'` leaves `git status` there to edit, and with `--accept` it runs
+  right away.
+- In a `pre_prompt` or `env_change` [hook](./hooks.md), `commandline edit` fills in the line of
+  the prompt that is about to appear.
+- In a `pre_execution` hook, `commandline` returns the line about to run, but a change made with
+  `commandline edit` is thrown away. The line has already been read.
+- In a script or with `nu -c`, there is no line editor. `commandline` returns an empty string
+  until `commandline edit` stores some text, and nothing ever runs it.
+
 ### Removing a Default Keybinding
 
 If you want to remove a certain default keybinding without replacing it with a different action, you can set `event: null`.
@@ -1343,7 +1481,12 @@ liking.
 The suggestions depend on what is under the cursor. At the start of a command the menu offers
 command names, after a `-` the command's flags, after a `$` the variables in scope, and for most
 arguments the names of files and directories. A [custom completer](./custom_completions.md) can
-replace the suggestions for a command's arguments. The IDE completion menu below shows the same
+replace the suggestions for a command's arguments. For an external command,
+[`generate completions`](/commands/docs/generate_completions.md) writes `extern` definitions that
+give its flags and their values to the menu, built from the command's fish, zsh or carapace
+completions, its man page, or its `--help` text (see
+[Generating completions for an external command](/cookbook/system.md#generating-completions-for-an-external-command)).
+The IDE completion menu below shows the same
 suggestions in a different layout. The sections that follow cover built-in completions that are
 easy to miss.
 
@@ -1890,6 +2033,9 @@ abbr list
 # => │ 2 │ ptop │ ps | compact cpu | sort-by cpu -r | first 15 │
 # => ╰───┴──────┴──────────────────────────────────────────────╯
 ```
+
+`abbr list` is the only subcommand of [`abbr`](/commands/docs/abbr.md), and `abbr` on its own
+only prints its help. To add or remove abbreviations, change `$env.config.abbreviations`.
 
 ## Terminal integration
 

@@ -235,6 +235,44 @@ help commands
 Notice that the `params` and `input_output` columns of the output above are _nested_ tables. Nushell allows [arbitrarily nested data structures](./navigating_structured_data.md#background).
 :::
 
+Nushell also ships a short tutorial. [`tutor`](/commands/docs/tutor.md) on its own prints a welcome message, `tutor begin` starts with the basics, and `tutor list` shows the topics:
+
+```nu
+tutor list
+# => This tutorial contains the following topics:
+# =>
+# => - begin
+# => - table
+# => - cell
+# => - expr
+# => - echo
+# => - each
+# => - var
+# => - block
+# => - conditional
+# => - custom-command
+# => - closure
+# => - pipeline-input
+# => - shorthand
+# => - shortcut
+# =>
+# => You can learn about a topic using tutor followed by the name of the topic.
+# => For example: tutor table to open the table topic.
+```
+
+Most topics also answer to other spellings, so `tutor tables`, `tutor columns`, and `tutor rows` all open `table`. The names are case-sensitive, and a name `tutor` doesn't know prints the welcome message again instead of an error. To find the topics that mention something, use `tutor --find` (`-f`), which also matches case exactly and ignores any topic name you give with it:
+
+```nu
+tutor --find where
+# => You can find 'where' in the following topics:
+# =>
+# => - conditional
+# => - closure
+# =>
+# => You can learn about a topic using tutor followed by the name of the topic.
+# => For example: tutor table to open the table topic.
+```
+
 ## `explore`'ing from Here
 
 That `help commands` output is quite long. You could send it to a pager like `less` or `bat`, but Nushell includes a built-in `explore` command that lets you not only scroll, but also telescope-in to nested data. Try:

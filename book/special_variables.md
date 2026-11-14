@@ -130,6 +130,12 @@ const this_dir = path self | path dirname
 
 Like `CURRENT_FILE`, it can't be assigned or hidden, it doesn't exist in the REPL or in `nu -c`, and it is set at the same times (see [`$env.CURRENT_FILE`](#env-current-file)).
 
+### `$env.GH_TOKEN` and `$env.GITHUB_TOKEN`
+
+[`version check`](/commands/docs/version_check.md) asks the GitHub API for the latest Nushell release. GitHub answers only a limited number of requests without a token, and past that limit `version check` fails with `failed to check for the latest version` and a hint that GitHub is rate limiting you. When `GH_TOKEN` or `GITHUB_TOKEN` holds a GitHub token, `version check` sends it with the request, which raises the limit. The `gh` CLI reads the same two variables, so a token you already use there works here too.
+
+When both are set, `GH_TOKEN` wins, as it does for `gh`. Nushell trims spaces from the value and skips a variable that is empty or only spaces, so an empty `GH_TOKEN` falls through to `GITHUB_TOKEN`. If GitHub rejects the token as unauthorized, `version check` sends the request again without it. The variables are read from `$env` when the command runs, so `with-env { GH_TOKEN: $token } { version check }` works. No other Nushell command reads them, and the [`http`](/commands/docs/http.md) commands don't send them.
+
 ### `$env.HOME`
 
 On Unix, `HOME` is the user's home directory. Nushell reads it once, when it starts, to set [`$nu.home-dir`](#nu) and the directory that `~` expands to. Assigning `$env.HOME` afterwards changes what external commands see, but not `~`:
@@ -190,13 +196,21 @@ A few commands treat it in their own way:
 - [`complete`](/commands/docs/complete.md) leaves it unchanged. Read the exit code from its `exit_code` column.
 - [`do --ignore-errors`](/commands/docs/do.md) sets it to `0` when it hides the failure of an external command. A Nushell error inside it leaves the value unchanged.
 
-On Unix, when a signal kills an external command, the value is the negative signal number, such as `-9` for `SIGKILL`:
+On Unix, when a signal kills an external command, the exit code is the negative signal number, such as `-9` for `SIGKILL` or `-15` for `SIGTERM`. `$env.LAST_EXIT_CODE`, the `exit_code` column of `complete`, and the `exit_code` field of the error that `catch` receives all hold that negative number:
 
 ```nu
 try { ^sh -c 'kill -9 $$' } catch {}
 $env.LAST_EXIT_CODE
 # => -9
+
+^sh -c 'kill -15 $$' | complete | get exit_code
+# => -15
+
+try { ^sh -c 'kill -15 $$' } catch {|e| $e.exit_code }
+# => -15
 ```
+
+Without `try` or `complete`, the command fails with a `nu::shell::terminated_by_signal` error that names the signal, as in `terminated by SIGTERM (15)`. See [`display_errors`](./config_reference.md#display-errors) to keep that error from being printed.
 
 ### `$env.LC_ALL`, `$env.LC_TIME`, and `$env.LANG`
 
@@ -375,6 +389,30 @@ From outside Nushell, `nu --version` (`-v`) prints the same version number and n
 
 Leftovers from the built-in `shells` and `enter` commands of older Nushell versions. Nothing in Nushell reads them, but they can show up in `$env`. When you change directories at the prompt by typing just a path (auto-cd), the REPL writes the new directory into the `NUSHELL_SHELLS` list, at the index in `NUSHELL_CURRENT_SHELL` (`0` when it isn't set), and sets `NUSHELL_LAST_SHELL`. [`cd`](/commands/docs/cd.md) doesn't touch them. To keep a list of directories and move between them, use the [`dirs` module](./directory_stack.md).
 
+### `$env.OLDPWD`
+
+The directory you were in before you last changed directory. Each time [`cd`](/commands/docs/cd.md) changes directory, it first copies `$env.PWD` into `$env.OLDPWD`, and auto-cd at the prompt does the same (see [`auto_cd_implicit`](./config_reference.md#auto-cd-implicit)). `cd -` goes to `$env.OLDPWD`, so repeating it switches back and forth between two directories:
+
+```nu
+cd /tmp
+cd /usr
+$env.OLDPWD
+# => /tmp
+cd -
+pwd
+# => /tmp
+cd -
+pwd
+# => /usr
+```
+
+Some details:
+
+- Nushell doesn't set `OLDPWD` when it starts. If the program that started Nushell passed one in the environment, `cd -` goes there. If there is none, `cd -` stays in the current directory.
+- A `cd` that fails because the directory doesn't exist leaves `OLDPWD` unchanged. One that fails because you may not enter the directory sets `OLDPWD` to the current directory, so a `cd -` right after it stays where you are.
+- `OLDPWD` follows the same scoping rules as `PWD`. A `cd` inside a custom command changes neither for the caller, unless the command is defined with `def --env`.
+- Unlike `PWD`, you can assign it yourself to choose where `cd -` goes. A value that isn't a string makes `cd -` fail with `Can't convert to path`.
+
 ### `$env.PATH`
 
 The search path for executing other applications. It is initially inherited from the parent process as a string, but converted to a Nushell `list` at startup for easy access.
@@ -430,6 +468,23 @@ RUST_BACKTRACE=1 nu
 ```
 
 `RUST_BACKTRACE=full` prints a longer backtrace. This variable is about crashes in Nushell's Rust code. To trace an error through the Nushell commands that led to it, use [`NU_BACKTRACE`](#env-nu-backtrace).
+
+The [`panic`](/commands/docs/panic.md) command crashes Nushell on purpose, with the message you give it, or `Panic!` without one. Use it to see what a crash report looks like, or to test how a program that runs `nu` copes with a crash:
+
+```nu
+panic 'testing the crash handler'
+# => Error:   × Main thread panicked.
+# =>   ├─▶ at crates/nu-command/src/misc/panic.rs:40:9
+# =>   ╰─▶ testing the crash handler
+# =>   help: set the `RUST_BACKTRACE=1` environment variable to display a
+# =>         backtrace.
+```
+
+A crash isn't a Nushell error, so `try` can't catch it. What happens next depends on where it happens:
+
+- In a script or with `nu -c`, Nushell exits with status `101`.
+- At the prompt, the REPL keeps running. It throws away what the crashed line changed, such as a variable or an `$env` value the line set, and shows a new prompt.
+- In a [background job](./background_jobs.md), only that job ends, although the report still says `Main thread panicked.`
 
 ### `$env.SHLVL`
 

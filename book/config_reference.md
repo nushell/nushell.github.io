@@ -84,7 +84,9 @@ Reading the setting back gives `true`, `"short"`, or `false`. The banner is the 
 
 ### `rm.always_trash`
 
-With `true`, [`rm`](/commands/docs/rm.md) moves files to the system trash as if you had passed `--trash`. With `false`, it deletes them permanently. The `--trash` and `--permanent` flags always win over this setting. The trash needs support from the operating system.
+With `true`, [`rm`](/commands/docs/rm.md) moves files to the system trash as if you had passed `--trash`. With `false`, it deletes them permanently. The `--trash` and `--permanent` flags always win over this setting. Given both flags, `rm` uses the trash. When moving a file to the trash fails, the error suggests `--permanent`.
+
+The trash needs a `nu` built with the `trash-support` feature, which the default build includes (`version | get features` lists it), and it isn't available on Android or iOS. Without it, `rm --trash` fails, and so does every `rm` while `rm.always_trash` is `true`, even with `--permanent`. Set it back to `false` to delete files there.
 
 ### `recursion_limit`
 
@@ -250,6 +252,16 @@ Each of these makes Nushell send escape sequences that the terminal has to under
 5. Otherwise, Nushell colors output when its standard output is a terminal.
 
 Without colors, error messages are drawn with plain ASCII characters instead of line-drawing ones. The [`ansi`](/commands/docs/ansi.md) command ignores this setting.
+
+[`config use-colors`](/commands/docs/config_use-colors.md) runs this check and returns the answer as a `bool`. Use it in your own commands instead of reading `$env.config.use_ansi_coloring`, which may hold `"auto"`:
+
+```nu
+def warn [msg: string] {
+    if (config use-colors) { print $"(ansi yellow)($msg)(ansi reset)" } else { print $msg }
+}
+```
+
+A change to `$env.config.use_ansi_coloring` counts right away. The environment variables are read from the session's global environment, though, not from the current scope. A change to `FORCE_COLOR`, `NO_COLOR`, `CLICOLOR`, or `TERM` made in `config.nu` or `env.nu` counts. One made at the prompt counts from the next command line on. One made inside a script, with `nu -c`, or with [`with-env`](/commands/docs/with-env.md) doesn't change the answer. The terminal check looks at Nushell's own standard output, so `config use-colors` gives the same answer whether or not its result is piped.
 
 ## Errors
 

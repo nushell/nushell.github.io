@@ -146,7 +146,9 @@ print (1 + 3)
 
 Run `$env.config.hooks.pre_execution = []` to turn this off again.
 
-On its own, `commandline` returns the text in the line editor's buffer as a string. In a `pre_execution` hook, that's the line about to run. Outside the REPL, in a script or with `nu -c`, it returns an empty string. Two of its subcommands change the buffer. [`commandline edit`](/commands/docs/commandline_edit.md) inserts, appends, or replaces text, and [`commandline set-cursor`](/commands/docs/commandline_set-cursor.md) moves the cursor.
+On its own, `commandline` returns the text in the line editor's buffer as a string. In a `pre_execution` hook, that's the line about to run. A `pre_execution` hook can't change that line. Nushell has already read it, so [`commandline edit`](/commands/docs/commandline_edit.md) there has no effect. In a `pre_prompt` or `env_change` hook, `commandline edit` fills in the line of the prompt that is about to appear.
+
+[Changing the line from Nushell code](./line_editor.md#changing-the-line-from-nushell-code) covers `commandline edit`, [`commandline set-cursor`](/commands/docs/commandline_set-cursor.md), and [`commandline get-cursor`](/commands/docs/commandline_get-cursor.md), and what each does at the prompt, in a keybinding, and in a script.
 
 These commands also work from a keybinding whose event is [`executehostcommand`](line_editor.md#send-type), which runs Nushell code while you're still editing the line. For example, this keybinding puts `sudo ` in front of the current line when you press <kbd>Alt</kbd>+<kbd>S</kbd>:
 
