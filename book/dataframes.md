@@ -63,6 +63,7 @@ polars store-ls | select key type columns rows estimated_size
 ::: tip
 `polars open` opens a file as a lazy dataframe by default.
 To open it as an eager dataframe, use the `--eager` flag.
+JSON and Avro files always open as eager dataframes. See [Reading options](#reading-options).
 :::
 
 We can have a look at the first lines of the file using [`polars first`](/commands/docs/polars_first.md):
@@ -96,6 +97,22 @@ To output more statistically correct timings, let's load and use the `std bench`
 ```nu
 use std/bench
 ```
+
+::: details More about `bench`
+[`bench`](./standard_library.md) runs each closure you give it 50 times unless you pass `--rounds` (`-n`), and returns a record with the `mean`, `min`, `max`, and `std` (standard deviation) of the run times. `--verbose` (`-v`) adds a `times` list with every round's duration. `--pretty` (`-p`) returns a string such as `3sec 268ms +/- 50ms` instead, and then `--verbose` has no effect.
+
+Give it several closures and it times each one and returns a table with a `code` column holding each closure's source and a `ratio` column, where the fastest closure has a ratio of `1.0`. With `--pretty` it prints each benchmark and then a line saying how many times faster the fastest closure ran than each of the others.
+
+The other flags control what runs around the timed code:
+
+- `--warmup` (`-w`) runs each closure that many extra times before timing starts. Use it to fill the disk cache before timing a command that reads files.
+- `--setup` (`-s`) and `--cleanup` (`-c`) take closures that run once, before the first benchmark and after the last one.
+- `--prepare` (`-S`) and `--conclude` (`-C`) take closures that run before and after every round, warmup rounds included. With several closures to compare, they receive the index of the closure being timed (starting at 0), both as an argument and as `$in`, so they can prepare different things for each one.
+- `--ignore-errors` (`-i`) keeps going when the timed closure fails.
+- `--progress` (`-P`) prints a round counter while it runs.
+
+Every 10 rounds, `bench` also writes an OSC 9;4 escape sequence with the percentage done. Terminals such as Windows Terminal show it as a progress bar, and `bench` clears it when it finishes.
+:::
 
 We are going to group the data by year, and sum the column `geo_count`.
 
@@ -170,6 +187,7 @@ analysis without leaving the terminal.
 Let's clean up the cache from the dataframes that we used during benchmarking.
 To do that, let's stop the `polars`.
 When we execute our next commands, we will start a new instance of plugin.
+[The object store](#the-object-store) explains what stopping the plugin does to the dataframes it holds.
 
 ```nu
 plugin stop polars
@@ -284,6 +302,87 @@ The plugin reads these variables from its own environment, which it gets from `$
 
 Not every format works with cloud storage. `polars open` reads CSV, TSV, Parquet, Arrow, and NDJSON files from a cloud URL, always as a lazy dataframe, so `--eager` fails with `Cloud URLs are not supported with --eager`. JSON and Avro files can't be read from the cloud. `polars save` writes Parquet, Arrow, NDJSON, and CSV files to the cloud, but not Avro.
 
+### Reading options
+
+[`polars open`](/commands/docs/polars_open.md) picks a reader from the file extension: `csv`, `tsv`, `parquet` (or `parq` and `pq`), `arrow` (or `ipc`), `json`, `jsonl` (or `ndjson`), and `avro`. Any other extension fails with `Unsupported type`, and a file without an extension fails with an I/O error. Use `--type` (`-t`) with one of those names to choose the reader yourself, for example `--type csv` for a `.txt` file.
+
+CSV, TSV, Parquet, Arrow, and NDJSON files open as lazy dataframes, and the file isn't read until the plan runs. That means a problem in the file, such as a value that doesn't fit its column's type, is reported when you collect the dataframe, not when you open it. JSON and Avro files are always read eagerly, with or without `--eager`.
+
+CSV and TSV files take the most options:
+
+- `--delimiter` (`-d`) sets the one-character field separator. A `.tsv` file is split on tabs only when it opens lazily. With `--eager` it is split on commas unless you also pass `--delimiter "\t"`.
+- `--no-header` reads the first line as data and names the columns `column_1`, `column_2`, and so on.
+- `--skip-rows` skips that many lines at the top of the file, before the header.
+- `--infer-schema` sets how many rows Polars reads to guess each column's type. The default is 100. If a column holds only numbers in those rows and text further down, collecting fails with `could not parse ... as dtype`, and you need a larger number or `--schema`.
+- `--schema` (`-s`) sets the types yourself, as a record of column name to type name. It applies by position: its names replace the header's names, and it must have one entry for every column in the file. `--schema` also works for JSON and NDJSON files.
+- `--truncate-ragged-lines` drops the extra fields on a line that has more fields than the header. Without it, such a line fails with `found more fields than defined in 'Schema'`.
+- `--columns` reads only the listed columns, but only on eager reads of CSV, Parquet, Arrow, and Avro files. A lazy read ignores it, so use [`polars select`](/commands/docs/polars_select.md) there.
+
+For example, this file has a comment line before the header and uses semicolons:
+
+```nu
+"# exported 2026-11-14
+id;name;score
+1;ann;7
+2;bob;9" | save --force scores.csv
+
+polars open scores.csv --skip-rows 1 --delimiter ";" --schema {id: u32, name: str, score: f64} | polars collect
+# => ╭───┬────┬──────┬───────╮
+# => │ # │ id │ name │ score │
+# => ├───┼────┼──────┼───────┤
+# => │ 0 │  1 │ ann  │  7.00 │
+# => │ 1 │  2 │ bob  │  9.00 │
+# => ╰───┴────┴──────┴───────╯
+```
+
+Parquet and Arrow data is often split across a Hive-partitioned directory, where each directory level is named `column=value`, as in `sales/year=2024/region=eu/part.parquet`. Open the directory, with `--type` because a directory has no extension, and Polars adds a column for each level:
+
+```nu
+polars open sales --type parquet | polars collect
+# => ╭───┬──────┬────────┬──────┬────────╮
+# => │ # │ item │ amount │ year │ region │
+# => ├───┼──────┼────────┼──────┼────────┤
+# => │ 0 │ pen  │      3 │ 2024 │ eu     │
+# => │ 1 │ ink  │      5 │ 2024 │ eu     │
+# => │ 2 │ cup  │      7 │ 2025 │ us     │
+# => ╰───┴──────┴────────┴──────┴────────╯
+```
+
+The Hive flags apply to lazy reads only. With `--eager`, opening a directory fails with `Parquet reader error`.
+
+- Hive partitioning is on when you open a directory, and off when you open a glob such as `"sales/**/*.parquet"`. Write `--hive-enabled=true` to turn it on for a glob, or `--hive-enabled=false` to turn it off for a directory. The bare switch `--hive-enabled` changes nothing.
+- `--hive-schema` sets the types of the partition columns, as a record like `--schema`. It has to name every partition column, or collecting fails with `path contains column not present in the given Hive schema`.
+- `--hive-try-parse-dates` turns partition values that look like dates, such as `day=2025-01-02`, into a `date` column instead of a string column.
+- `--hive-start-idx` has no effect on file paths. Polars works out where the partition directories start from the path you pass.
+
+### The object store
+
+The plugin keeps every dataframe, lazy dataframe, expression, group-by, and other Polars object you create in an in-memory store, and a Nushell value such as `$df_1` holds only a key into that store. The Polars value types table under [Core Plugin Quickstart](./plugins.md#core-plugin-quickstart) lists these kinds of values and the commands that make them. [`polars store-ls`](/commands/docs/polars_store-ls.md) lists what's stored. Right after loading `$df_1`, it holds just that one dataframe:
+
+```nu
+polars store-ls | select type span_contents reference_count
+# => ╭───┬───────────┬───────────────┬─────────────────╮
+# => │ # │   type    │ span_contents │ reference_count │
+# => ├───┼───────────┼───────────────┼─────────────────┤
+# => │ 0 │ DataFrame │ polars open   │               1 │
+# => ╰───┴───────────┴───────────────┴─────────────────╯
+```
+
+Each row has these columns:
+
+- `key` is the ID that Nushell values use to find the object.
+- `created` is when the object was stored. Group-by objects and the ones [`polars when`](/commands/docs/polars_when.md) makes have no `created` value.
+- `type` is `DataFrame`, `LazyFrame`, `Expression`, `LazyGroupBy`, `When`, `DataType`, `Schema`, or `Selector`.
+- `columns`, `rows`, and `estimated_size` are the width, height, and approximate memory use of a dataframe, and are empty for every other type. To fill them in for a lazy dataframe, `polars store-ls` runs its plan, so listing the store can take as long as collecting every stored lazy dataframe. A lazy dataframe whose plan fails makes `polars store-ls` fail too.
+- `span_contents`, `span_start`, and `span_end` give the source text that created the object, such as `polars open` or `$df_5 * 3`, and where that text sits in Nushell's source buffer.
+- `reference_count` counts the separate Nushell values that point to the object.
+
+An object stays in the store while a Nushell value refers to it. When the last of those values goes away, for example when a variable goes out of scope at the end of a block, or when a pipeline's result has been printed, Nushell tells the plugin and the plugin deletes the object. Copying a variable with `let df_copy = $df_1` doesn't add a reference, because both variables hold the same Nushell value. Commands that return an object that's already stored do add one: [`polars collect`](/commands/docs/polars_collect.md) on an eager dataframe and [`polars store-get`](/commands/docs/polars_store-get.md) return the same key and raise `reference_count` by one. The object is deleted once all of those values are gone. [`polars store-rm`](/commands/docs/polars_store-rm.md) deletes an object right away, whatever its count.
+
+Nushell's [plugin garbage collector](./plugins.md#plugin-garbage-collector) stops a plugin that has been idle for a while (10 seconds by default). The Polars plugin turns the garbage collector off for itself while anything is in its store, and back on once the store is empty. So as long as you hold a dataframe in a variable, the plugin keeps running however long it sits idle, and your `plugin_gc` settings don't stop it.
+
+`plugin stop polars` ends the plugin and throws away everything in the store. Variables that held dataframes still exist afterward, but using one fails with an error such as `Dataframe 600680b3-3242-47a6-b41a-9b71691e08ae not found in cache`, and you have to load the data again.
+
 ## Basic Aggregations
 
 Let's start with basic aggregations on the dataframe. Let's sum all the columns
@@ -298,9 +397,10 @@ $df_1 | polars sum | polars collect
 # => ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴──────╯
 ```
 
-As you can see, `polars sum` computes the sum for those columns where
-a sum makes sense. If you want to filter out the text column, you can select
-the columns you want by using the [`polars select`](/commands/docs/polars_select.md) command
+As you can see, `polars sum` adds up the integer and float columns, skipping
+null values. A boolean column sums to the number of `true` values, and text and
+date columns have no sum, so they come back null. If you want to filter out the
+text column, you can select the columns you want by using the [`polars select`](/commands/docs/polars_select.md) command
 
 ```nu
 $df_1 | polars sum | polars select int_1 int_2 float_1 float_2 | polars collect
@@ -338,6 +438,25 @@ polars store-ls | sort-by created | select key type columns rows estimated_size
 ```
 
 Pretty neat, isn't it?
+
+`polars sum` also has an expression form that sums a single column. Piping
+`polars col int_1` into `polars sum` doesn't add anything up yet. It builds an
+expression, and the sum happens when a command such as `polars select`,
+`polars with-column`, or `polars agg` runs it. [`polars as`](/commands/docs/polars_as.md)
+names the result:
+
+```nu
+$df_1 | polars select (polars col int_1 | polars sum) (polars col float_1 | polars sum | polars as float_total) | polars collect
+# => ╭───┬───────┬─────────────╮
+# => │ # │ int_1 │ float_total │
+# => ├───┼───────┼─────────────┤
+# => │ 0 │    40 │        4.50 │
+# => ╰───┴───────┴─────────────╯
+```
+
+The group-by examples below use this form, and `polars agg` then computes one sum
+per group. Other aggregation commands, such as [`polars mean`](/commands/docs/polars_mean.md)
+and [`polars max`](/commands/docs/polars_max.md), have the same two forms.
 
 You can perform several aggregations on the dataframe in order to extract basic
 information from the dataframe and do basic data analysis on your brand new
@@ -404,6 +523,70 @@ rows where both dataframes share the same value. You can select a left join to
 keep the missing rows from the left dataframe. You can also save this result
 in order to use it for further operations.
 
+The right dataframe's key columns are dropped from the result. Its other
+columns keep their names unless the left dataframe already has a column by that
+name, and then they get the suffix `_x`, as `int_2_x` and `first_x` show above.
+Pass `--suffix` (`-s`) to use a different suffix.
+
+`--left` (`-l`) keeps every row of the left dataframe and fills the right side's
+columns with nulls where nothing matched:
+
+```nu
+$df_1 | polars join $df_2 int_1 int_1 --left | polars select int_1 word int_2_x first_x | polars collect
+# => ╭───┬───────┬────────┬─────────┬─────────╮
+# => │ # │ int_1 │  word  │ int_2_x │ first_x │
+# => ├───┼───────┼────────┼─────────┼─────────┤
+# => │ 0 │     1 │ first  │         │         │
+# => │ 1 │     2 │ second │         │         │
+# => │ 2 │     3 │ third  │         │         │
+# => │ 3 │     4 │ second │         │         │
+# => │ 4 │     0 │ third  │         │         │
+# => │ 5 │     6 │ second │      11 │ b       │
+# => │ 6 │     7 │ third  │      12 │ a       │
+# => │ 7 │     8 │ eight  │      13 │ a       │
+# => │ 8 │     9 │ ninth  │      14 │ a       │
+# => │ 9 │     0 │ ninth  │         │         │
+# => ╰───┴───────┴────────┴─────────┴─────────╯
+```
+
+`--full` (`-f`) keeps the unmatched rows from both sides. Here the right key
+column isn't dropped. It stays as a separate column, `id_x` below, because a row
+that exists only on the right has no value in the left key column:
+
+```nu
+[[id l]; [1 a] [2 b]] | polars into-df | polars join ([[id r]; [2 x] [3 y]] | polars into-df) id id --full | polars sort-by id
+# => ╭───┬────┬───┬──────┬───╮
+# => │ # │ id │ l │ id_x │ r │
+# => ├───┼────┼───┼──────┼───┤
+# => │ 0 │    │   │    3 │ y │
+# => │ 1 │  1 │ a │      │   │
+# => │ 2 │  2 │ b │    2 │ x │
+# => ╰───┴────┴───┴──────┴───╯
+```
+
+Add `--coalesce-columns` to merge the two key columns into one that takes its
+value from whichever side has it:
+
+```nu
+[[id l]; [1 a] [2 b]] | polars into-df | polars join ([[id r]; [2 x] [3 y]] | polars into-df) id id --full --coalesce-columns | polars sort-by id
+# => ╭───┬────┬───┬───╮
+# => │ # │ id │ l │ r │
+# => ├───┼────┼───┼───┤
+# => │ 0 │  1 │ a │   │
+# => │ 1 │  2 │ b │ x │
+# => │ 2 │  3 │   │ y │
+# => ╰───┴────┴───┴───╯
+```
+
+The remaining flags:
+
+- `--cross` (`-c`) pairs every left row with every right row, and you don't give it any key columns.
+- `--nulls-equal` lets a null key match a null key on the other side. Without it, rows with a null key never match.
+- `--inner` (`-i`) names the default inner join explicitly.
+
+Pass only one join type. `--cross` together with `--left` or `--full` fails when
+collected, with `expected join keys/predicates`.
+
 ## DataFrame group-by
 
 One of the most powerful operations that can be performed with a DataFrame is
@@ -468,6 +651,66 @@ $group
 
 As you can see, the `GroupBy` object is a very powerful variable and it is
 worth keeping in memory while you explore your dataset.
+
+Both examples print a plan instead of data. [`polars agg`](/commands/docs/polars_agg.md)
+returns a lazy dataframe even when the group-by came from an eager one, so end the
+pipeline with `polars collect` to see the result.
+
+### Grouping keys and aggregations
+
+`polars group-by` takes any number of keys, and each one can be a column name or
+an expression. Name an expression key with `polars as`. Grouping by an
+aggregation, such as `(polars col int_1 | polars sum)`, fails with
+`Cannot group by an aggregation or window expression`.
+
+```nu
+$df_1 | polars group-by first second | polars agg (polars col int_1 | polars sum) | polars sort-by first second | polars collect
+# => ╭───┬───────┬────────┬───────╮
+# => │ # │ first │ second │ int_1 │
+# => ├───┼───────┼────────┼───────┤
+# => │ 0 │ a     │ b      │     6 │
+# => │ 1 │ b     │ a      │    10 │
+# => │ 2 │ b     │ c      │     7 │
+# => │ 3 │ c     │ c      │    17 │
+# => ╰───┴───────┴────────┴───────╯
+```
+
+`polars agg` runs each of its expressions once per group. An expression that
+reduces a column to one value, such as `polars sum`, `polars mean`, `polars min`,
+`polars count`, `polars n-unique`, or `polars first`, gives one value per group.
+An expression that doesn't reduce, such as a bare `polars col word`, gives a list
+of that group's values. [`polars len`](/commands/docs/polars_len.md) counts the
+rows in each group:
+
+```nu
+$df_1 | polars group-by ((polars col int_1) mod 2 | polars as parity) | polars agg (polars col word) (polars len) | polars sort-by parity | polars collect
+# => ╭───┬────────┬────────────────┬─────╮
+# => │ # │ parity │      word      │ len │
+# => ├───┼────────┼────────────────┼─────┤
+# => │ 0 │      0 │ [list 6 items] │   6 │
+# => │ 1 │      1 │ [list 4 items] │   4 │
+# => ╰───┴────────┴────────────────┴─────╯
+```
+
+A column with the generic `object` type can't be aggregated, and naming one in
+`polars agg` fails with `Object type column not supported for aggregation`.
+
+Polars builds the groups in parallel, so they come out in no particular order,
+and the order can change from one run to the next. That's why the examples in
+this chapter sort the result. If you want the groups in the order their keys
+first appear in the data, pass `--maintain-order` (`-m`) to `polars group-by`.
+It's slower than the default:
+
+```nu
+$df_1 | polars group-by third --maintain-order | polars agg (polars col int_1 | polars sum) | polars collect
+# => ╭───┬───────┬───────╮
+# => │ # │ third │ int_1 │
+# => ├───┼───────┼───────┤
+# => │ 0 │ c     │    10 │
+# => │ 1 │ a     │    13 │
+# => │ 2 │ b     │    17 │
+# => ╰───┴───────┴───────╯
+```
 
 ## Creating Dataframes
 
@@ -541,6 +784,93 @@ columns we created using the `polars into-df` command. For this reason, it isn't
 possible to change the value of a column in a dataframe. However, you can
 create new columns based on data from other columns or dataframes.
 
+### How values become columns
+
+`polars into-df` accepts several shapes of input:
+
+- A table, which is a list of records, gives one column per key. Every record needs the same keys, or the command fails with `Error creating dataframe`. Fill in missing keys first, for example with [`default`](/commands/docs/default.md).
+- A list of plain values gives a single column named `0`.
+- A list of lists treats each inner list as a row, and names the columns `0`, `1`, and so on.
+- A single record gives a dataframe with one row.
+- A record of lists also gives one row, with a list in each column. Add `--as-columns` to turn each list into a column instead.
+
+```nu
+[[1 x] [2 y]] | polars into-df
+# => ╭───┬───┬───╮
+# => │ # │ 0 │ 1 │
+# => ├───┼───┼───┤
+# => │ 0 │ 1 │ x │
+# => │ 1 │ 2 │ y │
+# => ╰───┴───┴───╯
+{a: [1 2 3], b: [x y z]} | polars into-df --as-columns
+# => ╭───┬───┬───╮
+# => │ # │ a │ b │
+# => ├───┼───┼───┤
+# => │ 0 │ 1 │ x │
+# => │ 1 │ 2 │ y │
+# => │ 2 │ 3 │ z │
+# => ╰───┴───┴───╯
+```
+
+Each column's type comes from the Nushell values in it:
+
+| Nushell value       | Column type                              |
+| ------------------- | ---------------------------------------- |
+| `int`               | `i64`                                    |
+| `float`             | `f64`                                    |
+| `string`            | `str`                                    |
+| `bool`              | `bool`                                   |
+| `datetime`          | `datetime<ns, UTC>`                      |
+| `duration`          | `i64`, holding the number of nanoseconds |
+| `filesize`          | `i64`, holding the number of bytes       |
+| `binary`            | `binary`                                 |
+| `list`              | `list` of the elements' type             |
+| `record`, `range`, `closure`, and anything else | `object`     |
+
+A `null` becomes a missing value in a column of the other values' type, but a
+column that holds only nulls is `object`. When a column mixes types, its first
+value decides the type, and the rest are converted to it where possible. A
+column that starts with a string turns later numbers into strings, and one that
+starts with a float turns later ints into floats. When a value can't be
+converted, such as a float after an int, the whole column becomes `object`, and
+the plugin prints `Falling back to object type` on stderr.
+
+::: warning
+In 0.117.0, a list column whose first list holds fewer than two items crashes
+the plugin, which also throws away everything in its store. For example,
+`[[1] [2 3]] | wrap c | polars into-df` fails with a
+`Failed to receive response to plugin call` error.
+:::
+
+To pick the types yourself, pass `--schema` (`-s`) a record of column name to
+type name. Values are converted to the type you give, and input columns the
+schema doesn't name are left out:
+
+```nu
+[[a b]; [1 2] [3 4]] | polars into-df --schema {a: f32, b: str}
+# => ╭───┬──────┬───╮
+# => │ # │  a   │ b │
+# => ├───┼──────┼───┤
+# => │ 0 │ 1.00 │ 2 │
+# => │ 1 │ 3.00 │ 4 │
+# => ╰───┴──────┴───╯
+```
+
+A schema column that the input doesn't have is added and filled with nulls. In
+that case the result is a lazy dataframe, so collect it to see the data. A value
+that can't be converted fails, for example `Can't convert to int.` for a string
+in an `i64` column. [`polars into-lazy`](/commands/docs/polars_into-lazy.md) takes
+the same `--schema` flag.
+
+`polars schema --datatype-list` (`-l`) lists the type names you can use, with
+notes on the `datetime` and `duration` forms, such as `datetime<ms, UTC>`. It
+leaves out `decimal<precision, scale>`, which schemas also
+accept. To check the types of a dataframe you've built,
+[`polars schema`](/commands/docs/polars_schema.md) returns a record of column
+name to type name, and [`polars shape`](/commands/docs/polars_shape.md) returns a
+one-row dataframe with `rows` and `columns` columns. Both work on lazy dataframes
+too.
+
 ## Working with Series
 
 A `Series` is the building block of a `DataFrame`. Each Series represents a
@@ -603,6 +933,25 @@ $df_7
 # => ╰───┴───────────╯
 ```
 
+To rename several columns at once, give [`polars rename`](/commands/docs/polars_rename.md)
+a list of old names and a list of new names:
+
+```nu
+$df_3 | polars rename [a b] [x y]
+# => ╭───┬───┬───╮
+# => │ # │ x │ y │
+# => ├───┼───┼───┤
+# => │ 0 │ 1 │ 2 │
+# => │ 1 │ 3 │ 4 │
+# => │ 2 │ 5 │ 6 │
+# => ╰───┴───┴───╯
+```
+
+The lists pair up by position. On an eager dataframe, extra names in the longer
+list are ignored, and a column that doesn't exist fails right away with
+`Error renaming`. On a lazy dataframe, lists of different lengths are an error,
+and a missing column is only reported when you collect.
+
 We can also do basic operations with two Series as long as they have the same
 data type
 
@@ -631,6 +980,28 @@ $df_8
 # => ╰───┴───┴───┴─────────╯
 ```
 
+Without `--name`, the new column keeps the series' own name. If the dataframe
+already has a column with that name, [`polars with-column`](/commands/docs/polars_with-column.md)
+replaces it in place instead of adding one. Multiplying `$df_3.a` by 10 keeps the
+name `a`, so this replaces column `a`:
+
+```nu
+$df_3 | polars with-column ($df_3.a * 10)
+# => ╭───┬────┬───╮
+# => │ # │ a  │ b │
+# => ├───┼────┼───┤
+# => │ 0 │ 10 │ 2 │
+# => │ 1 │ 30 │ 4 │
+# => │ 2 │ 50 │ 6 │
+# => ╰───┴────┴───╯
+```
+
+`polars with-column` also takes expressions, as in the
+[lazy dataframe examples](#lazy-dataframes). Name an expression's column with
+`polars as`, because `--name` with an expression fails with
+`Flag 'name' is unsupported when used with expressions`. A lazy dataframe takes
+only expressions, not series.
+
 The Series stored in a Dataframe can also be used directly, for example,
 we can multiply columns `a` and `b` to create a new Series
 
@@ -644,6 +1015,22 @@ $df_8.a * $df_8.b
 # => │ 2 │      30 │
 # => ╰───┴─────────╯
 ```
+
+A cell path with a column name, such as `$df_8.a`, returns that column as a
+one-column dataframe. An integer cell path returns the value in that row of a
+one-column dataframe:
+
+```nu
+$df_5.1
+# => 8
+```
+
+On a dataframe with more than one column, an integer cell path fails with
+`Error using as series`, so name the column first, as in `$df_8.a.1`. A row
+number past the end fails with `Cannot access empty content`. On a lazy
+dataframe, a cell path builds an expression instead of reading data. For a lazy
+dataframe in `$lf`, `$lf.a` is the same as `polars col a`, and `$lf.0` stands for
+its first column.
 
 and we can start piping things in order to create new columns and dataframes
 
@@ -660,6 +1047,69 @@ $df_9
 ```
 
 Nushell's piping system can help you create very interesting workflows.
+
+### Series operators
+
+These operators work between a series, meaning a one-column dataframe, and a
+single value:
+
+- `+`, `-`, `*`, and `/` with an int or a float. The value has to match the
+  series: an `i64` series takes ints and an `f64` series takes floats, so
+  `$df_5 - 2.5` fails with `Incorrect type`. `+` also appends a string to every
+  value of a string series. Dividing by zero fails.
+- `==`, `!=`, `<`, `<=`, `>`, and `>=` with an int or a float, under the same
+  type rule. `==` and `!=` also take a string.
+- `=~` with a string, which is a regular expression that each value has to
+  match somewhere.
+- `starts-with` and `ends-with` with a string, which has to appear literally at
+  the start or end of each value.
+
+```nu
+$df_5 >= 8
+# => ╭───┬───────╮
+# => │ # │   0   │
+# => ├───┼───────┤
+# => │ 0 │ true  │
+# => │ 1 │ true  │
+# => │ 2 │ false │
+# => ╰───┴───────╯
+[apple banana cherry] | polars into-df | $in ends-with y
+# => ╭───┬───────╮
+# => │ # │   0   │
+# => ├───┼───────┤
+# => │ 0 │ false │
+# => │ 1 │ false │
+# => │ 2 │ true  │
+# => ╰───┴───────╯
+```
+
+Between two series of the same type and length, `+`, `-`, `*`, `/` and the six
+comparison operators work row by row, and `and` and `or` combine two boolean
+series. The result's column is named after the operator and both columns, as
+in `sub_0_memorable` above, `lt_a_b` for `<`, or `neq_a_b` for `!=`.
+
+When either side has more than one column, only `+` works. It places the right
+dataframe's columns after the left one's, adding `_x` to names that clash, and
+both sides need the same number of rows. Other operators fail with
+`The '-' operator does not work on values of type 'polars_dataframe'` or the
+matching message.
+
+::: warning
+In Nushell 0.117.0, `!=` between a string series and a string returns the same
+mask as `==`. Use an expression instead, such as
+`$df_1 | polars filter-with ((polars col first) != a)`. Comparing a datetime
+series with a date also gives wrong results, so don't rely on series
+comparisons for dates.
+:::
+
+::: tip
+Nushell's parser expects a comparison to return a `bool`. When the left side is a
+cell path, as in `let mask = $df_1.int_1 > 5`, the `let` fails with
+`Type mismatch` because the comparison returns a dataframe. Piping a series
+comparison straight into a `polars` command fails too, with
+`Command does not support bool input`. Declare the variable with the `any` type,
+`let mask: any = $df_1.int_1 > 5`, and pipe the variable instead.
+:::
 
 ## Series and Masks
 
@@ -691,6 +1141,12 @@ $df_9 | polars filter-with $mask_0
 ```
 
 Now we have a new dataframe with only the values where the mask was true.
+
+The mask has to be a boolean series with one value per row. Any other type
+fails with `Error casting to bool`, and a mask of a different length fails with
+`Error filtering dataframe`. Series masks work only on eager dataframes. A lazy
+dataframe accepts only an expression, such as `(polars col a) > 1`, and a series
+mask there fails with `Can't convert to NuExpression.`
 
 The masks can also be created from Nushell lists, for example:
 
@@ -758,6 +1214,14 @@ $df_1 | polars filter-with $mask_2
 # => ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────╯
 ```
 
+[`polars is-in`](/commands/docs/polars_is-in.md) also takes a plain Nushell list,
+so `polars col first | polars is-in [b c]` builds the same mask. Its
+`--maintain-order` (`-o`) flag keeps the list's values in their original order
+while the plugin builds it. Membership doesn't depend on that order, so the mask
+comes out the same either way. When the mask runs, the Polars library behind the
+plugin prints a deprecation notice about `is_in` on stderr. The notice doesn't
+change the result.
+
 Another operation that can be done with masks is setting or replacing a value
 from a series. For example, we can change the value in the column `first` where
 the value is equal to `a`
@@ -780,6 +1244,16 @@ $df_1 | polars get first | polars set new --mask ($df_1.first =~ a)
 # => ╰───┴────────╯
 ```
 
+[`polars set`](/commands/docs/polars_set.md) works on one column at a time, so its
+input has to be a one-column dataframe, and a wider one fails with
+`Error using as series`. The `--mask` has to be a boolean series, and anything
+else fails with `Incorrect type`. The new value can be an int, a float, or a
+string, and it has to match the column, so an int goes in an `i64` column, a
+float in an `f64` column, and a string in a `str` column. A mismatch fails with
+an error such as `Error casting to i64`, and any other kind of value fails with
+`Incorrect value type`. When you set a string, the result's column is named
+`string`, as above.
+
 ## Series as Indices
 
 Series can be also used as a way of filtering a dataframe by using them as a
@@ -799,6 +1273,11 @@ $df_1 | polars take $indices_0
 # => ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────╯
 ```
 
+The indices have to be a series of integers of type `i32`, `i64`, `u32`, or
+`u64`. Any other type, such as a float series or a `u8` series, fails with
+`Incorrect type`. `polars take` also works on a lazy dataframe and returns a lazy
+one.
+
 The command [`polars take`](/commands/docs/polars_take.md) is very handy, especially if we mix it with other commands.
 Let's say that we want to extract all rows for the first duplicated element for
 column `first`. In order to do that, we can use the command `polars arg-unique` as
@@ -815,6 +1294,10 @@ $df_1 | polars take $indices_1
 # => │ 2 │     8 │    18 │    0.80 │    7.00 │ c     │ c      │ b     │ eight  │
 # => ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────╯
 ```
+
+[`polars arg-unique`](/commands/docs/polars_arg-unique.md) looks at a single
+column, which is why the example picks one with `polars get` first. A dataframe
+with more than one column fails with `Error using as series`.
 
 Or what if we want to create a new sorted dataframe using a column in specific.
 We can use the `arg-sort` to accomplish that. In the next example we
@@ -843,6 +1326,15 @@ $df_1 | polars take $indices_2
 # => ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────╯
 ```
 
+[`polars arg-sort`](/commands/docs/polars_arg-sort.md) also works on one column,
+and returns its indices in a `u64` column named `arg_sort`. By default it sorts
+in ascending order and puts null values first. `--reverse` (`-r`) sorts in
+descending order, with nulls still first, and `--nulls-last` (`-n`) moves the
+nulls to the end. `--maintain-order` (`-m`) keeps equal values in the order they
+had in the input. `--limit` (`-l`) asks for only the first that many indices.
+Polars treats it as an optimization hint that it may ignore, so take the first
+rows yourself if you need an exact count.
+
 And finally, we can create new Series by setting a new value in the marked
 indices. Have a look at the next command
 
@@ -864,6 +1356,11 @@ $df_1 | polars get int_1 | polars set-with-idx 123 --indices $indices_3
 # => │ 9 │     0 │
 # => ╰───┴───────╯
 ```
+
+[`polars set-with-idx`](/commands/docs/polars_set-with-idx.md) follows the same
+rules as `polars set`: the input has to be a one-column dataframe, and the value
+has to be an int, a float, or a string that matches the column's type. Its
+`--indices` follow the same integer rule as `polars take`.
 
 ## Unique Values
 
@@ -891,12 +1388,84 @@ $df_1 | polars get first | polars value-counts | polars sort-by first
 As expected, the command returns a new dataframe that can be used to do more
 queries.
 
+[`polars value-counts`](/commands/docs/polars_value-counts.md) counts the values
+of a single column, so its input has to be a one-column dataframe. A lazy input
+is collected first, and the result is always an eager dataframe. `--sort` (`-s`)
+orders the rows from the highest count to the lowest, and `--column` (`-c`)
+renames the `count` column:
+
+```nu
+$df_1 | polars get first | polars value-counts --sort --column n
+# => ╭───┬───────┬───╮
+# => │ # │ first │ n │
+# => ├───┼───────┼───┤
+# => │ 0 │ b     │ 4 │
+# => │ 1 │ a     │ 3 │
+# => │ 2 │ c     │ 3 │
+# => ╰───┴───────┴───╯
+```
+
+Values with the same count can come out in either order. `--parallel` (`-p`)
+counts on several threads, which only changes the speed. `--normalize` (`-n`)
+turns the counts into fractions of the total. In 0.117.0 its argument is
+declared as a string but read as a boolean, so `--normalize true` fails to parse
+and every string fails with `Can't convert to bool.` Pass `true` through a
+variable typed `any` instead:
+
+```nu
+let yes: any = true
+$df_1 | polars get first | polars value-counts --normalize $yes | polars sort-by first
+# => ╭───┬───────┬───────╮
+# => │ # │ first │ count │
+# => ├───┼───────┼───────┤
+# => │ 0 │ a     │  0.30 │
+# => │ 1 │ b     │  0.40 │
+# => │ 2 │ c     │  0.30 │
+# => ╰───┴───────┴───────╯
+```
+
 Continuing with our exploration of `Series`, the next thing that we can do is
 to only get the unique values from a series (sorted again, because the order
 isn't guaranteed), like this
 
 ```nu
 $df_1 | polars get first | polars unique | polars sort-by first
+# => ╭───┬───────╮
+# => │ # │ first │
+# => ├───┼───────┤
+# => │ 0 │ a     │
+# => │ 1 │ b     │
+# => │ 2 │ c     │
+# => ╰───┴───────╯
+```
+
+On an eager dataframe, [`polars unique`](/commands/docs/polars_unique.md) works
+on a single column and ignores its flags. On a lazy dataframe, it removes
+duplicate rows instead, and keeps the first row of each set of duplicates.
+`--subset` (`-s`) compares only the listed columns, and `--last` (`-l`) keeps the
+last row of each set instead of the first:
+
+```nu
+$df_1 | polars into-lazy | polars unique --subset [first] | polars select first int_1 word | polars collect
+# => ╭───┬───────┬───────┬────────╮
+# => │ # │ first │ int_1 │  word  │
+# => ├───┼───────┼───────┼────────┤
+# => │ 0 │ a     │     1 │ first  │
+# => │ 1 │ b     │     4 │ second │
+# => │ 2 │ c     │     8 │ eight  │
+# => ╰───┴───────┴───────┴────────╯
+```
+
+On a lazy dataframe, `polars unique` keeps the rows in their original order.
+In 0.117.0 its `--maintain-order` (`-k`) flag does the opposite there and lets
+the rows come out in any order, so leave it off.
+
+`polars unique` also works on an expression, which keeps the unique values of
+one column. There `--maintain-order` does keep the values in the order they first
+appear:
+
+```nu
+$df_1 | polars select (polars col first | polars unique --maintain-order) | polars collect
 # => ╭───┬───────╮
 # => │ # │ first │
 # => ├───┼───────┤
@@ -938,6 +1507,24 @@ $df_1 | polars filter-with ($in.word | polars is-duplicated)
 # => ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴────────╯
 ```
 
+Given a dataframe with more than one column,
+[`polars is-unique`](/commands/docs/polars_is-unique.md) and
+[`polars is-duplicated`](/commands/docs/polars_is-duplicated.md) compare whole
+rows. This keeps the rows whose combination of `first` and `second` appears only
+once:
+
+```nu
+$df_1 | polars filter-with ($df_1 | polars get first second | polars is-unique)
+# => ╭───┬───────┬───────┬─────────┬─────────┬───────┬────────┬───────┬───────╮
+# => │ # │ int_1 │ int_2 │ float_1 │ float_2 │ first │ second │ third │ word  │
+# => ├───┼───────┼───────┼─────────┼─────────┼───────┼────────┼───────┼───────┤
+# => │ 0 │     7 │    17 │    0.70 │    6.00 │ b     │ c      │ a     │ third │
+# => ╰───┴───────┴───────┴─────────┴─────────┴───────┴────────┴───────┴───────╯
+```
+
+Both commands also take a lazy dataframe, which they collect first, and they
+always return an eager mask, in a column named `is_unique` or `is_duplicated`.
+
 ## Lazy Dataframes
 
 Lazy dataframes are a way to query data by creating a logical plan. The
@@ -973,13 +1560,26 @@ $lf_0 | polars collect
 # => ╰───┴───┴───╯
 ```
 
-as you can see, the collect command executes the plan and creates a nushell
-table for you.
+as you can see, the collect command executes the plan and gives you an eager
+dataframe. It prints like a table, but it is still a dataframe held by the
+plugin. When you want a plain Nushell table, pipe it to
+[`polars into-nu`](/commands/docs/polars_into-nu.md):
 
-All dataframes operations should work with eager or lazy dataframes. They are
-converted in the background for compatibility. However, to take advantage of
-lazy operations if is recommended to only use lazy operations with lazy
-dataframes.
+```nu
+$lf_0 | polars collect | polars into-nu | describe
+# => table<a: int, b: string>
+```
+
+Given an eager dataframe, `polars collect` returns it unchanged, so you can end
+a pipeline with it whichever kind of dataframe reaches it. Any other input, such
+as an expression, is an error.
+
+Most dataframe commands take either an eager or a lazy dataframe and convert
+between the two in the background when they need to. Some return a lazy
+dataframe even for eager input, and some collect a lazy input.
+[When results are eager or lazy](#when-results-are-eager-or-lazy) lists which
+commands do what. To take advantage of lazy operations, keep a pipeline lazy
+until you collect it at the end.
 
 To find all lazy dataframe operations you can use
 
@@ -1014,6 +1614,8 @@ You can use the line buffer editor to format your queries (`ctrl + o`) easily
 
 This query uses the lazy reverse command to invert the dataframe and the
 `polars with-column` command to create new two columns using `expressions`.
+[`polars reverse`](/commands/docs/polars_reverse.md) also works on an eager
+dataframe, and then returns an eager one, as `$df_3 | polars reverse` shows.
 An `expression` is used to define an operation that is executed on the lazy
 frame. When put together they create the whole set of instructions used by the
 lazy commands to query the data. To list all the commands that generate an
@@ -1101,6 +1703,201 @@ $lf_2 | polars join $group name name | polars collect
 
 As you can see lazy frames are a powerful construct that will let you query
 data using a flexible syntax, resulting in blazing fast results.
+
+### Expression operators
+
+Expressions take more operators than series do. Polars applies them when the
+plan runs, so they work the same on eager and lazy dataframes:
+
+- `+`, `-`, `*`, `/`, `//` (floor division), `mod`, and `**` (power)
+- `==`, `!=`, `<`, `<=`, `>`, and `>=`
+- `and`, `or`, and `xor` between boolean expressions
+
+The left side has to be an expression. The right side can be another expression
+or a plain value, so `(polars col a) * 2` works, but `2 * (polars col a)` fails
+with `Types 'int' and 'polars_expression' are not compatible`. Like Nushell's own
+operators, `//` rounds down and the result of `mod` takes the sign of the
+divisor:
+
+```nu
+[[a b]; [7 2] [-7 3] [5 5]] | polars into-df | polars select [
+    ((polars col a) // (polars col b) | polars as floor_div)
+    ((polars col a) mod (polars col b) | polars as mod)
+    ((polars col a) ** 2 | polars as squared)
+    (((polars col a) > 0) xor ((polars col b) > 2) | polars as one_true)
+] | polars collect
+# => ╭───┬───────────┬─────┬─────────┬──────────╮
+# => │ # │ floor_div │ mod │ squared │ one_true │
+# => ├───┼───────────┼─────┼─────────┼──────────┤
+# => │ 0 │         3 │   1 │      49 │ true     │
+# => │ 1 │        -3 │   2 │      49 │ true     │
+# => │ 2 │         1 │   0 │      25 │ false    │
+# => ╰───┴───────────┴─────┴─────────┴──────────╯
+```
+
+### When results are eager or lazy
+
+A command doesn't always return the same kind of dataframe it was given. In
+Nushell 0.117.0 the commands fall into three groups:
+
+- Most commands that accept both kinds return the kind they were given. These
+  include `polars filter`, `polars filter-with`, `polars sort-by`,
+  `polars reverse`, `polars join`, `polars first`, `polars last`,
+  `polars rename`, `polars drop`, `polars take`, `polars slice`, `polars cast`,
+  `polars fill-null`, `polars drop-nulls`, `polars median`, `polars quantile`, and
+  `polars query`.
+- Some always return a lazy dataframe, even for eager input: `polars select`,
+  `polars with-column` with expressions, `polars agg`, `polars sum`,
+  `polars min`, `polars max`, `polars mean`, `polars std`, `polars var`,
+  `polars concat`, `polars unpivot`, and `polars into-lazy`.
+- Commands that need the data itself, including the ones that work on a single
+  column, collect a lazy input and return an eager dataframe: `polars get`,
+  `polars append`, `polars shape`, `polars value-counts`, `polars is-unique`,
+  `polars is-duplicated`, `polars arg-sort`, and `polars collect`.
+
+When you aren't sure, check with [`describe`](/commands/docs/describe.md):
+
+```nu
+$df_1 | polars sort-by int_1 | describe
+# => polars_dataframe
+$df_1 | polars select int_1 | describe
+# => polars_lazyframe
+```
+
+A lazy result prints as its plan, as the `polars agg` examples earlier showed.
+If a pipeline prints a plan where you expected data, end it with
+`polars collect`.
+
+## Selecting rows and columns
+
+[`polars first`](/commands/docs/polars_first.md) takes an optional number of
+rows, which defaults to 1, so `polars first 5` returns the first five rows. Given
+a group-by, it returns the first rows of each group, as a lazy dataframe:
+
+```nu
+$df_1 | polars select first int_1 word | polars group-by first | polars first | polars sort-by first | polars collect
+# => ╭───┬───────┬───────┬────────╮
+# => │ # │ first │ int_1 │  word  │
+# => ├───┼───────┼───────┼────────┤
+# => │ 0 │ a     │     1 │ first  │
+# => │ 1 │ b     │     4 │ second │
+# => │ 2 │ c     │     8 │ eight  │
+# => ╰───┴───────┴───────┴────────╯
+```
+
+Given an expression, as in `polars col int_1 | polars first`, it builds an
+expression for the first value of the column and ignores the row count. Inside
+`polars agg` that gives the first value of each group.
+
+[`polars col`](/commands/docs/polars_col.md) can pick more than one column:
+
+- `polars col int_1 int_2` names several columns, and the expression applies to
+  each of them. `(polars col int_1 int_2) * 2` doubles both and keeps their
+  names.
+- `polars col "*"` stands for every column.
+- A name that starts with `^` and ends with `$` is a regular expression. Without
+  both anchors, the name is taken literally.
+- `--type` (`-t`) reads the arguments as type names and picks every column of
+  those types. `polars schema --datatype-list` lists the type names.
+
+```nu
+$df_1 | polars select (polars col "^float_.*$") | polars first 2 | polars collect
+# => ╭───┬─────────┬─────────╮
+# => │ # │ float_1 │ float_2 │
+# => ├───┼─────────┼─────────┤
+# => │ 0 │    0.10 │    1.00 │
+# => │ 1 │    0.20 │    1.00 │
+# => ╰───┴─────────┴─────────╯
+$df_1 | polars select (polars col --type i64 str) | polars columns
+# => ╭───┬────────╮
+# => │ 0 │ int_1  │
+# => │ 1 │ int_2  │
+# => │ 2 │ first  │
+# => │ 3 │ second │
+# => │ 4 │ third  │
+# => │ 5 │ word   │
+# => ╰───┴────────╯
+```
+
+`polars select` also takes selectors, made by the
+[`polars selector`](/commands/docs/polars_selector.md) commands, which pick
+columns by name pattern, type, or position. Selectors, column names, and
+expressions mix in one call:
+
+```nu
+$df_1 | polars select word (polars selector starts-with int_) | polars first 2 | polars collect
+# => ╭───┬────────┬───────┬───────╮
+# => │ # │  word  │ int_1 │ int_2 │
+# => ├───┼────────┼───────┼───────┤
+# => │ 0 │ first  │     1 │    11 │
+# => │ 1 │ second │     2 │    12 │
+# => ╰───┴────────┴───────┴───────╯
+```
+
+`polars as` takes a selector too, and renames the column it picks:
+
+```nu
+$df_1 | polars select (polars selector by-name word | polars as w) | polars first 2 | polars collect
+# => ╭───┬────────╮
+# => │ # │   w    │
+# => ├───┼────────┤
+# => │ 0 │ first  │
+# => │ 1 │ second │
+# => ╰───┴────────╯
+```
+
+If the selector matches more than one column, they all get the same name, and
+collecting fails with `projections contained duplicate output name`.
+
+## Sorting
+
+[`polars sort-by`](/commands/docs/polars_sort-by.md) sorts by one or more
+columns or expressions, in the order you list them. `--reverse` (`-r`) takes a
+list of booleans with one entry per sort key, where `true` sorts that key in
+descending order. A list of a different length fails with `Incorrect list size`.
+
+```nu
+$df_1 | polars select first int_1 word | polars sort-by first int_1 --reverse [false true] | polars collect
+# => ╭───┬───────┬───────┬────────╮
+# => │ # │ first │ int_1 │  word  │
+# => ├───┼───────┼───────┼────────┤
+# => │ 0 │ a     │     3 │ third  │
+# => │ 1 │ a     │     2 │ second │
+# => │ 2 │ a     │     1 │ first  │
+# => │ 3 │ b     │     7 │ third  │
+# => │ 4 │ b     │     6 │ second │
+# => │ 5 │ b     │     4 │ second │
+# => │ 6 │ b     │     0 │ third  │
+# => │ 7 │ c     │     9 │ ninth  │
+# => │ 8 │ c     │     8 │ eight  │
+# => │ 9 │ c     │     0 │ ninth  │
+# => ╰───┴───────┴───────┴────────╯
+```
+
+A sort key can be any expression, such as `((polars col int_2) mod 3)`. Null
+values sort first unless you pass `--nulls-last` (`-n`). Rows with equal keys
+can come out in any order, and `--maintain-order` (`-m`) keeps them in their
+input order.
+
+## Working with strings
+
+[`polars str-lengths`](/commands/docs/polars_str-lengths.md) counts the
+characters in each string. With `--bytes` (`-b`) it counts UTF-8 bytes instead,
+which is larger for text with characters outside ASCII:
+
+```nu
+[[city]; [Zürich] [Köln] [Oslo]] | polars into-df | polars select (polars col city) (polars col city | polars str-lengths | polars as chars) (polars col city | polars str-lengths --bytes | polars as bytes) | polars collect
+# => ╭───┬────────┬───────┬───────╮
+# => │ # │  city  │ chars │ bytes │
+# => ├───┼────────┼───────┼───────┤
+# => │ 0 │ Zürich │     6 │     7 │
+# => │ 1 │ Köln   │     4 │     5 │
+# => │ 2 │ Oslo   │     4 │     4 │
+# => ╰───┴────────┴───────┴───────╯
+```
+
+`polars str-lengths` also works directly on a one-column dataframe, where the
+result keeps the column's name.
 
 ## Dataframe Commands
 

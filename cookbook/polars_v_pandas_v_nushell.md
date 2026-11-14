@@ -23,6 +23,10 @@ $df | polars shape
 # => ╰───┴─────────┴─────────╯
 ```
 
+`polars shape` returns a dataframe with a single row and two columns, `rows` and
+`columns`. `polars open` opened the file lazily, so `polars shape` runs the plan
+to count the rows.
+
 ## 2. Opening the file and show the first 5 rows
 
 ```nu
@@ -40,6 +44,11 @@ $df | polars first 5 | polars collect
 ```
 
 ## 3. Opening the file and get the length of all strings in the "id" column
+
+`polars str-lengths` counts characters. The IDs are plain ASCII, so counting
+bytes with `--bytes` would give the same numbers here. See
+[Working with strings](../book/dataframes.md#working-with-strings) for text where
+the two differ.
 
 ```nu
 let ids = $df | polars first 5 | polars get id | polars str-lengths
