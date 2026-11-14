@@ -13,12 +13,6 @@ convert string to integer:
 "12" | into int
 ```
 
-convert present date to provided time zone:
-
-```nu
-date now | date to-timezone "Europe/London"
-```
-
 update a record's language and if none is specified insert provided value:
 
 ```nu
@@ -296,6 +290,94 @@ $teams_scores | drop column
 # => │ 0 │ Boston Celtics        │   311 │
 # => │ 1 │ Golden State Warriors │   245 │
 # => ╰───┴───────────────────────┴───────╯
+```
+
+remove the last two columns of a table:
+
+```nu
+$teams_scores | drop column 2
+# => ╭───┬───────────────────────╮
+# => │ # │         team          │
+# => ├───┼───────────────────────┤
+# => │ 0 │ Boston Celtics        │
+# => │ 1 │ Golden State Warriors │
+# => ╰───┴───────────────────────╯
+```
+
+remove the first column of a table instead of the last:
+
+```nu
+$teams_scores | drop column --left
+# => ╭───┬───────┬───────╮
+# => │ # │ score │ plays │
+# => ├───┼───────┼───────┤
+# => │ 0 │   311 │     3 │
+# => │ 1 │   245 │     2 │
+# => ╰───┴───────┴───────╯
+```
+
+remove the last field of a record (use `reject` to remove columns or fields by name):
+
+```nu
+{name: nu, stars: 5, language: Rust} | drop column
+# => ╭───────┬────╮
+# => │ name  │ nu │
+# => │ stars │ 5  │
+# => ╰───────┴────╯
+```
+
+## Dates
+
+get the current date and time:
+
+```nu
+date now
+```
+
+convert present date to provided time zone:
+
+```nu
+date now | date to-timezone "Europe/London"
+```
+
+list the time zone names that `date to-timezone` accepts (case doesn't matter, and any other name is an `invalid time zone` error):
+
+```nu
+date list-timezone | where timezone =~ "Kolkata"
+# => ╭───┬──────────────┬────────╮
+# => │ # │   timezone   │ offset │
+# => ├───┼──────────────┼────────┤
+# => │ 0 │ Asia/Kolkata │ +05:30 │
+# => ╰───┴──────────────┴────────╯
+```
+
+convert a date to a fixed UTC offset (`+0530` and `+05` work too, and `local` converts to your own time zone):
+
+```nu
+2024-06-01T12:00:00Z | date to-timezone "+05:30" | format date "%F %T %z"
+# => 2024-06-01 17:30:00 +0530
+```
+
+convert date strings, or a list of them, to a time zone:
+
+```nu
+["2024-06-01 12:00:00 +00:00" "2024-12-01 12:00:00 +00:00"] | date to-timezone "America/New_York" | format date "%F %T %z"
+# => ╭───┬───────────────────────────╮
+# => │ 0 │ 2024-06-01 08:00:00 -0400 │
+# => │ 1 │ 2024-12-01 07:00:00 -0500 │
+# => ╰───┴───────────────────────────╯
+```
+
+describe a date relative to now, such as "2 years ago":
+
+```nu
+2024-06-01T12:00:00Z | date humanize
+```
+
+parse a date written in words:
+
+```nu
+"next friday" | date from-human
 ```
 
 ## Files and Filesystem

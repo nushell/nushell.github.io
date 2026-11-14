@@ -12,6 +12,24 @@ The `help` command is a good way to become familiar with all that Nu has to offe
 help commands
 ```
 
+`help commands` returns a table with one row per command and the columns `name`, `category`, `command_type`, `description`, `params`, `input_output`, `search_terms`, and `is_const`, so you can filter it like any other table. `--find` (`-f`) keeps the commands whose name, description, or search terms contain the text, ignoring case. `help --find` does the same search:
+
+```nu
+help commands --find timezone | select name category
+# => ╭───┬────────────────────┬─────────────╮
+# => │ # │        name        │  category   │
+# => ├───┼────────────────────┼─────────────┤
+# => │ 0 │ date               │ date        │
+# => │ 1 │ date from-human    │ date        │
+# => │ 2 │ date humanize      │ date        │
+# => │ 3 │ date list-timezone │ date        │
+# => │ 4 │ date to-timezone   │ date        │
+# => │ 5 │ into datetime      │ conversions │
+# => ╰───┴────────────────────┴─────────────╯
+```
+
+Given a name, `help commands` prints that one command's help, like `help http get` below. It only looks at commands and aliases, and fails with `Command not found` for a module name.
+
 ---
 
 ### Specific information on a command
@@ -77,6 +95,28 @@ help http get
 # =>
 # =>   Get from Docker daemon via Unix socket.
 # =>   > http get --unix-socket /var/run/docker.sock http://localhost/containers/json
+```
+
+`help <name>` isn't limited to commands. It looks for an alias or command with that name first, and then for a module. For an alias, it shows what the alias expands to, followed by the help of the command it runs. A name that matches nothing is a `Not found` error.
+
+Because commands come before modules, `help` shows the command when a module and a command share a name. That happens with a module that exports a `main` command, since `use` makes `main` available under the module's name. Use `help modules` to see the module itself:
+
+```nu
+module greet {
+    export def main [] { "hi" }
+    export def loud [] { "HI" }
+}
+use greet
+help modules greet
+# => Module: greet
+# =>
+# => Exported commands:
+# =>   greet, loud (greet loud)
+# =>
+# => Exported aliases:
+# =>
+# =>
+# => This module does not export environment.
 ```
 
 ### Custom help command

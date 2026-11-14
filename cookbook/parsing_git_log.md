@@ -154,6 +154,8 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split col
 # => ╰───┴──────────┴───────────────────────────────────────────────────────┴──────────────────┴──────────────────────────────────────────┴──────────────╯
 ```
 
+`reverse` can't output the last item until it has read every item, so it collects its whole input first. That's fine for 25 commits, but on an endless stream such as `1..` it never finishes. Here, `sort-by date --reverse` would sort and reverse in one step.
+
 Now let's try `group-by` and see what happens. This is a tiny bit tricky because dates are tricky. To group the commits by day rather than by the exact time, we first turn each date into a day string with `format date '%Y-%m-%d'` and then `group-by` the `date` column.
 
 ```nu
@@ -168,6 +170,60 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split col
 ```
 
 Each value in this record is a nested table holding that day's commits. Ending the pipeline with `table` shows them in compact form, like `[table 3 rows]`. Without it, a terminal that is at least 100 columns wide expands every nested table, which gets long quickly.
+
+::: details More ways to use `group-by`
+
+The examples here use a small table instead of `git log`:
+
+```nu
+let commits = [
+  [name    lang  day];
+  [Sophia  rust  "2026-09-27"]
+  [Justin  nu    "2026-09-28"]
+  [Sophia  nu    "2026-09-28"]
+  [Luca    null  "2026-09-27"]
+]
+```
+
+A closure can compute the group for each row, so the day doesn't have to be written into a column first. The closure gets the row as its input (and as its parameter, if it has one):
+
+```nu
+$commits | group-by { get day | into datetime | format date '%A' } --to-table | update items { length }
+# => ╭───┬───────────┬───────╮
+# => │ # │ closure_0 │ items │
+# => ├───┼───────────┼───────┤
+# => │ 0 │ Sunday    │     2 │
+# => │ 1 │ Monday    │     2 │
+# => ╰───┴───────────┴───────╯
+```
+
+`--to-table` returns a table with one column per grouper and an `items` column, instead of a record. A closure's column is named `closure_0`, `closure_1`, and so on. With several groupers, the record form nests one record inside another (`$commits | group-by name lang | get Sophia.nu`), while `--to-table` gives one row per combination:
+
+```nu
+$commits | group-by name lang --to-table | update items { length }
+# => ╭───┬────────┬──────┬───────╮
+# => │ # │  name  │ lang │ items │
+# => ├───┼────────┼──────┼───────┤
+# => │ 0 │ Sophia │ rust │     1 │
+# => │ 1 │ Sophia │ nu   │     1 │
+# => │ 2 │ Justin │ nu   │     1 │
+# => │ 3 │ Luca   │      │     1 │
+# => ╰───┴────────┴──────┴───────╯
+```
+
+The two forms differ in other ways:
+
+- A record can't have `null` as a key, so the record form leaves out rows whose group is `null`. Here `$commits | group-by lang` has only `rust` and `nu`, and Luca's commit is missing. `--to-table` keeps a `null` group.
+- Record keys are strings, so the record form puts values that display the same in one group, such as `1` and `"1"`. `--to-table` keeps each group's original type and only joins values that are equal.
+- `--to-table` rejects a grouper named `items` and two groupers with the same name, because the table would have two columns with one name. Use a closure such as `{ get items }` instead.
+
+Other options:
+
+- With no grouper, `group-by` groups a list by its values: `[a b a c a] | group-by` returns `{a: [a, a, a], b: [b], c: [c]}`.
+- `--prune` removes the grouper's column from the grouped rows, since every row in a group has the same value there. `$commits | group-by name --prune | get Sophia` has only the `lang` and `day` columns.
+- A row that lacks the grouper's column is a `Cannot find column` error. Add `?` to the grouper, as in `group-by team?`, to skip those rows instead.
+
+:::
 
 This would look better if we transpose the data and name the columns
 

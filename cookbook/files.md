@@ -75,6 +75,20 @@ Or, you can utilize the `headers` command to use the first row as a header row. 
 open bands.txt | lines | split column ":" | headers | sort-by year
 ```
 
+`headers` works on any table. It reads the column names from the values in the first row and then drops that row. An empty header cell gets the name `column` plus its position, counting from 0. The column names come from the first row only, so a cell that a later row has beyond them is dropped:
+
+```nu
+"name,,size\nfoo,x,1\nbar,y,2,extra" | lines | split column "," | headers
+# => ╭───┬──────┬─────────┬──────╮
+# => │ # │ name │ column1 │ size │
+# => ├───┼──────┼─────────┼──────┤
+# => │ 0 │ foo  │ x       │ 1    │
+# => │ 1 │ bar  │ y       │ 2    │
+# => ╰───┴──────┴─────────┴──────╯
+```
+
+Header cells have to be strings, numbers, booleans, or empty. A list or record in the first row is a type mismatch error, and an empty table fails with "Found empty list".
+
 ---
 
 ### Word occurrence count with Ripgrep
@@ -124,6 +138,10 @@ ls --all build | length
 # => 0
 ```
 
+---
+
+### Reports from `mkdir`, `mv` and `rm`
+
 With `--verbose` (`-v`), `mkdir`, `mv` and `rm` return a table describing what they did instead of printing messages, so the result can be filtered like any other data. For example, `mkdir -v` reports which directories it actually created:
 
 ```nu
@@ -137,23 +155,83 @@ mkdir -v logs/a logs/c | update path { path basename }
 # => ╰───┴──────┴─────────┴───────╯
 ```
 
+A path that can't be created doesn't stop `mkdir -v`. It gets `created: false` and the reason in the `error` column, and the other paths are still created. Here `notes.txt` is a file, so nothing can be created inside it:
+
+```nu
+"" | save notes.txt
+mkdir -v cache notes.txt/sub | update path { path relative-to $env.PWD }
+# => ╭───┬───────────────┬─────────┬────────────────────────────────────────────────╮
+# => │ # │     path      │ created │                     error                      │
+# => ├───┼───────────────┼─────────┼────────────────────────────────────────────────┤
+# => │ 0 │ cache         │ true    │                                                │
+# => │ 1 │ notes.txt/sub │ false   │ cannot create directory                        │
+# => │   │               │         │ '/home/me/project/notes.txt/sub': Not a        │
+# => │   │               │         │ directory                                      │
+# => ╰───┴───────────────┴─────────┴────────────────────────────────────────────────╯
+```
+
+Without `-v`, `mkdir` raises the error after it has tried every path.
+
+`mv -v` returns one row per source, with `source`, `destination` and `message` columns. The paths are absolute, and `message` reads like `renamed /home/me/project/a.log -> /home/me/project/archive/a.log`:
+
+```nu
+touch a.log b.log
+mkdir archive
+mv -v *.log archive | update source { path basename } | update destination { path relative-to $env.PWD } | reject message
+# => ╭───┬────────┬───────────────╮
+# => │ # │ source │  destination  │
+# => ├───┼────────┼───────────────┤
+# => │ 0 │ a.log  │ archive/a.log │
+# => │ 1 │ b.log  │ archive/b.log │
+# => ╰───┴────────┴───────────────╯
+```
+
+`rm -v` has `path`, `deleted` and `error` columns, and like `mkdir -v`, it puts failures in `error` instead of raising them.
+
+::: warning
+In Nushell 0.117.0, the text of these messages can go wrong in a longer session. Once one of `cp`, `mkdir`, `mktemp`, `mv`, and `touch` has run, the messages of the others come out as internal keys, such as `mkdir-error-cannot-create-directory` in the `error` column or `mv-verbose-renamed` in the `message` column. The `created` column and the paths are still right, and `rm` isn't affected.
+:::
+
 ---
 
 ### Searching files with an in-memory index
 
-The [`idx`](/commands/docs/idx.md) commands build an index of a directory tree in memory, so repeated searches don't have to walk the disk again. Let's create a small project to search:
+The [`idx`](/commands/docs/idx.md) commands build an index of a directory tree in memory, so repeated searches don't have to walk the disk again. Each Nushell process has one index. Running `idx init` again replaces it, and [`idx drop`](/commands/docs/idx_drop.md) throws it away to free the memory. Let's create a small project to search:
 
 ```nu
 mkdir project/src project/docs
-"// TODO: parse args" | save project/src/main.rs
-"// TODO: add tests" | save project/src/parser.rs
+"// TODO: parse args\nfn main() {\n    run();\n}" | save project/src/main.rs
+"// TODO: add tests\n// FIXME: handle errors" | save project/src/parser.rs
 "TODO: write docs" | save project/docs/notes.md
 ```
 
-[`idx init`](/commands/docs/idx_init.md) indexes it and returns a record describing the index. `--wait` blocks until the first scan is done. By default the index also watches the directory and stays up to date; pass `--no-watch` for a one-time snapshot.
+[`idx init`](/commands/docs/idx_init.md) indexes it and returns a record describing the index. `--wait` blocks until the first scan is done:
 
 ```nu
-idx init project --wait | ignore
+idx init project --wait | select watch scanning files dirs
+# => ╭──────────┬───────╮
+# => │ watch    │ true  │
+# => │ scanning │ false │
+# => │ files    │ 3     │
+# => │ dirs     │ 2     │
+# => ╰──────────┴───────╯
+```
+
+The record also has the `base_path` that was indexed, the `scan_duration`, and how much memory the index uses (`arena_size_total` and the parts it adds up). Without `--wait`, `idx init` returns while the scan is still running, with `scanning` set to `true`. [`idx status`](/commands/docs/idx_status.md) returns the same record at any time, so check it to see when the scan is done.
+
+By default the index also watches the directory and stays up to date. Pass `--no-watch` for a one-time snapshot; that also turns off [`idx watch`](/commands/docs/idx_watch.md), which streams the changes the watcher sees as records with a `kind` (`created`, `modified`, `removed`, or `rescan`) and a `path`. `--follow-symlinks` (`-f`) makes the scan follow symbolic links. Inside a Git repository, the index leaves out the files Git ignores; outside one, it leaves out hidden files. The index also keeps a summary of each file's contents so that `idx search` can skip files that can't match. `--no-content-indexing` turns that off to save memory, and every search then reads every file.
+
+[`idx files`](/commands/docs/idx_files.md) and [`idx dirs`](/commands/docs/idx_dirs.md) list what's in the index, or only the entries that fuzzy-match a query you pass. Their paths are relative to the indexed directory:
+
+```nu
+idx files | select relative_path ext size
+# => ╭───┬───────────────┬─────┬──────╮
+# => │ # │ relative_path │ ext │ size │
+# => ├───┼───────────────┼─────┼──────┤
+# => │ 0 │ docs/notes.md │ md  │ 16 B │
+# => │ 1 │ src/main.rs   │ rs  │ 44 B │
+# => │ 2 │ src/parser.rs │ rs  │ 42 B │
+# => ╰───┴───────────────┴─────┴──────╯
 ```
 
 [`idx find`](/commands/docs/idx_find.md) fuzzy-matches file and directory names:
@@ -165,6 +243,19 @@ idx find parser
 # => ├───┼──────┼───────────────────────┼──────┼───────┤
 # => │ 0 │ file │ project/src/parser.rs │    1 │    88 │
 # => ╰───┴──────┴───────────────────────┴──────┴───────╯
+```
+
+Here the paths are relative to the current directory. `score` says how well the name matched, and the rows are sorted by it, best first; `rank` is the row's position in that order, starting at 1. In a Git repository, files changed by recent commits get a higher score. `--files` (`-f`) or `--dirs` (`-d`) limits the search to one kind of entry (you can't pass both), and `--limit` (`-l`) caps the number of rows, which is 100 by default.
+
+`--verbose` (`-v`) shows how the score came about. When you search both kinds, a `score_details` record holds the `base_score` for the fuzzy match itself, a `filename_bonus` when the match falls in the file name rather than the directory part, a `special_filename_bonus` for entry-point files such as `mod.rs` or `index.js`, and a `frecency_boost`, which stays 0 because Nushell doesn't record which files you open. With `--files`, you get a `match_type` column instead, and with `--dirs`, an `exact_match` column:
+
+```nu
+idx find main --files --verbose
+# => ╭───┬──────┬─────────────────────┬──────┬───────┬────────────────╮
+# => │ # │ kind │    relative_path    │ rank │ score │   match_type   │
+# => ├───┼──────┼─────────────────────┼──────┼───────┼────────────────┤
+# => │ 0 │ file │ project/src/main.rs │    1 │    60 │ fuzzy_filename │
+# => ╰───┴──────┴─────────────────────┴──────┴───────┴────────────────╯
 ```
 
 [`idx search`](/commands/docs/idx_search.md) searches the contents of the indexed files:
@@ -179,3 +270,35 @@ idx search TODO | select relative_path line_number line
 # => │ 2 │ project/src/parser.rs │           1 │ // TODO: add tests  │
 # => ╰───┴───────────────────────┴─────────────┴─────────────────────╯
 ```
+
+Each row also has a `column` (where the first match starts in the line, counting from 0), a `byte_offset` (where the line starts in the file), and `matches`, a table with the `start` and `end` byte offset of each match.
+
+The pattern is plain text by default, so characters such as `*`, `?`, and `[` match themselves. `--regex` (`-r`) reads the patterns as regular expressions, and `--fuzzy` (`-f`) matches lines approximately; you can't use both. `--limit` (`-l`) caps the number of matching lines, 50 by default. `--context` (`-c`) adds a `with_context` column holding the matching line and its neighbors. An int sets the same number of lines before and after, and a range such as `-2..5` sets them separately:
+
+```nu
+idx search --context 1 run | select relative_path with_context
+# => ╭───┬─────────────────────┬─────────────────────╮
+# => │ # │    relative_path    │    with_context     │
+# => ├───┼─────────────────────┼─────────────────────┤
+# => │ 0 │ project/src/main.rs │ ╭───┬─────────────╮ │
+# => │   │                     │ │ 0 │ fn main() { │ │
+# => │   │                     │ │ 1 │     run();  │ │
+# => │   │                     │ │ 2 │ }           │ │
+# => │   │                     │ ╰───┴─────────────╯ │
+# => ╰───┴─────────────────────┴─────────────────────╯
+```
+
+`idx search TODO FIXME` finds lines that match either pattern. A word that looks like a file filter limits which files are searched instead of being searched for: `*.rs` (an extension), `src/` (a directory), a glob with a `/` or with braces (`src/**/*.rs`, `*.{md,txt}`), or any of these after a `!` to exclude those files. The filter can be its own argument or part of the same string:
+
+```nu
+idx search "TODO *.md" | select relative_path line
+# => ╭───┬───────────────────────┬──────────────────╮
+# => │ # │     relative_path     │       line       │
+# => ├───┼───────────────────────┼──────────────────┤
+# => │ 0 │ project/docs/notes.md │ TODO: write docs │
+# => ╰───┴───────────────────────┴──────────────────╯
+```
+
+::: warning
+In Nushell 0.117.0, a search for more than one text pattern, such as `idx search TODO FIXME`, can miss matching lines while content indexing is on. If you rely on that kind of search, build the index with `idx init --no-content-indexing`.
+:::

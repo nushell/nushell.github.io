@@ -73,6 +73,8 @@ sys host
 
 Run `sys` by itself to list all of its subcommands.
 
+`uptime` and `boot_time` are always in the record. The other fields are left out when the operating system doesn't report them, so a script that reads one should allow for that with `?`, as in `sys host | get hostname?`. `boot_time` is `null` when the reported boot time can't be turned into a date, which happens on some broken systems.
+
 ---
 
 ### Find processes sorted by greatest cpu utilization.
@@ -120,3 +122,38 @@ Notes:
 - `kill` is a built-in Nu command that works on all platforms. If you wish to use the classic Unix `kill` command, you can do so with `^kill`.
 - Filtering with the `where` command as shown above is case-sensitive.
 - `ps` returns the same columns on Linux, macOS, Windows, and the BSDs. Use `ps --long` for more columns, such as `command`, `exe`, `start_time`, and `cwd`.
+
+[`kill`](/commands/docs/kill.md) takes any number of pids, as in `kill 56866 56870`. On Linux, macOS, and the BSDs it runs the system `kill` command, which sends signal 15 (`TERM`) by default. That asks the process to exit, and a process can catch it or ignore it:
+
+- `--signal <n>` (`-s`) sends signal number `n` instead, such as `kill -s 1 56866` for `HUP`. Windows has no signals, so `kill` has no `--signal` flag there.
+- `--force` (`-f`) sends signal 9 (`KILL`), which can't be caught. On Windows, `kill` runs `taskkill`, and `--force` adds its `/F` flag. `--force` and `--signal` can't be used together.
+- `kill -9 56866`, as you'd write it in Bash, is an error. Nushell reads `-9` as a negative pid, and the error suggests `kill -s 9 <pid>`.
+- When the system command fails, for example because there's no such process or you may not signal it, `kill` raises a `process didn't terminate successfully` error with the system's message. `--quiet` (`-q`) hides that error and anything the command prints.
+
+---
+
+### More process details with `ps --long`
+
+The default `ps` columns include `mem`, the process's resident memory, meaning how much of its memory is in RAM right now. `ps --long` adds these columns:
+
+- `virtual` is the size of the process's virtual address space, which is usually much larger than the memory it uses.
+- `private` is the memory only this process uses. Activity Monitor and Task Manager show this number as "Memory".
+- `command` is the full command line and `exe` the path of the executable. `start_time` is when the process started, and `cwd` its working directory.
+- `user_id` is the numeric user id on Unix, and the SID string (for example `S-1-5-18`) on Windows.
+- `process_group_id` and `session_id` are the Unix process group and session. On Windows, `process_group_id` is the console process group.
+- `priority` is the scheduling priority as the operating system reports it, so its scale differs between platforms. On Windows it's the base priority, 8 for a normal process.
+- `nice` is the Unix nice value, from -20 (most favored) to 19. Windows has priority classes instead, and `nice` maps them onto the same scale: realtime is -20, high -14, above normal -7, normal 0, below normal 10, and idle 19.
+- `threads` is the number of threads.
+- `read` and `written` count the bytes of storage I/O since the process started. On Windows they count all I/O, including pipes and network traffic. The BSDs count blocks rather than bytes.
+- `environment` is the process's environment, as a list of `NAME=value` strings.
+
+```nu
+ps --long | where pid == $nu.pid | select name mem virtual private threads priority nice
+# => ╭───┬──────┬─────────┬──────────┬─────────┬─────────┬──────────┬──────╮
+# => │ # │ name │   mem   │ virtual  │ private │ threads │ priority │ nice │
+# => ├───┼──────┼─────────┼──────────┼─────────┼─────────┼──────────┼──────┤
+# => │ 0 │ nu   │ 24.0 MB │ 500.5 GB │  8.6 MB │       2 │       31 │    0 │
+# => ╰───┴──────┴─────────┴──────────┴─────────┴─────────┴──────────┴──────╯
+```
+
+As with `cpu`, a column is `null` when the operating system doesn't share the value. macOS shows the CPU, memory, threads, environment, and working directory of other users' processes only to root, and for those processes `command` is just the executable's path.

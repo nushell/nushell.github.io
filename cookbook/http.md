@@ -277,6 +277,158 @@ Available metadata:
 
 ---
 
+The examples in the next sections run against a small test server on `localhost:8765`. Its `/echo` path returns what it received, `/users` returns a JSON list, `/private` needs a password, and `/redirect` redirects to `/users`.
+
+### Sending headers and credentials
+
+`--headers` (`-H`) adds request headers. Give it a record, or a list that alternates names and values:
+
+```nu
+http get --headers {X-Api-Key: abc123} http://localhost:8765/echo | get x_api_key
+# => abc123
+http get --headers [X-Api-Key abc123] http://localhost:8765/echo | get x_api_key
+# => abc123
+```
+
+`--user` (`-u`) and `--password` (`-p`) send HTTP Basic authentication, an `Authorization: Basic ...` header holding the base64-encoded `user:password`. Either one can be given alone.
+
+```nu
+http get --user alice --password s3cret http://localhost:8765/private
+# => ╭──────┬───────╮
+# => │ user │ alice │
+# => ╰──────┴───────╯
+```
+
+Basic authentication only encodes the password and doesn't encrypt it, so use it over `https://`. For token-based APIs, send the token with `--headers {Authorization: $"Bearer ($env.API_TOKEN)"}`.
+
+---
+
+### Handling error responses
+
+A response with a status outside the 200 range is an error. The message has the status code, the reason, and the URL. Below it, the error shows the status reason again, or the response body when the response's content type is exactly `application/json`, with no `charset` or other parameter. For many APIs that body holds their own explanation:
+
+```nu
+http get http://localhost:8765/status/404/json
+# => Error: nu::shell::http_error
+# =>
+# =>   × HTTP Error 404 (Not Found): http://localhost:8765/status/404/json
+# =>    ╭─[repl_entry #1:1:10]
+# =>  1 │ http get http://localhost:8765/status/404/json
+# =>    ·          ──────────────────┬──────────────────
+# =>    ·                            ╰── {"error": "item not found"}
+# =>    ╰────
+```
+
+With `--allow-errors` (`-e`), `http get` returns the body of an error response like any other body. Check the status in the [response metadata](#accessing-http-response-metadata-while-streaming) or with `--full`:
+
+```nu
+http get --allow-errors http://localhost:8765/status/404 | metadata | get http_response.status
+# => 404
+```
+
+---
+
+### Getting the full response
+
+`--full` (`-f`) returns a record instead of just the body. It has the `urls` that were requested, including every redirect, the request and response `headers`, the `body`, and the `status`. Each set of headers is a list of `{name, value}` records, and the request headers are only those you added with flags such as `--headers` or `--user`.
+
+```nu
+http get --full http://localhost:8765/redirect | reject headers
+# => ╭────────┬────────────────────────────────────────╮
+# => │        │ ╭───┬────────────────────────────────╮ │
+# => │ urls   │ │ 0 │ http://localhost:8765/redirect │ │
+# => │        │ │ 1 │ http://localhost:8765/users    │ │
+# => │        │ ╰───┴────────────────────────────────╯ │
+# => │        │ ╭───┬────┬───────╮                     │
+# => │ body   │ │ # │ id │ name  │                     │
+# => │        │ ├───┼────┼───────┤                     │
+# => │        │ │ 0 │  1 │ Alice │                     │
+# => │        │ │ 1 │  2 │ Bob   │                     │
+# => │        │ ╰───┴────┴───────╯                     │
+# => │ status │ 200                                    │
+# => ╰────────┴────────────────────────────────────────╯
+```
+
+`--full` reads the whole body before it returns. For a large or streaming response, use the metadata instead.
+
+---
+
+### Redirects and timeouts
+
+The HTTP commands follow redirects by default. `--redirect-mode` (`-R`) changes that:
+
+- `manual` (or `m`) returns the redirect response itself, without an error. Its status and `location` header say where it points.
+- `error` (or `e`) fails with a `Redirect encountered when redirect handling mode was 'error'` error.
+
+```nu
+let response = http get --redirect-mode manual --full http://localhost:8765/redirect
+$response.status
+# => 302
+$response.headers.response | where name == location | get value.0
+# => /users
+```
+
+`--max-time` (`-m`) limits how long the whole request may take, including reading the body. When the time runs out, the command fails with a `Timed out` error. The duration has to be greater than zero.
+
+```nu
+http get --max-time 10sec http://localhost:8765/users
+```
+
+---
+
+### How `http post` sends its body
+
+[`http post`](/commands/docs/http_post.md) takes the body as its second argument, or from the pipeline. The content type comes from `--content-type` (`-t`). Without the flag, a body piped in from a command that sets one, such as `to json`, keeps that content type. A body given as an argument has none, so `{a: 1} | to json | http post $url` sends `application/json`, but `http post $url ({a: 1} | to json)` sends no content type at all.
+
+The content type decides how the body is encoded:
+
+- `application/json`: a record, list, or number is sent as JSON. A string that holds valid JSON is sent as that JSON, and any other string as a JSON string.
+- `application/x-www-form-urlencoded`: a record is sent as URL-encoded `name=value` pairs, the way an HTML form submits them. Each value has to be convertible to a string, so a nested list or record is an error. A list that alternates names and values does the same and can repeat a name.
+- `multipart/form-data`: a record is sent as form fields, and binary values are sent as files. See [Uploading files](#uploading-files).
+- Any other content type, or none: only a string or binary body is accepted, and it's sent as it is. A record fails with an `Accepted types: [binary, string]` error.
+
+```nu
+http post --content-type application/x-www-form-urlencoded http://localhost:8765/login {user: "alice smith", tags: "a&b", n: 3} | get body
+# => user=alice+smith&tags=a%26b&n=3
+```
+
+The other `http post` flags (`--headers`, `--user`, `--password`, `--max-time`, `--full`, `--allow-errors`, `--redirect-mode`, `--insecure`, `--pool`, and `--unix-socket`) work the same way as for `http get`. A body is required, and `http post` with neither an argument nor input fails with `Data must be provided either through pipeline or positional argument`.
+
+### `http put`, `http patch`, and `http delete`
+
+[`http put`](/commands/docs/http_put.md) and [`http patch`](/commands/docs/http_patch.md) take the same arguments and flags as `http post`, and only send a different HTTP method. The body is the second argument or the input, it's required, and `--content-type` or the input's content type decides how it's encoded:
+
+```nu
+{name: Bob} | to json | http put http://localhost:8765/users/2 | get method
+# => PUT
+http patch --content-type application/json http://localhost:8765/users/2 {name: Robert} | get method
+# => PATCH
+```
+
+[`http delete`](/commands/docs/http_delete.md) has the same flags, but its body is optional. Pass one with `--data` (`-d`) or through the input, and it's encoded the same way. Without one, the request has no body.
+
+---
+
+### Certificates, proxies, and connection pooling
+
+`--insecure` (`-k`) turns off TLS certificate checks, so you can reach a server with a self-signed or expired certificate. Anyone between you and the server can then read and change the traffic, so only use it with servers you control.
+
+The HTTP commands send requests through a proxy when one of these environment variables is set: `http_proxy`, `HTTP_PROXY`, `https_proxy`, `HTTPS_PROXY`, or `ALL_PROXY`. They use the first one set, in that order, for every request, whatever the URL's scheme. The value is the proxy's URL, such as `http://proxy.example.com:3128` or `socks5://localhost:1080`, and it can include a `user:password@` part. Hosts listed in `NO_PROXY` (or `no_proxy`), separated by commas, are contacted directly. The commands read these variables from Nushell's own environment, so `with-env` sets a proxy for one request:
+
+```nu
+with-env {HTTPS_PROXY: "http://proxy.example.com:3128"} { http get https://www.nushell.sh }
+```
+
+Each HTTP command normally opens new connections and closes them when it's done. With `--pool`, it uses one client shared by every HTTP command in the session instead, which keeps connections open for the next request to the same server. The shared client checks certificates and follows redirects. A `--pool` call uses the shared client's certificate, redirect, and Unix socket settings, not its own `--insecure`, `--redirect-mode`, and `--unix-socket` flags. To change the shared client's settings, use [`http pool`](/commands/docs/http_pool.md), which takes those three flags and closes the client's open connections:
+
+```nu
+http pool --insecure
+http get --pool https://self-signed.example.com/a
+http get --pool https://self-signed.example.com/b
+```
+
+---
+
 ### Connecting via Unix Domain Sockets
 
 You can connect to HTTP servers over Unix domain sockets using the `--unix-socket` flag. This works on Unix/Linux systems and Windows 10+ (build 17063 and later). This is commonly used for local services like the Docker daemon, systemd, or other IPC services.
