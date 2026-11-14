@@ -1,0 +1,228 @@
+# Language server
+
+Running `nu --lsp` starts Nushell's built-in [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) (LSP) server. An editor that speaks LSP uses it to underline errors as you type, complete commands and paths, show a command's help when you hover over it, jump to definitions, and rename a variable or custom command across files. The server runs Nushell's own parser on your code, so the errors it reports are the ones `nu` would report before running the script.
+
+The language server is part of the default build (the `lsp` [Cargo feature](./installation.md)). To step through a script while it runs, use the debugger instead (see [Debugging Scripts](./debugging.md)).
+
+## Starting the server
+
+You don't run the server by hand. The editor starts `nu --lsp` and talks to it over the process's standard input and output. No other arguments are needed.
+
+Before it answers the editor, the server loads the same startup files as an interactive session: the plugin registry, `env.nu`, `config.nu`, and the autoload directories. Custom commands, aliases, and modules defined there, and the commands of registered plugins, are all known to the server. It completes them, shows their help, and doesn't treat calls to them as external commands. Add `-n` (`--no-config-file`) to the arguments to start from the defaults instead. The other startup flags, such as `--config`, `--env-config`, `--plugin-config`, and `--plugins`, work with `--lsp` too.
+
+While the startup files run, [`$nu.is-lsp`](./special_variables.md#nu) is `true`. [`print`](/commands/docs/print.md) writes to stderr in this mode, but the output of an external command still goes to stdout, in between the protocol messages that the editor reads from there. Skip such commands when the language server starts:
+
+```nu
+# in config.nu
+if not $nu.is-lsp {
+    ^echo "hello from config.nu"
+}
+```
+
+The server parses each file with the file's own directory as the current directory. Relative paths in `use` and `source`, and file path completions, start from where the file is, not from where the editor was started.
+
+## Editor setup
+
+### VS Code
+
+The [Nushell extension for VS Code](https://marketplace.visualstudio.com/items?itemName=TheNuProjectContributors.vscode-nushell-lang) starts `nu --lsp` for `.nu` files.
+
+### Neovim
+
+Neovim 0.11 and later can start the server with the built-in LSP client. Neovim sets the `nu` filetype for `.nu` files:
+
+```lua
+vim.lsp.config('nushell', {
+  cmd = { 'nu', '--lsp' },
+  filetypes = { 'nu' },
+  root_markers = { '.git' },
+})
+vim.lsp.enable('nushell')
+```
+
+`root_markers` decides the workspace folder. Neovim looks upward from the file for one of the listed names and sends that directory to the server as the workspace folder. When nothing matches, no folder is sent, and find references and rename only see the current file.
+
+### Other editors
+
+Any editor with an LSP client can use the server. Configure it to run `nu` with the argument `--lsp` for `.nu` files, and check that it sends a workspace folder, as described in the next section.
+
+## What the editor sends
+
+The server uses standard LSP over stdin and stdout: JSON-RPC messages, each preceded by a `Content-Length` header. Editors with an LSP client handle the details, but a few of them matter when a feature doesn't work:
+
+- The server reads the project directories from the `workspaceFolders` field of the `initialize` request. It ignores `rootUri` and `rootPath`, so a client that only sends those gets no workspace-wide search. Later `workspace/didChangeWorkspaceFolders` notifications add and remove folders. A file belongs to a folder when the file's URI starts with the folder's URI.
+- The editor sends `textDocument/didOpen`, `didChange`, and `didClose` for the files you edit. The server asks for incremental changes, so each `didChange` carries only the edited range. The server works from the text it was sent, including unsaved edits.
+- The server reports the progress of workspace-wide searches with `$/progress` notifications, and sends warnings as `window/logMessage` notifications.
+- The server registers no trigger characters for completion or signature help. Most editors ask for completions while you type a word, but whether signature help appears without you asking for it depends on the editor.
+
+An `initialize` request with one workspace folder looks like this:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "initialize",
+  "params": {
+    "processId": null,
+    "capabilities": {},
+    "workspaceFolders": [
+      { "uri": "file:///home/me/project", "name": "project" }
+    ]
+  }
+}
+```
+
+The response lists the features below in `capabilities`, and its `serverInfo` gives the name `Nushell` and the version of `nu`.
+
+## Features
+
+| Feature            | LSP method                                               |
+| ------------------ | -------------------------------------------------------- |
+| Diagnostics        | `textDocument/publishDiagnostics` (sent by the server)   |
+| Completion         | `textDocument/completion`                                |
+| Hover              | `textDocument/hover`                                     |
+| Signature help     | `textDocument/signatureHelp`                             |
+| Go to definition   | `textDocument/definition`                                |
+| Document highlight | `textDocument/documentHighlight`                         |
+| Find references    | `textDocument/references`                                |
+| Rename             | `textDocument/prepareRename`, then `textDocument/rename` |
+| Document symbols   | `textDocument/documentSymbol`                            |
+| Workspace symbols  | `workspace/symbol`                                       |
+| Inlay hints        | `textDocument/inlayHint`                                 |
+| Semantic tokens    | `textDocument/semanticTokens/full`                       |
+
+The server has no formatting or code actions.
+
+### Diagnostics
+
+Each time a file is opened or changed, the server parses it and sends the problems it found in a `textDocument/publishDiagnostics` notification. Parse errors become errors, and parse warnings, such as a call to a deprecated command, become warnings. These are the problems `nu` finds before it runs a script: syntax errors, unknown flags, missing arguments, variables that don't exist, and the type mismatches the parser can detect. Errors that only happen while a script runs aren't reported. In this file:
+
+```nu
+ls --al
+$greting
+```
+
+the server reports two errors, ``The `ls` command doesn't have flag `al`.`` on `--al` and `Variable not found.` on `$greting`.
+
+A diagnostic has only the short message, without the help text and labels that `nu` prints. A problem inside a file that this one imports with `use` or `source` is reported on this file, at its end.
+
+### Completion
+
+Completions come from the same engine as <kbd>Tab</kbd> completion in the REPL. They include commands, flags, file and directory paths, module names after `use`, variables, the fields of a record in a cell path, and operators. [Custom completions](./custom_completions.md) and the external completer set in `config.nu` (`$env.config.completions.external.completer`) apply as well.
+
+Each item has a kind, which most editors show as an icon:
+
+| Suggestion                             | Completion item kind |
+| -------------------------------------- | -------------------- |
+| Built-in command                       | Function             |
+| Custom command or plugin command       | Method               |
+| Keyword, such as `let` or `def`        | Keyword              |
+| Alias                                  | Reference            |
+| External command                       | Interface            |
+| Flag                                   | Field                |
+| File                                   | File                 |
+| Directory                              | Folder               |
+| Module                                 | Module               |
+| Variable                               | Variable             |
+| Cell path member                       | Property             |
+| Operator                               | Operator             |
+| String value, such as a flag's choices | Value                |
+
+Choosing a command inserts a snippet with a placeholder for each positional parameter. An optional parameter's placeholder ends in `?`, a rest parameter's starts with `...`, and a block parameter gets braces. The item's documentation is the command's help. Completing `str jo` returns (some fields left out):
+
+```json
+{
+  "label": "str join",
+  "labelDetails": { "description": "built-in" },
+  "kind": 3,
+  "detail": "Concatenate multiple strings into a single string, with an optional separator between each.",
+  "insertTextFormat": 2,
+  "textEdit": {
+    "range": {
+      "start": { "line": 1, "character": 0 },
+      "end": { "line": 1, "character": 6 }
+    },
+    "newText": "str join ${1:separator?}"
+  }
+}
+```
+
+### Hover
+
+What hovering shows depends on what is under the cursor:
+
+- A command: its help as Markdown, with the description, usage, flags, parameters, input and output types, and examples. This covers built-in, custom, and plugin commands.
+- A variable: its type, and its value if it is a constant. For other variables, hover says whether the variable is `mutable` or `immutable`.
+- A cell path such as `$person.name`: the type of that field, and its value when the variable is a constant.
+- A module name: the module's documentation comments.
+- An external command: its manual page, from `man`. On Windows, the server runs PowerShell's `help` instead.
+- Any other expression, such as a literal: its type.
+
+### Signature help
+
+With the cursor among a command's arguments, signature help shows the command's usage line, such as `str join {flags} (separator)`, and describes each parameter. Positional parameters come first, in order, and the flags follow them. The active parameter is the positional parameter the cursor is on, counted by the positional arguments before it.
+
+### Go to definition
+
+Go to definition jumps to:
+
+- the body of a custom command
+- the declaration of a variable, including command parameters and closure parameters
+- the definition of a module
+- the value of a field, for a cell path into a constant
+
+For a module that is a whole file, as in `overlay use lib.nu`, the definition is the start of that file. The definition can be in another file that the current one imports with `use` or `source`, whether or not that file is open in the editor. Built-in commands, plugin commands, and external commands have no definition to go to. Neither do commands from the [standard library](./standard_library.md), which is built into `nu`. For a standard library command, the server logs a warning and returns nothing.
+
+### Document highlight
+
+Document highlight marks every place in the current file where the variable, command, or module under the cursor appears, including its definition.
+
+### Find references
+
+Find references lists every place where the variable, command, or module under the cursor appears, including its definition. The request's `includeDeclaration` setting is ignored.
+
+When the file is in a workspace folder, the server searches every `.nu` file under that folder, at any depth, along with the files open in the editor. It parses only the files whose text contains the name, and reports its progress as it goes (`Finding references ...`). The search has a five-second budget. When that runs out, the server stops, logs `Workspace-wide search took too long!`, and returns the references it found so far.
+
+When the file isn't in a workspace folder, only the current file is searched.
+
+Results from other files are best-effort. A use of a command in a file that imports it with a different path can be missed, and so can the name in that file's `use` statement.
+
+### Rename
+
+Renaming takes two requests. `textDocument/prepareRename` checks what is under the cursor and starts a search for every occurrence, and `textDocument/rename` turns what that search found into edits.
+
+Only variables, custom commands, and modules defined in your code can be renamed. On a built-in command, or anything else without a definition, preparation fails with `Definition not found. Not allowed to rename built-ins.` On a literal or another expression, it fails with `Rename only works for variable/command.`
+
+The search covers the same files as find references, and reports progress as `Preparing rename ...`. It has no time limit, but any other message from the editor stops it, such as a hover request or the `didChange` that a keystroke sends. The server then logs `Workspace-wide search took too long!` and ends the progress report with `interrupted.` A rename request that arrives before the search finishes is refused with `Please wait for renaming preparation to complete.` and stops the search too. A rename after a stopped search only edits what the search found before it stopped, which can be nothing at all. Start the rename again to search every file.
+
+Without a workspace folder, only the current file is edited. When the command is defined in another file, its definition keeps the old name. Because cross-file results are best-effort, check the edits before you save them.
+
+### Symbols
+
+Document symbols list the custom commands, variables, and modules defined in a file, as a flat list with the commands first. Editors use them for an outline view and for jumping to a symbol.
+
+Workspace symbols search the symbols of the files open in the editor and of the files they import with `use` or `source`, matching the query fuzzily. The query is case-insensitive unless it has an uppercase letter. Files in the workspace folder that aren't open or imported aren't searched.
+
+### Inlay hints
+
+Inlay hints are short labels that the editor draws inside the code without changing it. The server adds:
+
+- the type after the name in a `let`, `mut`, or `const` declaration and after a `for` loop variable, unless the code already has a type annotation, as in `let count: int = 0`,
+- the type after the variable in an assignment, such as `$count += 1`,
+- the parameter name before each positional argument of a custom command defined in your code, with the parameter's type and description as a tooltip.
+
+Lists, records, and tables are shown as `list`, `record`, and `table`, without their element types. Parameter names aren't shown for built-in or plugin commands, for flags, or for a rest parameter. After a spread argument (`...$args`), no more parameter names are shown. For this file:
+
+```nu
+def greet [name: string] { $"hello ($name)" }
+let names = [Ada Grace]
+$names | each {|n| greet $n }
+```
+
+an editor shows `: list` after `names`, and `name:` before `$n`.
+
+The server computes the hints when the file is opened or changed and always returns the hints for the whole file, whatever range the editor asks for.
+
+### Semantic tokens
+
+Most editors color Nushell code with a syntax grammar that only sees the text. Such a grammar can't know which multi-word names, such as `str join`, are a single command, so it may color the second word as an argument. Semantic tokens cover that one case. The server marks each call to a command whose name has more than one word, such as `str join`, a custom command named `git sync`, or `assert equal` from the standard library, with the token type `function`. Calls to commands whose names start with `export` or `overlay` aren't marked, and neither is anything else, so the grammar still colors the rest of the file. Only full-document requests are supported.

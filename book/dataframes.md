@@ -258,6 +258,32 @@ If you want to see all the dataframe commands that are available you
 can use `scope commands | where category =~ dataframe`
 :::
 
+### Cloud Storage
+
+`polars open` and `polars save` also accept a URL in cloud storage in place of a file path:
+
+```nu
+# Read a Parquet file from Amazon S3 as a lazy dataframe
+polars open s3://my-bucket/sales.parquet
+
+# Write a dataframe to Azure Blob Storage
+$df | polars save az://my-container/sales.parquet
+```
+
+The URL's scheme picks the provider, and each provider has its own way of finding credentials:
+
+| Schemes                                              | Provider             | Where the credentials come from                                                                                                                                                                                          |
+| ---------------------------------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `s3://`, `s3a://`                                    | Amazon S3            | The AWS SDK's default chain: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_SESSION_TOKEN`, then the shared config and credentials files (with `AWS_PROFILE`), web identity, ECS, and EC2 instance metadata. Other `AWS_` variables, such as `AWS_REGION`, are read too. |
+| `az://`, `azure://`, `abfs://`, `abfss://`, `adl://` | Azure                | Variables whose names start with `AZURE_`, such as `AZURE_STORAGE_ACCOUNT_NAME`, `AZURE_STORAGE_ACCOUNT_KEY`, `AZURE_STORAGE_SAS_TOKEN`, or `AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET`, and `AZURE_TENANT_ID`.             |
+| `gs://`, `gcs://`                                    | Google Cloud Storage | `SERVICE_ACCOUNT`, the path to a service account key file, and variables whose names start with `GOOGLE_`, such as `GOOGLE_SERVICE_ACCOUNT` (which wins over `SERVICE_ACCOUNT`) and `GOOGLE_APPLICATION_CREDENTIALS`. |
+
+When no AWS credentials turn up, the command fails with `Could not fetch AWS credentials`, followed by each place the SDK looked. Other schemes, such as `https://` and `file://`, fail with `Could not determine a supported cloud type from path`.
+
+The plugin reads these variables from its own environment, which it gets from `$env` when Nushell starts it. If you set or change them while the plugin is running, run `plugin stop polars`, and the next `polars` command starts the plugin with the new values. Stopping the plugin also drops the dataframes it holds.
+
+Not every format works with cloud storage. `polars open` reads CSV, TSV, Parquet, Arrow, and NDJSON files from a cloud URL, always as a lazy dataframe, so `--eager` fails with `Cloud URLs are not supported with --eager`. JSON and Avro files can't be read from the cloud. `polars save` writes Parquet, Arrow, NDJSON, and CSV files to the cloud, but not Avro.
+
 ## Basic Aggregations
 
 Let's start with basic aggregations on the dataframe. Let's sum all the columns

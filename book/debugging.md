@@ -62,6 +62,8 @@ The **Runtime errors** exception filter, which is on by default, pauses the scri
 
 While the script is paused, you can continue, step over a line, step into a command call or a pipeline stage, or step out of the current command. The call stack shows the command and closure calls that led to the current line.
 
+To stop a script that is running, use the editor's **Pause** command. The script stops at the next step it reaches, as if a breakpoint were there. While a long-running command such as [`sleep`](/commands/docs/sleep.md) or an external program is working, the script isn't at a step, so it pauses when that command finishes.
+
 ## Inspecting Values
 
 When the script pauses, the editor's variables view shows:
@@ -73,6 +75,8 @@ When the script pauses, the editor's variables view shows:
 - **Process**: the most recent output of the external commands the script ran.
 
 Nested records, lists, and tables load one level at a time as you expand them, so a large value doesn't slow anything down until you look inside it. Streams are described, not read, so looking at one doesn't consume it.
+
+To see a whole value at once, a client can send the debugger's own `nuDapVisualize` request, which the VS Code extension's **Visualize** action uses. Its arguments name a value from the variables view, either with the value's `variablesReference` or, for a value that doesn't expand, with the `containerReference` of the scope or value that holds it and its `name`. The response has the value as JSON in `value`, its Nushell type in `type`, and `truncated`. Lists and records stop at 1000 items, nesting stops at 8 levels, and binary data, sent as a hex string in a `$nuBinary` object, stops at 64 KiB. When any of these limits cuts the value, `truncated` is `true`. Filesizes, durations, and dates come back as strings, such as `"2.0 kB"`, `"1500000000ns"`, and `"2026-01-02T03:04:05+00:00"`. Use references from the current pause. One that the current pause doesn't have gets the error `no value for that reference (stale after resume?)`.
 
 Watch expressions, the debug console, and hovering over a variable evaluate Nushell expressions using the paused values. They run against a copy of the script's state, so they can't change the script's variables.
 

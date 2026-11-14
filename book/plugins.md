@@ -241,6 +241,15 @@ All of the commands from installed plugins are available in the current scope:
 scope commands | where type == "plugin"
 ```
 
+[`version`](/commands/docs/version.md) also names the plugins, in its `installed_plugins` column. It is a single string with each plugin's name and version, separated by commas:
+
+```nu
+version | get installed_plugins
+# => polars 0.117.0, query 0.117.0
+```
+
+The column lists the plugins loaded into the current session, running or not. A plugin you have only registered with `plugin add` appears after `plugin use` or a restart, and one you remove with `plugin rm` stays until the session ends. A plugin that didn't report a version is listed by its name alone.
+
 ### Plugin Lifecycle
 
 Plugins stay running while they are in use, and are automatically stopped by default after a period of time of inactivity. This behavior is managed by the [plugin garbage collector](#plugin-garbage-collector). To manually stop a plugin, call `plugin stop` with its name:
@@ -321,6 +330,22 @@ Nu's main repo contains example plugins that are useful for learning how the plu
 - [Rust](https://github.com/nushell/nushell/tree/main/crates/nu_plugin_example)
 - [Python](https://github.com/nushell/nushell/blob/main/crates/nu_plugin_python)
 - [Nu](https://github.com/nushell/nushell/tree/main/crates/nu_plugin_nu_example)
+- [JavaScript (Node.js)](https://github.com/nushell/nushell/tree/main/crates/nu_plugin_javascript)
+
+The JavaScript example is a single file, `nu_plugin_node_example.js`, that speaks the JSON encoding of the protocol. Its one command, `node_example`, ignores its arguments and returns a 10-row table. The file hard-codes the Nushell version it works with in the `NUSHELL_VERSION` constant, `'0.103.1'` as shipped. During the handshake, the plugin exits unless that constant equals the version of `nu` exactly, and `nu` itself refuses a plugin that reports an incompatible version. Before you add the plugin, set the constant to your version, the value of `(version).version`. Then register the file with Node.js as the interpreter, giving `--shell` the full path to `node`:
+
+```nu
+plugin add --shell (which node | get path.0) ./nu_plugin_node_example.js
+plugin use node_example
+node_example 2 "3" | first 3
+# => ╭───┬─────┬─────┬───────╮
+# => │ # │ one │ two │ three │
+# => ├───┼─────┼─────┼───────┤
+# => │ 0 │   0 │   0 │     0 │
+# => │ 1 │   1 │   2 │     3 │
+# => │ 2 │   2 │   4 │     6 │
+# => ╰───┴─────┴─────┴───────╯
+```
 
 ### Debugging
 

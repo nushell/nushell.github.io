@@ -65,6 +65,7 @@ export const sidebarEn: SidebarConfig = {
         '/book/sorting.md',
         '/book/testing.md',
         '/book/debugging.md',
+        '/book/language_server.md',
         '/book/style_guide.md',
       ],
     },

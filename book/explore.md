@@ -65,7 +65,35 @@ Press `/` to search forward or `?` to search backward. Results are highlighted a
 | `:help`     | Show the help page                               |
 | `:try`      | Open an interactive REPL on the current data     |
 | `:nu <cmd>` | Run a Nushell command on the current data        |
+| `:table`    | Open the current value in a new table view       |
+| `:expand`, `:e` | Show the current value with all nested data expanded |
 | `:q`        | Exit `explore`                                   |
+
+`:table` and `:expand` work on the current value, which is the selected cell in cursor mode and the whole table you are looking at in view mode. Both open a new view on top of the current one, and `Esc` goes back to it.
+
+`:table` shows the value as a table that you can move around in, even when it is a plain value such as a string. `:expand`, which the `e` key also runs, draws the value as text, the way [`table --expand`](/commands/docs/table.md) does. Every nested list and record is drawn in full inside its cell, in the style set by `$env.config.table.mode`.
+
+## Viewing Binary Data
+
+When the input is binary data, `explore` shows a hex dump instead of a table. Each line has the offset of its first byte, the next sixteen bytes in hex, and the same bytes as characters:
+
+```nu
+0x[48 65 6c 6c 6f 2c 20 4e 75 21 00 09 0a 7f c3 a9] | explore
+# =>  00000000 │ 4865 6c6c 6f2c 204e 7521 0009 0a7f c3a9 │ Hello, Nu!0__•××
+```
+
+In the character column, a printable ASCII character stands for itself, `0` is a null byte, `_` is whitespace other than a space (such as a tab or a newline), `•` is any other ASCII control character, and `×` is a byte outside ASCII.
+
+A byte stream also opens in the hex view, even when it holds text. That includes the output of an external command and a text file read with [`open`](/commands/docs/open.md):
+
+```nu
+^echo hi there | explore
+# =>  00000000 │ 6869 2074 6865 7265 0a                  │ hi there_
+```
+
+To see the text, convert it first, for example with [`lines`](/commands/docs/lines.md) or [`decode`](/commands/docs/decode.md). `explore` reads the whole stream into memory before it shows anything.
+
+The hex view is simpler than the table view. You can scroll with the arrow keys, but there is no cursor mode, searching finds nothing, and `--peek` returns nothing. `q` and `Esc` don't exit. Type `:q` or press `Ctrl+C` instead.
 
 ## Config
 
