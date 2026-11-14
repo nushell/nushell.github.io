@@ -114,7 +114,12 @@ export const sidebarEn: SidebarConfig = {
       link: '/book/advanced.md',
       collapsible: false,
       children: [
-        '/book/standard_library.md',
+        {
+          text: 'Standard Library',
+          link: '/book/standard_library.md',
+          collapsible: false,
+          children: ['/book/standard_library/std_rfc.md'],
+        },
         '/book/dataframes.md',
         '/book/metadata.md',
         '/book/creating_errors.md',
