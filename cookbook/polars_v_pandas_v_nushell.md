@@ -23,9 +23,8 @@ $df | polars shape
 # => ╰───┴─────────┴─────────╯
 ```
 
-`polars shape` returns a dataframe with a single row and two columns, `rows` and
-`columns`. `polars open` opened the file lazily, so `polars shape` runs the plan
-to count the rows.
+`polars open` opened the file lazily, so `polars shape` runs the plan to count
+the rows.
 
 ## 2. Opening the file and show the first 5 rows
 

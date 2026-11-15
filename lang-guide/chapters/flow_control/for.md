@@ -51,7 +51,7 @@ for x in [1 2 3] { $x * $x | print }
    # => 42
    ```
 
-1. `for` takes the items of a stream one at a time, as they are produced. Each item is processed before the next one is produced:
+1. `for` takes the items of a stream one at a time, as they are produced. The block finishes with each item before the next one is produced:
 
    ```nu
    for x in (1..3 | each {|i| print $"producing ($i)"; $i }) { print $"got ($x)" }

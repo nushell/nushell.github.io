@@ -121,7 +121,7 @@ let extra = [purple blue]
 # => ╰───┴────────────────╯
 ```
 
-Ranges are expanded the same way, and a single value as input, such as a string, becomes a one-item list first. See [Adding and changing data](/lang-guide/chapters/filters/changing_data.md#append-and-prepend) in the Language Guide.
+[Adding and changing data](/lang-guide/chapters/filters/changing_data.md#append-and-prepend) in the Language Guide covers ranges and input that isn't a list.
 
 In case you want to remove items from list, there are many ways. [`skip`](/commands/docs/skip.md) allows you skip first rows from input, while [`drop`](/commands/docs/drop.md) allows you to skip specific numbered rows from end of list.
 
@@ -248,7 +248,7 @@ $"product = ($scores | reduce --fold 1 { |elt, acc| $acc * $elt })" # product = 
 $scores | enumerate | reduce --fold 0 { |elt, acc| $acc + $elt.index * $elt.item } # 0*3 + 1*8 + 2*4 = 16
 ```
 
-Without `--fold`, the first item is the starting accumulator, so the closure first runs on the second item, and an empty list is an error. With `--fold`, an empty list returns the fold value. [`math sum`](/commands/docs/math_sum.md) and [`math avg`](/commands/docs/math_avg.md) also work on lists of durations and filesizes, such as `[1sec 90sec] | math sum`. For the details of these commands and the other ones in this chapter, see [Summarizing and comparing lists](/lang-guide/chapters/filters/summarizing_lists.md) in the Language Guide.
+[Summarizing and comparing lists](/lang-guide/chapters/filters/summarizing_lists.md) in the Language Guide explains how `reduce` starts with and without `--fold`, which lists [`math sum`](/commands/docs/math_sum.md) and [`math avg`](/commands/docs/math_avg.md) accept, and the rules for the other commands in this chapter.
 
 ## Accessing the List
 
@@ -344,7 +344,7 @@ $scores | any $it > 7 # true
 $scores | all $it > 2 # true
 ```
 
-Both stop at the first item that decides the answer. For an empty list, `any` returns `false` and `all` returns `true`.
+Both stop at the first item that decides the answer. See [`all` and `any`](/lang-guide/chapters/filters/summarizing_lists.md#all-and-any) for empty input and other edge cases.
 
 ## Set Operations and Combinations
 
@@ -396,7 +396,7 @@ Items match only when they are the same type and value, so `1` and `1.0` are dif
 # => ╰───┴─────╯
 ```
 
-Given a table, both return a list of tables. Asking `combinations` for more items than the list has gives an empty list, and `permutations` of a list with repeated items repeats orderings.
+See [`chunks`, `combinations` and `permutations`](/lang-guide/chapters/filters/summarizing_lists.md#chunks-combinations-and-permutations) for tables and edge cases.
 
 ## Converting the List
 

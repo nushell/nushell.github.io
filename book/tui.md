@@ -365,7 +365,7 @@ A closure **without** parameters transforms the file text, which it receives as 
 ls | tui split [ (tui table) (tui preview { nu-highlight }) ] | tui run
 ```
 
-The closure isn't run for directories and binary files. The text comes with metadata. Its `source` is the file's full path, and its `content_type` is a guess based on the file's extension, such as `text/x-toml` or `application/json`. [`nu-highlight`](/commands/docs/nu-highlight.md) ignores both. It takes only a string, and it always colors it as Nushell code, with the `shape_*` colors of `$env.config.color_config`. With `--reject-garbage`, it fails on text that doesn't parse as Nushell instead. To color only Nushell scripts, read the type with [`metadata access`](/commands/docs/metadata_access.md):
+The closure isn't run for directories and binary files. The text comes with metadata. Its `source` is the file's full path, and its `content_type` is a guess based on the file's extension, such as `text/x-toml` or `application/json`. [`nu-highlight`](/commands/docs/nu-highlight.md) ignores both. It takes only a string, and it always colors it as Nushell code, with the `shape_*` colors of `$env.config.color_config`. With `--reject-garbage`, it fails instead when part of the text would be colored as `shape_garbage`. To color only Nushell scripts, read the type with [`metadata access`](/commands/docs/metadata_access.md):
 
 ```nu
 ls | tui split [ (tui table) (tui preview { metadata access {|m| if $m.content_type? == "application/x-nuscript" { nu-highlight } else { $in } } }) ] | tui run

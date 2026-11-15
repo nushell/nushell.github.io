@@ -1,6 +1,6 @@
 # Summarizing and comparing lists
 
-These commands turn a list or table into a single answer (a `bool`, a count, a total), remove duplicates, compare two lists as sets, or split a list into groups. [Working with Lists](/book/working_with_lists.md) in the Book introduces most of them; this page gives the rules and edge cases.
+These commands turn a list or table into a single answer such as a `bool`, a count or a total, remove duplicates, compare two lists as sets, or split a list into groups. [Working with Lists](/book/working_with_lists.md) in the Book introduces most of them; this page gives the rules and edge cases.
 
 ## `all` and `any`
 
@@ -10,7 +10,7 @@ These commands turn a list or table into a single answer (a `bool`, a count, a t
 - They stop at the first item that settles the answer. For `all` that is the first item that doesn't match, and for `any` the first one that does. Later items are never checked, so side effects in the closure don't run for them.
 - Only `true` counts as a match. A result that isn't a `bool`, such as a string or `null`, counts as `false` without an error.
 - An empty closure, `{}`, returns its input unchanged, so `any {}` and `all {}` test the items themselves.
-- The input has to be a list or a table. A range or a single value is a type error, `Command does not support range input` (or `int input`, and so on). For a run of numbers, make a list with [`seq`](/commands/docs/seq.md).
+- The input has to be a list or a table. A range or a single value is a type error such as `Command does not support range input`. For a run of numbers, make a list with [`seq`](/commands/docs/seq.md).
 
 ```nu
 [1 2 3] | all {|x| print $"checking ($x)"; $x < 2 }
@@ -62,7 +62,7 @@ Given column names, `is-empty` checks those columns of a record or table instead
 # => [a]
 ```
 
-With column names, only `null` counts as empty, so `is-not-empty` returns `true` as soon as any named column in any row holds something else, even `""`. The check stops at that row. A missing column is a `column_not_found` error, as with `is-empty`.
+With column names, `is-not-empty` returns `true` as soon as any named column in any row holds something other than `null`, even `""`, and stops checking at that row.
 
 ## `reduce`
 
@@ -145,7 +145,7 @@ The flags change what comes back:
 - `--count` (`-c`) returns a table of each distinct `value` and its `count`.
 - `--repeated` (`-d`) returns only the values that appear more than once, and `--unique` (`-u`) only those that appear exactly once.
 - `--ignore-case` (`-i`) compares strings without regard to case, and keeps the first spelling it saw.
-- `--keep-last` (`-l`) keeps the last value of each group, in the position of the first. Without `--ignore-case` the values in a group are equal, so you rarely see a difference unless you combine the two.
+- `--keep-last` (`-l`) keeps the last value of each group, in the position of the first. Without `--ignore-case` the values in a group are equal, so on its own the flag rarely changes the result.
 
 ```nu
 [a b a c a b] | uniq --count

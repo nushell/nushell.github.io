@@ -62,7 +62,7 @@ Since `>` is an operator, Nushell writes output to a file with the [`save`](/com
 "hello" | save output.txt
 ```
 
-Writing the Bash form anyway doesn't raise an error, and that can be surprising. In a command's arguments, `>` is an ordinary word. `echo "hello" > output.txt` passes three arguments to `echo`, which returns them as a list, and no file is written. An external command gets the `>` as an argument too:
+The Bash form doesn't raise an error, because in a command's arguments `>` is an ordinary word. `echo "hello" > output.txt` passes three arguments to `echo`, which returns them as a list, and no file is written. An external command gets the `>` as an argument too:
 
 ```nu
 echo "hello" > output.txt
@@ -74,8 +74,6 @@ echo "hello" > output.txt
 ^echo hello > output.txt
 # => hello > output.txt
 ```
-
-Nushell's own redirections are `o>`, `e>` and `o+e>`. See [Stdout, Stderr, and Exit Codes](./stdout_stderr_exit_codes.md).
 
 The parser catches some other Bash operators, and its error names the Nushell replacement:
 

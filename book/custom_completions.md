@@ -83,7 +83,7 @@ If you want to choose how your completions are filtered and sorted, you can also
 
 The record can also have a `fallback` key, described in [Adding to the Built-in Completions](#adding-to-the-built-in-completions).
 
-An option you leave out keeps its value from the [completion settings](#completion-settings). Nushell reads a returned record this way only when it has at least one of the keys `completions`, `options` and `fallback`. It reads any other record as a single suggestion (see [Custom Descriptions and Styles](#custom-descriptions-and-styles)), and a lone string as a single suggestion too. Nushell skips keys it doesn't know, whether they're in this record, in `options` or in a suggestion. Start Nushell with `nu --log-level error` to see a message for each one.
+An option you leave out keeps its value from the [completion settings](#completion-settings). Nushell reads a returned record this way only when it has at least one of the keys `completions`, `options` and `fallback`. It reads any other record, and a lone string, as a single suggestion. See [Custom Descriptions and Styles](#custom-descriptions-and-styles). Nushell skips keys it doesn't know, whether they're in this record, in `options` or in a suggestion. Start Nushell with `nu --log-level error` to see a message for each one.
 
 Here's an example demonstrating how to set these options:
 
@@ -465,12 +465,13 @@ def my-command [commit: string@my_commits] {
 
 ## Interactive Completers
 
-Completers normally run in the background, on a separate thread with no access to the terminal's input, so a slow completer never blocks the line editor. A completer that needs the terminal, such as one that launches a fuzzy finder like `fzf` or uses [`input list`](/commands/docs/input_list.md), must be marked with the [`@interactive`](/commands/docs/attr_interactive.md) attribute. It then runs in the foreground with the terminal to itself, and whatever it returns becomes the completion:
+Completers normally run in the background, on a separate thread with no access to the terminal's input, so a slow completer never blocks the line editor. A completer that needs the terminal, such as one that launches a fuzzy finder like `fzf` or uses [`input list`](/commands/docs/input_list.md), must be marked with the [`@interactive`](/commands/docs/attr_interactive.md) attribute. It then runs in the foreground with the terminal to itself:
 
 ```nu
 @interactive
 def pick-file [token: record] {
-    ls | get name | to text | ^fzf --query $token.text | lines
+    let picks = ls | get name | to text | ^fzf --query $token.text | lines
+    {completions: $picks, options: {filter: false}}
 }
 
 def open-file [path: string@pick-file] {
@@ -478,7 +479,7 @@ def open-file [path: string@pick-file] {
 }
 ```
 
-Typing `open-file ` and pressing <kbd>Tab</kbd> opens `fzf`, and the file you pick is inserted into the command line. If you cancel the picker instead (for example with <kbd>Esc</kbd>), nothing is inserted and no menu stays open; pressing <kbd>Tab</kbd> again opens the picker again. What an interactive completer returns is final: when it returns nothing, returns `null` or fails, Nushell doesn't fall back to file names. It may return a single value instead of a list, which is what `input list` gives you.
+Typing `open-file ` and pressing <kbd>Tab</kbd> opens `fzf`, and the file you pick is inserted into the command line. If you cancel the picker instead (for example with <kbd>Esc</kbd>), nothing is inserted and no menu stays open; pressing <kbd>Tab</kbd> again opens the picker again. What an interactive completer returns is final. When it returns nothing, returns `null` or fails, Nushell doesn't fall back to file names, unless it returns a record with [`fallback: true`](#adding-to-the-built-in-completions). It may return a single value instead of a list, which is what `input list` gives you. Nushell still matches the answer against the text you typed, as it does for any completer attached to a parameter. That's why `pick-file` sets `filter: false`. Without it, a file that `fzf` matched fuzzily but that doesn't start with the typed text would be dropped.
 
 The [external completer](#external-completions) is a closure, and a closure can't carry an attribute. Nushell treats it as interactive when the last command in the closure is an `@interactive` command. To send every external command's arguments through `pick-file` from above:
 
@@ -488,7 +489,7 @@ $env.config.completions.external.completer = {|token| pick-file $token }
 
 Nushell decides this by reading the closure, not by running it, so the call has to come last. `{|token| pick-file $token | sort }` and `{|token| if true { pick-file $token } }` both run in the background like any other completer. The cookbook has a recipe that [feeds carapace's suggestions to `fzf`](../cookbook/external_completers.md#fzf-picker).
 
-In a script or with `nu -c`, `commandline complete` refuses to run an interactive completer and stops with the error `An @interactive completer cannot run here`. `commandline complete --input` still shows the record it would receive.
+In a script or with `nu -c`, `commandline complete` refuses to run an interactive completer and stops with the error ``An `@interactive` completer cannot run here``. `commandline complete --input` still shows the record it would receive.
 
 ## Testing Completers
 
@@ -531,11 +532,11 @@ With `my-command ` from the first example on the line, <kbd>Alt</kbd>+<kbd>C</kb
 
 ## Built-in completion sources
 
-These are the sources that `commandline complete --type` runs. Nushell also uses them on its own: when a parameter has no completer, or its completer returns `null`, the parameter's type picks the source.
+These are the sources that `commandline complete --type` runs. Nushell also uses them by itself. When a parameter has no completer, or its completer returns `null`, the parameter's type picks the source.
 
 - `path` and `glob` complete file and directory names. Parameters typed `path` or `glob` get this completion, and so do most other parameters that have no completer, unless the command has subcommands, in which case <kbd>Tab</kbd> offers those.
 - `directory` completes only directory names, leaving files out. The path argument of [`cd`](/commands/docs/cd.md) is typed `directory`, so `cd <Tab>` lists only directories, and so does any parameter or flag value you type as `directory`, such as `--to` in `def backup [--to: directory] { }`.
-- `command` completes command names, including executables in `PATH` (see [Command names, `^` and `%`](./line_editor.md#command-names-and)).
+- `command` completes command names, including executables in `PATH`. See [Command names, `^` and `%`](./line_editor.md#command-names-and).
 - `variable` completes the variables in scope, with each one's type as the description. The list includes `$nu`, `$env` and `$in`, and constants such as `$NU_LIB_DIRS`. This is what you get when you type `$` at the prompt and press <kbd>Tab</kbd>.
 - `env-var` completes the names of environment variables, which is what [`hide-env`](/commands/docs/hide-env.md) offers. At the prompt, typing `$env.` completes the same names, and `$nu.` completes the fields of `$nu`, as [cell paths](./line_editor.md#cell-paths).
 
@@ -585,7 +586,7 @@ Nushell quotes a name that couldn't be typed bare. A name that contains a glob p
 
 You can start a name with a quote yourself, as in `open "my`. Nushell matches what follows the quote and offers the name quoted its own way.
 
-The menu colors file and directory names with the colors in the `LS_COLORS` environment variable, the same ones [`ls`](/commands/docs/ls.md) uses (see [`LS_COLORS`](./coloring_and_theming.md#ls-colors-colors-for-the-ls-command)). When `LS_COLORS` isn't set, Nushell uses its own defaults. Set `$env.config.completions.use_ls_colors = false` to show them in the menu's plain text style instead. The colors also need `$env.config.use_ansi_coloring` to be on.
+The menu colors file and directory names with the colors in the `LS_COLORS` environment variable, the same ones [`ls`](/commands/docs/ls.md) uses. See [`LS_COLORS`](./coloring_and_theming.md#ls-colors-colors-for-the-ls-command). When `LS_COLORS` isn't set, Nushell uses its own defaults. Set `$env.config.completions.use_ls_colors = false` to show them in the menu's plain text style instead. The colors also need `$env.config.use_ansi_coloring` to be on.
 
 ## External Completions
 
@@ -618,7 +619,7 @@ To use the external completer for a custom command as well, mark the command wit
 
 ## Completion settings
 
-The settings in `$env.config.completions` decide how Nushell matches, sorts and inserts suggestions. The first three apply to every kind of completion, from file names and flags to the lists that completers return. In its [`options` record](#options-for-custom-completions), a completer can choose its own algorithm and case sensitivity, and turn sorting off.
+The settings in `$env.config.completions` decide how Nushell matches, sorts and inserts suggestions. The first three apply to every kind of completion, including file names, flags and the lists that completers return. In its [`options` record](#options-for-custom-completions), a completer can choose its own algorithm and case sensitivity, and turn sorting off.
 
 - `algorithm` decides which suggestions match what you typed. `"prefix"`, the default, keeps the ones that start with it, `"substring"` the ones that contain it anywhere, and `"fuzzy"` the ones that contain its characters in order, with gaps allowed. In a path, each part between separators is matched separately.
 - `sort` is `"smart"` (the default) or `"alphabetical"`. The two differ only with the `fuzzy` algorithm, where `smart` puts the closest matches first. With `prefix` and `substring`, suggestions are always in alphabetical order.
@@ -644,7 +645,7 @@ With `fuzzy`, names are compared exactly, both for `alphabetical` order and to o
 
 The next settings change what <kbd>Tab</kbd> does in a menu with the `columnar` or `ide` layout, which includes the default completion and IDE completion menus:
 
-- `quick` (default `true`) inserts the suggestion at once when there is only one, without opening the menu. With `false`, the menu opens even for a single suggestion, and you accept it with <kbd>Enter</kbd> or <kbd>Tab</kbd>. While a menu is open, `quick` also makes <kbd>Backspace</kbd> close it, unless `completions.persistent_menus` is `true`, in which case the menu stays open and updates instead (see [Menus](./line_editor.md#menus)).
+- `quick` (default `true`) inserts the suggestion at once when there is only one, without opening the menu. With `false`, the menu opens even for a single suggestion, and you accept it with <kbd>Enter</kbd> or <kbd>Tab</kbd>. While a menu is open, `quick` also makes <kbd>Backspace</kbd> close it, unless `completions.persistent_menus` is `true`, in which case the menu stays open and updates instead. See [Menus](./line_editor.md#menus).
 - `partial` (default `true`) fills in the text that all the suggestions share before it shows the menu. If the only suggestions are `report` and `repository`, <kbd>Tab</kbd> after `re` changes the line to `repo` and opens the menu. With `false`, <kbd>Tab</kbd> opens the menu and leaves the line as you typed it.
 
 `use_ls_colors` (default `true`) colors file and directory names, as described in [File and directory names](#file-and-directory-names). The settings under `completions.external` are described in [External Completions](#external-completions).

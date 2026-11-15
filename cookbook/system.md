@@ -73,9 +73,9 @@ sys host
 
 Run `sys` by itself to list all of its subcommands.
 
-`uptime` and `boot_time` are always in the record. The other fields are left out when the operating system doesn't report them, so a script that reads one should allow for that with `?`, as in `sys host | get hostname?`. `boot_time` is `null` when the reported boot time can't be turned into a date, which happens on some broken systems.
+`uptime` and `boot_time` are always in the record. The other fields are left out when the operating system doesn't report them, so read them with `?`, as in `sys host | get hostname?`. `boot_time` is `null` when the reported boot time can't be turned into a date, which happens on some broken systems.
 
-[`uname`](/commands/docs/uname.md) gives the same kind of answer in the shape of the Unix `uname -a` command. It returns a record with all six fields every time:
+[`uname`](/commands/docs/uname.md) returns the fields of the Unix `uname -a` command as a record, always with all six:
 
 ```nu
 uname
@@ -90,7 +90,7 @@ uname
 # => ╰──────────────────┴───────────────────────────────────────────────────────────╯
 ```
 
-The first five fields come from the running kernel. `operating-system` is decided when Nushell is built: `GNU/Linux` for a glibc build, `Linux` for a musl build, `Darwin`, `FreeBSD`, `Android`, and so on, and on Windows `MS/Windows` followed by the Windows release in parentheses. Unlike `sys host`, `uname` also works in a `const`, so its fields can be used where Nushell needs a value at parse time. To branch on the platform in a script, `$nu.os-info.name` (`linux`, `macos`, `windows`, ...) is simpler to compare.
+The first five fields come from the running kernel. `operating-system` depends on how Nushell was built: `GNU/Linux` for a glibc build, `Linux` for a musl build, `Darwin`, `FreeBSD`, `Android`, and so on, and on Windows `MS/Windows` followed by the Windows release in parentheses. Unlike `sys host`, `uname` also works in a `const`, so you can use its fields where Nushell needs a value at parse time. To branch on the platform in a script, `$nu.os-info.name` (`linux`, `macos`, `windows`, ...) is simpler to compare.
 
 ---
 
@@ -111,7 +111,7 @@ sys cpu | first | get load_average | split row ", " | into float
 
 Windows has no load average. There, the sysinfo library that Nushell uses estimates one by sampling the processor queue every 5 seconds. Sampling starts the first time a Nushell session asks, so the first `sys cpu` of a session shows `0.00, 0.00, 0.00`.
 
-`--long` (`-l`) adds `cpu_usage`, the percentage of time each CPU was busy, rounded to one decimal place. Usage can only be measured over an interval, so `sys cpu --long` reads the counters twice, 0.4 seconds apart (0.2 seconds on the BSDs). Plain `sys cpu` returns right away.
+`--long` (`-l`) adds `cpu_usage`, the percentage of time each CPU was busy, rounded to one decimal place. Usage can only be measured over an interval, so `sys cpu --long` reads the counters twice, 0.4 seconds apart, or 0.2 seconds on the BSDs. Plain `sys cpu` returns right away.
 
 ```nu
 sys cpu --long | select name brand freq cpu_usage | first 2
@@ -185,7 +185,7 @@ What you get depends on the platform:
 
 - Linux reads the sensors in `/sys/class/hwmon` and `/sys/class/thermal`. A Docker container or WSL usually has neither, and gets an empty table.
 - macOS reports the sensors its hardware drivers expose. On Apple silicon that's a few dozen; an Intel Mac has a handful, such as the CPU, GPU, and battery.
-- FreeBSD has one sensor per CPU core, named `cpu_0`, `cpu_1`, and so on.
+- FreeBSD has one sensor per CPU core, named `CPU 1`, `CPU 2`, and so on.
 - Windows reports at most one sensor, named `Computer`, read from the ACPI thermal zone through WMI. Many PCs don't provide it.
 - On other systems, OpenBSD among them, the table is always empty.
 
@@ -276,7 +276,7 @@ Notes:
 
 - `--signal <n>` (`-s`) sends signal number `n` instead, such as `kill -s 1 56866` for `HUP`. Windows has no signals, so `kill` has no `--signal` flag there.
 - `--force` (`-f`) sends signal 9 (`KILL`), which can't be caught. On Windows, `kill` runs `taskkill`, and `--force` adds its `/F` flag. `--force` and `--signal` can't be used together.
-- `kill -9 56866`, as you'd write it in Bash, is an error. Nushell reads `-9` as a negative pid, and the error suggests `kill -s 9 <pid>`.
+- On Unix, `kill -9 56866`, as you'd write it in Bash, is an error. Nushell reads `-9` as a negative pid, and the error suggests `kill -s 9 <pid>`.
 - When the system command fails, for example because there's no such process or you may not signal it, `kill` raises a `process didn't terminate successfully` error with the system's message. `--quiet` (`-q`) hides that error and anything the command prints.
 
 ---
@@ -346,7 +346,7 @@ The value can be:
 - `hard`, the current hard limit
 - `soft`, the current soft limit, when you set only the hard limit with `-H`. When the soft limit is being set, `soft` means the hard limit, the same as `hard`.
 
-Any other string is an error, and so is a negative int. When you set only the soft limit, a value above the hard limit, or `unlimited`, is lowered to the hard limit without a message. A value the system refuses is an error, such as `EPERM: Operation not permitted` when you try to raise a hard limit, or `EINVAL: Invalid argument` for a hard limit below the current soft limit.
+Any other string is an error, and so is a negative int. When you set only the soft limit, `ulimit` lowers a value above the hard limit, or `unlimited`, to the hard limit without a message. A value the system refuses is an error, such as `EPERM: Operation not permitted` when you try to raise a hard limit, or `EINVAL: Invalid argument` for a hard limit below the current soft limit.
 
 The limits belong to the whole Nushell process. A `ulimit` inside a closure or a custom command stays in effect after it returns, unlike a change to `$env`, and every external command started afterwards inherits the limits. To limit a single job, set the limit in a child Nushell:
 
@@ -444,7 +444,7 @@ registry query --hklm 'SOFTWARE\Microsoft\Windows NT\CurrentVersion' CurrentBuil
 
 | Registry type                                                                                       | Nushell value                             |
 | --------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| `REG_SZ`                                                                                            | string                                    |
+| `REG_SZ`, `REG_LINK`                                                                                | string                                    |
 | `REG_EXPAND_SZ`                                                                                     | string, with `%NAME%` references expanded |
 | `REG_MULTI_SZ`                                                                                      | list of strings                           |
 | `REG_DWORD`, `REG_DWORD_BIG_ENDIAN`, `REG_QWORD`                                                    | int                                       |
@@ -453,7 +453,7 @@ registry query --hklm 'SOFTWARE\Microsoft\Windows NT\CurrentVersion' CurrentBuil
 
 The `type` column keeps the original name, so a `REG_RESOURCE_LIST` value arrives as binary with `type` set to `REG_RESOURCE_LIST`.
 
-Windows stores some paths, such as the user `Path`, as `REG_EXPAND_SZ` with references like `%USERPROFILE%`. `registry query` expands them with the Windows function `ExpandEnvironmentStrings`, as PowerShell does, so the result can be used as a path right away. `--no-expand` (`-u`) returns the text as it's stored, with the `%NAME%` references left in.
+Windows stores some paths, such as the user `Path`, as `REG_EXPAND_SZ` with references like `%USERPROFILE%`. `registry query` expands them with the Windows function `ExpandEnvironmentStrings`, as PowerShell does, so you can use the result as a path right away. `--no-expand` (`-u`) returns the text as it's stored, with the `%NAME%` references left in.
 
 A key that doesn't exist is a `nu::shell::io::not_found` error that points at the key, and a key you aren't allowed to read gives a permission error. A value name that the key doesn't have is the error "Unable to find registry key/value", labeled "Registry value: `<name>` was not found".
 
@@ -471,7 +471,7 @@ A key that doesn't exist is a `nu::shell::io::not_found` error that points at th
 if not (version check).current { print "A newer Nushell is available" }
 ```
 
-GitHub limits how often a client without a token can call its API. When `GH_TOKEN` or `GITHUB_TOKEN` is set, `version check` sends it, and `GH_TOKEN` wins when both are set, as with the `gh` CLI. A token that GitHub rejects isn't fatal; the check is repeated without it. When the check fails, the error is "failed to check for the latest version", and its help says whether GitHub rejected the token, is rate limiting you, or had a problem of its own. Without a network connection, you get the same errors as from [`http get`](/commands/docs/http_get.md).
+GitHub limits how often a client without a token can call its API. When `GH_TOKEN` or `GITHUB_TOKEN` is set, `version check` sends it, and `GH_TOKEN` wins when both are set, as with the `gh` CLI. If GitHub rejects the token, `version check` repeats the check without it. When the check fails, the error is "failed to check for the latest version", and its help says whether GitHub rejected the token, is rate limiting you, or had a problem of its own. Without a network connection, you get the same errors as from [`http get`](/commands/docs/http_get.md).
 
 ---
 
@@ -486,16 +486,16 @@ use rg-completions.nu *
 
 Don't name the file after the command. `use rg.nu` would make a module named `rg`, and a module can't export an extern with its own name. To load the externs at every startup, save the file in one of `$nu.user-autoload-dirs` instead. There the name doesn't matter, because autoload files are sourced, not imported as modules.
 
-Without `--source` (`-s`), the sources are tried in the order carapace, fish, zsh, man, help, and the first one that knows any flags or subcommands wins. The help source can still add to it. A man page never lists subcommands, and a source may list a subcommand without any of its flags. In either case, when the command's `--help` lists subcommands, what the help source finds is merged in. `--source` with one name reads only that source, and any other name is an error that lists the valid ones.
+Without `--source` (`-s`), `generate completions` tries the sources in the order carapace, fish, zsh, man, help, and the first one that knows any flags or subcommands wins. The help source can still add to it. A man page never lists subcommands, and a source may list a subcommand without any of its flags. In either case, when the command's `--help` lists subcommands, what the help source finds is merged in. `--source` with one name reads only that source, and any other name is an error that lists the valid ones.
 
-`--source all` reads every source that knows the command and merges what they found. Where they disagree, the earlier source in that order wins, with one exception. When the sources disagree about whether a flag takes a value, the flag is declared as a switch, and a comment above it names the sources on each side. The header lists every source that was used. This output depends on the versions of the tools you have installed:
+`--source all` reads every source that knows the command and merges what they found. Where they disagree, the earlier source in that order wins, with one exception. When the sources disagree about whether a flag takes a value, `generate completions` declares it as a switch, and a comment above it names the sources on each side. The header lists every source that was used. This output depends on the versions of the tools you have installed:
 
 ```nu
 generate completions rg --source all | lines | where $it starts-with '# Sources disagree' | first
 # => # Sources disagree on whether --field-context-separator takes a value, so it's a switch: yes in `carapace rg export`, `man rg` and `rg --help`, no in the zsh completions of `rg`
 ```
 
-carapace, fish and zsh know a command's whole tree of subcommands, and a man page gives the flags of the named command only. The help source runs the command with `--help`, then each subcommand that output lists, and theirs in turn. A program that doesn't check for `--help` first would do the real work instead (`rm notes.txt --help` removes `notes.txt`), so the help source runs a subcommand's `--help` only when another source knows the subcommand, when the `--help` of the command above lists it along with a `--help` option, or when it has a man page, as git's subcommands do (`man git-commit`). When none of these holds for a subcommand you ask for, the error says why. On macOS:
+carapace, fish and zsh know a command's whole tree of subcommands, and a man page gives the flags of the named command only. The help source runs the command with `--help`, then each subcommand that output lists, and theirs in turn. A program that doesn't check for `--help` first would do the real work instead. On macOS, `rm notes.txt --help` removes `notes.txt`. So the help source runs a subcommand's `--help` only when another source knows the subcommand, when the `--help` of the command above lists it along with a `--help` option, or when it has a man page, as git's subcommands do (`man git-commit`). When none of these holds for a subcommand you ask for, the error says why. On macOS:
 
 ```nu
 generate completions 'launchctl reboot'
@@ -544,4 +544,4 @@ Two kinds of flags can't be declared in an extern's signature: flags whose value
 # => export extern "seek" []
 ```
 
-Piped text without `--source` is an error. Piped text read with `--source carapace` has to be the JSON of a carapace export, or it fails with "piped text is not a carapace export". The command name can't belong to a Nushell built-in, such as `ls`, since the extern would replace the built-in, or to a keyword, such as `if`, which an extern can't be named after. Each word of the name has to start with a letter or a digit and hold only letters, digits, `-`, `_`, `.`, `+`, and `:`, and it can't be a number. So `generate completions 'git --x'` fails with "`--x` can't be part of an extern's name". When no source knows anything about the command, the error suggests installing carapace or fish, or piping its help text in.
+Piped text without `--source` is an error. Piped text read with `--source carapace` has to be the JSON of a carapace export, or it fails with "piped text is not a carapace export". The command name can't belong to a Nushell built-in, such as `ls`, since the extern would replace the built-in, or to a keyword, such as `if`, which an extern can't be named after. Each word of the name has to start with a letter or a digit and hold only letters, digits, `-`, `_`, `.`, `+`, and `:`, and it can't be a number. For example, `generate completions 'git --x'` fails with "`--x` can't be part of an extern's name". When no source knows anything about the command, the error suggests installing carapace or fish, or piping its help text in.

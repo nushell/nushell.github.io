@@ -111,7 +111,7 @@ A byte stream also opens in the hex view, even when it holds text. That includes
 
 To see the text, convert it first, for example with [`lines`](/commands/docs/lines.md) or [`decode`](/commands/docs/decode.md). `explore` reads the whole stream into memory before it shows anything.
 
-The hex view is simpler than the table view. You can scroll with the arrow keys, but there is no cursor mode, and the view can't be searched. Type `:q` or press `Ctrl+C` to exit.
+In the hex view, the arrow keys scroll, and there is no cursor mode. Type `:q` or press `Ctrl+C` to exit.
 
 ## Config
 

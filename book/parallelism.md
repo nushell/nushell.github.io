@@ -55,7 +55,7 @@ Alternatively, `par-each --keep-order` (`-k`) returns the results in the same or
 # => ╰───┴────╯
 ```
 
-Without `--keep-order`, each result streams out as soon as it is ready. With it, `par-each` holds every result until the last item is done and then returns them in order, so nothing comes out until the whole input has been processed. Avoid it on long or endless streams.
+Without `--keep-order`, each result streams out as soon as it is ready. With it, `par-each` holds every result until the whole input has been processed, then returns them in order. Avoid it on long or endless streams.
 
 As with `each`, a closure that returns `null` produces no output for that item:
 
@@ -68,6 +68,6 @@ As with `each`, a closure that returns `null` produces no output for that item:
 # => ╰───┴───╯
 ```
 
-By default, `par-each` uses as many threads as your machine has logical CPUs. `--threads` (`-t`) sets a different number. Each `par-each` call runs on its own pool of threads, separate from the ones other commands use. Nushell keeps the pool after the call finishes, and the next `par-each` that asks for the same number of threads reuses it instead of starting new ones. A `par-each` inside another `par-each`, or one that starts while another is still running, gets a new pool.
+By default, `par-each` uses as many threads as your machine has logical CPUs. `--threads` (`-t`) sets a different number. `par-each` runs on thread pools of its own, separate from the ones other commands use. Nushell keeps a pool after the call finishes, and the next `par-each` that asks for the same number of threads reuses it instead of starting new ones. A `par-each` inside another `par-each`, or one that starts while another is still running, gets a new pool.
 
 To run commands in the background while you continue to use the shell, see [Background Jobs](background_jobs.md).

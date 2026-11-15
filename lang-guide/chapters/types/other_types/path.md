@@ -75,15 +75,15 @@ When the path exists, `path expand` also resolves symbolic links, so the result 
 - `--no-symlink` (`-n`) skips the symlink resolution. `..` segments are then removed as text, so `link/..` becomes the directory holding `link`, not the parent of the link's target.
 - `--strict` (`-s`) makes a path that doesn't exist an error ("Could not expand path"). With `--no-symlink` as well, the path must still exist, but the result keeps its links.
 
-With `link` a symbolic link to the directory `real`, in `/home/you/proj`:
+With `link` a symbolic link to the directory `real`, in `/home/me/proj`:
 
 ```nu
 "link/f.txt" | path expand
-# => /home/you/proj/real/f.txt
+# => /home/me/proj/real/f.txt
 "link/f.txt" | path expand --no-symlink
-# => /home/you/proj/link/f.txt
+# => /home/me/proj/link/f.txt
 "nope/x" | path expand
-# => /home/you/proj/nope/x
+# => /home/me/proj/nope/x
 "nope/x" | path expand --strict
 # => Error: nu::shell::error
 # =>

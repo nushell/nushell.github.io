@@ -66,7 +66,7 @@ This table was last updated for Nu 0.116.0.
 ::: tip
 [`path exists`](/commands/docs/path_exists.md) checks whether Nushell could open or enter the path. A file inside a directory you aren't allowed to read gives `false`, even though it's there. It follows a symbolic link, so a link whose target is missing gives `false`. Add `--no-symlink` (`-n`) to check the link itself. Piping in a list of paths returns a list of booleans.
 
-[`start`](/commands/docs/start.md) hands the path or URL to the operating system's opener. On Windows that is PowerShell's `Start-Process`, with `explorer.exe` as a fallback. macOS uses `open`. On Linux and the BSDs, `start` tries `xdg-open`, `gio open`, `gnome-open` and `kde-open` in that order and stops at the first one that works, and under WSL it tries Windows' `Start-Process` first. Anything that parses as a URL, such as `obsidian://open?vault=Test`, goes to the opener as it is. Anything else must be an existing path, or `start` fails with "Cannot find file or URL".
+[`start`](/commands/docs/start.md) hands the path or URL to the operating system's opener. On Windows that is PowerShell's `Start-Process`, with `explorer.exe` as a fallback. macOS uses `open`. On Linux and the BSDs, `start` tries `xdg-open`, `gio open`, `gnome-open` and `kde-open` in that order and stops at the first one that works, and under WSL it tries Windows' `Start-Process` first. Anything that parses as a URL, such as `obsidian://open?vault=Test`, goes to the opener as a URL. Anything else must be an existing path, or `start` fails with "Cannot find file or URL".
 :::
 
 ## Forwarded CMD.EXE commands

@@ -12,7 +12,7 @@ The `help` command is a good way to become familiar with all that Nu has to offe
 help commands
 ```
 
-`help commands` returns a table with one row per command and the columns `name`, `category`, `command_type`, `description`, `params`, `input_output`, `search_terms`, and `is_const`, so you can filter it like any other table. `--find` (`-f`) keeps the commands whose name, description, or search terms contain the text, ignoring case. `help --find` does the same search:
+`help commands` returns a table with one row per command and the columns `name`, `category`, `command_type`, `description`, `params`, `input_output`, `search_terms`, and `is_const`. `--find` (`-f`) keeps the commands whose name, description, or search terms contain the text, ignoring case. `help --find` does the same search:
 
 ```nu
 help commands --find timezone | select name category
@@ -97,7 +97,7 @@ help http get
 # =>   > http get --unix-socket /var/run/docker.sock http://localhost/containers/json
 ```
 
-`help <name>` isn't limited to commands. It looks for an alias or command with that name first, and then for a module. For an alias, it shows what the alias expands to, followed by the help of the command it runs. A name that matches nothing is a `Not found` error.
+`help <name>` looks for an alias or command with that name first, and then for a module. For an alias, it shows what the alias expands to, followed by the help of the command it runs. A name that matches nothing is a `Not found` error.
 
 Because commands come before modules, `help` shows the command when a module and a command share a name. That happens with a module that exports a `main` command, since `use` makes `main` available under the module's name. Use `help modules` to see the module itself:
 
@@ -123,7 +123,7 @@ help modules greet
 
 [`help modules`](/commands/docs/help_modules.md) and [`help externs`](/commands/docs/help_externs.md) work like `help commands`. Without arguments, `help modules` returns the same table as [`scope modules`](/commands/docs/scope_modules.md), and `help externs` returns the `name`, `description` and `decl_id` of each command declared with [`extern`](/book/externs.md), as [`scope externs`](/commands/docs/scope_externs.md) does. `--find` (`-f`) keeps the rows whose name or description contains the text.
 
-Given a name, `help modules` prints the module's description (see [Documenting Modules](/book/modules/creating_modules.md#documenting-modules)) and what it exports: commands, aliases, type aliases, and whether it has an [`export-env`](/commands/docs/export-env.md) block. Each command and alias shows how you can call it. A name in parentheses is the name it has in your scope, such as `geo area` after a plain `use geo`. With colors on, the names you can call are highlighted, and an export you haven't imported shows only its own name:
+Given a name, `help modules` prints the module's [description](/book/modules/creating_modules.md#documenting-modules) and what it exports: commands, aliases, type aliases, and whether it has an [`export-env`](/commands/docs/export-env.md) block. Each command and alias shows how you can call it. A name in parentheses is the name it has in your scope, such as `geo area` after a plain `use geo`. With colors on, the names you can call are highlighted, and an export you haven't imported shows only its own name:
 
 ```nu
 # Tools for geometry

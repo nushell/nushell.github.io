@@ -53,7 +53,7 @@ The `use std` command above loads the entire standard library so that you can se
 
 The list leaves a few things out:
 
-- The `std/clip` commands, because `use std` doesn't import `std/clip`.
+- The `std/clip` commands, which `use std` doesn't import.
 - The `std/testing` attributes. They are aliases, so they appear in `scope aliases` instead, as `std testing attr test` and so on.
 - The `shells-aliases` of `std/dirs`, which only `use std/dirs shells-aliases *` imports.
 - The `std/math` constants and `null_device`, which are values. After `use std`, they are in the `$std` record.
@@ -72,7 +72,7 @@ pwd --physical
 # => /private/tmp
 ```
 
-[`banner`](/commands/docs/banner.md) returns the welcome message that Nushell shows at startup: Ellie, the version, some links, how long ago Nushell's first commit was, and the startup time. `--short` returns only the `Startup Time` line, and `--no-startup-time` returns everything except that line. Three keys of `$env.config.color_config` set its colors: `banner_foreground` for the text, which defaults to `attr_normal`, and `banner_highlight1` and `banner_highlight2` for the highlighted words, which default to `green` and `purple`. When colors are turned off, so that [`config use-colors`](/commands/docs/config_use-colors.md) returns `false`, `banner` removes all ANSI codes from its text.
+[`banner`](/commands/docs/banner.md) returns the welcome message that Nushell shows at startup: Ellie, the version, some links, how long ago Nushell's first commit was, and the startup time. `--short` returns only the `Startup Time` line, and `--no-startup-time` returns everything except that line. Three keys of `$env.config.color_config` set its colors: `banner_foreground` for the text, which defaults to `attr_normal`, and `banner_highlight1` and `banner_highlight2` for the highlighted words, which default to `green` and `purple`. When [`config use-colors`](/commands/docs/config_use-colors.md) returns `false`, `banner` strips all ANSI codes from its text.
 
 `$env.config.show_banner` decides what the REPL shows when it starts:
 
@@ -82,7 +82,7 @@ pwd --physical
 | `"short"`           | only the startup time line, `banner --short` |
 | `false` or `"none"` | nothing                                      |
 
-The REPL prints the welcome part before it runs the startup hooks and the startup time line just before the first prompt, so the time it shows covers everything up to that prompt. See [Remove Welcome Message](./configuration.md#remove-welcome-message).
+The REPL prints the welcome part before it runs the startup hooks, and the startup time line just before the first prompt. The time it shows covers everything up to that prompt. See [Remove Welcome Message](./configuration.md#remove-welcome-message).
 
 ## Importing the Standard Library
 
@@ -104,20 +104,20 @@ See the [notes below](#optimal-startup) on how to ensure that your configuration
 
 `use std` and `use std *` both import every module except `std/clip`, which you have to import on its own. Both also run the `export-env` blocks of `std/log` and `std/dirs`, which set up the [log formats](./standard_library/log.md#log-line-format) and the [directory stack](./directory_stack.md#where-the-stack-is-stored). They differ in how the commands are named:
 
-- `use std` puts everything under the `std` prefix, as in `std log info`, `std dirs add` and `std help`. The `std/util` commands lose their module's name: they are `std path add`, `std repeat`, `std null-device`, `std structure` and `std ellie`, not `std util path add`. The math constants and `null_device` are in a `$std` record, as `$std.math.PI` and `$std.null_device`.
+- `use std` puts everything under the `std` prefix, as in `std log info`, `std dirs add` and `std help`. The `std/util` commands lose their module's name. They are `std path add`, `std repeat`, `std null-device`, `std structure` and `std ellie`, not `std util path add`. The math constants and `null_device` are in a `$std` record, as `$std.math.PI` and `$std.null_device`.
 - `use std *` imports each module under its own name, as in `log info`, `dirs add` and `assert equal`, and the `std/util` commands without any prefix, such as `path add`. The constants are `$math.PI` and `$null_device`.
 
-`use std *` also brings in the `help` command of [`std/help`](./standard_library/help.md), which takes the place of the built-in `help`. A word that `help` doesn't know then goes to `man` instead of causing an error, and the `--help` flag of every command shows the `std/help` version of its page. `use std` doesn't change `help`, because its version is named `std help`.
+`use std *` also brings in the `help` command of [`std/help`](./standard_library/help.md), which replaces the built-in `help` and the page that the `--help` flag of every command shows. `use std` doesn't change `help`, because its version is named `std help`.
 
 ### Importing Submodules
 
 Each submodule of the standard library can be loaded separately. Again, _for best performance, load only the submodule(s) that you need in your code._
 
-See [Importing Modules](./modules/using_modules.md#importing-modules) for general information on using modules. The [table above](#overview) shows the recommended import for each of the Standard Library submodules. There are two forms:
+See [Importing Modules](./modules/using_modules.md#importing-modules) for general information on using modules. The [table above](#overview) shows the recommended import for each of the Standard Library submodules. It uses one of the first two forms below.
 
 #### 1. Submodules with `<command> <subcommand>` form
 
-These submodules are normally imported with `use std/<submodule>` (without a glob/`*`): `std/assert`, `std/bench`, `std/clip`, `std/config`, `std/dirs`, `std/help`, `std/input`, `std/iter`, `std/log` and `std/random`. Their commands keep the submodule's name, as in `log warning <msg>`. `std/math` also works this way: after `use std/math`, its constants are `$math.E` and so on.
+These submodules are normally imported with `use std/<submodule>` (without a glob/`*`): `std/assert`, `std/bench`, `std/clip`, `std/config`, `std/dirs`, `std/help`, `std/input`, `std/iter`, `std/log` and `std/random`. Their commands keep the submodule's name, as in `log warning <msg>`. `std/math` also works this way. After `use std/math`, its constants are `$math.E` and so on.
 
 #### 2. Import the _definitions_ (contents) of the module directly
 
@@ -128,7 +128,7 @@ use std/formats *
 ls | to jsonl
 ```
 
-The submodules that are normally imported with `use std/<submodule> *` (**with** a glob/`*`) are `std/dt`, `std/formats`, `std/testing`, `std/util` and `std/xml`. The glob matters most for `std/testing`, whose `@test` and other attributes only work without a prefix, and for `std/formats`, whose commands [`open`](/commands/docs/open.md) and [`save`](/commands/docs/save.md) find only under their plain names. `std/util` also exports a constant, [`null_device`](./standard_library/util.md#null-device-and-null-device), for places where Nushell needs a value while it parses your code. `use std/math *` imports the math constants without a prefix, such as `$E`. Note that the prefixed form #1 above is likely more understandable when reading and maintaining code.
+The submodules that are normally imported with `use std/<submodule> *` (**with** a glob/`*`) are `std/dt`, `std/formats`, `std/testing`, `std/util` and `std/xml`. The glob matters most for `std/testing`, whose `@test` and other attributes only work without a prefix, and for `std/formats`, whose commands [`open`](/commands/docs/open.md) and [`save`](/commands/docs/save.md) find only under their plain names. `std/util` also exports a constant, [`null_device`](./standard_library/util.md#null-device-and-null-device), for places where Nushell needs a value while it parses your code. `use std/math *` imports the math constants without a prefix, such as `$E`, though the prefixed form #1 above is usually easier to read.
 
 #### 3. `use std <submodule>`
 
@@ -156,7 +156,7 @@ The logging commands, such as `log info` and `log warning`, are described in [`s
 
 Import `std-rfc/date` and `std-rfc/kv` with a glob. Their commands already start with the module's name, so `use std-rfc/date` gives you `date date floor`, and `use std-rfc/kv` gives you `kv kv set`. [Importing](./standard_library/std_rfc.md#importing) on the `std-rfc` page lists the recommended import for every submodule. `std-rfc/kv` exists only in a Nushell built with the `sqlite` feature, which the default build includes.
 
-`use std-rfc` imports every submodule except `std-rfc/date`, under the `std-rfc` prefix. Like `use std`, it drops the name of some submodules: the commands of `conversions`, `tables` and `path` become `std-rfc into list`, `std-rfc with-extension` and so on, while the others keep it, as in `std-rfc str dedent`.
+`use std-rfc` imports every submodule except `std-rfc/date`, under the `std-rfc` prefix. Like `use std`, it drops the name of some submodules. The commands of `conversions`, `tables` and `path` become `std-rfc into list`, `std-rfc with-extension` and so on, while the others keep it, as in `std-rfc str dedent`.
 
 If you are interested in adding to the Standard Library, please submit your code via PR to the `std-rfc` module in that repository. We also encourage you to try these candidate commands and provide feedback on them.
 
@@ -202,7 +202,7 @@ nu -n -c "$nu.startup-time"
 
 You will not be able to import the library, any of its submodules, nor use any of its commands, when it is disabled in this way. `std-rfc` is disabled as well, so `use std/log` and `use std-rfc/str` both fail with `Module not found`.
 
-The `banner` and `pwd` commands from `std/prelude` are gone too. Nushell then treats `pwd` and `banner` as external commands, so `pwd` runs a `pwd` program from your `PATH`, such as `/bin/pwd`. On macOS, `banner` runs `/usr/bin/banner`, which prints text in large letters and has nothing to do with Nushell. Where no such program exists, the command isn't found. The REPL doesn't show its startup banner either, whatever `show_banner` says.
+The `banner` and `pwd` commands from `std/prelude` are gone too, so Nushell runs them as external commands. `pwd` runs a `pwd` program from your `PATH`, such as `/bin/pwd`. On macOS, `banner` runs `/usr/bin/banner`, which prints text in large letters. Where no such program exists, the command isn't found. The REPL also skips its startup banner, whatever `show_banner` says.
 
 ## Using `std/dirs` in Modules
 

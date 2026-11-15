@@ -68,7 +68,7 @@ A duration can be added to a datetime with either one first, so `2wk + 2026-01-0
 
 `/`, `//` and `mod` raise `division_by_zero` when the divisor is zero, and that includes floats, so `1.0 / 0.0` is an error, not `inf`. A float result too large to represent does become `inf`, without an error, so `1e308 * 10` is `inf`. An `int` result that overflows is an `operator_overflow` error, as the [`int`](types/basic_types/int.md#additional-language-notes) page explains.
 
-`**` is the only operator that groups from the right, so `2 ** 3 ** 2` is `2 ** 9`, which is `512`. With an `int` base, the exponent can't be negative. `2 ** -1` fails with "Negative exponent for integer power is unsupported; use floats instead.", while `2.0 ** -1` is `0.5`. An `int` power past the 64-bit range, such as `2 ** 63`, is an `operator_overflow` error. A minus sign written against a number is part of that number, so `-2 ** 2` is `(-2) ** 2`, which is `4`. Write `-(2 ** 2)` to get `-4`.
+With an `int` base, the exponent can't be negative. `2 ** -1` fails with "Negative exponent for integer power is unsupported; use floats instead.", while `2.0 ** -1` is `0.5`. An `int` power past the 64-bit range, such as `2 ** 63`, is an `operator_overflow` error. A minus sign written against a number is part of that number, so `-2 ** 2` is `(-2) ** 2`, which is `4`. Write `-(2 ** 2)` to get `-4`.
 
 ## Comparison Operators
 
@@ -81,7 +81,7 @@ A duration can be added to a datetime with either one first, so `2wk + 2026-01-0
 - `older-than` - A datetime is before another datetime, or before now minus a duration
 - `newer-than` - A datetime is after another datetime, or after now minus a duration
 
-`==` and `!=` accept any two values. Values of different types are never equal, and comparing them isn't an error. An `int` and a `float` with the same value are equal, and so are two `null`s. Lists, records, ranges and binary values compare by content, and a record's field order doesn't matter:
+`==` and `!=` accept any two values, and comparing values of different types isn't an error. Values of different types are never equal, except that an `int` and a `float` with the same value are, and so are a glob and a string with the same text. Two `null`s are equal. Lists, records, ranges and binary values compare by content, and a record's field order doesn't matter:
 
 ```nu
 1 == "1"
@@ -123,7 +123,7 @@ false < true
 
 Comparisons don't chain. `1 < 2 < 3` reads as `(1 < 2) < 3`, which compares a `bool` with an `int` and fails. Write `1 < 2 and 2 < 3` instead.
 
-A datetime can't be compared with a duration using these operators. The error's help points to `older-than` for `<` and `newer-than` for `>`. For `<=` and `>=`, it suggests subtracting the duration from now (`$date <= (date now) - 2wk`), because `older-than` and `newer-than` are strict. See [Comparing datetimes](/book/operators.md#comparing-datetimes) in the Book for both operators.
+A datetime can't be compared with a duration using these operators. See [Comparing datetimes](/book/operators.md#comparing-datetimes) in the Book for the errors and for `older-than` and `newer-than`.
 
 ## Bitwise Operators
 
@@ -309,4 +309,4 @@ The parentheses can be used to denote sub-expressions.
 # => ╰───┴───╯
 ```
 
-Several pipelines in one subexpression are separated by `;`, and a newline inside the parentheses counts as a space. See [Subexpressions](/book/operators.md#subexpressions) in the Book for more, including cell paths on the result. [Operators in command arguments](/book/operators.md#operators-in-command-arguments) explains when Nushell reads a pipeline element as an expression and when as a command call.
+See [Subexpressions](/book/operators.md#subexpressions) in the Book for several pipelines in one subexpression, newlines inside the parentheses, and cell paths on the result. [Operators in command arguments](/book/operators.md#operators-in-command-arguments) explains when Nushell reads a pipeline element as an expression and when as a command call.

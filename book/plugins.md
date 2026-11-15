@@ -84,7 +84,7 @@ To begin using the Polars plugin:
    ```
 
 ::: details Polars value types
-`polars_dataframe` is one of several value types that the Polars plugin defines. Nushell holds these values without knowing what's inside them, and passes them back to the plugin when a command, cell path, or operator needs their contents. `describe` shows these names:
+`polars_dataframe` is one of several [custom value](/lang-guide/chapters/types/other_types/custom_value.md#plugin-custom-values) types that the Polars plugin defines. `describe` shows these names:
 
 | `describe` name     | Produced by                                                                   |
 | ------------------- | ----------------------------------------------------------------------------- |
@@ -188,15 +188,15 @@ When [`plugin add`](/commands/docs/plugin_add.md) is called, Nu:
 - Communicates via the [plugin protocol](/contributor-book/plugin_protocol_reference.md) in order to ensure compatibility and to get a list of all of the commands it supports
 - This plugin information is then saved to the plugin registry file (`$nu.plugin-path`), which acts as a cache
 
-`plugin add` looks for the file in the current directory first, then in each directory of the [plugin search path](#plugin-search-path). It saves the file's full path with symlinks resolved, and names the plugin after the file, without `nu_plugin_` and without the extension: `nu_plugin_cool.exe` becomes `cool`. If a plugin with that name is already in the registry, the new entry replaces it.
+`plugin add` looks for the file in the current directory first, then in the [plugin search path](#plugin-search-path). It saves the file's full path with symlinks resolved, and names the plugin after the file, without `nu_plugin_` and without the extension: `nu_plugin_cool.exe` becomes `cool`. If a plugin with that name is already in the registry, the new entry replaces it.
 
-Script files are run by an interpreter. Nu picks one from the file's extension, such as `python` for `.py` and `nu` for `.nu` (see the [contributor book](/contributor-book/plugins.md#creating-a-plugin-in-python) for the full list). For any other interpreter, or a different path to it, pass `--shell`:
+Nu runs a script file with an interpreter that it picks from the extension, such as `python` for `.py` and `nu` for `.nu`. The [contributor book](/contributor-book/plugins.md#creating-a-plugin-in-python) has the full list. For any other interpreter, or a different path to one, pass `--shell`:
 
 ```nu
 plugin add --shell /usr/bin/python3 ./nu_plugin_cool.py
 ```
 
-`plugin add` writes to the registry file at `$nu.plugin-path`, creating the file and its parent directories if they don't exist. `--plugin-config` writes to another registry file instead. When `nu` runs with `--no-config-file`, there's no default registry, so `plugin add` fails unless you pass `--plugin-config`:
+`plugin add` creates the registry file and its parent directories if they don't exist. `--plugin-config` writes to another registry file instead. When `nu` runs with `--no-config-file`, it uses no registry file, so `plugin add` fails unless you give it `--plugin-config`:
 
 ```nu
 plugin add nu_plugin_gstat
@@ -221,17 +221,17 @@ You can also immediately import (or reload) a plugin in the current session by c
 plugin use cool
 ```
 
-[`plugin use`](/commands/docs/plugin_use.md) also accepts the plugin's filename, as a path from the current directory or a full path, but it only loads what the registry file already holds for that plugin. It never runs the plugin to read new signatures, so a plugin you haven't added gives a "Plugin not found" error. If the plugin is running, `plugin use` stops it, so the next call starts the plugin again. Pass `--plugin-config` to read a registry file other than `$nu.plugin-path`.
+[`plugin use`](/commands/docs/plugin_use.md) also accepts the plugin's filename, as a path from the current directory or a full path. It only loads what the registry file holds for that plugin and never runs the plugin to read new signatures, so a plugin you haven't added gives a "Plugin not found" error. If the plugin is running, `plugin use` stops it, so the next call starts the plugin again. Pass `--plugin-config` to read a registry file other than `$nu.plugin-path`.
 
 It is not necessary to add `plugin use` statements to your config file. All previously registered plugins are automatically loaded at startup.
 
 ::: tip Note
-`plugin use` is a parser keyword, so when evaluating a script, it will be evaluated first. This means that while you can execute `plugin add` and then `plugin use` at the REPL on separate lines, you can't do this in a single script. To run a script with plugins you haven't registered, use `nu --plugins`, described below.
+`plugin use` is a parser keyword, so when evaluating a script, it will be evaluated first. This means that while you can execute `plugin add` and then `plugin use` at the REPL on separate lines, you can't do this in a single script. To run a script with plugins you haven't registered, use [`nu --plugins`](#loading-plugins-without-the-registry).
 :::
 
 ### Loading plugins without the registry
 
-The `--plugins` option of `nu` loads plugin executables for one session, without preparing a registry file. Pass a list of files:
+The `--plugins` option of `nu` loads plugin executables for one session, without a registry file. Pass a list of files:
 
 ```nu
 nu --plugins '[./my_plugins/nu_plugin_cool]'
@@ -261,7 +261,7 @@ if you commonly add and remove plugins.
 
 When updating a plugin, it is important to run `plugin add` again just as above to load the new signatures from the plugin and allow Nu to rewrite them to the plugin file (`$nu.plugin-path`). You can then `plugin use` to get the updated signatures within the current session.
 
-After you update Nushell itself, plugins built for the old version stop working until you update them too. Before 1.0, the minor version has to match, so a plugin built for 0.116 doesn't work with Nushell 0.117. Nu checks the version each time it launches a plugin: during `plugin add`, and the first time a session runs one of the plugin's commands. It doesn't check at startup, because the signatures it loads then come from the registry file. An outdated plugin therefore loads without complaint, and its commands fail when you run them, with an error like:
+Before 1.0, a plugin has to be built for the same minor version of Nushell, so a plugin built for 0.116 doesn't work with Nushell 0.117. Nu checks the version each time it starts a plugin, during `plugin add` and whenever you run a command of a plugin that isn't running. It doesn't check at startup, because the signatures it loads then come from the registry file. An outdated plugin therefore loads without complaint, and its commands fail when you run them, with an error like:
 
 ```text
 Plugin failed to load: Plugin `gstat` is compiled for nushell version 0.116.0, which is not compatible with version 0.117.0
@@ -272,7 +272,7 @@ Install the version of the plugin that matches your Nushell, then `plugin add` i
 An update can also change the format of the registry file itself. At startup, Nu skips each registry entry it can't read. For each one, it reports "The registered plugin data for `NAME` is invalid" along with the `plugin add` command that fixes it, and then it sums up:
 
 ```text
-Failed to load 1 plugin entry from /home/user/.config/nushell/plugin.msgpackz
+Failed to load 1 plugin entry from /home/me/.config/nushell/plugin.msgpackz
 ```
 
 with the help text "run `plugin list` and re-add outdated plugins with `plugin add`". `plugin list` shows those entries with the status `invalid`.
@@ -292,11 +292,11 @@ open $nu.plugin-path | get plugins | columns
 # => ╰───┴──────────╯
 ```
 
-Change it only through `plugin add` and `plugin rm`. Saving the decoded data back with `to msgpackz` doesn't produce a file that Nu can load. If Nu can't decompress or decode the file at startup, it loads no plugins from it and reports "Error while reading plugin registry file", with the help "you might try deleting the file and registering all of your plugins again". The `plugin` commands that read the file fail with "Failed to load plugin file" and similar help. Older versions of Nushell kept registered plugins in a `plugin.nu` file of `register` commands. Nu no longer reads that format, and pointing `nu --plugin-config` at a `.nu` file gives the error ".nu plugin files are no longer supported".
+Change it only through `plugin add` and `plugin rm`. Saving the decoded data back with `to msgpackz` doesn't produce a file that Nu can load. If Nu can't decompress or decode the file at startup, it loads no plugins from it and reports "Error while reading plugin registry file", with the help "you might try deleting the file and registering all of your plugins again". The `plugin` commands that read the file fail with "Failed to load plugin file" and similar help. Older versions of Nushell kept registered plugins in a `plugin.nu` file of `register` commands. Nu no longer reads that format. Pointing `nu --plugin-config` at a `.nu` file gives the error "Wrong plugin file format", with the label ".nu plugin files are no longer supported".
 
 ## Managing Plugins
 
-The `plugin` subcommands manage plugins. [`plugin`](/commands/docs/plugin.md) on its own only prints its help text, which lists them: `plugin add`, `plugin list`, `plugin rm`, `plugin stop`, and `plugin use`.
+[`plugin`](/commands/docs/plugin.md) on its own only prints its help text, which lists the subcommands: `plugin add`, `plugin list`, `plugin rm`, `plugin stop`, and `plugin use`.
 
 Installed plugins are displayed using [`plugin list`](/commands/docs/plugin_list.md):
 
@@ -401,14 +401,14 @@ help query
 # =>   > plugin
 ```
 
-[`version`](/commands/docs/version.md) also names the plugins, in its `installed_plugins` column. It is a single string with each plugin's name and version, separated by commas:
+[`version`](/commands/docs/version.md) also lists the plugins, in its `installed_plugins` field, as one string of names and versions separated by commas:
 
 ```nu
 version | get installed_plugins
 # => polars 0.117.0, query 0.117.0
 ```
 
-The column lists the plugins loaded into the current session, running or not. A plugin you have only registered with `plugin add` appears after `plugin use` or a restart, and one you remove with `plugin rm` stays until the session ends. A plugin that didn't report a version is listed by its name alone.
+The field lists the plugins loaded into the current session, running or not. A plugin you have only registered with `plugin add` appears after `plugin use` or a restart, and one you remove with `plugin rm` stays until the session ends. A plugin that didn't report a version is listed by its name alone.
 
 ::: details The other fields of `version`
 `version` returns one record. Besides `installed_plugins`, it has:
@@ -539,7 +539,7 @@ For information on when a plugin is considered to be active, see [the relevant s
 
 ### Plugin configuration
 
-Some plugins read settings from `$env.config.plugins`, in a key named after the plugin (the name `plugin list` shows). The value can be anything the plugin expects, usually a record:
+Some plugins read settings from `$env.config.plugins`, in a key named after the plugin as `plugin list` shows it. The value can be anything the plugin expects, usually a record:
 
 ```nu
 $env.config.plugins.motd = { message: "Nushell rocks!" }
@@ -551,7 +551,7 @@ The value can also be a closure. Nu runs it each time the plugin asks for its se
 $env.config.plugins.motd = {|| { message: $"Hello from (pwd)" } }
 ```
 
-If the closure fails, the plugin receives the error as its configuration value, and what happens next is up to the plugin. The core plugins (`polars`, `formats`, `gstat`, `query`, `inc`) don't read `$env.config.plugins`. Among the plugins that ship with Nushell, only the developer example `nu_plugin_example` does, in its `example config` command. A third-party plugin's documentation lists the settings it reads. The experimental built-in `clip` commands also look here, under `clip`, `clipboard`, or `nu_plugin_clipboard`, so that settings written for the third-party `nu_plugin_clipboard` keep working. See [Clipboard](./config_reference.md#clipboard).
+If the closure fails, the plugin receives the error as its configuration value, and what happens next is up to the plugin. None of the core plugins reads `$env.config.plugins`. Of the plugins that ship with Nushell, only the developer example `nu_plugin_example` does, in its `example config` command. The experimental built-in `clip` commands also look here, under `clip`, `clipboard`, or `nu_plugin_clipboard`, so that settings written for the third-party `nu_plugin_clipboard` keep working. See [Clipboard](./config_reference.md#clipboard).
 
 ## Removing Plugins
 
@@ -583,7 +583,7 @@ plugin rm cool
 
 ## Using the core plugins
 
-Each command below links to its reference page, which lists the flags. This section covers what the commands return and the cases those pages don't explain.
+Each command below links to its reference page, which lists the flags.
 
 ::: warning
 An error from a plugin can print the environment variables of the `nu` process, including any API keys or tokens they hold. Such an error points at "Host Environment Variables" instead of at your code. Check error output before you share it, for example in a bug report.
@@ -1101,9 +1101,9 @@ node_example 2 "3" | first 3
 # => ╰───┴─────┴─────┴───────╯
 ```
 
-The Python example, `nu_plugin_python_example.py`, and the Nu example, `nu_plugin_nu_example.nu`, work the same way. They speak JSON, and each returns a 10-row table like the one above, after printing the call it received to stderr. They also hard-code `NUSHELL_VERSION` and exit during the handshake unless it equals the version of `nu` exactly, which is stricter than Nu's own rule of a matching minor version. When that happens, `plugin add` doesn't report a version mismatch. It fails with "Failed to receive response to plugin call from `nu_example`" (or `python_example`), so set the constant first.
+The Python example, `nu_plugin_python_example.py`, and the Nu example, `nu_plugin_nu_example.nu`, work the same way. They speak JSON, and each returns a 10-row table like the one above, after printing the call it received to stderr. They also hard-code `NUSHELL_VERSION`, and exit during the handshake unless it equals the version of `nu` exactly. Nu's own rule only needs the same minor version, so when the constant differs from your version only in the patch number, `plugin add` doesn't report a version mismatch. It fails with "Failed to receive response to plugin call from `nu_example`" (or `python_example`). Set the constant first.
 
-Nu runs a `.py` file with the `python` command in your `PATH`, and a `.nu` file with `nu --stdin`, using the first `nu` in your `PATH`, so neither example needs `--shell`. That `nu` may not be the one you're running. If your Python is only installed as `python3`, pass its path with `--shell`. The Python example's command is `nu-python`, from a plugin named `python_example`. The Nu example's command is `nu_plugin_nu_example`, from a plugin named `nu_example`:
+Neither example needs `--shell` when `python` and `nu` are in your `PATH`, because Nu picks the interpreter from the extension, as [Registering Plugins](#registering-plugins) describes. For the Nu example, that's the first `nu` in your `PATH`, which may not be the one you're running. If your Python is only installed as `python3`, pass its path with `--shell`. The Python example's command is `nu-python`, from a plugin named `python_example`. The Nu example's command is `nu_plugin_nu_example`, from a plugin named `nu_example`:
 
 ```nu
 plugin add ./nu_plugin_nu_example.nu

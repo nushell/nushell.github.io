@@ -29,9 +29,9 @@ open status.txt
 # => i am inevitable
 ```
 
-The closure runs on a copy of the caller's variables and environment, so a change it makes, such as setting `$env.FOO`, doesn't come back. Whatever the closure returns is thrown away, and so is the output of the external commands it runs. Only [`print`](/commands/docs/print.md) reaches the terminal. If the closure fails, Nushell prints the error, unless the job was killed. A job can spawn jobs of its own.
+The closure runs on a copy of the caller's variables and environment, so a change it makes, such as setting `$env.FOO`, doesn't come back. Whatever the closure returns is thrown away, and so is the output of the external commands it runs. Only [`print`](/commands/docs/print.md) reaches the terminal. If the closure fails, Nushell prints the error, unless the job was killed or the [`display_errors`](./config_reference.md#display-errors) settings hide it. A job can spawn jobs of its own.
 
-Spawn a job with `--auto-kill` (`-k`) when it is fine to stop it without notice, such as a file watcher. Such a job doesn't count toward the warning that [`exit`](#exit-behavior) gives about running jobs. If an external command inside it is suspended and becomes a frozen job, though, that frozen job does count.
+Spawn a job with `--auto-kill` (`-k`) when it is fine to stop it without notice, such as a file watcher. [Exit Behavior](#exit-behavior) explains how `exit` treats such a job.
 
 ## Listing and Killing jobs
 
@@ -186,7 +186,7 @@ job recv --timeout 0sec
 # => low priority
 ```
 
-[`job send`](/commands/docs/job_send.md) collects a stream into one value before it sends it, and it never waits for the receiver. The message goes straight into the mailbox. Sending to a job that doesn't exist is an error, such as `Job 99 not found`.
+[`job send`](/commands/docs/job_send.md) never waits for the receiver. The message goes straight into the mailbox. Sending to a job that doesn't exist is an error, such as `Job 99 not found`.
 
 Without `--timeout`, [`job recv`](/commands/docs/job_recv.md) waits until a matching message arrives, and <kbd>Ctrl</kbd>+<kbd>C</kbd> interrupts the wait. When the timeout runs out first, it fails with `nu::shell::job::recv_timeout`. A timeout of `0sec` succeeds only when a matching message is already in the mailbox. Inside [`par-each`](/commands/docs/par-each.md), only one thread at a time can wait in `job recv`. The other threads wait for their turn in no particular order, whatever their timeouts.
 
@@ -209,7 +209,8 @@ the shell doesn't exit, and it doesn't ask for confirmation either. It prints a
 `nu::shell::background_jobs_running` warning with the number of running jobs, frozen jobs included,
 and returns to the prompt. Running `exit` again as the next command kills the jobs and exits; if you run any other command first, the next `exit` warns again.
 Jobs started with `job spawn --auto-kill` don't count toward the warning and are killed
-on exit without one.
+on exit without one. A frozen job counts even when its external command was suspended
+inside an auto-kill job.
 
 Pressing <kbd>Ctrl</kbd>+<kbd>C</kbd> at the REPL interrupts only the command running in the foreground.
 Background jobs and frozen jobs keep running.
@@ -218,10 +219,7 @@ When Nushell runs a script or a command given with `nu -c`, it stops any jobs th
 along with their child processes, before it exits. This also happens when the script was interrupted
 with <kbd>Ctrl</kbd>+<kbd>C</kbd> and the interruption was caught.
 
-A [`try`](./control_flow.md#try) block catches an interrupt like any other error. In Nushell code,
-the error message is `Operation interrupted`. On Unix, an external command that
-<kbd>Ctrl</kbd>+<kbd>C</kbd> stops fails with `External command was terminated by a signal`, and
-`try` treats that error the same way. Nushell clears the interrupt before `catch` runs, so the
-`catch` and `finally` blocks run to the end instead of being interrupted in turn.
+A [`try`](./control_flow.md#try) block catches an interrupt like any other error, as
+[Interrupting with Ctrl+C](./stdout_stderr_exit_codes.md#interrupting-with-ctrl-c) describes.
 
 Calling `exit` inside a job's closure ends that job, not the shell.

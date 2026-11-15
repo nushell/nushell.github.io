@@ -274,21 +274,21 @@ testing run-tests --path tests
 # => 2026-11-14T16:29:17.625|ERR|Error while running fib-zero in module test_fib
 # => Error: nu::shell::error
 # =>
-# =>   × These are not equal.
-# =>     ╭─[/home/myuser/fib/tests/3ABzxausZT.nu:12:26]
-# =>  11 │ def fib-zero [] {
-# =>  12 │     assert equal (fib 0) 1
-# =>     ·                          ┬
-# =>     ·                          ╰── right: 1
-# =>  13 │ }
-# =>     ╰────
-# =>    ╭─[/home/myuser/fib/tests/../math.nu:4:16]
-# =>  3 │     if $n == 0 {
-# =>  4 │         return 0
-# =>    ·                ┬
-# =>    ·                ╰── left: 0
-# =>  5 │     } else if $n == 1 {
-# =>    ╰────
+# =>   x These are not equal.
+# =>     ,-[/home/me/fib/tests/3ABzxausZT.nu:12:26]
+# =>  11 | def fib-zero [] {
+# =>  12 |     assert equal (fib 0) 1
+# =>     :                          |
+# =>     :                          `-- right: 1
+# =>  13 | }
+# =>     `----
+# =>    ,-[/home/me/fib/tests/../math.nu:4:16]
+# =>  3 |     if $n == 0 {
+# =>  4 |         return 0
+# =>    :                |
+# =>    :                `-- left: 0
+# =>  5 |     } else if $n == 1 {
+# =>    `----
 # =>
 # =>
 # => Error: nu::shell::error
@@ -306,7 +306,7 @@ and nothing for a pass. The runner never runs a skipped test, so the slow `fib-t
 takes no time. When all tests pass, `testing run-tests` returns nothing and only the
 progress lines appear. Those are logged with [`std/log`](./standard_library/log.md),
 so `$env.NU_LOG_LEVEL = "ERROR"` leaves only the failures, and `"DEBUG"` also logs the module's
-global context (see below) for each test.
+[global context](#setup-and-teardown) for each test.
 
 #### How tests are found and run
 

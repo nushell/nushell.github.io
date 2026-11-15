@@ -2,7 +2,7 @@
 
 Hooks allow you to run a code snippet at some predefined situations.
 The `pre_prompt`, `pre_execution` and `env_change` hooks only run in the interactive mode ([REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)). They do not run if you run Nushell with a script (`nu script.nu`) or command (`nu -c "print foo"`) argument.
-The `display_output` and `command_not_found` hooks work there too. `display_output` formats the value that the script or command returns, and `command_not_found` runs when it calls a command that doesn't exist.
+The `display_output` and `command_not_found` hooks also run in scripts and with `nu -c`. `display_output` formats the value that the script or command returns, and `command_not_found` runs when it calls a command that doesn't exist.
 
 If a hook raises an error, Nushell prints the error and carries on, and the REPL still shows the next prompt. [Hook lists and errors](#hook-lists-and-errors) describes which other hooks still run.
 
@@ -45,7 +45,7 @@ When you change a directory, the `PWD` environment variable changes and the chan
 
 Like environment variable names, the keys of `env_change` are case-insensitive, so a hook under `pwd` also runs when `PWD` changes.
 
-Each watched variable also fires once before the first prompt, with `$before` set to `null`, since Nushell has no earlier value to compare with yet. The hook above prints `changing directory from  to /home/user` when Nushell starts. A variable that isn't set at startup fires the first time it gets a value, again with `$before` as `null`.
+Each watched variable also fires once before the first prompt, with `$before` set to `null`, since Nushell has no earlier value to compare with yet. The hook above prints `changing directory from  to /home/me` when Nushell starts. A variable that isn't set at startup fires the first time it gets a value, again with `$before` as `null`.
 
 The `pre_prompt` and `pre_execution` hooks, and each variable in `env_change`, take a **list of hooks**, even if there is only one. When a list contains several hooks, they run in sequence:
 
@@ -95,7 +95,7 @@ $env.config.hooks.pre_prompt = [
 
 This prints `a`, `b`, and `c` before each prompt.
 
-If a hook raises an error, Nushell prints it and skips the rest of that list until the hook fires again. A hook whose definition is wrong counts as failing too, for example a closure with too many parameters or a [record](#conditional-hooks) without `code`. The one exception is a runtime error inside a [string hook](#hooks-as-strings). Nushell prints it and moves on to the next hook in the list.
+If a hook raises an error, Nushell prints it and skips the hooks after it, in its own list and in any list around it, until the hook fires again. A hook whose definition is wrong counts as failing too, for example a closure with too many parameters or a [record](#conditional-hooks) without `code`. The one exception is a runtime error inside a [string hook](#hooks-as-strings). Nushell prints it and moves on to the next hook in the list.
 
 ## Changing Environment
 
@@ -118,7 +118,7 @@ $env.SPAM
 
 The hook blocks otherwise follow the general scoping rules, i.e., commands, aliases, etc. defined within the block will be thrown away once the block ends.
 
-A closure can declare fewer parameters than its hook passes, but not more. `env_change` hooks pass two values (`before` and `after`), `command_not_found` passes one (the command name), and `pre_prompt`, `pre_execution`, and `display_output` pass none. A closure with an extra parameter, such as `pre_prompt: [{|x| print $x }]`, fails with "This hook block has too many parameters".
+A closure can declare fewer parameters than its hook passes, but not more required ones. `env_change` hooks pass two values (`before` and `after`), `command_not_found` passes one (the command name), and `pre_prompt`, `pre_execution`, and `display_output` pass none. A closure with an extra parameter, such as `pre_prompt: [{|x| print $x }]`, fails with "This hook block has too many parameters".
 
 ## `pre_execution` Hooks
 
@@ -146,11 +146,11 @@ print (1 + 3)
 
 Run `$env.config.hooks.pre_execution = []` to turn this off again.
 
-On its own, `commandline` returns the text in the line editor's buffer as a string. In a `pre_execution` hook, that's the line about to run. A `pre_execution` hook can't change that line. Nushell has already read it, so [`commandline edit`](/commands/docs/commandline_edit.md) there has no effect. In a `pre_prompt` or `env_change` hook, `commandline edit` fills in the line of the prompt that is about to appear.
+On its own, `commandline` returns the text in the line editor's buffer as a string. In a `pre_execution` hook, that's the line about to run. Nushell has already read it, so [`commandline edit`](/commands/docs/commandline_edit.md) there has no effect. In a `pre_prompt` or `env_change` hook, `commandline edit` fills in the line of the prompt that is about to appear.
 
 [Changing the line from Nushell code](./line_editor.md#changing-the-line-from-nushell-code) covers `commandline edit`, [`commandline set-cursor`](/commands/docs/commandline_set-cursor.md), and [`commandline get-cursor`](/commands/docs/commandline_get-cursor.md), and what each does at the prompt, in a keybinding, and in a script.
 
-These commands also work from a keybinding whose event is [`executehostcommand`](line_editor.md#send-type), which runs Nushell code while you're still editing the line. For example, this keybinding puts `sudo ` in front of the current line when you press <kbd>Alt</kbd>+<kbd>S</kbd>:
+These commands also work from a keybinding whose event is [`executehostcommand`](./line_editor.md#send-type), which runs Nushell code while you're still editing the line. For example, this keybinding puts `sudo ` in front of the current line when you press <kbd>Alt</kbd>+<kbd>S</kbd>:
 
 ```nu
 $env.config.keybindings ++= [{
@@ -207,7 +207,7 @@ If it returns `false`, nothing will happen.
 If it returns something else, an error will be thrown.
 The `condition` field can also be omitted altogether in which case the hook will always evaluate.
 
-`condition` has to be a closure. A string there fails with a type mismatch. `code` can be a closure or a string (see [Hooks as Strings](#hooks-as-strings)). A record without `code` fails with "Cannot find column 'code'", but only once its condition passes, because Nushell looks for `code` only when it's about to run it.
+`condition` has to be a closure. A string there fails with a type mismatch. `code` can be a closure or a string (see [Hooks as Strings](#hooks-as-strings)). A record without `code` fails with "Cannot find column 'code'", but only once its condition passes.
 
 The `pre_prompt` and `pre_execution` hook types also support the conditional hooks but they don't accept the `before` and `after` parameters.
 
@@ -262,11 +262,11 @@ $env.config = ($env.config | upsert hooks {
 })
 ```
 
-Nushell parses a string hook each time the hook runs. If the string doesn't parse, Nushell prints the parse error, then a second error that reads "Failed to run pre_prompt list, recursive hook" (with the name of your hook in place of `pre_prompt`) and points at the string with the label "source code has errors". It skips that hook and, like any failing hook, the rest of its list. A string that parses but fails while running only prints its error, and the next hook in the list still runs.
+Nushell parses a string hook each time the hook runs. If the string doesn't parse, Nushell prints the parse error, then a second error that points at the string with the label "source code has errors". For a string in the `pre_prompt` list, that error reads "Failed to run pre_prompt list, recursive hook". Other lists put their hook's name in place of `pre_prompt`. A hook that is a single string rather than a list leaves out `list, recursive`, as in "Failed to run display_output hook". Nushell skips that hook and, like any failing hook, the rest of its list.
 
 ## `command_not_found` hook
 
-The `command_not_found` hook runs when Nushell can't find a command, in the REPL, in a script, or with `nu -c`. A closure gets the command name as its parameter, and a string hook gets it as `$cmd_name`. If the hook returns a string, Nushell shows the string as the help text of the usual error:
+The `command_not_found` hook runs when Nushell can't find a command. A closure gets the command name as its parameter, and a string hook gets it as `$cmd_name`. If the hook returns a string, Nushell shows the string as the help text of the usual error:
 
 ```nu
 $env.config.hooks.command_not_found = {|cmd_name| $"Try installing ($cmd_name)" }
@@ -284,7 +284,7 @@ nosuchcmd
 
 If the hook returns anything else, such as `null`, Nushell ignores the result and shows its usual help, which suggests commands with similar names. If the hook raises an error, that error replaces the "not found" error.
 
-While the hook runs, Nushell sets the `ENTERED_COMMAND_NOT_FOUND` environment variable. If the hook itself calls a command that doesn't exist, Nushell sees the variable and fails with "Command pkgfile not found while running the `command_not_found` hook" (with that command's name) instead of starting the hook again.
+While the hook runs, Nushell sets the `ENTERED_COMMAND_NOT_FOUND` environment variable. If the hook itself calls a command that doesn't exist, Nushell sees the variable and fails with "Command pkgfile not found while running the `command_not_found` hook", naming that command, instead of starting the hook again.
 
 ## Examples
 
@@ -365,7 +365,7 @@ $env.config = ($env.config | upsert hooks {
 })
 ```
 
-The default hook is the string `'if (term size).columns >= 100 { table -e } else { table }'`, which expands nested data in full when the terminal is at least 100 columns wide. The hook also formats the final value of a script or a `nu -c` command, not just REPL output.
+The default hook is the string `'if (term size).columns >= 100 { table -e } else { table }'`, which expands nested data in full when the terminal is at least 100 columns wide.
 
 Setting `display_output` to `null` doesn't bring the default back. With no hook, Nushell draws output with a plain [`table`](/commands/docs/table.md), so nested data stays collapsed however wide the terminal is. To restore the default, assign the string above:
 

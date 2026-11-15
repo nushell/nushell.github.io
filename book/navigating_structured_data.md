@@ -424,7 +424,7 @@ By default only missing and `null` values are replaced. With `--empty` (`-e`), a
 # => [[a]; [x], [x], [x], [x], [" "]]
 ```
 
-Without column names, `default` replaces its whole input if that input is `null` (or empty, with `--empty`). It doesn't look inside a list, so use [`each`](/commands/docs/each.md) to replace `null` items:
+Without column names, `default` replaces its whole input if that input is `null`, or empty with `--empty`. It doesn't look inside a list, so use [`each`](/commands/docs/each.md) to replace `null` items:
 
 ```nu
 [null 1 null] | default 0 | to nuon

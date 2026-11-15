@@ -49,7 +49,7 @@ $products | polars select (polars col --type str | polars uppercase) | polars co
 # => ╰───┴───────┴──────────╯
 ```
 
-Polars resolves a selector when the query runs, so building a selector never fails. A selector that can't be resolved, such as `--strict` with a missing column, fails when you collect the result. It also fails when `polars columns` or `polars schema` asks the lazy dataframe for its columns.
+Polars resolves a selector when the query runs, so a selector that can't be resolved, such as `--strict` with a missing column, builds without an error. It fails when you collect the result, or when `polars columns` or `polars schema` asks the lazy dataframe for its columns.
 
 The order of the selected columns depends on the selector. [`polars selector by-name`](/commands/docs/polars_selector_by-name.md) and [`polars selector by-index`](/commands/docs/polars_selector_by-index.md) return columns in the order you list them. The other selectors return them in the dataframe's order:
 

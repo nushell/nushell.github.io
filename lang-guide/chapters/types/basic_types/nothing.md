@@ -93,7 +93,7 @@ Given a list, `compact` drops the `null` items. Given a record, it drops the fie
 # => {a: 1, c: ""}
 ```
 
-A table row is a record, not `null`, so `compact` on its own keeps every row. Name columns to drop the rows where any of those columns is `null` (or empty, with `--empty`):
+A table row is a record, not `null`, so `compact` on its own keeps every row. Name columns to drop the rows where any of those columns is `null`, or empty with `--empty`:
 
 ```nu
 [[a b]; [1 null] [null 2] [3 4]] | compact a | to nuon

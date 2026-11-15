@@ -28,7 +28,7 @@ The `else` part of `if` is optional. If not provided, if a condition is false, t
 
 The code that follows the `else` is an expression rather than a block, allowing any number of follow-on `if` expressions as well as other types of expressions. For example, this expression returns 100: `if false { 1 } else 100`.
 
-`else` must start on the same line as the `}` that closes the block before it. A newline ends the `if` command, so an `else` on the next line is a separate command. The `if` runs without it, and then the `else` line fails with a "Command `else` not found" error (`nu::shell::external_command`). The parser does not report this, so it shows up only when the code runs. Inside parentheses a newline does not end a command, so `else` may start a new line there. See the example in [Control Flow](/book/control_flow.md#if).
+`else` must start on the same line as the `}` that closes the block before it. A newline ends the `if` command, so an `else` on the next line is a separate command. The parser doesn't report this. The `if` runs without it, and then the `else` line fails with a "Command `else` not found" error (`nu::shell::external_command`). Inside parentheses a newline does not end a command, so `else` may start a new line there. See the example in [Control Flow](/book/control_flow.md#if).
 
 Chained `else if` expressions are checked in order, and the first block whose condition is true is run:
 

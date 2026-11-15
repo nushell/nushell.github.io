@@ -40,7 +40,7 @@ vim.lsp.config('nushell', {
 vim.lsp.enable('nushell')
 ```
 
-`root_markers` decides the workspace folder. Neovim looks upward from the file for one of the listed names and sends that directory to the server as the workspace folder. When nothing matches, no folder is sent, and find references and rename only see the current file.
+Neovim looks upward from the file for one of the `root_markers` names and sends that directory to the server as the workspace folder. When nothing matches, no folder is sent, and find references and rename only see the current file.
 
 ### Helix
 
@@ -182,8 +182,8 @@ Choosing a command inserts a snippet with a placeholder for each positional para
 What hovering shows depends on what is under the cursor:
 
 - A command: its help as Markdown, with the description, usage, flags, parameters, input and output types, and examples. This covers built-in, custom, and plugin commands.
-- A variable: its type, and its value if it is a constant. For other variables, hover says whether the variable is `mutable` or `immutable`.
-- A cell path such as `$person.name`: the type of that field, and its value when the variable is a constant.
+- A variable: its type, and its value if it is a constant whose value can be shown as text, such as a string or a number. Otherwise hover says whether the variable is `mutable` or `immutable`, so a constant list or record shows `immutable`.
+- A cell path such as `$person.name`: the type of that field, and its value when the variable is a constant and the field can be shown as text.
 - A module name: the module's documentation comments.
 - An external command: its manual page, from `man`. On Windows, the server runs PowerShell's `help` instead.
 - Any other expression, such as a literal: its type.
@@ -253,7 +253,7 @@ The server computes the hints when the file is opened or changed and always retu
 
 ### Semantic tokens
 
-Most editors color Nushell code with a syntax grammar that only sees the text. Such a grammar can't know which multi-word names, such as `str join`, are a single command, so it may color the second word as an argument. Semantic tokens cover that one case. The server marks each call to a command whose name has more than one word, such as `str join`, a custom command named `git sync`, or `assert equal` from the standard library, with the token type `function`. Calls to commands whose names start with `export` or `overlay` aren't marked, and neither is anything else, so the grammar still colors the rest of the file. Only full-document requests are supported.
+Most editors color Nushell code with a syntax grammar that only sees the text. Such a grammar can't know which multi-word names, such as `str join`, are a single command, so it may color the second word as an argument. Semantic tokens cover that one case. The server marks each call to a command whose name has more than one word, including a custom command named `git sync` or `assert equal` from the standard library, with the token type `function`. Calls to commands whose names start with `export` or `overlay` aren't marked, and neither is anything else, so the grammar still colors the rest of the file. Only full-document requests are supported.
 
 ## One-shot IDE flags
 

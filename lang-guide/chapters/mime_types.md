@@ -22,7 +22,7 @@ The three MIME types we define and recommend for consistent use are:
 
 ## How Nushell uses these types
 
-Nushell records the content type of some pipeline data in its [metadata](/book/metadata.md) (the `content_type` field). These commands set it:
+Nushell records the content type of some pipeline data in the `content_type` field of its [metadata](/book/metadata.md). These commands set it:
 
 | Command                                       | Content type                |
 | --------------------------------------------- | --------------------------- |
@@ -67,6 +67,6 @@ Commands that build new data from their input, such as `lines`, usually return n
 The HTTP commands use these types too:
 
 - `http post`, `http put`, `http patch` and `http delete` send the content type from the metadata as the `Content-Type` header when `--content-type` is not given. So `{a: 1} | to nuon | http post $url` sends `Content-Type: application/x-nuon`. Only a body piped into the command has metadata. For a body given as an argument, or with `--data` for `http delete`, use `--content-type`.
-- `http get` (like the other `http` commands) parses a response with the `from` command that matches the subtype of its content type, ignoring an `x-` prefix. A response with `Content-Type: application/x-nuon` is therefore parsed with `from nuon`.
+- `http get` and the other `http` commands parse a response with the `from` command that matches the subtype of its content type, ignoring an `x-` prefix. They parse a response with `Content-Type: application/x-nuon` with `from nuon`.
 
 `text/x-nushell` is not set or recognized by Nushell itself.

@@ -64,7 +64,7 @@ open Cargo.toml | metadata
 # => ╰────────┴───────────────────────────────╯
 ```
 
-Other commands attach other metadata. For instance, [`to json`](/commands/docs/to_json.md) and the other `to` commands set a `content_type` (such as `application/json`; [MIME types](/lang-guide/chapters/mime_types.md#how-nushell-uses-these-types) lists them all), [`ls`](/commands/docs/ls.md) marks its `name` column as containing [paths](#path-columns), and the HTTP commands attach the [HTTP response](#http-response-metadata).
+Other commands attach other metadata. [`to json`](/commands/docs/to_json.md) and the other `to` commands set a `content_type`, such as `application/json`, and [MIME types](/lang-guide/chapters/mime_types.md#how-nushell-uses-these-types) lists them all. [`ls`](/commands/docs/ls.md) marks its `name` column as containing [paths](#path-columns), and the HTTP commands attach the [HTTP response](#http-response-metadata).
 
 The two forms don't mix. When `metadata` is given an argument, it returns only that argument's `span` and ignores any pipeline input. That makes it safe to use inside a closure or block, whose first command receives the block's input:
 
@@ -131,7 +131,7 @@ You can attach arbitrary metadata to pipeline data using the [`metadata set`](/c
 # => ╰────────────┴────────────────────╯
 ```
 
-The closure gets the current metadata as a record, both as `$in` and as its parameter, and whatever record it returns becomes the new metadata. The record has no `span`, and a `span` key in the result is ignored. Keys you leave out are removed, so build on the record you were given unless you mean to drop them:
+The closure gets the current metadata as a record, both as `$in` and as its parameter, and whatever record it returns becomes the new metadata. The record has no `span`, and `metadata set` ignores a `span` key in the result. Keys you leave out are removed, so build on the record you were given unless you mean to drop them:
 
 ```nu
 {a: 1} | to json | metadata set {|meta| $meta | insert note "from the API" } | metadata | reject span

@@ -72,11 +72,7 @@ $env.config.table.mode = 'rounded' # back to the default
 
 ## Other table display settings
 
-`$env.config.footer_mode` decides when a table repeats its column names below the last row. Only tables with a header row get a footer, such as a list of records. A plain list never does.
-
-- `"always"` and `"never"` do what their names say.
-- An integer adds the footer once the table has at least that many rows. The default is `25`.
-- `"auto"` adds the footer when the table's rows, counting the header row, fill the terminal's height, which is about when the header scrolls out of view.
+`$env.config.footer_mode` decides when a table repeats its column names below the last row. Only tables with a header row get a footer, such as a list of records. A plain list never does. The setting takes `"always"`, `"never"`, `"auto"`, or a number of rows (default `25`), as described under [`footer_mode`](./config_reference.md#footer-mode-and-table-footer-inheritance). With a number, a table with at least that many rows gets a footer:
 
 ```nu
 $env.config.footer_mode = 3
@@ -92,7 +88,7 @@ $env.config.footer_mode = 3
 # => ╰───┴──────╯
 ```
 
-`$env.config.float_precision` sets how many decimal places a float gets when Nushell draws it inside a table, list, or record. The default is `2`. It only changes what you see. The float keeps its full precision, and a float printed on its own or converted to a string isn't rounded.
+`$env.config.float_precision` sets how many decimal places a float gets when Nushell draws it inside a table, list, or record. The default is `2`. The float itself keeps its full precision, and a float printed on its own or converted to a string isn't rounded.
 
 ```nu
 $env.config.float_precision = 4
@@ -126,7 +122,7 @@ The color and style-attributes can be declared in multiple alternative formats.
 - `{|x| 'yellow' }` - closure returning a string with one of the color representations listed above
 - `{|x| { fg: "#ff0000" bg: "#0000ff" attr: b } }` - closure returning a valid record
 
-Color names are case-sensitive. `red` works, but `Red` and `RED` don't. Nushell doesn't report a name it doesn't know. It draws the text in the terminal's default color instead, so a typo shows up as missing color rather than as an error.
+Color names are case-sensitive. `red` works, but `Red` and `RED` don't. Nushell doesn't report a name it doesn't know, and draws the text in the terminal's default color instead.
 
 A string that starts with `{` is read as a JSON style record, so `'{"fg": "red", "attr": "u"}'` works like the record `{ fg: red attr: u }`. It has to be valid JSON, with every key and value in double quotes.
 
@@ -330,7 +326,7 @@ Example: `{ fg: "#ff0000" bg: "#0000ff" attr: b }`
 
 ### Closure
 
-Nushell runs these closures only when it draws a table, which includes lists and records, since Nushell draws those as tables too. A value printed on its own, such as a bare `3`, isn't styled at all, and the `shape_*` keys don't accept closures.
+Nushell runs these closures only when it draws a table, list, or record. A value printed on its own, such as a bare `3`, isn't styled at all, and the `shape_*` keys don't accept closures.
 
 For example:
 
@@ -382,7 +378,6 @@ A few of these keys behave differently from the rest:
 
 - `list` and `record` style the `[list 2 items]` and `{record 1 field}` summaries that a table shows in place of a nested value. `list` also styles the `[table 1 row]` summary of a nested table.
 - `block` is reserved and changes nothing.
-- `custom` isn't part of the default `color_config`.
 
 Other type names, such as `any`, `number`, or `table`, aren't `color_config` keys, and setting them has no effect.
 
@@ -411,9 +406,9 @@ Other type names, such as `any`, `number`, or `table`, aren't `color_config` key
 
 `empty` styles the symbol that `$env.config.table.missing_value_symbol` sets for a cell a row doesn't have. The default symbol is an emoji, and many terminals draw emoji in their own colors, so `empty` may not change anything until you pick a plain-text symbol.
 
-The `binary_*` keys color the hex view that Nushell shows for a binary value printed on its own, such as `0x[41 00 20 ff]`. Each key covers one class of byte.
+The `binary_*` keys color the hex view that Nushell shows for a binary value printed on its own, such as `0x[41 00 20 ff]`.
 
-Here's a small example of changing some of these values. Note that the color names are quoted: Nushell treats a bare word on the right side of `=` as a command name, so `= purple` is a parse error.
+Here's a small example of changing some of these values. The color names are quoted because Nushell treats a bare word on the right side of `=` as a command name, so `= purple` is a parse error.
 
 ```nu
 $env.config.color_config.separator = 'purple'
@@ -454,7 +449,7 @@ $env.config.color_config.row_index = {
 
 ### Keys for the banner and for theme scripts
 
-Three more keys color the welcome banner: `banner_foreground` (default `attr_normal`), `banner_highlight1` (default `green`), and `banner_highlight2` (default `purple`). They aren't in the default `color_config`, and the banner uses those defaults when they're missing. The [`banner`](/commands/docs/banner.md) command passes them to [`ansi`](/commands/docs/ansi.md), so they take what `ansi` takes: its names, such as `attr_normal` or `green`, `"#hex"` strings, and records. Short forms that only `color_config` knows, such as `gbl`, make `banner` fail with an "Unknown ansi code" error.
+Three more keys color the welcome banner: `banner_foreground` for its text (default `attr_normal`), and `banner_highlight1` (default `green`) and `banner_highlight2` (default `purple`) for the highlighted words. They aren't in the default `color_config`, and the banner uses those defaults when they're missing. The [`banner`](/commands/docs/banner.md) command passes them to [`ansi`](/commands/docs/ansi.md), so they take what `ansi` takes: its names, such as `attr_normal` or `green`, `"#hex"` strings, and records. Short forms that only `color_config` knows, such as `gbl`, make `banner` fail with an "Unknown ansi code" error.
 
 `foreground`, `background`, and `cursor` are also accepted, but Nushell never reads them. They're there for scripts that set the terminal's own colors, such as the `theme` commands in [nu_scripts](https://github.com/nushell/nu_scripts/tree/main/themes). None of the three is set by default.
 
@@ -478,7 +473,7 @@ Here's the current list of flat shapes.
 | `shape_filepath`             | `cyan`                              | file path arguments, such as `out.txt` in `save out.txt`                                       |
 | `shape_flag`                 | `blue_bold`                         | flags such as `--all` and `-a`                                                                 |
 | `shape_float`                | `purple_bold`                       | float literals                                                                                 |
-| `shape_garbage`              | `{ fg: default, bg: red, attr: b }` | text that doesn't parse, including an incomplete expression while you type                     |
+| `shape_garbage`              | `{ fg: default, bg: red, attr: b }` | a token that doesn't parse where it stands, such as `abc` in `sleep abc` or `+` in `1 +`       |
 | `shape_glob_interpolation`   | `cyan_bold`                         | deprecated                                                                                     |
 | `shape_globpattern`          | `cyan_bold`                         | glob arguments, such as `*.txt` in `ls *.txt`                                                  |
 | `shape_int`                  | `purple_bold`                       | integer literals                                                                               |
@@ -501,7 +496,7 @@ Here's the current list of flat shapes.
 | `shape_variable`             | `purple`                            | variables such as `$env`                                                                       |
 | `shape_vardecl`              | `purple`                            | the name a variable gets when it's declared, such as `x` in `let x = 1`                        |
 
-A shape key that's missing, or set to something other than a string or a record, falls back to its default style. Shape keys don't accept closures.
+A shape key that's missing, or set to something other than a string or a record, falls back to its default style.
 
 Here's a small example of how to apply color to these items. Anything not overridden will receive its default color.
 
@@ -750,7 +745,7 @@ $env.config.color_config = (dark-theme)
 
 Both commands return a record you can inspect or change before assigning it. `dark-theme` looks like the built-in default theme except for `search_result` and `shape_garbage`, which use white text where the defaults use the terminal's default color. `light-theme` draws most values (`int`, `string`, `float`, `duration`, and others) and the table borders in `dark_gray`, so they stay readable on a light background.
 
-Neither theme sets `glob`, `semver`, `semver-range`, `selection`, `selection_cursor`, or `status_line_error`. Since assigning a theme replaces the whole map, those keys disappear from `$env.config.color_config`, and Nushell draws those items in their built-in default style.
+Neither theme sets `glob`, `semver`, `semver-range`, `selection`, `selection_cursor`, or `status_line_error`, so after you assign one, those items get their built-in default style.
 
 ## Turning colors on and off
 

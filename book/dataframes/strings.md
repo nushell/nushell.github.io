@@ -233,7 +233,7 @@ $first | polars str-join $last
 # => ╰───┴────────────────╯
 ```
 
-In this form `--delimiter` and `--ignore-nulls` don't apply, and a null on either side gives null. The two dataframes need the same number of rows, unless the argument has one row, which is then joined to every row. Without the argument the command fails with `Missing parameter: other`, and a column that isn't a string fails with `The str-join command only works with string columns`.
+In this form `--delimiter` and `--ignore-nulls` don't apply, and a null on either side gives null. The two dataframes need the same number of rows, unless the argument has one row, which is then joined to every row. Without the argument the command fails with `Missing parameter: other`, and a column that isn't a string fails with an error saying that `polars str-join` works only with string columns.
 
 ## Parsing numbers
 

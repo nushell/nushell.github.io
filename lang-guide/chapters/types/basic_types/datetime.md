@@ -55,7 +55,7 @@
 - `+` with a duration on either side gives a datetime.
 - `-` with a duration on the right gives a datetime. A duration minus a datetime is an error.
 - `-` with another datetime gives the duration between them.
-- `==`, `!=`, `<`, `<=`, `>` and `>=` compare the instants that two datetimes name, whatever their offsets. `<`, `<=`, `>` and `>=` accept only another datetime: a string or a duration on the other side is a parse error. Convert a string with [`into datetime`](/commands/docs/into_datetime.md) first. `==` against a value of another type is `false`, not an error.
+- `==`, `!=`, `<`, `<=`, `>` and `>=` compare the instants that two datetimes name, whatever their offsets. `<`, `<=`, `>` and `>=` accept only another datetime. A string or a duration on the other side is a parse error. Convert a string with [`into datetime`](/commands/docs/into_datetime.md) first. `==` against a value of another type is `false`, not an error.
 - `older-than` and `newer-than` take a datetime on the left. With a duration on the right, they count back from now: `$date older-than 2wk` is true when `$date` is more than two weeks in the past. With a datetime on the right, they are the same as `<` and `>`. Both are strict, so a date exactly at the cut-off is neither older nor newer.
 
 ```nu
@@ -250,7 +250,7 @@ The offset is a string, and it is the offset in effect right now. A zone with da
 Many of Nushell's builtin commands are datetime aware and output or use `datetime` values
 for fields and expressions. For example:
 
-- `date` and its subcommands (see [The `date` commands](#the-date-commands))
+- `date` and its subcommands, described in [The `date` commands](#the-date-commands)
 - `format date`
 - `into datetime`
 - `ls` (the `modified` column)

@@ -10,9 +10,9 @@ A command in `std-rfc` can change or disappear between releases, so expect to re
 
 `clip` went the first way. It moved from `std-rfc/clip` to `std/clip` in Nushell 0.106.0. The `std-rfc/clip` commands kept working, with a deprecation warning, until 0.111.0 removed them. When a module you use is promoted, change its `use` line from `std-rfc/...` to `std/...`.
 
-This page describes the commands in Nushell 0.117.0. If a candidate works well for you, or you run into a problem with one, say so in an issue or pull request on the [Nushell repository](https://github.com/nushell/nushell). The core team weighs that feedback when it decides what to promote.
+This page describes the commands in Nushell 0.117.0. If a candidate works well for you, or you run into a problem with one, say so in an issue or pull request on the [Nushell repository](https://github.com/nushell/nushell).
 
-`nu --no-std-lib` turns off `std-rfc` along with `std`. With that flag, `use std-rfc/str` fails with "Module not found".
+[`nu --no-std-lib`](../standard_library.md#disabling-the-standard-library) turns off `std-rfc` along with `std`.
 
 ## Importing
 
@@ -32,7 +32,7 @@ For each module, one import form gives the commands the names that this page and
 | `url`         | `use std-rfc/url`           | `url with-host`, `url with-port`, `url with-path`, `url with-fragment`, `url with-params`, `url replace` | 0.113.0          |
 | `xml`         | `use std-rfc/xml`           | `xml xaccess`                                                                                            | 0.112.0          |
 
-The other form changes the names. Without the `*`, `use std-rfc/iter` gives `iter recurse`, `iter only` and `iter prod`, and `use std-rfc/date` gives `date date floor`. With a `*`, `use std-rfc/url *` gives a bare `with-host` and `replace`. See [Using Modules](../modules/using_modules.md) for how the two forms work.
+The other form changes the names. Without the `*`, `use std-rfc/iter` gives `iter recurse`, `iter only` and `iter prod`, next to the `iter` commands from `std/iter`, and `use std-rfc/date` gives `date date floor`. With a `*`, `use std-rfc/url *` gives a bare `with-host` and `replace`. See [Using Modules](../modules/using_modules.md) for how the two forms work.
 
 `use std-rfc *` loads every module except `date`. Most commands get the names in the table, but the `path` commands lose their prefix (`with-extension`, not `path with-extension`) and the `iter` commands gain one (`iter recurse`). In a Nushell built without the `sqlite` feature, it skips `kv` as well. Like `use std *`, it loads more than most scripts need.
 
@@ -132,8 +132,6 @@ With fewer names than values, each remaining value's key is its position, as a s
 use std-rfc/date *
 ```
 
-`use std-rfc *` doesn't include this module, so import it on its own. Without the `*`, the commands are named `date date floor` and `date date ceil`.
-
 `date floor` rounds a datetime down to a multiple of a duration, and `date ceil` rounds it up to the next multiple:
 
 ```nu
@@ -178,8 +176,6 @@ The input must be a single datetime. Round a list with [`each`](/commands/docs/e
 ```nu
 use std-rfc/iter *
 ```
-
-Without the `*`, the commands are `iter recurse`, `iter only` and `iter prod`, next to the `iter` commands from `std/iter`.
 
 ### `recurse`
 
@@ -428,7 +424,7 @@ The hook runs before each command line you enter. After `kv set -u EDITOR hx` in
 use std-rfc/path
 ```
 
-These commands replace one part of a path: the extension, the stem (the file name without its extension), or the parent directory. They split the path with [`path parse`](/commands/docs/path_parse.md), change that part, and put the path back together with [`path join`](/commands/docs/path_join.md). They only compute a new string and never rename anything on disk. Pass the result to [`mv`](/commands/docs/mv.md) for that. Each one takes a single path or a list of paths.
+These commands replace one part of a path: the extension, the stem or the parent directory. The stem is the file name without its extension. They split the path with [`path parse`](/commands/docs/path_parse.md), change that part, and put the path back together with [`path join`](/commands/docs/path_join.md). They only compute a new string and never rename anything on disk. Pass the result to [`mv`](/commands/docs/mv.md) for that. Each one takes a single path or a list of paths.
 
 `path with-extension` replaces the last extension, or adds one when there is none. A leading dot in the new extension is optional, and an empty string removes the extension:
 
@@ -450,8 +446,8 @@ These commands replace one part of a path: the extension, the stem (the file nam
 ```nu
 "src/main.rs" | path with-stem lib
 # => src/lib.rs
-"/home/alice/" | path with-stem bob
-# => /home/bob
+"/srv/www/" | path with-stem web
+# => /srv/web
 ```
 
 `path with-parent` replaces everything before the last part. A trailing slash on the new parent is optional, and a leading `~` in it stays as it is:
@@ -498,7 +494,6 @@ pb clear
 - `pb set-idx` drops the fraction, so `pb set-idx 1 3` sends 33. A `total` of 0 fails with a division by zero error.
 - `pb error` puts its number in the field where `pb set` puts the percentage. It defaults to 0.
 - The sequences go to standard output, so when you redirect the output of a script that uses `pb`, they end up in the file.
-- Import the module without a glob. `use std-rfc/pb *` replaces the built-in `clear` command.
 
 ## `std-rfc/random`
 
@@ -517,7 +512,7 @@ use std-rfc/random
 
 - A count larger than the list fails with "Can't sample more elements than there are in input" and a label such as "Tried to sample 4 out of 3". An empty list fails the same way without a count.
 - Duplicate values in the list are separate positions, so a sample can hold the same value twice.
-- The order of the sample isn't random. A count equal to the list's length returns the list in its original order. Pipe the sample to [`shuffle`](/commands/docs/shuffle.md) when the order matters.
+- `random choice` doesn't shuffle the sample. A count equal to the list's length returns the list in its original order. Pipe the sample to [`shuffle`](/commands/docs/shuffle.md) when the order matters.
 - `random choice` collects a stream before it samples.
 - The parser rejects a range as input. Convert it with `into list` from [`std-rfc/conversions`](#into-list):
 

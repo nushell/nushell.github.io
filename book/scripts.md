@@ -12,7 +12,7 @@ This will run the script to completion in a new instance of Nu. You can also run
 source myscript.nu
 ```
 
-`source` reads the file when the code that calls it is parsed, before anything runs, so the file name has to be a constant (see [Thinking in Nu](thinking_in_nu.md#example-change-to-a-different-directory-cd-and-source-a-file)). A relative path is looked up from the directory of the file that contains the `source` call, or the current directory at the prompt, and then in `$NU_LIB_DIRS`. Inside a sourced file, a `source` or `use` with a relative path starts from that file's directory, not from your current directory. A `return` at the top level of the file ends only that file, and its value becomes the output of `source` (see [`return`](/lang-guide/chapters/flow_control/return.md#language-notes)).
+`source` reads the file when the code that calls it is parsed, before anything runs, so the file name has to be a constant. See [Thinking in Nu](thinking_in_nu.md#example-change-to-a-different-directory-cd-and-source-a-file) for an example. A relative path is looked up from the directory of the file that contains the `source` call, or the current directory at the prompt, and then in `$NU_LIB_DIRS`. A `use` with a relative path inside a sourced file also starts from that file's directory, not from your current directory. A `return` at the top level of the file ends only that file, and its value becomes the output of `source`. See [`return`](/lang-guide/chapters/flow_control/return.md#language-notes).
 
 If the file name is `null`, `source` does nothing. With a constant, this lets a config file load an optional file only when it exists:
 
@@ -51,7 +51,7 @@ helper
 # =>   help: Did you mean `help`?
 ```
 
-Enter `cd project` on its own line first, because `source-env` looks for the file while the line is parsed (see [How Nushell Code Gets Run](how_nushell_code_gets_run.md#the-nushell-repl)). To share environment setup as part of a module, use an [`export-env`](modules/creating_modules.md#environment-variables) block instead.
+Enter `cd project` on its own line first, because `source-env` looks for the file while the line is parsed. See [How Nushell Code Gets Run](how_nushell_code_gets_run.md#the-nushell-repl). To share environment setup as part of a module, use an [`export-env`](modules/creating_modules.md#environment-variables) block instead.
 
 To use a script as one stage of a pipeline, use [`run`](/commands/docs/run.md), described in [Scripts in a Pipeline](#scripts-in-a-pipeline) below.
 
@@ -279,7 +279,7 @@ nu -m basic -c '[[a b]; [1 2]]'
 # => +---+---+---+
 ```
 
-Without [`--stdin`](#standard-input), the code gets no input, and `$in` is empty even when something is piped into `nu`.
+To pass piped input to the code, use [`--stdin`](#standard-input).
 
 `--error-style` sets how an error from the code is reported: `fancy` (the default), `plain` (a text description without drawing characters), or `short` (a single line). For a script file or the interactive shell, set [`$env.config.error_style`](config_reference.md#error-style) instead.
 
@@ -460,7 +460,7 @@ A list spread such as `...$args` fills the rest parameter of `main`. Its items s
 
 The script runs in its own scope, so environment changes it makes (such as setting `$env.FOO` or calling `cd`) don't carry over to the caller. While it runs, `$env.CURRENT_FILE` holds the full path of the script and `$env.FILE_PWD` holds its directory.
 
-Like `source`, `run` is a parser keyword: the file name must be a constant, and the file is looked up the same way, from the directory of the calling file (the current directory at the prompt) and then in `$NU_LIB_DIRS`. The script is parsed together with the code that calls it. If the script can change after that, for example when a loop calls it again each time you save the file, use `--full-reparse` (`-f`) to reload and reparse it on every call:
+Like `source`, `run` is a parser keyword: the file name must be a constant, and the file is looked up the same way, from the directory of the calling file, or the current directory at the prompt, and then in `$NU_LIB_DIRS`. The script is parsed together with the code that calls it. If the script can change after that, for example when a loop calls it again each time you save the file, use `--full-reparse` (`-f`) to reload and reparse it on every call:
 
 ```nu
 for _ in (watch . --glob=*.nu) { run --full-reparse ./test.nu }

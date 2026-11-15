@@ -185,7 +185,7 @@ let commits = [
 ]
 ```
 
-A closure can compute the group for each row, so the day doesn't have to be written into a column first. The closure gets the row as its input (and as its parameter, if it has one):
+A closure can compute the group for each row, so the day doesn't have to be written into a column first. The closure gets the row as its input, and as its parameter if it has one:
 
 ```nu
 $commits | group-by { get day | into datetime | format date '%A' } --to-table | update items { length }
@@ -197,7 +197,7 @@ $commits | group-by { get day | into datetime | format date '%A' } --to-table | 
 # => ╰───┴───────────┴───────╯
 ```
 
-`--to-table` returns a table with one column per grouper and an `items` column, instead of a record. A closure's column is named `closure_0`, `closure_1`, and so on. With several groupers, the record form nests one record inside another (`$commits | group-by name lang | get Sophia.nu`), while `--to-table` gives one row per combination:
+`--to-table` returns a table with one column per grouper and an `items` column, instead of a record. A closure's column is named `closure_0`, `closure_1`, and so on. With several groupers, the record form nests one record inside another, as in `$commits | group-by name lang | get Sophia.nu`, while `--to-table` gives one row per combination:
 
 ```nu
 $commits | group-by name lang --to-table | update items { length }

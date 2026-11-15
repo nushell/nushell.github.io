@@ -21,12 +21,12 @@ The `$nu` constant is a record containing several useful values:
 - `history-path`: The text or SQLite file storing the command history. By default it is `history.txt` or `history.sqlite3` in the config directory, following `$env.config.history.file_format`. When `$env.config.history.path` names a directory, the default file name is added to it. When `history.path` is `null`, the value is an empty string. `nu --no-history` doesn't change it. Nushell sets this value when it finishes starting, so a change to the history settings after that, for example in `nu -c`, doesn't show here.
 - `loginshell-path`: The optional config file which runs for login shells, normally `login.nu` in the config directory.
 - `plugin-path`: The plugin registry file, normally `plugin.msgpackz` in the config directory, or the file given with `nu --plugin-config`. With `-n`, Nushell loads no registry, but the value still shows the file it would have read.
-- `home-dir`: The user's home directory which can be accessed using the shorthand `~`. Nushell gets it from the operating system when it starts. On Unix, that is the `HOME` variable, or the user's entry in the system's user database when `HOME` isn't set. Assigning `$env.HOME` later changes neither `$nu.home-dir` nor `~` (see [`$env.HOME`](#env-home)). If the operating system reports no home directory, reading `$nu.home-dir` is an error.
+- `home-dir`: The user's home directory which can be accessed using the shorthand `~`. Nushell gets it from the operating system when it starts. On Unix, that is the `HOME` variable, or the user's entry in the system's user database when `HOME` isn't set. Assigning `$env.HOME` later changes neither `$nu.home-dir` nor `~`. See [`$env.HOME`](#env-home). If the operating system reports no home directory, reading `$nu.home-dir` is an error.
 - `data-dir`: The data directory for Nushell, which includes the `./vendor/autoload` directories loaded at startup and other user data. When `XDG_DATA_HOME` is set to an absolute path, it is `nushell` inside that directory. A relative `XDG_DATA_HOME` is ignored without a warning. Otherwise it is `~/.local/share/nushell` on Linux, and the same directory as the configuration on macOS (`~/Library/Application Support/nushell`) and Windows (`%APPDATA%\nushell`).
 - `cache-dir`: A directory for non-essential (cached) data. Nushell doesn't store anything there itself. See [Configuration - Startup Variables](./configuration.md#startup-variables) for its default location and the `XDG_CACHE_HOME` override.
 - `vendor-autoload-dirs`: A list of directories where third-party applications should install configuration files that will be auto-loaded during startup. [Configuration - Autoload directories](./configuration.md#autoload-directories) lists the directories in it, in the order Nushell loads them.
 - `user-autoload-dirs`: A list with one directory, `autoload` in the config directory, for your own startup files. Nushell doesn't create it. See [Configuration - Autoload directories](./configuration.md#autoload-directories) for the order in which the files load.
-- `temp-dir`: A path for temporary files that should be writable by the user. It comes from `TMPDIR` on Unix (`/tmp` when `TMPDIR` isn't set) and from `TMP` or `TEMP` on Windows. On macOS, it is usually under `/private/var/folders`, because Nushell resolves the symbolic link in the usual `TMPDIR`.
+- `temp-dir`: A path for temporary files that should be writable by the user. It comes from `TMPDIR` on Unix and from `TMP` or `TEMP` on Windows. When `TMPDIR` isn't set, it is `/tmp` on Unix systems other than macOS. On macOS, both the usual `TMPDIR` and the fallback are a per-user directory under `/var/folders`, shown as `/private/var/folders` because Nushell resolves symbolic links in the path.
 - `pid`: The PID of the currently running Nushell process.
 - `os-info`: Information about the host operating system, as a record with the fields `name`, `arch`, `family`, and `kernel_version`. On a Mac with Apple silicon:
 
@@ -67,7 +67,7 @@ The `$nu` constant is a record containing several useful values:
 
   In these three modes, `print` writes to stderr so that it doesn't interfere with the protocol messages on stdout.
 
-When one of the paths from `default-config-dir` to `cache-dir`, or `temp-dir`, exists, Nushell resolves the symbolic links in it. So if your configuration directory is a link into a dotfiles repository, `$nu.default-config-dir` and `$nu.config-path` show the directory in the repository. The two autoload lists keep their paths as they are.
+Nushell resolves the symbolic links in each path from `default-config-dir` to `cache-dir`, and in `temp-dir`, when the path exists. So if your configuration directory is a link into a dotfiles repository, `$nu.default-config-dir` and `$nu.config-path` show the directory in the repository. The two autoload lists keep their paths as they are.
 
 ## `$env`
 
@@ -89,9 +89,9 @@ A terminal that is attached always wins, even when the output is redirected to a
 
 `$env.config` is the main configuration record used in Nushell. Settings are documented in `config nu --doc`.
 
-Assigning `$env.config` or one of its fields applies and checks the new settings right away, and so does [`load-env`](/commands/docs/load-env.md) with a record that has a `config` key. An invalid value is reported as an error at that point (see [Errors in settings](./configuration.md#errors-in-settings)). Because it is a record, `$env.config` is never passed to external commands.
+Assigning `$env.config` or one of its fields applies and checks the new settings right away, and so does [`load-env`](/commands/docs/load-env.md) with a record that has a `config` key. An invalid value is reported as an error at that point. See [Errors in settings](./configuration.md#errors-in-settings). Because it is a record, `$env.config` is never passed to external commands.
 
-The `nu` flag `--table-mode` (`-m`) overrides `table.mode` for one run, after the configuration files have loaded, and `--error-style` sets `error_style` for a `nu -c` run (see [Configuration - `nu` flags](./configuration.md#nu-flags)). `-m` works in the REPL, with `-c`, and for scripts, although `$env.config.table.mode` keeps showing the configured value. It accepts the mode names listed in [Coloring and Theming - Table Borders](./coloring_and_theming.md#table-borders), in any case.
+The `nu` flag `--table-mode` (`-m`) overrides `table.mode` for one run, after the configuration files have loaded, and `--error-style` sets `error_style` for a `nu -c` run. See [Configuration - `nu` flags](./configuration.md#nu-flags). `-m` works in the REPL, with `-c`, and for scripts, although `$env.config.table.mode` keeps showing the configured value. It accepts the mode names listed in [Coloring and Theming - Table Borders](./coloring_and_theming.md#table-borders), in any case.
 
 ### `$env.CURRENT_FILE`
 
@@ -128,7 +128,7 @@ the file resides. Note that this value is also available as a constant, using [`
 const this_dir = path self | path dirname
 ```
 
-Like `CURRENT_FILE`, it can't be assigned or hidden, it doesn't exist in the REPL or in `nu -c`, and it is set at the same times (see [`$env.CURRENT_FILE`](#env-current-file)).
+Like `CURRENT_FILE`, it can't be assigned or hidden, and it is set at the same times. See [`$env.CURRENT_FILE`](#env-current-file).
 
 ### `$env.GH_TOKEN` and `$env.GITHUB_TOKEN`
 
@@ -185,19 +185,18 @@ try {
 # => 2
 ```
 
-In the REPL, it is `0` when Nushell starts, and after each line it holds the exit code of that line: the external command's own code, or `1` when a Nushell error stopped the line. In `nu -c` and in a script, it doesn't exist until something sets it, so reading `$env.LAST_EXIT_CODE` there is an error. Use `$env.LAST_EXIT_CODE?` to get `null` instead.
+In the REPL, it is `0` when Nushell starts, and after each line it holds the exit code of that line, which is the external command's own code, or `1` when a Nushell error stopped the line. In `nu -c` and in a script, it doesn't exist until something sets it, so reading `$env.LAST_EXIT_CODE` there is an error. Use `$env.LAST_EXIT_CODE?` to get `null` instead.
 
 A few commands treat it in their own way:
 
-- [`try`](/commands/docs/try.md) with a `catch` sets it to the exit code of the error it caught, which is `1` for a Nushell error. A `try` without `catch` leaves it unchanged, even when the block fails.
-- [`complete`](/commands/docs/complete.md) leaves it unchanged. Read the exit code from its `exit_code` column.
-- [`do --ignore-errors`](/commands/docs/do.md) sets it to `0` when it hides the failure of an external command. A Nushell error inside it leaves the value unchanged.
+- [`try`](/commands/docs/try.md) with a `catch` sets it to the exit code of the error it caught, which is `1` for a Nushell error. A `try` without `catch` doesn't set it, even when the block fails.
+- [`complete`](/commands/docs/complete.md) doesn't set it. Read the exit code from its `exit_code` column.
+- [`do --ignore-errors`](/commands/docs/do.md) sets it to `0` when it hides the failure of an external command. It doesn't set the value for a Nushell error inside it.
 
 On Unix, when a signal kills an external command, the exit code is the negative signal number, such as `-9` for `SIGKILL` or `-15` for `SIGTERM`. `$env.LAST_EXIT_CODE`, the `exit_code` column of `complete`, and the `exit_code` field of the error that `catch` receives all hold that negative number:
 
 ```nu
-try { ^sh -c 'kill -9 $$' } catch {}
-$env.LAST_EXIT_CODE
+try { ^sh -c 'kill -9 $$' } catch {}; $env.LAST_EXIT_CODE
 # => -9
 
 ^sh -c 'kill -15 $$' | complete | get exit_code
@@ -262,7 +261,7 @@ NU_BACKTRACE=1 nu -n -c 'def inner [] { error make {msg: boom} }; def outer [] {
 # =>    ╰────
 ```
 
-Without `NU_BACKTRACE`, the same command prints only the `boom` error. An error from a stream, such as one raised inside [`each`](/commands/docs/each.md), also gets a label at each call the stream passed through.
+Without `NU_BACKTRACE`, the same command prints only the `boom` error.
 
 Any value turns it on, including `0` and `false`. Nushell checks its global environment, which takes in your changes after each startup file and after each line you run at the prompt. So you can set `NU_BACKTRACE` before starting `nu`, in `config.nu`, or at the prompt, where it applies from the next line on. Setting it inside a script or a `nu -c` command doesn't affect that same script or command.
 
@@ -351,7 +350,7 @@ nu --log-level 'debug' -c '1 | print; use std/log; log debug 1111; 9 | print'
 # => …
 ```
 
-`--log-level` takes `error`, `warn`, `info`, `debug`, `trace`, or `perf`. `perf` shows only the `perf:` lines that report how long each step of startup and evaluation took. By default the messages go to stderr, and only those from Nushell's own Rust modules (`nu`, `nu_cli`, `nu_command`, and so on) are shown, not those from the libraries it uses. The other logging flags change that. Without `--log-level`, Nushell logs nothing:
+`--log-level` takes `error`, `warn`, `info`, `debug`, `trace`, or `perf`. `perf` shows only the `perf:` lines that report how long each step of startup and evaluation took. Without `--log-level`, Nushell logs nothing. By default the messages go to stderr, and only those from Nushell's own Rust modules (`nu`, `nu_cli`, `nu_command`, and so on) are shown, not those from the libraries it uses. The other logging flags change that:
 
 - `--log-target` sends the messages to `stderr` (the default), `stdout`, `mixed`, or `file`. `mixed` writes error messages to stderr and the others to stdout. `file` requires `--log-file`.
 - `--log-file` names the file for `--log-target file`. It requires `--log-target file` and `--log-level`. Nushell empties the file when it starts.
@@ -386,7 +385,7 @@ Leftovers from the built-in `shells` and `enter` commands of older Nushell versi
 
 ### `$env.OLDPWD`
 
-The directory you were in before you last changed directory. Each time [`cd`](/commands/docs/cd.md) changes directory, it first copies `$env.PWD` into `$env.OLDPWD`, and auto-cd at the prompt does the same (see [`auto_cd_implicit`](./config_reference.md#auto-cd-implicit)). `cd -` goes to `$env.OLDPWD`, so repeating it switches back and forth between two directories:
+The directory you were in before you last changed directory. Each time [`cd`](/commands/docs/cd.md) changes directory, it first copies `$env.PWD` into `$env.OLDPWD`, and auto-cd at the prompt does the same. See [`auto_cd_implicit`](./config_reference.md#auto-cd-implicit). `cd -` goes to `$env.OLDPWD`, so repeating it switches back and forth between two directories:
 
 ```nu
 cd /tmp

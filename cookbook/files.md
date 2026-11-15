@@ -75,7 +75,7 @@ Or, you can utilize the `headers` command to use the first row as a header row. 
 open bands.txt | lines | split column ":" | headers | sort-by year
 ```
 
-`headers` works on any table. It reads the column names from the values in the first row and then drops that row. An empty header cell gets the name `column` plus its position, counting from 0. The column names come from the first row only, so a cell that a later row has beyond them is dropped:
+`headers` works on any table. It reads the column names from the values in the first row and then drops that row. An empty header cell gets the name `column` plus its position, counting from 0. The column names come from the first row only, so a later row's cells beyond them are dropped:
 
 ```nu
 "name,,size\nfoo,x,1\nbar,y,2,extra" | lines | split column "," | headers
@@ -87,7 +87,7 @@ open bands.txt | lines | split column ":" | headers | sort-by year
 # => ╰───┴──────┴─────────┴──────╯
 ```
 
-Header cells have to be strings, numbers, booleans, or empty. A list or record in the first row is a type mismatch error, and an empty table fails with "Found empty list".
+Header cells have to be strings, numbers, booleans, or empty. Any other value in the first row, such as a list, a record or a date, is a type mismatch error, and an empty table fails with "Found empty list".
 
 ---
 
@@ -155,7 +155,7 @@ mkdir -v logs/a logs/c | update path { path basename }
 # => ╰───┴──────┴─────────┴───────╯
 ```
 
-A path that can't be created doesn't stop `mkdir -v`. It gets `created: false` and the reason in the `error` column, and the other paths are still created. Here `notes.txt` is a file, so nothing can be created inside it:
+A path that can't be created doesn't stop `mkdir -v`. It gets `created: false` and the reason in the `error` column, and `mkdir` still creates the other paths. Here `notes.txt` is a file, so nothing can be created inside it:
 
 ```nu
 "" | save notes.txt
@@ -198,7 +198,7 @@ mv -v *.log archive | update source { path basename } | update destination { pat
 for change in (watch docs --glob "**/*.md") { ^mdbook build }
 ```
 
-Each record has three columns. `operation` is `Create`, `Write`, `Rename`, or `Remove`, and `path` is the absolute path of the file. `new_path` is only set for a rename: when the system reports both names, `path` holds the old one and `new_path` the new one, and when it reports only one of them, the other column is `null`. Changes to a file's metadata alone, such as its permissions or the times `touch` sets, aren't reported. Here a `.rs` file was saved under `project/src` while another shell waited on `watch`:
+Each record has three columns. `operation` is `Create`, `Write`, `Rename`, or `Remove`, and `path` is the absolute path of the file. `new_path` is only set for a rename. When the system reports both names, `path` holds the old one and `new_path` the new one. When it reports only one of them, the other column is `null`. Changes to a file's metadata alone, such as its permissions or the times `touch` sets, aren't reported. Here a `.rs` file was saved under `project/src` while another shell waited on `watch`:
 
 ```nu
 watch project --glob "**/*.rs" | first 1 | update path { path relative-to $env.PWD }
@@ -217,9 +217,9 @@ The `operation` comes from the operating system's file notifications, and on mac
 
 A path that doesn't exist fails with "Failed to create watcher".
 
-Older scripts pass `watch` a closure to run for each change, as in `watch . {|operation, path, new_path| ... }`. That form is deprecated since Nushell 0.113.0. It still works, with a deprecation warning the first time. It prints "Now watching files at ..." to stderr when it starts, which `--quiet` (`-q`) hides, and prints whatever the closure returns. `--verbose` (`-v`) prints the full glob path when you give `--glob`, and in the closure form it also prints whether each event matched the glob.
+Older scripts pass `watch` a closure to run for each change, as in `watch . {|operation, path, new_path| ... }`. That form has been deprecated since Nushell 0.113.0. It still works, with a deprecation warning the first time. It prints "Now watching files at ..." to stderr when it starts, which `--quiet` (`-q`) hides, and prints whatever the closure returns. `--verbose` (`-v`) prints the full glob path when you give `--glob`, and in the closure form it also prints whether each event matched the glob.
 
-[`idx watch`](#searching-files-with-an-in-memory-index) streams changes too, from the in-memory index described next. It reports only the files the index tracks, so files ignored by Git stay quiet. Use `watch` for a path you don't want to index.
+[`idx watch`](#streaming-changes-from-the-index) streams changes too, but only for the files tracked by the in-memory index described next. Use `watch` for a path you don't want to index.
 
 ---
 
@@ -246,7 +246,7 @@ idx init project --wait | select watch scanning files dirs
 # => ╰──────────┴───────╯
 ```
 
-The record also has the `base_path` that was indexed, the `scan_duration`, and how much memory the index uses (`arena_size_total` and the parts it adds up). Without `--wait`, `idx init` returns while the scan is still running, with `scanning` set to `true`. [`idx status`](/commands/docs/idx_status.md) returns the same record at any time, so check it to see when the scan is done.
+The record also has the `base_path` that was indexed, the `scan_duration`, and how much memory the index uses, in `arena_size_total` and the `arena_size_*` fields that add up to it. Without `--wait`, `idx init` returns while the scan is still running, with `scanning` set to `true`. [`idx status`](/commands/docs/idx_status.md) returns the same record at any time, so check it to see when the scan is done.
 
 `idx status` never fails. Before the first `idx init`, it returns `initialized: false`, an empty `base_path`, and zeros, so a script can test `(idx status).initialized`. The other `idx` commands fail with "idx is not initialized" until you run `idx init`. `idx drop` doesn't fail either. It returns a record with `dropped`, which is `false` when there was no index, and `status`, the record `idx status` gives from then on.
 
@@ -265,7 +265,7 @@ idx files | select relative_path ext size
 # => ╰───┴───────────────┴─────┴──────╯
 ```
 
-A file row also has `full_path`, `file_name`, `directory` (the relative directory, ending in `/`), and `modified`. A directory row has only `relative_path` and `full_path`, and both end in `/`:
+A file row also has `full_path`, `file_name`, `modified`, and `directory`, the relative directory ending in `/`. A directory row has only `relative_path` and `full_path`, and both end in `/`:
 
 ```nu
 idx files main | select relative_path file_name directory
@@ -289,7 +289,7 @@ idx find parser
 # => ╰───┴──────┴───────────────────────┴──────┴───────╯
 ```
 
-Here the paths are relative to the current directory. `score` says how well the name matched, and the rows are sorted by it, best first; `rank` is the row's position in that order, starting at 1. In a Git repository, files changed by recent commits get a higher score. `--files` (`-f`) or `--dirs` (`-d`) limits the search to one kind of entry (you can't pass both), and `--limit` (`-l`) caps the number of rows, which is 100 by default.
+Here the paths are relative to the current directory. `score` says how well the name matched, and the rows come sorted by it, best first. `rank` is the row's position in that order, starting at 1. In a Git repository, files changed by recent commits get a higher score. `--files` (`-f`) or `--dirs` (`-d`) limits the search to one kind of entry, and passing both is an error. `--limit` (`-l`) caps the number of rows, 100 by default.
 
 `--verbose` (`-v`) shows how the score came about. When you search both kinds, a `score_details` record holds the `base_score` for the fuzzy match itself, a `filename_bonus` when the match falls in the file name rather than the directory part, a `special_filename_bonus` for entry-point files such as `mod.rs` or `index.js`, and a `frecency_boost`, which stays 0 because Nushell doesn't record which files you open. With `--files`, you get a `match_type` column instead, and with `--dirs`, an `exact_match` column:
 
@@ -315,7 +315,7 @@ idx search TODO | select relative_path line_number line
 # => ╰───┴───────────────────────┴─────────────┴─────────────────────╯
 ```
 
-Each row also has a `column` (where the first match starts in the line, counting from 0), a `byte_offset` (where the line starts in the file), and `matches`, a table with the `start` and `end` byte offset of each match.
+Each row also has three more columns. `column` is where the first match starts in the line, counting from 0, and `byte_offset` is where the line starts in the file. `matches` is a table with the `start` and `end` byte offset of each match in the file.
 
 The pattern is plain text by default, so characters such as `*`, `?`, and `[` match themselves. `--regex` (`-r`) reads the patterns as regular expressions, and `--fuzzy` (`-f`) matches lines approximately; you can't use both. `--limit` (`-l`) caps the number of matching lines, 50 by default. `--context` (`-c`) adds a `with_context` column holding the matching line and its neighbors. An int sets the same number of lines before and after, and a range such as `-2..5` sets them separately:
 
@@ -332,7 +332,7 @@ idx search --context 1 run | select relative_path with_context
 # => ╰───┴─────────────────────┴─────────────────────╯
 ```
 
-To find lines that match either of two words, use a regular expression, as in `idx search --regex 'TODO|FIXME'`. A word that looks like a file filter limits which files are searched instead of being searched for: `*.rs` (an extension), `src/` (a directory), a glob with a `/` or with braces (`src/**/*.rs`, `*.{md,txt}`), or any of these after a `!` to exclude those files. Write the filter in the same string as the pattern:
+To find lines that match either of two words, use a regular expression, as in `idx search --regex 'TODO|FIXME'`. A word that looks like a file filter limits the files `idx search` reads instead of being a search term: `*.rs` (an extension), `src/` (a directory), a glob with a `/` or with braces (`src/**/*.rs`, `*.{md,txt}`), or any of these after a `!` to exclude those files. Write the filter in the same string as the pattern:
 
 ```nu
 idx search "TODO *.md" | select relative_path line
@@ -347,7 +347,7 @@ idx search "TODO *.md" | select relative_path line
 
 `idx watch` returns a stream of the changes the index's watcher sees, one record each, with a `kind` and the absolute `path`. `kind` is `created`, `modified`, `removed`, or `renamed`, or `rescan` when the watcher lost track of individual changes under a path and scanned it again. A renamed file is reported under its new path only. Files the index leaves out, such as those Git ignores, don't produce events.
 
-Like [`watch`](#running-a-command-when-files-change), the stream waits for changes until you press Ctrl+C. `--max-events` (`-n`) ends it after that many events, and `--timeout` (`-t`) after that much time, even when nothing happened. A negative `--max-events` is an error. Here two changes were made in another shell, a new file and a rename:
+Like [`watch`](#running-a-command-when-files-change), the stream waits for changes until you press Ctrl+C. `--max-events` (`-n`) ends it after that many events, and `--timeout` (`-t`) after that much time, even when nothing happened. A negative `--max-events` is an error. Here another shell made two changes, a new file and a rename:
 
 ```nu
 idx watch --max-events 2 | update path { path relative-to $env.PWD }

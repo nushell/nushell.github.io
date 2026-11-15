@@ -101,7 +101,7 @@ use std/bench
 ```
 
 ::: details More about `bench`
-[`bench`](./standard_library.md) runs each closure you give it 50 times unless you pass `--rounds` (`-n`), and returns a record with the `mean`, `min`, `max`, and `std` (standard deviation) of the run times. `--verbose` (`-v`) adds a `times` list with every round's duration. `--pretty` (`-p`) returns a string such as `3sec 268ms +/- 50ms` instead, and then `--verbose` has no effect.
+[`bench`](./standard_library/bench.md) runs each closure you give it 50 times unless you pass `--rounds` (`-n`), and returns a record with the `mean`, `min`, `max`, and `std` (standard deviation) of the run times. `--verbose` (`-v`) adds a `times` list with every round's duration. `--pretty` (`-p`) returns a string such as `3sec 268ms +/- 50ms` instead, and then `--verbose` has no effect.
 
 Give it several closures and it times each one and returns a table with a `code` column holding each closure's source and a `ratio` column, where the fastest closure has a ratio of `1.0`. With `--pretty` it prints each benchmark and then a line saying how many times faster the fastest closure ran than each of the others.
 
@@ -109,7 +109,7 @@ The other flags control what runs around the timed code:
 
 - `--warmup` (`-w`) runs each closure that many extra times before timing starts. Use it to fill the disk cache before timing a command that reads files.
 - `--setup` (`-s`) and `--cleanup` (`-c`) take closures that run once, before the first benchmark and after the last one.
-- `--prepare` (`-S`) and `--conclude` (`-C`) take closures that run before and after every round, warmup rounds included. With several closures to compare, they receive the index of the closure being timed (starting at 0), both as an argument and as `$in`, so they can prepare different things for each one.
+- `--prepare` (`-S`) and `--conclude` (`-C`) take closures that run before and after every round, warmup rounds included. With several closures to compare, they receive the index of the closure being timed, starting at 0, both as an argument and as `$in`, so they can prepare different things for each one.
 - `--ignore-errors` (`-i`) keeps going when the timed closure fails.
 - `--progress` (`-P`) prints a round counter while it runs.
 
@@ -300,7 +300,7 @@ The URL's scheme picks the provider, and each provider has its own way of findin
 
 When no AWS credentials turn up, the command fails with `Could not fetch AWS credentials`, followed by each place the SDK looked. Other schemes, such as `https://` and `file://`, fail with `Could not determine a supported cloud type from path`.
 
-The plugin reads these variables from its own environment, which it gets from `$env` when Nushell starts it. If you set or change them while the plugin is running, run `plugin stop polars`, and the next `polars` command starts the plugin with the new values. Stopping the plugin also drops the dataframes it holds.
+The plugin reads these variables from its own environment, which it gets from `$env` when Nushell starts it. If you set or change them while the plugin is running, run `plugin stop polars`, and the next `polars` command starts the plugin with the new values. [The object store](#the-object-store) explains what stopping the plugin does to the dataframes it holds.
 
 Not every format works with cloud storage. `polars open` reads CSV, TSV, Parquet, Arrow, and NDJSON files from a cloud URL, always as a lazy dataframe, so `--eager` fails with `Cloud URLs are not supported with --eager`. JSON and Avro files can't be read from the cloud. `polars save` writes Parquet, Arrow, NDJSON, and CSV files to the cloud, but not Avro.
 
@@ -316,7 +316,7 @@ CSV and TSV files take the most options:
 - `--no-header` reads the first line as data and names the columns `column_1`, `column_2`, and so on.
 - `--skip-rows` skips that many lines at the top of the file, before the header.
 - `--infer-schema` sets how many rows Polars reads to guess each column's type. The default is 100. If a column holds only numbers in those rows and text further down, collecting fails with `could not parse ... as dtype`, and you need a larger number or `--schema`.
-- `--schema` (`-s`) sets the types yourself, as a record of column name to type name. It applies by position: its names replace the header's names, and it must have one entry for every column in the file. `--schema` also works for JSON and NDJSON files.
+- `--schema` (`-s`) sets the types yourself, as a record of column name to type name. It applies by position. Its names replace the header's names, and it must have one entry for every column in the file. `--schema` also works for JSON and NDJSON files.
 - `--truncate-ragged-lines` drops the extra fields on a line that has more fields than the header. Without it, such a line fails with `found more fields than defined in 'Schema'`.
 - With `--eager`, `--columns` reads only the listed columns of a CSV, Parquet, Arrow, or Avro file. In a lazy read, pick the columns with [`polars select`](/commands/docs/polars_select.md).
 
@@ -405,7 +405,7 @@ Each row has these columns:
 - `span_contents`, `span_start`, and `span_end` give the source text that created the object, such as `polars open` or `$df_5 * 3`, and where that text sits in Nushell's source buffer.
 - `reference_count` counts the separate Nushell values that point to the object.
 
-An object stays in the store while a Nushell value refers to it. When the last of those values goes away, for example when a variable goes out of scope at the end of a block, or when a pipeline's result has been printed, Nushell tells the plugin and the plugin deletes the object. Copying a variable with `let df_copy = $df_1` doesn't add a reference, because both variables hold the same Nushell value. Commands that return an object that's already stored do add one: [`polars collect`](/commands/docs/polars_collect.md) on an eager dataframe and [`polars store-get`](/commands/docs/polars_store-get.md) return the same key and raise `reference_count` by one. The object is deleted once all of those values are gone. [`polars store-rm`](/commands/docs/polars_store-rm.md) deletes an object right away, whatever its count.
+An object stays in the store while a Nushell value refers to it. When the last of those values goes away, for example when a variable goes out of scope at the end of a block, or when a pipeline's result has been printed, Nushell tells the plugin and the plugin deletes the object. Copying a variable with `let df_copy = $df_1` doesn't add a reference, because both variables hold the same Nushell value. Commands that return an object that's already stored do add one. [`polars collect`](/commands/docs/polars_collect.md) on an eager dataframe and [`polars store-get`](/commands/docs/polars_store-get.md) return the same key and raise `reference_count` by one. The object is deleted once all of those values are gone. [`polars store-rm`](/commands/docs/polars_store-rm.md) deletes an object right away, whatever its count.
 
 Nushell's [plugin garbage collector](./plugins.md#plugin-garbage-collector) stops a plugin that has been idle for a while (10 seconds by default). The Polars plugin turns the garbage collector off for itself while anything is in its store, and back on once the store is empty. So as long as you hold a dataframe in a variable, the plugin keeps running however long it sits idle, and your `plugin_gc` settings don't stop it.
 
@@ -635,9 +635,9 @@ paired with every right row that satisfies the condition, and a left row that
 matches nothing is left out, as `t3` is here:
 
 ```nu
-let trips = [[trip km]; [t1 120] [t2 450] [t3 1500]] | polars into-df
-let cars = [[car range_km]; [city 300] [hybrid 600] [diesel 1000]] | polars into-df
-$trips | polars join-where $cars ((polars col km) <= (polars col range_km)) | polars sort-by trip car
+[[trip km]; [t1 120] [t2 450] [t3 1500]] | polars into-df
+| polars join-where ([[car range_km]; [city 300] [hybrid 600] [diesel 1000]] | polars into-df) ((polars col km) <= (polars col range_km))
+| polars sort-by trip car
 # => ╭───┬──────┬─────┬────────┬──────────╮
 # => │ # │ trip │ km  │  car   │ range_km │
 # => ├───┼──────┼─────┼────────┼──────────┤
@@ -1128,7 +1128,7 @@ These operators work between a series, meaning a one-column dataframe, and a
 single value:
 
 - `+`, `-`, `*`, and `/` with an int or a float. The value has to match the
-  series: an `i64` series takes ints and an `f64` series takes floats, so
+  series. An `i64` series takes ints and an `f64` series takes floats, so
   `$df_5 - 2.5` fails with `Incorrect type`. `+` also appends a string to every
   value of a string series. Dividing by zero fails.
 - `==`, `!=`, `<`, `<=`, `>`, and `>=` with an int or a float, under the same
@@ -1421,7 +1421,7 @@ $df_1 | polars get int_1 | polars set-with-idx 123 --indices $indices_3
 ```
 
 [`polars set-with-idx`](/commands/docs/polars_set-with-idx.md) follows the same
-rules as `polars set`: the input has to be a one-column dataframe, and the value
+rules as `polars set`. The input has to be a one-column dataframe, and the value
 has to be an int, a float, or a string that matches the column's type. Its
 `--indices` follow the same integer rule as `polars take`.
 
@@ -1648,8 +1648,8 @@ $df_1 | polars select int_1 word | polars into-nu --tail --rows 3 --index
 ```
 
 Columns come back as the matching Nushell types, except where `polars into-df`
-already changed the type. A `duration` or `filesize` value became an `i64` column
-(see [How values become columns](#how-values-become-columns)), so it comes back
+already changed the type. A `duration` or `filesize` value became an `i64` column,
+as [How values become columns](#how-values-become-columns) shows, so it comes back
 as an `int`.
 
 `polars into-nu` also converts an expression, a selector, a schema, or a data
@@ -1879,7 +1879,6 @@ $df_1 | polars select int_1 | describe
 # => polars_lazyframe
 ```
 
-A lazy result prints as its plan, as the `polars agg` examples earlier showed.
 If a pipeline prints a plan where you expected data, end it with
 `polars collect`.
 
@@ -1928,8 +1927,6 @@ third row from the end. The window doesn't wrap around. On the ten rows of
 `$df_1`, `polars slice -12 4` covers two positions before the first row and
 returns only rows 0 and 1. An offset past the end returns an empty dataframe, and
 a negative size fails with `Negative value passed when positive one is required`.
-`polars first`, `polars last`, and `polars slice` all return the kind of
-dataframe they were given.
 
 [`polars get`](/commands/docs/polars_get.md) picks columns by name, like
 `polars select`, but it takes only names, not expressions or selectors, and it

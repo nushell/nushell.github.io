@@ -51,7 +51,7 @@ List syntax is very similar to that of arrays in JSON. However, commas are _not_
   # => ╰───┴─────╯
   ```
 
-Extra commas are ignored, so a trailing comma (`[1, 2,]`) or a doubled one (`[1,,2]`) still gives `[1, 2]`. A semicolon is not a separator:
+Extra commas are ignored, so `[1, 2,]` and `[1,,2]` both give `[1, 2]`. A semicolon is not a separator:
 
 ```nu
 [1; 2]
@@ -88,7 +88,7 @@ Put an expression in parentheses to make it one item:
 # => ╰───┴───╯
 ```
 
-Variables and cell paths (`$x`, `$row.name`) work without parentheses. The same rule applies to [record literals](record.md#expressions-in-a-record-literal).
+Variables and cell paths such as `$x` and `$row.name` work without parentheses. The same rule applies to [record literals](record.md#expressions-in-a-record-literal).
 
 ## Additional Language Notes
 

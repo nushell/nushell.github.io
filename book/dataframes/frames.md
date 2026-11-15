@@ -107,7 +107,7 @@ $sales | polars pivot --on month --index store --values amount --aggregate sum |
 
 You need `--on` and at least one of `--index` and `--values`, or the command fails with `` `pivot` needs either `--index or `--values` needs to be specified ``. If you give only one of them, the other is every remaining column. All three take a column name, a list of names, or a [selector](/commands/docs/polars_selector.md).
 
-`--aggregate` (`-a`) decides what happens when several rows land in the same cell, like the two `south` rows for `feb` above. It takes `first`, `last`, `sum`, `min`, `max`, `mean`, `median`, or `count` (`len` also works). Without it, each cell may hold at most one value, and a duplicate fails when you collect with `aggregation 'item' expected no or a single value, got 2 values`. An unknown name fails with an error such as `wrong is not a valid aggregation`. `--aggregate` also accepts an expression, but the expression can't name a column, and one that does fails with ``explicit column references are not allowed in the `aggregate_function` of `pivot` ``. That leaves expressions such as `(polars len)`.
+`--aggregate` (`-a`) decides what happens when several rows land in the same cell, like the two `south` rows for `feb` above. It takes `first`, `last`, `sum`, `min`, `max`, `mean`, `median`, `count`, or `len`, which is the same as `count`. Without it, each cell may hold at most one value, and a duplicate fails when you collect with `aggregation 'item' expected no or a single value, got 2 values`. An unknown name fails with an error such as `wrong is not a valid aggregation`. `--aggregate` also accepts an expression, but the expression can't name a column, and one that does fails with ``explicit column references are not allowed in the `aggregate_function` of `pivot` ``. That leaves expressions such as `(polars len)`.
 
 `--on-cols` (`-c`) lists the values that become columns, in the order you want them. Values you leave out are dropped along with their rows, so the duplicate `feb` rows don't matter here, and a value that never occurs gives a column of nulls:
 
@@ -289,7 +289,7 @@ $scores | polars drop-nulls $cols
 
 A name that isn't a column fails with `Error dropping nulls` and `not found: "nope" not found`, and a name that isn't a string fails with `Incorrect column format`.
 
-`polars drop-nulls` returns the kind of dataframe it was given. Given a lazy dataframe, it runs the plan up to that point right away, drops the rows, and wraps the result in a new lazy dataframe. A row with `NaN` stays, because `NaN` isn't null. A column that held only nulls when you built it has the generic `object` type (see [How values become columns](../dataframes.md#how-values-become-columns)), and `polars drop-nulls` doesn't see the nulls in an `object` column. Give the column a real type with `--schema` when you create the dataframe if you need to drop those rows.
+`polars drop-nulls` returns the kind of dataframe it was given. Given a lazy dataframe, it runs the plan up to that point right away, drops the rows, and wraps the result in a new lazy dataframe. A row with `NaN` stays, because `NaN` isn't null. A column that held only nulls when you built it has the generic `object` type, as [How values become columns](../dataframes.md#how-values-become-columns) explains, and `polars drop-nulls` doesn't see the nulls in an `object` column. Give the column a real type with `--schema` when you create the dataframe if you need to drop those rows.
 
 ### Filling nulls
 
@@ -575,7 +575,7 @@ $nums | polars sample --n-rows 4 --seed 42 --shuffle
 
 As the first result shows, the picked rows keep their input order unless you add `--shuffle` (`-u`). A float seed fails with `Can't convert to int.`
 
-Without `--replace` (`-e`), each row can be picked once, so asking for more rows than the dataframe has, or a fraction above 1, fails with `cannot take a larger sample than the total population`. With `--replace`, a row can come up more than once, the sample can be larger than the dataframe, and the rows come out in random order. A negative count fails with `conversion from i64 to u64 failed`.
+Without `--replace` (`-e`), each row can be picked once, so asking for more rows than the dataframe has, or a fraction above 1, fails with `cannot take a larger sample than the total population`. With `--replace`, a row can come up more than once, the sample can be larger than the dataframe, and the rows come out in random order. A negative count fails with ``conversion from `i64` to `u64` failed``.
 
 A lazy input is collected first, and the result is an eager dataframe. The same seed picks the same rows from an eager dataframe and from a lazy one with the same data.
 
@@ -644,7 +644,7 @@ $scores | polars summary
 The `descriptor` column names each statistic. Every other column is named after an input column and its type, and holds floats. A few of the numbers need explaining:
 
 - `count` is the number of rows, nulls included, which is why `ratio` shows 4 with one value missing. The other statistics skip nulls. To count only the values that are there, use [`polars count`](/commands/docs/polars_count.md).
-- `std` divides by the number of values. [`polars std`](/commands/docs/polars_std.md) divides by one less by default, so it gives 2.36 for `score` where `polars summary` gives 2.05.
+- `std` divides by the number of values. [`polars std`](/commands/docs/polars_std.md) divides by one less, so it gives 2.36 for `score` where `polars summary` gives 2.05.
 - `median` averages the two middle values when there's an even number of them, but the percentile rows pick the nearest actual value. That's why `score` has a median of 8 and a `50%` of 9.
 - A string column gets only a `count`. A boolean column gets `sum`, which counts the `true` values, and `mean`, `min`, and `max`. A datetime column's statistics come out as nanoseconds since 1970. Columns of the generic `object` type are left out.
 
@@ -667,7 +667,7 @@ $weights | polars group-by g | polars agg (polars col p | polars entropy --base 
 # => ╰───┴───┴──────╯
 ```
 
-`--normalize false` skips the division and uses the values as they are, which only makes sense for a column that already sums to 1. On the whole `p` column above it gives -3.30, a number with no meaning as an entropy.
+`--normalize false` skips the division and uses the values as they are, which only makes sense for a column that already sums to 1. On the whole `p` column, `polars entropy --normalize false` gives -3.30, a number with no meaning as an entropy.
 
 For the entropy of a column of categories, count the categories first with [`polars value-counts`](/commands/docs/polars_value-counts.md):
 
@@ -750,7 +750,7 @@ The cache lasts for one run. Collecting the same lazy dataframe again runs the c
 
 ### Counting rows
 
-[`polars len`](/commands/docs/polars_len.md) is an expression for the number of rows, like `COUNT(*)` in SQL. It counts every row, nulls included, and names its column `len`, with the type `u64`. `polars count` counts only a column's non-null values:
+[`polars len`](/commands/docs/polars_len.md) is an expression for the number of rows, like `COUNT(*)` in SQL. It counts every row, nulls included, and names its column `len`, with the type `u64`. [Counting](./aggregation.md#counting) compares it with `polars count`, which skips nulls:
 
 ```nu
 let df = [[k v]; [x 1] [y null] [x 3]] | polars into-df

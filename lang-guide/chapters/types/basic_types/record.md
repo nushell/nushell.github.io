@@ -66,7 +66,7 @@ As in lists, extra commas are ignored: `{a: 1,, b: 2,}` is `{a: 1, b: 2}`.
 
 ## Expressions in a record literal
 
-A field's value is a single word, just like a [list item](list.md#expressions-in-a-list-literal). In `{a: 1 + 1}`, the value of `a` is `1`, and Nushell then reads `+` as the next key:
+A field's value is a single word, like a [list item](list.md#expressions-in-a-list-literal). In `{a: 1 + 1}`, the value of `a` is `1`, and Nushell then reads `+` as the next key:
 
 ```nu
 {a: 1 + 1}

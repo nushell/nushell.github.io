@@ -63,7 +63,7 @@ let text = ""
 
 [`into bool`](/commands/docs/into_bool.md) turns numbers and strings into booleans. The strings `true` and `false` convert in any letter case, with or without whitespace around them. A string that holds a number gives `false` for zero and `true` for anything else. Any other string is an error, with the help text 'the strings "true" and "false" can be converted into a bool'.
 
-`--relaxed` accepts every string. Then only `""`, `"0"` and `"false"` (again ignoring case and whitespace) are `false`, and every other string is `true`, including `"no"` and `"0.0"`:
+`--relaxed` accepts every string. Then only `""`, `"0"` and `"false"`, again ignoring case and whitespace, are `false`, and every other string is `true`, including `"no"` and `"0.0"`:
 
 ```nu
 ['true' ' FALSE ' '1' '-1' '0.0' 'yes' ''] | each {|s| {text: $s, default: (try { $s | into bool } catch { 'error' }), relaxed: ($s | into bool --relaxed)} }

@@ -92,7 +92,7 @@ let data = [
 
 - Directly on a value:
 
-  A cell path can follow a variable, as in `$data.condition`, and it can also follow a list, record or table literal, or a subexpression in parentheses. There is no need to store the value in a variable or pipe it to `get` first:
+  A cell path can follow a variable, as in `$data.condition`, and it can also follow a list, record or table literal, or a subexpression in parentheses:
 
   ```nu
   [1 2].0

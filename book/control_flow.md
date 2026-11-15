@@ -87,17 +87,17 @@ nu size.nu
 # => Error: nu::shell::external_command
 # =>
 # =>   × External command failed
-# =>    ╭─[/home/me/size.nu:5:5]
-# =>  4 │     }
-# =>  5 │     else {
+# =>    ╭─[/home/me/size.nu:6:5]
+# =>  5 │     }
+# =>  6 │     else {
 # =>    ·     ──┬─
 # =>    ·       ╰── Command `else` not found
-# =>  6 │         "small"
+# =>  7 │         "small"
 # =>    ╰────
 # =>   help: Did you mean `if`?
 ```
 
-Write `} else {` on one line. The same rule applies to `else if` and to the `catch` and `finally` parts of [`try`](#try). Inside parentheses a newline doesn't end the command, so wrapping the whole `if` in `( )` also lets `else` start a new line (see [Multi-line pipelines](pipelines.md#multi-line-pipelines)).
+Write `} else {` on one line. The same rule applies to `else if`. Inside parentheses a newline doesn't end the command, so wrapping the whole `if` in `( )` also lets `else` start a new line. See [Multi-line pipelines](pipelines.md#multi-line-pipelines).
 :::
 
 ### `match`

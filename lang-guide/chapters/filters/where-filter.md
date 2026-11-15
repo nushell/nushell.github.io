@@ -160,7 +160,7 @@ let is_odd = {|n| $n mod 2 == 1 }
    - `<`, `<=`, `>` and `>=` return `null`, so the row is dropped without an error.
    - `==` and `!=` return a `bool`, so `where a? == null` keeps the rows that lack `a`.
    - `null` on the item side of `in` or `not-in` is fine when the right side is a list.
-   - The other operators raise an error: arithmetic (`+`, `-`, `*`, `/`, `//`, `mod`, `**`), `++`, the bit operators, `=~`, `!~`, `starts-with`, `ends-with`, `and`, `or` and `xor`. So does `not null` (it can't convert `nothing` to a `bool`), and `null` as the collection of `in`, `not-in`, `has` or `not-has`.
+   - The other operators raise an error: arithmetic (`+`, `-`, `*`, `/`, `//`, `mod`, `**`), `++`, the bit operators, `=~`, `!~`, `starts-with`, `ends-with`, `and`, `or` and `xor`. So do `not null`, because `nothing` can't convert to a `bool`, and `null` as the collection of `in`, `not-in`, `has` or `not-has`.
 
    The first rule can turn into the last one. `size? > 1` is `null` for a row without `size`, and `null or ...` is an error:
 

@@ -80,13 +80,13 @@ With `true`, a command line that starts with a space isn't saved to the history.
 | `"short"`           | Only the `Startup Time:` line              |
 | `false` or `"none"` | Nothing                                    |
 
-Reading the setting back gives `true`, `"short"`, or `false`. The banner is the standard library's `banner` command, so `nu --no-std-lib` never shows it. Three `color_config` entries color it: `banner_foreground` for the text (default `"attr_normal"`), and `banner_highlight1` (default `"green"`) and `banner_highlight2` (default `"purple"`) for the highlighted words. See also [Remove Welcome Message](./configuration.md#remove-welcome-message).
+Reading the setting back gives `true`, `"short"`, or `false`. The banner is the standard library's `banner` command, so `nu --no-std-lib` never shows it. Three `color_config` entries color it, as described in [Keys for the banner and for theme scripts](./coloring_and_theming.md#keys-for-the-banner-and-for-theme-scripts). See also [Remove Welcome Message](./configuration.md#remove-welcome-message).
 
 ### `rm.always_trash`
 
 With `true`, [`rm`](/commands/docs/rm.md) moves files to the system trash as if you had passed `--trash`. With `false`, it deletes them permanently. The `--trash` and `--permanent` flags always win over this setting. Given both flags, `rm` uses the trash. When moving a file to the trash fails, the error suggests `--permanent`.
 
-The trash needs a `nu` built with the `trash-support` feature, which the default build includes (`version | get features` lists it), and it isn't available on Android or iOS. Without it, `rm --trash` fails. Leave `rm.always_trash` at `false` there.
+The trash needs a `nu` built with the `trash-support` feature, which the default build includes and `version | get features` lists. It isn't available on Android or iOS. Without it, `rm --trash` fails. Leave `rm.always_trash` at `false` there.
 
 ### `recursion_limit`
 
@@ -180,25 +180,25 @@ $env.config.buffer_editor = ["vim", "+{line}"]   # the file path is appended
 
 ## Completions
 
-| Setting                            | Type                    | Default    |
-| ---------------------------------- | ----------------------- | ---------- |
-| `completions.algorithm`            | string                  | `"prefix"` |
-| `completions.sort`                 | string                  | `"smart"`  |
-| `completions.case_sensitive`       | bool                    | `false`    |
-| `completions.quick`                | bool                    | `true`     |
-| `completions.partial`              | bool                    | `true`     |
-| `completions.persistent_menus`     | bool                    | `false`    |
-| `completions.use_ls_colors`        | bool                    | `true`     |
-| `completions.cache_size`           | int                     | `100`      |
-| `completions.external.enable`      | bool                    | `true`     |
-| `completions.external.max_results` | int                     | `100`      |
-| `completions.external.completer`   | closure, record, `null` | `null`     |
+| Setting                            | Type              | Default    |
+| ---------------------------------- | ----------------- | ---------- |
+| `completions.algorithm`            | string            | `"prefix"` |
+| `completions.sort`                 | string            | `"smart"`  |
+| `completions.case_sensitive`       | bool              | `false`    |
+| `completions.quick`                | bool              | `true`     |
+| `completions.partial`              | bool              | `true`     |
+| `completions.persistent_menus`     | bool              | `false`    |
+| `completions.use_ls_colors`        | bool              | `true`     |
+| `completions.cache_size`           | int               | `100`      |
+| `completions.external.enable`      | bool              | `true`     |
+| `completions.external.max_results` | int               | `100`      |
+| `completions.external.completer`   | closure or `null` | `null`     |
 
 - `algorithm` is `"prefix"` (match from the start), `"substring"` (match anywhere), or `"fuzzy"`.
 - `sort` is `"smart"` or `"alphabetical"`. `"smart"` sorts alphabetically for `prefix` and `substring`, and by match score for `fuzzy`.
 - `quick: true` fills in the only remaining suggestion without opening a menu.
 - `partial: true` fills in the part that all suggestions share. With `apple`, `apricot`, and `apron` in a directory, <kbd>Tab</kbd> after `ls a` fills in `ap`.
-- `persistent_menus: true` keeps a menu open while you delete text or empty the line, refiltering it instead. The menu closes on <kbd>Esc</kbd>, <kbd>Ctrl</kbd>+<kbd>C</kbd>, or when you accept a value. This applies to the history menu too.
+- `persistent_menus: true` keeps a menu, the history menu included, open while you delete text or empty the line. See [Menus](./line_editor.md#menus) for when a menu closes.
 - `use_ls_colors` colors file and directory suggestions with `LS_COLORS`.
 - `external.enable: false` stops Nushell from searching `PATH` for command names, which helps when `PATH` includes slow file systems. `external.max_results` limits how many it collects.
 - `external.completer` is a closure that completes arguments of external commands. See [External Completions](./custom_completions.md#external-completions).
@@ -231,7 +231,7 @@ Answers from [custom completers](./custom_completions.md) and from `completions.
 | `bracketed_paste`                          | bool             | `true`                     |
 | `use_ansi_coloring`                        | bool or `"auto"` | `"auto"`                   |
 
-Each of these makes Nushell send escape sequences that the terminal has to understand. Turn off the ones your terminal doesn't support.
+Each of these makes Nushell send escape sequences that the terminal has to understand. Turn off the ones your terminal doesn't support. [Terminal integration](./line_editor.md#terminal-integration) in the line editor chapter has more detail.
 
 - `use_kitty_protocol` turns on the Kitty keyboard protocol, which lets the terminal report keys that otherwise look the same, such as <kbd>Ctrl</kbd>+<kbd>I</kbd> and <kbd>Tab</kbd>.
 - `osc2` sets the window or tab title to the current directory and the running command.
@@ -243,15 +243,9 @@ Each of these makes Nushell send escape sequences that the terminal has to under
 
 ### `use_ansi_coloring`
 
-`true` always colors output and `false` never does. `"auto"` checks these in order and uses the first that applies:
+`true` always colors output and `false` never does. `"auto"` decides from `FORCE_COLOR`, `NO_COLOR`, `CLICOLOR`, `TERM`, and whether standard output is a terminal, in the order given in [Turning colors on and off](./coloring_and_theming.md#turning-colors-on-and-off).
 
-1. `FORCE_COLOR` set to anything other than `0`, `false`, or an empty string turns colors on.
-2. `NO_COLOR` set the same way turns them off.
-3. `CLICOLOR` turns them off when it is `0`, `false`, or empty, and on when it has any other value.
-4. `TERM` set to `dumb` turns them off.
-5. Otherwise, Nushell colors output when its standard output is a terminal.
-
-Without colors, error messages are drawn with plain ASCII characters instead of line-drawing ones. The [`ansi`](/commands/docs/ansi.md) command ignores this setting.
+Without colors, error messages are drawn with plain ASCII characters instead of line-drawing ones.
 
 [`config use-colors`](/commands/docs/config_use-colors.md) runs this check and returns the answer as a `bool`. Use it in your own commands instead of reading `$env.config.use_ansi_coloring`, which may hold `"auto"`:
 
@@ -261,7 +255,7 @@ def warn [msg: string] {
 }
 ```
 
-A change to `$env.config.use_ansi_coloring` counts right away. The environment variables are read from the session's global environment, though, not from the current scope. A change to `FORCE_COLOR`, `NO_COLOR`, `CLICOLOR`, or `TERM` made in `config.nu` or `env.nu` counts. One made at the prompt counts from the next command line on. One made inside a script, with `nu -c`, or with [`with-env`](/commands/docs/with-env.md) doesn't change the answer. The terminal check looks at Nushell's own standard output, so `config use-colors` gives the same answer whether or not its result is piped.
+A change to `$env.config.use_ansi_coloring` counts right away. Nushell reads the environment variables from the session's global environment, though, not from the current scope. A change to `FORCE_COLOR`, `NO_COLOR`, `CLICOLOR`, or `TERM` made in `config.nu` or `env.nu` counts. One made at the prompt counts from the next command line on. One made inside a script, with `nu -c`, or with [`with-env`](/commands/docs/with-env.md) doesn't change the answer. The terminal check looks at Nushell's own standard output, so `config use-colors` gives the same answer whether or not its result is piped.
 
 ## Errors
 
@@ -279,11 +273,11 @@ A change to `$env.config.use_ansi_coloring` counts right away. The environment v
 - `"plain"` describes the error and its location in plain sentences, which works better with screen readers.
 - `"short"` prints the error on one line.
 
-`nu --error-style` sets the style for a `nu -c` run, and takes `fancy`, `plain`, or `short`. For scripts and the REPL, set `error_style` in your configuration.
+[`nu --error-style`](./configuration.md#nu-flags) sets the style for a `nu -c` run. For scripts and the REPL, set `error_style` in your configuration.
 
 ### `error_lines`
 
-How many lines of source code `"fancy"` and `"nested"` errors show above and below the line with the error. `0` shows only that line. The value must be `0` or more. `"plain"` errors always show one line of context, and `"short"` errors show none.
+How many lines of source code `"fancy"` and `"nested"` errors show above and below the line with the error. `0` shows only the code the error points at, not the rest of its line. The value must be `0` or more. `"plain"` errors always show one line of context, and `"short"` errors show none.
 
 ### `display_errors`
 
@@ -414,7 +408,7 @@ A column is always at least as wide as its name. If a column name contains a cha
 
 ### `table.abbreviated_row_count`
 
-With an int `n`, a list or table longer than that shows its first `n` and last `n` rows, with a row of `...` between them. The `#` column numbers the rows that are shown, so it doesn't match their positions in the data. A record with more than `2n + 1` fields is shortened the same way. `null` shows every row.
+With an int `n`, a list or table with more than `2n` rows shows its first `n` and last `n` rows, with a row of `...` between them. The `#` column numbers the rows that are shown, so it doesn't match their positions in the data. A record with more than `2n + 1` fields is shortened the same way. `null` shows every row.
 
 ```nu
 $env.config.table.abbreviated_row_count = 2
@@ -436,7 +430,7 @@ A footer repeats the column names below the last row. `footer_mode` decides when
 
 - `"always"` and `"never"` do what they say.
 - An int `n`, such as the default `25`, adds a footer when the table has `n` rows or more.
-- `"auto"` adds a footer when the table has at least as many rows as the terminal has lines, so that its header would scroll out of sight.
+- `"auto"` adds a footer when the table, counting its header row, has at least as many rows as the terminal has lines, so that its header would scroll out of sight.
 
 `table.footer_inheritance` matters for nested tables, as drawn by [`table --expand`](/commands/docs/table.md) and by the default display at 100 or more terminal columns. With `false`, each table counts only its own rows. With `true`, a table counts the rows of the tables nested in it too, so a short outer table around a long inner one gets a footer as well.
 
@@ -622,7 +616,7 @@ Nushell only adds the links when all of these hold:
 | `hooks.env_change`        | record                  | `{}`                                                          | [Hooks](./hooks.md#changing-environment)             |
 | `hooks.display_output`    | string, closure, `null` | `"if (term size).columns >= 100 { table -e } else { table }"` | [Hooks](./hooks.md#changing-how-output-is-displayed) |
 | `hooks.command_not_found` | closure or `null`       | `null`                                                        | [Hooks](./hooks.md)                                  |
-| `keybindings`             | list                    | Nushell's menu keybindings                                    | [Keybindings](./line_editor.md#keybindings)          |
+| `keybindings`             | list                    | Nushell's menu and history-search keybindings                 | [Keybindings](./line_editor.md#keybindings)          |
 | `menus`                   | list                    | the completion, IDE completion, history, and help menus       | [Menus](./line_editor.md#menus)                      |
 | `abbreviations`           | record                  | `{}`                                                          | [Abbreviations](./line_editor.md#abbreviations)      |
 

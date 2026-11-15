@@ -34,7 +34,7 @@ let x: int = "ten"
 # =>    ╰────
 ```
 
-The parser can only check a value whose type it knows. When the right-hand side is a command whose output type is `any`, such as [`from json`](/commands/docs/from_json.md) or a custom command without an output type, Nushell checks the value again when the `let` runs:
+The parser can only check a value whose type it knows. When the right-hand side is a command whose output type is `any`, such as [`from json`](/commands/docs/from_json.md) or a custom command without an output type, Nushell checks the value when the `let` runs:
 
 ```nu
 let x: int = '"five"' | from json
@@ -49,7 +49,7 @@ let x: int = '"five"' | from json
 # =>    ╰────
 ```
 
-Assigning to an annotated `mut` variable is checked the same way. This runtime check is the experimental option `enforce-runtime-annotations`, which is on by default. To turn it off, start Nushell with `--experimental-options '[enforce-runtime-annotations=false]'`. The annotation is then only checked by the parser, and `$x` above would hold the string. See [Experimental options](/book/configuration.md#experimental-options) in the Book.
+Nushell checks an assignment to an annotated `mut` variable the same way. This runtime check is the experimental option `enforce-runtime-annotations`, which is on by default. To turn it off, start Nushell with `--experimental-options '[enforce-runtime-annotations=false]'`. Then only the parser checks the annotation, and `$x` above would hold the string. See [Experimental options](/book/configuration.md#experimental-options) in the Book.
 
 `let` without `=` takes its value from the pipeline. It also passes that value on, so it can sit at the end or in the middle of a pipeline:
 
@@ -339,7 +339,7 @@ See [Variable Names](/book/variables.md#variable-names) in the Book for the char
 
 ## Comments
 
-`#` starts a comment, which runs to the end of the line. There are no block comments, so a comment over several lines needs a `#` on each one. A comment directly above a `def` becomes the command's description (see [Documenting Your Command](/book/custom_commands.md#documenting-your-command)).
+`#` starts a comment, which runs to the end of the line. There are no block comments, so a comment over several lines needs a `#` on each one. A comment directly above a `def` becomes the command's description. See [Documenting Your Command](/book/custom_commands.md#documenting-your-command).
 
 A `#` starts a comment only where a new word could start: at the beginning of a line, after a space or tab, or right after a `;` or `|`. Inside a word, it's an ordinary character, and inside quotes, it's part of the string:
 

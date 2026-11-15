@@ -49,7 +49,7 @@ Nushell's own datetime values always carry an offset.
 
 Going the other way, every value has to become a Nushell datetime with an offset.
 A `date` becomes midnight UTC, and a naive datetime is shown as if it were UTC,
-with `+00:00`. Keep that in mind when you read the output of a naive column.
+with `+00:00`.
 
 ## Parsing strings
 
@@ -102,7 +102,7 @@ Both commands behave differently depending on what you give them.
 ```
 
 Both commands take `--not-exact` (`-n`), which lets the format match part of the
-string. That's handy for dates buried in other text:
+string. Use it for dates inside other text:
 
 ```nu
 ["shipped 2025-03-08 by ana" "2025-03-09"] | polars into-df | polars as-date "%Y-%m-%d" --not-exact
@@ -232,8 +232,8 @@ a lazy dataframe, it collects it first and returns an eager dataframe.
 ## Time zones
 
 Two commands attach or change a time zone. Both take an expression and return
-one, and both expect a `datetime` column. A `date` column fails with
-`expected Datetime, got date`.
+one, and both expect a `datetime` column. A `date` column fails with an error
+such as `expected Datetime, got date`.
 
 - [`polars replace-time-zone`](/commands/docs/polars_replace-time-zone.md) keeps
   the wall-clock time and labels it with a new zone. Use it to say where a naive

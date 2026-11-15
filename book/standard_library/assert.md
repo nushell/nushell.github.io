@@ -45,7 +45,7 @@ assert (1 + 1 == 3)
 # =>    ╰────
 ```
 
-A message replaces `Assertion failed.`. The `--error-label` flag replaces the `It is not true.` label with one of your own, a record with a `text` and a `span`, the same shape as a label for [`error make`](/commands/docs/error_make.md). `--error-labels` takes a list of such records, for an error that underlines more than one place. You can give both, and the error shows all of them. These flags are meant for your own assertion commands. With them, the error can point at the arguments that your command was called with, instead of at the code inside it:
+The `--error-label` flag replaces the `It is not true.` label with one of your own, a record with a `text` and a `span`, the same shape as a label for [`error make`](/commands/docs/error_make.md). `--error-labels` takes a list of such records, for an error that underlines more than one place. You can give both, and the error shows all of them. These flags are meant for your own assertion commands. With them, the error can point at the arguments that your command was called with, instead of at the code inside it:
 
 ```nu
 def "assert in-range" [value: int, low: int, high: int] {

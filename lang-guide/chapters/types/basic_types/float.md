@@ -34,7 +34,7 @@
   # => [2.5, 4.0, 3.0, 1.0, 4.0]
   ```
 
-- `into int` truncates the fractional part. Use `math round`, `math floor` or `math ceil` to round instead (see [Rounding](#rounding)).
+- `into int` truncates the fractional part. To round instead, use `math round`, `math floor` or `math ceil`, described under [Rounding](#rounding).
 - The other `math` commands, such as `math sqrt` and `math stddev`, are described in [Working with Numbers](/book/working_with_numbers.md).
 
 ## Rounding
@@ -88,7 +88,7 @@ The words `inf` and `NaN` are float literals for infinity and "not a number". Wr
 
 [`into float`](/commands/docs/into_float.md) is more lenient with text. `'infinity' | into float` returns `inf`.
 
-These values also come out of float arithmetic. A literal too large for a float becomes `inf` (`1e400` is `inf`), and so does a result too large for a float (`1e308 * 10` is `inf`). `inf - inf` is `NaN`. Division by zero is an error, even for floats, so `1.0 / 0` and `0.0 / 0.0` fail with `nu::shell::division_by_zero` instead of returning `inf` or `NaN`.
+These values also come out of float arithmetic. A result too large for a float becomes `inf`, so `1e308 * 10` is `inf`, and `inf - inf` is `NaN`. Division by zero is an error, even for floats, so `1.0 / 0` and `0.0 / 0.0` fail with `nu::shell::division_by_zero` instead of returning `inf` or `NaN`.
 
 Comparisons follow IEEE-754. `inf == inf` is `true`, and `NaN` is not equal to anything, itself included:
 

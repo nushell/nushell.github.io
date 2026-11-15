@@ -1,12 +1,12 @@
 # Data Formats
 
-[Loading Data](./loading_data.md) lists the formats that Nushell reads and writes, and covers [NUON](./loading_data.md#nuon) and the [notes on specific formats](./loading_data.md#notes-on-specific-formats) for JSON, Markdown, KDL, TOML, and YAML. This page covers the rest: writing CSV and TSV, `.env` files, MessagePack, spreadsheets, URL query strings, XML, HTML, and plain text. The last section is about the commands that turn binary data into text and back.
+[Loading Data](./loading_data.md) lists the formats that Nushell reads and writes, and covers [NUON](./loading_data.md#nuon) and the [notes on specific formats](./loading_data.md#notes-on-specific-formats) for JSON, Markdown, KDL, TOML, and YAML. This page covers the rest: writing CSV and TSV, `.env` files, MessagePack, spreadsheets, URL query strings, XML, HTML, plain text, and the commands that turn binary data into text and back.
 
 [[toc]]
 
 ## CSV and TSV
 
-[`to csv`](/commands/docs/to_csv.md) and [`to tsv`](/commands/docs/to_tsv.md) write a table or a record as delimited text, with a header line followed by one line per row. [`save`](/commands/docs/save.md) runs them for `.csv` and `.tsv` files. The flags for reading are explained in [Options for `from csv` and `from tsv`](./working_with_strings.md#options-for-from-csv-and-from-tsv).
+[`to csv`](/commands/docs/to_csv.md) and [`to tsv`](/commands/docs/to_tsv.md) write a table or a record as delimited text, with a header line followed by one line per row. [`save`](/commands/docs/save.md) runs them for `.csv` and `.tsv` files. [Options for `from csv` and `from tsv`](./working_with_strings.md#options-for-from-csv-and-from-tsv) explains the flags for reading.
 
 The header lists every column that appears in any row, in the order the columns first appear. A row that lacks a column gets an empty field:
 
@@ -25,7 +25,7 @@ The header lists every column that appears in any row, in the order the columns 
 # => me,b.txt
 ```
 
-A field that holds the separator, a double quote, or a line break is written in double quotes, with each quote inside it doubled. [`from csv`](/commands/docs/from_csv.md) reads such a field back as one value:
+`to csv` puts a field that holds the separator, a double quote, or a line break in double quotes, and doubles each quote inside it. [`from csv`](/commands/docs/from_csv.md) reads such a field back as one value:
 
 ```nu
 let row = [{file: 'notes, final.txt', title: 'The "best" one'}]
@@ -40,7 +40,7 @@ $row | to csv | from csv
 # => ╰───┴──────────────────┴────────────────╯
 ```
 
-The input has to be a table or a record. A list of plain values fails with `Command does not support list<int> input`; give the values a column name first, as in `[1 2 3] | wrap n | to csv`.
+The input has to be a table or a record. A list of plain values is an error. Nushell reports `Command does not support list<int> input` when it knows the input type before the pipeline runs, and `Input type not supported` when it finds out at run time. Give the values a column name first, as in `[1 2 3] | wrap n | to csv`.
 
 Each field has to hold a simple value. `null` becomes an empty field, and a list or record inside a row is an error:
 
@@ -60,7 +60,7 @@ Each field has to hold a simple value. `null` becomes an empty field, and a list
 # => a.txt,x;y
 ```
 
-Durations, file sizes, and dates are written the way Nushell displays them, so `from csv` reads them back as strings. A date comes out like `Tue, 2 Jan 2024 03:04:05 +0000 (2 years ago)`, following `$env.config.datetime_format.normal`, and a file size follows the `$env.config.filesize` settings. Convert those columns yourself when another program will read the file, with [`format date`](/commands/docs/format_date.md) for dates and [`into int`](/commands/docs/into_int.md) for nanoseconds and bytes:
+`to csv` writes durations, file sizes, and dates the way Nushell displays them, so `from csv` reads them back as strings. A date comes out like `Tue, 2 Jan 2024 03:04:05 +0000 (2 years ago)`, following `$env.config.datetime_format.normal`, and a file size follows the `$env.config.filesize` settings. Convert those columns yourself when another program will read the file, with [`format date`](/commands/docs/format_date.md) for dates and [`into int`](/commands/docs/into_int.md) for nanoseconds and bytes:
 
 ```nu
 [{name: a.txt, took: 90sec, size: 1kb}] | to csv
@@ -91,7 +91,7 @@ When the input is a stream, such as the output of [`each`](/commands/docs/each.m
 # =>   help: use `to csv --columns [...]` or `collect` before `to csv`
 ```
 
-As the help says, list the columns with `--columns`, or put [`collect`](/commands/docs/collect.md) before `to csv` so that it sees every row first. A table that is already a value, like the literals in the other examples, isn't a stream.
+List the columns with `--columns`, or put [`collect`](/commands/docs/collect.md) before `to csv` so that it sees every row first. A table that is already a value, like the literals in the other examples, isn't a stream.
 
 ## dotenv
 
@@ -118,7 +118,7 @@ $env.DB_URL
 # => postgres://localhost:5432/app
 ```
 
-`from dotenv` reads the file the way a shell would source it, but it never runs anything. A line may start with `export`, and `#` starts a comment at the start of a line or after a blank in an unquoted value. `${NAME}` and `$NAME` in an unquoted or double-quoted value expand to an earlier key in the file or to an environment variable, and single quotes or `\$` keep a `$` as written. A `$` that no name follows, as in `$5` or `$(whoami)`, stays as it is. The `sh` forms with a fallback work too. `${NAME:-word}` gives `word` when NAME is unset or empty and `${NAME-word}` only when it's unset, while `${NAME:+word}` gives `word` when NAME is set and not empty and `${NAME+word}` when it's set at all. Keys ignore case, as in `$env`, so `a=2` after `A=1` sets `A` again. The [`from dotenv` reference](/commands/docs/from_dotenv.md) has more examples.
+`from dotenv` reads the file the way a shell would source it, but it never runs anything. A line may start with `export`, and `#` starts a comment at the start of a line or after a blank in an unquoted value. `${NAME}` and `$NAME` in an unquoted or double-quoted value expand to an earlier key in the file or to an environment variable. Single quotes, or `\$` in a double-quoted value, keep a `$` as written. An unquoted value has no escapes, so `A=\$HOME` keeps the backslash and still expands `$HOME`. A `$` that no name follows, as in `$5` or `$(whoami)`, stays as it is. The `sh` forms with a fallback work too. `${NAME:-word}` gives `word` when NAME is unset or empty and `${NAME-word}` only when it's unset, while `${NAME:+word}` gives `word` when NAME is set and not empty and `${NAME+word}` when it's set at all. Keys ignore case, as in `$env`, so `a=2` after `A=1` sets `A` again. The [`from dotenv` reference](/commands/docs/from_dotenv.md) has more examples.
 
 Every value comes back as a string, `DB_PORT` included. Convert the ones you need with commands such as [`into int`](/commands/docs/into_int.md), as in `open .env | into int DB_PORT`.
 
@@ -136,11 +136,20 @@ A `.env` file that is really a shell script, such as an autoenv file, fails on i
 # =>    ╰────
 # =>   help: a .env file holds `KEY=value` lines; a shell script, such as an
 # =>         autoenv `.env` file, isn't one
+# =>
+# => Error: nu::shell::outsidespan
+# =>
+# =>   × Error while parsing .env text
+# =>    ╭────
+# =>  1 │ source venv/bin/activate
+# =>    · ───┬──
+# =>    ·    ╰── expected `=` after the variable name
+# =>    ╰────
 ```
 
 An unclosed quote and text after a closing quote, as in `A="x" y`, are errors too.
 
-[`to dotenv`](/commands/docs/to_dotenv.md) writes a record as `.env` text, and `save` uses it for a record saved to a file named like `.env`. Each value is written the way an external command would see it as an environment variable, so any `to_string` conversion in `$env.ENV_CONVERSIONS` applies. Numbers, booleans, and dates become their text, `null` becomes an empty value, binary data that is valid UTF-8 becomes that text, and `PATH` is joined with the path separator (`:`, or `;` on Windows). A plain value is written bare, one with spaces or other special characters in single quotes, and one holding a `'` or a line break in double quotes with escapes, so `from dotenv` reads back the same strings:
+[`to dotenv`](/commands/docs/to_dotenv.md) writes a record as `.env` text, and `save` uses it for a record saved to a file named like `.env`. It writes each value the way an external command would see it as an environment variable, so any `to_string` conversion in `$env.ENV_CONVERSIONS` applies. Numbers, booleans, and dates become their text, `null` becomes an empty value, binary data that is valid UTF-8 becomes that text, and `PATH` is joined with the path separator (`:`, or `;` on Windows). A plain value is written bare, one with spaces or other special characters in single quotes, and one holding a `'` or a line break in double quotes with escapes, so `from dotenv` reads back the same strings:
 
 ```nu
 {PORT: 8080, NAME: "my app", DEBUG: true, EMPTY: null, PATH: [/usr/bin /bin], NOTE: "it's two\nlines"} | to dotenv
@@ -186,7 +195,7 @@ open data.msgpack
 
 Give `save` the data, not the output of `to msgpack`. `save` converts binary data too, so `to msgpack | save data.msgpack` encodes the data twice, and `open` returns the inner MessagePack as binary. Use `save --raw` if you have already converted it.
 
-Values that MessagePack has a type for come back as the same type: strings, numbers, booleans, `null`, binary data, lists, and records. A date is written with the MessagePack timestamp extension and comes back in UTC. The other Nushell types are written as something simpler, and `from msgpack` doesn't turn them back:
+Values that MessagePack has a type for come back as the same type: strings, numbers, booleans, `null`, binary data, lists, and records. A date is written with the MessagePack timestamp extension and comes back in UTC. `to msgpack` writes the other Nushell types as something simpler, and `from msgpack` doesn't turn them back:
 
 | Nushell value | Written as                                          | Read back as |
 | ------------- | --------------------------------------------------- | ------------ |
@@ -209,7 +218,18 @@ Values that MessagePack has a type for come back as the same type: strings, numb
 # => [[1, 2], [3]]
 ```
 
-Without `--objects`, the same input fails with `Additional data after end of MessagePack object`. Other errors you may see: data that is cut short fails with `Error while reading MessagePack data`, a map whose keys aren't strings with `Invalid non-string value in MessagePack map`, an extension type other than the timestamp with `Unknown MessagePack extension`, an unsigned integer above the largest int with `MessagePack integer too big for Nushell`, a timestamp outside the date range with `Invalid MessagePack timestamp`, a string that isn't valid UTF-8 with `Non-UTF8 string`, a reserved type byte with `Invalid marker while reading MessagePack data`, and data nested more than 50 levels deep with `MessagePack data is nested too deeply`, in either direction.
+Without `--objects`, the same input fails with `Additional data after end of MessagePack object`. Other bad input fails with these errors:
+
+| Input                                      | Error                                                          |
+| ------------------------------------------ | -------------------------------------------------------------- |
+| data that is cut short                     | `Error while reading MessagePack data`                         |
+| a map whose keys aren't strings            | `Invalid non-string value in MessagePack map`                  |
+| an extension type other than the timestamp | `Unknown MessagePack extension`                                |
+| an unsigned integer above the largest int  | `MessagePack integer too big for Nushell`                      |
+| a timestamp outside the date range         | `Invalid MessagePack timestamp`                                |
+| a string that isn't valid UTF-8            | `Non-UTF8 string`                                              |
+| a reserved type byte                       | `Invalid marker while reading MessagePack data`                |
+| data nested more than 50 levels deep       | `MessagePack data is nested too deeply`, from `to msgpack` too |
 
 ### Compressed MessagePack (msgpackz)
 
@@ -270,7 +290,7 @@ open --raw sales.xlsx | from xlsx --sheets [SalesOrders] --prefer-integers | get
 # => ╰───┴─────────┴────────┴───────┴────────╯
 ```
 
-Cells become strings, ints, floats, and booleans. A date or date-time cell becomes a date in your local time zone, since spreadsheets don't store one, and a duration cell becomes a duration. Empty cells and cells holding an error such as `#DIV/0!` become `null`.
+Cells become strings, ints, floats, and booleans. A date or date-time cell becomes a date. Spreadsheets don't store a time zone, so the date gets a UTC offset from your local time zone. A duration cell becomes a duration. Empty cells and cells holding an error such as `#DIV/0!` become `null`.
 
 The first row that isn't empty supplies the column names, and an empty header cell is named after its position, such as `column1`. `--noheaders` (`-n`) keeps that row as data and names every column `column0`, `column1`, and so on. `--first-row` (`-f`) starts reading at a row number counted from 0, which helps when a sheet has a title above its table:
 
@@ -328,7 +348,7 @@ When a key can appear more than once, as in `tag=a&tag=b`, use [`url split-query
 # => ╰───┴─────┴───────╯
 ```
 
-There is no `to url`. [`url build-query`](/commands/docs/url_build-query.md) does the reverse: `{q: "hello world", lang: nu} | url build-query` returns `q=hello+world&lang=nu`.
+There is no `to url`. [`url build-query`](/commands/docs/url_build-query.md) does the reverse, so `{q: "hello world", lang: nu} | url build-query` returns `q=hello+world&lang=nu`. [Query strings](/cookbook/http.md#query-strings) in the HTTP cookbook covers both commands.
 
 ## XML
 
@@ -372,9 +392,9 @@ The example shows what `from xml` keeps and what it drops:
 - Namespace prefixes are removed from element and attribute names, so `m:price` is `price`, and `xmlns` declarations don't appear in `attributes`.
 - Entities such as `&amp;` are decoded, and CDATA sections become ordinary text.
 - Text is trimmed, and text that is only whitespace, such as the line breaks between elements, is dropped.
-- Comments and processing instructions inside the root are dropped, unless you ask for them. `--keep-comments` adds each comment as a row with the `tag` `!`, and `--keep-pi` adds each processing instruction as a row whose `tag` is `?` followed by its target, such as `?render` for `<?render fast?>`.
+- Comments and processing instructions inside the root are dropped unless you ask for them. `--keep-comments` adds each comment as a row with the `tag` `!`, and `--keep-pi` adds each processing instruction as a row whose `tag` is `?` followed by its target, such as `?render` for `<?render fast?>`.
 
-A document with a DTD (a `<!DOCTYPE ...>` with declarations) is rejected, because expanding its entities can take exponential time and memory. Use `--allow-dtd` only for files you trust:
+`from xml` rejects any document with a `<!DOCTYPE ...>`, even one without declarations such as `<!DOCTYPE html>`, because expanding a DTD's entities can take exponential time and memory. Use `--allow-dtd` only for files you trust:
 
 ```nu
 '<!DOCTYPE note [<!ENTITY who "Nu">]><note>Hi &who;</note>' | from xml
@@ -434,7 +454,7 @@ The input is one record, the root element. A list fails, and so does a record wi
 
 ## HTML
 
-[`to html`](/commands/docs/to_html.md) writes its input as an HTML page. A table, or a record, becomes an HTML `table` with a header row, a list of other values becomes a numbered `ol` list, and a single value becomes text. `--partial` (`-p`) leaves out the `html` and `body` tags and wraps the result in a `div` instead, for pasting into a page of your own:
+[`to html`](/commands/docs/to_html.md) writes its input as an HTML page. A table or a record becomes an HTML `table` with a header row, a list of other values becomes a numbered `ol` list, and a single value becomes text. `--partial` (`-p`) leaves out the `html` and `body` tags and wraps the result in a `div` instead, for pasting into a page of your own:
 
 ```nu
 [[name size]; ["a.txt" 1kb] ["<b>.txt" 22kb]] | to html --partial
@@ -443,7 +463,7 @@ The input is one record, the root element. A list fails, and so does a record wi
 
 Each cell holds the value as the terminal shows it, so a nested list is written as `[list 2 items]` and not as a nested table. Line breaks become `br` tags, and binary data becomes a hex dump in a `pre` block. The dump carries the terminal's color codes, which `--no-color` removes. `to html` escapes `<`, `>`, `&`, quotes, and `/` in the values. `--raw` (`-r`) writes them unescaped, which is how you put HTML you already have, such as the output of `to xml`, into the page.
 
-The page is black text on white. `--dark` (`-d`) swaps the two. `--theme` (`-t`) takes the colors from one of the 228 terminal color schemes that Nushell includes, named without regard to case. The page uses the scheme's `white` and `black` colors, not its `background` and `foreground`, so a dark scheme gives a light page unless you add `--dark`:
+The page is black text on white. `--dark` (`-d`) swaps the two. `--theme` (`-t`) takes the colors from one of the 228 terminal color schemes that Nushell includes, and the name ignores case. The page uses the scheme's `white` and `black` colors, not its `background` and `foreground`, so a dark scheme gives a light page unless you add `--dark`:
 
 ```nu
 "Total: 3" | to html --partial --theme dracula

@@ -73,7 +73,7 @@ The end can be negative too, and a range that runs past the end of the input sto
 # => ╰───┴───╯
 ```
 
-[`drop nth`](/commands/docs/drop_nth.md) also takes a range as its first argument, open-ended or not, followed by more indices. Indices past the end are ignored. A range as _input_ (such as `0..5 | drop nth 1`) comes back as a list:
+[`drop nth`](/commands/docs/drop_nth.md) also takes a range as its first argument, open-ended or not, followed by more indices. Indices past the end are ignored. A range as _input_, such as `0..5 | drop nth 1`, comes back as a list:
 
 ```nu
 [a b c d e f] | drop nth 1..3 5
@@ -130,7 +130,7 @@ The same five commands work on binary data: a `binary` value, or a byte stream s
 
 ### Taking or skipping by a condition
 
-`take while` and `skip while` continue while the condition is exactly `true`. `take until` and `skip until` continue while it is exactly `false`. Any other result, including `null` or a value that isn't a `bool`, ends the run. This catches closures built on `if` without an `else`, which return `null` on the other branch:
+`take while` and `skip while` continue while the condition is exactly `true`. `take until` and `skip until` continue while it is exactly `false`. Any other result, including `null` or a value that isn't a `bool`, ends the run. A closure built on `if` without an `else` returns `null` on the other branch, so the run ends there:
 
 ```nu
 [1 2 3 4] | take until {|x| if $x > 2 { true } }
@@ -236,9 +236,9 @@ $t | select ...$cols | first 1
 # => [[1, 3], [2], [4]]
 ```
 
-As the last two lines show, `values` skips the rows that lack a column instead of filling in `null`. A position in one of its lists then no longer matches a row number. When the rows can have gaps, use `get a?` for each column, which keeps a `null` for every missing cell.
+`values` skips the rows that lack a column instead of filling in `null`, so a position in one of its lists no longer matches a row number. When the rows can have gaps, use `get a?` for each column, which keeps a `null` for every missing cell.
 
-Both commands accept only a record or a table. A list that mixes records with other values is an `only_supports_this_input_type` error, and empty input gives an empty list. A common use of `columns` is counting the fields of a record, with `columns | length`. On a [SQLite database](#tables-from-a-sqlite-file) opened with `open`, `columns` lists the table names, and `values` returns the tables themselves, read in full.
+Both commands accept only a record or a table. A list that mixes records with other values is an `only_supports_this_input_type` error, and empty input gives an empty list. On a [SQLite database](#tables-from-a-sqlite-file) opened with `open`, `columns` lists the table names, and `values` returns the tables themselves, read in full.
 
 ## Cell Paths
 
@@ -307,7 +307,7 @@ When you [`open`](/commands/docs/open.md) a SQLite database and `get` one of its
 | `length`                                 | `COUNT(*)`                         |
 | `uniq` with no flags                     | `SELECT DISTINCT`                  |
 
-`select` returns another query, so it can be followed by one of the others. The rest run the query and return an ordinary table:
+`select` returns another query, so it can be followed by one of the others. The others run the query and return an ordinary table, or a number for `length`:
 
 ```nu
 [[name age]; [Alice 30] [Bob 25] [Carol 41] [Bob 25]] | into sqlite people.db --table-name people

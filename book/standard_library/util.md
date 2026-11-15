@@ -62,7 +62,7 @@ After `use std/util` without the `*`, the constant is `$util.null_device`. After
 
 ## `structure`
 
-`structure` takes a command line as a string and splits it into a table of tokens, with their `text`, `kind` and `span`. It is meant for custom completers that receive the whole command line. See [Context Aware Custom Completions](../custom_completions.md#context-aware-custom-completions).
+`structure` takes a command line as a string argument and splits it into a table of tokens, with their `text`, `kind` and `span`. It is meant for custom completers that receive the whole command line. See [Context Aware Custom Completions](../custom_completions.md#context-aware-custom-completions).
 
 ## `ellie`
 

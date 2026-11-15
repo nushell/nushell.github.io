@@ -281,7 +281,7 @@ use git-data "git status"
 
 There are a few limitations to the current `extern` syntax. In Nushell, flags and positional arguments are very flexible—flags can precede positional arguments, flags can be mixed into positional arguments, and flags can follow positional arguments. Many external commands are not this flexible. There is not yet a way to require a particular ordering of flags and positional arguments to the style required by the external.
 
-The second limitation is that some externals require flags to be passed using `=` to separate the flag and the value. In Nushell, the `=` is a convenient optional syntax and there's currently no way to require its use. A declared flag written with `=` even reaches the command as two arguments (see [How arguments reach the command](#how-arguments-reach-the-command)), so leave such a flag out of the signature to pass `--flag=value` as one argument.
+The second limitation is that some externals require flags to be passed using `=` to separate the flag and the value. In Nushell, the `=` is a convenient optional syntax and there's currently no way to require its use. A declared flag written with `=` even reaches the command as two arguments, so leave such a flag out of the signature to pass `--flag=value` as one argument. [How arguments reach the command](#how-arguments-reach-the-command) shows the conversion.
 
 In addition, externals called via the caret sigil (e.g., `^ssh`) are not recognized by `extern`.
 

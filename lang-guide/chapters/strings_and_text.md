@@ -108,7 +108,7 @@ Recognized Nushell escapes:
 
 A double-quoted string can span several lines. The line breaks are part of the string, and escapes work on every line.
 
-If the word starts with `"` and also ends with `"`, double quotes inside it are kept without escapes, as long as there's no whitespace outside them: `"[{a: "b"}]"` is the text `[{a: "b"}]`. See [Quotes inside a quoted word](/book/working_with_strings.md#quotes-inside-a-quoted-word) in the Book.
+If the word starts with `"` and also ends with `"`, double quotes inside it are kept without escapes, as long as there's no whitespace outside them, so `"[{a: "b"}]"` is the text `[{a: "b"}]`. See [Quotes inside a quoted word](/book/working_with_strings.md#quotes-inside-a-quoted-word) in the Book.
 
 #### Escape errors
 
@@ -160,7 +160,7 @@ A backtick-quoted string is a bare word that can contain spaces. It behaves like
 - It has no escapes. A backslash is kept as written.
 - Passed to a parameter of type `path`, a leading `~` expands to the home directory and `...` expands to `../..`. Single- and double-quoted strings are passed as written.
 - Passed to a parameter that takes a glob, such as for `ls`, it's a glob pattern, so `` ls `my dir/*.txt` `` lists the matching files.
-- In command position it's a command name, or a directory to change to. Typing `` `Program Files` `` on its own at `C:\` changes to that directory.
+- In command position it's a command name. A path such as `` `./my dir` ``, entered on its own at the prompt, changes to that directory.
 
 Unlike a bare word, it isn't interpolated. A bare word such as `file($n).txt` evaluates `($n)`, but `` `file($n).txt` `` is kept as written, and there is no `` $`...` `` form:
 
@@ -170,13 +170,13 @@ echo `a\nb file($n).txt`
 # => a\nb file($n).txt
 ```
 
-It can span several lines. It can't contain an unmatched backtick, but it can hold both kinds of quotes: `` `it's "quoted"` `` is the text `it's "quoted"`. When Tab completion inserts a path that contains a space or another special character, it wraps the path in backticks. A path that contains glob characters gets single or double quotes instead, so it isn't expanded as a glob.
+It can span several lines and can't contain an unmatched backtick. When Tab completion inserts a path that contains a space or another special character, it wraps the path in backticks. A path that contains glob characters gets single or double quotes instead, so it isn't expanded as a glob.
 
 See [Backtick-quoted Strings](/book/working_with_strings.md#backtick-quoted-strings) in the Book.
 
 ## Nested Quotes
 
-Sometimes you need to nest quotes. Put double quotes inside a single-quoted string, or single quotes inside a double-quoted one. A backtick string can hold both kinds, as long as the text has no backticks: `` `it's "quoted"` ``. A raw string such as `r#'it's "quoted"'#` can hold anything except its own closing `'#`.
+Sometimes you need to nest quotes. Put double quotes inside a single-quoted string, or single quotes inside a double-quoted one. A backtick string can hold both kinds, as in `` `it's "quoted"` ``, which is the text `it's "quoted"`. A raw string such as `r#'it's "quoted"'#` can hold anything except its own closing `'#`.
 
 ### Example:
 
@@ -222,7 +222,7 @@ A bare word that is a valid literal of another type gets that type instead:
 | `0x[ff]`                            | `binary`    |
 | `$.name`                            | `cell-path` |
 
-A word that only starts like one of these is a string: `2kbx`, `trueX` and `1..3x` are strings. The table applies where any type is accepted, such as list items, record values and command parameters without a type. A parameter declared as `string` takes `42`, `2kb` or `2024-01-02` as text, but rejects `true` and `null` with "expected string". An external command gets every bare word as written. In a record key, every bare word is a string (see [How record keys are written](/book/navigating_structured_data.md#how-record-keys-are-written)).
+A word that only starts like one of these is a string: `2kbx`, `trueX` and `1..3x` are strings. The table applies where any type is accepted, such as list items, record values and command parameters without a type. A parameter declared as `string` takes `42`, `2kb` or `2024-01-02` as text, but rejects `true` and `null` with "expected string". An external command gets every bare word as written. In a record key, every bare word is a string. See [How record keys are written](/book/navigating_structured_data.md#how-record-keys-are-written).
 
 A bare word ends at whitespace (a space, a tab or a newline), at `|`, and at `;`. Inside a list, a `,` also ends it, and inside a record so do `,` and the `:` after a key. A closing `)`, `]` or `}` ends it when it closes a bracket opened before the word. Other characters are part of the word, so `a,b`, `x=y` and `abc#def` are each one word in a command argument. A `#` starts a comment only after whitespace.
 

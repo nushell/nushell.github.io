@@ -17,7 +17,7 @@ open editors/vscode/package.json | get version
 # => 1.0.0
 ```
 
-Nu currently supports the following formats. The [`from`](/commands/docs/from.md) subcommands parse text in a format into structured data, and `open` runs them for you. The [`to`](/commands/docs/to.md) subcommands go the other way and serialize structured data into text in a format (binary for MessagePack), and [`save`](#saving-data) runs them for you.
+Nu currently supports the following formats. The [`from`](/commands/docs/from.md) subcommands parse text in a format into structured data, and `open` runs them for you. The [`to`](/commands/docs/to.md) subcommands go the other way, turning structured data into text, or into binary for MessagePack, and [`save`](#saving-data) runs them for you.
 
 | Format                                                                | Read with                                                                                            | Write with                                                                                   |
 | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
@@ -103,7 +103,7 @@ When no path is given, `open` takes it from its input. The input has to be a sin
 open ...(ls *.json | get name)
 ```
 
-`open` can't open a directory. Passing one fails with an `Is a directory` error; use [`ls`](/commands/docs/ls.md) to see what's inside.
+`open` can't open a directory. It fails with an `Is a directory` error. Use [`ls`](/commands/docs/ls.md) to see what's inside.
 
 ## NUON
 
@@ -198,7 +198,7 @@ The other flags change the layout:
 # =>    ╰────
 ```
 
-The text has to hold one value. Two values in a row, such as `{a: 1} {b: 2}`, fail with `error when parsing nuon text`, and so does a table row with too few cells. A record that names a field twice fails with `Record field or table column used twice`, and a file size or duration too large for 64 bits with `filesize too large` or `duration too large`. Empty text gives `null`.
+The text has to hold one value. Two values in a row, such as `{a: 1} {b: 2}`, fail with `error when parsing nuon text`, and so does a table row with too few cells. A record that names a field twice fails with `Record field or table column used twice`. That error also prints the environment variables of the `nu` process, which can include secrets, so check it before you share it. A file size or duration too large for 64 bits fails with `filesize too large` or `duration too large`. Empty text gives `null`.
 
 ## Notes on specific formats
 
@@ -220,7 +220,7 @@ open settings.json
 # => ╰─────────┴────────────────╯
 ```
 
-Bare words are read as strings too, so `"not json" | from json` returns the string `not json` instead of failing. `--strict` (`-s`) follows the JSON specification exactly, which makes it the flag to use when you want to check that text is valid JSON:
+Bare words are read as strings too, so `"not json" | from json` returns the string `not json` instead of failing. `--strict` (`-s`) follows the JSON specification exactly. Use it to check that text is valid JSON:
 
 ```nu
 open --raw settings.json | from json --strict
@@ -265,7 +265,7 @@ open app.log | from json --objects
 
 With `--objects`, a value can't span lines, and a line that fails to parse is an error when the list reaches it. The list is a stream, read line by line as later commands ask for items, so `from json --objects | first 10` stops reading after ten values. `--objects` takes text, such as a string or the output of an external command, and fails on binary data. The [`std/formats`](./standard_library/formats.md) module wraps it as `from jsonl` and `from ndjson`, so that `open` parses `.jsonl` and `.ndjson` files.
 
-[`to json`](/commands/docs/to_json.md) writes JSON, indented with two spaces. `--indent` (`-i`) sets the number of spaces, and `--tabs` (`-t`) indents with that many tabs instead. `--raw` (`-r`) leaves out all the whitespace, which suits a log line or a request body. `--raw` wins over the other two, and `--tabs` wins over `--indent`. The text never ends with a newline.
+[`to json`](/commands/docs/to_json.md) writes JSON, indented with two spaces. `--indent` (`-i`) sets the number of spaces, and `--tabs` (`-t`) indents with that many tabs instead. `--raw` (`-r`) leaves out all the whitespace. `--raw` wins over the other two, and `--tabs` wins over `--indent`. The text never ends with a newline.
 
 ```nu
 {name: nu, tags: [a b]} | to json --raw
@@ -298,7 +298,7 @@ JSON has fewer types than Nushell, so `to json` writes some values as plain numb
 # => {"size":1000,"wait":2000000000,"when":"2025-04-18T16:00:00+00:00","data":[1,255]}
 ```
 
-A closure fails with `closures are currently not deserializable`. `--serialize` (`-s`) writes its source code as a string instead, as in `{"inc":"{|x| $x + 1}"}`, and `from json` reads that back as a string. To keep every Nushell type, use [NUON](#nuon).
+A closure fails with `closures are currently not deserializable`. `--serialize` (`-s`) writes its source code as a string instead, as in `{"inc":"{|x| $x + 1}"}`, and `from json` reads that back as a string. [NUON](#nuon) keeps all of these types except globs and closures.
 
 ### Markdown
 
@@ -382,7 +382,7 @@ $tree.1.children.0.attrs.value
 # => My Project
 ```
 
-[`to md`](/commands/docs/to_md.md) goes the other way, but it doesn't rebuild a document from the rows `from md` returns. It writes a table as a Markdown table, which is handy for pasting results into a README or an issue. `--pretty` (`-p`) pads the columns so they line up in the source, and `--center` (`-c`) takes a list of columns to center:
+[`to md`](/commands/docs/to_md.md) goes the other way, but it doesn't rebuild a document from the rows `from md` returns. It writes a table as a Markdown table. `--pretty` (`-p`) pads the columns so they line up in the source, and `--center` (`-c`) takes a list of columns to center:
 
 ```nu
 [[name size]; [a.txt 1kb] [notes.md 22kb]] | to md
@@ -409,7 +409,7 @@ Each cell holds the value as text. A nested list or record is written in NUON-li
 
 A list of plain values becomes a bulleted list. `--list ordered` (`-l`) numbers the items, `--list none` writes one item per line without a marker, and `--list unordered` is the default. Any other style is an `Invalid value` error. A single plain value, such as a string, becomes a list of one item, `* done`.
 
-A list of records is one table, even if some records stand for a heading. `--per-element` (`-e`) writes each item of the list as its own element instead. A record with a single `h1`, `h2`, `h3`, or `blockquote` field (in any case) becomes that heading or a quote, consecutive records with the same columns become one table, and other values become list items:
+A list of records is one table, even if some records stand for a heading. `--per-element` (`-e`) writes each item of the list as its own element instead. A record with a single `h1`, `h2`, `h3`, or `blockquote` field, in any case, becomes that heading or a quote, consecutive records with the same columns become one table, and other values become list items:
 
 ```nu
 [{h1: Report} {blockquote: "Made with Nushell"} {h2: Files} {name: a.txt, size: 1kb} {name: b.txt, size: 2kb} {h2: Tags} cli shell] | to md --per-element
@@ -486,7 +486,7 @@ $doc | from kdl --ignore-types | get 0.props
 # => ╰──────┴──────╯
 ```
 
-`--format jik` fails on a document with more than one top-level node, and on an annotation it doesn't know (add `--ignore-types` to read those as plain values).
+`--format jik` fails on a document with more than one top-level node, and on an annotation it doesn't know. Add `--ignore-types` to read those as plain values.
 
 `to kdl` does write nodes when its input came from `from kdl`. `from kdl` records the format and KDL version in the [pipeline metadata](metadata.md), and `to kdl` writes the rows back as nodes in that version, so you can change a document and save it:
 
@@ -495,7 +495,9 @@ $doc | from kdl --ignore-types | get 0.props
 # => package name=nu version="0.117.0"
 ```
 
-With `--format nodes` or `--format jik` you choose the format yourself, and with `--spec 1` or `--spec 2` the version. `--format nodes` needs rows with `name`, `args`, `props`, and `children` columns, or a single record with them. A row can also have a `type` column, which is written as the node's annotation, so `{name: n, args: [1], props: {}, children: [], type: t}` becomes `(t)n 1`. A missing column, any other column, or data that isn't node rows fails with an `Unsupported input` error that lists the columns a row may have. Any `--format` other than `nodes` or `jik` fails with `KDL --format must be 'nodes' or 'jik'`. The values in `args` and `props` have to be plain values, and a nested list or record there fails with `nested list/record is not a KDL literal`. The one exception is a record with `value` and `type` keys, such as `{value: 1, type: u8}`, which is written as an annotated value, `(u8)1`. Both formats write dates, durations, file sizes, binary data, ranges, globs, and cell paths with the type annotations that `from kdl` reads back. `--spec 1` writes the KDL 1 keywords `true`, `false`, and `null` instead of `#true`, `#false`, and `#null`. Any other version fails with `KDL --spec must be 1 or 2`.
+With `--format nodes` or `--format jik` you choose the format yourself, and with `--spec 1` or `--spec 2` the version. `--format nodes` needs rows with `name`, `args`, `props`, and `children` columns, or a single record with them. A row can also have a `type` column, which is written as the node's annotation, so `{name: n, args: [1], props: {}, children: [], type: t}` becomes `(t)n 1`. A missing column, any other column, or data that isn't node rows fails with an `Unsupported input` error that lists the columns a row may have. Any `--format` other than `nodes` or `jik` fails with `KDL --format must be 'nodes' or 'jik'`.
+
+The values in `args` and `props` have to be plain values, and a nested list or record there fails with `nested list/record is not a KDL literal`. The one exception is a record with `value` and `type` keys, such as `{value: 1, type: u8}`, which is written as an annotated value, `(u8)1`. Both formats write dates, durations, file sizes, binary data, ranges, globs, and cell paths with the type annotations that `from kdl` reads back. `--spec 1` writes the KDL 1 keywords `true`, `false`, and `null` instead of `#true`, `#false`, and `#null`. Any other version fails with `KDL --spec must be 1 or 2`.
 
 A closure can't be written as KDL and read back, so `to kdl` fails on one. `--non-roundtrip 'null'` writes `#null` in its place, and `--non-roundtrip lossy` writes its source code as a string, which is what `--serialize` (`-s`) does too. Put `'null'` in quotes. The flag takes a string, and a bare `null` is the null value, which fails with `expected string`. Another word fails with ``expected `error`, `null` or `lossy` ``, and `--serialize` together with `--non-roundtrip 'null'` is an `Incompatible parameters` error. The flag treats error values and plugin custom values the same way as closures.
 
@@ -513,7 +515,7 @@ alarm = 07:32:00' | from toml | to nuon
 
 Text that isn't valid TOML fails with a `Can't convert to structured toml data` error. Its help text shows the line and column where parsing stopped and what the parser expected there.
 
-[`to toml`](/commands/docs/to_toml.md) takes only a record, because a TOML document is a table of keys. A list or a table fails with `Command does not support table<...> input`. Put it in a record, such as `{bins: $table} | to toml`, and it becomes an array of tables. A nested record becomes a `[section]`:
+[`to toml`](/commands/docs/to_toml.md) takes only a record, because a TOML document is a table of keys. A list or a table is an error. Nushell reports `Command does not support table<...> input`, or `list<...>`, when it knows the input type before the pipeline runs, and `Input type not supported` when it finds out at run time. Put it in a record, such as `{bins: $table} | to toml`, and it becomes an array of tables. A nested record becomes a `[section]`:
 
 ```nu
 {name: demo, released: 2024-01-02T03:04:05Z, tags: [cli shell], deps: {serde: "1.0"}, bins: [[name path]; [a src/a.rs]]} | to toml
@@ -543,7 +545,7 @@ TOML has no null and no type for durations or ranges, and `to toml` writes such 
 
 A closure is written as `closure_` and a number, or as its source code with `--serialize` (`-s`).
 
-When the record came from opening a `.toml` file, `to toml` and `save` keep that file's comments and layout and change only the values that differ. The [pipeline metadata](metadata.md#data-source) remembers which file the data came from. `--serialize` turns this off:
+When the record came from opening a `.toml` file, `to toml` and `save` keep that file's comments and layout and change only the values that differ. The [pipeline metadata](metadata.md#data-source) remembers which file the data came from, and `--serialize` turns this off. Here only the version changes:
 
 ```nu
 open --raw demo.toml
@@ -789,7 +791,7 @@ open foo.db | get some_table
 # => ╰───┴───────┴─────╯
 ```
 
-To keep a database in memory instead of in a file, use the `stor` commands described in [Working with SQLite](./working_with_sqlite.md). A table you `get` this way isn't read right away. Commands such as `select`, `first`, and `length` become part of an SQL query that SQLite runs, as [Tables from a SQLite file](/lang-guide/chapters/filters/selecting_data.md#tables-from-a-sqlite-file) explains.
+A table you `get` from a database isn't read right away. Commands such as `select`, `first`, and `length` become part of an SQL query that SQLite runs, as [Tables from a SQLite file](/lang-guide/chapters/filters/selecting_data.md#tables-from-a-sqlite-file) explains. To keep a database in memory instead of in a file, use the `stor` commands described in [Working with SQLite](./working_with_sqlite.md).
 
 Or run any SQL query you like:
 
@@ -829,7 +831,7 @@ open foo.db | query db "select * from some_table where age > ?" --params [26]
 # => ╰───┴───────┴─────╯
 ```
 
-The input has to be a database: a file from `open`, or the in-memory database that [`stor open`](/commands/docs/stor_open.md) returns. Anything else fails with a `Can't convert to database` error.
+`query db` works the same way on the in-memory database that [`stor open`](/commands/docs/stor_open.md) returns, and fails on input that isn't a database, as [Working with SQLite](./working_with_sqlite.md#database-files-and-the-in-memory-database) explains.
 
 `into sqlite` takes a record as well as a table, and a record becomes one row. Without `--table-name`, the table is named `main`. If the database file already exists, `into sqlite` adds to it, and if the table already exists, the new rows are appended to it. The columns of an existing table don't change, so a row with a column the table lacks fails with a `has no column named` error.
 

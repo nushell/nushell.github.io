@@ -192,7 +192,7 @@ The result is a string, so it no longer sorts or adds up as a duration. Keep the
 - `sleep`
 - `timeit`
 - [`into duration`](#converting-to-a-duration), [`format duration`](#formatting-durations)
-- `math` subcommands such as `math sum`, `math max` and `math stddev` (see [Working with Numbers](/book/working_with_numbers.md#what-each-command-accepts))
+- `math` subcommands such as `math sum`, `math max` and `math stddev`, described in [Working with Numbers](/book/working_with_numbers.md#what-each-command-accepts)
 - `sys host` (the `uptime` column)
 
 ## Operators that can be used with `duration`

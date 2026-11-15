@@ -1,6 +1,6 @@
 # Working with Binary Data
 
-Images, archives, checksums and some program output are raw bytes rather than text. Nushell holds bytes in the `binary` type. This page covers where binary values come from, how Nushell shows them, and the commands that work on them: the [`bytes`](/commands/docs/bytes.md) commands search and edit bytes, the [`bits`](/commands/docs/bits.md) commands do bitwise math, and the [`hash`](/commands/docs/hash.md) commands compute checksums. The literal syntax, the bytes that [`into binary`](/commands/docs/into_binary.md) produces for each type, and the operators that accept binary values are in the [Language Guide entry for binary](/lang-guide/chapters/types/basic_types/binary.md).
+Images, archives, checksums and some program output are raw bytes rather than text. Nushell holds bytes in the `binary` type. The [`bytes`](/commands/docs/bytes.md) commands search and edit bytes, the [`bits`](/commands/docs/bits.md) commands do bitwise math, and the [`hash`](/commands/docs/hash.md) commands compute checksums. The literal syntax, the bytes that [`into binary`](/commands/docs/into_binary.md) produces for each type, and the operators that accept binary values are in the [Language Guide entry for binary](/lang-guide/chapters/types/basic_types/binary.md).
 
 ## Getting binary data
 
@@ -8,7 +8,7 @@ A binary literal lists the bytes in hex, octal or binary digits, such as `0x[89 
 
 ### Files and external commands
 
-[`open`](/commands/docs/open.md) reads a file whose extension matches no `from` command as raw bytes, and `open --raw` does the same for any file (see [Opening in raw mode](./loading_data.md#opening-in-raw-mode)). The output of an external command arrives the same way. Either way, the pipeline carries a byte stream, not yet a value. When Nushell collects the stream, it becomes a string if the bytes are valid UTF-8, and a binary value if they aren't. In the examples below, `notes.txt` holds the six bytes `hello` and a newline, and `logo.png` is a PNG image:
+[`open`](/commands/docs/open.md) reads a file whose extension matches no `from` command as raw bytes, and `open --raw` does the same for any file. See [Opening in raw mode](./loading_data.md#opening-in-raw-mode). The output of an external command arrives the same way. Either way, the pipeline carries a byte stream, not yet a value. When Nushell collects the stream, it becomes a string if the bytes are valid UTF-8, and a binary value if they aren't. In the examples below, `notes.txt` holds the six bytes `hello` and a newline, and `logo.png` is a PNG image:
 
 ```nu
 [(open --raw notes.txt | collect | describe) (open --raw logo.png | collect | describe)] | to nuon
@@ -34,7 +34,7 @@ open --raw notes.txt | into binary | bytes length
 # => 0x[6869]
 ```
 
-[`complete`](/commands/docs/complete.md) follows the same rule for an external command's output. Its `stdout` field is a string when the output is valid UTF-8 and binary when it isn't (see [Using the `complete` command](./stdout_stderr_exit_codes.md#using-the-complete-command)).
+[`complete`](/commands/docs/complete.md) follows the same rule for an external command's output. Its `stdout` field is a string when the output is valid UTF-8 and binary when it isn't, as described in [Using the `complete` command](./stdout_stderr_exit_codes.md#using-the-complete-command).
 
 ### Converting other values
 
@@ -49,7 +49,7 @@ open --raw notes.txt | into binary | bytes length
 # => 0x[4869]
 ```
 
-[`bytes build`](/commands/docs/bytes_build.md) assembles a value from byte numbers and other binary values (see [Building and joining](#building-and-joining)).
+[`bytes build`](/commands/docs/bytes_build.md) assembles a value from byte numbers and other binary values. See [Building and joining](#building-and-joining).
 
 ## How binary values look
 
@@ -214,9 +214,9 @@ On a byte stream, `bytes at` reads only up to the end of the range. A stream's l
 
 ## The `bits` commands
 
-The `bits` commands do bitwise math on an int, a binary value, or a list of either. The [`bit-and`, `bit-or`, `bit-xor`, `bit-shl` and `bit-shr` operators](./operators.md) do some of the same for ints. The commands add binary input, negation, rotation, and word sizes other than 64 bits. They also handle overflow differently: `1 bit-shl 63` is `-9223372036854775808`, while `1 | bits shl 63` is an error (see [Shifts](#shifts)).
+The `bits` commands do bitwise math on an int, a binary value, or a list of either. The [`bit-and`, `bit-or`, `bit-xor`, `bit-shl` and `bit-shr` operators](./operators.md) do some of the same for ints. The commands add binary input, negation, rotation, and word sizes other than 64 bits. They also handle overflow differently: `1 bit-shl 63` is `-9223372036854775808`, while `1 | bits shl 63` is an error, as described under [Shifts](#shifts).
 
-Binary data that comes from a file or an external command has to be binary, not text, before it reaches a `bits` command. Text needs `into binary` first, as described under [Streams](#streams). An empty list gives an empty list, while no input at all is a "Pipeline empty" error and `null` is rejected.
+Text from a file or an external command needs `into binary` before it reaches a `bits` command, as described under [Streams](#streams). An empty list gives an empty list, while no input at all is a "Pipeline empty" error and `null` is rejected.
 
 ### And, or, and xor
 
@@ -237,7 +237,7 @@ Binary data that comes from a file or an external command has to be binary, not 
 # =>    ╰────
 ```
 
-Ints are combined as 64-bit two's-complement numbers, so `-8 | bits and 0xff` is `248`. Binary values are combined byte by byte, and the result is as long as the longer one. The shorter one is padded with zero bytes, and `--endian` (`-e`) picks the side. `big` pads on the left, which lines up the last bytes, and `little` pads on the right, which lines up the first bytes. Any other value is an error. The default, `native`, is the byte order of the machine running Nushell (little-endian on x86-64 and most ARM systems). Values of the same length, and ints, don't depend on it, but pass `--endian` when the lengths differ:
+Ints are combined as 64-bit two's-complement numbers, so `-8 | bits and 0xff` is `248`. Binary values are combined byte by byte, and the result is as long as the longer one. The shorter one is padded with zero bytes, and `--endian` (`-e`) picks the side. `big` pads on the left, which lines up the last bytes, and `little` pads on the right, which lines up the first bytes. Any other value is an error. The default, `native`, is the byte order of the machine running Nushell. Values of the same length, and ints, don't depend on it, but pass `--endian` when the lengths differ:
 
 ```nu
 0x[aa bb cc] | bits xor 0x[ff] --endian big | to nuon
@@ -351,7 +351,7 @@ A binary value shifts as one number and keeps its length. The shift amount can b
 # => 3406877694691ddd1dfb0aca54681407
 ```
 
-Every byte counts, including a trailing newline, and most external commands end their output with one. Piped straight into `hash`, the newline is hashed. Assigned with `let`, the output loses its final newline (see [Working with external commands](./pipelines.md#working-with-external-commands)):
+Every byte counts, including a trailing newline, and most external commands end their output with one. Piped straight into `hash`, the newline is hashed. Assigned with `let`, the output loses its final newline, as [Working with external commands](./pipelines.md#working-with-external-commands) explains:
 
 ```nu
 ^echo abc | hash md5

@@ -51,7 +51,7 @@ The detailed record has more fields for some types. A record gets `columns`, whi
 # => ╰───────────────┴───────────────╯
 ```
 
-Streams have their own shape. A list stream has `type` `stream`, `origin` `nushell`, a `subtype` that describes the collected list, and `metadata`. A byte stream has `type` `bytestream` and an `origin` of `file`, `external` (an external command's output) or `unknown`. `metadata` shows the stream's data source, or is empty when there is none.
+Streams have their own shape. A list stream has `type` `stream`, `origin` `nushell`, a `subtype` that describes the collected list, and `metadata`. A byte stream has `type` `bytestream` and an `origin` of `file`, `external` for an external command's output, or `unknown`. `metadata` shows the stream's data source, or is empty when there is none.
 
 `--no-collect` describes a stream without reading it. A list stream is then just `stream`, and with `--detailed` as well, its `subtype` is `any`. A byte stream is described as `byte stream`, `string (stream)` or `binary (stream)` with or without the flag:
 
@@ -86,7 +86,7 @@ Streams have their own shape. A list stream has `type` `stream`, `origin` `nushe
 # => }
 ```
 
-`--raw-value` (`-v`) shows the string Nushell makes from a value when it needs one, quoted, with escapes such as `\t` visible. A filesize becomes a number of bytes and a duration a number of nanoseconds. Binary data has no string form, so it gives an error:
+`--raw-value` (`-v`) shows the string Nushell makes from a value when it needs one, quoted, with escapes such as `\t` visible. A filesize becomes a number of bytes and a duration a number of nanoseconds. Binary data becomes its text when it is valid UTF-8. Other binary data and closures have no string form, so they give an error:
 
 ```nu
 [1kb 2sec "a\tb"] | debug --raw-value
@@ -108,7 +108,7 @@ debug env | select --optional COUNT ITEMS | to nuon
 # => {COUNT: "3", ITEMS: null}
 ```
 
-`debug info` returns a record about the running `nu` process: `thread_id`, `pid` and `ppid` (the parent process), a `system` record with `total_memory`, `free_memory`, `used_memory` and `available_memory`, and a `process` record with `memory`, `virtual_memory`, `status`, `root`, `cwd`, `exe_path`, `command` (the command line), `name` and `environment` (the variables the process was started with).
+`debug info` returns a record about the running `nu` process. It has `thread_id`, `pid`, the parent's process ID `ppid`, a `system` record with `total_memory`, `free_memory`, `used_memory` and `available_memory`, and a `process` record. The `process` record has `memory`, `virtual_memory`, `status`, `root`, `cwd`, `exe_path`, `command`, `name` and `environment`. `command` is the command line, and `environment` holds the variables the process was started with.
 
 ## metadata
 
@@ -221,8 +221,8 @@ scope externs | reject decl_id
 `scope engine-stats` describes the whole engine, not the current scope. It returns a record with these fields:
 
 - `source_bytes`: how many bytes of Nushell source the engine has read in this session, counting what it parsed at startup.
-- `num_vars`, `num_decls`, `num_blocks` and `num_modules`: how many variables, declarations (commands, aliases and externs, built-in ones included), blocks and modules the engine holds. These numbers never go down. A definition that has been hidden, or that belonged to a block that has ended, still counts, so they show how much a long session has accumulated rather than what you can use.
-- `num_env_vars`: the number of environment variables, added up over all overlays.
+- `num_vars`, `num_decls`, `num_blocks` and `num_modules`: how many variables, declarations, blocks and modules the engine holds. Declarations are commands, aliases and externs, built-in ones included. These numbers never go down. A definition that has been hidden, or that belonged to a block that has ended, still counts, so they show how much a long session has accumulated rather than what you can use.
+- `num_env_vars`: the number of environment variables, added up over all overlays. It counts them as they were when the current script or command line started, so variables set since then aren't included yet.
 - `last_result`: a record about the [`$ans`](/book/special_variables.md#ans) variable. `size_limit` is `$env.config.max_last_result_size`, `memory_size` is the size of the result `$ans` holds now, `truncated` is `true` when that result was larger than the limit and was cut short, and `has_metadata` says whether the result kept its [metadata](/book/metadata.md).
 
 With the limit set to `1MB`, after `[1 2 3]` has been displayed:

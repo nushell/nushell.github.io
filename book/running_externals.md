@@ -35,7 +35,7 @@ lsx
 # =>   help: Did you mean `ls`?
 ```
 
-Instead of a similar name, the help line can name a command that matches by search term (`sqrt` suggests `math sqrt`), point to a module that has a command by that name and isn't imported yet, or say that a file by that name in the current directory isn't executable. A [`command_not_found` hook](./hooks.md) can replace it with a message of your own.
+Instead of a similar name, the help line can name a command that has the name as one of its words or search terms (`sqrt` suggests `math sqrt`), point to a module that has a command by that name and isn't imported yet, or say that a file by that name in the current directory isn't executable. A [`command_not_found` hook](./hooks.md) can replace it with a message of your own.
 
 ## Running a Built-in Command with `%`
 
@@ -64,7 +64,7 @@ A `%` call only resolves to built-in commands. It still finds a built-in that ha
 # =>   help: remove `%` to use normal resolution, or use `^` to run an external command explicitly
 ```
 
-Like `^`, the `%` sigil also accepts a command name stored in a variable, such as `%$cmd`. The [completion menu](./line_editor.md#completion-menu) offers both forms: when an executable has the same name as a built-in command, it lists `^name` and `%name` so you can pick one.
+Like `^`, the `%` sigil also accepts a command name stored in a variable, such as `%$cmd`. When an executable has the same name as a built-in command, the [completion menu](./line_editor.md#completion-menu) lists both `^name` and `%name` so you can pick one.
 
 With `%$cmd` or `%($cmd)`, the parser can't tell which built-in you mean, so it turns the call into [`run-internal`](/commands/docs/run-internal.md) with the name as the first argument. `run-internal` looks the name up when the line runs, and checks the arguments against that command's signature at that point:
 
@@ -74,9 +74,9 @@ let cmd = "str length"
 # => 5
 ```
 
-`%$cmd --help` prints the built-in's help, as it does for a direct call. Moving the lookup to run time also moves some errors from parse time to run time. An unknown flag, such as `%$cmd --nope`, is reported only when the call runs, after the commands before it on the line have run. A name that isn't a built-in, including the name of one of your own commands, is a `nu::shell::command_not_found` error. The value must be a single string. Unlike `^$cmd`, a list doesn't add arguments, and `%$cmd` with a list is a `nu::shell::cant_convert` error.
+`%$cmd --help` prints the built-in's help, as it does for a direct call. Because the lookup happens at run time, so do some errors. Nushell reports an unknown flag, such as `%$cmd --nope`, only when the call runs, after the commands before it on the line have run. A name that isn't a built-in, including the name of one of your own commands, is a `nu::shell::command_not_found` error. The value must be a single string. Unlike `^$cmd`, a list doesn't add arguments, and `%$cmd` with a list is a `nu::shell::cant_convert` error.
 
-You can also call `run-internal` directly, as in `run-internal echo hi`. It then passes only positional arguments and spreads on to the command. A flag is read as a flag of `run-internal` itself, which has none, so `run-internal ls --all` is a parse error. Use `%$cmd` when you need flags.
+You can also call `run-internal` directly, as in `run-internal echo hi`. It then passes only positional arguments and spreads on to the command. Nushell reads a flag as a flag of `run-internal` itself, which has none, so `run-internal ls --all` is a parse error. Use `%$cmd` when you need flags.
 
 ## Passing Arguments
 
@@ -104,7 +104,7 @@ Raw strings (`r#'...'#`) aren't recognized inside a bare word. Use a raw string 
 
 Nushell gives `--` no special meaning in a call to an external command. It reaches the command unchanged, along with everything after it.
 
-A subexpression in parentheses and an interpolated string (`$"..."`) are evaluated inside a bare word, but a variable on its own is not. Write `--n=($n)`, not `--n=$n`:
+Nushell evaluates a subexpression in parentheses and an interpolated string (`$"..."`) inside a bare word, but not a variable on its own. Write `--n=($n)`, not `--n=$n`:
 
 ```nu
 let n = 5
@@ -118,7 +118,7 @@ let n = 5
 
 ### Values that aren't strings
 
-A value from a variable or a subexpression is converted to text. Integers, floats, and booleans become the same text that [`into string`](/commands/docs/into_string.md) gives (so `3.0` becomes `3`), a date becomes RFC 3339 text with milliseconds, and binary data is passed as its bytes. A bare word that looks like a value, such as `1kb` or `null`, is just text and is passed as you typed it:
+Nushell converts a value from a variable or a subexpression to text. Integers, floats, and booleans become the same text that [`into string`](/commands/docs/into_string.md) gives, so `3.0` becomes `3`. A date becomes RFC 3339 text with milliseconds, and binary data is passed as its bytes. A bare word that looks like a value, such as `1kb` or `null`, is just text and is passed as you typed it:
 
 ```nu
 ^printf '[%s]\n' 3 (10 / 4) true (2024-01-01T10:20:30+02:00) 1kb null
@@ -143,7 +143,7 @@ git add ...$paths
 
 Here, `git` receives two path arguments, and the space in each path remains part of that argument. See [the spread operator in command calls](operators.md#in-command-calls) for more examples and the complete spreading rules.
 
-Each item is converted by the rules in the previous section, so a list of numbers works, and a record inside the list is an error. Spread strings are never expanded as globs, even when the same text as a bare word would be:
+Nushell converts each item by the rules in the previous section, so a list of numbers works, and a record inside the list is an error. It never expands spread strings as globs, even when the same text as a bare word would be:
 
 ```nu
 ^printf '[%s]\n' *.md ...['*.md']
@@ -182,6 +182,6 @@ When running an external command on Windows,
 Nushell forwards some `CMD.EXE` internal commands to cmd instead of attempting to run external commands.
 [Coming from CMD.EXE](coming_from_cmd.md) contains a list of these commands and describes the behavior in more detail.
 
-Nushell can't safely pass every argument to these forwarded commands. An argument that contains a newline, a `%`, or a double quote is an error, unless the argument is one string wrapped in a single pair of double quotes, which is passed as it is. Nushell wraps an argument in double quotes when it contains a space or one of `<`, `>`, `&`, `|`, and `^`.
+Nushell can't safely pass every argument to these forwarded commands. An argument that contains a line break or a `%` is an error. So is one that contains a double quote, unless its only double quotes are a pair around the whole argument, which is then passed as it is. Nushell wraps an argument in double quotes when it contains a space or one of `<`, `>`, `&`, `|`, and `^`.
 
-To find a command that you typed without its extension, Nushell tries the extensions listed in `PATHEXT` (see [`$env.PATHEXT`](./special_variables.md#env-pathext)). A `.ps1` script runs with `powershell.exe -File`. A file with an extension that you added to `PATHEXT` and associated with a program using `assoc` and `ftype` runs through `cmd.exe /D /C`, so the association applies.
+To find a command that you typed without its extension, Nushell tries the extensions listed in the `PATHEXT` it inherited at startup. [`$env.PATHEXT`](./special_variables.md#env-pathext) has the details. A `.ps1` script runs with `powershell.exe -File`. A file with an extension that you added to `PATHEXT` before starting Nushell, and associated with a program using `assoc` and `ftype`, runs through `cmd.exe /D /C`, so the association applies.

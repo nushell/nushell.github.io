@@ -93,7 +93,7 @@ Only tags have content to insert into. If the path selects a text entry, a comme
 
 ## `xtype`
 
-`xtype` returns the kind of the entry it receives: `tag`, `text`, `comment` or `pi` (a processing instruction). A plain string also counts as `text`. Comments and processing instructions appear only when `from xml` keeps them with `--keep-comments` and `--keep-pi`:
+`xtype` returns the kind of the entry it receives: `tag`, `text`, `comment`, or `pi` for a processing instruction. A plain string also counts as `text`. Comments and processing instructions appear only when `from xml` keeps them with `--keep-comments` and `--keep-pi`:
 
 ```nu
 "<r><?target data?><!-- note --><a>text</a>tail</r>" | from xml --keep-comments --keep-pi | get content | each { xtype } | to nuon

@@ -313,7 +313,7 @@ $orders | join --anti $shipped id order_id
 # => ╰───┴────┴──────────╯
 ```
 
-If the right table has a column with the same name as one in the left table, `join` renames the right one with a `_` suffix, so `name` becomes `name_`. With `--prefix` or `--suffix`, your text is added to every column from the right table instead, except a join column that both tables share. A misspelled join column is reported as `column_not_found` rather than giving an empty result. See [`join`](/lang-guide/chapters/filters/changing_data.md#join) in the Language Guide for these rules and the `default null` workaround for tables that lack the column.
+If the right table has a column with the same name as one in the left table, `join` renames the right one with a `_` suffix, so `name` becomes `name_`. See [`join`](/lang-guide/chapters/filters/changing_data.md#join) in the Language Guide for `--prefix`, `--suffix`, and what happens when a table lacks the join column.
 
 ### Adding a new Column
 

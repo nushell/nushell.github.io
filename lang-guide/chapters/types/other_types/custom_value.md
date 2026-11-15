@@ -75,7 +75,7 @@
 
 ## Plugin custom values
 
-A plugin's custom value, such as a Polars dataframe, is a handle to data that the plugin manages. Whenever Nushell needs something from the value, it asks the plugin: to display it, to follow a cell path into it, to apply an operator, to compare it (as `sort` does), or to `save` it. If the plugin isn't running at that moment, Nushell starts it again first, the same way it does for one of the plugin's commands.
+A plugin's custom value, such as a Polars dataframe, is a handle to data that the plugin manages. Whenever Nushell needs something from the value, it asks the plugin to display it, follow a cell path into it, apply an operator, compare it as `sort` does, or `save` it. If the plugin isn't running at that moment, Nushell starts it again first, the same way it does for one of the plugin's commands.
 
 A restart brings back the plugin but not what it kept in memory. The Polars plugin keeps each dataframe in a cache inside its own process. While that cache holds anything, Polars keeps the [plugin garbage collector](/book/plugins.md#plugin-garbage-collector) from stopping it, but `plugin stop polars` still ends the process. After that, an existing dataframe value can't be resolved, and using it fails with an error that the dataframe was not found in the cache. Create the dataframe again. Other plugins that keep their values in memory have the same limit.
 
@@ -174,7 +174,7 @@ A list of versions is an input type error, so bump each item with `each`. The re
 
 ## SemVer ranges
 
-[`into semver-range`](/commands/docs/into_semver-range.md) turns a version requirement into a `semver-range` value. Its use is the `in` operator, which tests whether a version meets the requirement:
+[`into semver-range`](/commands/docs/into_semver-range.md) turns a version requirement into a `semver-range` value. The `in` operator tests whether a version meets it:
 
 ```nu
 let r = "^1.2" | into semver-range

@@ -28,9 +28,9 @@ end'
 # => end
 ```
 
-Single-quoted strings don't do anything to the text they're given, making them ideal for holding a wide range of text data. As the second example shows, a single-quoted string can span several lines, and the line breaks become part of the string.
+Single-quoted strings don't do anything to the text they're given, making them ideal for holding a wide range of text data. A single-quoted string can span several lines, and the line breaks become part of the string.
 
-There is no escape for `'` inside a single-quoted string. Inner single quotes work only in pairs, and only when the word ends with `'` (see [Quotes inside a quoted word](#quotes-inside-a-quoted-word)). Nushell keeps them as written, so `''` is not read as one quote the way it is in SQL:
+There is no escape for `'` inside a single-quoted string. Inner single quotes work only in pairs, and only when the word ends with `'`, as [Quotes inside a quoted word](#quotes-inside-a-quoted-word) explains. Nushell keeps them as written, so `''` is not read as one quote the way it is in SQL:
 
 ```nu
 'it''s'
@@ -129,7 +129,7 @@ Text after the last quote is an error:
 # =>         above.
 ```
 
-A space outside the inner quotes ends the word, so `"a "b c" d"` fails the same way at the `b`, and so does JSON with a space in a value, such as `"{"k": "a b"}"`. Escape the inner quotes instead (`"a \"b c\" d"`), or use the other kind of quote or a raw string: `'{"k": "a b"}'` works.
+A space outside the inner quotes ends the word, so `"a "b c" d"` fails the same way at the `b`, and so does JSON with a space in a value, such as `"{"k": "a b"}"`. Escape the inner quotes instead, as in `"a \"b c\" d"`, or use the other kind of quote, as in `'{"k": "a b"}'`, or a raw string.
 
 The rule also catches words that look like operators. `'a'..'z'` is not a range of letters. It is the single string `a'..'z`.
 
@@ -241,7 +241,7 @@ echo `a\nb file($n).txt`
 # => a\nb file($n).txt
 ```
 
-Passed to a command parameter of type `path`, a backtick string is expanded the same way a bare word is: a leading `~` becomes your home directory, and `...` becomes `../..`. A single- or double-quoted string is passed as written:
+Passed to a command parameter of type `path`, a backtick string is expanded the same way a bare word is. A leading `~` becomes your home directory, and `...` becomes `../..`. A single- or double-quoted string is passed as written:
 
 ```nu
 def show [p: path] { $p }
@@ -260,7 +260,7 @@ let foo = 'C:\Program Files\exiftool.exe'
 ^$foo
 ```
 
-You can also use the [`run-external`](/commands/docs/run-external.md) command for this purpose. Every external call goes through it. Both `^cmd arg` and a plain `cmd arg` that names an external run `run-external cmd arg`. Calling it yourself helps when the command line is stored in a list. If the first argument is a list, its first item is the program and the other items come before the remaining arguments:
+You can also use the [`run-external`](/commands/docs/run-external.md) command for this purpose. Both `^cmd arg` and a plain `cmd arg` that names an external run `run-external cmd arg`. Calling it yourself helps when the command line is stored in a list. If the first argument is a list, its first item is the program and the other items come before the remaining arguments:
 
 ```nu
 let cmd = [echo hello]
@@ -268,7 +268,7 @@ run-external $cmd world
 # => hello world
 ```
 
-Arguments are expanded as for `^cmd`. A bare word containing glob characters, such as `*.txt`, becomes the matching file names, or stays as written if nothing matches, and a bare word starting with `~` or `...` becomes a path. Quoted strings are passed unchanged. A list variable after the first argument is an error, so spread it with `...$list`.
+Arguments are expanded as for `^cmd`. A bare word containing glob characters, such as `*.txt`, becomes the matching file names, or stays as written if nothing matches. A bare word starting with `~` or `...` becomes a path. Quoted strings are passed unchanged. A list variable after the first argument is an error, so spread it with `...$list`.
 
 Because all externals go through `run-external`, a custom command with that name changes how every external runs. This one prints each command line before running it:
 
@@ -282,7 +282,7 @@ def --wrapped run-external [...args] {
 # => hello
 ```
 
-Inside the wrapper, call the built-in as `%run-external` (see [Running a Built-in Command with `%`](running_externals.md#running-a-built-in-command-with)). A `^cmd` call there is itself an external call, so it runs the wrapper again and never returns.
+Inside the wrapper, call the built-in as `%run-external`, described in [Running a Built-in Command with `%`](running_externals.md#running-a-built-in-command-with). A `^cmd` call there is itself an external call, so the wrapper calls itself until Nushell stops it with a `recursion_limit_reached` error.
 
 ## Appending and Prepending to strings
 
@@ -327,7 +327,7 @@ Finally you could also use string interpolation, but that is complex enough that
 
 Two cases differ from interpolation. A date is written in RFC 2822 form without the "(... ago)" part, and the items of a nested list or record are separated by newlines instead of commas. Run [`to nuon`](/commands/docs/to_nuon.md) on nested data before joining it.
 
-Without a separator, the items are joined directly (`[1 2] | str join` is `12`). A single string as input comes back unchanged.
+Without a separator, the items are joined directly, so `[1 2] | str join` is `12`. A single string as input comes back unchanged.
 
 ## String interpolation
 
@@ -425,7 +425,7 @@ const x = $"(2kb)"
 
 ### Interpolation in bare words
 
-A [bare word](#bare-word-strings) that contains `(` is interpolated without the `$"..."`. This is handy for file names and other arguments built from a variable:
+A [bare word](#bare-word-strings) that contains `(` is interpolated without the `$"..."`. Use it for file names and other arguments built from a variable:
 
 ```nu
 let n = 3
@@ -549,7 +549,7 @@ By default `split chars` splits into Unicode code points (`--code-points`). Some
 # => ╰───┴───╯
 ```
 
-Given a list of strings, `split chars` returns a list of lists, one for each string: `['ab' 'cd'] | split chars` is `[[a, b], [c, d]]`.
+Given a list of strings, `split chars` returns a list of lists, one for each string, so `['ab' 'cd'] | split chars` is `[[a, b], [c, d]]`.
 
 ## The [`str`](/commands/docs/str.md) command
 
@@ -703,7 +703,7 @@ Without `--alignment` the text goes on the left, and without `--character` the p
 # => ***ab**
 ```
 
-`fill` also pads ints, floats and file sizes, which are turned into text first, and it pads each item of a list. A file size is written as its number of bytes, and the minus sign of a negative number ends up after the padding (`-42 | fill -a r -c '0' -w 5` is `00-42`):
+`fill` also pads ints, floats and file sizes, which are turned into text first, and it pads each item of a list. A file size is written as its number of bytes, and the minus sign of a negative number ends up after the padding, so `-42 | fill -a r -c '0' -w 5` is `00-42`:
 
 ```nu
 [7 42 512] | fill -a r -c '0' -w 4
@@ -753,7 +753,7 @@ This can be done easily with the [`str reverse`](/commands/docs/str_reverse.md) 
 # => a+b+c
 ```
 
-The text to find is plain text. With `--regex` (or `--multiline`) it's a [regular expression](./regular_expressions.md#replacing-with-str-replace), and the replacement can refer to capture groups.
+The text to find is plain text. With `--regex` or `--multiline`, it's a [regular expression](./regular_expressions.md#replacing-with-str-replace), and the replacement can refer to capture groups.
 
 The replacement can also be a closure that computes the new text. With `--regex`, it runs once for each match, with the matched text as `$in`. It has to return a string:
 
@@ -1195,7 +1195,7 @@ The input has to be one int or float. A file size, a string or a list is an inpu
 
 The [`char`](/commands/docs/char.md) command returns a character by name, such as `char newline` or `char tab`. `char --list` shows every name with its code point and aliases (`nl` is an alias of `newline`). A few names depend on the operating system, which makes them useful in scripts that run everywhere:
 
-- `char path_sep` (alias `psep`) separates the parts of a file path: `\` on Windows and `/` elsewhere.
+- `char path_sep` (aliases `psep` and `separator`) separates the parts of a file path: `\` on Windows and `/` elsewhere.
 - `char esep` (alias `env_sep`) separates the entries of a list variable such as `PATH`: `;` on Windows and `:` elsewhere.
 - `char eol` (aliases `lsep` and `line_sep`) is the line ending: `\r\n` on Windows and `\n` elsewhere. `char newline` is always `\n`.
 
@@ -1237,7 +1237,7 @@ $'(ansi purple_bold)This text is a bold purple!(ansi reset)'
 You should always end colored strings with `ansi reset`
 :::
 
-`ansi --list` shows every name `ansi` accepts, with its short name and its escape sequence (written with `\e` for the escape character). Besides colors and styles, the list has names that control the terminal, such as clearing the screen or hiding the cursor:
+`ansi --list` shows every name `ansi` accepts, with its short name and its escape sequence, which uses `\e` for the escape character. Besides colors and styles, the list has names that control the terminal, such as clearing the screen or hiding the cursor:
 
 ```nu
 ansi --list | where name in [clear_screen cursor_home cursor_off cursor_on] | select name short_name code

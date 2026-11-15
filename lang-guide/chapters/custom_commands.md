@@ -11,14 +11,14 @@ def <name> [<parameters>]: <input type> -> <output type> { <body> }
 ```
 
 - The name may contain spaces to make a subcommand, e.g. `def "str shout" [] { ... }`. Parser keywords such as `if`, `let` or `def` cannot be used as names.
-- A name whose first word is a value literal (a number, filesize, duration, datetime, binary literal or range, such as `5sec` or `1..2`), or that contains `#`, `^` or `%`, or uses whitespace other than single spaces between words, could never be called. `def`, `extern` and `alias` reject it with `nu::parser::variable_not_valid` ("Command name not supported"). See [Naming Commands](/book/custom_commands.md#naming-commands).
+- `def`, `extern` and `alias` reject a name that could never be called with `nu::parser::variable_not_valid` ("Command name not supported", or "Alias name not supported" for `alias`). That is a name whose first word is a number, filesize, duration, datetime, binary literal or range, such as `5sec` or `1..2`, a name that contains `#`, `^` or `%`, and a name with whitespace other than single spaces between words. See [Naming Commands](/book/custom_commands.md#naming-commands).
 - The name and the signature must be separated by whitespace. `def greet[name] {}` fails with "no space between name and parameters".
 - The signature may be written in parentheses instead of brackets: `def add (a: int, b: int) { $a + $b }`.
 - The body must be written out as a `{ ... }` block. A variable holding a closure is rejected with `Parse mismatch: expected definition body closure { ... }`.
 - A block can define each name once. A second `def` or `extern` with the same name in the same block (including a whole script or module) is a `nu::parser::duplicate_command_def` error. A `def` in a nested block shadows the outer one inside that block, and each REPL entry is a new block, so redefining a command at the prompt replaces it. See [Defining a command more than once](/book/custom_commands.md#defining-a-command-more-than-once).
 - The `: <input> -> <output>` part is optional. Several input/output pairs can be given in brackets: `[int -> int, string -> string]`.
 - `def --env` keeps changes the body makes to the environment (see [Function Scope](#function-scope)).
-- `def --wrapped` passes unknown flags and arguments through to a `...rest` parameter, which is useful for wrapping external commands. The rest parameter is required (`nu::parser::missing_positional` without one) and must be untyped or `string` (`nu::parser::type_mismatch_help` otherwise). An untyped rest parameter has the `external_arg` shape, so bare words and flags arrive as the strings that were typed, while a subexpression keeps its value. A wrapped command gets no `--help` flag, so `--help` and `-h` go to the rest parameter. See [Rest Parameters with Wrapped External Commands](/book/custom_commands.md#rest-parameters-with-wrapped-external-commands).
+- `def --wrapped` passes unknown flags and arguments through to a `...rest` parameter, which is useful for wrapping external commands. The rest parameter is required (`nu::parser::missing_positional` without one) and must be untyped or `string` (`nu::parser::type_mismatch_help` otherwise). An untyped rest parameter has the `external_arg` shape, so bare words and flags arrive as the text that was typed, as a `glob` when the word contains `*`, `?` or `[` and otherwise as a `string`, with a leading `~` or `...` expanded as for an external command. A subexpression keeps its value. A wrapped command gets no `--help` flag, so `--help` and `-h` go to the rest parameter. See [Rest Parameters with Wrapped External Commands](/book/custom_commands.md#rest-parameters-with-wrapped-external-commands).
 - A comment directly above the `def`, and comments after each parameter, become the command's `help` text.
 - Inside a [module](/book/modules.md), `export def` makes the command available to `use`.
 
@@ -163,7 +163,7 @@ apply {|v| $v * 10 } 4
 | `--flag: type = value`  | Flag with a default value                                        | the default            |
 | `...rest`, `...rest: type` | Any number of remaining positional arguments, as a list       | `[]`                   |
 
-Parameters can be separated by spaces, commas or newlines, and a parameter name may be written with a leading `$` (`def f [$x]`). Without a type, a parameter accepts `any` value, unless it has a default value, in which case it takes the default's type, so `count = 1` only accepts an `int`. A `null` default gives the type `nothing`, so write `x?` or `x: any = null` for a parameter that may be left out. A flag with a default but no type, such as `--count = 1`, is a flag that takes a value of that type, not a switch. Flag values can be written as `--flag value` or `--flag=value`, and switches as `--flag` or `--flag=false`.
+Parameters can be separated by spaces, commas or newlines, and a parameter name may be written with a leading `$` (`def f [$x]`). Without a type, a parameter accepts `any` value. A parameter with a default value takes the default's type, so `count = 1` only accepts an `int`. A `null` default gives the type `nothing`, so write `x?` or `x: any = null` for a parameter that may be left out. A flag with a default but no type, such as `--count = 1`, is a flag that takes a value of that type, not a switch. Flag values can be written as `--flag value` or `--flag=value`, and switches as `--flag` or `--flag=false`.
 
 The parser also checks these rules:
 
@@ -182,7 +182,7 @@ Every parameter binds a variable, and all of them share one namespace:
 - No two parameters or flags may bind the same variable, and no two flags may share a short letter. A repeat is a `nu::parser::duplicate_parameter` error that points at both uses.
 - `_` is the exception. Positional parameters named `_` may repeat, to ignore arguments.
 - The names of the built-in variables `in`, `nu`, `env` and `ans` can't be used, so `def f [in] {}` and `def f [--env] {}` are `nu::parser::name_is_builtin_var` errors. See [Reserved Names](./declarations.md#reserved-names).
-- Nushell doesn't check `extern` signatures, because an `extern` binds no variables.
+- These rules don't apply to `extern`, because an `extern` binds no variables.
 
 See [Flags](/book/custom_commands.md#flags) in the Book for an example of the error.
 

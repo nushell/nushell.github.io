@@ -14,7 +14,7 @@ term size
 # => ╰─────────┴─────╯
 ```
 
-On Linux and macOS, `term size` asks the controlling terminal, so it gives the right answer even when Nushell's output goes into a pipe or a file. With no terminal at all, as in a cron job, it uses [`COLUMNS` and `LINES`](./special_variables.md#env-columns-and-env-lines) from the environment Nushell started with, or 80 by 24 when they aren't set. A pseudo-terminal that was never given a size reports 0 by 0, and `term size` passes that on. On Windows, it returns 0 by 0 when Nushell has no console.
+On Linux and macOS, `term size` asks the controlling terminal, so it gives the right answer even when Nushell's output goes into a pipe or a file. With no terminal at all, as in a cron job, it uses [`COLUMNS` and `LINES`](./special_variables.md#env-columns-and-env-lines) from the environment Nushell started with, or 80 by 24 unless both are set. A pseudo-terminal that was never given a size reports 0 by 0, and `term size` passes that on. On Windows, it returns 0 by 0 when Nushell has no console.
 
 `table`, `grid`, and `help` wrap their output to this width, and the default [`display_output` hook](./hooks.md#changing-how-output-is-displayed) checks `(term size).columns` to decide whether to expand nested tables.
 
@@ -36,7 +36,7 @@ A few things can go wrong:
 
 - A terminal that doesn't understand the query never replies, and `term query` keeps waiting. Press Ctrl+C. With a `--terminator`, that's an "Operation interrupted" error. Without one, `term query` always reads until Ctrl+C and returns everything it read, with no error.
 - When the reply doesn't start with the `--prefix`, the error is "Input did not begin with expected sequence". Run the query without `--prefix` to see what the terminal sent.
-- A custom completer can't read from the terminal, and `term query` there fails with "Interactive input is unavailable in this context". With no terminal at all, as in a cron job or the [MCP server](./mcp.md), it fails with an I/O error.
+- A custom completer can't read from the terminal, and `term query` there fails with "Interactive input is unavailable in this context". With no terminal at all, as in a cron job or an [MCP server](./mcp.md), which detaches from the terminal on Unix, it fails with an I/O error.
 
 ## Reading what the user types
 
@@ -61,7 +61,7 @@ These flags change how it reads:
 
 `--history-file` keeps that history in a text file, one entry per line. `input` reads it at the start and saves the new line, and the strings piped in, to it. The file is created if it doesn't exist. `--max-history` sets how many entries the history holds, 1000 by default, and the file is cut down to that many. Each of the two flags turns on `--reedline` by itself.
 
-Without a terminal, as in a cron job or the [MCP server](./mcp.md), `input` fails with an I/O error (`nu::shell::io::uncategorized_error`). In a [custom completer](./custom_completions.md), it fails with "Interactive input is unavailable in this context". To let the user pick from a list, use [`input list`](/commands/docs/input_list.md) (see [Select Lists](./tui.md#select-lists)), and to read single key presses with their modifiers, use [`input listen`](/commands/docs/input_listen.md).
+Without a terminal, as in a cron job or an [MCP server](./mcp.md), which detaches from the terminal on Unix, `input` fails with an I/O error (`nu::shell::io::uncategorized_error`). In a [custom completer](./custom_completions.md), it fails with "Interactive input is unavailable in this context". To let the user pick from a list, use [`input list`](/commands/docs/input_list.md) (see [Select Lists](./tui.md#select-lists)), and to read single key presses with their modifiers, use [`input listen`](/commands/docs/input_listen.md).
 
 ## Clearing the screen
 
@@ -71,7 +71,7 @@ Without a terminal, as in a cron job or the [MCP server](./mcp.md), `input` fail
 
 ## Laying out lists in a grid
 
-[`grid`](/commands/docs/grid.md) lays out a list in columns, the way `ls` does in other shells. Items run top to bottom, then left to right. The grid uses the width from `term size` unless you set `--width` (`-w`), and `--separator` (`-s`) replaces the default separator, `│`:
+[`grid`](/commands/docs/grid.md) lays out a list in columns, the way `ls` does in other shells. Items run top to bottom, then left to right. The grid uses the width from `term size` unless you set `--width` (`-w`), and `--separator` (`-s`) replaces the default separator, `│` with a space on each side:
 
 ```nu
 seq 1 12 | grid --width 30
@@ -84,7 +84,7 @@ seq 1 12 | grid --width 30
 
 The result is a single string that ends in a line feed, so you can save it, or trim the line feed with `str trim` as the `lsg` command in [Aliases](./aliases.md) does. When an item is wider than the grid, `grid` fails with an error such as "Couldn't fit grid into 10 columns".
 
-For a list of records, `grid` shows the `name` column, so `ls | grid` lists the file names. A record without a `name` column is shown whole, as `{a: 1, b: 2}`. Pass a column name or cell path to show something else, as in `grid size`. Then every record needs that column, or `grid` fails with "Cannot find column". Other values are turned into text, so a nested list shows as `[1, 2]`. The input has to be a list. A range fails with "Command does not support range input", and a single string fails the same way, so turn a range into a list first, as `seq 1 12` does above.
+For a list of records, `grid` shows the `name` column, so `ls | grid` lists the file names. A record without a `name` column is shown whole, as `{a: 1, b: 2}`. Pass a column name or cell path to show something else, as in `grid size`. Then every record needs that column, or `grid` fails with "Cannot find column". Other values are turned into text, so a nested list shows as `[1, 2]`. The input has to be a list. A range fails with "Command does not support range input", or with "Input type not supported" when Nushell finds out only at run time, and a single string fails the same way, so turn a range into a list first, as `seq 1 12` does above.
 
 `--color` (`-c`) colors each item the way `ls` colors file names, using [`LS_COLORS`](./coloring_and_theming.md#ls-colors-colors-for-the-ls-command). It treats each item as a path relative to the current directory, and it does nothing when [colors are turned off](./coloring_and_theming.md#turning-colors-on-and-off). `--icons` (`-i`) puts a file-type icon in front of each item, which needs a [Nerd Font](https://www.nerdfonts.com/) in the terminal.
 
@@ -97,7 +97,7 @@ For a list of records, `grid` shows the `name` column, so `ls | grid` lists the 
 # => \e]8;;https://www.nushell.sh\e\Nushell\e]8;;\e\
 ```
 
-The escape sequence counts toward the string's length: `str length` gives 43 for that link, and 7 after [`ansi strip`](/commands/docs/ansi_strip.md).
+The escape sequence counts toward the string's length. `str length` gives 43 for that link, and 7 after [`ansi strip`](/commands/docs/ansi_strip.md).
 
 A list of strings becomes a list of links. For a table or a record, name the columns that hold the targets, as in `$sites | ansi link url`. `--text` gives every link the same text, so to take the text from another column, call `ansi link` for each row. In a terminal with OSC 8 support, the `url` column then shows clickable names:
 

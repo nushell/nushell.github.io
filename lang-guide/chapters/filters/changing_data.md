@@ -37,7 +37,7 @@ All three take a cell path and a value. For a column, [`insert`](/commands/docs/
 
 | Command  | Column doesn't exist yet  | Column already exists          |
 | -------- | ------------------------- | ------------------------------ |
-| `insert` | adds it                   | error: `Column already exists` |
+| `insert` | adds it                   | error: `column_already_exists` |
 | `update` | error: `column_not_found` | replaces it                    |
 | `upsert` | adds it                   | replaces it                    |
 
@@ -135,7 +135,7 @@ For a list index, the closure runs only once. Both its argument and `$in` are th
 
 ### Matrices
 
-`update` also accepts a `matrix` value (from [`into matrix`](/commands/docs/into_matrix.md)). The path is a row index, or a row and a column such as `0.1`, and the result is still a matrix. The new values have to convert to floats:
+`update` also accepts the `matrix` value that [`into matrix`](/commands/docs/into_matrix.md) returns. The path is a row index, or a row and a column such as `0.1`, and the result is still a matrix. The new values have to convert to floats:
 
 ```nu
 [[1 2] [3 4]] | into matrix | update 0.1 9 | matrix into-nu | to nuon
@@ -146,7 +146,7 @@ Replacing a whole row with a list of a different length is an `Inconsistent row 
 
 ## `update cells`
 
-[`update cells`](/commands/docs/update_cells.md) runs a closure on every cell of a table or record and puts the result in its place. `update` changes one column, and its closure gets the whole row as its argument. The closure of `update cells` gets only the cell, as its argument and as `$in`, and runs for every column. Column names after the closure limit it to those columns:
+[`update cells`](/commands/docs/update_cells.md) runs a closure on every cell of a table or record and puts the result in its place. The closure gets only the cell, as its argument and as `$in`, while the closure of `update` gets the whole row as its argument. Column names after the closure limit it to those columns:
 
 ```nu
 [[name size count]; [a 0 3] [b 12 0]] | update cells { if $in == 0 { null } else { $in } } size count
@@ -158,7 +158,7 @@ Replacing a whole row with a list of a different length is an `Inconsistent row 
 # => ╰───┴──────┴──────┴───────╯
 ```
 
-A name that isn't a column is ignored, not an error. An empty list of names, as in `...[]`, updates no columns; only leaving the names out updates them all. The `--columns` (`-c`) flag takes the names as a list. It is deprecated since 0.117.0 in favor of the rest arguments, and names given both ways are combined.
+A name that isn't a column is ignored, not an error. An empty list of names, as in `...[]`, updates no columns; only leaving the names out updates them all. The `--columns` (`-c`) flag takes the names as a list. It was deprecated in 0.117.0 in favor of the rest arguments. Names given both ways are combined.
 
 A cell that holds a record or a list goes to the closure whole. `--recursive` (`-r`) walks into nested records and lists instead, and runs the closure on each value inside them. Column names still apply only at the top level, and everything below a named column is visited:
 
@@ -182,7 +182,7 @@ A cell that holds a record or a list goes to the closure whole. `--recursive` (`
 # => {b: 2, d: 4, a: 1, c: 3}
 ```
 
-A column that doesn't exist, as a column to move or as the `--after`/`--before` target, is an error (`Cannot move columns`, `column does not exist`). So is leaving out the location, giving more than one, or moving a column relative to itself.
+A column that doesn't exist, as a column to move or as the `--after`/`--before` target, is a `Cannot move columns` error labeled `column does not exist`. So is leaving out the location, giving more than one, or moving a column relative to itself.
 
 [`rename`](/commands/docs/rename.md) has three forms:
 
@@ -295,7 +295,7 @@ $users | join --prefix device_ $devices id
 # => ╰───┴────┴───────┴─────────────┴───────────╯
 ```
 
-If either table has rows but none of them has its join column, `join` reports `column_not_found`, even with `--left`, `--right`, `--outer` or `--anti`. This catches a misspelled column name. An empty table passes the check, and rows that lack the column in a table where other rows have it join as non-matching rows. When a table can legitimately lack the column, add it with `default null <column>` first:
+If either table has rows but none of them has its join column, `join` reports `column_not_found`, even with `--left`, `--right`, `--outer` or `--anti`. This catches a misspelled column name. An empty table passes the check. In a table where some rows have the column, the rows without it join as non-matching rows. When a table can legitimately lack the column, add it with `default null <column>` first:
 
 ```nu
 [[id name]; [1 alice] [2 bob]] | join --left [{note: x}] id
@@ -342,7 +342,7 @@ Any other argument, such as a number, counts as a list of one item, so it pairs 
 
 ### `interleave`
 
-[`interleave`](/commands/docs/interleave.md) runs each of its closures at the same time, each in its own thread, and merges everything they output into one stream. Its input, if there is any, is one more source. The closures get no input. Items come out as soon as any source produces them, so the order between sources changes from run to run, while the items of each source keep their order:
+[`interleave`](/commands/docs/interleave.md) runs its closures one after another, then reads each output stream in its own thread and merges them into one stream. Work a closure does before it returns its output, such as `sleep 1sec; [a]`, holds up the closures after it. A streaming pipeline such as `^cmd | lines` or `each` runs alongside the others. The input of `interleave`, if there is any, is one more source. The closures get no input. Items come out as soon as any source produces them, so the order between sources changes from run to run, while the items of each source keep their order:
 
 ```nu
 interleave { [a1 a2 a3] } { [b1 b2 b3] } | where $it starts-with a | to nuon
@@ -456,7 +456,7 @@ The flags control what happens to the names:
 
 ### `rotate`
 
-[`rotate`](/commands/docs/rotate.md) also swaps rows and columns, but it turns the table a quarter turn, so the order of the data changes too. By default it turns clockwise, so the last input row becomes the first column and the column names end up in the last column. `--ccw` turns the other way. The column names come first, the rows keep their order, and the last input column becomes the first row:
+[`rotate`](/commands/docs/rotate.md) also swaps rows and columns, but it turns the table a quarter turn, so the order of the data changes too. By default it turns clockwise, so the last input row becomes the first column and the column names end up in the last column. `--ccw` turns the other way, so the column names come first, the rows keep their order, and the last input column becomes the first row:
 
 ```nu
 [[name size]; [x 1] [y 2]] | rotate
@@ -479,7 +479,7 @@ Every row must have the same columns. A row with a different number of columns i
 # => [["column0", "column1", "column2"]; [3, 1, x], [4, 2, y]]
 ```
 
-To turn a record into key/value rows, `transpose key value` is usually what you want, since it keeps the names in the first column.
+To turn a record into key/value rows, use `transpose key value`, which keeps the names in the first column.
 
 ### `roll`
 

@@ -219,7 +219,7 @@ try { check-range 10 1 } catch {|err| $err.details | reject labels inner }
 
 `code` is empty here because `check-range` gives no `code`. The header still shows `nu::shell::error`, which is what Nushell prints for an error without one. With a string, as in `error make "message"`, `details.code` is `nu::shell::error`.
 
-Each item in `details.labels` is a record with the label's `text`, its `span` (the same `{start, end}` record that `error make` takes), and a `location` record. `location` has the `file` the label points into (or the name of the prompt entry) and the `start` and `end` byte offsets within it:
+Each item in `details.labels` is a record with the label's `text`, its `span`, which is the same `{start, end}` record that `error make` takes, and a `location` record. `location` has the `file` the label points into, or the name of the prompt entry, and the `start` and `end` byte offsets within it:
 
 ```nu
 try { 1 / 0 } catch {|err| $err.details.labels.0.location.start }
@@ -362,6 +362,6 @@ try { check-range 10 1 } catch {|err| let details = $err.details | update msg "c
 # =>   help: swap the two arguments
 ```
 
-The new error keeps the original labels and help. Because `error make` isn't the first command in the block, the caught error isn't also attached as an inner error (see [Chaining Errors](#chaining-errors)).
+The new error keeps the original labels and help. Because `error make` isn't the first command in the block, the caught error isn't also attached as an inner error. See [Chaining Errors](#chaining-errors).
 
 A `raw` field has to hold an error. Any other value, such as `raw: 5`, fails with `Can't convert to ShellError`, and `raw: null` is ignored.

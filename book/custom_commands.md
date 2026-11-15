@@ -303,7 +303,7 @@ ls | nullify name size
 # => ╰───┴──────┴──────┴──────┴───────────────╯
 ```
 
-The input goes only to the first pipeline of the command's body. The pipelines after it start with no input, so a command that does something else first, even a `let`, has to pick the input up with `$in`, which holds the command's input in any of those pipelines:
+The input goes only to the first pipeline of the command's body. Later pipelines start with no input, so a body that does something else first, even a `let`, has to read the input from `$in`, which holds it in every pipeline of the body:
 
 ```nu
 def scale [factor: int] {
@@ -338,7 +338,7 @@ Data moves through a pipeline in one of three forms:
 # => byte stream
 ```
 
-A command such as `each` handles one item at a time, so a stream stays a stream. Some code has to wait for the end of the stream and turn it into a single value. This happens when you:
+A command such as `each` handles one item at a time, so a stream stays a stream. Other code waits for the end of the stream and collects it into a single value. That happens when you:
 
 - use `$in`, as `nullify` does above
 - assign the stream to a variable with `let` or `mut`
@@ -514,7 +514,7 @@ def greet [] { "hi" }
 
 ### Defining a command more than once
 
-A block can define each command name only once. A second `def` (or [`extern`](externs.md)) with the same name in the same block is a parse error, so nothing in the block runs:
+A block can define each command name only once. A second `def` or [`extern`](externs.md) with the same name in the same block is a parse error, so nothing in the block runs:
 
 ```nu
 def greet [] { "hi" }; def greet [] { "hello" }
@@ -669,7 +669,7 @@ def greet [greeting?: string, name: string] {
 # =>    ╰────
 ```
 
-Because an optional parameter can be `null`, its type inside the body includes `nothing`. A parameter declared as `limit?: int` has the type `oneof<int, nothing>`, and that is the type error messages report for `$limit`. To work with a plain `int`, give the parameter a [default value](#parameters-with-a-default-value), or use `$limit | default 3` in the body.
+Because an optional parameter can be `null`, its type inside the body includes `nothing`. A parameter declared as `limit?: int` has the type `oneof<int, nothing>`, and error messages report that type for `$limit`. To work with a plain `int`, give the parameter a [default value](#parameters-with-a-default-value), or use `$limit | default 3` in the body.
 
 #### Parameters with a Default Value
 
@@ -1059,7 +1059,7 @@ def greet [
 }
 ```
 
-Because `--all-caps` creates `$all_caps`, it would collide with a parameter named `all_caps`. Parameters and flags share one set of variable names, and each short flag needs its own letter. Nushell rejects a repeated name when it parses the definition:
+Because `--all-caps` creates `$all_caps`, it would collide with a parameter named `all_caps`. Parameters and flags share one set of variable names. Nushell rejects a repeated name when it parses the definition:
 
 ```nu
 def greet [--all-caps, all_caps] { $all_caps }
@@ -1235,7 +1235,7 @@ show-args -- --verbose -x foo
 
 This works for built-in commands too, for example `[a b] | str join -- -x` returns `a-xb`. Commands defined with `def --wrapped` (see below) are the exception: they receive the `--` in their rest parameter, so they can pass it on unchanged to the external command they wrap.
 
-External commands also receive the `--`. Nushell passes the arguments of an external command through without treating any of them as its own flags, and that includes an external declared with [`extern`](externs.md). The `--` reaches the program like any other argument, and the program decides what it means. Compare the built-in `echo` with the system's `echo`:
+External commands receive the `--` too, including an external declared with [`extern`](externs.md). Nushell passes it to the program like any other argument, and the program decides what it means. Compare the built-in `echo` with the system's `echo`:
 
 ```nu
 echo -- --x
@@ -1304,7 +1304,7 @@ A few rules apply to `def --wrapped`:
 
 - The command must have a rest parameter. Without one, the definition is a `nu::parser::missing_positional` error.
 - The rest parameter must be untyped or typed as `string`. Any other type is a `nu::parser::type_mismatch_help` error.
-- An untyped rest parameter uses the [`external_arg`](#parameter-types) shape. Bare words and flags are kept as the strings you typed, so `0001` stays `"0001"`, while a subexpression keeps its value. With `...rest: string`, a subexpression must produce a string.
+- An untyped rest parameter uses the [`external_arg`](#parameter-types) shape. Bare words and flags are kept as the text you typed, so `0001` stays `"0001"`, while a subexpression keeps its value. A word that contains `*`, `?` or `[`, such as `*.md`, arrives as a `glob`. Any other word arrives as a `string`, with a leading `~` or `...` expanded as it would be for an external command, so `~/notes` becomes the full path. With `...rest: string`, a subexpression must produce a string.
 - Nushell doesn't add a `--help` flag to a wrapped command. `--help` and `-h` go into the rest parameter, so the wrapped program can show its own help. Use `help ezal` to see the help for the wrapper itself.
 
 ```nu
@@ -1448,7 +1448,7 @@ def greet [--help] { "hi" }
 # =>   help: Rename this flag. `--help` always shows the command's help.
 ```
 
-The short form `-h` isn't reserved. Another flag can take it, as in `--hidden (-h)`, and then `-h` sets that flag while only `--help` shows the help. A command defined with `def --wrapped` gets no `--help` flag at all, as described in [Rest Parameters with Wrapped External Commands](#rest-parameters-with-wrapped-external-commands).
+The short form `-h` isn't reserved. Another flag can take it, as in `--hidden (-h)`, and then `-h` sets that flag while only `--help` shows the help.
 
 We can extend the help further with some simple comments describing the command and its parameters:
 
@@ -1531,7 +1531,7 @@ with attributes with subcommands of the `attr` builtin, prefixed by the `@` symb
 before the definition of the command. For those coming from Python, Java, or JavaScript, this
 will appear similar to decorators or annotations, but serve a slightly different purpose.
 
-Each attribute goes on its own line, directly above `def`, `export def` or `extern`, and you can stack as many as you need. The command's doc comment goes above the attribute lines. A comment between an attribute and the definition is an error, because the attribute is then followed by something other than a definition:
+Attributes go directly above `def`, `export def` or `extern`, one per line, and you can stack as many as you need. The command's doc comment goes above the attribute lines. A comment between an attribute and the definition is an error, because the attribute is then followed by something other than a definition:
 
 ```nu
 @category math
@@ -1783,7 +1783,7 @@ new category. The exception is `core`, which is kept for Nushell's own commands,
 The [`search-terms`](/commands/docs/attr_search-terms.md) attribute adds words that should find the
 command even though they aren't in its name or description. `help --find` and
 [`help commands --find`](/cookbook/help.md#how-to-see-all-supported-commands) match them, ignoring
-case, `help <command>` shows them on a `Search terms:` line, and `scope commands` returns them in its
+case. `help <command>` shows them on a `Search terms:` line, and `scope commands` returns them in its
 `search_terms` column. Several `@search-terms` lines add up:
 
 ```nu
@@ -1802,7 +1802,7 @@ help commands --find TWICE | select name search_terms
 
 Each term is a string. A bare word needs no quotes, and a constant list can be spread in, as in
 `@search-terms ...$terms`. A value of another type, such as `true` or a `const` that holds a number, is a
-parse error. The attribute works on `extern` declarations too.
+parse error.
 
 Attributes also work on [`extern`](externs.md) declarations. One of them, [`@structured`](/commands/docs/attr_structured.md),
 applies only to `extern`. It lets an external command return data instead of text. See
@@ -1852,9 +1852,9 @@ scope commands | where {|cmd| "slow" in $cmd.attributes.name } | get name
 # => ╰───┴─────────╯
 ```
 
-To share attributes, export the aliases from a module (`export alias "attr owner" = echo`) and import them with `use ownership.nu *`, or by name with `use ownership.nu ["attr owner"]`. A plain `use ownership.nu` puts the module name in front of the alias, so `@owner` can't find it. The standard library's `@test`, `@ignore` and other [testing attributes](./testing.md#the-testing-nu-runner) are aliases of `echo` exported this way.
+To share attributes, export the aliases from a module, as in `export alias "attr owner" = echo`, and import them with `use ownership.nu *`, or by name with `use ownership.nu ["attr owner"]`. A plain `use ownership.nu` puts the module name in front of the alias, so `@owner` can't find it. The standard library's `@test`, `@ignore` and other [testing attributes](./testing.md#the-testing-nu-runner) are aliases of `echo` exported this way.
 
-The command behind an attribute has to be one that can run at parse time. An attribute backed by a custom command, such as `def "attr owner" [x] { $x }`, fails with a `Not a const command` error. An attribute also has to come right before a `def` or `extern`. Anywhere else, it is a `nu::parser::attribute_requires_definition` error.
+The command behind an attribute has to be one that can run at parse time. An attribute backed by a custom command, such as `def "attr owner" [x] { $x }`, fails with a `Not a const command` error.
 
 ## Changing the Environment in a Custom Command
 

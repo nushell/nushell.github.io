@@ -215,7 +215,7 @@ Ask the plugin for completion suggestions for an argument of one of its commands
 | **strip** | boolean          | Whether there is a placeholder in the input buffer.                                                                                                            |
 | **pos**   | unsigned integer | The position of the cursor, in the same coordinates as spans, which can be used to find the placeholder in the arguments.                                      |
 
-The inner `call` is the parser's `ast::Call` for the command as typed so far. Its arguments are unevaluated `Expression`s, the parser's representation of the source code. It's a map:
+The inner `call` is a map:
 
 | Field           | Type             | Description                                                                         |
 | --------------- | ---------------- | ----------------------------------------------------------------------------------- |
@@ -231,7 +231,7 @@ Each entry of `arguments` is a map with one key:
 - `{"Unknown": expression}`: an argument that a signature with `allows_unknown_args` passes through.
 - `{"Spread": expression}`: a spread list, such as `...$args`, filling rest arguments.
 
-An `Expression` is a map with four fields: `expr`, the expression itself, `span`, `span_id`, and `ty`, the type the parser inferred, in the same form as in [signatures](#signature-plugin-call-response). `expr` is an externally tagged enum with dozens of variants, defined by [`ast::Expr`](https://docs.rs/nu-protocol/latest/nu_protocol/ast/enum.Expr.html). Literals are the easiest to use: `{"Int": 3}`, `{"Float": 1.5}`, `{"Bool": true}`, `{"String": "va"}`, and `{"Filepath": ["./x", false]}`, where the boolean is `true` for a quoted path. Other expressions, such as `{"Var": 74}` for a variable or `{"Subexpression": 12}`, can't be evaluated during a completion call. If the cursor is on an argument the user hasn't started typing, `arguments` has no entry for it.
+An `Expression`, the parser's representation of the source code, is a map with the fields `expr`, `span`, `span_id`, and `ty`. `ty` is the type the parser inferred, in the same form as in [signatures](#signature-plugin-call-response). `expr`, the expression itself, is an externally tagged enum with dozens of variants, defined by [`ast::Expr`](https://docs.rs/nu-protocol/latest/nu_protocol/ast/enum.Expr.html). Literals are the easiest to use: `{"Int": 3}`, `{"Float": 1.5}`, `{"Bool": true}`, `{"String": "va"}`, and `{"Filepath": ["./x", false]}`, where the boolean is `true` for a quoted path. Other expressions, such as `{"Var": 74}` for a variable or `{"Subexpression": 12}`, can't be evaluated during a completion call. If the cursor is on an argument the user hasn't started typing, `arguments` has no entry for it.
 
 For example, take a command `probe args` with a `--sw` switch, a `--num` (`-n`) flag that takes an integer, and an optional positional argument. After the user types `probe args --sw -n 3 ` and presses Tab, the engine asks for `{"Positional": 0}`, and `arguments` holds only the two flags:
 
@@ -803,7 +803,7 @@ Example (for the closure `{|x| $x + 1}`):
 }
 ```
 
-`view ir` prints the same block in a readable form, which helps when you work out what a block does:
+`view ir` prints the same block in a readable form:
 
 ```nu
 view ir {|x| $x + 1}
@@ -901,7 +901,7 @@ A variant without fields is a bare string, such as `"PopErrorHandler"`. The othe
 The `Signal` message type is used to relay a signal from the engine to the plugin, allowing the plugin to respond to various system-level or user-initiated signals. The message body consists of a `SignalAction` enum, which currently supports the following variants:
 
 - **`Interrupt`**: Sent when the engine receives an interrupt signal (such as Ctrl+C), to gracefully interrupt a plugin's operation.
-- **`Reset`**: Sent when the engine's `reset_signals` method is called, indicating that the plugin should reset its signal state. Only the REPL calls it: at the start of each iteration, and after Ctrl+C interrupts the prompt or the line editor. See [Signal Handling in Plugins](#signal-handling-in-plugins).
+- **`Reset`**: Sent when the engine's `reset_signals` method is called, indicating that the plugin should reset its signal state. Only the REPL calls it, as [Signal Handling in Plugins](#signal-handling-in-plugins) describes.
 
 Example:
 
@@ -1062,24 +1062,24 @@ Example:
 
 Each element has a `sig` map, which describes one command, and an `examples` array. The fields of `sig`:
 
-| Field                               | Type                        | Description                                                                                                                                                             |
-| ----------------------------------- | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **name**                            | string                      | The command name. A subcommand's name includes its parent, as in `"len chars"`.                                                                                        |
-| **description**                     | string                      | The one-line description shown in `help` and in completions.                                                                                                            |
-| **extra_description**               | string                      | Longer help text, shown below the description in `help`. May be empty.                                                                                                  |
-| **search_terms**                    | string array                | Other words that `help --find` matches.                                                                                                                                 |
-| **required_positional**             | positional array            | Required positional arguments, in order.                                                                                                                                |
-| **optional_positional**             | positional array            | Optional positional arguments, after the required ones.                                                                                                                 |
-| **rest_positional**                 | positional or null          | An argument that takes all remaining positional values, or `null`.                                                                                                      |
-| **named**                           | flag array                  | Flags and switches. Include the `help` switch (`-h`) as in the example. The engine shows the help page itself, but without this entry `--help` is an unknown flag. |
-| **input_output_types**              | array of `Type` pairs       | The input types the command accepts, each with the output type it produces for that input. An empty array accepts any input.                                           |
-| **allow_variants_without_examples** | boolean                     | Used only by Nushell's own tests of built-in commands. It has no effect on plugins.                                                                                     |
-| **is_filter**                       | boolean                     | Not used. Send `false`.                                                                                                                                                 |
-| **creates_scope**                   | boolean                     | Whether the parser opens a new variable scope for the call's arguments. Send `false`.                                                                                   |
-| **allows_unknown_args**             | boolean                     | Pass undeclared flags and extra arguments through as positional values, the way `extern` does. A flag like `--what` arrives as the string `"--what"`.                  |
-| **rejects_unknown_flags**           | boolean, optional           | Added in 0.117.0, and `false` if left out. With `allows_unknown_args`, an undeclared flag becomes a parse error, while extra positional values still pass through, like `extern --strict`. |
-| **complete**                        | map or null                 | A completer for the whole command line, used by `extern` declarations. Send `null`.                                                                                     |
-| **category**                        | string or map               | The category in `help commands`, such as `"Default"`, `"Experimental"`, or `"Filters"`, or `{"Custom": "name"}` for a category of your own.                            |
+| Field                               | Type                  | Description                                                                                                                                                                                |
+| ----------------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **name**                            | string                | The command name. A subcommand's name includes its parent, as in `"len chars"`.                                                                                                            |
+| **description**                     | string                | The one-line description shown in `help` and in completions.                                                                                                                               |
+| **extra_description**               | string                | Longer help text, shown below the description in `help`. May be empty.                                                                                                                     |
+| **search_terms**                    | string array          | Other words that `help --find` matches.                                                                                                                                                    |
+| **required_positional**             | positional array      | Required positional arguments, in order.                                                                                                                                                   |
+| **optional_positional**             | positional array      | Optional positional arguments, after the required ones.                                                                                                                                    |
+| **rest_positional**                 | positional or null    | An argument that takes all remaining positional values, or `null`.                                                                                                                         |
+| **named**                           | flag array            | Flags and switches. Include the `help` switch (`-h`) as in the example. The engine shows the help page itself, but without this entry `--help` is an unknown flag.                         |
+| **input_output_types**              | array of `Type` pairs | The input types the command accepts, each with the output type it produces for that input. An empty array accepts any input.                                                               |
+| **allow_variants_without_examples** | boolean               | Used only by Nushell's own tests of built-in commands. It has no effect on plugins.                                                                                                        |
+| **is_filter**                       | boolean               | Not used. Send `false`.                                                                                                                                                                    |
+| **creates_scope**                   | boolean               | Whether the parser opens a new variable scope for the call's arguments. Send `false`.                                                                                                      |
+| **allows_unknown_args**             | boolean               | Pass undeclared flags and extra arguments through as positional values, the way `extern` does. A flag like `--what` arrives as the string `"--what"`.                                      |
+| **rejects_unknown_flags**           | boolean, optional     | Added in 0.117.0, and `false` if left out. With `allows_unknown_args`, an undeclared flag becomes a parse error, while extra positional values still pass through, like `extern --strict`. |
+| **complete**                        | string, map, or null  | A completer for the whole command line, used by `extern` declarations. Send `null`.                                                                                                        |
+| **category**                        | string or map         | The category in `help commands`, such as `"Default"`, `"Experimental"`, or `"Filters"`, or `{"Custom": "name"}` for a category of your own.                                                |
 
 A positional argument is a map with `name`, `desc`, `shape`, `completion`, `var_id`, and `default_value`. A flag is a map with `long`, `short` (a one-character string or `null`), `arg` (the shape of its value, or `null` for a switch), `required`, `desc`, `completion`, `var_id`, and `default_value`. In both:
 
@@ -1092,7 +1092,7 @@ A `Type` is a string, such as `"Any"`, `"Nothing"`, `"String"`, `"Int"`, or `"Bi
 
 Fields whose type allows `null` can be left out, and `rejects_unknown_flags` can be too. The others are required.
 
-Each element of `examples` is a map with `example`, the Nushell code, `description`, and `result`, a [`Value`](#value-types) or `null`. `help` shows the examples and their results. The Rust SDK converts custom values in example results with `to_base_value()` before sending them.
+Each element of `examples` is a map with `example`, `description`, and `result`. `example` is the Nushell code, and `result` is a [`Value`](#value-types) or `null`. `help` shows the examples and their results. The Rust SDK converts custom values in example results with the plugin's `custom_value_to_base_value()` before sending them.
 
 #### `Ordering` plugin call response
 
@@ -1189,7 +1189,7 @@ Example:
 
 In the `Command` form, `command_type` is one of `"Builtin"`, `"Custom"`, `"Keyword"`, `"External"`, `"Alias"`, or `"Plugin"`, and `decl_id` is a declaration ID or `null`. In the `Value` form, `type` is a type in the same form as in [signatures](#signature-plugin-call-response), such as `"Int"` or `{"List": "String"}`. Besides `commandline complete`, the Nushell language server uses `kind` to label suggestions in an editor.
 
-The engine filters the suggestions against the text the user has typed, using the user's completion settings, and sorts them, so the plugin can return every candidate. A `span` that starts before the beginning of the command line, or ends before it starts, is ignored, and the argument's own span is used instead.
+The engine filters the suggestions against the text the user has typed, using the user's completion settings, and sorts them, so the plugin can return every candidate. The engine ignores a `span` that starts before the beginning of the command line, or ends before it starts, and uses the argument's own span instead.
 
 #### `PipelineData` plugin call response
 
@@ -1263,7 +1263,7 @@ Example:
 
 Get the configuration for the plugin, from its section in `$env.config.plugins.NAME` if present. Returns a [`PipelineData` response](#pipelinedata-engine-call-response) if successful, which will contain either a [`Value`](#value-header-variant) or be [`Empty`](#empty-header-variant) if there is no configuration for the plugin set.
 
-If the plugin configuration was specified as a closure, the engine evaluates that closure, with no arguments and in the scope of the plugin call, each time it receives this engine call, and returns the result. If the closure fails, the response is still `PipelineData`: a `Value` holding an [`Error`](#error) value, not an [error response](#error-engine-call-response). For example:
+If the plugin configuration was specified as a closure, the engine evaluates that closure, with no arguments and in the scope of the plugin call, each time it receives this engine call, and returns the result. If the closure fails, the response is still `PipelineData`, with a `Value` that holds an [`Error`](#error) value, not an [error response](#error-engine-call-response). For example:
 
 ```json
 {
@@ -1293,7 +1293,7 @@ If the plugin configuration was specified as a closure, the engine evaluates tha
 }
 ```
 
-In Rust, [`EngineInterface::get_plugin_config()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.get_plugin_config) returns `Ok(None)` for `Empty`, and `Ok(Some(value))` otherwise, so a failed closure comes back as `Ok(Some(Value::Error { .. }))`.
+In Rust, call [`EngineInterface::get_plugin_config()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.get_plugin_config). [Plugin configuration](plugins.md#plugin-configuration) shows what it returns in each case.
 
 Example:
 
@@ -2793,7 +2793,7 @@ It's a map with the same top-level keys as `$env.config`, 39 of them in 0.117.0:
 - A setting that takes one of a few words is the Rust variant name, which is capitalized: `"edit_mode": "Emacs"`, `"use_ansi_coloring": "Auto"`, `"history": {"file_format": "Plaintext", ...}`.
 - A setting with a choice of forms is a tagged map, such as `"footer_mode": {"RowCount": 25}` or `"trim": {"Wrap": {"try_to_keep_words": true}}` in `table`.
 - Durations are integers of nanoseconds, as in `"plugin_gc": {"default": {"enabled": true, "stop_after": 10000000000}, ...}`, except `table.batch_duration`, which uses the `{"secs": 1, "nanos": 0}` form. Filesizes, such as `max_last_result_size`, are integers of bytes.
-- Settings that can hold any Nushell value are [`Value`s](#value-types): the entries of `color_config`, `explore`, `tui`, and `plugins`, `buffer_editor`, the hooks in `hooks`, and the fields of each entry in `keybindings` and `menus`. For example, `"buffer_editor": {"Nothing": {"span": {"start": 0, "end": 0}}}`.
+- Settings that can hold any Nushell value are [`Value`s](#value-types). These are `buffer_editor`, the hooks in `hooks`, the entries of `color_config`, `explore`, `tui`, and `plugins`, and the fields of each entry in `keybindings` and `menus`. For example, `"buffer_editor": {"Nothing": {"span": {"start": 0, "end": 0}}}`.
 
 ### `Ordering`
 

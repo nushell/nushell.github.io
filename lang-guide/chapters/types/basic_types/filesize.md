@@ -164,7 +164,7 @@ The `1.5 KiB` in the first row is 1536 bytes, shown in the default metric displa
 - `ps`
 - `sys mem`, `sys disks`, `sys net`
 - [`into filesize`](#converting-to-a-file-size), [`format filesize`](#format-filesize)
-- `math` subcommands such as `math sum`, `math max` and `math stddev` (see [Working with Numbers](/book/working_with_numbers.md#what-each-command-accepts))
+- `math` subcommands such as `math sum`, `math max` and `math stddev`, described in [Working with Numbers](/book/working_with_numbers.md#what-each-command-accepts)
 
 Note: The `where` command and other filters can use filesize in comparison expressions.
 
@@ -190,4 +190,4 @@ Note: The `where` command and other filters can use filesize in comparison expre
 
 A number can also go on the left of `*`, so `2 * 1kB` is `2.0 kB`. It can't go on the left of `/`: `2 / 1kB` is an error. Two file sizes can't be multiplied.
 
-A file size and a plain number don't mix in `+`, `-`, `<`, `<=`, `>` or `>=`. `1kB > 1` and `1kB + 1` are parse errors, since a bare number has no unit. Compare with a file size instead (`1kB > 1B`). `==` and `!=` don't fail, but a file size never equals a number, so `1kB == 1000` is `false`.
+A file size and a plain number don't mix in `+`, `-`, `<`, `<=`, `>` or `>=`. `1kB > 1` and `1kB + 1` are parse errors, since a bare number has no unit. Compare with a file size instead, as in `1kB > 1B`. `==` and `!=` don't fail, but a file size never equals a number, so `1kB == 1000` is `false`.

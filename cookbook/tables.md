@@ -84,7 +84,7 @@ Or as mentioned in the [Working with Tables](https://www.nushell.sh/book/working
 
 ### Calendar tables
 
-[`cal`](/commands/docs/cal.md) prints a calendar for the current month, or for a whole year with `--full-year 2024`. That calendar is text. `cal` renders the table itself, without the index column, and returns the rendered string. To filter or count days, ask for a table with `--as-table` (`-t`):
+[`cal`](/commands/docs/cal.md) prints a calendar for the current month, or for a whole year with `--full-year 2024`. `cal` renders the table itself, without the index column, and returns the rendered string. To filter or count days, ask for a table with `--as-table` (`-t`):
 
 ```nu
 cal --full-year 2024 | describe

@@ -95,7 +95,7 @@ Environment config file created at: /home/me/.config/nushell/env.nu
 Config file created at: /home/me/.config/nushell/config.nu
 ```
 
-Nushell decides that this is the first launch only when the configuration directory doesn't exist. If you delete `config.nu` later, Nushell starts without it and doesn't write a new one. To get the commented `config.nu` back, run `config reset --nu --without-backup`. Plain [`config reset`](/commands/docs/config_reset.md) writes the same text into both files after renaming the current ones to `oldconfig-<date>.nu` and `oldenv-<date>.nu`, and fails if one of them is missing (see [`config reset`](#config-reset)). Nushell doesn't create the `autoload` directory; see [Autoload directories](#autoload-directories).
+Nushell decides that this is the first launch only when the configuration directory doesn't exist. If you delete `config.nu` later, Nushell starts without it and doesn't write a new one. To get the commented `config.nu` back, run `config reset --nu --without-backup` (see [`config reset`](#config-reset)). Nushell doesn't create the `autoload` directory; see [Autoload directories](#autoload-directories).
 
 ::: tip
 You can quickly open `config.nu` in your default text editor using the `config nu` command. Likewise, the `config env` command will open `env.nu`. If Nushell was started with `--config` or `--env-config`, these commands open that file instead.
@@ -381,7 +381,7 @@ config nu --doc | nu-highlight | less -R
 
 The [Configuration reference](./config_reference.md) lists every setting with its type, default, and accepted values. Some of the more recently added settings are:
 
-- `error_style`: `"fancy"` (the default), `"plain"`, `"short"` for concise single-line error messages, or `"nested"` to show related errors nested under the main one. `error_lines` sets how many lines of source code the `fancy` and `nested` styles show above and below the line with the error (default `1`, and it can't be negative). See [Errors](./config_reference.md#errors).
+- `error_style`: `"fancy"` (the default), `"plain"`, `"short"` for concise single-line error messages, or `"nested"` to show related errors nested under the main one. `error_lines` sets how many lines of source code the `fancy` and `nested` styles show around the location of an error (default `1`). See [Errors](./config_reference.md#errors).
 - `auto_cd_implicit`: when `true`, typing just the name of a subdirectory (such as `src`) changes into it. By default, auto-cd requires a path such as `./src`. See [`auto_cd_implicit`](./config_reference.md#auto-cd-implicit) for how auto-cd works.
 - `history.path`: a custom location for the history file, or `null` to keep no history file. `history.ignore_space_prefixed` (default `true`) keeps commands that start with a space out of the history. See [History](./config_reference.md#history).
 - `completions.cache_size`: how many Tab-completion prefixes to remember (default `100`; `0` disables the cache). `completions.persistent_menus`: when `true`, completion and history menus stay open while you edit the commandline. See [`completions.cache_size`](./config_reference.md#completions-cache-size) for when Nushell empties the cache.
@@ -492,7 +492,7 @@ A few combinations only produce a warning (`nu::shell::incompatible_options`), a
 
 ### The `config` commands
 
-[`config`](/commands/docs/config.md) on its own only prints its help. The work is done by its subcommands:
+[`config`](/commands/docs/config.md) on its own only prints its help. Its subcommands do the work:
 
 | Command                                                                                  | What it does                                                                                                                    |
 | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -589,7 +589,7 @@ To remove the welcome message that displays each time Nushell starts:
 4. Save and exit your editor.
 5. Restart Nushell to test the change.
 
-To keep only the line with the startup time, set `$env.config.show_banner = "short"` instead. The setting also accepts `"full"`, which is the same as `true`, and `"none"`, which is the same as `false`. The banner's colors come from `color_config.banner_foreground`, `banner_highlight1`, and `banner_highlight2`. See [`show_banner`](./config_reference.md#show-banner).
+To keep only the line with the startup time, set `$env.config.show_banner = "short"` instead. See [`show_banner`](./config_reference.md#show-banner) for the other values and the banner's colors.
 
 ## Additional Startup Configuration
 
@@ -637,7 +637,7 @@ The variables that affect Nushell file locations are:
 
   Note that the directory represented by `$nu.data-dir`, including any of its subdirectories, are NOT created by default. Creation and use of these directories is up to the user.
 
-- `$env.XDG_DATA_DIRS` _(Unix Platforms Only)_: If this environment variable is set, it is used to populate the `$nu.vendor-autoload-dirs` directories. Following the XDG convention that earlier entries take precedence, the directories are processed in _reverse_ order: the first directory in `XDG_DATA_DIRS` is read last, giving it the ability to override definitions from the others. When the variable is unset or empty, Nushell uses `/usr/local/share/:/usr/share/`. Relative entries are skipped. See [Autoload directories](#autoload-directories) for the whole list.
+- `$env.XDG_DATA_DIRS` _(Unix Platforms Only)_: If this environment variable is set, it is used to populate the `$nu.vendor-autoload-dirs` directories. Following the XDG convention that earlier entries take precedence, the directories are processed in _reverse_ order: the first directory in `XDG_DATA_DIRS` is read last, giving it the ability to override definitions from the others. See [Autoload directories](#autoload-directories) for its default value and the whole list.
 
 - `$env.XDG_CACHE_HOME`: If this environment variable is set to an absolute path, Nushell sets the `$nu.cache-dir` constant to `($env.XDG_CACHE_HOME)/nushell`. Otherwise `$nu.cache-dir` is the `nushell` directory under the platform's cache directory, such as `~/Library/Caches/nushell` on macOS, `~/.cache/nushell` on Linux, or `%LOCALAPPDATA%\nushell` on Windows. A relative or empty value is ignored. Nushell doesn't store anything in this directory or create it. It is a standard place for your scripts and plugins to keep data they can rebuild.
 
@@ -1116,7 +1116,7 @@ debug experimental-options | select identifier enabled status
 # => ╰───┴─────────────────────────────┴─────────┴────────────────────╯
 ```
 
-The other columns are `description`, `since`, which is the Nushell version that added the option, and `issue`, a link to the GitHub issue that tracks it. The `experimental_options` column of [`version`](/commands/docs/version.md) gives the same states as one string, which is handy to paste into a bug report:
+The other columns are `description`, `since`, which is the Nushell version that added the option, and `issue`, a link to the GitHub issue that tracks it. The `experimental_options` field of [`version`](/commands/docs/version.md) gives the same states as one string, which is handy to paste into a bug report:
 
 ```nu
 version | get experimental_options

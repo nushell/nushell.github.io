@@ -1,6 +1,6 @@
 # Working with Paths
 
-The [`path`](/commands/docs/path.md) commands take file paths apart, build new ones, and compare them. This page explains what each subcommand accepts and returns, including the edge cases that the command reference leaves out. `path` by itself only prints the list of subcommands. For changing directories and the file commands, see [Moving Around the System](./moving_around.md).
+The [`path`](/commands/docs/path.md) commands take file paths apart, build new ones, and compare them. `path` by itself only prints the list of subcommands. For changing directories and the file commands, see [Moving Around the System](./moving_around.md).
 
 ## Paths are strings
 
@@ -124,7 +124,7 @@ A name that starts with a dot and has no other dot, such as `.bashrc`, is all st
 
 Give the extension without its dot. The name has to end in a dot and that exact text, case included. Otherwise the whole name becomes the stem and `extension` is empty, so `--extension .txt` never matches, and `--extension ''` keeps the whole name as the stem.
 
-`path join` skips an empty extension, so a trailing dot doesn't survive a round trip: `"draft." | path parse | path join` returns `draft`.
+`path join` skips an empty extension, so a trailing dot doesn't survive a round trip. `"draft." | path parse | path join` returns `draft`.
 
 ### `path split`
 

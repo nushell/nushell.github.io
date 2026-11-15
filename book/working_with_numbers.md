@@ -1,6 +1,6 @@
 # Working with Numbers
 
-The arithmetic [operators](operators.md) cover most everyday math. This page covers the commands that go further: the [`math`](/commands/docs/math.md) commands, which summarize lists and tables or apply a function to each number, and the [`random`](/commands/docs/random.md) commands, which generate random numbers, strings, bytes and UUIDs. The rules of each number type, such as literals, overflow, division and rounding, are on the [Integer](/lang-guide/chapters/types/basic_types/int.md), [Float](/lang-guide/chapters/types/basic_types/float.md), [Duration](/lang-guide/chapters/types/basic_types/duration.md) and [Filesize](/lang-guide/chapters/types/basic_types/filesize.md) pages of the Language Guide.
+The arithmetic [operators](operators.md) cover most everyday math. This page covers the [`math`](/commands/docs/math.md) commands, which summarize lists and tables or apply a function to each number, and the [`random`](/commands/docs/random.md) commands, which generate random numbers, strings, bytes and UUIDs. The rules of each number type, such as literals, overflow, division and rounding, are on the [Integer](/lang-guide/chapters/types/basic_types/int.md), [Float](/lang-guide/chapters/types/basic_types/float.md), [Duration](/lang-guide/chapters/types/basic_types/duration.md) and [Filesize](/lang-guide/chapters/types/basic_types/filesize.md) pages of the Language Guide.
 
 ## The `math` commands
 
@@ -85,7 +85,7 @@ The element-wise functions turn a list into a list of results, and an empty list
 # => {a: 1, b: [-2, -3]}
 ```
 
-Tables aren't part of their signatures. Apply the function to a column with [`update`](/commands/docs/update.md):
+They don't take tables. Apply the function to a column with [`update`](/commands/docs/update.md):
 
 ```nu
 [[item change]; [a -3] [b 2]] | update change { math abs }
@@ -161,7 +161,7 @@ The items have to be numbers, durations or file sizes, and a list can't mix numb
 
 ### `math mode`
 
-[`math mode`](/commands/docs/math_mode.md) returns a sorted list of the most frequent values. Every value that ties for most frequent is in the list, so a list with no repeats comes back whole, sorted. An empty list gives an empty list rather than an error:
+[`math mode`](/commands/docs/math_mode.md) returns a sorted list of the most frequent values. Every value that ties for most frequent is in the list, so a list with no repeats comes back whole, sorted:
 
 ```nu
 [1 2 2 3 3] | math mode | to nuon
@@ -170,11 +170,11 @@ The items have to be numbers, durations or file sizes, and a list can't mix numb
 # => [1, 2, 3]
 ```
 
-An int and a float count as different values even when they are equal, so `[1 1.0 1] | math mode` is `[1]`. `NaN` items are ignored. A range isn't accepted.
+An int and a float count as different values even when they are equal, so `[1 1.0 1] | math mode` is `[1]`. `NaN` items are ignored.
 
 ### `math product`
 
-[`math product`](/commands/docs/math_product.md) multiplies the items. The result is an int when every item is an int, and a float otherwise. Durations and file sizes aren't accepted. An int result that doesn't fit in 64 bits is an error, as it is for `*`:
+[`math product`](/commands/docs/math_product.md) multiplies the items. The result is an int when every item is an int, and a float otherwise. An int result that doesn't fit in 64 bits is an error, as it is for `*`:
 
 ```nu
 1..5 | math product
@@ -286,7 +286,7 @@ The constant e is `$math.E` after `use std/math`. See [`std/math`](./standard_li
 | [`math arccosh`](/commands/docs/math_arccosh.md)                                                                                                                                     | 1 or more              |                                                               |
 | [`math arctanh`](/commands/docs/math_arctanh.md)                                                                                                                                     | -1 to 1                | `1` and `-1` give `inf` and `-inf`                            |
 
-These commands take a number or a list of numbers, and nothing else: no ranges, records or column names. Input outside the range in the table is an error.
+These commands take only a number or a list of numbers, not a range, a record or column names. Input outside the range in the table is an error.
 
 ```nu
 [0 30 90] | math sin --degrees | to nuon
@@ -315,7 +315,7 @@ $math.PI | math sin
 
 ## Random values
 
-Each [`random`](/commands/docs/random.md) subcommand returns one new value. None of them reads pipeline input, so call one inside [`each`](/commands/docs/each.md) to get many values. The generator is seeded by the operating system, and no command or flag sets the seed, so results can't be repeated from one run to the next. `random` on its own only prints its subcommands.
+Each [`random`](/commands/docs/random.md) subcommand returns one new value. None of them reads pipeline input, so call one inside [`each`](/commands/docs/each.md) to get many values. The operating system seeds the generator, and no command or flag sets the seed, so results can't be repeated from one run to the next. `random` on its own only prints its subcommands.
 
 Three other commands also produce random results:
 

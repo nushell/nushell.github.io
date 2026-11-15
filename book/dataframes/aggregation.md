@@ -90,8 +90,6 @@ A fraction outside 0 to 1 fails when the plan runs, with
 
 ## Counting
 
-Three commands count values, and they don't count the same things.
-
 [`polars count`](/commands/docs/polars_count.md) counts the values that aren't
 null. It only builds an expression. [`polars len`](/commands/docs/polars_len.md)
 counts rows, nulls included:
@@ -296,7 +294,7 @@ dataframe always starts a rolling group-by, described next, so
 `--index-column is required for lazyframe input`. Use the expression form inside
 `polars select`, as above, or collect the dataframe first with
 [`polars collect`](/commands/docs/polars_collect.md). A column of type `object`,
-which Polars makes from a list of mixed values such as `[1 a 2]`, fails with
+which `polars into-df` makes from a list of mixed values such as `[1 a 2]`, fails with
 `Series of type object cannot be used for rolling operation`.
 
 To restart the window for each group, pipe the rolling expression into
@@ -373,7 +371,7 @@ $scores | polars select name (polars horizontal sum q1 q2 q3 | polars as total) 
 By default `sum` and `mean` skip nulls, so ana's total adds two scores and her
 average divides by two. With `--nulls` (`-n`), a null anywhere in the row makes
 the result null. `min` and `max` always skip nulls. `all` and `any` combine
-booleans, and there a null can decide the result: `true` and null give null for
+booleans, and there a null can decide the result. `true` and null give null for
 `all`. Given integer columns, they count every value other than `0` as `true`.
 `--nulls` changes only `sum` and `mean`. `sum` also accepts a string column, and
 then joins the values as text, so `sum name q1` gives `ana7` for the first row.

@@ -37,7 +37,7 @@
    # => 0001 README.md *.md
    ```
 
-   Here the bare `*.md` matched `README.md`, while the quoted `"*.md"` was passed as written. The untyped rest parameter of a `def --wrapped` command uses this shape too (see [Rest Parameters with Wrapped External Commands](/book/custom_commands.md#rest-parameters-with-wrapped-external-commands)).
+   Here the bare `*.md` matched `README.md`, while the quoted `"*.md"` was passed as written. The untyped rest parameter of a `def --wrapped` command reads bare words the same way, so `0001` keeps its text and a bare `*.md` is expanded when it reaches the external command. In that rest list, a bare word without glob characters is a `string`, not a `glob`, and a leading `~` or `...` in it is already expanded, so `~/x` arrives as `/home/me/x` (see [Rest Parameters with Wrapped External Commands](/book/custom_commands.md#rest-parameters-with-wrapped-external-commands)).
 
 3. On a variable, `external_arg` doesn't change how the value is parsed. It accepts any value, as [`any`](../basic_types/any.md) does, so a variable annotated this way behaves like an unannotated one:
 

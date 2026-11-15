@@ -1,6 +1,6 @@
 # Working with SQLite
 
-Nushell has SQLite built in. You can open a SQLite database file and run SQL against it, or keep tables in an in-memory database that the `stor` commands manage. This page covers both, the [`query db`](/commands/docs/query_db.md) and [`schema`](/commands/docs/schema.md) commands they share, and how Nushell values end up in SQLite columns.
+Nushell has SQLite built in. You can open a SQLite database file and run SQL against it, or keep tables in an in-memory database that the `stor` commands manage. The [`query db`](/commands/docs/query_db.md) and [`schema`](/commands/docs/schema.md) commands work on both.
 
 ## Database files and the in-memory database
 
@@ -17,7 +17,7 @@ Most tasks look the same for both kinds of database. The difference is how you g
 | List tables and columns      | `schema`                                           | `schema`                                           |
 | Keep the data after Nu exits | It's already a file                                | `stor export`, and `stor import` to load it        |
 
-[Loading data](./loading_data.md#sqlite) shows how to open a file, run queries with parameters, and write tables with [`into sqlite`](/commands/docs/into_sqlite.md), including the SQLite column type `into sqlite` picks for each Nushell type. When you `get` a table, some filters such as `select` and `first` become part of the SQL query, as [Tables from a SQLite file](/lang-guide/chapters/filters/selecting_data.md#tables-from-a-sqlite-file) explains. That works the same way for the in-memory database.
+[Loading data](./loading_data.md#sqlite) shows how to open a file, run queries with parameters, and write tables with [`into sqlite`](/commands/docs/into_sqlite.md), including the SQLite column type `into sqlite` picks for each Nushell type. When you `get` a table, some filters such as `select` and `first` become part of the SQL query, for the in-memory database too, as [Tables from a SQLite file](/lang-guide/chapters/filters/selecting_data.md#tables-from-a-sqlite-file) explains.
 
 Both kinds of database are the same kind of value, which `describe` shows as `SQLiteDatabase`. `query db`, `schema`, `get`, and `columns` take either one. `query db` and `schema` fail with a `Can't convert to database` error on any other input.
 
@@ -108,7 +108,7 @@ SQLite checks foreign keys in the in-memory database. A row that points at a mis
 
 [`stor insert`](/commands/docs/stor_insert.md) adds one row from a record, given with `--data-record` or as input, or one row for each record in a list or table on the input. The record's keys pick the columns, so they can come in any order and a record can leave columns out. A column that's left out is `NULL`, except a `datetime` column, which gets the current time.
 
-When you give both, `--data-record` wins and the input is ignored. This matters inside a closure, where the first command gets the closure's input without you passing it: `$rows | each {|row| stor insert --table-name people --data-record $row }` inserts `$row` once for each row.
+When you give both, `--data-record` wins and the input is ignored. This matters inside a closure, where the first command gets the closure's input without you passing it. `$rows | each {|row| stor insert --table-name people --data-record $row }` inserts `$row` once for each row.
 
 Each row is a separate `INSERT` statement. When one row fails, the rows before it stay in the table, and the rows after it aren't inserted. Here `Eve` fails with `table people has no column named email`, so `Dan` goes in and `Fay` doesn't:
 
@@ -131,7 +131,7 @@ The other errors you're likely to see are `no such table` when the table doesn't
 
 ### How values are stored
 
-`stor insert` and `stor update` convert values the way `into sqlite` does, as the table in [Loading data](./loading_data.md#sqlite) shows. A `bool` becomes `1` or `0`, a date becomes text such as `2024-01-02 10:00:00-06:00`, a duration becomes a number of nanoseconds, a filesize a number of bytes, and a list or record becomes JSON text. A range, which `into sqlite` can't make a column for, is stored as JSON text such as `"1..3"`. A closure is an error.
+`stor insert` and `stor update` convert values the way `into sqlite` does, as the table in [Loading data](./loading_data.md#sqlite) shows. A range, which `into sqlite` can't make a column for, is stored as JSON text such as `"1..3"`. A closure is an error.
 
 SQLite then applies the column's type. A string of digits put in an `INTEGER` column is stored as an integer, and an integer put in a `str` column is stored as text. A string that isn't a number stays text, even in an `INTEGER` column, and SQLite doesn't reject it.
 
@@ -295,5 +295,3 @@ open people.db | schema | get tables.people.columns | select name type pk
 # => │ 1 │ age  │ INTEGER │ 0  │
 # => ╰───┴──────┴─────────┴────╯
 ```
-
-`schema` with anything other than a database as input fails with `Can't convert to database`.

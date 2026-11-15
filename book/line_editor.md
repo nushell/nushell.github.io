@@ -23,7 +23,7 @@ Reedline allows Nushell commandlines to extend across multiple lines. This can b
 
    Pressing <kbd>Enter</kbd> after the open-bracket will insert a newline instead of running the command. This will also occur with opening (and valid) `(` and `[` expressions.
 
-   An unclosed string continues the same way. A line that ends inside a `"`, `'`, backtick or raw string gets a newline, and the newline becomes part of the string. Nushell decides by parsing the line: when the only problem is that something is still open, <kbd>Enter</kbd> inserts a newline. Any other error runs the line so that you see the error. That includes an extra closing bracket, as in `echo (1 + 2))`.
+   An unclosed string continues the same way. A line that ends inside a `"`, `'`, backtick or raw string gets a newline, and the newline becomes part of the string. Nushell parses the line, and when the first error it finds is that something is still open, <kbd>Enter</kbd> inserts a newline. Any other first error runs the line so that you see the error. That includes an extra closing bracket, as in `echo (1 + 2))`.
 
    This is commonly used to create blocks and closures (as above), but also list, record, and table literals:
 
@@ -83,14 +83,12 @@ Reedline allows Nushell commandlines to extend across multiple lines. This can b
 
    The editor is `$env.config.buffer_editor` if it's set, otherwise `$env.VISUAL`, otherwise `$env.EDITOR` (see [Configuration](./configuration.md)). When none of them is set, or the program it names isn't found, <kbd>Ctrl</kbd>+<kbd>O</kbd> does nothing.
 
-   Nushell adds the path of a temporary file to the end of the editor's arguments. An argument can instead hold the placeholders `{file}`, `{line}` and `{col}`, which Nushell replaces with the file's path and the cursor's line and column, both counted from 1. That way the editor opens with the cursor where you left it. If no argument contains `{file}`, the path still goes at the end:
+   To open the editor with the cursor where you left it, use the `{file}`, `{line}` and `{col}` placeholders described under [`buffer_editor`](./config_reference.md#buffer-editor):
 
    ```nu
    $env.config.buffer_editor = ["hx", "{file}:{line}:{col}"]
    $env.config.buffer_editor = ["vim", "+{line}"]   # cursor on line 2: vim +2 <temp file>
    ```
-
-   [`config nu`](/commands/docs/config_nu.md) and [`config env`](/commands/docs/config_env.md) open the same editor and fill in the placeholders too, with the config file as `{file}` and line and column 1.
 
 ## Setting the Editing Mode
 
@@ -204,7 +202,7 @@ A mode without the editing set rebinds <kbd>Backspace</kbd> and <kbd>Delete</kbd
 | <kbd>Ctrl</kbd>+<kbd>R</kbd> | Search the history (Nushell binds this key to the history menu instead, see above)  |
 | <kbd>Ctrl</kbd>+<kbd>O</kbd> | Open the current input in your editor (see `$env.config.buffer_editor`)             |
 
-When [background jobs](./background_jobs.md) are running, <kbd>Ctrl</kbd>+<kbd>D</kbd> on an empty line doesn't exit right away. Like [`exit`](/commands/docs/exit.md), it prints a `background_jobs_running` warning and returns to the prompt. Pressing <kbd>Ctrl</kbd>+<kbd>D</kbd> again kills the jobs and exits, unless you run another command first.
+When [background jobs](./background_jobs.md) not spawned with `--auto-kill` are running, <kbd>Ctrl</kbd>+<kbd>D</kbd> on an empty line doesn't exit right away. Like [`exit`](/commands/docs/exit.md), it prints a `background_jobs_running` warning and returns to the prompt. Pressing <kbd>Ctrl</kbd>+<kbd>D</kbd> again kills the jobs and exits, unless you run another command first.
 
 #### Navigation Keybindings
 
@@ -238,7 +236,7 @@ When the line already has text and the cursor is at its end, <kbd>↑</kbd> and 
 | <kbd>Shift</kbd>+<kbd>Enter</kbd>, <kbd>Alt</kbd>+<kbd>Enter</kbd> | Insert a newline without running the input             |
 | <kbd>Ctrl</kbd>+<kbd>J</kbd>                                       | Run the input, or insert a newline if it is incomplete |
 
-None of these fill the [cut buffer](#the-cut-buffer) (Emacs mode rebinds <kbd>Ctrl</kbd>+<kbd>W</kbd> to a cut, so there it does). When Nushell is built with the `system-clipboard` feature, this set also has <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd>, <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd> and <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd> to cut, copy and paste the selection with the system clipboard.
+None of these fill the [cut buffer](#the-cut-buffer), except <kbd>Ctrl</kbd>+<kbd>W</kbd> in Emacs mode, which rebinds it to a cut. When Nushell is built with the `system-clipboard` feature, this set also has <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd>, <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd> and <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd> to cut, copy and paste the selection with the system clipboard.
 
 #### Selection Keybindings
 
@@ -291,7 +289,7 @@ Emacs mode is the default. It has all four [common sets](#common-keybindings), p
 | <kbd>Alt</kbd>+<kbd>L</kbd>                                      | Lowercase the word under the cursor                                                             |
 | <kbd>Alt</kbd>+<kbd>C</kbd>                                      | Uppercase the first letter of the word under the cursor and lowercase the rest                  |
 
-<kbd>Alt</kbd>+<kbd>U</kbd>, <kbd>Alt</kbd>+<kbd>L</kbd> and <kbd>Alt</kbd>+<kbd>C</kbd> change the whole word, even with the cursor in the middle of it. With the cursor just before the `r` of `world`, <kbd>Alt</kbd>+<kbd>U</kbd> gives `WORLD`. Bash and other readline-based shells change only the part from the cursor to the end of the word, which would give `woRLD`.
+<kbd>Alt</kbd>+<kbd>U</kbd>, <kbd>Alt</kbd>+<kbd>L</kbd> and <kbd>Alt</kbd>+<kbd>C</kbd> change the whole word, even with the cursor in the middle of it. With the cursor just before the `r` of `world`, <kbd>Alt</kbd>+<kbd>U</kbd> gives `WORLD`. Bash and other readline-based shells change only the part from the cursor on, giving `woRLD`.
 
 ### Vi Mode
 
@@ -450,7 +448,7 @@ Selection:
 | <kbd>v</kbd>   | Toggle select mode                                                          |
 | <kbd>Esc</kbd> | Collapse the selection in normal mode; leave select mode in select mode     |
 
-In the Helix editor, <kbd>Esc</kbd> in normal mode keeps the selection, and <kbd>;</kbd> collapses it. Nushell has no <kbd>;</kbd> yet, so <kbd>Esc</kbd> does that job.
+In the Helix editor, <kbd>Esc</kbd> in normal mode keeps the selection, and <kbd>;</kbd> collapses it. Nushell's Helix mode has no <kbd>;</kbd>, so <kbd>Esc</kbd> does that job.
 
 Changes:
 
@@ -481,9 +479,9 @@ Match mode starts with <kbd>m</kbd>:
 | <kbd>m</kbd><kbd>d</kbd>\<char\>       | Delete the pair around the cursor, keeping what's inside |
 | <kbd>m</kbd><kbd>r</kbd>\<old\>\<new\> | Replace the pair around the cursor with another pair     |
 
-\<char\> is <kbd>w</kbd> or <kbd>W</kbd> for a word or WORD (with <kbd>i</kbd> and <kbd>a</kbd> only), either half of `()`, `[]`, `{}` or `<>`, or a quote. Any other character pairs with itself, so <kbd>m</kbd><kbd>i</kbd><kbd>|</kbd> selects the text between two `|`. On `echo (abc def)` with the cursor inside the parentheses, <kbd>m</kbd><kbd>i</kbd><kbd>(</kbd> and then <kbd>d</kbd> leave `echo ()`.
+\<char\> is <kbd>w</kbd> or <kbd>W</kbd> for a word or WORD (with <kbd>i</kbd> and <kbd>a</kbd> only), either half of `()`, `[]`, `{}` or `<>`, or a quote. Any other printable ASCII character pairs with itself, so <kbd>m</kbd><kbd>i</kbd><kbd>|</kbd> selects the text between two `|`. On `echo (abc def)` with the cursor inside the parentheses, <kbd>m</kbd><kbd>i</kbd><kbd>(</kbd> and then <kbd>d</kbd> leave `echo ()`.
 
-These Helix keys are not available yet: <kbd>;</kbd>, <kbd>,</kbd>, <kbd>J</kbd>, <kbd>G</kbd>, <kbd>X</kbd>, <kbd>&gt;</kbd>, <kbd>&lt;</kbd>, the <kbd>/</kbd>, <kbd>n</kbd> and <kbd>N</kbd> search commands, <kbd>m</kbd><kbd>m</kbd> (go to the matching bracket), and the multi-cursor commands.
+These Helix keys aren't available: <kbd>;</kbd>, <kbd>,</kbd>, <kbd>J</kbd>, <kbd>G</kbd>, <kbd>X</kbd>, <kbd>&gt;</kbd>, <kbd>&lt;</kbd>, the <kbd>/</kbd>, <kbd>n</kbd> and <kbd>N</kbd> search commands, <kbd>m</kbd><kbd>m</kbd> (go to the matching bracket), and the multi-cursor commands.
 
 Keybindings for Helix mode use the `helix_normal`, `helix_select` and `helix_insert` mode names. The prompt uses `PROMPT_INDICATOR_VI_INSERT` in Helix insert mode, and `PROMPT_INDICATOR_VI_NORMAL` in normal and select mode.
 
@@ -507,9 +505,8 @@ Reedline should store you will need to adjust this value in your config file:
 $env.config.history.max_size = 1000
 ```
 
-The default is `100_000`. Once the history holds that many commands, each new one pushes out the
-oldest. The limit applies only to the default `plaintext` file format. With
-`$env.config.history.file_format = "sqlite"`, Nushell ignores `max_size` and keeps every command.
+The default is `100_000`, and SQLite history ignores the limit. [History](./config_reference.md#history)
+in the configuration reference describes every history setting.
 
 ::: note
 The `history.max_size`, `history.file_format`, `history.isolation` and `history.path` settings
@@ -662,10 +659,6 @@ before. In the search:
 
 When nothing matches, the prompt says so, as in `(failing reverse-search: echqq)`.
 
-Reedline binds this search to <kbd>Ctrl</kbd>+<kbd>R</kbd>, but Nushell uses
-<kbd>Ctrl</kbd>+<kbd>R</kbd> for the [history menu](#history-menu) and moves the search to
-<kbd>Ctrl</kbd>+<kbd>Q</kbd>.
-
 ## Hints
 
 As you type, Reedline shows a hint in a dimmed color (`$env.config.color_config.hints`) after the
@@ -679,7 +672,7 @@ ran in the current directory, and falls back to the most recent one from anywher
 format doesn't record directories, so there the hint is always the most recent match.
 
 `show_hints` defaults to `true`, but hints also need color. While
-`$env.config.use_ansi_coloring` is `false` (or `auto` decides against color), no hint shows, whatever
+`$env.config.use_ansi_coloring` is `false`, or `auto` decides against color, no hint shows, whatever
 `show_hints` says.
 
 To compute hints yourself, set `$env.config.hinter.closure` to a closure. It receives a record with
@@ -1113,9 +1106,8 @@ event: { edit: CutInsidePair, left: "(", right: ")" }
 event: { edit: CutTextObject, scope: inner, object_type: { left: "(", right: ")" } }
 ```
 
-A missing `left` or `right`, or a value longer than one character, is treated
-like any other mistake in a keybinding. Nushell prints the error before every
-prompt and doesn't apply `$env.config.keybindings` until you fix it.
+A missing `left` or `right`, or a value longer than one character, makes a bad
+event, which Nushell handles as described under [Keybindings](#keybindings).
 
 ### Until Type
 
@@ -1159,23 +1151,11 @@ element in the menu.
 
 As you can see the `until` keyword allows us to define two events for the same
 keybinding. An event only lets `until` move on to the next one when it had
-nothing to do. The `menu` event does this when a menu is already open, the other
-menu events (such as `menunext`) when no menu is open, and `menuaccept` also when
-the menu has no suggestions. `up` and `down` do it when there is no line or
-history entry to move to, `left` and `right` at the ends of the line, `tostart`
-and `toend` when the cursor is already there, `firsthistory` when there is no
-older entry and `leavehistory` when you aren't stepping through the history. The
-history-hint events do it when there is no hint to accept, `esc` when there is no
-menu or selection to clear, `none` always, and `SwitchMode` when it can't switch
-(see [Send Type](#send-type)). Most other events always succeed, so the `until`
-event stops as soon as it reaches them.
-
-An `edit` event counts as having nothing to do only when it moves the cursor and
-the cursor stays put, as `{ edit: moveleft }` does at the start of the line, or
-when it copies a selection and nothing is selected. Every other edit succeeds,
-even one that changes nothing, such as `{ edit: clear }` on an empty line. The
-[reference](#event-and-edit-reference) at the end of this page lists the
-conditions for each event.
+nothing to do. The `menu` event has nothing to do when a menu is already open,
+`menunext` when no menu is open, and `{ edit: moveleft }` when the cursor is at
+the start of the line. Most other events always succeed, so the `until` event
+stops as soon as it reaches them. The [reference](#event-and-edit-reference) at
+the end of this page lists when each event and edit has nothing to do.
 
 For example, the next keybinding sends a `down` whenever there is a line or a
 newer history entry to move to, and only opens the completion menu when there
@@ -1625,7 +1605,7 @@ and their `not-` forms, and `++`. A date gets only comparisons, among them `olde
 A list gets `==`, `!=`, `in`, `not-in`, `has`, `not-has` and `++`, a record or a range gets the
 same without `++`, and a boolean gets `and`, `or` and `xor` plus `==`, `!=`, `in` and `not-in`.
 When the type isn't known, as for a column inside [`where`](/commands/docs/where.md)
-(`ls | where size `), the menu offers every operator. Typing the start of an operator narrows the
+(`ls | where size `), the menu offers every operator except `like` and `not-like`. Typing the start of an operator narrows the
 list, so `1 b` offers the five `bit-` operators.
 
 A mutable variable, or a variable under `$env`, also gets the assignment operators that fit its
@@ -1692,7 +1672,8 @@ that isn't loaded yet, and inside a bracketed import list:
 ```
 
 `overlay use` doesn't complete a module's members. [`source-env`](/commands/docs/source-env.md)
-offers `.nu` files and directories like `use` does, but not the `std/` paths, and
+offers loaded modules, `.nu` files and directories like `use` does, but not `std`, `std-rfc` or
+their submodules, and
 [`source`](/commands/docs/source.md) offers every file, as for any other path argument.
 
 ### Ide Completion Menu
@@ -2115,7 +2096,7 @@ there is one.
 | `MenuUp`, `MenuDown`, `MenuLeft`, `MenuRight` | Move the selection in that direction. What each direction does depends on the menu's layout.                                                                                                                                                                                        |
 | `MenuPageNext`, `MenuPagePrevious`            | Show the next or previous page of the menu.                                                                                                                                                                                                                                         |
 | `ExecuteHostCommand` `cmd: <string>`          | Runs `cmd` as a Nushell command and keeps the line, see [Send Type](#send-type).                                                                                                                                                                                                    |
-| `SwitchMode` `mode: <string>`                 | Switches to another mode of the current edit mode, see [Send Type](#send-type).                                                                                                                                                                                                     |
+| `SwitchMode` `mode: <string>`                 | Switches to another mode of the current edit mode, see [Send Type](#send-type). Has nothing to do when it can't switch.                                                                                                                                                             |
 
 Every `Menu...` event other than `Menu` itself has nothing to do when no menu is open.
 
@@ -2141,7 +2122,7 @@ lands instead of dropping it.
 | `MoveWordRight`                                     | The end of the next word                                                              |
 | `MoveWordRightStart`, `MoveBigWordRightStart`       | The start of the next word or WORD                                                    |
 | `MoveBigWordRightEnd`                               | The end of the next WORD                                                              |
-| `MoveWordRightEnd`                                  | The same place as `MoveWordRight`, which replaces it                                  |
+| `MoveWordRightEnd`                                  | The same place as `MoveWordRight`. Deprecated, use `MoveWordRight`                    |
 | `MoveToLineStart`, `MoveToLineEnd`                  | The start or end of the line                                                          |
 | `MoveToLineNonBlankStart`                           | The first character of the line that isn't a space or tab                             |
 | `MoveToStart`, `MoveToEnd`                          | The start or end of the buffer                                                        |

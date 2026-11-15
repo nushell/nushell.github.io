@@ -16,7 +16,7 @@ Import the module with a glob:
 use std/formats *
 ```
 
-The glob matters. [`open`](/commands/docs/open.md) parses a file by calling the `from` command named after its extension, and [`save`](/commands/docs/save.md) calls the matching `to` command. After `use std/formats *`, `from jsonl` and the others are in scope under those names, so `open` and `save` handle `.jsonl`, `.ndjson` and `.ndnuon` files automatically:
+The glob matters. [`open`](/commands/docs/open.md) parses a file by calling the `from` command named after its extension, and [`save`](/commands/docs/save.md) calls the matching `to` command. After `use std/formats *`, `from jsonl` and the others are in scope under those names, so `open` and `save` handle `.jsonl`, `.ndjson` and `.ndnuon` files:
 
 ```nu
 [{name: a, size: 1} {name: b, size: 2}] | save data.jsonl
@@ -38,7 +38,7 @@ After `use std/formats` without the glob, the commands are named `formats from j
 
 `from jsonl` and `from ndjson` are the same as [`from json --objects`](/commands/docs/from_json.md). They parse each line as a JSON value and return a list of the values, skipping blank lines. A line that isn't valid JSON, such as `{bad`, makes the whole conversion fail with `Error while parsing JSON text`. The parser is lenient about bare words, though, so a line such as `not json` comes back as the string `not json`.
 
-`to jsonl` and `to ndjson` write each item of a list as compact JSON on its own line, with a newline after every line, including the last. A single record or other value that isn't a list becomes one line.
+`to jsonl` and `to ndjson` write each item of a list as compact JSON on its own line, with a newline after every line, including the last. A single record or other value that isn't a list becomes one line, with no newline after it.
 
 ## NDNUON
 

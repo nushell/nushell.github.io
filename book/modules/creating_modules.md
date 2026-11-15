@@ -3,7 +3,7 @@
 [[toc]]
 
 ::: important
-When working through the examples below, start a new shell before importing an updated version of each module or command. This will help reduce any confusion caused by definitions from previous imports. It is also required when an example imports a module by name, as in `use my-utils`. Within one shell session, a module name that Nushell has already loaded keeps referring to the version it read first, even after you change the module's files. Importing by path, as in `use ./my-utils`, reads the files again, but commands you deleted from them stay defined. See [Module Path](./using_modules.md#module-path).
+When working through the examples below, start a new shell before importing an updated version of each module or command. This will help reduce any confusion caused by definitions from previous imports. It is also required when an example imports a module by name, as in `use my-utils`, because within one shell session that name keeps referring to the version Nushell read first, even after you change the module's files. See [Module Path](./using_modules.md#module-path) for when Nushell reads the files again.
 :::
 
 ## Overview
@@ -59,7 +59,7 @@ We covered the types of definitions that are available in modules briefly in the
 Only definitions marked with `export` (or `export-env` for environment variables) are accessible when the module is imported. Definitions not marked with `export` are only visible from inside the module. In some languages, these would be called "private" or "local" definitions. An example can be found below in [Additional Examples](#local-definitions).
 :::
 
-[`export`](/commands/docs/export.md) is a prefix, not a command of its own. It goes in front of `def`, `alias`, `const`, `type`, `extern`, `module` or `use`, and anything else after it, such as `export let x = 1`, is a parse error. `export-env` is a separate keyword. Outside a module, in a script or at the prompt, Nushell accepts the prefix and ignores it, so `export def` works like `def`. A file with `export def main [name: string] { ... }` can therefore be run with `nu greet.nu world` and imported with `use greet.nu`. Only a bare `export` with nothing after it fails outside a module, with `nu::parser::unexpected_keyword`.
+[`export`](/commands/docs/export.md) is a prefix, not a command of its own. It goes in front of `def`, `alias`, `const`, `type`, `extern`, `module` or `use`. `export-env` is a separate keyword. Outside a module, in a script or at the prompt, Nushell accepts the prefix and ignores it, so `export def` works like `def`. A file with `export def main [name: string] { ... }` can therefore be run with `nu greet.nu world` and imported with `use greet.nu`. Anything else after `export`, such as `let x = 1`, is a parse error, and so is a bare `export`. Outside a module, both fail with `nu::parser::unexpected_keyword`.
 
 An exported alias is imported the same way as a command: by name, with `*`, or behind the module name. The alias is expanded inside the module, so it can call a command that the module doesn't export:
 
@@ -538,7 +538,7 @@ To bring `my-utils` exported environment into scope for the `go.nu` module, ther
 
 1. Import the module in each command where it is needed
 
-   By placing `use my-utils` in the `go modules` command itself, its `export-env` will be _evaluated_ when the command is. The import applies only inside the body of `go modules` (see [Imports are scoped to their block](./using_modules.md#imports-are-scoped-to-their-block)). For example:
+   By placing `use my-utils` in the `go modules` command itself, its `export-env` will be _evaluated_ when the command is. The import applies only inside the body of `go modules`. See [Imports are scoped to their block](./using_modules.md#imports-are-scoped-to-their-block). For example:
 
    ```nu
    # go.nu
@@ -609,7 +609,7 @@ spam eggs
 # => eggs
 ```
 
-With any other submodule name, `use spam` would import neither command (see [Submodules](#submodules)). Constants that `mod` exports are dropped instead of merged. A `main` in `mod` also keeps the name `mod`, so `spam mod` runs it too. If the parent exports a `main` of its own as well, the second one is a `nu::parser::module_double_main` error.
+With any other submodule name, `use spam` would import neither command. See [Submodules](#submodules). Constants that `mod` exports are dropped instead of merged. A `main` in `mod` also keeps the name `mod`, so `spam mod` runs it too. If the parent exports a `main` of its own as well, the second one is a `nu::parser::module_double_main` error.
 
 ::: note
 A `.nu` file _may_ have the same name as its module directory (e.g., `spam/spam.nu`), and Nushell will import it. Still, prefer a different name: if the parent module and the same-named submodule both export a `main`, the two definitions resolve to the same command name and the parent's `main` silently wins.

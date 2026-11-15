@@ -24,7 +24,7 @@ ls *.md
 # => ╰───┴────────────────────┴──────┴─────────┴──────────────╯
 ```
 
-You can pass several patterns at once, such as `ls *.md docs`. A pattern that matches nothing is a "No matches found" error, while an empty directory gives an empty list. A directory name lists what's inside that directory, and each `name` keeps the directory part (`docs/intro.md`). `--short-names` (`-s`) drops it, `--full-paths` (`-f`) turns every name into an absolute path, and `--directory` (`-D`) lists the directory itself instead of its contents:
+You can pass several patterns at once, such as `ls *.md docs`. A pattern that matches nothing is a "No matches found" error, while an empty directory gives an empty list. A directory name lists what's inside that directory, and each `name` keeps the directory part, as in `docs/intro.md`. `--short-names` (`-s`) drops it, `--full-paths` (`-f`) turns every name into an absolute path, and `--directory` (`-D`) lists the directory itself instead of its contents:
 
 ```nu
 ls --short-names docs
@@ -90,7 +90,7 @@ Here, we're looking for any file that ends with ".md". The double-asterisks furt
 
 Nushell's globbing syntax not only supports `*`, but also matching [single characters with `?` and character groups with `[...]`](https://docs.rs/nu-glob/latest/nu_glob/struct.Pattern.html).
 
-That syntax is the one `ls`, `cp`, `mv`, `rm`, `du`, and the other file commands use. The [`glob` command](/commands/docs/glob.md) reads its patterns with a different library, [wax](https://docs.rs/wax/latest/wax/), which adds `{a,b}` alternatives and has its own rules. For example, `glob **/*.rs --exclude [target]` still lists the files under `target`, because an exclude pattern has to match the paths inside the directory: write `--exclude [target/**]`. See [Pattern syntax of the `glob` command](/lang-guide/chapters/types/basic_types/glob.md#pattern-syntax-of-the-glob-command) for the differences.
+That syntax is the one `ls`, `cp`, `mv`, `rm`, `du`, and the other file commands use. The [`glob` command](/commands/docs/glob.md) reads its patterns with a different library, [wax](https://docs.rs/wax/latest/wax/), which adds `{a,b}` alternatives and has its own rules. For example, `glob **/*.rs --exclude [target]` still lists the files under `target`, because an exclude pattern has to match the paths inside the directory. Write `--exclude [target/**]` instead. See [Pattern syntax of the `glob` command](/lang-guide/chapters/types/basic_types/glob.md#pattern-syntax-of-the-glob-command) for the differences.
 
 Escaping the `*`, `?`, and `[]` patterns works by enclosing them in a single-quoted, double-quoted, or
 [raw string](working_with_strings.md#raw-strings). For example, to show the contents of a directory named
@@ -369,7 +369,7 @@ mv *.log archive
 
 `rm` refuses to remove the current directory, or a directory that contains it, when you name it as `.` or as an absolute path. The error is "Cannot remove any parent directory".
 
-By default, `rm` deletes files permanently. If you'd rather have it move them to the system trash (the Recycle Bin on Windows), set `rm.always_trash` in your config:
+By default, `rm` deletes files permanently. If you'd rather have it move them to the system trash, or the Recycle Bin on Windows, set `rm.always_trash` in your config:
 
 ```nu
 $env.config.rm.always_trash = true
@@ -379,7 +379,7 @@ $env.config.rm.always_trash = true
 
 ### Checking disk usage
 
-[`du`](/commands/docs/du.md) reports how much space files and directories take up. With no argument, it reports on every entry in the current directory, hidden ones included. A glob such as `du *` skips hidden names unless you add `--all`. Each row has a `path` (always absolute) and two sizes:
+[`du`](/commands/docs/du.md) reports how much space files and directories take up. With no argument, it reports on every entry in the current directory, hidden ones included. A glob such as `du *` skips hidden names unless you add `--all`. Each row has an absolute `path` and two sizes:
 
 - `apparent` adds up the file sizes, the number most tools show as a file's size.
 - `physical` is the space on disk. It's usually larger, because the filesystem hands out space in whole blocks, but it can be smaller for sparse or compressed files.
@@ -440,7 +440,7 @@ ls --long *.txt | select name modified accessed | update modified { format date 
 
 ### Temporary files and directories
 
-[`mktemp`](/commands/docs/mktemp.md) creates a file with a random name and returns its absolute path. `--directory` (`-d`) creates a directory instead. On Linux and macOS, only you can use what it creates: a file gets the mode `rw-------` and a directory `rwx------`. Nushell doesn't delete them later, so remove them when you're done:
+[`mktemp`](/commands/docs/mktemp.md) creates a file with a random name and returns its absolute path. `--directory` (`-d`) creates a directory instead. On Linux and macOS, only you can use what it creates. A file gets the mode `rw-------` and a directory `rwx------`. Nushell doesn't delete them later, so remove them when you're done:
 
 ```nu
 let work = mktemp --directory
@@ -449,7 +449,7 @@ let work = mktemp --directory
 rm --recursive $work
 ```
 
-Without an argument, the name is `tmp.` followed by ten random characters, in the system's temporary directory. That's `TMPDIR` on Linux and macOS (`/tmp` when it isn't set), and `TMP` or `TEMP` on Windows, as they were set when Nushell started. It's the same directory as [`$nu.temp-dir`](./special_variables.md#nu), but `mktemp` doesn't resolve symbolic links in it, so on macOS its paths start with `/var/folders` where `$nu.temp-dir` has `/private/var/folders`.
+Without an argument, the name is `tmp.` followed by ten random characters, in the system's temporary directory. That's `TMPDIR` on Linux and macOS, and `TMP` or `TEMP` on Windows, as they were set when Nushell started. When `TMPDIR` isn't set, Linux uses `/tmp` and macOS uses your temporary directory under `/var/folders`. It's the same directory as [`$nu.temp-dir`](./special_variables.md#nu), but `mktemp` doesn't resolve symbolic links in it, so on macOS its paths start with `/var/folders` where `$nu.temp-dir` has `/private/var/folders`.
 
 A template argument sets the name. Its last run of `X`s, at least three of them, becomes random characters. With a template, the file goes in the current directory unless you add `--tmpdir` (`-t`) for the temporary directory or `--tmpdir-path` (`-p`) for another directory. A relative `--tmpdir-path` gives a relative result. `--suffix` adds text after the random part, and then the template has to end in `X`. `--dry` returns a name without creating anything:
 
@@ -473,4 +473,4 @@ try { mktemp report.XX } catch {|e| $e.msg }
 # => too few X's in template 'report.XX'
 ```
 
-A `--suffix` that contains `/` and a `--tmpdir-path` directory that doesn't exist are errors too.
+A `--suffix` that contains `/` is an error too, and so is a `--tmpdir-path` directory that doesn't exist, unless you add `--dry`.

@@ -98,7 +98,7 @@ Because these are environment variables, scripts you start from the shell, such 
 
 ### Colors in log lines
 
-The color codes are part of the line whether or not stderr is a terminal, so a log saved to a file (`nu build.nu 2> build.log` in another shell) contains them as well. Leave `%ANSI_START%` and `%ANSI_STOP%` out of the template to get plain lines.
+The color codes are part of the line whether or not stderr is a terminal, so a log saved to a file, as with `nu build.nu 2> build.log` in another shell, contains them as well. Leave `%ANSI_START%` and `%ANSI_STOP%` out of the template to get plain lines.
 
 ## Levels, prefixes and colors
 

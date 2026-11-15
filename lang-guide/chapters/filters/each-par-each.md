@@ -109,7 +109,7 @@ Some details of how `each` treats its input and output:
 
 ## Indexes with `enumerate`
 
-[`enumerate`](/commands/docs/enumerate.md) turns each item into a `{index, item}` record, so the closure can see the position. Because the column is named `index`, the table shows it in the `#` column. Input that isn't a list becomes a single row with index `0`, and `null` becomes an empty list:
+[`enumerate`](/commands/docs/enumerate.md) turns each item into a `{index, item}` record, so a closure after it can see the position. Because the column is named `index`, the table shows it in the `#` column. Input that isn't a list becomes a single row with index `0`, and `null` becomes an empty list:
 
 ```nu
 "solo" | enumerate

@@ -265,7 +265,7 @@ http get --raw --allow-errors https://httpbin.org/stream/3
 # => ╰───┴────┴──────────────────────────────╯
 ```
 
-`--raw` keeps the body as text so that `from json --objects` can read it one line at a time. Without it, `http get` tries to parse the whole JSON Lines body as a single JSON document and fails. The empty `else { }` block passes the response body through unchanged. Only the first pipeline inside the closure receives the stream as its input, so don't put other statements (such as `print`) before the `if`: the stream would not reach `from json --objects`. (Referencing `$in` later in the closure works, but it collects the whole body instead of streaming it.)
+`--raw` keeps the body as text so that `from json --objects` can read it one line at a time. Without it, `http get` tries to parse the whole JSON Lines body as a single JSON document and fails. The empty `else { }` block passes the response body through unchanged. Only the first pipeline inside the closure receives the stream as its input, so a statement such as `print` before the `if` keeps the stream from reaching `from json --objects`. Referencing `$in` later in the closure works, but it collects the whole body instead of streaming it.
 
 The response body streams through the pipeline while you inspect metadata and process the stream simultaneously. Before `metadata access`, you needed `--full` to get metadata, which consumed the entire body and prevented streaming.
 
@@ -292,7 +292,7 @@ http get --headers [X-Api-Key abc123] http://localhost:8765/echo | get x_api_key
 # => abc123
 ```
 
-`--user` (`-u`) and `--password` (`-p`) send HTTP Basic authentication, an `Authorization: Basic ...` header holding the base64-encoded `user:password`. Either one can be given alone.
+`--user` (`-u`) and `--password` (`-p`) send HTTP Basic authentication, an `Authorization: Basic ...` header holding the base64-encoded `user:password`. You can give either one alone.
 
 ```nu
 http get --user alice --password s3cret http://localhost:8765/private
@@ -307,7 +307,7 @@ Basic authentication only encodes the password and doesn't encrypt it, so use it
 
 ### Handling error responses
 
-A response with a status outside the 200 range is an error. The message has the status code, the reason, and the URL. Below it, the error shows the status reason again, or the response body when the response's content type is exactly `application/json`, with no `charset` or other parameter. For many APIs that body holds their own explanation:
+A response with a status outside the 200 range is an error. Its message has the status code, the reason, and the URL. The label below shows the status reason again, or the response body when the content type is exactly `application/json`, with no `charset` or other parameter. Many APIs put their own explanation in that body:
 
 ```nu
 http get http://localhost:8765/status/404/json
@@ -359,7 +359,7 @@ http get --full http://localhost:8765/redirect | reject headers
 
 The HTTP commands follow redirects by default. `--redirect-mode` (`-R`) changes that:
 
-- `manual` (or `m`) returns the redirect response itself, without an error. Its status and `location` header say where it points.
+- `manual` (or `m`) returns the redirect response itself, without an error. Its `location` header says where it points.
 - `error` (or `e`) fails with a `Redirect encountered when redirect handling mode was 'error'` error.
 
 ```nu
@@ -398,7 +398,7 @@ The other `http post` flags (`--headers`, `--user`, `--password`, `--max-time`, 
 
 ### `http put`, `http patch`, and `http delete`
 
-[`http put`](/commands/docs/http_put.md) and [`http patch`](/commands/docs/http_patch.md) take the same arguments and flags as `http post`, and only send a different HTTP method. The body is the second argument or the input, it's required, and `--content-type` or the input's content type decides how it's encoded:
+[`http put`](/commands/docs/http_put.md) and [`http patch`](/commands/docs/http_patch.md) take the same arguments and flags as `http post` and only send a different HTTP method. The body is required, and it's encoded by the same rules:
 
 ```nu
 {name: Bob} | to json | http put http://localhost:8765/users/2 | get method
@@ -421,7 +421,7 @@ http delete --content-type application/json --data {reason: duplicate} http://lo
 # => }
 ```
 
-A record given with `--data` needs a `--content-type` that says how to encode it, just like an `http post` body. Without one, it fails with `Accepted types: [binary, string]`.
+As with `http post`, a record given with `--data` and no `--content-type` fails with `Accepted types: [binary, string]`.
 
 ### `http` without a subcommand
 
@@ -517,7 +517,7 @@ http options http://localhost:8765/api | where name == allow | get value.0
 # => GET, HEAD, POST, DELETE, OPTIONS
 ```
 
-Browsers send an `OPTIONS` request before a cross-origin request (a CORS preflight), and you can send the same headers to check how a server will answer. In a `--headers` record, quote a value that contains a colon, such as a URL:
+Before a cross-origin request, a browser sends an `OPTIONS` request called a CORS preflight. Send the same headers to check how a server will answer it. In a `--headers` record, quote a value that contains a colon, such as a URL:
 
 ```nu
 http options --headers {Origin: "https://app.example.com", Access-Control-Request-Method: DELETE} http://localhost:8765/api | where name starts-with access-control | sort-by name
@@ -598,7 +598,7 @@ The socket path specifies where to connect, while the URL's hostname is used for
 
 ### Finding a free port
 
-[`port`](/commands/docs/port.md) returns the number of a TCP port that nothing is using, which is handy when you start a local server for testing:
+[`port`](/commands/docs/port.md) returns the number of a TCP port that nothing is using. Use it to pick a port for a local test server:
 
 ```nu
 let free = port
@@ -608,7 +608,7 @@ http get --full $"http://localhost:($free)/" | get status
 # => 200
 ```
 
-With no arguments, the operating system picks the port. With a start and an end, `port` tries the ports in that range from the lowest up and returns the first free one, and with only a start, the range runs to 65535. It only checks the port. It doesn't hold it open, so another program can take the port before you use it.
+With no arguments, the operating system picks the port. With a start and an end, `port` tries the ports in that range from the lowest up and returns the first free one, and with only a start, the range runs to 65535. It doesn't hold the port open, so another program can take it before you use it.
 
 On Linux and macOS, `port` checks a port by binding to it on `127.0.0.1`, and a port it can't bind for any reason counts as taken. On Windows it looks the port up in the system's table of TCP connections instead. When every port in the range is taken, it fails:
 
@@ -636,7 +636,7 @@ The `url` commands take URLs apart, put them back together, and encode and decod
 
 #### Taking a URL apart
 
-[`url parse`](/commands/docs/url_parse.md) turns a URL string into a record. It normalizes the URL on the way. The host is lowercased, `.` and `..` segments are resolved, and a port that's the default for the scheme is dropped. `query` keeps the query string as it was written, and `params` holds it decoded, with one row for each key:
+[`url parse`](/commands/docs/url_parse.md) turns a URL string into a record. On the way, it lowercases the host, resolves `.` and `..` segments, and drops a port that's the default for the scheme. `query` keeps the query string as it was written, and `params` holds it decoded, with one row for each `key=value` pair:
 
 ```nu
 'https://Example.COM:443/docs/../api/./v1?q=nu%20shell&tag=a&tag=b#top' | url parse
@@ -659,7 +659,7 @@ The `url` commands take URLs apart, put them back together, and encode and decod
 # => ╰──────────┴──────────────────────────╯
 ```
 
-Every field is a string, `port` included, and a part the URL doesn't have is an empty string. A string without a scheme, such as `example.com/path`, fails with `Incomplete or incorrect URL. Expected a full URL, e.g., https://www.example.com`.
+Every field except `params` is a string, `port` included, and a part the URL doesn't have is an empty string. A string without a scheme, such as `example.com/path`, fails with `Incomplete or incorrect URL. Expected a full URL, e.g., https://www.example.com`.
 
 `--base` (`-b`) resolves a relative URL against a base URL, the way a browser resolves a link on a page. An absolute URL ignores the base. Together with `url join`, that turns the links on a page into full URLs:
 
@@ -694,7 +694,7 @@ The base has to be a full URL itself. If it isn't, the error says `Incomplete or
 # => https://api.example.com/v1/search?q=rust+lang&page=2
 ```
 
-`url join` adds a `/` in front of `path`, a `?` in front of `query`, and a `#` in front of `fragment` when they don't start with one. `port` can be an int or a string of digits, and it's kept even when it's the scheme's default. Empty fields are left out.
+`url join` adds a `/` in front of `path` and a `#` in front of `fragment` when they don't start with one. It always adds a `?` in front of `query`, so leave the `?` out. `port` can be an int or a string of digits, and it's kept even when it's the scheme's default. Empty fields are left out.
 
 `params` is the only field that gets encoded. `path`, `query`, and `fragment` go into the URL exactly as you give them, so encode them first:
 
@@ -737,7 +737,7 @@ A missing `scheme` or `host` fails with `Missing parameter`, an empty one with `
 # => q=a%26b+c&tags=x&tags=y&n=3&ok=true
 ```
 
-It also takes a table with `key` and `value` columns, which can repeat a key wherever you need it. A table with other column names isn't accepted.
+It also takes a table with `key` and `value` columns, which can repeat a key wherever you need it. A table without both of those columns isn't accepted.
 
 ```nu
 [[key value]; [sort name] [sort age]] | url build-query

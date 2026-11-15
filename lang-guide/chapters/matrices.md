@@ -2,7 +2,7 @@
 
 A `matrix` is a block of floating-point numbers with a fixed shape, such as 2 rows by 3 columns. You make one from a list of lists or a table, and then the `matrix` commands do arithmetic, products, sums and reshaping on the whole block at once, in compiled code instead of a closure per item. Reach for a matrix when the data is all numbers and you want linear algebra or totals along rows and columns. For anything with text, records or mixed types, keep a list of lists or a table.
 
-This page covers creating matrices, the shape rules, element-wise and matrix operations, `matrix map` and `matrix reduce`, and converting back. [Custom values](./types/other_types/custom_value.md#matrices) describes the `matrix` value type itself. Bare [`matrix`](/commands/docs/matrix.md) prints the list of subcommands, the same as `help matrix`.
+[Custom values](./types/other_types/custom_value.md#matrices) describes the `matrix` value type itself. Bare [`matrix`](/commands/docs/matrix.md) prints the list of subcommands, the same as `help matrix`.
 
 ## Creating a matrix
 
@@ -195,7 +195,7 @@ $a | matrix multiply --swap $b | matrix into-nu | to nuon
 # => [[3.0, 4.0], [1.0, 2.0]]
 ```
 
-`--multall` (`-a`) multiplies by every matrix argument in turn, left to right, so `$a | matrix multiply --multall $b $c` is `A × B × C`. Without `--multall`, matrices after the first argument are silently ignored. With both flags, `--swap` only swaps the input and the first argument, and the rest still multiply on the right:
+`--multall` (`-a`) multiplies by every matrix argument in turn, left to right, so `$a | matrix multiply --multall $b $c` is `A × B × C`. Without `--multall`, matrices after the first argument are ignored. With both flags, `--swap` only swaps the input and the first argument, and the rest still multiply on the right:
 
 ```nu
 $a | matrix multiply $b $b | matrix into-nu | to nuon

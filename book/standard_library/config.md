@@ -46,7 +46,7 @@ $env.XDG_DATA_DIRS
 # => │ 2 │ ~/.local/share   │
 # => ╰───┴──────────────────╯
 ^sh -c 'echo $XDG_DATA_DIRS'
-# => /usr/share:/usr/local/share:/home/myuser/.local/share
+# => /usr/share:/usr/local/share:/home/me/.local/share
 ```
 
 The list keeps a path as you added it. The `~` is expanded only when `to_string` turns the list back into a string for an external program. This is the same pair of closures as the `XDG_DATA_DIRS` example in [ENV_CONVERSIONS](../configuration.md#env-conversions).

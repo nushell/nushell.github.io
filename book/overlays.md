@@ -5,7 +5,7 @@ They resemble virtual environments found in some languages, such as Python.
 
 _Note: To understand overlays, make sure to check [Modules](modules.md) first as overlays build on top of modules._
 
-All the work is done by four subcommands of [`overlay`](/commands/docs/overlay.md): `overlay use`, `overlay hide`, `overlay new` and `overlay list`. Running `overlay` by itself only prints its help. Like `use`, `overlay use`, `overlay hide` and `overlay new` are parser keywords, so they act when the code is parsed and can't be part of a pipeline. `overlay list` is an ordinary command that returns a table.
+[`overlay`](/commands/docs/overlay.md) has four subcommands, `overlay use`, `overlay hide`, `overlay new` and `overlay list`, and by itself only prints its help. Like `use`, `overlay use`, `overlay hide` and `overlay new` are parser keywords, so they act when the code is parsed and can't be part of a pipeline. `overlay list` is an ordinary command that returns a table.
 
 ## Basics
 
@@ -47,7 +47,7 @@ The module can be created by any of the three methods described in [Creating Mod
 - file
 - directory
 
-For a file or directory, give its path to `overlay use`. The overlay is named after the file without its `.nu` extension, or after the directory. As with [`use`](modules/using_modules.md#module-path), a relative path is looked up from the current directory (or the directory of the file making the call) and then in `$NU_LIB_DIRS` and `$env.NU_LIB_DIRS`. For example, in a new shell, with a file `spam-file.nu` that contains `export def foo [] { "foo from file" }`:
+For a file or directory, give its path to `overlay use`. The overlay is named after the file without its `.nu` extension, or after the directory. As with [`use`](modules/using_modules.md#module-path), a relative path is looked up from the directory of the file making the call, or the current directory at the prompt, and then in `$NU_LIB_DIRS` and `$env.NU_LIB_DIRS`. For example, in a new shell, with a file `spam-file.nu` that contains `export def foo [] { "foo from file" }`:
 
 ```nu
 overlay use ./spam-file.nu
@@ -65,7 +65,7 @@ overlay list
 
 From then on, the overlay is called `spam-file`, as in `overlay hide spam-file`.
 
-The path can also be a [constant](variables.md#constant-variables). If its value is `null`, `overlay use` does nothing, so a config file can activate an overlay only when, say, a file exists. See the `null` entry under [Module Path](modules/using_modules.md#module-path) for an example with `use`.
+The path can also be a [constant](variables.md#constant-variables). If its value is `null`, `overlay use` does nothing, so a config file can activate an overlay only when a file exists. See the `null` entry under [Module Path](modules/using_modules.md#module-path) for an example with `use`.
 :::
 
 To create the overlay, call [`overlay use`](/commands/docs/overlay_use.md):
@@ -234,7 +234,7 @@ eggs
 # => eggs
 ```
 
-Without `--reload`, `$env.SCRATCH` would be back as well. For a name that isn't an overlay yet, `--reload` makes no difference, and `overlay new --reload` creates the overlay as usual. On an overlay that is still active, `overlay new` moves the overlay to the top of the stack, with or without `--reload`, as `overlay use` does (see [Ordering overlays](#ordering-overlays)).
+Without `--reload`, `$env.SCRATCH` would be back as well. For a name that isn't an overlay yet, `--reload` makes no difference. On an overlay that is still active, `overlay new` moves the overlay to the top of the stack, with or without `--reload`, as `overlay use` does. See [Ordering overlays](#ordering-overlays).
 
 :::
 
@@ -373,7 +373,7 @@ $env.FOO
 # => foo
 ```
 
-The current directory is an environment variable too (`$env.PWD`), so a `cd` while an overlay is the last active one is recorded in that overlay. Hiding the overlay takes you back to the directory you were in when you activated it, and bringing it back with `overlay use` returns you to the directory you left it in. To stay where you are, hide it with `overlay hide <name> --keep-env [PWD]`.
+The current directory is the environment variable `$env.PWD`, so a `cd` while an overlay is the last active one is recorded in that overlay. Hiding the overlay takes you back to the directory you were in when you activated it, and bringing it back with `overlay use` returns you to the directory you left it in. To stay where you are, hide it with `overlay hide <name> --keep-env [PWD]`.
 
 ## Ordering Overlays
 

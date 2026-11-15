@@ -157,9 +157,9 @@ For a table or record, name the columns to convert as cell paths after the comma
 
 - `into binary`
 - `format bits` to show the bits of a binary value (or a number) as a string of `0`s and `1`s
-- `bits` subcommands for bitwise math (see [The `bits` commands](/book/working_with_binary.md#the-bits-commands))
-- `bytes` subcommands to search, slice and edit bytes (see [The `bytes` commands](/book/working_with_binary.md#the-bytes-commands))
-- `hash` subcommands for checksums (see [Hashing with `hash`](/book/working_with_binary.md#hashing-with-hash))
+- `bits` subcommands for bitwise math, described in [The `bits` commands](/book/working_with_binary.md#the-bits-commands)
+- `bytes` subcommands to search, slice and edit bytes, described in [The `bytes` commands](/book/working_with_binary.md#the-bytes-commands)
+- `hash` subcommands for checksums, described in [Hashing with `hash`](/book/working_with_binary.md#hashing-with-hash)
 - `encode`, `decode`
 - `take`
 - `chunks` to split binary into individual bytes or groups

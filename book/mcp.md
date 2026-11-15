@@ -47,7 +47,7 @@ The server offers three tools. It has no MCP resources or prompts.
 | `command_help`  | `name`   | Shows the help for one command. The name is the one you call it by, so an alias or a command imported from a module works too.     |
 | `evaluate`      | `input`  | Runs Nushell code and returns the result.                                                                                          |
 
-`list_commands` and `command_help` return plain text. `list_commands` writes one `<call signature> - <description>` line per command. Without `find`, it lists every command in scope, which is several hundred lines. With `find`, it keeps the commands whose name, description, or search terms contain that text, ignoring case. It is a plain substring test, not a pattern. If nothing matches, the tool returns the error `No matching commands found`.
+`list_commands` and `command_help` return plain text. `list_commands` writes one `<call signature> - <description>` line per command. Without `find`, it lists every command in scope, which is several hundred lines. With `find`, it keeps the commands whose name, description, or search terms contain that text as a plain substring, ignoring case. If nothing matches, the tool returns the error `No matching commands found`.
 
 `command_help` shows a command's usage line, description, extra details, search terms, flags, and positional parameters. It leaves out the input and output types and the examples, which `evaluate` can get with `help <name>`. It knows the commands defined in the session, including custom commands from earlier `evaluate` calls, but not external programs. An unknown name returns the error ``command `<name>` not found``.
 
@@ -101,15 +101,15 @@ Every result is also stored in the `$history` list, at the `history_index` given
 | `NU_MCP_HISTORY_LIMIT` | `100`    | How many results `$history` keeps. Older results are dropped. `0` still keeps the newest one.                                                                                       |
 | `NU_MCP_PROMOTE_AFTER` | `120sec` | A call that runs longer than this becomes a [background job](#long-running-calls). The response is an error with the job id, and the result can be collected later with `job recv`. |
 
-The output limit is measured on the result written as NUON, the way [`to nuon`](/commands/docs/to_nuon.md) writes it, so the quotes around a string count toward it. The response itself shows a string without quotes when it can.
+The output limit is measured on the result as [`to nuon`](/commands/docs/to_nuon.md) writes it, so the quotes around a string count toward it. The response itself shows a string without quotes when it can.
 
-Set these variables with `evaluate`, or in a configuration file the server loads, using a value of the right type: a filesize for `NU_MCP_OUTPUT_LIMIT`, an int for `NU_MCP_HISTORY_LIMIT`, and a duration for `NU_MCP_PROMOTE_AFTER`, as in `$env.NU_MCP_PROMOTE_AFTER = 10min`.
+Each variable needs a value of the right type: a filesize for `NU_MCP_OUTPUT_LIMIT`, an int for `NU_MCP_HISTORY_LIMIT`, and a duration for `NU_MCP_PROMOTE_AFTER`, as in `$env.NU_MCP_PROMOTE_AFTER = 10min`.
 
 `$history` indices count up for the whole session and never shift. A dropped result's index reads as `null`, the same as a result that was `null`, and `$history | length` still counts it. To keep a result for longer, save it with `let`.
 
 ### Long-Running Calls
 
-A call that runs longer than `NU_MCP_PROMOTE_AFTER` keeps running as a [background job](./background_jobs.md), and the client gets an error response right away. The same happens when the client cancels a request that is still running. Here each line is a separate `evaluate` call:
+A call that runs longer than `NU_MCP_PROMOTE_AFTER` keeps running as a [background job](./background_jobs.md), and the client gets an error response right away. A request that the client cancels while it runs becomes a background job the same way. Here each line is a separate `evaluate` call:
 
 ```nu
 $env.NU_MCP_PROMOTE_AFTER = 1sec
@@ -121,7 +121,7 @@ The second call returns the error ``Operation promoted to background job (id: 1)
 
 The job runs on a copy of the session. Variables, definitions, and environment changes it makes are thrown away, and its result is not added to `$history`. When it finishes, the result arrives in the session's own mailbox (job 0) as one string without a tag: the output written as NUON, an external command's output as plain text, or `Error: ` followed by the error record. The string is never truncated. Use [`from nuon`](/commands/docs/from_nuon.md) to turn NUON back into data.
 
-In [`job list`](/commands/docs/job_list.md), the job's description is `mcp: ` followed by the first line of the code, cut to 40 characters. [`job kill`](/commands/docs/job_kill.md) interrupts it, and an `Error: ` message about the interruption still arrives in the mailbox.
+In [`job list`](/commands/docs/job_list.md), the job's description is `mcp: ` followed by the first line of the code. A line longer than 40 characters is cut to 40 and ends in `...`. [`job kill`](/commands/docs/job_kill.md) interrupts it, and an `Error: ` message about the interruption still arrives in the mailbox.
 
 ## HTTP Transport
 

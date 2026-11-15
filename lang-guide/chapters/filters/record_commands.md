@@ -2,7 +2,7 @@
 
 The `record` subcommands take a record and return a record, so you don't need to `transpose` it into a table and back. [Transforming Records](/book/working_with_records.md#transforming-records) in the Book introduces them. This page gives the exact rules.
 
-Given a list of records (a table), each of the four handles every record on its own and streams the results. `record` by itself only prints its help text with the list of subcommands.
+Given a table, each of the four handles every record on its own and streams the results. `record` by itself only prints its help text with the list of subcommands.
 
 ## `record where`
 
@@ -47,7 +47,7 @@ Put `--keys` and `--values` before the condition, because a row condition takes 
 - a two-element list `[newkey, newvalue]`.
 - `null`, which drops the field.
 
-Anything else is a type error (`expected a record, a two-element list, or null`).
+Any other value is a type error (`expected a record, a two-element list, or null`), and a list of any other length is an `incorrect_value` error.
 
 ```nu
 {a: 1, b: 2} | record each {|key, value| [($key + _x) ($value * 2)] }
@@ -122,7 +122,7 @@ For a list of records, each record is walked separately, and the paths start at 
 # => {port: 8080, tls: {enabled: true, cert: x}}
 ```
 
-Fields without a closure pass through unchanged. A closure for a field that the input doesn't have is skipped, unless `--strict` is given, which makes it a `column_not_found` error.
+Fields without a closure pass through unchanged. A closure for a field that the input doesn't have is skipped, unless `--strict` (`-s`) is given, which makes it a `column_not_found` error.
 
 Every entry of the closures record has to be a closure or a nested record of closures. `record apply` checks that before it runs any closure, so a mistake fails without partly converting the record:
 

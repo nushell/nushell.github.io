@@ -61,11 +61,11 @@ If you have more than one environment variable you'd like to set, you can use [`
 load-env { "BOB": "FOO", "JAY": "BAR" }
 ```
 
-`load-env` also takes the record as pipeline input, which suits commands that output one, as in `direnv export json | from json | load-env` (see [Direnv](/cookbook/direnv.md)).
+`load-env` also takes the record as pipeline input, which suits commands that output one, as in `direnv export json | from json | load-env`. See [Direnv](/cookbook/direnv.md).
 
-Each string value goes through its `from_string` conversion in `$env.ENV_CONVERSIONS`, and a string `PATH` becomes a list (see [Environment Variable Conversions](#environment-variable-conversions)). `--no-convert` sets the values exactly as given. If a conversion fails, `load-env` sets none of the variables, unless the record has an `ENV_CONVERSIONS` key (see below).
+Each string value goes through its `from_string` conversion in `$env.ENV_CONVERSIONS`, and a string `PATH` becomes a list. See [Environment Variable Conversions](#environment-variable-conversions). `--no-convert` sets the values exactly as given. If a conversion fails, `load-env` sets none of the variables, unless the record has an `ENV_CONVERSIONS` key.
 
-Three kinds of keys are special. A `config` key applies its settings to `$env.config` right away, as assigning `$env.config` does. `PWD`, `FILE_PWD`, and `CURRENT_FILE` are rejected with an error (see [Automatic variables](#automatic-variables)). An `ENV_CONVERSIONS` key changes the order. `load-env` first sets every value in the record as given, then runs the new conversions on every string variable, as assigning `$env.ENV_CONVERSIONS` does. One record can therefore carry a conversion and the variable it converts:
+Three kinds of keys are special. A `config` key applies its settings to `$env.config` right away, as assigning `$env.config` does. `PWD`, `FILE_PWD`, and `CURRENT_FILE` are rejected with an error. See [Automatic variables](#automatic-variables). An `ENV_CONVERSIONS` key changes the order. `load-env` first sets every value in the record as given, then runs the new conversions on every string variable, as assigning `$env.ENV_CONVERSIONS` does. One record can therefore carry a conversion and the variable it converts:
 
 ```nu
 load-env { ENV_CONVERSIONS: { FOO: { from_string: { split row '-' } } }, FOO: 'a-b' }
@@ -216,7 +216,7 @@ An assignment like this one fails before anything runs, with a `nu::compile` err
 
 When Nushell starts, it sets `PWD` to the directory its process starts in. An inherited `PWD` variable that names a different directory is replaced. External commands always start in `$env.PWD`.
 
-`FILE_PWD` and `CURRENT_FILE` don't exist in the REPL or in `nu -c`. For when exactly they are set, see [`$env.CURRENT_FILE`](./special_variables.md#env-current-file).
+For when exactly `FILE_PWD` and `CURRENT_FILE` are set, see [`$env.CURRENT_FILE`](./special_variables.md#env-current-file).
 
 ## Single-use Environment Variables
 
@@ -368,7 +368,7 @@ Because `nu` is an external program, Nushell translated the `[ a b c ]` list acc
 Running commands with `nu -c` does not load the config file, therefore the env conversion for `FOO` is missing and it is displayed as a plain string -- this way we can verify the translation was successful.
 You can also run this step manually by `do $env.ENV_CONVERSIONS.FOO.to_string [a b c]`
 
-_(Important! The string -> value conversion happens only for variables that already exist when `$env.ENV_CONVERSIONS` is assigned, such as those inherited from the parent process. A variable that you set as a string afterwards with `$env.FOO = ...` stays a string. To convert it, set it before assigning `ENV_CONVERSIONS`, or assign `$env.ENV_CONVERSIONS` to itself again. [`load-env`](/commands/docs/load-env.md), [`with-env`](/commands/docs/with-env.md) and `FOO=bar cmd` don't have this limit. They run each string they set through its `from_string` conversion and turn a string `PATH` into a list. Pass `--no-convert` to `load-env` or `with-env` to set the values as given.)_
+_(Important! The string -> value conversion happens only for variables that already exist when `$env.ENV_CONVERSIONS` is assigned, such as those inherited from the parent process. A variable that you set as a string afterwards with `$env.FOO = ...` stays a string. To convert it, set it before assigning `ENV_CONVERSIONS`, or assign `$env.ENV_CONVERSIONS` to itself again. [`load-env`](/commands/docs/load-env.md), [`with-env`](/commands/docs/with-env.md) and `FOO=bar cmd` don't have this limit, as described above.)_
 
 Spell each key in `ENV_CONVERSIONS` the way the variable is spelled.
 
@@ -437,7 +437,7 @@ hide-env NOT_SET
 # =>    ╰────
 ```
 
-Nushell hides the names in order and stops at the first one that isn't set, so `hide-env FOO NOT_SET` still hides `FOO`. With `--ignore-errors` (`-i`), names that aren't set are skipped without an error, which is handy when you don't know whether a variable exists. A hidden variable is also left out of the environment of external commands, even one that Nushell inherited.
+Nushell hides the names in order and stops at the first one that isn't set, so `hide-env FOO NOT_SET` still hides `FOO`. With `--ignore-errors` (`-i`), names that aren't set are skipped without an error. A hidden variable is also left out of the environment of external commands, even one that Nushell inherited.
 
 The hiding is also scoped which both allows you to remove an environment variable temporarily and prevents you from modifying a parent environment from within a child scope:
 

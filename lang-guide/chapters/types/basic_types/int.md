@@ -43,7 +43,7 @@ A decimal literal has to fit in a signed 64-bit int, from `-9223372036854775808`
 # =>    ╰────
 ```
 
-Hex (`0x`), octal (`0o`) and binary (`0b`) literals can have a sign before the prefix, so `-0x10` is `-16` and `-0b101` is `-5`. The prefixes are lowercase only.
+Hex (`0x`), octal (`0o`) and binary (`0b`) literals can have a sign before the prefix, so `-0x10` is `-16` and `-0b101` is `-5`.
 
 Nushell reads a hex, octal or binary literal as the 64 bits of the int, not as a signed number. Every 64-bit pattern can be written this way, and the upper half of the unsigned range comes out negative. A decimal literal with the same value would be rejected:
 
@@ -90,7 +90,7 @@ Division by zero is an error for `/`, `//` and `mod`. That holds for floats too,
 # =>    ╰────
 ```
 
-Float arithmetic doesn't overflow with an error. A float result too large to represent becomes `inf`, so `1e308 * 10` is `inf`. See [Infinity and NaN](float.md#infinity-and-nan).
+Float arithmetic doesn't overflow with an error. See [Infinity and NaN](float.md#infinity-and-nan).
 
 `bit-shl` and `bit-shr` take a shift amount from 0 to 63. Any other amount, negative ones included, is an `operator_overflow` error whose help says "Limit operand to 0 <= rhs < 64". A shift inside that range drops the bits that move out without an error, so `1 bit-shl 63` is `-9223372036854775808`.
 
@@ -145,7 +145,7 @@ An int given `--radix` is written out in decimal, and those digits are read in t
 # => 16
 ```
 
-A binary value of up to 8 bytes becomes one int. `--endian` (`-e`) sets the byte order to `little`, `big`, or `native`, the default, which is the byte order of the machine running Nushell (little-endian on x86-64 and on most ARM systems). Without `--signed`, the bytes form an unsigned number. With `--signed`, the highest bit is the sign bit:
+A binary value of up to 8 bytes becomes one int. `--endian` (`-e`) sets the byte order to `little`, `big`, or `native`, the default, which is the byte order of the machine running Nushell. Without `--signed`, the bytes form an unsigned number. With `--signed`, the highest bit is the sign bit:
 
 ```nu
 0x[01 02] | into int --endian big

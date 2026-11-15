@@ -39,7 +39,7 @@ let ext = '.txt'
 # => 1\+1=2
 ```
 
-You need it only where Nushell reads a regex: the `=~` and `!~` operators, and the `--regex` forms of `str replace`, `parse`, `split row` and `split column`. Without `--regex`, those commands already match plain text, and so does [`str contains`](/commands/docs/str_contains.md). Given a list of strings, `str escape-regex` escapes each one. For a table or record, name the columns to escape, as described in [Lists, records and tables](working_with_strings.md#lists-records-and-tables).
+You need it only where Nushell reads a regex, such as the `=~` and `!~` operators and the `--regex` forms of `str replace`, `parse`, `split row`, `split column`, `split list` and [`find`](/commands/docs/find.md). Without `--regex`, those commands already match plain text, and so does [`str contains`](/commands/docs/str_contains.md). Given a list of strings, `str escape-regex` escapes each one. For a table or record, name the columns to escape, as described in [Lists, records and tables](working_with_strings.md#lists-records-and-tables).
 
 ## Replacing with `str replace`
 
@@ -72,7 +72,7 @@ A group reference takes every letter, digit and underscore that follows the `$`.
 # => > b
 ```
 
-When the replacement is a closure, it runs once for each match. The whole match is its input (`$in`), and the capture groups are passed as its parameters, in order. A group that didn't take part in the match is `null`. The closure has to return a string:
+When the replacement is a closure, it runs once for each match. The whole match is its input, `$in`, and the capture groups are passed as its parameters, in order. A group that didn't take part in the match is `null`. The closure has to return a string:
 
 ```nu
 '2024-01-15' | str replace --regex '(\d+)-(\d+)-(\d+)' {|y, m, d| $'($d).($m).($y)' }

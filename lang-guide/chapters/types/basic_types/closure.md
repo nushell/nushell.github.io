@@ -29,7 +29,7 @@ Closures are used in Nu extensively as parameters to iteration style commands li
    # => failed with 3
    ```
 
-   The flag has no effect on errors from Nushell commands, which stop the pipeline either way. Don't combine it with [`complete`](/commands/docs/complete.md): the error comes before `complete` can record the exit code, so use plain `do` there.
+   The flag has no effect on errors from Nushell commands, which stop the pipeline either way. Don't combine it with [`complete`](/commands/docs/complete.md). The error comes before `complete` can record the exit code, so use plain `do` there.
 
 1. The `|args|` list can also contain 0 arguments (`||`) or more than one argument `|arg1,arg2|`
 

@@ -111,7 +111,7 @@ A subexpression can hold several pipelines separated by `;`. Its value is the va
 # => 5
 ```
 
-A newline inside the parentheses doesn't end a pipeline. Nushell treats it as a space, which is what lets a long pipeline span several lines (see [Multi-line pipelines](./pipelines.md#multi-line-pipelines)). So a subexpression with `print a` on one line and `print b` on the next runs a single `print` with three arguments. Use `;` to separate pipelines.
+A newline inside the parentheses doesn't end a pipeline. Nushell treats it as a space, so a long pipeline can span several lines, as in [Multi-line pipelines](./pipelines.md#multi-line-pipelines). It also means that a subexpression with `print a` on one line and `print b` on the next runs a single `print` with three arguments. Use `;` to separate pipelines.
 
 A cell path can follow the closing parenthesis to pick a field or an item out of the result:
 
@@ -157,7 +157,7 @@ echo (1 + 2)
 # => 3
 ```
 
-Some keywords and commands take a whole expression as one argument, so operators work there without parentheses. That covers the condition of `if` and `while`, the value after `=` in `let`, `mut` and `const`, and the row condition of [`where`](/commands/docs/where.md) and of filters such as `all`, `any` and `take while`. That's why `where size > 2kb` and `let x = 2 + 3` work.
+Some keywords and commands take a whole expression as one argument, so operators work there without parentheses. That covers the condition of `if` and `while`, the value after `=` in `let`, `mut` and `const`, and the row condition of [`where`](/commands/docs/where.md) and of filters such as `all`, `any` and `take while`.
 
 List items work the same way as command arguments, so `[1 + 1]` is a list of three items and `[(1 + 1)]` is `[2]`. `if` and `match` return values too, but an operator can't follow them directly. Write `(if $x { 1 } else { 2 }) + 1`.
 
@@ -228,7 +228,7 @@ For example, `++` only concatenates two values of the same kind: two lists, two 
 # => true
 ```
 
-Both comparisons are strict, so a datetime is neither older nor newer than itself. Nushell reads the clock each time the expression runs, as it would for `(date now) - 2wk`. They're handy with [`where`](/commands/docs/where.md):
+Both comparisons are strict, so a datetime is neither older nor newer than itself. Nushell reads the clock each time the expression runs, as it would for `(date now) - 2wk`. Use them in a [`where`](/commands/docs/where.md) condition:
 
 ```nu
 [[name modified]; [old.txt 2020-01-01] [new.txt 2099-01-01]] | where modified older-than 1wk | get name

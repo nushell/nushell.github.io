@@ -82,9 +82,9 @@ $env.Path = ($env.Path | prepend 'C:\Program Files\Git\usr\bin')
 | `unset FOO`                          | `hide-env FOO`                                                | Unset environment variable for current session                    |
 | `alias s="git status -sb"`           | `alias s = git status -sb`                                    | Define an alias temporarily                                       |
 | `type FOO`                           | `which FOO`                                                   | Display information about a command (builtin, alias, or executable) |
-| `type -a FOO`                        | `which -a FOO`                                                | List every match: the Nushell command of that name and each executable in PATH |
+| `type -a FOO`                        | `which -a FOO`                                                | List the Nushell command and each executable in PATH with that name |
 | `type -P FOO`                        | `which ^FOO`                                                  | Look up only the external program, skipping Nushell commands      |
-| `compgen -c`                         | `which`                                                       | List every command: Nushell's own and each executable in PATH     |
+| `compgen -c`                         | `which`                                                       | List every Nushell command and every executable in PATH           |
 | `<update ~/.bashrc>`                 | `vim $nu.config-path`                                         | Add and edit alias permanently (for new shells)                   |
 | `bash -c <commands>`                 | `nu -c <commands>`                                            | Run a pipeline of commands                                        |
 | `bash <script file>`                 | `nu <script file>`                                            | Run a script file                                                 |
@@ -101,7 +101,7 @@ In Nushell, `type` is the keyword that declares a [type alias](./custom_commands
 :::
 
 ::: tip
-Nushell rejects `&&`, `||`, `2>` and `2>&1` with a parse error that names the Nushell replacement. A lone `>` gets no error. It's the greater-than operator, so in a command's arguments it's an ordinary word, and `echo hi > file.txt` returns a three-item list without writing a file. See [But it's not Bash](./thinking_in_nu.md#but-it-s-not-bash).
+Nushell rejects `&&`, `||`, `2>` and `2>&1` with a parse error that names the Nushell replacement. A lone `>` gets no error and writes no file. [But it's not Bash](./thinking_in_nu.md#but-it-s-not-bash) shows what it does instead.
 :::
 
 ::: details More about find and date from-human

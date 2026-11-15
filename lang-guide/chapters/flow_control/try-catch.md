@@ -65,7 +65,7 @@ try { error make {msg: "disk full", help: "free some space"} } catch { $in.detai
 
 In `details`:
 
-- `labels` is a table with one row for each underlined place. Each row has the label `text`, a `span` record (`start` and `end`, the form that `error make` takes), and a `location` record with the `file` the label points into and the `start` and `end` byte offsets within that file.
+- `labels` is a table with one row for each underlined place. Each row has the label `text`, a `span` record with `start` and `end` in the form that `error make` takes, and a `location` record with the `file` the label points into and the `start` and `end` byte offsets within that file.
 - `code` is the error code, such as `nu::shell::division_by_zero`. It is `null` for an error from `error make` with a record that has no `code`. For `error make "message"` it is `nu::shell::error`.
 - `inner` is a list of records with the same fields as `details`, one for each inner error.
 
@@ -117,7 +117,7 @@ The `span` numbers depend on everything Nushell has parsed so far, so yours will
    # =>    ╰────
    ```
 
-   After any other statement, the original error is no longer the input. Pipe it in (`$e | error make {msg: b}`) or pass it as `inner` to keep it attached: `catch {|e| print "logging"; error make {msg: b, inner: [$e]} }`.
+   After any other statement, the original error is no longer the input. Pipe it in, as in `$e | error make {msg: b}`, or pass it as `inner` to keep it attached: `catch {|e| print "logging"; error make {msg: b, inner: [$e]} }`.
 
    To log an error and re-raise it unchanged, return `$e.raw`: `catch {|e| print "logging"; $e.raw }`. `error make` also re-raises the error held in the `raw` field of a record it is given, including `$e` itself, and then ignores the record's other fields. See [Re-raising a caught error](/book/creating_errors.md#re-raising-a-caught-error).
 
