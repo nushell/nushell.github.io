@@ -220,6 +220,22 @@ Of course, you always have the option to choose a form that works best for your 
 
   After a plain `use std/formats`, the commands are named `formats from ndjson` and `formats to ndjson`, so `open` and `save` don't find them. `open` then returns the file's contents unparsed, and `save` rejects a table with `nu::shell::unsupported_input`. `to ndjson` also marks its output with the `application/x-ndjson` content type, which [`http post`](/commands/docs/http_post.md) sends as the `Content-Type` header when you don't give one.
 
+  `to ndjson` writes each item of a list as one line of JSON and ends every line with a newline. An empty list gives an empty string. To add records to a file one at a time, append each one as a one-item list, so that it lands on a line of its own:
+
+  ```nu
+  [{a: 3}] | save --append data.ndjson
+  open data.ndjson
+  # => ╭───┬───╮
+  # => │ # │ a │
+  # => ├───┼───┤
+  # => │ 0 │ 1 │
+  # => │ 1 │ 2 │
+  # => │ 2 │ 3 │
+  # => ╰───┴───╯
+  ```
+
+  A single value that JSON can't hold, such as a closure, makes `to ndjson` fail with `nu::shell::unsupported_input`.
+
   ::: note Importing submodules
   While you can import a submodule by itself using `use <module> <submodule>`, the entire parent module and _all_ of its definitions (and thus submodules) will be _parsed_ when using this form. When possible, loading the submodule as a _module_ will result in faster code. For example:
 

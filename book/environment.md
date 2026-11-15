@@ -246,6 +246,47 @@ A=1 B=2 ^env | lines | where $it =~ '^(A|B)='
 # => ╰───┴─────╯
 ```
 
+The name has to start with a letter or `_`, and the rest can be letters, digits, and `_`. A word such as `MY-VAR=1` isn't a shorthand, so Nushell runs it as an external command and reports that `MY-VAR=1` isn't found.
+
+The value after `=` is a string unless it starts with `$`:
+
+- A bare word or a quoted string sets a string. `FOO=1` sets the string `1`, and `FOO='a b'` sets `a b`.
+- With nothing after the `=`, as in `FOO= cmd`, the value is an empty string.
+- A variable, a cell path such as `$record.field`, or a `$"..."` interpolation sets its value with its type, so `N=$n` sets an int when `$n` holds one.
+- A parenthesized expression doesn't work. In `FOO=(1 + 1) cmd`, Nushell runs `FOO=2` as a command name and doesn't set `FOO`. Save the result in a variable first, or use `with-env`.
+
+```nu
+let n = 5
+N=$n $env.N | describe
+# => int
+FOO=1 $env.FOO | describe
+# => string
+```
+
+Nushell computes all the values before it sets any of them, so in `A=1 B=$env.A cmd`, the value of `B` can't read the new `A`.
+
+The variables apply to the one command they precede. The next command in the pipeline doesn't see them, and neither does the next line:
+
+```nu
+FOO=bar $env.FOO | $"($in), ($env.FOO? | default unset)"
+# => bar, unset
+```
+
+A shorthand with no command after it, such as `FOO=bar` on its own, is an `Unknown command` error. To set a variable for the rest of the session, assign it with `$env.FOO = 'bar'`.
+
+The configuration lives in `$env.config`, so `with-env` can change it for one block. When the block ends, the configuration is back to what it was. Draw the output inside the block, as `table` does here. A value that the block returns is drawn after the block ends, with the configuration from outside it:
+
+```nu
+with-env { config: ($env.config | upsert float_precision 5) } { [3.14159265] | table }
+# => ╭───┬─────────╮
+# => │ 0 │ 3.14159 │
+# => ╰───┴─────────╯
+[3.14159265]
+# => ╭───┬──────╮
+# => │ 0 │ 3.14 │
+# => ╰───┴──────╯
+```
+
 Both forms convert the values they set the way `load-env` does. A string value goes through its `from_string` conversion in `$env.ENV_CONVERSIONS`, and a string `PATH` becomes a list:
 
 ```nu

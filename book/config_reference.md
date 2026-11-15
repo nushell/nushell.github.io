@@ -579,7 +579,20 @@ The number of decimal places for floats in tables, lists, and records. Nushell r
 
 `ls.use_ls_colors` colors file names in [`ls`](/commands/docs/ls.md) output with the `LS_COLORS` environment variable. With `false`, Nushell doesn't use `LS_COLORS` for them. See [`LS_COLORS` Colors for the `ls` Command](./coloring_and_theming.md#ls-colors-colors-for-the-ls-command).
 
-`ls.clickable_links` makes each file name in `ls` output an OSC 8 hyperlink to the file, which terminals that support OSC 8 let you click. Nushell only adds the links when all of these hold:
+`ls.clickable_links` makes each file name in `ls` output an OSC 8 hyperlink to the file, which terminals that support OSC 8 let you click. The link target is a `file://` URL of the file's absolute path, such as `file:///home/me/notes.txt`.
+
+Both settings cover more than `ls`. When a table is drawn, Nushell colors and links every column that the pipeline's metadata marks as holding paths: the `name` column of `ls`, the `path` column of [`du`](/commands/docs/du.md) and [`which`](/commands/docs/which.md), and the `cwd` column of [`history`](/commands/docs/history.md) with the `sqlite` history format. Filters such as `where`, `select`, and `sort-by` keep the metadata, so their output keeps the links. To mark a column of your own data, use [`metadata set --path-columns`](/commands/docs/metadata_set.md):
+
+```nu
+[[file size]; [notes.txt 0b]] | metadata set --path-columns [file]
+# => ╭───┬───────────┬──────╮
+# => │ # │   file    │ size │
+# => ├───┼───────────┼──────┤
+# => │ 0 │ notes.txt │  0 B │
+# => ╰───┴───────────┴──────╯
+```
+
+Nushell only adds the links when all of these hold:
 
 - `ls.clickable_links` and `shell_integration.osc8` are both `true`.
 - `ls.use_ls_colors` is `true` and the output is colored (see [`use_ansi_coloring`](#use-ansi-coloring)).

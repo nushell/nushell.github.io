@@ -761,6 +761,7 @@ $api | url with-params {page: 3, sort: name}
 - `url with-port` takes an int or a string, and an empty string removes the port. Nothing checks that the port is valid.
 - In `url with-path`, a leading `/` is optional.
 - In `url with-fragment`, a leading `#` is optional, and an empty string removes the fragment.
+- `url with-path` and `url with-fragment` put the text you give them into the URL unchanged, without percent-encoding it. Encode a path or fragment that contains spaces or a `#` with [`url encode`](/commands/docs/url_encode.md) first. `$api | url with-fragment ("a b#c" | url encode)` gives `https://api.example.com/v1/items?page=2#a%20b%23c`.
 - `url with-params` replaces the whole query string, so parameters you don't pass are dropped. It takes a record, or a table with `key` and `value` columns. A list value, or the same key in several rows, repeats the parameter. `[]` or `{}` removes the query. [`url build-query`](/commands/docs/url_build-query.md) encodes the values.
 - When the URL has no path, `url join` adds a `/`, so `"http://localhost" | url with-port 8080` is `http://localhost:8080/`.
 

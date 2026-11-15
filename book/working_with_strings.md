@@ -133,6 +133,8 @@ A space outside the inner quotes ends the word, so `"a "b c" d"` fails the same 
 
 The rule also catches words that look like operators. `'a'..'z'` is not a range of letters. It is the single string `a'..'z`.
 
+A record literal can't have text attached after it either. `{a: 1}x` is the same "Invalid characters after closing delimiter" error, pointing at the `x`.
+
 ## Bare Word Strings
 
 Like other shell languages (but unlike most other programming languages) strings consisting of a single 'word' can also be written without any quotes:
@@ -593,7 +595,7 @@ For a record or a table, name the fields or columns to change after the command'
 # => ╰──────┴───────╯
 ```
 
-This works the same for [`str contains`](/commands/docs/str_contains.md), [`str index-of`](/commands/docs/str_index-of.md), [`str replace`](/commands/docs/str_replace.md), [`str reverse`](/commands/docs/str_reverse.md), [`str substring`](/commands/docs/str_substring.md), [`str trim`](/commands/docs/str_trim.md), [`into string`](/commands/docs/into_string.md), the commands in [Changing case](#changing-case), [`str starts-with`](/commands/docs/str_starts-with.md), [`str ends-with`](/commands/docs/str_ends-with.md) and [`str escape-regex`](/commands/docs/str_escape-regex.md). For all of them except `str trim`, a record or table without any names is an error. A named column has to hold strings, except for `into string`, which converts whatever it finds there. Given a record or table and no names, `str trim` trims every string it finds at any depth and leaves other values alone:
+This works the same for [`str contains`](/commands/docs/str_contains.md), [`str index-of`](/commands/docs/str_index-of.md), [`str replace`](/commands/docs/str_replace.md), [`str reverse`](/commands/docs/str_reverse.md), [`str substring`](/commands/docs/str_substring.md), [`str trim`](/commands/docs/str_trim.md), [`into string`](/commands/docs/into_string.md), the commands in [Changing case](#changing-case), [`str starts-with`](/commands/docs/str_starts-with.md), [`str ends-with`](/commands/docs/str_ends-with.md) and [`str escape-regex`](/commands/docs/str_escape-regex.md). For all of them except `str trim`, a record or table without any names is an error. A named column has to hold strings, except for `into string`, which converts any plain value it finds there. A list, record or binary value in the column is a `cant_convert` error. Given a record or table and no names, `str trim` trims every string it finds at any depth and leaves other values alone:
 
 ```nu
 {name: ' Ann ', meta: {city: ' Oslo '}, tags: [' a '], age: 30} | str trim | to nuon
@@ -1135,6 +1137,21 @@ $"(1.0)"
 ```
 
 `into string` doesn't decode binary data. It fails with a hint to use [`decode`](/commands/docs/decode.md), as in `0x[48 69] | decode utf-8`, which gives `Hi`. A record is also an error, and its hint points to [`to nuon`](/commands/docs/to_nuon.md). A list is converted item by item, and for a table or record you name the columns to convert, as described in [Lists, records and tables](#lists-records-and-tables).
+
+A `null` inside a list, or in a column you convert, becomes an empty string. A `null` on its own isn't accepted, so `null | into string` is a type error. A range becomes a list with one string per number. Floats that aren't finite are written as `NaN`, `inf` and `-inf`:
+
+```nu
+[1 null 2] | into string | to nuon
+# => ["1", "", "2"]
+1..3 | into string | to nuon
+# => ["1", "2", "3"]
+[NaN inf -inf] | into string | to nuon
+# => ["NaN", "inf", "-inf"]
+```
+
+`--decimals` takes a number from 0 to 65535. A negative number is a type error, and a larger one is an `Incorrect value` error.
+
+The output of an external command reaches `into string` as a byte stream. `into string` only marks the stream as text, without decoding or checking the bytes. Output that isn't valid UTF-8 therefore fails later, with a `Non-UTF8 string` error when the stream is collected into one value. For text in another encoding, use [`decode`](/commands/docs/decode.md) instead, as in `^cat notes.txt | decode iso-8859-1`.
 
 The [`format`](/commands/docs/format.md) command groups more ways to turn a value into text. On its own it only prints its help. Its subcommands are [`format date`](/commands/docs/format_date.md) for dates, [`format duration`](/commands/docs/format_duration.md) and [`format filesize`](/commands/docs/format_filesize.md) for writing a value in a unit you choose, [`format bits`](/commands/docs/format_bits.md) for the bits of a number or binary value, [`format pattern`](/commands/docs/format_pattern.md) for filling a pattern such as `'{name}: {size}'` from each row of a table, and `format number`.
 

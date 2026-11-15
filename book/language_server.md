@@ -42,6 +42,36 @@ vim.lsp.enable('nushell')
 
 `root_markers` decides the workspace folder. Neovim looks upward from the file for one of the listed names and sends that directory to the server as the workspace folder. When nothing matches, no folder is sent, and find references and rename only see the current file.
 
+### Helix
+
+Helix comes with the server already configured. Its built-in `languages.toml` gives `.nu` and `.nuon` files the `nu` language, whose language server, `nu-lsp`, runs `nu --lsp`. It works as long as `nu` is on your `PATH`. Run `hx --health nu` to see whether Helix found it.
+
+To change the arguments or the `nu` binary, redefine `nu-lsp` in your own `languages.toml`, which lives in `~/.config/helix/` on Linux and macOS and in `%AppData%\helix\` on Windows. Helix merges your table with the built-in one, so a key you leave out, such as `command` here, keeps its built-in value. This starts the server without your configuration files:
+
+```toml
+[language-server.nu-lsp]
+args = ["--lsp", "--no-config-file"]
+```
+
+### Zed
+
+Install the Nu extension from Zed's extensions panel. It gives `.nu` and `.nuon` files the Nu language and starts `nu --lsp` with the `nu` it finds on your `PATH`. When there is no `nu` on the `PATH`, it reports `nu is not installed`. This describes version 0.0.10 of the [extension](https://github.com/zed-extensions/nu).
+
+To run a different `nu` or pass more arguments, override the `nu` language server's binary in your Zed settings. The extension's README uses this to load a smaller configuration file instead of your full one, since a large configuration can slow the server down. Replace `<file>` with the path to that file:
+
+```json
+{
+  "lsp": {
+    "nu": {
+      "binary": {
+        "path": "nu",
+        "arguments": ["--config", "<file>", "--lsp"]
+      }
+    }
+  }
+}
+```
+
 ### Other editors
 
 Any editor with an LSP client can use the server. Configure it to run `nu` with the argument `--lsp` for `.nu` files, and check that it sends a workspace folder, as described in the next section.

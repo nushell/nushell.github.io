@@ -303,6 +303,23 @@ ls | nullify name size
 # => ╰───┴──────┴──────┴──────┴───────────────╯
 ```
 
+The input goes only to the first pipeline of the command's body. The pipelines after it start with no input, so a command that does something else first, even a `let`, has to pick the input up with `$in`, which holds the command's input in any of those pipelines:
+
+```nu
+def scale [factor: int] {
+  let f = $factor * 10
+  $in | each {|x| $x * $f }
+}
+[1 2 3] | scale 2
+# => ╭───┬────╮
+# => │ 0 │ 20 │
+# => │ 1 │ 40 │
+# => │ 2 │ 60 │
+# => ╰───┴────╯
+```
+
+Without the `$in`, the `each` would get no input, and `scale` would return nothing.
+
 ### Streaming and collecting input
 
 Data moves through a pipeline in one of three forms:
@@ -1659,8 +1676,13 @@ greet "bob"
 # => Hello, bob!
 ```
 
-The `--report` flag sets how often the warning appears. With the default, `--report first`, it is
-only shown the first time the command is used in a session. `--report every` warns on every call.
+The `--report` flag sets how often the warning appears. `--report every` warns on every call. With
+the default, `--report first`, Nushell shows each warning once per session. It remembers the label
+of every warning it has shown, such as `greet is deprecated and will be removed in a future
+release.`, and skips a later warning with the same label. Redefining the command with a different
+help message doesn't bring the warning back. A new `--since` or `--remove` version, described
+below, changes the label, so that warning appears again. Any other `--report` value is an
+`Incorrect value` error when the command is defined, and the message lists `every` and `first`.
 
 Two more flags take version strings. `--since` gives the version that deprecated the command, and
 `--remove` gives the version that will remove it. Each one replaces its part of the warning text:

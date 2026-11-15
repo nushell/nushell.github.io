@@ -901,7 +901,7 @@ A variant without fields is a bare string, such as `"PopErrorHandler"`. The othe
 The `Signal` message type is used to relay a signal from the engine to the plugin, allowing the plugin to respond to various system-level or user-initiated signals. The message body consists of a `SignalAction` enum, which currently supports the following variants:
 
 - **`Interrupt`**: Sent when the engine receives an interrupt signal (such as Ctrl+C), to gracefully interrupt a plugin's operation.
-- **`Reset`**: Sent when the engine’s `reset_signals` method is called, indicating that the plugin should reset its signal state.
+- **`Reset`**: Sent when the engine's `reset_signals` method is called, indicating that the plugin should reset its signal state. Only the REPL calls it: at the start of each iteration, and after Ctrl+C interrupts the prompt or the line editor. See [Signal Handling in Plugins](#signal-handling-in-plugins).
 
 Example:
 
@@ -1786,16 +1786,32 @@ let _guard = engine.register_signal_handler(Box::new(move |action| {
 }))?;
 ```
 
+When you press Ctrl+C, Nu sends `Interrupt` to every plugin that is running, whether or not it is in the middle of a call. Only the REPL sends `Reset`. It sends one at the start of every iteration, before it draws the prompt, so a running plugin gets a `Reset` after each command line finishes. It also sends one when Ctrl+C interrupts the prompt while it is being drawn, and before it runs a line if the prompt or the line editor was interrupted. Scripts and `nu -c` never send it.
+
+A handler runs on the thread that reads the plugin's input from Nu. Until the handler returns, the plugin receives nothing else: no stream data, no engine call responses, and no new calls. Keep handlers short and leave the real work to the thread that is running the call. The `example ctrlc` command in `nu_plugin_example` works this way. Its handler only sends on a channel, and `run()` waits on the other end. The list of handlers stays locked while they run, so registering a handler or dropping a guard from inside a handler never returns.
+
 #### `signals()`
 
-The `signals()` method allows the plugin to check the status of the signal, specifically for `Interrupt`. This method returns a `Signals` struct, which includes the method `interrupted()` that indicates if an interrupt has occurred.
+The `signals()` method returns the plugin's `Signals`. The SDK sets its interrupt flag when an `Interrupt` arrives and clears it on `Reset`, before it runs the registered handlers. The flag belongs to the whole plugin process. Every `EngineInterface` returns the same `Signals`, so an interrupt shows up in all of the plugin's calls that are running, and a `Reset` clears it for all of them.
+
+`interrupted()` reports whether the flag is set:
 
 ```rust
 if engine.signals().interrupted() {
     eprintln!("Operation was interrupted.");
 }
 ```
-Use `signals().interrupted()` to check for interrupt status, particularly when managing long-running operations.
+
+`check(&span)` returns `Err(ShellError::Interrupted { .. })` once the flag is set, so a long loop can stop with `?`. That works in `run()`, which returns `LabeledError`, because `LabeledError` converts from `ShellError`:
+
+```rust
+for item in items {
+    engine.signals().check(&call.head)?;
+    // work on item
+}
+```
+
+A list stream that the plugin builds with `engine.signals()`, for example with `into_pipeline_data(span, engine.signals().clone())`, checks the flag on each item and ends once it is set. `PipelineData::map`, which the `double` example in the [plugins chapter](plugins.md#using-streams-in-plugins) uses, passes its `signals` argument on only when the input is a list or range value. When the input is already a stream, the mapped stream keeps the input stream's signals.
 
 ## Encoding
 

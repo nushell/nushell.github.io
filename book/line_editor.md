@@ -657,6 +657,8 @@ before. In the search:
 - <kbd>Backspace</kbd> removes the last character of the search text.
 - <kbd>Enter</kbd> puts the match on the line without running it, so you can edit it first.
 - <kbd>Esc</kbd> ends the search and gives you back the line you were typing.
+- <kbd>Ctrl</kbd>+<kbd>C</kbd> ends the search and abandons the line you were typing, so the next
+  prompt starts empty.
 
 When nothing matches, the prompt says so, as in `(failing reverse-search: echqq)`.
 
@@ -2086,7 +2088,7 @@ there is one.
 | Event                                         | What it does                                                                                                                                                                                                                                                                        |
 | --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `None`                                        | Nothing. A key bound to `None` is swallowed, while `event: null` removes the key's binding (see [Removing a Default Keybinding](#removing-a-default-keybinding)). Always counts as having nothing to do.                                                                            |
-| `CtrlC`                                       | Abandons the line without running it, closes an open menu and clears the undo history. <kbd>Ctrl</kbd>+<kbd>C</kbd>.                                                                                                                                                                |
+| `CtrlC`                                       | Abandons the line without running it, closes an open menu and clears the undo history. In a [reverse history search](#reverse-history-search), it ends the search first. <kbd>Ctrl</kbd>+<kbd>C</kbd>.                                                                              |
 | `CtrlD`                                       | Exits Nushell when the line is empty, otherwise deletes the character under the cursor. <kbd>Ctrl</kbd>+<kbd>D</kbd>.                                                                                                                                                               |
 | `ClearScreen`                                 | Clears the screen and redraws the prompt at the top, keeping the line. Closes an open menu. <kbd>Ctrl</kbd>+<kbd>L</kbd>.                                                                                                                                                           |
 | `ClearScrollback`                             | Like `ClearScreen`, and also clears the terminal's scrollback. Not bound by default.                                                                                                                                                                                                |

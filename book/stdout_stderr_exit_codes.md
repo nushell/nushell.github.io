@@ -118,6 +118,8 @@ nu -c 'try { exit 4 } catch { print caught } finally { print cleanup }; print af
 
 `exit --abort` skips the `finally` blocks too.
 
+An interactive session ends with status `0` when you press <kbd>Ctrl</kbd>+<kbd>D</kbd> on an empty line, whatever `$env.LAST_EXIT_CODE` is at the time. To end it with another status, run `exit` with a number. While [background jobs](./background_jobs.md) are running, the first <kbd>Ctrl</kbd>+<kbd>D</kbd> only warns (see [Control Keybindings](./line_editor.md#control-keybindings)). If the line editor fails to read from the terminal, Nushell prints the error and exits with status `1`.
+
 ### Interrupting with Ctrl+C
 
 Pressing <kbd>Ctrl</kbd>+<kbd>C</kbd> while Nushell code runs raises an `Operation interrupted` error. Loops, streams, and long-running commands such as [`sleep`](/commands/docs/sleep.md) check for it as they go, so the error points at the command that was running when you pressed the keys:

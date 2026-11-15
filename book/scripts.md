@@ -12,7 +12,7 @@ This will run the script to completion in a new instance of Nu. You can also run
 source myscript.nu
 ```
 
-`source` reads the file when the code that calls it is parsed, before anything runs, so the file name has to be a constant (see [Thinking in Nu](thinking_in_nu.md#example-change-to-a-different-directory-cd-and-source-a-file)). A relative path is looked up from the directory of the file that contains the `source` call, or the current directory at the prompt, and then in `$NU_LIB_DIRS`. Inside a sourced file, a `source` or `use` with a relative path starts from that file's directory, not from your current directory.
+`source` reads the file when the code that calls it is parsed, before anything runs, so the file name has to be a constant (see [Thinking in Nu](thinking_in_nu.md#example-change-to-a-different-directory-cd-and-source-a-file)). A relative path is looked up from the directory of the file that contains the `source` call, or the current directory at the prompt, and then in `$NU_LIB_DIRS`. Inside a sourced file, a `source` or `use` with a relative path starts from that file's directory, not from your current directory. A `return` at the top level of the file ends only that file, and its value becomes the output of `source` (see [`return`](/lang-guide/chapters/flow_control/return.md#language-notes)).
 
 If the file name is `null`, `source` does nothing. With a constant, this lets a config file load an optional file only when it exists:
 

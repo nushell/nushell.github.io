@@ -284,10 +284,20 @@ $df_1 | polars select int_1 (polars col int_1 | polars rolling sum 3 | polars as
 
 A window that contains a null also gives null, and a window larger than the
 column gives null everywhere. A window of `0` gives `0` for `sum` on every row.
-Both arguments are required. Leaving out the window fails with
-`Row number too large`, and an operation other than the four above fails with
-`Operation not valid for rolling`. Given a series, the result's name joins the
+Both arguments are required, and an operation other than the four above fails
+with `Operation not valid for rolling`. Given a series, the result's name joins the
 input's name and the operation, such as `int_1_rolling_sum`.
+
+A series here means an eager dataframe with one column. A wider dataframe fails
+with `Error using as series` and `dataframe has more than one column`, so pick
+the column with [`polars get`](/commands/docs/polars_get.md) first. A lazy
+dataframe always starts a rolling group-by, described next, so
+`$lazy | polars rolling sum 3` fails with
+`--index-column is required for lazyframe input`. Use the expression form inside
+`polars select`, as above, or collect the dataframe first with
+[`polars collect`](/commands/docs/polars_collect.md). A column of type `object`,
+which Polars makes from a list of mixed values such as `[1 a 2]`, fails with
+`Series of type object cannot be used for rolling operation`.
 
 To restart the window for each group, pipe the rolling expression into
 `polars over`.
@@ -309,7 +319,8 @@ a total over the last three days when rows aren't evenly spaced.
 - `--period` (`-p`) is the window's length.
 - `--offset` (`-o`) is where the window starts, relative to the row's own value.
 - `--closed` (`-c`) says which ends belong to the window: `left`, `right`,
-  `both`, or `none`. The default is `left`.
+  `both`, or `none`. The default is `left`. Any other value fails with
+  `Invalid closed window value`.
 - `--group-by` (`-g`) takes a list of columns or expressions, and computes the
   windows separately for each of their values.
 

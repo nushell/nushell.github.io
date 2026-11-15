@@ -470,9 +470,16 @@ The flags control what happens to the names:
 # => [[field, first, second]; [size, 1, 2], [name, x, y]]
 ```
 
-As with `transpose`, name arguments replace `column0`, `column1` and so on, in order, and extra names are ignored. A record is rotated as a one-row table. A list of plain values, or a single value, becomes a one-row table with an item in each column, in reverse order unless you pass `--ccw`. Empty input is an error (`list input is empty`).
+As with `transpose`, name arguments replace `column0`, `column1` and so on, in order, and extra names are ignored. A record is rotated as a one-row table. A list of plain values, or a single string, becomes a one-row table with an item in each column, in reverse order unless you pass `--ccw`. Empty input is an error (`list input is empty`).
 
-Every row must have the same columns. A row with a different number of columns is a `record_cols_vals_mismatch` error. To turn a record into key/value rows, `transpose key value` is usually what you want, since it keeps the names in the first column.
+Every row must have the same columns. A row with a different number of columns is a `record_cols_vals_mismatch` error. Give `rotate` a table, a record, or a list of plain values. It doesn't treat nested lists as rows, and `[[1 2] [3 4]] | rotate` is the same `record_cols_vals_mismatch` error. Turn each inner list into a record first:
+
+```nu
+[[1 2] [3 4]] | each {|r| {x: $r.0, y: $r.1} } | rotate | to nuon
+# => [["column0", "column1", "column2"]; [3, 1, x], [4, 2, y]]
+```
+
+To turn a record into key/value rows, `transpose key value` is usually what you want, since it keeps the names in the first column.
 
 ### `roll`
 

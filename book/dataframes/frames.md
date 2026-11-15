@@ -382,6 +382,26 @@ A missing column fails with `Error dropping duplicates`. Like `polars drop-nulls
 
 Polars picks each column's type when it builds a dataframe, as described in [How values become columns](../dataframes.md#how-values-become-columns). These commands change a column's type afterward, or build type and schema values you can reuse. Type names are the ones `polars schema --datatype-list` prints, such as `i32`, `f32`, `str`, and `datetime<ms, UTC>`. Nushell's own names, such as `int` or `string`, fail with `Invalid polars data type` and `Unknown type: int`.
 
+The full set of type names is:
+
+- `bool`, `str`, `binary`, `date`, `time`, `null`, `object`, and `unknown`.
+- The integers `i8`, `i16`, `i32`, `i64`, `u8`, `u16`, `u32`, and `u64`, and the floats `f32` and `f64`.
+- `datetime<unit, zone>`. The unit is `ms`, `us` (or `μs`), or `ns`. The zone is a name from the time zone database, such as `UTC` or `America/Los_Angeles`, or `*` for a datetime without a zone.
+- `duration<unit>`, with the same units.
+- `decimal<precision, scale>`, such as `decimal<10, 2>`. A `*` as the precision gives the largest one, 38. The scale must be a number.
+- `list<type>` with any of these inside, such as `list<str>` or `list<list<i64>>`.
+
+```nu
+{price: 'decimal<*, 2>', tags: 'list<str>', at: 'datetime<ms, *>', took: 'duration<us>', opens: time} | polars into-schema
+# => ╭───────┬───────────────╮
+# => │ price │ decimal<38,2> │
+# => │ tags  │ list<str>     │
+# => │ at    │ datetime<ms>  │
+# => │ took  │ duration<μs>  │
+# => │ opens │ time          │
+# => ╰───────┴───────────────╯
+```
+
 ### Casting columns
 
 [`polars cast`](/commands/docs/polars_cast.md) takes a type and, for a dataframe, the name of the column to convert. It converts one column per call and returns the kind of dataframe it was given. Leaving out the column name fails with `Missing parameter: column_name.`
@@ -770,16 +790,46 @@ $staff | polars query "SELECT dept, sum(salary) AS total, count(name) AS people 
 
 These parts of SQL work:
 
-- In the `SELECT` list, column names, `*`, the operators `+`, `-`, `*`, `/`, `%`, and `||` (which joins strings), `CAST(x AS type)` with types such as `INT`, `BIGINT`, `DOUBLE`, `VARCHAR`, `BOOLEAN`, and `DATE`, and `AS` to name a result. An aggregate without `AS` keeps its column's name.
-- In `WHERE`, the comparisons `=`, `!=` or `<>`, `<`, `<=`, `>`, and `>=`, joined with `AND` and `OR` and grouped with parentheses. Write strings in single quotes. Double quotes name a column, so `dept = "eng"` fails with `unable to find column "eng"`.
+- In the `SELECT` list, column names, `*`, the operators `+`, `-`, `*`, `/`, `%`, and `||` (which joins strings), `CAST(x AS type)` with the types in the table below, and `AS` to name a result. An aggregate without `AS` keeps its column's name.
+- In `WHERE`, the comparisons `=`, `!=` or `<>`, `<`, `<=`, `>`, and `>=`, joined with `AND`, `OR`, and `XOR` and grouped with parentheses. Put parentheses around each side of `XOR`, as in the example below. Write strings in single quotes. Double quotes name a column, so `dept = "eng"` fails with `unable to find column "eng"`.
+- The literals `TRUE`, `FALSE`, and `NULL`, along with numbers and strings, in the `SELECT` list and in `WHERE`.
 - `GROUP BY` with column names, and the functions `sum(column)`, `count(column)`, and `count(DISTINCT column)`. `count` skips nulls. The groups come out in no fixed order, so sort the result with `polars sort-by`, as above.
 - `LIMIT` with a number.
+- A table alias, as in `FROM df AS t` or `FROM df t`. You can't refer to the alias, though, because qualified names such as `t.name` fail.
+
+```nu
+$staff | polars query "SELECT name, CAST(salary AS REAL) AS pay, TRUE AS active, NULL AS note FROM df AS t WHERE (salary > 110) XOR (dept = 'eng')"
+# => ╭───┬──────┬────────┬────────┬──────╮
+# => │ # │ name │  pay   │ active │ note │
+# => ├───┼──────┼────────┼────────┼──────┤
+# => │ 0 │ bob  │ 100.00 │ true   │      │
+# => ╰───┴──────┴────────┴────────┴──────╯
+```
+
+`CAST` knows these SQL types:
+
+| SQL type                                                | Polars type                       |
+| ------------------------------------------------------- | --------------------------------- |
+| `CHAR`, `VARCHAR`, `TEXT`, `STRING`, `CLOB`, `UUID`     | `str`                             |
+| `TINYINT`, `SMALLINT`, `INT`, `BIGINT`                  | `i8`, `i16`, `i32`, `i64`         |
+| The same followed by `UNSIGNED`, such as `INT UNSIGNED` | `u8`, `u16`, `u32`, `u64`         |
+| `FLOAT`, `REAL`                                         | `f32`                             |
+| `DOUBLE`                                                | `f64`                             |
+| `BOOLEAN`                                               | `bool`                            |
+| `DATE`                                                  | `date`                            |
+| `TIME`                                                  | `time`                            |
+| `TIMESTAMP`                                             | `datetime<us>`, with no time zone |
+| `INTERVAL`                                              | `duration<us>`                    |
+| `ARRAY<type>` or `type[]`, such as `DOUBLE[]`           | `list` of the inner type          |
+
+Other names, such as `INTEGER`, `DECIMAL`, `NUMERIC`, `BOOL`, and `DOUBLE PRECISION`, fail with `SQL Datatype ... was not supported in polars-sql yet!`. `polars schema` shows the `us` unit as `μs`.
 
 Most unsupported SQL fails with a `Dataframe Error` that says what went wrong:
 
 - Other functions, such as `avg` or `max`, fail with `Function "avg" with args ... was not supported in polars-sql yet!`.
 - `IS NULL`, `IN`, `LIKE`, `BETWEEN`, `CASE`, `NOT`, a minus sign in front of a column, and qualified names such as `t.name` fail with `Expression: ... was not supported in polars-sql yet!`.
 - `LIMIT` with `OFFSET` fails with `Only support number argument to LIMIT clause`.
+- `GROUP BY ALL` and `GROUP BY 0` fail with a `Group-By Error`, and so does `SELECT *` with `GROUP BY`, as `Group-By Error: Can't process wildcard in group-by`. Name the columns to group by instead.
 - Two statements fail with `One and only one statement at a time please`, and `UNION` fails with `INSERT, UPDATE is not supported for polars`.
 - A table other than `df` fails with a message such as `Table name people was not found`.
 - SQL that doesn't parse gives the parser's message, such as `ParserError("Expected: identifier, found: EOF")` for `SELECT name FROM` with no table.

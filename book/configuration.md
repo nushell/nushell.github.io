@@ -737,6 +737,18 @@ of paths will be searched. The constant `NU_LIB_DIRS` will be searched _first_ a
 precedence. If a file matching the name is found in one of those directories, the search will
 stop. Otherwise, it will continue into the `$env.NU_LIB_DIRS` search path.
 
+A relative directory in either list is resolved against the directory of the file that runs `use` or `source`, not the directory you started Nushell in. At the prompt and with `nu -c`, that is the current directory. A script can keep its modules in a folder next to it and find them from anywhere:
+
+```nu
+# /home/me/project/main.nu
+const NU_LIB_DIRS = [lib]
+use greet.nu   # loads /home/me/project/lib/greet.nu
+```
+
+A file that `main.nu` loads from a subdirectory, such as `use tools/build.nu`, resolves `lib` against `tools/` when it runs `use` itself.
+
+Both values have to be lists of strings. Nushell skips a value that isn't a list, such as `const NU_LIB_DIRS = 'lib'` without the brackets, and then `use` fails with `Module not found`. In a list, an item that isn't a string is skipped. A `NU_LIB_DIRS` string that Nushell inherits from its parent process is the exception. Nushell splits it into a list at startup (see [`$env.NU_LIB_DIRS`](./special_variables.md#env-nu-lib-dirs)).
+
 #### `NU_PLUGIN_DIRS` Constant
 
 `const NU_PLUGIN_DIRS` works in the same way for the plugin search path.
@@ -1128,6 +1140,15 @@ nu --experimental-options native-clip --experimental-options pipefail=false
 ```
 
 Separate the items in the brackets with commas, and quote the bracketed form. In Nushell, an unquoted `[native-clip, pipefail=false]` is a list, and a list can't be passed to an external command.
+
+Nushell applies the entries from left to right, and repeated flags from first to last, so a later entry overrides an earlier one. Because `all` sets every option, put it first and the exceptions after it. `all,pipefail=false` turns on every option that isn't deprecated, except `pipefail`:
+
+```nu
+nu -n --experimental-options all,pipefail=false -c 'version | get experimental_options'
+# => example=false, dc-glob=true, reorder-cell-paths=true, pipefail=false, enforce-runtime-annotations=true, native-clip=true, cell-path-types=true
+```
+
+In the other order, `pipefail=false,all`, the `all` comes last and turns `pipefail` back on.
 
 Nushell reads `NU_EXPERIMENTAL_OPTIONS` once, before any configuration file, so it has to be in the environment that starts `nu`. Setting it in `config.nu` has no effect on that session. When both are given, the flag is applied after the variable, so the flag wins for an option that both name.
 

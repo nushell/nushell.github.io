@@ -132,6 +132,19 @@ A string can hold a decimal number, or a hex, octal or binary number with a `0x`
 # => 1295
 ```
 
+With a radix other than 10, the string may have a sign and surrounding whitespace, but otherwise only digits of that base. The locale's thousands separator and a fraction aren't accepted, so `"1,000" | into int --radix 16` and `"ff.8" | into int --radix 16` are errors. A `0x`, `0o` or `0b` prefix takes precedence over `--radix`.
+
+An int given `--radix` is written out in decimal, and those digits are read in the new base. A float is truncated to an int first. A digit that the base doesn't have, such as the `9` in `19 | into int --radix 8`, is an error:
+
+```nu
+"0x10" | into int --radix 2
+# => 16
+10 | into int --radix 16
+# => 16
+10.7 | into int --radix 16
+# => 16
+```
+
 A binary value of up to 8 bytes becomes one int. `--endian` (`-e`) sets the byte order to `little`, `big`, or `native`, the default, which is the byte order of the machine running Nushell (little-endian on x86-64 and on most ARM systems). Without `--signed`, the bytes form an unsigned number. With `--signed`, the highest bit is the sign bit:
 
 ```nu

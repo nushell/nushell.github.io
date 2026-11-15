@@ -73,17 +73,21 @@ Calls to `evaluate` run one at a time. A call that arrives while another is runn
 
 ### Server Instructions
 
-When a client connects, the server sends it instructions, which most clients add to the model's context. They tell the model to:
+When a client connects, the server identifies itself as `nushell-mcp-server`, with the title `Nushell MCP Server` and the version of `nu`. It also sends the client instructions, which most clients add to the model's context. They tell the model to:
 
 - run a command once, with no `first` or `last` in the pipeline, and slice the saved result in `$history` by its `history_index`
+- read the `evaluate` response as a record of `cwd`, `history_index`, `timestamp`, and `output`, where a result over the size limit has `note` in place of `output`
 - change the three environment variables described below when the defaults don't fit
 - prefer Nushell's own commands, which return structured data, to `to json` and text parsing
+- find commands with `list_commands`, and read a command's usage, flags, and parameters with `command_help`
+- turn the column-aligned text that many external programs print into a table with `detect columns`
+- expect variables and environment changes to last from one call to the next, and remember that external commands see environment variables but not `let` variables
 - quote and interpolate strings the Nushell way, and redirect with `o>`, `o+e>|`, and `ignore` instead of `>` and `2>&1`
 - look up Bash commands in a table of Nushell equivalents
 - let `http get` parse JSON responses, use `par-each` for parallel work, find files with `glob`, and use `polars` when that plugin is loaded
 - collect promoted calls with `job recv`, and start long-lived programs with `job spawn`
 
-The `evaluate` tool's description has a second Bash-to-Nushell table and repeats the limits.
+The `evaluate` tool's description has a second Bash-to-Nushell table and names two of the limits, `NU_MCP_OUTPUT_LIMIT` and `NU_MCP_PROMOTE_AFTER`.
 
 ## State Between Calls
 

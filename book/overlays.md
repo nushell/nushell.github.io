@@ -234,7 +234,7 @@ eggs
 # => eggs
 ```
 
-Without `--reload`, `$env.SCRATCH` would be back as well.
+Without `--reload`, `$env.SCRATCH` would be back as well. For a name that isn't an overlay yet, `--reload` makes no difference, and `overlay new --reload` creates the overlay as usual. On an overlay that is still active, `overlay new` moves the overlay to the top of the stack, with or without `--reload`, as `overlay use` does (see [Ordering overlays](#ordering-overlays)).
 
 :::
 
@@ -267,7 +267,7 @@ overlay use --reload dev
 # => ╰───┴────────────────╯
 ```
 
-Other environment variables that you set in the overlay are kept if the overlay is active when you reload it. If it was hidden and the module has an `export-env` block, they are dropped, and only the variables that `export-env` sets come back. `overlay new --reload` on an overlay that is still active changes nothing you can see.
+Other environment variables that you set in the overlay are kept if the overlay is active when you reload it. If it was hidden and the module has an `export-env` block, they are dropped, and only the variables that `export-env` sets come back.
 
 `--reload` works from the module as Nushell first read it. It doesn't read the module's file again. To pick up changes to a module file, give `overlay use` the file's path again, as in `overlay use ./spam-file.nu`. Each call with a path reads the file again and then works like `--reload`, so the new definitions replace the old ones, and the commands you added to the overlay stay.
 

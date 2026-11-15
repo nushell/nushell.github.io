@@ -9,6 +9,8 @@ These commands turn a list or table into a single answer (a `bool`, a count, a t
 - For empty input, `all` returns `true` and `any` returns `false`.
 - They stop at the first item that settles the answer. For `all` that is the first item that doesn't match, and for `any` the first one that does. Later items are never checked, so side effects in the closure don't run for them.
 - Only `true` counts as a match. A result that isn't a `bool`, such as a string or `null`, counts as `false` without an error.
+- An empty closure, `{}`, returns its input unchanged, so `any {}` and `all {}` test the items themselves.
+- The input has to be a list or a table. A range or a single value is a type error, `Command does not support range input` (or `int input`, and so on). For a run of numbers, make a list with [`seq`](/commands/docs/seq.md).
 
 ```nu
 [1 2 3] | all {|x| print $"checking ($x)"; $x < 2 }
@@ -17,6 +19,10 @@ These commands turn a list or table into a single answer (a `bool`, a count, a t
 # => false
 [a b] | all {|x| "yes" }
 # => false
+[false true] | any {}
+# => true
+seq 1 5 | any {|x| $x > 3 }
+# => true
 ```
 
 ## `length` and `is-empty`

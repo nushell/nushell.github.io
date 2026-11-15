@@ -364,6 +364,43 @@ All of the commands from installed plugins are available in the current scope:
 scope commands | where type == "plugin"
 ```
 
+[`which`](/commands/docs/which.md) reports a plugin command with the type `plugin`, and its `path` column holds the plugin's executable. `query db` is built into Nushell, and the `query` plugin adds the other `query` subcommands:
+
+```nu
+which "query json" "query db" | select command type
+# => ╭───┬────────────┬──────────╮
+# => │ # │  command   │   type   │
+# => ├───┼────────────┼──────────┤
+# => │ 0 │ query json │ plugin   │
+# => │ 1 │ query db   │ built-in │
+# => ╰───┴────────────┴──────────╯
+which "query json" | get path.0
+# => /home/me/.cargo/bin/nu_plugin_query
+```
+
+In [`help`](/commands/docs/help.md), the list of a command's subcommands marks each one that comes from a plugin with `(plugin)`, and the help for a plugin command shows `plugin` under `Command Type`:
+
+```nu
+help query
+# => Show all the query commands
+# =>
+# => Usage:
+# =>   > query
+# =>
+# => Subcommands:
+# =>   query db - Query a SQLite database with SQL statements.
+# =>   query json (plugin) - execute json query on json file (open --raw <file> | query json 'query string')
+# =>   query web (plugin) - execute selector query on html/web
+# =>   query webpage-info (plugin) - uses the webpage crate to extract info from html: title, description, language, links, RSS feeds, Opengraph, Schema.org, and more
+# =>   query xml (plugin) - Execute XPath 1.0 query on XML input
+# =>
+# => Flags:
+# =>   -h, --help: Display the help message for this command
+# =>
+# => Command Type:
+# =>   > plugin
+```
+
 [`version`](/commands/docs/version.md) also names the plugins, in its `installed_plugins` column. It is a single string with each plugin's name and version, separated by commas:
 
 ```nu
@@ -1080,7 +1117,33 @@ The simplest way to debug a plugin is to print to stderr. A plugin inherits its 
 
 #### Tracing
 
-The Nu plugin protocol message stream may be captured for diagnostic purposes using [trace_nu_plugin](https://crates.io/crates/trace_nu_plugin/).
+To see the [protocol](/contributor-book/plugin_protocol_reference.md) messages that Nu and a plugin exchange, start `nu` with `--log-level trace`. Nu then logs every message it sends to or receives from a plugin, decoded from JSON or MessagePack. `--log-include nu_plugin_engine::interface` leaves out the rest of the trace output:
+
+```nu
+nu --log-level trace --log-include nu_plugin_engine::interface -c '1 | inc'
+# => 2026-11-15 01:54:22.624 PM [TRACE] nu_plugin_engine::interface: [crates/nu-plugin-engine/src/interface/mod.rs:1163] to plugin: Hello(ProtocolInfo { protocol: NuPlugin, version: "0.117.0", features: [LocalSocket] })
+# => 2026-11-15 01:54:22.624 PM [TRACE] nu_plugin_engine::interface: [crates/nu-plugin-engine/src/interface/mod.rs:468] from plugin: Hello(ProtocolInfo { protocol: NuPlugin, version: "0.117.0", features: [LocalSocket] })
+# => 2026-11-15 01:54:22.630 PM [TRACE] nu_plugin_engine::interface: [crates/nu-plugin-engine/src/interface/mod.rs:1163] to plugin: Hello(ProtocolInfo { protocol: NuPlugin, version: "0.117.0", features: [LocalSocket] })
+# => 2026-11-15 01:54:22.630 PM [TRACE] nu_plugin_engine::interface: [crates/nu-plugin-engine/src/interface/mod.rs:468] from plugin: Hello(ProtocolInfo { protocol: NuPlugin, version: "0.117.0", features: [LocalSocket] })
+# => 2026-11-15 01:54:22.630 PM [TRACE] nu_plugin_engine::interface: [crates/nu-plugin-engine/src/interface/mod.rs:1163] to plugin: Goodbye
+# => 2026-11-15 01:54:22.630 PM [TRACE] nu_plugin_engine::interface: [crates/nu-plugin-engine/src/interface/mod.rs:1163] to plugin: Call(0, Run(CallInfo { name: "inc", call: EvaluatedCall { head: Span[152671..152674], positional: [], named: [] }, input: Value(Int(1), None) }))
+# => 2026-11-15 01:54:22.631 PM [TRACE] nu_plugin_engine::interface: [crates/nu-plugin-engine/src/interface/mod.rs:468] from plugin: CallResponse(0, PipelineData(Value(Int(2), None)))
+# => 2
+```
+
+The log goes to stderr. Add `--log-target file --log-file <path>` to write it to a file instead, which is easier to read when you trace an interactive session. The two `Hello` exchanges are there because Nu starts the plugin over stdio first and then again over a local socket, since the plugin supports one.
+
+The log shows Nu's view of each message. To capture the bytes on the wire, use [trace_nu_plugin](https://crates.io/crates/trace_nu_plugin/), a separate program that sits between Nu and the plugin. Install it with Cargo, then add the plugin again with the tracer as its `--shell`, giving the full path of both:
+
+```nu
+cargo install --locked trace_nu_plugin
+plugin add --shell ~/.cargo/bin/trace_nu_plugin ~/.cargo/bin/nu_plugin_inc
+plugin use inc
+```
+
+The new registry entry replaces the old one, because the plugin's name is the same. Nu now starts the tracer with the plugin's path and arguments. The tracer starts the plugin, passes the messages through, and appends a copy of each direction to a file in your home directory, named after the plugin's executable: `nu_plugin_inc.in.raw` gets what Nu sends, and `nu_plugin_inc.out.raw` gets what the plugin sends back. The tracer refuses to run in local socket mode, so Nu falls back to stdio.
+
+The files hold the messages in the plugin's encoding. `.out.raw` starts with a length byte and the encoding name, `json` or `msgpack`. A JSON plugin gives text you can read. Of the plugins that ship with Nu, `inc` and `query` use JSON, while `polars`, `gstat`, and `formats` use MessagePack, which is binary. For a MessagePack plugin, the `--log-level trace` output is easier to read.
 
 ::: warning
 Trace output will accumulate for as long as the plugin is installed with the trace wrapper. Large files are possible. Be sure to remove the plugin with `plugin rm` when finished tracing, and reinstall without the trace wrapper.

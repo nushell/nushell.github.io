@@ -98,6 +98,22 @@ def sign [n: int] {
 
    `nu greet.nu` prints `main ran`. With `SKIP` set to `1` in the environment, it prints nothing and exits with status 0.
 
+1. In a file run with [`source`](/commands/docs/source.md), a top-level `return` ends only that file. The returned value becomes the output of `source`, and the code that called `source` keeps running. Commands the file defines with `def` still exist, even ones below the `return`, because Nushell adds them when it parses the file. Other code after the `return` doesn't run. With this `setup.nu`:
+
+   ```nu
+   print "loading"
+   if not ("config.toml" | path exists) { return "no config.toml, skipped" }
+   print "config loaded"
+   ```
+
+   ```nu
+   source setup.nu
+   # => loading
+   # => no config.toml, skipped
+   ```
+
+   In a file run with [`source-env`](/commands/docs/source-env.md), `return` also ends the file early, and the value becomes the output of `source-env`.
+
 1. A `finally` block of a surrounding [`try`](./try-catch.md) still runs, and the returned value is kept:
 
    ```nu
