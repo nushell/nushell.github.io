@@ -1086,7 +1086,7 @@ nu_plugin_nu_example 1 a
 
 ### Debugging
 
-The simplest way to debug a plugin is to print to stderr; plugins' standard error streams are redirected through Nu and displayed to the user.
+The simplest way to debug a plugin is to print to stderr. A plugin inherits its standard error from the `nu` process that started it, so what it prints there shows up in your terminal.
 
 #### Tracing
 

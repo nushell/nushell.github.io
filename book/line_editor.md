@@ -1660,7 +1660,7 @@ above a definition:
 These are all the commands in scope whose names start with `attr `, shown without that prefix
 and with their descriptions. Attributes you import show up too, such as `@test` and
 `@before-each` after `use std/testing *`, and so do ones you define yourself with
-`def "attr my-tag" [] { ... }`. After the attributes, the menu offers the definitions an
+`alias "attr my-tag" = echo` (see [Defining your own attributes](./custom_commands.md#defining-your-own-attributes)). After the attributes, the menu offers the definitions an
 attribute can be attached to, which are `def`, `export def`, `extern` and `export extern`.
 
 #### Modules and their exports

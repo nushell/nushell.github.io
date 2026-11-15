@@ -467,7 +467,7 @@ Nushell reads `RUST_BACKTRACE` from the environment it was started with, so assi
 RUST_BACKTRACE=1 nu
 ```
 
-`RUST_BACKTRACE=full` prints a longer backtrace. This variable is about crashes in Nushell's Rust code. To trace an error through the Nushell commands that led to it, use [`NU_BACKTRACE`](#env-nu-backtrace).
+`RUST_BACKTRACE=full` is accepted too, but with the release builds it prints the same frames as `1`. This variable is about crashes in Nushell's Rust code. To trace an error through the Nushell commands that led to it, use [`NU_BACKTRACE`](#env-nu-backtrace).
 
 The [`panic`](/commands/docs/panic.md) command crashes Nushell on purpose, with the message you give it, or `Panic!` without one. Use it to see what a crash report looks like, or to test how a program that runs `nu` copes with a crash:
 

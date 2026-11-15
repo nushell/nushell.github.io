@@ -1625,8 +1625,8 @@ commands may end up being replaced by newer versions or removed completely, but
 remain available temporarily to give users time to transition away from the older
 functionality.
 
-The `deprecated` attribute raises a warning to the users upon running
-the custom command.
+The `deprecated` attribute raises a warning when Nushell parses a call to
+the custom command, even if that call never runs.
 
 ```nu
 @deprecated

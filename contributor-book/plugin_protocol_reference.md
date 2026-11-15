@@ -1780,8 +1780,8 @@ Below is an example of registering a handler that responds to both `Interrupt` a
 ```rust
 let _guard = engine.register_signal_handler(Box::new(move |action| {
     match action {
-        SignalAction::Interrupt => println!("Interrupt signal received"),
-        SignalAction::Reset => println!("Reset signal received"),
+        SignalAction::Interrupt => eprintln!("Interrupt signal received"),
+        SignalAction::Reset => eprintln!("Reset signal received"),
     }
 }))?;
 ```
@@ -1792,7 +1792,7 @@ The `signals()` method allows the plugin to check the status of the signal, spec
 
 ```rust
 if engine.signals().interrupted() {
-    println!("Operation was interrupted.");
+    eprintln!("Operation was interrupted.");
 }
 ```
 Use `signals().interrupted()` to check for interrupt status, particularly when managing long-running operations.
