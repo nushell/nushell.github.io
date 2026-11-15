@@ -130,7 +130,7 @@ $codes | polars select [
 # => ╰───┴──────────┴────────┴───────╯
 ```
 
-A start past the end of a string gives an empty string. A slice that begins before the start of the string keeps only the part inside it, so `polars str-slice -8 --length 3` gives `G` for `GB-001`. `--length` can't be negative. In an expression, a negative length fails on collect with ``conversion from `i32` to `u64` failed``.
+A start past the end of a string gives an empty string. A slice that begins before the start of the string keeps only the part inside it, so `polars str-slice -8 --length 3` gives `G` for `GB-001`. In an expression, `--length` can't be negative. A negative length fails on collect with ``conversion from `i32` to `u64` failed``.
 
 ## Splitting
 

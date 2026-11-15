@@ -7,6 +7,6 @@ use std/input
 input display --types [key]
 ```
 
-`input display` calls [`input listen`](/commands/docs/input_listen.md) in a loop and prints each event it returns, written as NUON on one line. It stops when you press <kbd>Esc</kbd> without modifiers. To get the events as records instead, call `input listen` yourself.
+`input display` calls [`input listen`](/commands/docs/input_listen.md) in a loop and prints each event it returns on its own line. It stops when you press <kbd>Esc</kbd> without modifiers. To get the events as records instead, call `input listen` yourself.
 
-`--types` (`-t`) picks the kinds of event to show. With `[key]`, as above, it shows only key presses. `--raw` (`-r`) adds two fields to key events: `raw_code`, the character's code in hexadecimal, for character keys only, and `raw_modifiers`, the modifier bits in binary.
+`--types` (`-t`) sets the kinds of event to listen for. Use `[key]`, as above, to show key presses. `--raw` (`-r`) adds two fields to key events: `raw_code`, the character's code in hexadecimal, for character keys only, and `raw_modifiers`, the modifier bits in binary.

@@ -82,7 +82,7 @@ let text = ""
 
 `null` is an error, except with `--relaxed`, which turns it into `false`. A bool comes back unchanged.
 
-`0` and `0.0` are `false`. Other ints, negative ones included, are `true`, and so are floats such as `0.5`:
+`0` and `0.0` are `false`. Other ints, negative ones included, are `true`, and so is `0.5`:
 
 ```nu
 [0 7 -7 0.5 0.0] | each {|n| {value: $n, bool: ($n | into bool)} }

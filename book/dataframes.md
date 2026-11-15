@@ -1867,8 +1867,8 @@ commands fall into three groups:
   column, collect a lazy input and return an eager dataframe: `polars get`,
   `polars append`, `polars shape`, `polars value-counts`, `polars is-unique`,
   `polars is-duplicated`, `polars arg-sort`, `polars cut`, `polars qcut`,
-  `polars sample`, `polars dummies`, `polars map-batches`, and
-  `polars collect`.
+  `polars sample`, `polars dummies`, `polars map-batches`, `polars fill-nan`,
+  and `polars collect`.
 
 When you aren't sure, check with [`describe`](/commands/docs/describe.md):
 

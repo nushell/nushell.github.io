@@ -171,7 +171,7 @@ The unit can be any duration unit, or `month` (30 days), `yr` (365 days) or `dec
 # =>         dec
 ```
 
-A whole number in that unit is shown without decimals. Otherwise the number of decimal places comes from `$env.config.float_precision` (default `2`).
+A whole number in that unit is shown without decimals. Otherwise the number of decimal places comes from `$env.config.float_precision` (default `2`), as set in `config.nu` or by an earlier command line.
 
 The input can be a duration, a list of durations, or a table with the columns to format named as cell paths after the unit. A record isn't accepted, and neither is a table without cell paths.
 

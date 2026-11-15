@@ -265,7 +265,7 @@ An int is treated as unsigned unless it is negative or you pass `--signed` (`-s`
 
 ### Not
 
-`bits not` flips every bit. For an unsigned int, the result stays inside the word. For a negative int, or with `--signed`, the result is the 64-bit flip, which is the negated number minus one, and `--number-bytes` is ignored. For binary data, every byte is flipped:
+`bits not` flips every bit. For an unsigned int and a word of 1, 2 or 4 bytes, the result stays inside the word. For a negative int, or with `--signed`, the result is the 64-bit flip, which is the negated number minus one, and `--number-bytes` is ignored. For binary data, every byte is flipped:
 
 ```nu
 [0 5 256] | bits not | to nuon

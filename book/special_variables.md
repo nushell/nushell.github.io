@@ -105,7 +105,7 @@ Nushell sets it, so it can't be assigned or hidden. See [Automatic variables](./
 - While [`source`](/commands/docs/source.md) runs a file. Afterwards the caller's values come back, so a command defined in the sourced file doesn't see the file's path when you call it later.
 - While [`use`](/commands/docs/use.md) or [`overlay use`](/commands/docs/overlay_use.md) runs a module's `export-env` block. A module without `export-env` doesn't set them at all.
 
-Apart from that, neither variable exists in the REPL or in `nu -c`, so use `$env.CURRENT_FILE?` where it may be missing.
+Outside these cases, don't rely on either variable. Read it as `$env.CURRENT_FILE?` where it may be missing.
 
 When code needs the path of the file it is written in, use `path self`. It runs at parse time, so it always names the file that contains it. Given a path, it resolves that path from the file's directory, so in `/home/me/scripts/tool.nu` this sets `helpers` to `/home/me/scripts/helpers.nu`:
 

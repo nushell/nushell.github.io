@@ -393,7 +393,7 @@ Both commands produce a stream, so `random binary 1GB | save noise.bin` writes t
 
 [`random pass`](/commands/docs/random_pass.md) generates a password from uppercase letters, lowercase letters, digits and these symbols: ``!@#$%^&*()_+-=[]{}|;':",.<>/?`~``.
 
-- `--chars` (`-c`) sets the length, up to 128. The default is 12. A length of 0 or more than 128 is an error.
+- `--chars` (`-c`) sets the length, up to 128. The default is 12. A length of 0 or more than 128 is an error. The password always holds at least one character of each kind it uses, so it is never shorter than the number of kinds.
 - `--no-uppercase` (`-u`), `--no-lowercase` (`-l`), `--no-numbers` (`-n`) and `--no-symbols` (`-s`) each leave out one kind of character. Leaving out all four is an error.
 
 ```nu

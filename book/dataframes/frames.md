@@ -326,7 +326,7 @@ $scores | polars with-column [
 
 The mean is a float, so `score` becomes an `f64` column. A string fill is always a literal value, never a column name, so `polars fill-null "team"` writes the word `team`. Use `polars col team` to fill from another column.
 
-`polars fill-null` returns the kind of input it was given: an eager dataframe for an eager one, a lazy dataframe for a lazy one, and an expression for an expression. To fill several columns with one expression, pick them with `polars col`, which takes several names or `--type`. The same goes for `polars fill-nan`, `polars cast`, and `polars shift` below.
+`polars fill-null` returns the kind of input it was given: an eager dataframe for an eager one, a lazy dataframe for a lazy one, and an expression for an expression. To fill several columns with one expression, pick them with `polars col`, which takes several names or `--type`. The same goes for `polars cast` and `polars shift` below. `polars fill-nan` given a lazy dataframe returns an eager one.
 
 ### Filling NaN
 
@@ -793,7 +793,7 @@ These parts of SQL work:
 - In the `SELECT` list, column names, `*`, the operators `+`, `-`, `*`, `/`, `%`, and `||` (which joins strings), `CAST(x AS type)` with the types in the table below, and `AS` to name a result. An aggregate without `AS` keeps its column's name.
 - In `WHERE`, the comparisons `=`, `!=` or `<>`, `<`, `<=`, `>`, and `>=`, joined with `AND`, `OR`, and `XOR` and grouped with parentheses. Put parentheses around each side of `XOR`, as in the example below. Write strings in single quotes. Double quotes name a column, so `dept = "eng"` fails with `unable to find column "eng"`.
 - The literals `TRUE`, `FALSE`, and `NULL`, along with numbers and strings, in the `SELECT` list and in `WHERE`.
-- `GROUP BY` with column names, and the functions `sum(column)`, `count(column)`, and `count(DISTINCT column)`. `count` skips nulls. The groups come out in no fixed order, so sort the result with `polars sort-by`, as above.
+- `GROUP BY` with column names, and the functions `sum(column)`, `count(column)`, and `count(DISTINCT column)`. `count(column)` skips nulls. The groups come out in no fixed order, so sort the result with `polars sort-by`, as above.
 - `LIMIT` with a number.
 - A table alias, as in `FROM df AS t` or `FROM df t`. You can't refer to the alias, though, because qualified names such as `t.name` fail.
 

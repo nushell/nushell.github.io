@@ -354,7 +354,7 @@ view source shout --dependencies
 # => }
 ```
 
-`--dependencies` works only on a custom command. With an alias, a module, a closure or a block ID, it changes nothing. It follows the calls written in the command's body, including the calls in a closure that the body defines and then runs through a variable. A closure that the command receives as an argument isn't part of its body, so the commands that closure calls don't appear. Two kinds of constant are left out: `$nu`, and the record that `use <module>` binds under the module's name.
+`--dependencies` works only on a custom command. With an alias, a module, a closure or a block ID, it changes nothing. It follows the calls written in the command's body, including the calls in a closure that the body defines and then runs through a variable. A closure that the command receives as an argument isn't part of its body, so the commands that closure calls don't appear. It lists the constants the body uses that are declared without a type, such as `const LIMIT = 3`. It doesn't list `$nu`, or the record that `use <module>` binds under the module's name.
 
 The output's [metadata](/book/metadata.md#data-source) has the content type `application/x-nuscript`. Its `source` is the file the definition came from, or a name such as `repl_entry #3` for a definition typed at the prompt.
 

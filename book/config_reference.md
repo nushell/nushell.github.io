@@ -127,7 +127,7 @@ These settings are for the built-in `clip copy` and `clip paste` commands, which
 
 ### `clip.resident_mode`
 
-Only Linux uses this setting. On Linux, a program that copies text has to keep running to hand that text to other programs, unless a clipboard manager takes it over. With `true`, `clip copy` passes the text to a background thread inside Nushell, which keeps serving it until Nushell exits. To turn the thread off, set the older plugin-style setting, `$env.config.plugins.clip.NO_RESIDENT = true`.
+Only Linux uses this setting. On Linux, a program that copies text has to keep running to hand that text to other programs, unless a clipboard manager takes it over. With `true`, `clip copy` passes the text to a background thread inside Nushell, which keeps serving it until Nushell exits. To turn the thread off, set `clip.resident_mode` to `false` and also set the older plugin-style setting, `$env.config.plugins.clip.NO_RESIDENT = true`.
 
 ### `clip.default_raw`
 

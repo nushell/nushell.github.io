@@ -70,7 +70,7 @@ $listing | detect columns --skip 1 --no-headers --combine-columns 5..7
 - `--no-headers` (`-n`) reads the first line as data and names the columns `column0`, `column1`, and so on.
 - `--combine-columns <range>` (`-c`) joins the columns in the range into one, separated by spaces. The joined column keeps the first column's name, which is why the file name above is still `column8`. Negative numbers count from the end, so `-2..-1` joins the last two columns. Pipe the result to [`rename`](/commands/docs/rename.md) to give the columns real names.
 
-`--ignore-box-chars` (`-i`) is for text that is already drawn as a table. It drops lines made only of box drawing characters, such as `+------+` or `├──────┤`, and strips the borders from the other lines:
+`--ignore-box-chars` (`-i`) is for text that is already drawn as a table, such as the output of `table --theme light` or `table --theme basic`. It drops lines made only of box drawing characters, such as `+------+` or `├──────┤`, and strips the borders from the other lines:
 
 ```nu
 "+-------+------+
