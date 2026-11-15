@@ -166,6 +166,44 @@ In this case, the final expression is the `match` statement which can return:
 - Otherwise, a `record` representing the randomly chosen file
   :::
 
+## Commands that call themselves
+
+A custom command can call itself:
+
+```nu
+def fact [n: int] {
+  if $n <= 1 { 1 } else { $n * (fact ($n - 1)) }
+}
+fact 5
+# => 120
+```
+
+Two commands can also call each other. Nushell defines every `def` in a block before it runs any of the block's code, so a command can call one that is defined further down the file:
+
+```nu
+def is-even [n: int] { if $n == 0 { true } else { is-odd ($n - 1) } }
+def is-odd [n: int] { if $n == 0 { false } else { is-even ($n - 1) } }
+is-even 10
+# => true
+```
+
+Each call that hasn't returned yet counts toward [`$env.config.recursion_limit`](./config_reference.md#recursion-limit), which is 50 by default. The 51st nested call fails instead of crashing Nushell:
+
+```nu
+def depth [n: int] { if $n == 0 { 0 } else { 1 + (depth ($n - 1)) } }
+depth 100
+# => Error: nu::shell::recursion_limit_reached
+# =>
+# =>   × Recursion limit (50) reached
+# =>    ╭─[repl_entry #1:1:20]
+# =>  1 │ def depth [n: int] { if $n == 0 { 0 } else { 1 + (depth ($n - 1)) } }
+# =>    ·                    ─────────────────────────┬────────────────────────
+# =>    ·                                             ╰── This called itself too many times
+# =>    ╰────
+```
+
+Closures count too, so a command that calls itself from inside `each` or `do` uses up the limit twice as fast. See [closures](/lang-guide/chapters/types/basic_types/closure.md) for the details. To go deeper, raise the limit, as in `$env.config.recursion_limit = 200`. A loop or [`reduce`](/commands/docs/reduce.md) has no such limit.
+
 ## Custom Commands and Pipelines
 
 Just as with built-in commands, the return value of a custom command can be passed into the next command in a pipeline. Custom commands can also accept pipeline input. In addition, whenever possible, pipeline input and output is streamed as it becomes available.

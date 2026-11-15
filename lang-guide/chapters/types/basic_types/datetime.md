@@ -122,6 +122,87 @@ $env.LC_TIME = "de_DE"
 # => Montag, 15.01.2024
 ```
 
+## Converting to datetime
+
+[`into datetime`](/commands/docs/into_datetime.md) turns a string, an int or a record into a datetime. A datetime passes through unchanged, and a list of strings becomes a list of datetimes.
+
+Without `--format`, a string can hold a date, a time, or both, in most common layouts: RFC 3339, RFC 2822, ISO 8601, dates with month names, times such as `5 pm`, and relative words such as `yesterday` or `3 days ago`. A UTC offset or a time zone name can follow the time. Parts that are left out come from today, and a time with no offset or zone is local time. `into datetime --formats` lists every layout it reads, with an example of each. A string that isn't a date fails with `nu::shell::datetime_parse_error`.
+
+```nu
+'2025-04-18 16:04:32 +05:30' | into datetime | to nuon
+# => 2025-04-18T16:04:32+05:30
+'Apr 18, 2025 4:04 PM America/New_York' | into datetime | to nuon
+# => 2025-04-18T16:04:00-04:00
+```
+
+An int, or a string of digits, is a Unix timestamp in nanoseconds, and the result is in UTC. For a timestamp in seconds, put `@` in front of it in a string, or use `--format '%s'`:
+
+```nu
+1744992000000000000 | into datetime | to nuon
+# => 2025-04-18T16:00:00+00:00
+'@1744992000' | into datetime | to nuon
+# => 2025-04-18T16:00:00+00:00
+```
+
+`--format` (`-f`) reads the string with a strftime-style format. It takes the specifiers of `format date`, plus `%J` for `%Y%m%d` and `%Q` for `%H%M%S`, and `into datetime --list` prints them all. An int is turned into text before it's read, so `1744992000 | into datetime --format '%s'` reads seconds. A string that doesn't match fails with `nu::shell::cant_convert`, whose help suggests leaving out `--format`.
+
+`--timezone` (`-z`) and `--offset` (`-o`) set the time zone of a timestamp, or of a string read with `--format`. `--timezone` takes `UTC` (or `u`), `LOCAL` (or `l`), or a name from [`date list-timezone`](#date-list-timezone), in any case. `--offset` takes whole hours from -12 to 12, and wins when both flags are given. A timestamp keeps its instant and is shown in the new zone. A formatted string without an offset is read as a time in that zone, and one with an offset is converted to it. An unknown zone name, or an offset out of range, fails with `Invalid timezone or offset`. Without `--format`, a string ignores both flags, so put the zone in the string itself.
+
+```nu
+1744992000000000000 | into datetime --timezone Asia/Kolkata | to nuon
+# => 2025-04-18T21:30:00+05:30
+'2025-04-18 16:04' | into datetime --format '%Y-%m-%d %H:%M' --timezone Asia/Kolkata | to nuon
+# => 2025-04-18T16:04:00+05:30
+```
+
+A record builds a datetime from its parts. Its columns can be `year`, `month`, `day`, `hour`, `minute`, `second`, `millisecond`, `microsecond`, `nanosecond`, and `timezone`, an offset string such as `"+02:00"`. Any other column is an error. Parts bigger than the biggest one you give come from now, and smaller ones start at zero, or at 1 for the month and day. So `{hour: 9}` is 9:00 today, and `{year: 2025}` is the first moment of 2025. Without `timezone`, the record gets your current UTC offset, even when daylight saving time gives that date a different one. `--timezone`, `--offset` and `--format` can't be used with a record.
+
+```nu
+{year: 2025, month: 4, day: 18, hour: 9, timezone: "+02:00"} | into datetime | to nuon
+# => 2025-04-18T09:00:00+02:00
+```
+
+For a table or a record, name the columns to convert. A record given column names has those fields converted, instead of being read as parts:
+
+```nu
+[[name when]; [a "2025-04-18 16:04 +00:00"]] | into datetime when | to nuon
+# => [[name, when]; [a, 2025-04-18T16:04:00+00:00]]
+```
+
+## Sequences of dates
+
+[`seq date`](/commands/docs/seq_date.md) returns a list of dates as strings, written with `--output-format` (`-o`), which is `%Y-%m-%d` by default. Pipe the list to `into datetime` to get datetime values.
+
+The list starts at `--begin-date` (`-b`) and goes up by `--increment` (`-n`) until it would pass `--end-date` (`-e`). The increment is a duration, or an int that counts days, and it's one day by default. An increment of 0 is an error. Both dates are read with `--input-format` (`-i`), `%Y-%m-%d` by default, and a format without a time means midnight. A date you leave out is now, the current local date and time, not midnight. When the end date comes before the start, the list counts down.
+
+```nu
+seq date --begin-date 2020-01-01 --end-date 2020-01-10 --increment 4 | to nuon
+# => ["2020-01-01", "2020-01-05", "2020-01-09"]
+seq date -b 2020-01-03 -e 2020-01-01 | to nuon
+# => ["2020-01-03", "2020-01-02", "2020-01-01"]
+```
+
+Instead of an end date, give `--days` (`-d`) or `--periods` (`-p`). `--days 10` ends the list nine days after the start, which is 10 dates with the default increment but only two with `--increment 5`. `--periods` is the number of dates, whatever the increment. When both are given, `--days` is ignored.
+
+```nu
+seq date -b 2020-01-01 --periods 3 --increment 6hr -o '%F %H:%M' | to nuon
+# => ["2020-01-01 00:00", "2020-01-01 06:00", "2020-01-01 12:00"]
+```
+
+`--reverse` (`-r`) makes `--days` and `--periods` count back from the start date. It has no effect without them, since the order of the two dates sets the direction.
+
+::: warning
+In Nushell 0.117.0, `--reverse` with `--days` or `--periods` returns two more dates than you asked for. Add `first` to keep the number you want:
+
+```nu
+seq date -b 2020-01-10 --days 3 --reverse | to nuon
+# => ["2020-01-10", "2020-01-09", "2020-01-08", "2020-01-07", "2020-01-06"]
+seq date -b 2020-01-10 --days 3 --reverse | first 3 | to nuon
+# => ["2020-01-10", "2020-01-09", "2020-01-08"]
+```
+
+:::
+
 ## The `date` commands
 
 [`date`](/commands/docs/date.md) on its own only prints a list of its subcommands, which are these:
@@ -134,7 +215,7 @@ $env.LC_TIME = "de_DE"
 | [`date humanize`](/commands/docs/date_humanize.md)           | Describes a date relative to now, such as "3 minutes ago"                                            |
 | [`date from-human`](/commands/docs/date_from-human.md)       | Reads a phrase such as "next friday" as a date                                                       |
 
-Other datetime commands have their own names: [`format date`](#formatting-dates) turns a date into text, and [`into datetime`](/commands/docs/into_datetime.md) reads one from text or a number.
+Other datetime commands have their own names: [`format date`](#formatting-dates) turns a date into text, [`into datetime`](#converting-to-datetime) reads one from text or a number, and [`seq date`](#sequences-of-dates) makes a list of dates.
 
 ### `date humanize`
 

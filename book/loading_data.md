@@ -265,6 +265,41 @@ open app.log | from json --objects
 
 With `--objects`, a value can't span lines, and a line that fails to parse is an error when the list reaches it. The list is a stream, read line by line as later commands ask for items, so `from json --objects | first 10` stops reading after ten values. `--objects` takes text, such as a string or the output of an external command, and fails on binary data. The [`std/formats`](./standard_library/formats.md) module wraps it as `from jsonl` and `from ndjson`, so that `open` parses `.jsonl` and `.ndjson` files.
 
+[`to json`](/commands/docs/to_json.md) writes JSON, indented with two spaces. `--indent` (`-i`) sets the number of spaces, and `--tabs` (`-t`) indents with that many tabs instead. `--raw` (`-r`) leaves out all the whitespace, which suits a log line or a request body. `--raw` wins over the other two, and `--tabs` wins over `--indent`. The text never ends with a newline.
+
+```nu
+{name: nu, tags: [a b]} | to json --raw
+# => {"name":"nu","tags":["a","b"]}
+{name: nu, tags: [a b]} | to json --indent 4
+# => {
+# =>     "name": "nu",
+# =>     "tags": [
+# =>         "a",
+# =>         "b"
+# =>     ]
+# => }
+```
+
+JSON has fewer types than Nushell, so `to json` writes some values as plain numbers or strings, and `from json` reads them back as those, not as the original types:
+
+| Nushell value        | JSON                                                                                             |
+| -------------------- | ------------------------------------------------------------------------------------------------ |
+| filesize             | number of bytes                                                                                  |
+| duration             | number of nanoseconds                                                                            |
+| datetime             | RFC 3339 string, such as `"2025-04-18T16:00:00+00:00"`                                           |
+| binary               | list of byte values                                                                              |
+| range                | list of its numbers when it's the whole input, a string such as `"1..3"` inside a list or record |
+| glob, cell path      | string                                                                                           |
+| `NaN`, `inf`, `-inf` | `null`                                                                                           |
+| closure              | an error, unless you add `--serialize`                                                           |
+
+```nu
+{size: 1kb, wait: 2sec, when: 2025-04-18T16:00:00Z, data: 0x[01 ff]} | to json --raw
+# => {"size":1000,"wait":2000000000,"when":"2025-04-18T16:00:00+00:00","data":[1,255]}
+```
+
+A closure fails with `closures are currently not deserializable`. `--serialize` (`-s`) writes its source code as a string instead, as in `{"inc":"{|x| $x + 1}"}`, and `from json` reads that back as a string. To keep every Nushell type, use [NUON](#nuon).
+
 ### Markdown
 
 Markdown is one of the formats that `open` understands, so opening a `.md` file doesn't give you a string. Take this `README.md`, shown here as text with [`open --raw`](#opening-in-raw-mode):

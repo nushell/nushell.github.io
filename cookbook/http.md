@@ -394,7 +394,7 @@ http post --content-type application/x-www-form-urlencoded http://localhost:8765
 # => user=alice+smith&tags=a%26b&n=3
 ```
 
-The other `http post` flags (`--headers`, `--user`, `--password`, `--max-time`, `--full`, `--allow-errors`, `--redirect-mode`, `--insecure`, `--pool`, and `--unix-socket`) work the same way as for `http get`. A body is required, and `http post` with neither an argument nor input fails with `Data must be provided either through pipeline or positional argument`.
+The other `http post` flags (`--headers`, `--user`, `--password`, `--max-time`, `--full`, `--raw`, `--allow-errors`, `--redirect-mode`, `--insecure`, `--pool`, and `--unix-socket`) work the same way as for `http get`. A body is required, and `http post` with neither an argument nor input fails with `Data must be provided either through pipeline or positional argument`.
 
 ### `http put`, `http patch`, and `http delete`
 

@@ -335,6 +335,17 @@ Currently, the use of `$in` on a stream in a pipeline results in a "collected" v
 # => 5
 ```
 
+The closure runs in its own scope, so changes it makes to `$env` are lost when it returns. `collect` has a `--keep-env` flag that its help says keeps them, but in Nushell 0.117.0 the flag has no effect, even inside a `def --env` command. Collect first and run the closure with [`do --env`](/commands/docs/do.md) instead:
+
+```nu
+[1 2] | collect --keep-env { $env.COUNT = ($in | length) }
+'COUNT' in $env
+# => false
+[1 2] | collect | do --env { $env.COUNT = ($in | length) }
+$env.COUNT
+# => 2
+```
+
 Collecting also lets a pipeline read and write the same file. `open notes.txt | save -f notes.txt` fails with "pipeline input and output are the same file", but `open notes.txt | collect | save -f notes.txt` works, because the file has been read completely before `save` opens it.
 
 Likewise, avoid using `$in` when normal pipeline input will suffice, as internally `$in` forces a conversion from `PipelineData` to `Value` and _may_ result in decreased performance and/or increased memory usage.
@@ -345,7 +356,18 @@ Nu commands communicate with each other using the Nu data types (see [types of d
 
 `internal_command | external_command`
 
-Data will flow from the internal_command to the external_command. This data will get converted to a string, so that they can be sent to the `stdin` of the external_command.
+Data will flow from the internal_command to the external_command, which reads it on its `stdin`. What it reads depends on the value:
+
+- A string is sent as it is, without a newline added. Binary data is sent as raw bytes.
+- A list, range, record or table is rendered by [`table`](/commands/docs/table.md) with colors turned off, so the external command reads the bordered table you would see on screen. [Output Result to External Commands](#output-result-to-external-commands) shows how to send plain text instead.
+- Any other single value, such as a number, bool, filesize, duration, datetime or `null`, sends nothing, and the external command reads empty input. Convert it with [`into string`](/commands/docs/into_string.md) first:
+
+```nu
+5 | ^wc -c | str trim
+# => 0
+5 | into string | ^wc -c | str trim
+# => 1
+```
 
 `external_command | internal_command`
 
@@ -387,6 +409,33 @@ try { ^sh -c 'kill -TERM $$' | lines } catch {|e| $e.exit_code }
 ```
 
 To capture the output and exit code of an external command without failing, use [`complete`](/commands/docs/complete.md). See [Stdout, Stderr, and Exit Codes](stdout_stderr_exit_codes.md) for more.
+
+### Copying a stream with `tee`
+
+[`tee`](/commands/docs/tee.md) sends a copy of its input to a closure and passes the input on unchanged. Use it to save or print a stream while the rest of the pipeline goes on working with it. The closure runs on another thread at the same time as the rest of the pipeline. Whatever the closure returns is thrown away, so it has to do its work with a command such as `save` or `print`:
+
+```nu
+1..4 | tee { save -f nums.txt } | math sum
+# => 10
+[1 2 3] | tee { length }
+# => ╭───┬───╮
+# => │ 0 │ 1 │
+# => │ 1 │ 2 │
+# => │ 2 │ 3 │
+# => ╰───┴───╯
+```
+
+For a stream, such as a list or an external command's output, the pipeline waits for the closure to finish before the stream ends. For a single value, such as a number or a record, `tee` passes the value on right away and doesn't wait for the closure.
+
+With an external command, `tee` copies its standard output. `--stderr` (`-e`) copies its standard error instead, and the standard error still goes where it would have gone without `tee`, such as the terminal. This saves an external command's error messages to a file and still shows them:
+
+```nu
+^nu -c 'print -e oops; print ok' | tee --stderr { save -f err.log }
+# => oops
+# => ok
+```
+
+`--stderr` works only on an external command's output. Given any other input, it fails with `--stderr can only be used on external commands`.
 
 ### Command Input and Output Types
 

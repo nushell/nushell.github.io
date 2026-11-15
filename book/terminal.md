@@ -1,6 +1,6 @@
 # Working with the Terminal
 
-Most Nushell commands work on data and leave the drawing to the display. The commands on this page deal with the terminal itself. They measure it, ask it questions, clear it, and produce text meant for it: grids, hyperlinks, and shorter escape sequences. To find out whether output is going to a terminal at all, see [Checking for a Terminal](./stdout_stderr_exit_codes.md#checking-for-a-terminal). Colors are covered in [Coloring Strings](./working_with_strings.md#coloring-strings) and [Coloring and Theming](./coloring_and_theming.md). For information about the machine rather than the terminal, such as the `sys` commands, see the [System cookbook](/cookbook/system.md).
+Most Nushell commands work on data and leave the drawing to the display. The commands on this page deal with the terminal itself. They measure it, ask it questions, read what the user types, clear it, and produce text meant for it: grids, hyperlinks, and shorter escape sequences. To find out whether output is going to a terminal at all, see [Checking for a Terminal](./stdout_stderr_exit_codes.md#checking-for-a-terminal). Colors are covered in [Coloring Strings](./working_with_strings.md#coloring-strings) and [Coloring and Theming](./coloring_and_theming.md). For information about the machine rather than the terminal, such as the `sys` commands, see the [System cookbook](/cookbook/system.md).
 
 ## The size of the terminal
 
@@ -37,6 +37,31 @@ A few things can go wrong:
 - A terminal that doesn't understand the query never replies, and `term query` keeps waiting. Press Ctrl+C. With a `--terminator`, that's an "Operation interrupted" error. Without one, `term query` always reads until Ctrl+C and returns everything it read, with no error.
 - When the reply doesn't start with the `--prefix`, the error is "Input did not begin with expected sequence". Run the query without `--prefix` to see what the terminal sent.
 - A custom completer can't read from the terminal, and `term query` there fails with "Interactive input is unavailable in this context". With no terminal at all, as in a cron job or the [MCP server](./mcp.md), it fails with an I/O error.
+
+## Reading what the user types
+
+[`input`](/commands/docs/input.md) shows an optional prompt, reads what the user types until Enter, and returns it as a string. Backspace deletes the last character. Ctrl+C stops `input` with an "Operation interrupted" error, and other Ctrl and Alt key combinations are ignored.
+
+```nu
+let name = input "Name: "
+```
+
+These flags change how it reads:
+
+- `--suppress-output` (`-s`) doesn't show what the user types, for a password or a token.
+- `--numchar` (`-n`) stops after that many bytes, without waiting for Enter, so `input -n 1` reads a single ASCII key. A character such as `é` counts as two bytes. The number has to be at least 1. Its help says it hides the typing, but it doesn't, so add `-s` for that.
+- `--bytes-until-any` (`-u`) also stops at the first character that appears in the string you give it, and leaves that character out. After `input -u ",;"`, typing `ab,` returns `ab`. Enter still ends the input, and the result is a string. Use ASCII characters for the stop list.
+- `--default` (`-d`) is the value returned when the user presses Enter without typing anything. With a prompt, `input` shows it after the prompt, as in `Name:  (default: guest)`.
+
+`--reedline` reads the line with the same line editor as the Nushell prompt, so the user can move the cursor and edit the text. In this mode, a list of strings piped into `input` becomes a history that the Up arrow steps through, `--default` fills in the line ready to edit, and Ctrl+D returns `null`. `-s`, `-n` and `-u` have no effect.
+
+```nu
+[red green blue] | input --reedline "Color: "
+```
+
+`--history-file` keeps that history in a text file, one entry per line. `input` reads it at the start and saves the new line, and the strings piped in, to it. The file is created if it doesn't exist. `--max-history` sets how many entries the history holds, 1000 by default, and the file is cut down to that many. Each of the two flags turns on `--reedline` by itself.
+
+Without a terminal, as in a cron job or the [MCP server](./mcp.md), `input` fails with an I/O error (`nu::shell::io::uncategorized_error`). In a [custom completer](./custom_completions.md), it fails with "Interactive input is unavailable in this context". To let the user pick from a list, use [`input list`](/commands/docs/input_list.md) (see [Select Lists](./tui.md#select-lists)), and to read single key presses with their modifiers, use [`input listen`](/commands/docs/input_listen.md).
 
 ## Clearing the screen
 

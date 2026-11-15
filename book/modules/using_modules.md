@@ -124,6 +124,25 @@ The path to the module can be:
 
   On other systems, `$extras` is `null`, and the `use` line does nothing, whatever members follow it. [`overlay use`](/commands/docs/overlay_use.md), [`source`](/commands/docs/source.md) and [`source-env`](/commands/docs/source-env.md) treat `null` the same way. The value has to be known at parse time, so a `let` variable holding `null` is a `not_a_constant` error, as it is for any `use` path.
 
+If you edit a module and import it again in the same session, the form of the path decides whether Nushell reads the files again. A path such as `use ./spam.nu`, `use spam.nu` or `use ./pkg` reads them again and gives you the new definitions. A bare name such as `use spam` or `use pkg`, once Nushell has loaded a module by that name, refers to the loaded copy and ignores your edits. Commands you imported earlier stay defined, even after you delete them from the file. Here `spam.nu` starts out exporting a `hi` that returns `one` and a `gone` command:
+
+```nu
+use ./spam.nu
+spam hi
+# => one
+'export def hi [] { "two" }' | save -f spam.nu
+use spam
+spam hi
+# => one
+use ./spam.nu
+spam hi
+# => two
+spam gone
+# => still here
+```
+
+Start a new shell to drop the old definitions.
+
 ### Module Definitions
 
 The second argument to the `use` command is an optional list of the definitions to import. Again, the module documentation should provide recommendations. For example, the [Standard Library Chapter](../standard_library.md#importing-submodules) covers the recommended imports for each submodule.

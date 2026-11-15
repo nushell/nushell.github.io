@@ -503,7 +503,31 @@ use rg-completions.nu *
 
 Don't name the file after the command. `use rg.nu` would make a module named `rg`, and a module can't export an extern with its own name. To load the externs at every startup, save the file in one of `$nu.user-autoload-dirs` instead. There the name doesn't matter, because autoload files are sourced, not imported as modules.
 
-Without `--source` (`-s`), the sources are tried in the order carapace, fish, zsh, man, help, and the first one that knows the command wins. `--source help` reads only the `--help` output, and `--source all` merges every source. The generated page explains how the sources are merged and which subcommands get their `--help` run.
+Without `--source` (`-s`), the sources are tried in the order carapace, fish, zsh, man, help, and the first one that knows any flags or subcommands wins. The help source can still add to it. A man page never lists subcommands, and a source may list a subcommand without any of its flags. In either case, when the command's `--help` lists subcommands, what the help source finds is merged in. `--source` with one name reads only that source, and any other name is an error that lists the valid ones.
+
+`--source all` reads every source that knows the command and merges what they found. Where they disagree, the earlier source in that order wins, with one exception. When the sources disagree about whether a flag takes a value, the flag is declared as a switch, and a comment above it names the sources on each side. The header lists every source that was used. This output depends on the versions of the tools you have installed:
+
+```nu
+generate completions rg --source all | lines | where $it starts-with '# Sources disagree' | first
+# => # Sources disagree on whether --field-context-separator takes a value, so it's a switch: yes in `carapace rg export`, `man rg` and `rg --help`, no in the zsh completions of `rg`
+```
+
+carapace, fish and zsh know a command's whole tree of subcommands, and a man page gives the flags of the named command only. The help source runs the command with `--help`, then each subcommand that output lists, and theirs in turn. A program that doesn't check for `--help` first would do the real work instead (`rm notes.txt --help` removes `notes.txt`), so the help source runs a subcommand's `--help` only when another source knows the subcommand, when the `--help` of the command above lists it along with a `--help` option, or when it has a man page, as git's subcommands do (`man git-commit`). When none of these holds for a subcommand you ask for, the error says why. On macOS:
+
+```nu
+generate completions 'launchctl reboot'
+# => Error: nu::shell::error
+# =>
+# =>   × couldn't generate completions for `launchctl reboot`
+# =>    ╭─[repl_entry #1:1:22]
+# =>  1 │ generate completions 'launchctl reboot'
+# =>    ·                      ─────────┬────────
+# =>    ·                               ╰── no flags or subcommands found in carapace, fish, zsh, man, help
+# =>    ╰────
+# =>   help: `launchctl --help` lists `reboot` but no --help option, and there's no
+# =>         `man launchctl-reboot`, so `launchctl reboot --help` wasn't run. Pipe
+# =>         its help text in with --source help
+```
 
 When you already have the help text, pipe it in and say which source it is. That also works for a command that isn't installed:
 
@@ -521,4 +545,20 @@ When you already have the help text, pipe it in and say which source it is. That
 # => ]
 ```
 
-The `[possible values: ...]` list became the completions of `--color`. Piped text without `--source` is an error, and so is a command name that belongs to a Nushell built-in, such as `generate completions ls`, since the extern would replace the built-in. When no source knows anything about the command, the error suggests installing carapace or fish, or piping its help text in.
+The `[possible values: ...]` list became the completions of `--color`. Values that fish or zsh compute with a command instead become completer commands in the module, named `nu-complete <command> ...`, when they translate to Nushell. `generate completions git --source fish` defines `nu-complete git local branches`, for example, which runs `git for-each-ref`. Shared helpers cover users, groups, hosts, processes, commands, network interfaces, and make targets. A tool built with the [cobra](https://cobra.dev) library, such as `gh`, `docker`, or `kubectl`, completes its own arguments. Each of its externs gets `@complete "nu-complete gh"`, a completer that asks the tool through its hidden `__complete` command. Every other extern gets `@complete external`, so an argument that nothing else covers is completed by the [external completer](/cookbook/external_completers.md) in `$env.config.completions.external`, if you've set one.
+
+Two kinds of flags can't be declared in an extern's signature: flags whose value is optional, such as `--color[=WHEN]`, and long options written with one dash, such as `-name`. They're listed in a comment above the extern, which becomes its description, and they still reach the command when you type them:
+
+```nu
+"      --color[=WHEN]  Colorize the output
+  -name PATTERN       Match files by name" | generate completions seek --source help
+# => # Generated by `generate completions` from help text piped in.
+# => # Flags that are not declared here still reach `seek`. Arguments without a completer
+# => # here are completed by the external completer in $env.config.completions.external.
+# =>
+# => # Not declared (optional value or unsupported name): --color, -name
+# => @complete external
+# => export extern "seek" []
+```
+
+Piped text without `--source` is an error. Piped text read with `--source carapace` has to be the JSON of a carapace export, or it fails with "piped text is not a carapace export". The command name can't belong to a Nushell built-in, such as `ls`, since the extern would replace the built-in, or to a keyword, such as `if`, which an extern can't be named after. Each word of the name has to start with a letter or a digit and hold only letters, digits, `-`, `_`, `.`, `+`, and `:`, and it can't be a number. So `generate completions 'git --x'` fails with "`--x` can't be part of an extern's name". When no source knows anything about the command, the error suggests installing carapace or fish, or piping its help text in.

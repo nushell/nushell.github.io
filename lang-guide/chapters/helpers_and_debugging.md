@@ -354,6 +354,8 @@ view source shout --dependencies
 # => }
 ```
 
+`--dependencies` works only on a custom command. With an alias, a module, a closure or a block ID, it changes nothing. It follows the calls written in the command's body, including the calls in a closure that the body defines and then runs through a variable. A closure that the command receives as an argument isn't part of its body, so the commands that closure calls don't appear. Some constants are left out as well: `$nu`, the record that `use <module>` binds under the module's name, and, in Nushell 0.117.0, any constant declared with a type annotation, such as `const LIMIT: int = 3`.
+
 The output's [metadata](/book/metadata.md#data-source) has the content type `application/x-nuscript`. Its `source` is the file the definition came from, or a name such as `repl_entry #3` for a definition typed at the prompt.
 
 [`view span`](/commands/docs/view_span.md) prints the source text for a span (see [metadata](#metadata)). Both ends must lie in the same parsed file. A start after the end is an `Invalid span` error, and a span outside the code Nushell has parsed is a `Cannot view span` error.

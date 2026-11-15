@@ -3,7 +3,7 @@
 [[toc]]
 
 ::: important
-When working through the examples below, start a new shell before importing an updated version of each module or command. This will help reduce any confusion caused by definitions from previous imports. It is also required for modules in a directory (a `mod.nu` file): within one shell session, Nushell keeps using the version of such a module that it imported first, even after you change its files.
+When working through the examples below, start a new shell before importing an updated version of each module or command. This will help reduce any confusion caused by definitions from previous imports. It is also required when an example imports a module by name, as in `use my-utils`. Within one shell session, a module name that Nushell has already loaded keeps referring to the version it read first, even after you change the module's files. Importing by path, as in `use ./my-utils`, reads the files again, but commands you deleted from them stay defined. See [Module Path](./using_modules.md#module-path).
 :::
 
 ## Overview

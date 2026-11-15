@@ -297,7 +297,7 @@ $env.PROMPT_COMMAND_RIGHT = {
 }
 ```
 
-`commandline set-prompt` sets the left prompt by default. Use `--right`, `--indicator`, `--vi-insert`, `--vi-normal`, or `--multiline` to set the other prompt components. The new text lasts until the next prompt is drawn.
+`commandline set-prompt` sets the left prompt by default. The text is its argument or, without one, a string piped into it, so `$text | commandline set-prompt` works too. Use `--right`, `--indicator`, `--vi-insert`, `--vi-normal`, or `--multiline` to set the other prompt components. `--indicator` sets only the indicator for the default (emacs) edit mode, the one `$env.PROMPT_INDICATOR` gives. In vi mode, use `--vi-insert` and `--vi-normal`. The new text lasts until the next prompt is drawn. Outside the REPL, in a script or a `nu -c` run, the command does nothing.
 
 A job started from a prompt closure, or from a `pre_prompt` or `env_change` [hook](./hooks.md), can finish before the prompt is drawn, for example when `git` answers quickly. Its `commandline set-prompt` still shows on that prompt. The same is true when a hook or prompt closure calls `commandline set-prompt` directly: the pushed text replaces what the prompt variable gives that segment.
 
@@ -984,7 +984,7 @@ Running commands:
 | `-c`, `--commands <string>`   | Runs the commands and exits. Any arguments after the commands go to their `main` command; see [Arguments with `nu -c`](./scripts.md#arguments-with-nu-c).                                                                                                                                                           |
 | `-e`, `--execute <string>`    | Runs the commands after the startup files have loaded, then starts the REPL. It is ignored when `-c` or a script file is given.                                                                                                                                                                                     |
 | `-l`, `--login`               | Starts a login shell, which also loads `login.nu`. Nushell starts as a login shell, too, when the name it was started under (`argv[0]`) begins with `-`, which is how `login` and `sshd` start a user's shell. With `-c`, `-l` also loads `env.nu` and `config.nu`; with a script file, it loads none of the three. |
-| `-i`, `--interactive`         | Treats a `-c` or script run as an interactive session. On Unix, Nushell then takes control of the terminal and hands it to each external command while it runs, as the REPL does.                                                                                                                                   |
+| `-i`, `--interactive`         | Treats a `-c` or script run as an interactive session. On Unix, Nushell then takes control of the terminal and hands it to each external command while it runs, as the REPL does. It doesn't change which configuration files load, so `nu -i -c` and `nu -i <script>` load none of them, as without `-i`.          |
 | `--stdin`                     | Lets the `-c` commands or the script read the input piped to `nu` as `$in`. See [Shebangs](./scripts.md#shebangs).                                                                                                                                                                                                  |
 | `--no-newline`                | Prints the result of the `-c` commands without a newline at the end.                                                                                                                                                                                                                                                |
 | `-m`, `--table-mode <string>` | Draws tables in this mode for the whole run, over the `table.mode` setting from the configuration files. `$env.config.table.mode` still shows the configured value.                                                                                                                                                 |
@@ -1120,6 +1120,16 @@ You can set them when Nushell starts, with the `--experimental-options` flag or 
 NU_EXPERIMENTAL_OPTIONS='native-clip,pipefail=false' nu
 ```
 
+The flag takes the same comma-separated list, or the list in square brackets, and you can repeat it. These three commands set the same options:
+
+```nu
+nu --experimental-options native-clip,pipefail=false
+nu --experimental-options '[native-clip, pipefail=false]'
+nu --experimental-options native-clip --experimental-options pipefail=false
+```
+
+Separate the items in the brackets with commas, and quote the bracketed form. In Nushell, an unquoted `[native-clip, pipefail=false]` is a list, and a list can't be passed to an external command.
+
 Nushell reads `NU_EXPERIMENTAL_OPTIONS` once, before any configuration file, so it has to be in the environment that starts `nu`. Setting it in `config.nu` has no effect on that session. When both are given, the flag is applied after the variable, so the flag wins for an option that both name.
 
 Problems in the variable are warnings, not errors. Nushell reports an unknown name or a value other than `true` or `false`, skips that entry, and starts anyway:
@@ -1143,6 +1153,16 @@ NU_EXPERIMENTAL_OPTIONS='native-clp,pipefail=nope' nu
 # =>  1 │ NU_EXPERIMENTAL_OPTIONS=native-clp,pipefail=nope
 # =>    ·                                    ─────────────
 # =>    ╰────
+```
+
+The flag is stricter about names. A value other than `true` or `false`, as in `--experimental-options pipefail=nope`, gets the same warning, and Nushell starts with that option unchanged. An unknown name, or `all=false`, is an error that stops `nu` with exit status 1 before it runs anything:
+
+```nu
+nu --experimental-options native-clp -c 'ls'
+# => Error: nu::shell::error
+# =>
+# =>   × Invalid value for `--experimental-options`
+# =>   help: Did you mean 'native-clip'?
 ```
 
 Naming a deprecated option also prints a warning. For a `deprecated-discard` option, the warning says it will be removed. For a `deprecated-default` option, it says the behavior is now the default and that you can remove the option.
