@@ -29,7 +29,7 @@ Typical plugin interaction after the initial handshake looks like this:
 
 The plugin **should** respond to further plugin calls. The engine **may** send additional plugin calls before responses have been received, and it is up to the plugin to decide whether to handle each call immediately as it is received, or to process only one at a time and hold on to them for later. In any case, sending another plugin call before a response has been received **should not** cause an error.
 
-The plugin **may** send [engine calls](#enginecall) during the execution of a call to request operations from the engine. Engine calls are [only valid within the context of a call](#enginecall-context) and may not be sent otherwise.
+The plugin **may** send [engine calls](#enginecall) during the execution of a call to request operations from the engine. Engine calls are [only valid within the context of a call](#enginecall) and may not be sent otherwise.
 
 The engine **may** send a [`Goodbye`](#goodbye) message to the plugin indicating that it will no longer send any more plugin calls. Upon receiving this message, the plugin **may** choose not to accept any more plugin calls, and **should** exit after any in-progress plugin calls have finished.
 
@@ -128,7 +128,7 @@ Tell the plugin to run a command. The argument is the following map:
 | Field     | Type                                        | Description                                           |
 | --------- | ------------------------------------------- | ----------------------------------------------------- |
 | **name**  | string                                      | The name of the command to run                        |
-| **call**  | [`EvaluatedCall`](#evaluatedcall)           | Information about the invocation, including arguments |
+| **call**  | [`EvaluatedCall`](#run-plugin-call)           | Information about the invocation, including arguments |
 | **input** | [`PipelineDataHeader`](#pipelinedataheader) | Pipeline input to the command                         |
 
 <a name="evaluatedcall"></a>
@@ -138,8 +138,8 @@ Tell the plugin to run a command. The argument is the following map:
 | Field          | Type                                                      | Description                                             |
 | -------------- | --------------------------------------------------------- | ------------------------------------------------------- |
 | **head**       | [`Span`](#span)                                           | The position of the beginning of the command execution. |
-| **positional** | [`Value`](#value) array                                   | Positional arguments.                                   |
-| **named**      | 2-tuple (spanned string, [`Value`](#value) or null) array | Named arguments, such as switches.                      |
+| **positional** | [`Value`](#value-types) array                                   | Positional arguments.                                   |
+| **named**      | 2-tuple (spanned string, [`Value`](#value-types) or null) array | Named arguments, such as switches.                      |
 
 The name of each named argument is a map with an `item` (the name) and a `span` (the position of the flag in the source). Named arguments are always sent by their long name, never their short name. A switch given without a value (e.g. `--major`) has a `null` value, but one given an explicit value (e.g. `--major=false`) has a `Bool` value. Switches that weren't given are not sent.
 
@@ -451,7 +451,7 @@ $version.field
 
 ##### `PartialCmp`
 
-Compares the custom value to another value and returns the [`Ordering`](#ordering) that should be used, if any. This is used to order values, for example when sorting; comparison operators such as `<` are sent as an [`Operation`](#operation) instead. The argument type is a [`Value`](#value), which may be any value - not just the same custom value type. The response type is [`Ordering`](#ordering-plugin-call-response). [`Error`](#error-plugin-call-response) may also be returned, but at present the error is unlikely to be presented to the user - the engine will act as if you had sent `{"Ordering": null}`.
+Compares the custom value to another value and returns the [`Ordering`](#ordering) that should be used, if any. This is used to order values, for example when sorting; comparison operators such as `<` are sent as an [`Operation`](#operation) instead. The argument type is a [`Value`](#value-types), which may be any value - not just the same custom value type. The response type is [`Ordering`](#ordering-plugin-call-response). [`Error`](#error-plugin-call-response) may also be returned, but at present the error is unlikely to be presented to the user - the engine will act as if you had sent `{"Ordering": null}`.
 
 Example (comparing two `version` custom values):
 
@@ -494,7 +494,7 @@ Example (comparing two `version` custom values):
 
 ##### `Operation`
 
-Returns the result of evaluating an [`Operator`](#operator) on this custom value with another value. The argument is a 2-tuple: (`operator`, `value`), where `operator` is a spanned [`Operator`](#operator) and `value` is a [`Value`](#value), which may be any value - not just the same custom value type. The response type is [`PipelineData`](#pipelinedata-plugin-call-response) or [`Error`](#error-plugin-call-response). The result **may** be another custom value. If the operation produces a stream, it will be consumed to a value.
+Returns the result of evaluating an [`Operator`](#operator) on this custom value with another value. The argument is a 2-tuple: (`operator`, `value`), where `operator` is a spanned [`Operator`](#operator) and `value` is a [`Value`](#value-types), which may be any value - not just the same custom value type. The response type is [`PipelineData`](#pipelinedata-plugin-call-response) or [`Error`](#error-plugin-call-response). The result **may** be another custom value. If the operation produces a stream, it will be consumed to a value.
 
 Example:
 
@@ -662,7 +662,7 @@ Example:
 
 #### `PipelineData` engine call response
 
-A successful result with a Nu [`Value`](#value) or stream. The body is a [`PipelineDataHeader`](#pipelinedataheader).
+A successful result with a Nu [`Value`](#value-types) or stream. The body is a [`PipelineDataHeader`](#pipelinedataheader).
 
 Example:
 
@@ -725,7 +725,7 @@ This example is abbreviated, as the [`Config`](#config) object is large and ever
 
 #### `ValueMap` engine call response
 
-A successful result for engine calls that produce plain maps, such as the [`GetEnvVars` engine call](#getenvvars-engine-call). The body is a map from strings to [`Value`s](#value).
+A successful result for engine calls that produce plain maps, such as the [`GetEnvVars` engine call](#getenvvars-engine-call). The body is a map from strings to [`Value`s](#value-types).
 
 Example:
 
@@ -933,7 +933,7 @@ These are messages sent from the plugin to the engine. [`Hello`](#hello) and [`S
 
 An error occurred while attempting to fulfill the request. The body is a [`LabeledError`](#labelederror).
 
-It is strongly preferred to provide labeled messages whenever possible to let the user know where the problem might be in their script. If there is no more suitable span from a value that can be used, `head` from [`EvaluatedCall`](#evaluatedcall) is a good fallback.
+It is strongly preferred to provide labeled messages whenever possible to let the user know where the problem might be in their script. If there is no more suitable span from a value that can be used, `head` from [`EvaluatedCall`](#run-plugin-call) is a good fallback.
 
 Example:
 
@@ -1086,13 +1086,13 @@ A positional argument is a map with `name`, `desc`, `shape`, `completion`, `var_
 - `shape` and `arg` are a [`SyntaxShape`](https://docs.rs/nu-protocol/latest/nu_protocol/enum.SyntaxShape.html), which tells the parser how to parse the argument. Simple shapes are strings, such as `"Int"`, `"String"`, `"Filepath"`, `"CellPath"`, or `"Any"`. Others are maps, such as `{"List": "Int"}` or `{"Closure": null}` for a closure with any parameters.
 - `completion` is `null`, or `{"List": ["alpha", "beta"]}` to offer a fixed list of values when the user presses Tab. For values computed at that time, answer [`GetCompletion`](#getcompletion-plugin-call) instead.
 - `var_id` is for commands defined in Nushell code. Send `null`.
-- `default_value` is a [`Value`](#value) or `null`. `help` shows it, but the engine doesn't fill it in. When the user leaves the argument out, it's missing from the [`EvaluatedCall`](#evaluatedcall), and the plugin has to apply the default.
+- `default_value` is a [`Value`](#value-types) or `null`. `help` shows it, but the engine doesn't fill it in. When the user leaves the argument out, it's missing from the [`EvaluatedCall`](#run-plugin-call), and the plugin has to apply the default.
 
 A `Type` is a string, such as `"Any"`, `"Nothing"`, `"String"`, `"Int"`, or `"Binary"`, or a map for a type with parameters, such as `{"List": "Int"}`, `{"Record": [["name", "String"], ["size", "Filesize"]]}` (an empty array for any record), or `{"Custom": "polars_dataframe"}`.
 
 Fields whose type allows `null` can be left out, and `rejects_unknown_flags` can be too. The others are required.
 
-Each element of `examples` is a map with `example`, the Nushell code, `description`, and `result`, a [`Value`](#value) or `null`. `help` shows the examples and their results. The Rust SDK converts custom values in example results with `to_base_value()` before sending them.
+Each element of `examples` is a map with `example`, the Nushell code, `description`, and `result`, a [`Value`](#value-types) or `null`. `help` shows the examples and their results. The Rust SDK converts custom values in example results with `to_base_value()` before sending them.
 
 #### `Ordering` plugin call response
 
@@ -1193,7 +1193,7 @@ The engine filters the suggestions against the text the user has typed, using th
 
 #### `PipelineData` plugin call response
 
-A successful result with a Nu [`Value`](#value) or stream. The body is a [`PipelineDataHeader`](#pipelinedataheader).
+A successful result with a Nu [`Value`](#value-types) or stream. The body is a [`PipelineDataHeader`](#pipelinedataheader).
 
 Example:
 
@@ -1479,8 +1479,8 @@ Pass a [`Closure`](#closure) and arguments to the engine to be evaluated. Return
 
 | Field               | Type                                        | Description                                                            |
 | ------------------- | ------------------------------------------- | ---------------------------------------------------------------------- |
-| **closure**         | spanned [`Closure`](#closure)               | The closure to call, generally from a [`Value`](#value).               |
-| **positional**      | [`Value`](#value) array                     | Positional arguments for the closure.                                  |
+| **closure**         | spanned [`Closure`](#closure)               | The closure to call, generally from a [`Value`](#value-types).               |
+| **positional**      | [`Value`](#value-types) array                     | Positional arguments for the closure.                                  |
 | **input**           | [`PipelineDataHeader`](#pipelinedataheader) | Input for the closure.                                                 |
 | **redirect_stdout** | boolean                                     | Whether to redirect stdout if the closure ends in an external command. |
 | **redirect_stderr** | boolean                                     | Whether to redirect stderr if the closure ends in an external command. |
@@ -1553,7 +1553,7 @@ Pass a command's declaration ID (found via [`FindDecl`](#finddecl-engine-call)) 
 | Field               | Type                                        | Description                                                                     |
 | ------------------- | ------------------------------------------- | ------------------------------------------------------------------------------- |
 | **decl_id**         | unsigned integer                            | The ID of the declaration to call.                                              |
-| **call**            | [`EvaluatedCall`](#evaluatedcall)           | Arguments and head span for the call.                                           |
+| **call**            | [`EvaluatedCall`](#run-plugin-call)           | Arguments and head span for the call.                                           |
 | **input**           | [`PipelineDataHeader`](#pipelinedataheader) | Input for the command.                                                          |
 | **redirect_stdout** | boolean                                     | Whether to redirect stdout if the declared command ends in an external command. |
 | **redirect_stderr** | boolean                                     | Whether to redirect stderr if the declared command ends in an external command. |
@@ -1657,7 +1657,7 @@ All stream messages reference a stream ID. This identifier is an integer startin
 
 This message is sent from producer to consumer. The body is a 2-tuple (array) of (`id`, `data`).
 
-The `data` is either a `List` map for a list stream, in which case the body is the [`Value`](#value) to be sent, or `Raw` for a raw stream, in which case the body is either an `Ok` map with a byte buffer, or an `Err` map with a [`LabeledError`](#labelederror).
+The `data` is either a `List` map for a list stream, in which case the body is the [`Value`](#value-types) to be sent, or `Raw` for a raw stream, in which case the body is either an `Ok` map with a byte buffer, or an `Err` map with a [`LabeledError`](#labelederror).
 
 Examples:
 
@@ -2191,7 +2191,7 @@ An associative key-value map. If records are contained in a list, this renders a
 
 | Field    | Type                            |
 | -------- | ------------------------------- |
-| **val**  | map: string ⇒ [`Value`](#value) |
+| **val**  | map: string ⇒ [`Value`](#value-types) |
 | **span** | [`Span`](#span)                 |
 
 Example:
@@ -2237,7 +2237,7 @@ A list of values of any type.
 
 | Field    | Type                    |
 | -------- | ----------------------- |
-| **vals** | [`Value`](#value) array |
+| **vals** | [`Value`](#value-types) array |
 | **span** | [`Span`](#span)         |
 
 Example:
@@ -2309,7 +2309,7 @@ A reference to a parsed block of Nushell code, with variables captured from scop
 | Field        | Type                                                          |
 | ------------ | ------------------------------------------------------------- |
 | **block_id** | unsigned integer                                              |
-| **captures** | array of pairs (unsigned integer `var_id`, [`Value`](#value)) |
+| **captures** | array of pairs (unsigned integer `var_id`, [`Value`](#value-types)) |
 
 The plugin **should not** try to inspect the contents of the closure. It is recommended that this is only used as an argument to the [`EvalClosure` engine call](#evalclosure-engine-call). The exact representation of a closure is likely to change in the future to avoid serializing all of the captures.
 
@@ -2578,7 +2578,7 @@ The representation is the following string:
 
 #### `Value` header variant
 
-A single value. Does not start a stream, so there is no identifier. The body is a 2-tuple (array): (`value`, `metadata`), where `value` is a [`Value`](#value) and `metadata` is either [`PipelineMetadata`](#pipelinemetadata) or `null`. Both elements **must** be present.
+A single value. Does not start a stream, so there is no identifier. The body is a 2-tuple (array): (`value`, `metadata`), where `value` is a [`Value`](#value-types) and `metadata` is either [`PipelineMetadata`](#pipelinemetadata) or `null`. Both elements **must** be present.
 
 Example:
 
@@ -2658,7 +2658,7 @@ Starts a byte stream. Expect [`Data`](#data) messages of the `Raw` variant with 
 | ------------ | ---------------------------------------- | ------------------------------------------------- |
 | **id**       | integer                                  | The stream identifier                             |
 | **span**     | [`Span`](#span)                          | The source code reference that caused the stream. |
-| **type**     | [`ByteStreamType`](#bytestreamtype)      | The expected type of the stream.                  |
+| **type**     | `ByteStreamType`      | The expected type of the stream.                  |
 | **metadata** | [`PipelineMetadata`](#pipelinemetadata)? | Metadata about the stream, or `null`.             |
 
 <a name="bytestreamtype"></a> Byte streams carry a `type` field with one of the three following strings:
@@ -2698,7 +2698,7 @@ Metadata that can be attached to pipeline data, as shown by the [`metadata`](/co
 | **data_source**  | string or map                    | Where the data came from: `"None"`, `"HtmlThemes"`, or `{"FilePath": "<path>"}`.   |
 | **path_columns** | string array                     | Names of columns that contain file paths (e.g. `["name"]` for the output of `ls`). |
 | **content_type** | string?                          | The MIME type of the data, e.g. `"application/json"`.                              |
-| **custom**       | map: string ⇒ [`Value`](#value)? | Other metadata, set by commands and plugins. Defaults to an empty map.             |
+| **custom**       | map: string ⇒ [`Value`](#value-types)? | Other metadata, set by commands and plugins. Defaults to an empty map.             |
 
 `data_source` and `path_columns` are required.
 
@@ -2777,7 +2777,7 @@ It's a map with the same top-level keys as `$env.config`, 39 of them in 0.117.0:
 - A setting that takes one of a few words is the Rust variant name, which is capitalized: `"edit_mode": "Emacs"`, `"use_ansi_coloring": "Auto"`, `"history": {"file_format": "Plaintext", ...}`.
 - A setting with a choice of forms is a tagged map, such as `"footer_mode": {"RowCount": 25}` or `"trim": {"Wrap": {"try_to_keep_words": true}}` in `table`.
 - Durations are integers of nanoseconds, as in `"plugin_gc": {"default": {"enabled": true, "stop_after": 10000000000}, ...}`, except `table.batch_duration`, which uses the `{"secs": 1, "nanos": 0}` form. Filesizes, such as `max_last_result_size`, are integers of bytes.
-- Settings that can hold any Nushell value are [`Value`s](#value): the entries of `color_config`, `explore`, `tui`, and `plugins`, `buffer_editor`, the hooks in `hooks`, and the fields of each entry in `keybindings` and `menus`. For example, `"buffer_editor": {"Nothing": {"span": {"start": 0, "end": 0}}}`.
+- Settings that can hold any Nushell value are [`Value`s](#value-types): the entries of `color_config`, `explore`, `tui`, and `plugins`, `buffer_editor`, the hooks in `hooks`, and the fields of each entry in `keybindings` and `menus`. For example, `"buffer_editor": {"Nothing": {"span": {"start": 0, "end": 0}}}`.
 
 ### `Ordering`
 
