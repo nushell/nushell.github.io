@@ -21,7 +21,7 @@ Each command on this page builds an expression. Most of them take a column expre
 
 On a dataframe with more than one column, these commands fail with `Error using as series`, so take one column first with `polars get`. They also take a lazy dataframe, but they collect it and return an eager dataframe. The result keeps the column's name.
 
-Only `polars str-split` and `polars str-strip-chars` take a [selector](./selectors.md) as input. The other commands reject one with an error such as `Can't convert to NuDataFrame, NuLazyFrame, NuExpression, NuSelector`, so pick several string columns with `polars col --type str` instead.
+`polars str-split` and `polars str-strip-chars` also take a [selector](./selectors.md) as input. With the other commands, pick several string columns with `polars col --type str`.
 
 A string command used on a column of another type fails when you collect the result, with an error such as `` invalid series dtype: expected `String`, got `i64` ``. On a one-column dataframe it fails straight away. Null values stay null.
 
@@ -45,8 +45,6 @@ $people | polars select (polars col name | polars uppercase) (polars col city | 
 # => │ 2 │ ÉMILE ZOLA   │ paris    │
 # => ╰───┴──────────────┴──────────╯
 ```
-
-When their dataframe input isn't a string column, the error's help text says `The str-slice command can only be used with string columns`, even though the command was `polars uppercase` or `polars lowercase`.
 
 ## Searching with regular expressions
 
@@ -132,7 +130,7 @@ $codes | polars select [
 # => ╰───┴──────────┴────────┴───────╯
 ```
 
-A start past the end of a string gives an empty string. A slice that begins before the start of the string keeps only the part inside it, so `polars str-slice -8 --length 3` gives `G` for `GB-001`. In an expression, a negative `--length` fails on collect with ``conversion from `i32` to `u64` failed``. On a one-column dataframe it gives the rest of the string instead.
+A start past the end of a string gives an empty string. A slice that begins before the start of the string keeps only the part inside it, so `polars str-slice -8 --length 3` gives `G` for `GB-001`. `--length` can't be negative. In an expression, a negative length fails on collect with ``conversion from `i32` to `u64` failed``.
 
 ## Splitting
 
@@ -235,7 +233,7 @@ $first | polars str-join $last
 # => ╰───┴────────────────╯
 ```
 
-In this form `--delimiter` and `--ignore-nulls` have no effect, and a null on either side gives null. A one-row argument is joined to every row. Otherwise, when the lengths differ, the result has as many rows as the shorter dataframe. Without the argument the command fails with `Missing parameter: other`, and a column that isn't a string fails with `The str-join command only works with string columns`.
+In this form `--delimiter` and `--ignore-nulls` don't apply, and a null on either side gives null. The two dataframes need the same number of rows, unless the argument has one row, which is then joined to every row. Without the argument the command fails with `Missing parameter: other`, and a column that isn't a string fails with `The str-join command only works with string columns`.
 
 ## Parsing numbers
 
@@ -261,7 +259,7 @@ The first optional argument is the base, from 2 to 36, which defaults to 10. It 
 # => ╰───┴─────┴────────┴─────────┴───────╯
 ```
 
-`polars decimal` parses strings as decimal numbers. Its argument, which the command's help calls `infer_length`, sets how many digits to keep after the decimal point. Extra digits are rounded to the nearest value, and a value exactly halfway rounds to an even last digit. The result is then converted to `f64`, so the column's type is `f64`, not a decimal type. Strings it can't parse, including ones with spaces or a comma as the decimal mark, become null. Scientific notation such as `1e3` works:
+`polars decimal` parses strings as decimal numbers. Its argument sets how many digits to keep after the decimal point. Extra digits are rounded to the nearest value, and a value exactly halfway rounds to an even last digit. The result is then converted to `f64`, so the column's type is `f64`, not a decimal type. Strings it can't parse, including ones with spaces or a comma as the decimal mark, become null. Scientific notation such as `1e3` works:
 
 ```nu
 [[s]; ["2.456"] ["2.45"] ["2.55"] ["1e3"] ["1,5"]] | polars into-df | polars select [

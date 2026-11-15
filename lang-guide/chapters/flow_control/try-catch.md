@@ -66,7 +66,7 @@ try { error make {msg: "disk full", help: "free some space"} } catch { $in.detai
 In `details`:
 
 - `labels` is a table with one row for each underlined place. Each row has the label `text`, a `span` record (`start` and `end`, the form that `error make` takes), and a `location` record with the `file` the label points into and the `start` and `end` byte offsets within that file.
-- `code` is the error code, such as `nu::shell::division_by_zero`. It is `null` for an error from `error make` with a record that has no `code`, even though the printed error shows `nu::shell::error`. For `error make "message"` it is `nu::shell::error`.
+- `code` is the error code, such as `nu::shell::division_by_zero`. It is `null` for an error from `error make` with a record that has no `code`. For `error make "message"` it is `nu::shell::error`.
 - `inner` is a list of records with the same fields as `details`, one for each inner error.
 
 ```nu

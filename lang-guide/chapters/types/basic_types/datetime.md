@@ -155,7 +155,7 @@ An int, or a string of digits, is a Unix timestamp in nanoseconds, and the resul
 # => 2025-04-18T16:04:00+05:30
 ```
 
-A record builds a datetime from its parts. Its columns can be `year`, `month`, `day`, `hour`, `minute`, `second`, `millisecond`, `microsecond`, `nanosecond`, and `timezone`, an offset string such as `"+02:00"`. Any other column is an error. Parts bigger than the biggest one you give come from now, and smaller ones start at zero, or at 1 for the month and day. So `{hour: 9}` is 9:00 today, and `{year: 2025}` is the first moment of 2025. Without `timezone`, the record gets your current UTC offset, even when daylight saving time gives that date a different one. `--timezone`, `--offset` and `--format` can't be used with a record.
+A record builds a datetime from its parts. Its columns can be `year`, `month`, `day`, `hour`, `minute`, `second`, `millisecond`, `microsecond`, `nanosecond`, and `timezone`, an offset string such as `"+02:00"`. Any other column is an error. Parts bigger than the biggest one you give come from now, and smaller ones start at zero, or at 1 for the month and day. So `{hour: 9}` is 9:00 today, and `{year: 2025}` is the first moment of 2025. Without `timezone`, the record gets your current UTC offset. `--timezone`, `--offset` and `--format` can't be used with a record.
 
 ```nu
 {year: 2025, month: 4, day: 18, hour: 9, timezone: "+02:00"} | into datetime | to nuon
@@ -188,20 +188,6 @@ Instead of an end date, give `--days` (`-d`) or `--periods` (`-p`). `--days 10` 
 seq date -b 2020-01-01 --periods 3 --increment 6hr -o '%F %H:%M' | to nuon
 # => ["2020-01-01 00:00", "2020-01-01 06:00", "2020-01-01 12:00"]
 ```
-
-`--reverse` (`-r`) makes `--days` and `--periods` count back from the start date. It has no effect without them, since the order of the two dates sets the direction.
-
-::: warning
-In Nushell 0.117.0, `--reverse` with `--days` or `--periods` returns two more dates than you asked for. Add `first` to keep the number you want:
-
-```nu
-seq date -b 2020-01-10 --days 3 --reverse | to nuon
-# => ["2020-01-10", "2020-01-09", "2020-01-08", "2020-01-07", "2020-01-06"]
-seq date -b 2020-01-10 --days 3 --reverse | first 3 | to nuon
-# => ["2020-01-10", "2020-01-09", "2020-01-08"]
-```
-
-:::
 
 ## The `date` commands
 

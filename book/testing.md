@@ -78,7 +78,7 @@ assert str contains $b $a
 # =>    ╰────
 ```
 
-The labels show the string and the text it looked for. The message above them is a mistake in Nushell 0.117.0, where `assert str contains` reuses the text of `assert length`. Give it a message as a third argument, as in `assert str contains $b $a "the needle is missing"`, and that message comes first.
+The labels show the string and the text it looked for. Give it a message as a third argument, as in `assert str contains $b $a "the needle is missing"`, and that message comes first.
 
 In general for base `assert` command it is encouraged to always provide the additional message to show what went wrong. If you cannot use any built-in assert command, you can create a custom one with passing the label for [`error make`](/commands/docs/error_make.md) for the `assert` command:
 
@@ -374,9 +374,7 @@ The global context reaches the tests as NUON text, so it can only hold values th
 - `--exclude-module <regex>` leaves out the modules whose names match.
 - `--list` returns a table of the modules it found and their tests, setup and teardown commands,
   without running anything.
-- `--module <name>` is meant to pick a single module, but in Nushell 0.117.0 it always fails with
-  `module_not_found`, even for a module that exists. Filter with `--exclude-module`, or point
-  `--path` at a directory holding only that module.
+- To run the tests of a single module, point `--path` at a directory that holds only that module.
 
 If nothing is left to run, the runner fails with `no test to run`, and a `--path` that doesn't
 exist gives `directory_not_found`.

@@ -62,7 +62,7 @@ $readings | polars select [
 # => ╰───┴────┴──────────┴──────┴───────┴───────╯
 ```
 
-The parser expects a number for the base, so an expression such as `(polars col b)` written in its place fails with `expected number, found polars_expression`. The command itself accepts an expression, and one stored in a variable declared as `any`, as in `let base: any = polars col b`, gets past the parser. Dividing two natural logarithms gives the same per-row base without that workaround:
+The base is a number. For a different base on each row, divide two natural logarithms:
 
 ```nu
 [[x b]; [8 2] [81 3] [1000 10]] | polars into-df | polars select [

@@ -81,7 +81,7 @@
 | `record`   | A duration built from fields named after units (see below)                               |
 | `duration` | The value unchanged                                                                      |
 
-`--unit` (`-u`) names the unit of a number: `ns`, `us`, `µs`, `ms`, `sec`, `min`, `hr`, `day` or `wk`. It also applies to a float and to a string that holds only a number, although its description mentions only ints. Months and years aren't units, and any other name is a `nu::shell::invalid_unit` error. With a duration or record as input, `--unit` is an `incompatible_parameters` error, whose message says "got a record as input" in both cases.
+`--unit` (`-u`) names the unit of a number: `ns`, `us`, `µs`, `ms`, `sec`, `min`, `hr`, `day` or `wk`. The number can be an int, a float, or a string that holds only a number. Months and years aren't units, and any other name is a `nu::shell::invalid_unit` error. With a duration or record as input, `--unit` is an `incompatible_parameters` error.
 
 ```nu
 90 | into duration --unit sec
@@ -171,9 +171,9 @@ The unit can be any duration unit, or `month` (30 days), `yr` (365 days) or `dec
 # =>         dec
 ```
 
-A whole number in that unit is shown without decimals. Otherwise the number of decimal places comes from `$env.config.float_precision` (default `2`). `format duration` reads that setting as it was when the current script or REPL line started, so a change made earlier in the same script has no effect. In the REPL, a new value applies from the next line on.
+A whole number in that unit is shown without decimals. Otherwise the number of decimal places comes from `$env.config.float_precision` (default `2`).
 
-The input can be a duration, a list of durations, or a table with the columns to format named as cell paths after the unit. A record isn't accepted, and neither is a table without cell paths. That error says "only filesize input data is supported", although it means durations.
+The input can be a duration, a list of durations, or a table with the columns to format named as cell paths after the unit. A record isn't accepted, and neither is a table without cell paths.
 
 ```nu
 [[name time]; [build 95sec] [test 2min]] | format duration min time

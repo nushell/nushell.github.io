@@ -71,23 +71,24 @@ assert in-range 15 1 10
 
 ## `assert not`
 
-`assert not` passes when the condition is `false`, the opposite of `assert`. The message, `--error-label` and `--error-labels` work the same way. Without a label of your own, though, the default `It is not true.` label points into the source of `std/assert` instead of at your code:
+`assert not` passes when the condition is `false`, the opposite of `assert`. The message, `--error-label` and `--error-labels` work the same way. Give it a message that says what went wrong, or a label that points at the value:
 
 ```nu
-assert not (1 == 1)
+def "assert odd" [number: int] {
+    assert not ($number mod 2 == 0) --error-label {text: $"($number) is even", span: (metadata $number).span}
+}
+assert odd 3
+assert odd 4
 # => Error: nu::shell::error
 # =>
 # =>   × Assertion failed.
-# =>     ╭─[std/assert/mod.nu:57:14]
-# =>  56 │         main
-# =>  57 │         (not $condition)
-# =>     ·              ─────┬────
-# =>     ·                   ╰── It is not true.
-# =>  58 │         ($message | default "Assertion failed.")
-# =>     ╰────
+# =>    ╭─[repl_entry #1:5:12]
+# =>  4 │ assert odd 3
+# =>  5 │ assert odd 4
+# =>    ·            ┬
+# =>    ·            ╰── 4 is even
+# =>    ╰────
 ```
-
-So give `assert not` a message that says what went wrong, or a label.
 
 ## `assert error`
 
@@ -114,10 +115,6 @@ $msg
 # => Row number too large (max: 1).
 assert str contains $msg "too large"
 ```
-
-::: warning
-In Nushell 0.117.0, `assert error` also passes when the closure returns `true` without an error, so `assert error { true }` passes. It catches the error by comparing the result of `try` with `true`, and a closure that returns `true` looks the same.
-:::
 
 ## Comparing two values
 
@@ -190,7 +187,7 @@ The first argument must be a list. A string is a parse error, so check a string'
 
 ## `assert str contains`
 
-`assert str contains` takes a string, the substring it should contain and an optional message. The labels show the string as NUON and the substring it looked for. The error text is `` `$left` does not have the correct length ``, which in Nushell 0.117.0 is copied by mistake from `assert length` and has nothing to do with containment. A message of your own makes the failure clearer:
+`assert str contains` takes a string, the substring it should contain and an optional message. The labels show the string as NUON and the substring it looked for. Give it a message that says what was missing:
 
 ```nu
 assert str contains "haystack" "needle" "search failed"
@@ -209,8 +206,6 @@ assert str contains "haystack" "needle" "search failed"
 ## `assert compare`
 
 `assert compare` is the building block for comparison assertions that `std/assert` doesn't have. It takes a closure, a left value, a right value, a base message and an optional message. It calls the closure with the left and right values as its two parameters and passes if the closure returns `true`. When it fails, the error text is the optional message, if any, then the base message, and the labels show both values as NUON, as for `assert equal`.
-
-Its `help` text reads "Assert $left == $right" and its examples are those of `assert equal`. Both are copied from `assert equal` in Nushell 0.117.0 and don't describe the closure.
 
 Wrap `assert compare` in a command of your own:
 

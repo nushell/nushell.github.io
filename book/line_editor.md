@@ -553,8 +553,7 @@ with `custom values are currently not nuon-compatible`. Pipe it through
 - SQLite history saves each command when you press <kbd>Enter</kbd>, so `history | last` is the
   line that runs `history`.
 
-Started with `nu --no-history`, `history` returns nothing. With `history.path` set to `null`, it
-fails with `The config directory could not be found`.
+Started with `nu --no-history`, `history` returns nothing.
 
 `history --clear` (`-c`) deletes the history without asking. It removes the plain-text file, or
 every row of the SQLite database. With plain-text history and the default `sync_on_enter`, the
@@ -579,8 +578,7 @@ With no input, it copies every entry from the file of the other format, `history
 you use plain text or `history.txt` when you use SQLite, which keeps your history when you change
 `history.file_format`. It looks for that file in the configuration directory, even when
 `history.path` points elsewhere. If there's no such file, it creates an empty one and imports
-nothing. Like `history`, it does nothing in a `nu --no-history` session and fails when
-`history.path` is `null`.
+nothing. Like `history`, it does nothing in a `nu --no-history` session.
 
 Piped input can be:
 
@@ -1345,9 +1343,7 @@ you assign the list. If one of them is wrong, or a required field is missing,
 Nushell reports it and rejects the whole list, keeping the previous menus. The
 `layout` has to be in lowercase. The other fields of `type`, such as `columns`,
 are read when the next prompt is built. A wrong one there, such as
-`columns: "four"`, prints its error before every prompt, and until you fix it the
-line editor runs without menus, completions, hints, syntax highlighting or the
-check for [unfinished lines](#multi-line-editing).
+`columns: "four"`, prints its error before every prompt until you fix it.
 
 Each menu sets `input_mode`, which controls the text that the menu searches:
 
@@ -1491,9 +1487,7 @@ suggestions in a different layout. The sections that follow cover built-in compl
 easy to miss.
 
 To see what <kbd>Tab</kbd> would offer for a line, pipe the line to
-[`commandline complete`](/commands/docs/commandline_complete.md), as the examples below do. In a
-script or with `nu -c`, `commandline complete` doesn't list the executables in `PATH`, so run the
-examples that involve them at the prompt.
+[`commandline complete`](/commands/docs/commandline_complete.md), as the examples below do.
 
 #### Command names, `^` and `%`
 
@@ -1530,11 +1524,9 @@ in front of the sigil, <kbd>Tab</kbd> offers nothing. See
 [Running System (External) Commands](./running_externals.md) for what `^` and `%` do when the
 command runs.
 
-The word right after `sudo` or `doas`, written with or without `^`, completes from the same list
-of command names, since it names the command to run. Typing `sudo sor` at the prompt offers the
-same four suggestions as `sort` above. Pick a plain name that is an executable. `sudo` can't run
-Nushell commands, and a sigil in this position isn't removed, so `sudo ^sort` asks `sudo` for a
-program called `^sort`. Only that first word is special. With options in between, as in `sudo -u root sor`, and for the
+The word right after `sudo` or `doas`, written with or without `^`, completes from the list of
+command names, since it names the command to run. Pick the plain name of an executable there,
+because `sudo` can't run Nushell commands. Only that first word is special. With options in between, as in `sudo -u root sor`, and for the
 arguments of the command that follows, you get the usual completion for an external command,
 which is your [external completer](./custom_completions.md#external-completions) if you have one
 and file names otherwise. The same happens when no command name matches, and when `sudo` or `doas`

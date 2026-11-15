@@ -59,7 +59,7 @@ The `$nu` constant is a record containing several useful values:
   On Unix, when standard input is a terminal, `-i` does make Nushell take over the terminal the way the REPL does. It moves into its own process group, makes that group the terminal's foreground process group, and ignores job-control signals such as `SIGTSTP`, so Ctrl+Z doesn't suspend it.
 
 - `is-login`: `true` when Nushell was started as a login shell, either with `--login` (`-l`) or with a program name (`argv[0]`) that begins with `-`. `login`, `sshd`, and many terminal emulators start a login shell the second way, as `-nu`.
-- `history-enabled`: `false` when Nushell was started with `nu --no-history`. The REPL then neither reads nor writes a history file. The Up arrow still recalls lines from the current session, and the [`history`](/commands/docs/history.md) command returns nothing. Setting `$env.config.history.path = null` in `config.nu` also keeps history out of a file, but `history-enabled` stays `true` and the `history` command fails with an error.
+- `history-enabled`: `false` when Nushell was started with `nu --no-history`. The REPL then neither reads nor writes a history file. The Up arrow still recalls lines from the current session, and the [`history`](/commands/docs/history.md) command returns nothing. Setting `$env.config.history.path = null` in `config.nu` also keeps history out of a file, but `history-enabled` stays `true`.
 - `current-exe`: The full path to the currently-running `nu` binary. Can be combined with `path dirname` (which is constant) to determine the directory where the binary is located.
 - `is-lsp`: `true` when Nushell was started as a Language Server Protocol (LSP) server with `nu --lsp`. See [Language server](./language_server.md).
 - `is-mcp`: `true` when Nushell is running as a Model Context Protocol (MCP) server, started with `nu --mcp`. See [MCP Server](./mcp.md).
@@ -91,7 +91,7 @@ A terminal that is attached always wins, even when the output is redirected to a
 
 Assigning `$env.config` or one of its fields applies and checks the new settings right away, and so does [`load-env`](/commands/docs/load-env.md) with a record that has a `config` key. An invalid value is reported as an error at that point (see [Errors in settings](./configuration.md#errors-in-settings)). Because it is a record, `$env.config` is never passed to external commands.
 
-The `nu` flags `--table-mode` (`-m`) and `--error-style` override `table.mode` and `error_style` for one run, after the configuration files have loaded (see [Configuration - `nu` flags](./configuration.md#nu-flags)). `-m` works in the REPL, with `-c`, and for scripts, although `$env.config.table.mode` keeps showing the configured value. It accepts the mode names listed in [Coloring and Theming - Table Borders](./coloring_and_theming.md#table-borders), in any case.
+The `nu` flag `--table-mode` (`-m`) overrides `table.mode` for one run, after the configuration files have loaded, and `--error-style` sets `error_style` for a `nu -c` run (see [Configuration - `nu` flags](./configuration.md#nu-flags)). `-m` works in the REPL, with `-c`, and for scripts, although `$env.config.table.mode` keeps showing the configured value. It accepts the mode names listed in [Coloring and Theming - Table Borders](./coloring_and_theming.md#table-borders), in any case.
 
 ### `$env.CURRENT_FILE`
 
@@ -103,11 +103,11 @@ Nushell sets it, so it can't be assigned or hidden. See [Automatic variables](./
 
 - When you run a script with `nu script.nu` or [`run`](/commands/docs/run.md), for the whole run.
 - While [`source`](/commands/docs/source.md) runs a file. Afterwards the caller's values come back, so a command defined in the sourced file doesn't see the file's path when you call it later.
-- While [`use`](/commands/docs/use.md) or [`overlay use`](/commands/docs/overlay_use.md) runs a module's `export-env` block. These values then stay in the environment of the code that called `use`. After a script imports a module that has an `export-env` block, `$env.CURRENT_FILE` in the script, and in the module's commands, is the module's path, not the script's. A module without `export-env` doesn't set them at all.
+- While [`use`](/commands/docs/use.md) or [`overlay use`](/commands/docs/overlay_use.md) runs a module's `export-env` block. A module without `export-env` doesn't set them at all.
 
 Apart from that, neither variable exists in the REPL or in `nu -c`, so use `$env.CURRENT_FILE?` where it may be missing.
 
-When code needs the path of the file it is written in, `path self` is more reliable. It runs at parse time, so it always names the file that contains it. Given a path, it resolves that path from the file's directory, so in `/home/me/scripts/tool.nu` this sets `helpers` to `/home/me/scripts/helpers.nu`:
+When code needs the path of the file it is written in, use `path self`. It runs at parse time, so it always names the file that contains it. Given a path, it resolves that path from the file's directory, so in `/home/me/scripts/tool.nu` this sets `helpers` to `/home/me/scripts/helpers.nu`:
 
 ```nu
 const helpers = path self helpers.nu
@@ -165,10 +165,7 @@ The value is the proxy's URL, such as `http://proxy.example.com:8080`. The schem
 
 Entries match the host name only. An entry with a port, such as `localhost:8080`, never matches.
 
-Nushell reads these variables from `$env` each time an `http` command runs, so setting them in `config.nu`, at the prompt, or for a single command with [`with-env`](/commands/docs/with-env.md) works. Two cases behave differently:
-
-- Hiding an inherited proxy variable with `hide-env` doesn't turn the proxy off. With no proxy variable in `$env`, the HTTP library falls back to the environment Nushell was started with. To skip an inherited proxy, set `$env.NO_PROXY = "*"` and leave the proxy variable alone.
-- The shared client that `--pool` uses is created on the first `--pool` request and keeps that proxy for the rest of the session. It ignores `NO_PROXY` until you rebuild it with [`http pool`](/commands/docs/http_pool.md).
+Nushell reads these variables from `$env` each time an `http` command runs, so setting them in `config.nu`, at the prompt, or for a single command with [`with-env`](/commands/docs/with-env.md) works. To turn off a proxy that Nushell inherited, set `$env.NO_PROXY = "*"`.
 
 ### `$env.LAST_EXIT_CODE`
 
@@ -269,8 +266,6 @@ Without `NU_BACKTRACE`, the same command prints only the `boom` error. An error 
 
 Any value turns it on, including `0` and `false`. Nushell checks its global environment, which takes in your changes after each startup file and after each line you run at the prompt. So you can set `NU_BACKTRACE` before starting `nu`, in `config.nu`, or at the prompt, where it applies from the next line on. Setting it inside a script or a `nu -c` command doesn't affect that same script or command.
 
-The chain also changes what [`try`](/commands/docs/try.md) catches. With `NU_BACKTRACE` set, `$e.msg` in a `catch` closure is `oops`, the message of the outer entry, instead of the original message.
-
 ### `$env.NU_EXPERIMENTAL_OPTIONS`
 
 A comma-separated list of experimental options to turn on or off when Nushell starts, such as `native-clip,pipefail=false`. Nushell reads it once, before any configuration file, so it has to be in the environment that starts `nu`. It is ignored with `-n`, and for `nu -c` and scripts unless they also load configuration files. See [Configuration - Experimental options](./configuration.md#experimental-options).
@@ -367,7 +362,7 @@ nu --log-level 'debug' -c '1 | print; use std/log; log debug 1111; 9 | print'
 
 ### `$env.NU_PLUGIN_DIRS`
 
-A list of directories that [`plugin add`](/commands/docs/plugin_add.md) searches for a plugin given by a relative path, after the current directory and the `$NU_PLUGIN_DIRS` constant. It starts as an empty list. `plugin use`, `plugin rm`, and `plugin stop` don't search it.
+A list of directories that [`plugin add`](/commands/docs/plugin_add.md) searches for a plugin given by a relative path, after the current directory and the `$NU_PLUGIN_DIRS` constant. It starts as an empty list.
 
 A `NU_PLUGIN_DIRS` that Nushell inherits as a string stays a single string. Unlike `NU_LIB_DIRS`, it isn't split, and the plugin commands ignore a value that isn't a list. Set it as a list in `config.nu`.
 
@@ -409,7 +404,7 @@ pwd
 Some details:
 
 - Nushell doesn't set `OLDPWD` when it starts. If the program that started Nushell passed one in the environment, `cd -` goes there. If there is none, `cd -` stays in the current directory.
-- A `cd` that fails because the directory doesn't exist leaves `OLDPWD` unchanged. One that fails because you may not enter the directory sets `OLDPWD` to the current directory, so a `cd -` right after it stays where you are.
+- A `cd` that fails because the directory doesn't exist leaves `OLDPWD` unchanged.
 - `OLDPWD` follows the same scoping rules as `PWD`. A `cd` inside a custom command changes neither for the caller, unless the command is defined with `def --env`.
 - Unlike `PWD`, you can assign it yourself to choose where `cd -` goes. A value that isn't a string makes `cd -` fail with `Can't convert to path`.
 
@@ -484,7 +479,7 @@ A crash isn't a Nushell error, so `try` can't catch it. What happens next depend
 
 - In a script or with `nu -c`, Nushell exits with status `101`.
 - At the prompt, the REPL keeps running. It throws away what the crashed line changed, such as a variable or an `$env` value the line set, and shows a new prompt.
-- In a [background job](./background_jobs.md), only that job ends, although the report still says `Main thread panicked.`
+- In a [background job](./background_jobs.md), only that job ends.
 
 ### `$env.SHLVL`
 
@@ -587,7 +582,7 @@ A constant version of `$env.NU_LIB_DIRS` - a list of directories which will be s
 
 ## `$NU_PLUGIN_DIRS`
 
-A constant version of `$env.NU_PLUGIN_DIRS` - a list of directories which will be searched when registering plugins with `plugin add`. `plugin add` looks for a relative plugin path in the current directory first, then in the directories of `$NU_PLUGIN_DIRS`, and then in those of `$env.NU_PLUGIN_DIRS`. [`plugin use`](/commands/docs/plugin_use.md), [`plugin rm`](/commands/docs/plugin_rm.md), and [`plugin stop`](/commands/docs/plugin_stop.md) don't search it: they resolve a file name against the current directory only.
+A constant version of `$env.NU_PLUGIN_DIRS` - a list of directories which will be searched when registering plugins with `plugin add`. `plugin add` looks for a relative plugin path in the current directory first, then in the directories of `$NU_PLUGIN_DIRS`, and then in those of `$env.NU_PLUGIN_DIRS`.
 
 By default it holds the `plugins` directory in the config directory and the directory that contains the `nu` executable. See also:
 

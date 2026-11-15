@@ -141,7 +141,7 @@ A string can hold a decimal number with an optional sign, fraction and exponent,
 # =>   help: invalid float literal
 ```
 
-A comma is read as a decimal point, so `"1,5" | into float` is `1.5`. A comma that groups thousands therefore gives a wrong number without an error: `"1,000" | into float` is `1.0`, while `"1,000" | into int` is `1000` with an English locale. A string with both a comma and a dot is an error:
+A comma is read as a decimal point, so `"1,5" | into float` is `1.5`. A comma that groups thousands is read the same way, so `"1,000" | into float` is `1.0`, while `"1,000" | into int` is `1000` with an English locale. A string with both a comma and a dot is an error:
 
 ```nu
 "1,000.5" | into float

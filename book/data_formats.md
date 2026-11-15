@@ -316,7 +316,7 @@ It expects only the query. Given a whole URL, it takes everything before the fir
 # => ╰──────┴────╯
 ```
 
-A key that appears more than once, as in `tag=a&tag=b`, becomes a record with the same column twice, and `get tag` returns only the last value. [`url split-query`](/commands/docs/url_split-query.md) returns a table of `key` and `value` rows instead, which keeps every value:
+When a key can appear more than once, as in `tag=a&tag=b`, use [`url split-query`](/commands/docs/url_split-query.md). It returns a table of `key` and `value` rows, which keeps every value:
 
 ```nu
 "tag=a&tag=b" | url split-query
@@ -461,7 +461,7 @@ $"(ansi red)failed(ansi reset) 2 tests" | to html --partial --no-color
 # => <div style="background-color:white;color:black;">failed 2 tests</div>
 ```
 
-`--html-color` (`-c`) replaces the eight basic colors and their bold forms with `span` tags in the theme's colors. The tags aren't closed where each color ends. They all close at the end of the output, after the closing `div` tag, so the result isn't well-formed HTML.
+`--html-color` (`-c`) replaces the eight basic colors and their bold forms with `span` tags in the theme's colors.
 
 ## Plain text
 

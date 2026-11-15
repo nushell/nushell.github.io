@@ -56,7 +56,7 @@
    # => list<list<float>>
    ```
 
-   Any other input passes through `into value` unchanged, so it is safe on input that may or may not be a custom value. It converts only a custom value that is the whole input. A list, record or stream that holds custom values comes back as it was, and passing it through [`collect`](/commands/docs/collect.md) first doesn't change that, despite the hint in `help into value`. Convert each item instead, or use `update` for a record field:
+   Any other input passes through `into value` unchanged, so it is safe on input that may or may not be a custom value. It converts only a custom value that is the whole input. A list, record or stream that holds custom values comes back as it was. Convert each item instead, or use `update` for a record field:
 
    ```nu
    ["1.2.3" "2.0.0"] | into semver | into value | describe
@@ -160,7 +160,7 @@ Because the pre-release levels keep the numbers, `1.2.3-alpha.1` sorts before th
 
 The level must be one of the seven names, in lowercase. Anything else, such as `Major`, is the error "'Major' is not a valid bump level". The flags change the rest of the result:
 
-- `--build-metadata` (`-b`) sets the build metadata of the result, at any level, as in `semver bump patch -b ci.42`. It is made of ASCII letters, digits and hyphens, in parts separated by single dots. Anything else, such as a space or `a..b`, is the error "Invalid build metadata". An empty string removes the build metadata.
+- `--build-metadata` (`-b`) sets the build metadata of the result, at any level, as in `semver bump patch -b ci.42`. It is made of ASCII letters, digits and hyphens, in parts separated by single dots. Anything else, such as a space or `a..b`, is the error "Invalid build metadata". That error also prints the environment variables of the `nu` process, which can include secrets. An empty string removes the build metadata.
 - `--preserve-build-metadata` (`-p`) keeps the input's build metadata on levels that would drop it, so `1.2.3+b.7` bumps to `1.3.0+b.7` at `minor`. When both flags are given, `-b` wins.
 - `--loose` (`-l`) accepts a string with a prefix such as `v`, the same prefixes `into semver --loose` takes, and keeps the prefix on the result. A `semver` made with `into semver --loose` already carries its prefix and doesn't need the flag.
 - `--ignore-errors` (`-i`) returns a string that isn't a valid version unchanged, instead of failing with "Value is not a valid semver version". It doesn't excuse an unknown level for a valid version.
@@ -251,9 +251,5 @@ $m | matrix sum --axis 0 | matrix into-nu | to nuon
 $m | matrix sum --axis 0 | into value | to nuon
 # => [4.0, 6.0]
 ```
-
-::: warning
-`--as-records` gives correct values only for a two-dimensional matrix. For a matrix with one dimension, or with three or more, it returns rows of zeros. Use the default list form for those.
-:::
 
 The input must be a matrix. Any other value, a list of lists included, is an input type error.

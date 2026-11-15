@@ -155,7 +155,7 @@ A module name that isn't in scope is a `nu::shell::module_not_found` error. `hel
 
 ### Escapes and redirections
 
-Like [`help operators`](/commands/docs/help_operators.md), two more `help` subcommands return reference tables instead of help for a definition. [`help escapes`](/commands/docs/help_escapes.md) lists the backslash escapes of double-quoted strings, with a `sequence` and an `output` column. It leaves out `\0`, `\xHH` and a backslash before a space, which also work. See [Double-quoted Strings](/book/working_with_strings.md#double-quoted-strings) for the complete list.
+Like [`help operators`](/commands/docs/help_operators.md), two more `help` subcommands return reference tables instead of help for a definition. [`help escapes`](/commands/docs/help_escapes.md) lists the backslash escapes of double-quoted strings, with a `sequence` and an `output` column. See [Double-quoted Strings](/book/working_with_strings.md#double-quoted-strings) for the complete list.
 
 [`help pipe-and-redirect`](/commands/docs/help_pipe-and-redirect.md) lists the pipe and redirection operators, with `symbol`, `name`, `description` and `example` columns. It covers only the short spellings, such as `o>` and `e>|`, and lists `o>|` as unsupported. The long spellings, such as `out>` and `err>|`, and the reversed ones, such as `e+o>`, are explained in [Stdout, Stderr, and Exit Codes](/book/stdout_stderr_exit_codes.md#file-redirections).
 

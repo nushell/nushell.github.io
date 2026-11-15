@@ -10,12 +10,10 @@ Most of the commands here build expressions, so you use them inside
 [`polars select`](/commands/docs/polars_select.md),
 [`polars with-column`](/commands/docs/polars_with-column.md), or
 [`polars agg`](/commands/docs/polars_agg.md), as described in
-[Lazy Dataframes](../dataframes.md#lazy-dataframes). Their help lists
-[selectors](./selectors.md) as input too, but in Nushell 0.117.0 only
+[Lazy Dataframes](../dataframes.md#lazy-dataframes).
 `polars datepart`, `polars truncate`, `polars convert-time-zone`, and
-`polars replace-time-zone` accept one. The others fail with
-`can't convert polars_selector to NuDataFrame, NuLazyFrame, NuExpression, NuSelector`,
-so name the column with `polars col` instead.
+`polars replace-time-zone` also take a [selector](./selectors.md) as input.
+With the other commands, name the column with `polars col`.
 
 ::: tip
 By default, a table shows a date as how long ago it was, such as `4 years ago`.
@@ -85,8 +83,6 @@ Both commands behave differently depending on what you give them.
 - Given an expression, as above, they convert that column and keep its name. If
   any value doesn't match the format, the whole query fails with an error such as
   ``conversion from `str` to `date` failed in column 'at' for 1 out of 3 values``.
-  The error suggests setting `strict=False`, which is an option of Polars' Python
-  API; the Nushell commands have no such flag.
 - Given a dataframe, they convert its only column, so a dataframe with more than
   one column fails with `Error using as series`. The result is a single column
   named `date` or `datetime`, and values that don't match the format become null
@@ -134,8 +130,7 @@ string. That's handy for dates buried in other text:
 - `--naive` only matters for a dataframe. Without it, the command expects every
   string in a dataframe to carry an offset, so a format without `%z` turns every
   value into null. With `--naive`, it drops an offset read by `%z` and keeps the
-  wall-clock time. In Nushell 0.117.0, `--naive` together with `--time-zone` on a
-  dataframe crashes the plugin, so parse with an expression instead.
+  wall-clock time.
 - `--ambiguous` (`-a`) applies to expressions and lazy dataframes, and only when
   `--time-zone` puts a value inside a daylight saving change. See
   [Ambiguous and missing times](#ambiguous-and-missing-times).
@@ -170,9 +165,8 @@ integer:
 [`polars datepart`](/commands/docs/polars_datepart.md) does the same job with the
 part's name as an argument. It takes `year`, `quarter`, `month`, `week`, `day`,
 `hour`, `minute`, `second`, `millisecond`, `microsecond`, and `nanosecond`, so it
-is the way to get a quarter or a millisecond count. Its help text also lists
-`weekday`, but in Nushell 0.117.0 that fails with
-`weekday is not a valid datepart`; use `polars get-weekday`.
+is the way to get a quarter or a millisecond count. For the weekday, use
+`polars get-weekday`.
 
 ```nu
 $events | polars select at (polars col at | polars get-week | polars as week) (polars col at | polars get-weekday | polars as weekday) (polars col at | polars get-ordinal | polars as day_of_year) (polars col at | polars datepart quarter | polars as quarter) (polars col at | polars get-year | polars as year) | polars collect
@@ -232,9 +226,8 @@ $events | polars select (polars col at | polars strftime "%A %d %B %Y" | polars 
 As an expression, it works on `date` and `datetime` columns. A specifier for a
 part the column doesn't have fails, so formatting a `date` with `%H:%M` gives
 `cannot format Date with format '%H:%M'`. Given a dataframe, it needs a single
-`datetime` column, and a `date` column fails with `Error casting to date`. The
-error's help line mentions `str-slice`, which you can ignore. Given a lazy
-dataframe, it collects it first and returns an eager dataframe.
+`datetime` column, and a `date` column fails with `Error casting to date`. Given
+a lazy dataframe, it collects it first and returns an eager dataframe.
 
 ## Time zones
 
@@ -258,10 +251,6 @@ one, and both expect a `datetime` column. A `date` column fails with
 # => │ 0 │ 2025-06-01 12:00:00 +00:00 │ 2025-06-01 21:00:00 +09:00 │ 2025-06-01 12:00:00 +09:00 │
 # => ╰───┴────────────────────────────┴────────────────────────────┴────────────────────────────╯
 ```
-
-Their help text says you can pass `null` to remove the time zone. In Nushell
-0.117.0 the argument has to be a string, and `null` fails with
-`Parse mismatch: expected string.`
 
 ### Ambiguous and missing times
 
@@ -288,9 +277,8 @@ $fall_back | polars select (polars col at | polars replace-time-zone America/New
 ```
 
 `polars as-datetime --time-zone` runs into the same problem while parsing. Its
-`--ambiguous` flag takes `earliest` and `latest`, but `null` fails, because the
-parse treats the null as a value it couldn't convert. It has no flag for skipped
-times. For either case, parse to a naive column first and then use
+`--ambiguous` flag takes `earliest` or `latest`. To get null for an ambiguous
+time, or to handle a skipped one, parse to a naive column first and then use
 `polars replace-time-zone`, as above.
 
 ### Comparing with a date
@@ -311,10 +299,6 @@ the literal a zone with [`polars lit`](/commands/docs/polars_lit.md) and
 # => │ 0 │ 2025-03-10 08:05:00 +00:00 │
 # => ╰───┴────────────────────────────╯
 ```
-
-Comparisons between a datetime series and a date, without expressions, give wrong
-results in Nushell 0.117.0. See the warning under
-[Series operators](../dataframes.md#series-operators).
 
 ## Truncating to buckets
 
@@ -368,10 +352,8 @@ and there is no flag for the number of samples.
 
 `--start` and `--end` take a Nushell date or an expression. A quoted string such
 as `"2025-01-01"` fails with `'start' must be Date or Datetime, got String`.
-`--interval` takes a Polars duration string, as `polars truncate` does. The plugin
-converts a Nushell duration to nanoseconds, so `polars date-range` rejects `1day` with
-`` `interval` input for `date_range` must consist of full days ``. Write `1d`
-instead.
+`--interval` takes a Polars duration string, as `polars truncate` does, such as
+`1d` or `1mo`.
 
 `--closed` (`-c`) says which ends belong to the range: `both`, `left`, `right`, or
 `none`. The default is `both`, and any other value fails with
@@ -432,10 +414,8 @@ $stays | polars select guest (polars date-ranges --start (polars col check_in) -
 # => ╰───┴───────┴────────────────╯
 ```
 
-In Nushell 0.117.0 a list of dates doesn't come back as dates. A `date` inside a
-list is shown as the number of days since 1 January 1970, and a `datetime` inside
-a list as a count of its time unit since then. To see the values as dates, give
-each one its own row with [`polars explode`](/commands/docs/polars_explode.md):
+To see the dates, give each one its own row with
+[`polars explode`](/commands/docs/polars_explode.md):
 
 ```nu
 $stays | polars select guest (polars date-ranges --start (polars col check_in) --end (polars col check_out) --interval 1d --closed left | polars as night) | polars explode night | polars collect

@@ -620,13 +620,13 @@ When Nushell runs without any terminal, `input list` fails with an I/O error (`n
 
 Any record expands into its fields, so the rows of `ls` open up to show `name`, `type`, `size`, and `modified`.
 
-With `--walk`, rows whose `type` is `dir` are treated as folders, and their contents are listed from disk when they are expanded. Relative paths are resolved against the current directory, and `--column` selects the path column (`name` by default):
+With `--walk`, rows whose `type` is `dir` (or `directory`) are treated as folders, and their contents are listed from disk when they are expanded. Relative paths are resolved against the current directory, and `--column` selects the path column (`name` by default):
 
 ```nu
 ls | tui split [ (tui tree --walk) (tui preview) ] | tui run
 ```
 
-An opened folder lists one `{name, type}` record per entry, sorted by name. The `name` is the entry's full path, and the `type` is `dir` or `file`. A symbolic link is listed as `file`, even when it points to a folder. The `dir` entries open the same way, and a `file` entry opens into its two fields. A folder that can't be read opens to nothing. Only records whose `type` is `dir` (or `directory`) are listed from disk: a plain string that names a directory gets an expand marker, but opening it shows nothing.
+An opened folder lists one `{name, type}` record per entry, sorted by name. The `name` is the entry's full path, and the `type` is `dir` or `file`. A symbolic link is listed as `file`, even when it points to a folder. The `dir` entries open the same way, and a `file` entry opens into its two fields. A folder that can't be read opens to nothing.
 
 ### Logs
 

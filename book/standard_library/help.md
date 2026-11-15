@@ -16,7 +16,6 @@ Nushell answers every `--help` flag by calling whichever `help` command is in sc
 
 - A name that isn't a command, alias or module goes to an external help program, `man` by default, instead of causing an error. See [Help from external programs](#help-from-external-programs).
 - The names you type after `help` and its subcommands have completions.
-- `--find` is case-sensitive. The built-in `help --find escapes` and `help --find ESCAPES` give the same result, but the `std/help` version finds nothing for the second.
 - `help operators` has a page for a single operator and a `--find` flag.
 - The pages look different. A command's page also shows its category, lists flags as `--name, -n: <type> - description`, and has a "Signatures" section instead of the input/output table. The "Usage" line names positional parameters but not a rest parameter, which is listed under "Parameters".
 
@@ -119,7 +118,6 @@ module greet {
     export def bye [] { "bye" }
     export alias hi = hello
 }
-use greet hello
 help modules greet
 # => Greeting commands
 # =>
@@ -135,8 +133,6 @@ help modules greet
 # =>
 # => This module does not export environment.
 ```
-
-The command's help text says that commands in scope are highlighted and that those imported under another name appear in parentheses. In Nushell 0.117.0 it doesn't check the scope. Every command gets the same highlight, and the name in parentheses is always the module's name followed by the command's, however you imported it. Above, `bye` isn't imported and `hello` is imported without a prefix, but both look the same.
 
 An unknown module name is an error, `std::help::module_not_found`.
 

@@ -335,12 +335,9 @@ Currently, the use of `$in` on a stream in a pipeline results in a "collected" v
 # => 5
 ```
 
-The closure runs in its own scope, so changes it makes to `$env` are lost when it returns. `collect` has a `--keep-env` flag that its help says keeps them, but in Nushell 0.117.0 the flag has no effect, even inside a `def --env` command. Collect first and run the closure with [`do --env`](/commands/docs/do.md) instead:
+The closure runs in its own scope, so changes it makes to `$env` are lost when it returns. To keep them, collect first and run the closure with [`do --env`](/commands/docs/do.md):
 
 ```nu
-[1 2] | collect --keep-env { $env.COUNT = ($in | length) }
-'COUNT' in $env
-# => false
 [1 2] | collect | do --env { $env.COUNT = ($in | length) }
 $env.COUNT
 # => 2
@@ -360,11 +357,9 @@ Data will flow from the internal_command to the external_command, which reads it
 
 - A string is sent as it is, without a newline added. Binary data is sent as raw bytes.
 - A list, range, record or table is rendered by [`table`](/commands/docs/table.md) with colors turned off, so the external command reads the bordered table you would see on screen. [Output Result to External Commands](#output-result-to-external-commands) shows how to send plain text instead.
-- Any other single value, such as a number, bool, filesize, duration, datetime or `null`, sends nothing, and the external command reads empty input. Convert it with [`into string`](/commands/docs/into_string.md) first:
+- `null` sends no input. Any other single value, such as a number, bool, filesize, duration or datetime, has to be converted to text first, for example with [`into string`](/commands/docs/into_string.md):
 
 ```nu
-5 | ^wc -c | str trim
-# => 0
 5 | into string | ^wc -c | str trim
 # => 1
 ```

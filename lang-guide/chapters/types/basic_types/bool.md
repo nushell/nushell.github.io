@@ -82,10 +82,10 @@ let text = ""
 
 `null` is an error, except with `--relaxed`, which turns it into `false`. A bool comes back unchanged.
 
-An int is `false` when it's `0` and `true` otherwise, negative ints included. A float is `true` only when it's larger than a tiny positive number (Rust's `f64::EPSILON`, about `2.2e-16`). So `0.0` and every negative float are `false`, which makes `-1.5` false, while `-7` and the string `"-1.5"` are true:
+`0` and `0.0` are `false`. Other ints, negative ones included, are `true`, and so are floats such as `0.5`:
 
 ```nu
-[0 7 -7 0.5 0.0 -1.5] | each {|n| {value: $n, bool: ($n | into bool)} }
+[0 7 -7 0.5 0.0] | each {|n| {value: $n, bool: ($n | into bool)} }
 # => ╭───┬───────┬───────╮
 # => │ # │ value │ bool  │
 # => ├───┼───────┼───────┤
@@ -94,7 +94,6 @@ An int is `false` when it's `0` and `true` otherwise, negative ints included. A 
 # => │ 2 │    -7 │ true  │
 # => │ 3 │  0.50 │ true  │
 # => │ 4 │  0.00 │ false │
-# => │ 5 │ -1.50 │ false │
 # => ╰───┴───────┴───────╯
 ```
 

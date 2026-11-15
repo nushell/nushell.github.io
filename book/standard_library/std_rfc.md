@@ -10,7 +10,7 @@ A command in `std-rfc` can change or disappear between releases, so expect to re
 
 `clip` went the first way. It moved from `std-rfc/clip` to `std/clip` in Nushell 0.106.0. The `std-rfc/clip` commands kept working, with a deprecation warning, until 0.111.0 removed them. When a module you use is promoted, change its `use` line from `std-rfc/...` to `std/...`.
 
-This page describes the commands as they behave in Nushell 0.117.0, known bugs included. If you find another bug, or a candidate works well for you, say so in an issue or pull request on the [Nushell repository](https://github.com/nushell/nushell). The core team weighs that feedback when it decides what to promote.
+This page describes the commands in Nushell 0.117.0. If a candidate works well for you, or you run into a problem with one, say so in an issue or pull request on the [Nushell repository](https://github.com/nushell/nushell). The core team weighs that feedback when it decides what to promote.
 
 `nu --no-std-lib` turns off `std-rfc` along with `std`. With that flag, `use std-rfc/str` fails with "Module not found".
 
@@ -68,7 +68,7 @@ use std-rfc/conversions *
 # => [hello]
 ```
 
-`null | into list` is `[null]`, not an empty list. Put `into list` in front of the commands on this page that mishandle a range, such as [`random choice`](#std-rfc-random) and [`prod`](#prod).
+`null | into list` is `[null]`, not an empty list. Use `into list` to turn a range into the list that [`random choice`](#std-rfc-random) and [`prod`](#prod) need.
 
 ### `table-into-columns`, `record-into-columns` and `columns-into-table`
 
@@ -164,7 +164,7 @@ The multiples count from midnight on 1 January 1970 in that offset. A period tha
 # => 2026-07-15T13:00:00-04:00
 ```
 
-The period must be greater than zero. `0sec` or a negative duration fails with `nu::shell::needs_positive_value`, whose message says "Negative value passed when positive one is required" even for zero. Put a negative literal in parentheses, as in `(-1hr)`, or the parser reads it as a flag. Months and years aren't durations in Nushell, so these commands can't round to them.
+The period must be greater than zero. `0sec` or a negative duration fails with `nu::shell::needs_positive_value`. Put a negative literal in parentheses, as in `(-1hr)`, or the parser reads it as a flag. Months and years aren't durations in Nushell, so these commands can't round to them.
 
 The input must be a single datetime. Round a list with [`each`](/commands/docs/each.md), and convert strings with [`into datetime`](/commands/docs/into_datetime.md) first:
 
@@ -172,8 +172,6 @@ The input must be a single datetime. Round a list with [`each`](/commands/docs/e
 [2026-07-15T12:11:10-04:00 2026-07-15T14:49:00-04:00] | each { date floor 1hr } | to nuon
 # => [2026-07-15T12:00:00-04:00, 2026-07-15T14:00:00-04:00]
 ```
-
-The example in `help date floor` is titled "Round date up to nearest hour". It rounds down, as the command's name says.
 
 ## `std-rfc/iter`
 
@@ -268,8 +266,6 @@ Empty input fails with "expected non-empty table/list". With `--optional`, `only
 
 `only` collects a stream before it counts, so it never returns on an endless stream. The input must be a list or a table. A record or a single value is a type error.
 
-The second example in `help only` runs `[] | only` and shows `null` as the result. Without `--optional`, that input is an error.
-
 ### `prod`
 
 `prod` takes a record whose values are lists and returns their cartesian product, a table with one column per key and one row per combination. The first key changes slowest:
@@ -304,7 +300,7 @@ A list piped into `prod` becomes an extra first column named `in`:
 - An empty list anywhere gives an empty table, and `prod {}` gives one empty record, `[{}]`.
 - A table piped in isn't merged into the result. Each of its rows becomes one value in the `in` column.
 - A key named `in` replaces the column made from the input.
-- A range piped in gives `null`, although the signature accepts ranges. Convert it with [`into list`](#into-list) first.
+- To pipe in a range, convert it with [`into list`](#into-list) first, as in `1..3 | into list | prod {letter: [a b]}`.
 
 ## `std-rfc/kv`
 
@@ -344,7 +340,7 @@ When the value is a closure, `kv set` runs it on the pipeline input and stores t
 - `value`, or `v`, outputs the stored value. For a closure, that's the closure's result.
 - `all`, or `a`, outputs every pair in the table, as `kv list` does.
 
-Any other word fails with "Invalid --return option", but only after the value is stored.
+Any other word fails with "Invalid --return option".
 
 With the default, you can store several values from one pipeline and keep going:
 
@@ -377,7 +373,7 @@ kv set x 2
 # => [2, 1]
 ```
 
-A table name can contain only ASCII letters, digits and underscores. Any other name fails with "Invalid table name". The error's label shows the text `${valid_table_regex}` where it means the pattern `^[a-zA-Z0-9_]+$`.
+A table name can contain only ASCII letters, digits and underscores. Any other name fails with "Invalid table name".
 
 ### In memory or on disk
 
@@ -415,7 +411,7 @@ $env.NU_UNIVERSAL_KV_PATH = ('~/nu-kv.sqlite3' | path expand)
 
 ### Universal variables
 
-`kv universal-variable-hook` turns the universal keys into environment variables in every running session, the way universal variables work in fish. It returns a closure that loads each universal key into `$env` and then sets `$env.NU_KV_UNIVERSALS` to `true`. Add it to the [`pre_execution` hooks](../hooks.md#pre-execution-hooks) in `config.nu`:
+`kv universal-variable-hook` turns the universal keys into environment variables in every running session, the way universal variables work in fish. It returns a closure that loads each universal key into `$env` and then sets `$env.NU_KV_UNIVERSALS` to `true`. Store at least one key with `kv set -u` before you add the hook, and keep at least one stored while it's installed. Add it to the [`pre_execution` hooks](../hooks.md#pre-execution-hooks) in `config.nu`:
 
 ```nu
 use std-rfc/kv *
@@ -424,17 +420,7 @@ $env.config.hooks.pre_execution ++= [(kv universal-variable-hook)]
 
 The hook runs before each command line you enter. After `kv set -u EDITOR hx` in one session, `$env.EDITOR` is `hx` from the next command line on, in that session and in every other session with the hook. Values keep their type, so `$env.retries` from the example above is an `int`.
 
-`$env.NU_KV_UNIVERSALS` tells `kv drop --universal` that universal keys are loaded as environment variables. When it is `true`, `kv drop -u` also removes the environment variable of the same name from the session that runs it. The hook sets it for you. If you load the keys another way, for example once at startup with `kv list -u | transpose -dr | load-env`, set `$env.NU_KV_UNIVERSALS = true` yourself.
-
-::: warning
-Universal variables have rough edges in Nushell 0.117.0:
-
-- While no universal keys are stored, the hook fails before every command line, with [`load-env`](/commands/docs/load-env.md) reporting "Unsupported input". Store at least one key with `kv set -u` before you add the hook.
-- Dropping a key doesn't reach other sessions. Their hook only loads the keys that still exist, so the variable stays set there until the session ends or you remove it with [`hide-env`](/commands/docs/hide-env.md).
-- `kv drop -u` removes the key from the file before it hides the environment variable. When the session has no variable of that name, for example because the key was set and dropped in the same command line, it then fails with `Environment variable '<key>' not found`. The key is gone all the same.
-- Programs started from a session with the hook inherit `NU_KV_UNIVERSALS` as the string `"true"`. In a script or `nu -c` command started that way, `kv drop -u` fails with "The 'and' operator does not work on values of type 'string'", after it has removed the key from the file. Run `hide-env NU_KV_UNIVERSALS`, or set it to the boolean `true`, before `kv drop -u` there.
-
-:::
+`$env.NU_KV_UNIVERSALS` tells `kv drop --universal` that universal keys are loaded as environment variables. When it is `true`, `kv drop -u` also removes the environment variable of the same name from the session that runs it. To remove the variable from another session as well, run [`hide-env`](/commands/docs/hide-env.md) there. The hook sets `NU_KV_UNIVERSALS` for you. If you load the keys another way, for example once at startup with `kv list -u | transpose -dr | load-env`, set `$env.NU_KV_UNIVERSALS = true` yourself.
 
 ## `std-rfc/path`
 
@@ -530,7 +516,6 @@ use std-rfc/random
 ```
 
 - A count larger than the list fails with "Can't sample more elements than there are in input" and a label such as "Tried to sample 4 out of 3". An empty list fails the same way without a count.
-- A count of 0 fails with a division by zero error.
 - Duplicate values in the list are separate positions, so a sample can hold the same value twice.
 - The order of the sample isn't random. A count equal to the list's length returns the list in its original order. Pipe the sample to [`shuffle`](/commands/docs/shuffle.md) when the order matters.
 - `random choice` collects a stream before it samples.
@@ -570,9 +555,9 @@ usage
 
 `str dedent` is strict. A first line with anything but whitespace fails with "First line must be empty". A last line with anything but whitespace fails with "Last line must contain only whitespace indicating the dedent". A line indented less than the last line fails with a message such as "Line 2 must have an indent of 4 or more.", counting lines from the one after the opening line break. Lines with nothing but whitespace are exempt from that check.
 
-`str dedent` compares the indentation as text, so tab indentation works without a flag. It accepts a `--tabs` flag, which `help` leaves undescribed and which does nothing.
+`str dedent` compares the indentation as text, so tab indentation works without a flag.
 
-`str unindent` finds the smallest indentation among the lines that aren't blank and removes that much from every line. It drops the first and the last line only when they hold nothing but whitespace, and uneven indentation is never an error. The one input it fails on is a string of four or more lines that are all blank, which gives "Unsupported input".
+`str unindent` finds the smallest indentation among the lines that aren't blank and removes that much from every line. It drops the first and the last line only when they hold nothing but whitespace, and uneven indentation is never an error.
 
 ```nu
 "
@@ -622,14 +607,6 @@ On Windows, both commands look for `\r\n` line endings when they check the first
 ```
 
 `--char` (`-c`) sets the padding, a space by default. `str align` inserts the whole string once for each column of padding, so a two-character string doubles the gap. Lines without the substring are left alone, and empty input returns an empty string.
-
-`str align` measures the column in bytes, so a line with a non-ASCII character before the substring ends up out of line:
-
-```nu
-["café = 1", "tea = 2"] | str align "="
-# => café = 1
-# => tea   = 2
-```
 
 ### `str lcp`
 
@@ -732,7 +709,7 @@ For a list, the result is a table with `index` and `item` columns:
 ```
 
 - Rows come back in input order, whatever the order of the arguments.
-- A range without an end, such as `3..`, never finishes. Give it one, as in `3..<($sales | length)`.
+- Give each range an end, as in `3..<($sales | length)`.
 - `select slices` ignores a row number past the end. `reject slices` fails on one with "Row number too large".
 
 ### `select column-slices` and `reject column-slices`
@@ -756,8 +733,8 @@ $sales | select column-slices 0 2
 
 - The columns keep their original order.
 - For a table, the positions refer to the first row's columns. A later row that lacks one of the selected columns makes `select column-slices` fail with "Cannot find column".
-- A position past the last column matches nothing. When none of the positions match, `select column-slices` returns its input unchanged instead of an empty result.
-- A range without an end never finishes, as with `select slices`.
+- A position past the last column matches nothing.
+- Give each range an end, as with `select slices`.
 
 ## `std-rfc/url`
 
@@ -834,7 +811,7 @@ $doc | xml xaccess library.shelf {|s| $s.attributes.name == tech } **.title.* | 
 # => [SICP]
 ```
 
-An int step counts across all the selected nodes, not per parent. `library.shelf.book.0` is the first book in the library, while XPath's `library/shelf/book[1]` is the first book on each shelf. For the same reason, the `A.**.B.*.0` that `help xml xaccess` translates as `A//B/*[1]` is closer to `(A//B/*)[1]`.
+An int step counts across all the selected nodes, not per parent. `library.shelf.book.0` is the first book in the library, while XPath's `library/shelf/book[1]` is the first book on each shelf.
 
 An empty query fails with "Missing query", and a query that matches nothing returns an empty list.
 

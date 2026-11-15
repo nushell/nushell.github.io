@@ -102,21 +102,7 @@ stor open | query db "create table pets (id integer primary key, name text not n
 stor open | query db "create index pets_owner on pets (owner)" | ignore
 ```
 
-SQLite checks foreign keys in the in-memory database, so a row that points at a missing parent row is refused:
-
-```nu
-stor insert --table-name pets --data-record {name: Rex, owner: Nobody}
-# => Error: nu::shell::error
-# =>
-# =>   × Failed to insert using the SQLite connection to the in-memory database from insert.rs.
-# =>    ╭────
-# =>  1 │ crates/nu-command/src/stor/insert.rs:191:33
-# =>    · ─────────────────────┬─────────────────────
-# =>    ·                      ╰── FOREIGN KEY constraint failed
-# =>    ╰────
-```
-
-Every error that SQLite reports through a `stor` command looks like this. SQLite's message is on the label, and the numbered line names a spot in Nushell's own source code, not your command. The rest of this page quotes only SQLite's message.
+SQLite checks foreign keys in the in-memory database. A row that points at a missing parent row, as in `stor insert --table-name pets --data-record {name: Rex, owner: Nobody}`, fails with `FOREIGN KEY constraint failed`.
 
 ### Adding rows
 
@@ -124,18 +110,10 @@ Every error that SQLite reports through a `stor` command looks like this. SQLite
 
 When you give both, `--data-record` wins and the input is ignored. This matters inside a closure, where the first command gets the closure's input without you passing it: `$rows | each {|row| stor insert --table-name people --data-record $row }` inserts `$row` once for each row.
 
-Each row is a separate `INSERT` statement. When one row fails, the rows before it stay in the table, and the rows after it aren't inserted. Here `Dan` goes in, and `Fay` doesn't:
+Each row is a separate `INSERT` statement. When one row fails, the rows before it stay in the table, and the rows after it aren't inserted. Here `Eve` fails with `table people has no column named email`, so `Dan` goes in and `Fay` doesn't:
 
 ```nu
 [{name: Dan, age: 31} {name: Eve, email: eve@example.com} {name: Fay, age: 27}] | stor insert --table-name people
-# => Error: nu::shell::error
-# =>
-# =>   × Failed to insert using the SQLite connection to the in-memory database from insert.rs.
-# =>    ╭────
-# =>  1 │ crates/nu-command/src/stor/insert.rs:191:33
-# =>    · ─────────────────────┬─────────────────────
-# =>    ·                      ╰── table people has no column named email
-# =>    ╰────
 stor open | query db "select name, age from people"
 # => ╭───┬───────┬─────╮
 # => │ # │ name  │ age │
@@ -224,7 +202,7 @@ A where clause that names a missing column fails with `no such column`. `stor de
 
 [`stor import`](/commands/docs/stor_import.md) replaces the in-memory database with a copy of a SQLite file. Tables that aren't in the file are gone afterwards. A path that doesn't exist fails with `File not found`, and a file that isn't a SQLite database fails with `file is not a database`. In both cases the in-memory database doesn't change.
 
-Both commands give the file name to SQLite unchanged. `~` isn't expanded, and a quote in the name breaks `stor export` with a syntax error. A relative path is resolved against the working directory of the Nushell process, which isn't always the directory you're in. The REPL updates it between lines, so in a script, or after a `cd` earlier on the same line, it still points where you were before. Build an absolute path with [`path expand`](/commands/docs/path_expand.md) to avoid that:
+Give both commands an absolute path, which [`path expand`](/commands/docs/path_expand.md) builds from a relative one:
 
 ```nu
 stor export --file-name ('backup.db' | path expand) | ignore

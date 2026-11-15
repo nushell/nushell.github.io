@@ -44,10 +44,8 @@ parser rejects a plain Nushell list, so convert it with `polars into-df`.
 ## Testing for nulls
 
 `polars is-null` gives `true` where a value is null, and `polars is-not-null`
-gives the opposite. As expressions they keep the column's name. Their help lists
-selectors as input, but in Nushell 0.117.0 a selector fails with
-`can't convert polars_selector to NuDataFrame, NuLazyFrame, NuExpression, NuSelector`,
-so use `polars col`:
+gives the opposite. As expressions they keep the column's name. Pick the column
+with `polars col`:
 
 ```nu
 let readings = [[sensor value]; [a 1.5] [b null] [c 3.0] [d NaN]] | polars into-df
@@ -128,9 +126,8 @@ $big | polars all-true
 # => ╰───┴──────────╯
 ```
 
-Both fail on any series that isn't boolean, and both say
-`all-false only works with series of type bool`, even `polars all-true`. There
-is no expression form. Inside `polars agg`, compare a count instead, such as
+Both fail on any series that isn't boolean. There is no expression form. Inside
+`polars agg`, compare a count instead, such as
 `((polars col x) > 5 | polars expr-not | polars sum) == 0`.
 
 ## Finding positions
@@ -249,8 +246,8 @@ so name the column with `polars as`. When the values have different types,
 Polars picks a type that holds them all: an int and a float give a float, and a
 string with a number gives a string.
 
-There is no null literal in Nushell 0.117.0. `polars otherwise null` and
-`polars lit null` both fail with `can't convert nothing to lazy expression`.
+`polars otherwise` and `polars lit` don't take `null`. Both fail with
+`can't convert nothing to lazy expression`.
 
 ### Literal values
 
@@ -343,9 +340,9 @@ A few rules for the lists:
 - The new list has to be as long as the old one, or hold one value that every
   match gets. Other lengths fail with
   `` `new` input for `replace` must have the same length as `old` or have length 1 ``.
-- The type of a list's first value sets the type for the whole list, and the
-  command drops values of other types without a warning. It reads `[a 5 b]` as
-  `[a b]`.
+- Give every value in a list the same type. The first value's type sets the
+  type for the whole list, and values of other types are left out, so
+  `[a 5 b]` counts as `[a b]`.
 - A list can hold one expression, such as `[(polars lit z)]`, but not more. Two
   fail with `Multiple expressions to be replaced is not supported`.
 - With a record, leave out the second argument. A record together with a list,

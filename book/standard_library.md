@@ -23,7 +23,7 @@ The standard library is split into modules, and you import only the ones you nee
 | [`std/dt`](./standard_library/dt.md)                | `use std/dt *`      | `datetime-diff` and `pretty-print-duration`, for calendar differences between dates              |
 | [`std/formats`](./standard_library/formats.md)      | `use std/formats *` | `from` and `to` commands for JSONL, NDJSON and NDNUON                                            |
 | [`std/help`](./standard_library/help.md)            | `use std/help`      | another version of `help` and its subcommands                                                    |
-| [`std/input`](./standard_library/input.md)          | `use std/input`     | `input display`, which shows the key presses and other events Nushell receives                   |
+| [`std/input`](./standard_library/input.md)          | `use std/input`     | `input display`, which shows the key presses Nushell receives                                    |
 | [`std/iter`](./standard_library/iter.md)            | `use std/iter`      | `iter find`, `iter scan` and other commands for working through lists                            |
 | [`std/log`](./standard_library/log.md)              | `use std/log`       | `log info`, `log warning` and the other logging commands                                         |
 | [`std/math`](./standard_library/math.md)            | `use std/math`      | the constants `E`, `PI`, `TAU`, `PHI` and `GAMMA`                                                |

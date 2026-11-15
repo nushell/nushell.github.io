@@ -37,7 +37,7 @@ The options for `$env.config.table.mode` can be listed with `table --list`:
 
 The names ignore case, so `'PSQL'` works too. `default` is another name for `rounded`, so after you assign `'default'`, the setting reads back as `rounded`.
 
-To draw one table in a different mode, pass it to [`table --theme`](/commands/docs/table.md) (`-t`) and leave the setting alone. To use a mode for a whole session, start Nushell with `nu --table-mode <mode>` (`-m`). The flag overrides the mode from `config.nu`, but `$env.config.table.mode` keeps the configured value, and the override lasts only until something changes `$env.config`. After any assignment, even `$env.config.footer_mode = 30`, tables go back to the configured mode.
+To draw one table in a different mode, pass it to [`table --theme`](/commands/docs/table.md) (`-t`) and leave the setting alone. To try a mode without changing your configuration, start Nushell with `nu --table-mode <mode>` (`-m`). The flag overrides the mode from `config.nu`, but `$env.config.table.mode` keeps the configured value.
 
 ```nu
 [[a b]; [1 2]] | table --theme markdown
@@ -306,7 +306,7 @@ These names set the foreground color. For a background color, use the record for
 
 <!-- These rows come from lookup_style() in crates/nu-color-config/src/nu_style.rs. Don't regenerate them from ansi --list: ansi uses k for black and b for blue where color_config uses b and u, and it has no _blink or _strike names. -->
 
-`color_config` also accepts the 256 xterm colors that [`ansi --list`](/commands/docs/ansi.md) shows with an `xterm_` prefix, such as `xterm_navy` or `xterm_grey42`. Most of them also work under the name in the `short_name` column of `ansi --list`, such as `navy` or `grey42`, but the `xterm_` names are safer because the short names don't always match. `ansi` calls `xterm_purplec` `xpurplec`, while `color_config` calls it `purplec`. These colors have no `_bold` or other forms, so add attributes with a record, such as `{ fg: xterm_navy attr: b }`.
+`color_config` also accepts the 256 xterm colors that [`ansi --list`](/commands/docs/ansi.md) shows with an `xterm_` prefix, such as `xterm_navy` or `xterm_grey42`. Use the full `xterm_` name. These colors have no `_bold` or other forms, so add attributes with a record, such as `{ fg: xterm_navy attr: b }`.
 
 ### `"#hex"` Format
 
@@ -363,7 +363,6 @@ These keys style values of each type when Nushell draws them in a table, list, o
 | `block`        | `default`     |
 | `bool`         | `light_cyan`  |
 | `cell-path`    | `default`     |
-| `closure`      | `green_bold`  |
 | `custom`       | not set       |
 | `datetime`     | `purple`      |
 | `duration`     | `default`     |
@@ -382,7 +381,7 @@ These keys style values of each type when Nushell draws them in a table, list, o
 A few of these keys behave differently from the rest:
 
 - `list` and `record` style the `[list 2 items]` and `{record 1 field}` summaries that a table shows in place of a nested value. `list` also styles the `[table 1 row]` summary of a nested table.
-- `block` and `closure` are accepted but change nothing. A closure in a table is drawn unstyled whatever `closure` says.
+- `block` is reserved and changes nothing.
 - `custom` isn't part of the default `color_config`.
 
 Other type names, such as `any`, `number`, or `table`, aren't `color_config` keys, and setting them has no effect.
@@ -471,7 +470,6 @@ Here's the current list of flat shapes.
 | `shape_block`                | `blue_bold`                         | the braces of a block, as in `if true { }`, and the parentheses of a subexpression             |
 | `shape_bool`                 | `light_cyan`                        | `true` and `false`                                                                             |
 | `shape_closure`              | `green_bold`                        | the braces and parameters of a closure                                                         |
-| `shape_custom`               | `green`                             | not used                                                                                       |
 | `shape_datetime`             | `cyan_bold`                         | datetime literals such as `2020-01-01`                                                         |
 | `shape_directory`            | `cyan`                              | arguments that must be a directory, such as `foo` in `cd foo`                                  |
 | `shape_external`             | `cyan`                              | a command that Nushell will run as an external command                                         |
@@ -493,7 +491,6 @@ Here's the current list of flat shapes.
 | `shape_nothing`              | `light_cyan`                        | `null`                                                                                         |
 | `shape_operator`             | `yellow`                            | operators such as `+` and `==`, and the `..` of a range                                        |
 | `shape_pipe`                 | `purple_bold`                       | the pipe symbol                                                                                |
-| `shape_range`                | `yellow_bold`                       | not used. A range such as `1..5` gets `shape_int` and `shape_operator`                         |
 | `shape_raw_string`           | `light_purple`                      | raw strings such as `r#'text'#`                                                                |
 | `shape_record`               | `cyan_bold`                         | the braces and colons of a record literal                                                      |
 | `shape_redirection`          | `purple_bold`                       | redirections such as `o>` and `e>`                                                             |
@@ -753,7 +750,7 @@ $env.config.color_config = (dark-theme)
 
 Both commands return a record you can inspect or change before assigning it. `dark-theme` looks like the built-in default theme except for `search_result` and `shape_garbage`, which use white text where the defaults use the terminal's default color. `light-theme` draws most values (`int`, `string`, `float`, `duration`, and others) and the table borders in `dark_gray`, so they stay readable on a light background.
 
-Neither theme sets `closure`, `glob`, `semver`, `semver-range`, `selection`, `selection_cursor`, or `status_line_error`. Since assigning a theme replaces the whole map, those keys disappear from `$env.config.color_config`, and Nushell draws those items in their built-in default style.
+Neither theme sets `glob`, `semver`, `semver-range`, `selection`, `selection_cursor`, or `status_line_error`. Since assigning a theme replaces the whole map, those keys disappear from `$env.config.color_config`, and Nushell draws those items in their built-in default style.
 
 ## Turning colors on and off
 
@@ -792,8 +789,6 @@ Write each color as `0x` followed by six hex digits, such as `0x40c9ff`. Any oth
 'abcd' | ansi gradient --fgstart '0xff0000' --fgend '0x0000ff' | str replace --all (ansi escape) '\e'
 # => \e[38;2;255;0;0ma\e[38;2;191;0;63mb\e[38;2;127;0;127mc\e[38;2;63;0;191md\e[0m
 ```
-
-Each character gets the color for its position divided by the length of the string, so the last character stops one step short of the end color.
 
 `--fgnamed` and `--bgnamed` take the name of a built-in gradient instead of two colors, such as `rainbow` or `forest`, in any case. `ansi gradient --list` returns a table with each `name` and a sample `text`. A named gradient can't be mixed with a start or end color for the same layer, but a named foreground works with a two-color background, and the other way around.
 

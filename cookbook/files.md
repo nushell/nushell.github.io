@@ -172,7 +172,7 @@ mkdir -v cache notes.txt/sub | update path { path relative-to $env.PWD }
 
 Without `-v`, `mkdir` raises the error after it has tried every path.
 
-`mv -v` returns one row per source, with `source`, `destination` and `message` columns. The paths are absolute, and `message` reads like `renamed /home/me/project/a.log -> /home/me/project/archive/a.log`:
+`mv -v` returns one row per source, with `source`, `destination` and `message` columns. The paths are absolute:
 
 ```nu
 touch a.log b.log
@@ -187,10 +187,6 @@ mv -v *.log archive | update source { path basename } | update destination { pat
 ```
 
 `rm -v` has `path`, `deleted` and `error` columns, and like `mkdir -v`, it puts failures in `error` instead of raising them.
-
-::: warning
-In Nushell 0.117.0, the text of these messages can go wrong in a longer session. Once one of `cp`, `mkdir`, `mktemp`, `mv`, and `touch` has run, the messages of the others come out as internal keys, such as `mkdir-error-cannot-create-directory` in the `error` column or `mv-verbose-renamed` in the `message` column. The `created` column and the paths are still right, and `rm` isn't affected.
-:::
 
 ---
 
@@ -336,7 +332,7 @@ idx search --context 1 run | select relative_path with_context
 # => ╰───┴─────────────────────┴─────────────────────╯
 ```
 
-`idx search TODO FIXME` finds lines that match either pattern. A word that looks like a file filter limits which files are searched instead of being searched for: `*.rs` (an extension), `src/` (a directory), a glob with a `/` or with braces (`src/**/*.rs`, `*.{md,txt}`), or any of these after a `!` to exclude those files. The filter can be its own argument or part of the same string:
+To find lines that match either of two words, use a regular expression, as in `idx search --regex 'TODO|FIXME'`. A word that looks like a file filter limits which files are searched instead of being searched for: `*.rs` (an extension), `src/` (a directory), a glob with a `/` or with braces (`src/**/*.rs`, `*.{md,txt}`), or any of these after a `!` to exclude those files. Write the filter in the same string as the pattern:
 
 ```nu
 idx search "TODO *.md" | select relative_path line
@@ -346,10 +342,6 @@ idx search "TODO *.md" | select relative_path line
 # => │ 0 │ project/docs/notes.md │ TODO: write docs │
 # => ╰───┴───────────────────────┴──────────────────╯
 ```
-
-::: warning
-In Nushell 0.117.0, a search for more than one text pattern, such as `idx search TODO FIXME`, can miss matching lines while content indexing is on. If you rely on that kind of search, build the index with `idx init --no-content-indexing`.
-:::
 
 #### Streaming changes from the index
 

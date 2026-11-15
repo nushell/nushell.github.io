@@ -240,7 +240,7 @@ The result can be any value, not only a `bool`. It suits runs in ordered data, s
 
 The input can be a list, a table or a range. Empty input gives an empty list.
 
-A closure that fails, for example on a missing column, doesn't stop `chunk-by` or report an error. The error becomes that item's result, and all errors count as equal, so neighboring items whose closure fails end up in one group. When a column can be missing, use an optional cell path such as `$r.level?`, which gives `null` instead.
+When some items may lack the column, use an optional cell path such as `$r.level?`. Those items get `null` as their result, so neighbors without the column form one group.
 
 ### `split list`
 
@@ -248,7 +248,7 @@ A closure that fails, for example on a missing column, doesn't stop `chunk-by` o
 
 - a value. An item is a separator when it equals the value, so `2` also matches `2.0`.
 - a regular expression, with `--regex` (`-r`). Items are converted to strings to test them. Items that can't be converted, such as records, never match.
-- a closure. An item is a separator when the closure returns `true`. Any other result counts as `false`, and so does a closure that fails, without an error.
+- a closure. An item is a separator when the closure returns `true`. Any other result counts as `false`.
 
 `--split` chooses what happens to each separator. `on`, the default, drops it. `before` starts the next group with it, and `after` ends the current group with it. Any other word is an error:
 

@@ -45,7 +45,7 @@ To fall back to Nushell's own completions, return `null` rather than a list of s
 
 The part after `@` takes one of three forms:
 
-- A command name, such as `string@animals`. Put a name that contains spaces in quotes, as in `string@"nu-complete git branches"`. An alias of such a command works too. The command must be one you define with `def`. The parser also accepts a built-in or plugin command such as `ls`, but it offers nothing when you press <kbd>Tab</kbd>.
+- A command name, such as `string@animals`. Put a name that contains spaces in quotes, as in `string@"nu-complete git branches"`. An alias of such a command works too. The command must be one you define with `def`.
 - A list of values, such as `string@[up down left right]`. Nushell filters and sorts the list the same way it handles a list that a completer command returns. An item may be a record with a `value` field, but Nushell reads only the `value`, so use a completer command when you want descriptions or styles.
 - A constant, such as `string@$SIZES`. Nushell attaches completers while it parses the definition, so the variable has to come from [`const`](/commands/docs/const.md), not `let` or `mut`. It can hold a list or the name of a command.
 
@@ -370,8 +370,6 @@ def deploy [...args: string] { $args }
 # => ╰───┴───────────╯
 ```
 
-Returning `options: {filter: true}` doesn't change that. Nushell then sorts what the completer returns, but still doesn't narrow it. The same goes for the external completer when `@complete external`, described below, sends it a custom command's arguments. For external commands, `filter: true` does narrow its results.
-
 A command can have both a command-wide completer and completers on some of its parameters. A parameter's own completer runs first, and the command-wide completer answers only where that one returns `null` or sets `fallback: true`, and for parameters that have no completer. When you complete a flag name, Nushell lists the command's declared flags first, then adds whatever the command-wide completer returns, leaving out values it has already listed:
 
 ```nu
@@ -515,7 +513,7 @@ def build [target: string@"nu-complete dirs-or-default"] { }
 # => ╰───┴──────────╯
 ```
 
-In a script or with `nu -c`, `commandline complete` doesn't list the executables in `PATH`. Run it at the prompt to check suggestions that include them. The [completion menu](./line_editor.md#completion-menu) section of the line editor chapter uses `commandline complete` to show what Nushell completes without a custom completer, such as cell paths, operators, attributes and module exports.
+The [completion menu](./line_editor.md#completion-menu) section of the line editor chapter uses `commandline complete` to show what Nushell completes without a custom completer, such as cell paths, operators, attributes and module exports.
 
 Without pipeline input, `commandline complete` completes the line you're editing, at the cursor rather than at the end of the line. That lets a keybinding that runs [`executehostcommand`](./line_editor.md#keybindings) use it. This one prints what <kbd>Tab</kbd> would offer when you press <kbd>Alt</kbd>+<kbd>C</kbd>:
 

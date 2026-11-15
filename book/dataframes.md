@@ -312,13 +312,13 @@ CSV, TSV, Parquet, Arrow, and NDJSON files open as lazy dataframes, and the file
 
 CSV and TSV files take the most options:
 
-- `--delimiter` (`-d`) sets the one-character field separator. A `.tsv` file is split on tabs only when it opens lazily. With `--eager` it is split on commas unless you also pass `--delimiter "\t"`.
+- `--delimiter` (`-d`) sets the one-character field separator. To open a `.tsv` file with `--eager`, also pass `--delimiter "\t"`.
 - `--no-header` reads the first line as data and names the columns `column_1`, `column_2`, and so on.
 - `--skip-rows` skips that many lines at the top of the file, before the header.
 - `--infer-schema` sets how many rows Polars reads to guess each column's type. The default is 100. If a column holds only numbers in those rows and text further down, collecting fails with `could not parse ... as dtype`, and you need a larger number or `--schema`.
 - `--schema` (`-s`) sets the types yourself, as a record of column name to type name. It applies by position: its names replace the header's names, and it must have one entry for every column in the file. `--schema` also works for JSON and NDJSON files.
 - `--truncate-ragged-lines` drops the extra fields on a line that has more fields than the header. Without it, such a line fails with `found more fields than defined in 'Schema'`.
-- `--columns` reads only the listed columns, but only on eager reads of CSV, Parquet, Arrow, and Avro files. A lazy read ignores it, so use [`polars select`](/commands/docs/polars_select.md) there.
+- With `--eager`, `--columns` reads only the listed columns of a CSV, Parquet, Arrow, or Avro file. In a lazy read, pick the columns with [`polars select`](/commands/docs/polars_select.md).
 
 For example, this file has a comment line before the header and uses semicolons:
 
@@ -352,10 +352,9 @@ polars open sales --type parquet | polars collect
 
 The Hive flags apply to lazy reads only. With `--eager`, opening a directory fails with `Parquet reader error`.
 
-- Hive partitioning is on when you open a directory, and off when you open a glob such as `"sales/**/*.parquet"`. Write `--hive-enabled=true` to turn it on for a glob, or `--hive-enabled=false` to turn it off for a directory. The bare switch `--hive-enabled` changes nothing.
+- Hive partitioning is on when you open a directory, and off when you open a glob such as `"sales/**/*.parquet"`. Write `--hive-enabled=true` to turn it on for a glob, or `--hive-enabled=false` to turn it off for a directory.
 - `--hive-schema` sets the types of the partition columns, as a record like `--schema`. It has to name every partition column, or collecting fails with `path contains column not present in the given Hive schema`.
 - `--hive-try-parse-dates` turns partition values that look like dates, such as `day=2025-01-02`, into a `date` column instead of a string column.
-- `--hive-start-idx` has no effect on file paths. Polars works out where the partition directories start from the path you pass.
 
 ### Saving dataframes
 
@@ -374,14 +373,14 @@ open --raw first_a.csv
 
 The other flags apply to one format each:
 
-- `--csv-delimiter` sets the field separator. It has to be a single character. An eager dataframe fails with `Incorrect delimiter` otherwise, and a lazy one silently uses the first character.
+- `--csv-delimiter` sets the field separator. It has to be a single character.
 - `--csv-no-header` leaves out the header line.
 - `--avro-compression` compresses an Avro file with `deflate` or `snappy`. Any other value fails with `compression must be one of deflate or snappy`.
 
 `polars save` can also write to cloud storage, as described in [Cloud Storage](#cloud-storage).
 
 ::: warning
-Saving a lazy dataframe over the file it reads from destroys the data, because Polars truncates the file before it reads it. A CSV file keeps only its header line, and a Parquet file can crash the plugin. `polars save` catches this case with `Error saving file: attempted to save into source` only when `polars open` is earlier in the same pipeline and both commands spell the path the same way. It misses `./data.csv` against `data.csv`, and a lazy dataframe stored in a variable. It also refuses `polars open --eager data.csv | polars save data.csv`, which would be safe. To overwrite a source file, collect the dataframe first, as in `polars open data.csv | polars collect | polars save data.csv`, or save to a new file.
+Don't save a lazy dataframe over the file it reads from. `polars save` empties the file before the plan reads it, so the data is lost. To overwrite a source file, collect the dataframe first, as in `polars open data.csv | polars collect | polars save data.csv`, or save to a new file.
 :::
 
 ### The object store
@@ -907,15 +906,6 @@ starts with a float turns later ints into floats. When a value can't be
 converted, such as a float after an int, the whole column becomes `object`, and
 the plugin prints `Falling back to object type` on stderr.
 
-::: warning
-In 0.117.0, a list column whose first list holds fewer than two items crashes
-the plugin, which also throws away everything in its store. For example,
-`[[1] [2 3]] | wrap c | polars into-df` fails with a
-`Failed to receive response to plugin call` error. A `null` in place of a list
-crashes it the same way, wherever it is in the column, as in
-`[[id tags]; [1 [a b]] [2 null]] | polars into-df`.
-:::
-
 To pick the types yourself, pass `--schema` (`-s`) a record of column name to
 type name. Values are converted to the type you give, and input columns the
 schema doesn't name are left out:
@@ -930,16 +920,26 @@ schema doesn't name are left out:
 # => ╰───┴──────┴───╯
 ```
 
-A schema column that the input doesn't have is added and filled with nulls. In
-that case the result is a lazy dataframe, so collect it to see the data. A value
-that can't be converted fails, for example `Can't convert to int.` for a string
-in an `i64` column. [`polars into-lazy`](/commands/docs/polars_into-lazy.md) takes
-the same `--schema` flag.
+A schema column that the input doesn't have is added and filled with nulls:
+
+```nu
+[[a b]; [1 2] [3 4]] | polars into-df --schema {a: i64, b: i64, c: str} | polars collect
+# => ╭───┬───┬───┬───╮
+# => │ # │ a │ b │ c │
+# => ├───┼───┼───┼───┤
+# => │ 0 │ 1 │ 2 │   │
+# => │ 1 │ 3 │ 4 │   │
+# => ╰───┴───┴───┴───╯
+```
+
+A value that can't be converted fails, for example `Can't convert to int.` for a
+string in an `i64` column. [`polars into-lazy`](/commands/docs/polars_into-lazy.md)
+takes the same `--schema` flag.
 
 `polars schema --datatype-list` (`-l`) lists the type names you can use, with
-notes on the `datetime` and `duration` forms, such as `datetime<ms, UTC>`. It
-leaves out `decimal<precision, scale>`, which schemas also
-accept. To check the types of a dataframe you've built,
+notes on the `datetime` and `duration` forms, such as `datetime<ms, UTC>`.
+Schemas also accept `decimal<precision, scale>`. To check the types of a
+dataframe you've built,
 [`polars schema`](/commands/docs/polars_schema.md) returns a record of column
 name to type name, and [`polars shape`](/commands/docs/polars_shape.md) returns a
 one-row dataframe with `rows` and `columns` columns. Both work on lazy dataframes
@@ -1132,7 +1132,9 @@ single value:
   `$df_5 - 2.5` fails with `Incorrect type`. `+` also appends a string to every
   value of a string series. Dividing by zero fails.
 - `==`, `!=`, `<`, `<=`, `>`, and `>=` with an int or a float, under the same
-  type rule. `==` and `!=` also take a string.
+  type rule. `==` also takes a string. To find the values that differ from a
+  string, use an expression, as in
+  `$df_1 | polars filter-with ((polars col first) != a)`.
 - `=~` with a string, which is a regular expression that each value has to
   match somewhere.
 - `starts-with` and `ends-with` with a string, which has to appear literally at
@@ -1168,21 +1170,10 @@ both sides need the same number of rows. Other operators fail with
 `The '-' operator does not work on values of type 'polars_dataframe'` or the
 matching message.
 
-::: warning
-In Nushell 0.117.0, `!=` between a string series and a string returns the same
-mask as `==`. Use an expression instead, such as
-`$df_1 | polars filter-with ((polars col first) != a)`. Comparing a datetime
-series with a date also gives wrong results, so don't rely on series
-comparisons for dates.
-:::
-
 ::: tip
-Nushell's parser expects a comparison to return a `bool`. When the left side is a
-cell path, as in `let mask = $df_1.int_1 > 5`, the `let` fails with
-`Type mismatch` because the comparison returns a dataframe. Piping a series
-comparison straight into a `polars` command fails too, with
-`Command does not support bool input`. Declare the variable with the `any` type,
-`let mask: any = $df_1.int_1 > 5`, and pipe the variable instead.
+When the left side of a comparison is a cell path, as in `$df_1.int_1 > 5`,
+store the mask in a variable declared with the `any` type,
+`let mask: any = $df_1.int_1 > 5`, and pass the variable to the next command.
 :::
 
 ## Series and Masks
@@ -1292,9 +1283,7 @@ $df_1 | polars filter-with $mask_2
 so `polars col first | polars is-in [b c]` builds the same mask. Its
 `--maintain-order` (`-o`) flag keeps the list's values in their original order
 while the plugin builds it. Membership doesn't depend on that order, so the mask
-comes out the same either way. When the mask runs, the Polars library behind the
-plugin prints a deprecation notice about `is_in` on stderr. The notice doesn't
-change the result.
+comes out the same either way.
 
 Another operation that can be done with masks is setting or replacing a value
 from a series. For example, we can change the value in the column `first` where
@@ -1481,10 +1470,8 @@ $df_1 | polars get first | polars value-counts --sort --column n
 
 Values with the same count can come out in either order. `--parallel` (`-p`)
 counts on several threads, which only changes the speed. `--normalize` (`-n`)
-turns the counts into fractions of the total. In 0.117.0 its argument is
-declared as a string but read as a boolean, so `--normalize true` fails to parse
-and every string fails with `Can't convert to bool.` Pass `true` through a
-variable typed `any` instead:
+turns the counts into fractions of the total. Give it `true` from a variable
+declared as `any`:
 
 ```nu
 let yes: any = true
@@ -1531,12 +1518,10 @@ $df_1 | polars into-lazy | polars unique --subset [first] | polars select first 
 ```
 
 On a lazy dataframe, `polars unique` keeps the rows in their original order.
-In 0.117.0 its `--maintain-order` (`-k`) flag does the opposite there and lets
-the rows come out in any order, so leave it off.
 
 `polars unique` also works on an expression, which keeps the unique values of
-one column. There `--maintain-order` does keep the values in the order they first
-appear:
+one column. There `--maintain-order` (`-k`) keeps the values in the order they
+first appear:
 
 ```nu
 $df_1 | polars select (polars col first | polars unique --maintain-order) | polars collect
@@ -1691,9 +1676,7 @@ an expression doesn't do what you expected:
 
 A schema becomes a record of column names and type names, and a data type
 becomes its name as a string. A selector becomes a string in Polars' internal
-notation, such as `Some(ByName { names: ["a", "b"], strict: false })`. A
-group-by or a `polars when` object fails with `Can't convert to NuDataFrame`,
-although the command's signature lists both types.
+notation, such as `Some(ByName { names: ["a", "b"], strict: false })`.
 
 Given an eager dataframe, `polars collect` returns it unchanged, so you can end
 a pipeline with it whichever kind of dataframe reaches it. Any other input, such
@@ -1862,8 +1845,8 @@ divisor:
 
 ### When results are eager or lazy
 
-A command doesn't always return the same kind of dataframe it was given. In
-Nushell 0.117.0 the commands fall into three groups:
+A command doesn't always return the same kind of dataframe it was given. The
+commands fall into three groups:
 
 - Most commands that accept both kinds return the kind they were given. These
   include `polars filter`, `polars filter-with`, `polars sort-by`,
@@ -1884,8 +1867,8 @@ Nushell 0.117.0 the commands fall into three groups:
   column, collect a lazy input and return an eager dataframe: `polars get`,
   `polars append`, `polars shape`, `polars value-counts`, `polars is-unique`,
   `polars is-duplicated`, `polars arg-sort`, `polars cut`, `polars qcut`,
-  `polars sample`, `polars dummies`, `polars map-batches`, `polars fill-nan`
-  given a whole dataframe, and `polars collect`.
+  `polars sample`, `polars dummies`, `polars map-batches`, and
+  `polars collect`.
 
 When you aren't sure, check with [`describe`](/commands/docs/describe.md):
 

@@ -28,7 +28,7 @@ The examples on this page use a file `books.xml` with this content:
 | An integer | the entry at that position among the current selection, counting from `0` |
 | A closure  | the entries of the current selection for which the closure returns `true` |
 
-`*` selects only the direct children, although the help text compares it to XPath's `descendant`. A closure receives each entry as its parameter.
+`*` selects only the direct children, not their descendants. A closure receives each entry as its parameter.
 
 ## `xaccess`
 

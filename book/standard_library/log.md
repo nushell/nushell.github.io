@@ -100,8 +100,6 @@ Because these are environment variables, scripts you start from the shell, such 
 
 The color codes are part of the line whether or not stderr is a terminal, so a log saved to a file (`nu build.nu 2> build.log` in another shell) contains them as well. Leave `%ANSI_START%` and `%ANSI_STOP%` out of the template to get plain lines.
 
-Setting `$env.config.use_ansi_coloring = false` doesn't help in Nushell 0.117.0. `std/log` means to drop the colors when that setting is `false`, but it compares the setting with the boolean `false`, while Nushell stores the setting as the string `"false"`. The comparison never matches, and the codes are always written.
-
 ## Levels, prefixes and colors
 
 Four commands return the tables that `std/log` uses for its five levels, as records keyed by the level's name. `log log-level` gives each level's number, `log log-prefix` its prefix, `log log-short-prefix` its one-letter prefix, and `log log-ansi` the escape code for its color:

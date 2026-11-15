@@ -672,7 +672,7 @@ Both commands count in UTF-8 bytes by default (`--utf-8-bytes`), so a character 
 # => 3
 ```
 
-`--range` in `str index-of` always counts bytes, even with `--grapheme-clusters`, and a bound that falls inside a character is an error. With `--grapheme-clusters`, a match that starts in the middle of a character, such as a lone combining accent, reports the index of the character after it, or `-1` if there isn't one.
+`--range` in `str index-of` always counts bytes, even with `--grapheme-clusters`, and a bound that falls inside a character is an error.
 
 ### String Padding
 
@@ -714,7 +714,7 @@ Without `--alignment` the text goes on the left, and without `--character` the p
 # =>   1000
 ```
 
-The width counts visible characters, and [`ansi`](#coloring-strings) color codes don't count. Use a single character with `--character`. A longer string is repeated once for each missing character, so the result comes out wider than `--width`.
+The width counts visible characters, and [`ansi`](#coloring-strings) color codes don't count. Give `--character` a single character.
 
 ### Reversing Strings
 
@@ -857,7 +857,7 @@ A backslash makes the next character plain text. `\,` is a comma that doesn't se
 # => ["C:\\Users\\ann", "C:\\Users\\bo"]
 ```
 
-Without `--path`, the `\{` in that pattern is a plain brace, so only a `}` is left, and the pattern fails with the "Format Not Supported" error for unbalanced braces. An extra `}` elsewhere is an "Extra Closing Brace" error, but an extra `{` next to a complete group is dropped without an error, so `'{a,b}{'` gives `a` and `b`. Text with no braces at all is a "No Braces" error, and an empty string is a "Pipeline empty" error.
+Without `--path`, the `\{` in that pattern is a plain brace, so only a `}` is left, and the pattern fails with the "Format Not Supported" error for unbalanced braces. An extra `}` elsewhere is an "Extra Closing Brace" error. Text with no braces at all is a "No Braces" error, and an empty string is a "Pipeline empty" error.
 
 `str expand` doesn't look at the file system, so it can name files and directories that don't exist yet. Spread the list into a command that takes several arguments:
 

@@ -48,19 +48,7 @@ If an empty result is fine, put [`default ""`](/commands/docs/default.md) in fro
 
 ## Three ways to write a path
 
-`help path` describes three forms of a path: a string, a record with `parent`, `stem`, and `extension` fields from [`path parse`](#path-parse), and a list of parts from [`path split`](#path-split). It says that every subcommand accepts all three. In Nushell 0.117.0 that isn't true. Only `path join` reads a record or a list of parts, and the other subcommands fail on a record:
-
-```nu
-"/home/me/report.md" | path parse | path basename
-# => Error: nu::parser::input_type_mismatch
-# =>
-# =>   × Command does not support record input.
-# =>    ╭─[repl_entry #1:1:37]
-# =>  1 │ "/home/me/report.md" | path parse | path basename
-# =>    ·                                     ──────┬──────
-# =>    ·                                           ╰── command doesn't support record input
-# =>    ╰────
-```
+Besides a string, you can write a path as a record with `parent`, `stem`, and `extension` fields from [`path parse`](#path-parse), or as a list of parts from [`path split`](#path-split). [`path join`](#building-paths-with-path-join) reads all three forms. The other subcommands take only strings.
 
 A list of strings means two different things. The other subcommands treat it as several paths, while `path join` treats it as the parts of one path. So the usual pattern is to take a path apart with `path parse` or `path split`, change the record or the list, and put it back together with `path join`.
 
@@ -134,14 +122,9 @@ A name that starts with a dot and has no other dot, such as `.bashrc`, is all st
 # => ╰───────────┴──────────╯
 ```
 
-Give the extension without its dot. The name has to end in a dot and that exact text, case included. Otherwise the whole name becomes the stem and `extension` is empty, so `--extension .txt` never matches, and `--extension ''` keeps the whole name as the stem. When the extension appears twice at the end, every copy comes off the stem, and `path join` doesn't give back the original name:
+Give the extension without its dot. The name has to end in a dot and that exact text, case included. Otherwise the whole name becomes the stem and `extension` is empty, so `--extension .txt` never matches, and `--extension ''` keeps the whole name as the stem.
 
-```nu
-"backup.txt.txt" | path parse --extension txt | path join
-# => backup.txt
-```
-
-A trailing dot is lost the same way. `"draft." | path parse | path join` returns `draft`.
+`path join` skips an empty extension, so a trailing dot doesn't survive a round trip: `"draft." | path parse | path join` returns `draft`.
 
 ### `path split`
 

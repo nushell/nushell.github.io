@@ -551,7 +551,7 @@ with-env {HTTPS_PROXY: "http://proxy.example.com:3128"} { http get https://www.n
 
 Each HTTP command normally opens new connections and closes them when it's done. With `--pool`, it uses one client shared by every HTTP command in the session instead, which keeps connections open for the next request to the same server. Nushell creates the shared client the first time a command uses `--pool`. That client checks certificates, follows redirects, and connects over TCP. It reads the proxy variables once, when it's created, so a later `with-env` doesn't change its proxy.
 
-[`http pool`](/commands/docs/http_pool.md) replaces the shared client with a new one and closes the old client's open connections. Its `--insecure`, `--redirect-mode`, and `--unix-socket` flags set up the new client, and `http pool` with no flags goes back to the defaults. It returns nothing. It also accepts `--allow-errors`, but the flag does nothing there, so give `--allow-errors` to each request instead.
+[`http pool`](/commands/docs/http_pool.md) replaces the shared client with a new one and closes the old client's open connections. Its `--insecure`, `--redirect-mode`, and `--unix-socket` flags set up the new client, and `http pool` with no flags goes back to the defaults. It returns nothing.
 
 ```nu
 http pool --insecure
@@ -675,7 +675,7 @@ Every field is a string, `port` included, and a part the URL doesn't have is an 
 
 The base has to be a full URL itself. If it isn't, the error says `Incomplete or incorrect base URL`.
 
-`url parse` takes one string at a time. It doesn't accept a list, and although its help lists cell path arguments, Nushell 0.117.0 ignores them, and a table or record as input fails with `Incomplete or incorrect URL`. Use `each` for a list and `update` for a column:
+`url parse` takes one string at a time. Use `each` for a list and `update` for a column:
 
 ```nu
 [[site]; ['https://a.com/x?q=1'] ['https://b.org/y']] | update site { url parse } | get site.host
@@ -705,7 +705,7 @@ The base has to be a full URL itself. If it isn't, the error says `Incomplete or
 # => https://example.com/Q3%20report%2Epdf
 ```
 
-When a record has both `query` and `params`, they have to give the same query string, or `url join` fails with a `Mismatch` error. In Nushell 0.117.0 they're compared as text, so a query that writes a space as `%20` doesn't match `params`, which writes it as `+`, and `query` has to come before `params` in the record, the way `url parse` returns them. In a record you build yourself, give only one of the two. To change the query of a URL you parsed, remove `query` and update `params`:
+When a record has both `query` and `params`, they have to give the same query string, or `url join` fails with a `Mismatch` error. In a record you build yourself, give only one of the two. To change the query of a URL you parsed, remove `query` and update `params`:
 
 ```nu
 'https://example.com/search?q=nu&page=1#results' | url parse | reject query | update params {q: 'nu shell', page: 2} | url join

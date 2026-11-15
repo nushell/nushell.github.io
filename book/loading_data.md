@@ -439,8 +439,6 @@ The text in cells and items is otherwise written as it is, so Markdown or HTML i
 # => | my_notes.md | &lt;b&gt;see #3&lt;&#x2f;b&gt; |
 ```
 
-`--escape-all` also escapes the `#` inside the entities, so a renderer shows `&#x2f;` as text where the `/` was. Use `--escape-html` alone when the data has slashes.
-
 ### KDL
 
 [KDL](https://kdl.dev) documents are read as a table of nodes. Each row has the node's `name`, its positional `args`, its named `props`, and its `children`:
@@ -895,11 +893,13 @@ Strings and byte streams, such as the output of `open --raw` or an external comm
 `save` doesn't replace a file that exists. It fails with a `Destination file already exists` error instead. Use `--force` (`-f`) to overwrite the file, or `--append` (`-a`) to add to its end. `--force` also creates missing parent directories; without it, a missing directory is a `Directory not found` error.
 
 ::: warning
-Don't save to the file the pipeline is reading from. `save` empties the file before it writes, so the rest of the data still streaming in from that file is lost. `save` catches the simplest case, `open --raw notes.txt | save -f notes.txt`, with a `pipeline input and output are the same file` error. It can't tell when another command sits in between: `open notes.txt | lines | where $it != "" | save -f notes.txt` leaves `notes.txt` empty. Put [`collect`](/commands/docs/collect.md) before `save` so the whole file is read first:
+Don't save to the file the pipeline is reading from. `save` empties the file before it writes, so the rest of the data still streaming in from that file is lost. Put [`collect`](/commands/docs/collect.md) before `save` so the whole file is read first:
 
 ```nu
 open notes.txt | lines | where $it != "" | collect | save -f notes.txt
 ```
+
+When `open --raw` streams straight into `save`, as in `open --raw notes.txt | save -f notes.txt`, `save` stops with a `pipeline input and output are the same file` error that suggests the same fix.
 
 When `open` parses the file into a value, as with `open Cargo.toml`, the whole file has been read before `save` starts, so no `collect` is needed.
 :::

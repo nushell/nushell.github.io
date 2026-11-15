@@ -49,7 +49,7 @@ let name = input "Name: "
 These flags change how it reads:
 
 - `--suppress-output` (`-s`) doesn't show what the user types, for a password or a token.
-- `--numchar` (`-n`) stops after that many bytes, without waiting for Enter, so `input -n 1` reads a single ASCII key. A character such as `é` counts as two bytes. The number has to be at least 1. Its help says it hides the typing, but it doesn't, so add `-s` for that.
+- `--numchar` (`-n`) stops after that many bytes, without waiting for Enter, so `input -n 1` reads a single ASCII key. The number has to be at least 1. Combine it with `-s` to read a key without showing it.
 - `--bytes-until-any` (`-u`) also stops at the first character that appears in the string you give it, and leaves that character out. After `input -u ",;"`, typing `ab,` returns `ab`. Enter still ends the input, and the result is a string. Use ASCII characters for the stop list.
 - `--default` (`-d`) is the value returned when the user presses Enter without typing anything. With a prompt, `input` shows it after the prompt, as in `Name:  (default: guest)`.
 

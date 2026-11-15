@@ -37,7 +37,7 @@ Here `"two" mod 2` is an error, so `"two"` is skipped. The same leniency hides m
 # => 1
 ```
 
-When nothing matches, it returns `null`. Its help text has an example whose result is `-1`, but in Nushell 0.117.0 the command never returns `-1`:
+When nothing matches, it returns `null`:
 
 ```nu
 [3 5 13 91] | iter find-index {|x| $x mod 2 == 0 } | describe
@@ -73,7 +73,7 @@ Without `--fold`, the first item is the starting accumulator, and it is also the
 # => ["", a, ab, abc]
 ```
 
-An empty input gives an empty list without `--fold`, and a list holding only the `--fold` value with it. The starting value can't be `null`. `--fold null` counts as no `--fold` at all, and `-f null` fails with `The initial value is missing`.
+An empty input gives an empty list without `--fold`, and a list holding only the `--fold` value with it.
 
 ## `iter filter-map`
 

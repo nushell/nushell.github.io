@@ -346,10 +346,6 @@ cp --preserve [mode timestamps] report.pdf archive/
 
 `--verbose` (`-v`) prints a line such as `'/home/me/a.txt' -> '/home/me/backup/a.txt'` for each file. `--debug` prints the same line plus how the file was copied, for example whether the filesystem could clone it. Unlike `mkdir`, `mv`, and `rm`, `cp --verbose` prints text instead of returning a table. `--progress` (`-p`) shows a progress bar, which is useful for large files.
 
-::: warning
-When one file can't be copied, for example because the destination is read-only, `cp` prints a message but doesn't raise an error, so `try` doesn't catch it. A source that doesn't exist does raise an error.
-:::
-
 ### Moving and renaming files
 
 [`mv`](/commands/docs/mv.md) renames a file or directory, or moves it into an existing directory. Directories move without any extra flag. As with `cp`, several sources need a directory as the destination:
@@ -359,9 +355,9 @@ mv draft.md final.md
 mv *.log archive
 ```
 
-`mv` overwrites an existing destination without asking. `--no-clobber` (`-n`), `--update` (`-u`), and `--interactive` (`-i`) work the way they do for `cp`. `--force` (`-f`) is accepted, but since overwriting is already the default, it changes nothing. `--progress` (`-p`) shows a progress bar.
+`mv` overwrites an existing destination without asking. `--no-clobber` (`-n`), `--update` (`-u`), and `--interactive` (`-i`) work the way they do for `cp`. `--progress` (`-p`) shows a progress bar.
 
-`mv --verbose` (`-v`) returns a table with `source`, `destination`, and `message` columns, one row per source, with absolute paths. The table lists what you asked to move. With `--no-clobber` or `--update`, a file that was skipped still gets a row.
+`mv --verbose` (`-v`) returns a table with `source`, `destination`, and `message` columns, one row per source, with absolute paths.
 
 ### Removing files
 
@@ -371,9 +367,7 @@ mv *.log archive
 
 `rm` keeps going after an error. It removes everything it can, then raises the first error and prints the others. With `--verbose` (`-v`), it raises nothing and returns a table with `path`, `deleted`, and `error` columns, one row per path. The rows aren't in a fixed order.
 
-::: warning
-`rm` refuses to remove the current directory, or a directory that contains it, when you name it as `.` or as an absolute path. The error is "Cannot remove any parent directory". It doesn't recognize a relative path to a parent, though, so `rm -r ..` deletes the parent directory and the current directory with it.
-:::
+`rm` refuses to remove the current directory, or a directory that contains it, when you name it as `.` or as an absolute path. The error is "Cannot remove any parent directory".
 
 By default, `rm` deletes files permanently. If you'd rather have it move them to the system trash (the Recycle Bin on Windows), set `rm.always_trash` in your config:
 
@@ -381,7 +375,7 @@ By default, `rm` deletes files permanently. If you'd rather have it move them to
 $env.config.rm.always_trash = true
 ```
 
-`--trash` (`-t`) and `--permanent` (`-p`) override the setting for a single call. If a file can't be moved to the trash, the error suggests `--permanent`. Trash support is part of the default build, but it's missing from Nushell builds without the `trash-support` feature, and it's never available on Android or iOS. Without it, `rm --trash` fails, and so does every `rm` while `rm.always_trash` is `true`.
+`--trash` (`-t`) and `--permanent` (`-p`) override the setting for a single call. If a file can't be moved to the trash, the error suggests `--permanent`. Trash support is part of the default build, but it's missing from Nushell builds without the `trash-support` feature, and it's never available on Android or iOS. Without it, `rm --trash` fails. Leave `rm.always_trash` at `false` there.
 
 ### Checking disk usage
 
@@ -455,7 +449,7 @@ let work = mktemp --directory
 rm --recursive $work
 ```
 
-Without an argument, the name is `tmp.` followed by ten random characters, in the system's temporary directory. That's `TMPDIR` on Linux and macOS (`/tmp` when it isn't set), and `TMP` or `TEMP` on Windows, as they were set when Nushell started. Setting `$env.TMPDIR` inside Nushell doesn't move it. It's the same directory as [`$nu.temp-dir`](./special_variables.md#nu), but `mktemp` doesn't resolve symbolic links in it, so on macOS its paths start with `/var/folders` where `$nu.temp-dir` has `/private/var/folders`.
+Without an argument, the name is `tmp.` followed by ten random characters, in the system's temporary directory. That's `TMPDIR` on Linux and macOS (`/tmp` when it isn't set), and `TMP` or `TEMP` on Windows, as they were set when Nushell started. It's the same directory as [`$nu.temp-dir`](./special_variables.md#nu), but `mktemp` doesn't resolve symbolic links in it, so on macOS its paths start with `/var/folders` where `$nu.temp-dir` has `/private/var/folders`.
 
 A template argument sets the name. Its last run of `X`s, at least three of them, becomes random characters. With a template, the file goes in the current directory unless you add `--tmpdir` (`-t`) for the temporary directory or `--tmpdir-path` (`-p`) for another directory. A relative `--tmpdir-path` gives a relative result. `--suffix` adds text after the random part, and then the template has to end in `X`. `--dry` returns a name without creating anything:
 
@@ -479,4 +473,4 @@ try { mktemp report.XX } catch {|e| $e.msg }
 # => too few X's in template 'report.XX'
 ```
 
-A `--suffix` that contains `/` and a `--tmpdir-path` directory that doesn't exist are errors too. In Nushell 0.117.0, the text of these errors can come out as an internal key; see the warning under [Reports from `mkdir`, `mv` and `rm`](/cookbook/files.md#reports-from-mkdir-mv-and-rm).
+A `--suffix` that contains `/` and a `--tmpdir-path` directory that doesn't exist are errors too.

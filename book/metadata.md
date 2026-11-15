@@ -116,8 +116,6 @@ to html --list | metadata | reject span
 # => ╰────────┴──────────────────╯
 ```
 
-When [`table`](/commands/docs/table.md) sees this value, it paints each cell of the `name` column that holds a hex color, such as `#ff0000`, in that color. The theme names in that list aren't colors, so the list itself shows up uncolored.
-
 ## Custom Metadata
 
 You can attach arbitrary metadata to pipeline data using the [`metadata set`](/commands/docs/metadata_set.md) command with the optional closure parameter:

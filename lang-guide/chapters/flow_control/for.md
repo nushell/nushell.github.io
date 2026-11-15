@@ -101,5 +101,3 @@ for x in [1 2 3] { $x * $x | print }
    ```
 
    To collect a result for each item, use [`each`](/commands/docs/each.md), which is an expression. See [Loops](/book/control_flow.md#loops) in the Book for when to choose each one.
-
-1. The loop variable can have a type annotation, as in `for x: int in $numbers`. Nushell doesn't check the items against it; see [Control Flow - `for`](/book/control_flow.md#for).

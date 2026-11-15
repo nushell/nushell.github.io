@@ -124,7 +124,7 @@ bytes build 256
 # =>    ╰────
 ```
 
-`bytes collect` joins a list of binary values into one, with an optional binary separator between them. The result is a byte stream, and an empty list gives `0x[]`. Every item must be binary. Its signature also lists table input, but each row of a table is a record, so a table fails the same way a string item does:
+`bytes collect` joins a list of binary values into one, with an optional binary separator between them. The result is a byte stream, and an empty list gives `0x[]`. Every item must be binary:
 
 ```nu
 [0x[01] 0x[02 03]] | bytes collect 0x[00] | to nuon
@@ -137,7 +137,7 @@ bytes build 256
 
 `bytes length` returns the number of bytes, and it can run in a `const` expression. For a single value it gives the same answer as `length`, but it also works on each item of a list and on named columns.
 
-`bytes at` takes an int range. Indexes start at 0, `a..b` includes byte `b`, and `a..<b` stops before it. A negative index counts from the end, and a negative start needs parentheses: `(-2)..`. A range that runs past the end stops at the last byte, and a range that starts past the end, or ends before it starts, gives `0x[]`. A float range is an error, and the step of a range such as `0..2..4` is ignored:
+`bytes at` takes an int range. Indexes start at 0, `a..b` includes byte `b`, and `a..<b` stops before it. A negative index counts from the end, and a negative start needs parentheses: `(-2)..`. A range that runs past the end stops at the last byte, and a range that starts past the end, or ends before it starts, gives `0x[]`. A float range is an error:
 
 ```nu
 let data = 0x[10 20 30 40 50]
@@ -277,10 +277,6 @@ An int is treated as unsigned unless it is negative or you pass `--signed` (`-s`
 0x[0f f0] | bits not | to nuon
 # => 0x[F00F]
 ```
-
-::: warning
-For an unsigned 8-byte word, `bits not` keeps only the low 47 bits of the result, not 63. `0 | bits not --number-bytes 8` is `140737488355327` (`0x7fffffffffff`), and the same happens without `--number-bytes` for a number above `0xffffffff`. Use `--signed` for a full 64-bit flip.
-:::
 
 ### Shifts
 

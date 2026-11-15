@@ -253,9 +253,6 @@ input listen --types [key] --raw
 # => ╰───────────────┴───────────────────────────────╯
 ```
 
-The [generated help](/commands/docs/input_listen.md) for Nushell 0.117.0 calls the second field
-`raw_flags`. The field is `raw_modifiers`.
-
 `--timeout` sets how long to wait. When nothing arrives in time, `input listen` fails with
 `Timed out while waiting for user input`, which you can catch with [`try`](/commands/docs/try.md):
 
@@ -263,13 +260,8 @@ The [generated help](/commands/docs/input_listen.md) for Nushell 0.117.0 calls t
 try { input listen --types [key] --timeout 5sec } catch { print "No key pressed" }
 ```
 
-::: warning
-In Nushell 0.117.0, `input listen` declares that it returns a key record. Assigning any other event
-to a variable with `let` fails with a type mismatch, as in
-`let event = input listen --types [mouse]`. Give the variable the type `record`
-(`let event: record = input listen --types [mouse]`), or use the result in the same pipeline, as in
-`input listen --types [mouse] | get kind`.
-:::
+To keep an event in a variable, give the variable the type `record`, as in
+`let event: record = input listen --types [mouse]`.
 
 `input listen` needs a terminal. Run with its input redirected, as in `nu -c 'input listen' < file`,
 it fails with an I/O error. Where Nushell has detached the terminal, such as in a completer, it fails

@@ -226,7 +226,7 @@ plugin use cool
 It is not necessary to add `plugin use` statements to your config file. All previously registered plugins are automatically loaded at startup.
 
 ::: tip Note
-`plugin use` is a parser keyword, so when evaluating a script, it will be evaluated first. This means that while you can execute `plugin add` and then `plugin use` at the REPL on separate lines, you can't do this in a single script. To run a script with plugins you haven't registered, use `nu --plugins`, described below. (The help text of `plugin use` calls this option `--plugin`, but the flag is `--plugins`.)
+`plugin use` is a parser keyword, so when evaluating a script, it will be evaluated first. This means that while you can execute `plugin add` and then `plugin use` at the REPL on separate lines, you can't do this in a single script. To run a script with plugins you haven't registered, use `nu --plugins`, described below.
 :::
 
 ### Loading plugins without the registry
@@ -243,7 +243,7 @@ The `--plugins` option can also be repeated, once for each plugin:
 nu --plugins ./my_plugins/nu_plugin_cool --plugins ./my_plugins/nu_plugin_other
 ```
 
-Inside the brackets, separate the paths with spaces or with commas, and put double quotes around a path that contains spaces: `--plugins '["./my plugins/nu_plugin_cool", ./nu_plugin_other]'`. `nu --help` asks for full paths, but a relative path works too, and is resolved against the directory you start `nu` from.
+Inside the brackets, separate the paths with spaces or with commas, and put double quotes around a path that contains spaces: `--plugins '["./my plugins/nu_plugin_cool", ./nu_plugin_other]'`. Nu resolves a relative path against the directory you start it from.
 
 Nu starts each of these plugins at startup to read its signatures, so they show as `running` in `plugin list` until the [garbage collector](#plugin-garbage-collector) stops them. They load even with `--no-config-file`, which skips the registry file, and `nu` never writes them to the registry file.
 
@@ -256,8 +256,6 @@ if you commonly add and remove plugins.
 - `$env.NU_PLUGIN_DIRS`: An environment variable which is mutable and can accept any command that updates its list. `plugin add` reads it when it runs, so a change applies to the next `plugin add`, even later in the same script.
 
 `plugin add` tries the current directory first, then the directories in `$NU_PLUGIN_DIRS` in order, then those in `$env.NU_PLUGIN_DIRS`, and uses the first match. A relative directory in either list is resolved against the current directory.
-
-`plugin use`, `plugin rm`, and `plugin stop` also accept a filename, but they don't search these directories. They resolve the filename against the current directory only, so outside the plugin's directory, use the plugin's name or its full path.
 
 ### Updating Plugins
 
@@ -550,6 +548,10 @@ plugin rm cool
 
 Each command below links to its reference page, which lists the flags. This section covers what the commands return and the cases those pages don't explain.
 
+::: warning
+An error from a plugin can print the environment variables of the `nu` process, including any API keys or tokens they hold. Such an error points at "Host Environment Variables" instead of at your code. Check error output before you share it, for example in a bug report.
+:::
+
 ### The polars plugin
 
 The `polars` plugin adds the `polars` commands for working with dataframes. The [DataFrames chapter](dataframes.md) covers them, and the "Polars value types" box in the [quickstart](#core-plugin-quickstart) lists the kinds of values they return.
@@ -587,7 +589,7 @@ The record starts with `Subject`, `From`, and `To`, then has the other headers i
 
 `Body` is the text after the headers, exactly as it is in the file. Quoted-printable text and MIME parts aren't decoded. It's also cut to the first 50 bytes, which is why the body above stops at "for". `--preview-body` (`-b`) sets a different limit in bytes. The cut never splits a character, and a negative limit gives an empty body. To keep the whole body, pass a limit larger than the message, such as `--preview-body 1_000_000`.
 
-Text that doesn't start with a header fails with "Can't convert to structured eml data". A message made only of headers needs a blank line after them. Without one, `from eml` fails the same way, or crashes the plugin with "Failed to receive response to plugin call from `formats`" when the text doesn't end with a newline. The address parser also misreads one kind of list. When a bare address comes before a named one, as in `bob@example.com, Carol <carol@example.com>`, the result is a single address named `bob@example.com, Carol`.
+Text that doesn't start with a header fails with "Can't convert to structured eml data". End the headers with a blank line, even when the message has no body.
 
 #### Calendars and contacts
 
@@ -718,8 +720,6 @@ A line with no `=` or `:` is an error:
 # =>    ╰────
 ```
 
-A section name that appears twice, or a key that appears twice in one section, fails with "Plugin failed to decode: invalid entry, duplicate keys are not allowed for `Record`".
-
 #### Property lists
 
 `from plist` reads XML, binary, and old-style text (OpenStep) property lists, from a string or from binary data. Any other input, or data that isn't a property list, fails with "Could not load plist". Because binary input works, `open` can read the binary `.plist` files that macOS keeps in `~/Library/Preferences`. `to plist` writes an XML property list as text, or a binary one with `--binary` (`-b`).
@@ -743,15 +743,7 @@ A section name that appears twice, or a key that appears twice in one section, f
 # => {name: demo, size: 2000, saved: 2026-11-14T18:30:00+00:00}
 ```
 
-A value with no property list type, such as `null`, a duration, or a range, fails the whole conversion, wherever it is in the input. The error names the value:
-
-```nu
-{name: demo, timeout: 5sec} | to plist
-# => Error: nu::shell::error
-# =>
-# =>   × Cannot convert plist
-# =>   [Failed to read contents for label `Duration(5s) is not convertible` (offset: 9223372036854775807, length: 0): OutOfBounds]
-```
+A value with no property list type, such as `null`, a duration, or a range, fails the whole conversion with "Cannot convert plist", wherever it is in the input.
 
 `save settings.plist` writes an XML property list. To write a binary one, use `to plist --binary | save --raw settings.plist`. Without `--raw`, `save` runs `to plist` again on the binary data, and the file ends up as an XML property list holding one `data` element.
 
@@ -872,7 +864,7 @@ $json | query json 'authors.0|@ugly'
 # => {"name":"Ann","commits":120,"active":true}
 ```
 
-Text that isn't JSON fails with "Invalid JSON". An object with the same key twice fails with "Plugin failed to decode: invalid entry, duplicate keys are not allowed for `Record`".
+Text that isn't JSON fails with "Invalid JSON".
 
 #### Querying XML
 
@@ -899,8 +891,6 @@ $feed | query xml 'count(//a:entry)' --namespaces {a: "http://www.w3.org/2005/At
 $feed | query xml 'string(/*/@xml:lang)'
 # => en
 ```
-
-A prefix that isn't bound crashes the plugin with "Failed to receive response to plugin call from `query`".
 
 By default each row has only `string_value`, the node's text. `--output-type` adds `type`, which is `element`, `attribute`, `text`, `comment`, `processing_instruction`, `root`, or `namespace`. `--output-names` adds `local_name`, `namespace`, and `prefixed_name`, which are `null` for a node without a name, such as text. Once you pass any of the `--output-*` switches, only the columns you ask for appear. Add `--output-string-value` to keep the text, which this example leaves out:
 
@@ -990,11 +980,11 @@ $page | query web --as-table [Price]
 # => ╰───────┴─────────────────────────────────────────────────────╯
 ```
 
-The names are case-sensitive and must match the header text exactly, but you can ask for any of the columns, in any order. Cells come back as strings with their markup removed, and a row with too few cells gets `Missing column: 'NAME'`. A table with a header row and no data rows comes back as one row of filler values, not as an empty table. When more than one table matches, the result is a list of tables. When none does, the result is a record like the one above, not an error. A name that contains a header's text without being equal to it, such as `Full Name` for a `Name` column, crashes the plugin.
+The names are case-sensitive and must match the header text exactly, but you can ask for any of the columns, in any order. Cells come back as strings with their markup removed, and a row with too few cells gets `Missing column: 'NAME'`. When more than one table matches, the result is a list of tables. When none does, the result is a record like the one above, not an error.
 
-`--as-table []` returns every table on the page: the table itself when there's only one, and a list of tables when there are more. The columns of each come in no fixed order. A table with no `th` cells in its first row gets columns named `column0`, `column1`, and so on, and a table with its headers down the first column doesn't come out right.
+`--as-table []` returns every table on the page: the table itself when there's only one, and a list of tables when there are more. The columns of each come in no fixed order. A table with no `th` cells in its first row gets columns named `column0`, `column1`, and so on.
 
-`--inspect` (`-i`) helps you find the header names. With `--as-table`, it prints to stderr the names you passed, the first 2047 bytes of the HTML, the header row of every table on the page, and the tables that matched. On input shorter than 2047 bytes, it crashes the plugin. With `--query`, `--inspect` ignores the selector and returns the text of the whole page.
+`--inspect` (`-i`) helps you find the header names. With `--as-table`, it prints to stderr the names you passed, the first 2047 bytes of the HTML, the header row of every table on the page, and the tables that matched. With `--query`, `--inspect` ignores the selector and returns the text of the whole page.
 
 #### Page metadata
 

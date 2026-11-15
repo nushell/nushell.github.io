@@ -46,7 +46,7 @@ If the terminal doesn't answer, `clip paste52` waits until you press a key and t
 # => # =>
 ```
 
-Its help suggests `ls | clip prefix '# => ' | clip copy52` for copying output into documentation written the way this book shows output. Unlike `clip copy52`, though, `clip prefix` doesn't turn colors off. At the prompt, where standard output is a terminal, the table it renders contains ANSI color codes, and `clip copy52` copies a string with its codes. Strip them on the way:
+At the prompt, where standard output is a terminal, the table that `clip prefix` renders contains ANSI color codes, and `clip copy52` copies a string with its codes. To copy output for documentation written the way this book shows output, strip the codes before you copy:
 
 ```nu
 ls | clip prefix '# => ' | ansi strip | clip copy52

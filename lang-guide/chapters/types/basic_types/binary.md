@@ -121,24 +121,6 @@ Other operators are errors with binary values, including `+`, the `bit-` operato
 # => [0x[01], 0x[01FF], 0x[02]]
 ```
 
-`<`, `>`, `<=` and `>=` are a parse error when Nushell can see that both sides are binary, as with two literals or a parameter typed `binary`. When one side's type isn't known, as with an untyped custom command parameter, the comparison runs and uses the same order as `sort`:
-
-```nu
-0x[02] < 0x[03]
-# => Error: nu::parser::operator_unsupported_type
-# =>
-# =>   × The '<' operator does not work on values of type 'binary'.
-# =>    ╭─[repl_entry #1:1:1]
-# =>  1 │ 0x[02] < 0x[03]
-# =>    · ───┬── ┬
-# =>    ·    │   ╰── does not support 'binary'
-# =>    ·    ╰── binary
-# =>    ╰────
-def less [a b] { $a < $b }
-less 0x[02] 0x[03]
-# => true
-```
-
 ## Showing the bits with `format bits`
 
 [`format bits`](/commands/docs/format_bits.md) returns a string of `0`s and `1`s, with a space between bytes. It accepts more than binary values:

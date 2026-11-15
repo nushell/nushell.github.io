@@ -281,7 +281,7 @@ nu -m basic -c '[[a b]; [1 2]]'
 
 Without [`--stdin`](#standard-input), the code gets no input, and `$in` is empty even when something is piped into `nu`.
 
-`--error-style` sets how an error from the code is reported: `fancy` (the default), `plain` (a text description without drawing characters), or `short` (a single line). `nested` isn't accepted here, although [`$env.config.error_style`](config_reference.md#error-style) takes it. The flag only applies to `-c`. A script file and the interactive shell ignore it, so set `$env.config.error_style` for those.
+`--error-style` sets how an error from the code is reported: `fancy` (the default), `plain` (a text description without drawing characters), or `short` (a single line). For a script file or the interactive shell, set [`$env.config.error_style`](config_reference.md#error-style) instead.
 
 ```nu
 nu --error-style short -c '1 / 0'

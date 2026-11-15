@@ -52,7 +52,7 @@ With SQLite history, `true` hides the commands that other Nushell sessions run w
 
 `$nu.history-path` shows the file in use.
 
-Give an absolute path. Nushell uses the string as it is and doesn't expand `~`, so `"~/history.txt"` creates a directory literally named `~` inside the current directory. A relative path is resolved against the current directory every time Nushell writes the file, so after a `cd` your history goes to a different file. Build the path from one of the [`$nu` constants](./configuration.md#nu-constant) instead:
+Give an absolute path built from one of the [`$nu` constants](./configuration.md#nu-constant):
 
 ```nu
 $env.config.history.path = ($nu.home-dir | path join ".nu_history.txt")
@@ -86,7 +86,7 @@ Reading the setting back gives `true`, `"short"`, or `false`. The banner is the 
 
 With `true`, [`rm`](/commands/docs/rm.md) moves files to the system trash as if you had passed `--trash`. With `false`, it deletes them permanently. The `--trash` and `--permanent` flags always win over this setting. Given both flags, `rm` uses the trash. When moving a file to the trash fails, the error suggests `--permanent`.
 
-The trash needs a `nu` built with the `trash-support` feature, which the default build includes (`version | get features` lists it), and it isn't available on Android or iOS. Without it, `rm --trash` fails, and so does every `rm` while `rm.always_trash` is `true`, even with `--permanent`. Set it back to `false` to delete files there.
+The trash needs a `nu` built with the `trash-support` feature, which the default build includes (`version | get features` lists it), and it isn't available on Android or iOS. Without it, `rm --trash` fails. Leave `rm.always_trash` at `false` there.
 
 ### `recursion_limit`
 
@@ -127,7 +127,7 @@ These settings are for the built-in `clip copy` and `clip paste` commands, which
 
 ### `clip.resident_mode`
 
-Only Linux uses this setting. On Linux, a program that copies text has to keep running to hand that text to other programs, unless a clipboard manager takes it over. With `true`, `clip copy` passes the text to a background thread inside Nushell, which keeps serving it until Nushell exits. In 0.117.0, Nushell uses that thread on Linux even when this setting is `false`. Only the older plugin-style setting, `$env.config.plugins.clip.NO_RESIDENT = true`, turns it off.
+Only Linux uses this setting. On Linux, a program that copies text has to keep running to hand that text to other programs, unless a clipboard manager takes it over. With `true`, `clip copy` passes the text to a background thread inside Nushell, which keeps serving it until Nushell exits. To turn the thread off, set the older plugin-style setting, `$env.config.plugins.clip.NO_RESIDENT = true`.
 
 ### `clip.default_raw`
 
@@ -279,7 +279,7 @@ A change to `$env.config.use_ansi_coloring` counts right away. The environment v
 - `"plain"` describes the error and its location in plain sentences, which works better with screen readers.
 - `"short"` prints the error on one line.
 
-`nu --error-style` sets the style for a `nu -c` run only, and accepts only `fancy`, `plain`, and `short`.
+`nu --error-style` sets the style for a `nu -c` run, and takes `fancy`, `plain`, or `short`. For scripts and the REPL, set `error_style` in your configuration.
 
 ### `error_lines`
 

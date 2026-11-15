@@ -326,7 +326,7 @@ ulimit -s
 
 The system enforces the soft limit. A process may move its soft limit anywhere up to the hard limit, and it may lower its hard limit, but only root can raise a hard limit. Sizes are in kB of 1024 bytes, `-t` (`--cpu-time`) is in seconds, and the other limits are counts. A resource without a limit shows the string `unlimited`, so a column can hold both ints and strings.
 
-To set a limit, put the value after the flags. Without `-S` or `-H`, both limits change. With several resource flags, each of them gets the value.
+To set a limit, put the value after the flags. Without `-S` or `-H`, both limits change. To change only one of them, add `-S` or `-H` to the resource flag, as in `ulimit -f -S 2000` for the soft file size limit. With several resource flags, each of them gets the value.
 
 ```nu
 ulimit -n 256
@@ -346,24 +346,7 @@ The value can be:
 - `hard`, the current hard limit
 - `soft`, the current soft limit, when you set only the hard limit with `-H`. When the soft limit is being set, `soft` means the hard limit, the same as `hard`.
 
-Any other string is an error, and so is a negative int. When you set only the soft limit, a value above the hard limit, or `unlimited`, is lowered to the hard limit without a message. A value the system refuses is an error, such as `EPERM: Operation not permitted` when you try to raise a hard limit, or `EINVAL: Invalid argument` for a hard limit below the current soft limit. The error points at a line of Nushell's source code instead of your command:
-
-```nu
-ulimit -n 256
-ulimit -n 1024
-# => Error: nu::shell::error
-# =>
-# =>   × EPERM: Operation not permitted
-# =>    ╭────
-# =>  1 │ crates/nu-command/src/platform/ulimit.rs:405:42
-# =>    · ───────────────────────┬───────────────────────
-# =>    ·                        ╰──
-# =>    ╰────
-```
-
-::: warning
-In Nushell 0.117.0, `-S` and `-H` are swapped when no resource flag is given. `ulimit -H 2000` sets the soft file size limit, and `ulimit -S 2000` tries to set the hard limit, which fails with `EINVAL` while the soft limit is higher. Name the resource, as in `ulimit -f -S 2000`, and both flags work as described.
-:::
+Any other string is an error, and so is a negative int. When you set only the soft limit, a value above the hard limit, or `unlimited`, is lowered to the hard limit without a message. A value the system refuses is an error, such as `EPERM: Operation not permitted` when you try to raise a hard limit, or `EINVAL: Invalid argument` for a hard limit below the current soft limit.
 
 The limits belong to the whole Nushell process. A `ulimit` inside a closure or a custom command stays in effect after it returns, unlike a change to `$env`, and every external command started afterwards inherits the limits. To limit a single job, set the limit in a child Nushell:
 
@@ -468,7 +451,7 @@ registry query --hklm 'SOFTWARE\Microsoft\Windows NT\CurrentVersion' CurrentBuil
 | `REG_BINARY`, `REG_RESOURCE_LIST`, `REG_FULL_RESOURCE_DESCRIPTOR`, `REG_RESOURCE_REQUIREMENTS_LIST` | binary                                    |
 | `REG_NONE`                                                                                          | `null`                                    |
 
-The `type` column keeps the original name, so a `REG_RESOURCE_LIST` value arrives as binary with `type` set to `REG_RESOURCE_LIST`. A `REG_QWORD` above the largest int comes out negative.
+The `type` column keeps the original name, so a `REG_RESOURCE_LIST` value arrives as binary with `type` set to `REG_RESOURCE_LIST`.
 
 Windows stores some paths, such as the user `Path`, as `REG_EXPAND_SZ` with references like `%USERPROFILE%`. `registry query` expands them with the Windows function `ExpandEnvironmentStrings`, as PowerShell does, so the result can be used as a path right away. `--no-expand` (`-u`) returns the text as it's stored, with the `%NAME%` references left in.
 

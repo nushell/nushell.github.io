@@ -88,7 +88,7 @@ A row index past the end is an `access_beyond_end` error, and any other name is 
 
 Most examples here are two-dimensional, but a matrix can have one dimension or several. A vector comes from `matrix zeros n`, `matrix reshape n`, `matrix reshape --flatten`, or the `--axis` form of `matrix sum` and `matrix max`. A vector is not a one-row matrix. Its shape is `[3]`, not `[1, 3]`.
 
-Some commands only handle certain shapes. `matrix get-col` and `matrix set-col` need exactly two dimensions. `matrix multiply` takes one or two. On a vector, each "row" holds a single element, so `matrix get-row 1` returns a one-element list and `matrix set-row 1 [5]` replaces one element. On three or more dimensions, `matrix get-row` returns all the values under that first index as one flat list, but `matrix set-row` crashes with a panic (`ndarray: index out of bounds`), so reshape to two dimensions before you set a row.
+Some commands only handle certain shapes. `matrix get-col` and `matrix set-col` need exactly two dimensions. `matrix multiply` takes one or two. On a vector, each "row" holds a single element, so `matrix get-row 1` returns a one-element list and `matrix set-row 1 [5]` replaces one element. On three or more dimensions, `matrix get-row` returns all the values under that first index as one flat list. To set a row of such a matrix, reshape it to two dimensions first.
 
 ## Element-wise arithmetic
 
@@ -327,6 +327,6 @@ Commands that walk through a list, such as `each`, `par-each` and `length`, don'
 # => [1.0, 2.0, 3.0]
 ```
 
-`matrix into-nu --as-records` (`-r`) returns a table instead, with columns named `col0`, `col1` and so on. Use it only on a two-dimensional matrix. For other shapes, the records it returns hold `0.0` instead of the matrix's values.
+For a two-dimensional matrix, `matrix into-nu --as-records` (`-r`) returns a table instead, with columns named `col0`, `col1` and so on.
 
 The values stay floats in both cases. `to json` converts a matrix the same way `into value` does, but `to nuon` rejects it with `custom values are currently not nuon-compatible`, so convert it first.

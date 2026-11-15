@@ -62,7 +62,7 @@ By default, file sizes are displayed with metric units:
 
 Three settings in `$env.config.filesize` control the display:
 
-- `unit` picks the unit. `"metric"`, the default, and `"binary"` choose a unit to fit each value, from the metric (`kB`, `MB`, ...) or binary (`KiB`, `MiB`, ...) column of the table above. A unit name shows every size in that unit: `"B"`, `"kB"`, `"MB"`, `"GB"`, `"TB"`, `"PB"`, `"EB"`, `"KiB"`, `"MiB"`, `"GiB"`, `"TiB"`, `"PiB"` or `"EiB"`. Unlike in literals, the case must match exactly. `"KB"` and `"kb"` are rejected with "Invalid value for $env.config.filesize.unit", even though `config nu --doc` lists `"KB"`.
+- `unit` picks the unit. `"metric"`, the default, and `"binary"` choose a unit to fit each value, from the metric (`kB`, `MB`, ...) or binary (`KiB`, `MiB`, ...) column of the table above. A unit name shows every size in that unit: `"B"`, `"kB"`, `"MB"`, `"GB"`, `"TB"`, `"PB"`, `"EB"`, `"KiB"`, `"MiB"`, `"GiB"`, `"TiB"`, `"PiB"` or `"EiB"`. Unlike in literals, the case must match exactly. `"KB"` and `"kb"` are rejected with "Invalid value for $env.config.filesize.unit".
 - `show_unit` (default `true`) can be set to `false` to leave off the unit. With a fixed unit, every value has the same one anyway.
 - `precision` (default `1`) is the number of decimal places. `null` shows all of them.
 

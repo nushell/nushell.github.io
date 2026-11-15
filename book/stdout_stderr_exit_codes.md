@@ -413,7 +413,7 @@ for i in 1..2 { ^echo $i } o> loop.txt
 # =>    ╰────
 ```
 
-Two other keywords reject a redirection with a different error. `type T = int o> t.txt` is "Extra tokens in code", and `alias l = ls o> x.txt` is "Can't create alias to expression".
+`alias` rejects a redirection with a different error. `alias l = ls o> x.txt` is "Can't create alias to expression".
 
 To redirect what a loop prints, run it inside [`do`](/commands/docs/do.md) and redirect the `do` call. A file redirection applies to every external command inside it:
 
@@ -516,7 +516,7 @@ Without an argument, `decode` guesses the encoding from the bytes. A guess needs
 # => ŠL
 ```
 
-The name can be any label from the [WHATWG Encoding Standard](https://encoding.spec.whatwg.org/#names-and-labels), such as `utf-8`, `utf-16be`, `shift_jis`, `gbk`, `euc-kr`, `latin1`, or `windows-1252`, in upper or lower case. `utf16` also works, as a name for `utf-16le`. Some DOS code pages can be named by number: `437`, `737`, `775`, `850`, `852`, `855`, `858`, `860`, `861`, `862`, `863`, `865`, and `866`. Use only these numbers. A name that isn't a known label is an error.
+The name can be any label from the [WHATWG Encoding Standard](https://encoding.spec.whatwg.org/#names-and-labels), such as `utf-8`, `utf-16be`, `shift_jis`, `gbk`, `euc-kr`, `latin1`, or `windows-1252`, in upper or lower case. `utf16` also works, as a name for `utf-16le`. Some DOS code pages can be named by number: `437`, `737`, `775`, `850`, `852`, `855`, `858`, `860`, `861`, `862`, `863`, `865`, and `866`. An unknown label, such as `utf-9`, is an error.
 
 `decode` never fails on the bytes themselves. A byte sequence that isn't valid in the encoding becomes the replacement character `�`. When the input starts with a UTF-8 or UTF-16 byte order mark, the mark decides the encoding instead of the name you gave:
 

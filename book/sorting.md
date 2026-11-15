@@ -80,7 +80,7 @@ To instead sort in order of values, use the `-v` flag:
 # => ╰─────┴────────╯
 ```
 
-`sort-by` doesn't take a record, even though its help lists record input. It fails with `only list, binary, range, or byte stream input data is supported`. To sort the fields of a record by anything other than the key or the value, turn it into a table first with `transpose key value`.
+To sort the fields of a record by anything other than the key or the value, turn it into a table with `transpose key value` and sort that with `sort-by`.
 
 ### Tables
 

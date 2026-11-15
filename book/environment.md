@@ -329,7 +329,7 @@ You can also run this step manually by `do $env.ENV_CONVERSIONS.FOO.to_string [a
 
 _(Important! The string -> value conversion happens only for variables that already exist when `$env.ENV_CONVERSIONS` is assigned, such as those inherited from the parent process. A variable that you set as a string afterwards with `$env.FOO = ...` stays a string. To convert it, set it before assigning `ENV_CONVERSIONS`, or assign `$env.ENV_CONVERSIONS` to itself again. [`load-env`](/commands/docs/load-env.md), [`with-env`](/commands/docs/with-env.md) and `FOO=bar cmd` don't have this limit. They run each string they set through its `from_string` conversion and turn a string `PATH` into a list. Pass `--no-convert` to `load-env` or `with-env` to set the values as given.)_
 
-Spell each key in `ENV_CONVERSIONS` the way the variable is spelled. `from_string` finds the variable whatever the case of the key, but `to_string` is looked up by the variable's exact name. With the key `FOO`, a list stored in `$env.foo` has no `to_string` conversion, so it is left out of an external command's environment.
+Spell each key in `ENV_CONVERSIONS` the way the variable is spelled.
 
 If a `from_string` closure fails while `$env.ENV_CONVERSIONS` is being assigned, the assignment reports the error. The new record is stored anyway, and the variable keeps its string value.
 

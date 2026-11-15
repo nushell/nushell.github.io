@@ -12,12 +12,10 @@ calculations across the columns of each row.
 The examples use `$df_1`, the dataframe loaded from `test_small.csv` in
 [Working with Dataframes](../dataframes.md#working-with-dataframes).
 
-Most of these commands list [selectors](./selectors.md) as input in their help.
-In Nushell 0.117.0 only `polars count` and `polars agg-groups` accept one. The
-others fail with an error such as
-`can't convert polars_selector to NuDataFrame, NuLazyFrame, NuExpression, NuSelector`,
-so pick columns with [`polars col`](/commands/docs/polars_col.md), which also
-takes a regular expression or a type with `--type`.
+To apply one of these commands to several columns, pick them with
+[`polars col`](/commands/docs/polars_col.md), which also takes a regular
+expression or a type with `--type`. `polars count` and `polars agg-groups` also
+take a [selector](./selectors.md) as input.
 
 ## Summary statistics
 
@@ -134,9 +132,8 @@ input and return an eager dataframe.
 ## Group positions and lists
 
 [`polars agg-groups`](/commands/docs/polars_agg-groups.md) gives, for each group,
-the row positions that belong to it, as a `list<u64>`. It only makes sense inside
-`polars agg`. Used anywhere else, such as in `polars select`, Polars hits an
-internal error and the command fails with `Panic occurred`.
+the row positions that belong to it, as a `list<u64>`. Use it inside
+`polars agg`.
 
 ```nu
 $df_1 | polars group-by first | polars agg (polars col int_1 | polars agg-groups | polars as rows) | polars sort-by first | polars collect | polars into-nu | update rows { to nuon }
@@ -322,13 +319,8 @@ window that ends at the row, pass the negative period as `--offset` and
 `--closed right`.
 
 For an integer index, `--period` and `--offset` take integers, or strings such as
-`2i`. For a date or datetime index, they have to be Polars duration strings,
-such as `3d`. The plugin converts a Nushell duration such as `3day` to a number of
-nanoseconds, which Polars reads as an integer, and it does the same with the
-defaults. Both
-fail with an error such as
-`` `period` duration may not be a parsed integer (i.e. use '2d', not '2i') when working with a temporal column ``,
-so on a date index always pass both flags as strings.
+`2i`. For a date or datetime index, pass both flags as Polars duration strings,
+such as `3d`.
 
 ```nu
 $env.config.datetime_format.table = "%F"
@@ -380,6 +372,4 @@ The result takes the first column's name, so rename it with `polars as`. Calling
 `Cannot apply horizontal aggregation`. Columns that can't be compared fail when
 the plan runs, so `max` over a string column and an integer column gives
 `got invalid or ambiguous dtypes: '[str, i64]'`. An unknown operation fails with
-an error that says
-`Operation not valid for cumulative` but lists the allowed values for
-`polars horizontal`.
+an error that lists the allowed values.

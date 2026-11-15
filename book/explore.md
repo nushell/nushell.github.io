@@ -111,7 +111,7 @@ A byte stream also opens in the hex view, even when it holds text. That includes
 
 To see the text, convert it first, for example with [`lines`](/commands/docs/lines.md) or [`decode`](/commands/docs/decode.md). `explore` reads the whole stream into memory before it shows anything.
 
-The hex view is simpler than the table view. You can scroll with the arrow keys, but there is no cursor mode, searching finds nothing, and `--peek` returns nothing. `q` and `Esc` don't exit. Type `:q` or press `Ctrl+C` instead.
+The hex view is simpler than the table view. You can scroll with the arrow keys, but there is no cursor mode, and the view can't be searched. Type `:q` or press `Ctrl+C` to exit.
 
 ## Config
 
@@ -142,10 +142,7 @@ These are the supported keys. The ones without a default use the terminal's own 
 | `command_bar_text`, `command_bar_background`   | The command bar at the bottom, where you type `:` commands and searches        | none                       |
 | `status.success`                               | The name of a `:` command after it opens a view                                | `{ fg: black, bg: green }` |
 | `status.error`                                 | Error messages, such as an unknown command or a failed `:nu` command           | `{ fg: white, bg: red }`   |
-| `status.info`, `status.warn`                   | Nothing                                                                        | none                       |
 | `try.reactive`                                 | When `true`, `:try` re-runs your command as you type instead of on `Enter`     | `false`                    |
-
-Informational messages, such as `Ready` or the row count after `:nu`, take the text color of the bar they appear in, so `status.info` has no visible effect. No message uses the `warn` level.
 
 Run `config nu --doc` to see the documentation for every key.
 
@@ -181,7 +178,7 @@ In the tree, the arrow keys or `j`/`k` move, `Right`/`Left` (or `l`/`h`) expand 
 
 `Enter` on a value starts editing it, and `Tab` switches between the tree and the editor pane, where `Enter` or `e` starts editing. In the editor, `Enter` adds a line, so press `Ctrl+S` or `Alt+Enter` to apply the edit to the tree, or `Esc` to cancel it. The text is read as the old value's type: plain text for a string, a number or `true`/`false` for those, and JSON for a record or a list. `explore config` refuses invalid JSON with a parse error.
 
-After an edit, `q` won't quit and shows "Unsaved changes!" until you press `Ctrl+S` again while you aren't editing a value, which stages your changes. When `explore config` exits, every edit you applied to the tree is written to `$env.config` in the running session. That includes quitting with `Ctrl+C`, which skips the check and drops only an edit you haven't applied yet. The tree holds JSON, which has no closures, durations, filesizes, or dates. It shows closures and dates as strings, and durations and filesizes as plain numbers of nanoseconds and bytes. They all get their Nushell types back when the changes are applied.
+After an edit, `q` won't quit and shows "Unsaved changes!" until you press `Ctrl+S` again while you aren't editing a value, which stages your changes. When `explore config` exits, every edit you applied to the tree is written to `$env.config` in the running session. The tree holds JSON, which has no closures, durations, filesizes, or dates. It shows closures and dates as strings, and durations and filesizes as plain numbers of nanoseconds and bytes. They all get their Nushell types back when the changes are applied.
 
 Piped input switches `explore config` to a JSON viewer. The input must be JSON text, so use `open --raw` or `to json` rather than piping in a table or record. `--use-example-data` (`-e`) loads a built-in sample configuration instead. Neither one touches `$env.config`. `Ctrl+S` saves the whole document as indented JSON to the file named by `--output` (`-o`), or to `output.json` in the current directory. Using `--output` while editing your configuration is an `Invalid flag combination` error.
 

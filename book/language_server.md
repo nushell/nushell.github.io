@@ -179,13 +179,11 @@ Document highlight marks every place in the current file where the variable, com
 
 ### Find references
 
-Find references lists every place where the variable, command, or module under the cursor appears, including its definition. The request's `includeDeclaration` setting is ignored.
+Find references lists every place where the variable, command, or module under the cursor appears, including its definition.
 
 When the file is in a workspace folder, the server searches every `.nu` file under that folder, at any depth, along with the files open in the editor. It parses only the files whose text contains the name, and reports its progress as it goes (`Finding references ...`). The search has a five-second budget. When that runs out, the server stops, logs `Workspace-wide search took too long!`, and returns the references it found so far.
 
 When the file isn't in a workspace folder, only the current file is searched.
-
-Results from other files are best-effort. A use of a command in a file that imports it with a different path can be missed, and so can the name in that file's `use` statement.
 
 ### Rename
 
@@ -195,7 +193,7 @@ Only variables, custom commands, and modules defined in your code can be renamed
 
 The search covers the same files as find references, and reports progress as `Preparing rename ...`. It has no time limit, but any other message from the editor stops it, such as a hover request or the `didChange` that a keystroke sends. The server then logs `Workspace-wide search took too long!` and ends the progress report with `interrupted.` A rename request that arrives before the search finishes is refused with `Please wait for renaming preparation to complete.` and stops the search too. A rename after a stopped search only edits what the search found before it stopped, which can be nothing at all. Start the rename again to search every file.
 
-Without a workspace folder, only the current file is edited. When the command is defined in another file, its definition keeps the old name. Because cross-file results are best-effort, check the edits before you save them.
+Without a workspace folder, only the current file is edited. When the command is defined in another file, its definition keeps the old name.
 
 ### Symbols
 

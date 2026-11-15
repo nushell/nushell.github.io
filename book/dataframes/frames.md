@@ -39,10 +39,6 @@ $left | polars append ([[b a]; [5 6]] | polars into-df) --col
 # => ╰───┴───┴───╯
 ```
 
-::: warning
-The help text for `--col` says "Append as new columns instead of rows", which is the opposite of what it does. In 0.117.0 the default appends columns and `--col` appends rows.
-:::
-
 With `--col`, both dataframes need the same set of column names, and each column has to have the same type on both sides. Otherwise the command fails with `Dataframes with different number of columns`, `Dataframes with different columns names`, or an error such as `Unable to append: type String is incompatible with expected type Int64`. To stack dataframes whose types differ, use `polars concat --to-supertypes`.
 
 Either side can be a lazy dataframe. `polars append` collects it first and always returns an eager dataframe. Plain Nushell tables aren't accepted on either side, so convert them with `polars into-df` first.
@@ -86,9 +82,7 @@ $jan | polars concat ([[month amount note]; [mar 3.5 late]] | polars into-df) --
 
 The other flags change how Polars runs the plan, not which rows you get. `--no-maintain-order` lets the rows come out in any order, `--no-parallel` reads the inputs one at a time, `--rechunk` stores the result in one contiguous block of memory, and `--from-partitioned-ds` tells the optimizer that the inputs are parts of one partitioned dataset.
 
-::: warning
-The arguments have to be dataframes or lazy dataframes. A Nushell table as an argument fails with an unhelpful `Error using as series` error. A piped-in value that isn't a dataframe is dropped without an error, so `[[month amount]; [dec 1]] | polars concat $feb` returns only the row from `$feb`.
-:::
+The arguments and the piped-in value have to be dataframes or lazy dataframes, so convert a Nushell table with `polars into-df` first.
 
 ## Reshaping dataframes
 
@@ -130,8 +124,6 @@ $sales | polars pivot --on month --index store --values amount --on-cols [jan ma
 With `--aggregate sum` or `count`, an empty cell holds `0` instead of null. Without `--on-cols`, `polars pivot` reads the `--on` column as soon as it runs to find its distinct values, so on a lazy dataframe from a large file, listing the values yourself saves a pass over the data. If that read fails, for example because the `--on` column doesn't exist, the error is ``Pivot columns cannot be deduced, `--on-cols` must be specified``.
 
 When `--values` names more than one column, the new columns are named after both the value column and the `--on` value, joined by `_`, as in `amount_jan` and `units_jan`. `--separator` (`-p`) replaces the `_`, and `--always-combine-names` uses these combined names even for a single value column. With several `--on` columns, the new column names hold every value, as in `{"south","jan"}`.
-
-`--stable` and `--streamable` (`-t`) are accepted but have no effect in 0.117.0.
 
 ### Unpivoting wide data to long
 
@@ -187,15 +179,11 @@ To explode several list columns at once, pass their names as one list, or pass a
 # => ╰───┴────┴───────┴───────╯
 ```
 
-::: warning
-In 0.117.0, `polars explode tags votes`, with the names as separate arguments, explodes only `tags` and leaves `votes` as lists. Put the names in a list.
-:::
-
 `polars explode` returns a lazy dataframe for both eager and lazy input. Errors show up when you collect. A column that isn't a list fails with an error such as `` `explode` operation not supported for dtype `i64` ``, and calling it without a column fails with `no columns provided in explode`.
 
-Given an expression, as in `polars col tags | polars explode`, it builds an expression that you can use in `polars select`. The exploded column has more rows than the dataframe, so it can't sit next to unexploded columns in the same `polars select`, which fails with an error such as `lengths don't match: Series length 2 doesn't match the DataFrame height of 4`. The command's signature also lists a selector as input, but piping a selector into it fails with `Can't convert to NuDataFrame, NuLazyFrame, NuExpression, NuSelector.`
+Given an expression, as in `polars col tags | polars explode`, it builds an expression that you can use in `polars select`. The exploded column has more rows than the dataframe, so it can't sit next to unexploded columns in the same `polars select`, which fails with an error such as `lengths don't match: Series length 2 doesn't match the DataFrame height of 4`.
 
-[`polars flatten`](/commands/docs/polars_flatten.md) is an alias for `polars explode` with fewer options. It has no `--empty-as-null` or `--keep-nulls`, so it always drops empty and null lists. It explodes only one column, the first name you give. A list of names is read as a single column name, and fails with `not found: "[tags votes]" not found`. It takes an eager dataframe or an expression, but not a lazy dataframe, which fails with `Command does not support polars_lazyframe input.` Like `polars explode`, it returns a lazy dataframe.
+[`polars flatten`](/commands/docs/polars_flatten.md) is an alias for `polars explode` with fewer options. It has no `--empty-as-null` or `--keep-nulls`, so it always drops empty and null lists. It takes one column name, and an eager dataframe or an expression as input. Like `polars explode`, it returns a lazy dataframe.
 
 ### Unnesting struct columns
 
@@ -227,21 +215,11 @@ polars open people.ndjson | polars unnest person --separator "." | polars collec
 
 List several struct columns to unnest them all. With no column names, `polars unnest` returns the dataframe unchanged. A column that isn't a struct fails with an error such as ``invalid series dtype: expected `Struct`, got `i64` ``. `polars unnest` returns the same kind of dataframe it was given, and a lazy one reports these errors when you collect.
 
-Records in a Nushell table become an `object` column in `polars into-df`, which `polars unnest` can't split. To get a struct column from a table, pass `polars into-df` a schema with a record type, such as `--schema {id: i64, person: {name: str, age: u8}}`.
-
-::: warning
-In 0.117.0, `polars into-df --schema` builds a struct column only when the table has exactly as many rows as the struct has fields. Other row counts fail with a `lengths don't match` error. The fields also come out in a different order from run to run. Reading the data from a JSON or NDJSON file, as above, avoids both problems.
-:::
+Records in a Nushell table become an `object` column in `polars into-df`, which `polars unnest` can't split. To get a struct column, read the records from a JSON or NDJSON file, as above.
 
 ### Encoding structs as JSON
 
-[`polars struct-json-encode`](/commands/docs/polars_struct-json-encode.md) is meant to turn a struct column expression into a string column holding each row's record as JSON text, such as `{"name":"Bob","age":36}`.
-
-::: warning
-`polars struct-json-encode` can't run in 0.117.0. It declares its input type as `expression` instead of `polars_expression`, so `polars col person | polars struct-json-encode` fails with `Command does not support polars_expression input.` Hiding the type with `let e: any = polars col person` moves the failure to run time, with `Input type not supported.`
-:::
-
-Until it's fixed, convert the dataframe to a Nushell table and encode the records there:
+To turn each row's struct into JSON text, such as `{"name":"Bob","age":36}`, convert the dataframe to a Nushell table and encode the records with [`to json`](/commands/docs/to_json.md):
 
 ```nu
 polars open people.ndjson | polars collect | polars into-nu | update person {|row| $row.person | to json --raw }
@@ -270,9 +248,8 @@ polars open people.ndjson | polars collect | polars into-nu | update person {|ro
 
 `polars dummies` encodes every column and keeps none of the originals, so select the category columns first, then add the result back with `polars append`. A lazy input is collected, and the result is always an eager dataframe.
 
-- `--drop-first` (`-d`) leaves out the column for the value that appears first in each input column, `color_red` and `size_1` above. Statistical models often need this, because the dropped column can be worked out from the others. Its help text says "Drop first row", but no rows are dropped.
+- `--drop-first` (`-d`) leaves out the column for the value that appears first in each input column, `color_red` and `size_1` above. Statistical models often need this, because the dropped column can be worked out from the others.
 - `--drop-nulls` (`-n`) leaves out the `<column>_null` column that a column with nulls otherwise gets, so a null row is `0` in every column.
-- `--separator` (`-s`) is a switch that takes no value and has no effect in 0.117.0. The separator is always `_`.
 
 ## Missing values and duplicates
 
@@ -297,7 +274,7 @@ $scores | polars drop-nulls
 # => ╰───┴──────┴───────┴──────╯
 ```
 
-To look for nulls only in some columns, pass their names. The parameter is declared as a table, so a list literal such as `[score]` fails to parse with `Type mismatch` and `expected table, found list<string>`. Put the list in a variable typed `any` first:
+To look for nulls only in some columns, pass their names as a list held in a variable declared as `any`:
 
 ```nu
 let cols: any = [score]
@@ -349,7 +326,7 @@ $scores | polars with-column [
 
 The mean is a float, so `score` becomes an `f64` column. A string fill is always a literal value, never a column name, so `polars fill-null "team"` writes the word `team`. Use `polars col team` to fill from another column.
 
-`polars fill-null` returns the kind of input it was given: an eager dataframe for an eager one, a lazy dataframe for a lazy one, and an expression for an expression. The generated page lists selectors as input too, but in 0.117.0 a selector fails with an error that begins `Can't convert to NuDataFrame`. Pick the columns with `polars col` instead, which takes several names or `--type`. The same is true of `polars fill-nan`, `polars cast`, and `polars shift` below.
+`polars fill-null` returns the kind of input it was given: an eager dataframe for an eager one, a lazy dataframe for a lazy one, and an expression for an expression. To fill several columns with one expression, pick them with `polars col`, which takes several names or `--type`. The same goes for `polars fill-nan`, `polars cast`, and `polars shift` below.
 
 ### Filling NaN
 
@@ -368,17 +345,6 @@ $readings | polars with-column (polars col temp | polars fill-nan 0.0) | polars 
 ```
 
 Add `| polars fill-null 0.0` after it to fill both kinds of gaps in one column.
-
-::: warning
-Given a whole dataframe, `polars fill-nan` in 0.117.0 doesn't run in Polars. It turns every value into a Nushell value, replaces each `NaN` with the fill value, and builds a new dataframe from the result, the way [`polars into-df`](/commands/docs/polars_into-df.md) does. That has several effects:
-
-- A lazy input is collected, and the result is an eager dataframe.
-- Narrow types are lost. A `u8` column comes back as `i64`, and an `f32` column as `f64`.
-- The fill value is converted like any other value, so an int fill in a column whose first value is `NaN` makes the whole column `object`, and the plugin prints `Falling back to object type` on stderr. Fill a float column with a float, such as `0.0`.
-- The fill has to be a plain value. An expression fails with `Error converting to f64`.
-
-The expression form has none of these problems.
-:::
 
 ### Dropping duplicate rows
 
@@ -410,7 +376,7 @@ $visits | polars drop-duplicates $by_city --last
 # => ╰───┴────┴──────┴──────╯
 ```
 
-The order is kept whether or not you pass `--maintain` (`-m`), which has no effect in 0.117.0. A missing column fails with `Error dropping duplicates`. Like `polars drop-nulls`, the command runs a lazy plan right away and returns the result as a lazy dataframe. [`polars unique`](../dataframes.md#unique-values) on a lazy dataframe does the same job with `--subset` and `--last`, but stays part of the plan until you collect it.
+A missing column fails with `Error dropping duplicates`. Like `polars drop-nulls`, the command runs a lazy plan right away and returns the result as a lazy dataframe. [`polars unique`](../dataframes.md#unique-values) on a lazy dataframe does the same job with `--subset` and `--last`, but stays part of the plan until you collect it.
 
 ## Changing column types
 
@@ -466,10 +432,7 @@ let schema = {id: u32, name: str, score: f32} | polars into-schema
 
 `polars into-schema` takes only a record, and a list fails with `Can't convert to record.` Each value in the record is a type name, a `polars_datatype` value, or a nested record, which describes a `struct` column with those fields. The schema prints as a record, and [`polars into-nu`](/commands/docs/polars_into-nu.md) turns it into a plain record of type names.
 
-A `polars_datatype` value also works in the places that accept a type name without requiring a string. Those are an entry in a schema record, the type argument of [`polars integer`](/commands/docs/polars_integer.md), and `--return-dtype` on `polars map-batches`. `polars cast` requires a string.
-
-::: warning
-In 0.117.0, `polars into-dtype` declares that it returns a dataframe. Assigning its result with `let` fails with `Type mismatch` and `expected polars_dataframe, got polars_datatype`. Declare the variable with the `any` type:
+A `polars_datatype` value also works in the places that accept a type name without requiring a string. Those are an entry in a schema record, the type argument of [`polars integer`](/commands/docs/polars_integer.md), and `--return-dtype` on `polars map-batches`. `polars cast` requires a string. To keep a type in a variable, declare the variable as `any`:
 
 ```nu
 let small: any = 'u8' | polars into-dtype
@@ -480,33 +443,28 @@ let small: any = 'u8' | polars into-dtype
 # => ╰──────┴─────╯
 ```
 
-:::
-
 ## Binning values
 
 [`polars cut`](/commands/docs/polars_cut.md) and [`polars qcut`](/commands/docs/polars_qcut.md) sort numbers into ranges, called bins. `polars cut` takes the break points between bins. `polars qcut` takes quantile probabilities and works out the break points from the data.
 
-Both work on a one-column dataframe, so pick the column with `polars get` first. A wider dataframe fails with `Error using as series`. A lazy input is collected, and the result is always an eager dataframe with one column named `category`, whatever the input column was called. Nulls stay null, and a column of strings gives null for every row.
-
-::: warning
-The `category` column has the `enum` type, and in 0.117.0 Nushell shows an `enum` column wrong. Printing it, or converting it with `polars into-nu`, lists each bin label once instead of one value per row, and `polars schema` shows the column's type as the list of labels:
+Both work on a one-column dataframe, so pick the column with `polars get` first. A wider dataframe fails with `Error using as series`. A lazy input is collected, and the result is always an eager dataframe with one column named `category`, whatever the input column was called. Nulls stay null, and a column of strings gives null for every row. The `category` column is an `enum` column from `polars cut` and a categorical one from `polars qcut`, and the examples here cast it to `str` with `polars cast str category`:
 
 ```nu
 let ages = [[age]; [3] [17] [18] [40] [65] [80]] | polars into-df
-$ages | polars get age | polars cut [17 64]
+$ages | polars get age | polars cut [17 64] | polars cast str category
 # => ╭───┬────────────╮
 # => │ # │  category  │
 # => ├───┼────────────┤
 # => │ 0 │ (-inf, 17] │
-# => │ 1 │ (17, 64]   │
-# => │ 2 │ (64, inf]  │
+# => │ 1 │ (-inf, 17] │
+# => │ 2 │ (17, 64]   │
+# => │ 3 │ (17, 64]   │
+# => │ 4 │ (64, inf]  │
+# => │ 5 │ (64, inf]  │
 # => ╰───┴────────────╯
 ```
 
-The dataframe really has six rows, as `polars into-repr` or `polars shape` shows. Cast the column to `str` with `polars cast str category` before you look at it or add it to another dataframe.
-:::
-
-With the cast, the bins can go back next to the data. `--labels` (`-l`) names the bins, and it needs one more label than there are break points:
+The bins can go back next to the data. `--labels` (`-l`) names the bins, and it needs one more label than there are break points:
 
 ```nu
 $ages | polars with-column ($ages | polars get age | polars cut [17 64] --labels [child adult senior] | polars cast str category) --name group
@@ -561,7 +519,7 @@ $sizes | polars qcut [0.25 0.75] | polars cast str category
 # => ╰───┴──────────────╯
 ```
 
-A probability outside that range fails with `quantile should be between 0.0 and 1.0`. The generated page says an integer asks for that many equal-sized bins, but in 0.117.0 a bare integer fails with `Can't convert to list<float>`, so write the probabilities out, such as `[0.25 0.5 0.75]` for quartiles.
+A probability outside that range fails with `quantile should be between 0.0 and 1.0`. For equal-sized bins, list the probabilities, such as `[0.25 0.5 0.75]` for quartiles.
 
 When many values repeat, two quantiles can land on the same value. Then `polars qcut` fails with `quantiles are not unique while allow_duplicates=False`. `--allow_duplicates` (`-d`) drops the repeated breaks and gives fewer bins instead.
 
@@ -621,7 +579,7 @@ What `polars shift` does depends on its input:
 
 - On an expression, as above, it shifts one column, and `--fill` (`-f`) sets the value for the gap, as in `polars col units | polars shift -1 --fill 0`.
 - On a lazy dataframe, it shifts every column together. `--fill` fills the gap in every column, and like `polars fill-null`, it converts columns to fit, so `--fill 0` writes the text `0` into a string column.
-- On an eager dataframe, it works only on a one-column dataframe, and a wider one fails with `Error using as series`. It ignores `--fill`, so the gap stays null.
+- On an eager dataframe, it works only on a one-column dataframe, and a wider one fails with `Error using as series`. Use the expression or lazy form when you need `--fill`.
 
 ```nu
 $sales | polars into-lazy | polars shift 1 --fill 0 | polars collect
@@ -702,7 +660,7 @@ For the entropy of a column of categories, count the categories first with [`pol
 # => ╰───┴───────╯
 ```
 
-Pointing `polars entropy` at a string column fails when the plan runs, with `expected numerical input for 'entropy'`. It works only on expressions, and piping a dataframe into it fails with `Command does not support polars_dataframe input`. In 0.117.0 a selector fails too, with `Can't convert to NuExpression, NuSelector`, although the command's signature lists it. Use `polars col` instead.
+Pointing `polars entropy` at a string column fails when the plan runs, with `expected numerical input for 'entropy'`. It works only on expressions, and piping a dataframe into it fails with `Command does not support polars_dataframe input`. Pick the column with `polars col`.
 
 ### Polars' own text layout
 
@@ -749,10 +707,6 @@ $result.profiling | polars select node | polars collect
 
 The example leaves out `start` and `end` because they change from run to run. The `optimization` row is the time Polars spent optimizing the plan before running it. Not every step gets a row of its own. A `polars group-by` with `polars agg`, for one, doesn't appear in the list. An eager dataframe has no steps to run, so its profile holds only the `optimization` row. If the query fails, for example because it selects a column that doesn't exist, `polars profile` fails with `Could not profile dataframe:` and Polars' message.
 
-::: warning
-In 0.117.0, `polars profile` declares that it returns a dataframe, but it returns a record. Assigning the result with a plain `let` fails with `Type mismatch`, saying `expected polars_lazyframe, got record<dataframe: polars_dataframe, profiling: polars_dataframe>`. Declare the variable's type, as in `let result: record = ...` above, or pipe the result straight into `get profiling`.
-:::
-
 ### Caching part of a plan
 
 [`polars cache`](/commands/docs/polars_cache.md) marks the lazy plan built so far, so that one run of the query computes it once and reuses the result everywhere later steps read it. It adds a `CACHE` node to the plan. It has nothing to do with the plugin's [object store](../dataframes.md#the-object-store), which holds dataframes between commands.
@@ -792,7 +746,7 @@ $df | polars select (polars len) (polars col v | polars count) | polars collect
 
 ## Querying with SQL
 
-[`polars query`](/commands/docs/polars_query.md) runs a SQL `SELECT` statement against a dataframe, which is always the table `df`. The plugin doesn't use Polars' SQL engine for this. It has its own small translator that turns a few SQL clauses into Polars operations, so a lot of SQL is missing, and some of it is ignored without an error.
+[`polars query`](/commands/docs/polars_query.md) runs a SQL `SELECT` statement against a dataframe, which is always the table `df`. The plugin doesn't use Polars' SQL engine for this. It has its own small translator that turns a few SQL clauses into Polars operations, so stick to the parts of SQL listed below.
 
 ```nu
 let staff = [[name dept salary]; [ann eng 120] [bob eng 100] [cy ops 90] [dee ops 95] [eve hr 80]] | polars into-df
@@ -818,7 +772,7 @@ These parts of SQL work:
 
 - In the `SELECT` list, column names, `*`, the operators `+`, `-`, `*`, `/`, `%`, and `||` (which joins strings), `CAST(x AS type)` with types such as `INT`, `BIGINT`, `DOUBLE`, `VARCHAR`, `BOOLEAN`, and `DATE`, and `AS` to name a result. An aggregate without `AS` keeps its column's name.
 - In `WHERE`, the comparisons `=`, `!=` or `<>`, `<`, `<=`, `>`, and `>=`, joined with `AND` and `OR` and grouped with parentheses. Write strings in single quotes. Double quotes name a column, so `dept = "eng"` fails with `unable to find column "eng"`.
-- `GROUP BY` with column names, and the functions `sum`, `count`, and `count(DISTINCT ...)`. `count` skips nulls, and `count(DISTINCT ...)` counts null as one more value.
+- `GROUP BY` with column names, and the functions `sum(column)`, `count(column)`, and `count(DISTINCT column)`. `count` skips nulls. The groups come out in no fixed order, so sort the result with `polars sort-by`, as above.
 - `LIMIT` with a number.
 
 Most unsupported SQL fails with a `Dataframe Error` that says what went wrong:
@@ -830,14 +784,7 @@ Most unsupported SQL fails with a `Dataframe Error` that says what went wrong:
 - A table other than `df` fails with a message such as `Table name people was not found`.
 - SQL that doesn't parse gives the parser's message, such as `ParserError("Expected: identifier, found: EOF")` for `SELECT name FROM` with no table.
 
-::: warning
-In 0.117.0, `polars query` ignores some SQL without telling you, and gets some wrong:
-
-- `ORDER BY`, `HAVING`, `DISTINCT`, and `JOIN` are ignored, and the result is what you'd get without them. Sort the result with `polars sort-by`, which you need after `GROUP BY` anyway, because the groups come out in no fixed order.
-- `count(*)` always returns 1. Count a column instead, as with `count(name)` above.
-- `sum(x) OVER (PARTITION BY y)` returns the total of the whole column on every row.
-- `GROUP BY` with a position number picks the item after the one you meant, so `GROUP BY 1` groups by the second item of the `SELECT` list, and the last position crashes the plugin, which throws away every dataframe it holds. Group by column names.
-  :::
+To sort, filter groups, or join, use [`polars sort-by`](/commands/docs/polars_sort-by.md), [`polars filter`](/commands/docs/polars_filter.md), and [`polars join`](/commands/docs/polars_join.md) on the result.
 
 An eager dataframe gives an eager result. A lazy dataframe is collected before the query runs, and the result is a new lazy dataframe that starts from that data, so collect it to see the rows. For anything past a quick filter or group-by, the expression commands in this chapter cover far more than the SQL translator does.
 
@@ -894,6 +841,4 @@ Values that don't convert become null, so a list of words cast to `i64` gives a 
 
 A lazy dataframe is collected before the closure runs. Naming a column that doesn't exist fails with `Column 'c' not found`. A closure that returns a dataframe with more than one column fails with `Error using as series`, and one that returns an expression fails with `Can't convert to series`. An error inside the closure is reported as usual, and the plugin also prints `Error evaluating closure in polars map-batches:` and the message on stderr.
 
-::: warning
-In 0.117.0, a closure that uses a dataframe from outside it, such as `{|cols| $cols.0 + $other }`, stops the plugin with `Plugin failed to decode: unknown variant NuDataFrameCustomValue`, and every dataframe the plugin held is lost. Put the data you need into the input dataframe first, for example with `polars with-column` or `polars join`, and name its column after the closure.
-:::
+To use data from another dataframe in the closure, add it to the input dataframe first, for example with `polars with-column` or `polars join`, and name its column after the closure.

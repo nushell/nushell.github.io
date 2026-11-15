@@ -1705,9 +1705,6 @@ greet --caps
 # => HI
 ```
 
-Nushell doesn't check that the command has a flag with the name you give `--flag`, so a misspelled
-name never produces a warning.
-
 The `deprecation_info` column of [`scope commands`](/commands/docs/scope_commands.md) lists each
 deprecation as a record with the fields `type`, `label`, `flag`, `since`, `expected_removal` and
 `help`. `type` is `Command` or `Flag`, and `label` holds the warning text.

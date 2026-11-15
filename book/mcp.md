@@ -99,7 +99,7 @@ Every result is also stored in the `$history` list, at the `history_index` given
 
 The output limit is measured on the result written as NUON, the way [`to nuon`](/commands/docs/to_nuon.md) writes it, so the quotes around a string count toward it. The response itself shows a string without quotes when it can.
 
-Each variable must hold a value of its own type: a filesize for `NU_MCP_OUTPUT_LIMIT`, an int for `NU_MCP_HISTORY_LIMIT`, and a duration for `NU_MCP_PROMOTE_AFTER`. Nushell ignores any other value, such as the string `"10min"`, and uses the default. Variables set in the `env` block of a client's server configuration reach Nushell as strings, so set these three in Nushell code.
+Set these variables with `evaluate`, or in a configuration file the server loads, using a value of the right type: a filesize for `NU_MCP_OUTPUT_LIMIT`, an int for `NU_MCP_HISTORY_LIMIT`, and a duration for `NU_MCP_PROMOTE_AFTER`, as in `$env.NU_MCP_PROMOTE_AFTER = 10min`.
 
 `$history` indices count up for the whole session and never shift. A dropped result's index reads as `null`, the same as a result that was `null`, and `$history | length` still counts it. To keep a result for longer, save it with `let`.
 

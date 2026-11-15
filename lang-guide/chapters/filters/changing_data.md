@@ -472,7 +472,7 @@ The flags control what happens to the names:
 
 As with `transpose`, name arguments replace `column0`, `column1` and so on, in order, and extra names are ignored. A record is rotated as a one-row table. A list of plain values, or a single value, becomes a one-row table with an item in each column, in reverse order unless you pass `--ccw`. Empty input is an error (`list input is empty`).
 
-Every row must have the same columns. A row with a different number of columns is a `record_cols_vals_mismatch` error, and when only the names differ, the output silently uses the names of one row. To turn a record into key/value rows, `transpose key value` is usually what you want, since it keeps the names in the first column.
+Every row must have the same columns. A row with a different number of columns is a `record_cols_vals_mismatch` error. To turn a record into key/value rows, `transpose key value` is usually what you want, since it keeps the names in the first column.
 
 ### `roll`
 

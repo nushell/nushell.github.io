@@ -286,7 +286,7 @@ The constant e is `$math.E` after `use std/math`. See [`std/math`](./standard_li
 | [`math arccosh`](/commands/docs/math_arccosh.md)                                                                                                                                     | 1 or more              |                                                               |
 | [`math arctanh`](/commands/docs/math_arctanh.md)                                                                                                                                     | -1 to 1                | `1` and `-1` give `inf` and `-inf`                            |
 
-These commands take a number or a list of numbers, and nothing else: no ranges, records or column names. Input outside the range in the table is an error. For `math arctanh` the message says "open interval (-1, 1)", but `1` and `-1` are accepted.
+These commands take a number or a list of numbers, and nothing else: no ranges, records or column names. Input outside the range in the table is an error.
 
 ```nu
 [0 30 90] | math sin --degrees | to nuon
@@ -338,7 +338,6 @@ Imported with `use std/random` and `use std-rfc/random`, without a `*`, both mod
 
 - Without a range, `random int` returns an int from 0 to the largest int, and `random float` a float from 0 up to, but not including, 1.
 - A range with no end goes up to the largest int or float, and a range with no start, such as `..10`, starts at 0.
-- The step of a range is ignored. `random int 0..2..10` can return any int from 0 to 10, odd ones included.
 - A range that counts down, such as `5..1`, is an `invalid_range` error.
 - `random int` rejects a float range such as `1.0..2.0` with the error "float range". `random float` accepts an int range.
 
@@ -394,17 +393,12 @@ Both commands produce a stream, so `random binary 1GB | save noise.bin` writes t
 
 [`random pass`](/commands/docs/random_pass.md) generates a password from uppercase letters, lowercase letters, digits and these symbols: ``!@#$%^&*()_+-=[]{}|;':",.<>/?`~``.
 
-- `--chars` (`-c`) sets the length, from 1 to 128. The default is 12. Any other length is an error.
+- `--chars` (`-c`) sets the length, up to 128. The default is 12. A length of 0 or more than 128 is an error.
 - `--no-uppercase` (`-u`), `--no-lowercase` (`-l`), `--no-numbers` (`-n`) and `--no-symbols` (`-s`) each leave out one kind of character. Leaving out all four is an error.
-- Each kind of character that isn't left out appears at least once. A length shorter than the number of kinds therefore gives a longer password, so `random pass -c 1` has four characters.
-- In 0.117.0, `--require-each-type` adds nothing to that, since every kind already appears. Its only effect is that combining it with a `--no-*` flag is an error.
-- In 0.117.0, `--include-ambiguous` and `--include-similar` have no effect. Passwords can contain `O`, `0`, `l`, `1` and `i` with or without them.
 
 ```nu
 random pass | str length
 # => 12
-random pass -c 1 | str length
-# => 4
 random pass -c 0
 # => Error: nu::shell::error
 # =>
