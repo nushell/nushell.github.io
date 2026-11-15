@@ -254,8 +254,8 @@ http get --raw --allow-errors https://httpbin.org/stream/3
         error make {msg: $"Failed with status ($meta.http_response.status)"}
     } else { }
   }
-| lines
-| each { from json | select id url }
+| from json --objects
+| select id url
 # => ╭───┬────┬──────────────────────────────╮
 # => │ # │ id │             url              │
 # => ├───┼────┼──────────────────────────────┤
@@ -265,7 +265,7 @@ http get --raw --allow-errors https://httpbin.org/stream/3
 # => ╰───┴────┴──────────────────────────────╯
 ```
 
-`--raw` keeps the body as text so that `lines` can split it. Without it, `http get` tries to parse the whole JSON Lines body as a single JSON document and fails. The empty `else { }` block passes the response body through unchanged. Only the first pipeline inside the closure receives the stream as its input, so don't put other statements (such as `print`) before the `if`: the stream would not reach `lines`. (Referencing `$in` later in the closure works, but it collects the whole body instead of streaming it.)
+`--raw` keeps the body as text so that `from json --objects` can read it one line at a time. Without it, `http get` tries to parse the whole JSON Lines body as a single JSON document and fails. The empty `else { }` block passes the response body through unchanged. Only the first pipeline inside the closure receives the stream as its input, so don't put other statements (such as `print`) before the `if`: the stream would not reach `from json --objects`. (Referencing `$in` later in the closure works, but it collects the whole body instead of streaming it.)
 
 The response body streams through the pipeline while you inspect metadata and process the stream simultaneously. Before `metadata access`, you needed `--full` to get metadata, which consumed the entire body and prevented streaming.
 
@@ -277,7 +277,9 @@ Available metadata:
 
 ---
 
-The examples in the next sections run against a small test server on `localhost:8765`. Its `/echo` path returns what it received, `/users` returns a JSON list, `/private` needs a password, and `/redirect` redirects to `/users`.
+The examples in the next sections run against a small test server on `localhost:8765`. Its `/echo` path returns what it received, `/users` returns a JSON list, `/private` needs a password, and `/redirect` redirects to `/users`. For `HEAD` requests, `/report.csv` sends a file's headers and `/login` sets two cookies, and an `OPTIONS` request to any path lists the methods the server allows.
+
+A URL without a scheme gets `http://` in front of it, and one that starts with `:` gets `http://localhost`, so `http get :8765/users` asks the same server for the same path.
 
 ### Sending headers and credentials
 
@@ -405,7 +407,135 @@ http patch --content-type application/json http://localhost:8765/users/2 {name: 
 # => PATCH
 ```
 
-[`http delete`](/commands/docs/http_delete.md) has the same flags, but its body is optional. Pass one with `--data` (`-d`) or through the input, and it's encoded the same way. Without one, the request has no body.
+[`http delete`](/commands/docs/http_delete.md) has the same flags, but its body is optional. Pass one with `--data` (`-d`) or through the input, and it's encoded the same way. Without one, the request has no body:
+
+```nu
+http delete http://localhost:8765/users/2 | select method body
+# => ╭────────┬────────╮
+# => │ method │ DELETE │
+# => │ body   │        │
+# => ╰────────┴────────╯
+http delete --content-type application/json --data {reason: duplicate} http://localhost:8765/users/2 | get body
+# => {
+# =>   "reason": "duplicate"
+# => }
+```
+
+A record given with `--data` needs a `--content-type` that says how to encode it, just like an `http post` body. Without one, it fails with `Accepted types: [binary, string]`.
+
+### `http` without a subcommand
+
+[`http`](/commands/docs/http.md) on its own picks the method from its arguments. With just a URL it sends a `GET`, and with a URL and a body it sends a `POST`. With no arguments it prints its help.
+
+```nu
+http http://localhost:8765/users | length
+# => 2
+http http://localhost:8765/echo "hello" | select method body
+# => ╭────────┬───────╮
+# => │ method │ POST  │
+# => │ body   │ hello │
+# => ╰────────┴───────╯
+```
+
+The body has to be the second argument. `http` doesn't take pipeline input, so `"hello" | http $url` fails with `command doesn't support string input`; pipe into `http post` instead. Its flags work the way they do for `http get` and `http post`, but it lacks the `--pool` and `--unix-socket` flags that the subcommands have.
+
+A method name in the URL position is an error, so storing the method in a variable doesn't work:
+
+```nu
+let method = "post"
+http $method http://localhost:8765/echo
+# => Error: nu::shell::error
+# =>
+# =>   × Invalid command construction
+# =>    ╭─[repl_entry #2:1:6]
+# =>  1 │ http $method http://localhost:8765/echo
+# =>    ·      ───┬───
+# =>    ·         ╰── Using "post" dynamically is bad command construction. You are providing it to the `url` positional argument of `http`
+# =>    ╰────
+# =>   help: Prefer to use `http post` directly
+```
+
+To choose the method at run time, use `match` with one `http` subcommand in each arm.
+
+### Reading headers with `http head` and `http options`
+
+[`http head`](/commands/docs/http_head.md) sends a `HEAD` request, which asks for a resource's headers without its body. Use it to check a file's size, type, or `etag` before you download it, or to see whether a URL exists. It returns the response headers as a table of `name` and `value` columns. The names are in lowercase, and the rows come in no fixed order, so filter or sort them instead of relying on their position:
+
+```nu
+http head http://localhost:8765/report.csv | where name in [content-type content-length etag] | sort-by name
+# => ╭───┬────────────────┬──────────╮
+# => │ # │      name      │  value   │
+# => ├───┼────────────────┼──────────┤
+# => │ 0 │ content-length │ 52817    │
+# => │ 1 │ content-type   │ text/csv │
+# => │ 2 │ etag           │ "r42"    │
+# => ╰───┴────────────────┴──────────╯
+```
+
+Every value is a string. To look headers up by name, turn the table into a record with [`transpose`](/commands/docs/transpose.md):
+
+```nu
+let headers = http head http://localhost:8765/report.csv | transpose --header-row --as-record
+$headers.content-length | into filesize
+# => 52.8 kB
+```
+
+A header that appears more than once, such as `set-cookie`, gets one row for each value. The record keeps only the first of them, so read those from the table:
+
+```nu
+http head http://localhost:8765/login | where name == set-cookie
+# => ╭───┬────────────┬─────────────╮
+# => │ # │    name    │    value    │
+# => ├───┼────────────┼─────────────┤
+# => │ 0 │ set-cookie │ session=abc │
+# => │ 1 │ set-cookie │ theme=dark  │
+# => ╰───┴────────────┴─────────────╯
+```
+
+A status outside the 200 range is an error, as it is for `http get`. With `--allow-errors` you get the error response's headers instead, and `--redirect-mode manual` returns the headers of a redirect response, including where it points:
+
+```nu
+http head http://localhost:8765/missing
+# => Error: nu::shell::http_error
+# =>
+# =>   × HTTP Error 404 (Not Found): http://localhost:8765/missing
+# =>    ╭─[repl_entry #1:1:11]
+# =>  1 │ http head http://localhost:8765/missing
+# =>    ·           ──────────────┬──────────────
+# =>    ·                         ╰── Not Found
+# =>    ╰────
+http head --redirect-mode manual http://localhost:8765/redirect | where name == location | get value.0
+# => /users
+```
+
+`--full` returns the same record as [`http get --full`](#getting-the-full-response), with an empty `body`. That's the way to get the status code, which the headers table doesn't include. `http head` has no `--raw` flag, since there's no body to read. Its other flags, for credentials, headers, timeouts, certificates, the connection pool, and Unix sockets, work the way they do for `http get`.
+
+[`http options`](/commands/docs/http_options.md) sends an `OPTIONS` request and returns the response headers the same way. Many servers answer it with an `allow` header that lists the methods a URL accepts:
+
+```nu
+http options http://localhost:8765/api | where name == allow | get value.0
+# => GET, HEAD, POST, DELETE, OPTIONS
+```
+
+Browsers send an `OPTIONS` request before a cross-origin request (a CORS preflight), and you can send the same headers to check how a server will answer. In a `--headers` record, quote a value that contains a colon, such as a URL:
+
+```nu
+http options --headers {Origin: "https://app.example.com", Access-Control-Request-Method: DELETE} http://localhost:8765/api | where name starts-with access-control | sort-by name
+# => ╭───┬──────────────────────────────┬─────────────────────────╮
+# => │ # │             name             │          value          │
+# => ├───┼──────────────────────────────┼─────────────────────────┤
+# => │ 0 │ access-control-allow-headers │ Content-Type            │
+# => │ 1 │ access-control-allow-methods │ GET, POST, DELETE       │
+# => │ 2 │ access-control-allow-origin  │ https://app.example.com │
+# => ╰───┴──────────────────────────────┴─────────────────────────╯
+```
+
+`http options` always follows redirects and has no `--redirect-mode` flag. Its other flags are the same as those of `http head`. It reads and discards any body the server sends. `--full` returns the full record instead, which has the status:
+
+```nu
+http options --full http://localhost:8765/api | get status
+# => 204
+```
 
 ---
 
@@ -419,13 +549,34 @@ The HTTP commands send requests through a proxy when one of these environment va
 with-env {HTTPS_PROXY: "http://proxy.example.com:3128"} { http get https://www.nushell.sh }
 ```
 
-Each HTTP command normally opens new connections and closes them when it's done. With `--pool`, it uses one client shared by every HTTP command in the session instead, which keeps connections open for the next request to the same server. The shared client checks certificates and follows redirects. A `--pool` call uses the shared client's certificate, redirect, and Unix socket settings, not its own `--insecure`, `--redirect-mode`, and `--unix-socket` flags. To change the shared client's settings, use [`http pool`](/commands/docs/http_pool.md), which takes those three flags and closes the client's open connections:
+Each HTTP command normally opens new connections and closes them when it's done. With `--pool`, it uses one client shared by every HTTP command in the session instead, which keeps connections open for the next request to the same server. Nushell creates the shared client the first time a command uses `--pool`. That client checks certificates, follows redirects, and connects over TCP. It reads the proxy variables once, when it's created, so a later `with-env` doesn't change its proxy.
+
+[`http pool`](/commands/docs/http_pool.md) replaces the shared client with a new one and closes the old client's open connections. Its `--insecure`, `--redirect-mode`, and `--unix-socket` flags set up the new client, and `http pool` with no flags goes back to the defaults. It returns nothing. It also accepts `--allow-errors`, but the flag does nothing there, so give `--allow-errors` to each request instead.
 
 ```nu
 http pool --insecure
 http get --pool https://self-signed.example.com/a
 http get --pool https://self-signed.example.com/b
 ```
+
+A `--pool` request uses the shared client's certificate and Unix socket settings and ignores its own `--insecure` and `--unix-socket` flags. Redirects are split between the two. The shared client decides whether a redirect is followed, and when it isn't, the request's own `--redirect-mode` decides what to do with the redirect response. To get that response back, set `manual` on both:
+
+```nu
+http pool --redirect-mode manual
+http get --pool http://localhost:8765/redirect
+# => Error: nu::shell::http_error
+# =>
+# =>   × HTTP Error 302 (Found): http://localhost:8765/redirect
+# =>    ╭─[repl_entry #2:1:17]
+# =>  1 │ http get --pool http://localhost:8765/redirect
+# =>    ·                 ───────────────┬──────────────
+# =>    ·                                ╰── Found
+# =>    ╰────
+http get --pool --redirect-mode manual --full http://localhost:8765/redirect | get status
+# => 302
+```
+
+With the default shared client, which follows redirects, a request's `--redirect-mode manual` or `error` has no effect.
 
 ---
 
@@ -442,3 +593,221 @@ http post --unix-socket ./my-service.sock --content-type application/json http:/
 ```
 
 The socket path specifies where to connect, while the URL's hostname is used for the HTTP Host header. The hostname must still resolve (`localhost` always does), even though the request goes over the socket; a name that doesn't resolve fails with an I/O error. As with any `http post`, a record body needs a `--content-type` such as `application/json`.
+
+---
+
+### Finding a free port
+
+[`port`](/commands/docs/port.md) returns the number of a TCP port that nothing is using, which is handy when you start a local server for testing:
+
+```nu
+let free = port
+job spawn { python3 -m http.server $free --bind 127.0.0.1 } | ignore
+sleep 1sec
+http get --full $"http://localhost:($free)/" | get status
+# => 200
+```
+
+With no arguments, the operating system picks the port. With a start and an end, `port` tries the ports in that range from the lowest up and returns the first free one, and with only a start, the range runs to 65535. It only checks the port. It doesn't hold it open, so another program can take the port before you use it.
+
+On Linux and macOS, `port` checks a port by binding to it on `127.0.0.1`, and a port it can't bind for any reason counts as taken. On Windows it looks the port up in the system's table of TCP connections instead. When every port in the range is taken, it fails:
+
+```nu
+port 8765 8765
+# => Error: nu::shell::io::addr_in_use
+# =>
+# =>   × I/O error
+# =>   ╰─▶   × Every port has been tried, but no valid one was found
+# =>
+# =>    ╭─[repl_entry #1:1:6]
+# =>  1 │ port 8765 8765
+# =>    ·      ────┬────
+# =>    ·          ╰── Address in use
+# =>    ╰────
+```
+
+A start higher than the end fails with `Invalid range`, a number above 65535 with `Can't convert to u16`, and a negative number with `Negative value passed when positive one is required`.
+
+---
+
+### Working with URLs
+
+The `url` commands take URLs apart, put them back together, and encode and decode their pieces. [`url`](/commands/docs/url.md) on its own prints the list of them. The ones that handle query strings use a table with `key` and `value` columns, so that a key can appear more than once.
+
+#### Taking a URL apart
+
+[`url parse`](/commands/docs/url_parse.md) turns a URL string into a record. It normalizes the URL on the way. The host is lowercased, `.` and `..` segments are resolved, and a port that's the default for the scheme is dropped. `query` keeps the query string as it was written, and `params` holds it decoded, with one row for each key:
+
+```nu
+'https://Example.COM:443/docs/../api/./v1?q=nu%20shell&tag=a&tag=b#top' | url parse
+# => ╭──────────┬──────────────────────────╮
+# => │ scheme   │ https                    │
+# => │ username │                          │
+# => │ password │                          │
+# => │ host     │ example.com              │
+# => │ port     │                          │
+# => │ path     │ /api/v1                  │
+# => │ query    │ q=nu%20shell&tag=a&tag=b │
+# => │ fragment │ top                      │
+# => │          │ ╭───┬─────┬──────────╮   │
+# => │ params   │ │ # │ key │  value   │   │
+# => │          │ ├───┼─────┼──────────┤   │
+# => │          │ │ 0 │ q   │ nu shell │   │
+# => │          │ │ 1 │ tag │ a        │   │
+# => │          │ │ 2 │ tag │ b        │   │
+# => │          │ ╰───┴─────┴──────────╯   │
+# => ╰──────────┴──────────────────────────╯
+```
+
+Every field is a string, `port` included, and a part the URL doesn't have is an empty string. A string without a scheme, such as `example.com/path`, fails with `Incomplete or incorrect URL. Expected a full URL, e.g., https://www.example.com`.
+
+`--base` (`-b`) resolves a relative URL against a base URL, the way a browser resolves a link on a page. An absolute URL ignores the base. Together with `url join`, that turns the links on a page into full URLs:
+
+```nu
+['/about' 'img/logo.png' '../up' 'https://other.org/x'] | each { url parse --base https://example.com/docs/intro | url join }
+# => ╭───┬───────────────────────────────────────╮
+# => │ 0 │ https://example.com/about             │
+# => │ 1 │ https://example.com/docs/img/logo.png │
+# => │ 2 │ https://example.com/up                │
+# => │ 3 │ https://other.org/x                   │
+# => ╰───┴───────────────────────────────────────╯
+```
+
+The base has to be a full URL itself. If it isn't, the error says `Incomplete or incorrect base URL`.
+
+`url parse` takes one string at a time. It doesn't accept a list, and although its help lists cell path arguments, Nushell 0.117.0 ignores them, and a table or record as input fails with `Incomplete or incorrect URL`. Use `each` for a list and `update` for a column:
+
+```nu
+[[site]; ['https://a.com/x?q=1'] ['https://b.org/y']] | update site { url parse } | get site.host
+# => ╭───┬───────╮
+# => │ 0 │ a.com │
+# => │ 1 │ b.org │
+# => ╰───┴───────╯
+```
+
+#### Building a URL
+
+[`url join`](/commands/docs/url_join.md) builds a URL from a record with the fields that `url parse` returns. `scheme` and `host` are required. `params` takes a record, or a table with `key` and `value` columns, and encodes it into the query string. A list value repeats its key:
+
+```nu
+{scheme: https, host: api.example.com, path: "v1/search", params: {q: "rust lang", page: 2}} | url join
+# => https://api.example.com/v1/search?q=rust+lang&page=2
+```
+
+`url join` adds a `/` in front of `path`, a `?` in front of `query`, and a `#` in front of `fragment` when they don't start with one. `port` can be an int or a string of digits, and it's kept even when it's the scheme's default. Empty fields are left out.
+
+`params` is the only field that gets encoded. `path`, `query`, and `fragment` go into the URL exactly as you give them, so encode them first:
+
+```nu
+{scheme: https, host: example.com, path: '/a b'} | url join
+# => https://example.com/a b
+{scheme: https, host: example.com, path: ('Q3 report.pdf' | url encode --all)} | url join
+# => https://example.com/Q3%20report%2Epdf
+```
+
+When a record has both `query` and `params`, they have to give the same query string, or `url join` fails with a `Mismatch` error. In Nushell 0.117.0 they're compared as text, so a query that writes a space as `%20` doesn't match `params`, which writes it as `+`, and `query` has to come before `params` in the record, the way `url parse` returns them. In a record you build yourself, give only one of the two. To change the query of a URL you parsed, remove `query` and update `params`:
+
+```nu
+'https://example.com/search?q=nu&page=1#results' | url parse | reject query | update params {q: 'nu shell', page: 2} | url join
+# => https://example.com/search?q=nu+shell&page=2#results
+```
+
+A missing `scheme` or `host` fails with `Missing parameter`, an empty one with `Invalid value`, and a `port` that isn't a number with `Port parameter should represent an unsigned int`. A field `url join` doesn't know is reported as an error, but the command goes on without it and still returns the URL:
+
+```nu
+{scheme: https, host: example.com, colour: blue} | url join
+# => Error: nu::shell::error
+# =>
+# =>   × 'colour' is not a valid URL field
+# =>    ╭─[repl_entry #1:1:44]
+# =>  1 │ {scheme: https, host: example.com, colour: blue} | url join
+# =>    ·                                            ──┬─
+# =>    ·                                              ╰── remove 'colour' col from input record
+# =>    ╰────
+# =>
+# => https://example.com
+```
+
+#### Query strings
+
+[`url build-query`](/commands/docs/url_build-query.md) turns a record into a query string, encoded the way an HTML form encodes its fields. A space becomes `+`, and characters such as `&` and `=` are percent-encoded. A list value repeats its key, and numbers and booleans become text. A `null` or a nested record fails with `Expected a record with string or list of string values`.
+
+```nu
+{q: "a&b c", tags: [x y], n: 3, ok: true} | url build-query
+# => q=a%26b+c&tags=x&tags=y&n=3&ok=true
+```
+
+It also takes a table with `key` and `value` columns, which can repeat a key wherever you need it. A table with other column names isn't accepted.
+
+```nu
+[[key value]; [sort name] [sort age]] | url build-query
+# => sort=name&sort=age
+```
+
+[`url split-query`](/commands/docs/url_split-query.md) goes the other way. It decodes a query string into a `key` and `value` table, reading `+` as a space, and every value comes back as a string:
+
+```nu
+'q=nu+shell&tag=a&tag=b&empty=' | url split-query
+# => ╭───┬───────┬──────────╮
+# => │ # │  key  │  value   │
+# => ├───┼───────┼──────────┤
+# => │ 0 │ q     │ nu shell │
+# => │ 1 │ tag   │ a        │
+# => │ 2 │ tag   │ b        │
+# => │ 3 │ empty │          │
+# => ╰───┴───────┴──────────╯
+```
+
+Leave out the leading `?`. `url split-query` doesn't strip it, so `'?q=1'` gives a key named `?q`. To look values up by key, turn the table into a record with `transpose --header-row --as-record`. As with headers, a key that repeats keeps only its first value:
+
+```nu
+'q=1&tag=a&tag=b' | url split-query | transpose --header-row --as-record
+# => ╭─────┬───╮
+# => │ q   │ 1 │
+# => │ tag │ a │
+# => ╰─────┴───╯
+```
+
+#### Encoding and decoding
+
+[`url encode`](/commands/docs/url_encode.md) percent-encodes a string. It's meant for one piece of a URL, such as a path or a single value. It leaves ASCII letters and digits, `/`, `:`, and `.` alone, and encodes everything else, including `?`, `&`, `=`, `-`, and `_`. Run on a whole URL, it breaks the query string:
+
+```nu
+'https://example.com/a file?x=1&y=my-name' | url encode
+# => https://example.com/a%20file%3Fx%3D1%26y%3Dmy%2Dname
+```
+
+For query strings, use `url build-query`, which encodes each value and keeps the `&` and `=` between them. `--all` (`-a`) also encodes `/`, `:`, and `.`, for a value that has to stay a single path segment:
+
+```nu
+'reports/2026 Q3.pdf' | url encode
+# => reports/2026%20Q3.pdf
+'reports/2026 Q3.pdf' | url encode --all
+# => reports%2F2026%20Q3%2Epdf
+```
+
+`url encode` also takes binary data, which it encodes byte by byte, for text in an encoding other than UTF-8. Given cell paths, it encodes the strings at those paths in a table or record. A column that holds anything other than strings fails with `only string input data is supported`.
+
+```nu
+[[file]; ['Q3 report.pdf'] ['notes.txt']] | url encode file
+# => ╭───┬─────────────────╮
+# => │ # │      file       │
+# => ├───┼─────────────────┤
+# => │ 0 │ Q3%20report.pdf │
+# => │ 1 │ notes.txt       │
+# => ╰───┴─────────────────╯
+```
+
+[`url decode`](/commands/docs/url_decode.md) turns `%` sequences back into characters, and takes cell paths the same way. It leaves `+` alone, unlike `url split-query`, and keeps a `%` that isn't followed by two hex digits:
+
+```nu
+'nu+shell%21' | url decode
+# => nu+shell!
+```
+
+When the decoded bytes aren't UTF-8, `url decode` fails with `Input is not UTF-8 encoded`. `--binary` (`-b`) returns the bytes instead, and [`decode`](/commands/docs/decode.md) turns them into text:
+
+```nu
+'%A3%20rates' | url decode --binary | decode iso-8859-1
+# => £ rates
+```

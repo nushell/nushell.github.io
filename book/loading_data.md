@@ -754,7 +754,7 @@ open foo.db | get some_table
 # => ╰───┴───────┴─────╯
 ```
 
-A table you `get` this way isn't read right away. Commands such as `select`, `first`, and `length` become part of an SQL query that SQLite runs, as [Tables from a SQLite file](/lang-guide/chapters/filters/selecting_data.md#tables-from-a-sqlite-file) explains.
+To keep a database in memory instead of in a file, use the `stor` commands described in [Working with SQLite](./working_with_sqlite.md). A table you `get` this way isn't read right away. Commands such as `select`, `first`, and `length` become part of an SQL query that SQLite runs, as [Tables from a SQLite file](/lang-guide/chapters/filters/selecting_data.md#tables-from-a-sqlite-file) explains.
 
 Or run any SQL query you like:
 

@@ -33,6 +33,7 @@ export const sidebarEn: SidebarConfig = {
         '/book/types_of_data.md',
         '/book/loading_data.md',
         '/book/data_formats.md',
+        '/book/working_with_sqlite.md',
         '/book/pipelines.md',
         '/book/working_with_strings.md',
         '/book/regular_expressions.md',
