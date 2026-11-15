@@ -66,6 +66,18 @@ A `%` call only resolves to built-in commands. It still finds a built-in that ha
 
 Like `^`, the `%` sigil also accepts a command name stored in a variable, such as `%$cmd`. The [completion menu](./line_editor.md#completion-menu) offers both forms: when an executable has the same name as a built-in command, it lists `^name` and `%name` so you can pick one.
 
+With `%$cmd` or `%($cmd)`, the parser can't tell which built-in you mean, so it turns the call into [`run-internal`](/commands/docs/run-internal.md) with the name as the first argument. `run-internal` looks the name up when the line runs, and checks the arguments against that command's signature at that point:
+
+```nu
+let cmd = "str length"
+"hello" | %$cmd --grapheme-clusters
+# => 5
+```
+
+`%$cmd --help` prints the built-in's help, as it does for a direct call. Moving the lookup to run time also moves some errors from parse time to run time. An unknown flag, such as `%$cmd --nope`, is reported only when the call runs, after the commands before it on the line have run. A name that isn't a built-in, including the name of one of your own commands, is a `nu::shell::command_not_found` error. The value must be a single string. Unlike `^$cmd`, a list doesn't add arguments, and `%$cmd` with a list is a `nu::shell::cant_convert` error.
+
+You can also call `run-internal` directly, as in `run-internal echo hi`. It then passes only positional arguments and spreads on to the command. A flag is read as a flag of `run-internal` itself, which has none, so `run-internal ls --all` is a parse error. Use `%$cmd` when you need flags.
+
 ## Passing Arguments
 
 External arguments are separated by Nushell syntax, not by spaces inside a quoted string. Quote a string to keep its spaces inside one argument:

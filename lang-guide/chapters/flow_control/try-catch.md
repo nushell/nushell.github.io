@@ -277,3 +277,12 @@ The `span` numbers depend on everything Nushell has parsed so far, so yours will
    ```
 
    When `do -i` ignores an external's failure, `$env.LAST_EXIT_CODE` is `0` afterwards, not the external's exit code. A core dump is never ignored. An external that dumps core raises `nu::shell::core_dumped` even inside `do -i`.
+
+1. [`do --capture-errors`](/commands/docs/do.md) (`-c`) does the opposite for an external command that ends the closure. `do` reads all of the command's output into memory and waits for it to exit. If the exit code isn't zero, `do` fails with `nu::shell::non_zero_exit_code`, and the commands after it never see the output:
+
+   ```nu
+   try { do -c { ^sh -c "echo one; exit 2" } | lines | each { print $"got ($in)" } } catch {|e| $"failed with ($e.exit_code)" }
+   # => failed with 2
+   ```
+
+   Without `-c`, `each` would print `got one` before the failure is reported. Because the output is held until the command exits, `-c` doesn't suit a command with endless output. Its stderr still goes to the terminal unless you redirect it. Errors from Nushell commands in the closure are passed on as usual. When both flags are given, `-c` wins, and the external's failure is raised even at the terminal. [Closure](../types/basic_types/closure.md) shows the streaming case side by side, and why `-c` shouldn't be combined with `complete`.

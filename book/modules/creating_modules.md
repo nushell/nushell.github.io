@@ -59,6 +59,20 @@ We covered the types of definitions that are available in modules briefly in the
 Only definitions marked with `export` (or `export-env` for environment variables) are accessible when the module is imported. Definitions not marked with `export` are only visible from inside the module. In some languages, these would be called "private" or "local" definitions. An example can be found below in [Additional Examples](#local-definitions).
 :::
 
+[`export`](/commands/docs/export.md) is a prefix, not a command of its own. It goes in front of `def`, `alias`, `const`, `type`, `extern`, `module` or `use`, and anything else after it, such as `export let x = 1`, is a parse error. `export-env` is a separate keyword. Outside a module, in a script or at the prompt, Nushell accepts the prefix and ignores it, so `export def` works like `def`. A file with `export def main [name: string] { ... }` can therefore be run with `nu greet.nu world` and imported with `use greet.nu`. Only a bare `export` with nothing after it fails outside a module, with `nu::parser::unexpected_keyword`.
+
+An exported alias is imported the same way as a command: by name, with `*`, or behind the module name. The alias is expanded inside the module, so it can call a command that the module doesn't export:
+
+```nu
+module tools {
+    def build-all [] { "building everything" }
+    export alias ba = build-all
+}
+use tools
+tools ba
+# => building everything
+```
+
 ### `main` Exports
 
 ::: important

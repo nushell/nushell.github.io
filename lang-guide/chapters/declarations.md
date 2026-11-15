@@ -8,7 +8,7 @@ Nushell has three keywords that declare variables:
 | [`mut`](/commands/docs/mut.md)     | When it runs   | Yes          | No                   | No                   |
 | [`const`](/commands/docs/const.md) | While parsing  | No           | Yes                  | Yes                  |
 
-[`unlet`](/commands/docs/unlet.md) removes a variable again. Commands, aliases, modules and externals are declared with [`def`](./custom_commands.md), [`alias`](/commands/docs/alias.md), [`module`](/commands/docs/module.md) and [`extern`](/commands/docs/extern.md). Names for types are declared with [`type`](#type).
+[`unlet`](/commands/docs/unlet.md) removes a variable again. Commands, aliases, modules and externals are declared with [`def`](./custom_commands.md), [`alias`](/commands/docs/alias.md), [`module`](/commands/docs/module.md) and [`extern`](/commands/docs/extern.md). Names for types are declared with [`type`](#type). The syntax of [comments](#comments) is at the end of this chapter.
 
 See also: [Variables](/book/variables.md) in the Book. Where declarations are visible is covered in [Variable Scope](./variable_scope.md).
 
@@ -336,3 +336,38 @@ let ans = 1
 ```
 
 See [Variable Names](/book/variables.md#variable-names) in the Book for the characters allowed in a name.
+
+## Comments
+
+`#` starts a comment, which runs to the end of the line. There are no block comments, so a comment over several lines needs a `#` on each one. A comment directly above a `def` becomes the command's description (see [Documenting Your Command](/book/custom_commands.md#documenting-your-command)).
+
+A `#` starts a comment only where a new word could start: at the beginning of a line, after a space or tab, or right after a `;` or `|`. Inside a word, it's an ordinary character, and inside quotes, it's part of the string:
+
+```nu
+echo foo#bar
+# => foo#bar
+echo foo #bar
+# => foo
+echo https://example.com/page#top
+# => https://example.com/page#top
+"a # b"
+# => a # b
+```
+
+Comments can go between the items of a list or record written over several lines, and between the lines of a pipeline that continues on the next line:
+
+```nu
+[1 2 3]
+# keep the big ones
+| where $it > 1
+| to nuon
+# => [2, 3]
+
+{
+    name: "nu"   # the shell
+    version: 117 # the release
+} | to nuon
+# => {name: nu, version: 117}
+```
+
+A comment also swallows any closing bracket that follows it on the same line. In `print (echo foo #bar)`, the `)` is part of the comment. In a script, that's a `nu::parser::unclosed_delimiter` error, and at the prompt, Nushell waits for the `)` on another line. Put the closing bracket on the next line, or the comment after it.

@@ -1466,7 +1466,7 @@ This will show the Help _record_ that Nushell creates. Each column is described 
 The comments following the parameters become their description. A comment can continue on the lines below its parameter. Nushell adds each comment-only line, up to the next parameter, to that parameter's description as a new line.
 
 ::: tip Note
-A Nushell comment that continues on the same line for argument documentation purposes requires a space before the ` #` pound sign.
+A Nushell comment that continues on the same line for argument documentation purposes requires a space before the ` #` pound sign. See [Comments](/lang-guide/chapters/declarations.md#comments) in the Language Guide for where a `#` starts a comment.
 :::
 
 ## Adding Attributes to Custom Commands via `attr`
@@ -1723,12 +1723,37 @@ or `deprecated`, puts the command in that category. Any other name, such as `"de
 new category. The exception is `core`, which is kept for Nushell's own commands, so
 `@category core` gives the category `custom_core`.
 
+The [`search-terms`](/commands/docs/attr_search-terms.md) attribute adds words that should find the
+command even though they aren't in its name or description. `help --find` and
+[`help commands --find`](/cookbook/help.md#how-to-see-all-supported-commands) match them, ignoring
+case, `help <command>` shows them on a `Search terms:` line, and `scope commands` returns them in its
+`search_terms` column. Several `@search-terms` lines add up:
+
+```nu
+# Double a number
+@search-terms multiply times
+@search-terms twice
+def double []: number -> number { $in * 2 }
+
+help commands --find TWICE | select name search_terms
+# => ╭───┬────────┬────────────────────────╮
+# => │ # │  name  │      search_terms      │
+# => ├───┼────────┼────────────────────────┤
+# => │ 0 │ double │ multiply, times, twice │
+# => ╰───┴────────┴────────────────────────╯
+```
+
+Each term is a string. A bare word needs no quotes, and a constant list can be spread in, as in
+`@search-terms ...$terms`. A value of another type, such as `true` or a `const` that holds a number, is a
+parse error. The attribute works on `extern` declarations too.
+
 Attributes also work on [`extern`](externs.md) declarations. One of them, [`@structured`](/commands/docs/attr_structured.md),
 applies only to `extern`. It lets an external command return data instead of text. See
 [Structured Output](externs.md#structured-output) for examples.
 
 To see other attributes available for use within nushell, check the [command reference](/commands/docs/attr.html)
-or run `help attr` from the nushell REPL.
+or run `help attr` from the nushell REPL. Each built-in attribute is a subcommand of `attr`, so `@category`
+runs `attr category`. Running `attr` by itself only prints that help.
 
 ### Defining your own attributes
 

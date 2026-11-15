@@ -379,6 +379,13 @@ try { ^false | lines } catch {|e| $e.exit_code }
 # => 1
 ```
 
+On Linux and macOS, an external that a signal stops has no exit code of its own. Nushell reports the signal number made negative instead, so a command ended by SIGTERM (signal 15) gives `-15`. `$env.LAST_EXIT_CODE` and the `exit_code` from `complete` hold the same negative number:
+
+```nu
+try { ^sh -c 'kill -TERM $$' | lines } catch {|e| $e.exit_code }
+# => -15
+```
+
 To capture the output and exit code of an external command without failing, use [`complete`](/commands/docs/complete.md). See [Stdout, Stderr, and Exit Codes](stdout_stderr_exit_codes.md) for more.
 
 ### Command Input and Output Types

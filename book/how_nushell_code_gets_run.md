@@ -262,7 +262,7 @@ source-env foo.nu
 
 There we saw that this cannot work (as a script or other single expression) because the directory will be changed _after_ the parse-time [`source-env` keyword](/commands/docs/source-env.md) attempts to read the file.
 
-`source-env` runs a file and keeps only the changes it makes to the environment: `$env` variables and the current directory. Unlike [`source`](/commands/docs/source.md), it leaves the file's definitions behind, so a `def`, `alias`, or `let` in `foo.nu` isn't available afterward. Like `source`, it also accepts `null` in place of a file name, and then it does nothing.
+`source-env` runs a file and keeps only the changes it makes to the environment: `$env` variables and the current directory. Unlike [`source`](/commands/docs/source.md), it leaves the file's definitions behind, so a `def`, `alias`, or `let` in `foo.nu` isn't available afterward. Like `source`, it also accepts `null` in place of a file name, and then it does nothing. The opening of [Scripts](./scripts.md) has an example.
 
 Running these commands as separate REPL entries, however, works. First enter:
 

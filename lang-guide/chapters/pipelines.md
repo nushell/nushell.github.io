@@ -33,7 +33,7 @@ You can handle stderr in multiple ways:
 1. Do nothing, stderr will be printed directly
 2. Pipe stderr to the next command, using `e>|` or `o+e>|`
 3. Redirect stderr to a file, using `e> file_path`, or `o+e> file_path`
-4. Use `do -i { cmd } | complete` to capture both stdout and stderr as structured data
+4. Use `cmd | complete` to capture stdout, stderr and the exit code as a record. `complete` doesn't treat a non-zero exit code as an error, so the command needs no `do -i` around it. `do -i` wouldn't help anyway. When its output goes on to another command, a failing external still fails the pipeline (see the [`do --ignore-errors` note](./flow_control/try-catch.md#language-notes))
 
 For the next examples, let's assume this file:
 

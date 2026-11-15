@@ -33,6 +33,8 @@ use "ssh extern" ssh
 
 Notice that the syntax here is similar to that of the `def` keyword when defining a custom command. You can describe flags, positional parameters, types, completers, and more.
 
+You don't have to write every extern by hand. [`generate completions`](/commands/docs/generate_completions.md) builds externs from a command's `--help` output, its man page, or existing fish, zsh or carapace completions. See [Generating completions for an external command](/cookbook/system.md#generating-completions-for-an-external-command).
+
 This implementation:
 
 - Will provide `-p` and `-i` (with descriptions) as possible completions for `ssh -`.
@@ -86,7 +88,7 @@ The parameters of an extern don't become variables, the way the parameters of a 
 
 ### Rejecting unknown flags with `--strict`
 
-By default, a flag that the signature doesn't declare goes through to the command. With `extern --strict` (or `export extern --strict`), it's a parse error, the same as for a custom command:
+By default, a flag that the signature doesn't declare goes through to the command. With `extern --strict` (or `export extern --strict`), it's a parse error, the same as for a custom command. The flag can also come after the name, as in `extern printf --strict [...]`:
 
 ```nu
 extern --strict printf [format: string, --verbose(-v)]

@@ -307,6 +307,8 @@ for x in [1 2 3] { $x * $x | print }
 
 A table gives one row at a time, as a record. Any other single value, including a record or a string, runs the block once with the whole value, and `null` runs it zero times. A stream, such as the output of `each` or a range like `1..` with no end, is consumed one item at a time as the loop runs. See the [Language Guide](/lang-guide/chapters/flow_control/for.md) for examples.
 
+The loop variable can be written with or without its `$`. `for $x in [1 2 3]` is the same loop as `for x in [1 2 3]`, and the block reads the item as `$x` either way. `_` is an ordinary name too. It's a common choice when the block doesn't need the item, as in `for _ in 1..3 { print hi }`, but it is still bound, so the block could read `$_`. The names of the built-in variables `nu`, `env`, `in` and `ans` can't be used, the same as for [`let`](/lang-guide/chapters/declarations.md#reserved-names).
+
 The loop variable can have a type annotation, as in `for x: int in $numbers`. Nushell checks that the annotation names a real type, but it doesn't check the items against it, and it doesn't convert them. The variable gets the type of the items instead, so this loop runs without an error:
 
 ```nu

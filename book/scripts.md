@@ -22,6 +22,37 @@ const maybe_local = if ($local_file | path exists) { $local_file } else { null }
 source $maybe_local
 ```
 
+[`source-env`](/commands/docs/source-env.md) runs a file in the same way, but keeps only what the file does to the environment: the `$env` variables it sets or hides with [`hide-env`](/commands/docs/hide-env.md), and its `cd`. The commands, aliases and variables that the file defines are gone once it finishes. The file name follows the same rules as for `source`, including `null`. The file can use the variables and commands of the code that calls it, `return` ends it early, and its last value becomes the output of `source-env`. While it runs, `$env.CURRENT_FILE` and `$env.FILE_PWD` hold the path of the file and its directory. Use `source-env` as a statement of its own, not as one stage of a pipeline. With this `setup.nu` in a `project` directory that has a `src` subdirectory:
+
+```nu
+$env.PROJECT_ROOT = $env.FILE_PWD
+def helper [] { "only inside setup.nu" }
+cd src
+"setup done"
+```
+
+```nu
+cd project
+source-env setup.nu
+# => setup done
+$env.PROJECT_ROOT | path basename
+# => project
+pwd | path basename
+# => src
+helper
+# => Error: nu::shell::external_command
+# =>
+# =>   × External command failed
+# =>    ╭─[repl_entry #5:1:1]
+# =>  1 │ helper
+# =>    · ───┬──
+# =>    ·    ╰── Command `helper` not found
+# =>    ╰────
+# =>   help: Did you mean `help`?
+```
+
+Enter `cd project` on its own line first, because `source-env` looks for the file while the line is parsed (see [How Nushell Code Gets Run](how_nushell_code_gets_run.md#the-nushell-repl)). To share environment setup as part of a module, use an [`export-env`](modules/creating_modules.md#environment-variables) block instead.
+
 To use a script as one stage of a pipeline, use [`run`](/commands/docs/run.md), described in [Scripts in a Pipeline](#scripts-in-a-pipeline) below.
 
 Let's look at an example script file:
@@ -435,6 +466,8 @@ Like `source`, `run` is a parser keyword: the file name must be a constant, and 
 for _ in (watch . --glob=*.nu) { run --full-reparse ./test.nu }
 ```
 
+[Running a command when files change](/cookbook/files.md#running-a-command-when-files-change) explains the records that [`watch`](/commands/docs/watch.md) returns and its flags.
+
 If the file name is `null`, `run` does nothing and passes its input on unchanged.
 
 ## Shebangs (`#!`)
@@ -477,3 +510,59 @@ echo "Hello World!" | ./stdin-script
 The input arrives as a byte stream, so a command such as [`lines`](/commands/docs/lines.md) processes it as it is read. `$in` collects all of it into a string, or into binary data if it isn't valid UTF-8.
 
 In a script with a `main` command, `main` receives the input. In a script without one, the input goes to the first pipeline of the script, and the pipelines after it start with no input. `$in` refers to the input anywhere at the top level of the script.
+
+## Checking a script without running it
+
+[`nu-check`](/commands/docs/nu-check.md) parses Nushell code without running it, and returns `true` if the code parses and `false` if it doesn't. Give it the path of a file, or pipe the code in as a string, as a byte stream such as the output of `open`, or as a stream of lines, which it joins with newlines. When there is input, the path is ignored. With this `broken.nu`:
+
+```nu
+def greet [name: string] {
+    $"hello ($name)"
+}
+greet (1 +)
+```
+
+```nu
+nu-check broken.nu
+# => false
+nu-check --debug broken.nu
+# => Error: nu::parser::incomplete_math_expression
+# =>
+# =>   × Incomplete math expression.
+# =>    ╭─[broken.nu:4:10]
+# =>  3 │ }
+# =>  4 │ greet (1 +)
+# =>    ·          ┬
+# =>    ·          ╰── incomplete math expression
+# =>    ╰────
+# =>
+# => Error: nu::shell::error
+# =>
+# =>   × Failed to parse content
+# =>    ╭─[repl_entry #2:1:1]
+# =>  1 │ nu-check --debug broken.nu
+# =>    · ────┬───
+# =>    ·     ╰── Found : Incomplete math expression.
+# =>    ╰────
+```
+
+`--debug` (`-d`) prints the first parse error and then fails, instead of returning `false`, so a script stops there unless it catches the error with `try`.
+
+Parsing finds syntax errors, type errors that are visible before the code runs, and wrong arguments to the commands that Nushell knows. Nothing runs, so `nu-check` can't find errors that only happen at run time, such as a division by zero. A command name that Nushell doesn't know passes, since it could be an external program. The check uses the commands defined in your session, so `"greet" | nu-check` is `true` in a new shell, but `false` after `def greet [name: string] { ... }`, because the call is then missing its argument.
+
+`--as-module` (`-m`) parses the code as a module, which may only contain definitions. `"print hi" | nu-check` is `true`, while `"print hi" | nu-check --as-module` is `false`. A directory is always checked as a module, from its `mod.nu` file, and a directory without one gives `false`. A relative path is looked up from the current directory and then in `$NU_LIB_DIRS`. A file that isn't found is a `nu::shell::io::file_not_found` error. Calling `nu-check` with neither a path nor input is an error too.
+
+## Scripts that need administrator rights
+
+[`is-admin`](/commands/docs/is-admin.md) returns `true` when Nushell runs with administrator or root rights. A script that changes system files can check it first and stop with a clear message:
+
+```nu
+def main [] {
+    if not (is-admin) {
+        error make --unspanned "run this script with sudo"
+    }
+    # ...
+}
+```
+
+What counts depends on the platform. On Linux, macOS and other Unix systems, `is-admin` is `true` when the real user ID of the Nushell process is 0, as it is under `sudo nu`. On Windows, it is `true` when the process runs elevated, for example from a terminal started with "Run as administrator". Being a member of the Administrators group isn't enough on its own, since such a user's processes normally run without elevation.

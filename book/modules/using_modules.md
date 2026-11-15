@@ -115,6 +115,15 @@ The path to the module can be:
 
 - Less commonly, the name of a module already created with the [`module`](/commands/docs/module.md) command. While it is possible to use this command to create a module at the commandline, this isn't common or useful. Instead, this form is primarily used by module authors to define a submodule. See [Creating Modules - Submodules](./creating_modules.md#submodules).
 
+- `null`, which imports nothing. `use null` on its own is pointless, but the path can be a [constant](../variables.md#constant-variables), and a constant can pick a module or `null` while the code is parsed. That lets a config file import a module only on some systems or only when a file exists:
+
+  ```nu
+  const extras = if $nu.os-info.name == "windows" { "windows-tools.nu" } else { null }
+  use $extras *
+  ```
+
+  On other systems, `$extras` is `null`, and the `use` line does nothing, whatever members follow it. [`overlay use`](/commands/docs/overlay_use.md), [`source`](/commands/docs/source.md) and [`source-env`](/commands/docs/source-env.md) treat `null` the same way. The value has to be known at parse time, so a `let` variable holding `null` is a `not_a_constant` error, as it is for any `use` path.
+
 ### Module Definitions
 
 The second argument to the `use` command is an optional list of the definitions to import. Again, the module documentation should provide recommendations. For example, the [Standard Library Chapter](../standard_library.md#importing-submodules) covers the recommended imports for each submodule.
@@ -372,7 +381,7 @@ let q: Point = {x: 1}
 # =>         <type>` above this line, or imported with `use <module> Name`
 ```
 
-A type alias imported from a module can be hidden by its name or through the module, as in `hide geo Point`.
+A type alias imported from a module can be hidden by its name or through the module, as in `hide geo Point`. Hiding a name that matches nothing is not an error, and does nothing.
 
 For example, with this module:
 

@@ -203,6 +203,43 @@ let answer = 42; scope variables | where name == '$answer' | reject var_id
 
 `var_id` is the engine's internal number for the variable. It changes from session to session, so it's left out above. `mem_size` estimates the bytes the value takes up in memory: 48 for every value, plus the contents of strings and binary data, plus the size of every item in a list or record. The string `"nushell"` is 55, and `[1 2 3]` is 192.
 
+Running [`scope`](/commands/docs/scope.md) by itself only prints its help.
+
+`scope externs` lists the commands declared with [`extern`](/book/externs.md), sorted by name. Each row has the `name`, the `description` taken from the comment above the `extern`, and the `decl_id`. [`help externs`](/commands/docs/help_externs.md) returns the same table. The externs also appear in `scope commands`, with the type `external` and their full signatures.
+
+```nu
+# Show the working tree status
+extern "git status" [--short(-s)]
+scope externs | reject decl_id
+# => ╭───┬────────────┬──────────────────────────────╮
+# => │ # │    name    │         description          │
+# => ├───┼────────────┼──────────────────────────────┤
+# => │ 0 │ git status │ Show the working tree status │
+# => ╰───┴────────────┴──────────────────────────────╯
+```
+
+`scope engine-stats` describes the whole engine, not the current scope. It returns a record with these fields:
+
+- `source_bytes`: how many bytes of Nushell source the engine has read in this session, counting what it parsed at startup.
+- `num_vars`, `num_decls`, `num_blocks` and `num_modules`: how many variables, declarations (commands, aliases and externs, built-in ones included), blocks and modules the engine holds. These numbers never go down. A definition that has been hidden, or that belonged to a block that has ended, still counts, so they show how much a long session has accumulated rather than what you can use.
+- `num_env_vars`: the number of environment variables, added up over all overlays.
+- `last_result`: a record about the [`$ans`](/book/special_variables.md#ans) variable. `size_limit` is `$env.config.max_last_result_size`, `memory_size` is the size of the result `$ans` holds now, `truncated` is `true` when that result was larger than the limit and was cut short, and `has_metadata` says whether the result kept its [metadata](/book/metadata.md).
+
+With the limit set to `1MB`, after `[1 2 3]` has been displayed:
+
+```nu
+scope engine-stats | get last_result
+# => ╭──────────────┬────────╮
+# => │ name         │ $ans   │
+# => │ size_limit   │ 1.0 MB │
+# => │ memory_size  │ 192 B  │
+# => │ truncated    │ false  │
+# => │ has_metadata │ false  │
+# => ╰──────────────┴────────╯
+```
+
+With the default limit of `0b`, `$ans` keeps no result, and `memory_size` stays `0 B`.
+
 ## ast
 
 `ast` parses a string of Nushell code and returns its abstract syntax tree. `--flatten` gives one row per token with its syntax shape, which shows how the parser read each word. Here `size` is a column name in the row condition, and `1kb` is split into a number and a unit:
@@ -277,6 +314,8 @@ view ir { 1 + 2 }
 ```
 
 ## view
+
+[`view`](/commands/docs/view.md) on its own only prints its help, which lists its subcommands: `view source`, `view blocks`, `view files`, `view ir` and `view span`.
 
 [`view source`](/commands/docs/view_source.md) prints the source of a custom command, alias, module or closure. Built-in commands have none. It also takes a block ID from [`view blocks`](#view-blocks). For a module it prints the code between the module's braces, as written:
 

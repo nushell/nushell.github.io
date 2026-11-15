@@ -6,7 +6,7 @@ Using the [metadata](metadata.md) information, you can create your own custom er
 - The label of error message, which includes both the text of the label and the span to underline
 - Optionally, a help message, an error code, a URL, and "inner" errors that led to this one
 
-You can use the [`error make`](/commands/docs/error_make.md) command to create your own error messages. For example, let's say you had your own command called `my-command` and you wanted to give an error back to the caller about something wrong with a parameter that was passed in.
+You can use the [`error make`](/commands/docs/error_make.md) command to create your own error messages. It is the only subcommand of [`error`](/commands/docs/error.md), and running `error` by itself just prints its help. For example, let's say you had your own command called `my-command` and you wanted to give an error back to the caller about something wrong with a parameter that was passed in.
 
 First, you can take the span of where the argument is coming from:
 
@@ -104,8 +104,8 @@ Besides `msg`, `label`, `labels` and `help`, the record can have these fields:
 
 - `code` replaces `nu::shell::error` in the first line of the message. Use it for an identifier that scripts can check with `$err.details.code`.
 - `url` is shown after the code. With colors on, Nushell prints it as `(link)`, a terminal hyperlink to the URL. With colors off, it prints the URL itself.
-- `inner` is a list of error records, which are printed after the main error. See [Chaining Errors](#chaining-errors).
-- `src` makes the labels point into other text instead of into Nushell code. Give it a `name` and the `text` itself, or a `path` to read the text from a file. The `span` offsets of the labels then count bytes in that text, and the code is always `nu::shell::outside`.
+- `inner` is a list of error records, which are printed after the main error. Each one takes the same fields as the main record. See [Chaining Errors](#chaining-errors).
+- `src` makes the labels point into other text instead of into Nushell code. Give it a `name` and the `text` itself, or a `path` to read the text from a file. The `span` offsets of the labels then count bytes in that text, and the code is always `nu::shell::outside`. A `code` field is ignored.
 
 ```nu
 error make {msg: "invalid port", code: "my_tool::bad_port", url: "https://example.com/bad-port"}
@@ -134,7 +134,45 @@ error make {
 # =>    ╰────
 ```
 
-Without any label, the error underlines the `error make` call itself. `error make --unspanned` (`-u`) leaves out the labels and the code excerpt, which suits errors that aren't about a place in the code, such as a missing file:
+With `path`, `error make` reads the file when it runs and names the source after the path, so a `name` next to `path` is ignored. When both `text` and `path` are given, `text` wins. A `src` with neither one is a `nu::shell::cant_convert` error. A file that can't be read doesn't stop the error. Nushell prints the message, and in place of the code excerpt it prints a note such as ``[Failed to read contents for label `not a number` (offset: 7, length: 3): OutOfBounds]``.
+
+You get the same note when a label points past the end of the text. That happens if you mix in a span taken with `metadata`, because such a span counts bytes in Nushell's own source, not in `src`. One error can't underline both your code and another text. To point at both, give the main error a label in your code and put the error about the file in `inner`, with its own `src`:
+
+```nu
+def check-config [file: string] {
+    error make {
+        msg: "invalid configuration"
+        label: {text: "in this file", span: (metadata $file).span}
+        inner: [{
+            msg: "port is not a number"
+            src: {path: $file}
+            label: {text: "expected a number", span: {start: 7, end: 10}}
+        }]
+    }
+}
+
+# config.toml contains "port = abc"
+check-config config.toml
+# => Error: nu::shell::error
+# =>
+# =>   × invalid configuration
+# =>    ╭─[repl_entry #2:1:14]
+# =>  1 │ check-config config.toml
+# =>    ·              ─────┬─────
+# =>    ·                   ╰── in this file
+# =>    ╰────
+# =>
+# => Error: nu::shell::outside
+# =>
+# =>   × port is not a number
+# =>    ╭─[config.toml:1:8]
+# =>  1 │ port = abc
+# =>    ·        ─┬─
+# =>    ·         ╰── expected a number
+# =>    ╰────
+```
+
+Without any label, the error underlines the record you passed, or the words `error make` when you pass a string. `error make --unspanned` (`-u`) leaves out the labels and the code excerpt, which suits errors that aren't about a place in the code, such as a missing file:
 
 ```nu
 error make --unspanned "settings.toml not found"
@@ -143,7 +181,20 @@ error make --unspanned "settings.toml not found"
 # =>   × settings.toml not found
 ```
 
-`error make` with no argument at all raises an error whose message is `originates from here`.
+`--unspanned` also removes the labels of the `inner` errors. It doesn't touch an error with `src`, whose labels are still shown.
+
+`error make` with no argument at all raises an error whose message is `originates from here`. It is a quick way to stop a script at a given line while you debug it:
+
+```nu
+error make
+# => Error: nu::shell::error
+# =>
+# =>   × originates from here
+# =>    ╭─[repl_entry #1:1:1]
+# =>  1 │ error make
+# =>    · ──────────
+# =>    ╰────
+```
 
 ## Catching Errors
 
@@ -234,6 +285,29 @@ $err | error make "could not compute the ratio"
 # =>    ·                   ╰── division by zero
 # =>    ╰────
 ```
+
+The inner errors don't have to come from `catch`. Each item of `inner` is a record with the same fields as the one passed to `error make`, so you can write the cause yourself. An inner error without labels underlines the same record as the main error, and one without a `code` shows an empty code in its header:
+
+```nu
+error make {msg: "deploy failed", inner: [{msg: "config.toml is missing", help: "run init first"}]}
+# => Error: nu::shell::error
+# =>
+# =>   × deploy failed
+# =>    ╭─[repl_entry #1:1:12]
+# =>  1 │ error make {msg: "deploy failed", inner: [{msg: "config.toml is missing", help: "run init first"}]}
+# =>    ·            ────────────────────────────────────────────────────────────────────────────────────────
+# =>    ╰────
+# =>
+# => Error:
+# =>   × config.toml is missing
+# =>    ╭─[repl_entry #1:1:12]
+# =>  1 │ error make {msg: "deploy failed", inner: [{msg: "config.toml is missing", help: "run init first"}]}
+# =>    ·            ────────────────────────────────────────────────────────────────────────────────────────
+# =>    ╰────
+# =>   help: run init first
+```
+
+An item that isn't a valid error record, such as one without `msg`, is replaced in the chain by the error that describes the problem, here `nu::shell::column_not_found` for the missing `msg` column.
 
 ## Re-raising a caught error
 

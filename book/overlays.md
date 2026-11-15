@@ -5,6 +5,8 @@ They resemble virtual environments found in some languages, such as Python.
 
 _Note: To understand overlays, make sure to check [Modules](modules.md) first as overlays build on top of modules._
 
+All the work is done by four subcommands of [`overlay`](/commands/docs/overlay.md): `overlay use`, `overlay hide`, `overlay new` and `overlay list`. Running `overlay` by itself only prints its help. Like `use`, `overlay use`, `overlay hide` and `overlay new` are parser keywords, so they act when the code is parsed and can't be part of a pipeline. `overlay list` is an ordinary command that returns a table.
+
 ## Basics
 
 First, Nushell comes with one default overlay called `zero`.
@@ -62,6 +64,8 @@ overlay list
 ```
 
 From then on, the overlay is called `spam-file`, as in `overlay hide spam-file`.
+
+The path can also be a [constant](variables.md#constant-variables). If its value is `null`, `overlay use` does nothing, so a config file can activate an overlay only when, say, a file exists. See the `null` entry under [Module Path](modules/using_modules.md#module-path) for an example with `use`.
 :::
 
 To create the overlay, call [`overlay use`](/commands/docs/overlay_use.md):
@@ -233,6 +237,39 @@ eggs
 Without `--reload`, `$env.SCRATCH` would be back as well.
 
 :::
+
+## Reloading an overlay
+
+Calling `overlay use` with the name of an overlay that already exists brings back what the overlay recorded. It doesn't run the module's `export-env` block again, and a command you redefined while the overlay was active keeps your definition. With `--reload` (`-r`), the overlay starts over from its module instead. Nushell adds the module's commands and aliases again, replacing your versions of them, and runs `export-env` again. Commands that you added to the overlay yourself stay:
+
+```nu
+module dev {
+    export def build [] { "build from dev" }
+    export-env { $env.MODE = "debug" }
+}
+overlay use dev
+def build [] { "my build" }; def deploy [] { "deploying" }; $env.MODE = "release"
+
+overlay use dev
+[(build) (deploy) $env.MODE]
+# => ╭───┬───────────╮
+# => │ 0 │ my build  │
+# => │ 1 │ deploying │
+# => │ 2 │ release   │
+# => ╰───┴───────────╯
+
+overlay use --reload dev
+[(build) (deploy) $env.MODE]
+# => ╭───┬────────────────╮
+# => │ 0 │ build from dev │
+# => │ 1 │ deploying      │
+# => │ 2 │ debug          │
+# => ╰───┴────────────────╯
+```
+
+Other environment variables that you set in the overlay are kept if the overlay is active when you reload it. If it was hidden and the module has an `export-env` block, they are dropped, and only the variables that `export-env` sets come back. `overlay new --reload` on an overlay that is still active changes nothing you can see.
+
+`--reload` works from the module as Nushell first read it. It doesn't read the module's file again. To pick up changes to a module file, give `overlay use` the file's path again, as in `overlay use ./spam-file.nu`. Each call with a path reads the file again and then works like `--reload`, so the new definitions replace the old ones, and the commands you added to the overlay stay.
 
 ## Prefixed Overlays
 
