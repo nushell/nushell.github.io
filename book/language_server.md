@@ -1,4 +1,4 @@
-# Language server
+# Language Server
 
 Running `nu --lsp` starts Nushell's built-in [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) (LSP) server. An editor that speaks LSP uses it to underline errors as you type, complete commands and paths, show a command's help when you hover over it, jump to definitions, and rename a variable or custom command across files. The server runs Nushell's own parser on your code, so the errors it reports are the ones `nu` would report before running the script.
 

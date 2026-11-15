@@ -1,4 +1,4 @@
-# Configuration reference
+# Configuration Reference
 
 This page lists every setting in the `$env.config` record, grouped the way `config nu --doc` groups them. For each one it gives the type, the default, the values Nushell accepts, and what the setting changes.
 
