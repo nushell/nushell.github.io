@@ -140,9 +140,10 @@ A caveat for this approach is that it requires all changed environment variables
 not to include newline characters, as the UNIX `env` output is not cleanly
 parseable in that case.
 
-Also beware that directly passing the output of `capture-foreign-env` to
-`load-env` can result in changed variables like `PATH` to become strings again,
-even if they have been converted to a list before.
+Before Nushell 0.117.0, passing the output of `capture-foreign-env` directly to
+`load-env` turned changed variables like `PATH` back into strings. Since 0.117.0,
+`load-env` turns a string `PATH` into a list and applies `$env.ENV_CONVERSIONS`
+to the other variables it sets.
 :::
 
 ### Detailed Explanation of `capture-foreign-env`

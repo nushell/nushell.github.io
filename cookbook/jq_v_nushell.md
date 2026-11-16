@@ -207,6 +207,8 @@ In `nu` we do:
 # => ╰───┴───╯
 ```
 
+Unlike jq's `unique`, `uniq` doesn't sort; it keeps the first of each value where it was. It compares whole values, so on a table it removes duplicate rows. `uniq --count` returns each value with the number of times it appears. `--repeated` and `--unique` return only the values that appear more than once or exactly once, and `--ignore-case` compares strings without regard to case. See [`uniq`](/lang-guide/chapters/filters/summarizing_lists.md#uniq) in the Language Guide.
+
 ### Combining filters
 
 In `jq`, to combine filters we do:
@@ -246,6 +248,31 @@ In `nu` we do:
 | split words
 | get 0
 # => Alice
+```
+
+`split words` is not quite jq's `split(" ")`. Every character that isn't a letter, a digit or an apostrophe separates words and is dropped, so punctuation disappears and `3.5` becomes two words. To split on spaces only, use `split row " "`:
+
+```nu
+"it's a well-known fact: 3.5 cats!" | split words
+# => ╭───┬───────╮
+# => │ 0 │ it's  │
+# => │ 1 │ a     │
+# => │ 2 │ well  │
+# => │ 3 │ known │
+# => │ 4 │ fact  │
+# => │ 5 │ 3     │
+# => │ 6 │ 5     │
+# => │ 7 │ cats  │
+# => ╰───┴───────╯
+```
+
+Given a list of strings, `split words` returns a list of word lists. `--min-word-length n` (`-l`) drops words shorter than `n`. The length is counted in UTF-8 bytes, so `é` counts as 2, unless you add `--grapheme-clusters` (`-g`) to count characters as they appear. `-g` and `--utf-8-bytes` (`-b`, the default) are errors without `-l`:
+
+```nu
+"héllo wörld ab" | split words -l 6 | to nuon
+# => [héllo, wörld]
+"héllo wörld ab" | split words -l 6 -g | to nuon
+# => []
 ```
 
 ### Conditional logic
@@ -313,6 +340,29 @@ In `nu` we do:
 | format pattern "Name: {name}, Age: {age}"
 # => Name: Alice, Age: 30
 ```
+
+Given a table, `format pattern` returns one string per row:
+
+```nu
+'[{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]'
+| from json
+| format pattern "{name} is {age}"
+# => ╭───┬─────────────╮
+# => │ 0 │ Alice is 30 │
+# => │ 1 │ Bob is 25   │
+# => ╰───┴─────────────╯
+```
+
+A placeholder can be a nested path of column names such as `{user.name}`. Each part is a column name, so `{tags.0}` looks for a column called `0`. To put a literal brace in the output, double it:
+
+```nu
+'{"user": {"name": "Alice"}}'
+| from json
+| format pattern "{{user.name}} = {user.name}"
+# => {user.name} = Alice
+```
+
+An unmatched brace is a `delimiter_error` (`there are unmatched curly braces`), and a placeholder for a column the input doesn't have is `column_not_found`. Variables such as `{$it.name}` are no longer allowed in placeholders and fail with `Removed functionality`. For anything beyond looking up columns, use [string interpolation](/book/working_with_strings.md#string-interpolation), as in `$"Name: ($in.name)"`.
 
 ### Composing records
 
@@ -595,6 +645,8 @@ In `nu` we do:
 | math avg
 # => 90.0
 ```
+
+You can also skip `get` and name the column. On a table, `math avg score` returns a record with the average of that column, and `math avg` with no column averages every column. `math avg` also averages durations and filesizes, and fails on an empty list. See [`math sum` and `math avg`](/lang-guide/chapters/filters/summarizing_lists.md#math-sum-and-math-avg) in the Language Guide.
 
 ### Generating histogram bins
 

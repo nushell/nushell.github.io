@@ -23,6 +23,9 @@ $df | polars shape
 # => ╰───┴─────────┴─────────╯
 ```
 
+`polars open` opened the file lazily, so `polars shape` runs the plan to count
+the rows.
+
 ## 2. Opening the file and show the first 5 rows
 
 ```nu
@@ -41,6 +44,11 @@ $df | polars first 5 | polars collect
 
 ## 3. Opening the file and get the length of all strings in the "id" column
 
+`polars str-lengths` counts characters. The IDs are plain ASCII, so counting
+bytes with `--bytes` would give the same numbers here. See
+[Working with strings](../book/dataframes.md#working-with-strings) for text where
+the two differ.
+
 ```nu
 let ids = $df | polars first 5 | polars get id | polars str-lengths
 $df | polars first 5 | polars append $ids | polars rename id_x vendor_id_length
@@ -55,6 +63,12 @@ $df | polars first 5 | polars append $ids | polars rename id_x vendor_id_length
 # => │ 4 │ id2181028 │         2 │ 2016-03-26 13:30:55 │ 2016-03-26 13:38:10 │               1 │           -73.97 │           40.79 │            -73.97 │      40.78 │ N          │        435 │          9 │
 # => ╰───┴───────────┴───────────┴─────────────────────┴─────────────────────┴─────────────────┴──────────────────┴─────────────────┴───────────────────┴────────────┴────────────┴────────────┴────────────╯
 ```
+
+[`polars append`](/commands/docs/polars_append.md) places the columns of `$ids`
+to the right of the first five rows, so both need the same number of rows. That
+column is also named `id`, so it arrives as `id_x`, and `polars rename` gives it
+a clearer name. [Appending dataframes](../book/dataframes/frames.md#appending-dataframes)
+covers `polars append --col`, which adds rows instead of columns.
 
 Here's an alternate approach using `with-column`
 

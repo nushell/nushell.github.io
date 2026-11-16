@@ -24,6 +24,8 @@ try { ^false | lines } catch {|e| $e.exit_code }
 # => 1
 ```
 
+This rule is the `pipefail` experimental option, which is on by default. When it is off, only the exit code of the last command in the pipeline counts. See [Exit Code](/book/stdout_stderr_exit_codes.md#exit-code) in the Book for both cases, and for the `display_errors` settings that decide whether Nushell prints its own error message for a failing command.
+
 ## Handling stdout and stderr
 
 You can handle stderr in multiple ways:
@@ -31,7 +33,7 @@ You can handle stderr in multiple ways:
 1. Do nothing, stderr will be printed directly
 2. Pipe stderr to the next command, using `e>|` or `o+e>|`
 3. Redirect stderr to a file, using `e> file_path`, or `o+e> file_path`
-4. Use `do -i { cmd } | complete` to capture both stdout and stderr as structured data
+4. Use `cmd | complete` to capture stdout, stderr and the exit code as a record. `complete` doesn't treat a non-zero exit code as an error, so the command needs no `do -i` around it. Piping `do -i { cmd }` into any other command doesn't help either, because the failing external still fails the pipeline (see the [`do --ignore-errors` note](./flow_control/try-catch.md#language-notes))
 
 For the next examples, let's assume this file:
 

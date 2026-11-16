@@ -11,11 +11,17 @@
 - [Nu Fundamentals](nu_fundamentals.md)
   - [Types of Data](types_of_data.md) - Types of data in Nushell
   - [Loading Data](loading_data.md) - Loading data and using it
+  - [Data Formats](data_formats.md) - Reading and writing CSV, MessagePack, spreadsheets, XML, HTML, and other formats
+  - [Working with SQLite](working_with_sqlite.md) - SQLite files and the in-memory `stor` database
   - [Pipelines](pipelines.md) - How the pipeline works
   - [Working with Strings](working_with_strings.md) - Strings, escape characters, and string interpolation
+  - [Regular Expressions](regular_expressions.md) - Guide to use regex
+  - [Working with Binary Data](working_with_binary.md) - The `bytes`, `bits`, and `hash` commands
   - [Working with Lists](working_with_lists.md) - Working with Nu lists
   - [Working with Records](working_with_records.md) - Working with Nu records
+  - [Working with Numbers](working_with_numbers.md) - The `math` and `random` commands
   - [Working with Tables](working_with_tables.md) - Working with Nu tables
+  - [Working with Paths](working_with_paths.md) - The `path` commands
   - [Navigating and Accessing Structured Data](navigating_structured_data.md) - Cell paths and getting at nested data
   - [Special Variables](special_variables.md) - Variables that Nushell defines for you
 - [Programming in Nu](programming_in_nu.md)
@@ -32,11 +38,14 @@
   - [Sorting](sorting.md) - Sorting lists, records, and tables
   - [Testing your Nushell Code](testing.md) - Writing tests with the standard library
   - [Debugging Scripts](debugging.md) - Stepping through scripts in your editor with `nu --dap`
+  - [Language Server](language_server.md) - Using Nushell in an editor with `nu --lsp`
   - [Best Practices](style_guide.md) - Formatting and naming conventions
 - [Nu as a Shell](nu_as_a_shell.md)
   - [Configuration](configuration.md) - How to configure Nushell
+  - [Configuration Reference](config_reference.md) - Every setting in `$env.config`
   - [Environment](environment.md) - Working with environment variables
   - [Stdout, Stderr, and Exit Codes](stdout_stderr_exit_codes.md) - Working with stdout, stderr, and exit codes
+  - [Working with the Terminal](terminal.md) - Terminal size, queries, grids, and hyperlinks
   - [Running System (External) Commands](running_externals.md) - Running external commands with a naming conflict
   - [How to Configure 3rd Party Prompts](3rdpartyprompts.md) - How to configure 3rd party prompts
   - [Directory Stack](directory_stack.md) - Working with multiple locations
@@ -58,7 +67,29 @@
   - [How Nushell Code Gets Run](how_nushell_code_gets_run.md) - Parsing, evaluation, and why some things must be known at parse time
 - [(Not So) Advanced](advanced.md)
   - [Standard Library](standard_library.md) - Nushell's standard library
+    - [`std/assert`](standard_library/assert.md)
+    - [`std/bench`](standard_library/bench.md)
+    - [`std/clip`](standard_library/clip.md)
+    - [`std/config`](standard_library/config.md)
+    - [`std/dt`](standard_library/dt.md)
+    - [`std/formats`](standard_library/formats.md)
+    - [`std/help`](standard_library/help.md)
+    - [`std/input`](standard_library/input.md)
+    - [`std/iter`](standard_library/iter.md)
+    - [`std/log`](standard_library/log.md)
+    - [`std/math`](standard_library/math.md)
+    - [`std/random`](standard_library/random.md)
+    - [`std/util`](standard_library/util.md)
+    - [`std/xml`](standard_library/xml.md)
+    - [`std-rfc`](standard_library/std_rfc.md) - Candidate modules for the standard library
   - [Dataframes](dataframes.md) - Working with dataframes in Nushell
+    - [Dataframe Operations](dataframes/frames.md)
+    - [Column Selectors](dataframes/selectors.md)
+    - [Math Expressions](dataframes/math.md)
+    - [String Expressions](dataframes/strings.md)
+    - [Dates and Times in Dataframes](dataframes/dates.md)
+    - [Masks and Conditionals](dataframes/conditionals.md)
+    - [Aggregations and Window Functions](dataframes/aggregation.md)
   - [Metadata](metadata.md) - An explanation of Nu's metadata system
   - [Creating Your Own Errors](creating_errors.md) - Creating your own error messages
   - [Parallelism](parallelism.md) - Running your code in parallel
@@ -66,5 +97,4 @@
   - [Explore](explore.md) - Browsing structured data with `explore`
   - [Building TUIs with `tui`](tui.md) - Building your own interactive terminal interfaces
   - [MCP Server](mcp.md) - Letting AI agents run Nushell code through the Model Context Protocol
-- [Regular Expressions](regular_expressions.md) - Guide to use regex
 - [Command Reference](/commands/) - List of all Nushell's commands

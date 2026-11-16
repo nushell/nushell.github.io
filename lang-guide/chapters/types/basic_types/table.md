@@ -28,6 +28,45 @@ Table literals can be created using a syntax similar to that of a list literal. 
 
 In this syntax, the headers are separated from the data cells using a semicolon(`;`). The semicolon separator is mandatory in a table-literal. It must follow the headers.
 
+A table literal has these rules:
+
+- At least one row must follow the `;`. `[[a b];]` fails with "expected table row". For an empty table, use `[]`.
+- Each row needs exactly one cell per column. A short row is a `nu::parser::missing_columns` error, and a long one is `nu::parser::extra_columns`:
+
+  ```nu
+  [[a b]; [1]]
+  # => Error: nu::parser::missing_columns
+  # =>
+  # =>   × Missing columns.
+  # =>    ╭─[repl_entry #1:1:9]
+  # =>  1 │ [[a b]; [1]]
+  # =>    ·         ─┬─
+  # =>    ·          ╰── expected 2 columns
+  # =>    ╰────
+  ```
+
+- A column name can't appear twice. With literal names, as in `[[a a]; [1 2]]`, that is a parse error (`nu::parser::column_defined_twice`). When the names come from variables, the same check happens at runtime as `nu::shell::column_defined_twice`.
+- A row can't use the spread operator. `[[a b]; [...$row]]` fails with "Cannot spread in a table row". Build such a table from records instead.
+
+Column names can be bare words, quoted strings, variables or subexpressions:
+
+```nu
+let c = "x"
+[[$c ("y" + "z") "a b"]; [1 2 3]]
+# => ╭───┬───┬────┬─────╮
+# => │ # │ x │ yz │ a b │
+# => ├───┼───┼────┼─────┤
+# => │ 0 │ 1 │  2 │   3 │
+# => ╰───┴───┴────┴─────╯
+```
+
+[`to nuon`](/commands/docs/to_nuon.md) writes a table in this form, and `from nuon` reads it back as a table:
+
+```nu
+[{a: 1, b: 2} {a: 3, b: 4}] | to nuon
+# => [[a, b]; [1, 2], [3, 4]]
+```
+
 ### List-of-Records syntax
 
 You can also create a table as a list of records, JSON-style:

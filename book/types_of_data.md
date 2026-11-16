@@ -26,7 +26,7 @@ Each type below lists its _annotation_: the name you write after `:` to declare 
 | Type                                  | Example                                                               |
 | ------------------------------------- | --------------------------------------------------------------------- |
 | [Integers](#integers)                 | `-65535`                                                              |
-| [Floats (decimals)](#floats-decimals) | `9.9999`, `Infinity`                                                  |
+| [Floats (decimals)](#floats-decimals) | `9.9999`, `inf`, `-inf`, `NaN`                                        |
 | [Strings](#text-strings)              | <code>"hole 18", 'hole 18', \`hole 18\`, hole18, r#'hole18'#</code>   |
 | [Booleans](#booleans)                 | `true`                                                                |
 | [Dates](#dates)                       | `2000-01-01`                                                          |
@@ -42,6 +42,7 @@ Each type below lists its _annotation_: the name you write after `:` to declare 
 | [Blocks](#blocks)                     | `if true { print "hello!" }`, `loop { print "press ctrl-c to exit" }` |
 | [Null (Nothing)](#nothing-null)       | `null`                                                                |
 | [Any](#any)                           | `let p: any = 5`                                                      |
+| [Number](#number)                     | `let n: number = 2.5`                                                 |
 | [SemVer](#semantic-versions)          | `'1.2.3' \| into semver`                                              |
 
 ## Basic Data Types
@@ -81,6 +82,7 @@ The `/` operator always returns a float, even when both operands are integers an
 | **_Description:_**    | Numbers with some fractional component                                           |
 | **_Annotation:_**     | `float`                                                                          |
 | **_Literal Syntax:_** | A decimal numeric value including a decimal place. E.g., `1.5`, `2.0`, `-15.333` |
+|                       | `inf`, `-inf` and `NaN` (also `nan`) for infinity and "not a number"             |
 | **_See also:_**       | [Language Reference - Float](/lang-guide/chapters/types/basic_types/float.md)    |
 
 Simple Example:
@@ -216,6 +218,7 @@ See the [Language Reference](/lang-guide/chapters/types/basic_types/filesize.htm
 | **_Annotation:_**     | `range`                                                                                        |
 | **_Literal Syntax:_** | `<start_value>..<end_value>`. E.g., `1..10`.                                                   |
 |                       | `<start_value>..<second_value>..<end_value>`. E.g., `2..4..20`                                 |
+|                       | `..<` excludes the end value (`0..<5`), and `..=` is an explicit spelling of `..` (`0..=4`)    |
 | **_See also:_**       | [Language Guide - Range](/lang-guide/chapters/types/basic_types/range.md)                      |
 
 Simple example:
@@ -232,7 +235,7 @@ Simple example:
 ```
 
 ::: tip
-You can also easily create lists of characters with a form similar to ranges with the command [`seq char`](/commands/docs/seq_char.html) as well as with dates using the [`seq date`](/commands/docs/seq_date.html) command.
+The values of a range must be numbers, so `("a")..("z")` is an error. To make a list of characters, use the [`seq char`](/commands/docs/seq_char.html) command, and for dates use [`seq date`](/commands/docs/seq_date.html).
 :::
 
 ### Cell Paths
@@ -289,9 +292,10 @@ Closures are a useful way to represent code that can be executed on each row of 
 | **_Description:_**    | Represents binary data                                                      |
 | **_Annotation:_**     | `binary`                                                                    |
 | **_Literal Syntax:_** | `0x[ffffffff]` - hex-based binary representation                            |
-|                       | `0o[1234567]` - octal-based binary representation                           |
+|                       | `0o[377 001]` - octal-based binary representation                           |
 |                       | `0b[10101010101]` - binary-based binary representation                      |
 | **_See also:_**       | [Language Guide - Binary](/lang-guide/chapters/types/basic_types/binary.md) |
+|                       | [Working with Binary Data](/book/working_with_binary.md)                    |
 
 Binary data, like the data from an image file, is a group of raw bytes.
 
@@ -393,6 +397,25 @@ Internally, tables are simply **lists of records**. This means that any command 
 | **_Literal syntax:_** | N/A - Any literal value can be assigned to an `any` type                                                    |
 | **_See also:_**       | [Language Reference - Any](/lang-guide/chapters/types/basic_types/any.md)                                   |
 
+### Number
+
+|                       |                                                                                    |
+| --------------------- | ---------------------------------------------------------------------------------- |
+| **_Description:_**    | When used in a type annotation or signature, matches either an `int` or a `float`. |
+| **_Annotation:_**     | `number`                                                                           |
+| **_Literal syntax:_** | N/A - Any int or float literal can be assigned to a `number` type                  |
+| **_See also:_**       | [Language Reference - Number](/lang-guide/chapters/types/basic_types/number.md)    |
+
+A value keeps its own type, so `describe` reports `int` or `float`. `number` shows up in `describe` output only for a collection that mixes the two:
+
+```nu
+let n: number = 2.5
+$n | describe
+# => float
+[1 2.5] | describe
+# => list<number>
+```
+
 ### Blocks
 
 |                       |                                                                               |
@@ -439,7 +462,7 @@ $simple_record.c? == null
 |                       |                                                                                                            |
 | --------------------- | ---------------------------------------------------------------------------------------------------------- |
 | **_Description:_**    | A [semantic version](https://semver.org) number, such as `1.2.3` or `2.0.0-rc.1`                           |
-| **_Annotation:_**     | N/A - This is a custom value, which `describe` reports as `semver`                                         |
+| **_Annotation:_**     | `semver`, a custom value type that `describe` also reports as `semver`                                     |
 | **_Literal Syntax:_** | N/A - Convert a string or record with [`into semver`](/commands/docs/into_semver.md)                       |
 | **_See also:_**       | [`semver bump`](/commands/docs/semver_bump.md), [`into semver-range`](/commands/docs/into_semver-range.md) |
 
@@ -453,3 +476,7 @@ Simple example - Semantic versions compare by version number, not as text:
 '1.2.3' | into semver | semver bump minor
 # => 1.3.0
 ```
+
+A cell path reads a semver's parts (`$v.major`, `$v.minor`, `$v.patch`, `$v.pre`, `$v.build` and `$v.prefix`), and a version range from `into semver-range` tests versions with `in`. The [SemVer section](/lang-guide/chapters/types/other_types/custom_value.md#semver) of the Language Reference covers these, along with `into semver --loose` and record input.
+
+[`semver bump`](/commands/docs/semver_bump.md) is the only subcommand of [`semver`](/commands/docs/semver.md). It moves a version to the next major, minor or patch number, adds or advances an `alpha`, `beta` or `rc` pre-release, or drops the pre-release with `release`. [Bumping versions](/lang-guide/chapters/types/other_types/custom_value.md#bumping-versions) describes each level and flag.

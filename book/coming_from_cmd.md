@@ -50,6 +50,8 @@ This table was last updated for Nu 0.116.0.
 | `SET <var>=<string>`                 | `$env.<var> = "<string>"`                                                           | Set environment variables                                             |
 | `SETLOCAL`                           | (default behavior)                                                                  | Localize environment changes to a script                              |
 | `START <path>`                       | Partially covered by `start <path>`                                                 | Open the path in the system-configured default application            |
+| `START <folder>`                     | `start <folder>`                                                                    | Open a folder in the file manager                                     |
+| `START <url>`                        | `start <url>`                                                                       | Open a URL in the default browser or the app registered for its scheme |
 | `START <internal command>`           |                                                                                     | Start a separate window to run a specified internal command           |
 | `START <batch file>`                 |                                                                                     | Start a separate window to run a specified batch file                 |
 | `TIME /T`                            | `date now \| format date "%H:%M:%S"`                                                | Get the current time                                                  |
@@ -60,6 +62,12 @@ This table was last updated for Nu 0.116.0.
 | `VER`                                |                                                                                     | Display the OS version                                                |
 | `VERIFY`                             |                                                                                     | Verify that file writes happen                                        |
 | `VOL`                                |                                                                                     | Show drive information                                                |
+
+::: tip
+[`path exists`](/commands/docs/path_exists.md) checks whether Nushell could open or enter the path. A file inside a directory you aren't allowed to read gives `false`, even though it's there. It follows a symbolic link, so a link whose target is missing gives `false`. Add `--no-symlink` (`-n`) to check the link itself. Piping in a list of paths returns a list of booleans.
+
+[`start`](/commands/docs/start.md) hands the path or URL to the operating system's opener. On Windows that is PowerShell's `Start-Process`, with `explorer.exe` as a fallback. macOS uses `open`. On Linux and the BSDs, `start` tries `xdg-open`, `gio open`, `gnome-open` and `kde-open` in that order and stops at the first one that works, and under WSL it tries Windows' `Start-Process` first. Anything that parses as a URL, such as `obsidian://open?vault=Test`, goes to the opener as a URL. Anything else must be an existing path, or `start` fails with "Cannot find file or URL".
+:::
 
 ## Forwarded CMD.EXE commands
 

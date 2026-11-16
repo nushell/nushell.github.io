@@ -85,7 +85,7 @@ g
 # => 1
 ```
 
-`def` and `alias` definitions are scoped like variables: a command defined inside a block, closure or other command is not visible outside it. Unlike variables, definitions are available in their whole block, even before the line that defines them:
+`def` and `alias` definitions are scoped like variables: a command defined inside a block, closure or other command is not visible outside it. An `alias` can only be used after its definition, but a `def` is available in its whole block, even before the line that defines it:
 
 ```nu
 print (greet); def greet [] { 'defined later' }
@@ -95,6 +95,21 @@ print (greet); def greet [] { 'defined later' }
 ```nu
 def outer [] { def helper [] { 'helper' }; helper }; outer
 # => helper
+```
+
+An alias used above its definition isn't found, so Nushell runs the name as an external command:
+
+```nu
+ll; alias ll = ls -l
+# => Error: nu::shell::external_command
+# =>
+# =>   × External command failed
+# =>    ╭─[repl_entry #1:1:1]
+# =>  1 │ ll; alias ll = ls -l
+# =>    · ─┬
+# =>    ·  ╰── Command `ll` not found
+# =>    ╰────
+# =>   help: Did you mean `all`?
 ```
 
 ## Environment Scope

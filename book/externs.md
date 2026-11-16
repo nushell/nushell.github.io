@@ -33,6 +33,8 @@ use "ssh extern" ssh
 
 Notice that the syntax here is similar to that of the `def` keyword when defining a custom command. You can describe flags, positional parameters, types, completers, and more.
 
+You don't have to write every extern by hand. [`generate completions`](/commands/docs/generate_completions.md) builds externs from a command's `--help` output, its man page, or existing fish, zsh or carapace completions. See [Generating completions for an external command](/cookbook/system.md#generating-completions-for-an-external-command).
+
 This implementation:
 
 - Will provide `-p` and `-i` (with descriptions) as possible completions for `ssh -`.
@@ -57,6 +59,60 @@ export extern "git add" [
   # …
 ]
 ```
+
+A name with a space, such as `"git add"`, needs quotes in the declaration. A call written as `git add` then uses this signature, and the command still receives `add` as its first argument.
+
+An extern without a rest parameter gets one anyway, so arguments and flags that the signature doesn't declare still reach the command. A signature only needs to list the parts you want completions and type checks for.
+
+## How arguments reach the command
+
+Nushell passes the arguments of an extern call on to the command, with a few changes to the declared flags:
+
+```nu
+extern printf [format: string, --verbose(-v), -x, --width: int]
+printf '[%s]\n' -v -x -x --width=10 --depth=3 extra
+# => [--verbose]
+# => [-x]
+# => [-x]
+# => [--width]
+# => [10]
+# => [--depth=3]
+# => [extra]
+```
+
+- A declared flag that has a long name arrives in its long form, even when you typed the short one, so `-v` became `--verbose`. When a command only accepts the short form, declare the flag without a long name, the way the `ssh` example above declares `-p` and `-i`.
+- A declared flag given a value with `=` arrives as two arguments, `--width` and `10`. An undeclared flag, such as `--depth=3`, arrives as you typed it.
+- A flag you repeat is passed each time, which suits options like `ssh -v -v`.
+
+The parameters of an extern don't become variables, the way the parameters of a `def` do, so the signature may repeat a name that `def` would reject as a duplicate.
+
+### Rejecting unknown flags with `--strict`
+
+By default, a flag that the signature doesn't declare goes through to the command. With `extern --strict` (or `export extern --strict`), it's a parse error, the same as for a custom command. The flag can also come after the name, as in `extern printf --strict [...]`:
+
+```nu
+extern --strict printf [format: string, --verbose(-v)]
+printf '[%s]\n' --depth=3
+# => Error: nu::parser::unknown_flag
+# =>
+# =>   × The `printf` command doesn't have flag `depth`.
+# =>    ╭─[repl_entry #2:1:17]
+# =>  1 │ printf '[%s]\n' --depth=3
+# =>    ·                 ────┬────
+# =>    ·                     ╰── unknown flag
+# =>    ╰────
+# =>   help: Use `--help` to see available flags
+```
+
+The check happens while Nushell parses the call, so it only covers flags written out in the code. These still reach the command unchecked:
+
+- a negative number such as `-10`, which counts as a value
+- a flag built while the code runs, such as `--($name)`
+- the items of a spread list, such as `...[--color]`
+- anything after `--`
+- `--help`, so the command can still show its own help (`-h` is checked like any other flag)
+
+Positional arguments are never rejected, since the extern still has its rest parameter.
 
 ## Structured Output
 
@@ -225,7 +281,7 @@ use git-data "git status"
 
 There are a few limitations to the current `extern` syntax. In Nushell, flags and positional arguments are very flexible—flags can precede positional arguments, flags can be mixed into positional arguments, and flags can follow positional arguments. Many external commands are not this flexible. There is not yet a way to require a particular ordering of flags and positional arguments to the style required by the external.
 
-The second limitation is that some externals require flags to be passed using `=` to separate the flag and the value. In Nushell, the `=` is a convenient optional syntax and there's currently no way to require its use.
+The second limitation is that some externals require flags to be passed using `=` to separate the flag and the value. In Nushell, the `=` is a convenient optional syntax and there's currently no way to require its use. A declared flag written with `=` even reaches the command as two arguments, so leave such a flag out of the signature to pass `--flag=value` as one argument. [How arguments reach the command](#how-arguments-reach-the-command) shows the conversion.
 
 In addition, externals called via the caret sigil (e.g., `^ssh`) are not recognized by `extern`.
 

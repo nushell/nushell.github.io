@@ -80,6 +80,8 @@ To instead sort in order of values, use the `-v` flag:
 # => ╰─────┴────────╯
 ```
 
+To sort the fields of a record by anything other than the key or the value, turn it into a table with `transpose key value` and sort that with `sort-by`.
+
 ### Tables
 
 Table rows are sorted by comparing rows by the columns in order. If two rows have equal values in their first column, they are sorted by their second column. This repeats until the rows are sorted different or all columns are equal.
@@ -281,6 +283,21 @@ $queue | sort-by -c $my_sort
 
 ## Special sorts
 
+### Reverse sort
+
+`sort` and `sort-by` both take `--reverse` (`-r`). It reverses the whole sorted result, so `null` values come first instead of last, and items that compare equal come out in the opposite of their input order. For a record, `sort -r` reverses the key order, and `sort -v -r` the value order. `-r` also combines with `sort-by --custom`.
+
+```nu
+[[name size]; [a 1] [b 2] [c 1]] | sort-by size -r
+# => ╭───┬──────┬──────╮
+# => │ # │ name │ size │
+# => ├───┼──────┼──────┤
+# => │ 0 │ b    │    2 │
+# => │ 1 │ c    │    1 │
+# => │ 2 │ a    │    1 │
+# => ╰───┴──────┴──────╯
+```
+
 ### Case insensitive sort
 
 When using case insensitive sort, strings (and globs) which are the same except for different casing will be considered equal for sorting, while other types remain unaffected:
@@ -351,6 +368,21 @@ $data | sort -n
 # => ╰───┴──────╯
 ```
 
+`sort-by` takes the same `--ignore-case` (`-i`) and `--natural` (`-n`) flags and applies them to the values it sorts by, whether they come from a cell path or a key closure. They can be combined:
+
+```nu
+[[file]; [img10.png] [Img9.png] [img1.png]] | sort-by file -n -i
+# => ╭───┬───────────╮
+# => │ # │   file    │
+# => ├───┼───────────┤
+# => │ 0 │ img1.png  │
+# => │ 1 │ Img9.png  │
+# => │ 2 │ img10.png │
+# => ╰───┴───────────╯
+```
+
+Without `-i`, `Img9.png` sorts first, because uppercase letters sort before lowercase ones.
+
 ### Sorting with mixed types
 
 Under some circumstances, you might need to sort data containing mixed types. There are a couple things to be aware of when sorting mixed types:
@@ -398,7 +430,7 @@ $incompatible | sort-by -c {|a, b| $a < $b | default ($a != null) }
 # =>    ╰────
 ```
 
-Special handling is required for `null` values, since comparison between any value and `null` returns `null`. To instead reject `null` values, try the following:
+Special handling is required for `null` values, since an ordering comparison (`<`, `<=`, `>`, `>=`) between any value and `null` returns `null`. `==` and `!=` still return a `bool`, so `1 == null` is `false`. To instead reject `null` values, try the following:
 
 ```nu
 let baddata = [8 3.2 null 58 2]
@@ -420,3 +452,9 @@ $baddata | sort-by -c $strict
 # =>  5 │         [_, null] => (error make {msg: "Attempt to sort null"}),
 # =>    ╰────
 ```
+
+## Random order
+
+[`shuffle`](/commands/docs/shuffle.md) returns the items of a list, or the rows of a table, in a random order, and each row moves as a whole. The order is different on every run, and there is no seed to repeat one. To pick a random sample, take from the shuffled result. `$players | shuffle | first 2` picks two different players.
+
+`shuffle` reads all of its input before it returns anything, so it never finishes on an endless stream. It accepts a list or a table. A range is rejected when the pipeline is parsed, so use `seq 1 10 | shuffle` instead of `1..10 | shuffle`.

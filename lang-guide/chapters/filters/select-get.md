@@ -99,4 +99,39 @@ Both commands raise an error when a column does not exist. Add `?` to a cell-pat
 
 Both commands also accept `--ignore-case` to match column names case-insensitively.
 
+A `null` input has no columns, so `null | get name` is an error (`nothing doesn't support cell paths`). With `name?` or `-o`, it returns `null`.
+
+## How many values `get` returns
+
+The shape of `get`'s result depends on how many paths it was given:
+
+- No path: the input is returned unchanged. `$data | get` is the same as `$data`.
+- One path: the value at that path, not wrapped in a list.
+- Several paths, or any spread (`...$paths`): a list with one value per path. A spread always gives a list, even when it holds one path, and an empty spread gives an empty list. Code that builds the path list at run time gets the same shape whatever its length:
+
+```nu
+let cols = [b]
+{a: 1, b: 2} | get ...$cols
+# => ╭───┬───╮
+# => │ 0 │ 2 │
+# => ╰───┴───╯
+let cols = []
+{a: 1, b: 2} | get ...$cols
+# => ╭────────────╮
+# => │ empty list │
+# => ╰────────────╯
+```
+
+A string in a spread list is one column name, dots included. A list in a variable, such as `let p = [a.b]`, holds strings, so `get ...$p` looks for a column named `a.b`. For nested paths, spread a list of cell-path values written with `$.`:
+
+```nu
+let paths = [$.a.b]
+{a: {b: 1}} | get ...$paths
+# => ╭───┬───╮
+# => │ 0 │ 1 │
+# => ╰───┴───╯
+```
+
+A list literal written directly after `...` is parsed as cell paths, so `get ...[a.b]` follows the nested path, while `get ...["a.b"]` looks up the column `a.b`.
+
 See also: [Filters to select subsets of data](./selecting_data.md), and [Using `get` and `select`](/book/navigating_structured_data.md#using-get-and-select) in the Book.

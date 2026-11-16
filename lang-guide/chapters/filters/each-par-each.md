@@ -61,7 +61,39 @@ Some details of how `each` treats its input and output:
   # => ╰───┴───╯
   ```
 
+  `--flatten` also changes when results move on. Without it, a stream the closure returns is collected into one list before `each` passes it along. With it, each item goes to the next command as soon as the closure produces it:
+
+  ```nu
+  [a b] | each --flatten {|x| 1..2 | each {|n| print $"make ($x)($n)"; $"($x)($n)" } } | each {|v| print $"got ($v)" } | ignore
+  # => make a1
+  # => got a1
+  # => make a2
+  # => got a2
+  # => make b1
+  # => got b1
+  # => make b2
+  # => got b2
+  ```
+
+  Without `--flatten`, `make a1` and `make a2` both print before the second `each` gets anything, and then it gets them together as one list.
+
 - A range is iterated like a list. A `null` input is returned unchanged, without running the closure.
+
+- A string or byte stream, such as the output of an external command, is split into chunks of whatever size the data arrives in, not into lines. A short output is often one chunk. Use [`lines`](/commands/docs/lines.md) first to work line by line. The example runs the Unix `printf` command:
+
+  ```nu
+  ^printf "a\nb\n" | each {|chunk| $chunk | str length }
+  # => ╭───┬───╮
+  # => │ 0 │ 4 │
+  # => ╰───┴───╯
+  ^printf "a\nb\n" | lines | each {|line| $line | str length }
+  # => ╭───┬───╮
+  # => │ 0 │ 1 │
+  # => │ 1 │ 1 │
+  # => ╰───┴───╯
+  ```
+
+- A custom value that can be iterated, such as a [table from a SQLite file](./selecting_data.md#tables-from-a-sqlite-file), is treated as a list of its rows. A `matrix` value is rejected with an error that points to [`matrix map`](/commands/docs/matrix_map.md) and [`matrix reduce`](/commands/docs/matrix_reduce.md).
 
 - `break` and `continue` cannot be used inside the closure (it is not a loop). Use [`for`](/commands/docs/for.md), or stop early with `take while` or [`each while`](/commands/docs/each_while.md), which stops at the first `null` result:
 
@@ -73,6 +105,21 @@ Some details of how `each` treats its input and output:
   # => ╰───┴────╯
   ```
 
+  `each while` takes less input than `each`: a list, a table, or a byte stream from an external command, which it splits into chunks the same way. A range, a `null` or any other single value is a type error.
+
+## Indexes with `enumerate`
+
+[`enumerate`](/commands/docs/enumerate.md) turns each item into a `{index, item}` record, so a closure after it can see the position. Because the column is named `index`, the table shows it in the `#` column. Input that isn't a list becomes a single row with index `0`, and `null` becomes an empty list:
+
+```nu
+"solo" | enumerate
+# => ╭───┬──────╮
+# => │ # │ item │
+# => ├───┼──────┤
+# => │ 0 │ solo │
+# => ╰───┴──────╯
+```
+
 ## Iterating over a record
 
 `each`/`par-each` only iterates over list/table data. A record is a single value, so `each` runs the closure only once, with the whole record. To iterate over each key/value pair in a record, use [`items`](/commands/docs/items.md):
@@ -83,6 +130,16 @@ Some details of how `each` treats its input and output:
 # => │ 0 │ a=1 │
 # => │ 1 │ b=2 │
 # => ╰───┴─────╯
+```
+
+`items` returns a list. To get a record back, use [`record each`](./record_commands.md#record-each) instead. Unlike `each`, `items` keeps a `null` result as an empty item, so the output always has one item per field. `$in` is empty inside the closure; use the two parameters:
+
+```nu
+{a: 1, b: 2} | items {|key, value| if $value > 1 { $key } }
+# => ╭───┬───╮
+# => │ 0 │   │
+# => │ 1 │ b │
+# => ╰───┴───╯
 ```
 
 Or first pipe the record through `| transpose key value` to create a table of the keys/values.

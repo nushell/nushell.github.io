@@ -27,6 +27,21 @@
   # => 5
   ```
 
+  [`str length`](/commands/docs/str_length.md) counts in one of three units. `--utf-8-bytes` (`-b`) counts bytes, the default. `--chars` (`-c`) counts Unicode scalar values, roughly the code points. `--grapheme-clusters` (`-g`) counts what a reader sees as one character. The last two differ when a character is built from several code points, such as `e` followed by a combining accent:
+
+  ```nu
+  let s = "e\u{301}"
+  [($s | str length) ($s | str length --chars) ($s | str length --grapheme-clusters)] | to nuon
+  # => [3, 2, 1]
+  ```
+
+  Only one of `--chars` and `--grapheme-clusters` can be given. A list of strings gives a list of lengths. For a table or record, name the columns as cell paths after the command, and each string there is replaced by its length:
+
+  ```nu
+  [[name]; [ab] [héllo]] | str length name | to nuon
+  # => [[name]; [2], [6]]
+  ```
+
 ## Common commands that work with `string`
 
 Many commands takes strings as inputs or parameters.
@@ -37,7 +52,7 @@ These commands work with strings explicitly
 - `into string`
 - `ansi strip`
 - `is-empty`
-- `is-not-empty`
+- `is-not-empty`, described in [`length` and `is-empty`](../../filters/summarizing_lists.md#length-and-is-empty)
 
 In addition to the above commands, most other `into <type>` commands take strings
 as inputs.

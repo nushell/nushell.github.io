@@ -34,9 +34,63 @@ alias m = math
 
 This is particularly handy for plugins with many subcommands. For example, after `alias pl = polars`, you can write `pl into-df`, `pl select` and `pl collect`.
 
+## What an alias can contain
+
+The right side of an alias is a single command call. It can include some of the command's arguments and leave the rest for the call site, even required ones:
+
+```nu
+alias r = str replace
+"a-b-c" | r --all "-" "+"
+# => a+b+c
+```
+
+Anything other than one command call is rejected with `nu::parser::cant_alias_expression`. That covers pipelines like `ls | length`, redirections like `echo hi o> out.txt`, math expressions, and variables or cell paths like `$nu.home-dir`:
+
+```nu
+alias total = 1 + 2
+# => Error: nu::parser::cant_alias_expression
+# =>
+# =>   × Can't create alias to expression.
+# =>    ╭─[repl_entry #1:1:15]
+# =>  1 │ alias total = 1 + 2
+# =>    ·               ┬
+# =>    ·               ╰── aliasing a binary operation is not supported
+# =>    ╰────
+# =>   help: Only command calls can be aliased.
+```
+
+Most parser keywords can't be aliased either. The exceptions are `if`, `match`, `try`, `overlay`, `overlay use`, `overlay new` and `overlay hide`. Aliasing any other keyword, such as `alias l = let`, is a `nu::parser::cant_alias_keyword` error.
+
+The `=` needs a space on each side. `alias ll=ls -l` and `alias ll =ls -l` are both parse errors.
+
+An alias is visible from the line that defines it to the end of the enclosing block. Unlike a `def`, it can't be used above its definition, and an alias defined inside a block, such as `do { alias ll = ls -l }`, is gone after the block ends.
+
 ## List All Loaded Aliases
 
-Your useable aliases can be seen in `scope aliases` and `help aliases`.
+Your useable aliases can be seen in [`scope aliases`](/commands/docs/scope_aliases.md) and [`help aliases`](/commands/docs/help_aliases.md). Both return a table with these columns:
+
+- `name`: the alias name
+- `expansion`: the command call the alias stands for
+- `description`: the alias's description, explained below
+- `decl_id`: a number that identifies the alias
+- `aliased_decl_id`: the `decl_id` of the command the alias calls, as listed by `scope commands`, or `null` for an external command
+
+A comment on the line above `alias` or `export alias` becomes the alias's description. Without one, the description is ``Alias for `<expansion>` ``:
+
+```nu
+# List files in long form
+alias ll = ls -l
+alias la = ls -a
+scope aliases | where name in [ll la] | select name expansion description
+# => ╭───┬──────┬───────────┬─────────────────────────╮
+# => │ # │ name │ expansion │       description       │
+# => ├───┼──────┼───────────┼─────────────────────────┤
+# => │ 0 │ la   │ ls -a     │ Alias for `ls -a`       │
+# => │ 1 │ ll   │ ls -l     │ List files in long form │
+# => ╰───┴──────┴───────────┴─────────────────────────╯
+```
+
+`help aliases --find` keeps only the aliases whose name or description contains the given text, so `help aliases --find long` lists `ll` here. `help aliases ll` shows the help for one alias, the same as `help ll`. An unknown name is a `nu::shell::alias_not_found` error.
 
 Running `help` on an alias shows what it expands to, followed by the help for the aliased command. For example, with an alias for a small custom command:
 

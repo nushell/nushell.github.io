@@ -13,12 +13,6 @@ convert string to integer:
 "12" | into int
 ```
 
-convert present date to provided time zone:
-
-```nu
-date now | date to-timezone "Europe/London"
-```
-
 update a record's language and if none is specified insert provided value:
 
 ```nu
@@ -298,6 +292,159 @@ $teams_scores | drop column
 # => ╰───┴───────────────────────┴───────╯
 ```
 
+remove the last two columns of a table:
+
+```nu
+$teams_scores | drop column 2
+# => ╭───┬───────────────────────╮
+# => │ # │         team          │
+# => ├───┼───────────────────────┤
+# => │ 0 │ Boston Celtics        │
+# => │ 1 │ Golden State Warriors │
+# => ╰───┴───────────────────────╯
+```
+
+remove the first column of a table instead of the last:
+
+```nu
+$teams_scores | drop column --left
+# => ╭───┬───────┬───────╮
+# => │ # │ score │ plays │
+# => ├───┼───────┼───────┤
+# => │ 0 │   311 │     3 │
+# => │ 1 │   245 │     2 │
+# => ╰───┴───────┴───────╯
+```
+
+remove the last field of a record (use `reject` to remove columns or fields by name):
+
+```nu
+{name: nu, stars: 5, language: Rust} | drop column
+# => ╭───────┬────╮
+# => │ name  │ nu │
+# => │ stars │ 5  │
+# => ╰───────┴────╯
+```
+
+## Numbers
+
+convert a string to a float (`into float` reads a comma as a decimal point, so remove thousands separators first):
+
+```nu
+"1.5" | into float
+# => 1.5
+```
+
+find the largest value in each column of a table:
+
+```nu
+[[a b]; [1 5] [3 2]] | math max
+# => ╭───┬───╮
+# => │ a │ 3 │
+# => │ b │ 5 │
+# => ╰───┴───╯
+```
+
+get the median and the standard deviation of a list (`--sample` divides by N - 1):
+
+```nu
+[2 4 4 4 5 5 7 9] | math median
+# => 4.5
+[2 4 4 4 5 5 7 9] | math stddev
+# => 2.0
+```
+
+apply a function to each number in a list:
+
+```nu
+[1 10 100] | math log 10
+# => ╭───┬──────╮
+# => │ 0 │ 0.00 │
+# => │ 1 │ 1.00 │
+# => │ 2 │ 2.00 │
+# => ╰───┴──────╯
+```
+
+roll a six-sided die ten times (`..` includes the end of the range, `..<` leaves it out):
+
+```nu
+1..10 | each { random int 1..6 }
+```
+
+generate a UUID (`-v 7` makes one that sorts by creation time):
+
+```nu
+random uuid
+```
+
+read a clock time as a duration and show it in minutes:
+
+```nu
+"1:30:00" | into duration | format duration min
+# => 90 min
+```
+
+read a size written as text (units are case-insensitive, and `KiB`, `MiB` and so on count in 1024s):
+
+```nu
+"1.5 GiB" | into filesize
+# => 1.6 GB
+```
+
+## Dates
+
+get the current date and time:
+
+```nu
+date now
+```
+
+convert present date to provided time zone:
+
+```nu
+date now | date to-timezone "Europe/London"
+```
+
+list the time zone names that `date to-timezone` accepts (case doesn't matter, and any other name is an `invalid time zone` error):
+
+```nu
+date list-timezone | where timezone =~ "Kolkata"
+# => ╭───┬──────────────┬────────╮
+# => │ # │   timezone   │ offset │
+# => ├───┼──────────────┼────────┤
+# => │ 0 │ Asia/Kolkata │ +05:30 │
+# => ╰───┴──────────────┴────────╯
+```
+
+convert a date to a fixed UTC offset (`+0530` and `+05` work too, and `local` converts to your own time zone):
+
+```nu
+2024-06-01T12:00:00Z | date to-timezone "+05:30" | format date "%F %T %z"
+# => 2024-06-01 17:30:00 +0530
+```
+
+convert date strings, or a list of them, to a time zone:
+
+```nu
+["2024-06-01 12:00:00 +00:00" "2024-12-01 12:00:00 +00:00"] | date to-timezone "America/New_York" | format date "%F %T %z"
+# => ╭───┬───────────────────────────╮
+# => │ 0 │ 2024-06-01 08:00:00 -0400 │
+# => │ 1 │ 2024-12-01 07:00:00 -0500 │
+# => ╰───┴───────────────────────────╯
+```
+
+describe a date relative to now, such as "2 years ago":
+
+```nu
+2024-06-01T12:00:00Z | date humanize
+```
+
+parse a date written in words:
+
+```nu
+"next friday" | date from-human
+```
+
 ## Files and Filesystem
 
 open a text file with the default text editor:
@@ -330,7 +477,7 @@ recursively search for files by file name:
 glob **/*.{rs,toml} --depth 2
 ```
 
-watch a file, run command whenever it changes:
+watch a file, run command whenever it changes (see [Running a command when files change](/cookbook/files.md#running-a-command-when-files-change)):
 
 ```nu
 for _ in (watch . --glob=**/*.rs) { cargo test }

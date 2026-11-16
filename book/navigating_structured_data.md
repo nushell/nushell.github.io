@@ -18,6 +18,7 @@ Given Nushell's strong support for structured data, some of the more common task
   - Example - `select` with multiple rows and columns
 - [Handling missing data using the optional operator](#the-optional-operator)
 - [Key/Column names with spaces](#key-column-names-with-spaces)
+  - [How record keys are written](#how-record-keys-are-written)
 - [Case-insensitive access](#case-insensitive-access)
 - [Other commands for navigating structured data](#other-commands-for-accessing-structured-data)
 
@@ -280,7 +281,7 @@ $record_example | get "key x"
 # => 12
 ```
 
-Quotes are also required when a key name may be confused for a numeric value.
+In a cell path, quotes are also required when a key name may be confused for a numeric value, because a bare number there is a row index. The record literal itself doesn't need them, as [How record keys are written](#how-record-keys-are-written) explains.
 
 Example:
 
@@ -297,6 +298,42 @@ $record_example."1"
 
 Do not confuse the key name with a row index in this case. Here, the first item is _assigned_ the key name `1` (a string). If converted to a table using the `transpose` command, key `1` (`string`) would be at row-index `0` (an integer).
 
+### How record keys are written
+
+A key in a record literal is always a string, and you can write it in several ways:
+
+- As a bare word. Here every bare word is a string, even one that would be a number, file size, date, range, `true`, `false` or `null` as a value.
+- As a quoted string, in single quotes, double quotes or backticks, or as a raw string.
+- As a variable, a subexpression in parentheses, or an interpolated string. Nushell evaluates it and turns the result into a string. A key that evaluates to `null` is an error.
+
+```nu
+{1: a, 1kb: b, 2020-01-01: c, 1..2: d, true: e, null: f} | columns | to nuon
+# => ["1", "1kb", "2020-01-01", "1..2", "true", "null"]
+let k = "x"
+{$k: 1, ($k + "2"): 2, $"($k)3": 3, `a b`: 4, r#'c'd'#: 5} | to nuon
+# => {x: 1, "x2": 2, "x3": 3, "a b": 4, "c'd": 5}
+```
+
+The column names in a table literal follow the same rule: `[[1 true]; [a b]]` has the columns `1` and `true`.
+
+A bare key or value can't contain a `:`, because the colon separates the key from the value. Quote it instead:
+
+```nu
+{url: https://www.nushell.sh}
+# => Error: nu::parser::error
+# =>
+# =>   × Invalid literal
+# =>    ╭─[repl_entry #1:1:12]
+# =>  1 │ {url: https://www.nushell.sh}
+# =>    ·            ┬
+# =>    ·            ╰── colon in bare word specifying record value
+# =>    ╰────
+{url: "https://www.nushell.sh"} | to nuon
+# => {url: "https://www.nushell.sh"}
+```
+
+Each key can appear only once, and that includes computed keys. `let k = "a"; {a: 1, $k: 2}` is the error "Record field or table column used twice".
+
 ## Case-insensitive access
 
 Cell-path members are case-sensitive, so `$person.name` fails with a "Name not found" error when the key is `Name`. To match a member regardless of case, add `!` after it. To make every member of a cell-path case-insensitive, use the `--ignore-case` flag of `get`, `select`, or `reject`:
@@ -310,6 +347,8 @@ $person | get --ignore-case name
 ```
 
 (Environment variables are an exception: `$env.path` and `$env.PATH` both work.)
+
+A member can also be both case-insensitive and [optional](#the-optional-operator). Add both modifiers, in either order: `$person.age?!` returns `null` instead of failing.
 
 ## Handling Missing Data
 
@@ -365,6 +404,43 @@ $with_default_value
 
 $with_default_value.1.a
 # => n/a
+```
+
+You can name several columns at once. Each name is a cell path, so `a.c` fills in the field `c` inside `a`, and creates `a` too if it's missing:
+
+```nu
+[{a: 1} {b: 2}] | default 0 a b | to nuon
+# => [{a: 1, b: 0}, {b: 2, a: 0}]
+{a: {b: 1}} | default 2 a.c | to nuon
+# => {a: {b: 1, c: 2}}
+```
+
+With column names, the input has to be a record or a list of records. Items in the list that aren't records pass through unchanged.
+
+By default only missing and `null` values are replaced. With `--empty` (`-e`), an empty string, an empty list and an empty record are replaced too. A string of spaces doesn't count as empty:
+
+```nu
+[{a: ''} {a: []} {a: {}} {a: null} {a: ' '}] | default --empty 'x' a | to nuon
+# => [[a]; [x], [x], [x], [x], [" "]]
+```
+
+Without column names, `default` replaces its whole input if that input is `null`, or empty with `--empty`. It doesn't look inside a list, so use [`each`](/commands/docs/each.md) to replace `null` items:
+
+```nu
+[null 1 null] | default 0 | to nuon
+# => [null, 1, null]
+[null 1 null] | each { default 0 } | to nuon
+# => [0, 1, 0]
+```
+
+The default can be a closure literal, which runs only if a value is missing. It runs at most once, gets no input or arguments, and every missing value gets its result. A closure passed in a variable is used as the default value itself, without running:
+
+```nu
+null | default { 1 + 2 } | describe
+# => int
+let f = {|| 1 + 2 }
+null | default $f | describe
+# => closure
 ```
 
 ## Other commands for accessing structured data

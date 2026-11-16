@@ -29,7 +29,7 @@ Typical plugin interaction after the initial handshake looks like this:
 
 The plugin **should** respond to further plugin calls. The engine **may** send additional plugin calls before responses have been received, and it is up to the plugin to decide whether to handle each call immediately as it is received, or to process only one at a time and hold on to them for later. In any case, sending another plugin call before a response has been received **should not** cause an error.
 
-The plugin **may** send [engine calls](#enginecall) during the execution of a call to request operations from the engine. Engine calls are [only valid within the context of a call](#enginecall-context) and may not be sent otherwise.
+The plugin **may** send [engine calls](#enginecall) during the execution of a call to request operations from the engine. Engine calls are [only valid within the context of a call](#enginecall) and may not be sent otherwise.
 
 The engine **may** send a [`Goodbye`](#goodbye) message to the plugin indicating that it will no longer send any more plugin calls. Upon receiving this message, the plugin **may** choose not to accept any more plugin calls, and **should** exit after any in-progress plugin calls have finished.
 
@@ -128,7 +128,7 @@ Tell the plugin to run a command. The argument is the following map:
 | Field     | Type                                        | Description                                           |
 | --------- | ------------------------------------------- | ----------------------------------------------------- |
 | **name**  | string                                      | The name of the command to run                        |
-| **call**  | [`EvaluatedCall`](#evaluatedcall)           | Information about the invocation, including arguments |
+| **call**  | [`EvaluatedCall`](#run-plugin-call)           | Information about the invocation, including arguments |
 | **input** | [`PipelineDataHeader`](#pipelinedataheader) | Pipeline input to the command                         |
 
 <a name="evaluatedcall"></a>
@@ -138,8 +138,8 @@ Tell the plugin to run a command. The argument is the following map:
 | Field          | Type                                                      | Description                                             |
 | -------------- | --------------------------------------------------------- | ------------------------------------------------------- |
 | **head**       | [`Span`](#span)                                           | The position of the beginning of the command execution. |
-| **positional** | [`Value`](#value) array                                   | Positional arguments.                                   |
-| **named**      | 2-tuple (spanned string, [`Value`](#value) or null) array | Named arguments, such as switches.                      |
+| **positional** | [`Value`](#value-types) array                                   | Positional arguments.                                   |
+| **named**      | 2-tuple (spanned string, [`Value`](#value-types) or null) array | Named arguments, such as switches.                      |
 
 The name of each named argument is a map with an `item` (the name) and a `span` (the position of the flag in the source). Named arguments are always sent by their long name, never their short name. A switch given without a value (e.g. `--major`) has a `null` value, but one given an explicit value (e.g. `--major=false`) has a `Bool` value. Switches that weren't given are not sent.
 
@@ -214,6 +214,50 @@ Ask the plugin for completion suggestions for an argument of one of its commands
 | **call**  | map              | The parsed call ([`ast::Call`](https://docs.rs/nu-protocol/latest/nu_protocol/ast/struct.Call.html)), with unevaluated arguments. This is an internal Nu type. |
 | **strip** | boolean          | Whether there is a placeholder in the input buffer.                                                                                                            |
 | **pos**   | unsigned integer | The position of the cursor, in the same coordinates as spans, which can be used to find the placeholder in the arguments.                                      |
+
+The inner `call` is a map:
+
+| Field           | Type             | Description                                                                         |
+| --------------- | ---------------- | ----------------------------------------------------------------------------------- |
+| **decl_id**     | unsigned integer | The declaration ID of the command.                                                  |
+| **head**        | [`Span`](#span)  | The span of the command name.                                                       |
+| **arguments**   | array            | One entry for each argument typed so far, in order.                                 |
+| **parser_info** | map              | Extra expressions the parser stores for some built-in commands. Empty for plugins. |
+
+Each entry of `arguments` is a map with one key:
+
+- `{"Positional": expression}`: a positional argument.
+- `{"Named": [name, short, expression]}`: a flag. `name` is the long name as a spanned string (`item` and `span`), even when the user typed the short form. `short` is a spanned string or `null`, and `expression` is `null` for a switch or a flag whose value hasn't been typed yet.
+- `{"Unknown": expression}`: an argument that a signature with `allows_unknown_args` passes through.
+- `{"Spread": expression}`: a spread list, such as `...$args`, filling rest arguments.
+
+An `Expression`, the parser's representation of the source code, is a map with the fields `expr`, `span`, `span_id`, and `ty`. `ty` is the type the parser inferred, in the same form as in [signatures](#signature-plugin-call-response). `expr`, the expression itself, is an externally tagged enum with dozens of variants, defined by [`ast::Expr`](https://docs.rs/nu-protocol/latest/nu_protocol/ast/enum.Expr.html). Literals are the easiest to use: `{"Int": 3}`, `{"Float": 1.5}`, `{"Bool": true}`, `{"String": "va"}`, and `{"Filepath": ["./x", false]}`, where the boolean is `true` for a quoted path. Other expressions, such as `{"Var": 74}` for a variable or `{"Subexpression": 12}`, can't be evaluated during a completion call. If the cursor is on an argument the user hasn't started typing, `arguments` has no entry for it.
+
+For example, take a command `probe args` with a `--sw` switch, a `--num` (`-n`) flag that takes an integer, and an optional positional argument. After the user types `probe args --sw -n 3 ` and presses Tab, the engine asks for `{"Positional": 0}`, and `arguments` holds only the two flags:
+
+```json
+[
+  {
+    "Named": [
+      { "item": "sw", "span": { "start": 170715, "end": 170719 } },
+      null,
+      null
+    ]
+  },
+  {
+    "Named": [
+      { "item": "num", "span": { "start": 170720, "end": 170722 } },
+      null,
+      {
+        "expr": { "Int": 3 },
+        "span": { "start": 170723, "end": 170724 },
+        "span_id": 4932,
+        "ty": "Int"
+      }
+    ]
+  }
+]
+```
 
 The plugin can make [engine calls](#enginecall) in the context of this call, but only the ones that don't change state or run code: `GetConfig`, `GetPluginConfig`, `GetEnvVar`, `GetEnvVars`, `GetCurrentDir`, `GetHelp` and `GetSpanContents`.
 
@@ -407,7 +451,7 @@ $version.field
 
 ##### `PartialCmp`
 
-Compares the custom value to another value and returns the [`Ordering`](#ordering) that should be used, if any. This is used to order values, for example when sorting; comparison operators such as `<` are sent as an [`Operation`](#operation) instead. The argument type is a [`Value`](#value), which may be any value - not just the same custom value type. The response type is [`Ordering`](#ordering-plugin-call-response). [`Error`](#error-plugin-call-response) may also be returned, but at present the error is unlikely to be presented to the user - the engine will act as if you had sent `{"Ordering": null}`.
+Compares the custom value to another value and returns the [`Ordering`](#ordering) that should be used, if any. This is used to order values, for example when sorting; comparison operators such as `<` are sent as an [`Operation`](#operation) instead. The argument type is a [`Value`](#value-types), which may be any value - not just the same custom value type. The response type is [`Ordering`](#ordering-plugin-call-response). [`Error`](#error-plugin-call-response) may also be returned, but at present the error is unlikely to be presented to the user - the engine will act as if you had sent `{"Ordering": null}`.
 
 Example (comparing two `version` custom values):
 
@@ -450,7 +494,7 @@ Example (comparing two `version` custom values):
 
 ##### `Operation`
 
-Returns the result of evaluating an [`Operator`](#operator) on this custom value with another value. The argument is a 2-tuple: (`operator`, `value`), where `operator` is a spanned [`Operator`](#operator) and `value` is a [`Value`](#value), which may be any value - not just the same custom value type. The response type is [`PipelineData`](#pipelinedata-plugin-call-response) or [`Error`](#error-plugin-call-response). The result **may** be another custom value. If the operation produces a stream, it will be consumed to a value.
+Returns the result of evaluating an [`Operator`](#operator) on this custom value with another value. The argument is a 2-tuple: (`operator`, `value`), where `operator` is a spanned [`Operator`](#operator) and `value` is a [`Value`](#value-types), which may be any value - not just the same custom value type. The response type is [`PipelineData`](#pipelinedata-plugin-call-response) or [`Error`](#error-plugin-call-response). The result **may** be another custom value. If the operation produces a stream, it will be consumed to a value.
 
 Example:
 
@@ -618,7 +662,7 @@ Example:
 
 #### `PipelineData` engine call response
 
-A successful result with a Nu [`Value`](#value) or stream. The body is a [`PipelineDataHeader`](#pipelinedataheader).
+A successful result with a Nu [`Value`](#value-types) or stream. The body is a [`PipelineDataHeader`](#pipelinedataheader).
 
 Example:
 
@@ -677,11 +721,11 @@ Example:
 }
 ```
 
-This example is abbreviated, as the [`Config`](#config) object is large and ever-changing.
+This example is abbreviated, as the [`Config`](#config) object is large and ever-changing. The [`Config`](#config) section describes its structure.
 
 #### `ValueMap` engine call response
 
-A successful result for engine calls that produce plain maps, such as the [`GetEnvVars` engine call](#getenvvars-engine-call). The body is a map from strings to [`Value`s](#value).
+A successful result for engine calls that produce plain maps, such as the [`GetEnvVars` engine call](#getenvvars-engine-call). The body is a map from strings to [`Value`s](#value-types).
 
 Example:
 
@@ -732,25 +776,24 @@ Example (for the closure `{|x| $x + 1}`):
 ```json
 {
   "EngineCallResponse": [
-    13,
+    0,
     {
       "IrBlock": {
         "instructions": [
-          { "LoadVariable": { "dst": 0, "var_id": 77, "preserve_origin": false } },
+          { "LoadVariable": { "dst": 0, "var_id": 74, "preserve_origin": false } },
           { "LoadLiteral": { "dst": 1, "lit": { "Int": 1 } } },
           { "BinaryOp": { "lhs_dst": 0, "op": { "Math": "Add" }, "rhs": 1 } },
           { "Span": { "src_dst": 0 } },
           { "Return": { "src": 0 } }
         ],
         "spans": [
-          { "start": 169382, "end": 169384 },
-          { "start": 169387, "end": 169388 },
-          { "start": 169385, "end": 169386 },
-          { "start": 169382, "end": 169388 },
-          { "start": 169377, "end": 169389 }
+          { "start": 170521, "end": 170523 },
+          { "start": 170526, "end": 170527 },
+          { "start": 170524, "end": 170525 },
+          { "start": 170521, "end": 170527 },
+          { "start": 170516, "end": 170528 }
         ],
         "data": [],
-        "ast": [null, null, null, null, null],
         "comments": ["", "", "", "", ""],
         "register_count": 2,
         "file_count": 0
@@ -760,12 +803,105 @@ Example (for the closure `{|x| $x + 1}`):
 }
 ```
 
+`view ir` prints the same block in a readable form:
+
+```nu
+view ir {|x| $x + 1}
+# => # 2 registers, 5 instructions, 0 bytes of data
+# =>    0: load-variable          %0, var 74
+# =>    1: load-literal           %1, int(1)
+# =>    2: binary-op              %0, Math(Add), %1
+# =>    3: span                   %0
+# =>    4: return                 %0
+```
+
+The `IrBlock` map has these fields:
+
+| Field              | Type                   | Description                                                                                                  |
+| ------------------ | ---------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **instructions**   | array                  | The instructions, run in order from index 0. Jumps and branches refer to these indexes.                      |
+| **spans**          | [`Span`](#span) array  | The source span of each instruction, at the same index.                                                      |
+| **data**           | byte array             | String and binary data that the instructions refer to. A `DataSlice`, `{"start": 0, "len": 3}`, is a range of these bytes. |
+| **comments**       | string array           | A comment for each instruction, used when printing the IR. Usually empty strings.                           |
+| **register_count** | unsigned integer       | How many registers the block uses. Registers are numbered from 0.                                            |
+| **file_count**     | unsigned integer       | How many files the block opens for redirection.                                                              |
+
+Versions before 0.117.0 also had an `ast` array, with one entry per instruction.
+
+Each instruction is an externally tagged enum. Most variants are maps that name their operands, where `dst`, `src`, `src_dst`, and similar fields are register numbers. `LoadLiteral` puts a literal in a register. Literals that hold text, such as `{"String": {"start": 0, "len": 3}}`, point into `data`. `Call` runs the command with the given `decl_id`, using the arguments that the `Push*` instructions before it collected. The full list of variants and their fields is in the [`Instruction`](https://docs.rs/nu-protocol/latest/nu_protocol/ir/enum.Instruction.html) and [`Literal`](https://docs.rs/nu-protocol/latest/nu_protocol/ir/enum.Literal.html) documentation, and `view ir` shows which ones a given block uses.
+
+::: details All instructions in 0.117.0
+A variant without fields is a bare string, such as `"PopErrorHandler"`. The others are maps of their fields.
+
+| Instruction          | Fields                             | Effect                                                                                   |
+| -------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------- |
+| `Unreachable`        |                                    | Marks a code path that can't run. Reaching it is an error.                               |
+| `LoadLiteral`        | `dst`, `lit`                       | Loads a literal into `dst`.                                                              |
+| `LoadValue`          | `dst`, `val`                       | Loads a copy of a value, such as the result of constant evaluation, into `dst`.          |
+| `Move`               | `dst`, `src`                       | Moves the value from `src` to `dst`, leaving `src` empty.                                |
+| `Clone`              | `dst`, `src`                       | Copies a collected value from `src` to `dst`.                                            |
+| `Collect`            | `src_dst`                          | Collects a stream into a value, ignoring errors in the stream.                           |
+| `TryCollect`         | `src_dst`                          | Collects a stream into a value, failing on an error in the stream.                       |
+| `Span`               | `src_dst`                          | Gives the value the span of this instruction.                                            |
+| `Drop`               | `src`                              | Drops a value or stream without reading it.                                              |
+| `Drain`              | `src`                              | Reads a stream to its end and discards it, as `;` does.                                  |
+| `DrainIfEnd`         | `src`                              | Like `Drain`, but only for the last element of a pipeline.                               |
+| `LoadVariable`       | `dst`, `var_id`, `preserve_origin` | Loads a variable into `dst`.                                                             |
+| `StoreVariable`      | `var_id`, `src`                    | Stores `src` in a variable.                                                              |
+| `DropVariable`       | `var_id`                           | Removes a variable from the stack.                                                       |
+| `LoadEnv`            | `dst`, `key`                       | Loads an environment variable, failing if it doesn't exist.                              |
+| `LoadEnvOpt`         | `dst`, `key`                       | Loads an environment variable, or `nothing` if it doesn't exist.                         |
+| `StoreEnv`           | `key`, `src`                       | Sets an environment variable.                                                            |
+| `PushPositional`     | `src`                              | Adds a positional argument for the next `Call`.                                          |
+| `AppendRest`         | `src`                              | Adds a spread list of arguments for the next `Call`.                                     |
+| `PushFlag`           | `name`                             | Adds a switch for the next `Call`.                                                       |
+| `PushShortFlag`      | `short`                            | Adds a switch, by its short name, for the next `Call`.                                   |
+| `PushNamed`          | `name`, `src`                      | Adds a flag with a value for the next `Call`.                                            |
+| `PushShortNamed`     | `short`, `src`                     | Adds a flag with a value, by its short name, for the next `Call`.                        |
+| `PushParserInfo`     | `name`, `info`                     | Adds parser information for the next `Call`.                                             |
+| `RedirectOut`        | `mode`                             | Sets where the next `Call` sends stdout.                                                 |
+| `RedirectErr`        | `mode`                             | Sets where the next `Call` sends stderr.                                                 |
+| `CheckErrRedirected` | `src`                              | Fails if stderr wasn't redirected in the stream in `src`.                                |
+| `OpenFile`           | `file_num`, `path`, `append`       | Opens a file for a redirection.                                                          |
+| `WriteFile`          | `file_num`, `src`                  | Writes `src` to a redirection file.                                                      |
+| `CloseFile`          | `file_num`                         | Closes a redirection file.                                                               |
+| `Call`               | `decl_id`, `src_dst`               | Calls a command with `src_dst` as input, and puts its output in `src_dst`.               |
+| `StringAppend`       | `src_dst`, `val`                   | Appends a value to a string, for string interpolation.                                   |
+| `GlobFrom`           | `src_dst`, `no_expand`             | Turns a string into a glob.                                                              |
+| `ListPush`           | `src_dst`, `item`                  | Adds an item to a list.                                                                  |
+| `ListSpread`         | `src_dst`, `items`                 | Adds all the items of a list to a list.                                                  |
+| `RecordInsert`       | `src_dst`, `key`, `val`            | Adds a column to a record, failing if it exists.                                         |
+| `RecordSpread`       | `src_dst`, `items`                 | Adds all the columns of a record to a record.                                            |
+| `Not`                | `src_dst`                          | Negates a boolean.                                                                       |
+| `BinaryOp`           | `lhs_dst`, `op`, `rhs`             | Applies an [`Operator`](#operator) and puts the result in `lhs_dst`.                     |
+| `FollowCellPath`     | `src_dst`, `path`                  | Replaces a value with the value at a cell path.                                          |
+| `CloneCellPath`      | `dst`, `src`, `path`               | Copies the value at a cell path of `src` to `dst`.                                       |
+| `UpsertCellPath`     | `src_dst`, `path`, `new_value`     | Sets the value at a cell path.                                                           |
+| `UpdateVarCellPath`  | `var_id`, `cell_path`, `new_value` | Sets the value at a cell path of a mutable variable, in place.                           |
+| `Jump`               | `index`                            | Continues at instruction `index`.                                                        |
+| `BranchIf`           | `cond`, `index`                    | Jumps to `index` if `cond` is `true`.                                                    |
+| `BranchIfEmpty`      | `src`, `index`                     | Jumps to `index` if `src` is empty or `nothing`.                                         |
+| `Match`              | `pattern`, `src`, `index`          | Jumps to `index` and binds variables if `src` matches the pattern.                       |
+| `CheckMatchGuard`    | `src`                              | Fails if a `match` guard isn't a boolean.                                                |
+| `Iterate`            | `dst`, `stream`, `end_index`       | Puts the next item of `stream` in `dst`, or jumps to `end_index` at the end.             |
+| `UnwindJump`         | `index`, `handlers`                | Jumps to `index` after leaving `handlers` levels of `try`, as `break` and `continue` do. |
+| `OnError`            | `index`                            | Starts a `catch` handler at `index`.                                                     |
+| `OnErrorInto`        | `index`, `dst`                     | Starts a `catch` handler at `index` that receives the error in `dst`.                    |
+| `FinallyInto`        | `index`, `dst`                     | Starts a `finally` handler at `index`.                                                   |
+| `PopErrorHandler`    |                                    | Ends the innermost `catch` handler.                                                      |
+| `BeginFinally`       |                                    | Marks the start of a `finally` block.                                                    |
+| `EndFinally`         |                                    | Marks the end of a `finally` block.                                                      |
+| `ReturnEarly`        | `src`                              | Returns `src` early, running pending `finally` blocks first.                             |
+| `Return`             | `src`                              | Returns `src` from the block.                                                            |
+
+:::
+
 ### `Signal`
 
 The `Signal` message type is used to relay a signal from the engine to the plugin, allowing the plugin to respond to various system-level or user-initiated signals. The message body consists of a `SignalAction` enum, which currently supports the following variants:
 
 - **`Interrupt`**: Sent when the engine receives an interrupt signal (such as Ctrl+C), to gracefully interrupt a plugin's operation.
-- **`Reset`**: Sent when the engine’s `reset_signals` method is called, indicating that the plugin should reset its signal state.
+- **`Reset`**: Sent when the engine's `reset_signals` method is called, indicating that the plugin should reset its signal state. Only the REPL calls it, as [Signal Handling in Plugins](#signal-handling-in-plugins) describes.
 
 Example:
 
@@ -797,7 +933,7 @@ These are messages sent from the plugin to the engine. [`Hello`](#hello) and [`S
 
 An error occurred while attempting to fulfill the request. The body is a [`LabeledError`](#labelederror).
 
-It is strongly preferred to provide labeled messages whenever possible to let the user know where the problem might be in their script. If there is no more suitable span from a value that can be used, `head` from [`EvaluatedCall`](#evaluatedcall) is a good fallback.
+It is strongly preferred to provide labeled messages whenever possible to let the user know where the problem might be in their script. If there is no more suitable span from a value that can be used, `head` from [`EvaluatedCall`](#run-plugin-call) is a good fallback.
 
 Example:
 
@@ -924,6 +1060,40 @@ Example:
 }
 ```
 
+Each element has a `sig` map, which describes one command, and an `examples` array. The fields of `sig`:
+
+| Field                               | Type                  | Description                                                                                                                                                                                |
+| ----------------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **name**                            | string                | The command name. A subcommand's name includes its parent, as in `"len chars"`.                                                                                                            |
+| **description**                     | string                | The one-line description shown in `help` and in completions.                                                                                                                               |
+| **extra_description**               | string                | Longer help text, shown below the description in `help`. May be empty.                                                                                                                     |
+| **search_terms**                    | string array          | Other words that `help --find` matches.                                                                                                                                                    |
+| **required_positional**             | positional array      | Required positional arguments, in order.                                                                                                                                                   |
+| **optional_positional**             | positional array      | Optional positional arguments, after the required ones.                                                                                                                                    |
+| **rest_positional**                 | positional or null    | An argument that takes all remaining positional values, or `null`.                                                                                                                         |
+| **named**                           | flag array            | Flags and switches. Include the `help` switch (`-h`) as in the example. The engine shows the help page itself, but without this entry `--help` is an unknown flag.                         |
+| **input_output_types**              | array of `Type` pairs | The input types the command accepts, each with the output type it produces for that input. An empty array accepts any input.                                                               |
+| **allow_variants_without_examples** | boolean               | Used only by Nushell's own tests of built-in commands. It has no effect on plugins.                                                                                                        |
+| **is_filter**                       | boolean               | Not used. Send `false`.                                                                                                                                                                    |
+| **creates_scope**                   | boolean               | Whether the parser opens a new variable scope for the call's arguments. Send `false`.                                                                                                      |
+| **allows_unknown_args**             | boolean               | Pass undeclared flags and extra arguments through as positional values, the way `extern` does. A flag like `--what` arrives as the string `"--what"`.                                      |
+| **rejects_unknown_flags**           | boolean, optional     | Added in 0.117.0, and `false` if left out. With `allows_unknown_args`, an undeclared flag becomes a parse error, while extra positional values still pass through, like `extern --strict`. |
+| **complete**                        | string, map, or null  | A completer for the whole command line, used by `extern` declarations. Send `null`.                                                                                                        |
+| **category**                        | string or map         | The category in `help commands`, such as `"Default"`, `"Experimental"`, or `"Filters"`, or `{"Custom": "name"}` for a category of your own.                                                |
+
+A positional argument is a map with `name`, `desc`, `shape`, `completion`, `var_id`, and `default_value`. A flag is a map with `long`, `short` (a one-character string or `null`), `arg` (the shape of its value, or `null` for a switch), `required`, `desc`, `completion`, `var_id`, and `default_value`. In both:
+
+- `shape` and `arg` are a [`SyntaxShape`](https://docs.rs/nu-protocol/latest/nu_protocol/enum.SyntaxShape.html), which tells the parser how to parse the argument. Simple shapes are strings, such as `"Int"`, `"String"`, `"Filepath"`, `"CellPath"`, or `"Any"`. Others are maps, such as `{"List": "Int"}` or `{"Closure": null}` for a closure with any parameters.
+- `completion` is `null`, or `{"List": ["alpha", "beta"]}` to offer a fixed list of values when the user presses Tab. For values computed at that time, answer [`GetCompletion`](#getcompletion-plugin-call) instead.
+- `var_id` is for commands defined in Nushell code. Send `null`.
+- `default_value` is a [`Value`](#value-types) or `null`. `help` shows it, but the engine doesn't fill it in. When the user leaves the argument out, it's missing from the [`EvaluatedCall`](#run-plugin-call), and the plugin has to apply the default.
+
+A `Type` is a string, such as `"Any"`, `"Nothing"`, `"String"`, `"Int"`, or `"Binary"`, or a map for a type with parameters, such as `{"List": "Int"}`, `{"Record": [["name", "String"], ["size", "Filesize"]]}` (an empty array for any record), or `{"Custom": "polars_dataframe"}`.
+
+Fields whose type allows `null` can be left out, and `rejects_unknown_flags` can be too. The others are required.
+
+Each element of `examples` is a map with `example`, `description`, and `result`. `example` is the Nushell code, and `result` is a [`Value`](#value-types) or `null`. `help` shows the examples and their results. The Rust SDK converts custom values in example results with the plugin's `custom_value_to_base_value()` before sending them.
+
 #### `Ordering` plugin call response
 
 A successful response to the [`PartialCmp` custom value op](#partialcmp). The body is either [`Ordering`](#ordering) if the comparison is possible, or `null` if the values can't be compared.
@@ -967,7 +1137,7 @@ A successful response to a [`GetCompletion` plugin call](#getcompletion-plugin-c
 | **append_whitespace** | boolean                 | **Required.** Whether to append a space after the suggestion is accepted.           |
 | **match_indices**     | unsigned integer array? | Indices of the graphemes in the suggestion that matched the typed text.             |
 | **span**              | [`Span`](#span)?        | The part of the input buffer to replace, if different from the argument's span.     |
-| **kind**              | string or map?          | The kind of suggestion, such as `"File"` or `"Directory"`, which affects its style. |
+| **kind**              | string or map?          | The kind of suggestion, such as `"File"` or `"Directory"`. See below.               |
 
 Example:
 
@@ -1003,9 +1173,27 @@ Example:
 }
 ```
 
+`kind` is `null` or one of these:
+
+| `kind`                                   | Reported by `commandline complete --detailed` as |
+| ---------------------------------------- | ------------------------------------------------ |
+| `"CellPath"`                             | `cell-path`                                      |
+| `"Directory"`                            | `directory`                                      |
+| `"File"`                                 | `file`                                           |
+| `"Flag"`                                 | `flag`                                           |
+| `"Module"`                               | `module`                                         |
+| `"Operator"`                             | `operator`                                       |
+| `"Variable"`                             | `variable`                                       |
+| `{"Command": [command_type, decl_id]}`   | `command`, with the command type as its `type`   |
+| `{"Value": type}`                        | `value`, with the type as its `type`             |
+
+In the `Command` form, `command_type` is one of `"Builtin"`, `"Custom"`, `"Keyword"`, `"External"`, `"Alias"`, or `"Plugin"`, and `decl_id` is a declaration ID or `null`. In the `Value` form, `type` is a type in the same form as in [signatures](#signature-plugin-call-response), such as `"Int"` or `{"List": "String"}`. Besides `commandline complete`, the Nushell language server uses `kind` to label suggestions in an editor.
+
+The engine filters the suggestions against the text the user has typed, using the user's completion settings, and sorts them, so the plugin can return every candidate. The engine ignores a `span` that starts before the beginning of the command line, or ends before it starts, and uses the argument's own span instead.
+
 #### `PipelineData` plugin call response
 
-A successful result with a Nu [`Value`](#value) or stream. The body is a [`PipelineDataHeader`](#pipelinedataheader).
+A successful result with a Nu [`Value`](#value-types) or stream. The body is a [`PipelineDataHeader`](#pipelinedataheader).
 
 Example:
 
@@ -1057,7 +1245,7 @@ The engine call ID **must** be unique for the lifetime of the plugin, and it is 
 #### `GetConfig` engine call
 
 Get the Nushell engine configuration. Returns a [`Config` response](#config-engine-call-response) if
-successful.
+successful. In Rust, call [`EngineInterface::get_config()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.get_config), which returns an `Arc<Config>`. Because the configuration is large, the engine only sends it when asked.
 
 Example:
 
@@ -1075,7 +1263,37 @@ Example:
 
 Get the configuration for the plugin, from its section in `$env.config.plugins.NAME` if present. Returns a [`PipelineData` response](#pipelinedata-engine-call-response) if successful, which will contain either a [`Value`](#value-header-variant) or be [`Empty`](#empty-header-variant) if there is no configuration for the plugin set.
 
-If the plugin configuration was specified as a closure, the engine will evaluate that closure and return the result, which may cause an [error response](#error-engine-call-response).
+If the plugin configuration was specified as a closure, the engine evaluates that closure, with no arguments and in the scope of the plugin call, each time it receives this engine call, and returns the result. If the closure fails, the response is still `PipelineData`, with a `Value` that holds an [`Error`](#error) value, not an [error response](#error-engine-call-response). For example:
+
+```json
+{
+  "EngineCallResponse": [
+    0,
+    {
+      "PipelineData": {
+        "Value": [
+          {
+            "Error": {
+              "error": {
+                "msg": "boom",
+                "labels": [{ "text": "", "span": { "start": 170716, "end": 170729 } }],
+                "code": null,
+                "url": null,
+                "help": null,
+                "inner": []
+              },
+              "span": { "start": 170740, "end": 170752 }
+            }
+          },
+          null
+        ]
+      }
+    }
+  ]
+}
+```
+
+In Rust, call [`EngineInterface::get_plugin_config()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.get_plugin_config). [Plugin configuration](plugins.md#plugin-configuration) shows what it returns in each case.
 
 Example:
 
@@ -1170,7 +1388,7 @@ Example:
 
 #### `GetHelp` engine call
 
-Get fully formatted help text for the current command. This can help with implementing top-level commands that just list their subcommands, rather than implementing any specific functionality. The response on success is [`Value` pipeline data](#value-header-variant) that always contains a string.
+Get fully formatted help text for the current command. This can help with implementing top-level commands that just list their subcommands, rather than implementing any specific functionality. The response on success is [`Value` pipeline data](#value-header-variant) that always contains a string. It's the same text that `--help` prints. In Rust, call [`EngineInterface::get_help()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.get_help), which returns a `String`.
 
 Example:
 
@@ -1193,6 +1411,14 @@ This call responds with [`Empty` pipeline data](#empty-header-variant) on succes
 This call will fail with an error if the plugin is already in the foreground.
 
 The plugin **should** call [`LeaveForeground`](#leaveforeground-engine-call) when it no longer needs to be in the foreground. Note that the plugin will also automatically be removed from the foreground when the plugin call response is received, even if the plugin call returns a stream.
+
+In Rust, [`EngineInterface::enter_foreground()`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.enter_foreground) sends this call, joins the process group from the response if there is one, and returns a `ForegroundGuard`. Keep the guard alive while you use the terminal. Dropping it moves the plugin back to its own process group and sends `LeaveForeground`, but discards any error. Call `.leave()` on the guard instead to get that error as a `Result`. On Windows and other non-Unix platforms, a response that asks the plugin to join a process group makes `enter_foreground()` return an error, since process groups aren't supported there.
+
+```rust
+let guard = engine.enter_foreground()?;
+// ... read keys and draw on the terminal ...
+guard.leave()?;
+```
 
 Example:
 
@@ -1228,7 +1454,7 @@ Example:
 
 #### `GetSpanContents` engine call
 
-Get the contents of a [`Span`](#span) from the engine. This can be used for viewing the source code that generated a value. The argument is a [`Span`](#span). The response on success is [`Value` pipeline data](#value-header-variant) containing a [`Binary`](#binary) value, as the result is not guaranteed to be valid UTF-8.
+Get the contents of a [`Span`](#span) from the engine. This can be used for viewing the source code that generated a value. The argument is a [`Span`](#span). The response on success is [`Value` pipeline data](#value-header-variant) containing a [`Binary`](#binary) value, as the result is not guaranteed to be valid UTF-8. In Rust, call [`EngineInterface::get_span_contents(span)`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.get_span_contents), which returns a `Vec<u8>`. Spans count bytes, so a span can cut through a multibyte character. Use `String::from_utf8_lossy()` to display the result.
 
 Example:
 
@@ -1253,8 +1479,8 @@ Pass a [`Closure`](#closure) and arguments to the engine to be evaluated. Return
 
 | Field               | Type                                        | Description                                                            |
 | ------------------- | ------------------------------------------- | ---------------------------------------------------------------------- |
-| **closure**         | spanned [`Closure`](#closure)               | The closure to call, generally from a [`Value`](#value).               |
-| **positional**      | [`Value`](#value) array                     | Positional arguments for the closure.                                  |
+| **closure**         | spanned [`Closure`](#closure)               | The closure to call, generally from a [`Value`](#value-types).               |
+| **positional**      | [`Value`](#value-types) array                     | Positional arguments for the closure.                                  |
 | **input**           | [`PipelineDataHeader`](#pipelinedataheader) | Input for the closure.                                                 |
 | **redirect_stdout** | boolean                                     | Whether to redirect stdout if the closure ends in an external command. |
 | **redirect_stderr** | boolean                                     | Whether to redirect stderr if the closure ends in an external command. |
@@ -1327,7 +1553,7 @@ Pass a command's declaration ID (found via [`FindDecl`](#finddecl-engine-call)) 
 | Field               | Type                                        | Description                                                                     |
 | ------------------- | ------------------------------------------- | ------------------------------------------------------------------------------- |
 | **decl_id**         | unsigned integer                            | The ID of the declaration to call.                                              |
-| **call**            | [`EvaluatedCall`](#evaluatedcall)           | Arguments and head span for the call.                                           |
+| **call**            | [`EvaluatedCall`](#run-plugin-call)           | Arguments and head span for the call.                                           |
 | **input**           | [`PipelineDataHeader`](#pipelinedataheader) | Input for the command.                                                          |
 | **redirect_stdout** | boolean                                     | Whether to redirect stdout if the declared command ends in an external command. |
 | **redirect_stderr** | boolean                                     | Whether to redirect stderr if the declared command ends in an external command. |
@@ -1387,7 +1613,7 @@ Example (calling `"hello" | str length --grapheme-clusters`, where `str length` 
 
 Get the compiled intermediate representation (IR) of a block, such as the block of a [`Closure`](#closure) passed to the plugin. The argument is the block ID, as an unsigned integer. Returns an [`IrBlock` response](#irblock-engine-call-response) if successful, or an [error](#error-engine-call-response) if the block doesn't exist or wasn't compiled.
 
-The IR format is internal to Nu and can change between versions, so plugins that use this call are likely to depend on a specific Nu version.
+The IR format is internal to Nu and can change between versions, so plugins that use this call are likely to depend on a specific Nu version. In Rust, call [`EngineInterface::get_block_ir(block_id)`](https://docs.rs/nu-plugin/latest/nu_plugin/struct.EngineInterface.html#method.get_block_ir), which returns an `IrBlock`. A closure's block ID is `closure.item.block_id`.
 
 Example:
 
@@ -1431,7 +1657,7 @@ All stream messages reference a stream ID. This identifier is an integer startin
 
 This message is sent from producer to consumer. The body is a 2-tuple (array) of (`id`, `data`).
 
-The `data` is either a `List` map for a list stream, in which case the body is the [`Value`](#value) to be sent, or `Raw` for a raw stream, in which case the body is either an `Ok` map with a byte buffer, or an `Err` map with a [`LabeledError`](#labelederror).
+The `data` is either a `List` map for a list stream, in which case the body is the [`Value`](#value-types) to be sent, or `Raw` for a raw stream, in which case the body is either an `Ok` map with a byte buffer, or an `Err` map with a [`LabeledError`](#labelederror).
 
 Examples:
 
@@ -1554,22 +1780,38 @@ Below is an example of registering a handler that responds to both `Interrupt` a
 ```rust
 let _guard = engine.register_signal_handler(Box::new(move |action| {
     match action {
-        SignalAction::Interrupt => println!("Interrupt signal received"),
-        SignalAction::Reset => println!("Reset signal received"),
+        SignalAction::Interrupt => eprintln!("Interrupt signal received"),
+        SignalAction::Reset => eprintln!("Reset signal received"),
     }
 }))?;
 ```
 
+When you press Ctrl+C, Nu sends `Interrupt` to every plugin that is running, whether or not it is in the middle of a call. Only the REPL sends `Reset`. It sends one at the start of every iteration, before it draws the prompt, so a running plugin gets a `Reset` after each command line finishes. It also sends one when Ctrl+C interrupts the prompt while it is being drawn, and before it runs a line if the prompt or the line editor was interrupted. Scripts and `nu -c` never send it.
+
+A handler runs on the thread that reads the plugin's input from Nu. Until the handler returns, the plugin receives nothing else: no stream data, no engine call responses, and no new calls. Keep handlers short and leave the real work to the thread that is running the call. The `example ctrlc` command in `nu_plugin_example` works this way. Its handler only sends on a channel, and `run()` waits on the other end. The list of handlers stays locked while they run, so registering a handler or dropping a guard from inside a handler never returns.
+
 #### `signals()`
 
-The `signals()` method allows the plugin to check the status of the signal, specifically for `Interrupt`. This method returns a `Signals` struct, which includes the method `interrupted()` that indicates if an interrupt has occurred.
+The `signals()` method returns the plugin's `Signals`. The SDK sets its interrupt flag when an `Interrupt` arrives and clears it on `Reset`, before it runs the registered handlers. The flag belongs to the whole plugin process. Every `EngineInterface` returns the same `Signals`, so an interrupt shows up in all of the plugin's calls that are running, and a `Reset` clears it for all of them.
+
+`interrupted()` reports whether the flag is set:
 
 ```rust
 if engine.signals().interrupted() {
-    println!("Operation was interrupted.");
+    eprintln!("Operation was interrupted.");
 }
 ```
-Use `signals().interrupted()` to check for interrupt status, particularly when managing long-running operations.
+
+`check(&span)` returns `Err(ShellError::Interrupted { .. })` once the flag is set, so a long loop can stop with `?`. That works in `run()`, which returns `LabeledError`, because `LabeledError` converts from `ShellError`:
+
+```rust
+for item in items {
+    engine.signals().check(&call.head)?;
+    // work on item
+}
+```
+
+A list stream that the plugin builds with `engine.signals()`, for example with `into_pipeline_data(span, engine.signals().clone())`, checks the flag on each item and ends once it is set. `PipelineData::map`, which the `double` example in the [plugins chapter](plugins.md#using-streams-in-plugins) uses, passes its `signals` argument on only when the input is a list or range value. When the input is already a stream, the mapped stream keeps the input stream's signals.
 
 ## Encoding
 
@@ -1965,7 +2207,7 @@ An associative key-value map. If records are contained in a list, this renders a
 
 | Field    | Type                            |
 | -------- | ------------------------------- |
-| **val**  | map: string ⇒ [`Value`](#value) |
+| **val**  | map: string ⇒ [`Value`](#value-types) |
 | **span** | [`Span`](#span)                 |
 
 Example:
@@ -2011,7 +2253,7 @@ A list of values of any type.
 
 | Field    | Type                    |
 | -------- | ----------------------- |
-| **vals** | [`Value`](#value) array |
+| **vals** | [`Value`](#value-types) array |
 | **span** | [`Span`](#span)         |
 
 Example:
@@ -2083,7 +2325,7 @@ A reference to a parsed block of Nushell code, with variables captured from scop
 | Field        | Type                                                          |
 | ------------ | ------------------------------------------------------------- |
 | **block_id** | unsigned integer                                              |
-| **captures** | array of pairs (unsigned integer `var_id`, [`Value`](#value)) |
+| **captures** | array of pairs (unsigned integer `var_id`, [`Value`](#value-types)) |
 
 The plugin **should not** try to inspect the contents of the closure. It is recommended that this is only used as an argument to the [`EvalClosure` engine call](#evalclosure-engine-call). The exact representation of a closure is likely to change in the future to avoid serializing all of the captures.
 
@@ -2352,7 +2594,7 @@ The representation is the following string:
 
 #### `Value` header variant
 
-A single value. Does not start a stream, so there is no identifier. The body is a 2-tuple (array): (`value`, `metadata`), where `value` is a [`Value`](#value) and `metadata` is either [`PipelineMetadata`](#pipelinemetadata) or `null`. Both elements **must** be present.
+A single value. Does not start a stream, so there is no identifier. The body is a 2-tuple (array): (`value`, `metadata`), where `value` is a [`Value`](#value-types) and `metadata` is either [`PipelineMetadata`](#pipelinemetadata) or `null`. Both elements **must** be present.
 
 Example:
 
@@ -2432,7 +2674,7 @@ Starts a byte stream. Expect [`Data`](#data) messages of the `Raw` variant with 
 | ------------ | ---------------------------------------- | ------------------------------------------------- |
 | **id**       | integer                                  | The stream identifier                             |
 | **span**     | [`Span`](#span)                          | The source code reference that caused the stream. |
-| **type**     | [`ByteStreamType`](#bytestreamtype)      | The expected type of the stream.                  |
+| **type**     | `ByteStreamType`      | The expected type of the stream.                  |
 | **metadata** | [`PipelineMetadata`](#pipelinemetadata)? | Metadata about the stream, or `null`.             |
 
 <a name="bytestreamtype"></a> Byte streams carry a `type` field with one of the three following strings:
@@ -2472,7 +2714,7 @@ Metadata that can be attached to pipeline data, as shown by the [`metadata`](/co
 | **data_source**  | string or map                    | Where the data came from: `"None"`, `"HtmlThemes"`, or `{"FilePath": "<path>"}`.   |
 | **path_columns** | string array                     | Names of columns that contain file paths (e.g. `["name"]` for the output of `ls`). |
 | **content_type** | string?                          | The MIME type of the data, e.g. `"application/json"`.                              |
-| **custom**       | map: string ⇒ [`Value`](#value)? | Other metadata, set by commands and plugins. Defaults to an empty map.             |
+| **custom**       | map: string ⇒ [`Value`](#value-types)? | Other metadata, set by commands and plugins. Defaults to an empty map.             |
 
 `data_source` and `path_columns` are required.
 
@@ -2546,6 +2788,13 @@ Example:
 
 This struct describes the configuration of Nushell. It is quite large and frequently changing, so please refer to the Rust documentation if there is anything you need from it.
 
+It's a map with the same top-level keys as `$env.config`, 39 of them in 0.117.0: `filesize`, `table`, `ls`, `clip`, `color_config`, `footer_mode`, `float_precision`, `recursion_limit`, `use_ansi_coloring`, `completions`, `edit_mode`, `show_hints`, `hinter`, `status_line`, `history`, `keybindings`, `abbreviations`, `menus`, `hooks`, `rm`, `shell_integration`, `buffer_editor`, `show_banner`, `bracketed_paste`, `render_right_prompt_on_last_line`, `explore`, `tui`, `cursor_shape`, `datetime_format`, `error_style`, `error_lines`, `display_errors`, `use_kitty_protocol`, `highlight_resolved_externals`, `auto_cd_implicit`, `duration_max_unit`, `max_last_result_size`, `plugins`, and `plugin_gc`. The nested keys also follow `$env.config`, so the [configuration reference](/book/config_reference.md) describes what each one means. The values are serialized from Nushell's Rust types, though, so they don't always look like what `$env.config` shows:
+
+- A setting that takes one of a few words is the Rust variant name, which is capitalized: `"edit_mode": "Emacs"`, `"use_ansi_coloring": "Auto"`, `"history": {"file_format": "Plaintext", ...}`.
+- A setting with a choice of forms is a tagged map, such as `"footer_mode": {"RowCount": 25}` or `"trim": {"Wrap": {"try_to_keep_words": true}}` in `table`.
+- Durations are integers of nanoseconds, as in `"plugin_gc": {"default": {"enabled": true, "stop_after": 10000000000}, ...}`, except `table.batch_duration`, which uses the `{"secs": 1, "nanos": 0}` form. Filesizes, such as `max_last_result_size`, are integers of bytes.
+- Settings that can hold any Nushell value are [`Value`s](#value-types). These are `buffer_editor`, the hooks in `hooks`, the entries of `color_config`, `explore`, `tui`, and `plugins`, and the fields of each entry in `keybindings` and `menus`. For example, `"buffer_editor": {"Nothing": {"span": {"start": 0, "end": 0}}}`.
+
 ### `Ordering`
 
 [Documentation](https://doc.rust-lang.org/stable/std/cmp/enum.Ordering.html)
@@ -2562,14 +2811,52 @@ We serialize the Rust `Ordering` type as literal strings, for example:
 
 [Documentation](https://docs.rs/nu-protocol/latest/nu_protocol/ast/enum.Operator.html)
 
-Serialized with serde's default enum representation. Examples:
+Serialized with serde's default enum representation, as a map from the operator's group to its name. These are all of the operators in 0.117.0:
 
-```js
-{ "Math": "Add" }              // +       Math(Add)
-{ "Math": "Concatenate" }      // ++      Math(Concatenate)
-{ "Bits": "BitOr" }            // bit-or  Bits(BitOr)
-{ "Comparison": "RegexMatch" } // =~      Comparison(RegexMatch)
-```
+| Serialized form                        | Nushell operator  |
+| -------------------------------------- | ----------------- |
+| `{"Comparison": "Equal"}`              | `==`              |
+| `{"Comparison": "NotEqual"}`           | `!=`              |
+| `{"Comparison": "LessThan"}`           | `<`               |
+| `{"Comparison": "GreaterThan"}`        | `>`               |
+| `{"Comparison": "LessThanOrEqual"}`    | `<=`              |
+| `{"Comparison": "GreaterThanOrEqual"}` | `>=`              |
+| `{"Comparison": "RegexMatch"}`         | `=~`              |
+| `{"Comparison": "NotRegexMatch"}`      | `!~`              |
+| `{"Comparison": "In"}`                 | `in`              |
+| `{"Comparison": "NotIn"}`              | `not-in`          |
+| `{"Comparison": "Has"}`                | `has`             |
+| `{"Comparison": "NotHas"}`             | `not-has`         |
+| `{"Comparison": "StartsWith"}`         | `starts-with`     |
+| `{"Comparison": "NotStartsWith"}`      | `not-starts-with` |
+| `{"Comparison": "EndsWith"}`           | `ends-with`       |
+| `{"Comparison": "NotEndsWith"}`        | `not-ends-with`   |
+| `{"Comparison": "OlderThan"}`          | `older-than`      |
+| `{"Comparison": "NewerThan"}`          | `newer-than`      |
+| `{"Math": "Add"}`                      | `+`               |
+| `{"Math": "Subtract"}`                 | `-`               |
+| `{"Math": "Multiply"}`                 | `*`               |
+| `{"Math": "Divide"}`                   | `/`               |
+| `{"Math": "FloorDivide"}`              | `//`              |
+| `{"Math": "Modulo"}`                   | `mod`             |
+| `{"Math": "Pow"}`                      | `**`              |
+| `{"Math": "Concatenate"}`              | `++`              |
+| `{"Boolean": "And"}`                   | `and`             |
+| `{"Boolean": "Or"}`                    | `or`              |
+| `{"Boolean": "Xor"}`                   | `xor`             |
+| `{"Bits": "BitAnd"}`                   | `bit-and`         |
+| `{"Bits": "BitOr"}`                    | `bit-or`          |
+| `{"Bits": "BitXor"}`                   | `bit-xor`         |
+| `{"Bits": "ShiftLeft"}`                | `bit-shl`         |
+| `{"Bits": "ShiftRight"}`               | `bit-shr`         |
+| `{"Assignment": "Assign"}`             | `=`               |
+| `{"Assignment": "AddAssign"}`          | `+=`              |
+| `{"Assignment": "SubtractAssign"}`     | `-=`              |
+| `{"Assignment": "MultiplyAssign"}`     | `*=`              |
+| `{"Assignment": "DivideAssign"}`       | `/=`              |
+| `{"Assignment": "ConcatenateAssign"}`  | `++=`             |
+
+A plugin receives an operator in the [`Operation`](#operation) custom value op only when its custom value is on the left side. Compound assignments such as `+=` and `++=` arrive as the matching `Math` operator, so in practice a plugin never receives an `Assignment` operator. The `has` and `not-has` operators reverse their operands, so `$list has $value` arrives as `In` on `$value` when `$value` is the custom value.
 
 ### `SignalAction`
 

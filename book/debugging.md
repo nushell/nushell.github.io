@@ -27,7 +27,24 @@ dap.configurations.nu = {
 }
 ```
 
-VS Code needs an extension that registers a debugger for Nushell, which then reads the same launch settings from `launch.json`.
+In VS Code, the debugger comes with the [Nushell extension](https://marketplace.visualstudio.com/items?itemName=TheNuProjectContributors.vscode-nushell-lang), the same one that sets up the [language server](./language_server.md). Debugger support was added to the extension after its 2.0.6 release, so you need a newer release, or a build from the extension's [repository](https://github.com/nushell/vscode-nushell-lang). The extension registers the debug type `nushell` and runs the same `nu` as its language server. A configuration in `.vscode/launch.json` looks like this:
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "nushell",
+      "request": "launch",
+      "name": "Debug nu script",
+      "program": "${file}",
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}
+```
+
+Zed only runs debug adapters that are built into Zed or provided by a Zed extension. The [Nu extension for Zed](https://github.com/zed-extensions/nu) provides the language server but no debug adapter, so Zed can't start `nu --dap` yet.
 
 The debugger loads your `env.nu` and `config.nu` before it runs the script, so the script sees the same custom commands, aliases, and environment as your shell does. Add `-n` to the arguments (`args = { '--dap', '-n' }`) to start from the defaults instead. While the configuration files run, [`$nu.is-dap`](./special_variables.md#nu) is `true`.
 
@@ -39,7 +56,7 @@ These are the settings a launch configuration can have:
 | -------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `program`            |         | The absolute path of the `.nu` script to debug. Required.                                                                                        |
 | `args`               | `[]`    | Arguments for `main`, or for the `entryPoint` command, as a list of strings. They are parsed the way `nu <script> ...args` parses them.          |
-| `cwd`                |         | The directory to run the script in.                                                                                                              |
+| `cwd`                |         | The directory to run the script in. Without it, the script runs in the directory that holds the script, not the editor's.                        |
 | `stopOnEntry`        | `false` | Pause before the first line runs.                                                                                                                |
 | `entryPoint`         |         | A command to run after the script's top level, for a file that only defines commands. Without it, `main` runs if the script has one.             |
 | `timeTravel`         | `true`  | Record every line that runs, so you can [step backward](#stepping-backward). With `false`, only the places where the script paused are recorded. |
@@ -47,20 +64,24 @@ These are the settings a launch configuration can have:
 
 The script runs the way `nu <script> ...args` would: first the top-level code, then `main` with the arguments from `args`, or the command named in `entryPoint`.
 
+The VS Code configuration above, like the one the extension generates, sets `cwd` to `${workspaceFolder}`, the folder open in VS Code. Leave `cwd` out to run the script in its own directory.
+
 ## Breakpoints and Stepping
 
-Set a breakpoint on a line, and the script pauses there. A breakpoint on a line that can't pause, such as a comment, moves to the next line that can.
+Set a breakpoint on a line, and the script pauses there. A breakpoint on a line that can't pause, such as a comment, moves to the next line that can. If that puts two breakpoints in the same place, for example one on a comment and one on the line below it, only the first one works. The editor shows the other as unverified, with a message such as `another breakpoint already covers line 5`.
 
 A line often holds several steps. In `let doubled = ($nums | each {|n| $n * 2 })`, the `let`, the `each` call, and the closure body each run separately. An ordinary breakpoint pauses at the first of them and then again in the closure body for every item. An _inline_ breakpoint, set at a column (<kbd>Shift</kbd>+<kbd>F9</kbd> in VS Code), pauses at only that step.
 
 Breakpoints can also be:
 
-- **Conditional**: the condition is a Nushell expression, such as `$n == 3`, and the script pauses only when it is `true`.
-- **Logpoints**: instead of pausing, the breakpoint writes a message to the debug console. Expressions in braces are evaluated, so `names has {$names | length} items` prints `names has 2 items`.
+- **Conditional**: the condition is a Nushell expression, such as `$n == 3`, and the script pauses only when it is `true`. If the condition fails with an error or returns something other than a `bool`, the script pauses anyway, and a note starting with `nu-dap:` in the debug console says what went wrong.
+- **Logpoints**: instead of pausing, the breakpoint writes a message to the debug console. Expressions in braces are evaluated, so `names has {$names | length} items` prints `names has 2 items`. A logpoint can have a condition too, and then it logs only when the condition is `true`. A condition that fails or doesn't return a `bool` doesn't hide the message. The logpoint logs anyway, after a `nu-dap:` note that says what went wrong.
 
 The **Runtime errors** exception filter, which is on by default, pauses the script when a command raises an error, including an error that a `try` block will catch. The editor shows the error's code and message.
 
 While the script is paused, you can continue, step over a line, step into a command call or a pipeline stage, or step out of the current command. The call stack shows the command and closure calls that led to the current line.
+
+To stop a script that is running, use the editor's **Pause** command. The script stops at the next step it reaches, as if a breakpoint were there. While a long-running command such as [`sleep`](/commands/docs/sleep.md) or an external program is working, the script isn't at a step, so it pauses when that command finishes.
 
 ## Inspecting Values
 
@@ -73,6 +94,10 @@ When the script pauses, the editor's variables view shows:
 - **Process**: the most recent output of the external commands the script ran.
 
 Nested records, lists, and tables load one level at a time as you expand them, so a large value doesn't slow anything down until you look inside it. Streams are described, not read, so looking at one doesn't consume it.
+
+Each level shows at most its first 200 entries. To see the rest, evaluate the value in the debug console or use the visualizer described below. A string longer than 120 characters shows its first 117 characters, then `…` and its length, such as `(500 chars)`. Most other values are cut to 120 characters, ending in `…`. A closure shows its source and how many variables it captured, such as `{|x| $x * $n} +1 capture`, and expanding it lists those variables with their values.
+
+To see a whole value at once, a client can send the debugger's own `nuDapVisualize` request, which the VS Code extension's **Visualize** action uses. Its arguments name a value from the variables view, either with the value's `variablesReference` or, for a value that doesn't expand, with the `containerReference` of the scope or value that holds it and its `name`. The response has the value as JSON in `value`, its Nushell type in `type`, and `truncated`. Lists and records stop at 1000 items, nesting stops at 8 levels, and binary data, sent as a hex string in a `$nuBinary` object, stops at 64 KiB. When any of these limits cuts the value, `truncated` is `true`. Filesizes, durations, and dates come back as strings, such as `"2.0 kB"`, `"1500000000ns"`, and `"2026-01-02T03:04:05+00:00"`. Use references from the current pause. One that the current pause doesn't have gets the error `no value for that reference (stale after resume?)`.
 
 Watch expressions, the debug console, and hovering over a variable evaluate Nushell expressions using the paused values. They run against a copy of the script's state, so they can't change the script's variables.
 

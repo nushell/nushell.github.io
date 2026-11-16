@@ -64,6 +64,8 @@ $greeting
 
 If you don't want to see the value at the end of a pipeline, add `| ignore`, or use the regular `let nums = ...` form.
 
+After a pipe, only the form without `=` works. `[3 1 2] | let nums = $in` is a `nu::parser::assignment_requires_variable` error. Write `[3 1 2] | let nums` or `let nums = [3 1 2]` instead.
+
 ### Mutable Variables
 
 A mutable variable is allowed to change its value by assignment. These are declared using the `mut` keyword.
@@ -92,6 +94,32 @@ There are a couple of assignment operators used with mutable variables
 2. `++=` requires that the variable and the value are the same kind: both lists, both strings, or both binary values. To add a single item to a list, use `$list ++= [$item]`.
 
 :::
+
+The right-hand side of an assignment can be a whole pipeline:
+
+```nu
+mut file_count = 0
+$file_count = ls | length
+```
+
+An assignment doesn't produce a value. If it is the last statement of a block or custom command, the result is `null`, so end with the variable itself when you want the new value back.
+
+All of the assignment operators also work on part of a value, through a [cell path](/lang-guide/chapters/types/basic_types/cellpath.md). This updates a field of a mutable record, an item of a mutable list, or an environment variable:
+
+```nu
+mut stats = { hits: 0, sizes: [10 20] }
+$stats.hits += 1
+$stats.sizes.1 *= 3
+$stats | to nuon
+# => {hits: 1, sizes: [10, 60]}
+
+$env.RETRIES = 1
+$env.RETRIES += 1
+$env.RETRIES
+# => 2
+```
+
+`=` can create a new field, as in `$stats.misses = 0`. The compound operators read the field first, so they fail with `nu::shell::column_not_found` when it doesn't exist yet.
 
 #### More on Mutability
 
@@ -193,6 +221,22 @@ generate {|weather_station|
 }
 ```
 
+`generate` can also read a list or stream from its input. The closure then gets each input item as its first argument and the state from the previous call as its second. Generation stops when the input runs out, or earlier if the closure returns no `next`. This keeps a running total without a mutable variable:
+
+```nu
+[3 1 4 1 5] | generate {|n, total = 0|
+  let total = $total + $n
+  {out: $total, next: $total}
+}
+# => ╭───┬────╮
+# => │ 0 │  3 │
+# => │ 1 │  4 │
+# => │ 2 │  8 │
+# => │ 3 │  9 │
+# => │ 4 │ 14 │
+# => ╰───┴────╯
+```
+
 ### Performance Considerations
 
 Using [filter commands](/commands/categories/filters.html) with immutable variables is often far more performant than mutable variables with traditional flow-control statements such as `for` and `while`. For example:
@@ -253,6 +297,18 @@ $a
 # =>    ·  ╰── variable not found
 # =>    ╰────
 ```
+
+A constant isn't deleted, only hidden. `unlet` on a `const` makes the parser forget the name from that point on, so a later `$x` is a parse error, but a command or closure defined earlier keeps using the value:
+
+```nu
+const x = 42
+def show [] { $x }
+unlet $x
+show
+# => 42
+```
+
+See [`unlet`](/lang-guide/chapters/declarations.md#unlet) in the Language Reference Guide for the details.
 
 ## Variable Names
 

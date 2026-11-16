@@ -28,6 +28,8 @@ def greet [name] {
 
 Here, we define the `greet` command, which takes a single parameter `name`. Following this parameter is the block that represents what will happen when the custom command runs. When called, the custom command will set the value passed for `name` as the `$name` variable, which will be available to the block.
 
+Put a space between the name and the `[`, since `def greet[name]` is a parse error. The body has to be written out as a `{ ... }` block. A variable that holds a closure can't be used in its place. See [Defining Custom Commands](/lang-guide/chapters/custom_commands.md#defining-custom-commands) in the Language Reference Guide for the exact errors.
+
 To run this command, we can call it just as we would call built-in commands:
 
 ```nu
@@ -164,6 +166,44 @@ In this case, the final expression is the `match` statement which can return:
 - Otherwise, a `record` representing the randomly chosen file
   :::
 
+## Commands that call themselves
+
+A custom command can call itself:
+
+```nu
+def fact [n: int] {
+  if $n <= 1 { 1 } else { $n * (fact ($n - 1)) }
+}
+fact 5
+# => 120
+```
+
+Two commands can also call each other. Nushell defines every `def` in a block before it runs any of the block's code, so a command can call one that is defined further down the file:
+
+```nu
+def is-even [n: int] { if $n == 0 { true } else { is-odd ($n - 1) } }
+def is-odd [n: int] { if $n == 0 { false } else { is-even ($n - 1) } }
+is-even 10
+# => true
+```
+
+Each call that hasn't returned yet counts toward [`$env.config.recursion_limit`](./config_reference.md#recursion-limit), which is 50 by default. The 51st nested call fails instead of crashing Nushell:
+
+```nu
+def depth [n: int] { if $n == 0 { 0 } else { 1 + (depth ($n - 1)) } }
+depth 100
+# => Error: nu::shell::recursion_limit_reached
+# =>
+# =>   × Recursion limit (50) reached
+# =>    ╭─[repl_entry #1:1:20]
+# =>  1 │ def depth [n: int] { if $n == 0 { 0 } else { 1 + (depth ($n - 1)) } }
+# =>    ·                    ─────────────────────────┬────────────────────────
+# =>    ·                                             ╰── This called itself too many times
+# =>    ╰────
+```
+
+Closures count too, so a command that calls itself from inside `each` or `do` uses up the limit twice as fast. See [closures](/lang-guide/chapters/types/basic_types/closure.md) for the details. To go deeper, raise the limit, as in `$env.config.recursion_limit = 200`. A loop or [`reduce`](/commands/docs/reduce.md) has no such limit.
+
 ## Custom Commands and Pipelines
 
 Just as with built-in commands, the return value of a custom command can be passed into the next command in a pipeline. Custom commands can also accept pipeline input. In addition, whenever possible, pipeline input and output is streamed as it becomes available.
@@ -263,17 +303,106 @@ ls | nullify name size
 # => ╰───┴──────┴──────┴──────┴───────────────╯
 ```
 
+The input goes only to the first pipeline of the command's body. Later pipelines start with no input, so a body that does something else first, even a `let`, has to read the input from `$in`, which holds it in every pipeline of the body:
+
+```nu
+def scale [factor: int] {
+  let f = $factor * 10
+  $in | each {|x| $x * $f }
+}
+[1 2 3] | scale 2
+# => ╭───┬────╮
+# => │ 0 │ 20 │
+# => │ 1 │ 40 │
+# => │ 2 │ 60 │
+# => ╰───┴────╯
+```
+
+Without the `$in`, the `each` would get no input, and `scale` would return nothing.
+
+### Streaming and collecting input
+
+Data moves through a pipeline in one of three forms:
+
+- a single value, such as a number, a string, or a list that is already in memory
+- a list stream, whose items arrive one at a time, such as the output of `ls` or `each`
+- a byte stream, which is the raw output of an external command or of `open --raw`
+
+[`describe`](/commands/docs/describe.md) tells you which one a command receives:
+
+```nu
+1..3 | each { $in } | describe
+# => list<int> (stream)
+
+^echo hi | describe
+# => byte stream
+```
+
+A command such as `each` handles one item at a time, so a stream stays a stream. Other code waits for the end of the stream and collects it into a single value. That happens when you:
+
+- use `$in`, as `nullify` does above
+- assign the stream to a variable with `let` or `mut`
+- pass a pipeline in parentheses as an argument, as in `my-command (ls)`
+- run [`collect`](/commands/docs/collect.md)
+- call a command that needs all of its input before it can output anything, such as `sort`, `reverse` or `length`
+
+A collected list stream becomes a list. A collected byte stream becomes a string, or `binary` if the bytes aren't valid UTF-8.
+
+To see the difference, print a message on both sides of the pipe. `double` uses `each` directly, so each number is doubled as soon as it arrives:
+
+```nu
+def double [] { each {|n| print $"double ($n)"; 2 * $n } }
+[1 2 3] | each {|n| print $"send ($n)"; $n } | double | ignore
+# => send 1
+# => double 1
+# => send 2
+# => double 2
+# => send 3
+# => double 3
+```
+
+`double-all` stores `$in` in a variable first, so nothing is doubled until all three numbers have been sent:
+
+```nu
+def double-all [] {
+  let nums = $in
+  $nums | each {|n| print $"double ($n)"; 2 * $n }
+}
+[1 2 3] | each {|n| print $"send ($n)"; $n } | double-all | ignore
+# => send 1
+# => send 2
+# => send 3
+# => double 1
+# => double 2
+# => double 3
+```
+
+With an endless input such as `1..`, `double-all` would never finish. When a command doesn't need all of its input at once, write it in the style of `double`.
+
 ## Naming Commands
 
 In Nushell, a command name can be a string of characters. Here are some examples of valid command names: `greet`, `get-size`, `mycommand123`, `my command`, `命令` (English translation: "command"), and even `😊`.
 
 Strings which might be confused with other parser patterns should be avoided. For instance, the following command names might not be callable:
 
-- `1`, `"1"`, or `"1.5"`: Nushell will not allow numbers to be used as command names
-- `4MiB` or `"4MiB"`: Nushell will not allow filesizes to be used as command names
+- `1`, `"1.5"`, `4MiB`, `5sec`, `2024-01-01`, `0x[ff]`, or `1..2`: When the first word of a name is a number, filesize, duration, datetime, binary literal or range, a call would read that word as a value and never reach the command, so Nushell rejects the name. Only the first word counts, so `def "retry 5sec"` is fine.
 - `"number#four"`, `"number^four"`, or `"number%four"`: Carets, hash symbols, and percent signs are not allowed in command names
-- `"foo  bar"`, `" foo"`, or `"foo "`: The words of a command name must be separated by single spaces, with no leading or trailing whitespace. Such a name could never be called, so `def`, `extern`, and `alias` reject it.
+- `"foo  bar"`, `" foo"`, or `"foo "`: The words of a command name must be separated by single spaces, with no leading or trailing whitespace.
 - `-a`, `"{foo}"`, `"(bar)"`: Will not be callable, as Nushell will interpret them as flags, closures, or expressions.
+
+`def`, `extern`, and `alias` reject the names in the first three groups with a `nu::parser::variable_not_valid` error:
+
+```nu
+def 5sec [] { "five seconds" }
+# => Error: nu::parser::variable_not_valid
+# =>
+# =>   × Command name not supported.
+# =>    ╭─[repl_entry #1:1:5]
+# =>  1 │ def 5sec [] { "five seconds" }
+# =>    ·     ──┬─
+# =>    ·       ╰── command name can't be a number, a filesize, a duration, a datetime, a binary literal or a range, contain #, ^, or %, or have whitespace other than single spaces between words
+# =>    ╰────
+```
 
 Parser keywords such as `if`, `for`, `let`, `def`, `type`, `use` or `where` can't be used as command names at all, because shadowing them would break the language constructs they implement:
 
@@ -383,6 +512,41 @@ def greet [] { "hi" }
 `%` is handy inside a command that shadows a built-in, because the body can call the original without recursing into itself. See [Aliases](aliases.md#replacing-existing-commands-using-aliases) for a complete example that replaces `ls`.
 :::
 
+### Defining a command more than once
+
+A block can define each command name only once. A second `def` or [`extern`](externs.md) with the same name in the same block is a parse error, so nothing in the block runs:
+
+```nu
+def greet [] { "hi" }; def greet [] { "hello" }
+# => Error: nu::parser::duplicate_command_def
+# =>
+# =>   × Duplicate command definition within a block.
+# =>    ╭─[repl_entry #1:1:28]
+# =>  1 │ def greet [] { "hi" }; def greet [] { "hello" }
+# =>    ·                            ──┬──
+# =>    ·                              ╰── defined more than once
+# =>    ╰────
+```
+
+A script file and a module are each a single block, so neither can define the same name twice. At the REPL, each entry is a new block, and entering a new `def greet` at the prompt replaces the earlier one:
+
+```nu
+def greet [] { "hi" }
+def greet [] { "hello" }
+greet
+# => hello
+```
+
+A `def` inside a nested block, such as a `do` closure or another command's body, shadows the outer command only within that block:
+
+```nu
+def greet [] { "hi" }
+do { def greet [] { "hello" }; greet }
+# => hello
+greet
+# => hi
+```
+
 ## Parameters
 
 ### Multiple parameters
@@ -414,6 +578,18 @@ def greet [
   $"Hello, ($name1) and ($name2)!"
 }
 ```
+
+The signature can also be written in parentheses instead of brackets, and a parameter name can start with `$`, the way the variable is written in the body:
+
+```nu
+def greet ($name1, $name2) {
+  $"Hello, ($name1) and ($name2)!"
+}
+greet Wei Mei
+# => Hello, Wei and Mei!
+```
+
+`$name1` and `name1` declare the same variable, but `help greet` then lists the parameter as `$name1`. Most code uses brackets and leaves out the `$`.
 
 ### Required positional parameters
 
@@ -476,7 +652,24 @@ greet
 # => Hello! I don't know your name!
 ```
 
-If required and optional positional parameters are used together, then the required parameters must appear in the definition first.
+If required and optional positional parameters are used together, then the required parameters must appear in the definition first:
+
+```nu
+def greet [greeting?: string, name: string] {
+  $"($greeting), ($name)!"
+}
+# => Error: nu::parser::required_after_optional
+# =>
+# =>   × Required positional parameter after optional parameter
+# =>    ╭─[repl_entry #1:1:12]
+# =>  1 │ def greet [greeting?: string, name: string] {
+# =>    ·            ───────────────┬───────────────
+# =>    ·                           ╰── required parameter name after optional parameter
+# =>  2 │   $"($greeting), ($name)!"
+# =>    ╰────
+```
+
+Because an optional parameter can be `null`, its type inside the body includes `nothing`. A parameter declared as `limit?: int` has the type `oneof<int, nothing>`, and error messages report that type for `$limit`. To work with a plain `int`, give the parameter a [default value](#parameters-with-a-default-value), or use `$limit | default 3` in the body.
 
 #### Parameters with a Default Value
 
@@ -505,6 +698,43 @@ def congratulate [age: int = 18] {
   $"Happy birthday! You are ($age) years old now!"
 }
 ```
+
+Without an annotation, the parameter takes its type from the default value. Here `count` defaults to `1`, so it only accepts an `int`:
+
+```nu
+def repeat [text, count = 1] { 1..$count | each { $text } | str join " " }
+repeat hi 2.5
+# => Error: nu::parser::parse_mismatch
+# =>
+# =>   × Parse mismatch: expected int.
+# =>    ╭─[repl_entry #1:2:11]
+# =>  1 │ def repeat [text, count = 1] { 1..$count | each { $text } | str join " " }
+# =>  2 │ repeat hi 2.5
+# =>    ·           ─┬─
+# =>    ·            ╰── expected int
+# =>    ╰────
+# =>   help: Check the syntax around this position — a typo, missing delimiter, or wrong separator is common.
+```
+
+This includes a `null` default. `def f [x = null]` gives `x` the type `nothing`, so any other argument is rejected with "expected nothing". For a parameter that is `null` when it's left out, write `x?`, or annotate it as `x: any = null`.
+
+Nushell works out the default while it parses the definition, so the default has to be a [constant](./variables.md#constant-variables): a literal, an expression of literals such as `(1 + 2)`, or a `const` variable. A `let` variable can't be used:
+
+```nu
+let fallback = "Nushell"
+def greet [name = $fallback] { $"Hello, ($name)!" }
+# => Error: nu::parser::non_constant_default_value
+# =>
+# =>   × Default values should be constant expressions.
+# =>    ╭─[repl_entry #1:2:19]
+# =>  1 │ let fallback = "Nushell"
+# =>  2 │ def greet [name = $fallback] { $"Hello, ($name)!" }
+# =>    ·                   ────┬────
+# =>    ·                       ╰── expected a constant value
+# =>    ╰────
+```
+
+With `const fallback = "Nushell"` instead, the definition works.
 
 ### Parameter Types
 
@@ -550,10 +780,10 @@ The highlight style can be changed using a [theme](https://github.com/nushell/nu
 ::: details List of Type Annotations
 Most types can be used as type-annotations. In addition, there are a few "shapes" which can be used. For instance:
 
-- `number`: Accepts either an `int` or a `float`
+- `number`: Accepts either an `int` or a `float`. The value keeps its own type, so `describe` reports `int` or `float` for a `number` parameter. `describe` only shows `number` for a collection that mixes the two, such as `[1 2.5]`, which is a `list<number>`.
 - `path`: A string that is treated as a filesystem path. A leading `~` is expanded to the home directory, and "n-dot" shorthands such as `...` are expanded to `../..`. Relative paths stay relative: `.` stays `.`, and `foo/../bar` becomes `bar`. See [Path](/lang-guide/chapters/types/other_types/path.html) in the Language Reference Guide for example usage.
-- `directory`: A subset of `path` (above). Only directories will be offered when using tab-completion for the parameter. Expansions take place just as with `path`.
-- `external_arg`: Parses the argument the way an [external command](./running_externals.md) would. A bare word is kept exactly as typed, so `0001` or `true` is not turned into an `int` or `bool`, while quoted strings, variables and subexpressions keep their own value. This is mainly useful for the `main` command of a [script](./scripts.md) that receives arguments from another shell.
+- `directory`: A subset of `path` (above). Only directories will be offered when using tab-completion for the parameter. This is the shape of [`cd`](/commands/docs/cd.md)'s argument, which is why <kbd>Tab</kbd> after `cd` lists only directories. Expansions take place just as with `path`.
+- `external_arg`: Parses the argument the way an [external command](./running_externals.md) would. A bare word is kept exactly as typed, so `0001` or `true` is not turned into an `int` or `bool`, while quoted strings, variables and subexpressions keep their own value. This is mainly useful for the `main` command of a [script](./scripts.md) that receives arguments from another shell. It only changes how a command's argument is parsed. On a variable, as in `let e: external_arg = 0001`, it accepts any value like `any` does, and `0001` is stored as the `int` `1`.
 - `oneof<...>`: Accepts any one of the listed types, for example `oneof<int, string>`. A literal argument gets the first listed type that it matches, with the text-like types (`string`, `path`, `directory`, `glob`, `cell-path`, `external_arg`, and `any`) tried last whatever their position. So with `oneof<string, list<string>>`, `[foo bar]` is a list, and with `oneof<string, int>`, `5` (and `007`) is an `int`. Quote the argument if you need the text.
 - `error`: Available, but currently no known valid usage. See [Error](/lang-guide/chapters/types/other_types/error.html) in the Language Reference Guide for more information.
 
@@ -589,7 +819,23 @@ The following [types](./types_of_data.html) can be used for parameter annotation
 - `string`
 - `table`
 
+`list`, `record` and `table` can also say what they contain, for example `list<int>`, `record<name: string, age: int>` or `table<name: string>`. See [Type Signatures](/lang-guide/chapters/types/type_signatures.md) in the Language Reference Guide for the full syntax.
+
+Custom value types work too. The built-in [`into semver`](/commands/docs/into_semver.md), [`into semver-range`](/commands/docs/into_semver-range.md) and [`into matrix`](/commands/docs/into_matrix.md) commands create values of type `semver`, `semver-range` and `matrix`, and a plugin can add its own, such as `polars_dataframe` from the Polars plugin. A plugin's type name is only known while the plugin is loaded. Custom value types take no type parameters.
+
+`block` is not a valid annotation. Nushell rejects it with the hint `Use 'closure' instead of 'block'`.
+
 :::
+
+A parameter's type can be followed by `@` and a completer, which lists the values <kbd>Tab</kbd> offers for that argument. The completer can be the name of a command, a list, or a `const` variable that holds a list:
+
+```nu
+const colors = [red green blue]
+def paint [color: string@$colors] { $color }
+def pick [size: string@[small medium large]] { $size }
+```
+
+A list item can also be a record with a `value` field, but its other fields, such as `description` and `style`, are ignored. Completers only suggest values. Any `string` is still accepted. See [Custom Completions](./custom_completions.md) for completer commands and the other forms.
 
 ### Type Aliases
 
@@ -627,6 +873,8 @@ You can use a type alias anywhere a type annotation goes: positional parameters,
 A few rules apply:
 
 - Like [`alias`](./aliases.md) and `const`, a type alias is visible from its definition to the end of the enclosing block. It must be defined above its first use, and it can't refer to itself.
+- A type alias can't take the name of a built-in type. The reserved names are `any`, `binary`, `block`, `bool`, `cell-path`, `closure`, `datetime`, `directory`, `duration`, `error`, `external_arg`, `filesize`, `float`, `glob`, `int`, `list`, `nothing`, `number`, `oneof`, `path`, `range`, `record`, `string` and `table`. Using one is a `nu::parser::type_alias_shadows_builtin` error.
+- A type alias has no type parameters. `type Pair<T> = ...` is not a valid name, and with `type Point = record<x: float, y: float>`, writing `Point<int>` is a `nu::parser::type_alias_with_params` error.
 - A custom completer belongs to the parameter, not the type. Write it on the parameter, as in `def paint [color: Color@[red green blue]] { ... }`. `type Color = string@[red green blue]` is an error.
 - In a module, a type alias is private unless it is defined with `export type`. See [Modules](./modules/creating_modules.md#exports) for how to export one and [Using Modules](./modules/using_modules.md#importing-type-aliases) for how to import it.
 
@@ -776,6 +1024,25 @@ def greet [
 
 :::
 
+A flag with a default value is never a switch, even without a type annotation. It takes a value, and the default sets the value's type. So `--caps = false` declares a flag that needs a `bool` value, as in `--caps true`, and `--caps = null` declares one that only accepts `null`. Here `--times = 1` makes `--times` an `int` flag:
+
+```nu
+def greet [name: string, --times = 1] {
+  1..$times | each { $"Hello, ($name)!" } | str join " "
+}
+greet Mia --times 2
+# => Hello, Mia! Hello, Mia!
+greet Mia --times
+# => Error: nu::parser::missing_flag_param
+# =>
+# =>   × Missing flag argument.
+# =>    ╭─[repl_entry #3:1:11]
+# =>  1 │ greet Mia --times
+# =>    ·           ───┬───
+# =>    ·              ╰── flag missing int argument
+# =>    ╰────
+```
+
 Flags can contain dashes. They can be accessed by replacing the dash with an underscore in the resulting variable name:
 
 ```nu
@@ -791,6 +1058,35 @@ def greet [
     }
 }
 ```
+
+Because `--all-caps` creates `$all_caps`, it would collide with a parameter named `all_caps`. Parameters and flags share one set of variable names. Nushell rejects a repeated name when it parses the definition:
+
+```nu
+def greet [--all-caps, all_caps] { $all_caps }
+# => Error: nu::parser::duplicate_parameter
+# =>
+# =>   × Duplicate parameter or flag.
+# =>    ╭─[repl_entry #1:1:24]
+# =>  1 │ def greet [--all-caps, all_caps] { $all_caps }
+# =>    ·            ─────┬────  ────┬───
+# =>    ·                 │          ╰── `all_caps` uses a name that is already taken
+# =>    ·                 ╰── first used here
+# =>    ╰────
+# =>   help: Each parameter and flag needs its own name, and each short flag its own letter. A long flag's
+# =>         variable replaces `-` with `_`, so `--foo-bar` and `foo_bar` clash.
+```
+
+The same error covers two parameters with one name, a rest parameter that reuses a name, and two flags with the same short letter, such as `--verbose (-v)` and `--version (-v)`. A flag with only a short form, like `-v`, creates the variable `$v`, so it also collides with a parameter named `v`.
+
+The one name you can repeat is `_`. Use it for positional arguments the command doesn't need:
+
+```nu
+def third [_, _, value] { $value }
+third a b c
+# => c
+```
+
+The names of the built-in variables `in`, `nu`, `env` and `ans` are taken too. A parameter or flag with one of these names, such as `def show [--env] {}`, is a `nu::parser::name_is_builtin_var` error, the same as `let env = 1`. See [Reserved Names](/lang-guide/chapters/declarations.md#reserved-names).
 
 #### Flags with a `null` Value
 
@@ -905,6 +1201,23 @@ vip-greet $vip ...$guests
 # => And a special welcome to our VIP today, Tanisha!
 ```
 
+A command can have only one rest parameter, and it has to be the last positional parameter, since it takes every remaining argument. Flags can still be listed after it. Putting the VIP last is a parse error:
+
+```nu
+def vip-greet [...names: string, vip: string] {}
+# => Error: nu::parser::positional_after_rest
+# =>
+# =>   × Positional parameter after the rest parameter.
+# =>    ╭─[repl_entry #1:1:34]
+# =>  1 │ def vip-greet [...names: string, vip: string] {}
+# =>    ·                                  ─┬─
+# =>    ·                                   ╰── parameter vip after the rest parameter
+# =>    ╰────
+# =>   help: The rest parameter takes all remaining positional arguments, so it must be the last positional parameter. Flags can still follow it.
+```
+
+A second rest parameter is a `nu::parser::multiple_rest_params` error. A rest parameter also can't have a default value, so `...names = [Ada]` is a `nu::parser::assignment_mismatch` error. When no arguments are left for it, it is an empty list.
+
 ### Ending Flag Parsing with `--`
 
 Arguments that start with `-` are normally parsed as flags, so passing a value like `-x` as a positional argument is an error. As in POSIX shells, a standalone `--` ends flag parsing. Every argument after it is treated as a positional argument, even if it starts with `-`, and the `--` itself isn't passed to the command:
@@ -921,6 +1234,15 @@ show-args -- --verbose -x foo
 ```
 
 This works for built-in commands too, for example `[a b] | str join -- -x` returns `a-xb`. Commands defined with `def --wrapped` (see below) are the exception: they receive the `--` in their rest parameter, so they can pass it on unchanged to the external command they wrap.
+
+External commands receive the `--` too, including an external declared with [`extern`](externs.md). Nushell passes it to the program like any other argument, and the program decides what it means. Compare the built-in `echo` with the system's `echo`:
+
+```nu
+echo -- --x
+# => --x
+^echo -- --x
+# => -- --x
+```
 
 ### Rest Parameters with Wrapped External Commands
 
@@ -976,6 +1298,19 @@ def --wrapped ezal [...rest] {
 
 ezal -G commands
 # => categories  docs  README.md
+```
+
+A few rules apply to `def --wrapped`:
+
+- The command must have a rest parameter. Without one, the definition is a `nu::parser::missing_positional` error.
+- The rest parameter must be untyped or typed as `string`. Any other type is a `nu::parser::type_mismatch_help` error.
+- An untyped rest parameter uses the [`external_arg`](#parameter-types) shape. Bare words and flags are kept as the text you typed, so `0001` stays `"0001"`, while a subexpression keeps its value. A word that contains `*`, `?` or `[`, such as `*.md`, arrives as a `glob`. Any other word arrives as a `string`, with a leading `~` or `...` expanded as it would be for an external command, so `~/notes` becomes the full path. With `...rest: string`, a subexpression must produce a string.
+- Nushell doesn't add a `--help` flag to a wrapped command. `--help` and `-h` go into the rest parameter, so the wrapped program can show its own help. Use `help ezal` to see the help for the wrapper itself.
+
+```nu
+def --wrapped show-rest [...rest] { $rest | to nuon }
+show-rest 0001 --help -x (1 + 1)
+# => ["0001", --help, -x, 2]
 ```
 
 ## Pipeline Input-Output Signature
@@ -1098,6 +1433,23 @@ Input/output types:
 You can see that Nushell automatically created some basic help for the command simply based on our definition so far. Nushell also automatically adds a `--help`/`-h` flag to the command, so users can also access the help using `vip-greet --help`.
 :::
 
+Since every command already has `--help`, you can't declare a flag with that name:
+
+```nu
+def greet [--help] { "hi" }
+# => Error: nu::parser::error
+# =>
+# =>   × The `--help` flag is reserved
+# =>    ╭─[repl_entry #1:1:12]
+# =>  1 │ def greet [--help] { "hi" }
+# =>    ·            ───┬──
+# =>    ·               ╰── every command already has `--help`
+# =>    ╰────
+# =>   help: Rename this flag. `--help` always shows the command's help.
+```
+
+The short form `-h` isn't reserved. Another flag can take it, as in `--hidden (-h)`, and then `-h` sets that flag while only `--help` shows the help.
+
 We can extend the help further with some simple comments describing the command and its parameters:
 
 ```nu
@@ -1163,13 +1515,13 @@ scope commands
 | wrap help
 ```
 
-This will show the Help _record_ that Nushell creates.
+This will show the Help _record_ that Nushell creates. Each column is described in [Inspecting commands](/lang-guide/chapters/custom_commands.md#inspecting-commands) in the Language Reference Guide.
 :::
 
-The comments following the parameters become their description. Only a single-line comment is valid for parameters.
+The comments following the parameters become their description. A comment can continue on the lines below its parameter. Nushell adds each comment-only line, up to the next parameter, to that parameter's description as a new line.
 
 ::: tip Note
-A Nushell comment that continues on the same line for argument documentation purposes requires a space before the ` #` pound sign.
+A Nushell comment that continues on the same line for argument documentation purposes requires a space before the ` #` pound sign. See [Comments](/lang-guide/chapters/declarations.md#comments) in the Language Guide for where a `#` starts a comment.
 :::
 
 ## Adding Attributes to Custom Commands via `attr`
@@ -1178,6 +1530,28 @@ As of version 0.103.0, Nushell allows authors of custom commands to enrich their
 with attributes with subcommands of the `attr` builtin, prefixed by the `@` symbol
 before the definition of the command. For those coming from Python, Java, or JavaScript, this
 will appear similar to decorators or annotations, but serve a slightly different purpose.
+
+Attributes go directly above `def`, `export def` or `extern`, one per line, and you can stack as many as you need. The command's doc comment goes above the attribute lines. A comment between an attribute and the definition is an error, because the attribute is then followed by something other than a definition:
+
+```nu
+@category math
+# Double a number
+def double [] { $in * 2 }
+# => Error: nu::parser::attribute_requires_definition
+# =>
+# =>   × Attributes must be followed by a definition.
+# =>    ╭─[repl_entry #1:1:2]
+# =>  1 │ @category math
+# =>    ·  ──────┬──────
+# =>    ·        ╰── must be followed by a definition
+# =>  2 │ # Double a number
+# =>    ╰────
+# =>   help: try following this line with a `def` or `extern` definition
+```
+
+To put an attribute on the same line as the definition, end it with `;`, as in `@category math; def double [] { $in * 2 }`. Without the `;`, `def` is read as another argument to the attribute.
+
+Nushell evaluates an attribute's arguments while it parses the definition, so they must be [constants](./variables.md#constant-variables): literal values or `const` variables. With `let section = "math"`, `@category $section` fails with a `nu::shell::not_a_constant` error, while `const section = "math"` works.
 
 Let's improve the documentation for the `vip-greet` custom command. The `example`
 attribute adds to the output of `help {command}` or `{command} -h`:
@@ -1247,13 +1621,29 @@ Examples:
   And a special welcome to our VIP today, Bob!
 ```
 
+The example can also be a string instead of a block. Nushell checks that a block parses, but keeps a string exactly as written:
+
+```nu
+@example "Greet the guests listed in a file" "vip-greet Bob ...(open guests.txt | lines)"
+```
+
+The examples are also stored in the `examples` column of [`scope commands`](/commands/docs/scope_commands.md), as a table with `description`, `example` and `result` columns:
+
+```nu
+scope commands | where name == vip-greet | get 0.examples.example
+# => ╭───┬───────────────────────────────────╮
+# => │ 0 │ vip-greet "Bob"                   │
+# => │ 1 │ vip-greet "Bob" "Alice" "Charlie" │
+# => ╰───┴───────────────────────────────────╯
+```
+
 When maintaining a script, module, plugin, or library written in nu, some custom
 commands may end up being replaced by newer versions or removed completely, but
 remain available temporarily to give users time to transition away from the older
 functionality.
 
-The `deprecated` attribute raises a warning to the users upon running
-the custom command.
+The `deprecated` attribute raises a warning when Nushell parses a call to
+the custom command, even if that call never runs.
 
 ```nu
 @deprecated
@@ -1286,8 +1676,60 @@ greet "bob"
 # => Hello, bob!
 ```
 
-By default, the warning is only shown the first time the command is used in a session. Add
-`--report every` to warn on every call.
+The `--report` flag sets how often the warning appears. `--report every` warns on every call. With
+the default, `--report first`, Nushell shows each warning once per session. It remembers the label
+of every warning it has shown, such as `greet is deprecated and will be removed in a future
+release.`, and skips a later warning with the same label. Redefining the command with a different
+help message doesn't bring the warning back. A new `--since` or `--remove` version, described
+below, changes the label, so that warning appears again. Any other `--report` value is an
+`Incorrect value` error when the command is defined, and the message lists `every` and `first`.
+
+Two more flags take version strings. `--since` gives the version that deprecated the command, and
+`--remove` gives the version that will remove it. Each one replaces its part of the warning text:
+
+```nu
+@deprecated --since 0.9.0 --remove 1.0.0
+def greet [] { "hi" }
+
+greet
+# => Warning: nu::parser::deprecated
+# =>
+# =>   ⚠ Command deprecated.
+# =>    ╭─[repl_entry #2:1:1]
+# =>  1 │ greet
+# =>    · ──┬──
+# =>    ·   ╰── greet was deprecated in 0.9.0 and will be removed in 1.0.0.
+# =>    ╰────
+# =>
+# => hi
+```
+
+To deprecate a single flag instead of the whole command, name it with `--flag`, without its
+dashes. Calls that don't use the flag get no warning:
+
+```nu
+@deprecated "Use --upper instead." --flag caps
+def greet [--caps, --upper] { if $caps or $upper { "HI" } else { "hi" } }
+
+greet --upper
+# => HI
+greet --caps
+# => Warning: nu::parser::deprecated
+# =>
+# =>   ⚠ Flag deprecated.
+# =>    ╭─[repl_entry #3:1:7]
+# =>  1 │ greet --caps
+# =>    ·       ───┬──
+# =>    ·          ╰── greet --caps is deprecated and will be removed in a future release.
+# =>    ╰────
+# =>   help: Use --upper instead.
+# =>
+# => HI
+```
+
+The `deprecation_info` column of [`scope commands`](/commands/docs/scope_commands.md) lists each
+deprecation as a record with the fields `type`, `label`, `flag`, `since`, `expected_removal` and
+`help`. `type` is `Command` or `Flag`, and `label` holds the warning text.
 
 If there is a replacement command or additional context that would
 assist the user when updating their workflows, add text after `@deprecated`.
@@ -1333,12 +1775,86 @@ help commands | where category == deprecated | select name category command_type
 # => ╰───┴───────┴────────────┴──────────────╯
 ```
 
+Any string can be a category. A name that matches a built-in category, such as `math`, `strings`
+or `deprecated`, puts the command in that category. Any other name, such as `"deploy"`, starts a
+new category. The exception is `core`, which is kept for Nushell's own commands, so
+`@category core` gives the category `custom_core`.
+
+The [`search-terms`](/commands/docs/attr_search-terms.md) attribute adds words that should find the
+command even though they aren't in its name or description. `help --find` and
+[`help commands --find`](/cookbook/help.md#how-to-see-all-supported-commands) match them, ignoring
+case. `help <command>` shows them on a `Search terms:` line, and `scope commands` returns them in its
+`search_terms` column. Several `@search-terms` lines add up:
+
+```nu
+# Double a number
+@search-terms multiply times
+@search-terms twice
+def double []: number -> number { $in * 2 }
+
+help commands --find TWICE | select name search_terms
+# => ╭───┬────────┬────────────────────────╮
+# => │ # │  name  │      search_terms      │
+# => ├───┼────────┼────────────────────────┤
+# => │ 0 │ double │ multiply, times, twice │
+# => ╰───┴────────┴────────────────────────╯
+```
+
+Each term is a string. A bare word needs no quotes, and a constant list can be spread in, as in
+`@search-terms ...$terms`. A value of another type, such as `true` or a `const` that holds a number, is a
+parse error.
+
 Attributes also work on [`extern`](externs.md) declarations. One of them, [`@structured`](/commands/docs/attr_structured.md),
 applies only to `extern`. It lets an external command return data instead of text. See
 [Structured Output](externs.md#structured-output) for examples.
 
 To see other attributes available for use within nushell, check the [command reference](/commands/docs/attr.html)
-or run `help attr` from the nushell REPL.
+or run `help attr` from the nushell REPL. Each built-in attribute is a subcommand of `attr`, so `@category`
+runs `attr category`. Running `attr` by itself only prints that help.
+
+### Defining your own attributes
+
+An attribute such as `@owner` calls a command named `attr owner` while Nushell parses the definition, and stores the value that command returns. To create your own attribute, define an alias whose name starts with `attr ` and points to a built-in command that can run at parse time. [`echo`](/commands/docs/echo.md) is the usual choice, since it returns its arguments as they are:
+
+```nu
+alias "attr owner" = echo
+alias "attr tags" = echo
+alias "attr slow" = echo
+
+@owner "platform-team"
+@tags web api
+@slow
+@category "deploy"
+def deploy [] { "deploying" }
+
+@slow
+def rebuild [] { "rebuilding" }
+
+scope commands | where name == deploy | get 0.attributes
+# => ╭───┬───────┬────────────────╮
+# => │ # │ name  │     value      │
+# => ├───┼───────┼────────────────┤
+# => │ 0 │ owner │ platform-team  │
+# => │ 1 │ tags  │ [list 2 items] │
+# => │ 2 │ slow  │                │
+# => ╰───┴───────┴────────────────╯
+```
+
+Nushell doesn't act on custom attributes. It stores them in the `attributes` column of [`scope commands`](/commands/docs/scope_commands.md), one row per attribute, with its name and value. Several arguments, as in `@tags web api`, give a list, and an attribute without arguments, like `@slow`, stores an empty string. Using the same attribute twice adds two rows. The built-in `@example`, `@search-terms`, `@category` and `@complete` attributes are applied to the command and aren't listed.
+
+A script can read the attributes back to find the commands it cares about:
+
+```nu
+scope commands | where {|cmd| "slow" in $cmd.attributes.name } | get name
+# => ╭───┬─────────╮
+# => │ 0 │ deploy  │
+# => │ 1 │ rebuild │
+# => ╰───┴─────────╯
+```
+
+To share attributes, export the aliases from a module, as in `export alias "attr owner" = echo`, and import them with `use ownership.nu *`, or by name with `use ownership.nu ["attr owner"]`. A plain `use ownership.nu` puts the module name in front of the alias, so `@owner` can't find it. The standard library's `@test`, `@ignore` and other [testing attributes](./testing.md#the-testing-nu-runner) are aliases of `echo` exported this way.
+
+The command behind an attribute has to be one that can run at parse time. An attribute backed by a custom command, such as `def "attr owner" [x] { $x }`, fails with a `Not a const command` error.
 
 ## Changing the Environment in a Custom Command
 

@@ -59,6 +59,29 @@ view ir { print "Hello, World!" }
 # =>    5: return                 %0
 ```
 
+Besides a closure, `view ir` takes the name of a custom command. Closures inside the IR show up as `closure(N)`, and `view ir N` shows the IR of that closure. The number depends on your session:
+
+```nu
+def double [] { each {|x| $x * 2 } }
+view ir double
+# => # 2 registers, 6 instructions, 0 bytes of data
+# =>    0: load-literal           %1, closure(319)
+# =>    1: push-positional        %1
+# =>    2: redirect-out           caller
+# =>    3: redirect-err           caller
+# =>    4: call                   decl 81 "each", %0
+# =>    5: return                 %0
+view ir 319
+# => # 2 registers, 5 instructions, 0 bytes of data
+# =>    0: load-variable          %0, var 74
+# =>    1: load-literal           %1, int(2)
+# =>    2: binary-op              %0, Math(Multiply), %1
+# =>    3: span                   %0
+# =>    4: return                 %0
+```
+
+A `call` instruction names the command it calls with a declaration ID, as in `decl 81 "each"`. `view ir --decl-id` takes such an ID, which helps when the command isn't in scope under its name. It only works for custom commands. A built-in command such as `each` or `print` is written in Rust and has no IR to show. `--json` prints the compiled block as JSON instead of text. Its format may change between releases.
+
 ### Compiled Languages
 
 On the other side are languages that are typically "compiled", such as C, C++, or Rust. For example, here's a simple _"Hello, World!"_ in Rust:
@@ -181,7 +204,7 @@ This is the complete Parse/Eval sequence.
 ::: tip Takeaway
 By not allowing `eval`-like functionality, Nushell prevents these types of `eval`-related bugs. Calling a non-existent definition is guaranteed to be caught at parse-time in Nushell.
 
-Furthermore, after parsing completes, we can be certain the bytecode (IR) won't change during evaluation. This gives us a deep insight into the resulting bytecode (IR), allowing for powerful and reliable static analysis and IDE integration which can be challenging to achieve with more dynamic languages. Nushell's language server (`nu --lsp`) provides this kind of editor integration. For stepping through a script while it runs, `nu --dap` (added in 0.116.0) starts a Debug Adapter Protocol server that DAP-capable editors can use to set breakpoints and inspect variables (see [Debugging Scripts](debugging.md)).
+Furthermore, after parsing completes, we can be certain the bytecode (IR) won't change during evaluation. This gives us a deep insight into the resulting bytecode (IR), allowing for powerful and reliable static analysis and IDE integration which can be challenging to achieve with more dynamic languages. Nushell's [language server](./language_server.md) (`nu --lsp`) provides this kind of editor integration. For stepping through a script while it runs, `nu --dap` (added in 0.116.0) starts a Debug Adapter Protocol server that DAP-capable editors can use to set breakpoints and inspect variables (see [Debugging Scripts](debugging.md)).
 
 In general, you have more peace of mind that errors will be caught earlier when scaling Nushell programs.
 :::
@@ -238,6 +261,8 @@ source-env foo.nu
 ```
 
 There we saw that this cannot work (as a script or other single expression) because the directory will be changed _after_ the parse-time [`source-env` keyword](/commands/docs/source-env.md) attempts to read the file.
+
+`source-env` runs a file and keeps only the changes it makes to the environment: `$env` variables and the current directory. Unlike [`source`](/commands/docs/source.md), it leaves the file's definitions behind, so a `def`, `alias`, or `let` in `foo.nu` isn't available afterward. Like `source`, it also accepts `null` in place of a file name, and then it does nothing. The opening of [Scripts](./scripts.md) has an example.
 
 Running these commands as separate REPL entries, however, works. First enter:
 
@@ -405,7 +430,7 @@ Put differently, only a small subset of commands and expressions can generate a 
 
 In general, the commands and resulting expressions will be fairly simple and **_without side effects_**. Otherwise, the parser could all-too-easily enter an unrecoverable state. Imagine, for instance, attempting to assign an infinite stream to a constant. The Parse stage would never complete!
 
-A constant that is merely slow to compute, such as `const x = (1..10000000000 | math sum)`, can still be stopped. In a script or with `nu -c`, <kbd>Ctrl</kbd>+<kbd>C</kbd> interrupts it with an `Operation interrupted` error.
+A constant that is merely slow to compute, such as `const x = (1..10000000000 | math sum)`, can still be stopped. In a script or with `nu -c`, <kbd>Ctrl</kbd>+<kbd>C</kbd> interrupts it with an `Operation interrupted` error (see [Interrupting with Ctrl+C](./stdout_stderr_exit_codes.md#interrupting-with-ctrl-c)).
 
 ::: tip
 You can see which Nushell commands can return constant values using:
@@ -417,6 +442,16 @@ help commands | where is_const
 When a line in the REPL uses only these commands, the [status line](./line_editor.md#status-line) previews its value as you type.
 
 :::
+
+[`if`](/commands/docs/if.md) is one of these commands, so a constant can depend on a condition, as long as the condition is constant too:
+
+```nu
+const os_family = if $nu.os-info.name == "windows" { "windows" } else { "unix" }
+$os_family
+# => unix
+```
+
+Only the branch that runs has to be constant. `const x = if false { ls } else { 2 }` works, but `const x = if true { ls } else { 2 }` fails, because `ls` can't run at parse time.
 
 For example, the `path join` command can output a constant value. Nushell also defines several useful paths in the `$nu` constant record. These can be combined to create useful parse-time constant evaluations like:
 

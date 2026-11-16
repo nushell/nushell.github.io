@@ -49,6 +49,61 @@ Alternatively, `detect columns --guess` works out the columns from their widths,
 df -h | detect columns --guess
 ```
 
+### `detect columns` on less tidy output
+
+Without `--guess`, `detect columns` takes the first line as the headers and splits every line on runs of whitespace. Output from `ls -l` breaks both assumptions: its first line is a total, not headers, and the date takes up three space-separated columns. Three flags handle that:
+
+```nu
+let listing = "total 16
+-rw-r--r--  1 me  staff  1.2K Nov 14 09:30 notes.md
+drwxr-xr-x  3 me  staff   96B Nov 13 18:02 src"
+$listing | detect columns --skip 1 --no-headers --combine-columns 5..7
+# => ╭───┬────────────┬─────────┬─────────┬─────────┬─────────┬──────────────┬──────────╮
+# => │ # │  column0   │ column1 │ column2 │ column3 │ column4 │   column5    │ column8  │
+# => ├───┼────────────┼─────────┼─────────┼─────────┼─────────┼──────────────┼──────────┤
+# => │ 0 │ -rw-r--r-- │ 1       │ me      │ staff   │ 1.2K    │ Nov 14 09:30 │ notes.md │
+# => │ 1 │ drwxr-xr-x │ 3       │ me      │ staff   │ 96B     │ Nov 13 18:02 │ src      │
+# => ╰───┴────────────┴─────────┴─────────┴─────────┴─────────┴──────────────┴──────────╯
+```
+
+- `--skip <n>` (`-s`) drops the first `n` lines before anything else happens.
+- `--no-headers` (`-n`) reads the first line as data and names the columns `column0`, `column1`, and so on.
+- `--combine-columns <range>` (`-c`) joins the columns in the range into one, separated by spaces. The joined column keeps the first column's name, and the columns after it keep theirs, so the file name above is still `column8`. Negative numbers count from the end, so `-2..-1` joins the last two columns. Pipe the result to [`rename`](/commands/docs/rename.md) to give the columns real names.
+
+`--ignore-box-chars` (`-i`) is for text that is already drawn as a table, such as the output of `table --theme light` or `table --theme basic`. It drops lines made only of box drawing characters, such as `+------+` or `├──────┤`, and strips the borders from the other lines:
+
+```nu
+"+-------+------+
+| name  | size |
++-------+------+
+| a.txt | 1KB  |
+| b.txt | 2KB  |
++-------+------+" | detect columns --ignore-box-chars
+# => ╭───┬───────┬──────╮
+# => │ # │ name  │ size │
+# => ├───┼───────┼──────┤
+# => │ 0 │ a.txt │ 1KB  │
+# => │ 1 │ b.txt │ 2KB  │
+# => ╰───┴───────┴──────╯
+```
+
+Some inputs don't split into columns at all:
+
+- If the first data line has a different number of columns than the header line, `detect columns` gives up and returns every line, the header line included, in a single `data` column. A later line that doesn't match gets a `data` column of its own, while the lines that match fill the header columns.
+- If two headers have the same name, it fails with a `Failed to detect columns` error. Use `--no-headers` and rename the columns, or try `--guess`.
+- A table, or a list of records, passes through unchanged, so `detect columns` does no harm on input that is already structured.
+
+Every value that `detect columns` returns is a string, so a column of numbers can't be added up yet. [`detect type`](/commands/docs/detect_type.md), the other subcommand of [`detect`](/commands/docs/detect.md), turns a string into the type it looks like:
+
+```nu
+"name size
+a.txt 1024
+b.txt 2048" | detect columns | update size { detect type } | get size | math sum
+# => 3072
+```
+
+`detect` on its own does nothing but print its help, which lists the two subcommands.
+
 ### Using `from ssv`
 
 Also the builtin `from` data parser for `ssv` (*s*pace *s*eparated *v*alues) can be used:
@@ -59,7 +114,7 @@ df -h | str replace "Mounted on" Mounted_On | from ssv --aligned-columns --minim
 
 The output is identical to the previous example.
 
-`from ssv` supports several modifying flags to tweak its behaviour.
+`from ssv` supports several modifying flags to tweak its behaviour. [Options for `from ssv`](../book/working_with_strings.md#options-for-from-ssv) explains each of them.
 
 Note we still need to fix the column headers if they contain unexpected spaces.
 

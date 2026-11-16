@@ -12,6 +12,24 @@ The `help` command is a good way to become familiar with all that Nu has to offe
 help commands
 ```
 
+`help commands` returns a table with one row per command and the columns `name`, `category`, `command_type`, `description`, `params`, `input_output`, `search_terms`, and `is_const`. `--find` (`-f`) keeps the commands whose name, description, or search terms contain the text, ignoring case. `help --find` does the same search:
+
+```nu
+help commands --find timezone | select name category
+# => ╭───┬────────────────────┬─────────────╮
+# => │ # │        name        │  category   │
+# => ├───┼────────────────────┼─────────────┤
+# => │ 0 │ date               │ date        │
+# => │ 1 │ date from-human    │ date        │
+# => │ 2 │ date humanize      │ date        │
+# => │ 3 │ date list-timezone │ date        │
+# => │ 4 │ date to-timezone   │ date        │
+# => │ 5 │ into datetime      │ conversions │
+# => ╰───┴────────────────────┴─────────────╯
+```
+
+Given a name, `help commands` prints that one command's help, like `help http get` below. It only looks at commands and aliases, and fails with `Command not found` for a module name.
+
 ---
 
 ### Specific information on a command
@@ -77,6 +95,77 @@ help http get
 # =>
 # =>   Get from Docker daemon via Unix socket.
 # =>   > http get --unix-socket /var/run/docker.sock http://localhost/containers/json
+```
+
+`help <name>` looks for an alias or command with that name first, and then for a module. For an alias, it shows what the alias expands to, followed by the help of the command it runs. A name that matches nothing is a `Not found` error.
+
+Because commands come before modules, `help` shows the command when a module and a command share a name. That happens with a module that exports a `main` command, since `use` makes `main` available under the module's name. Use `help modules` to see the module itself:
+
+```nu
+module greet {
+    export def main [] { "hi" }
+    export def loud [] { "HI" }
+}
+use greet
+help modules greet
+# => Module: greet
+# =>
+# => Exported commands:
+# =>   greet, loud (greet loud)
+# =>
+# => Exported aliases:
+# =>
+# =>
+# => This module does not export environment.
+```
+
+### Help for modules and externs
+
+[`help modules`](/commands/docs/help_modules.md) and [`help externs`](/commands/docs/help_externs.md) work like `help commands`. Without arguments, `help modules` returns the same table as [`scope modules`](/commands/docs/scope_modules.md), and `help externs` returns the `name`, `description` and `decl_id` of each command declared with [`extern`](/book/externs.md), as [`scope externs`](/commands/docs/scope_externs.md) does. `--find` (`-f`) keeps the rows whose name or description contains the text.
+
+Given a name, `help modules` prints the module's [description](/book/modules/creating_modules.md#documenting-modules) and what it exports: commands, aliases, type aliases, and whether it has an [`export-env`](/commands/docs/export-env.md) block. Each command and alias shows how you can call it. A name in parentheses is the name it has in your scope, such as `geo area` after a plain `use geo`. With colors on, the names you can call are highlighted, and an export you haven't imported shows only its own name:
+
+```nu
+# Tools for geometry
+module geo {
+    export def area [w: int, h: int] { $w * $h }
+    export alias sq = area 2 2
+    export type Point = record<x: int, y: int>
+    export-env { $env.GEO_UNITS = "cm" }
+}
+use geo
+help modules geo
+# => Tools for geometry
+# =>
+# => Module: geo
+# =>
+# => Exported commands:
+# =>   area (geo area)
+# =>
+# => Exported aliases:
+# =>   sq (geo sq)
+# =>
+# => Exported type aliases:
+# =>   Point
+# =>
+# => This module exports environment.
+```
+
+A module name that isn't in scope is a `nu::shell::module_not_found` error. `help externs <name>` prints the same help as `help <name>`, with the extern's flags and parameters, and an unknown name is a `nu::shell::command_not_found` error.
+
+### Escapes and redirections
+
+Like [`help operators`](/commands/docs/help_operators.md), two more `help` subcommands return reference tables instead of help for a definition. [`help escapes`](/commands/docs/help_escapes.md) lists the backslash escapes of double-quoted strings, with a `sequence` and an `output` column. See [Double-quoted Strings](/book/working_with_strings.md#double-quoted-strings) for the complete list.
+
+[`help pipe-and-redirect`](/commands/docs/help_pipe-and-redirect.md) lists the pipe and redirection operators, with `symbol`, `name`, `description` and `example` columns. It covers only the short spellings, such as `o>` and `e>|`, and lists `o>|` as unsupported. The long spellings, such as `out>` and `err>|`, and the reversed ones, such as `e+o>`, are explained in [Stdout, Stderr, and Exit Codes](/book/stdout_stderr_exit_codes.md#file-redirections).
+
+```nu
+help pipe-and-redirect | where symbol == "e>|" | reject symbol
+# => ╭───┬─────────────┬─────────────────────────────────────────────────┬─────────────────╮
+# => │ # │    name     │                   description                   │     example     │
+# => ├───┼─────────────┼─────────────────────────────────────────────────┼─────────────────┤
+# => │ 0 │ stderr pipe │ pipeline stderr of a command to another command │ ^cmd1 e>| ^cmd2 │
+# => ╰───┴─────────────┴─────────────────────────────────────────────────┴─────────────────╯
 ```
 
 ### Custom help command

@@ -5,6 +5,8 @@ They resemble virtual environments found in some languages, such as Python.
 
 _Note: To understand overlays, make sure to check [Modules](modules.md) first as overlays build on top of modules._
 
+[`overlay`](/commands/docs/overlay.md) has four subcommands, `overlay use`, `overlay hide`, `overlay new` and `overlay list`, and by itself only prints its help. Like `use`, `overlay use`, `overlay hide` and `overlay new` are parser keywords, so they act when the code is parsed and can't be part of a pipeline. `overlay list` is an ordinary command that returns a table.
+
 ## Basics
 
 First, Nushell comes with one default overlay called `zero`.
@@ -44,6 +46,26 @@ The module can be created by any of the three methods described in [Creating Mod
 - "inline" modules (used in this example)
 - file
 - directory
+
+For a file or directory, give its path to `overlay use`. The overlay is named after the file without its `.nu` extension, or after the directory. As with [`use`](modules/using_modules.md#module-path), a relative path is looked up from the directory of the file making the call, or the current directory at the prompt, and then in `$NU_LIB_DIRS` and `$env.NU_LIB_DIRS`. For example, in a new shell, with a file `spam-file.nu` that contains `export def foo [] { "foo from file" }`:
+
+```nu
+overlay use ./spam-file.nu
+foo
+# => foo from file
+
+overlay list
+# => ╭───┬───────────┬────────╮
+# => │ # │   name    │ active │
+# => ├───┼───────────┼────────┤
+# => │ 0 │ zero      │ true   │
+# => │ 1 │ spam-file │ true   │
+# => ╰───┴───────────┴────────╯
+```
+
+From then on, the overlay is called `spam-file`, as in `overlay hide spam-file`.
+
+The path can also be a [constant](variables.md#constant-variables). If its value is `null`, `overlay use` does nothing, so a config file can activate an overlay only when a file exists. See the `null` entry under [Module Path](modules/using_modules.md#module-path) for an example with `use`.
 :::
 
 To create the overlay, call [`overlay use`](/commands/docs/overlay_use.md):
@@ -127,6 +149,8 @@ overlay list
 
 The last way to remove an overlay is to call [`overlay hide`](/commands/docs/overlay_hide.md) without an argument which will remove the last active overlay.
 
+The default `zero` overlay can't be hidden. `overlay hide zero` fails with `nu::parser::cant_hide_default_overlay`, and so does `overlay hide` without an argument when `zero` is the last active overlay. Naming an overlay that isn't active, or doesn't exist, fails with `nu::parser::active_overlay_not_found`.
+
 ## Overlays Are Recordable
 
 Any new definition (command, alias, environment variable) is recorded into the last active overlay:
@@ -195,7 +219,57 @@ overlay new scratchpad
 def eggs [] { "eggs" }
 ```
 
+If an overlay with that name already exists, `overlay new` brings it back with everything it recorded, like `overlay use`. With `--reload` (`-r`), it keeps the recorded definitions but drops the environment variables that exist only in that overlay:
+
+```nu
+overlay new scratchpad
+$env.SCRATCH = "set in scratchpad"
+def eggs [] { "eggs" }
+overlay hide scratchpad
+
+overlay new --reload scratchpad
+'SCRATCH' in $env
+# => false
+eggs
+# => eggs
+```
+
+Without `--reload`, `$env.SCRATCH` would be back as well. For a name that isn't an overlay yet, `--reload` makes no difference. On an overlay that is still active, `overlay new` moves the overlay to the top of the stack, with or without `--reload`, as `overlay use` does. See [Ordering overlays](#ordering-overlays).
+
 :::
+
+## Reloading an overlay
+
+Calling `overlay use` with the name of an overlay that already exists brings back what the overlay recorded. It doesn't run the module's `export-env` block again, and a command you redefined while the overlay was active keeps your definition. With `--reload` (`-r`), the overlay starts over from its module instead. Nushell adds the module's commands and aliases again, replacing your versions of them, and runs `export-env` again. Commands that you added to the overlay yourself stay:
+
+```nu
+module dev {
+    export def build [] { "build from dev" }
+    export-env { $env.MODE = "debug" }
+}
+overlay use dev
+def build [] { "my build" }; def deploy [] { "deploying" }; $env.MODE = "release"
+
+overlay use dev
+[(build) (deploy) $env.MODE]
+# => ╭───┬───────────╮
+# => │ 0 │ my build  │
+# => │ 1 │ deploying │
+# => │ 2 │ release   │
+# => ╰───┴───────────╯
+
+overlay use --reload dev
+[(build) (deploy) $env.MODE]
+# => ╭───┬────────────────╮
+# => │ 0 │ build from dev │
+# => │ 1 │ deploying      │
+# => │ 2 │ debug          │
+# => ╰───┴────────────────╯
+```
+
+Other environment variables that you set in the overlay are kept if the overlay is active when you reload it. If it was hidden and the module has an `export-env` block, they are dropped, and only the variables that `export-env` sets come back.
+
+`--reload` works from the module as Nushell first read it. It doesn't read the module's file again. To pick up changes to a module file, give `overlay use` the file's path again, as in `overlay use ./spam-file.nu`. Each call with a path reads the file again and then works like `--reload`, so the new definitions replace the old ones, and the commands you added to the overlay stay.
 
 ## Prefixed Overlays
 
@@ -216,6 +290,23 @@ ham greet
 
 Note that this does not apply for environment variables.
 
+An overlay keeps the prefix setting it was first added with. Bringing it back with `overlay use` with `--prefix` when it was added without it, or the other way around, fails with `nu::parser::overlay_prefix_mismatch`:
+
+```nu
+overlay hide ham
+overlay use ham
+# => Error: nu::parser::overlay_prefix_mismatch
+# =>
+# =>   × Overlay prefix mismatch.
+# =>    ╭─[repl_entry #5:1:13]
+# =>  1 │ overlay use ham
+# =>    ·             ─┬─
+# =>    ·              ╰── already exists with a prefix
+# =>    ╰────
+# =>   help: Overlay ham already exists with a prefix. To add it again, do it with
+# =>         the --prefix flag.
+```
+
 ## Rename an Overlay
 
 You can change the name of the added overlay with the `as` keyword:
@@ -235,6 +326,8 @@ overlay hide breakfast
 ```
 
 This can be useful if you have a generic script name, such as virtualenv's `activate.nu` but you want a more descriptive name for your overlay.
+
+An overlay keeps the name it was first added under. Once `bacon` has been added as `breakfast`, bring it back with `overlay use breakfast`. An overlay also can't be added again under another name. After `overlay use spam` has added an overlay named `spam`, `overlay use spam as eggs` fails with `nu::parser::cant_add_overlay_help` ("Cannot add overlay as 'eggs' because it already exists under the name 'spam'"), whether `spam` is active or hidden.
 
 ## Preserving Definitions
 
@@ -279,6 +372,8 @@ foo
 $env.FOO
 # => foo
 ```
+
+The current directory is the environment variable `$env.PWD`, so a `cd` while an overlay is the last active one is recorded in that overlay. Hiding the overlay takes you back to the directory you were in when you activated it, and bringing it back with `overlay use` returns you to the directory you left it in. To stay where you are, hide it with `overlay hide <name> --keep-env [PWD]`.
 
 ## Ordering Overlays
 

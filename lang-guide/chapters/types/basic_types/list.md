@@ -51,6 +51,45 @@ List syntax is very similar to that of arrays in JSON. However, commas are _not_
   # => ╰───┴─────╯
   ```
 
+Extra commas are ignored, so `[1, 2,]` and `[1,,2]` both give `[1, 2]`. A semicolon is not a separator:
+
+```nu
+[1; 2]
+# => Error: nu::parser::error
+# =>
+# =>   × Unexpected semicolon in list
+# =>    ╭─[repl_entry #1:1:3]
+# =>  1 │ [1; 2]
+# =>    ·   ┬
+# =>    ·   ╰── not a valid list separator
+# =>    ╰────
+# =>   help: Use commas or whitespace to separate list items.
+```
+
+### Expressions in a list literal
+
+Because whitespace separates the items, a list literal doesn't evaluate operators or pipelines. Each word is its own item, so `[1 + 1]` is a list of three values:
+
+```nu
+[1 + 1]
+# => ╭───┬───╮
+# => │ 0 │ 1 │
+# => │ 1 │ + │
+# => │ 2 │ 1 │
+# => ╰───┴───╯
+```
+
+Put an expression in parentheses to make it one item:
+
+```nu
+[(1 + 1)]
+# => ╭───┬───╮
+# => │ 0 │ 2 │
+# => ╰───┴───╯
+```
+
+Variables and cell paths such as `$x` and `$row.name` work without parentheses. The same rule applies to [record literals](record.md#expressions-in-a-record-literal).
+
 ## Additional Language Notes
 
 1. A list is like a vector or array list in other languages.

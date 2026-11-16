@@ -17,18 +17,15 @@ From [direnv.net](https://direnv.net):
 In Nushell, it's possible to run direnv each time the prompt displays (using a [`pre_prompt` hook](/book/hooks.html)). However, it's more efficient to update only when the directory is changed using an `env_change` hook along with:
 
 - [`from json`](/commands/docs/from_json.md) to convert the direnv output to structured data
-- [`load-env`](/commands/docs/load-env.md)
-- An `env-conversion` helper for the `PATH` from the [Standard Library](/book/standard_library.md)
+- [`load-env`](/commands/docs/load-env.md), which also turns the `PATH` string that direnv exports into a list
 
 ::: note
 
-The direnv configuration below requires Nushell 0.104 or later.
+The direnv configuration below requires Nushell 0.117 or later.
 
 :::
 
 ```nu
-use std/config *
-
 # Initialize the PWD hook as an empty list if it doesn't exist
 $env.config.hooks.env_change.PWD = $env.config.hooks.env_change.PWD? | default []
 
@@ -38,14 +35,7 @@ $env.config.hooks.env_change.PWD ++= [{||
     return
   }
 
-  direnv export json
-  | from json
-  | default {}
-  | update cells {
-      # If direnv changes the PATH, it will become a string and we need to re-convert it to a list
-      do (env-conversions).path.from_string $in
-    } PATH
-  | load-env
+  direnv export json | from json | default {} | load-env
 }]
 ```
 

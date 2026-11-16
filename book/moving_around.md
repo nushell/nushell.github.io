@@ -24,6 +24,42 @@ ls *.md
 # => ╰───┴────────────────────┴──────┴─────────┴──────────────╯
 ```
 
+You can pass several patterns at once, such as `ls *.md docs`. A pattern that matches nothing is a "No matches found" error, while an empty directory gives an empty list. A directory name lists what's inside that directory, and each `name` keeps the directory part, as in `docs/intro.md`. `--short-names` (`-s`) drops it, `--full-paths` (`-f`) turns every name into an absolute path, and `--directory` (`-D`) lists the directory itself instead of its contents:
+
+```nu
+ls --short-names docs
+# => ╭───┬───────────┬─────────┬──────┬───────────────╮
+# => │ # │   name    │  type   │ size │   modified    │
+# => ├───┼───────────┼─────────┼──────┼───────────────┤
+# => │ 0 │ img       │ dir     │ 96 B │ 6 minutes ago │
+# => │ 1 │ intro.md  │ file    │  5 B │ 6 minutes ago │
+# => │ 2 │ latest.md │ symlink │  8 B │ 6 minutes ago │
+# => ╰───┴───────────┴─────────┴──────┴───────────────╯
+ls --directory docs
+# => ╭───┬──────┬──────┬───────┬───────────────╮
+# => │ # │ name │ type │ size  │   modified    │
+# => ├───┼──────┼──────┼───────┼───────────────┤
+# => │ 0 │ docs │ dir  │ 192 B │ 6 minutes ago │
+# => ╰───┴──────┴──────┴───────┴───────────────╯
+```
+
+The `size` of a directory is the size of the directory entry itself, which says little about what's in it. `ls --du` (`-d`) replaces it with the total size of everything inside, the same number that [`du`](#checking-disk-usage) reports as `apparent`. It has to walk the whole tree, so it's slow on big directories.
+
+`ls --mime-type` (`-m`) puts a MIME type such as `text/markdown` in the `type` column of each file. The type is guessed from the file name; `ls` never reads the file. `ls --threads` (`-t`) reads directories on several threads, which can be faster for large listings, but the rows come back in a different order on each run, so add [`sort-by`](/commands/docs/sort-by.md) when the order matters.
+
+`ls --long` (`-l`) adds more columns. On every platform you get `target` (where a symlink points), `readonly`, `created`, and `accessed`. Linux, macOS, and the BSDs also have `mode` (the permission bits), `num_links` (the number of hard links), `inode`, `user`, and `group`. Windows has none of those five. `user` and `group` fall back to the numeric id when the name can't be looked up, and `created` is empty on filesystems that don't record a creation time.
+
+```nu
+ls --long docs | select name type target readonly mode num_links
+# => ╭───┬────────────────┬─────────┬──────────┬──────────┬───────────┬───────────╮
+# => │ # │      name      │  type   │  target  │ readonly │   mode    │ num_links │
+# => ├───┼────────────────┼─────────┼──────────┼──────────┼───────────┼───────────┤
+# => │ 0 │ docs/img       │ dir     │          │ false    │ rwxr-xr-x │         3 │
+# => │ 1 │ docs/intro.md  │ file    │          │ false    │ rw-r--r-- │         1 │
+# => │ 2 │ docs/latest.md │ symlink │ intro.md │ false    │ rwxr-xr-x │         1 │
+# => ╰───┴────────────────┴─────────┴──────────┴──────────┴───────────┴───────────╯
+```
+
 ## Glob Patterns (wildcards)
 
 The asterisk (`*`) in the above optional argument `*.md` is sometimes called a wildcard or a glob. It lets us match anything. You can read this glob `*.md` as _"match any filename, so long as it ends with '.md'."_
@@ -53,6 +89,8 @@ ls **/*.md
 Here, we're looking for any file that ends with ".md". The double-asterisks further specify _"in any directory starting from here."_
 
 Nushell's globbing syntax not only supports `*`, but also matching [single characters with `?` and character groups with `[...]`](https://docs.rs/nu-glob/latest/nu_glob/struct.Pattern.html).
+
+That syntax is the one `ls`, `cp`, `mv`, `rm`, `du`, and the other file commands use. The [`glob` command](/commands/docs/glob.md) reads its patterns with a different library, [wax](https://docs.rs/wax/latest/wax/), which adds `{a,b}` alternatives and has its own rules. For example, `glob **/*.rs --exclude [target]` still lists the files under `target`, because an exclude pattern has to match the paths inside the directory. Write `--exclude [target/**]` instead. See [Pattern syntax of the `glob` command](/lang-guide/chapters/types/basic_types/glob.md#pattern-syntax-of-the-glob-command) for the differences.
 
 Escaping the `*`, `?`, and `[]` patterns works by enclosing them in a single-quoted, double-quoted, or
 [raw string](working_with_strings.md#raw-strings). For example, to show the contents of a directory named
@@ -87,8 +125,21 @@ However, _backtick_ quoted strings do not escape globs. For example, compare the
    rm `*myfile*`
    ```
 
+The same rules decide whether Nushell expands a glob in an argument to an [external command](running_externals.md). `^echo *.txt` passes the names of the matching files, while `^echo "*.txt"` passes the text `*.txt`. One thing differs. When a pattern matches nothing, `ls` and the other file commands report an error, but an external command gets the pattern unchanged, as in Bash. See [glob expansion for external commands](/lang-guide/chapters/types/basic_types/glob.md#additional-language-notes) for how variables and interpolated strings behave.
+
+```nu
+^echo *.txt
+# => a.txt b.txt
+^echo "*.txt"
+# => *.txt
+^echo *.zip
+# => *.zip
+```
+
 ::: tip
 When a glob is passed to [`ls`](/commands/docs/ls.md), [`cp`](/commands/docs/cp.md), [`mv`](/commands/docs/mv.md), [`rm`](/commands/docs/rm.md), or [`du`](/commands/docs/du.md), it doesn't match hidden files (names that start with a `.`). To include them, pass `--all` (`-a`). For example, `rm *myfile*` leaves a file named `.myfile.bak` alone, but `rm --all *myfile*` removes it too.
+
+On Windows, `ls` goes by the file's hidden attribute instead of the leading `.`. It shows a file like `.gitignore` and leaves out files marked hidden, unless you pass `--all`.
 :::
 
 ::: tip
@@ -109,6 +160,24 @@ The quoting techniques above are useful when constructing glob-literals, but you
    let glob_pattern = ($"*($current_month)*" | into glob)
    ls $glob_pattern
    ```
+
+   An interpolated string written directly as the argument doesn't need `into glob`. Nushell expands it as a glob, so `ls $"*($current_month)*"` finds the same files. The conversion is needed when the pattern is stored in a variable first, as above, or comes from another command.
+
+   This only works when the interpolated string has at least one `( )` part. `ls $"*.txt"` has nothing to interpolate, so it is a plain string, and `ls` looks for a file literally named `*.txt`. A [bare word with `( )`](working_with_strings.md#interpolation-in-bare-words) expands as well: `ls *($current_month)*` finds the same files as the examples above.
+
+   `into glob` also converts a whole list of strings. Spread the result into a command that takes several patterns. Without `into glob`, each item stays a string and `ls` looks for a file literally named `*.md`:
+
+   ```nu
+   let patterns = ["*.md" "img/*"]
+   ls ...($patterns | into glob) | get name
+   # => ╭───┬──────────────╮
+   # => │ 0 │ intro.md     │
+   # => │ 1 │ latest.md    │
+   # => │ 2 │ img/logo.png │
+   # => ╰───┴──────────────╯
+   ```
+
+   For a record or a table, name the columns to convert, as in `$rules | into glob pattern`. Only those columns become globs and the rest are left alone. Without a column name, `into glob` fails with a `can't convert record<...> to glob` error.
 
 2. The spread operator combined with the [`glob` command](/commands/docs/glob.html):
 
@@ -156,6 +225,8 @@ As with most other shells, the [`mkdir` command](/commands/docs/mkdir.md) is use
   Just repeat the command without the `-p` to achieve the same effect.
   :::
 
+You can create several directories with one `mkdir`. If one of them fails, for example because part of its path is an existing file, `mkdir` still creates the rest and then raises the error. When more than one path fails, you see the error for the last one. With `--verbose` (`-v`), `mkdir` raises nothing and returns a table with a row for each path instead. A path that failed has `created` set to `false` and the reason in its `error` column. See [the Files cookbook](/cookbook/files.md#reports-from-mkdir-mv-and-rm) for an example.
+
 ## Changing the Current Directory
 
 ```nu
@@ -188,6 +259,14 @@ As with a directory name, you can also leave out `cd` and enter just the dots (s
 
 ::: tip
 Multi-dot shortcuts are available to both internal Nushell [filesystem commands](/commands/categories/filesystem.html) as well as to external commands. For example, running `^stat ....` on a Linux/Unix system will show that the path is expanded to `../../..`
+
+External commands also get `~` expanded. An unquoted argument that is `~` or starts with `~/` becomes a path in your home directory, as it would in Bash. Single or double quotes keep the `~` as typed. A backtick-quoted argument is expanded like an unquoted one. Only a leading `~` counts, so `--out=~/x` is passed unchanged, and so is a `~` that comes from a variable:
+
+```nu
+^echo ~/notes.txt "~/notes.txt" `~/notes.txt` --out=~/x
+# => /Users/me/notes.txt ~/notes.txt /Users/me/notes.txt --out=~/x
+```
+
 :::
 
 You can combine relative directory levels with directory names as well:
@@ -195,6 +274,30 @@ You can combine relative directory levels with directory names as well:
 ```nu
 cd ../sibling
 ```
+
+`cd` with no argument takes you to your home directory, and `cd -` takes you back to the directory you were in before. Every `cd` saves the directory it leaves in `$env.OLDPWD`, so `cd -` is the same as `cd $env.OLDPWD`. Running `cd -` again returns you to where you started. If `$env.OLDPWD` isn't set, `cd -` stays where it is.
+
+When you `cd` through a symbolic link, Nushell keeps the path the way you typed it. `$env.PWD` contains the link's name, and `..` goes back to the directory that holds the link. `cd --physical` (`-P`) resolves symbolic links before it applies `..`, so it moves to the real parent instead:
+
+```nu
+# current is a symbolic link to releases/v2
+cd current
+$env.PWD | path basename
+# => current
+cd ..
+$env.PWD | path basename
+# => site
+cd current
+cd --physical ..
+$env.PWD | path basename
+# => releases
+```
+
+`cd --physical current` resolves the link itself too, so `$env.PWD` ends in `releases/v2` instead of `current`.
+
+On Windows, `cd d:` switches to drive D:. If you're already on D:, nothing changes. Otherwise you land in the directory that Windows remembers as current for D:, which Nushell inherits from the program that started it, or at the root of D: if there is none. A drive-relative path such as `cd d:projects` starts from that same directory.
+
+If the path doesn't exist, `cd` fails with a "Directory not found" error. A path to a file fails with "Not a directory", and a directory you aren't allowed to enter fails with "Permission denied". In each case you stay where you were.
 
 ::: tip IMPORTANT TIP
 Changing the directory with [`cd`](/commands/docs/cd.md) changes the `PWD` environment variable. This means that a change of directory inside a closure (e.g. `do { cd somewhere }`) or a custom command is kept to that scope. Once the closure ends, you'll return to the previous directory. The blocks of keywords like `if` and `for` are not closures, so a `cd` inside them stays in effect. You can learn more about this in the [Environment](./environment.md) chapter.
@@ -208,6 +311,8 @@ Nu also provides some basic [filesystem commands](/commands/categories/filesyste
 - [`cp`](/commands/docs/cp.md) to copy an item to a new location
 - [`rm`](/commands/docs/rm.md) to remove items from the filesystem
 
+The `path` commands split, join, and inspect the paths these commands take. See [Working with Paths](./working_with_paths.md).
+
 ::: tip NOTE
 Under Bash and many other shells, most filesystem commands (other than `cd`) are actually separate binaries in the system. For instance, on a Linux system, `cp` is the `/usr/bin/cp` binary. In Nushell, these commands are built-in. This has several advantages:
 
@@ -216,3 +321,156 @@ Under Bash and many other shells, most filesystem commands (other than `cd`) are
 - As mentioned in the [Quick Tour](quick_tour.html), they are documented in the Nushell help system. Running `help <command>` or `<command> --help` will display the Nushell documentation for the command.
 
 While the use of the Nushell built-in versions is typically recommended, it is possible to access the Linux binaries. See [Running System Commands](./running_externals.md) for details.
+:::
+
+### Copying files
+
+[`cp`](/commands/docs/cp.md) copies one or more sources to a destination. With more than one source, the destination has to be an existing directory, and the copies go inside it under their own names. A destination that ends in `/` also has to be a directory.
+
+```nu
+cp a.txt b.txt backup
+cp *.log archive/
+```
+
+`cp` won't copy a directory unless you pass `--recursive` (`-r`). If the destination directory already exists, the source goes inside it, so `cp -r src dest` creates `dest/src`. Otherwise `dest` becomes the copy.
+
+Without `-r`, `cp` follows a symbolic link and copies the file it points to. In a recursive copy, links are copied as links. `--no-dereference` (`-P`) copies a link as a link in both cases.
+
+`cp` overwrites existing files without asking. `--no-clobber` (`-n`) skips files that already exist, `--update` (`-u`) skips them unless the source is newer, and `--interactive` (`-i`) asks before each overwrite. `--force` (`-f`) handles a destination file that can't be opened for writing, such as a read-only file, by removing it and copying again. It does nothing together with `-n`, and it isn't implemented on Windows.
+
+The copy keeps the source's permission bits (its mode). `--preserve` replaces that with a list of the attributes to keep: `mode`, `ownership` (not on Windows), `timestamps`, `context` (the SELinux security context), `links` (or `link`), and `xattr`. An empty list keeps none of them, so `cp --preserve [] a.txt b.txt` gives `b.txt` the default permissions for a new file.
+
+```nu
+cp --preserve [mode timestamps] report.pdf archive/
+```
+
+`--verbose` (`-v`) prints a line such as `'/home/me/a.txt' -> '/home/me/backup/a.txt'` for each file. `--debug` prints the same line plus how the file was copied, for example whether the filesystem could clone it. Unlike `mkdir`, `mv`, and `rm`, `cp --verbose` prints text instead of returning a table. `--progress` (`-p`) shows a progress bar, which is useful for large files.
+
+### Moving and renaming files
+
+[`mv`](/commands/docs/mv.md) renames a file or directory, or moves it into an existing directory. Directories move without any extra flag. As with `cp`, several sources need a directory as the destination:
+
+```nu
+mv draft.md final.md
+mv *.log archive
+```
+
+`mv` overwrites an existing destination without asking. `--no-clobber` (`-n`), `--update` (`-u`), and `--interactive` (`-i`) work the way they do for `cp`. `--progress` (`-p`) shows a progress bar.
+
+`mv --verbose` (`-v`) returns a table with `source`, `destination`, and `message` columns, one row per source, with absolute paths.
+
+### Removing files
+
+[`rm`](/commands/docs/rm.md) removes files, symbolic links, and empty directories. A directory that has anything in it needs `--recursive` (`-r`); without it, `rm` fails with "Cannot remove ... try --recursive". `rm` removes a symbolic link itself and leaves its target alone. A trailing `/` on a link to a directory (`rm mylink/`) is an error that tells you to drop the `/`.
+
+`rm` reports a missing file as an error; `--force` (`-f`) ignores missing files. `--interactive` (`-i`) asks before each file, and `--interactive-once` (`-I`) asks once for the whole batch. You can't remove your home directory without one of those two flags.
+
+`rm` keeps going after an error. It removes everything it can, then raises the first error and prints the others. With `--verbose` (`-v`), it raises nothing and returns a table with `path`, `deleted`, and `error` columns, one row per path. The rows aren't in a fixed order.
+
+`rm` refuses to remove the current directory, or a directory that contains it, when you name it as `.` or as an absolute path. The error is "Cannot remove any parent directory".
+
+By default, `rm` deletes files permanently. If you'd rather have it move them to the system trash, or the Recycle Bin on Windows, set `rm.always_trash` in your config:
+
+```nu
+$env.config.rm.always_trash = true
+```
+
+`--trash` (`-t`) and `--permanent` (`-p`) override the setting for a single call. If a file can't be moved to the trash, the error suggests `--permanent`. Trash support is part of the default build, but it's missing from Nushell builds without the `trash-support` feature, and it's never available on Android or iOS. Without it, `rm --trash` fails. Leave `rm.always_trash` at `false` there.
+
+### Checking disk usage
+
+[`du`](/commands/docs/du.md) reports how much space files and directories take up. With no argument, it reports on every entry in the current directory, hidden ones included. A glob such as `du *` skips hidden names unless you add `--all`. Each row has an absolute `path` and two sizes:
+
+- `apparent` adds up the file sizes, the number most tools show as a file's size.
+- `physical` is the space on disk. It's usually larger, because the filesystem hands out space in whole blocks, but it can be smaller for sparse or compressed files.
+
+```nu
+du site | update path { path basename }
+# => ╭───┬──────┬──────────┬──────────╮
+# => │ # │ path │ apparent │ physical │
+# => ├───┼──────┼──────────┼──────────┤
+# => │ 0 │ site │  73.3 kB │  77.8 kB │
+# => ╰───┴──────┴──────────┴──────────╯
+```
+
+A file with several hard links is counted once. A symbolic link counts as the link itself; `--deref` (`-r`) counts the file it points to instead.
+
+`--max-depth` (`-d`) sets how many levels of subdirectories `du` walks. In GNU `du`, `--max-depth` only shortens the report. In Nushell, anything below the limit is also left out of the totals. In this example, most of the data is a 50 kB image in `site/assets/img`, and `--max-depth 1` stops before that directory:
+
+```nu
+du site --max-depth 1 | update path { path basename }
+# => ╭───┬──────┬──────────┬──────────╮
+# => │ # │ path │ apparent │ physical │
+# => ├───┼──────┼──────────┼──────────┤
+# => │ 0 │ site │  23.2 kB │  24.5 kB │
+# => ╰───┴──────┴──────────┴──────────╯
+```
+
+`--exclude` (`-x`) skips files whose path matches a glob, such as `du --exclude *.log`, and `--min-size` (`-m`) skips files smaller than a number of bytes. Both change the totals. `--long` (`-l`) adds `directories` and `files` columns. Each holds a table of the subdirectories or files directly inside, with the same columns, so you can work your way down the tree with [`get`](/commands/docs/get.md).
+
+### Creating files and setting timestamps
+
+[`touch`](/commands/docs/touch.md) creates each file you name as an empty file if it doesn't exist, and sets the access and modification times of each one that does. It never creates directories, so `touch logs/today.txt` fails with "Could not touch" when `logs` doesn't exist. Run `mkdir logs` first.
+
+An unquoted name with `*`, `?`, or `[` is a glob. `touch *.log` updates every `.log` file that exists, and when none does, it fails with "No matches found for glob" instead of creating a file called `*.log`. Quote the name if you want that file. A list literal such as `touch [a.txt b.txt]` is read as a glob too, so spread a list instead: `touch ...$names`.
+
+By default both times become the current time. These flags pick another time:
+
+- `--timestamp` (`-t`) takes a datetime value. A literal without an offset, such as `2024-01-15T12:00:00`, is in UTC, so write `2024-01-15T12:00:00-06:00` for a local time.
+- `--date` (`-d`) takes text in the format GNU `touch` accepts: a date and time such as `"2024-03-01 12:00"`, or a time relative to now such as `yesterday`, `"2 hours ago"`, or `"-1 month"`. Text it can't read is an "Invalid date" error.
+- `--reference` (`-r`) copies the times of another file. Together with a relative `--date`, the date counts from the reference file's times instead of from now.
+
+`--timestamp` can't be combined with `--date` or `--reference`. `--modified` (`-m`) changes only the modification time, and `--access` (`-a`) only the access time. Giving both is the same as giving neither:
+
+```nu
+touch notes.txt
+touch --timestamp 2024-01-15T12:00:00 notes.txt
+touch --modified --date "2024-03-01 12:00" notes.txt
+touch --reference notes.txt --date "-1 day" copy.txt
+ls --long *.txt | select name modified accessed | update modified { format date "%F" } | update accessed { format date "%F" }
+# => ╭───┬───────────┬────────────┬────────────╮
+# => │ # │   name    │  modified  │  accessed  │
+# => ├───┼───────────┼────────────┼────────────┤
+# => │ 0 │ copy.txt  │ 2024-02-29 │ 2024-01-14 │
+# => │ 1 │ notes.txt │ 2024-03-01 │ 2024-01-15 │
+# => ╰───┴───────────┴────────────┴────────────╯
+```
+
+`--no-create` (`-c`) skips names that don't exist, without an error. When a name is a symbolic link, `touch` changes the times of the file the link points to; `--no-deref` (`-s`) changes the link's own times instead, on systems that support that. The name `-` stands for standard output, so `touch -` changes the times of whatever stdout is connected to.
+
+### Temporary files and directories
+
+[`mktemp`](/commands/docs/mktemp.md) creates a file with a random name and returns its absolute path. `--directory` (`-d`) creates a directory instead. On Linux and macOS, only you can use what it creates. A file gets the mode `rw-------` and a directory `rwx------`. Nushell doesn't delete them later, so remove them when you're done:
+
+```nu
+let work = mktemp --directory
+"hello" | save ($work | path join input.txt)
+# ... use the files in $work ...
+rm --recursive $work
+```
+
+Without an argument, the name is `tmp.` followed by ten random characters, in the system's temporary directory. That's `TMPDIR` on Linux and macOS, and `TMP` or `TEMP` on Windows, as they were set when Nushell started. When `TMPDIR` isn't set, Linux uses `/tmp` and macOS uses your temporary directory under `/var/folders`. It's the same directory as [`$nu.temp-dir`](./special_variables.md#nu), but `mktemp` doesn't resolve symbolic links in it, so on macOS its paths start with `/var/folders` where `$nu.temp-dir` has `/private/var/folders`.
+
+A template argument sets the name. Its last run of `X`s, at least three of them, becomes random characters. With a template, the file goes in the current directory unless you add `--tmpdir` (`-t`) for the temporary directory or `--tmpdir-path` (`-p`) for another directory. A relative `--tmpdir-path` gives a relative result. `--suffix` adds text after the random part, and then the template has to end in `X`. `--dry` returns a name without creating anything:
+
+```nu
+mktemp --dry
+# => /tmp/tmp.GwOUqXVkaY
+mktemp --dry --suffix .csv
+# => /tmp/tmp.moSjapA94V.csv
+mktemp --dry --tmpdir report.XXX
+# => /tmp/report.Uh1
+mktemp --dry --tmpdir-path logs run-XXXXXX.log
+# => logs/run-xvB1Rp.log
+```
+
+The template is a file name, not a path. Put the directory in `--tmpdir-path`:
+
+```nu
+try { mktemp logs/report.XXX } catch {|e| $e.msg }
+# => invalid template, 'logs/report.XXX', contains directory separator
+try { mktemp report.XX } catch {|e| $e.msg }
+# => too few X's in template 'report.XX'
+```
+
+A `--suffix` that contains `/` is an error too, and so is a `--tmpdir-path` directory that doesn't exist, unless you add `--dry`.

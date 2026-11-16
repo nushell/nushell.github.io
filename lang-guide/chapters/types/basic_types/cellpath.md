@@ -63,6 +63,54 @@ let data = [
   # => 1
   ```
 
+  One member can have both modifiers, in either order. `?!` and `!?` mean the same thing, and Nushell displays the combination as `!?`. Repeating a modifier is a parse error: `{a: 1}.a??` fails with "expected . or !", and `.a!!` with "expected . or ?".
+
+  ```nu
+  {Name: 1}.name?!
+  # => 1
+  {Name: 1}.age!? | describe
+  # => nothing
+  ```
+
+- Negative indexes:
+
+  A row index counts from the start, and there is no negative form for counting from the end. `$list.-1` is a parse error:
+
+  ```nu
+  [1 2 3].-1
+  # => Error: nu::parser::error
+  # =>
+  # =>   × Invalid literal
+  # =>    ╭─[repl_entry #1:1:9]
+  # =>  1 │ [1 2 3].-1
+  # =>    ·         ─┬
+  # =>    ·          ╰── negative index is not supported in cell path
+  # =>    ╰────
+  ```
+
+  A negative int passed to `get` fails at runtime with "can't convert negative number to cell path". Use [`last`](/commands/docs/last.md) to get items from the end of a list.
+
+- Directly on a value:
+
+  A cell path can follow a variable, as in `$data.condition`, and it can also follow a list, record or table literal, or a subexpression in parentheses:
+
+  ```nu
+  [1 2].0
+  # => 1
+  {a: {b: 2}}.a.b
+  # => 2
+  [[a]; [1] [2]].a | to nuon
+  # => [1, 2]
+  (1..5).2
+  # => 3
+  ({a: 1} | insert b 2).b
+  # => 2
+  ```
+
+  A command's output in parentheses works the same way, so `(ls).name` is the list of file names.
+
+  A quoted string can't take a cell path. `"abc".0` is a parse error ("Invalid characters after closing delimiter"), and `("abc").0` fails with "string doesn't support cell paths".
+
 ## Additional Language Notes
 
 1. Ordering
@@ -139,8 +187,52 @@ let data = [
    # => 39.21
    ```
 
+   `into cell-path` takes three kinds of input:
+
+   - An int gives a one-member path: `5 | into cell-path` is `$.5`. A negative int is an error.
+   - A list of ints and strings gives one member per item. An int is a row index and a string is a column name, so the string `"1"` names a column called `1`, not row 1.
+   - A table with a `value` column gives one member per row. The optional `optional` and `insensitive` columns hold bools that add the `?` and `!` modifiers. Other columns are ignored.
+
+   ```nu
+   [[value optional insensitive]; [a true false] [B false true]] | into cell-path
+   # => $.a?.B!
+   ```
+
+   A string on its own is rejected on purpose. Text such as `"a.b"` could name the column `a.b` or the path `a` then `b`, so split it yourself, and convert the parts that are row numbers to ints:
+
+   ```nu
+   "x.1" | split row "." | into cell-path
+   # => $.x."1"
+   "x.1" | split row "." | each {|m| try { $m | into int } catch { $m } } | into cell-path
+   # => $.x.1
+   ```
+
+1. [`split cell-path`](/commands/docs/split_cell-path.md) goes the other way. It takes a cell path apart into a table with one row per member, in the same `value`, `optional` and `insensitive` columns that `into cell-path` reads, so the two commands undo each other:
+
+   ```nu
+   $.temps?.2.Name! | split cell-path
+   # => ╭───┬───────┬──────────┬─────────────╮
+   # => │ # │ value │ optional │ insensitive │
+   # => ├───┼───────┼──────────┼─────────────┤
+   # => │ 0 │ temps │ true     │ false       │
+   # => │ 1 │     2 │ false    │ false       │
+   # => │ 2 │ Name  │ false    │ true        │
+   # => ╰───┴───────┴──────────┴─────────────╯
+   ```
+
+   A row index comes out as an int and a column name as a string, so `$.a."2"` gives the string `"2"`, not the int `2`. `insensitive` is always `false` for a row index. This lets a command inspect or change a path it received as an argument. For example, dropping the last member gives the path of the parent:
+
+   ```nu
+   def parent [p: cell-path] { $p | split cell-path | drop 1 | into cell-path }
+   parent config.color.fg
+   # => $.config.color
+   ```
+
+   The input has to be a cell-path value. A string such as `"a.b"` is an "Input type not supported" error, so turn it into a cell path first, as shown above.
+
 ## Common commands that can be used with `cell-path`
 
 - `get`
 - `select`
 - `update`/`upsert`
+- `into cell-path`, `split cell-path`

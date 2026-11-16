@@ -55,3 +55,35 @@ git log --pretty=%h»¦«%aN»¦«%s»¦«%aD | lines | split column "»¦«" sh
 # => │ 4 │ Stefan Holderbach │     1 │     0.10 │ 10.00%     │ **********                                         │
 # => ╰───┴───────────────────┴───────┴──────────┴────────────┴────────────────────────────────────────────────────╯
 ```
+
+The first argument names the column to count. The second, optional argument names the column that holds the bar, here `merger`; without it, that column is called `frequency`. It can't be `value`, `count`, `quantile`, or `percentage`, which are taken by the other columns:
+
+- `count` is how many times the value appears.
+- `quantile` is `count` as a fraction, and `percentage` is the same fraction as a string such as `50.00%`.
+- The bar has one `*` for each whole percent, so 50% draws 50 stars.
+
+Rows with the same count are sorted by value. For a plain list, leave out the column name, and the values go in a `value` column:
+
+```nu
+[Sophia Justin Sophia Luca Justin] | histogram
+# => ╭───┬────────┬───────┬──────────┬────────────┬──────────────────────────────────────────╮
+# => │ # │ value  │ count │ quantile │ percentage │                frequency                 │
+# => ├───┼────────┼───────┼──────────┼────────────┼──────────────────────────────────────────┤
+# => │ 0 │ Justin │     2 │     0.40 │ 40.00%     │ **************************************** │
+# => │ 1 │ Sophia │     2 │     0.40 │ 40.00%     │ **************************************** │
+# => │ 2 │ Luca   │     1 │     0.20 │ 20.00%     │ ********************                     │
+# => ╰───┴────────┴───────┴──────────┴────────────┴──────────────────────────────────────────╯
+```
+
+By default, or with `--percentage-type normalize`, the fraction is `count` divided by the number of values, so the percentages add up to 100%. With `--percentage-type relative` (`-t relative`) it's `count` divided by the largest count instead. The most common value then gets 100% and a full bar of 100 stars, and the others are measured against it:
+
+```nu
+[Sophia Justin Sophia Luca Justin] | histogram --percentage-type relative | select value count quantile percentage
+# => ╭───┬────────┬───────┬──────────┬────────────╮
+# => │ # │ value  │ count │ quantile │ percentage │
+# => ├───┼────────┼───────┼──────────┼────────────┤
+# => │ 0 │ Justin │     2 │     1.00 │ 100.00%    │
+# => │ 1 │ Sophia │     2 │     1.00 │ 100.00%    │
+# => │ 2 │ Luca   │     1 │     0.50 │ 50.00%     │
+# => ╰───┴────────┴───────┴──────────┴────────────╯
+```

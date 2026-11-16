@@ -23,6 +23,30 @@ For example, `[foo bar baz]` or `[foo, bar, baz]`.
 Nushell lists are similar to JSON arrays. The same `[ "Item1", "Item2", "Item3" ]` that represents a JSON array can also be used to create a Nushell list.
 :::
 
+### Lists of numbers with `seq`
+
+[`seq`](/commands/docs/seq.md) generates numbers. With two numbers it counts from the first to the second by 1. With three, the middle one is the increment. Both ends are included when the count lands on them:
+
+```nu
+seq 1 5 | to nuon
+# => [1, 2, 3, 4, 5]
+seq 10 -3 1 | to nuon
+# => [10, 7, 4, 1]
+```
+
+Counting down needs a negative increment, so `seq 5 1` gives an empty list. A single number gives a list that holds only that number, unlike the Unix `seq`, which counts up to it. An increment of 0 is an error, and so is calling `seq` with no numbers. With more than three numbers, the first is the start, the second the increment and the last the end, and the ones in between are ignored.
+
+If any of the numbers is a float, every value is a float. Each value is computed as the start plus a multiple of the increment, so rounding errors don't add up, but a float end can still be missed by a hair:
+
+```nu
+seq 0.1 0.1 0.3 | to nuon
+# => [0.1, 0.2]
+seq 1 3 | each { $in / 10 } | to nuon
+# => [0.1, 0.2, 0.3]
+```
+
+`seq` returns a stream, so the numbers are made only as they are read, and `seq 1 1_000_000_000 | first 3` returns at once. A [range](/lang-guide/chapters/types/basic_types/range.md) such as `1..5` covers many of the same uses, but it is a range value, not a list, and some commands, such as `window`, `every` and `shuffle`, accept only a list. `seq` gives them one. For letters and dates, use [`seq char`](/commands/docs/seq_char.md) and [`seq date`](/commands/docs/seq_date.md).
+
 ## Updating lists
 
 We can [`insert`](/commands/docs/insert.md) values into lists as they flow through the pipeline, for example let's insert the value `10` into the middle of a list:
@@ -84,6 +108,20 @@ $colors
 # => │ 3 │ blue   │
 # => ╰───┴────────╯
 ```
+
+A list given to `append` or `prepend` is unwrapped, so its items are added one by one, the same as `++`. To add the list as a single item, put it inside another list:
+
+```nu
+let extra = [purple blue]
+[yellow green] | append [$extra]
+# => ╭───┬────────────────╮
+# => │ 0 │ yellow         │
+# => │ 1 │ green          │
+# => │ 2 │ [list 2 items] │
+# => ╰───┴────────────────╯
+```
+
+[Adding and changing data](/lang-guide/chapters/filters/changing_data.md#append-and-prepend) in the Language Guide covers ranges and input that isn't a list.
 
 In case you want to remove items from list, there are many ways. [`skip`](/commands/docs/skip.md) allows you skip first rows from input, while [`drop`](/commands/docs/drop.md) allows you to skip specific numbered rows from end of list.
 
@@ -210,6 +248,8 @@ $"product = ($scores | reduce --fold 1 { |elt, acc| $acc * $elt })" # product = 
 $scores | enumerate | reduce --fold 0 { |elt, acc| $acc + $elt.index * $elt.item } # 0*3 + 1*8 + 2*4 = 16
 ```
 
+[Summarizing and comparing lists](/lang-guide/chapters/filters/summarizing_lists.md) in the Language Guide explains how `reduce` starts with and without `--fold`, which lists [`math sum`](/commands/docs/math_sum.md) and [`math avg`](/commands/docs/math_avg.md) accept, and the rules for the other commands in this chapter.
+
 ## Accessing the List
 
 ::: tip Note
@@ -304,6 +344,8 @@ $scores | any $it > 7 # true
 $scores | all $it > 2 # true
 ```
 
+Both stop at the first item that decides the answer. See [`all` and `any`](/lang-guide/chapters/filters/summarizing_lists.md#all-and-any) for empty input and other edge cases.
+
 ## Set Operations and Combinations
 
 The [`union`](/commands/docs/union.md), [`intersect`](/commands/docs/intersect.md), and [`difference`](/commands/docs/difference.md) commands treat lists as sets. Their results contain no duplicates, and items stay in the order in which they first appear:
@@ -332,6 +374,8 @@ $a | difference $b
 # => ╰───┴───╯
 ```
 
+Items match only when they are the same type and value, so `1` and `1.0` are different. For tables, whole rows are compared.
+
 [`combinations`](/commands/docs/combinations.md) returns every way to choose a given number of items from a list, and [`permutations`](/commands/docs/permutations.md) returns every ordering of a list. Both return a list of lists, so the examples below join each inner list into a string:
 
 ```nu
@@ -352,6 +396,8 @@ $a | difference $b
 # => ╰───┴─────╯
 ```
 
+See [`chunks`, `combinations` and `permutations`](/lang-guide/chapters/filters/summarizing_lists.md#chunks-combinations-and-permutations) for tables and edge cases.
+
 ## Converting the List
 
 The [`flatten`](/commands/docs/flatten.md) command creates a new list from an existing list
@@ -365,8 +411,10 @@ For example:
 [[1 2] [3 [4 5 [6 7 8]]]] | flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
 ```
 
-The [`wrap`](/commands/docs/wrap.md) command converts a list to a table. Each list value will
-be converted to a separate row with a single column:
+On a table, `flatten` expands a column of lists into one row per item and lifts the fields of a record column into the row. See [Reshaping](/lang-guide/chapters/filters/changing_data.md#reshaping) in the Language Guide for `--all`, column arguments and name clashes.
+
+The [`wrap`](/commands/docs/wrap.md) command converts a list or a range to a table. Each list value will
+be converted to a separate row with a single column. A single value that isn't a list becomes a one-field record:
 
 ```nu
 let zones = [UTC CET Europe/Moscow Asia/Yekaterinburg]
