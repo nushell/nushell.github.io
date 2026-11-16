@@ -102,7 +102,7 @@ stor open | query db "create table pets (id integer primary key, name text not n
 stor open | query db "create index pets_owner on pets (owner)" | ignore
 ```
 
-SQLite checks foreign keys in the in-memory database. A row that points at a missing parent row, as in `stor insert --table-name pets --data-record {name: Rex, owner: Nobody}`, fails with `FOREIGN KEY constraint failed`.
+The SQLite built into Nushell checks foreign keys from the start. SQLite's own default is to leave them unchecked, so a tool like the `sqlite3` command-line shell doesn't check them until you run `pragma foreign_keys = on`. In the in-memory database, a row that points at a missing parent row, as in `stor insert --table-name pets --data-record {name: Rex, owner: Nobody}`, fails with `FOREIGN KEY constraint failed`. To turn the checks off, run `stor open | query db "pragma foreign_keys = off"`. They stay off until you turn them back on or run `stor reset`.
 
 ### Adding rows
 
@@ -194,7 +194,7 @@ stor open | query db "select name, admin from people"
 
 A where clause that names a missing column fails with `no such column`. `stor delete` fails with `no such table` when the table doesn't exist, and with `FOREIGN KEY constraint failed` when you drop a table while rows in another table still point at it.
 
-[`stor reset`](/commands/docs/stor_reset.md) drops every table. It turns foreign key checks off while it does that, so tables that point at each other don't stop it.
+[`stor reset`](/commands/docs/stor_reset.md) drops every table. It turns foreign key checks off while it does that, so tables that point at each other don't stop it. When it's done, it turns the checks on, even if you had turned them off before the reset.
 
 ### Saving and loading
 
