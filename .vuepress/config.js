@@ -267,11 +267,6 @@ export default defineUserConfig({
       appId: 'GHCTOYCW6T',
       indexName: 'nushell',
       apiKey: 'dd6a8f770a42efaed5befa429d167232',
-      searchParameters: {
-        // Keep "quoted phrase" search, but don't treat a leading "-" as
-        // "exclude this word": in shell docs, "-a" is a flag people search for.
-        advancedSyntaxFeatures: ['exactPhrase'],
-      },
     }),
     feedPlugin({
       rss: true,
