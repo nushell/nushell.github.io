@@ -18,7 +18,6 @@ export const sidebarEs: SidebarConfig = {
         '/es/book/matematicas', // "variables_y_subexpresiones"
         '/es/book/entorno', // "scripts"
         '/es/book/metadatos',
-        '/es/book/shells_en_shells',
         '/es/book/escapando',
         '/es/book/plugins', // "dataframes"
         '/es/book/llegando_de_bash',

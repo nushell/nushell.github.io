@@ -344,4 +344,4 @@ $with_default_value.1.a
 ## 구조화된 데이터 액세스를 위한 기타 명령
 
 - [`reject`](/commands/docs/reject.md)는 `select`의 반대이며 지정된 행과 열을 제거합니다.
-- [`range`](/commands/docs/range.md)는 [`range`](./types_of_data.md#ranges) 유형을 사용하여 선택할 목록 또는 테이블의 행을 지정합니다.
+- [`slice`](/commands/docs/slice.md)는 [`range`](./types_of_data.md#ranges) 유형을 사용하여 선택할 목록 또는 테이블의 행을 지정합니다.
