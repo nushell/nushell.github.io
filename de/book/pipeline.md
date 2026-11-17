@@ -41,7 +41,7 @@ Wenn eine Pipeline etwas lange wird für eine Zeile, kann sie mit `(` und `)` zu
 )
 ```
 
-Siehe auch [Subexpressions](https://www.nushell.sh/book/variables_and_subexpressions.html#subexpressions)
+Siehe auch [Subexpressions](variables_and_subexpressions.md#unterausdrucke)
 
 ## Mit externen Befehlen arbeiten
 

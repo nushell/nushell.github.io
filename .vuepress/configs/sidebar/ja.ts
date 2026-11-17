@@ -23,7 +23,7 @@ export const sidebarJa: SidebarConfig = {
     },
     {
       text: 'Nu 基礎編',
-      link: '/ja/book/nu_fundamentals.md',
+      link: '/book/nu_fundamentals.md',
       collapsible: false,
       children: [
         '/ja/book/types_of_data.md',
@@ -36,24 +36,23 @@ export const sidebarJa: SidebarConfig = {
     },
     {
       text: 'Programming in Nu',
-      link: '/ja/book/programming_in_nu.md',
+      link: '/book/programming_in_nu.md',
       collapsible: false,
       children: [
         '/book/custom_commands.md',
         '/ja/book/aliases.md',
         '/book/operators.md',
-        '/book/variables_and_subexpressions.md',
+        '/book/variables.md',
         '/book/scripts.md',
         '/book/modules.md',
         '/book/overlays.md',
-        '/book/command_signature.md',
         '/book/testing.md',
         '/book/style_guide.md',
       ],
     },
     {
       text: 'シェルとしての Nu',
-      link: '/ja/book/nu_as_a_shell.md',
+      link: '/book/nu_as_a_shell.md',
       collapsible: false,
       children: [
         '/ja/book/configuration.md',
@@ -67,12 +66,12 @@ export const sidebarJa: SidebarConfig = {
         '/book/custom_completions.md',
         '/book/coloring_and_theming.md',
         '/book/hooks.md',
-        '/book/background_task.md',
+        '/book/background_jobs.md',
       ],
     },
     {
       text: 'Nu への移行',
-      link: '/ja/book/coming_to_nu.md',
+      link: '/book/coming_to_nu.md',
       collapsible: false,
       children: [
         '/ja/book/coming_from_bash.md',
@@ -85,13 +84,13 @@ export const sidebarJa: SidebarConfig = {
     },
     {
       text: 'Design Notes',
-      link: '/ja/book/design_notes.md',
+      link: '/book/design_notes.md',
       collapsible: false,
       children: ['/book/how_nushell_code_gets_run.md'],
     },
     {
       text: '(Not So) Advanced',
-      link: '/ja/book/advanced.md',
+      link: '/book/advanced.md',
       collapsible: false,
       children: [
         '/book/standard_library.md',

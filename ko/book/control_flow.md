@@ -226,7 +226,7 @@ for x in [1 2 3] { $x * $x | print }
 
 - [`each`](/commands/docs/each.html)
 - [`par-each`](/commands/docs/par-each.html)
-- [`where`](/commands/docs/where.html)/[`filter`](/commands/docs/filter.html)
+- [`where`](/commands/docs/where.html)
 - [`reduce`](/commands/docs/reduce.html)
 
 ### `while`

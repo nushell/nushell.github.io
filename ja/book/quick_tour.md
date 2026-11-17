@@ -34,9 +34,23 @@ Unix の哲学と同様、互いに対話可能なコマンドにより、さま
 
 @[code](@snippets/introduction/date_example.sh)
 
-テーブルとして取得したい場合は、これを [`date to-table`](/commands/docs/date_to-table.md) に渡します。
+レコードとして取得したい場合は、これを [`into record`](/commands/docs/into_record.md) に渡します。
 
-@[code](@snippets/introduction/date_table_example.sh)
+```nu
+date now | into record
+# => ╭─────────────┬────────╮
+# => │ year        │ 2022   │
+# => │ month       │ 3      │
+# => │ day         │ 7      │
+# => │ hour        │ 14     │
+# => │ minute      │ 45     │
+# => │ second      │ 3      │
+# => │ millisecond │ 0      │
+# => │ microsecond │ 0      │
+# => │ nanosecond  │ 0      │
+# => │ timezone    │ -08:00 │
+# => ╰─────────────┴────────╯
+```
 
 [`sys`](/commands/docs/sys.md) を実行すると、 Nu が実行されているシステムに関する情報が得られます。
 

@@ -15,7 +15,6 @@ export const sidebarPtBR: SidebarConfig = {
         '/pt-BR/book/pipeline',
         '/pt-BR/book/line_editor',
         '/pt-BR/book/metadados',
-        '/pt-BR/book/shells_em_shells',
         '/pt-BR/book/escapando',
         '/pt-BR/book/plugins',
       ],
