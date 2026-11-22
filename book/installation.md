@@ -20,25 +20,27 @@ Nu binaries are published for Linux, macOS, and Windows [with each GitHub releas
 
 ## Package Managers
 
-Nu is available via several package managers:
+### Homebrew (macOS and Linux)
 
-[![Packaging status](https://repology.org/badge/vertical-allrepos/nushell.svg)](https://repology.org/project/nushell/versions)
+Install with [Homebrew](https://brew.sh/): brew install nushell
 
-For macOS and Linux, [Homebrew](https://brew.sh/) is a popular choice (`brew install nushell`).
+### Winget (Windows)
 
-For Windows:
-
-- [Winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/)
+Install with [Winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/):
 
   - User scope installation (the default): `winget install Nushell.Nushell`
   - Machine scope installation (for all users): `winget install Nushell.Nushell --override 'ALLUSERS=1'`
   - Upgrade: `winget upgrade Nushell.Nushell`
 
-  The `--scope` flag of `winget install` is not supported. Use `--override` as shown above for a machine scope installation.
+The `--scope` flag of `winget install` is not supported. Use `--override` as shown above for a machine scope installation.
 
-- [Scoop](https://scoop.sh/) (`scoop install nu`)
+### Scoop (Windows)
 
-For Debian & Ubuntu:
+Install with [Scoop](https://scoop.sh/): `scoop install nu`
+
+### APT (Debian & Ubuntu)
+
+Install with APT:
 
 ```sh
 wget -qO- https://apt.fury.io/nushell/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/fury-nushell.gpg
@@ -47,7 +49,9 @@ sudo apt update
 sudo apt install nushell
 ```
 
-For RedHat/Fedora & Rocky Linux:
+### DNF (RedHat / Fedora & Rocky Linux)
+
+Install with DNF:
 
 ```sh
 echo "[gemfury-nushell]
@@ -59,7 +63,9 @@ gpgkey=https://yum.fury.io/nushell/gpg.key" | sudo tee /etc/yum.repos.d/fury-nus
 sudo dnf install -y nushell
 ```
 
-For Alpine Linux:
+### APK (Alpine Linux)
+
+Install with APK:
 
 ```sh
 echo "https://alpine.fury.io/nushell/" | tee -a /etc/apk/repositories
@@ -67,9 +73,17 @@ apk update
 apk add --allow-untrusted nushell
 ```
 
-Cross Platform installation:
+### NPM (cross-platform)
 
-- [npm](https://www.npmjs.com/) (`npm install -g nushell` Note that nu plugins are not included if you install in this way)
+Install with NPM: `npm install -g nushell` 
+
+Note that nu plugins are not included if you install in this way
+
+### Distro repositories
+
+Nu is also available via official distro repositories for some distros; however, some may be a bit behind on newer releases, so we recommend using one of the methods above in those cases.
+
+[![Packaging status](https://repology.org/badge/vertical-allrepos/nushell.svg)](https://repology.org/project/nushell/versions)
 
 ## Docker Container Images
 
