@@ -22,7 +22,7 @@ Nu binaries are published for Linux, macOS, and Windows [with each GitHub releas
 
 ### Homebrew (macOS and Linux)
 
-Install with [Homebrew](https://brew.sh/): brew install nushell
+Install with [Homebrew](https://brew.sh/): `brew install nushell`
 
 ### Winget (Windows)
 
