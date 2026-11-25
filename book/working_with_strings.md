@@ -992,18 +992,22 @@ If a string is known to contain comma-separated, tab-separated or multi-space-se
 
 ### Options for `from csv` and `from tsv`
 
-`from csv` turns a field into an int or a float when it parses as one. Every other field stays a string, including `true` and dates. `--no-infer` keeps every field a string, which also keeps leading zeros:
+`from csv` reads every field as a string, so values such as `007`, `1E5` or `NaN` stay as written. `--infer` turns a field into an int or a float when it parses as one. Every other field stays a string, including `true` and dates:
 
 ```nu
 "id,price,active,since\n007,2.50,true,2024-01-02" | from csv | describe
+# => table<id: string, price: string, active: string, since: string> (stream)
+"id,price,active,since\n007,2.50,true,2024-01-02" | from csv --infer | describe
 # => table<id: int, price: float, active: string, since: string> (stream)
-"id,price\n007,2.50" | from csv --no-infer
-# => ╭───┬─────┬───────╮
-# => │ # │ id  │ price │
-# => ├───┼─────┼───────┤
-# => │ 0 │ 007 │ 2.50  │
-# => ╰───┴─────┴───────╯
+"id,price\n007,2.50" | from csv --infer
+# => ╭───┬────┬───────╮
+# => │ # │ id │ price │
+# => ├───┼────┼───────┤
+# => │ 0 │  7 │  2.50 │
+# => ╰───┴────┴───────╯
 ```
+
+To convert only some columns, run [`into int`](/commands/docs/into_int.md), [`into float`](/commands/docs/into_float.md) or [`detect type`](/commands/docs/detect_type.md) on them, as in `from csv | update id { into int }`. `--no-infer` is deprecated: it asks for the default and warns on first use.
 
 The other options describe the format of the text:
 
@@ -1011,7 +1015,7 @@ The other options describe the format of the text:
 - `--comment` names a character that marks a comment. Lines that start with it are skipped.
 - `--noheaders` treats the first line as data. The columns are then named `column0`, `column1` and so on.
 - `--quote` changes the quote character from `"`. A separator inside quotes is part of the field. By default, a quote inside a quoted field is written twice (`"say ""hi"""`). `--escape` names a character that escapes it instead, such as `\` for `"say \"hi\""`.
-- `--trim` removes whitespace around the header names (`headers`), the fields (`fields`), or both (`all`). The default is `none`. Trimming happens before the number conversion, so a field written as ` 3` only becomes the int `3` when fields are trimmed.
+- `--trim` removes whitespace around the header names (`headers`), the fields (`fields`), or both (`all`). The default is `none`. Trimming happens before `--infer`'s number conversion, so a field written as ` 3` only becomes the int `3` with `--infer --trim fields`.
 - `--flexible` allows rows with different numbers of fields. Without it, such a row is an error ("found record with 3 fields, but the previous record has 2 fields"). Extra fields get columns named after their position, and short rows lack the missing columns.
 
 ```nu
@@ -1023,7 +1027,7 @@ The other options describe the format of the text:
 # => │ 1 │ pear  │  10 │
 # => ╰───┴───────┴─────╯
 "a,b\n1,2,3\n4" | from csv --flexible | to nuon
-# => [{a: 1, b: 2, "column2": 3}, {a: 4}]
+# => [{a: "1", b: "2", "column2": "3"}, {a: "4"}]
 ```
 
 `from tsv` takes the same options, except `--separator`, because its separator is always a tab.

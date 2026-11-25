@@ -33,7 +33,7 @@ A table with a text column can't be converted. Select the numeric columns first:
 # => [[1.0], [2.0]]
 ```
 
-A string that holds a number, such as the cells of a CSV file read with `from csv --no-infer`, is converted to a float. A literal list of strings like `[["1" "2"]]` is rejected when the pipeline is parsed, because its type is known to be wrong. A flat list of numbers is rejected the same way. Wrap it in another list to get a matrix with one row, or see [one-dimensional matrices](#one-dimensional-and-larger-matrices) below. An empty list gives a matrix with the shape `[0, 0]`.
+A string that holds a number, such as the cells of a CSV file read with `from csv`, is converted to a float. A literal list of strings like `[["1" "2"]]` is rejected when the pipeline is parsed, because its type is known to be wrong. A flat list of numbers is rejected the same way. Wrap it in another list to get a matrix with one row, or see [one-dimensional matrices](#one-dimensional-and-larger-matrices) below. An empty list gives a matrix with the shape `[0, 0]`.
 
 ### `matrix identity` and `matrix zeros`
 
